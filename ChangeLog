@@ -1,35 +1,3 @@
-2002-05-06  Monte Ohrt  <monte@ispi.net>
-
-    * plugins/function.fetch.php:
-    update fetch function with more error checking
-
-2002-05-03  Monte Ohrt  <monte@ispi.net>
-
-    * docs/designers.sgml
-      plugins/function.counter.php:
-    update counter to use name instead of id (id still works though)
-
-    * plugins/function.cycle.php
-      docs/designers.sgml: rename id to name for cycle function
-
-    * plugins/function.cycle.php:
-    update cycle function to allow blank values parameter after initialized
-
-    * plugins/function.cycle.php: fix syntax error
-
-2002-05-02  Monte Ohrt  <monte@ispi.net>
-
-    * plugins/function.cycle.php: ugh, another typo
-
-    * plugins/function.cycle.php: update comments
-
-    * docs/designers.sgml
-      plugins/function.cycle.php
-      NEWS: added function cycle
-
-    * FAQ
-      Smarty.class.php: fix register_outputfilter function
-
 2002-05-01  Monte Ohrt  <monte@ispi.net>
 
     * docs/designers.sgml
