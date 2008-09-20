@@ -48,6 +48,9 @@ class Smarty {
   
   // config directory
   public $config_dir = null;
+
+  // plugins directory
+  public $sysplugins_dir = null;
   
   // use sub dirs for compiled/cached files?
   public $use_sub_dirs = false;
@@ -71,6 +74,7 @@ class Smarty {
     $this->plugins_dir = array('.'.DIRECTORY_SEPARATOR.'plugins'.DIRECTORY_SEPARATOR);
     $this->cache_dir = '.'.DIRECTORY_SEPARATOR.'cache'.DIRECTORY_SEPARATOR;
     $this->config_dir = '.'.DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR;
+    $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR;
     // set instance object
     self::instance($this);
   }
@@ -157,6 +161,10 @@ class Smarty {
       if(file_exists($plugins_dir . $plugin_filename))
         return require_once($plugins_dir . $plugin_filename);
     }
+    
+    // check sysplugins
+    if(file_exists($this->sysplugins_dir . $plugin_filename))
+      return require_once($this->sysplugins_dir . $plugin_filename);
     
     return false;
   }
