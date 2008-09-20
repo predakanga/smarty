@@ -154,14 +154,14 @@ class Smarty {
       
     $plugin_filename = strtolower($name_parts[1].'.'.$name_parts[2].$this->php_ext);
     
+    // if internal, get plugin from sysplugins
+    if($name_parts[1] == 'Internal' && file_exists($this->sysplugins_dir . $plugin_filename))
+      return require_once($this->sysplugins_dir . $plugin_filename);
+    
     foreach((array)$this->plugins_dir as $plugins_dir) {
       if(file_exists($plugins_dir . $plugin_filename))
         return require_once($plugins_dir . $plugin_filename);
     }
-    
-    // check sysplugins
-    if(file_exists($this->sysplugins_dir . $plugin_filename))
-      return require_once($this->sysplugins_dir . $plugin_filename);
     
     return false;
   }
