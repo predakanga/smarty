@@ -158,9 +158,9 @@ class Smarty {
     if($name_parts[1] == 'Internal' && file_exists($this->sysplugins_dir . $plugin_filename))
       return require_once($this->sysplugins_dir . $plugin_filename);
     
-    foreach((array)$this->plugins_dir as $plugins_dir) {
-      if(file_exists($plugins_dir . $plugin_filename))
-        return require_once($plugins_dir . $plugin_filename);
+    foreach((array)$this->plugins_dir as $plugin_dir) {
+      if(file_exists($plugin_dir . $plugin_filename))
+        return require_once($plugin_dir . $plugin_filename);
     }
     
     return false;
@@ -181,9 +181,8 @@ class Smarty {
 if(!function_exists('__autoload'))
 {
   function __autoload($class_name) {  
-    if(($smarty = Smarty::instance()) !== null)
-      if($smarty->autoload($class_name) !== false)
-        return true;
+    return (($smarty = Smarty::instance()) !== null)
+      && ($smarty->autoload($class_name) !== false);
   }
 }
 
