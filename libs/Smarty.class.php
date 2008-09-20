@@ -59,10 +59,7 @@ class Smarty {
   public $php_ext = '.php';
 
   // assigned tpl vars
-  public $_tpl_vars = array();
-
-  // compiled tpl display object
-  private $_display_obj = null;
+  public $tpl_vars = array();
   
   /**
    * Class constructor, initializes basic smarty properties
@@ -104,14 +101,14 @@ class Smarty {
     if(substr($tpl,-strlen($this->php_ext))==$this->php_ext)
     {
       // PHP template
-      $this->_display_obj = new Smarty_Internal_DisplayPHP;
-      $this->_display_obj->display($tpl,$this->_tpl_vars);
+      $display = new Smarty_Internal_DisplayPHP;
+      $display->display($tpl,$this->tpl_vars);
     }
     else
     {
       // compiled template
-      $this->_display_obj = new Smarty_Internal_DisplayTPL;
-      $this->_display_obj->display($tpl,$this->_tpl_vars);
+      $display = new Smarty_Internal_DisplayTPL;
+      $display->display($tpl,$this->tpl_vars);
     }
   }
   
@@ -126,12 +123,12 @@ class Smarty {
     if (is_array($tpl_var)){
       foreach ($tpl_var as $key => $val) {
         if ($key != '') {
-          $this->_tpl_vars[$key] = $val;
+          $this->tpl_vars[$key] = $val;
         }
       }
     } else {
       if ($tpl_var != '')
-        $this->_tpl_vars[$tpl_var] = $value;
+        $this->tpl_vars[$tpl_var] = $value;
     }
   }  
   

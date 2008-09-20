@@ -128,18 +128,9 @@ is because I have not written the compiler yet. Do we give Smarty 3 a new
 syntax? Do we make a Smarty 2 compatability layer? Anything is possible.
 
 
-Ok that pretty much wraps up the principles behind the alpha code. Some
-questions that are lingering:
+Ok that pretty much wraps up the principles behind the alpha code. Please
+look through it and send any questions/suggestions/etc to the forums.
 
-1) Do we make a separate plugin directory for internal.* plugins? This is
-   just a code organization decision.
-2) Is this code structure fundamentally sound? This is where I can use
-   help from other OOP gurus :) Obviously we are leveraging some
-   PHP-specific stuff such as __autoload(), but there may be places where
-   extending core classes or implementing well-known interfaces will do
-   some good for the future.
-   
-Please send your thoughts to the forums. I will be creating a place
-there specifically for this development discussion.
+http://www.phpinsider.com/smarty-forum/viewtopic.php?t=14168
 
 Monte
