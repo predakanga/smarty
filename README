@@ -14,12 +14,13 @@ If you take a look at the file structure, you should see this:
 index.php
 /libs/
   Smarty.class.php
-/plugins/
-  function.mailto.php
+/libs/sysplugins/
   internal.compiler.php
   internal.displayphp.php
   internal.displaytpl.php
   internal.pluginbase.php
+/plugins/
+  function.mailto.php
   modifier.escape.php
 /templates/
   index.tpl
