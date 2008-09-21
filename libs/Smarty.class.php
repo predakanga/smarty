@@ -165,6 +165,24 @@ class Smarty {
     
     return false;
   }
+
+  /**
+   * Takes unknown class methods and lazy loads plugin files for them
+   * class name format: Smarty_Method_MethodName
+   * plugin filename format: method.methodname.php
+   *
+   * @param string $class_name unknown class name
+   */
+  public function __call($name, $args) {
+
+    $plugin_filename = strtolower('method.'.$name.$this->php_ext);
+    require_once($this->sysplugins_dir . $plugin_filename);
+    
+    $class_name = "Smarty_Method_{$name}";
+    $method = new $class_name;
+    return $method->execute($args);
+    
+  }
   
   
 }
