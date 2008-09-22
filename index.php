@@ -2,14 +2,20 @@
 
 require('./libs/Smarty.class.php');
 
-$smarty = new Smarty;
+$smarty = new Smarty('foo');
 
 $smarty->assign('foo','a & b');
+echo "foo is: " . $smarty->tpl_vars['foo'] . "\n";
 
-// example of executing a PHP template (non-compiled)
-$smarty->display('index_view.php');
+$smarty = new Smarty('bar');
 
-// example of executing a compiled template
-$smarty->display('index.tpl');
+$smarty->assign('foo','c & d');
+echo "foo is: " . $smarty->tpl_vars['foo'] . "\n";
+
+$smarty = Smarty::instance('foo');
+echo "foo is: " . $smarty->tpl_vars['foo'] . "\n";
+
+$smarty = Smarty::instance('bar');
+echo "foo is: " . $smarty->tpl_vars['foo'] . "\n";
 
 ?>

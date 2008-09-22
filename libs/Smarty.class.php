@@ -64,7 +64,7 @@ class Smarty {
   /**
    * Class constructor, initializes basic smarty properties
    */
-  public function __construct() {
+  public function __construct($id='default') {
     // set default dirs
     $this->template_dir = '.'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR;
     $this->compile_dir = '.'.DIRECTORY_SEPARATOR.'templates_c'.DIRECTORY_SEPARATOR;
@@ -73,7 +73,7 @@ class Smarty {
     $this->config_dir = '.'.DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR;
     $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR;
     // set instance object
-    self::instance($this);
+    self::instance($id,$this);
   }
   
   /**
@@ -83,12 +83,12 @@ class Smarty {
    * @param obj $new_instance the Smarty object when setting
    * @return obj reference to Smarty object
    */
-  public static function &instance($new_instance=null)
+  public static function &instance($id='default',$new_instance=null)
   {
-    static $instance = null;
+    static $instance = array();
     if(isset($new_instance) && is_object($new_instance))
-      $instance = $new_instance;
-    return $instance;
+      $instance[$id] = $new_instance;
+    return $instance[$id];
   }
   
   /**
