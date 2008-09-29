@@ -17,7 +17,8 @@ class Smarty_Internal_DisplayTPL extends Smarty_Internal_PluginBase {
     
     // compile if needed
     if(
-      !file_exists($this->smarty->compile_dir.$_compiled_filename)
+      $this->smarty->force_compile
+      || !file_exists($this->smarty->compile_dir.$_compiled_filename)
       || filemtime($_compiled_filepath) !== filemtime($_tpl_filepath)
       ) {
       $this->_compiler = new Smarty_Internal_Compiler;
@@ -25,7 +26,7 @@ class Smarty_Internal_DisplayTPL extends Smarty_Internal_PluginBase {
       // make tpl and compiled file timestamp match
       touch($_compiled_filepath,filemtime($_tpl_filepath));
     }
-    
+    extract($tpl_vars);
     include($_compiled_filepath);
   }
   

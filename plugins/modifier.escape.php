@@ -77,8 +77,8 @@ class Smarty_Modifier_Escape extends Smarty_Internal_PluginBase {
 
       default:
         return $string;
+    }
   }
-
 }
 
 ?>

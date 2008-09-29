@@ -31,8 +31,20 @@
 
 /* $Id: $ */
 
+/**
+ * set SMARTY_DIR to absolute path to Smarty library files.
+ * if not defined, include_path will be used. Sets SMARTY_DIR only if user
+ * application has not already defined it.
+ */
 
-class Smarty {
+if (!defined('SMARTY_DIR'))
+{
+    define('SMARTY_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
+}
+
+
+class Smarty
+{
   
   // template directory
   public $template_dir = null;
@@ -49,6 +61,9 @@ class Smarty {
   // config directory
   public $config_dir = null;
 
+  // force template compiling?
+  public $force_compile = false;
+  
   // plugins directory
   public $sysplugins_dir = null;
   
@@ -60,11 +75,14 @@ class Smarty {
 
   // assigned tpl vars
   public $tpl_vars = array();
+
+  // contains current instance id
+  public $_instance_id = null;
   
   /**
    * Class constructor, initializes basic smarty properties
    */
-  public function __construct($id='default') {
+  public function __construct() {
     // set default dirs
     $this->template_dir = '.'.DIRECTORY_SEPARATOR.'templates'.DIRECTORY_SEPARATOR;
     $this->compile_dir = '.'.DIRECTORY_SEPARATOR.'templates_c'.DIRECTORY_SEPARATOR;
@@ -73,23 +91,63 @@ class Smarty {
     $this->config_dir = '.'.DIRECTORY_SEPARATOR.'configs'.DIRECTORY_SEPARATOR;
     $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR;
     // set instance object
-    self::instance($id,$this);
+    self::instance($this);
   }
   
   /**
    * Sets a static instance of the smarty object. Retrieve with:
    * $smarty = Smarty::instance();
    *
+   * @param string $id the object instance id
    * @param obj $new_instance the Smarty object when setting
    * @return obj reference to Smarty object
    */
-  public static function &instance($id='default',$new_instance=null)
+  public static function &instance($new_instance=null)
   {
-    static $instance = array();
+    static $instance = null;
     if(isset($new_instance) && is_object($new_instance))
-      $instance[$id] = $new_instance;
-    return $instance[$id];
+      $instance = $new_instance;
+    return $instance;
   }
+  
+  /**
+   * Call a Smarty Plugin function directly
+   *
+   * @param string $name the plugin name
+   * @param array $params the plugin parameters
+   * @return mixed
+   */
+  public static function helper($name,$params)
+  {
+    // check valid plugin name syntax
+    if(!preg_match('!^\w+$!',$name))
+      return false;
+      
+    $plugin_class = "Smarty_Function_{$name}";
+    $plugin = new $plugin_class;
+    
+    return $plugin->execute($params);
+  }
+
+  /**
+   * Call a Smarty Plugin function directly
+   *
+   * @param string $name the plugin name
+   * @param array $params the plugin parameters
+   * @return mixed
+   */
+  public static function modifier($name,$params)
+  {
+    // check valid plugin name syntax
+    if(!preg_match('!^\w+$!',$name))
+      return false;
+      
+    $plugin_class = "Smarty_Modifier_{$name}";
+    $plugin = new $plugin_class;
+    
+    return $plugin->execute($params);
+  }
+  
   
   /**
    * displays a Smarty template
@@ -198,7 +256,7 @@ class Smarty {
 
 if(!function_exists('__autoload'))
 {
-  function __autoload($class_name) {  
+  function __autoload($class_name) {
     return (($smarty = Smarty::instance()) !== null)
       && ($smarty->autoload($class_name) !== false);
   }

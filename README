@@ -80,7 +80,7 @@ echo $mailto->execute(array('address'=>'me@example.com'));
 
 As you can see, __autoload() makes plugins a snap from anywhere in PHP.
 
-FEATURE 2: $smarty object singleton (with multiple instance ids)
+FEATURE 2: $smarty object singleton
 
 Do you need a reference to the Smarty object instance? No problem:
 
@@ -89,14 +89,6 @@ $smarty = Smarty::instance();
 You can do this from anywhere in your PHP code, and get the instance. You can
 be buried in a php function, in a class method, or wherever. The $smarty
 object is quickly obtainable.
-
-If you want to launch multiple instances, you give them ids:
-
-// initialize object
-$smarty = new Smarty('myinstance1');
-
-// retrieve object
-$smarty = Smarty::instance('myinstance1');
 
 Since all plugins are now classes (did I mention that yet?), They all extend
 Smarty_Internal_PluginBase, which makes $this->smarty a reference to the Smarty

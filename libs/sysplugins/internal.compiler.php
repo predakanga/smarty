@@ -16,6 +16,10 @@ class Smarty_Internal_Compiler extends Smarty_Internal_PluginBase {
        copy the template to the compiled file. */    
   
     $content = file_get_contents($tpl_filepath);
+    
+    // replace {$foo} with
+    $content = preg_replace('!{(\$\w+.*)}!U','<?php echo ${1}; ?>'."\n",$content);
+    
     return file_put_contents($compiled_path,$content);
   }
 
