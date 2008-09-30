@@ -19,7 +19,7 @@ class Smarty_Internal_Caching extends Smarty_Internal_PluginBase {
         } else {
             $cache_file_time = 0;
         } 
-        if ($cache_file_time == 0 || filemtime($_compiled_filepath) > $cache_file_time || $this->smarty->cache_lifetime > 0 AND time() > $cache_file_time + $this->smarty->cache_lifetime) {
+        if ($cache_file_time == 0 || filemtime($_compiled_filepath) > $cache_file_time || $this->smarty->cache_lifetime > 0 && time() > $cache_file_time + $this->smarty->cache_lifetime) {
             // must create cache file
             // get output
             ob_start();

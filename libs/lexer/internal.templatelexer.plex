@@ -26,6 +26,7 @@ class Smarty_Internal_Templatelexer extends Smarty_Internal_PluginBase
 %line $this->line
 ldel = /\{/
 rdel = /\}/
+fortag = /\{for[\s\t]+/
 iftag = /\{if[\s\t]+/
 elseiftag = /\{elseif[\s\t]+/
 number = /[0-9]+(\.[0-9]+)?/
@@ -42,6 +43,7 @@ dollar = /\$/
 dot = /\./
 comma = /\,/
 colon = /\:/
+semicolon = /\;/
 vert = /\|/
 equal = /\=/
 space = /[\s\t]+/
@@ -71,6 +73,9 @@ si_qstr {
 db_qstr {
   $this->token = Smarty_Internal_Templateparser::TP_DB_QSTR;
   $this->type = 'string';
+}
+fortag{
+  $this->token = Smarty_Internal_Templateparser::TP_FORTAG;
 }
 iftag{
   $this->token = Smarty_Internal_Templateparser::TP_IFTAG;
@@ -184,6 +189,10 @@ number {
 dollar {
   $this->token = Smarty_Internal_Templateparser::TP_DOLLAR;
   $this->type = '"$"';
+}
+semicolon {
+  $this->token = Smarty_Internal_Templateparser::TP_SEMICOLON;
+  $this->type = '";"';
 }
 colon {
   $this->token = Smarty_Internal_Templateparser::TP_COLON;

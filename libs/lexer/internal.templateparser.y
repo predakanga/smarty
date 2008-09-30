@@ -57,6 +57,9 @@ smartytag(res)   ::= LDEL ID(e) RDEL. {$this->smarty = Smarty::instance(); res =
 smartytag(res)   ::= LDEL SLASH ID(e) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>'end_'.e)) ."\n ";}
 smartytag(res)   ::= IFTAG ifexprs(ie) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'if'),array('ifexp'=>ie))) ."\n ";}
 smartytag(res)   ::= ELSEIFTAG ifexprs(ie) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'elseif'),array('ifexp'=>ie))) ."\n ";}
+smartytag(res)   ::= FORTAG variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) EQUAL expr(e2) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'for'),array('start'=>v1.'='.e1),array('ifexp'=>ie),array('loop'=>v2.'='.e2))) ."\n ";}
+smartytag(res)   ::= FORTAG variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) PLUS PLUS RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'for'),array('start'=>v1.'='.e1),array('ifexp'=>ie),array('loop'=>v2.'++'))) ."\n ";}
+smartytag(res)   ::= FORTAG variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) MINUS MINUS RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'for'),array('start'=>v1.'='.e1),array('ifexp'=>ie),array('loop'=>v2.'--'))) ."\n ";}
 
 /* Attributes Smarty tags */
 attributes(res)  ::= attribute(a). { res = a;}

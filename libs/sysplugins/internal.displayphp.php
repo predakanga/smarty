@@ -13,9 +13,9 @@ class Smarty_Internal_DisplayPHP extends Smarty_Internal_PluginBase {
         $_cached_filename = $this->_get_cached_filename($tpl);
         $_cached_filepath = $this->smarty->cache_dir . $_cached_filename;
 
-        extract($tpl_vars);
+             extract($tpl_vars);
 
-        if ($this->smarty->caching AND $this->smarty->cache_lifetime != 0) {
+        if ($this->smarty->caching && $this->smarty->cache_lifetime != 0) {
             $display = new Smarty_Internal_Caching;
             $display->display($this->smarty->template_dir . $tpl, $_cached_filepath);
         } else {

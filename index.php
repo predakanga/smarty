@@ -5,7 +5,7 @@ require('./libs/Smarty.class.php');
 $smarty = new Smarty;
 
 $smarty->force_compile = true;
-$smarty->caching = true;
+$smarty->caching = false;
 $smarty->cache_lifetime = 10;
 
 $smarty->assign('foo','a & b');

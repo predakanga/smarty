@@ -17,7 +17,7 @@ class Smarty_Method_Compile_Smarty_Tag extends Smarty_Internal_CompileBase {
         $class_name = "Smarty_Internal_Compile_{$tag}";
         
         // Check if there is already an instace for that tag
-        if (!is_object($this->compiler->_compiler_class[$tag]) and class_exists($class_name)) {
+        if (!is_object($this->compiler->_compiler_class[$tag]) && class_exists($class_name)) {
             // No load plugin if required and create instance 
             $this->compiler->_compiler_class[$tag] = new $class_name;
         } 

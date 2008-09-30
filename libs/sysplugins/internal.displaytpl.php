@@ -32,7 +32,7 @@ class Smarty_Internal_DisplayTPL extends Smarty_Internal_PluginBase {
     }
     
     // call cache handler if caching enabled
-    if ($this->smarty->caching AND $this->smarty->cache_lifetime != 0) {
+    if ($this->smarty->caching && $this->smarty->cache_lifetime != 0) {
          $cache = new Smarty_Internal_Caching;
          $cache->display($_compiled_filepath,$_cached_filepath);
       } else {
