@@ -14,7 +14,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
     */
     function compile($args)
     {
-            $this->compiler->_open_tag('for');
+            $this->_open_tag('for');
          foreach ($args as $key => $value) {
             $_attr[$key] = $value;
         } 
@@ -33,8 +33,8 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
         * 
        * @return string 
         */ 
-        $this->compiler->_close_tag('for');
-        $this->compiler->_open_tag('forelse');
+        $this->_close_tag('for');
+        $this->_open_tag('forelse');
         return "<?php }} else { ?>";
     } 
 } 
@@ -46,7 +46,7 @@ class Smarty_Internal_Compile_End_For extends Smarty_Internal_CompileBase {
         * 
        * @return string 
         */ 
-        $_open_tag = $this->compiler->_close_tag(array('for','forelse'));
+        $_open_tag = $this->_close_tag(array('for','forelse'));
         if ($_open_tag == 'forelse')
             return "<?php } ?>";
         else

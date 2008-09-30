@@ -1,10 +1,9 @@
-<?php
-//  Compiler foreach tags
-//
-//  Not yet complete
-//  - name tag not yet supported
-//  - nesting checks missing
+<?php 
+// Compiler foreach tags
 
+// Not yet complete
+// - name tag not yet supported
+// - nesting checks missing
 class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
     /**
     * Compile {foreach ...} tag.
@@ -14,30 +13,22 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
     */
     function compile($args)
     {
-            $this->compiler->_open_tag('foreach');
-         foreach ($args as $key => $value) {
-            $_attr[$key] = $value;
-        } 
+        $this->required_attributes = array('from', 'item');
+        $this->optional_attributes = array('name', 'key'); 
 
-        if (empty($_attr['from'])) {
-           //$smarty->_syntax_error("foreach: missing 'from' attribute", E_USER_ERROR, __FILE__, __LINE__);
-return;
-        } 
+        // check and get attributes
+        $_attr = $this->_get_attributes($args);
+
+        $this->_open_tag('foreach');
+
         $from = $_attr['from'];
-
-        if (empty($_attr['item'])) {
-             //$smarty->_syntax_error("foreach: missing 'item' attribute", E_USER_ERROR, __FILE__, __LINE__);
-return;        } 
         $item = $_attr['item'];
-//        if (!preg_match('~^\w+$~', $item)) {
-//            return $smarty->_syntax_error("'foreach: 'item' must be a variable name (literal string)", E_USER_ERROR, __FILE__, __LINE__);
-//        } 
 
         if (isset($_attr['key'])) {
             $key = $_attr['key'];
-//            if (!preg_match('~^\w+$~', $key)) {
-//                return $smarty->_syntax_error("foreach: 'key' must to be a variable name (literal string)", E_USER_ERROR, __FILE__, __LINE__);
-//            } 
+            // if (!preg_match('~^\w+$~', $key)) {
+            // return $smarty->_syntax_error("foreach: 'key' must to be a variable name (literal string)", E_USER_ERROR, __FILE__, __LINE__);
+            // }
             $key_part = "\$this->smarty->tpl_vars['$key'] => ";
         } else {
             $key = null;
@@ -63,7 +54,6 @@ return;        }
         } 
         $output .= "?>";
 
-
         return $output;
     } 
 } 
@@ -73,10 +63,13 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
         /**
         * Compile {foreachelse} tag
         * 
-       * @return string 
+        * @return string 
         */ 
-        $this->compiler->_close_tag('foreach');
-        $this->compiler->_open_tag('foreachelse');
+        // check and get attributes
+        $_attr = $this->_get_attributes($args);
+
+        $this->_close_tag('foreach');
+        $this->_open_tag('foreachelse');
         return "<?php endforeach; else: ?>";
     } 
 } 
@@ -86,13 +79,17 @@ class Smarty_Internal_Compile_End_Foreach extends Smarty_Internal_CompileBase {
         /**
         * Compile {/foreach} tag
         * 
-       * @return string 
+        * @return string 
         */ 
-        $_open_tag = $this->compiler->_close_tag(array('foreach','foreachelse'));
+        // check and get attributes
+        $_attr = $this->_get_attributes($args);
+
+        $_open_tag = $this->_close_tag(array('foreach', 'foreachelse'));
         if ($_open_tag == 'foreachelse')
             return "<?php endif; unset(\$_from); ?>";
         else
             return "<?php endforeach; endif; unset(\$_from); ?>";
-         } 
+    } 
 } 
+
 ?>

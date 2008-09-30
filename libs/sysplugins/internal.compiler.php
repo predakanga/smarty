@@ -102,37 +102,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_PluginBase {
         $this->_compiler_status = array_pop($this->_compiler_status_stack);
     } 
 
-    /**
-    * push opening tag-name
-    * 
-    * @param string $ the opening tag's name
-    */
-    function _open_tag($open_tag)
-    {
-        array_push($this->_tag_stack, $open_tag);
-    } 
-
-    /**
-    * pop closing tag-name
-    * raise an error if this stack-top doesn't match with the closing tag
-    * 
-    * @param string $ the closing tag's name
-    * @return string the opening tag's name
-    */
-    function _close_tag($close_tag)
-    {
-        $message = '';
-        if (count($this->_tag_stack) > 0) {
-            $_open_tag = array_pop($this->_tag_stack);
-            if (in_array($_open_tag, (array)$close_tag)) {
-                return $_open_tag;
-            } 
-            $message = " expected {/$_open_tag} (opened line $_line_no).";
-        } 
-        // $this->_syntax_error("mismatched tag {/$close_tag}.$message",
-        // E_USER_ERROR, __FILE__, __LINE__);
-        return;
-    } 
 } 
 
 ?>
