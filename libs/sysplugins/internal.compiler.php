@@ -58,7 +58,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_PluginBase {
         foreach ($lines AS $line) {
             $this->_compiler_status->current_line++; 
             // splitt line into text and smarty tags ( {some tag} }
-            preg_match_all('/(?:{[^\s](.*?)[^\s]})|(?:([^{]*))/m', $line, $match); 
+            preg_match_all("/(?:".$this->smarty->left_delimiter."[^\s](.*?)[^\s]".$this->smarty->right_delimiter.")|(?:([^".$this->smarty->left_delimiter."]*))/m", $line, $match); 
             // loop over all parts of template
             foreach ($match[0] as $part) {
                 if (substr($part, 0, 1) == '{') {

@@ -1,5 +1,5 @@
 <?php
-class Smarty_Internal_Templatelexer extends Smarty_Internal_PluginBase
+class Smarty_Internal_Templatelexer
 {
 
     public $data;
@@ -16,7 +16,8 @@ class Smarty_Internal_Templatelexer extends Smarty_Internal_PluginBase
         $this->data = $data;
         $this->counter = 0;
         $this->line = 1;
-    }
+        $this->smarty = Smarty::instance(); 
+     }
 
 /*!lex2php
 %input $this->data
