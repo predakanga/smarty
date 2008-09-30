@@ -1,0 +1,212 @@
+<?php
+class Smarty_Internal_Templatelexer extends Smarty_Internal_PluginBase
+{
+
+    public $data;
+    public $counter;
+    public $token;
+    public $value;
+    public $node;
+    public $line;
+    public $type;
+    private $state = 1;
+
+    function __construct($data)
+    {
+        $this->data = $data;
+        $this->counter = 0;
+        $this->line = 1;
+    }
+
+/*!lex2php
+%input $this->data
+%counter $this->counter
+%token $this->token
+%value $this->value
+%line $this->line
+ldel = /\{/
+rdel = /\}/
+iftag = /\{if[\s\t]+/
+elseiftag = /\{elseif[\s\t]+/
+number = /[0-9]+(\.[0-9]+)?/
+plus = /\+/
+minus = /\-/
+star = /\*/
+slash = '\/'
+percent = /\%/
+openP = /\(/
+closeP = /\)/
+openB = /\[/
+closeB = /]/
+dollar = /\$/
+dot = /\./
+comma = /\,/
+colon = /\:/
+vert = /\|/
+equal = /\=/
+space = /[\s\t]+/
+ptr = /\->/
+aptr = /=>/
+id = /\w+/
+si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
+db_qstr = '"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"'
+equals = /[\s\t]*==[\s\t]*|[\s\t]+EQ[\s\t]+/
+notequals = /[\s\t]*\!=[\s\t]*|[\s\t]+NE[\s\t]+/
+greaterthan = /[\s\t]*\>[\s\t]*|[\s\t]+GT[\s\t]+/
+lessthan = /[\s\t]*\<[\s\t]*|[\s\t]+LT[\s\t]+/
+greaterequal = /[\s\t]*\>=[\s\t]*|[\s\t]+GE[\s\t]+/
+lessequal = /[\s\t]*<=[\s\t]*|[\s\t]+LE[\s\t]+/
+identity = /[\s\t]*===[\s\t]*/
+not = /\!|[\s\t]+NOT[\s\t]+/
+land = /[\s\t]+AND[\s\t]+|[\s\t]+\&\&[\s\t]+/
+lor = /[\s\t]+OR[\s\t]+|[\s\t]+\|\|[\s\t]+/
+other = /./
+*/
+/*!lex2php
+%statename START
+si_qstr {
+  $this->token = Smarty_Internal_Templateparser::TP_SI_QSTR;
+  $this->type = 'string';
+}
+db_qstr {
+  $this->token = Smarty_Internal_Templateparser::TP_DB_QSTR;
+  $this->type = 'string';
+}
+iftag{
+  $this->token = Smarty_Internal_Templateparser::TP_IFTAG;
+}
+elseiftag{
+  $this->token = Smarty_Internal_Templateparser::TP_ELSEIFTAG;
+}
+identity{
+  $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;
+  $this->type = '"==="';
+}
+equals{
+  $this->token = Smarty_Internal_Templateparser::TP_EQUALS;
+  $this->type = '"=="';
+}
+notequals{
+  $this->token = Smarty_Internal_Templateparser::TP_NOTEQUALS;
+}
+greaterequal{
+  $this->token = Smarty_Internal_Templateparser::TP_GREATEREQUAL;
+  $this->type = '">="';
+}
+lessequal{
+  $this->token = Smarty_Internal_Templateparser::TP_LESSEQUAL;
+  $this->type = '"<="';
+}
+greaterthan{
+  $this->token = Smarty_Internal_Templateparser::TP_GREATERTHAN;
+  $this->type = '">"';
+}
+lessthan{
+  $this->token = Smarty_Internal_Templateparser::TP_LESSTHAN;
+  $this->type = '"<"';
+}
+not{
+  $this->token = Smarty_Internal_Templateparser::TP_NOT;
+  $this->type = '"!"';
+}
+land {
+  $this->token = Smarty_Internal_Templateparser::TP_LAND;
+  $this->type = '"&&"';
+}
+lor {
+  $this->token = Smarty_Internal_Templateparser::TP_LOR;
+  $this->type = '"||"';
+}
+openP {
+  $this->token = Smarty_Internal_Templateparser::TP_OPENP;
+  $this->type = '"("';
+}
+closeP {
+  $this->token = Smarty_Internal_Templateparser::TP_CLOSEP;
+  $this->type = '")"';
+}
+openB {
+  $this->token = Smarty_Internal_Templateparser::TP_OPENB;
+  $this->type = '"["';
+}
+closeB {
+  $this->token = Smarty_Internal_Templateparser::TP_CLOSEB;
+  $this->type = '"]"';
+}
+ptr {
+  $this->token = Smarty_Internal_Templateparser::TP_PTR;
+  $this->type = '"->"';
+}
+aptr {
+  $this->token = Smarty_Internal_Templateparser::TP_APTR;
+  $this->type = '"=>"';
+}
+equal {
+  $this->token = Smarty_Internal_Templateparser::TP_EQUAL;
+  $this->type = '"="';
+}
+plus {
+  $this->token = Smarty_Internal_Templateparser::TP_PLUS;
+  $this->type = '"+"';
+}
+minus {
+  $this->token = Smarty_Internal_Templateparser::TP_MINUS;
+  $this->type = '"-"';
+}
+star {
+  $this->token = Smarty_Internal_Templateparser::TP_STAR;
+  $this->type = '"*"';
+}
+slash {
+  $this->token = Smarty_Internal_Templateparser::TP_SLASH;
+  $this->type = '"/"';
+}
+percent {
+  $this->token = Smarty_Internal_Templateparser::TP_PERCENT;
+  $this->type = '"%"';
+}
+space {
+  $this->token = Smarty_Internal_Templateparser::TP_SPACE;
+  $this->type = '" "';
+}
+ldel {
+  $this->token = Smarty_Internal_Templateparser::TP_LDEL;
+  $this->type = '"{"';
+}
+rdel {
+  $this->token = Smarty_Internal_Templateparser::TP_RDEL;
+  $this->type = '"}"';
+}
+number {
+  $this->token = Smarty_Internal_Templateparser::TP_NUMBER;
+  $this->type = 'number';
+}
+dollar {
+  $this->token = Smarty_Internal_Templateparser::TP_DOLLAR;
+  $this->type = '"$"';
+}
+colon {
+  $this->token = Smarty_Internal_Templateparser::TP_COLON;
+  $this->type = '":"';
+}
+vert {
+  $this->token = Smarty_Internal_Templateparser::TP_VERT;
+  $this->type = '"|"';
+}
+dot {
+  $this->token = Smarty_Internal_Templateparser::TP_DOT;
+  $this->type = '"."';
+}
+comma {
+  $this->token = Smarty_Internal_Templateparser::TP_COMMA;
+  $this->type = '","';
+}
+id {
+  $this->token = Smarty_Internal_Templateparser::TP_ID;
+  $this->type = 'identifier';
+}
+other {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
+*/
+}
