@@ -30,9 +30,9 @@ ldels = /\{\s{1,}/
 rdels = /\s{1,}\}/
 ldel = /\{/
 rdel = /\}/
-fortag = /\{for[\s\t]+/
-iftag = /\{if[\s\t]+/
-elseiftag = /\{elseif[\s\t]+/
+fortag = /\{for\s+/
+iftag = /\{if\s+/
+elseiftag = /\{elseif\s+/
 number = /\d+(\.\d+)?/
 plus = /\+/
 minus = /\-/
@@ -56,16 +56,16 @@ aptr = /=>/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
 db_qstr = '"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"'
-equals = /[\s\t]*==[\s\t]*|[\s\t]+EQ[\s\t]+/
-notequals = /[\s\t]*\!=[\s\t]*|[\s\t]+NE[\s\t]+/
-greaterthan = /[\s\t]*\>[\s\t]*|[\s\t]+GT[\s\t]+/
-lessthan = /[\s\t]*\<[\s\t]*|[\s\t]+LT[\s\t]+/
-greaterequal = /[\s\t]*\>=[\s\t]*|[\s\t]+GE[\s\t]+/
-lessequal = /[\s\t]*<=[\s\t]*|[\s\t]+LE[\s\t]+/
-identity = /[\s\t]*===[\s\t]*/
-not = /\!|[\s\t]+NOT[\s\t]+/
-land = /[\s\t]+AND[\s\t]+|[\s\t]+\&\&[\s\t]+/
-lor = /[\s\t]+OR[\s\t]+|[\s\t]+\|\|[\s\t]+/
+equals = /\s*==\s*|\s+EQ\s+/
+notequals = /\s*\!==\s*|\s+NE\s+/
+greaterthan = /\s*\>\s*|\s+GT\s+/
+lessthan = /\s*\<\s*|\s+LT\s+/
+greaterequal = /\s*\>=\s*|\s+GE\s+/
+lessequal = /\s*<=\s*|\s+LE\s+/
+identity = /\s*===\s*/
+not = /\!|\s+NOT\s+/
+land = /\s+AND\s+|\s*\&\&\s*/
+lor = /\s+OR\s+|\s*\|\|\s*/
 other = /./
 */
 /*!lex2php
