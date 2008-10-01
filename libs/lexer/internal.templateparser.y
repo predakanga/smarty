@@ -10,9 +10,21 @@
     private $internalError = false;
 
     function __construct($lex) {
+        // set instance object
+        self::instance($this); 
         $this->lex = $lex;
+        $this->smarty = Smarty::instance(); 
     }
-}
+    public static function &instance($new_instance = null)
+    {
+        static $instance = null;
+        if (isset($new_instance) && is_object($new_instance))
+            $instance = $new_instance;
+        return $instance;
+    }
+    
+} 
+
 
 %token_prefix TP_
 
@@ -26,27 +38,8 @@
 
 %syntax_error
 {
-//    var_dump($this);
     $this->internalError = true;
-    $compiler = Smarty_Internal_Compiler::instance();
-//    echo "<br>Syntax Error on line " . $this->lex->line . ": token '" . 
-//        $this->lex->value . "' count ".$this->lex->counter.'<p style="font-family:courier">'.$this->lex->data."<br>";
-   $match = preg_split("/\n/", $this->lex->data); 
-    echo "<br>Syntax Error on line " . $this->lex->line ." template ".$compiler->_compiler_status->current_tpl_filepath.'<p style="font-family:courier">'.$match[$this->lex->line-1]."<br>";
-//    for ($i=1;$i<$this->lex->counter;$i++) echo '&nbsp';
-    echo '</p>';    
-//    echo " while parsing rule: ";
-//    foreach ($this->yystack as $entry) {
-//        echo $this->tokenName($entry->major) . '->';
-//    }
-    foreach ($this->yy_get_expected_tokens($yymajor) as $token) {
-        $expect[] = self::$yyTokenName[$token];
-    }
-//	echo "<br>";	
-//    throw new Exception('Unexpected ' . $this->tokenName($yymajor) . '(' . $TOKEN. '), expected one of: ' . implode(',', $expect));
-    echo 'Unexpected "' . $TOKEN. '", expected one of: ' . implode(',', $expect)."<br>";
-    echo "Compilation terminated";
-    die();
+    $this->smarty->trigger_template_error();
 }
 
 %fallback     OTHER LDELS RDELS RDEL NUMBER MINUS PLUS STAR SLASH PERCENT OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON

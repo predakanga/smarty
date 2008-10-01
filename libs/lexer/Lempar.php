@@ -260,7 +260,7 @@ class ParseyyStackEntry
      * are required.  The following table supplies these names
      * @var array
      */
-    static public $yyTokenName = array( 
+    public $yyTokenName = array( 
 %%
     );
 
