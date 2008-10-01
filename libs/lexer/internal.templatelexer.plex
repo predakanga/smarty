@@ -63,9 +63,9 @@ equal = /\=/
 space = /[\s]+/
 ptr = /\->/
 aptr = /=>/
+quote = /\"/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
-db_qstr = '""[^"\\\\]*(?:\\\\.[^"\\\\]*)*""'
 equals = /\s*==\s*|\s+EQ\s+/
 notequals = /\s*\!=\s*|\s+NE\s+/
 greaterthan = /\s*\>\s*|\s+GT\s+/
@@ -82,10 +82,6 @@ other = /./
 %statename START
 si_qstr {
   $this->token = Smarty_Internal_Templateparser::TP_SI_QSTR;
-  $this->type = 'string';
-}
-db_qstr {
-  $this->token = Smarty_Internal_Templateparser::TP_DB_QSTR;
   $this->type = 'string';
 }
 fortag{
@@ -218,6 +214,10 @@ semicolon {
 }
 colon {
   $this->token = Smarty_Internal_Templateparser::TP_COLON;
+  $this->type = '":"';
+}
+quote {
+  $this->token = Smarty_Internal_Templateparser::TP_QUOTE;
   $this->type = '":"';
 }
 vert {

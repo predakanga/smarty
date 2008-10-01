@@ -43,8 +43,8 @@
 }
 
 %fallback     OTHER LDELS RDELS RDEL NUMBER MINUS PLUS STAR SLASH PERCENT OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
-              VERT EQUAL SPACE PTR APTR ID SI_QSTR DB_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR.
+              VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
+              NOT LAND LOR QUOTE.
 
 start(res)       ::= input(t). { res = t; }
 
@@ -55,7 +55,7 @@ single(res)      ::= smartytag(st). {res = st;}
 single(res)      ::= PHP(php). {res = php;}
 single(res)      ::= OTHER(o). {res = o;}
 
-smartytag(res)   ::= LDEL expr(e) RDEL. { res = "<?php echo ". e .";?>\n";}
+smartytag(res)   ::= LDEL expr(e) RDEL. { res = "<?php echo str_replace('\"','&quot;',". e .");?>\n";}
 smartytag(res)   ::= LDEL ID(e) attributes(a) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>e),a)) ."\n ";}
 smartytag(res)   ::= LDEL ID(e) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>e),array(0))) ."\n ";}
 smartytag(res)   ::= LDEL SLASH ID(e) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>'end_'.e)) ."\n ";}
@@ -89,7 +89,7 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 value(res)		   ::= variable(f). { res = f; }
 value(res)       ::= method(m). { res = m; }
 value(res)	     ::= SI_QSTR(s). { res = s; }
-value(res)	     ::= DB_QSTR(s). { res = s; }
+value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = '"'.s.'"'; }
 value(res)	     ::= function(f). { res = f; }
 
 /* variables */
@@ -154,3 +154,7 @@ arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.'
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
 
+doublequoted(res)          ::= doublequoted(o1) other(o2). {res = o1.o2;}
+doublequoted(res)          ::= other(o). {res = o;}
+other(res)           ::= variable(v). {res = '".'.v.'."';}
+other(res)           ::= OTHER(o). {res = o;}
