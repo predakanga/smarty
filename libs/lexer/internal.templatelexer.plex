@@ -25,12 +25,15 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
+php = /\<\?php.*\?\>/
+ldels = /\{\s{1,}/
+rdels = /\s{1,}\}/
 ldel = /\{/
 rdel = /\}/
 fortag = /\{for[\s\t]+/
 iftag = /\{if[\s\t]+/
 elseiftag = /\{elseif[\s\t]+/
-number = /[0-9]+(\.[0-9]+)?/
+number = /\d+(\.\d+)?/
 plus = /\+/
 minus = /\-/
 star = /\*/
@@ -47,7 +50,7 @@ colon = /\:/
 semicolon = /\;/
 vert = /\|/
 equal = /\=/
-space = /[\s\t]+/
+space = /[\s]+/
 ptr = /\->/
 aptr = /=>/
 id = /\w+/
@@ -175,6 +178,14 @@ space {
   $this->token = Smarty_Internal_Templateparser::TP_SPACE;
   $this->type = '" "';
 }
+ldels {
+  $this->token = Smarty_Internal_Templateparser::TP_LDELS;
+  $this->type = '"{"';
+}
+rdels {
+  $this->token = Smarty_Internal_Templateparser::TP_RDELS;
+  $this->type = '"}"';
+}
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
   $this->type = '"{"';
@@ -214,6 +225,10 @@ comma {
 id {
   $this->token = Smarty_Internal_Templateparser::TP_ID;
   $this->type = 'identifier';
+}
+php {
+  $this->token = Smarty_Internal_Templateparser::TP_PHP;
+  $this->type = 'PHP code';
 }
 other {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;

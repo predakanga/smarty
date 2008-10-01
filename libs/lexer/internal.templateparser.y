@@ -31,9 +31,10 @@
     $compiler = Smarty_Internal_Compiler::instance();
 //    echo "<br>Syntax Error on line " . $this->lex->line . ": token '" . 
 //        $this->lex->value . "' count ".$this->lex->counter.'<p style="font-family:courier">'.$this->lex->data."<br>";
-    echo "<br>Syntax Error on line " . $compiler->_compiler_status->current_line ." template ".$compiler->_compiler_status->current_tpl_filepath.'<p style="font-family:courier">'.$this->lex->data."<br>";
-    for ($i=1;$i<$this->lex->counter;$i++) echo '&nbsp';
-    echo '^</p>';    
+   $match = preg_split("/\n/", $this->lex->data); 
+    echo "<br>Syntax Error on line " . $this->lex->line ." template ".$compiler->_compiler_status->current_tpl_filepath.'<p style="font-family:courier">'.$match[$this->lex->line-1]."<br>";
+//    for ($i=1;$i<$this->lex->counter;$i++) echo '&nbsp';
+    echo '</p>';    
 //    echo " while parsing rule: ";
 //    foreach ($this->yystack as $entry) {
 //        echo $this->tokenName($entry->major) . '->';
@@ -48,8 +49,18 @@
     die();
 }
 
+%fallback     OTHER LDELS RDELS RDEL NUMBER MINUS PLUS STAR SLASH PERCENT OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
+              VERT EQUAL SPACE PTR APTR ID SI_QSTR DB_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
+              NOT LAND LOR.
 
-start(res)       ::= smartytag(t). { res = t; }
+start(res)       ::= input(t). { res = t; }
+
+input(res)       ::= single(e). {res = e;}
+input(res)       ::= input(i) single(e). {res = i.e;}
+
+single(res)      ::= smartytag(st). {res = st;}
+single(res)      ::= PHP(php). {res = php;}
+single(res)      ::= OTHER(o). {res = o;}
 
 smartytag(res)   ::= LDEL expr(e) RDEL. { res = "<?php echo ". e .";?>\n";}
 smartytag(res)   ::= LDEL ID(e) attributes(a) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>e),a)) ."\n ";}
@@ -150,4 +161,3 @@ arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.'
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
 
-other(res) ::= OTHER(c). {}
