@@ -13,6 +13,7 @@ class Smarty_Internal_CompileBase {
     function __construct()
     { 
         // $this->smarty = Smarty::instance();
+        $this->smarty = Smarty::instance();
         $this->compiler = Smarty_Internal_Compiler::instance(); 
         // definition of valid attributes
         $this->required_attributes = array();
@@ -30,12 +31,12 @@ class Smarty_Internal_CompileBase {
     } 
 
     function _get_attributes ($args)
-    {
+    { 
         // foreach ($args as $key => $value) {
         // $_attr[$key] = $value;
         foreach ($this->required_attributes as $attr) {
             if (!array_key_exists($attr, $args)) {
-                echo "missing " . $attr . " attribute";
+                $this->smarty->trigger_template_error("missing \"" . $attr . "\" attribute");
             } 
         } 
 
@@ -43,7 +44,7 @@ class Smarty_Internal_CompileBase {
             $tmp_array = array_merge($this->required_attributes, $this->optional_attributes);
             foreach ($args as $key => $dummy) {
                 if (!in_array($key, $tmp_array)) {
-                    echo "unexspected " . $key . " attribute";
+                    $this->smarty->trigger_template_error("unexspected \"" . $key . "\" attribute");
                 } 
             } 
         } 
