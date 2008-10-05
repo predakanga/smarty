@@ -14,7 +14,7 @@ class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
     */
     function compile($args)
     {
-        $this->compiler->_open_tag('if');
+        $this->_open_tag('if');
         return '<?php if (' .$args[ifexp] . '): ?>';   
         }
 } 
@@ -28,8 +28,8 @@ class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase {
     */
     function compile($args)
     {
-            $this->compiler->_close_tag(array('if','elseif'));
-            $this->compiler->_open_tag('else');
+            $this->_close_tag(array('if','elseif'));
+            $this->_open_tag('else');
 
         return '<?php else: ?>';
     } 
@@ -43,8 +43,8 @@ class Smarty_Internal_Compile_ElseIf extends Smarty_Internal_CompileBase {
     */
     function compile($args)
     {
-            $this->compiler->_close_tag(array('if','elseif'));
-            $this->compiler->_open_tag('elseif');
+            $this->_close_tag(array('if','elseif'));
+            $this->_open_tag('elseif');
 
         return '<?php elseif (' .$args[ifexp] . '): ?>'; 
     } 
@@ -59,7 +59,7 @@ class Smarty_Internal_Compile_End_If extends Smarty_Internal_CompileBase {
         * 
        * @return string 
         */ 
-            $this->compiler->_close_tag(array('if',',else','elseif'));
+            $this->_close_tag(array('if',',else','elseif'));
         return "<?php endif;?>";
          } 
 } 

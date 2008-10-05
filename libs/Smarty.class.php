@@ -48,6 +48,8 @@ class Smarty {
     public $use_sub_dirs = false; 
     // force_compile?
     public $force_compile = false; 
+    // compile_error?
+    public $compile_error = false; 
     // caching enabled
     public $caching = false; 
     // caching lifetime
@@ -55,6 +57,8 @@ class Smarty {
     // delimiter
     public $left_delimiter = "{";
     public $right_delimiter = "}"; 
+    // security mode
+    public $security = false;
     // php file extention
     public $php_ext = '.php'; 
     // assigned tpl vars
@@ -72,6 +76,7 @@ class Smarty {
         $this->cache_dir = '.' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR;
         $this->config_dir = '.' . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR;
         $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR; 
+        $this->compile_error = false;
         // set instance object
         self::instance($this);
     } 
@@ -176,9 +181,18 @@ class Smarty {
     public function __call($name, $args)
     {
         $plugin_filename = strtolower('method.' . $name . $this->php_ext);
+
+        if (!file_exists($this->sysplugins_dir . $plugin_filename)) {
+           echo "<br>Sysplugin file " . $plugin_filename . " does not exist<br>";
+           die();
+        }
         require_once($this->sysplugins_dir . $plugin_filename);
 
         $class_name = "Smarty_Method_{$name}";
+        if (!class_exists($class_name)) {
+           echo "<br>Sysplugin file " . $plugin_filename . "does not define class " . $class_name ."<br>";
+           die();
+        }
         $method = new $class_name;
         return $method->execute($args);
     } 

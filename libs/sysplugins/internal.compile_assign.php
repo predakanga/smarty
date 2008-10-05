@@ -10,12 +10,12 @@
 class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
     public function compile($args)
     {
-         foreach ($args as $key => $value) {
-            $_attr[$key] = $value;
-        } 
-        $_value = $_attr['value'];
+        $this->required_attributes = array('var', 'value');
+
+        // check and get attributes
+        $_attr = $this->_get_attributes($args);
         
-        return "<?php \$this->smarty->assign('$_attr[var]',$_value); ?>";
+        return "<?php \$this->smarty->assign('$_attr[var]',$_attr[value]);?>";
     } 
 } 
 

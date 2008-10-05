@@ -230,7 +230,7 @@ class ParseyyStackEntry
     static function PrintTrace()
     {
         self::$yyTraceFILE = fopen('php://output', 'w');
-        self::$yyTracePrompt = '';
+        self::$yyTracePrompt = '<br>';
     }
 
     /**

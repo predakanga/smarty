@@ -1,4 +1,5 @@
-/* This is an example for a Parser in PHP */
+/* This is a Parser for Smarty3 */
+/* Definitions written by Uwe Tews */
 %name TP_
 %declare_class {class Smarty_Internal_Templateparser}
 %include_class
@@ -33,7 +34,7 @@
     $this->successful = !$this->internalError;
     $this->internalError = false;
     $this->retvalue = $this->_retvalue;
-    //    echo $this->retvalue."\n\n";
+    //echo $this->retvalue."\n\n";
 }
 
 %syntax_error
@@ -42,100 +43,192 @@
     $this->smarty->trigger_template_error();
 }
 
-%fallback     OTHER LDELS RDELS RDEL NUMBER MINUS PLUS STAR SLASH PERCENT OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
+//
+// fallback definition to catch all non Smarty template text
+//
+%fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
               NOT LAND LOR QUOTE.
 
-start(res)       ::= input(t). { res = t; }
 
-input(res)       ::= single(e). {res = e;}
-input(res)       ::= input(i) single(e). {res = i.e;}
+//
+// complete template
+//
+start(res)       ::= template(t). { res = t; }
 
-single(res)      ::= smartytag(st). {res = st;}
-single(res)      ::= PHP(php). {res = php;}
-single(res)      ::= OTHER(o). {res = o;}
+//
+// loop over template elements
+//
+											// single template element
+template(res)       ::= template_element(e). {res = e;}
+											// loop of elements
+template(res)       ::= template(t) template_element(e). {res = t.e;}
 
-smartytag(res)   ::= LDEL expr(e) RDEL. { res = "<?php echo str_replace('\"','&quot;',". e .");?>\n";}
-smartytag(res)   ::= LDEL ID(e) attributes(a) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>e),a)) ."\n ";}
-smartytag(res)   ::= LDEL ID(e) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>e),array(0))) ."\n ";}
-smartytag(res)   ::= LDEL SLASH ID(e) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>'end_'.e)) ."\n ";}
-smartytag(res)   ::= IFTAG ifexprs(ie) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'if'),array('ifexp'=>ie))) ."\n ";}
-smartytag(res)   ::= ELSEIFTAG ifexprs(ie) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'elseif'),array('ifexp'=>ie))) ."\n ";}
-smartytag(res)   ::= FORTAG variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) EQUAL expr(e2) RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'for'),array('start'=>v1.'='.e1),array('ifexp'=>ie),array('loop'=>v2.'='.e2))) ."\n ";}
-smartytag(res)   ::= FORTAG variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) PLUS PLUS RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'for'),array('start'=>v1.'='.e1),array('ifexp'=>ie),array('loop'=>v2.'++'))) ."\n ";}
-smartytag(res)   ::= FORTAG variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) MINUS MINUS RDEL. {$this->smarty = Smarty::instance(); res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>'for'),array('start'=>v1.'='.e1),array('ifexp'=>ie),array('loop'=>v2.'--'))) ."\n ";}
+//
+// template elements
+//
+											// Smarty tag
+template_element(res)::= smartytag(st). {res = st;}	
+											// PHP tag
+template_element(res)::= PHP(php). {res = php;}	
+											// Other template text
+template_element(res)::= OTHER(o). {res = o;}	
 
-/* Attributes Smarty tags */
+
+//
+// all Smarty tags start here
+//
+									// variable
+smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable_output(e);}
+									// tag without attributes
+smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>i),array(0)));}
+									// tag with Smarty2 style attributes
+smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>i),a));}
+									// end of block tag  {/....}									
+smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>'end_'.i));}
+									// {if} and {elseif} tag
+smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>i,'ifexp'=>ie));}
+									// {for} tag
+smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>i,'start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
+foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
+foraction(res)	 ::= INCDEC(e). { res = e;}
+
+//
+//Attributes of Smarty tags 
+//
+									// single attribute
 attributes(res)  ::= attribute(a). { res = a;}
+									// list of attributes
 attributes(res)  ::= attributes(a1) attribute(a2). { res = array_merge(a1,a2);}
-
+									// different formats of attribute
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>e);}
+attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
 
-expr(res)        ::= value(f). { res = f; }
-expr(res)        ::= MINUS value(f). { res = "-".f; }
-expr(res)        ::= expr(f) modifier(m). { res = m . "(". f .")"; }
-expr(res)        ::= expr(f) modifier(m) modparameters(p). { res = m . "(". f .",". p .")"; } 
-expr(res)        ::= expr(t1) math(m) value(f2). { res = t1 . m . f2; } 
-expr(res)        ::= array(a). { res = a; }
+//
+// expressions
+//
+									// single value
+expr(res)        ::= value(v). { res = v; }
+									// +/- value
+expr(res)        ::= UNIMATH(m) value(v). { res = m.v; }
+									// expression with simple modifier
+expr(res)        ::= expr(e) modifier(m). { res = m . "(". e .")"; }
+									// expression with modifier and additional modifier paramter
+expr(res)        ::= expr(e) modifier(m) modparameters(p). { res = m . "(". e .",". p .")"; } 
+									// arithmetic expresiion
+expr(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 
-math(res)        ::= PLUS. { res = "+";}
-math(res)        ::= MINUS. { res = "-";}
-math(res)        ::= STAR. { res = "*";}
-math(res)        ::= SLASH. { res = "/";}
+//
+// mathematical operators
+//
+									// +,-
+math(res)        ::= UNIMATH(m). {res = m;}
+									// *,/,%
+math(res)        ::= MATH(m). {res = m;}
 
+//
+// value in expressions
+//
+									// numeric constant
 value(res)       ::= NUMBER(n). { res = n; }
+									// expression
 value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
-value(res)		   ::= variable(f). { res = f; }
-value(res)       ::= method(m). { res = m; }
-value(res)	     ::= SI_QSTR(s). { res = s; }
-value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = '"'.s.'"'; }
+									// variable
+value(res)		   ::= variable(v). { res = v; }
+									// object
+value(res)       ::= object(o). { res = o; }
+									// function call
 value(res)	     ::= function(f). { res = f; }
+									// singele quoted string
+value(res)	     ::= SI_QSTR(s). { res = s; }
+									// double quoted string
+value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = '"'.s.'"'; }
 
-/* variables */
-variable(res)    ::= DOLLAR varids(s). { res = '$this->smarty->tpl_vars['. s .']';}
-variable(res)    ::= variable(v) DOT varids(s). { res = v ."[". s ."]";}
-variable(res)    ::= variable(v) OPENB varids(s) CLOSEB. { res = v ."[". s ."]";}
-varids(res)			 ::= varids(v1) varid(v2). {res = v1.".".v2;}
-varids(res)			 ::= varid(v). {res = v;}
-varid(res)       ::= ID(s). {res = s;}
-/* varid(res)       ::= expr(s). {res = s;}*/
-varid(res)       ::= OPENP expr(s) CLOSEP. {res = s;}
+//
+// variables 
+//
+									// simple Smarty variable
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']';}
+									// array variable
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']'.a;}
+										// single array index
+vararraydefs(res)  ::= vararraydef(a). {res = a;}
+										// multiple array index
+vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
+										// Smarty2 style index
+vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
+										// PHP style index
+vararraydef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
 
-/* methode */
-method(res)      ::= DOLLAR ID(s) methodchain(mc). { res = '$this->smarty->tpl_vars['. s .']'.mc;}
+// variable identifer, supporting variable variables
+										// singel identifier element
+varvar(res)			 ::= varvarele(v). {res = v;}
+										// sequence of identifier elements
+varvar(res)			 ::= varvar(v1) varvarele(v2). {res = v1.".".v2;}
+										// fix sections of element
+varvarele(res)	 ::= ID(s). {res = s;}
+										// variable sections of element
+varvarele(res)	 ::= LDEL expr(e) RDEL. {res = "(".e.")";}
 
-methodchain(res)      ::= methodelement(me). {res  = me; } 
-methodchain(res)      ::= methodchain(mc) methodelement(me). {res  = mc.me; }
-/* methodchain(res)      ::= .  */
+//
+// objects
+//
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->smarty->tpl_vars['. v .']'.oc;}
+										// single element
+objectchain(res) ::= objectelement(oe). {res  = oe; }
+										// cahin of elements 
+objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
+										// variable
+objectelement(res)::= PTR varvar(v).	{ res = '->'.v;}
+										// method
+objectelement(res)::= PTR function(f).	{ res = '->'.f;}
 
-methodelement(res)     ::= PTR ID(s).	{ res = '->'.s;}
-methodelement(res)     ::= PTR function(f).	{ res = '->'.f;}
-
-/* function */
+//
+// function/method
+//
+										// function with parameter
 function(res)     ::= ID(s) OPENP params(p) CLOSEP.	{ res = s."(".p.")";}
+										// function without parameter
 function(res)     ::= ID(s) OPENP CLOSEP.	{ res = s."()";}
 
-/* parameter */
+// function parameter
+										// single parameter
 params(res)       ::= expr(e). { res = e;}
+										// multiple parameters
 params(res)       ::= params(p) COMMA expr(e). { res = p.",".e;}
 
-/* modifier */  
+//
+// modifier
+//  
 modifier(res)    ::= VERT ID(s). { res =  s;}
-
-/* modifier parameter */
+// modifier parameter
+										// single parameter
 modparameters(res) ::= modparameter(mp). {res = mp;}
+										// multiple parameter
 modparameters(res) ::= modparameters(mps) modparameter(mp). {res = mps .",". mp;}
-modparameter(res) ::= COLON value(mp). {res = mp;}
+										// parameter expression
+modparameter(res) ::= COLON expr(mp). {res = mp;}
 
+//
+// if expressions
+//
+										// single if expression
 ifexprs(res)			 ::= ifexpr(e).	{res = e;}
+										// multiple if expressions
 ifexprs(res)			 ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
+										// subexpressions
 ifexprs(res)			 ::= OPENP ifexprs(e1) lop(o) ifexprs(e2) CLOSEP.	{res = '('.e1.o.e2.')';}
+ifexprs(res)			 ::= NOT OPENP ifexprs(e1) lop(o) ifexprs(e2) CLOSEP.	{res = '!('.e1.o.e2.')';}
 
+// if expression
+										// simple expression
 ifexpr(res)        ::= expr(e). {res =e;}
+										// simple inverted expression
 ifexpr(res)        ::= NOT expr(e). {res = '!'.e;}
 ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
 ifexpr(res)        ::= OPENP expr(e1) ifcond(c) expr(e2) CLOSEP. {res = e1.c.e2;}
+ifexpr(res)        ::= NOT OPENP expr(e1) ifcond(c) expr(e2) CLOSEP. {res = e1.c.e2;}
 
 ifcond(res)        ::= EQUALS. {res = '==';}
 ifcond(res)        ::= NOTEQUALS. {res = '!=';}
@@ -153,8 +246,10 @@ arrayelements(res)   ::=  arrayelement(a).  { res = a; }
 arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.','.a; }
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
+arrayelement(res)		 ::=  ID(e1) APTR expr(e2). { res = e1.'=>'.e2;}
+arrayelement(res)		 ::=  array(a). { res = a;}
 
 doublequoted(res)          ::= doublequoted(o1) other(o2). {res = o1.o2;}
 doublequoted(res)          ::= other(o). {res = o;}
-other(res)           ::= variable(v). {res = '".'.v.'."';}
+other(res)           ::= LDEL variable(v) RDEL. {res = '".'.v.'."';}
 other(res)           ::= OTHER(o). {res = o;}
