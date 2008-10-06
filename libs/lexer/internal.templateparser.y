@@ -143,7 +143,7 @@ value(res)	     ::= function(f). { res = f; }
 									// singele quoted string
 value(res)	     ::= SI_QSTR(s). { res = s; }
 									// double quoted string
-value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = '"'.s.'"'; }
+value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 
 //
 // variables 
@@ -215,20 +215,15 @@ modparameter(res) ::= COLON expr(mp). {res = mp;}
 //
 										// single if expression
 ifexprs(res)			 ::= ifexpr(e).	{res = e;}
-										// multiple if expressions
-ifexprs(res)			 ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
-										// subexpressions
-ifexprs(res)			 ::= OPENP ifexprs(e1) lop(o) ifexprs(e2) CLOSEP.	{res = '('.e1.o.e2.')';}
-ifexprs(res)			 ::= NOT OPENP ifexprs(e1) lop(o) ifexprs(e2) CLOSEP.	{res = '!('.e1.o.e2.')';}
+ifexprs(res)			 ::= NOT ifexpr(e).	{res = '!'.e;}
+ifexprs(res)			 ::= OPENP ifexpr(e) CLOSEP.	{res = '('.e.')';}
+ifexprs(res)			 ::= NOT OPENP ifexpr(e) CLOSEP.	{res = '!('.e.')';}
 
 // if expression
 										// simple expression
 ifexpr(res)        ::= expr(e). {res =e;}
-										// simple inverted expression
-ifexpr(res)        ::= NOT expr(e). {res = '!'.e;}
 ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
-ifexpr(res)        ::= OPENP expr(e1) ifcond(c) expr(e2) CLOSEP. {res = e1.c.e2;}
-ifexpr(res)        ::= NOT OPENP expr(e1) ifcond(c) expr(e2) CLOSEP. {res = e1.c.e2;}
+ifexpr(res)			   ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
 
 ifcond(res)        ::= EQUALS. {res = '==';}
 ifcond(res)        ::= NOTEQUALS. {res = '!=';}
@@ -251,5 +246,5 @@ arrayelement(res)		 ::=  array(a). { res = a;}
 
 doublequoted(res)          ::= doublequoted(o1) other(o2). {res = o1.o2;}
 doublequoted(res)          ::= other(o). {res = o;}
-other(res)           ::= LDEL variable(v) RDEL. {res = '".'.v.'."';}
+other(res)           ::= LDEL variable(v) RDEL. {res = "'.".v.".'";}
 other(res)           ::= OTHER(o). {res = o;}

@@ -20,16 +20,6 @@ class Smarty_Internal_CompileBase {
         $this->optional_attributes = array();
     } 
 
-    /**
-    * push opening tag-name
-    * 
-    * @param string $ the opening tag's name
-    */
-    function _open_tag($open_tag)
-    {
-        array_push($this->compiler->_tag_stack, $open_tag);
-    } 
-
     function _get_attributes ($args)
     { 
         // foreach ($args as $key => $value) {
@@ -40,7 +30,7 @@ class Smarty_Internal_CompileBase {
             } 
         } 
 
-        if ($this->optional_attributes != "_any") {
+        if ($this->optional_attributes != array('_any')) {
             $tmp_array = array_merge($this->required_attributes, $this->optional_attributes);
             foreach ($args as $key => $dummy) {
                 if (!in_array($key, $tmp_array)) {
@@ -50,6 +40,16 @@ class Smarty_Internal_CompileBase {
         } 
 
         return $args;
+    } 
+    /**
+    * push opening tag-name
+    * 
+    * @param string $ the opening tag's name
+    */
+
+    function _open_tag($open_tag)
+    {
+        array_push($this->compiler->_tag_stack, $open_tag);
     } 
 
     /**
@@ -67,10 +67,10 @@ class Smarty_Internal_CompileBase {
             if (in_array($_open_tag, (array)$close_tag)) {
                 return $_open_tag;
             } 
-            $message = " expected {/$_open_tag} (opened line $_line_no).";
+            $this->smarty->trigger_template_error("unclosed {" . $_open_tag . "} tag");
+            return;
         } 
-        // $this->_syntax_error("mismatched tag {/$close_tag}.$message",
-        // E_USER_ERROR, __FILE__, __LINE__);
+        $this->smarty->trigger_template_error("unexpected closing tag");
         return;
     } 
 } 

@@ -26,10 +26,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
         if (isset($_attr['key'])) {
             $key = $_attr['key'];
-            // if (!preg_match('~^\w+$~', $key)) {
-            // return $smarty->_syntax_error("foreach: 'key' must to be a variable name (literal string)", E_USER_ERROR, __FILE__, __LINE__);
-            // }
-            $key_part = "\$this->smarty->tpl_vars['$key'] => ";
+            $key_part = "\$this->smarty->tpl_vars[$key] => ";
         } else {
             $key = null;
             $key_part = '';

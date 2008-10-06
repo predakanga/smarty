@@ -107,16 +107,15 @@ class Smarty {
         if (substr($tpl, - strlen($this->php_ext)) == $this->php_ext) {
             // PHP template
             $display = new Smarty_Internal_DisplayPHP;
-            $display->display($tpl, $this->tpl_vars);
         } elseif (substr($tpl,0,7) == "String:") {
             // String template
             $display = new Smarty_Internal_DisplayString;
-            $display->display(substr($tpl,7), $this->tpl_vars);
+            $tpl = substr($tpl,7);
         } else {
             // compiled template
             $display = new Smarty_Internal_DisplayTPL;
-            $display->display($tpl, $this->tpl_vars);
         } 
+        $display->display($tpl, $this->tpl_vars);
     } 
 
     /**
