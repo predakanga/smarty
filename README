@@ -131,13 +131,8 @@ ACCESSING PLUGINS (modifiers, functions)
 
 When using PHP templates, you can call plugins with this syntax:
 
-<?=$this->smarty->modifier->modname($var,$params)?>
-<?=$this->smarty->function->funcname($params)?>
-
-OR (which is better?):
-
-<?=smarty::instance->modifier->modname($var,$params)?>
-<?=smarty::instance->function->funcname($params)?>
+<?=$this->modifier->modname($var,$params)?>
+<?=$this->function->funcname($params)?>
 
 When using tagged templates, plugins are accessed with
 the typical smarty syntax:
