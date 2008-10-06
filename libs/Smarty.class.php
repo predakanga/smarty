@@ -73,12 +73,15 @@ class Smarty {
     public $right_delimiter = "}"; 
     // security mode
     public $security = false;
-
+    
     /**
-    * Class constructor, initializes basic smarty properties
-    */
+      * Class constructor, initializes basic smarty properties
+      */
     public function __construct()
     { 
+        // set exception handler
+        set_exception_handler(array('SmartyException','getStaticException'));
+        
         // set default dirs
         $this->template_dir = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
         $this->compile_dir = '.' . DIRECTORY_SEPARATOR . 'templates_c' . DIRECTORY_SEPARATOR;
@@ -90,6 +93,15 @@ class Smarty {
         self::instance($this);
     } 
 
+    /**
+      * Class destructor
+      */
+    public function __destruct()
+    { 
+        // reset exception handler
+        restore_exception_handler();
+    } 
+    
     /**
     * Sets a static instance of the smarty object. Retrieve with:
     * $smarty = Smarty::instance();
@@ -206,17 +218,18 @@ class Smarty {
         } 
         $method = new $class_name;
         return $method->execute($args);
-    } 
-} 
+    }
+    
+}
 
 /**
-* Lazy loads a smarty plugin for an unknown class.
-* 
-* If you already have an __autoload() defined, copy the
-* smarty __autoload() function contents to the top of it.
-* 
-* @param string $class_name unknown class name
-*/
+  * Lazy loads a smarty plugin for an unknown class.
+  * 
+  * If you already have an __autoload() defined, copy the
+  * smarty __autoload() function contents to the top of it.
+  * 
+  * @param string $class_name unknown class name
+  */
 
 if (!function_exists('__autoload')) {
     function __autoload($class_name)
@@ -224,5 +237,39 @@ if (!function_exists('__autoload')) {
         return (($smarty = Smarty::instance()) !== null) && ($smarty->loadPlugin($class_name) !== false);
     } 
 } 
+
+/**
+  * Smarty Exception Handler
+  * 
+  * All errors thrown in Smarty will be handled here.
+  * 
+  * @param string $message the error message
+  * @param string $code the error code
+  */
+class SmartyException extends Exception
+{
+    public function __construct($message, $code=NULL)
+    {
+        parent::__construct($message, $code);
+    }
+   
+    public function __toString()
+    {
+        return "Error: " . htmlentities($this->getMessage()) . "<br>\n"
+          . "File: " . $this->getFile() . "<br>\n"
+          . "Line: " . $this->getLine() . "\n";
+    }
+   
+    public function getException()
+    {
+        print $this; // returns output from __toString()
+    }
+   
+    public static function getStaticException($exception)
+    {
+         $exception->getException();
+    }
+}
+
 
 ?>
