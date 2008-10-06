@@ -10,7 +10,7 @@ class Smarty_Function_Mailto extends Smarty_Internal_PluginBase {
 
   public function execute($params) {
     $extra = '';
-
+    
     if (empty($params['address'])) {
         trigger_error("mailto: missing 'address' parameter");
         return;
