@@ -6,7 +6,7 @@
  * @subpackage plugins
  */
 
-class Smarty_Method_Test extends Smarty_Internal_PluginBase {
+class Smarty_Method_Test extends Smarty_Internal_Base {
 
   public function execute($args) {
 

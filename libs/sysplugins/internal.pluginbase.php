@@ -6,13 +6,7 @@
  * @subpackage plugins
  */
 
-class Smarty_Internal_PluginBase {
-
-  public $smarty = null;
-
-  function __construct() {
-    $this->smarty = Smarty::instance();
-  }
+class Smarty_Internal_PluginBase extends Smarty_Internal_Base {
   
 }
 

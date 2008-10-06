@@ -75,12 +75,6 @@ class Smarty
 
   // assigned tpl vars
   public $tpl_vars = array();
-
-  // modifier object
-  public $modifier = null;
-  
-  // function object
-  public $function = null;
   
   /**
    * Class constructor, initializes basic smarty properties
@@ -95,9 +89,6 @@ class Smarty
     $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR;
     // set instance object
     self::instance($this);
-    // setup function and modifier objects
-    $this->modifier = new Smarty_Internal_Modifier;
-    $this->function = new Smarty_Internal_Function;
   }
   
   /**

@@ -6,7 +6,7 @@
  * @subpackage plugins
  */
 
-class Smarty_Internal_Compiler extends Smarty_Internal_PluginBase {
+class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
   public function compile($tpl_filepath,$compiled_path) {
   

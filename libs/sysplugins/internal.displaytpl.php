@@ -6,7 +6,7 @@
  * @subpackage plugins
  */
 
-class Smarty_Internal_DisplayTPL extends Smarty_Internal_PluginBase {
+class Smarty_Internal_DisplayTPL extends Smarty_Internal_DisplayBase {
   
   public function display($tpl,$tpl_vars) {
 
