@@ -45,6 +45,7 @@ class Smarty_Internal_Templatelexer
     				'DOT'			=> '.',
     				'COMMA'		=> '","',
     				'ID'			=> 'identifier',
+    				'OTHER'		=> 'text',
     				'PHP'			=> 'PHP code'
     				);
     				

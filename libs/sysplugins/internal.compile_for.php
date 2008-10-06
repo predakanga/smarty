@@ -1,5 +1,5 @@
 <?php
-//  Compiler foreach tags
+//  Compiler for tags
 //
 //  Not yet complete
 //  - name tag not yet supported
@@ -7,7 +7,7 @@
 
 class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
     /**
-    * Compile {foreach ...} tag.
+    * Compile {for ...} tag.
     * 
     * @param string $tag_args 
     * @return string 
