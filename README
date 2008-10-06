@@ -127,6 +127,24 @@ You will notice in the sample code the template tags do not get compiled. That
 is because I have not written the compiler yet. Do we give Smarty 3 a new
 syntax? Do we make a Smarty 2 compatability layer? Anything is possible.
 
+ACCESSING PLUGINS (modifiers, functions)
+
+When using PHP templates, you can call plugins with this syntax:
+
+<?=$this->smarty->modifier->modname($var,$params)?>
+<?=$this->smarty->function->funcname($params)?>
+
+OR (which is better?):
+
+<?=smarty::instance->modifier->modname($var,$params)?>
+<?=smarty::instance->function->funcname($params)?>
+
+When using tagged templates, plugins are accessed with
+the typical smarty syntax:
+
+{func foo=$bar}
+{$foo|mod:$bar}
+
 
 Ok that pretty much wraps up the principles behind the alpha code. Please
 look through it and send any questions/suggestions/etc to the forums.

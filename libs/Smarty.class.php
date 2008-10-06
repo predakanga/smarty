@@ -76,8 +76,11 @@ class Smarty
   // assigned tpl vars
   public $tpl_vars = array();
 
-  // contains current instance id
-  public $_instance_id = null;
+  // modifier object
+  public $modifier = null;
+  
+  // function object
+  public $function = null;
   
   /**
    * Class constructor, initializes basic smarty properties
@@ -92,6 +95,9 @@ class Smarty
     $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR;
     // set instance object
     self::instance($this);
+    // setup function and modifier objects
+    $this->modifier = new Smarty_Internal_Modifier;
+    $this->function = new Smarty_Internal_Function;
   }
   
   /**
@@ -109,45 +115,6 @@ class Smarty
       $instance = $new_instance;
     return $instance;
   }
-  
-  /**
-   * Call a Smarty Plugin function directly
-   *
-   * @param string $name the plugin name
-   * @param array $params the plugin parameters
-   * @return mixed
-   */
-  public static function helper($name,$params)
-  {
-    // check valid plugin name syntax
-    if(!preg_match('!^\w+$!',$name))
-      return false;
-      
-    $plugin_class = "Smarty_Function_{$name}";
-    $plugin = new $plugin_class;
-    
-    return $plugin->execute($params);
-  }
-
-  /**
-   * Call a Smarty Plugin function directly
-   *
-   * @param string $name the plugin name
-   * @param array $params the plugin parameters
-   * @return mixed
-   */
-  public static function modifier($name,$params)
-  {
-    // check valid plugin name syntax
-    if(!preg_match('!^\w+$!',$name))
-      return false;
-      
-    $plugin_class = "Smarty_Modifier_{$name}";
-    $plugin = new $plugin_class;
-    
-    return $plugin->execute($params);
-  }
-  
   
   /**
    * displays a Smarty template
@@ -192,13 +159,13 @@ class Smarty
   
   
   /**
-   * Takes unknown classes and lazy loads plugin files for them
+   * Takes unknown classes and loads plugin files for them
    * class name format: Smarty_PluginType_PluginName
    * plugin filename format: plugintype.pluginname.php
    *
    * @param string $class_name unknown class name
    */
-  public function autoload($class_name) {
+  public function loadPlugin($class_name) {
 
     $name_parts = explode('_',$class_name);
     
@@ -223,7 +190,7 @@ class Smarty
     
     return false;
   }
-
+  
   /**
    * Takes unknown class methods and lazy loads plugin files for them
    * class name format: Smarty_Method_MethodName
@@ -258,7 +225,7 @@ if(!function_exists('__autoload'))
 {
   function __autoload($class_name) {
     return (($smarty = Smarty::instance()) !== null)
-      && ($smarty->autoload($class_name) !== false);
+      && ($smarty->loadPlugin($class_name) !== false);
   }
 }
 
