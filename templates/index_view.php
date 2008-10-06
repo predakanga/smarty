@@ -1,16 +1,9 @@
-This is an example of a PHP template (not compiled.)
+PHP file test
 
-Test function:
-<?php
-  $mailto = new Smarty_Function_Mailto;
-  echo $mailto->execute(array('address'=>'me@example.com'));
-?>
+$foo is <?=$foo?>
 
-Test variable:
-foo is <?=$foo?>.
+<?=$this->function->mailto(array('address'=>'me@example.com'))?>
+<?=$this->modifier->escape($foo['name'],'html')?>
+<?=$this->modifier->trim($foo['name'])?>
 
-Test modifier:
-
-
-Finished.
-
+DONE
