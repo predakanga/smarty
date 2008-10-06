@@ -15,17 +15,24 @@ class Smarty_Internal_DisplayTPL extends Smarty_Internal_DisplayBase {
     $_compiled_filepath = $this->smarty->compile_dir . $_compiled_filename;
     $_tpl_filepath = $this->smarty->template_dir . $tpl;
     
-    // compile if needed
-    if(
-      $this->smarty->force_compile
-      || !file_exists($this->smarty->compile_dir.$_compiled_filename)
-      || filemtime($_compiled_filepath) !== filemtime($_tpl_filepath)
-      ) {
-      $this->_compiler = new Smarty_Internal_Compiler;
-      $this->_compiler->compile($_tpl_filepath,$_compiled_filepath);
-      // make tpl and compiled file timestamp match
-      touch($_compiled_filepath,filemtime($_tpl_filepath));
-    }
+        // compile if needed
+        if (!file_exists($_compiled_filepath) || filemtime($_compiled_filepath) !== filemtime($_tpl_filepath) || $this->smarty->force_compile
+                ) {
+            $this->_compiler = new Smarty_Internal_Compiler; 
+            // read template file
+            $_content = file_get_contents($_tpl_filepath);
+
+            $this->_compiler->compile($_content, $_tpl_filepath, $_compiled_filepath);
+
+            if ($this->smarty->compile_error) {
+                // Display error and die
+                $this->smarty->trigger_fatal_error("Template compilation error");
+            } 
+
+            // make tpl and compiled file timestamp match
+            touch($_compiled_filepath, filemtime($_tpl_filepath));
+        } 
+
     extract($tpl_vars);
     include($_compiled_filepath);
   }

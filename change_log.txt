@@ -1,0 +1,29 @@
+10/6/2008
+- completed compilation of {include} tag, variable scoping same as in smarty2
+
+10/4/2008
+- added comments in the parser definition y file.
+
+- added array of $smarty_token_names to lexer for use in trigger_template_error function
+
+- change handling of none smarty2 style tags like {if}, {for}....
+
+- lexer/parser optimization
+
+10/3/2008
+
+- create different compiled template files depending if caching and/or security is enabled
+
+- cleaned up compiler
+
+- lexer/parser optimization
+
+10/2/2008
+
+- new method trigger fatal error, displays massage and terminates smarty
+
+- compile error status flag added
+  The compiler will in case of error continue to parse the template(s) to display all errors. No compiled
+  templates will be written, Smarty terminates after the compiler exits.
+
+- added error message to function __call in Smarty.class.php
