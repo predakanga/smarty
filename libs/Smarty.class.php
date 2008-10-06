@@ -98,7 +98,7 @@ class Smarty {
       */
     public function __destruct()
     { 
-        // reset exception handler
+        // restore to previous exception handler, if any
         restore_exception_handler();
     } 
     

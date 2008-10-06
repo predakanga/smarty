@@ -8,7 +8,10 @@
 
 class Smarty_Modifier_Escape extends Smarty_Internal_PluginBase {
 
-  public function execute($string,$esc_type = 'html', $char_set = 'UTF-8') {
+  public function execute($string,$params) {
+    
+    $esc_type = !empty($params[0]) ? $params[0] : 'html';
+    $char_set = !empty($params[1]) ? $params[1] : 'UTF-8';
     
     switch ($esc_type) {
       case 'html':
