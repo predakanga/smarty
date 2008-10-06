@@ -17,14 +17,14 @@ class Smarty_Internal_Modifier extends Smarty_Internal_Base {
    * @param string $args modifier args
    */
   public function __call($name, $args) {
-
-    // use PHP function if it exists, otherwise load plugin
-    if(function_exists($name))
-      return $name($args[0],array_slice($args,1));
   
     $class_name = "Smarty_Modifier_{$name}";
     
     $this->smarty->loadPlugin($class_name);
+    
+    // no plugin found, use PHP function if exists
+    if(!class_exists($class_name) && function_exists($name))
+      return $name($args[0],array_slice($args,1));
     
     $method = new $class_name;
     return $method->execute($args[0],array_slice($args,1));
