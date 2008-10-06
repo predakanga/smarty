@@ -7,7 +7,7 @@
  */
 
 class Smarty_Internal_Modifier extends Smarty_Internal_Base {
- 
+                  
   /**
    * Takes unknown class methods and lazy loads plugin files for them
    * class name format: Smarty_Modifier_ModName

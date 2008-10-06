@@ -113,10 +113,11 @@ expr(res)        ::= value(v). { res = v; }
 									// +/- value
 expr(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// expression with simple modifier
-expr(res)        ::= expr(e) modifier(m). { res = m . "(". e .")"; }
+//expr(res)        ::= expr(e) modifier(m). { res = m . "(". e .")"; }
+expr(res)        ::= expr(e) modifier(m). { res = "\$this->modifier->".m . "(". e .")"; }
 									// expression with modifier and additional modifier paramter
 expr(res)        ::= expr(e) modifier(m) modparameters(p). { res = m . "(". e .",". p .")"; } 
-									// arithmetic expresiion
+									// arithmetic expression
 expr(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 
 //
