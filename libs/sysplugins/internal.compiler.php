@@ -51,7 +51,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // call the lexer/parser to compile the template
         $lex = new Smarty_Internal_Templatelexer($_content);
         $parser = new Smarty_Internal_Templateparser($lex);
-//        $parser->PrintTrace();
+
         while ($lex->yylex()) {
             // echo "Parsing  {$lex->token} Token {$lex->value} \n";
             $parser->doParse($lex->token, $lex->value);
