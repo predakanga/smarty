@@ -116,7 +116,7 @@ expr(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 //expr(res)        ::= expr(e) modifier(m). { res = m . "(". e .")"; }
 expr(res)        ::= expr(e) modifier(m). { res = "\$this->modifier->".m . "(". e .")"; }
 									// expression with modifier and additional modifier paramter
-expr(res)        ::= expr(e) modifier(m) modparameters(p). { res = m . "(". e .",". p .")"; } 
+expr(res)        ::= expr(e) modifier(m) modparameters(p). {res = "\$this->modifier->".m . "(". e .",". p .")"; } 
 									// arithmetic expression
 expr(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 
@@ -207,7 +207,7 @@ modifier(res)    ::= VERT ID(s). { res =  s;}
 										// single parameter
 modparameters(res) ::= modparameter(mp). {res = mp;}
 										// multiple parameter
-modparameters(res) ::= modparameters(mps) modparameter(mp). {res = mps .",". mp;}
+modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.",".mp;}
 										// parameter expression
 modparameter(res) ::= COLON expr(mp). {res = mp;}
 
