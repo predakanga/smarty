@@ -16,8 +16,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     public $_tag_stack = array();
 
     public function __construct()
-    { 
-        parent::__construct();
+    {
+        parent::__construct(); 
         // set instance object
         self::instance($this); 
         // flag for nochache sections
@@ -25,7 +25,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // current template file
         $this->_compiler_status->current_tpl_filepath = ""; 
         // current compiled template file
-        $this->_compiler_status->current_compiled_path = ""; 
+        $this->_compiler_status->current_compiled_path = "";
     } 
 
     public static function &instance($new_instance = null)
@@ -41,13 +41,11 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
-
         // save compiler state when it's called recursively when pocessing {include} tags
         array_push($this->_compiler_status_stack, $this->_compiler_status);
 
         $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
-        $this->_compiler_status->current_compiled_path = $compiled_path;
-
+        $this->_compiler_status->current_compiled_path = $compiled_path; 
         // call the lexer/parser to compile the template
         $lex = new Smarty_Internal_Templatelexer($_content);
         $parser = new Smarty_Internal_Templateparser($lex);
@@ -57,14 +55,19 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $parser->doParse($lex->token, $lex->value);
         } 
         $parser->doParse(0, 0); 
-
-        if (!$this->smarty->compile_error) {
-          // write compiled template file if no errors
-          return file_put_contents($compiled_path, $parser->retvalue); 
-        }
-        
+        // if (!$this->smarty->compile_error) {
+        // write compiled template file if no errors
+        // return file_put_contents($compiled_path, $parser->retvalue);
+        // } 
         // restore last compiler status
         $this->_compiler_status = array_pop($this->_compiler_status_stack);
+
+        if (!$this->smarty->compile_error) {
+            // return compiled template
+            return $parser->retvalue;
+        } else {
+            return false;
+        } 
     } 
 } 
 

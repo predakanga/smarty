@@ -73,15 +73,14 @@ class Smarty {
     public $right_delimiter = "}"; 
     // security mode
     public $security = false;
-    
+
     /**
-      * Class constructor, initializes basic smarty properties
-      */
+    * Class constructor, initializes basic smarty properties
+    */
     public function __construct()
     { 
         // set exception handler
-        set_exception_handler(array('SmartyException','getStaticException'));
-        
+        set_exception_handler(array('SmartyException', 'getStaticException')); 
         // set default dirs
         $this->template_dir = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
         $this->compile_dir = '.' . DIRECTORY_SEPARATOR . 'templates_c' . DIRECTORY_SEPARATOR;
@@ -94,14 +93,14 @@ class Smarty {
     } 
 
     /**
-      * Class destructor
-      */
+    * Class destructor
+    */
     public function __destruct()
     { 
         // restore to previous exception handler, if any
         restore_exception_handler();
     } 
-    
+
     /**
     * Sets a static instance of the smarty object. Retrieve with:
     * $smarty = Smarty::instance();
@@ -124,21 +123,50 @@ class Smarty {
     * @param string $tpl the name of the template file
     */
     public function display($tpl)
-    { 
-        // if tpl file ends in .php, just include it
-        if (substr($tpl, - strlen($this->php_ext)) == $this->php_ext) {
-            // PHP template
-            $display = new Smarty_Internal_DisplayPHP;
-            $display->display($tpl, $this->tpl_vars);
-        } elseif (substr($tpl, 0, 7) == "String:") {
-            // String template
-            $display = new Smarty_Internal_DisplayString;
-            $tpl = substr($tpl, 7);
-            $display->display($tpl, $this->tpl_vars);
+    {
+        if (false) {
+            // if tpl file ends in .php, just include it
+            if (substr($tpl, - strlen($this->php_ext)) == $this->php_ext) {
+                // PHP template
+                $display = new Smarty_Internal_DisplayPHP;
+                $display->display($tpl, $this->tpl_vars);
+            } elseif (substr($tpl, 0, 7) == "String:") {
+                // String template
+                $display = new Smarty_Internal_DisplayString;
+                $tpl = substr($tpl, 7);
+                $display->display($tpl, $this->tpl_vars);
+            } else {
+                // compiled template
+                $display = new Smarty_Internal_DisplayTPL;
+                $display->display($tpl, $this->tpl_vars);
+            } 
         } else {
-            // compiled template
-            $display = new Smarty_Internal_DisplayTPL;
-            $display->display($tpl, $this->tpl_vars);
+            // new process of compiling here
+            $resource = new Smarty_Internal_Resource_TPL; 
+            // assemble file pathes
+            $_tpl_filepath = $this->getTemplateFilepath($tpl);
+            $_compiled_filepath = $this->getCompileFilepath($_tpl_filepath);
+
+            if ($resource->compile_check($tpl, $_tpl_filepath, $_compiled_filepath)) {
+                // compile template
+                $this->_compiler = new Smarty_Internal_Compiler;
+                $_template = $resource->get_template($_tpl_filepath);
+                $_compiled_template = $this->_compiler->compile($_template, $_tpl_filepath, $_compiled_filepath);
+echo  $_compiled_template;
+
+                if ($_compiled_template !== false) {
+                    // write compiled template
+                    file_put_contents($_compiled_filepath, $_compiled_template); 
+                    // make tpl and compiled file timestamp match
+                    touch($_compiled_filepath, filemtime($_tpl_filepath));
+                } else {
+                    // Display error and die
+                    $this->smarty->trigger_fatal_error("Template compilation error");
+                } 
+            } 
+            // display template
+            extract($this->tpl_vars);
+            include($_compiled_filepath);
         } 
     } 
 
@@ -162,6 +190,29 @@ class Smarty {
         } 
     } 
 
+    /*
+        * Build template file path
+        */
+    private function getTemplateFilepath ($tpl)
+    {
+        foreach((array)$this->template_dir as $_template_dir) {
+            $_filepath = $_template_dir.$tpl;
+            if (file_exists($_filepath))
+                return $_filepath;
+        } 
+        throw new SmartyException("Unable to load template '{$tpl}'");
+        return false;
+    } 
+
+    /*
+        * Build template file path
+        */
+
+    private function getCompileFilepath ($tpl)
+    {
+        return $this->compile_dir . md5($_tpl_filepath) . $this->php_ext;
+    } 
+
     /**
     * Takes unknown classes and loads plugin files for them
     * class name format: Smarty_PluginType_PluginName
@@ -170,36 +221,30 @@ class Smarty {
     * @param string $class_name unknown class name
     */
     public function loadPlugin($class_name)
-    {
+    { 
         // if class exists, exit silently (already loaded)
-        if(class_exists($class_name))
-          return true;
-    
+        if (class_exists($class_name))
+            return true; 
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
         $name_parts = explode('_', $class_name); 
-        
         // class name must have three parts to be valid plugin
         if (count($name_parts) < 3)
             return false; 
         // class must start with Smarty_
         if ($name_parts[0] !== 'smarty')
-            return false;
-
+            return false; 
         // plugin filename is expected to be: [type].[name].php
-        $plugin_filename = $name_parts[1] . '.' . str_replace("smarty_" . $name_parts[1] . "_", "", $class_name) . $this->php_ext;
-         
+        $plugin_filename = $name_parts[1] . '.' . str_replace("smarty_" . $name_parts[1] . "_", "", $class_name) . $this->php_ext; 
         // if type is "internal", get plugin from sysplugins
         if (($name_parts[1] == 'internal') && file_exists($this->sysplugins_dir . $plugin_filename)) {
             return require_once($this->sysplugins_dir . $plugin_filename);
         } 
-
         // loop through plugin dirs and find the plugin
         foreach((array)$this->plugins_dir as $plugin_dir) {
             if (file_exists($plugin_dir . $plugin_filename))
                 return require_once($plugin_dir . $plugin_filename);
         } 
-
         // no plugin loaded
         return false;
     } 
@@ -228,18 +273,17 @@ class Smarty {
         } 
         $method = new $class_name;
         return $method->execute($args);
-    }
-    
-}
+    } 
+} 
 
 /**
-  * Lazy loads a smarty plugin for an unknown class.
-  * 
-  * If you already have an __autoload() defined, copy the
-  * smarty __autoload() function contents to the top of it.
-  * 
-  * @param string $class_name unknown class name
-  */
+* Lazy loads a smarty plugin for an unknown class.
+* 
+* If you already have an __autoload() defined, copy the
+* smarty __autoload() function contents to the top of it.
+* 
+* @param string $class_name unknown class name
+*/
 
 if (!function_exists('__autoload')) {
     function __autoload($class_name)
@@ -249,37 +293,35 @@ if (!function_exists('__autoload')) {
 } 
 
 /**
-  * Smarty Exception Handler
-  * 
-  * All errors thrown in Smarty will be handled here.
-  * 
-  * @param string $message the error message
-  * @param string $code the error code
-  */
-class SmartyException extends Exception
-{
-    public function __construct($message, $code=NULL)
+* Smarty Exception Handler
+* 
+* All errors thrown in Smarty will be handled here.
+* 
+* @param string $message the error message
+* @param string $code the error code
+*/
+class SmartyException extends Exception {
+    public function __construct($message, $code = null)
     {
         parent::__construct($message, $code);
-    }
-   
+    } 
+
     public function __toString()
     {
         return "Error: " . htmlentities($this->getMessage()) . "<br>\n"
-          . "File: " . $this->getFile() . "<br>\n"
-          . "Line: " . $this->getLine() . "\n";
-    }
-   
+         . "File: " . $this->getFile() . "<br>\n"
+         . "Line: " . $this->getLine() . "\n";
+    } 
+
     public function getException()
     {
         print $this; // returns output from __toString()
-    }
-   
+    } 
+
     public static function getStaticException($exception)
     {
-         $exception->getException();
-    }
-}
-
+        $exception->getException();
+    } 
+} 
 
 ?>

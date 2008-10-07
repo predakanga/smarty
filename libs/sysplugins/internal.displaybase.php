@@ -16,8 +16,7 @@ class Smarty_Internal_DisplayBase extends Smarty_Internal_Base {
     // setup function and modifier objects
     $this->modifier = new Smarty_Internal_Modifier;
     $this->function = new Smarty_Internal_Function;
-  }
-  
+  }  
 }
 
 ?>
