@@ -15,7 +15,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         // check and get attributes
         $_attr = $this->_get_attributes($args);
         
-        return "<?php \$this->smarty->assign('$_attr[var]',$_attr[value]);?>";
+        return "<?php \$this->assign('$_attr[var]',$_attr[value]);?>";
     } 
 } 
 

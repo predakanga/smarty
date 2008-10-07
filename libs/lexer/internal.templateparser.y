@@ -151,9 +151,9 @@ value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']';}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars['. v .']';}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']'.a;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars['. v .']'.a;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -176,7 +176,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = "(".e.")";}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->smarty->tpl_vars['. v .']'.oc;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars['. v .']'.oc;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
@@ -184,15 +184,23 @@ objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
 objectelement(res)::= PTR varvar(v).	{ res = '->'.v;}
 										// method
-objectelement(res)::= PTR function(f).	{ res = '->'.f;}
+objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 
 //
-// function/method
+// function
 //
 										// function with parameter
 function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$this->function->".f . "(". p .")";}
 										// function without parameter
 function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$this->function->".f."()";}
+
+//
+// method
+//
+										// function with parameter
+method(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = f . "(". p .")";}
+										// function without parameter
+method(res)     ::= ID(f) OPENP CLOSEP.	{ res = f."()";}
 
 // function parameter
 										// single parameter

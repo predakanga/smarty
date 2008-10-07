@@ -147,21 +147,22 @@ class Smarty {
             $_tpl_filepath = $this->getTemplateFilepath($tpl);
             $_compiled_filepath = $this->getCompileFilepath($_tpl_filepath);
 
-            if ($resource->compile_check($tpl, $_tpl_filepath, $_compiled_filepath)) {
-                // compile template
-                $this->_compiler = new Smarty_Internal_Compiler;
-                $_template = $resource->get_template($_tpl_filepath);
-                $_compiled_template = $this->_compiler->compile($_template, $_tpl_filepath, $_compiled_filepath);
-echo  $_compiled_template;
-
-                if ($_compiled_template !== false) {
-                    // write compiled template
-                    file_put_contents($_compiled_filepath, $_compiled_template); 
-                    // make tpl and compiled file timestamp match
-                    touch($_compiled_filepath, filemtime($_tpl_filepath));
-                } else {
-                    // Display error and die
-                    $this->smarty->trigger_fatal_error("Template compilation error");
+            if (($template_timestamp = $resource->get_timestamp($tpl, $_tpl_filepath)) !== false) {
+                // check if we need a recompile
+                if (!file_exists($_compiled_filepath) || filemtime($_compiled_filepath) !== $template_timestamp || $this->smarty->force_compile) {
+                    // compile template
+                    $this->_compiler = new Smarty_Internal_Compiler;
+                    $_template = $resource->get_template($tpl, $_tpl_filepath);
+                    $_compiled_template = $this->_compiler->compile($_template, $_tpl_filepath, $_compiled_filepath);
+                    if ($_compiled_template !== false) {
+                        // write compiled template
+                        file_put_contents($_compiled_filepath, $_compiled_template); 
+                        // make tpl and compiled file timestamp match
+                        touch($_compiled_filepath, filemtime($_tpl_filepath));
+                    } else {
+                        // Display error and die
+                        $this->smarty->trigger_fatal_error("Template compilation error");
+                    } 
                 } 
             } 
             // display template
@@ -196,7 +197,7 @@ echo  $_compiled_template;
     private function getTemplateFilepath ($tpl)
     {
         foreach((array)$this->template_dir as $_template_dir) {
-            $_filepath = $_template_dir.$tpl;
+            $_filepath = $_template_dir . $tpl;
             if (file_exists($_filepath))
                 return $_filepath;
         } 
@@ -259,13 +260,11 @@ echo  $_compiled_template;
     public function __call($name, $args)
     {
         $plugin_filename = strtolower('method.' . $name . $this->php_ext);
-
         if (!file_exists($this->sysplugins_dir . $plugin_filename)) {
             throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not exist");
             die();
         } 
         require_once($this->sysplugins_dir . $plugin_filename);
-
         $class_name = "Smarty_Method_{$name}";
         if (!class_exists($class_name)) {
             throw new SmartyException ("Sysplugin file " . $plugin_filename . "does not define class " . $class_name);
