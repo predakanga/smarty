@@ -27,7 +27,7 @@ class Smarty_Internal_Modifier extends Smarty_Internal_Base {
       return $name($args);
     
     $method = new $class_name;
-    return $method->execute($args[0],array_slice($args,1));
+    return $method->execute($args);
     
   }
   
