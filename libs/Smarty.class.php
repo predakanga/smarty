@@ -171,8 +171,14 @@ class Smarty {
     */
     public function loadPlugin($class_name)
     {
+        // if class exists, exit silently (already loaded)
+        if(class_exists($class_name))
+          return true;
+    
+        // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
         $name_parts = explode('_', $class_name); 
+        
         // class name must have three parts to be valid plugin
         if (count($name_parts) < 3)
             return false; 
@@ -180,17 +186,21 @@ class Smarty {
         if ($name_parts[0] !== 'smarty')
             return false;
 
-        $plugin_filename = $name_parts[1] . '.' . str_replace("smarty_" . $name_parts[1] . "_", "", $class_name) . $this->php_ext; 
-        // if internal, get plugin from sysplugins
+        // plugin filename is expected to be: [type].[name].php
+        $plugin_filename = $name_parts[1] . '.' . str_replace("smarty_" . $name_parts[1] . "_", "", $class_name) . $this->php_ext;
+         
+        // if type is "internal", get plugin from sysplugins
         if (($name_parts[1] == 'internal') && file_exists($this->sysplugins_dir . $plugin_filename)) {
             return require_once($this->sysplugins_dir . $plugin_filename);
         } 
 
+        // loop through plugin dirs and find the plugin
         foreach((array)$this->plugins_dir as $plugin_dir) {
             if (file_exists($plugin_dir . $plugin_filename))
                 return require_once($plugin_dir . $plugin_filename);
         } 
 
+        // no plugin loaded
         return false;
     } 
 
