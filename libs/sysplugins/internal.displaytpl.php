@@ -16,7 +16,7 @@ class Smarty_Internal_DisplayTPL extends Smarty_Internal_DisplayBase {
         $_tpl_filepath = $this->smarty->template_dir . $tpl; 
 
         if (!file_exists($_tpl_filepath)) {
-                $this->smarty->trigger_fatal_error("Template file ".$_tpl_filepath." does not exist");
+                throw new SmartyException ("Template file ".$_tpl_filepath." does not exist");
          }
         // compile if needed
         if (!file_exists($_compiled_filepath) || filemtime($_compiled_filepath) !== filemtime($_tpl_filepath) || $this->smarty->force_compile

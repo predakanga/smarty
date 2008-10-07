@@ -15,6 +15,8 @@
         self::instance($this); 
         $this->lex = $lex;
         $this->smarty = Smarty::instance(); 
+        $this->smarty->compile_tag = new Smarty_Internal_Compile_Smarty_Tag;
+        $this->smarty->compile_variable = new Smarty_Internal_Compile_Smarty_Variable;
     }
     public static function &instance($new_instance = null)
     {
@@ -79,17 +81,17 @@ template_element(res)::= OTHER(o). {res = o;}
 // all Smarty tags start here
 //
 									// variable
-smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable_output(e);}
+smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable->execute(e);}
 									// tag without attributes
-smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>i),array(0)));}
+smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
 									// tag with Smarty2 style attributes
-smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_smarty_tag(array_merge(array('_smarty_tag'=>i),a));}
+smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),a));}
 									// end of block tag  {/....}									
-smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>'end_'.i));}
+smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
 									// {if} and {elseif} tag
-smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>i,'ifexp'=>ie));}
+smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'ifexp'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->smarty->compile_smarty_tag(array('_smarty_tag'=>i,'start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
+smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
 

@@ -216,14 +216,14 @@ class Smarty {
         $plugin_filename = strtolower('method.' . $name . $this->php_ext);
 
         if (!file_exists($this->sysplugins_dir . $plugin_filename)) {
-            echo "<br>Sysplugin file " . $plugin_filename . " does not exist<br>";
+            throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not exist");
             die();
         } 
         require_once($this->sysplugins_dir . $plugin_filename);
 
         $class_name = "Smarty_Method_{$name}";
         if (!class_exists($class_name)) {
-            echo "<br>Sysplugin file " . $plugin_filename . "does not define class " . $class_name . "<br>";
+            throw new SmartyException ("Sysplugin file " . $plugin_filename . "does not define class " . $class_name);
             die();
         } 
         $method = new $class_name;
