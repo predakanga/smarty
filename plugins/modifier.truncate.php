@@ -25,13 +25,9 @@
 * @return string 
 */
 class Smarty_Modifier_Truncate extends Smarty_Internal_PluginBase {
-    public function execute ($params)        
+    public function execute ($string, $length = 80, $etc = '...',
+                                  $break_words = false, $middle = false)     
     {
-    $string = $params[0];
-    $length = !empty($params[1]) ? $params[1] : 80;
-    $etc = !empty($params[2]) ? $params[2] : '...';
-    $break_words = !empty($params[3]) ? $params[3] : false;
-    $middle = !empty($params[4]) ? $params[4] : false;
 
        if ($length == 0)
             return '';

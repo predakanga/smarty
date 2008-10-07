@@ -24,10 +24,10 @@ class Smarty_Internal_Function extends Smarty_Internal_Base {
     
     // no plugin found, use PHP function if exists
     if(!class_exists($class_name) && function_exists($name))
-      return $name($args[0]);
+      return call_user_func_array($name , $args);
     
     $method = new $class_name;
-    return $method->execute($args[0]);
+    return call_user_func_array(array($method, 'execute'), $args);     
     
   }
   

@@ -113,7 +113,6 @@ expr(res)        ::= value(v). { res = v; }
 									// +/- value
 expr(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// expression with simple modifier
-//expr(res)        ::= expr(e) modifier(m). { res = m . "(". e .")"; }
 expr(res)        ::= expr(e) modifier(m). { res = "\$this->modifier->".m . "(". e .")"; }
 									// expression with modifier and additional modifier paramter
 expr(res)        ::= expr(e) modifier(m) modparameters(p). {res = "\$this->modifier->".m . "(". e .",". p .")"; } 
@@ -189,9 +188,9 @@ objectelement(res)::= PTR function(f).	{ res = '->'.f;}
 // function/method
 //
 										// function with parameter
-function(res)     ::= ID(s) OPENP params(p) CLOSEP.	{ res = s."(".p.")";}
+function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$this->function->".f . "(". p .")";}
 										// function without parameter
-function(res)     ::= ID(s) OPENP CLOSEP.	{ res = s."()";}
+function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$this->function->".f."()";}
 
 // function parameter
 										// single parameter
