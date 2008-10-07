@@ -18,16 +18,24 @@ class Smarty_Internal_Modifier extends Smarty_Internal_Base {
    */
   public function __call($name, $args) {
    
+    static $objects = array();
+   
     $class_name = "Smarty_Modifier_{$name}";
     
-    $this->smarty->loadPlugin($class_name);
+    if(!isset($objects[$class_name]))
+    {
     
-    // no plugin found, use PHP function if exists
-    if(!class_exists($class_name) && function_exists($name))
-      return call_user_func_array($name , $args);
+      $this->smarty->loadPlugin($class_name);
+      
+      // no plugin found, use PHP function if exists
+      if(!class_exists($class_name) && function_exists($name))
+        return call_user_func_array($name , $args);
+      
+      $objects[$class_name] = new $class_name;
     
-    $method = new $class_name;
-      return call_user_func_array(array($method, 'execute'), $args);     
+    }
+    
+      return call_user_func_array(array($objects[$class_name], 'execute'), $args);     
   }
   
 }
