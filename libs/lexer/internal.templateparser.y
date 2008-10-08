@@ -15,7 +15,9 @@
         self::instance($this); 
         $this->lex = $lex;
         $this->smarty = Smarty::instance(); 
+        $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Tag");
         $this->smarty->compile_tag = new Smarty_Internal_Compile_Smarty_Tag;
+        $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Variable");
         $this->smarty->compile_variable = new Smarty_Internal_Compile_Smarty_Variable;
     }
     public static function &instance($new_instance = null)
@@ -151,9 +153,9 @@ value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars['. v .']';}
+variable(res)    ::= DOLLAR varvar(v). { res = '$_smarty->tpl_vars['. v .']';}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars['. v .']'.a;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty->tpl_vars['. v .']'.a;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -176,7 +178,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = "(".e.")";}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars['. v .']'.oc;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$_smarty->tpl_vars['. v .']'.oc;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
