@@ -90,6 +90,10 @@ class Smarty {
         $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR; 
         // set instance object
         self::instance($this);
+        // load base plugins
+        $this->loadPlugin('Smarty_Internal_Base');
+        $this->loadPlugin('Smarty_Internal_DisplayBase');
+        $this->loadPlugin('Smarty_Internal_PluginBase');
     } 
 
     /**
@@ -128,20 +132,24 @@ class Smarty {
             // if tpl file ends in .php, just include it
             if (substr($tpl, - strlen($this->php_ext)) == $this->php_ext) {
                 // PHP template
+                $this->loadPlugin('Smarty_Internal_DisplayPHP');
                 $display = new Smarty_Internal_DisplayPHP;
                 $display->display($tpl, $this->tpl_vars);
             } elseif (substr($tpl, 0, 7) == "String:") {
                 // String template
+                $this->loadPlugin('Smarty_Internal_DisplayString');
                 $display = new Smarty_Internal_DisplayString;
                 $tpl = substr($tpl, 7);
                 $display->display($tpl, $this->tpl_vars);
             } else {
                 // compiled template
+                $this->loadPlugin('Smarty_Internal_DisplayTPL');
                 $display = new Smarty_Internal_DisplayTPL;
                 $display->display($tpl, $this->tpl_vars);
             } 
         } else {
             // new process of compiling here
+            $this->loadPlugin('Smarty_Internal_Resource_TPL');
             $resource = new Smarty_Internal_Resource_TPL; 
             // assemble file pathes
             $_tpl_filepath = $this->getTemplateFilepath($tpl);
@@ -151,6 +159,7 @@ class Smarty {
                 // check if we need a recompile
                 if (!file_exists($_compiled_filepath) || filemtime($_compiled_filepath) !== $template_timestamp || $this->smarty->force_compile) {
                     // compile template
+                    $this->loadPlugin('Smarty_Internal_Compiler');
                     $this->_compiler = new Smarty_Internal_Compiler;
                     $_template = $resource->get_template($tpl, $_tpl_filepath);
                     $_compiled_template = $this->_compiler->compile($_template, $_tpl_filepath, $_compiled_filepath);
@@ -272,22 +281,6 @@ class Smarty {
         } 
         $method = new $class_name;
         return $method->execute($args);
-    } 
-} 
-
-/**
-* Lazy loads a smarty plugin for an unknown class.
-* 
-* If you already have an __autoload() defined, copy the
-* smarty __autoload() function contents to the top of it.
-* 
-* @param string $class_name unknown class name
-*/
-
-if (!function_exists('__autoload')) {
-    function __autoload($class_name)
-    {
-        return (($smarty = Smarty::instance()) !== null) && ($smarty->loadPlugin($class_name) !== false);
     } 
 } 
 

@@ -47,7 +47,9 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
         $this->_compiler_status->current_compiled_path = $compiled_path; 
         // call the lexer/parser to compile the template
+        $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
         $lex = new Smarty_Internal_Templatelexer($_content);
+        $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
         $parser = new Smarty_Internal_Templateparser($lex);
 
         while ($lex->yylex()) {

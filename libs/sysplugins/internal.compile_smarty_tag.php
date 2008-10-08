@@ -19,6 +19,7 @@ class Smarty_Internal_Compile_Smarty_Tag extends Smarty_Internal_CompileBase {
         // Check if there is already an instace for that tag
         if (!is_object($objects[$tag]) && class_exists($class_name)) {
             // Now load plugin if required and create instance
+            $this->smarty->loadPlugin($class_name);
             $objects[$tag] = new $class_name;
         } 
 

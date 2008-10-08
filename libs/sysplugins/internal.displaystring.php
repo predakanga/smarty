@@ -17,6 +17,7 @@ class Smarty_Internal_DisplayString extends Smarty_Internal_DisplayBase {
         // compile if necessary
         if (!file_exists($_compiled_filepath) || $this->smarty->force_compile
                 ) {
+            $this->smarty->loadPlugin('Smarty_Internal_Compiler');
             $this->_compiler = new Smarty_Internal_Compiler;
 
             $this->_compiler->compile($tpl, $_tpl_filepath, $_compiled_filepath);

@@ -114,7 +114,9 @@ class Smarty_Internal_Templateparser#line 102 "internal.templateparser.php"
         self::instance($this); 
         $this->lex = $lex;
         $this->smarty = Smarty::instance(); 
+        $this->smarty->loadPlugin('Smarty_Internal_Compile_Smarty_Tag');
         $this->smarty->compile_tag = new Smarty_Internal_Compile_Smarty_Tag;
+        $this->smarty->loadPlugin('Smarty_Internal_Compile_Smarty_Variable');
         $this->smarty->compile_variable = new Smarty_Internal_Compile_Smarty_Variable;
     }
     public static function &instance($new_instance = null)
