@@ -36,7 +36,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         return $instance;
     } 
 
-    public function compile($_content, $tpl_filepath, $compiled_path)
+    public function compile($_content, $tpl_filepath)
     {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
@@ -45,7 +45,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         array_push($this->_compiler_status_stack, $this->_compiler_status);
 
         $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
-        $this->_compiler_status->current_compiled_path = $compiled_path; 
+
         // call the lexer/parser to compile the template
         $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
         $lex = new Smarty_Internal_Templatelexer($_content);
@@ -57,16 +57,13 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $parser->doParse($lex->token, $lex->value);
         } 
         $parser->doParse(0, 0); 
-        // if (!$this->smarty->compile_error) {
-        // write compiled template file if no errors
-        // return file_put_contents($compiled_path, $parser->retvalue);
-        // } 
-        // restore last compiler status
+
+       // restore last compiler status
         $this->_compiler_status = array_pop($this->_compiler_status_stack);
 
         if (!$this->smarty->compile_error) {
             // return compiled template
-            return $parser->retvalue;
+            return "<?php \$_smarty = Smarty::instance();?>\n" . $parser->retvalue;
         } else {
             return false;
         } 

@@ -1351,10 +1351,10 @@ static public $yy_action = array(
     function yy_r20(){ $this->_retvalue = $this->yystack[$this->yyidx + -1]->minor.$this->yystack[$this->yyidx + 0]->minor;     }
 #line 1355 "internal.templateparser.php"
 #line 118 "internal.templateparser.y"
-    function yy_r21(){ $this->_retvalue = "\$this->modifier->".$this->yystack[$this->yyidx + 0]->minor . "(". $this->yystack[$this->yyidx + -1]->minor .")";     }
+    function yy_r21(){ $this->_retvalue = "\$_smarty->modifier->".$this->yystack[$this->yyidx + 0]->minor . "(". $this->yystack[$this->yyidx + -1]->minor .")";     }
 #line 1358 "internal.templateparser.php"
 #line 120 "internal.templateparser.y"
-    function yy_r22(){$this->_retvalue = "\$this->modifier->".$this->yystack[$this->yyidx + -1]->minor . "(". $this->yystack[$this->yyidx + -2]->minor .",". $this->yystack[$this->yyidx + 0]->minor .")";     }
+    function yy_r22(){$this->_retvalue = "\$_smarty->modifier->".$this->yystack[$this->yyidx + -1]->minor . "(". $this->yystack[$this->yyidx + -2]->minor .",". $this->yystack[$this->yyidx + 0]->minor .")";     }
 #line 1361 "internal.templateparser.php"
 #line 122 "internal.templateparser.y"
     function yy_r23(){ $this->_retvalue = $this->yystack[$this->yyidx + -2]->minor . $this->yystack[$this->yyidx + -1]->minor . $this->yystack[$this->yyidx + 0]->minor;     }
@@ -1393,10 +1393,10 @@ static public $yy_action = array(
     function yy_r46(){ $this->_retvalue = '->'.$this->yystack[$this->yyidx + 0]->minor;    }
 #line 1397 "internal.templateparser.php"
 #line 193 "internal.templateparser.y"
-    function yy_r48(){ $this->_retvalue = "\$this->function->".$this->yystack[$this->yyidx + -3]->minor . "(". $this->yystack[$this->yyidx + -1]->minor .")";    }
+    function yy_r48(){ $this->_retvalue = "\$_smarty->function->".$this->yystack[$this->yyidx + -3]->minor . "(". $this->yystack[$this->yyidx + -1]->minor .")";    }
 #line 1400 "internal.templateparser.php"
 #line 195 "internal.templateparser.y"
-    function yy_r49(){ $this->_retvalue = "\$this->function->".$this->yystack[$this->yyidx + -2]->minor."()";    }
+    function yy_r49(){ $this->_retvalue = "\$_smarty->function->".$this->yystack[$this->yyidx + -2]->minor."()";    }
 #line 1403 "internal.templateparser.php"
 #line 201 "internal.templateparser.y"
     function yy_r50(){ $this->_retvalue = $this->yystack[$this->yyidx + -3]->minor . "(". $this->yystack[$this->yyidx + -1]->minor .")";    }

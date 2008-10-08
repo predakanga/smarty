@@ -27,22 +27,22 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         unset($_attr['assign']); 
 
         // save template vars
-        $_output = "\$_smarty_tpl_vars = \$this->tpl_vars; ";
+        $_output = "\$_smarty_tpl_vars = \$_smarty->tpl_vars; ";
 
         foreach ($_attr as $_key => $_value) {
-            $_output .= "\$this->assign('$_key','$_value'); ";
+            $_output .= "\$_smarty->assign('$_key','$_value'); ";
         } 
 
         if (isset($_assign)) {
-            $_output .= "\$_tmp = \$this->fetch('$include_file'); ";
+            $_output .= "\$_tmp = \$_smarty->fetch('$include_file'); ";
         } else {
-            $_output .= "echo \$this->fetch('$include_file'); ";
+            $_output .= "echo \$_smarty->fetch('$include_file'); ";
         } 
         // restore template vars
-        $_output .= "\$this->tpl_vars = \$_smarty_tpl_vars; unset(\$_smarty_tpl_vars);";
+        $_output .= "\$_smarty->tpl_vars = \$_smarty_tpl_vars; unset(\$_smarty_tpl_vars);";
 
         if (isset($_assign)) {
-            $_output .= "\$this->>assign('$_assign',\$_tmp);  unset(\$_tmp);";
+            $_output .= "\$_smarty->>assign('$_assign',\$_tmp);  unset(\$_tmp);";
         } 
         return "<?php $_output ?>";
     } 

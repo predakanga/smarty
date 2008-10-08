@@ -72,11 +72,13 @@ class Smarty {
     public $left_delimiter = "{";
     public $right_delimiter = "}"; 
     // security mode
-    public $security = false;
+    public $security = false; 
     // modifier object
-    public $modifier = null;
+    public $modifier = null; 
     // function object
-    public $function = null;
+    public $function = null; 
+    // default resource type
+    public $default_resource_type = 'file';
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -93,10 +95,10 @@ class Smarty {
         $this->config_dir = '.' . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR;
         $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR; 
         // set instance object
-        self::instance($this);
+        self::instance($this); 
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
-        $this->loadPlugin('Smarty_Internal_PluginBase');
+        $this->loadPlugin('Smarty_Internal_PluginBase'); 
         // setup function and modifier objects
         $this->loadPlugin('Smarty_Internal_Modifier');
         $this->modifier = new Smarty_Internal_Modifier;
@@ -136,57 +138,43 @@ class Smarty {
     */
     public function display($tpl)
     {
-        if (false) {
-            // if tpl file ends in .php, just include it
-            if (substr($tpl, - strlen($this->php_ext)) == $this->php_ext) {
-                // PHP template
-                $this->loadPlugin('Smarty_Internal_DisplayPHP');
-                $display = new Smarty_Internal_DisplayPHP;
-                $display->display($tpl, $this->tpl_vars);
-            } elseif (substr($tpl, 0, 7) == "String:") {
-                // String template
-                $this->loadPlugin('Smarty_Internal_DisplayString');
-                $display = new Smarty_Internal_DisplayString;
-                $tpl = substr($tpl, 7);
-                $display->display($tpl, $this->tpl_vars);
-            } else {
-                // compiled template
-                $this->loadPlugin('Smarty_Internal_DisplayTPL');
-                $display = new Smarty_Internal_DisplayTPL;
-                $display->display($tpl, $this->tpl_vars);
-            } 
-        } else {
-            // new process of compiling here
-            $this->loadPlugin('Smarty_Internal_Resource_TPL');
-            $resource = new Smarty_Internal_Resource_TPL; 
-            // assemble file pathes
-            $_tpl_filepath = $this->getTemplateFilepath($tpl);
-            $_compiled_filepath = $this->getCompileFilepath($_tpl_filepath);
+        $resource_type = '';
+        $resource_name = ''; 
+        // get resource type and name
+        $this->parseResourceName($tpl, $resource_type, $resource_name);
 
-            if (($template_timestamp = $resource->get_timestamp($tpl, $_tpl_filepath)) !== false) {
-                // check if we need a recompile
-                if (!file_exists($_compiled_filepath) || filemtime($_compiled_filepath) !== $template_timestamp || $this->smarty->force_compile) {
-                    // compile template
-                    $this->loadPlugin('Smarty_Internal_CompileBase');
-                    $this->loadPlugin('Smarty_Internal_Compiler');
-                    $this->_compiler = new Smarty_Internal_Compiler;
-                    $_template = $resource->get_template($tpl, $_tpl_filepath);
-                    $_compiled_template = $this->_compiler->compile($_template, $_tpl_filepath, $_compiled_filepath);
-                    if ($_compiled_template !== false) {
-                        // write compiled template
-                        file_put_contents($_compiled_filepath, $_compiled_template); 
+        $class = 'Smarty_Internal_Resource_' . $resource_type; 
+        // load resource plugin
+        $this->loadPlugin($class);
+        $resource = new $class; 
+        // get file pathes
+        $resource->getFilePathes($resource_name, $_tpl_filepath, $_compiled_filepath);
+
+        if (($template_timestamp = $resource->getTimestamp($_tpl_filepath)) !== false) {
+            // check if we need a recompile
+            if (!file_exists($_compiled_filepath) || filemtime($_compiled_filepath) < $template_timestamp || $this->smarty->force_compile) {
+                // compile template
+                $this->loadPlugin('Smarty_Internal_CompileBase');
+                $this->loadPlugin('Smarty_Internal_Compiler');
+                $this->_compiler = new Smarty_Internal_Compiler;
+                $_template = $resource->getTemplate($_tpl_filepath);
+                $_compiled_template = $this->_compiler->compile($_template, $_tpl_filepath, $_compiled_filepath);
+                if ($_compiled_template !== false) {
+                    // write compiled template
+                    file_put_contents($_compiled_filepath, $_compiled_template);
+                    if ($resource_type != 'string') {
                         // make tpl and compiled file timestamp match
                         touch($_compiled_filepath, filemtime($_tpl_filepath));
-                    } else {
-                        // Display error and die
-                        $this->smarty->trigger_fatal_error("Template compilation error");
                     } 
+                } else {
+                    // Display error and die
+                    throw new SmartyException("Template compilation error");
                 } 
-            } 
+            }
+            }
             // display template
             extract($this->tpl_vars);
             include($_compiled_filepath);
-        } 
     } 
 
     /**
@@ -212,7 +200,7 @@ class Smarty {
     /*
         * Build template file path
         */
-    private function getTemplateFilepath ($tpl)
+    public function getTemplateFilepath ($tpl)
     {
         foreach((array)$this->template_dir as $_template_dir) {
             $_filepath = $_template_dir . $tpl;
@@ -224,12 +212,35 @@ class Smarty {
     } 
 
     /*
-        * Build template file path
-        */
-
-    private function getCompileFilepath ($tpl)
+     * Build template file path
+    */
+    public function getCompileFilepath ($tpl)
     {
-        return $this->compile_dir . md5($_tpl_filepath) . $this->php_ext;
+        return $this->compile_dir . md5($tpl) . $this->php_ext;
+    } 
+
+    /*
+     * parse the resource names
+    */
+    function parseResourceName($tpl, &$resource_type, &$resource_name)
+    { 
+        // split tpl_path by the first colon
+        $_resource_name_parts = explode(':', $tpl, 2);
+
+        if (count($_resource_name_parts) == 1) {
+            // no resource type given
+            $resource_type = $this->default_resource_type;
+            $resource_name = $_resource_name_parts[0];
+        } else {
+            if (strlen($_resource_name_parts[0]) == 1) {
+                // 1 char is not resource type, but part of filepath
+                $resource_type = $this->default_resource_type;
+                $resource_name = $tpl;
+            } else {
+                $resource_type = strtolower($_resource_name_parts[0]);
+                $resource_name = $_resource_name_parts[1];
+            } 
+        } 
     } 
 
     /**
@@ -246,17 +257,14 @@ class Smarty {
             return true; 
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
-        $name_parts = explode('_', $class_name,3); 
-        
+        $name_parts = explode('_', $class_name, 3); 
         // class name must have three parts to be valid plugin
-        if (count($name_parts) < 3 || $name_parts[0] !== 'smarty')
-        {
+        if (count($name_parts) < 3 || $name_parts[0] !== 'smarty') {
             throw new SmartyException("plugin {$class_name} is not a valid name format");
             return false;
         } 
         // plugin filename is expected to be: [type].[name].php
-        $plugin_filename = "{$name_parts[1]}.{$name_parts[2]}{$this->php_ext}";
-        
+        $plugin_filename = "{$name_parts[1]}.{$name_parts[2]}{$this->php_ext}"; 
         // if type is "internal", get plugin from sysplugins
         if (($name_parts[1] == 'internal') && file_exists($this->sysplugins_dir . $plugin_filename)) {
             return require_once($this->sysplugins_dir . $plugin_filename);
