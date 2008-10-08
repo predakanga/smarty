@@ -7,6 +7,4 @@ $foo[2] = {$foo[2]}
 
 function:
 
-{mailto(array('address'=>'foo@example.com'))}
-
 End Test

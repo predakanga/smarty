@@ -9,7 +9,7 @@
 
 class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
 
-    public function getFilePathes ($resource_name, &$_tpl_filepath, &$_compiled_filepath)
+    public function getFilePaths ($resource_name, &$_tpl_filepath, &$_compiled_filepath)
     {
 
         $_tpl_filepath = $resource_name;
@@ -18,11 +18,12 @@ class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
 
 
     public function getTimestamp ($_tpl_filepath)
-    {
-         return 0;
+    {    
+         // timestamp for strings is always now
+         return time();
     } 
 
-    public function getTemplate($_tpl_filepath)
+    public function getTemplate ($_tpl_filepath)
     { 
         // return template string
         return $_tpl_filepath;

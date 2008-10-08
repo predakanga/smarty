@@ -9,7 +9,7 @@
 
 class Smarty_Internal_Resource_File extends Smarty_Internal_Base {
 
-    public function getFilePathes ($resource_name, &$_tpl_filepath, &$_compiled_filepath)
+    public function getFilePaths ($resource_name, &$_tpl_filepath, &$_compiled_filepath)
     {
 
         $_tpl_filepath = $this->smarty->getTemplateFilepath($resource_name);
