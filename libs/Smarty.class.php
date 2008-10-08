@@ -238,14 +238,16 @@ class Smarty {
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
         $name_parts = explode('_', $class_name,3); 
+        
         // class name must have three parts to be valid plugin
-        if (count($name_parts) < 3)
-            return false; 
-        // class must start with Smarty_
-        if ($name_parts[0] !== 'smarty')
-            return false; 
+        if (count($name_parts) < 3 || $name_parts[0] !== 'smarty')
+        {
+            throw new SmartyException("plugin {$class_name} is not a valid name format");
+            return false;
+        } 
         // plugin filename is expected to be: [type].[name].php
-        $plugin_filename = $name_parts[1] . '.' . str_replace("smarty_" . $name_parts[1] . "_", "", $class_name) . $this->php_ext; 
+        $plugin_filename = "{$name_parts[1]}.{$name_parts[2]}{$this->php_ext}";
+        
         // if type is "internal", get plugin from sysplugins
         if (($name_parts[1] == 'internal') && file_exists($this->sysplugins_dir . $plugin_filename)) {
             return require_once($this->sysplugins_dir . $plugin_filename);
