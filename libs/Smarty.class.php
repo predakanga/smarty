@@ -237,7 +237,7 @@ class Smarty {
             return true; 
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
-        $name_parts = explode('_', $class_name); 
+        $name_parts = explode('_', $class_name,3); 
         // class name must have three parts to be valid plugin
         if (count($name_parts) < 3)
             return false; 
