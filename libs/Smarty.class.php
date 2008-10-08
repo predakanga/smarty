@@ -73,6 +73,10 @@ class Smarty {
     public $right_delimiter = "}"; 
     // security mode
     public $security = false;
+    // modifier object
+    public $modifier = null;
+    // function object
+    public $function = null;
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -92,8 +96,12 @@ class Smarty {
         self::instance($this);
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
-        $this->loadPlugin('Smarty_Internal_DisplayBase');
         $this->loadPlugin('Smarty_Internal_PluginBase');
+        // setup function and modifier objects
+        $this->loadPlugin('Smarty_Internal_Modifier');
+        $this->modifier = new Smarty_Internal_Modifier;
+        $this->loadPlugin('Smarty_Internal_Function');
+        $this->function = new Smarty_Internal_Function;
     } 
 
     /**
@@ -159,6 +167,7 @@ class Smarty {
                 // check if we need a recompile
                 if (!file_exists($_compiled_filepath) || filemtime($_compiled_filepath) !== $template_timestamp || $this->smarty->force_compile) {
                     // compile template
+                    $this->loadPlugin('Smarty_Internal_CompileBase');
                     $this->loadPlugin('Smarty_Internal_Compiler');
                     $this->_compiler = new Smarty_Internal_Compiler;
                     $_template = $resource->get_template($tpl, $_tpl_filepath);

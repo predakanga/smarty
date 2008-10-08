@@ -7,7 +7,7 @@
 * @subpackage plugins
 */
 
-class Smarty_Internal_DisplayTPL extends Smarty_Internal_DisplayBase {
+class Smarty_Internal_DisplayTPL extends Smarty_Internal_Base {
     public function display($tpl, $tpl_vars)
     { 
         // get compiled filename/filepath
