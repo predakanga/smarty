@@ -10,8 +10,6 @@
 class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     // loaded compuler classes
     public $_compiler_class = array(); 
-    // compiler status stack
-    public $_compiler_status_stack = array(); 
     // tag stack
     public $_tag_stack = array();
 
@@ -24,8 +22,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->_compiler_status->nocache = false; 
         // current template file
         $this->_compiler_status->current_tpl_filepath = ""; 
-        // current compiled template file
-        $this->_compiler_status->current_compiled_path = "";
     } 
 
     public static function &instance($new_instance = null)
@@ -41,9 +37,10 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
-        // save compiler state when it's called recursively when pocessing {include} tags
-        array_push($this->_compiler_status_stack, $this->_compiler_status);
-
+       
+       // if no content just return
+       if ($_content == '') return '';
+       
         $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
 
         // call the lexer/parser to compile the template
@@ -57,9 +54,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $parser->doParse($lex->token, $lex->value);
         } 
         $parser->doParse(0, 0); 
-
-       // restore last compiler status
-        $this->_compiler_status = array_pop($this->_compiler_status_stack);
 
         if (!$this->smarty->compile_error) {
             // return compiled template
