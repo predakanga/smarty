@@ -54,25 +54,25 @@ class Smarty {
     public $config_dir = null; 
     // force template compiling?
     public $force_compile = false; 
-    // plugins directory
-    public $sysplugins_dir = null; 
     // use sub dirs for compiled/cached files?
     public $use_sub_dirs = false; 
     // php file extention
     public $php_ext = '.php'; 
-    // assigned tpl vars
-    public $tpl_vars = array(); 
     // compile_error?
     public $compile_error = false; 
     // caching enabled
     public $caching = false; 
     // caching lifetime
     public $caching_lifetime = 0; 
-    // delimiter
+    // template delimiters
     public $left_delimiter = "{";
     public $right_delimiter = "}"; 
     // security mode
     public $security = false; 
+    // assigned tpl vars
+    public $tpl_vars = array(); 
+    // system plugins directory
+    private $sysplugins_dir = null; 
     // modifier object
     private $modifier = null; 
     // function object
@@ -167,11 +167,10 @@ class Smarty {
         
         if($_resource->usesCompiler())
         {
-        
             // see if template needs compiling.
             $_compiled_filepath = $this->getCompiledFilepath($_resource_name);
             $_template_timestamp = $_resource->getTimestamp($_resource_name);
-            if ($this->smarty->force_compile
+            if ($this->force_compile
                     || !file_exists($_compiled_filepath)
                     || $_template_timestamp === false
                     || filemtime($_compiled_filepath) !== $_template_timestamp)
