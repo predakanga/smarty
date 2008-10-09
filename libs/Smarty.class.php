@@ -165,6 +165,7 @@ class Smarty {
         
         if($_resource->usesCompiler())
         {
+        
             // see if template needs compiling.
             $_compiled_filepath = $this->getCompiledFilepath($_resource_name);
             $_template_timestamp = $_resource->getTimestamp($_resource_name);
@@ -173,12 +174,16 @@ class Smarty {
                     || $_template_timestamp === false
                     || filemtime($_compiled_filepath) !== $_template_timestamp)
             {
+                // get contents of template
+                if(($_template_contents = $_resource->getContents($_resource_name)) === false)
+                {
+                    throw new SmartyException("Unable to load template {$template_resource}");
+                }
                 // compile template
                 $this->loadPlugin('Smarty_Internal_CompileBase');
                 $this->loadPlugin($this->compiler_class);
                 $_compiler = new $this->compiler_class;
-                $_template_contents = $_resource->getTemplate($_resource_name);
-                $_template_filepath = $this->getTemplateFilepath($_resource_name);
+                $_template_filepath = $_resource->getFilepath($_resource_name);
                 $_compiled_template = $_compiler->compile($_template_contents, $_template_filepath);
                 
                 // did compiling succeed?
@@ -213,7 +218,7 @@ class Smarty {
         else
         {
             // resource is PHP itself
-            if (($_template_filepath = $_resource->getTemplateFilepath($_resource_name)) !== false)
+            if (($_template_filepath = $_resource->getFilepath($_resource_name)) !== false)
             {
                 extract($this->tpl_vars);
                 include($_template_filepath);
