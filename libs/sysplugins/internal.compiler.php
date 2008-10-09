@@ -37,9 +37,12 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
+
+        $template_header = "<?php /* Smarty version ".$this->smarty->_version.", created on ".strftime("%Y-%m-%d %H:%M:%S")."\n";
+        $template_header .= "         compiled from ".strtr(urlencode($tpl_filepath), array('%2F'=>'/', '%3A'=>':'))." */ ?>\n";
        
        // if no content just return
-       if ($_content == '') return '';
+       if ($_content == '') return $template_header;
        
         $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
 
@@ -57,7 +60,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         if (!$this->smarty->compile_error) {
             // return compiled template
-            return "<?php \$_smarty = Smarty::instance();?>\n" . $parser->retvalue;
+            return $template_header."<?php \$_smarty = Smarty::instance();?>\n" . $parser->retvalue;
         } else {
             return false;
         } 

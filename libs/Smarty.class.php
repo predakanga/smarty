@@ -42,6 +42,8 @@ if (!defined('SMARTY_DIR')) {
 } 
 
 class Smarty {
+    // smarty version
+    public $_version = 'Smarty3Alpha';
     // template directory
     public $template_dir = null; 
     // compile directory
