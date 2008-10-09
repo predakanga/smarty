@@ -9,9 +9,9 @@
 
 class Smarty_Internal_Resource_File extends Smarty_Internal_Base {
 
-    public function getFilepath($template_resource)
+    public function getFilepath($resource_name)
     {
-        return $this->smarty->getTemplateFilepath($template_resource);
+        return $this->smarty->getTemplateFilepath($resource_name);
     }
 
     public function getTimestamp($resource_name)

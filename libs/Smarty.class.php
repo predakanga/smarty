@@ -199,7 +199,7 @@ class Smarty {
                     else
                     {
                         // write compiled template
-                        file_put_contents($_compiled_filepath, $_compiled_template);
+                        $this->write_file($_compiled_filepath,$_compiled_template);
                         // make template and compiled file timestamp match
                         touch($_compiled_filepath, $_template_timestamp);
                     }
@@ -277,9 +277,20 @@ class Smarty {
     /*
      * get system filepath to compiled file
     */
-    public function getCompiledFilepath ($tpl)
+    public function getCompiledFilepath ($template_resource)
     {
-        return $this->compile_dir . md5($tpl) . $this->php_ext;
+        $_filepath = md5($template_resource) . $this->php_ext;
+        
+        // if use_sub_dirs, break file into directories
+        if($this->use_sub_dirs)
+        {
+            $_filepath = substr($_filepath,0,3) . DIRECTORY_SEPARATOR
+              . substr($_filepath,0,2) . DIRECTORY_SEPARATOR
+              . substr($_filepath,0,1) . DIRECTORY_SEPARATOR
+              . $_filepath;
+        }
+              
+        return $this->compile_dir . $_filepath;
     } 
 
     /*
@@ -380,6 +391,7 @@ class Smarty {
 * @param string $code the error code
 */
 class SmartyException extends Exception {
+
     public function __construct($message, $code = null)
     {
         parent::__construct($message, $code);
@@ -387,8 +399,8 @@ class SmartyException extends Exception {
 
     public function __toString()
     {
-        return "Error: " . htmlentities($this->getMessage()) . "<br>\n"
-         . "File: " . $this->getFile() . "<br>\n"
+        return "Error: " . htmlentities($this->getMessage()) . "<br>"
+         . "File: " . $this->getFile() . "<br>"
          . "Line: " . $this->getLine() . "\n";
     } 
 
@@ -400,7 +412,8 @@ class SmartyException extends Exception {
     public static function getStaticException($exception)
     {
         $exception->getException();
-    } 
+    }
+     
 } 
 
 ?>
