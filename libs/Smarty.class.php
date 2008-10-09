@@ -191,9 +191,7 @@ class Smarty {
                 {
                     if ($_resource->isEvaluated())
                     {                   
-                        // string resource, eval output
-                        extract($this->tpl_vars);
-                        eval('?>'.$_compiled_template);
+                        $this->evalTemplate($_compiled_template);
                         return true;
                     }
                     else
@@ -211,8 +209,7 @@ class Smarty {
             
             }
             // display compiled template
-            extract($this->tpl_vars);
-            include($_compiled_filepath);
+            $this->renderTemplate($_compiled_filepath);
             return true;
         }
         else
@@ -261,6 +258,24 @@ class Smarty {
         } 
     } 
 
+    /*
+     * render the template
+     */
+    public function renderTemplate ($template)
+    {
+        extract($this->tpl_vars);
+        include($template);
+    }
+
+    /*
+     * evaluate template string
+     */
+    public function evalTemplate ($template_contents)
+    {
+        extract($this->tpl_vars);
+        eval('?>'.$template_contents);
+    }
+    
     /*
      * get system filepath to template
      */
@@ -358,7 +373,7 @@ class Smarty {
     } 
 
     /**
-    * Takes unknown class methods and lazy loads plugin files for them
+    * Takes unknown class methods and lazy loads sysplugin files for them
     * class name format: Smarty_Method_MethodName
     * plugin filename format: method.methodname.php
     * 
