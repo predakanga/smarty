@@ -143,7 +143,7 @@ class Smarty {
     * @param string $template_resource the resource handle of the template file
     */
     public function display($template_resource)
-    {
+    {    
         // initialize
         $_resource_type = '';
         $_resource_name = '';
@@ -194,7 +194,7 @@ class Smarty {
                 {
                     if ($_resource->isEvaluated())
                     {   
-                        $this->render_info['compiled_template'] = $_compiled_template;                
+                        $this->render_info['contents'] = $_compiled_template;                
                         $this->evalTemplate();
                         return true;
                     }
@@ -213,7 +213,7 @@ class Smarty {
             
             }
             // display compiled template
-            $this->render_info['compiled_filepath'] = $_compiled_filepath;
+            $this->render_info['filepath'] = $_compiled_filepath;
             $this->renderTemplate();
             return true;
         }
@@ -222,8 +222,10 @@ class Smarty {
             // resource is PHP itself
             if (($_template_filepath = $_resource->getFilepath($_resource_name)) !== false)
             {
-                extract($this->tpl_vars);
-                include($_template_filepath);
+                // display template
+                $this->render_info['filepath'] = $_template_filepath;
+                $this->renderTemplate();
+                
             }
             else
             {
@@ -269,7 +271,7 @@ class Smarty {
     private function renderTemplate ()
     {
         extract($this->tpl_vars);
-        include($this->render_info['compiled_filepath']);
+        include($this->render_info['filepath']);
     }
 
     /*
@@ -278,7 +280,7 @@ class Smarty {
     private function evalTemplate ()
     {
         extract($this->tpl_vars);
-        eval('?>'.$this->render_info['compiled_template']);
+        eval('?>'.$this->render_info['contents']);
     }
     
     /*
@@ -419,7 +421,7 @@ class SmartyException extends Exception {
 
     public function __toString()
     {
-        return "Error: " . htmlentities($this->getMessage()) . "<br>"
+        return "Code: " . $this->getCode . "<br>Error: " . htmlentities($this->getMessage()) . "<br>"
          . "File: " . $this->getFile() . "<br>"
          . "Line: " . $this->getLine() . "\n";
     } 

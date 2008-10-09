@@ -6,6 +6,4 @@ $foo is <?=$foo?>
 <?=$this->modifier->escape($foo['name'],'html')?>
 <?=$this->modifier->trim($foo['name'])?>
 
-<?=phpinfo()?>
-
 DONE
