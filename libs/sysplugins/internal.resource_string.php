@@ -9,7 +9,7 @@
 
 class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
 
-    public function getTemplateFilepath($template_resource)
+    public function getFilepath($template_resource)
     {
         // no filepath for strings
         return false;
@@ -21,7 +21,7 @@ class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
          return false;
     } 
 
-    public function getTemplate ($_tpl_filepath)
+    public function getContents ($_tpl_filepath)
     { 
         // return template string
         return $_tpl_filepath;
