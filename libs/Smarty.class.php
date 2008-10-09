@@ -261,10 +261,10 @@ class Smarty {
     /*
      * render the template
      */
-    public function renderTemplate ($template)
+    public function renderTemplate ($template_filepath)
     {
         extract($this->tpl_vars);
-        include($template);
+        include($template_filepath);
     }
 
     /*
