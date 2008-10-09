@@ -4,7 +4,7 @@ class Smarty_Internal_Compile_Smarty_Variable extends Smarty_Internal_CompileBas
     public function execute($args)
     { 
         // $args contains Smarty variable
-        $output = "<?php echo str_replace('\"','&quot;'," . $args . ");?>";
+        $output = "<?php echo " . $args . ";?>";
 
         if ($this->compiler->_compiler_status->nocache && $this->smarty->caching && $this->smarty->cache_lifetime != 0) {
             // If we have a ncocache section and caching enabled make the compiled template to inject the compiled code into the cache file
