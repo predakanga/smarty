@@ -74,13 +74,15 @@ class Smarty {
     // security mode
     public $security = false; 
     // modifier object
-    public $modifier = null; 
+    private $modifier = null; 
     // function object
-    public $function = null; 
+    private $function = null; 
     // resource type used if none given
-    public $default_resource_type = 'file';
+    private $default_resource_type = 'file';
     // class used for compiling templates
-    public $compiler_class = 'Smarty_Internal_Compiler';
+    private $compiler_class = 'Smarty_Internal_Compiler';
+    // information for rendering the template
+    private $render_info = array();
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -190,8 +192,9 @@ class Smarty {
                 if($_compiled_template !== false)
                 {
                     if ($_resource->isEvaluated())
-                    {                   
-                        $this->evalTemplate($_compiled_template);
+                    {   
+                        $this->render_info['compiled_template'] = $_compiled_template;                
+                        $this->evalTemplate();
                         return true;
                     }
                     else
@@ -209,7 +212,8 @@ class Smarty {
             
             }
             // display compiled template
-            $this->renderTemplate($_compiled_filepath);
+            $this->render_info['compiled_filepath'] = $_compiled_filepath;
+            $this->renderTemplate();
             return true;
         }
         else
@@ -261,19 +265,19 @@ class Smarty {
     /*
      * render the template
      */
-    public function renderTemplate ($template_filepath)
+    private function renderTemplate ()
     {
         extract($this->tpl_vars);
-        include($template_filepath);
+        include($this->render_info['compiled_filepath']);
     }
 
     /*
      * evaluate template string
      */
-    public function evalTemplate ($template_contents)
+    private function evalTemplate ()
     {
         extract($this->tpl_vars);
-        eval('?>'.$template_contents);
+        eval('?>'.$this->render_info['compiled_template']);
     }
     
     /*
@@ -292,7 +296,7 @@ class Smarty {
     /*
      * get system filepath to compiled file
     */
-    public function getCompiledFilepath ($template_resource)
+    private function getCompiledFilepath ($template_resource)
     {
         $_filepath = md5($template_resource) . $this->php_ext;
         
@@ -311,7 +315,7 @@ class Smarty {
     /*
      * get the resource type and name from filepath
      */
-    function parseResourceName($tpl, &$resource_type, &$resource_name)
+    private function parseResourceName($tpl, &$resource_type, &$resource_name)
     { 
         if (empty($tpl))
           return false;
