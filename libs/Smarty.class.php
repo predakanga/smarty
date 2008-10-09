@@ -171,9 +171,9 @@ class Smarty {
             $_compiled_filepath = $this->getCompiledFilepath($_resource_name);
             $_template_timestamp = $_resource->getTimestamp($_resource_name);
             if ($this->force_compile
-                    || !file_exists($_compiled_filepath)
-                    || $_template_timestamp === false
-                    || filemtime($_compiled_filepath) !== $_template_timestamp)
+                || !file_exists($_compiled_filepath)
+                || $_template_timestamp === false
+                || filemtime($_compiled_filepath) !== $_template_timestamp)
             {
                 // get contents of template
                 if(($_template_contents = $_resource->getContents($_resource_name)) === false)
@@ -205,7 +205,7 @@ class Smarty {
                     }
                 } else {
                     // error compiling template
-                    throw new SmartyException("Error compiling template {$tpl}");
+                    throw new SmartyException("Error compiling template {$template_source}");
                     return false;
                 }
             
@@ -282,10 +282,10 @@ class Smarty {
     /*
      * get system filepath to template
      */
-    public function getTemplateFilepath ($tpl)
+    public function getTemplateFilepath ($template_resource)
     {
         foreach((array)$this->template_dir as $_template_dir) {
-            $_filepath = $_template_dir . $tpl;
+            $_filepath = $_template_dir . $template_resource;
             if (file_exists($_filepath))
                 return $_filepath;
         } 
@@ -314,26 +314,26 @@ class Smarty {
     /*
      * get the resource type and name from filepath
      */
-    private function parseResourceName($tpl, &$resource_type, &$resource_name)
+    private function parseResourceName($template_resource, &$resource_type, &$resource_name)
     { 
-        if (empty($tpl))
+        if (empty($template_resource))
           return false;
           
-        if (strpos($tpl,':') === false)
+        if (strpos($template_resource,':') === false)
         {
             // no resource given, use default
             $resource_type = $this->default_resource_type;
-            $resource_name = $tpl;
+            $resource_name = $template_resource;
             return true;            
         }
         
         // get type and name from path
-        list($resource_type,$resource_name) = explode(':', $tpl, 2);
+        list($resource_type,$resource_name) = explode(':', $template_resource, 2);
 
         if (strlen($resource_type) == 1) {
             // 1 char is not resource type, but part of filepath
             $resource_type = $this->default_resource_type;
-            $resource_name = $tpl;
+            $resource_name = $template_resource;
         } else {
             $resource_type = strtolower($resource_type);
         }
