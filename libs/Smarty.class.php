@@ -136,105 +136,95 @@ class Smarty {
     /**
     * displays a Smarty template
     * 
-    * @param string $tpl the resource handle of the template file
+    * @param string $template_resource the resource handle of the template file
     */
-    public function display($tpl)
+    public function display($template_resource)
     {
         // initialize
-        $resource_type = '';
-        $resource_name = '';
+        $_resource_type = '';
+        $_resource_name = '';
         
         // get resource type and name
-        $this->parseResourceName($tpl, $resource_type, $resource_name);
+        $this->parseResourceName($template_resource, $_resource_type, $_resource_name);
 
-        if($resource_type == 'php')
+        // is this an internal or custom resource?
+        if (in_array($_resource_type, array('file','php','string')))
         {
-            // include tpl file if found    
-            if (($_tpl_filepath = $this->getTemplateFilepath($resource_name)) !== false)
+            // internal, get from sysplugins dir
+            $_resource_class = "Smarty_Internal_Resource_{$_resource_type}";
+        }
+        else
+        {
+            // custom, get from plugins dir
+            $_resource_class = "Smarty_Resource_{$_resource_type}";
+        }
+        
+        // load resource plugin, instantiate
+        $this->loadPlugin($_resource_class);
+        $_resource = new $_resource_class;
+        
+        if($_resource->usesCompiler())
+        {
+            // see if template needs compiling.
+            $_compiled_filepath = $this->getCompiledFilepath($_resource_name);
+            $_template_timestamp = $_resource->getTimestamp($_resource_name);
+            if ($this->smarty->force_compile
+                    || !file_exists($_compiled_filepath)
+                    || $_template_timestamp === false
+                    || filemtime($_compiled_filepath) !== $_template_timestamp)
+            {
+                // compile template
+                $this->loadPlugin('Smarty_Internal_CompileBase');
+                $this->loadPlugin($this->compiler_class);
+                $_compiler = new $this->compiler_class;
+                $_template_contents = $_resource->getTemplate($_resource_name);
+                $_template_filepath = $this->getTemplateFilepath($_resource_name);
+                $_compiled_template = $_compiler->compile($_template_contents, $_template_filepath);
+                
+                // did compiling succeed?
+                if($_compiled_template !== false)
+                {
+                    if ($_resource->isEvaluated())
+                    {                   
+                        // string resource, eval output
+                        extract($this->tpl_vars);
+                        eval('?>'.$_compiled_template);
+                        return true;
+                    }
+                    else
+                    {
+                        // write compiled template
+                        file_put_contents($_compiled_filepath, $_compiled_template);
+                        // make template and compiled file timestamp match
+                        touch($_compiled_filepath, $_template_timestamp);
+                    }
+                } else {
+                    // error compiling template
+                    throw new SmartyException("Error compiling template {$tpl}");
+                    return false;
+                }
+            
+            }
+            // display compiled template
+            extract($this->tpl_vars);
+            include($_compiled_filepath);
+            return true;
+        }
+        else
+        {
+            // resource is PHP itself
+            if (($_template_filepath = $_resource->getTemplateFilepath($_resource_name)) !== false)
             {
                 extract($this->tpl_vars);
-                include($_tpl_filepath);
+                include($_template_filepath);
             }
             else
             {
                 // no tpl file found
-                throw new SmartyException("Unable to load template {$tpl}");
+                throw new SmartyException("Unable to load template {$template_resource}");
                 return false;
             }
-        }
-        else
-        {
-            // not a php resource type, so we will use compiling
-
-            // is this an internal or custom resource?
-            if (in_array($resource_type, array('file','string')))
-            {
-                // internal, get from sysplugins dir
-                $resource_class = "Smarty_Internal_Resource_{$resource_type}";
-            }
-            else
-            {
-                // custom, get from plugins dir
-                $resource_class = "Smarty_Resource_{$resource_type}";
-            }
             
-            // load resource plugin, instantiate
-            $this->loadPlugin($resource_class);
-            $resource = new $resource_class;
-        
-            // get file paths
-            $resource->getFilePaths($resource_name, $_tpl_filepath, $_compiled_filepath);
-            
-            // get template timestamp
-            if (($template_timestamp = $resource->getTimestamp($_tpl_filepath)) !== false)
-            {
-                // check if we need to (re)compile
-                if ($resource_type == 'string'
-                    || $this->smarty->force_compile
-                    || !file_exists($_compiled_filepath)
-                    || filemtime($_compiled_filepath) !== $template_timestamp)
-                {
-                    // compile template
-                    $this->loadPlugin('Smarty_Internal_CompileBase');
-                    $this->loadPlugin($this->compiler_class);
-                    $this->_compiler = new $this->compiler_class;
-                    $_template_contents = $resource->getTemplate($_tpl_filepath);
-                    $_compiled_template = $this->_compiler->compile($_template_contents, $_tpl_filepath);
-                    
-                    // did compiling succeed?
-                    if ($_compiled_template !== false)
-                    {
-                        if ($resource_type !== 'string')
-                        {                   
-                            // write compiled template
-                            file_put_contents($_compiled_filepath, $_compiled_template);
-                            // make tpl and compiled file timestamp match
-                            touch($_compiled_filepath, $template_timestamp);
-                        }
-                        else
-                        {
-                            // string resource, eval output
-                            extract($this->tpl_vars);
-                            eval('?>'.$_compiled_template);
-                            return true;
-                        }
-                    } else {
-                        // error compiling template
-                        throw new SmartyException("Error compiling template {$tpl}");
-                        return false;
-                    } 
-                }
-                // display compiled template
-                extract($this->tpl_vars);
-                include($_compiled_filepath);
-                return true;
-            }
-            else
-            {
-                // error getting timestamp
-                throw new SmartyException("Error getting timestamp for template {$tpl}");
-                return false;
-            }
         }
     } 
 
@@ -267,7 +257,7 @@ class Smarty {
     } 
 
     /*
-     * Build template file path
+     * get system filepath to template
      */
     public function getTemplateFilepath ($tpl)
     {
@@ -278,11 +268,11 @@ class Smarty {
         } 
         return false;
     } 
-
+    
     /*
-     * Build template file path
+     * get system filepath to compiled file
     */
-    public function getCompileFilepath ($tpl)
+    public function getCompiledFilepath ($tpl)
     {
         return $this->compile_dir . md5($tpl) . $this->php_ext;
     } 

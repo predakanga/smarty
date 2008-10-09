@@ -9,11 +9,10 @@
 
 class Smarty_Internal_Resource_PHP extends Smarty_Internal_Base {
 
-    public function getFilePaths ($resource_name, &$_tpl_filepath, &$_compiled_filepath)
+    public function getTemplateFilepath($template_resource)
     {
-        $_tpl_filepath = $this->smarty->getTemplateFilepath($resource_name);
-        $_compiled_filepath = $_tpl_filepath;
-   }    
+        return $this->smarty->getTemplateFilepath($template_resource);
+    }
 
     public function getTimestamp ($_tpl_filepath)
     {
@@ -26,6 +25,20 @@ class Smarty_Internal_Resource_PHP extends Smarty_Internal_Base {
         // is no template source to compile
         return false;
     } 
+
+    public function usesCompiler()
+    { 
+        // does not use compiler, template is PHP
+        return false;
+    } 
+
+    public function isEvaluated()
+    { 
+        // does not use compiler
+        return false;
+    } 
+    
+
 } 
 
 ?>

@@ -9,25 +9,36 @@
 
 class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
 
-    public function getFilePaths ($resource_name, &$_tpl_filepath, &$_compiled_filepath)
+    public function getTemplateFilepath($template_resource)
     {
-
-        $_tpl_filepath = $resource_name;
-        $_compiled_filepath = $this->smarty->getCompileFilepath($_tpl_filepath);
-    }    
-
+        // no filepath for strings
+        return false;
+    }
 
     public function getTimestamp ($_tpl_filepath)
     {    
-         // timestamp for strings is always now
-         return time();
+         // strings are always compiled
+         return false;
     } 
 
     public function getTemplate ($_tpl_filepath)
     { 
         // return template string
         return $_tpl_filepath;
+    }
+    
+    public function usesCompiler()
+    { 
+        // resource string is template, needs compiler
+        return true;
+    }
+    
+    public function isEvaluated()
+    { 
+        // compiled template is evaluated instead of saved to disk
+        return true;
     } 
+     
 } 
 
 ?>
