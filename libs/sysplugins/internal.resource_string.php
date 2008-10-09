@@ -12,7 +12,8 @@ class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
     public function getFilepath($template_resource)
     {
         // no filepath for strings
-        return false;
+        // return "string" for compiler error messages
+        return '"string"';;
     }
 
     public function getTimestamp($_tpl_filepath)
