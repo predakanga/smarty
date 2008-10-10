@@ -9,23 +9,23 @@
 
 class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
 
-    public function getFilepath($template_resource)
+    public function getTemplateFilepath($_template)
     {
         // no filepath for strings
         // return "string" for compiler error messages
         return '"string"';;
     }
 
-    public function getTimestamp($_tpl_filepath)
+    public function getTimestamp($_template)
     {    
          // strings are always compiled
          return false;
     } 
 
-    public function getContents($_tpl_filepath)
+    public function getContents($_template)
     { 
         // return template string
-        return $_tpl_filepath;
+        return $_template->resource_name;
     }
     
     public function usesCompiler()

@@ -21,7 +21,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // flag for nochache sections
         $this->_compiler_status->nocache = false; 
         // current template file
-        $this->_compiler_status->current_tpl_filepath = ""; 
+        $this->_compiler_status->current_tpl_filepath = "";
     } 
 
     public static function &instance($new_instance = null)
@@ -31,21 +31,29 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $instance = $new_instance;
         return $instance;
     } 
-
-    public function compile($_content, $tpl_filepath)
+    // public function compile($_content, $tpl_filepath)
+    public function compile($_template)
     {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
+        // get template filepath for error messages
+        $tpl_filepath = $_template->getTemplateFilepath(); 
+        // get template
+        if (($_content = $_template->getContents($_resource_name)) === false) {
+            throw new SmartyException("Unable to load template {$tpl_filepath}");
+        } 
 
-        $template_header = "<?php /* Smarty version ".$this->smarty->_version.", created on ".strftime("%Y-%m-%d %H:%M:%S")."\n";
-        $template_header .= "         compiled from ".strtr(urlencode($tpl_filepath), array('%2F'=>'/', '%3A'=>':'))." */ ?>\n";
-       
-       // if no content just return
-       if ($_content == '') return $template_header;
-       
-        $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
+        $template_header = "<?php /* Smarty version " . $this->smarty->_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
+        $template_header .= "         compiled from " . strtr(urlencode($tpl_filepath), array('%2F' => '/', '%3A' => ':')) . " */ ?>\n"; 
 
+        // if no content just return header
+        if ($_content == '') {
+            $_template->compiled_template = $template_header;
+            return true;
+        } 
+
+        $this->_compiler_status->current_tpl_filepath = $tpl_filepath; 
         // call the lexer/parser to compile the template
         $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
         $lex = new Smarty_Internal_Templatelexer($_content);
@@ -56,11 +64,12 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             // echo "Parsing  {$lex->token} Token {$lex->value} \n";
             $parser->doParse($lex->token, $lex->value);
         } 
-        $parser->doParse(0, 0); 
+        $parser->doParse(0, 0);
 
         if (!$this->smarty->compile_error) {
             // return compiled template
-            return $template_header."<?php \$_smarty = Smarty::instance();?>\n" . $parser->retvalue;
+            $_template->compiled_template =  $template_header . "<?php \$_smarty = Smarty::instance();?>\n" . $parser->retvalue;
+            return true;
         } else {
             return false;
         } 

@@ -9,22 +9,20 @@
 
 class Smarty_Internal_Resource_File extends Smarty_Internal_Base {
 
-    public function getFilepath($resource_name)
+    public function getTemplateFilepath($_template)
     {
-        return $this->smarty->getTemplateFilepath($resource_name);
+        return $_template->buildTemplateFilepath ();
     }
 
-    public function getTimestamp($resource_name)
+    public function getTimestamp($_template)
     {
-        $_tpl_filepath = $this->smarty->getTemplateFilepath($resource_name);
-        return file_exists($_tpl_filepath) ? filemtime($_tpl_filepath) : false;
+        return filemtime($_template->template_filepath);
     } 
 
-    public function getContents($resource_name)
+    public function getContents($_template)
     { 
         // read template file
-        $_tpl_filepath = $this->smarty->getTemplateFilepath($resource_name);
-        return file_exists($_tpl_filepath) ? file_get_contents($_tpl_filepath) : false;
+        return file_get_contents($_template->template_filepath);
     }
     
     public function usesCompiler()

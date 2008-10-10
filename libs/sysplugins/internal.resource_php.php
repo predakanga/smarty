@@ -9,18 +9,18 @@
 
 class Smarty_Internal_Resource_PHP extends Smarty_Internal_Base {
 
-    public function getFilepath($template_resource)
+    public function getTemplateFilepath($_template)
     {
-        return $this->smarty->getTemplateFilepath($template_resource);
+        return $_template->buildTemplateFilepath ();
     }
 
-    public function getTimestamp($_tpl_filepath)
+    public function getTimestamp($_template)
     {
             // no time stamps for PHP templates
             return false;
     } 
 
-    public function getContents($_tpl_filepath)
+    public function getContents($_template)
     { 
         // is no template source to compile
         return false;

@@ -57,7 +57,7 @@ class Smarty {
     // force template compiling?
     public $force_compile = false; 
     // use sub dirs for compiled/cached files?
-    public $use_sub_dirs = false; 
+    public $use_sub_dirs = true; 
     // php file extention
     public $php_ext = '.php'; 
     // compile_error?
@@ -76,15 +76,13 @@ class Smarty {
     // system plugins directory
     private $sysplugins_dir = null; 
     // modifier object
-    private $modifier = null; 
+    public $modifier = null; 
     // function object
-    private $function = null; 
+    public $function = null; 
     // resource type used if none given
-    private $default_resource_type = 'file';
+    public $default_resource_type = 'file';
     // class used for compiling templates
     private $compiler_class = 'Smarty_Internal_Compiler';
-    // information for rendering the template
-    private $render_info = array();
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -144,66 +142,29 @@ class Smarty {
     */
     public function display($template_resource)
     {    
-        // initialize
-        $_resource_type = '';
-        $_resource_name = '';
         
-        // get resource type and name
-        $this->parseResourceName($template_resource, $_resource_type, $_resource_name);
-
-        // is this an internal or custom resource?
-        if (in_array($_resource_type, array('file','php','string')))
+        $this->loadPlugin('Smarty_Internal_Template');
+        $_template = new Smarty_Internal_Template ($template_resource);
+                
+        if($_template->usesCompiler())
         {
-            // internal, get from sysplugins dir
-            $_resource_class = "Smarty_Internal_Resource_{$_resource_type}";
-        }
-        else
-        {
-            // custom, get from plugins dir
-            $_resource_class = "Smarty_Resource_{$_resource_type}";
-        }
-        
-        // load resource plugin, instantiate
-        $this->loadPlugin($_resource_class);
-        $_resource = new $_resource_class;
-        
-        if($_resource->usesCompiler())
-        {
-            // see if template needs compiling.
-            $_compiled_filepath = $this->getCompiledFilepath($_resource_name);
-            $_template_timestamp = $_resource->getTimestamp($_resource_name);
-            if ($this->force_compile
-                || !file_exists($_compiled_filepath)
-                || $_template_timestamp === false
-                || filemtime($_compiled_filepath) !== $_template_timestamp)
+            // see if template needs compiling.            
+            if ($_template->mustCompile())
             {
-                // get contents of template
-                if(($_template_contents = $_resource->getContents($_resource_name)) === false)
-                {
-                    throw new SmartyException("Unable to load template {$template_resource}");
-                }
                 // compile template
                 $this->loadPlugin('Smarty_Internal_CompileBase');
                 $this->loadPlugin($this->compiler_class);
                 $_compiler = new $this->compiler_class;
-                $_template_filepath = $_resource->getFilepath($_resource_name);
-                $_compiled_template = $_compiler->compile($_template_contents, $_template_filepath);
                 
                 // did compiling succeed?
-                if($_compiled_template !== false)
+                if($_compiler->compile($_template))
                 {
-                    if ($_resource->isEvaluated())
-                    {   
-                        $this->render_info['contents'] = $_compiled_template;                
-                        $this->evalTemplate();
-                        return true;
-                    }
-                    else
-                    {
+                    if (!$_template->isEvaluated())
+                   {
                         // write compiled template
-                        $this->write_file($_compiled_filepath,$_compiled_template);
+                        $this->write_file($_template->getCompiledFilepath(),$_template->getCompiledTemplate());
                         // make template and compiled file timestamp match
-                        touch($_compiled_filepath, $_template_timestamp);
+                        touch($_template->getCompiledFilepath(), $_template->getTimestamp());
                     }
                 } else {
                     // error compiling template
@@ -212,29 +173,10 @@ class Smarty {
                 }
             
             }
-            // display compiled template
-            $this->render_info['filepath'] = $_compiled_filepath;
-            $this->renderTemplate();
+       }
+            // display template
+            $_template->renderTemplate();
             return true;
-        }
-        else
-        {
-            // resource is PHP itself
-            if (($_template_filepath = $_resource->getFilepath($_resource_name)) !== false)
-            {
-                // display template
-                $this->render_info['filepath'] = $_template_filepath;
-                $this->renderTemplate();
-                
-            }
-            else
-            {
-                // no tpl file found
-                throw new SmartyException("Unable to load template {$template_resource}");
-                return false;
-            }
-            
-        }
     } 
 
     /**
@@ -265,84 +207,6 @@ class Smarty {
         } 
     } 
 
-    /*
-     * render the template
-     */
-    private function renderTemplate ()
-    {
-        extract($this->tpl_vars);
-        include($this->render_info['filepath']);
-    }
-
-    /*
-     * evaluate template string
-     */
-    private function evalTemplate ()
-    {
-        extract($this->tpl_vars);
-        eval('?>'.$this->render_info['contents']);
-    }
-    
-    /*
-     * get system filepath to template
-     */
-    public function getTemplateFilepath ($template_resource)
-    {
-        foreach((array)$this->template_dir as $_template_dir) {
-            $_filepath = $_template_dir . $template_resource;
-            if (file_exists($_filepath))
-                return $_filepath;
-        } 
-        return false;
-    } 
-    
-    /*
-     * get system filepath to compiled file
-    */
-    private function getCompiledFilepath ($template_resource)
-    {
-        $_filepath = md5($template_resource) . $this->php_ext;
-        
-        // if use_sub_dirs, break file into directories
-        if($this->use_sub_dirs)
-        {
-            $_filepath = substr($_filepath,0,3) . DIRECTORY_SEPARATOR
-              . substr($_filepath,0,2) . DIRECTORY_SEPARATOR
-              . substr($_filepath,0,1) . DIRECTORY_SEPARATOR
-              . $_filepath;
-        }
-              
-        return $this->compile_dir . $_filepath;
-    } 
-
-    /*
-     * get the resource type and name from filepath
-     */
-    private function parseResourceName($template_resource, &$resource_type, &$resource_name)
-    { 
-        if (empty($template_resource))
-          return false;
-          
-        if (strpos($template_resource,':') === false)
-        {
-            // no resource given, use default
-            $resource_type = $this->default_resource_type;
-            $resource_name = $template_resource;
-            return true;            
-        }
-        
-        // get type and name from path
-        list($resource_type,$resource_name) = explode(':', $template_resource, 2);
-
-        if (strlen($resource_type) == 1) {
-            // 1 char is not resource type, but part of filepath
-            $resource_type = $this->default_resource_type;
-            $resource_name = $template_resource;
-        } else {
-            $resource_type = strtolower($resource_type);
-        }
-        return true;
-    } 
 
     /**
     * Takes unknown classes and loads plugin files for them
@@ -423,9 +287,10 @@ class SmartyException extends Exception {
     {
         return "Code: " . $this->getCode . "<br>Error: " . htmlentities($this->getMessage()) . "<br>"
          . "File: " . $this->getFile() . "<br>"
-         . "Line: " . $this->getLine() . "\n";
-    } 
-
+         . "Line: " . $this->getLine() . "<br>"
+         . "Trace: " . $this->getTraceAsString() . "\n";
+    }
+    
     public function getException()
     {
         print $this; // returns output from __toString()

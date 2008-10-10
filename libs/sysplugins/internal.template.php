@@ -24,9 +24,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         $this->template_filepath = null;
         $this->compiled_filepath = null;
         $this->template_timestamp = null;
-        $this->template_content = null; 
+        $this->template_content = null;
         $this->compiled_template = null; 
-
         // parse resoure name
         if (!$this->parseResourceName ($template_resource)) {
             throw new SmartyException ("Missing template resource");
@@ -71,14 +70,14 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
     public function getTemplateFilepath ()
     {
         return $this->template_filepath == null ?
-        $this->template_filepath = $this->buildTemplateFilepath() :
+        $this->template_filepath = $this->resource_objects[$this->resource_type]->getTemplateFilepath($this) :
         $this->template_filepath;
     } 
 
     public function getTimestamp ()
     {
         return $this->template_timestamp == null ?
-        $this->template_timestamp = $this->resource_objects[$this->resource_type]->getTimestamp($this->resource_name) :
+        $this->template_timestamp = $this->resource_objects[$this->resource_type]->getTimestamp($this) :
         $this->template_timestamp;
     } 
 
@@ -90,23 +89,36 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
     public function getContents ()
     {
         if ($this->template_contents == null) {
-            if (($this->template_contents = $this->resource_objects[$this->resource_type]->getContents($this->resource_name)) === false) {
+            if (($this->template_contents = $this->resource_objects[$this->resource_type]->getContents($this)) === false) {
                 throw new SmartyException("Unable to load template {$this->template_resource}");
             } 
         } 
         return $this->template_contents;
     } 
-    
+
     public function getCompiledTemplate ()
     {
         return $this->compiled_template;
-    }
+    } 
+
+    public function renderTemplate ()
+    {
+        extract($this->smarty->tpl_vars);
+        if ($this->usesCompiler()) {
+            if ($this->compiled_template == null) {
+                include($this->compiled_filepath);
+            } else {
+                eval('?>' . $this->compiled_template);
+            } 
+        } else {
+            include(getTemplateFilepath ());
+        } 
+    } 
 
     private function parseResourceName($template_resource)
     {
         if (empty($template_resource))
             return false;
-
         if (strpos($template_resource, ':') === false) {
             // no resource given, use default
             $this->resource_type = $this->smarty->default_resource_type;
@@ -115,7 +127,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         } 
         // get type and name from path
         list($this->resource_type, $this->resource_name) = explode(':', $template_resource, 2);
-
         if (strlen($this->resource_type) == 1) {
             // 1 char is not resource type, but part of filepath
             $this->resource_type = $this->smarty->default_resource_type;
@@ -130,11 +141,13 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
      */
     public function buildTemplateFilepath ()
     {
-        foreach((array)$this->template_dir as $_template_dir) {
+        foreach((array)$this->smarty->template_dir as $_template_dir) {
             $_filepath = $_template_dir . $this->resource_name;
             if (file_exists($_filepath))
                 return $_filepath;
         } 
+        // no tpl file found
+        throw new SmartyException("Unable to load template {$this->resource_name}");
         return false;
     } 
 
@@ -143,9 +156,9 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
     */
     private function buildCompiledFilepath ()
     {
-        $_filepath = md5($this->resource_name) . $this->php_ext; 
+        $_filepath = md5($this->resource_name) . $this->smarty->php_ext; 
         // if use_sub_dirs, break file into directories
-        if ($this->use_sub_dirs) {
+        if ($this->smarty->use_sub_dirs) {
             $_filepath = substr($_filepath, 0, 3) . DIRECTORY_SEPARATOR
              . substr($_filepath, 0, 2) . DIRECTORY_SEPARATOR
              . substr($_filepath, 0, 1) . DIRECTORY_SEPARATOR
