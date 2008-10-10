@@ -43,7 +43,7 @@ if (!defined('SMARTY_DIR')) {
 
 class Smarty {
     // smarty version
-    public $_version = 'Smarty3Alpha';
+    public $_version = 'Smarty3Alpha'; 
     // template directory
     public $template_dir = null; 
     // compile directory
@@ -80,7 +80,7 @@ class Smarty {
     // function object
     public $function = null; 
     // resource type used if none given
-    public $default_resource_type = 'file';
+    public $default_resource_type = 'file'; 
     // class used for compiling templates
     private $compiler_class = 'Smarty_Internal_Compiler';
 
@@ -141,42 +141,35 @@ class Smarty {
     * @param string $template_resource the resource handle of the template file
     */
     public function display($template_resource)
-    {    
-        
+    {
         $this->loadPlugin('Smarty_Internal_Template');
         $_template = new Smarty_Internal_Template ($template_resource);
-                
-        if($_template->usesCompiler())
-        {
-            // see if template needs compiling.            
-            if ($_template->mustCompile())
-            {
+
+        if ($_template->usesCompiler()) {
+            // see if template needs compiling.
+            if ($_template->mustCompile()) {
                 // compile template
                 $this->loadPlugin('Smarty_Internal_CompileBase');
                 $this->loadPlugin($this->compiler_class);
-                $_compiler = new $this->compiler_class;
-                
+                $_compiler = new $this->compiler_class; 
                 // did compiling succeed?
-                if($_compiler->compile($_template))
-                {
-                    if (!$_template->isEvaluated())
-                   {
+                if ($_compiler->compile($_template)) {
+                    if (!$_template->isEvaluated()) {
                         // write compiled template
-                        $this->write_file($_template->getCompiledFilepath(),$_template->getCompiledTemplate());
+                        $this->write_file($_template->getCompiledFilepath(), $_template->getCompiledTemplate()); 
                         // make template and compiled file timestamp match
                         touch($_template->getCompiledFilepath(), $_template->getTimestamp());
-                    }
+                    } 
                 } else {
                     // error compiling template
-                    throw new SmartyException("Error compiling template {$template_source}");
+                    throw new SmartyException("Error compiling template {$_template->getTemplateFilepath ()}");
                     return false;
-                }
-            
-            }
-       }
-            // display template
-            $_template->renderTemplate();
-            return true;
+                } 
+            } 
+        } 
+        // display template
+        echo $_template->getRenderedTemplate();
+        return true;
     } 
 
     /**
@@ -190,23 +183,21 @@ class Smarty {
         if (is_array($tpl_var)) {
             foreach ($tpl_var as $key => $val) {
                 if ($key != '') {
-                    if(in_array($key,array('this','smarty')))
+                    if (in_array($key, array('this', 'smarty')))
                         throw new SmartyException("Cannot assign value to reserved var '{$key}'");
                     else
                         $this->tpl_vars[$key] = $val;
                 } 
             } 
         } else {
-            if ($tpl_var != '')
-            {
-                if(in_array($tpl_var,array('this','smarty')))
+            if ($tpl_var != '') {
+                if (in_array($tpl_var, array('this', 'smarty')))
                     throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
                 else
                     $this->tpl_vars[$tpl_var] = $value;
-            }
+            } 
         } 
     } 
-
 
     /**
     * Takes unknown classes and loads plugin files for them
@@ -277,7 +268,6 @@ class Smarty {
 * @param string $code the error code
 */
 class SmartyException extends Exception {
-
     public function __construct($message, $code = null)
     {
         parent::__construct($message, $code);
@@ -289,8 +279,8 @@ class SmartyException extends Exception {
          . "File: " . $this->getFile() . "<br>"
          . "Line: " . $this->getLine() . "<br>"
          . "Trace: " . $this->getTraceAsString() . "\n";
-    }
-    
+    } 
+
     public function getException()
     {
         print $this; // returns output from __toString()
@@ -299,8 +289,7 @@ class SmartyException extends Exception {
     public static function getStaticException($exception)
     {
         $exception->getException();
-    }
-     
+    } 
 } 
 
 ?>

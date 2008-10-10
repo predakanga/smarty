@@ -25,7 +25,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         $this->compiled_filepath = null;
         $this->template_timestamp = null;
         $this->template_content = null;
-        $this->compiled_template = null; 
+        $this->compiled_template = null;
+        $this->redered_template = null; 
         // parse resoure name
         if (!$this->parseResourceName ($template_resource)) {
             throw new SmartyException ("Missing template resource");
@@ -101,18 +102,25 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         return $this->compiled_template;
     } 
 
-    public function renderTemplate ()
+    public function getRenderedTemplate ()
     {
-        extract($this->smarty->tpl_vars);
-        if ($this->usesCompiler()) {
-            if ($this->compiled_template == null) {
-                include($this->compiled_filepath);
+        if ($this->redered_template == null) {
+            extract($this->smarty->tpl_vars);
+            ob_start();
+
+            if ($this->usesCompiler()) {
+                if ($this->compiled_template == null) {
+                    include($this->compiled_filepath);
+                } else {
+                    eval('?>' . $this->compiled_template);
+                } 
             } else {
-                eval('?>' . $this->compiled_template);
+                include(getTemplateFilepath ());
             } 
-        } else {
-            include(getTemplateFilepath ());
+            $this->rendered_template = ob_get_contents();
+            ob_clean();
         } 
+        return $this->rendered_template;
     } 
 
     private function parseResourceName($template_resource)
