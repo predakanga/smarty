@@ -59,7 +59,7 @@ class Smarty_Internal_Compile_End_If extends Smarty_Internal_CompileBase {
         * 
        * @return string 
         */ 
-            $this->_close_tag(array('if',',else','elseif'));
+            $this->_close_tag(array('if','else','elseif'));
         return "<?php endif;?>";
          } 
 } 

@@ -82,7 +82,7 @@ class Smarty {
     // resource type used if none given
     public $default_resource_type = 'file'; 
     // class used for compiling templates
-    private $compiler_class = 'Smarty_Internal_Compiler';
+    public $compiler_class = 'Smarty_Internal_Compiler';
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -136,39 +136,32 @@ class Smarty {
     } 
 
     /**
+    * fetches a rendered Smarty template
+    * 
+    * @param string $template_resource the resource handle of the template file
+    */
+    public function fetch($template_resource)
+    {
+        $this->loadPlugin('Smarty_Internal_Template');
+        $_template = new Smarty_Internal_Template ($template_resource);
+
+        // compile template if required
+        $_template->processTemplate();
+
+        // return redered template template
+        return $_template->getRenderedTemplate();
+    } 
+
+    /**
     * displays a Smarty template
     * 
     * @param string $template_resource the resource handle of the template file
     */
     public function display($template_resource)
     {
-        $this->loadPlugin('Smarty_Internal_Template');
-        $_template = new Smarty_Internal_Template ($template_resource);
 
-        if ($_template->usesCompiler()) {
-            // see if template needs compiling.
-            if ($_template->mustCompile()) {
-                // compile template
-                $this->loadPlugin('Smarty_Internal_CompileBase');
-                $this->loadPlugin($this->compiler_class);
-                $_compiler = new $this->compiler_class; 
-                // did compiling succeed?
-                if ($_compiler->compile($_template)) {
-                    if (!$_template->isEvaluated()) {
-                        // write compiled template
-                        $this->write_file($_template->getCompiledFilepath(), $_template->getCompiledTemplate()); 
-                        // make template and compiled file timestamp match
-                        touch($_template->getCompiledFilepath(), $_template->getTimestamp());
-                    } 
-                } else {
-                    // error compiling template
-                    throw new SmartyException("Error compiling template {$_template->getTemplateFilepath ()}");
-                    return false;
-                } 
-            } 
-        } 
         // display template
-        echo $_template->getRenderedTemplate();
+        echo $this->fetch($template_resource);
         return true;
     } 
 

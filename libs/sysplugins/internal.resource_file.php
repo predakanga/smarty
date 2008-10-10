@@ -16,13 +16,13 @@ class Smarty_Internal_Resource_File extends Smarty_Internal_Base {
 
     public function getTimestamp($_template)
     {
-        return filemtime($_template->template_filepath);
+        return filemtime($_template->getTemplateFilepath());
     } 
 
     public function getContents($_template)
     { 
         // read template file
-        return file_get_contents($_template->template_filepath);
+        return file_get_contents($_template->getTemplateFilepath());
     }
     
     public function usesCompiler()

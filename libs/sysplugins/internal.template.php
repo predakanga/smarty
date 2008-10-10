@@ -26,7 +26,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         $this->template_timestamp = null;
         $this->template_content = null;
         $this->compiled_template = null;
-        $this->redered_template = null; 
+        $this->redered_template = null;
+        $this->compiler_class = $this->smarty->compiler_class; 
         // parse resoure name
         if (!$this->parseResourceName ($template_resource)) {
             throw new SmartyException ("Missing template resource");
@@ -96,6 +97,38 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         } 
         return $this->template_contents;
     } 
+
+    public function compileTemplate ()
+    {
+        $this->smarty->loadPlugin('Smarty_Internal_CompileBase');
+        $this->smarty->loadPlugin($this->compiler_class);
+        $_compiler = new $this->compiler_class;
+        return $_compiler->compile($this);
+    } 
+    
+    public function processTemplate ()
+    {
+            if ($this->usesCompiler()) {
+            // see if template needs compiling.
+            if ($this->mustCompile()) {
+                // compile template
+                // did compiling succeed?
+                if ($this->compileTemplate()) {
+                    if (!$this->isEvaluated()) {
+                        // write compiled template
+                        $this->smarty->write_file($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
+                        // make template and compiled file timestamp match
+                        touch($this->getCompiledFilepath(), $this->getTimestamp());
+                    } 
+                } else {
+                    // error compiling template
+                    throw new SmartyException("Error compiling template {$this->getTemplateFilepath ()}");
+                    return false;
+                } 
+            } 
+        } 
+
+    }
 
     public function getCompiledTemplate ()
     {

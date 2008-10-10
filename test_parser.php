@@ -15,8 +15,6 @@ $smarty->assign('template', $template);
 $smarty->display('test_parser.tpl');
 
 // $smarty->internal_debugging = true;
-$smarty->force_compile = true;
-$smarty->caching = true;
 if ($template != "") {
     $smarty->display('String:' . $template);
 } 
