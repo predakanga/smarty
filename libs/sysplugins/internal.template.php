@@ -50,35 +50,35 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
 
     public function usesCompiler ()
     {
-        return $this->usesCompiler == null ?
+        return $this->usesCompiler === null ?
         $this->usesCompiler = $this->resource_objects[$this->resource_type]->usesCompiler() :
         $this->usesCompiler;
     } 
 
     public function isEvaluated ()
     {
-        return $this->isEvaluated == null ?
+        return $this->isEvaluated === null ?
         $this->isEvaluated = $this->resource_objects[$this->resource_type]->isEvaluated() :
         $this->isEvaluated;
     } 
 
     public function getCompiledFilepath ()
     {
-        return $this->compiled_filepath == null ?
+        return $this->compiled_filepath === null ?
         $this->compiled_filepath = $this->buildCompiledFilepath() :
         $this->compiled_filepath;
     } 
 
     public function getTemplateFilepath ()
     {
-        return $this->template_filepath == null ?
+        return $this->template_filepath === null ?
         $this->template_filepath = $this->resource_objects[$this->resource_type]->getTemplateFilepath($this) :
         $this->template_filepath;
     } 
 
     public function getTimestamp ()
     {
-        return $this->template_timestamp == null ?
+        return $this->template_timestamp === null ?
         $this->template_timestamp = $this->resource_objects[$this->resource_type]->getTimestamp($this) :
         $this->template_timestamp;
     } 
@@ -90,7 +90,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
 
     public function getContents ()
     {
-        if ($this->template_contents == null) {
+        if ($this->template_contents === null) {
             if (($this->template_contents = $this->resource_objects[$this->resource_type]->getContents($this)) === false) {
                 throw new SmartyException("Unable to load template {$this->template_resource}");
             } 
@@ -137,12 +137,12 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
 
     public function getRenderedTemplate ()
     {
-        if ($this->redered_template == null) {
+        if ($this->redered_template === null) {
             extract($this->smarty->tpl_vars);
             ob_start();
 
             if ($this->usesCompiler()) {
-                if ($this->compiled_template == null) {
+                if ($this->compiled_template === null) {
                     include($this->compiled_filepath);
                 } else {
                     eval('?>' . $this->compiled_template);
