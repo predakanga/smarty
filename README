@@ -48,37 +48,9 @@ is used to automate this task.
 
 FEATURE 1: AUTOLOAD
 
-The moment you fire up a Smarty object:
-
-require('Smarty.class.php');
-$smarty = new Smarty;
-
-The engine is ready to go. Now you can load any Smarty plugin from anywhere in
-PHP like so:
-
-$plugin = new Smarty_Foo_Bar;
-
-If the Smarty_Foo_Bar class does not exist, Smarty will automagically find the
-proper plugin file and load it, and instantiate it. In the above example, the
-file is called foo.bar.php in the plugins directory. So long as the plugin file
-name and class name follow the naming conventions, everything falls into place.
-
-Now you can see how things start happening in the core of Smarty. Does a
-template need compiling? Ok, let's do it:
-
-$compiler = new Smarty_Internal_Compiler;
-$compiler->compile($tpl_filepath,$compiled_filepath);
-
-Do we need to load an output filter?
-
-$filter = new Smarty_Outputfilter_Whitespace;
-
-Do you want to use a template function/modifier?
-
-$mailto = new Smarty_Function_Mailto;
-echo $mailto->execute(array('address'=>'me@example.com'));
-
-As you can see, __autoload() makes plugins a snap from anywhere in PHP.
+Autoloading has been removed, as it does not work with op-code caches such as
+APC or XCache. It works, but any autoloaded classes do not get op-cached. We
+have worked around this by running a loadPlugin() call prior to instantiation.
 
 FEATURE 2: $smarty object singleton
 
@@ -133,6 +105,8 @@ When using PHP templates, you can call plugins with this syntax:
 
 <?=$this->modifier->modname($var,$params)?>
 <?=$this->function->funcname($params)?>
+
+Note: the above syntax is subject to change during Alpha.
 
 When using tagged templates, plugins are accessed with
 the typical smarty syntax:
