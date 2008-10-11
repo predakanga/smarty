@@ -87,6 +87,8 @@ class Smarty {
     public $compiler_class = 'Smarty_Internal_Compiler'; 
     // class used for templates
     public $template_class = 'Smarty_Internal_Template';
+    // exception handler: set null to disable
+    public $exception_handler = array('SmartyException', 'getStaticException');
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -94,7 +96,8 @@ class Smarty {
     public function __construct()
     { 
         // set exception handler
-        set_exception_handler(array('SmartyException', 'getStaticException')); 
+        if(!empty($this->exception_handler))
+            set_exception_handler($this->exception_handler); 
         // set default dirs
         $this->template_dir = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
         $this->compile_dir = '.' . DIRECTORY_SEPARATOR . 'templates_c' . DIRECTORY_SEPARATOR;
