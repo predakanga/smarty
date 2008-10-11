@@ -15,6 +15,7 @@
         self::instance($this); 
         $this->lex = $lex;
         $this->smarty = Smarty::instance(); 
+        $this->compiler = Smarty_Internal_Compiler::instance(); 
         $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Tag");
         $this->smarty->compile_tag = new Smarty_Internal_Compile_Smarty_Tag;
         $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Variable");
@@ -44,7 +45,7 @@
 %syntax_error
 {
     $this->internalError = true;
-    $this->smarty->trigger_template_error();
+    $this->compiler->trigger_template_error();
 }
 
 //

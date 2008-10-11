@@ -5,8 +5,8 @@ require('./libs/Smarty.class.php');
 $smarty = new Smarty;
 
 $smarty->force_compile = false;
-$smarty->caching = false;
-$smarty->cache_lifetime = 10;
+$smarty->caching = true;
+$smarty->caching_lifetime = 20;
 
  class Person
 {

@@ -37,7 +37,7 @@ class Smarty_Internal_Compile_Smarty_Tag extends Smarty_Internal_CompileBase {
 
             return $output;
         } else {
-            $this->smarty->trigger_template_error ("missing compiler module for tag \"" . $tag . "\"");
+            $this->compiler->trigger_template_error ("missing compiler module for tag \"" . $tag . "\"");
         } 
     } 
 } 

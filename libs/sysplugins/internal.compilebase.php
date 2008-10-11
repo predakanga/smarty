@@ -26,7 +26,7 @@ class Smarty_Internal_CompileBase {
         // $_attr[$key] = $value;
         foreach ($this->required_attributes as $attr) {
             if (!array_key_exists($attr, $args)) {
-                $this->smarty->trigger_template_error("missing \"" . $attr . "\" attribute");
+                $this->compiler->trigger_template_error("missing \"" . $attr . "\" attribute");
             } 
         } 
 
@@ -34,7 +34,7 @@ class Smarty_Internal_CompileBase {
             $tmp_array = array_merge($this->required_attributes, $this->optional_attributes);
             foreach ($args as $key => $dummy) {
                 if (!in_array($key, $tmp_array)) {
-                    $this->smarty->trigger_template_error("unexspected \"" . $key . "\" attribute");
+                    $this->compiler->trigger_template_error("unexspected \"" . $key . "\" attribute");
                 } 
             } 
         } 
@@ -67,10 +67,10 @@ class Smarty_Internal_CompileBase {
             if (in_array($_open_tag, (array)$close_tag)) {
                 return $_open_tag;
             } 
-            $this->smarty->trigger_template_error("unclosed {" . $_open_tag . "} tag");
+            $this->compiler->trigger_template_error("unclosed {" . $_open_tag . "} tag");
             return;
         } 
-        $this->smarty->trigger_template_error("unexpected closing tag");
+        $this->compiler->trigger_template_error("unexpected closing tag");
         return;
     } 
 } 

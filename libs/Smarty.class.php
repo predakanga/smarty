@@ -57,7 +57,7 @@ class Smarty {
     // force template compiling?
     public $force_compile = false; 
     // use sub dirs for compiled/cached files?
-    public $use_sub_dirs = true; 
+    public $use_sub_dirs = false; 
     // php file extention
     public $php_ext = '.php'; 
     // compile_error?
@@ -81,8 +81,12 @@ class Smarty {
     public $function = null; 
     // resource type used if none given
     public $default_resource_type = 'file'; 
+    // caching type
+    public $default_caching_type = 'file'; 
     // class used for compiling templates
-    public $compiler_class = 'Smarty_Internal_Compiler';
+    public $compiler_class = 'Smarty_Internal_Compiler'; 
+    // class used for templates
+    public $template_class = 'Smarty_Internal_Template';
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -140,15 +144,14 @@ class Smarty {
     * 
     * @param string $template_resource the resource handle of the template file
     */
-    public function fetch($template_resource)
+    public function fetch($_template, $_cache_id = null, $_compile_id = null)
     {
-        $this->loadPlugin('Smarty_Internal_Template');
-        $_template = new Smarty_Internal_Template ($template_resource);
+        if (!($_template instanceof $this->template_class)) {
+            $this->loadPlugin($this->template_class);
+            $_template = new $this->template_class ($_template, $_cache_id, $_compile_id);
+        } 
 
-        // compile template if required
-        $_template->processTemplate();
-
-        // return redered template template
+        // return redered template 
         return $_template->getRenderedTemplate();
     } 
 
@@ -157,11 +160,16 @@ class Smarty {
     * 
     * @param string $template_resource the resource handle of the template file
     */
-    public function display($template_resource)
-    {
+    public function display($_template, $_cache_id = null, $_compile_id = null)
+    { 
+        if (!($_template instanceof $this->template_class)) {
+            $this->loadPlugin($this->template_class);
+            $_template = new $this->template_class ($_template, $_cache_id, $_compile_id);
+        } 
+
 
         // display template
-        echo $this->fetch($template_resource);
+        echo $this->fetch($_template);
         return true;
     } 
 
@@ -271,7 +279,8 @@ class SmartyException extends Exception {
         return "Code: " . $this->getCode . "<br>Error: " . htmlentities($this->getMessage()) . "<br>"
          . "File: " . $this->getFile() . "<br>"
          . "Line: " . $this->getLine() . "<br>"
-         . "Trace: " . $this->getTraceAsString() . "\n";
+     //    . "Trace: " . $this->getTraceAsString()
+          . "\n";
     } 
 
     public function getException()
