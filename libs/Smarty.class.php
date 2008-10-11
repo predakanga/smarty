@@ -123,7 +123,8 @@ class Smarty {
     public function __destruct()
     { 
         // restore to previous exception handler, if any
-        restore_exception_handler();
+        if(!empty($this->exception_handler))
+            restore_exception_handler();
     } 
 
     /**
