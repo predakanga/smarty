@@ -20,7 +20,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         // initianlize
         $this->template_resource = $template_resource;
         $this->template_cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
-        $this->template_compile_id = $_compile_id === null ? $this->smarty->compile_id : $_cache_id;
+        $this->template_compile_id = $_compile_id === null ? $this->smarty->compile_id : $_compile_id;
         $this->resource_type = null;
         $this->resource_name = null;
         $this->usesCompiler = null;
@@ -35,12 +35,12 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         $this->cached_timestamp = null;
         $this->template_contents = null;
         $this->compiled_template = null;
-        $this->redered_template = null;
+        $this->rendered_template = null;
         $this->compiler_class = $this->smarty->compiler_class;
         $this->caching_type = $this->smarty->default_caching_type; 
-        // parse resoure name
+        // parse resource name
         if (!$this->parseResourceName ($template_resource)) {
-            throw new SmartyException ("Missing template resource");
+            throw new SmartyException ("Unable to parse resource '{$template_resource}'");
         } 
         // load resource handler if required
         if (!isset($this->resource_objects[$this->resource_type])) {
@@ -205,7 +205,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
     public function getRenderedTemplate ()
     { 
         // read from cache or render
-        if ($this->redered_template === null && !$this->isCached()) {
+        if ($this->rendered_template === null && !$this->isCached()) {
             // render template (not loaded and not in cache)
             $this->renderTemplate();
         } 
@@ -214,7 +214,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
 
     public function renderTemplate ()
     {
-        if ($this->redered_template === null) {
+        if ($this->rendered_template === null) {
             if ($this->usesCompiler()) {
                 $this->processTemplate();
                 extract($this->smarty->tpl_vars);
@@ -260,7 +260,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
             $this->resource_type = strtolower($this->resource_type);
         } 
         return true;
-    } 
+    }
+    
     /*
      * get system filepath to template
      */
