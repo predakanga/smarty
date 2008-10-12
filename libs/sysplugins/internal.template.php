@@ -224,7 +224,11 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         if ($this->rendered_template === null) {
             if ($this->usesCompiler()) {
                 $this->processTemplate();
-                extract($this->smarty->tpl_vars);
+//                extract($this->smarty->tpl_vars);
+                foreach ($this->smarty->tpl_vars as $_smarty_var => $_smarty_value) {
+                  $$_smarty_var = $_smarty_value->data;
+                }
+                unset ($_smarty_var, $_smarty_value);
                 ob_start();
                 if ($this->compiled_template === null) {
                     include($this->compiled_filepath);
@@ -233,7 +237,11 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
                 } 
             } else {
                 // php template, just include it
-                extract($this->smarty->tpl_vars);
+//                extract($this->smarty->tpl_vars);
+                foreach ($this->smarty->tpl_vars as $_smarty_var => $_smarty_value) {
+                  $$_smarty_var = $_smarty_value->data;
+                }
+                unset ($_smarty_var, $_smarty_value);
                 ob_start();
                 include(getTemplateFilepath ());
             } 

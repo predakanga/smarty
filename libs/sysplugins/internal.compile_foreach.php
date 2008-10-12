@@ -26,7 +26,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
         if (isset($_attr['key'])) {
             $key = $_attr['key'];
-            $key_part = "\$this->smarty->tpl_vars[$key] => ";
+            $key_part = "\$this->smarty->tpl_vars[$key]->data => ";
         } else {
             $key = null;
             $key_part = '';
@@ -47,7 +47,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
             $output .= "        {$foreach_props}['iteration']++;\n";
         } else {
             $output .= "if (count(\$_from)):\n";
-            $output .= "    foreach (\$_from as $key_part\$this->smarty->tpl_vars[$item]):\n";
+            $output .= "    foreach (\$_from as $key_part\$this->smarty->tpl_vars[$item]->data):\n";
         } 
         $output .= "?>";
 
