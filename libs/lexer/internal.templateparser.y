@@ -20,6 +20,7 @@
         $this->smarty->compile_tag = new Smarty_Internal_Compile_Smarty_Tag;
         $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Variable");
         $this->smarty->compile_variable = new Smarty_Internal_Compile_Smarty_Variable;
+				$this->caching = true;
     }
     public static function &instance($new_instance = null)
     {
@@ -84,8 +85,8 @@ template_element(res)::= OTHER(o). {res = o;}
 // all Smarty tags start here
 //
 									// variable
-smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e));}
-smartytag(res)   ::= LDEL expr(e) SPACE NOCACHE(v) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,v=>true));}
+smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>$this->caching));$this->caching=true;}
+smartytag(res)   ::= LDEL expr(e) SPACE NOCACHE(v) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>false));}
 									// tag without attributes
 smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
 smartytag(res)   ::= LDEL NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
@@ -158,9 +159,9 @@ value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']';}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']->data'; if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']'.a;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']->data'.a;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -183,7 +184,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = "(".e.")";}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->smarty->tpl_vars['. v .']'.oc;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->smarty->tpl_vars['. v .']->data'.oc;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 

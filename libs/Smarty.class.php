@@ -182,7 +182,7 @@ class Smarty {
     * @param array $ |string $tpl_var the template variable name(s)
     * @param mixed $value the value to assign
     */
-    public function assign($tpl_var, $value = null)
+    public function assign($tpl_var, $value = null, $caching=true)
     {
         if (is_array($tpl_var)) {
             foreach ($tpl_var as $key => $val) {
@@ -190,7 +190,8 @@ class Smarty {
                     if (in_array($key, array('this', 'smarty')))
                         throw new SmartyException("Cannot assign value to reserved var '{$key}'");
                     else
-                        $this->tpl_vars[$key] = $val;
+                        $this->tpl_vars[$key]->data = $val;
+                        $this->tpl_vars[$key]->caching = $caching;
                 } 
             } 
         } else {
@@ -198,7 +199,8 @@ class Smarty {
                 if (in_array($tpl_var, array('this', 'smarty')))
                     throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
                 else
-                    $this->tpl_vars[$tpl_var] = $value;
+                        $this->tpl_vars[$tpl_var]->data = $value;
+                        $this->tpl_vars[$tpl_var]->caching = $caching;
             } 
         } 
     } 
