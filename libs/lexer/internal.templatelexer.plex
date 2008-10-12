@@ -85,8 +85,8 @@ ldel = /\{/
 rdel = /\}/
 number = /\d+(\.\d+)?/
 math = /\*|\/|\%/
-unimath = /\+|\-/
 incdec = /\+\+|\-\-/
+unimath = /\+|\-/
 openP = /\(/
 closeP = /\)/
 openB = /\[/
@@ -182,7 +182,7 @@ closeB {
   $this->token = Smarty_Internal_Templateparser::TP_CLOSEB;
 }
 ptr {
-  $this->token = Smarty_Internal_Templateparser::TP_PTR;  $this->type = '"->"';
+  $this->token = Smarty_Internal_Templateparser::TP_PTR; 
 }
 aptr {
   $this->token = Smarty_Internal_Templateparser::TP_APTR;
@@ -193,14 +193,14 @@ equal {
 number {
   $this->token = Smarty_Internal_Templateparser::TP_NUMBER;
 }
-math {
-  $this->token = Smarty_Internal_Templateparser::TP_MATH;
+incdec {
+  $this->token = Smarty_Internal_Templateparser::TP_INCDEC;
 }
 unimath {
   $this->token = Smarty_Internal_Templateparser::TP_UNIMATH;
 }
-incdec {
-  $this->token = Smarty_Internal_Templateparser::TP_INCDEC;
+math {
+  $this->token = Smarty_Internal_Templateparser::TP_MATH;
 }
 space {
   $this->token = Smarty_Internal_Templateparser::TP_SPACE;
