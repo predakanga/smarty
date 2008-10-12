@@ -53,7 +53,7 @@
 //
 %fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR QUOTE.
+              NOT LAND LOR QUOTE NOCACHE.
 
 
 //
@@ -84,13 +84,16 @@ template_element(res)::= OTHER(o). {res = o;}
 // all Smarty tags start here
 //
 									// variable
-smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable->execute(e);}
+smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e));}
+smartytag(res)   ::= LDEL expr(e) SPACE NOCACHE(v) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,v=>true));}
 									// tag without attributes
 smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
+smartytag(res)   ::= LDEL NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
 									// tag with Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),a));}
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
+smartytag(res)   ::= LDELSLASH NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
 									// {if} and {elseif} tag
 smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'ifexp'=>ie));}
 									// {for} tag
@@ -106,6 +109,7 @@ attributes(res)  ::= attribute(a). { res = a;}
 									// list of attributes
 attributes(res)  ::= attributes(a1) attribute(a2). { res = array_merge(a1,a2);}
 									// different formats of attribute
+attribute(res)   ::= SPACE NOCACHE(v). { res = array(v=>true);}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
@@ -118,9 +122,9 @@ expr(res)        ::= value(v). { res = v; }
 									// +/- value
 expr(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// expression with simple modifier
-expr(res)        ::= expr(e) modifier(m). { res = "\$_smarty->modifier->".m . "(". e .")"; }
+expr(res)        ::= expr(e) modifier(m). { res = "\$this->smarty->modifier->".m . "(". e .")"; }
 									// expression with modifier and additional modifier paramter
-expr(res)        ::= expr(e) modifier(m) modparameters(p). {res = "\$_smarty->modifier->".m . "(". e .",". p .")"; } 
+expr(res)        ::= expr(e) modifier(m) modparameters(p). {res = "\$this->smarty->modifier->".m . "(". e .",". p .")"; } 
 									// arithmetic expression
 expr(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 
@@ -154,9 +158,9 @@ value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$_smarty->tpl_vars['. v .']';}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']';}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty->tpl_vars['. v .']'.a;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']'.a;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -179,7 +183,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = "(".e.")";}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$_smarty->tpl_vars['. v .']'.oc;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->smarty->tpl_vars['. v .']'.oc;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
@@ -193,9 +197,9 @@ objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 // function
 //
 										// function with parameter
-function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$_smarty->function->".f . "(". p .")";}
+function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$this->smarty->function->".f . "(". p .")";}
 										// function without parameter
-function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$_smarty->function->".f."()";}
+function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$this->smarty->function->".f."()";}
 
 //
 // method

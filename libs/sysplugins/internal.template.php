@@ -208,8 +208,15 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         if ($this->rendered_template === null && !$this->isCached()) {
             // render template (not loaded and not in cache)
             $this->renderTemplate();
-        } 
-        return $this->rendered_template;
+        }
+        if ($this->caching && $this->usesCompiler()) {
+            // cached output could contain nocache code
+            ob_start();
+            eval("?>".$this->rendered_template);
+            return  ob_get_clean();
+         } else { 
+            return $this->rendered_template;
+        }
     } 
 
     public function renderTemplate ()
@@ -230,8 +237,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
                 ob_start();
                 include(getTemplateFilepath ());
             } 
-            $this->rendered_template = ob_get_contents();
-            ob_clean(); 
+            $this->rendered_template = ob_get_clean();
+
             // write to cache when nessecary
             if (!$this->isEvaluated() && $this->caching) {
                 // write rendered template

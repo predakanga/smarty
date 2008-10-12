@@ -46,7 +46,9 @@ class Smarty_Internal_Templatelexer
     				'COMMA'		=> '","',
     				'ID'			=> 'identifier',
     				'OTHER'		=> 'text',
-    				'PHP'			=> 'PHP code'
+    				'PHP'			=> 'PHP code',
+    				'LDELSLASH' => 'closing tag',
+    				'NOCACHE'	=> 'nocache'
     				);
     				
     				
@@ -75,6 +77,7 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 php = /\<\?php.*\?\>/
+nocache = /nocache/
 ldels = /\{\s{1,}/
 rdels = /\s{1,}\}/
 ldelslash = /\{\//
@@ -132,6 +135,9 @@ ldel {
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
+}
+nocache {
+  $this->token = Smarty_Internal_Templateparser::TP_NOCACHE;
 }
 identity{
   $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;

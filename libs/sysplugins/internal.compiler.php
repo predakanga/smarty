@@ -8,8 +8,7 @@
 */
 
 class Smarty_Internal_Compiler extends Smarty_Internal_Base {
-    // loaded compuler classes
-    public $_compiler_class = array(); 
+
     // tag stack
     public $_tag_stack = array();
 
@@ -20,6 +19,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         self::instance($this); 
         // flag for nochache sections
         $this->_compiler_status->nocache = false; 
+        $this->_compiler_status->tag_nocache = false; 
         // current template file
         $this->_compiler_status->current_tpl_filepath = "";
     } 
@@ -68,7 +68,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         if (!$this->smarty->compile_error) {
             // return compiled template
-            $_template->compiled_template =  $template_header . "<?php \$_smarty = Smarty::instance();?>\n" . $parser->retvalue;
+            $_template->compiled_template =  $template_header  . $parser->retvalue;
             return true;
         } else {
             return false;

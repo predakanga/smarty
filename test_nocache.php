@@ -8,9 +8,6 @@ $smarty->force_compile = false;
 $smarty->caching = true;
 $smarty->caching_lifetime = 10;
 
-$smarty->assign('foo',1);
-
-// example of executing a compiled template
-$smarty->display('test_inc.tpl');
+$smarty->display('test_nocache.tpl');
 
 ?>

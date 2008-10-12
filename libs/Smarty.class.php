@@ -110,6 +110,7 @@ class Smarty {
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
         $this->loadPlugin('Smarty_Internal_PluginBase'); 
+        $this->loadPlugin($this->template_class);
         // setup function and modifier objects
         $this->loadPlugin('Smarty_Internal_Modifier');
         $this->modifier = new Smarty_Internal_Modifier;
@@ -151,7 +152,6 @@ class Smarty {
     public function fetch($_template, $_cache_id = null, $_compile_id = null)
     {
         if (!($_template instanceof $this->template_class)) {
-            $this->loadPlugin($this->template_class);
             $_template = new $this->template_class ($_template, $_cache_id, $_compile_id);
         } 
 
@@ -167,7 +167,6 @@ class Smarty {
     public function display($_template, $_cache_id = null, $_compile_id = null)
     { 
         if (!($_template instanceof $this->template_class)) {
-            $this->loadPlugin($this->template_class);
             $_template = new $this->template_class ($_template, $_cache_id, $_compile_id);
         } 
 

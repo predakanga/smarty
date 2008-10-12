@@ -6,7 +6,7 @@ $smarty = new Smarty;
 
 $smarty->force_compile = false;
 $smarty->caching = true;
-$smarty->caching_lifetime = 20;
+$smarty->caching_lifetime = 60;
 
  class Person
 {

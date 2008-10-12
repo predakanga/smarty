@@ -24,12 +24,14 @@ class Smarty_Internal_Compile_Smarty_Tag extends Smarty_Internal_CompileBase {
         if (is_object($objects[$tag])) {
             // compile the smarty tag
             $output = $objects[$tag]->compile($args);
-
-            if ($this->compiler->_compiler_status->nocache && $this->smarty->caching && $this->smarty->cache_lifetime != 0 && $output != '') {
+     
+            if (($this->compiler->_compiler_status->nocache || $this->compiler->_compiler_status->tag_nocache)            
+                 && $output != '') {
                 // If we have a ncocache section and caching enabled make the compiled template to inject the compiled code into the cache file
                 $output = str_replace("'", "\'", $output);
-                $output = "<?php echo '$output';?>";
+                $output = "<?php \$_tmp = '$output'; if (\$this->smarty->caching) echo \$_tmp; else eval(\$_tmp);\n?>";
             } 
+            $this->compiler->_compiler_status->tag_nocache = false; 
             // just for debugging
             if ($this->smarty->internal_debugging) {
                 // echo "<br>compiled tag '".$output."'<br>";

@@ -4,13 +4,15 @@ class Smarty_Internal_Compile_Smarty_Variable extends Smarty_Internal_CompileBas
     public function execute($args)
     { 
         // $args contains Smarty variable
-        $output = "<?php echo " . $args . ";?>";
+        $output = "echo " . $args['var'] . ";";
 
-        if ($this->compiler->_compiler_status->nocache && $this->smarty->caching && $this->smarty->cache_lifetime != 0) {
+        if ($this->compiler->_compiler_status->nocache || isset($args['nocache'])) {
             // If we have a ncocache section and caching enabled make the compiled template to inject the compiled code into the cache file
-            $output = str_replace("'","\'",$output);
-            $output = "<?php echo '$output';?>\n";
-        } 
+                $output = str_replace("'", "\'", $output);
+                $output = "<?php \$_tmp = '$output'; if (\$this->smarty->caching) echo '<?php '.\$_tmp.'?>'; else eval(\$_tmp);\n?>";
+        } else {
+             $output = "<?php ".$output."?>";
+        }
         // just for debugging
         if ($this->smarty->internal_debugging) {
             // echo "<br>compiled tag '".$output."'<br>";
