@@ -37,5 +37,4 @@ $smarty->assign('person',$person);
 
 // example of executing a compiled template
 $smarty->display('test_object.tpl');
-
 ?>

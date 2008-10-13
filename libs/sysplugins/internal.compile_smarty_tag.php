@@ -4,7 +4,7 @@
 class Smarty_Internal_Compile_Smarty_Tag extends Smarty_Internal_CompileBase {
     public function execute($args)
     {
-        static $objects = array(); 
+        static $tag_compiler_objects = array(); 
         // $args contains the attributes parsed and compiled by the lexer/parser
         // get type of smarty tag
         $tag = $args['_smarty_tag'];
@@ -13,28 +13,29 @@ class Smarty_Internal_Compile_Smarty_Tag extends Smarty_Internal_CompileBase {
         // Build class name
         $class_name = "Smarty_Internal_Compile_{$tag}"; 
         // Check if there is already an instace for that tag
-        if (!is_object($objects[$tag])) {
+        if (!is_object($tag_compiler_objects[$tag])) {
             // Now load plugin if required and create instance
             $this->smarty->loadPlugin($class_name);
             if (class_exists($class_name)) {
-                $objects[$tag] = new $class_name;
+                $tag_compiler_objects[$tag] = new $class_name;
             } 
         } 
 
-        if (is_object($objects[$tag])) {
+        if (is_object($tag_compiler_objects[$tag])) {
             // compile the smarty tag
-            $output = $objects[$tag]->compile($args);
+            $output = $tag_compiler_objects[$tag]->compile($args);
      
-            if (($this->compiler->_compiler_status->nocache || $this->compiler->_compiler_status->tag_nocache)            
-                 && $output != '') {
-                // If we have a ncocache section and caching enabled make the compiled template to inject the compiled code into the cache file
+            // If the template is not evaluated and we have a ncocache section and or a nocache tag
+            // make the compiled template to inject the compiled code into the cache file
+            if (!$this->compiler->template->isEvaluated() && $output != '' &&
+               ($this->compiler->_compiler_status->nocache || $this->compiler->_compiler_status->tag_nocache)) {            
                 $output = str_replace("'", "\'", $output);
                 $output = "<?php \$_tmp = '$output'; if (\$this->smarty->caching) echo \$_tmp; else eval(\$_tmp);\n?>";
             } 
             $this->compiler->_compiler_status->tag_nocache = false; 
             // just for debugging
             if ($this->smarty->internal_debugging) {
-                // echo "<br>compiled tag '".$output."'<br>";
+                echo "<br>compiled tag '".$output."'<br>";
             } 
 
             return $output;

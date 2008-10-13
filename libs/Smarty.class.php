@@ -89,6 +89,8 @@ class Smarty {
     public $template_class = 'Smarty_Internal_Template';
     // exception handler: set null to disable
     public $exception_handler = array('SmartyException', 'getStaticException');
+    // cached template objects
+    public $template_objects = null;
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -116,6 +118,8 @@ class Smarty {
         $this->modifier = new Smarty_Internal_Modifier;
         $this->loadPlugin('Smarty_Internal_Function');
         $this->function = new Smarty_Internal_Function;
+        // enable short open tags of PHP
+        ini_set('short_open_tag','1');
     } 
 
     /**
@@ -147,12 +151,12 @@ class Smarty {
     /**
     * fetches a rendered Smarty template
     * 
-    * @param string $template_resource the resource handle of the template file
+    * @param string $template_resource the resource handle of the template file or template object
     */
     public function fetch($_template, $_cache_id = null, $_compile_id = null)
     {
         if (!($_template instanceof $this->template_class)) {
-            $_template = new $this->template_class ($_template, $_cache_id, $_compile_id);
+            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id);
         } 
 
         // return redered template 
@@ -162,18 +166,60 @@ class Smarty {
     /**
     * displays a Smarty template
     * 
-    * @param string $template_resource the resource handle of the template file
+    * @param string $template_resource the resource handle of the template file  or template object
     */
     public function display($_template, $_cache_id = null, $_compile_id = null)
     { 
         if (!($_template instanceof $this->template_class)) {
-            $_template = new $this->template_class ($_template, $_cache_id, $_compile_id);
+            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id);
         } 
 
 
         // display template
         echo $this->fetch($_template);
         return true;
+    } 
+
+    /**
+    * test if cache i valid
+    * 
+    * @param string $template_resource the resource handle of the template file or template object
+    */
+    public function is_cached($_template, $_cache_id = null, $_compile_id = null)
+    {
+        if (!($_template instanceof $this->template_class)) {
+            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id);
+        } 
+
+        // return cache status of template
+        return $_template->isCached();
+    } 
+
+        /**
+    * creates an template object
+    * 
+    * @param string $template_resource the resource handle of the template file
+    */
+    public function createTemplate($_template, $_cache_id = null, $_compile_id = null)
+    {
+        if (!($_template instanceof $this->template_class)) {
+            // we got a template resource
+            $_templateId = Smarty_Internal_Template::buildTemplateId ($_template, $_cache_id, $_compile_id);
+            // already in template cache?
+            if ($this->template_objects[$_templateId] instanceof $this->template_class) {
+                  // return cached template object 
+                  return $this->template_objects[$_templateId];
+            } else {
+                  // create and cache new template object 
+                  return  new $this->template_class ($_template, $_cache_id, $_compile_id);
+            }
+        } else {
+            // just return a copy of template class
+            return $_template;
+        }
+
+        // return redered template 
+        return $_template->getRenderedTemplate();
     } 
 
     /**

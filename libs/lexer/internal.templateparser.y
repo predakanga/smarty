@@ -89,11 +89,13 @@ smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable-
 smartytag(res)   ::= LDEL expr(e) SPACE NOCACHE(v) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>false));}
 									// tag without attributes
 smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
+                  // special handling of {nocache} tag 
 smartytag(res)   ::= LDEL NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
 									// tag with Smarty2 style attributes
-smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),a));}
+smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array('_smarty_caching'=>$this->caching),a));$this->caching=true;}
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
+                  // special handling of {/nocache} tag 
 smartytag(res)   ::= LDELSLASH NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
 									// {if} and {elseif} tag
 smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'ifexp'=>ie));}
@@ -112,7 +114,7 @@ attributes(res)  ::= attributes(a1) attribute(a2). { res = array_merge(a1,a2);}
 									// different formats of attribute
 attribute(res)   ::= SPACE NOCACHE(v). { res = array(v=>true);}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
-attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>e);}
+//attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
 
 //
@@ -154,6 +156,8 @@ value(res)	     ::= function(f). { res = f; }
 value(res)	     ::= SI_QSTR(s). { res = s; }
 									// double quoted string
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
+									// identifier
+value(res)	     ::= ID(i). { res = i; }
 
 //
 // variables 

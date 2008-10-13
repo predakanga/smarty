@@ -37,6 +37,10 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
+
+        // save template object for compile classe
+        $this->template = $_template;
+        
         // get template filepath for error messages
         $tpl_filepath = $_template->getTemplateFilepath(); 
         // get template

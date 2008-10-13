@@ -33,7 +33,7 @@ class Smarty_Internal_Caching_File extends Smarty_Internal_PluginBase {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");
             $_template->write_file_object = new Smarty_Internal_Write_File;
         } 
-        $_template->write_file_object->writeFile($_template->getCachedFilepath(), $_template->rendered_template);
+        $_template->write_file_object->writeFile($_template->getCachedFilepath(), $_template->cached_template);
     } 
 
     /*

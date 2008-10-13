@@ -12,13 +12,17 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
     {
         $this->required_attributes = array('var', 'value');
         $this->optional_attributes = array('nocache');
-
-        // check and get attributes
+        
+         // check and get attributes
         $_attr = $this->_get_attributes($args);
-
-        if (isset($_attr['nocache'])) {        
+ 
+        if (isset($_attr['nocache']) || $this->_smarty_caching == false) {
+           // remember this for the compiler
+           $this->smarty->tpl_vars[$_attr['var']]->caching = false;        
            return "<?php \$this->smarty->assign('$_attr[var]',$_attr[value],false);?>";
         } else {
+           // remember this for the compiler
+           $this->smarty->tpl_vars[$_attr['var']]->caching = true;        
            return "<?php \$this->smarty->assign('$_attr[var]',$_attr[value]);?>";
        }
     } 
