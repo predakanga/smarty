@@ -48,6 +48,8 @@ class Smarty_Internal_Templatelexer
     				'OTHER'		=> 'text',
     				'PHP'			=> 'PHP code',
     				'LDELSLASH' => 'closing tag',
+    				'COMMENTSTART' => '{*',
+    				'COMMENTEND' => '*}',
     				'NOCACHE'	=> 'nocache'
     				);
     				
@@ -77,8 +79,6 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 php = /\<\?php.*\?\>/
-commentstart = /\{\*/
-commentend = /\*\}/
 nocache = /nocache/
 ldels = /\{\s{1,}/
 rdels = /\s{1,}\}/
@@ -86,9 +86,11 @@ ldelslash = /\{\//
 ldel = /\{/
 rdel = /\}/
 number = /\d+(\.\d+)?/
-math = /\*|\/|\%/
+math = /\*|\s?\/\s?|\s?\%\s?/
+commentstart = /\{\*/
+commentend = /\*\}/
 incdec = /\+\+|\-\-/
-unimath = /\+|\-/
+unimath = /\s?\+\s?|\s?\-\s?/
 openP = /\(/
 closeP = /\)/
 openB = /\[/
@@ -106,25 +108,25 @@ aptr = /=>/
 quote = /\"/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
-equals = /\s*==\s*|\s+EQ\s+/
-notequals = /\s*\!=\s*|\s+NE\s+/
-greaterthan = /\s*\>\s*|\s+GT\s+/
-lessthan = /\s*\<\s*|\s+LT\s+/
-greaterequal = /\s*\>=\s*|\s+GE\s+/
-lessequal = /\s*<=\s*|\s+LE\s+/
+equals = /\s*==\s*|\s+EQ\s+|\s+eq\s+/
+notequals = /\s*\!=\s*|\s+NE\s+|\s+ne\s+/
+greaterthan = /\s*\>\s*|\s+GT\s+|\s+gt\s+/
+lessthan = /\s*\<\s*|\s+LT\s+|\s+lt\s+/
+greaterequal = /\s*\>=\s*|\s+GE\s+|\s+ge\s+/
+lessequal = /\s*<=\s*|\s+LE\s+|\s+le\s+/
 identity = /\s*===\s*/
-not = /\!|\s+NOT\s+/
-land = /\s+AND\s+|\s*\&\&\s*/
-lor = /\s+OR\s+|\s*\|\|\s*/
+not = /\!|\s+NOT\s+|\s+not\s+/
+land = /\s+AND\s+|\s+and\s+|\s*\&\&\s*/
+lor = /\s+OR\s+|\s+or\s+|\s*\|\|\s*/
 other = /./
 */
 /*!lex2php
 %statename START
-commentstart {
-  $this->token = Smarty_Internal_Templateparser::TP_COMMENTSTART;
-}
 commentend {
   $this->token = Smarty_Internal_Templateparser::TP_COMMENTEND;
+}
+commentstart {
+  $this->token = Smarty_Internal_Templateparser::TP_COMMENTSTART;
 }
 si_qstr {
   $this->token = Smarty_Internal_Templateparser::TP_SI_QSTR;

@@ -76,7 +76,9 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 											// Smarty tag
 template_element(res)::= smartytag(st). {res = st;}	
 											// comments
-template_element(res)::= COMMENTSTART doublequoted(s) COMMENTEND. { res = '<?php /* comment placeholder */?>'; }	
+//template_element(res)::= NEWLINE COMMENTSTART doublequoted(s) COMMENTEND NEWLINE. { res = '<?php /* comment placeholder */?>'; }	
+											// comments
+template_element(res)::= COMMENTSTART something(s) COMMENTEND. { res = '<?php /* comment placeholder */?>'; }	
 											// PHP tag
 template_element(res)::= PHP(php). {res = php;}	
 											// Other template text
@@ -174,7 +176,7 @@ variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->t
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
 vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
-										// Smarty2 style index  not supported any longer
+// Smarty2 style index  not supported any longer
 //vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
 										// PHP style index
 vararraydef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
@@ -274,3 +276,7 @@ doublequoted(res)          ::= doublequoted(o1) other(o2). {res = o1.o2;}
 doublequoted(res)          ::= other(o). {res = o;}
 other(res)           ::= LDEL variable(v) RDEL. {res = "'.".v.".'";}
 other(res)           ::= OTHER(o). {res = o;}
+
+something(res)          ::= something(o1) otherth(o2). {res = o1.o2;}
+something(res)          ::= otherth(o). {res = o;}
+otherth(res)           ::= OTHER(o). {res = o;}
