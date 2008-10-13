@@ -4,7 +4,7 @@ class Smarty_Internal_Compile_Smarty_Variable extends Smarty_Internal_CompileBas
     public function execute($args)
     { 
         // $args contains Smarty variable
-        $output = "echo " . $args['var'] . ".'\n'".";";
+        $output = 'echo ' . $args['var'] . '."\n";';
 
        // If the template is not evaluated and we have a ncocache section and or a nocache expression
        // make the compiled template to inject the compiled code into the cache file
