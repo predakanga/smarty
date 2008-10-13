@@ -75,6 +75,8 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 //
 											// Smarty tag
 template_element(res)::= smartytag(st). {res = st;}	
+											// comments
+template_element(res)::= COMMENTS. { res = null; }	
 											// PHP tag
 template_element(res)::= PHP(php). {res = php;}	
 											// Other template text
