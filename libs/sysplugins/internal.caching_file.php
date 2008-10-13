@@ -49,6 +49,14 @@ class Smarty_Internal_Caching_File extends Smarty_Internal_PluginBase {
              . substr($_filepath, 0, 1) . DIRECTORY_SEPARATOR
              . $_filepath;
         } 
+        $_compile_dir_sep =  $this->smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
+        if (isset($_template->cache_id)) {
+            $_cache_id = str_replace('|',$_compile_dir_sep,$_template->cache_id);
+            $_filepath = $_cache_id . $_compile_dir_sep . $_filepath;
+        }
+        if (isset($_template->compile_id)) {
+            $_filepath = $_template->compile_id . $_compile_dir_sep . $_filepath;
+        }
 
         return $this->smarty->cache_dir . $_filepath . '.' . $_template->resource_name . $this->smarty->php_ext;
     } 

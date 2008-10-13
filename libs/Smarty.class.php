@@ -66,6 +66,10 @@ class Smarty {
     public $caching = false; 
     // caching lifetime
     public $caching_lifetime = 0; 
+    // cache_id
+    public $cache_id = null; 
+    // compile_id
+    public $compile_id = null; 
     // template delimiters
     public $left_delimiter = "{";
     public $right_delimiter = "}"; 
@@ -118,8 +122,6 @@ class Smarty {
         $this->modifier = new Smarty_Internal_Modifier;
         $this->loadPlugin('Smarty_Internal_Function');
         $this->function = new Smarty_Internal_Function;
-        // enable short open tags of PHP
-        ini_set('short_open_tag','1');
     } 
 
     /**

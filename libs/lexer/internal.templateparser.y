@@ -130,6 +130,8 @@ expr(res)        ::= expr(e) modifier(m). { res = "\$this->smarty->modifier->".m
 expr(res)        ::= expr(e) modifier(m) modparameters(p). {res = "\$this->smarty->modifier->".m . "(". e .",". p .")"; } 
 									// arithmetic expression
 expr(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
+									// catenate
+expr(res)        ::= expr(e) DOT value(v). { res = e . '.' . v; } 
 
 //
 // mathematical operators
@@ -163,15 +165,15 @@ value(res)	     ::= ID(i). { res = i; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']->data'; if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars[\''. v .'\']->data'; if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']->data'.a;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars[\''. v .'\']->data'.a;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
 vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
-										// Smarty2 style index
-vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
+										// Smarty2 style index  not supported any longer
+//vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
 										// PHP style index
 vararraydef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
 

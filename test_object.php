@@ -6,7 +6,10 @@ $smarty = new Smarty;
 
 $smarty->force_compile = false;
 $smarty->caching = true;
+$smarty->cache_id = 'test|foo';
+$smarty->compile_id = 2;
 $smarty->caching_lifetime = 60;
+$smarty->use_sub_dirs = true;
 
  class Person
 {

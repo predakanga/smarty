@@ -19,8 +19,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         // self::instance($this);
         // initianlize
         $this->template_resource = $template_resource;
-        $this->template_cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
-        $this->template_compile_id = $_compile_id === null ? $this->smarty->compile_id : $_compile_id;
+        $this->cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
+        $this->compile_id = $_compile_id === null ? $this->smarty->compile_id : $_compile_id;
         $this->resource_type = null;
         $this->resource_name = null;
         $this->usesCompiler = null;
@@ -279,7 +279,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
             $this->resource_objects[$this->resource_type] = new $_resource_class;
         }
         // cache template object under a unique ID
-        $this->smarty->template_objects[$this->buildTemplateId ($this->template_resource, $this->template_cache_id, $this->template_compile_id)] = $this;
+        $this->smarty->template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
 
         return true;
     }
@@ -318,6 +318,10 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
              . substr($_filepath, 0, 1) . DIRECTORY_SEPARATOR
              . $_filepath;
         } 
+        $_compile_dir_sep =  $this->smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
+        if (isset($this->compile_id)) {
+            $_filepath = $this->compile_id . $_compile_dir_sep . $_filepath;
+        }
 
         return $this->smarty->compile_dir . $_filepath . '.' . $this->resource_name . $this->smarty->php_ext;
     } 
