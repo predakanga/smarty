@@ -77,7 +77,8 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 php = /\<\?php.*\?\>/
-comments = /\{\*.*\*\}/
+commentstart = /\{\*/
+commentend = /\*\}/
 nocache = /nocache/
 ldels = /\{\s{1,}/
 rdels = /\s{1,}\}/
@@ -119,8 +120,11 @@ other = /./
 */
 /*!lex2php
 %statename START
-comments {
-  $this->token = Smarty_Internal_Templateparser::TP_COMMENTS;
+commentstart {
+  $this->token = Smarty_Internal_Templateparser::TP_COMMENTSTART;
+}
+commentend {
+  $this->token = Smarty_Internal_Templateparser::TP_COMMENTEND;
 }
 si_qstr {
   $this->token = Smarty_Internal_Templateparser::TP_SI_QSTR;
