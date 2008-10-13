@@ -1372,7 +1372,7 @@ static public $yy_action = array(
     function yy_r2(){$this->_retvalue = $this->yystack[$this->yyidx + -1]->minor.$this->yystack[$this->yyidx + 0]->minor;    }
 #line 1378 "internal.templateparser.php"
 #line 81 "internal.templateparser.y"
-    function yy_r4(){ $this->_retvalue = '<?php /* comment placeholder */?>';     }
+    function yy_r4(){ $this->_retvalue = '<?php /* comment placeholder */?> ';     }
 #line 1381 "internal.templateparser.php"
 #line 92 "internal.templateparser.y"
     function yy_r7(){ $this->_retvalue = $this->smarty->compile_variable->execute(array('var'=>$this->yystack[$this->yyidx + -1]->minor,'caching'=>$this->caching));$this->caching=true;    }
