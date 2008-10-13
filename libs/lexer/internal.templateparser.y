@@ -76,7 +76,7 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 											// Smarty tag
 template_element(res)::= smartytag(st). {res = st;}	
 											// comments
-template_element(res)::= COMMENTSTART doublequoted(s) COMMENTEND. { res = '<?php /*'.s.'*/?>'; }	
+template_element(res)::= COMMENTSTART doublequoted(s) COMMENTEND. { res = '<?php /* comment placeholder */?>'; }	
 											// PHP tag
 template_element(res)::= PHP(php). {res = php;}	
 											// Other template text
