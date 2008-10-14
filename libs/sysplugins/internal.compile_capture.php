@@ -1,7 +1,5 @@
-<?php
-//  Compiler for capture tags
-//
-
+<?php 
+// Compiler for capture tags
 class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
     /**
     * Compile {capture ...} tag.
@@ -11,8 +9,7 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
     */
     function compile($args)
     {
-        $this->optional_attributes = array('name','assign');
-
+        $this->optional_attributes = array('name', 'assign'); 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
@@ -27,9 +24,9 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
             $assign = $_attr['assign'];
         else
             $assign = null;
-        
+
         $_output = "<?php ob_start(); ?>";
-        $this->_capture_stack[] = array($buffer, $assign);
+        $this->smarty->_capture_stack[] = array($buffer, $assign);
 
         return $_output;
     } 
@@ -40,20 +37,22 @@ class Smarty_Internal_Compile_End_Capture extends Smarty_Internal_CompileBase {
         /**
         * Compile {/capture} tag
         * 
-       * @return string 
+        * @return string 
         */ 
-
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
         $this->_close_tag(array('capture'));
 
         list($buffer, $assign) = array_pop($this->smarty->_capture_stack);
-        $_output = "<?php \$this->smarty->_smarty_vars['capture'][$buffer] = ob_get_clean(); ?>";
+
+        $_output = "<?php \$this->smarty->_smarty_vars['capture'][$buffer] = ob_get_contents();";
         if (isset($assign)) {
-            $_output .= " \$this->smarty->assign($assign, ob_get_clean()); ?>";
+            $_output .= " \$this->smarty->assign($assign, ob_get_contents());";
         } 
+        $_output .= " ob_clean(); ?>";
         return $_output;
     } 
 } 
+
 ?>
