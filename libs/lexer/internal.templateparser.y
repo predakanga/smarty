@@ -118,7 +118,7 @@ attributes(res)  ::= attributes(a1) attribute(a2). { res = array_merge(a1,a2);}
 									// different formats of attribute
 attribute(res)   ::= SPACE NOCACHE(v). { res = array(v=>true);}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
-//attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>e);}
+//attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>'e');}
 attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
 
 //
@@ -163,15 +163,15 @@ value(res)	     ::= SI_QSTR(s). { res = s; }
 									// double quoted string
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 									// identifier
-value(res)	     ::= ID(i). { res = i; }
+value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 
 //
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars[\''. v .'\']->data'; if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']->data'; if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars[\''. v .'\']->data'.a;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']->data'.a;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -185,11 +185,11 @@ vararraydef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
 										// singel identifier element
 varvar(res)			 ::= varvarele(v). {res = v;}
 										// sequence of identifier elements
-varvar(res)			 ::= varvar(v1) varvarele(v2). {res = v1.".".v2;}
+varvar(res)			 ::= varvar(v1) varvarele(v2). {res = v1.'.'.v2;}
 										// fix sections of element
-varvarele(res)	 ::= ID(s). {res = s;}
+varvarele(res)	 ::= ID(s). {res = '\''.s.'\'';}
 										// variable sections of element
-varvarele(res)	 ::= LDEL expr(e) RDEL. {res = "(".e.")";}
+varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 
 //
 // objects
