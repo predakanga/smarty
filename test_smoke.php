@@ -11,6 +11,8 @@ $smarty->assign('foo2','bar2');
 $smarty->assign('baz',array(1,2,3));
 $smarty->assign('blah',array('a'=>1,'b'=>2,'c'=>3));
 
+$smarty->assign('includeme','header.tpl');
+
 $smarty->assign('myint',4);
 
 $myobj = new MyObj();

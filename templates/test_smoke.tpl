@@ -94,11 +94,27 @@ IF TESTS:
   IS NOT NINE
 {/if}
 
+{if count($baz)-2 eq 1}
+  IS ONE
+{else}
+  IS NOT ONE
+{/if}
+
 {if $foo.$foo2 eq "barbar2"}
   IS BARBAR2
 {else}
   IS NOT BARBAR2
 {/if}
+
+{if $not_logged}
+  NOT LOGGED
+{/if}
+
+TEST INCLUDE:
+
+{include file="header.tpl" gee="joe"}
+{include file="header.tpl" gee="joe $foo bar"}
+{include file=$includeme}
 
 TEST FINISHED
 </pre>
