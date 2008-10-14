@@ -16,18 +16,18 @@ class Smarty_Internal_Caching_File extends Smarty_Internal_PluginBase {
         return $this->buildCachedFilepath ($_template);
     } 
 
-    public function getTimestamp($_template)
+    public function getCachedTimestamp($_template)
     {
         return file_exists($_template->getCachedFilepath()) ? filemtime($_template->getCachedFilepath()) : 0 ;
     } 
 
-    public function getContents($_template)
+    public function getCachedContents($_template)
     { 
         // read cached template file
         return file_get_contents($_template->getCachedFilepath());
     } 
 
-    public function writeContent($_template)
+    public function writeCachedContent($_template)
     {
         if (!is_object($_template->write_file_object)) {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");

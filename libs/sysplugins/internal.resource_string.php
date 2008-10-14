@@ -13,20 +13,21 @@ class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
     {
         // no filepath for strings
         // return "string" for compiler error messages
-        return '"string"';;
+        return 'string';;
     }
 
-    public function getTimestamp($_template)
+    public function getTemplateTimestamp($_template)
     {    
          // strings are always compiled
          return false;
     } 
 
-    public function getContents($_template)
+    public function getTemplateSource($_template)
     { 
         // return template string
-        return $_template->resource_name;
-    }
+        $_template->template_source = $_template->resource_name;
+        return  true;
+   }
     
     public function usesCompiler()
     { 

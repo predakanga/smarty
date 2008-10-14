@@ -4,12 +4,10 @@ require('./libs/Smarty.class.php');
 
 $smarty = new Smarty;
 
-$smarty->force_compile = false;
-$smarty->caching = true;
-$smarty->cache_id = 'test|foo';
-$smarty->compile_id = 2;
+$smarty->force_compile = true;
+$smarty->caching = false;
 $smarty->caching_lifetime = 60;
-$smarty->use_sub_dirs = true;
+$smarty->use_sub_dirs = false;
 
  class Person
 {

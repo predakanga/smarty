@@ -44,12 +44,12 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // get template filepath for error messages
         $tpl_filepath = $_template->getTemplateFilepath(); 
         // get template
-        if (($_content = $_template->getContents($_resource_name)) === false) {
+        if (($_content = $_template->getTemplateSource($_resource_name)) === false) {
             throw new SmartyException("Unable to load template {$tpl_filepath}");
         } 
 
         $template_header = "<?php /* Smarty version " . $this->smarty->_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
-        $template_header .= "         compiled from " . strtr(urlencode($tpl_filepath), array('%2F' => '/', '%3A' => ':')) . " */ ?>\n"; 
+        $template_header .= "         compiled from \"" . $tpl_filepath . "\" */ ?>\n"; 
 
         // if no content just return header
         if ($_content == '') {

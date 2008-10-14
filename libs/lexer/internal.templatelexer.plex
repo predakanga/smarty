@@ -86,11 +86,11 @@ ldelslash = /\{\//
 ldel = /\{/
 rdel = /\}/
 number = /\d+(\.\d+)?/
-math = /\*|\s?\/\s?|\s?\%\s?/
+math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
 commentstart = /\{\*/
 commentend = /\*\}/
 incdec = /\+\+|\-\-/
-unimath = /\s?\+\s?|\s?\-\s?/
+unimath = /\s?(\+|\-)\s?/
 openP = /\(/
 closeP = /\)/
 openB = /\[/
@@ -108,16 +108,16 @@ aptr = /=>/
 quote = /\"/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
-equals = /\s*==\s*|\s+EQ\s+|\s+eq\s+/
-notequals = /\s*\!=\s*|\s+NE\s+|\s+ne\s+/
-greaterthan = /\s*\>\s*|\s+GT\s+|\s+gt\s+/
-lessthan = /\s*\<\s*|\s+LT\s+|\s+lt\s+/
-greaterequal = /\s*\>=\s*|\s+GE\s+|\s+ge\s+/
-lessequal = /\s*<=\s*|\s+LE\s+|\s+le\s+/
+equals = /\s*==\s*|\s+(EQ|eq)\s+/
+notequals = /\s*\!=\s*|\s+(NE|ne)\s+/
+greaterthan = /\s*\>\s*|\s+(GT|gt)\s+/
+lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
+greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
+lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
-not = /\!|\s+NOT\s+|\s+not\s+/
-land = /\s+AND\s+|\s+and\s+|\s*\&\&\s*/
-lor = /\s+OR\s+|\s+or\s+|\s*\|\|\s*/
+not = /\s*\!|\s+(NOT|not)\s+/
+land = /\s*\&\&\s*|\s+(AND|and)\s+/
+lor = /\s*\|\|\s*|\s+(OR|or)\s+/
 other = /./
 */
 /*!lex2php

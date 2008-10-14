@@ -87,6 +87,8 @@ class Smarty {
     public $default_resource_type = 'file'; 
     // caching type
     public $default_caching_type = 'file'; 
+    // config type
+    public $default_config_type = 'file'; 
     // class used for compiling templates
     public $compiler_class = 'Smarty_Internal_Compiler'; 
     // class used for templates

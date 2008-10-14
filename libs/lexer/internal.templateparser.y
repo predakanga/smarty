@@ -76,9 +76,7 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 											// Smarty tag
 template_element(res)::= smartytag(st). {res = st;}	
 											// comments
-//template_element(res)::= NEWLINE COMMENTSTART doublequoted(s) COMMENTEND NEWLINE. { res = '<?php /* comment placeholder */?> '; }	
-											// comments
-template_element(res)::= COMMENTSTART something(s) COMMENTEND. { res = '<?php /* comment placeholder */?> '; }	
+template_element(res)::= COMMENTSTART commenttext(t) COMMENTEND. { res = '<?php /* comment placeholder */?> '; }	
 											// PHP tag
 template_element(res)::= PHP(php). {res = php;}	
 											// Other template text
@@ -200,7 +198,8 @@ objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
 objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
-objectelement(res)::= PTR varvar(v).	{ res = '->'.v;}
+objectelement(res)::= PTR ID(i).	    { res = '->'.i;}
+//objectelement(res)::= PTR varvar(v).	{ res = '->'.v;}
 										// method
 objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 
@@ -277,6 +276,5 @@ doublequoted(res)          ::= other(o). {res = o;}
 other(res)           ::= LDEL variable(v) RDEL. {res = "'.".v.".'";}
 other(res)           ::= OTHER(o). {res = o;}
 
-something(res)          ::= something(o1) otherth(o2). {res = o1.o2;}
-something(res)          ::= otherth(o). {res = o;}
-otherth(res)           ::= OTHER(o). {res = o;}
+commenttext(res)          ::= commenttext(t) OTHER(o2). {res = t.o;}
+commenttext(res)          ::= OTHER(o). {res = o;}

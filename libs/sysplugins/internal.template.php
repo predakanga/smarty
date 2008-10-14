@@ -8,40 +8,78 @@
 */
 
 class Smarty_Internal_Template extends Smarty_Internal_Base {
+    // object cache
     static $resource_objects = array();
     static $caching_objects = array();
-    static $write_file_object = null;
+    static $compiler_objects = array();
+    static $write_file_object = null; 
+    // Smarty parameter
+    public $cache_id = null;
+    public $compile_id = null;
+    public $caching = null;
+    public $caching_lifetime = null;
+    public $compiler_class = null;
+    public $caching_type = null; 
+    // Template resource
+    public $template_resource = null;
+    public $resource_type = null;
+    public $resource_name = null;
+    private $usesCompiler = null;
+    private $isEvaluated = null; 
+    // Template source
+    private $template_filepath = null;
+    public $template_source = null;
+    private $template_timestamp = null; 
+    // Compiled temlate
+    private $compiled_filepath = null;
+    public $compiled_template = null;
+    private $compiled_filestamp = null; 
+    // Cache file
+    private $cached_filepath = null;
+    public  $cached_template = null;
+    private $cached_timestamp = null;
+    private $isCached = null;
 
     public function __construct($template_resource, $_cache_id = null, $_compile_id = null)
     {
         parent::__construct(); 
-        // set instance object
-        // self::instance($this);
-        // initianlize
-        $this->template_resource = $template_resource;
+        // Smarty parameter
         $this->cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
         $this->compile_id = $_compile_id === null ? $this->smarty->compile_id : $_compile_id;
-        $this->resource_type = null;
-        $this->resource_name = null;
-        $this->usesCompiler = null;
-        $this->isEvaluated = null;
-        $this->isCached = null;
         $this->caching = $this->smarty->caching;
         $this->caching_lifetime = $this->smarty->caching_lifetime;
-        $this->template_filepath = null;
-        $this->compiled_filepath = null;
-        $this->template_timestamp = null;
-        $this->cached_filepath = null;
-        $this->cached_timestamp = null;
-        $this->template_contents = null;
-        $this->compiled_template = null;
-        $this->cached_template = null;
         $this->compiler_class = $this->smarty->compiler_class;
         $this->caching_type = $this->smarty->default_caching_type; 
+        // Template resource
+        $this->template_resource = $template_resource; 
         // parse resource name
         if (!$this->parseResourceName ($template_resource)) {
             throw new SmartyException ("Unable to parse resource '{$template_resource}'");
         } 
+    } 
+
+    public function getTemplateFilepath ()
+    {
+        return $this->template_filepath === null ?
+        $this->template_filepath = $this->resource_objects[$this->resource_type]->getTemplateFilepath($this) :
+        $this->template_filepath;
+    } 
+
+    public function getTemplateTimestamp ()
+    {
+        return $this->template_timestamp === null ?
+        $this->template_timestamp = $this->resource_objects[$this->resource_type]->getTemplateTimestamp($this) :
+        $this->template_timestamp;
+    } 
+
+    public function getTemplateSource ()
+    {
+        if ($this->template_source === null) {
+            if ($this->resource_objects[$this->resource_type]->getTemplateSource($this) === false) {
+                throw new SmartyException("Unable to load template {$this->template_resource}");
+            } 
+        } 
+        return $this->template_source;
     } 
 
     public function usesCompiler ()
@@ -58,6 +96,13 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         $this->isEvaluated;
     } 
 
+    public function mustCompile ()
+    {
+        return $this->mustCompile === null ?
+        $this->mustCompile = ($this->usesCompiler() && ($this->smarty->force_compile || !file_exists($this->getCompiledFilepath ()) || $this->getTemplateTimestamp () === false || filemtime($this->getCompiledFilepath ()) !== $this->getTemplateTimestamp ())):
+        $this->mustCompile;
+    } 
+
     public function getCompiledFilepath ()
     {
         return $this->compiled_filepath === null ?
@@ -65,73 +110,52 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         $this->compiled_filepath;
     } 
 
-    public function getTemplateFilepath ()
+    public function getCompiledTimestamp ()
     {
-        return $this->template_filepath === null ?
-        $this->template_filepath = $this->resource_objects[$this->resource_type]->getTemplateFilepath($this) :
-        $this->template_filepath;
-    } 
-
-    public function getTimestamp ()
-    {
-        return $this->template_timestamp === null ?
-        $this->template_timestamp = $this->resource_objects[$this->resource_type]->getTimestamp($this) :
-        $this->template_timestamp;
-    } 
-
-    public function mustCompile ()
-    {
-        return $this->mustCompile === null ?
-        $this->mustCompile = ($this->usesCompiler() && ($this->smarty->force_compile || !file_exists($this->getCompiledFilepath ()) || $this->getTimestamp () === false || filemtime($this->getCompiledFilepath ()) !== $this->getTimestamp ())):
-        $this->mustCompile;
-    } 
-
-    public function getContents ()
-    {
-        if ($this->template_contents === null) {
-            if (($this->template_contents = $this->resource_objects[$this->resource_type]->getContents($this)) === false) {
-                throw new SmartyException("Unable to load template {$this->template_resource}");
-            } 
-        } 
-        return $this->template_contents;
-    } 
-
-    public function compileTemplateSource ()
-    {
-        $this->smarty->loadPlugin('Smarty_Internal_CompileBase');
-        $this->smarty->loadPlugin($this->compiler_class);
-        $_compiler = new $this->compiler_class;
-        return $_compiler->compile($this);
-    } 
-
-    public function processTemplate ()
-    { 
-        // see if template needs compiling.
-        if ($this->mustCompile()) {
-            // compile template
-            // did compiling succeed?
-            if ($this->compileTemplateSource()) {
-                if (!$this->isEvaluated()) {
-                    if (!is_object($this->write_file_object)) {
-                        $this->smarty->loadPlugin("Smarty_Internal_Write_File");
-                        $this->write_file_object = new Smarty_Internal_Write_File;
-                    } 
-                    // write compiled template
-                    $this->write_file_object->writeFile($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
-                    // make template and compiled file timestamp match
-                    touch($this->getCompiledFilepath(), $this->getTimestamp());
-                } 
-            } else {
-                // error compiling template
-                throw new SmartyException("Error compiling template {$this->getTemplateFilepath ()}");
-                return false;
-            } 
-        } 
+        return $this->compiled_timestamp === null ?
+        ($this->compiled_timestamp = file_exists($this->getCompiledFilepath()) ? filemtime($this->getCompiledFilepath()) : 0) :
+        $this->compiled_timestamp;
     } 
 
     public function getCompiledTemplate ()
     {
-        return $this->compiled_template;
+        if ($this->compiled_template === null) {
+            // see if template needs compiling.
+            if ($this->mustCompile()) {
+                $this->compileTemplateSource();
+            } else {
+                $this->compiled_template = file_get_contents($this->getCompiledFilepath());
+            } 
+        } else {
+            return $this->compiled_template;
+        } 
+    } 
+
+    public function compileTemplateSource ()
+    { 
+        // compile template
+        if (!is_object($this->compiler_objects[$this->compiler_class])) {
+            $this->smarty->loadPlugin('Smarty_Internal_CompileBase');
+            $this->smarty->loadPlugin($this->compiler_class);
+            $this->compiler_objects[$this->compiler_class] = new $this->compiler_class;
+        } 
+        // did compiling succeed?
+        if ($this->compiler_objects[$this->compiler_class]->compile($this)) {
+            if (!$this->isEvaluated()) {
+                if (!is_object($this->write_file_object)) {
+                    $this->smarty->loadPlugin("Smarty_Internal_Write_File");
+                    $this->write_file_object = new Smarty_Internal_Write_File;
+                } 
+                // write compiled template
+                $this->write_file_object->writeFile($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
+                // make template and compiled file timestamp match
+                touch($this->getCompiledFilepath(), $this->getTemplateTimestamp());
+            } 
+        } else {
+            // error compiling template
+            throw new SmartyException("Error compiling template {$this->getTemplateFilepath ()}");
+            return false;
+        } 
     } 
 
     public function getCachedFilepath ()
@@ -141,23 +165,24 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         $this->cached_filepath;
     } 
 
-    public function getCachingTimestamp ()
+    public function getCachedTimestamp ()
     {
         return $this->caching_timestamp === null ?
-        $this->cached_timestamp = $this->caching_objects[$this->caching_type]->getTimestamp($this) :
+        $this->cached_timestamp = $this->caching_objects[$this->caching_type]->getCachedTimestamp($this) :
         $this->cached_timestamp;
     } 
 
     public function getCachedContent ()
     {
+        $this->loadCacheHandler();
         return $this->cached_content === null ?
-        $this->cached_content = $this->caching_objects[$this->caching_type]->getContent($this) :
+        $this->cached_content = $this->caching_objects[$this->caching_type]->getCachedContent($this) :
         $this->cached_content;
     } 
 
     public function writeCachedContent ()
     {
-        return $this->caching_objects[$this->caching_type]->writeContent($this);
+        return $this->caching_objects[$this->caching_type]->writeCachedContent($this);
     } 
 
     public function isCached ()
@@ -165,27 +190,32 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         if ($this->isCached === null) {
             $this->isCached = false;
             if ($this->caching) {
-                // load cache handler if required
-                if (!isset($this->caching_objects[$this->caching_type])) {
-                    // is this an internal or custom cache handler?
-                    if (in_array($this->caching_type, array('file'))) {
-                        // internal, get from sysplugins dir
-                        $_caching_class = "Smarty_Internal_Caching_{$this->caching_type}";
-                    } else {
-                        // custom, get from plugins dir
-                        $_caching_class = "Smarty_Caching_{$this->caching_type}";
-                    } 
-                    // load resource plugin, instantiate
-                    $this->smarty->loadPlugin($_caching_class);
-                    $this->caching_objects[$this->caching_type] = new $_caching_class;
-                } 
-                if (!$this->mustCompile() && filemtime($this->getCompiledFilepath()) < $this->getCachingTimestamp() && ((time() <= $this->getCachingTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
-                    $this->cached_template = $this->caching_objects[$this->caching_type]->getContents($this);
+                $this->loadCacheHandler();
+                if (!$this->mustCompile() && filemtime($this->getCompiledFilepath()) < $this->getCachedTimestamp() && ((time() <= $this->getCachedTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
+                    $this->cached_template = $this->caching_objects[$this->caching_type]->getCachedContents($this);
                     $this->isCached = true;
                 } 
             } 
         } 
         return $this->isCached;
+    } 
+
+    private function loadCacheHandler ()
+    { 
+        // load cache handler if required
+        if (!isset($this->caching_objects[$this->caching_type])) {
+            // is this an internal or custom cache handler?
+            if (in_array($this->caching_type, array('file'))) {
+                // internal, get from sysplugins dir
+                $_caching_class = "Smarty_Internal_Caching_{$this->caching_type}";
+            } else {
+                // custom, get from plugins dir
+                $_caching_class = "Smarty_Caching_{$this->caching_type}";
+            } 
+            // load resource plugin, instantiate
+            $this->smarty->loadPlugin($_caching_class);
+            $this->caching_objects[$this->caching_type] = new $_caching_class;
+        } 
     } 
 
     public function getRenderedTemplate ()
@@ -194,52 +224,47 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         if ($this->cached_template === null && !$this->isCached()) {
             // render template (not loaded and not in cache)
             $this->renderTemplate();
-        }
+        } 
         if ($this->caching && $this->usesCompiler()) {
             // cached output could contain nocache code
             ob_start();
-            eval("?>".$this->cached_template);
-            return  ob_get_clean();
-         } else { 
+            eval("?>" . $this->cached_template);
+            return ob_get_clean();
+        } else {
             return $this->cached_template;
-        }
+        } 
     } 
 
     public function renderTemplate ()
     {
         if ($this->cached_template === null) {
             if ($this->usesCompiler()) {
-                $this->processTemplate();
-//                extract($this->smarty->tpl_vars);
+                $this->getCompiledTemplate(); 
+                // extract($this->smarty->tpl_vars);
                 foreach ($this->smarty->tpl_vars as $_smarty_var => $_smarty_value) {
-                  if (isset($_smarty_value->data)) {
-                     $$_smarty_var = $_smarty_value->data;
-                  }
-                }
+                    if (isset($_smarty_value->data)) {
+                        $$_smarty_var = $_smarty_value->data;
+                    } 
+                } 
                 unset ($_smarty_var, $_smarty_value);
                 ob_start();
-                if ($this->compiled_template === null) {
-                    include($this->compiled_filepath);
-                } else {
-                    eval('?>' . $this->compiled_template);
-                } 
+                eval('?>' . $this->compiled_template);
             } else {
                 // php template, just include it
-//                extract($this->smarty->tpl_vars);
+                // extract($this->smarty->tpl_vars);
                 foreach ($this->smarty->tpl_vars as $_smarty_var => $_smarty_value) {
-                  if (isset($_smarty_value->data)) {
-                     $$_smarty_var = $_smarty_value->data;
-                  }
-                }
+                    if (isset($_smarty_value->data)) {
+                        $$_smarty_var = $_smarty_value->data;
+                    } 
+                } 
                 unset ($_smarty_var, $_smarty_value);
                 ob_start();
                 include(getTemplateFilepath ());
             } 
-            $this->cached_template = ob_get_clean();
-
+            $this->cached_template = ob_get_clean(); 
             // write to cache when nessecary
             if (!$this->isEvaluated() && $this->caching) {
-               // write rendered template
+                // write rendered template
                 $this->writeCachedContent($this);
             } 
         } 
@@ -253,16 +278,16 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
             // no resource given, use default
             $this->resource_type = $this->smarty->default_resource_type;
             $this->resource_name = $template_resource;
-        }  else {
+        } else {
             // get type and name from path
             list($this->resource_type, $this->resource_name) = explode(':', $template_resource, 2);
             if (strlen($this->resource_type) == 1) {
-                  // 1 char is not resource type, but part of filepath
-                  $this->resource_type = $this->smarty->default_resource_type;
-                  $this->resource_name = $template_resource;
+                // 1 char is not resource type, but part of filepath
+                $this->resource_type = $this->smarty->default_resource_type;
+                $this->resource_name = $template_resource;
             } else {
-                  $this->resource_type = strtolower($this->resource_type);
-            }
+                $this->resource_type = strtolower($this->resource_type);
+            } 
         } 
         // load resource handler if required
         if (!isset($this->resource_objects[$this->resource_type])) {
@@ -277,19 +302,18 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
             // load resource plugin, instantiate
             $this->smarty->loadPlugin($_resource_class);
             $this->resource_objects[$this->resource_type] = new $_resource_class;
-        }
+        } 
         // cache template object under a unique ID
         $this->smarty->template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
 
         return true;
-    }
-    
+    } 
     // build a unique template ID
     public function buildTemplateId ($_resorce, $_cache_id, $_compile_id)
     {
-            return md5($_resorce.md5($_cache_id).md5($_compile_id));
-    }
-    
+        return md5($_resorce . md5($_cache_id) . md5($_compile_id));
+    } 
+
     /*
      * get system filepath to template
      */
@@ -318,10 +342,10 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
              . substr($_filepath, 0, 1) . DIRECTORY_SEPARATOR
              . $_filepath;
         } 
-        $_compile_dir_sep =  $this->smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
+        $_compile_dir_sep = $this->smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
         if (isset($this->compile_id)) {
             $_filepath = $this->compile_id . $_compile_dir_sep . $_filepath;
-        }
+        } 
 
         return $this->smarty->compile_dir . $_filepath . '.' . $this->resource_name . $this->smarty->php_ext;
     } 
