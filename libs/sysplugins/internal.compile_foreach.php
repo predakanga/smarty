@@ -49,7 +49,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
             $output .= "if (count(\$_from)):\n";
             $output .= "    foreach (\$_from as $key_part\$this->smarty->tpl_vars[$item]->data):\n";
         } 
-        $output .= "?>\n";
+        $output .= "?>";
 
         return $output;
     } 

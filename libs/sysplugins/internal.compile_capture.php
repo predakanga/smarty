@@ -28,7 +28,7 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
         else
             $assign = null;
         
-        $_output = "<?php ob_start(); ?>\n";
+        $_output = "<?php ob_start(); ?>";
         $this->_capture_stack[] = array($buffer, $assign);
 
         return $_output;
@@ -49,9 +49,9 @@ class Smarty_Internal_Compile_End_Capture extends Smarty_Internal_CompileBase {
         $this->_close_tag(array('capture'));
 
         list($buffer, $assign) = array_pop($this->smarty->_capture_stack);
-        $_output = "<?php \$this->smarty->_smarty_vars['capture'][$buffer] = ob_get_clean(); ?>\n";
+        $_output = "<?php \$this->smarty->_smarty_vars['capture'][$buffer] = ob_get_clean(); ?>";
         if (isset($assign)) {
-            $_output .= " \$this->smarty->assign($assign, ob_get_clean()); ?>\n";
+            $_output .= " \$this->smarty->assign($assign, ob_get_clean()); ?>";
         } 
         return $_output;
     } 
