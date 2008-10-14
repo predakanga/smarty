@@ -21,7 +21,8 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
-        $include_file = str_replace("'", "", $_attr['file']);
+//        $include_file = str_replace("'", "", $_attr['file']);
+        $include_file = $_attr['file'];
 
         if (isset($_attr['assign'])) {
             $_assign = $_attr['assign'];
@@ -44,7 +45,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_output .= "\$this->smarty->assign('$_key',$_value); ";
         } 
 
-        $_output .= " \$_template = new \$this->smarty->template_class ('$include_file');";
+        $_output .= " \$_template = new \$this->smarty->template_class ($include_file);";
 
         if (isset($_caching_lifetime)) {
             $_output .= "\$_template->caching_lifetime = $_caching_lifetime; \n";
