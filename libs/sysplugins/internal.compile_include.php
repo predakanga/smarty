@@ -41,7 +41,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         $_output = "\$_smarty_tpl_vars = \$this->smarty->tpl_vars; ";
 
         foreach ($_attr as $_key => $_value) {
-            $_output .= "\$this->smarty->assign('$_key','$_value'); ";
+            $_output .= "\$this->smarty->assign('$_key',$_value); ";
         } 
 
         $_output .= " \$_template = new \$this->smarty->template_class ('$include_file');";
