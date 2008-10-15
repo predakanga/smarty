@@ -12,14 +12,14 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
     public function compile($args)
     {
         $this->compiler->_compiler_status->nocache = true;
-        return;
+        return ' ';
     } 
 } 
 class Smarty_Internal_Compile_End_Nocache extends Smarty_Internal_CompileBase {
     public function compile($args)
     {
         $this->compiler->_compiler_status->nocache = false;
-        return;
+        return ' ';
     } 
 } 
 

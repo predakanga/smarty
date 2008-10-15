@@ -10,8 +10,9 @@
 class Smarty_Internal_CompileBase {
     public $smarty = null;
 
-    // flag from lexer parser if this tag could be cached
-    public $_smarty_caching = true;
+    // flag from lexer parser if this tag is nocache
+    public $_smarty_nocache = false;
+    public $has_output = false;
     
     function __construct()
     { 
@@ -26,11 +27,11 @@ class Smarty_Internal_CompileBase {
     function _get_attributes ($args)
     { 
         // assume tag could be cached
-        $this->_smarty_caching = true;        
-        if (isset($args['_smarty_caching'])) {
+        $this->_smarty_nocache = false;        
+        if (isset($args['_smarty_nocache'])) {
             // caching info from lexer/parser
-            $this->_smarty_caching = $args['_smarty_caching'];
-            unset($args['_smarty_caching']);
+            $this->_smarty_nocache = $args['_smarty_nocache'];
+            unset($args['_smarty_nocache']);
         }
 
 

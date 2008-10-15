@@ -50,7 +50,7 @@ class Smarty_Internal_Templatelexer
     				'LDELSLASH' => 'closing tag',
     				'COMMENTSTART' => '{*',
     				'COMMENTEND' => '*}',
-    				'NOCACHE'	=> 'nocache'
+    				'BOOLEAN' => 'boolean'
     				);
     				
     				
@@ -79,13 +79,13 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 php = /\<\?php.*\?\>/
-nocache = /nocache/
 ldels = /\{\s{1,}/
 rdels = /\s{1,}\}/
 ldelslash = /\{\//
 ldel = /\{/
 rdel = /\}/
 number = /\d+(\.\d+)?/
+boolean = /true|false/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
 commentstart = /\{\*/
 commentend = /\*\}/
@@ -146,8 +146,8 @@ ldel {
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
 }
-nocache {
-  $this->token = Smarty_Internal_Templateparser::TP_NOCACHE;
+boolean {
+  $this->token = Smarty_Internal_Templateparser::TP_BOOLEAN;
 }
 identity{
   $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;

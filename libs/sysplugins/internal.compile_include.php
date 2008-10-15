@@ -14,7 +14,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
     {
 
         // for now do not {include} in the cache file
-        $this->compiler->_compiler_status->tag_nocache = true; 
+//        $this->compiler->_compiler_status->tag_nocache = true; 
 
         $this->required_attributes = array('file');
         $this->optional_attributes = array('_any'); 
@@ -31,39 +31,38 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_caching_lifetime = $_attr['caching_lifetime'];
         } 
 
-        if (isset($_attr['nocache'])) {
+        if ($_attr['nocache'] == 'true') {
             $_caching = false;
         } 
 
         unset($_attr['file'],$_attr['assign'],$_attr['caching_lifetime'],$_attr['nocache']);
 
-        // save template vars
-        $_output = "\$_smarty_tpl_vars = \$this->smarty->tpl_vars; ";
+        $_output = '';
 
         foreach ($_attr as $_key => $_value) {
-            $_output .= "\$this->smarty->assign('$_key',$_value); ";
+            $_output .= "\$this->smarty->assign('$_key',$_value);";
         } 
 
-        $_output .= " \$_template = new \$this->smarty->template_class ($include_file);";
+        $_output .= " \$_template = \$this->createTemplate ($include_file, null, null, \$this);";
 
         if (isset($_caching_lifetime)) {
-            $_output .= "\$_template->caching_lifetime = $_caching_lifetime; \n";
+            $_output .= "\$_template->caching_lifetime = $_caching_lifetime;";
         } 
 
         if (isset($_caching)) {
-            $_output .= "\$_template->caching = false; \n";
+            $_output .= "\$_template->caching = false;";
         } 
 
         if (isset($_assign)) {
-            $_output .= "\$_tmp = \$this->smarty->fetch(\$_template); ";
+            $_output .= "\$_tmp = \$this->smarty->fetch(\$_template);";
         } else {
-            $_output .= "echo \$this->smarty->fetch(\$_template); ";
+            $_output .= "echo \$this->smarty->fetch(\$_template);";
         } 
-        // restore template vars
-        $_output .= "\$this->smarty->tpl_vars = \$_smarty_tpl_vars; unset(\$_smarty_tpl_vars);";
+        // update global vars
+        $_output .= "\$_template->updateGlobalVariables ();";
 
         if (isset($_assign)) {
-            $_output .= "\$this->smarty->>assign('$_assign',\$_tmp);  unset(\$_tmp);";
+            $_output .= "\$this->smarty->assign($_assign,\$_tmp);  unset(\$_tmp);";
         } 
         return "<?php $_output ?>";
     } 

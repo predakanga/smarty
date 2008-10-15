@@ -40,8 +40,10 @@
 if (!defined('SMARTY_DIR')) {
     define('SMARTY_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 } 
+// load required base class for creation of the smarty object
+require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR . 'internal.templatebase.php');
 
-class Smarty {
+class Smarty extends Smarty_Internal_TemplateBase {
     // smarty version
     public $_version = 'Smarty3Alpha'; 
     // template directory
@@ -77,6 +79,8 @@ class Smarty {
     public $security = false; 
     // assigned tpl vars
     public $tpl_vars = array(); 
+    // dummy parent object
+    public $parent_object = null; 
     // system plugins directory
     private $sysplugins_dir = null; 
     // modifier object
@@ -92,9 +96,9 @@ class Smarty {
     // class used for compiling templates
     public $compiler_class = 'Smarty_Internal_Compiler'; 
     // class used for templates
-    public $template_class = 'Smarty_Internal_Template';
+    public $template_class = 'Smarty_Internal_Template'; 
     // exception handler: set null to disable
-    public $exception_handler = array('SmartyException', 'getStaticException');
+    public $exception_handler = array('SmartyException', 'getStaticException'); 
     // cached template objects
     public $template_objects = null;
 
@@ -104,7 +108,7 @@ class Smarty {
     public function __construct()
     { 
         // set exception handler
-        if(!empty($this->exception_handler))
+        if (!empty($this->exception_handler))
             set_exception_handler($this->exception_handler); 
         // set default dirs
         $this->template_dir = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
@@ -117,13 +121,17 @@ class Smarty {
         self::instance($this); 
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
-        $this->loadPlugin('Smarty_Internal_PluginBase'); 
-        $this->loadPlugin($this->template_class);
-        // setup function and modifier objects
+        $this->loadPlugin('Smarty_Internal_PluginBase');
+        $this->loadPlugin($this->template_class); 
+        // setup function , modifier block objects
         $this->loadPlugin('Smarty_Internal_Modifier');
         $this->modifier = new Smarty_Internal_Modifier;
         $this->loadPlugin('Smarty_Internal_Function');
         $this->function = new Smarty_Internal_Function;
+        $this->loadPlugin('Smarty_Internal_Compile');
+        $this->compile = new Smarty_Internal_Compile;
+        $this->loadPlugin('Smarty_Internal_Block');
+        $this->block = new Smarty_Internal_Block;
     } 
 
     /**
@@ -132,7 +140,7 @@ class Smarty {
     public function __destruct()
     { 
         // restore to previous exception handler, if any
-        if(!empty($this->exception_handler))
+        if (!empty($this->exception_handler))
             restore_exception_handler();
     } 
 
@@ -157,30 +165,36 @@ class Smarty {
     * 
     * @param string $template_resource the resource handle of the template file or template object
     */
-    public function fetch($_template, $_cache_id = null, $_compile_id = null)
+    public function fetch($_template, $_cache_id = null, $_compile_id = null, $_parent = null)
     {
-        if (!($_template instanceof $this->template_class)) {
-            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id);
+        if ($_parent === null) {
+            $_parent = $this;
         } 
-
-        // return redered template 
-        return $_template->getRenderedTemplate();
+        if (!($_template instanceof $this->template_class)) {
+            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id, $_parent);
+        } 
+        // return redered template
+        $_output = $_template->getRenderedTemplate();
+        $_template->updateGlobalVariables();
+        return $_output;
     } 
-
+                              
     /**
     * displays a Smarty template
     * 
     * @param string $template_resource the resource handle of the template file  or template object
     */
-    public function display($_template, $_cache_id = null, $_compile_id = null)
-    { 
-        if (!($_template instanceof $this->template_class)) {
-            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id);
+    public function display($_template, $_cache_id = null, $_compile_id = null, $_parent = null)
+    {
+        if ($_parent === null) {
+            $_parent = $this;
         } 
-
-
+        if (!($_template instanceof $this->template_class)) {
+            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id, $_parent);
+        } 
         // display template
-        echo $this->fetch($_template);
+        echo $_template->getRenderedTemplate();
+        $_template->updateGlobalVariables();
         return true;
     } 
 
@@ -194,65 +208,8 @@ class Smarty {
         if (!($_template instanceof $this->template_class)) {
             $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id);
         } 
-
         // return cache status of template
         return $_template->isCached();
-    } 
-
-        /**
-    * creates an template object
-    * 
-    * @param string $template_resource the resource handle of the template file
-    */
-    public function createTemplate($_template, $_cache_id = null, $_compile_id = null)
-    {
-        if (!($_template instanceof $this->template_class)) {
-            // we got a template resource
-            $_templateId = Smarty_Internal_Template::buildTemplateId ($_template, $_cache_id, $_compile_id);
-            // already in template cache?
-            if ($this->template_objects[$_templateId] instanceof $this->template_class) {
-                  // return cached template object 
-                  return $this->template_objects[$_templateId];
-            } else {
-                  // create and cache new template object 
-                  return  new $this->template_class ($_template, $_cache_id, $_compile_id);
-            }
-        } else {
-            // just return a copy of template class
-            return $_template;
-        }
-
-        // return redered template 
-        return $_template->getRenderedTemplate();
-    } 
-
-    /**
-    * assigns values to template variables
-    * 
-    * @param array $ |string $tpl_var the template variable name(s)
-    * @param mixed $value the value to assign
-    */
-    public function assign($tpl_var, $value = null, $caching=true)
-    {
-        if (is_array($tpl_var)) {
-            foreach ($tpl_var as $key => $val) {
-                if ($key != '') {
-                    if (in_array($key, array('this', 'smarty')))
-                        throw new SmartyException("Cannot assign value to reserved var '{$key}'");
-                    else
-                        $this->tpl_vars[$key]->data = $val;
-                        $this->tpl_vars[$key]->caching = $caching;
-                } 
-            } 
-        } else {
-            if ($tpl_var != '') {
-                if (in_array($tpl_var, array('this', 'smarty')))
-                    throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
-                else
-                        $this->tpl_vars[$tpl_var]->data = $value;
-                        $this->tpl_vars[$tpl_var]->caching = $caching;
-            } 
-        } 
     } 
 
     /**
@@ -333,9 +290,9 @@ class SmartyException extends Exception {
     {
         return "Code: " . $this->getCode . "<br>Error: " . htmlentities($this->getMessage()) . "<br>"
          . "File: " . $this->getFile() . "<br>"
-         . "Line: " . $this->getLine() . "<br>"
-     //    . "Trace: " . $this->getTraceAsString()
-          . "\n";
+         . "Line: " . $this->getLine() . "<br>" 
+        // . "Trace: " . $this->getTraceAsString()
+        . "\n";
     } 
 
     public function getException()

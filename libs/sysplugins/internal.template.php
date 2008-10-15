@@ -7,7 +7,7 @@
 * @subpackage plugins
 */
 
-class Smarty_Internal_Template extends Smarty_Internal_Base {
+class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     // object cache
     static $resource_objects = array();
     static $caching_objects = array();
@@ -36,13 +36,17 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
     private $compiled_filestamp = null; 
     // Cache file
     private $cached_filepath = null;
-    public  $cached_template = null;
+    public $cached_template = null;
     private $cached_timestamp = null;
-    private $isCached = null;
+    private $isCached = null; 
+    // template variables
+    public $tpl_vars = array(); 
+    // parent object
+    public $parent_object = null;
 
-    public function __construct($template_resource, $_cache_id = null, $_compile_id = null)
+    public function __construct($template_resource, $_cache_id = null, $_compile_id = null, $_parent = null)
     {
-        parent::__construct(); 
+        $this->smarty = Smarty::instance(); 
         // Smarty parameter
         $this->cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
         $this->compile_id = $_compile_id === null ? $this->smarty->compile_id : $_compile_id;
@@ -55,6 +59,30 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         // parse resource name
         if (!$this->parseResourceName ($template_resource)) {
             throw new SmartyException ("Unable to parse resource '{$template_resource}'");
+        } 
+        // if we have a parent copy ofthe template vars
+        if (is_object($_parent)) {
+            foreach ($_parent->tpl_vars as $_key => $_value) {
+                $this->tpl_vars[$_key] = clone $_parent->tpl_vars[$_key];
+            } 
+            $this->parent_object = $_parent;
+        } 
+    } 
+
+    public function updateGlobalVariables ()
+    { 
+        // copy global vars back to parent
+        if (is_object($this->parent_object)) {
+            foreach ($this->tpl_vars as $_key => $_value) {
+                if ($this->tpl_vars[$_key]->global) {
+                    if (isset($this->parent_object->tpl_vars[$_key])) {
+                        $this->parent_object->tpl_vars[$_key]->data = $this->tpl_vars[$_key]->data;
+                    } else {
+                        $this->parent_object->tpl_vars[$_key] = clone $this->tpl_vars[$_key];
+                        $this->parent_object->tpl_vars[$_key]->global = false;
+                    } 
+                } 
+            } 
         } 
     } 
 
@@ -305,7 +333,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Base {
         } 
         // cache template object under a unique ID
         $this->smarty->template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
-
         return true;
     } 
     // build a unique template ID

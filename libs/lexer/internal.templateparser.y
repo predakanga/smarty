@@ -18,9 +18,9 @@
         $this->compiler = Smarty_Internal_Compiler::instance(); 
         $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Tag");
         $this->smarty->compile_tag = new Smarty_Internal_Compile_Smarty_Tag;
-        $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Variable");
-        $this->smarty->compile_variable = new Smarty_Internal_Compile_Smarty_Variable;
-				$this->caching = true;
+ //       $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Variable");
+ //       $this->smarty->compile_variable = new Smarty_Internal_Compile_Smarty_Variable;
+				$this->nocache = false;
     }
     public static function &instance($new_instance = null)
     {
@@ -54,7 +54,7 @@
 //
 %fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR QUOTE NOCACHE.
+              NOT LAND LOR QUOTE BOOLEAN.
 
 
 //
@@ -76,7 +76,7 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 											// Smarty tag
 template_element(res)::= smartytag(st). {res = st;}	
 											// comments
-template_element(res)::= COMMENTSTART commenttext(t) COMMENTEND. { res = '<?php /* comment placeholder */?> '; }	
+template_element(res)::= COMMENTSTART commenttext(t) COMMENTEND. { res = '<?php /* comment placeholder */?>'; }	
 											// PHP tag
 template_element(res)::= PHP(php). {res = php;}	
 											// Other template text
@@ -87,18 +87,20 @@ template_element(res)::= OTHER(o). {res = o;}
 // all Smarty tags start here
 //
 									// variable
-smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>$this->caching));$this->caching=true;}
-smartytag(res)   ::= LDEL expr(e) SPACE NOCACHE(v) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>false));}
+//smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>$this->caching));$this->caching=true;}
+//smartytag(res)   ::= LDEL expr(e) SPACE NOCACHE(v) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>false));}
+smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>'print_expression'),array('value'=>e),array('_smarty_nocache'=>$this->nocache)));$this->nocache=false;}
+smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>'print_expression'),array('value'=>e),array('_smarty_nocache'=>$this->nocache),a));$this->nocache=false;}
 									// tag without attributes
 smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
                   // special handling of {nocache} tag 
-smartytag(res)   ::= LDEL NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
+//smartytag(res)   ::= LDEL NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
 									// tag with Smarty2 style attributes
-smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array('_smarty_caching'=>$this->caching),a));$this->caching=true;}
+smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array('_smarty_nocache'=>$this->nocache),a));$this->nocache=false;}
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
                   // special handling of {/nocache} tag 
-smartytag(res)   ::= LDELSLASH NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
+//smartytag(res)   ::= LDELSLASH NOCACHE(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
 									// {if} and {elseif} tag
 smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'ifexp'=>ie));}
 									// {for} tag
@@ -148,6 +150,8 @@ math(res)        ::= MATH(m). {res = m;}
 //
 									// numeric constant
 value(res)       ::= NUMBER(n). { res = n; }
+									// boolean
+value(res)       ::= BOOLEAN(b). { res = b; }
 									// expression
 value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 									// variable
@@ -167,9 +171,9 @@ value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->smarty->tpl_vars['. v .']->data'; if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars['. v .']->data'; if($this->tpl_vars[v]->nocache) $this->nocache=true;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->smarty->tpl_vars['. v .']->data'.a;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars['. v .']->data'.a;if($this->tpl_vars[v]->nocache) $this->nocache=true;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -192,7 +196,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->smarty->tpl_vars['. v .']->data'.oc;if(!$this->smarty->tpl_vars[v]->caching) $this->caching=false;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars['. v .']->data'.oc;if($this->tpl_vars[v]->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
@@ -273,7 +277,8 @@ arrayelement(res)		 ::=  array(a). { res = a;}
 
 doublequoted(res)          ::= doublequoted(o1) other(o2). {res = o1.o2;}
 doublequoted(res)          ::= other(o). {res = o;}
-other(res)           ::= LDEL variable(v) RDEL. {res = "'.".v.".'";}
+other(res)           ::=  variable(v). {res = "'.".v.".'";}
+other(res)           ::=  LDEL expr(e) RDEL. {res = "'.".e.".'";}
 other(res)           ::= OTHER(o). {res = o;}
 
 commenttext(res)          ::= commenttext(t) OTHER(o2). {res = t.o;}
