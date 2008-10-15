@@ -43,7 +43,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_output .= "\$this->smarty->assign('$_key',$_value);";
         } 
 
-        $_output .= " \$_template = \$this->createTemplate ($include_file, null, null, \$this);";
+        $_output .= " \$_template = \$this->createTemplate ($include_file, null, null, \$this->tpl_vars);";
 
         if (isset($_caching_lifetime)) {
             $_output .= "\$_template->caching_lifetime = $_caching_lifetime;";

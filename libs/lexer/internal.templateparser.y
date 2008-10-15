@@ -171,9 +171,9 @@ value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars['. v .']->data'; if($this->tpl_vars[v]->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars->tpl_vars['. v .']->data'; if($this->tpl_vars->tpl_vars[v]->nocache) $this->nocache=true;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars['. v .']->data'.a;if($this->tpl_vars[v]->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars->tpl_vars['. v .']->data'.a;if($this->tpl_vars->tpl_vars[v]->nocache) $this->nocache=true;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -196,7 +196,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars['. v .']->data'.oc;if($this->tpl_vars[v]->nocache) $this->nocache=true;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars->tpl_vars['. v .']->data'.oc;if($this->tpl_vars->tpl_vars[v]->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 

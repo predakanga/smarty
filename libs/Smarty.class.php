@@ -78,7 +78,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // security mode
     public $security = false; 
     // assigned tpl vars
-    public $tpl_vars = array(); 
+    public $tpl_vars = null; 
     // dummy parent object
     public $parent_object = null; 
     // system plugins directory
@@ -119,6 +119,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR; 
         // set instance object
         self::instance($this); 
+        $this->tpl_vars = new Smarty_Data; 
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
         $this->loadPlugin('Smarty_Internal_PluginBase');
@@ -165,17 +166,16 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file or template object
     */
-    public function fetch($_template, $_cache_id = null, $_compile_id = null, $_parent = null)
+    public function fetch($template, $cache_id = null, $compile_id = null, $parent_tpl_vars = null)
     {
-        if ($_parent === null) {
-            $_parent = $this;
+        if ($parent_tpl_vars === null) {
+            $parent_tpl_vars = $this->tpl_vars;
         } 
-        if (!($_template instanceof $this->template_class)) {
-            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id, $_parent);
+        if (!($template instanceof $this->template_class)) {
+            $template = $this->createTemplate ($template, $cache_id, $compile_id, $parent_tpl_vars);
         } 
         // return redered template
-        $_output = $_template->getRenderedTemplate();
-        $_template->updateGlobalVariables();
+        $_output = $template->getRenderedTemplate();
         return $_output;
     } 
                               
@@ -184,17 +184,16 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file  or template object
     */
-    public function display($_template, $_cache_id = null, $_compile_id = null, $_parent = null)
+    public function display($template, $cache_id = null, $compile_id = null, $parent_tpl_vars = null)
     {
-        if ($_parent === null) {
-            $_parent = $this;
+        if ($parent_tpl_vars === null) {
+            $parent_tpl_vars = $this->tpl_vars;
         } 
-        if (!($_template instanceof $this->template_class)) {
-            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id, $_parent);
+        if (!($template instanceof $this->template_class)) {
+            $template = $this->createTemplate ($template, $cache_id, $compile_id, $parent_tpl_vars);
         } 
         // display template
-        echo $_template->getRenderedTemplate();
-        $_template->updateGlobalVariables();
+        echo $template->getRenderedTemplate();
         return true;
     } 
 
@@ -203,13 +202,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file or template object
     */
-    public function is_cached($_template, $_cache_id = null, $_compile_id = null)
+    public function is_cached($template, $cache_id = null, $compile_id = null)
     {
-        if (!($_template instanceof $this->template_class)) {
-            $_template = $this->createTemplate ($_template, $_cache_id, $_compile_id);
+        if (!($template instanceof $this->template_class)) {
+            $template = $this->createTemplate ($template, $cache_id, $compile_id);
         } 
         // return cache status of template
-        return $_template->isCached();
+        return $template->isCached();
     } 
 
     /**
