@@ -9,8 +9,8 @@ $smarty->caching = false;
 $smarty->caching_lifetime = 10;
 
 // standard
-//$smarty->assign('foo',1);
-//$smarty->display('test_inc.tpl');
+$smarty->assign('foo',1);
+$smarty->display('test_inc.tpl');
 
 // data object
 //$data = new Smarty_Data;
@@ -18,10 +18,10 @@ $smarty->caching_lifetime = 10;
 //$smarty->display('test_inc.tpl',null,null,$data);
 
 // template object
-$myvars = array('foo' => 1);
-$template = new Smarty_Template ('test_inc.tpl',$myvars);
+//$myvars = array('foo' => 1);
+//$template = new Smarty_Template ('test_inc.tpl',$myvars);
 //$template->assign('foo',1);
-$smarty->display($template);
+//$smarty->display($template);
 
 
 ?>

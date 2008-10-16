@@ -21,25 +21,27 @@ class Smarty_Internal_TemplateBase {
         } else {
             $_var_ptr = $this;
         } 
-       if (is_array($tpl_var)) {
+        if (is_array($tpl_var)) {
             foreach ($tpl_var as $_key => $_val) {
                 if ($_key != '') {
                     if (in_array($_key, array('this', 'smarty')))
                         throw new SmartyException("Cannot assign value to reserved var '{$_key}'");
-                    else
+                    else {
                         $_var_ptr[$_key]->data = $_val;
-                    ($nocache === null)? $_var_ptr[$_key]->nocache = false : $_var_ptr[$_key]->nocache = $nocache;
-                    ($global === null)? $_var_ptr[$_key]->global = false : $_var_ptr[$_key]->global = $global;
+                        if ($nocache !== null) $_var_ptr[$_key]->nocache = $nocache;
+                        if ($global !== null) $_var_ptr[$_key]->global = $global;
+                    } 
                 } 
             } 
         } else {
             if ($tpl_var != '') {
                 if (in_array($tpl_var, array('this', 'smarty')))
                     throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
-                else
+                else {
                     $_var_ptr->tpl_vars[$tpl_var]->data = $value;
-                ($nocache === null)? $_var_ptr->tpl_vars[$tpl_var]->nocache = false : $_var_ptr->tpl_vars[$tpl_var]->nocache = $nocache;
-                ($global === null)? $_var_ptr->tpl_vars[$tpl_var]->global = false : $_var_ptr->tpl_vars[$tpl_var]->global = $global;
+                    if ($nocache !== null) $_var_ptr->tpl_vars[$tpl_var]->nocache = $nocache;
+                    if ($global !== null) $_var_ptr->tpl_vars[$tpl_var]->global = $global;
+                } 
             } 
         } 
     } 

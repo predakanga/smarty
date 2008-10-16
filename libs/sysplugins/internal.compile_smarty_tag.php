@@ -20,8 +20,8 @@ class Smarty_Internal_Compile_Smarty_Tag extends Smarty_Internal_CompileBase {
             } 
             // If the template is not evaluated and we have a ncocache section and or a nocache tag
             // make the compiled template to inject the compiled code into the cache file
-            if (false && !$this->compiler->template->isEvaluated() && $output != '' &&
-                    ($this->compiler->_compiler_status->nocache || $nocache)) {
+            if (false &&!$this->compiler->template->isEvaluated() && $output != '' &&
+                    !($this->compiler->_compiler_status->nocache || $nocache)) {
                 $output = str_replace("'", "\'", $output);
                 $output = "<?php \$_tmp = '$output'; if (\$this->smarty->caching) echo \$_tmp; else eval(\$_tmp);\n?>";
             } 
