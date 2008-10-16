@@ -26,7 +26,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
         if (isset($_attr['key'])) {
             $key = $_attr['key'];
-            $key_part = "\$this->tpl_vars[$key]->data => ";
+            $key_part = "\$this->tpl_vars->tpl_vars[$key]->data => ";
         } else {
             $key = null;
             $key_part = '';
@@ -40,14 +40,14 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         $output = "<?php ";
         $output .= "\$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array'); }";
         if (isset($name)) {
-            $foreach_props = "\$this->tpl_vars['smarty']->data['foreach'][$name]";
+            $foreach_props = "\$this->tpl_vars->tpl_vars['smarty']->data['foreach'][$name]";
             $output .= "{$foreach_props} = array('total' => count(\$_from), 'iteration' => 0);\n";
             $output .= "if ({$foreach_props}['total'] > 0):\n";
-            $output .= "    foreach (\$_from as $key_part\$this->tpl_vars[$item]->data):\n";
+            $output .= "    foreach (\$_from as $key_part\$this->tpl_vars->tpl_vars[$item]->data):\n";
             $output .= "        {$foreach_props}['iteration']++;\n";
         } else {
             $output .= "if (count(\$_from)):\n";
-            $output .= "    foreach (\$_from as $key_part\$this->tpl_vars[$item]->data):\n";
+            $output .= "    foreach (\$_from as $key_part\$this->tpl_vars->tpl_vars[$item]->data):\n";
         } 
         $output .= "?>";
 

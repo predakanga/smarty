@@ -54,7 +54,7 @@
 //
 %fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR QUOTE BOOLEAN.
+              NOT LAND LOR QUOTE BOOLEAN AS.
 
 
 //
@@ -91,6 +91,8 @@ template_element(res)::= OTHER(o). {res = o;}
 //smartytag(res)   ::= LDEL expr(e) SPACE NOCACHE(v) RDEL. { res = $this->smarty->compile_variable->execute(array('var'=>e,'caching'=>false));}
 smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>'print_expression'),array('value'=>e),array('_smarty_nocache'=>$this->nocache)));$this->nocache=false;}
 smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>'print_expression'),array('value'=>e),array('_smarty_nocache'=>$this->nocache),a));$this->nocache=false;}
+									// assign
+smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL expr(e) RDEL. { res = $this->smarty->compile_tag->execute(array('_smarty_tag'=>'assign','var' => v, 'value'=>e,'_smarty_nocache'=>$this->nocache));$this->nocache=false;}									
 									// tag without attributes
 smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
                   // special handling of {nocache} tag 
@@ -105,6 +107,8 @@ smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_tag->
 smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'ifexp'=>ie));}
 									// {for} tag
 smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
+									// {foreach} tag
+smartytag(res)   ::= LDEL ID(i) SPACE variable(v0) AS DOLLAR ID(v1) APTR DOLLAR ID(v2) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'from'=>v0,'key'=>v1,'item'=>v2));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
 

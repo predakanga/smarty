@@ -50,6 +50,7 @@ class Smarty_Internal_Templatelexer
     				'LDELSLASH' => 'closing tag',
     				'COMMENTSTART' => '{*',
     				'COMMENTEND' => '*}',
+    				'AS' => 'as',
     				'BOOLEAN' => 'boolean'
     				);
     				
@@ -104,7 +105,7 @@ vert = /\|/
 equal = /\=/
 space = /[\s]+/
 ptr = /\->/
-aptr = /=>/
+aptr = /\s?=>\s?/
 quote = /\"/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
@@ -115,6 +116,7 @@ lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
 greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
+as = /\s+(AS|as)\s+/
 not = /\s*\!|\s+(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
 lor = /\s*\|\|\s*|\s+(OR|or)\s+/
@@ -145,6 +147,9 @@ ldel {
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
+}
+as {
+  $this->token = Smarty_Internal_Templateparser::TP_AS;
 }
 boolean {
   $this->token = Smarty_Internal_Templateparser::TP_BOOLEAN;

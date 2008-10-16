@@ -278,7 +278,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             if ($this->usesCompiler()) {
                 $this->getCompiledTemplate(); 
                 // extract($this->smarty->tpl_vars);
-                foreach ($this->smarty->tpl_vars as $_smarty_var => $_smarty_value) {
+                foreach ($this->tpl_vars->tpl_vars as $_smarty_var => $_smarty_value) {
                     if (isset($_smarty_value->data)) {
                         $$_smarty_var = $_smarty_value->data;
                     } 
@@ -289,7 +289,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             } else {
                 // php template, just include it
                 // extract($this->smarty->tpl_vars);
-                foreach ($this->smarty->tpl_vars as $_smarty_var => $_smarty_value) {
+                foreach ($this->tpl_vars->tpl_vars as $_smarty_var => $_smarty_value) {
                     if (isset($_smarty_value->data)) {
                         $$_smarty_var = $_smarty_value->data;
                     } 
