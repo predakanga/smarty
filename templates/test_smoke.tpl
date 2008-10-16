@@ -12,12 +12,16 @@ $blah[$baz[1]] is {$blah[$baz[1]]}
 
 $foo.$baz[1] is {$foo.$baz[1]}
 
+$foo.$foo is {$foo.$foo}
+
 {"foo"}
 
 OBJECT TESTS:
 
 $myobj->foo is {$myobj->foo}
 
+$myobj->test is {$myobj->test}
+$myobj->test() is {$myobj->test()}
 $myobj->test(1) is {$myobj->test(1)}
 $myobj->test(1,'two') is {$myobj->test(1,'two')}
 $myobj->test(count($baz)) is {$myobj->test(count($baz))}
@@ -59,6 +63,9 @@ E{assign var=zoo value="blah"}
 F
 G
 {assign var=zoo value="blah"}H
+{assign var=zoo value="joe{$myobj->test(1)}bar"}
+
+zoo is {$zoo}
 
 SPACING TESTS:
 
@@ -110,11 +117,46 @@ IF TESTS:
   NOT LOGGED
 {/if}
 
+{if "joe{$myobj->test(1)}bar"}
+  FOO
+{/if}
+
 TEST INCLUDE:
 
 {include file="header.tpl" gee="joe"}
 {include file="header.tpl" gee="joe $foo bar"}
+{include file="header.tpl" gee="joe{$foo}bar"}
+{include file="header.tpl" gee="joe{$foo.$foo}bar"}
+{include file="header.tpl" gee="joe{$myobj->test(1)}bar"}
 {include file=$includeme}
+{include file=$includeme gee="joe"}
+{include file="$top.tpl"}
+
+JAVSCRIPT TEST
+
+<script language="javascript">
+  function sayhi()
+  {
+    alert('hi there!');
+  }
+  function foobar() { alert('foobar'); }
+</script>
+
+MATH TESTS:
+
+$one+2 is {$one+2}
+$one + 2 - $one is {$one + 2 - $one}
+$one*$one is {$one*$one}
+$one/$one is {$one/$one}
+abs(-$one) is {abs(-$one)}
+
+$footest is {$footest}
+
+FOREACH TESTS:
+
+{foreach from=$blah key="idx" item="val"}
+  $idx/$val is {$idx}/{$val}
+{/foreach}
 
 TEST FINISHED
 </pre>
