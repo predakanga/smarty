@@ -166,13 +166,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file or template object
     */
-    public function fetch($template, $cache_id = null, $compile_id = null, $parent_tpl_vars = null)
+    public function fetch($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
     {
         if ($parent_tpl_vars === null) {
             $parent_tpl_vars = $this->tpl_vars;
         } 
         if (!($template instanceof $this->template_class)) {
-            $template = $this->createTemplate ($template, $cache_id, $compile_id, $parent_tpl_vars);
+            $template = $this->createTemplate ($template, $parent_tpl_vars, $cache_id, $compile_id);
         } 
         // return redered template
         $_output = $template->getRenderedTemplate();
@@ -184,13 +184,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file  or template object
     */
-    public function display($template, $cache_id = null, $compile_id = null, $parent_tpl_vars = null)
+    public function display($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
     {
         if ($parent_tpl_vars === null) {
             $parent_tpl_vars = $this->tpl_vars;
         } 
         if (!($template instanceof $this->template_class)) {
-            $template = $this->createTemplate ($template, $cache_id, $compile_id, $parent_tpl_vars);
+            $template = $this->createTemplate ($template, $parent_tpl_vars , $cache_id, $compile_id);
         } 
         // display template
         echo $template->getRenderedTemplate();

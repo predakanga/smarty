@@ -42,7 +42,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     // template variables
     public $tpl_vars = null;
 
-    public function __construct($template_resource, $_cache_id = null, $_compile_id = null, $_parent_tpl_vars = null)
+    public function __construct($template_resource, $_parent_tpl_vars = null, $_cache_id = null, $_compile_id = null)
     {
         $this->smarty = Smarty::instance(); 
         // Smarty parameter
@@ -61,9 +61,17 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             throw new SmartyException ("Unable to parse resource '{$template_resource}'");
         } 
         // if we have a parent copy of the template vars
-        if ($_parent_tpl_vars !== null) {
+        if (is_object($_parent_tpl_vars)) {
+            // is a Smarty data object
             foreach ($_parent_tpl_vars->tpl_vars as $_key => $_value) {
                 $this->tpl_vars->tpl_vars[$_key] = clone $_parent_tpl_vars->tpl_vars[$_key];
+            } 
+        } elseif (is_array($_parent_tpl_vars)) {
+            // is a PHP array
+            foreach ($_parent_tpl_vars as $_key => $_value) {
+                $this->tpl_vars->tpl_vars[$_key]->data = $_value;
+                $this->tpl_vars->tpl_vars[$_key]->caching = false;
+                $this->tpl_vars->tpl_vars[$_key]->global = false;
             } 
         } 
     } 
@@ -71,7 +79,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function updateGlobalVariables ()
     { 
         // copy global vars back to parent
-        if ($this->parent_tpl_vars !== null) {
+        if (is_object($this->parent_tpl_vars)) {
             foreach ($this->tpl_vars->tpl_vars as $_key => $_value) {
                 if ($this->tpl_vars->tpl_vars[$_key]->global) {
                     if (isset($this->parent_tpl_vars->tpl_vars[$_key])) {
@@ -377,6 +385,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 
         return $this->smarty->compile_dir . $_filepath . '.' . $this->resource_name . $this->smarty->php_ext;
     } 
+} 
+// wrapper for template class
+class Smarty_Template extends Smarty_Internal_Template {
 } 
 
 ?>

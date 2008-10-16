@@ -43,7 +43,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_output .= "\$this->smarty->assign('$_key',$_value);";
         } 
 
-        $_output .= " \$_template = \$this->createTemplate ($include_file, null, null, \$this->tpl_vars);";
+        $_output .= " \$_template = new Smarty_Template ($include_file, \$this->tpl_vars);";
 
         if (isset($_caching_lifetime)) {
             $_output .= "\$_template->caching_lifetime = $_caching_lifetime;";
@@ -59,7 +59,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_output .= "echo \$this->smarty->fetch(\$_template);";
         } 
         // update global vars
-        $_output .= "\$_template->updateGlobalVariables ();";
+ //       $_output .= "\$_template->updateGlobalVariables ();";
 
         if (isset($_assign)) {
             $_output .= "\$this->smarty->assign($_assign,\$_tmp);  unset(\$_tmp);";

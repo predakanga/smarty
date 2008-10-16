@@ -49,7 +49,7 @@ class Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file
     */
-    public function createTemplate($template, $cache_id = null, $compile_id = null, $parent_tpl_vars = null)
+    public function createTemplate($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
     {
         if (!is_object($template)) {
             // we got a template resource
@@ -60,7 +60,7 @@ class Smarty_Internal_TemplateBase {
                 return $this->template_objects[$_templateId];
             } else {
                 // create and cache new template object
-                return new Smarty_Internal_Template ($template, $cache_id, $compile_id, $parent_tpl_vars);
+                return new Smarty_Internal_Template ($template, $parent_tpl_vars, $cache_id, $compile_id);
             } 
         } else {
             // just return a copy of template class
