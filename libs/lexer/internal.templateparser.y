@@ -93,6 +93,7 @@ smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_tag->exec
 smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>'print_expression'),array('value'=>e),array('_smarty_nocache'=>$this->nocache),a));$this->nocache=false;}
 									// assign
 smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL expr(e) RDEL. { res = $this->smarty->compile_tag->execute(array('_smarty_tag'=>'assign','var' => v, 'value'=>e,'_smarty_nocache'=>$this->nocache));$this->nocache=false;}									
+smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->smarty->compile_tag->execute(array('_smarty_tag'=>'assign','var' => v, 'value'=>e,'_smarty_nocache'=>$this->nocache));$this->nocache=false;}									
 									// tag without attributes
 smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
                   // special handling of {nocache} tag 
