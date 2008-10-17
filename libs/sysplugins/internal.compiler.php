@@ -38,7 +38,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
 
-        // save template object for compile classe
+        // save template object for compile class
+
         $this->template = $_template;
         
         // get template filepath for error messages
@@ -62,7 +63,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
         $lex = new Smarty_Internal_Templatelexer($_content);
         $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
-        $parser = new Smarty_Internal_Templateparser($lex);
+        $parser = new Smarty_Internal_Templateparser($lex,$_template->tpl_vars);
 
         while ($lex->yylex()) {
             // echo "Parsing  {$lex->token} Token {$lex->value} \n";

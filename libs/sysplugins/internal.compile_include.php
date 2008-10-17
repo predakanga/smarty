@@ -38,7 +38,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         $_output = '';
 
         foreach ($_attr as $_key => $_value) {
-            $_output .= "\$this->smarty->assign('$_key',$_value);";
+            $_output .= "\$this->assign('$_key',$_value);";
         } 
 
         if (isset($_caching_lifetime) || isset($_caching)) {

@@ -26,14 +26,6 @@ class Smarty_Internal_CompileBase {
 
     function _get_attributes ($args)
     { 
-        // assume tag could be cached
-        $this->_smarty_nocache = false;        
-        if (isset($args['_smarty_nocache'])) {
-            // caching info from lexer/parser
-            $this->_smarty_nocache = $args['_smarty_nocache'];
-            unset($args['_smarty_nocache']);
-        }
-
 
         // check if all required attributes present
         foreach ($this->required_attributes as $attr) {
