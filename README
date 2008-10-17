@@ -15,10 +15,7 @@ index.php
 /libs/
   Smarty.class.php
 /libs/sysplugins/
-  internal.compiler.php
-  internal.displayphp.php
-  internal.displaytpl.php
-  internal.pluginbase.php
+  internal.*
 /plugins/
   function.mailto.php
   modifier.escape.php
@@ -28,9 +25,7 @@ index.php
   
 
 If you execute the index.php file, you will see an example of using Smarty to
-display a couple of template files. Since this alpha code is a shell, the
-compiler doesn't actually compile the tags yet. But the framework is in place
-to make it happen.
+display a couple of template files.
 
 The way to use Smarty 3 should look extremely familiar:
 
@@ -43,16 +38,14 @@ $smarty->display('index.tpl');
 However, Smarty works completely different on the inside. The majority of
 the Smarty system now lies in the plugin directory. The core Smarty.class.php
 class is extremely slim. The fundamental idea is for Smarty to lazy-load all
-requirements (objects) on an as-needed basis. The PHP5 __autoload() feature
-is used to automate this task.
+requirements (objects) on an as-needed basis.
 
-FEATURE 1: AUTOLOAD
+LEXER!
 
-Autoloading has been removed, as it does not work with op-code caches such as
-APC or XCache. It works, but any autoloaded classes do not get op-cached. We
-have worked around this by running a loadPlugin() call prior to instantiation.
+Smarty 3 now uses a real lexing tokenizer. This opens all kinds of doors
+such as template math, function recursion, among many other things.
 
-FEATURE 2: $smarty object singleton
+$smarty OBJECT SINGLETON
 
 Do you need a reference to the Smarty object instance? No problem:
 
@@ -66,7 +59,7 @@ Since all plugins are now classes (did I mention that yet?), They all extend
 Smarty_Internal_PluginBase, which makes $this->smarty a reference to the Smarty
 object instance. This is available to all plugins.
 
-FEATURE 3: PHP templates
+PHP TEMPLATES
 
 Smarty's fundamental design goals are meant to separate business logic from
 presentation logic. Since Smarty 2.0 templates work on a tag-based syntax, this
@@ -81,38 +74,41 @@ more important to you (PHP or tags/security/etc), make your own choice. Just
 remember, PHP templates require YOU to keep the separation yourself. It won't
 be as obvious.
 
-If you want to use a PHP template, just name it with the .php extension:
+If you want to use a PHP template, just use the "php" resource type:
 
-$smarty->display('mytemplate.php');
+$smarty->display('php:mytemplate.tpl');
 
 Smarty will not compile it, it will just get executed as PHP. You have full
 reign of PHP in your template code. Your assigned template vars are available
-simply as <?=$foo?> <?=$bar?>, etc. (BTW, extract() doesn't carry the burden you
-may initially think.)
+simply as <?=$foo?> <?=$bar?>, etc.
 
-If you want to use a traditional compiled template, name it with any other
-extention. Most use the default .tpl extention:
+You can also use strings as templates with the "string" resource type:
 
-$smarty->display('mytemplate.tpl');
-
-You will notice in the sample code the template tags do not get compiled. That
-is because I have not written the compiler yet. Do we give Smarty 3 a new
-syntax? Do we make a Smarty 2 compatability layer? Anything is possible.
+$smarty->display('string:This is my template, {$foo}!');
 
 ACCESSING PLUGINS (modifiers, functions)
 
-When using PHP templates, you can call plugins with this syntax:
+We haven't landed on a syntax for accessing plugins from PHP templates.
+It needs to be simple, yet robust. Some ideas:
 
-<?=$this->modifier->modname($var,$params)?>
-<?=$this->function->funcname($params)?>
+// load/run modifier in-template
+$this->modifier('truncate',$foo,$args);
 
-Note: the above syntax is subject to change during Alpha.
+// load modifier into php function first
+$smarty->load->modifier('truncate','truncate');
+// execute in template;
+truncate($foo,$args);
 
-When using tagged templates, plugins are accessed with
-the typical smarty syntax:
 
-{func foo=$bar}
-{$foo|mod:$bar}
+Many other things are on the list, such as:
+
+* cache file resources
+* compile file resources
+* config file resources
+* template objects
+* per template caching
+* per function caching
+* per variable caching
 
 
 Ok that pretty much wraps up the principles behind the alpha code. Please
