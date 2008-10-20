@@ -9,10 +9,6 @@
 
 class Smarty_Internal_CompileBase {
     public $smarty = null;
-
-    // flag from lexer parser if this tag is nocache
-    public $_smarty_nocache = false;
-    public $has_output = false;
     
     function __construct()
     { 

@@ -8,15 +8,24 @@
 */
 
 class Smarty_Internal_Compiler extends Smarty_Internal_Base {
+    // compile tag objects
+    static $_tag_objects = array();
 
     // tag stack
     public $_tag_stack = array();
+    // current template
+    public $template = null;
 
     public function __construct()
     {
         parent::__construct(); 
         // set instance object
         self::instance($this); 
+
+        // get required plugins
+        $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
+        $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
+
         // flag for nochache sections
         $this->_compiler_status->nocache = false; 
         $this->_compiler_status->tag_nocache = false; 
@@ -31,25 +40,28 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $instance = $new_instance;
         return $instance;
     } 
-    // public function compile($_content, $tpl_filepath)
-    public function compile($_template)
+
+
+    /* here is where the compiling takes place. Smarty
+     *  tags in the templates are replaces with PHP code
+     */ 
+    public function compileTemplate($_template)
     {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
 
         // save template object for compile class
-
         $this->template = $_template;
         
         // get template filepath for error messages
-        $tpl_filepath = $_template->getTemplateFilepath(); 
+        $this->tpl_filepath = $_template->getTemplateFilepath(); 
         // get template
         if (($_content = $_template->getTemplateSource($_resource_name)) === false) {
             throw new SmartyException("Unable to load template {$tpl_filepath}");
         } 
 
-        $template_header = "<?php /* Smarty version " . $this->smarty->_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
+        $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
         $template_header .= "         compiled from \"" . $tpl_filepath . "\" */ ?>\n"; 
 
         // if no content just return header
@@ -59,14 +71,13 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } 
 
         $this->_compiler_status->current_tpl_filepath = $tpl_filepath; 
+
         // call the lexer/parser to compile the template
-        $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
         $lex = new Smarty_Internal_Templatelexer($_content);
-        $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
         $parser = new Smarty_Internal_Templateparser($lex,$_template->tpl_vars);
 
         while ($lex->yylex()) {
-            // echo "Parsing  {$lex->token} Token {$lex->value} \n";
+            // echo "<br>Parsing  {$lex->token} Token {$lex->value} \n";
             $parser->doParse($lex->token, $lex->value);
         } 
         $parser->doParse(0, 0);
@@ -80,13 +91,80 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } 
     } 
 
+    /*
+    *  Compile Tag
+    *
+    *  This is a call back from the lexer/parser
+    *  If required it executes the required compile plugin for the Smarty tag
+    *
+    */
+    public function compileTag($tag, $args, $nocache_parser = false)
+    { 
+        // $args contains the attributes parsed and compiled by the lexer/parser
+
+        // paser did detect detect expression with nocache vars
+        if ($nocache_parser) $this->_compiler_status->tag_nocache = true;
+
+        // assume that tag does compile into code, but creates no HTML output 
+        $this->has_code = true; 
+        $this->has_output = true; 
+        // compile the smarty tag
+        if (!($_output = $this->$tag($args)) === false) {
+            // did we get compiled code
+            if ($this->has_code) {
+                // Does it create output?
+                if ($this->has_output) {
+                    $_output .= "\n";
+                } 
+                // Call Cacher to replace nocache code
+                $_output = $this->template->cacher_object->processNocacheCode($_output);
+                // just for debugging
+                if ($this->smarty->internal_debugging) {
+                    echo "<br>compiled tag '" . htmlentities($_output) . "'<br>";
+                } 
+
+                return $_output;
+            } 
+            return;
+        } else {
+            $this->trigger_template_error ("missing compiler module for tag \"" . $tag . "\"");
+        } 
+    } 
+
+    /**
+    * Takes unknown class methods and lazy loads plugin files for them
+    * class name format:  Smarty_Compile_TagName or Smarty_Internal_Compile_TagName
+    * plugin filename format: compile.tagname.php  or internal.compile_tagname.php
+    * 
+    */
+    public function __call($name, $args)
+    {
+        $ucname = ucfirst($name);
+        $classes = array("Smarty_Internal_Compile_{$name}", "Smarty_Compile_{$name}");
+
+        foreach ($classes as $class_name) {
+            // re-use object if already instantiated
+            if (!isset(self::$_tag_objects[$name])) {
+                if ($this->smarty->loadPlugin($class_name)) {
+                    // use plugin if found
+                    self::$_tag_objects[$name] = new $class_name;
+                    return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
+                } 
+            } else {
+                return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
+            } 
+        } 
+        return false;
+    } 
+
     public function trigger_template_error($args=null)
     {
         $this->lex = Smarty_Internal_Templatelexer::instance();
         $this->parser = Smarty_Internal_Templateparser::instance();
+        $this->compiler = Smarty_Internal_Compiler::instance();
 
         $match = preg_split("/\n/", $this->lex->data);
-        echo "<br>Syntax Error on line " . $this->lex->line . " template " . $this->_compiler_status->current_tpl_filepath . '<p style="font-family:courier">' . $match[$this->lex->line-1] . "<br>";
+        echo "<br>Syntax Error on line " . $this->lex->line . " in template " . $this->compiler->tpl_filepath . '<p style="font-family:courier">' . $match[$this->lex->line-1] . "<br>";
 
         if (false) { // work in progress
             // find position in this line

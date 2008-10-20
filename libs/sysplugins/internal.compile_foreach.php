@@ -1,6 +1,5 @@
 <?php 
 // Compiler foreach tags
-
 // Not yet complete
 // - name tag not yet supported
 // - nesting checks missing
@@ -15,7 +14,6 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
     {
         $this->required_attributes = array('from', 'item');
         $this->optional_attributes = array('name', 'key'); 
-
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
@@ -26,7 +24,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
         if (isset($_attr['key'])) {
             $key = $_attr['key'];
-            $key_part = "\$this->tpl_vars->tpl_vars[$key]->data => ";
+            $key_part = "\$_key => ";
         } else {
             $key = null;
             $key_part = '';
@@ -39,7 +37,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         } 
         $output = "<?php ";
         $output .= "\$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array'); }";
-        if (isset($name)) {
+        if (false && isset($name)) {
             $foreach_props = "\$this->tpl_vars->tpl_vars['smarty']->data['foreach'][$name]";
             $output .= "{$foreach_props} = array('total' => count(\$_from), 'iteration' => 0);\n";
             $output .= "if ({$foreach_props}['total'] > 0):\n";
@@ -47,7 +45,11 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
             $output .= "        {$foreach_props}['iteration']++;\n";
         } else {
             $output .= "if (count(\$_from)):\n";
-            $output .= "    foreach (\$_from as $key_part\$this->tpl_vars->tpl_vars[$item]->data):\n";
+            $output .= "    foreach (\$_from as $key_part\$_item):\n";
+            if ($key !== null) {
+                $output .= " \$this->tpl_vars->assign($key,\$_key);";
+            } 
+            $output .= " \$this->tpl_vars->assign($item,\$_item);";
         } 
         $output .= "?>";
 

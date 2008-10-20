@@ -3,6 +3,8 @@
 /**
 * Smarty template class
 * 
+* contains methods to process the template
+* 
 * @package Smarty
 * @subpackage plugins
 */
@@ -10,15 +12,17 @@
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     // object cache
     static $resource_objects = array();
-    static $caching_objects = array();
-    static $compiler_objects = array();
-    static $write_file_object = null; 
+    static $write_file_object = null;
+    static $compiler_object = null;
+    static $cacher_object = null;
+    static $cache_resource_objects = array(); 
     // Smarty parameter
     public $cache_id = null;
     public $compile_id = null;
     public $caching = null;
     public $caching_lifetime = null;
     public $compiler_class = null;
+    public $cacher_class = null;
     public $caching_type = null; 
     // Template resource
     public $template_resource = null;
@@ -40,7 +44,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     private $cached_timestamp = null;
     private $isCached = null; 
     // template variables
-    public $tpl_vars = null;
+    public $tpl_vars;
 
     public function __construct($template_resource, $_parent_tpl_vars = null, $_cache_id = null, $_compile_id = null)
     {
@@ -51,43 +55,42 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->caching = $this->smarty->caching;
         $this->caching_lifetime = $this->smarty->caching_lifetime;
         $this->compiler_class = $this->smarty->compiler_class;
+        $this->cacher_class = $this->smarty->cacher_class;
         $this->caching_type = $this->smarty->default_caching_type;
-        $this->tpl_vars = new Smarty_Data;
-        $this->parent_tpl_vars = $_parent_tpl_vars; 
+        $this->cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($this->caching_type);
+        $this->tpl_vars = new Smarty_Data($_parent_tpl_vars); 
+        // load cacher
+        if (!is_object($this->cacher_object)) {
+            $this->smarty->loadPlugin($this->cacher_class);
+            $this->cacher_object = new $this->cacher_class;
+        } 
+        // load cache resource
+        if (!is_object($this->cache_resource_objects[$this->caching_type])) {
+            $this->smarty->loadPlugin($this->cache_resource_class);
+            $this->cache_resource_objects[$this->caching_type] = new $this->cache_resource_class;
+        } 
         // Template resource
         $this->template_resource = $template_resource; 
         // parse resource name
         if (!$this->parseResourceName ($template_resource)) {
             throw new SmartyException ("Unable to parse resource '{$template_resource}'");
         } 
-        // if we have a parent copy of the template vars
-        if (is_object($_parent_tpl_vars)) {
-            // is a Smarty data object
-            foreach ($_parent_tpl_vars->tpl_vars as $_key => $_value) {
-                $this->tpl_vars->tpl_vars[$_key] = clone $_parent_tpl_vars->tpl_vars[$_key];
-            } 
-        } elseif (is_array($_parent_tpl_vars)) {
-            // is a PHP array
-            foreach ($_parent_tpl_vars as $_key => $_value) {
-                $this->tpl_vars->tpl_vars[$_key]->data = $_value;
-                $this->tpl_vars->tpl_vars[$_key]->caching = false;
-                $this->tpl_vars->tpl_vars[$_key]->global = false;
-            } 
-        } 
     } 
 
     public function updateGlobalVariables ()
     { 
-        // copy global vars back to parent
-        if (is_object($this->parent_tpl_vars)) {
+        // do we have a back pointer?
+        if (is_object($this->tpl_vars->parent_tpl_vars)) {
             foreach ($this->tpl_vars->tpl_vars as $_key => $_value) {
+                // copy global vars back to parent
                 if ($this->tpl_vars->tpl_vars[$_key]->global) {
                     if (isset($this->parent_tpl_vars->tpl_vars[$_key])) {
-                        $this->parent_tpl_vars->tpl_vars[$_key]->data = $this->tpl_vars->tpl_vars[$_key]->data;
+                        // variable is already defined in parent, copy value
+                        $this->tpl_vars->parent_tpl_varstpl_vars[$_key]->value = $this->tpl_vars->tpl_vars[$_key]->value;
                     } else {
-                        $this->parent_tpl_vars->tpl_vars[$_key] = clone $this->tpl_vars->tpl_vars[$_key];
-                        $this->parent_tpl_vars->tpl_vars[$_key]->global = false;
-                    } 
+                        // create variable in parent
+                        $this->tpl_vars->parent_tpl_vars->tpl_vars[$_key] = clone $_value;
+                   } 
                 } 
             } 
         } 
@@ -169,13 +172,15 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function compileTemplateSource ()
     { 
         // compile template
-        if (!is_object($this->compiler_objects[$this->compiler_class])) {
+        if (!is_object($this->compiler_object)) {
+            // load compiler
             $this->smarty->loadPlugin('Smarty_Internal_CompileBase');
             $this->smarty->loadPlugin($this->compiler_class);
-            $this->compiler_objects[$this->compiler_class] = new $this->compiler_class;
+            $this->compiler_object = new $this->compiler_class;
         } 
-        // did compiling succeed?
-        if ($this->compiler_objects[$this->compiler_class]->compile($this)) {
+        // call compiler
+        if ($this->compiler_object->compileTemplate($this)) {
+            // compiling succeded
             if (!$this->isEvaluated()) {
                 if (!is_object($this->write_file_object)) {
                     $this->smarty->loadPlugin("Smarty_Internal_Write_File");
@@ -196,28 +201,27 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getCachedFilepath ()
     {
         return $this->cached_filepath === null ?
-        $this->cached_filepath = $this->caching_objects[$this->caching_type]->getCachedFilepath($this) :
+        $this->cached_filepath = $this->cache_resource_objects[$this->caching_type]->getCachedFilepath($this) :
         $this->cached_filepath;
     } 
 
     public function getCachedTimestamp ()
     {
         return $this->caching_timestamp === null ?
-        $this->cached_timestamp = $this->caching_objects[$this->caching_type]->getCachedTimestamp($this) :
+        $this->cached_timestamp = $this->cache_resource_objects[$this->caching_type]->getCachedTimestamp($this) :
         $this->cached_timestamp;
     } 
 
     public function getCachedContent ()
     {
-        $this->loadCacheHandler();
         return $this->cached_content === null ?
-        $this->cached_content = $this->caching_objects[$this->caching_type]->getCachedContent($this) :
+        $this->cached_content = $this->cacher_object->getCachedContent($this) :
         $this->cached_content;
     } 
 
     public function writeCachedContent ()
     {
-        return $this->caching_objects[$this->caching_type]->writeCachedContent($this);
+        return $this->cacher_object->writeCachedContent($this);
     } 
 
     public function isCached ()
@@ -225,32 +229,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if ($this->isCached === null) {
             $this->isCached = false;
             if ($this->caching) {
-                $this->loadCacheHandler();
                 if (!$this->mustCompile() && filemtime($this->getCompiledFilepath()) < $this->getCachedTimestamp() && ((time() <= $this->getCachedTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
-                    $this->cached_template = $this->caching_objects[$this->caching_type]->getCachedContents($this);
+                    $this->cached_template = $this->cacher_object->getCachedContents($this);
                     $this->isCached = true;
                 } 
             } 
         } 
         return $this->isCached;
-    } 
-
-    private function loadCacheHandler ()
-    { 
-        // load cache handler if required
-        if (!isset($this->caching_objects[$this->caching_type])) {
-            // is this an internal or custom cache handler?
-            if (in_array($this->caching_type, array('file'))) {
-                // internal, get from sysplugins dir
-                $_caching_class = "Smarty_Internal_Caching_{$this->caching_type}";
-            } else {
-                // custom, get from plugins dir
-                $_caching_class = "Smarty_Caching_{$this->caching_type}";
-            } 
-            // load resource plugin, instantiate
-            $this->smarty->loadPlugin($_caching_class);
-            $this->caching_objects[$this->caching_type] = new $_caching_class;
-        } 
     } 
 
     public function getRenderedTemplate ()
@@ -278,11 +263,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             if ($this->usesCompiler()) {
                 $this->getCompiledTemplate(); 
                 // extract($this->smarty->tpl_vars);
-                foreach ($this->tpl_vars->tpl_vars as $_smarty_var => $_smarty_value) {
-                    if (isset($_smarty_value->data)) {
-                        $$_smarty_var = $_smarty_value->data;
-                    } 
-                } 
+                // foreach ($this->tpl_vars->tpl_vars as $_smarty_var => $_smarty_value) {
+                // if (isset($_smarty_value->data)) {
+                // $$_smarty_var = $_smarty_value->data;
+                // }
+                // }
                 unset ($_smarty_var, $_smarty_value);
                 ob_start();
                 eval('?>' . $this->compiled_template);
@@ -343,11 +328,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         // cache template object under a unique ID
         $this->smarty->template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
         return true;
-    } 
-    // build a unique template ID
-    public function buildTemplateId ($_resorce, $_cache_id, $_compile_id)
-    {
-        return md5($_resorce . md5($_cache_id) . md5($_compile_id));
     } 
 
     /*

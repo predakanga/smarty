@@ -27,9 +27,7 @@ class Smarty_Internal_TemplateBase {
                     if (in_array($_key, array('this', 'smarty')))
                         throw new SmartyException("Cannot assign value to reserved var '{$_key}'");
                     else {
-                        $_var_ptr[$_key]->data = $_val;
-                        if ($nocache !== null) $_var_ptr[$_key]->nocache = $nocache;
-                        if ($global !== null) $_var_ptr[$_key]->global = $global;
+                        $_var_ptr[$_key] = new Smarty_variable($_val, $nocache, $global);
                     } 
                 } 
             } 
@@ -38,11 +36,47 @@ class Smarty_Internal_TemplateBase {
                 if (in_array($tpl_var, array('this', 'smarty')))
                     throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
                 else {
-                    $_var_ptr->tpl_vars[$tpl_var]->data = $value;
-                    if ($nocache !== null) $_var_ptr->tpl_vars[$tpl_var]->nocache = $nocache;
-                    if ($global !== null) $_var_ptr->tpl_vars[$tpl_var]->global = $global;
+                    $_var_ptr->tpl_vars[$tpl_var] = new Smarty_variable($value, $nocache, $global);
                 } 
             } 
+        } 
+    } 
+
+    /**
+    * gets the Value of a Smarty variable
+    * 
+    * @param string $variable the name of the Smarty variable
+    */
+    public function getValue($variable)
+    {
+        $var = $this->getVariable($variable);
+//        var_dump($var);
+        return $this->getVariable($variable)->value;
+    } 
+
+    /**
+    * gets the object of a Smarty variable
+    * 
+    * @param string $variable the name of the Smarty variable
+    */
+    public function getVariable($variable)
+    {
+        if (isset($this->tpl_vars[$variable])) {
+            // found it, return it
+           return $this->tpl_vars[$variable]; 
+            // not found, try at parent
+        } elseif ($this->parent_tpl_vars !== null) {
+            // check there, may be called recursivly
+            $var=$this->parent_tpl_vars->getVariable($variable);
+            return $this->parent_tpl_vars->getVariable($variable);
+        }
+        if (Smarty::$error_unassigned) {
+        if (class_exists('Smarty_Internal_Compiler')) {
+            Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable.'"');
+//            die();
+        } else {
+            throw new SmartyException('Undefined Smarty variable "' . $variable.'"');
+        }
         } 
     } 
 
@@ -55,7 +89,8 @@ class Smarty_Internal_TemplateBase {
     {
         if (!is_object($template)) {
             // we got a template resource
-            $_templateId = Smarty_Internal_Template::buildTemplateId ($template, $cache_id, $compile_id); 
+
+            $_templateId = $this->buildTemplateId ($template, $cache_id, $compile_id); 
             // already in template cache?
             if (is_object($this->template_objects[$_templateId])) {
                 // return cached template object
@@ -68,12 +103,56 @@ class Smarty_Internal_TemplateBase {
             // just return a copy of template class
             return $template;
         } 
+    }
+    
+    // build a unique template ID
+    public function buildTemplateId ($_resorce, $_cache_id, $_compile_id)
+    {
+        return md5($_resorce . md5($_cache_id) . md5($_compile_id));
     } 
+ 
 } 
 // Class for template data
 class Smarty_Data extends Smarty_Internal_TemplateBase {
-    // template variables
-    var $tpl_vars = array();
+    // array template of variable objects
+    public $tpl_vars = NULL; 
+    // back pointer to parent vars
+    public $parent_tpl_vars = null;
+
+    public function __construct ($_parent_tpl_vars = null)
+    { 
+        // array template of variable objects
+        $this->tpl_vars = array();
+        if ($_parent_tpl_vars === null) {
+            // no back pionter
+            $this->parent_tpl_vars = null;
+        } elseif ($_parent_tpl_vars instanceof Smarty_Data) {
+            // when Smarty data object set up back pointer
+            $this->parent_tpl_vars = $_parent_tpl_vars;
+        } elseif (is_array($_parent_tpl_vars)) {
+            // when PHP array no back pionter
+            $this->parent_tpl_vars = null; 
+            // set up varaible values
+            foreach ($_parent_tpl_vars as $_key => $_val) {
+                $this->tpl_vars[$_key] = new Smarty_variable($_val);
+            } 
+        } else {
+            throw new SmartyException("Wrong type for template variables");
+        } 
+    } 
+} 
+// Class for a variable
+class Smarty_Variable {
+    // template variable
+    public $value;
+    public $nocache;
+    public $global;
+    public function __construct ($value = null, $nocache = false, $global = false)
+    {
+        $this->value = $value;
+        $this->nocache = $nocache;
+        $this->global = $global;
+    } 
 } 
 
 ?>

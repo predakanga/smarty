@@ -17,10 +17,6 @@
         $this->tpl_vars = $tpl_vars; 
         $this->smarty = Smarty::instance(); 
         $this->compiler = Smarty_Internal_Compiler::instance(); 
-        $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Tag");
-        $this->smarty->compile_tag = new Smarty_Internal_Compile_Smarty_Tag;
- //       $this->smarty->loadPlugin("Smarty_Internal_Compile_Smarty_Variable");
- //       $this->smarty->compile_variable = new Smarty_Internal_Compile_Smarty_Variable;
 				$this->nocache = false;
     }
     public static function &instance($new_instance = null)
@@ -87,34 +83,34 @@ template_element(res)::= OTHER(o). {res = o;}
 //
 // all Smarty tags start here
 //
-									// variable
-smartytag(res)   ::= LDEL expr(e) RDEL. { res = $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>'print_expression'),array('value'=>e),array('_smarty_nocache'=>$this->nocache)));$this->nocache=false;}
-smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>'print_expression'),array('value'=>e),array('_smarty_nocache'=>$this->nocache),a));$this->nocache=false;}
+									// output with optional attributes
+smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a),$this->nocache);$this->nocache=false;}
 									// assign new style
-smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL expr(e) RDEL. { res = $this->smarty->compile_tag->execute(array('_smarty_tag'=>'assign','var' => v, 'value'=>e,'_smarty_nocache'=>$this->nocache));$this->nocache=false;}									
-smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->smarty->compile_tag->execute(array('_smarty_tag'=>'assign','var' => v, 'value'=>e,'_smarty_nocache'=>$this->nocache));$this->nocache=false;}									
-									// tag without attributes
-smartytag(res)   ::= LDEL ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array(0)));}
-									// tag with Smarty2 style attributes
-smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->smarty->compile_tag->execute(array_merge(array('_smarty_tag'=>i),array('_smarty_nocache'=>$this->nocache),a));$this->nocache=false;}
+smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e),$this->nocache);$this->nocache=false;}									
+smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e),$this->nocache);$this->nocache=false;}									
+									// tag with optional Smarty2 style attributes
+smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
 									// end of block tag  {/....}									
-smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>'end_'.i));}
+smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
 									// {if} and {elseif} tag
-smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'ifexp'=>ie));}
+smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
+smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
 									// {foreach} tag
-smartytag(res)   ::= LDEL ID(i) SPACE variable(v0) AS DOLLAR ID(v1) APTR DOLLAR ID(v2) RDEL. { res =  $this->smarty->compile_tag->execute(array('_smarty_tag'=>i,'from'=>v0,'key'=>v1,'item'=>v2));}
+smartytag(res)   ::= LDEL ID(i) SPACE variable(v0) AS DOLLAR ID(v1) APTR DOLLAR ID(v2) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v0,'key'=>v1,'item'=>v2));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
 
 //
 //Attributes of Smarty tags 
 //
-									// single attribute
-attributes(res)  ::= attribute(a). { res = a;}
 									// list of attributes
 attributes(res)  ::= attributes(a1) attribute(a2). { res = array_merge(a1,a2);}
+									// single attribute
+attributes(res)  ::= attribute(a). { res = a;}
+									// no attributes
+attributes(res)  ::= . { res = array();}
+									
 									// different formats of attribute
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 //attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>'e');}
@@ -123,18 +119,21 @@ attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
 //
 // expressions
 //
+									// simple expression
+expr(res)				 ::= exprs(e).	{res = e;}
+									// expression with modifier and optional additional modifier paramter
+expr(res)        ::= exprs(e) modifier(m) modparameters(p). {res = "\$this->smarty->modifier->".m . "(". e . p .")"; } 
+
 									// single value
-expr(res)        ::= value(v). { res = v; }
+exprs(res)        ::= value(v). { res = v; }
 									// +/- value
-expr(res)        ::= UNIMATH(m) value(v). { res = m.v; }
+exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// expression with simple modifier
-expr(res)        ::= expr(e) modifier(m). { res = "\$this->smarty->modifier->".m . "(". e .")"; }
-									// expression with modifier and additional modifier paramter
-expr(res)        ::= expr(e) modifier(m) modparameters(p). {res = "\$this->smarty->modifier->".m . "(". e .",". p .")"; } 
+//expr(res)        ::= expr(e) modifier(m). { res = "\$this->smarty->modifier->".m . "(". e .")"; }
 									// arithmetic expression
-expr(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
+exprs(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 									// catenate
-expr(res)        ::= expr(e) DOT value(v). { res = e . '.' . v; } 
+exprs(res)        ::= expr(e) DOT value(v). { res = e . '.' . v; } 
 
 //
 // mathematical operators
@@ -170,9 +169,9 @@ value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars->tpl_vars['. v .']->data'; $_v = trim(v,"'"); if($this->tpl_vars->tpl_vars[$_v]->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars->tpl_vars['. v .']->data'.a;if($this->tpl_vars->tpl_vars[$_v]->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
@@ -195,7 +194,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars->tpl_vars['. v .']->data'.oc; $_v=trim(v,"'");if($this->tpl_vars->tpl_vars[$_v]->nocache) $this->nocache=true;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars->getVariable('. v .')->value'.oc; $_v=trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
@@ -212,7 +211,7 @@ objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 										// function with parameter
 function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$this->smarty->function->".f . "(". p .")";}
 										// function without parameter
-function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$this->smarty->function->".f."()";}
+//function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$this->smarty->function->".f."()";}
 
 //
 // method
@@ -220,25 +219,29 @@ function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$this->smarty->function->".f
 										// method with parameter
 method(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = f . "(". p .")";}
 										// function without parameter
-method(res)     ::= ID(f) OPENP CLOSEP.	{ res = f."()";}
+//method(res)     ::= ID(f) OPENP CLOSEP.	{ res = f."()";}
 
 // function parameter
 										// multiple parameters
 params(res)       ::= expr(e) COMMA params(p). { res = e.",".p;}
 										// single parameter
 params(res)       ::= expr(e). { res = e;}
+										// kein parameter
+params            ::= . { return;}
 
 //
 // modifier
 //  
 modifier(res)    ::= VERT ID(s). { res =  s;}
 // modifier parameter
+										// multiple parameter
+modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 										// single parameter
 modparameters(res) ::= modparameter(mp). {res = mp;}
-										// multiple parameter
-modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.",".mp;}
+										// no parameter
+modparameters      ::= . {return;}
 										// parameter expression
-modparameter(res) ::= COLON expr(mp). {res = mp;}
+modparameter(res) ::= COLON expr(mp). {res = ','.mp;}
 
 //
 // if expressions

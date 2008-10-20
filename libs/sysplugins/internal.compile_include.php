@@ -17,54 +17,50 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         $this->required_attributes = array('file');
         $this->optional_attributes = array('_any'); 
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
-
+        $_attr = $this->_get_attributes($args); 
+        // save posible attributes
         $include_file = $_attr['file'];
-
         if (isset($_attr['assign'])) {
             $_assign = $_attr['assign'];
         } 
-
         if (isset($_attr['caching_lifetime'])) {
             $_caching_lifetime = $_attr['caching_lifetime'];
         } 
-
         if ($_attr['nocache'] == 'true') {
-            $_caching = false;
+            $_caching = 'false';
         } 
-
-        unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache']);
-
-        $_output = '';
-
-        foreach ($_attr as $_key => $_value) {
-            $_output .= "\$this->assign('$_key',$_value);";
+        if ($_attr['caching'] == 'true') {
+            $_caching = 'true';
         } 
-
-        if (isset($_caching_lifetime) || isset($_caching)) {
-            $_output .= " \$_template = new Smarty_Template ($include_file, \$this->tpl_vars);";
-
-            if (isset($_caching_lifetime)) {
-                $_output .= "\$_template->caching_lifetime = $_caching_lifetime;";
+        // delete {include} attributes
+        unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching']); 
+        // create template object
+        $_output = "\$_template = new Smarty_Template ($include_file, \$this->tpl_vars);"; 
+        // ceck if there are smarty variables defined in the {include} tag
+        if (isset($_attr)) {
+            // create variables
+            foreach ($_attr as $_key => $_value) {
+                $_output .= "\$_template->assign('$_key',$_value);";
             } 
-            if (isset($_caching)) {
-                $_output .= "\$_template->caching = false;";
-            } 
-            if (isset($_assign)) {
-                $_output .= "\$_tmp = \$this->smarty->fetch(\$_template);";
-            } else {
-                $_output .= "echo \$this->smarty->fetch(\$_template);";
-            } 
+        } 
+        // add caching parameter if required
+        if (isset($_caching_lifetime)) {
+            $_output .= "\$_template->caching_lifetime = $_caching_lifetime;";
+        } 
+        if (isset($_caching)) {
+            $_output .= "\$_template->caching = $_caching;";
+        }
+        //was there an assign attribute 
+        if (isset($_assign)) {
+            $_output .= "\$_tmp = \$this->smarty->fetch(\$_template);";
         } else {
-            if (isset($_assign)) {
-                $_output .= "\$_tmp = \$this->smarty->fetch($include_file, \$this->tpl_vars);";
-            } else {
-                $_output .= "echo \$this->smarty->fetch($include_file, \$this->tpl_vars);";
-            } 
+            $_output .= "echo \$this->smarty->fetch(\$_template);";
         } 
 
         if (isset($_assign)) {
-            $_output .= "\$this->smarty->assign($_assign,\$_tmp);  unset(\$_tmp);";
+            $_output .= "\$this->tpl->assign($_assign,\$_tmp);  unset(\$_tmp);";
+            // create variable for compiler
+//            $this->compiler->template->tpl_vars->tpl_vars[$_var] = new Smarty_variable(null, $_nocache_boolean, $_global_boolean);
         } 
         return "<?php $_output ?>";
     } 

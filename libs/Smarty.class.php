@@ -45,7 +45,11 @@ require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_
 
 class Smarty extends Smarty_Internal_TemplateBase {
     // smarty version
-    public $_version = 'Smarty3Alpha'; 
+    static $_version = 'Smarty3Alpha'; 
+    // class used for templates
+    public $template_class = 'Smarty_Internal_Template'; 
+    // display error on not assigned variabled
+    static $error_unassigned = false; 
     // template directory
     public $template_dir = null; 
     // compile directory
@@ -91,12 +95,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $default_resource_type = 'file'; 
     // caching type
     public $default_caching_type = 'file'; 
+    // internal cache resource types
+    public $cache_resorce_types = array('file'); 
     // config type
     public $default_config_type = 'file'; 
     // class used for compiling templates
     public $compiler_class = 'Smarty_Internal_Compiler'; 
-    // class used for templates
-    public $template_class = 'Smarty_Internal_Template'; 
+    // class used for cacher
+    public $cacher_class = 'Smarty_Internal_Cacher_InjectCode'; 
     // exception handler: set null to disable
     public $exception_handler = array('SmartyException', 'getStaticException'); 
     // cached template objects
@@ -119,7 +125,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR; 
         // set instance object
         self::instance($this); 
-        $this->tpl_vars = new Smarty_Data; 
+        // root data object
+        $this->tpl_vars = new Smarty_Data;
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
         $this->loadPlugin('Smarty_Internal_PluginBase');
@@ -129,8 +136,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->modifier = new Smarty_Internal_Modifier;
         $this->loadPlugin('Smarty_Internal_Function');
         $this->function = new Smarty_Internal_Function;
-        $this->loadPlugin('Smarty_Internal_Compile');
-        $this->compile = new Smarty_Internal_Compile;
         $this->loadPlugin('Smarty_Internal_Block');
         $this->block = new Smarty_Internal_Block;
     } 
@@ -169,31 +174,29 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public function fetch($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
     {
         if ($parent_tpl_vars === null) {
+            // get default Smarty data object
             $parent_tpl_vars = $this->tpl_vars;
-        } 
-        if (!($template instanceof $this->template_class)) {
-            $template = $this->createTemplate ($template, $parent_tpl_vars, $cache_id, $compile_id);
-        } 
+        }
+        // create template object if necessary
+        ($template instanceof $this->template_class)? $_template = $template :
+        $_template = $this->createTemplate ($template, $parent_tpl_vars , $cache_id, $compile_id); 
         // return redered template
-        $_output = $template->getRenderedTemplate();
-        return $_output;
+        return $_template->getRenderedTemplate();
     } 
-                              
+
     /**
     * displays a Smarty template
     * 
     * @param string $template_resource the resource handle of the template file  or template object
     */
     public function display($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
-    {
+    { 
         if ($parent_tpl_vars === null) {
+            // get default Smarty data object
             $parent_tpl_vars = $this->tpl_vars;
         } 
-        if (!($template instanceof $this->template_class)) {
-            $template = $this->createTemplate ($template, $parent_tpl_vars , $cache_id, $compile_id);
-        } 
         // display template
-        echo $template->getRenderedTemplate();
+        echo $this->fetch ($template, $parent_tpl_vars , $cache_id, $compile_id);
         return true;
     } 
 

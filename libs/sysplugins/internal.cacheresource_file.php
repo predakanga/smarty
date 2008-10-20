@@ -10,7 +10,7 @@
 * Cache Handler
 */
 
-class Smarty_Internal_Caching_File extends Smarty_Internal_PluginBase {
+class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     public function getCachedFilepath($_template)
     {
         return $this->buildCachedFilepath ($_template);
