@@ -152,6 +152,7 @@ class Smarty_Variable {
         $this->value = $value;
         $this->nocache = $nocache;
         $this->global = $global;
+        $this->prop = array();
     } 
 } 
 

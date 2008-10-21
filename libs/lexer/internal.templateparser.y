@@ -51,7 +51,7 @@
 //
 %fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR QUOTE BOOLEAN AS.
+              NOT LAND LOR QUOTE BOOLEAN AS IN.
 
 
 //
@@ -98,6 +98,7 @@ smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->compiler
 smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
 									// {foreach} tag
 smartytag(res)   ::= LDEL ID(i) SPACE variable(v0) AS DOLLAR ID(v1) APTR DOLLAR ID(v2) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v0,'key'=>v1,'item'=>v2));}
+smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag('foreach',array('from'=>v1,'item'=>v0));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
 
@@ -170,6 +171,7 @@ value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 //
 									// simple Smarty variable
 variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$this->tpl_vars->getVariable('. v .')->prop['.p.']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// array variable
 variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 										// single array index
