@@ -44,7 +44,10 @@ class Smarty_Internal_Templatelexer
     				'VERT'		=> '|',
     				'DOT'			=> '.',
     				'COMMA'		=> '","',
+    				'ANDSYM'		=> '"&"',
     				'ID'			=> 'identifier',
+    				'IF'			=> 'if',
+    				'FOR'			=> 'for',
     				'OTHER'		=> 'text',
     				'PHP'			=> 'PHP code',
     				'LDELSLASH' => 'closing tag',
@@ -104,10 +107,12 @@ colon = /\:/
 semicolon = /\;/
 vert = /\|/
 equal = /\=/
+underl = /_/
 space = /[\s]+/
 ptr = /\->/
 aptr = /\s?=>\s?/
 quote = /\"/
+andsym = /\s?\&\s?/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
@@ -117,7 +122,9 @@ lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
 greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
-as = /\s+(AS|as)\s+/
+if = /(if|elseif)/
+for = /for/
+foreach = /foreach/
 in = /\s+(IN|in)\s+/
 not = /\s*\!|\s+(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
@@ -150,8 +157,14 @@ ldel {
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
 }
-as {
-  $this->token = Smarty_Internal_Templateparser::TP_AS;
+if {
+  $this->token = Smarty_Internal_Templateparser::TP_IF;
+}
+foreach {
+  $this->token = Smarty_Internal_Templateparser::TP_FOREACH;
+}
+for {
+  $this->token = Smarty_Internal_Templateparser::TP_FOR;
 }
 in {
   $this->token = Smarty_Internal_Templateparser::TP_IN;
@@ -201,6 +214,9 @@ openB {
 closeB {
   $this->token = Smarty_Internal_Templateparser::TP_CLOSEB;
 }
+underl {
+  $this->token = Smarty_Internal_Templateparser::TP_UNDERL;
+}
 ptr {
   $this->token = Smarty_Internal_Templateparser::TP_PTR; 
 }
@@ -245,6 +261,9 @@ dot {
 }
 comma {
   $this->token = Smarty_Internal_Templateparser::TP_COMMA;
+}
+andsym {
+  $this->token = Smarty_Internal_Templateparser::TP_ANDSYM;
 }
 id {
   $this->token = Smarty_Internal_Templateparser::TP_ID;

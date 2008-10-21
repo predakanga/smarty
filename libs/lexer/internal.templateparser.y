@@ -51,7 +51,7 @@
 //
 %fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR QUOTE BOOLEAN AS IN.
+              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM IF FOR FOREACH UNDERL.
 
 
 //
@@ -90,15 +90,19 @@ smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL expr(e) RDEL. { res = $this->co
 smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e),$this->nocache);$this->nocache=false;}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
+smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+//smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+smartytag(res)   ::= LDELSLASH IF(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+smartytag(res)   ::= LDELSLASH FOREACH(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
 									// {if} and {elseif} tag
-smartytag(res)   ::= LDEL ID(i) SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
+smartytag(res)   ::= LDEL IF(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL ID(i) SPACE variable(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON variable(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>v1.'='.e1,'ifexp'=>ie,'loop'=>v2.e2));}
-									// {foreach} tag
-smartytag(res)   ::= LDEL ID(i) SPACE variable(v0) AS DOLLAR ID(v1) APTR DOLLAR ID(v2) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v0,'key'=>v1,'item'=>v2));}
-smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag('foreach',array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDEL FOR(i) SPACE DOLLAR varvar(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('var'=>v1,'start'=>e1,'ifexp'=>ie,'loop'=>e2));}
+									// {for $var in $array} tag
+smartytag(res)   ::= LDEL FOR(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
 
@@ -134,7 +138,7 @@ exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// arithmetic expression
 exprs(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 									// catenate
-exprs(res)        ::= expr(e) DOT value(v). { res = e . '.' . v; } 
+exprs(res)        ::= expr(e) ANDSYM value(v). { res = e . '.' . v; } 
 
 //
 // mathematical operators
@@ -170,16 +174,19 @@ value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 // variables 
 //
 									// simple Smarty variable
-variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
-variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$this->tpl_vars->getVariable('. v .')->prop['.p.']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+//variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$this->tpl_vars->getVariable('. v .')->prop[\''.p.'\']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// array variable
 variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+									// special vriables
+variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
 vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
-// Smarty2 style index  not supported any longer
-//vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
+vararraydefs        ::= . {return;}
+										// Smarty2 style index 
+vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
 										// PHP style index
 vararraydef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
 
