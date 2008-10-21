@@ -71,7 +71,7 @@ class Smarty_Internal_TemplateBase {
             return $this->parent_tpl_vars->getVariable($variable);
         }
         if (Smarty::$error_unassigned) {
-        if (class_exists('Smarty_Internal_Compiler')) {
+        if (class_exists('Smarty_Internal_Compiler',false)) {
             Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable.'"');
 //            die();
         } else {

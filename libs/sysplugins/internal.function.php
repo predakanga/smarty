@@ -26,7 +26,7 @@ class Smarty_Internal_Function extends Smarty_Internal_Base {
       if(!isset($objects[$class_name]))
       {
   
-          if(class_exists($class_name) || $this->smarty->loadPlugin($class_name))
+          if(class_exists($class_name,false) || $this->smarty->loadPlugin($class_name))
           {
               // use plugin if found
               $objects[$class_name] = new $class_name;

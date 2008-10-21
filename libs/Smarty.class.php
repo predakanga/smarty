@@ -224,7 +224,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public function loadPlugin($class_name)
     { 
         // if class exists, exit silently (already loaded)
-        if (class_exists($class_name))
+        if (class_exists($class_name,false))
             return true; 
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
@@ -265,7 +265,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         } 
         require_once($this->sysplugins_dir . $plugin_filename);
         $class_name = "Smarty_Method_{$name}";
-        if (!class_exists($class_name)) {
+        if (!class_exists($class_name,false)) {
             throw new SmartyException ("Sysplugin file " . $plugin_filename . "does not define class " . $class_name);
             die();
         } 
