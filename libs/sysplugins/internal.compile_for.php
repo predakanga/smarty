@@ -28,9 +28,11 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
             $output .= " \$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array');}\n";
             $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['total']=count(\$_from);\n";
             $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['iteration']=0;\n";
+            $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['index']=-1;\n";
             $output .= "if (\$this->tpl_vars->tpl_vars[$item]->prop['total'] > 0){\n";
             $output .= "    foreach (\$_from as \$this->tpl_vars->tpl_vars[$item]->prop['key'] => \$this->tpl_vars->tpl_vars[$item]->value){\n";
             $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['iteration']++;\n";
+            $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['index']++;\n";
             $output .= "?>";
 
             return $output;

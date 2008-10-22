@@ -161,10 +161,9 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     {
         $this->lex = Smarty_Internal_Templatelexer::instance();
         $this->parser = Smarty_Internal_Templateparser::instance();
-        $this->compiler = Smarty_Internal_Compiler::instance();
 
         $match = preg_split("/\n/", $this->lex->data);
-        echo "<br>Syntax Error on line " . $this->lex->line . " in template " . $this->compiler->tpl_filepath . '<p style="font-family:courier">' . $match[$this->lex->line-1] . "<br>";
+        echo '<br>Syntax Error on line ' . $this->lex->line . ' in template "' . $this->tpl_filepath . '"<p style="font-family:courier">' . $match[$this->lex->line-1] . "<br>";
 
         if (false) { // work in progress
             // find position in this line
