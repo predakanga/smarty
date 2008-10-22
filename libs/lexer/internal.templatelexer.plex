@@ -46,8 +46,6 @@ class Smarty_Internal_Templatelexer
     				'COMMA'		=> '","',
     				'ANDSYM'		=> '"&"',
     				'ID'			=> 'identifier',
-    				'IF'			=> 'if',
-    				'FOR'			=> 'for',
     				'OTHER'		=> 'text',
     				'PHP'			=> 'PHP code',
     				'LDELSLASH' => 'closing tag',
@@ -122,9 +120,6 @@ lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
 greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
-if = /(if|elseif)/
-for = /for/
-foreach = /foreach/
 in = /\s+(IN|in)\s+/
 not = /\s*\!|\s+(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
@@ -156,15 +151,6 @@ ldel {
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
-}
-if {
-  $this->token = Smarty_Internal_Templateparser::TP_IF;
-}
-foreach {
-  $this->token = Smarty_Internal_Templateparser::TP_FOREACH;
-}
-for {
-  $this->token = Smarty_Internal_Templateparser::TP_FOR;
 }
 in {
   $this->token = Smarty_Internal_Templateparser::TP_IN;

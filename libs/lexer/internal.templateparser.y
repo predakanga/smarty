@@ -51,7 +51,7 @@
 //
 %fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM IF FOR FOREACH UNDERL.
+              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL.
 
 
 //
@@ -86,23 +86,24 @@ template_element(res)::= OTHER(o). {res = o;}
 									// output with optional attributes
 smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a),$this->nocache);$this->nocache=false;}
 									// assign new style
-smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e),$this->nocache);$this->nocache=false;}									
-smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e),$this->nocache);$this->nocache=false;}									
+smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s,$this->nocache);$this->nocache=false;}									
+//smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e),$this->nocache);$this->nocache=false;}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
-smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
+//smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
 //smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
-smartytag(res)   ::= LDELSLASH IF(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
-smartytag(res)   ::= LDELSLASH FOREACH(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
-smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+//smartytag(res)   ::= LDELSLASH IF(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+//smartytag(res)   ::= LDELSLASH FOREACH(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+//smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
 									// {if} and {elseif} tag
-smartytag(res)   ::= LDEL IF(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
+smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL FOR(i) SPACE DOLLAR varvar(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('var'=>v1,'start'=>e1,'ifexp'=>ie,'loop'=>e2));}
+//smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('var'=>v1,'start'=>e1,'ifexp'=>ie,'loop'=>e2));}
+smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
 									// {for $var in $array} tag
-smartytag(res)   ::= LDEL FOR(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
 
@@ -119,7 +120,15 @@ attributes(res)  ::= . { res = array();}
 									// different formats of attribute
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 //attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>'e');}
-attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
+//attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
+
+//
+// statement
+//
+statements(res)		::= statement(s). { res = array(s);}
+statements(res)		::= statements(s1) COMMA statement(s). { s1[]=s; res = s1;}
+
+statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'value'=>e);}
 
 //
 // expressions
@@ -128,6 +137,8 @@ attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
 expr(res)				 ::= exprs(e).	{res = e;}
 									// expression with modifier and optional additional modifier paramter
 expr(res)        ::= exprs(e) modifier(m) modparameters(p). {res = "\$this->smarty->modifier->".m . "(". e . p .")"; } 
+									// array
+expr(res)				 ::= array(a).	{res = a;}
 
 									// single value
 exprs(res)        ::= value(v). { res = v; }

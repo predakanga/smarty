@@ -1,6 +1,5 @@
 <?php 
 // Compiler for tags
-
 // Not yet complete
 // - name tag not yet supported
 // - nesting checks missing
@@ -14,8 +13,8 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
     function compile($args)
     {
         if (isset($args['from'])) {
-            //  {for $var in $array}  style
-            $this->required_attributes = array('from', 'item');
+            // {for $var in $array}  style
+            $this->required_attributes = array('from', 'item'); 
             // check and get attributes
             $_attr = $this->_get_attributes($args);
 
@@ -36,15 +35,18 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 
             return $output;
         } else {
-            $this->required_attributes = array('var','ifexp', 'start', 'loop'); 
+            $this->required_attributes = array('ifexp', 'start', 'loop', 'varloop'); 
             // check and get attributes
             $_attr = $this->_get_attributes($args);
 
             $this->_open_tag('for');
 
             $output = "<?php ";
-            $output .= " \$this->tpl_vars->tpl_vars[$_attr[var]] = new Smarty_Variable;\n";
-            $output .= " \$this->tpl_vars->tpl_vars[$_attr[var]]->value = $_attr[start]; if ($_attr[ifexp]) { for (\$this->tpl_vars->tpl_vars[$_attr[var]]->value = $_attr[start];$_attr[ifexp];\$this->tpl_vars->tpl_vars[$_attr[var]]->value$_attr[loop]) {";
+            foreach ($_attr['start'] as $_statement) {
+                $output .= " \$this->tpl_vars->tpl_vars[$_statement[var]] = new Smarty_Variable;";
+                $output .= " \$this->tpl_vars->tpl_vars[$_statement[var]]->value = $_statement[value];\n";
+            } 
+            $output .= "  if ($_attr[ifexp]) { for (\$_foo=true;$_attr[ifexp]; \$this->tpl_vars->tpl_vars[$_attr[varloop]]->value$_attr[loop]) {\n";
             $output .= "?>";
 
             return $output;
@@ -64,7 +66,9 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
 
         $this->_close_tag('for');
         $this->_open_tag('forelse');
-        return "<?php }} else { ?>";
+        return "<?php } 
+    } else {
+        ?>";
     } 
 } 
 class Smarty_Internal_Compile_End_For extends Smarty_Internal_CompileBase {
@@ -80,9 +84,12 @@ class Smarty_Internal_Compile_End_For extends Smarty_Internal_CompileBase {
 
         $_open_tag = $this->_close_tag(array('for', 'forelse'));
         if ($_open_tag == 'forelse')
-            return "<?php } ?>";
+            return "<?php } 
+    ?>";
         else
-            return "<?php }} ?>";
+            return "<?php } 
+} 
+?>";
     } 
 } 
 

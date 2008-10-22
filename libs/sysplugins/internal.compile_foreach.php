@@ -42,13 +42,13 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         } 
         $output .= " \$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array');}\n";
         if ($name != null) {
-            $output .= " \$this->smarty->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['total'] = count(\$_from);\n";
-            $output .= " \$this->smarty->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']=0;\n";
+            $output .= " \$this->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['total'] = count(\$_from);\n";
+            $output .= " \$this->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']=0;\n";
         } 
         $output .= "if (count(\$_from) > 0){\n";
         $output .= "    foreach (\$_from as " . $key_part . "\$this->tpl_vars->tpl_vars[$item]->value){\n";
         if ($name != null) {
-            $output .= " \$this->smarty->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']++;\n";
+            $output .= " \$this->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']++;\n";
         } 
         $output .= "?>";
 

@@ -130,7 +130,7 @@ TEST INCLUDE:
 {include file="header.tpl" gee="joe{$myobj->test(1)}bar"}
 {include file=$includeme}
 {include file=$includeme gee="joe"}
-{* { include file="$top.tpl" } *}
+{include file="{$top}.tpl"}
 
 JAVSCRIPT TEST
 
