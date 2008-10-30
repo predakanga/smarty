@@ -28,7 +28,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         // flag for nochache sections
         $this->_compiler_status->nocache = false; 
-        $this->_compiler_status->tag_nocache = false; 
+        $this->_compiler_status->tag_nocache = false;
         // current template file
         $this->_compiler_status->current_tpl_filepath = "";
     } 
@@ -62,7 +62,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } 
 
         $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
-        $template_header .= "         compiled from \"" . $tpl_filepath . "\" */ ?>\n"; 
+        $template_header .= "         compiled from \"" . $this->tpl_filepath . "\" */ ?>\n"; 
 
         // if no content just return header
         if ($_content == '') {
@@ -70,17 +70,22 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             return true;
         } 
 
-        $this->_compiler_status->current_tpl_filepath = $tpl_filepath; 
+        $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
+        
+        //Init cacher
+        $_template->cacher_object->initCacher($this); 
 
         // call the lexer/parser to compile the template
         $lex = new Smarty_Internal_Templatelexer($_content);
-        $parser = new Smarty_Internal_Templateparser($lex,$_template->tpl_vars);
+        $parser = new Smarty_Internal_Templateparser($lex);
 
         while ($lex->yylex()) {
             // echo "<br>Parsing  {$lex->token} Token {$lex->value} \n";
             $parser->doParse($lex->token, $lex->value);
         } 
         $parser->doParse(0, 0);
+
+        $_template->cacher_object->closeCacher($this); 
 
         if (!$this->smarty->compile_error) {
             // return compiled template
@@ -98,26 +103,21 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     *  If required it executes the required compile plugin for the Smarty tag
     *
     */
-    public function compileTag($tag, $args, $nocache_parser = false)
+    public function compileTag($tag, $args)
     { 
         // $args contains the attributes parsed and compiled by the lexer/parser
 
-        // paser did detect detect expression with nocache vars
-        if ($nocache_parser) $this->_compiler_status->tag_nocache = true;
-
         // assume that tag does compile into code, but creates no HTML output 
         $this->has_code = true; 
-        $this->has_output = true; 
+        $this->has_output = false; 
         // compile the smarty tag
         if (!($_output = $this->$tag($args)) === false) {
             // did we get compiled code
             if ($this->has_code) {
                 // Does it create output?
                 if ($this->has_output) {
-                    $_output .= "\n";
+                  $_output .= "\n";
                 } 
-                // Call Cacher to replace nocache code
-                $_output = $this->template->cacher_object->processNocacheCode($_output);
                 // just for debugging
                 if ($this->smarty->internal_debugging) {
                     echo "<br>compiled tag '" . htmlentities($_output) . "'<br>";
@@ -125,7 +125,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
                 return $_output;
             } 
-            return;
+            return '';
         } else {
             $this->trigger_template_error ("missing compiler module for tag \"" . $tag . "\"");
         } 

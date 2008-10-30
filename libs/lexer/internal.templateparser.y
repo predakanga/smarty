@@ -10,13 +10,14 @@
     private $lex;
     private $internalError = false;
 
-    function __construct($lex,$tpl_vars) {
+    function __construct($lex) {
         // set instance object
         self::instance($this); 
         $this->lex = $lex;
-        $this->tpl_vars = $tpl_vars; 
         $this->smarty = Smarty::instance(); 
-        $this->compiler = Smarty_Internal_Compiler::instance(); 
+        $this->compiler = Smarty_Internal_Compiler::instance();
+        $this->template = $this->compiler->template; 
+        $this->tpl_vars = $this->compiler->template->tpl_vars; 
 				$this->nocache = false;
     }
     public static function &instance($new_instance = null)
@@ -71,26 +72,28 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 // template elements
 //
 											// Smarty tag
-template_element(res)::= smartytag(st). {res = st;}	
+template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
+                                            res = $this->template->cacher_object->processNocacheCode(st, $this->compiler,$this->nocache,true);
+                                         } $this->nocache=false;}	
 											// comments
-template_element(res)::= COMMENTSTART commenttext(t) COMMENTEND. { res = '<?php /* comment placeholder */?>'; }	
+template_element(res)::= COMMENTSTART commenttext(t) COMMENTEND. { res = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// PHP tag
-template_element(res)::= PHP(php). {res = php;}	
+template_element(res)::= PHP(php). {res = $this->template->cacher_object->processNocacheCode(php, $this->compiler, false,true);}	
 											// Other template text
-template_element(res)::= OTHER(o). {res = o;}	
+template_element(res)::= OTHER(o). {res = $this->template->cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
 
 
 //
 // all Smarty tags start here
 //
 									// output with optional attributes
-smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a),$this->nocache);$this->nocache=false;}
+smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a));}
 									// assign new style
-smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s,$this->nocache);$this->nocache=false;}									
-//smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e),$this->nocache);$this->nocache=false;}									
+smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s);}									
+//smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e));}									
 									// tag with optional Smarty2 style attributes
-smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
-//smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a,$this->nocache);$this->nocache=false;}
+smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
+//smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
 //smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}

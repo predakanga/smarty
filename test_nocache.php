@@ -8,6 +8,8 @@ $smarty->force_compile = false;
 $smarty->caching = true;
 $smarty->caching_lifetime = 10;
 
+$smarty->assign('a',array(1,2,3,4,5));
+
 $smarty->display('test_nocache.tpl');
 
 ?>

@@ -4,7 +4,7 @@ class Smarty_Internal_Compile_Print_Expression extends Smarty_Internal_CompileBa
     public function compile($args)
     { 
         // This tag does create output
-        $this->has_output = true;
+        $this->compiler->has_output = true;
 
         $this->required_attributes = array('value');
         $this->optional_attributes = array('nocache');

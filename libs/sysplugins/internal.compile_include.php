@@ -25,9 +25,11 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         } 
         if (isset($_attr['caching_lifetime'])) {
             $_caching_lifetime = $_attr['caching_lifetime'];
+            $this->compiler->_compiler_status->tag_nocache = true;
         } 
         if ($_attr['nocache'] == 'true') {
             $_caching = 'false';
+            $this->compiler->_compiler_status->tag_nocache = true;
         } 
         if ($_attr['caching'] == 'true') {
             $_caching = 'true';
@@ -49,6 +51,8 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         } 
         if (isset($_caching)) {
             $_output .= "\$_template->caching = $_caching;";
+        } elseif (isset($_caching_lifetime)) {
+            $_output .= "\$_template->caching = true;";
         }
         //was there an assign attribute 
         if (isset($_assign)) {

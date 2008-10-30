@@ -90,7 +90,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                     } else {
                         // create variable in parent
                         $this->tpl_vars->parent_tpl_vars->tpl_vars[$_key] = clone $_value;
-                   } 
+                    } 
                 } 
             } 
         } 
@@ -178,14 +178,14 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->smarty->loadPlugin($this->compiler_class);
             $this->compiler_object = new $this->compiler_class;
         } 
+        if (!is_object($this->write_file_object)) {
+            $this->smarty->loadPlugin("Smarty_Internal_Write_File");
+            $this->write_file_object = new Smarty_Internal_Write_File;
+        } 
         // call compiler
         if ($this->compiler_object->compileTemplate($this)) {
             // compiling succeded
             if (!$this->isEvaluated()) {
-                if (!is_object($this->write_file_object)) {
-                    $this->smarty->loadPlugin("Smarty_Internal_Write_File");
-                    $this->write_file_object = new Smarty_Internal_Write_File;
-                } 
                 // write compiled template
                 $this->write_file_object->writeFile($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
                 // make template and compiled file timestamp match
@@ -362,8 +362,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (isset($this->compile_id)) {
             $_filepath = $this->compile_id . $_compile_dir_sep . $_filepath;
         } 
-
-        return $this->smarty->compile_dir . $_filepath . '.' . $this->resource_name . $this->smarty->php_ext;
+        if ($this->caching) {
+           $_cache = '.cache';
+        } else {
+           $_cache = '';
+        }
+        return $this->smarty->compile_dir . $_filepath . '.' . $this->resource_name . $_cache . $this->smarty->php_ext;
     } 
 } 
 // wrapper for template class

@@ -23,7 +23,8 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
             $from = $_attr['from'];
             $item = $_attr['item'];
 
-            $output = "<?php ";
+           $output = "<?php ";
+//            $output = "";
             $output .= " \$this->tpl_vars->tpl_vars[$item] = new Smarty_Variable;\n";
             $output .= " \$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array');}\n";
             $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['total']=count(\$_from);\n";
@@ -48,7 +49,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
                 $output .= " \$this->tpl_vars->tpl_vars[$_statement[var]] = new Smarty_Variable;";
                 $output .= " \$this->tpl_vars->tpl_vars[$_statement[var]]->value = $_statement[value];\n";
             } 
-            $output .= "  if ($_attr[ifexp]) { for (\$_foo=true;$_attr[ifexp]; \$this->tpl_vars->tpl_vars[$_attr[varloop]]->value$_attr[loop]) {\n";
+            $output .= "  if ($_attr[ifexp]){ for (\$_foo=true;$_attr[ifexp]; \$this->tpl_vars->tpl_vars[$_attr[varloop]]->value$_attr[loop]){\n";
             $output .= "?>";
 
             return $output;
@@ -68,9 +69,7 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
 
         $this->_close_tag('for');
         $this->_open_tag('forelse');
-        return "<?php } 
-    } else {
-        ?>";
+        return "<?php } } else { ?>";
     } 
 } 
 class Smarty_Internal_Compile_End_For extends Smarty_Internal_CompileBase {
@@ -86,12 +85,9 @@ class Smarty_Internal_Compile_End_For extends Smarty_Internal_CompileBase {
 
         $_open_tag = $this->_close_tag(array('for', 'forelse'));
         if ($_open_tag == 'forelse')
-            return "<?php } 
-    ?>";
+            return "<?php }  ?>";
         else
-            return "<?php } 
-} 
-?>";
+            return "<?php }} ?>";
     } 
 } 
 

@@ -102,7 +102,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // class used for compiling templates
     public $compiler_class = 'Smarty_Internal_Compiler'; 
     // class used for cacher
-    public $cacher_class = 'Smarty_Internal_Cacher_InjectCode'; 
+    public $cacher_class = 'Smarty_Internal_Cacher_InlineCode'; 
+//    public $cacher_class = 'Smarty_Internal_Cacher_NocacheInclude'; 
     // exception handler: set null to disable
     public $exception_handler = array('SmartyException', 'getStaticException'); 
     // cached template objects
