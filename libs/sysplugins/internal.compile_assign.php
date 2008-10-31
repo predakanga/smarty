@@ -37,7 +37,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
             // create variable for compiler
             $this->compiler->template->tpl_vars->tpl_vars[$_var] = new Smarty_variable(null, $_nocache_boolean, $_global_boolean);
         }   */
-        return "<?php \$this->assign($_attr[var],$_attr[value],$_nocache,$_global);?>";
+        return "<?php \$_smarty_tpl->assign($_attr[var],$_attr[value],$_nocache,$_global);?>";
     } 
 } 
 

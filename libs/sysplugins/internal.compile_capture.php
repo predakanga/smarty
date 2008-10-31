@@ -46,9 +46,9 @@ class Smarty_Internal_Compile_End_Capture extends Smarty_Internal_CompileBase {
 
         list($buffer, $assign) = array_pop($this->smarty->_capture_stack);
 
-        $_output = "<?php \$this->smarty->_smarty_vars['capture'][$buffer] = ob_get_contents();";
+        $_output = "<?php \$_smarty_tpl->smarty->_smarty_vars['capture'][$buffer] = ob_get_contents();";
         if (isset($assign)) {
-            $_output .= " \$this->smarty->assign($assign, ob_get_contents());";
+            $_output .= " \$_smarty_tpl->smarty->assign($assign, ob_get_contents());";
         } 
         $_output .= " ob_clean(); ?>";
         return $_output;

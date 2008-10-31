@@ -23,17 +23,16 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
             $from = $_attr['from'];
             $item = $_attr['item'];
 
-           $output = "<?php ";
-//            $output = "";
-            $output .= " \$this->tpl_vars->tpl_vars[$item] = new Smarty_Variable;\n";
+            $output = "<?php ";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item] = new Smarty_Variable;\n";
             $output .= " \$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array');}\n";
-            $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['total']=count(\$_from);\n";
-            $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['iteration']=0;\n";
-            $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['index']=-1;\n";
-            $output .= "if (\$this->tpl_vars->tpl_vars[$item]->prop['total'] > 0){\n";
-            $output .= "    foreach (\$_from as \$this->tpl_vars->tpl_vars[$item]->prop['key'] => \$this->tpl_vars->tpl_vars[$item]->value){\n";
-            $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['iteration']++;\n";
-            $output .= " \$this->tpl_vars->tpl_vars[$item]->prop['index']++;\n";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['total']=count(\$_from);\n";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['iteration']=0;\n";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['index']=-1;\n";
+            $output .= "if (\$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['total'] > 0){\n";
+            $output .= "    foreach (\$_from as \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['key'] => \$_smarty_tpl->tpl_vars->tpl_vars[$item]->value){\n";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['iteration']++;\n";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['index']++;\n";
             $output .= "?>";
 
             return $output;
@@ -46,10 +45,10 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
 
             $output = "<?php ";
             foreach ($_attr['start'] as $_statement) {
-                $output .= " \$this->tpl_vars->tpl_vars[$_statement[var]] = new Smarty_Variable;";
-                $output .= " \$this->tpl_vars->tpl_vars[$_statement[var]]->value = $_statement[value];\n";
+                $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$_statement[var]] = new Smarty_Variable;";
+                $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$_statement[var]]->value = $_statement[value];\n";
             } 
-            $output .= "  if ($_attr[ifexp]){ for (\$_foo=true;$_attr[ifexp]; \$this->tpl_vars->tpl_vars[$_attr[varloop]]->value$_attr[loop]){\n";
+            $output .= "  if ($_attr[ifexp]){ for (\$_foo=true;$_attr[ifexp]; \$_smarty_tpl->tpl_vars->tpl_vars[$_attr[varloop]]->value$_attr[loop]){\n";
             $output .= "?>";
 
             return $output;

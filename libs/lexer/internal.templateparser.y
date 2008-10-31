@@ -139,7 +139,7 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 									// simple expression
 expr(res)				 ::= exprs(e).	{res = e;}
 									// expression with modifier and optional additional modifier paramter
-expr(res)        ::= exprs(e) modifier(m) modparameters(p). {res = "\$this->smarty->modifier->".m . "(". e . p .")"; } 
+expr(res)        ::= exprs(e) modifier(m) modparameters(p). {res = "\$_smarty_tpl->smarty->modifier->".m . "(". e . p .")"; } 
 									// array
 expr(res)				 ::= array(a).	{res = a;}
 
@@ -148,7 +148,7 @@ exprs(res)        ::= value(v). { res = v; }
 									// +/- value
 exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// expression with simple modifier
-//expr(res)        ::= expr(e) modifier(m). { res = "\$this->smarty->modifier->".m . "(". e .")"; }
+//expr(res)        ::= expr(e) modifier(m). { res = "\$_smarty_tpl->smarty->modifier->".m . "(". e .")"; }
 									// arithmetic expression
 exprs(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 									// catenate
@@ -188,10 +188,10 @@ value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 // variables 
 //
 									// simple Smarty variable
-//variable(res)    ::= DOLLAR varvar(v). { res = '$this->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
-variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$this->tpl_vars->getVariable('. v .')->prop[\''.p.'\']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+//variable(res)    ::= DOLLAR varvar(v). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->prop[\''.p.'\']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$this->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// special vriables
 variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
 										// single array index
@@ -217,7 +217,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$this->tpl_vars->getVariable('. v .')->value'.oc; $_v=trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'.oc; $_v=trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
@@ -232,9 +232,9 @@ objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 // function
 //
 										// function with parameter
-function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$this->smarty->function->".f . "(". p .")";}
+function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";}
 										// function without parameter
-//function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$this->smarty->function->".f."()";}
+//function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$_smarty_tpl->smarty->function->".f."()";}
 
 //
 // method

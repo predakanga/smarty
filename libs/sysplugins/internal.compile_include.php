@@ -37,7 +37,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         // delete {include} attributes
         unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching']); 
         // create template object
-        $_output = "\$_template = new Smarty_Template ($include_file, \$this->tpl_vars);"; 
+        $_output = "\$_template = new Smarty_Template ($include_file, \$_smarty_tpl->tpl_vars);"; 
         // ceck if there are smarty variables defined in the {include} tag
         if (isset($_attr)) {
             // create variables
@@ -56,13 +56,13 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         }
         //was there an assign attribute 
         if (isset($_assign)) {
-            $_output .= "\$_tmp = \$this->smarty->fetch(\$_template);";
+            $_output .= "\$_tmp = \$_smarty_tpl->smarty->fetch(\$_template);";
         } else {
-            $_output .= "echo \$this->smarty->fetch(\$_template);";
+            $_output .= "echo \$_smarty_tpl->smarty->fetch(\$_template);";
         } 
 
         if (isset($_assign)) {
-            $_output .= "\$this->tpl->assign($_assign,\$_tmp);  unset(\$_tmp);";
+            $_output .= "\$_smarty_tpl->tpl->assign($_assign,\$_tmp);  unset(\$_tmp);";
             // create variable for compiler
 //            $this->compiler->template->tpl_vars->tpl_vars[$_var] = new Smarty_variable(null, $_nocache_boolean, $_global_boolean);
         } 

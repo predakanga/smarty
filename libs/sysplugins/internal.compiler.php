@@ -85,11 +85,9 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } 
         $parser->doParse(0, 0);
 
-        $_template->cacher_object->closeCacher($this); 
-
         if (!$this->smarty->compile_error) {
             // return compiled template
-            $_template->compiled_template =  $template_header  . $parser->retvalue;
+            $_template->compiled_template =  $template_header  . $_template->cacher_object->closeCacher($this, $parser->retvalue); 
             return true;
         } else {
             return false;

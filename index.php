@@ -9,8 +9,8 @@ $smarty->caching_lifetime = 10;
 
 $smarty->assign('foo',array('a','b','c'));
 
-$smarty->setDefaultResource = 'php';
+//$smarty->setDefaultResource = 'php';
 //$smarty->display('index.tpl');
-$smarty->display('index_view.php');
+$smarty->display('php:index_view.php');
 
 ?>

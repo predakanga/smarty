@@ -36,9 +36,9 @@ class Smarty_Internal_Cacher_InlineCode extends Smarty_Internal_PluginBase {
         return;
     } 
 
-    public function closeCacher ($compiler)
+    public function closeCacher ($compiler, $template_code)
     {
-        return;
+        return $template_code;
     } 
 
     public function getCachedContents ($_template)
