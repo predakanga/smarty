@@ -50,8 +50,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
-
-        $_start_time = $this->_get_time();
         
         // save template object for compile class
         $this->template = $_template;
@@ -93,7 +91,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         if (!$this->smarty->compile_error) {
             // return compiled template
             $_template->compiled_template =  $template_header  . $_template->cacher_object->closeCacher($this, $parser->retvalue);
-            $_template->compile_time = $this->_get_time() - $_start_time;
             return true;
         } else {
             return false;
@@ -204,16 +201,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         echo "<br>";
 
         $this->smarty->compile_error = true;
-    } 
-
-    /**
-    * get time stamp
-    */
-    function _get_time()
-    {
-        $_mtime = microtime();
-        $_mtime = explode(" ", $_mtime);
-        return (double)($_mtime[1]) + (double)($_mtime[0]);
     } 
 
 } 

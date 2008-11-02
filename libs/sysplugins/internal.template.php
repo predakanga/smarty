@@ -24,6 +24,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	public $compiler_class = null;
 	public $cacher_class = null;
 	public $caching_type = null;
+	public $force_compile = null;
 	// Template resource
 	public $template_resource = null;
 	public $resource_type = null;
@@ -38,14 +39,16 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	private $compiled_filepath = null;
 	public $compiled_template = null;
 	private $compiled_filestamp = null;
-	public $compile_time = null;
+	public $compile_time = 0;
 	// Cache file
 	private $cached_filepath = null;
 	public $cached_template = null;
 	private $cached_timestamp = null;
 	private $isCached = null;
+	public $cache_time = 0;
 	// template variables
 	public $tpl_vars;
+	public $render_time = 0;
 
 	public function __construct($template_resource, $_parent_tpl_vars = null, $_cache_id = null, $_compile_id = null)
 	{
@@ -53,6 +56,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		// Smarty parameter
 		$this->cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
 		$this->compile_id = $_compile_id === null ? $this->smarty->compile_id : $_compile_id;
+		$this->force_compile = $this->smarty->force_compile;
 		$this->caching = $this->smarty->caching;
 		$this->caching_lifetime = $this->smarty->caching_lifetime;
 		$this->compiler_class = $this->smarty->compiler_class;
@@ -138,7 +142,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	public function mustCompile ()
 	{
 		return $this->mustCompile === null ?
-		$this->mustCompile = ($this->usesCompiler() && ($this->smarty->force_compile || !file_exists($this->getCompiledFilepath ()) || $this->getTemplateTimestamp () === false || filemtime($this->getCompiledFilepath ()) !== $this->getTemplateTimestamp ())):
+		$this->mustCompile = ($this->usesCompiler() && ($this->force_compile || !file_exists($this->getCompiledFilepath ()) || $this->getTemplateTimestamp () === false || filemtime($this->getCompiledFilepath ()) !== $this->getTemplateTimestamp ())):
 		$this->mustCompile;
 	}
 
@@ -171,6 +175,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 
 	public function compileTemplateSource ()
 	{
+            $_start_time = $this->_get_time();
 		// compile template
 		if (!is_object($this->compiler_object)) {
 			// load compiler
@@ -196,6 +201,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			throw new SmartyException("Error compiling template {$this->getTemplateFilepath ()}");
 			return false;
 		}
+            $this->compile_time = $this->_get_time() - $_start_time;
 	}
 
 	public function getCachedFilepath ()
@@ -247,10 +253,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		}
 		if ($this->caching && $this->usesCompiler()) {
 			// cached output could contain nocache code
+                  $_start_time = $this->_get_time();
 			$_smarty_tpl = $this;
 			ob_start();
 			eval("?>" . $this->cached_template);
 			$this->updateGlobalVariables();
+                  $this->cache_time = $this->_get_time() - $_start_time;
 			return ob_get_clean();
 		} else {
 			$this->updateGlobalVariables();
@@ -266,10 +274,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 					$this->compileTemplateSource();
 				}
 				$_smarty_tpl = $this;
+                        $_start_time = $this->_get_time();
 				ob_start();
 				include($this->getCompiledFilepath ());
 			} else {
-				// php template, just include it
+                        $_start_time = $this->_get_time();
+ 				// php template, just include it
 				$_tpl_vars = $this->tpl_vars;
 				do {
 					foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
@@ -283,6 +293,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 				ob_start();
 				include($this->getTemplateFilepath ());
 			}
+                  $this->render_time = $this->_get_time() - $_start_time;
 			$this->cached_template = ob_get_clean();
 			// write to cache when nessecary
 			if (!$this->isEvaluated() && $this->caching) {

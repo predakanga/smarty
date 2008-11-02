@@ -4,7 +4,6 @@
 <head>
     <title>Smarty Debug Console</title>
 <style type="text/css">
-/* <![CDATA[ */
 body, h1, h2, td, th, p {
     font-family: sans-serif;
     font-weight: normal;
@@ -81,7 +80,6 @@ td {
 #table_config_vars th {
     color: maroon;
 }
-/* ]]> */
 </style>
 </head>
 <body>
@@ -94,7 +92,7 @@ td {
 {for $template in $template_data}
   <font color=brown>{$template.name}</font>
   <span class="exectime">
-   (compile {$template['compile_time']|string_format:"%.5f"})
+   (compile {$template['compile_time']|string_format:"%.5f"}) (render {$template['render_time']|string_format:"%.5f"}) (cache {$template['cache_time']|string_format:"%.5f"})
   </span>
   <br>
 {/for}
@@ -104,9 +102,9 @@ td {
 
 <table id="table_assigned_vars">
     {for $vars in $assigned_vars}
-        <tr>
-            <th>${$vars:key|escape:'html'}</th>
-            <td>{$vars|debug_print_var}</td></tr>
+       <tr class="{if $vars:iteration % 2 eq 0}odd{else}even{/if}">   
+       <th>${$vars:key|escape:'html'}</th>
+       <td>{$vars|debug_print_var}</td></tr>
     {/for}
 </table>
 

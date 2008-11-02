@@ -50,7 +50,6 @@ class Smarty_Internal_TemplateBase {
     public function getValue($variable)
     {
         $var = $this->getVariable($variable);
-//        var_dump($var);
         return $this->getVariable($variable)->value;
     } 
 
@@ -63,20 +62,20 @@ class Smarty_Internal_TemplateBase {
     {
         if (isset($this->tpl_vars[$variable])) {
             // found it, return it
-           return $this->tpl_vars[$variable]; 
+            return $this->tpl_vars[$variable]; 
             // not found, try at parent
         } elseif ($this->parent_tpl_vars !== null) {
             // check there, may be called recursivly
-            $var=$this->parent_tpl_vars->getVariable($variable);
+            $var = $this->parent_tpl_vars->getVariable($variable);
             return $this->parent_tpl_vars->getVariable($variable);
-        }
+        } 
         if (Smarty::$error_unassigned) {
-        if (class_exists('Smarty_Internal_Compiler',false)) {
-            Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable.'"');
-//            die();
-        } else {
-            throw new SmartyException('Undefined Smarty variable "' . $variable.'"');
-        }
+            if (class_exists('Smarty_Internal_Compiler', false)) {
+                Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable . '"');
+                // die();
+            } else {
+                throw new SmartyException('Undefined Smarty variable "' . $variable . '"');
+            } 
         } 
     } 
 
@@ -89,7 +88,6 @@ class Smarty_Internal_TemplateBase {
     {
         if (!is_object($template)) {
             // we got a template resource
-
             $_templateId = $this->buildTemplateId ($template, $cache_id, $compile_id); 
             // already in template cache?
             if (is_object(Smarty::$template_objects[$_templateId])) {
@@ -103,19 +101,27 @@ class Smarty_Internal_TemplateBase {
             // just return a copy of template class
             return $template;
         } 
-    }
-    
+    } 
     // build a unique template ID
     public function buildTemplateId ($_resorce, $_cache_id, $_compile_id)
     {
         return md5($_resorce . md5($_cache_id) . md5($_compile_id));
     } 
- 
+
+    /**
+    * get time stamp
+    */
+    function _get_time()
+    {
+        $_mtime = microtime();
+        $_mtime = explode(" ", $_mtime);
+        return (double)($_mtime[1]) + (double)($_mtime[0]);
+    } 
 } 
 // Class for template data
 class Smarty_Data extends Smarty_Internal_TemplateBase {
     // array template of variable objects
-    public $tpl_vars = NULL; 
+    public $tpl_vars = null; 
     // back pointer to parent vars
     public $parent_tpl_vars = null;
 
