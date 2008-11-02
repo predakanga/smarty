@@ -54,7 +54,6 @@
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
               NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL.
 
-
 //
 // complete template
 //
@@ -76,11 +75,12 @@ template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
                                             res = $this->template->cacher_object->processNocacheCode(st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
-template_element(res)::= COMMENTSTART commenttext(t) COMMENTEND. { res = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// PHP tag
 template_element(res)::= PHP(php). {res = $this->template->cacher_object->processNocacheCode(php, $this->compiler, false,true);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->template->cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
+//template_element(res)::= text(t). {res = $this->template->cacher_object->processNocacheCode(t, $this->compiler,false,false);}	
 
 
 //
@@ -90,16 +90,10 @@ template_element(res)::= OTHER(o). {res = $this->template->cacher_object->proces
 smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a));}
 									// assign new style
 smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s);}									
-//smartytag(res)   ::= LDEL DOLLAR varvar(v) EQUAL array(e) RDEL. { res = $this->compiler->compileTag('assign',array('var' => v, 'value'=>e));}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
-//smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
-//smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
-//smartytag(res)   ::= LDELSLASH IF(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
-//smartytag(res)   ::= LDELSLASH FOREACH(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
-//smartytag(res)   ::= LDELSLASH FOR(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
 									// {if} and {elseif} tag
 smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
 									// {for} tag
@@ -147,8 +141,6 @@ expr(res)				 ::= array(a).	{res = a;}
 exprs(res)        ::= value(v). { res = v; }
 									// +/- value
 exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
-									// expression with simple modifier
-//expr(res)        ::= expr(e) modifier(m). { res = "\$_smarty_tpl->smarty->modifier->".m . "(". e .")"; }
 									// arithmetic expression
 exprs(res)        ::= expr(e) math(m) value(v). { res = e . m . v; } 
 									// catenate
@@ -165,14 +157,10 @@ math(res)        ::= MATH(m). {res = m;}
 //
 // value in expressions
 //
-									// numeric constant
-value(res)       ::= NUMBER(n). { res = n; }
-									// boolean
-value(res)       ::= BOOLEAN(b). { res = b; }
-									// expression
-value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 									// variable
 value(res)		   ::= variable(v). { res = v; }
+									// numeric constant
+value(res)       ::= NUMBER(n). { res = n; }
 									// object
 value(res)       ::= object(o). { res = o; }
 									// function call
@@ -183,16 +171,21 @@ value(res)	     ::= SI_QSTR(s). { res = s; }
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 									// identifier
 value(res)	     ::= ID(i). { res = '\''.i.'\''; }
+									// boolean
+value(res)       ::= BOOLEAN(b). { res = b; }
+									// expression
+value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 
 //
 // variables 
 //
 									// simple Smarty variable
 //variable(res)    ::= DOLLAR varvar(v). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
-variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->prop[\''.p.'\']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// array variable
 variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
-									// special vriables
+									// variable with property
+variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->prop[\''.p.'\']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+									// special variables
 variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
@@ -300,11 +293,12 @@ arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
 arrayelement(res)		 ::=  ID(e1) APTR expr(e2). { res = e1.'=>'.e2;}
 arrayelement(res)		 ::=  array(a). { res = a;}
 
-doublequoted(res)          ::= doublequoted(o1) other(o2). {res = o1.o2;}
-doublequoted(res)          ::= other(o). {res = o;}
-other(res)           ::=  variable(v). {res = "'.".v.".'";}
-other(res)           ::=  LDEL expr(e) RDEL. {res = "'.".e.".'";}
-other(res)           ::= OTHER(o). {res = o;}
+doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
+doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
+doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
+doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.".e.".'";}
+doublequotedcontent(res)           ::= OTHER(o). {res = o;}
+//doublequotedcontent(res)           ::= text(t). {res = t;}
 
-commenttext(res)          ::= commenttext(t) OTHER(o2). {res = t.o;}
-commenttext(res)          ::= OTHER(o). {res = o;}
+text(res)          ::= text(t) OTHER(o). {res = t.o;}
+text(res)          ::= OTHER(o). {res = o;}

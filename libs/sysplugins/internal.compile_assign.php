@@ -17,9 +17,6 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
 
         $_nocache = 'null';
         $_global = 'null';
-        $_nocache_boolean = null;
-        $_global_boolean = null;
-        $_var = trim($_attr['var'],"'");
 
         if ($_attr['nocache'] == 'true') {
             $_nocache = 'true';
@@ -30,7 +27,11 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
             $_global_boolean = true;
         } 
 
-/*        if (isset($this->compiler->template->tpl_vars->tpl_vars[$_var])) {
+/* 
+        $_nocache_boolean = null;
+        $_global_boolean = null;
+        $_var = trim($_attr['var'],"'");
+        if (isset($this->compiler->template->tpl_vars->tpl_vars[$_var])) {
             // remember mark nocache for the compiler
             if ($_nocache_boolean === true) $this->compiler->template->tpl_vars[$_var]->nocache = true;
         } else {

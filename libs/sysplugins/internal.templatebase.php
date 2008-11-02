@@ -92,9 +92,9 @@ class Smarty_Internal_TemplateBase {
 
             $_templateId = $this->buildTemplateId ($template, $cache_id, $compile_id); 
             // already in template cache?
-            if (is_object($this->template_objects[$_templateId])) {
+            if (is_object(Smarty::$template_objects[$_templateId])) {
                 // return cached template object
-                return $this->template_objects[$_templateId];
+                return Smarty::$template_objects[$_templateId];
             } else {
                 // create and cache new template object
                 return new Smarty_Internal_Template ($template, $parent_tpl_vars, $cache_id, $compile_id);

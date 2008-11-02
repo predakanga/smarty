@@ -81,6 +81,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $right_delimiter = "}"; 
     // security mode
     public $security = false; 
+    // debug mode
+    public $debugging = false;
+    public $debugging_ctrl = 'URL';
+    public $smarty_debug_id = 'SMARTY_DEBUG'; 
+    public $request_use_auto_globals = true;
     // assigned tpl vars
     public $tpl_vars = null; 
     // dummy parent object
@@ -103,11 +108,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $compiler_class = 'Smarty_Internal_Compiler'; 
     // class used for cacher
     public $cacher_class = 'Smarty_Internal_Cacher_InlineCode'; 
-//    public $cacher_class = 'Smarty_Internal_Cacher_NocacheInclude'; 
+    // public $cacher_class = 'Smarty_Internal_Cacher_NocacheInclude';
     // exception handler: set null to disable
     public $exception_handler = array('SmartyException', 'getStaticException'); 
     // cached template objects
-    public $template_objects = null;
+    static $template_objects = null;
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -127,7 +132,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // set instance object
         self::instance($this); 
         // root data object
-        $this->tpl_vars = new Smarty_Data;
+        $this->tpl_vars = new Smarty_Data; 
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
         $this->loadPlugin('Smarty_Internal_PluginBase');
@@ -139,6 +144,25 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->function = new Smarty_Internal_Function;
         $this->loadPlugin('Smarty_Internal_Block');
         $this->block = new Smarty_Internal_Block;
+        if (!$this->debugging && $this->debugging_ctrl == 'URL') {
+            $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
+            if (@strstr($_query_string, $this->smarty_debug_id)) {
+                if (@strstr($_query_string, $this->smarty_debug_id . '=on')) {
+                    // enable debugging for this browser session
+                    @setcookie('SMARTY_DEBUG', true);
+                    $this->debugging = true;
+                } elseif (@strstr($_query_string, $this->smarty_debug_id . '=off')) {
+                    // disable debugging for this browser session
+                    @setcookie('SMARTY_DEBUG', false);
+                    $this->debugging = false;
+                } else {
+                    // enable debugging for this page
+                    $this->debugging = true;
+                }
+            } else {
+                $this->debugging = (bool)($this->request_use_auto_globals ? @$_COOKIE['SMARTY_DEBUG'] : @$GLOBALS['HTTP_COOKIE_VARS']['SMARTY_DEBUG']);
+            }
+        }
     } 
 
     /**
@@ -177,7 +201,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if ($parent_tpl_vars === null) {
             // get default Smarty data object
             $parent_tpl_vars = $this->tpl_vars;
-        }
+        } 
         // create template object if necessary
         ($template instanceof $this->template_class)? $_template = $template :
         $_template = $this->createTemplate ($template, $parent_tpl_vars , $cache_id, $compile_id); 
@@ -191,13 +215,18 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @param string $template_resource the resource handle of the template file  or template object
     */
     public function display($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
-    { 
+    {
         if ($parent_tpl_vars === null) {
             // get default Smarty data object
             $parent_tpl_vars = $this->tpl_vars;
         } 
         // display template
-        echo $this->fetch ($template, $parent_tpl_vars , $cache_id, $compile_id);
+        echo $this->fetch ($template, $parent_tpl_vars , $cache_id, $compile_id); 
+        // debug output?
+        if ($this->debugging) {
+            $this->loadPlugin('Smarty_Internal_Debug');
+            Smarty_Internal_Debug::display_debug();
+        } 
         return true;
     } 
 
@@ -225,7 +254,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public function loadPlugin($class_name)
     { 
         // if class exists, exit silently (already loaded)
-        if (class_exists($class_name,false))
+        if (class_exists($class_name, false))
             return true; 
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
@@ -266,7 +295,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         } 
         require_once($this->sysplugins_dir . $plugin_filename);
         $class_name = "Smarty_Method_{$name}";
-        if (!class_exists($class_name,false)) {
+        if (!class_exists($class_name, false)) {
             throw new SmartyException ("Sysplugin file " . $plugin_filename . "does not define class " . $class_name);
             die();
         } 

@@ -51,14 +51,16 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
 
+        $_start_time = $this->_get_time();
+        
         // save template object for compile class
         $this->template = $_template;
         
         // get template filepath for error messages
         $this->tpl_filepath = $_template->getTemplateFilepath(); 
         // get template
-        if (($_content = $_template->getTemplateSource($_resource_name)) === false) {
-            throw new SmartyException("Unable to load template {$tpl_filepath}");
+        if (($_content = $_template->getTemplateSource()) === false) {
+            throw new SmartyException("Unable to load template {$this->tpl_filepath}");
         } 
 
         $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
@@ -70,7 +72,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             return true;
         } 
 
-        $this->_compiler_status->current_tpl_filepath = $tpl_filepath;
+        $this->_compiler_status->current_tpl_filepath = $this->tpl_filepath;
         
         //Init cacher
         $_template->cacher_object->initCacher($this); 
@@ -79,15 +81,19 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $lex = new Smarty_Internal_Templatelexer($_content);
         $parser = new Smarty_Internal_Templateparser($lex);
 
+
         while ($lex->yylex()) {
-            // echo "<br>Parsing  {$lex->token} Token {$lex->value} \n";
+//             echo "<br>Parsing  {$lex->token} Token {$lex->value} \n";
             $parser->doParse($lex->token, $lex->value);
         } 
+
+
         $parser->doParse(0, 0);
 
         if (!$this->smarty->compile_error) {
             // return compiled template
-            $_template->compiled_template =  $template_header  . $_template->cacher_object->closeCacher($this, $parser->retvalue); 
+            $_template->compiled_template =  $template_header  . $_template->cacher_object->closeCacher($this, $parser->retvalue);
+            $_template->compile_time = $this->_get_time() - $_start_time;
             return true;
         } else {
             return false;
@@ -138,7 +144,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     public function __call($name, $args)
     {
         $ucname = ucfirst($name);
-        $classes = array("Smarty_Internal_Compile_{$name}", "Smarty_Compile_{$name}");
+        $classes = array("Smarty_Internal_Compile_{$ucname}", "Smarty_Compile_{$ucname}");
 
         foreach ($classes as $class_name) {
             // re-use object if already instantiated
@@ -198,6 +204,16 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         echo "<br>";
 
         $this->smarty->compile_error = true;
+    } 
+
+    /**
+    * get time stamp
+    */
+    function _get_time()
+    {
+        $_mtime = microtime();
+        $_mtime = explode(" ", $_mtime);
+        return (double)($_mtime[1]) + (double)($_mtime[0]);
     } 
 
 } 

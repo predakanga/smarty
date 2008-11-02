@@ -12,7 +12,6 @@ class Smarty_Internal_Write_File extends Smarty_Internal_Base {
   {
 
       $_dirpath = dirname($_filepath);
-      $_filename = basename($_filepath);
       
       // if subdirs, create dir structure
       if($_dirpath !== '.' && !file_exists($_dirpath))

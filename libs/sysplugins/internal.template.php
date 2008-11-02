@@ -38,6 +38,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	private $compiled_filepath = null;
 	public $compiled_template = null;
 	private $compiled_filestamp = null;
+	public $compile_time = null;
 	// Cache file
 	private $cached_filepath = null;
 	public $cached_template = null;
@@ -325,7 +326,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			$this->resource_objects[$this->resource_type] = new $_resource_class;
 		}
 		// cache template object under a unique ID
-		$this->smarty->template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
+		Smarty::$template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
 		return true;
 	}
 
@@ -339,6 +340,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			if (file_exists($_filepath))
 			return $_filepath;
 		}
+		if (file_exists($this->resource_name)) return $this->resource_name;
 		// no tpl file found
 		throw new SmartyException("Unable to load template {$this->resource_name}");
 		return false;
@@ -366,7 +368,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		} else {
 			$_cache = '';
 		}
-		return $this->smarty->compile_dir . $_filepath . '.' . $this->resource_name . $_cache . $this->smarty->php_ext;
+		return $this->smarty->compile_dir . $_filepath . '.' . basename($this->resource_name) . $_cache . $this->smarty->php_ext;
 	}
 }
 // wrapper for template class
