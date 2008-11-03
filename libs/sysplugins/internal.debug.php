@@ -21,11 +21,13 @@ class Smarty_Internal_Debug extends Smarty_Internal_TemplateBase {
         // get template names
         $i = 0;
         foreach (Smarty::$template_objects as $_template_obj) {
-            $_template_data[$i]['name'] = $_template_obj->resource_name;
-            $_template_data[$i]['compile_time'] = $_template_obj->compile_time;
-            $_template_data[$i]['render_time'] = $_template_obj->render_time;
-            $_template_data[$i]['cache_time'] = $_template_obj->cache_time;
-            $i++;
+            if ($this->smarty->debug_tpl != $_template_obj->resource_name) {
+                $_template_data[$i]['name'] = $_template_obj->getTemplateFilepath();
+                $_template_data[$i]['compile_time'] = $_template_obj->compile_time;
+                $_template_data[$i]['render_time'] = $_template_obj->render_time;
+                $_template_data[$i]['cache_time'] = $_template_obj->cache_time;
+                $i++;
+            } 
         } 
         $_assigned_vars = $this->smarty->tpl_vars->tpl_vars;
         ksort($_assigned_vars);

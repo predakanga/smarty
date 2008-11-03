@@ -246,7 +246,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 
 	public function getRenderedTemplate ()
 	{
-		// read from cache or render
+            // disable caching for evaluated code
+		if ($this->isEvaluated()) {
+                $this->caching = false;
+            }
+            // read from cache or render
 		if ($this->cached_template === null && !$this->isCached()) {
 			// render template (not loaded and not in cache)
 			$this->renderTemplate();
@@ -276,7 +280,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 				$_smarty_tpl = $this;
                         $_start_time = $this->_get_time();
 				ob_start();
-				include($this->getCompiledFilepath ());
+                        if ($this->isEvaluated()) {
+                            eval("?>" . $this->compiled_template);
+                        } else {
+				    include($this->getCompiledFilepath ());
+				}
 			} else {
                         $_start_time = $this->_get_time();
  				// php template, just include it

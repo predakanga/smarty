@@ -22,7 +22,7 @@ $myobj = new MyObj();
 $smarty->assign('myobj',$myobj);
 
 $smarty->display('test_smoke.tpl');
-
+$i=0;
 class MyObj
 {
   var $foo = 'bar';

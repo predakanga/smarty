@@ -4,7 +4,8 @@
 * Smarty plugin
 * 
 * @package Smarty
-* @subpackage plugins
+* @subpackage compiler
+* @author Uwe Tews
 */
 
 class Smarty_Internal_CompileBase {
