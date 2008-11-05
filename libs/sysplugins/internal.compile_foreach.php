@@ -1,8 +1,12 @@
 <?php 
-// Compiler foreach tags
-// Not yet complete
-// - name tag not yet supported
-// - nesting checks missing
+/**
+* Smarty Internal Plugin Compile Foreach
+*
+* Compiles the {foreach} tag 
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
 class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
     /**
     * Compile {foreach ...} tag.

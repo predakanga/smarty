@@ -1,10 +1,12 @@
 <?php
 
 /**
-* Smarty debug class
+* Smarty Internal Plugin Debug
 * 
+* Class to collect data for the Smarty Debugging Consol
 * @package Smarty
-* @subpackage plugins
+* @subpackage debug
+* @author Uwe Tews
 */
 
 class Smarty_Internal_Debug extends Smarty_Internal_TemplateBase {

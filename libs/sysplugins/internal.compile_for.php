@@ -1,8 +1,12 @@
 <?php 
-// Compiler for tags
-// Not yet complete
-// - name tag not yet supported
-// - nesting checks missing
+/**
+* Smarty Internal Plugin Compile For
+*
+* Compiles the {for} tag 
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
 class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
     /**
     * Compile {for ...} tag.

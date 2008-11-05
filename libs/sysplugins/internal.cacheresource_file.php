@@ -1,13 +1,13 @@
 <?php
 
 /**
-* Smarty plugin
+* Smarty Internal Plugin CacheResource File
 * 
+* Implements the file system as resource for the HTML cache
+* Version ussing nocache inserts
 * @package Smarty
-* @subpackage plugins
-*/
-/**
-* Cache Handler
+* @subpackage cacher
+* @author Uwe Tews
 */
 
 class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {

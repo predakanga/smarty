@@ -1,10 +1,12 @@
 <?php
 
 /**
-* Smarty plugin
+* Smarty Internal Plugin TemplateBase
 * 
+* This class contains the basic methode for template and variable creation
 * @package Smarty
-* @subpackage templates
+* @subpackage Templates
+* @author Uwe Tews
 */
 
 class Smarty_Internal_TemplateBase {

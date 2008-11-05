@@ -1,5 +1,13 @@
-<?php 
-// Compiler for capture tags
+<?php
+/**
+* Smarty Internal Plugin Compile Capture
+*
+* Compiles the {captur} tag 
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
+ 
 class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
     /**
     * Compile {capture ...} tag.

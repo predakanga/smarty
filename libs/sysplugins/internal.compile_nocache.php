@@ -1,12 +1,13 @@
 <?php
 
 /**
-* Smarty plugin
-* 
+* Smarty Internal Plugin Compile Nocache
+*
+* Compiles the {nocache} tag 
 * @package Smarty
-* @subpackage plugins
+* @subpackage compiler
+* @author Uwe Tews
 */
-// Handles the {nocache} tags
 // It does not generate compiled code, just sets the compile status flags
 class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
     public function compile($args)

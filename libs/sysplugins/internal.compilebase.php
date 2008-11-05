@@ -1,7 +1,7 @@
 <?php
 
 /**
-* Smarty plugin
+* Smarty Internal Plugin CompileBase
 * 
 * @package Smarty
 * @subpackage compiler

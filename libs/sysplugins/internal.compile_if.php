@@ -1,9 +1,12 @@
 <?php
-//  Compiler foreach tags
-//
-//  Not yet complete
-//  - name tag not yet supported
-//  - nesting checks missing
+/**
+* Smarty Internal Plugin Compile If
+*
+* Compiles the {if} tag 
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
 
 class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
     /**

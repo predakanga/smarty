@@ -1,7 +1,18 @@
 /* This is a Parser for Smarty3 */
 /* Definitions written by Uwe Tews */
 %name TP_
-%declare_class {class Smarty_Internal_Templateparser}
+%
+/**
+* Smarty Internal Plugin Templateparser
+*
+* This is the template parser
+* 
+* 
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
+declare_class {class Smarty_Internal_Templateparser}
 %include_class
 {
     // states whether the parse was successful or not

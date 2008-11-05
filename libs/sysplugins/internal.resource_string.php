@@ -1,10 +1,12 @@
 <?php
 
 /**
-* Smarty plugin
+* Smarty Internal Plugin Resource String
 * 
+* Implements the strings as resource for Smarty template
 * @package Smarty
-* @subpackage plugins
+* @subpackage Template Resources
+* @author Uwe Tews
 */
 
 class Smarty_Internal_Resource_String extends Smarty_Internal_Base {

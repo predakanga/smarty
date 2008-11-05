@@ -1,12 +1,12 @@
 <?php
 
 /**
-* Smarty template class
+* Smarty Internal Plugin Template
 * 
-* contains methods to process the template
-* 
+* This is the Smarty template engine
 * @package Smarty
-* @subpackage plugins
+* @subpackage Templates
+* @author Uwe Tews
 */
 
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {

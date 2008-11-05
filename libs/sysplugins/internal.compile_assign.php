@@ -1,10 +1,12 @@
 <?php
 
 /**
-* Smarty plugin
-* 
+* Smarty Internal Plugin Compile Assign
+*
+* Compiles the {assign} tag 
 * @package Smarty
-* @subpackage plugins
+* @subpackage compiler
+* @author Uwe Tews
 */
 // compiles the {assign } tag to php
 class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {

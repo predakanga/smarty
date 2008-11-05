@@ -1,16 +1,14 @@
 <?php
 
 /**
-* Smarty plugin
+* Smarty Internal Plugin Cacher InlineCode
 * 
-* @package Smarty
-* @subpackage plugins
-*/
-/**
-* Cache Handler
 * Process nocached code
 * Version to inject nocache code directly into cache file
 * if caching is disabled at render time the code is being evaluated
+* @package Smarty
+* @subpackage cacher
+* @author Uwe Tews
 */
 
 class Smarty_Internal_Cacher_InlineCode extends Smarty_Internal_PluginBase {

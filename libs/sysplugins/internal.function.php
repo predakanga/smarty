@@ -1,9 +1,12 @@
 <?php
 
-/**
+ /**
+ * Smarty Internal Plugin Function
+ * 
  * Smarty function class
  * @package Smarty
  * @subpackage plugins
+ * @author Monte Ohrt
  */
 
 class Smarty_Internal_Function extends Smarty_Internal_Base {

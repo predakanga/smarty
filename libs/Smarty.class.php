@@ -29,7 +29,6 @@
 * @version 3.0-alpha1
 */
 
-/* $Id: $ */
 
 /**
 * set SMARTY_DIR to absolute path to Smarty library files.
@@ -40,9 +39,15 @@
 if (!defined('SMARTY_DIR')) {
     define('SMARTY_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 } 
-// load required base class for creation of the smarty object
+
+/** 
+* load required base class for creation of the smarty object
+*/
 require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR . 'internal.templatebase.php');
 
+/**
+* This is the main Smarty class
+*/
 class Smarty extends Smarty_Internal_TemplateBase {
     // smarty version
     static $_version = 'Smarty3Alpha'; 

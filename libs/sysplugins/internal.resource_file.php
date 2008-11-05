@@ -1,10 +1,12 @@
 <?php
 
 /**
-* Smarty plugin
+* Smarty Internal Plugin Resource File
 * 
+* Implements the file system as resource for Smarty templates
 * @package Smarty
-* @subpackage plugins
+* @subpackage Template Resources
+* @author Uwe Tews
 */
 
 class Smarty_Internal_Resource_File extends Smarty_Internal_Base {

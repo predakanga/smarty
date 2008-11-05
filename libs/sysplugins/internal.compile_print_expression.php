@@ -1,5 +1,12 @@
 <?php 
-// Generate code for variable display
+/**
+* Smarty Internal Plugin Compile Print Expression
+*
+* Compiles any tag which will output an expression or variable
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
 class Smarty_Internal_Compile_Print_Expression extends Smarty_Internal_CompileBase {
     public function compile($args)
     { 

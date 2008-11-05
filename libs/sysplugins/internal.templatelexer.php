@@ -1,6 +1,12 @@
 <?php
-//  Lexer definition for Smarty3 project
-//	written by Uwe Tews
+/**
+* Smarty Internal Plugin Templatelexer
+*
+* This is the lexer to break the template source into tokens 
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
 class Smarty_Internal_Templatelexer
 {
 

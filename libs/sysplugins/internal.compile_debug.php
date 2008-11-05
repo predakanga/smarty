@@ -1,5 +1,13 @@
 <?php 
-// Compiler for capture tags
+/**
+* Smarty Internal Plugin Compile Debug
+*
+* Compiles the {debug} tag 
+* It opens a window the the Smarty Debugging Console
+* @package Smarty
+* @subpackage compiler
+* @author Uwe Tews
+*/
 class Smarty_Internal_Compile_Debug extends Smarty_Internal_CompileBase {
     /**
     * Compile {debug ...} tag.

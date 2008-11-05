@@ -1,14 +1,13 @@
 <?php
 
 /**
-* Smarty plugin
-* 
+* Smarty Internal Plugin Compile Include
+*
+* Compiles the {include} tag 
 * @package Smarty
-* @subpackage plugins
+* @subpackage compiler
+* @author Uwe Tews
 */
-// Compile include tag
-// Not yet working completely
-// The idea is just to call $smarty->fetchtoget teh work done
 class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
     public function compile($args)
     { 

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title></title>
+			<link rel="stylesheet" href="media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+						<h1 align="center">README</h1>
+<pre>
+Smarty 3.0 Alpha 1 : Proof of Concept
+
+Author: Monte Ohrt &lt;monte at ohrt dot com &gt;
+
+This code is a proof of concept as a basis of the Smarty 3 template engine.
+It is by no means complete, it is only a shell of an infrastructure to build
+the 3.0 codebase upon. What I need is feedback before continuing! Now is the
+time to make decisions that will affect the engine fundamentals.
+
+So, a quick intro to the thinking behind this alpha code.
+
+If you take a look at the file structure, you should see this:
+
+index.php
+/libs/
+  Smarty.class.php
+/libs/sysplugins/
+  internal.*
+/plugins/
+  function.mailto.php
+  modifier.escape.php
+/templates/
+  index.tpl
+  index_view.php
+  
+
+If you execute the index.php file, you will see an example of using Smarty to
+display a couple of template files.
+
+The way to use Smarty 3 should look extremely familiar:
+
+require('Smarty.class.php');
+$smarty = new Smarty;
+$smarty-&gt;assign('foo','bar');
+$smarty-&gt;display('index.tpl');
+
+
+However, Smarty works completely different on the inside. The majority of
+the Smarty system now lies in the plugin directory. The core Smarty.class.php
+class is extremely slim. The fundamental idea is for Smarty to lazy-load all
+requirements (objects) on an as-needed basis.
+
+LEXER!
+
+Smarty 3 now uses a real lexing tokenizer. This opens all kinds of doors
+such as template math, function recursion, among many other things.
+
+$smarty OBJECT SINGLETON
+
+Do you need a reference to the Smarty object instance? No problem:
+
+$smarty = Smarty::instance();
+
+You can do this from anywhere in your PHP code, and get the instance. You can
+be buried in a php function, in a class method, or wherever. The $smarty
+object is quickly obtainable.
+
+Since all plugins are now classes (did I mention that yet?), They all extend
+Smarty_Internal_PluginBase, which makes $this-&gt;smarty a reference to the Smarty
+object instance. This is available to all plugins.
+
+PHP TEMPLATES
+
+Smarty's fundamental design goals are meant to separate business logic from
+presentation logic. Since Smarty 2.0 templates work on a tag-based syntax, this
+has usually equated to &quot;Don't put PHP in the templates.&quot; But, these two
+philosophies are completely separate. You could conceivably use plain PHP
+scripts as your templates and still maintain business logic separation.
+Even though PHP is used in the template, it is still just presentation logic.
+
+So now you have your choice: Use templates that are just plain PHP code, or
+use the compiled templates using the familiar {$foo} tag syntax. Whatever is
+more important to you (PHP or tags/security/etc), make your own choice. Just
+remember, PHP templates require YOU to keep the separation yourself. It won't
+be as obvious.
+
+If you want to use a PHP template, just use the &quot;php&quot; resource type:
+
+$smarty-&gt;display('php:mytemplate.tpl');
+
+Smarty will not compile it, it will just get executed as PHP. You have full
+reign of PHP in your template code. Your assigned template vars are available
+simply as &lt;?=$foo?&gt; &lt;?=$bar?&gt;, etc.
+
+You can also use strings as templates with the &quot;string&quot; resource type:
+
+$smarty-&gt;display('string:This is my template, {$foo}!');
+
+ACCESSING PLUGINS (modifiers, functions)
+
+We haven't landed on a syntax for accessing plugins from PHP templates.
+It needs to be simple, yet robust. Some ideas:
+
+// load/run modifier in-template
+$this-&gt;modifier('truncate',$foo,$args);
+
+// load modifier into php function first
+$smarty-&gt;load-&gt;modifier('truncate','truncate');
+// execute in template;
+truncate($foo,$args);
+
+
+Many other things are on the list, such as:
+
+* cache file resources
+* compile file resources
+* config file resources
+* template objects
+* per template caching
+* per function caching
+* per variable caching
+
+
+Ok that pretty much wraps up the principles behind the alpha code. Please
+look through it and send any questions/suggestions/etc to the forums.
+
+http://www.phpinsider.com/smarty-forum/viewtopic.php?t=14168
+
+Monte
+
+</pre>
+	<p class="notes" id="credit">
+		Documentation generated on Wed, 05 Nov 2008 23:43:01 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</body>
+</html>
