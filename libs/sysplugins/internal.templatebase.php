@@ -232,7 +232,21 @@ class Smarty_Variable {
     */
     public function __call($name, $args = array())
     {
-        $_smarty = Smarty::instance();
+        if (is_object($this->value)) {
+            if (method_exists($this->value, $name)) {
+                // call objects methode
+                $_tmp = call_user_func_array(array($this->value, $name), $args);
+                if (is_object($_tmp)) {
+                    // is methode chaining, we must return the variable object
+                    return $this;
+                } else {
+                    // save result and return variable object
+                    $this->_tmp = $_tmp;
+                    return $this;
+                } 
+            } 
+        } 
+        $_smarty = Smarty::instance(); 
         // get variable value
         if (isset($this->_tmp)) {
             $args = array_merge(array($this->_tmp), $args);

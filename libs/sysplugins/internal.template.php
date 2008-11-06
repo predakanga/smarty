@@ -304,7 +304,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                     do {
                         foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
                             if (isset($_var_object->value)) {
-                                $$_smarty_var = $_var_object;
+                                if (is_array($_var_object->value)) {
+                                    $$_smarty_var = new ArrayObject($_var_object->value);
+                                } else {
+                                    $$_smarty_var = $_var_object;
+                                } 
                             } 
                         } 
                         $_tpl_vars = $_tpl_vars->parent_tpl_vars;
