@@ -233,9 +233,14 @@ class Smarty_Variable {
     public function __call($name, $args = array())
     {
         $_smarty = Smarty::instance();
-        $args = array_merge(array($this->value), $args);
+        // get variable value
+        if (isset($this->_tmp)) {
+            $args = array_merge(array($this->_tmp), $args);
+        } else {
+            $args = array_merge(array($this->value), $args);
+        } 
         // call modifier and save result
-        $this->_tmp = call_user_func_array(array($_smarty->modifier, $name), $args);
+        $this->_tmp = call_user_func_array(array($_smarty->modifier, $name), $args); 
         // return variable object for methode chaining
         return $this;
     } 
