@@ -1,4 +1,13 @@
 <?php
+/**
+* Test script for the Smarty compiler
+*
+* It displays a form in which a template source code can be entered.
+* The template source will be compiled, rendered and the result is displayed.
+* The compiled code is displayed as well
+* @author Uwe Tews 
+* @package SmartyTestScripts
+*/
 
 require('./libs/Smarty.class.php');
 

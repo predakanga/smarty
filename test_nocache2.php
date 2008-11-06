@@ -1,4 +1,9 @@
 <?php
+/**
+* Test script for nocache variables
+* @author Uwe Tews 
+* @package SmartyTestScripts
+*/
 
 require('./libs/Smarty.class.php');
 

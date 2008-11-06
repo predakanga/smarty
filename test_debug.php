@@ -1,4 +1,9 @@
 <?php
+/**
+* Test script for the {debug} tag
+* @author Uwe Tews 
+* @package SmartyTestScripts
+*/
 
 require('./libs/Smarty.class.php');
 

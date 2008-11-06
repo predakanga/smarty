@@ -3,18 +3,24 @@
 /**
 * Smarty Internal Plugin TemplateBase
 * 
-* This class contains the basic methode for template and variable creation
+* This file contains the basic classes and methodes for template and variable creation
+* 
 * @package Smarty
 * @subpackage Templates
-* @author Uwe Tews
+* @author Uwe Tews 
 */
 
+/**
+* Base class with template and variable methodes
+*/
 class Smarty_Internal_TemplateBase {
     /**
-    * assigns values to template variables
+    * assigns a Smarty variable
     * 
     * @param array $ |string $tpl_var the template variable name(s)
     * @param mixed $value the value to assign
+    * @param boolean $nocache if true any output of this variable will be not cached
+    * @param boolean $global if true the variable will have global scope
     */
     public function assign($tpl_var, $value = null, $nocache = false, $global = false)
     {
@@ -48,6 +54,7 @@ class Smarty_Internal_TemplateBase {
     * gets the Value of a Smarty variable
     * 
     * @param string $variable the name of the Smarty variable
+    * @return mixed the value of the variable
     */
     public function getValue($variable)
     {
@@ -59,6 +66,7 @@ class Smarty_Internal_TemplateBase {
     * gets the object of a Smarty variable
     * 
     * @param string $variable the name of the Smarty variable
+    * @return object the object of the variable
     */
     public function getVariable($variable)
     {
@@ -73,7 +81,7 @@ class Smarty_Internal_TemplateBase {
         } 
         if (Smarty::$error_unassigned) {
             if (class_exists('Smarty_Internal_Compiler', false)) {
-                Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable . '"');
+                Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable . '"'); 
                 // die();
             } else {
                 throw new SmartyException('Undefined Smarty variable "' . $variable . '"');
@@ -84,7 +92,11 @@ class Smarty_Internal_TemplateBase {
     /**
     * creates a template object
     * 
-    * @param string $template_resource the resource handle of the template file
+    * @param string $template the resource handle of the template file
+    * @param object $parent_tpl_vars next higher level of Smarty variables
+    * @param mixed $cache_id cache id to be used with this template
+    * @param mixed $compile_id compile id to be used with this template
+    * @returns object template object
     */
     public function createTemplate($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
     {
@@ -104,14 +116,24 @@ class Smarty_Internal_TemplateBase {
             return $template;
         } 
     } 
-    // build a unique template ID
-    public function buildTemplateId ($_resorce, $_cache_id, $_compile_id)
+
+    /**
+    * generates a template id
+    * 
+    * @param string $_resource the resource handle of the template file
+    * @param mixed $_cache_id cache id to be used with this template
+    * @param mixed $_compile_id compile id to be used with this template
+    * @returns string a unique template id
+    */
+    public function buildTemplateId ($_resource, $_cache_id, $_compile_id)
     {
-        return md5($_resorce . md5($_cache_id) . md5($_compile_id));
+        return md5($_resource . md5($_cache_id) . md5($_compile_id));
     } 
 
     /**
-    * get time stamp
+    * return current time
+    * 
+    * @returns double current time
     */
     function _get_time()
     {
@@ -120,13 +142,23 @@ class Smarty_Internal_TemplateBase {
         return (double)($_mtime[1]) + (double)($_mtime[0]);
     } 
 } 
-// Class for template data
+
+/**
+* class for the Smarty data object
+* 
+* The Smarty data object will hold Smarty variables in the current scope
+* 
+* @param object $parent_tpl_vars next higher level of Smarty variables
+*/
 class Smarty_Data extends Smarty_Internal_TemplateBase {
     // array template of variable objects
     public $tpl_vars = null; 
     // back pointer to parent vars
     public $parent_tpl_vars = null;
 
+    /**
+    * create Smarty data object
+    */
     public function __construct ($_parent_tpl_vars = null)
     { 
         // array template of variable objects
@@ -149,18 +181,63 @@ class Smarty_Data extends Smarty_Internal_TemplateBase {
         } 
     } 
 } 
-// Class for a variable
+/**
+* class for the Smarty variable object
+* 
+* This class defines the Smarty variable object
+*/
 class Smarty_Variable {
     // template variable
     public $value;
     public $nocache;
     public $global;
+    /**
+    * create Smarty variable object
+    * 
+    * @param mixed $value the value to assign
+    * @param boolean $nocache if true any output of this variable will be not cached
+    * @param boolean $global if true the variable will have global scope
+    */
     public function __construct ($value = null, $nocache = false, $global = false)
     {
         $this->value = $value;
         $this->nocache = $nocache;
         $this->global = $global;
         $this->prop = array();
+    } 
+
+    /**
+    * Return output string
+    * 
+    * @return string variable content
+    */
+    public function __toString()
+    {
+        if (isset($this->_tmp)) {
+            // result from modifer
+            $_tmp = $this->_tmp; 
+            // must unset because variable could be reused
+            unset($this->_tmp);
+            return $_tmp;
+        } else {
+            // variable value
+            return $this->value;
+        } 
+    } 
+
+    /**
+    * Lazy load modifier and execute it
+    * 
+    * @return object variable object
+    */
+    public function __call($name, $args = array())
+    {
+        $_smarty = Smarty::instance();
+        $args = array_merge(array($this->value), $args);
+        // call modifier and save result
+        $this->_tmp = call_user_func_array(array($_smarty->modifier, $name), $args);
+        // return variable object for methode chaining
+        return $this;
     } 
 } 
 

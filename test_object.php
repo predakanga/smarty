@@ -1,4 +1,9 @@
 <?php
+/**
+* Test script for methode chaining
+* @author Uwe Tews 
+* @package SmartyTestScripts
+*/
 
 require('./libs/Smarty.class.php');
 

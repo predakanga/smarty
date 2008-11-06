@@ -1,4 +1,9 @@
 <?php
+/**
+* Montes smoke test
+* @author Monte Ohrt <monte at ohrt dot com> 
+* @package SmartyTestScripts
+*/
 
 require('./libs/Smarty.class.php');
 
