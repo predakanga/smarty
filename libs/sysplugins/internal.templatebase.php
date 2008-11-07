@@ -170,9 +170,9 @@ class Smarty_Data extends Smarty_Internal_TemplateBase {
             // when Smarty data object set up back pointer
             $this->parent_tpl_vars = $_parent_tpl_vars;
         } elseif (is_array($_parent_tpl_vars)) {
-            // when PHP array no back pionter
+            // when PHP array no back pointer
             $this->parent_tpl_vars = null; 
-            // set up varaible values
+            // set up variable values
             foreach ($_parent_tpl_vars as $_key => $_val) {
                 $this->tpl_vars[$_key] = new Smarty_variable($_val);
             } 
@@ -206,58 +206,6 @@ class Smarty_Variable {
         $this->prop = array();
     } 
 
-    /**
-    * Return output string
-    * 
-    * @return string variable content
-    */
-    public function __toString()
-    {
-        if (isset($this->_tmp)) {
-            // result from modifer
-            $_tmp = $this->_tmp; 
-            // must unset because variable could be reused
-            unset($this->_tmp);
-            return (string)$_tmp;
-        } else {
-            // variable value
-            return (string)$this->value;
-        } 
-    } 
-
-    /**
-    * Lazy load modifier and execute it
-    * 
-    * @return object variable object
-    */
-    public function __call($name, $args = array())
-    {
-        if (is_object($this->value)) {
-            if (method_exists($this->value, $name)) {
-                // call objects methode
-                $_tmp = call_user_func_array(array($this->value, $name), $args);
-                if (is_object($_tmp)) {
-                    // is methode chaining, we must return the variable object
-                    return $this;
-                } else {
-                    // save result and return variable object
-                    $this->_tmp = $_tmp;
-                    return $this;
-                } 
-            } 
-        } 
-        $_smarty = Smarty::instance(); 
-        // get variable value
-        if (isset($this->_tmp)) {
-            $args = array_merge(array($this->_tmp), $args);
-        } else {
-            $args = array_merge(array($this->value), $args);
-        } 
-        // call modifier and save result
-        $this->_tmp = call_user_func_array(array($_smarty->modifier, $name), $args); 
-        // return variable object for methode chaining
-        return $this;
-    } 
 } 
 
 ?>

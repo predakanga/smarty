@@ -271,6 +271,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } 
     } 
 
+    /**
+    * Render the output using the compiled template or the PHP template source
+    * 
+    * The rendering process is accomplished by just including the PHP files.
+    * The only exceptions are evaluated templates (string template). Their code has 
+    * to be evaluated
+    */
     public function renderTemplate ()
     {
         if ($this->cached_template === null) {
@@ -287,35 +294,23 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                     include($this->getCompiledFilepath ());
                 } 
             } else {
+                // PHP template
                 $_start_time = $this->_get_time(); 
-                // php template, just include it
+                // Smarty variables as objects extract as objects
+                $this->smarty->loadPlugin('Smarty_Internal_PHPVariableObjects');
                 $_tpl_vars = $this->tpl_vars;
-                if (false) { // extract as normal vars
-                    do {
-                        foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
-                            if (isset($_var_object->value)) {
-                                $$_smarty_var = $_var_object->value;
-                            } 
+                do {
+                    foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
+                        if (isset($_var_object->value)) {
+                            $$_smarty_var = Smarty_Internal_PHPVariableObjects::createPHPVarObj($_var_object->value);
                         } 
-                        $_tpl_vars = $_tpl_vars->parent_tpl_vars;
-                    } while ($_tpl_vars != null);
-                } 
-                if (true) { // extract as objects
-                    do {
-                        foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
-                            if (isset($_var_object->value)) {
-                                if (is_array($_var_object->value)) {
-                                    $$_smarty_var = $this->createObjArray($_var_object->value);
-                                } else {
-                                    $$_smarty_var = $_var_object;
-                                } 
-                            } 
-                        } 
-                        $_tpl_vars = $_tpl_vars->parent_tpl_vars;
-                    } while ($_tpl_vars != null);
-                } 
+                    } 
+                    $_tpl_vars = $_tpl_vars->parent_tpl_vars;
+                } while ($_tpl_vars != null);
+
                 unset ($_smarty_var, $_smarty_value, $_tpl_vars);
-                ob_start();
+                ob_start(); 
+                // include PHP template
                 include($this->getTemplateFilepath ());
             } 
             $this->render_time = $this->_get_time() - $_start_time;
@@ -328,6 +323,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } 
     } 
 
+    /**
+    * parse a template resource in its name and type
+    * 
+    * @param string $template_resource template resource specification
+    */
     private function parseResourceName($template_resource)
     {
         if (empty($template_resource))
@@ -366,9 +366,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return true;
     } 
 
-    /*
-	* get system filepath to template
-	*/
+    /**
+    * get system filepath to template
+    */
     public function buildTemplateFilepath ()
     {
         foreach((array)$this->smarty->template_dir as $_template_dir) {
@@ -382,9 +382,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return false;
     } 
 
-    /*
-	* get system filepath to compiled file
-	*/
+    /**
+    * get system filepath to compiled file
+    */
     private function buildCompiledFilepath ()
     {
         $_filepath = md5($this->resource_name); 
@@ -405,25 +405,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $_cache = '';
         } 
         return $this->smarty->compile_dir . $_filepath . '.' . basename($this->resource_name) . $_cache . $this->smarty->php_ext;
-    } 
-
-    /**
-    * function to generate object arrays from Smarty variables for use in PHP templates
-    * 
-    * @param array $data nested array with data values
-    * @return array nested array of variable objects
-    */
-    private function createObjArray ($data)
-    {
-        $_result = array();
-        foreach ($data as $key => $value) {
-            if (is_array($value)) {
-                $_result[$key] = $this->createObjArray($value);
-            } else {
-                $_result[$key] = new Smarty_Variable ($value);
-            } 
-        } 
-        return $_result;
     } 
 } 
 
