@@ -41,7 +41,7 @@ $person = new Person;
 
 $smarty->assign('person',$person);
 
-$smarty->assign('array',array('a'=>1,'b'=>2));
+$smarty->assign('array',array('a'=>array('aa'=>'This is a long string'),'b'=>2));
 
 $smarty->display('php:index_view.php');
 

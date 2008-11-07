@@ -218,10 +218,10 @@ class Smarty_Variable {
             $_tmp = $this->_tmp; 
             // must unset because variable could be reused
             unset($this->_tmp);
-            return $_tmp;
+            return (string)$_tmp;
         } else {
             // variable value
-            return $this->value;
+            return (string)$this->value;
         } 
     } 
 

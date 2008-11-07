@@ -305,7 +305,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                         foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
                             if (isset($_var_object->value)) {
                                 if (is_array($_var_object->value)) {
-                                    $$_smarty_var = new ArrayObject($_var_object->value);
+                                    $$_smarty_var = $this->createObjArray($_var_object->value);
                                 } else {
                                     $$_smarty_var = $_var_object;
                                 } 
@@ -406,8 +406,30 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } 
         return $this->smarty->compile_dir . $_filepath . '.' . basename($this->resource_name) . $_cache . $this->smarty->php_ext;
     } 
+
+    /**
+    * function to generate object arrays from Smarty variables for use in PHP templates
+    * 
+    * @param array $data nested array with data values
+    * @return array nested array of variable objects
+    */
+    private function createObjArray ($data)
+    {
+        $_result = array();
+        foreach ($data as $key => $value) {
+            if (is_array($value)) {
+                $_result[$key] = $this->createObjArray($value);
+            } else {
+                $_result[$key] = new Smarty_Variable ($value);
+            } 
+        } 
+        return $_result;
+    } 
 } 
-// wrapper for template class
+
+/**
+* wrapper for template class
+*/
 class Smarty_Template extends Smarty_Internal_Template {
 } 
 

@@ -9,6 +9,6 @@ $foo is <?=$foo?>
 <?=$this->smarty->modifier->escape($foo,'html')?>
 <?=$this->smarty->modifier->trim($foo)?>
 <br>Arrays
-<?=$array['a']?>
+<?=$array['a']['aa']->truncate(5)?><?=$array['b']?>
 
 DONE
