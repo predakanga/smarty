@@ -3,7 +3,7 @@
 /**
  * Smarty plugin
  * @package Smarty
- * @subpackage plugins
+ * @subpackage PluginsFunction
  */
 
 class Smarty_Function_Mailto extends Smarty_Internal_PluginBase {

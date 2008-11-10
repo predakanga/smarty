@@ -5,7 +5,7 @@
 * 
 * Implements the strings as resource for Smarty template
 * @package Smarty
-* @subpackage Template Resources
+* @subpackage TemplateResources
 * @author Uwe Tews
 */
 
@@ -15,7 +15,7 @@ class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
     {
         // no filepath for strings
         // return "string" for compiler error messages
-        return 'string';;
+        return 'string';
     }
 
     public function getTemplateTimestamp($_template)

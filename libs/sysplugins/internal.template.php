@@ -3,13 +3,16 @@
 /**
 * Smarty Internal Plugin Template
 * 
-* This is the Smarty template engine
+* This files contains the Smarty template engine
 * 
 * @package Smarty
 * @subpackage Templates
 * @author Uwe Tews 
 */
 
+/**
+* Main class with template data structures and methods
+*/
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     // object cache
     static $resource_objects = array();
@@ -51,6 +54,17 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $tpl_vars;
     public $render_time = 0;
 
+    /**
+    * Create template data object
+    * 
+    * Some of the global Smarty settings copied to template scope
+    * It load the required template resources and cacher plugins
+    * 
+    * @param string $template_resource template resource string
+    * @param object $_parent_tpl_vars back pointer to parent Smarty variables or null
+    * @param mixed $_cache_id cache id or null
+    * @param mixed $_compile_id compile id or null
+    */
     public function __construct($template_resource, $_parent_tpl_vars = null, $_cache_id = null, $_compile_id = null)
     {
         $this->smarty = Smarty::instance(); 
@@ -83,25 +97,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } 
     } 
 
-    public function updateGlobalVariables ()
-    { 
-        // do we have a back pointer?
-        if (is_object($this->tpl_vars->parent_tpl_vars)) {
-            foreach ($this->tpl_vars->tpl_vars as $_key => $_value) {
-                // copy global vars back to parent
-                if ($this->tpl_vars->tpl_vars[$_key]->global) {
-                    if (isset($this->parent_tpl_vars->tpl_vars[$_key])) {
-                        // variable is already defined in parent, copy value
-                        $this->tpl_vars->parent_tpl_varstpl_vars[$_key]->value = $this->tpl_vars->tpl_vars[$_key]->value;
-                    } else {
-                        // create variable in parent
-                        $this->tpl_vars->parent_tpl_vars->tpl_vars[$_key] = clone $_value;
-                    } 
-                } 
-            } 
-        } 
-    } 
-
+    /**
+    * Returns the template filepath
+    * 
+    * The template filepath is determined by the actual resource handler
+    * 
+    * @return string the template filepath
+    */
     public function getTemplateFilepath ()
     {
         return $this->template_filepath === null ?
@@ -109,6 +111,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->template_filepath;
     } 
 
+    /**
+    * Returns the timpestamp of the template source
+    * 
+    * The template timestamp is determined by the actual resource handler
+    * 
+    * @return integer the template timestamp
+    */
     public function getTemplateTimestamp ()
     {
         return $this->template_timestamp === null ?
@@ -116,6 +125,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->template_timestamp;
     } 
 
+    /**
+    * Returns the template source code
+    * 
+    * The template source is being read by the actual resource handler
+    * 
+    * @return string the template source
+    */
     public function getTemplateSource ()
     {
         if ($this->template_source === null) {
@@ -126,6 +142,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return $this->template_source;
     } 
 
+    /**
+    * Returns if the template resource uses the Smarty compiler
+    * 
+    * The status is determined by the actual resource handler
+    * 
+    * @return boolean true if the template will use the compiler
+    */
     public function usesCompiler ()
     {
         return $this->usesCompiler === null ?
@@ -133,6 +156,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->usesCompiler;
     } 
 
+    /**
+    * Returns if the compiled template is stored or just evaluated in memory
+    * 
+    * The status is determined by the actual resource handler
+    * 
+    * @return boolean true if the compiled template has to be evaluated
+    */
     public function isEvaluated ()
     {
         return $this->isEvaluated === null ?
@@ -140,6 +170,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->isEvaluated;
     } 
 
+    /**
+    * Returns if the current template must be compiled by the Smarty compiler
+    * 
+    * It does compare the timestamps of template source and the compiled templates and checks the force compile configuration
+    * 
+    * @return boolean true if the template must be compiled
+    */
     public function mustCompile ()
     {
         return $this->mustCompile === null ?
@@ -147,6 +184,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->mustCompile;
     } 
 
+    /**
+    * Returns the compiled template filepath
+    * 
+    * @return string the template filepath
+    */
     public function getCompiledFilepath ()
     {
         return $this->compiled_filepath === null ?
@@ -154,6 +196,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->compiled_filepath;
     } 
 
+    /**
+    * Returns the timpestamp of the compiled template
+    * 
+    * @return integer the template timestamp
+    */
     public function getCompiledTimestamp ()
     {
         return $this->compiled_timestamp === null ?
@@ -161,6 +208,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->compiled_timestamp;
     } 
 
+    /**
+    * Returns the compiled template 
+    * 
+    * It checks if the template must be compiled or just read from the template resource
+    * 
+    * @return string the compiled template
+    */
     public function getCompiledTemplate ()
     {
         if ($this->compiled_template === null) {
@@ -174,6 +228,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return $this->compiled_template;
     } 
 
+    /**
+    * Compiles the template
+    * 
+    * If the template is not evaluated the compiled template is saved on disk
+    */
     public function compileTemplateSource ()
     {
         $_start_time = $this->_get_time(); 
@@ -205,6 +264,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->compile_time = $this->_get_time() - $_start_time;
     } 
 
+    /**
+    * Returns the filepath of the cached template output
+    * 
+    * The filepath is determined by the actual resource handler of the cacher
+    * 
+    * @return string the cache filepath
+    */
     public function getCachedFilepath ()
     {
         return $this->cached_filepath === null ?
@@ -212,6 +278,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->cached_filepath;
     } 
 
+    /**
+    * Returns the timpestamp of the cached template output
+    * 
+    * The timestamp is determined by the actual resource handler of the cacher
+    * 
+    * @return integer the template timestamp
+    */
     public function getCachedTimestamp ()
     {
         return $this->caching_timestamp === null ?
@@ -219,6 +292,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->cached_timestamp;
     } 
 
+    /**
+    * Returns the cached template output
+    * 
+    * @return string |booelan the template content or false if the file does not exist
+    */
     public function getCachedContent ()
     {
         return $this->cached_content === null ?
@@ -226,17 +304,27 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->cached_content;
     } 
 
+    /**
+    * Writes the cached template output 
+    *
+    */
     public function writeCachedContent ()
     {
         return $this->cacher_object->writeCachedContent($this);
     } 
 
+    /**
+    * Checks of a valid version redered HTML output is in the cache
+    *
+    * If the cache is valid the contents is stored in the template object
+    * @return boolean true if cache is valid
+    */ 
     public function isCached ()
     {
         if ($this->isCached === null) {
             $this->isCached = false;
             if ($this->caching) {
-                if (!$this->mustCompile() && filemtime($this->getCompiledFilepath()) < $this->getCachedTimestamp() && ((time() <= $this->getCachedTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
+                if (!$this->mustCompile() && $this->getCompiledTimestamp() < $this->getCachedTimestamp() && ((time() <= $this->getCachedTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
                     $this->cached_template = $this->cacher_object->getCachedContents($this);
                     $this->isCached = true;
                 } 
@@ -245,6 +333,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return $this->isCached;
     } 
 
+    /**
+    * Returns the rendered HTML output 
+    *
+    * If the cache is valid the cached content is used, otherwise
+    * the output is rendered from the compiled template or PHP template source
+    * @return string rendered HTML output
+    */ 
     public function getRenderedTemplate ()
     { 
         // disable caching for evaluated code
@@ -405,6 +500,28 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $_cache = '';
         } 
         return $this->smarty->compile_dir . $_filepath . '.' . basename($this->resource_name) . $_cache . $this->smarty->php_ext;
+    } 
+
+    /**
+    * Update global Smarty variables in parent variable object
+    */
+    public function updateGlobalVariables ()
+    { 
+        // do we have a back pointer?
+        if (is_object($this->tpl_vars->parent_tpl_vars)) {
+            foreach ($this->tpl_vars->tpl_vars as $_key => $_value) {
+                // copy global vars back to parent
+                if ($this->tpl_vars->tpl_vars[$_key]->global) {
+                    if (isset($this->parent_tpl_vars->tpl_vars[$_key])) {
+                        // variable is already defined in parent, copy value
+                        $this->tpl_vars->parent_tpl_varstpl_vars[$_key]->value = $this->tpl_vars->tpl_vars[$_key]->value;
+                    } else {
+                        // create variable in parent
+                        $this->tpl_vars->parent_tpl_vars->tpl_vars[$_key] = clone $_value;
+                    } 
+                } 
+            } 
+        } 
     } 
 } 
 

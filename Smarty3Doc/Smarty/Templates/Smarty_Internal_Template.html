@@ -23,13 +23,9 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Smarty Internal Plugin Template</p>
-<p class="description"><p>This is the Smarty template engine</p></p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Uwe Tews</li>
-			</ul>
+<p class="short-description">Main class with template data structures and methods</p>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---internal.template.php.html">/libs/sysplugins/internal.template.php</a> (line <span class="field">13</span>)
+			Located in <a class="field" href="_libs---sysplugins---internal.template.php.html">/libs/sysplugins/internal.template.php</a> (line <span class="field">16</span>)
 		</p>
 		
 				
@@ -193,7 +189,7 @@
 												<div class="method-definition">
 											<span class="method-result">Smarty_Internal_Template</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$template_resource</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$_parent_tpl_vars</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$_cache_id</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$_compile_id</span> = <span class="var-default">null</span>])
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$template_resource</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$_parent_tpl_vars</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$_cache_id</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$_compile_id</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -206,67 +202,67 @@
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getCachedContent" title="details" class="method-name">getCachedContent</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getCachedFilepath" title="details" class="method-name">getCachedFilepath</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">integer</span>
 										<a href="#getCachedTimestamp" title="details" class="method-name">getCachedTimestamp</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getCompiledFilepath" title="details" class="method-name">getCompiledFilepath</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getCompiledTemplate" title="details" class="method-name">getCompiledTemplate</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">integer</span>
 										<a href="#getCompiledTimestamp" title="details" class="method-name">getCompiledTimestamp</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getRenderedTemplate" title="details" class="method-name">getRenderedTemplate</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getTemplateFilepath" title="details" class="method-name">getTemplateFilepath</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getTemplateSource" title="details" class="method-name">getTemplateSource</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">integer</span>
 										<a href="#getTemplateTimestamp" title="details" class="method-name">getTemplateTimestamp</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">boolean</span>
 										<a href="#isCached" title="details" class="method-name">isCached</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">boolean</span>
 										<a href="#isEvaluated" title="details" class="method-name">isEvaluated</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">boolean</span>
 										<a href="#mustCompile" title="details" class="method-name">mustCompile</a>
 										()
 									</div>
@@ -281,7 +277,7 @@
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">boolean</span>
 										<a href="#usesCompiler" title="details" class="method-name">usesCompiler</a>
 										()
 									</div>
@@ -309,13 +305,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$cacher_object" id="$cacher_object"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$cacher_object</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">18</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">21</span>)
 		</span>
 	</div>
 
@@ -327,13 +323,13 @@
 
 </div>
 <a name="var$cache_resource_objects" id="$cache_resource_objects"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$cache_resource_objects</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">19</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">22</span>)
 		</span>
 	</div>
 
@@ -345,13 +341,13 @@
 
 </div>
 <a name="var$compiler_object" id="$compiler_object"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$compiler_object</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">17</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">20</span>)
 		</span>
 	</div>
 
@@ -363,13 +359,13 @@
 
 </div>
 <a name="var$resource_objects" id="$resource_objects"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$resource_objects</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">15</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">18</span>)
 		</span>
 	</div>
 
@@ -381,13 +377,13 @@
 
 </div>
 <a name="var$write_file_object" id="$write_file_object"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$write_file_object</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">16</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">19</span>)
 		</span>
 	</div>
 
@@ -399,13 +395,13 @@
 
 </div>
 <a name="var$cached_template" id="$cached_template"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$cached_template</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">46</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -420,13 +416,13 @@
 
 </div>
 <a name="var$cacher_class" id="$cacher_class"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$cacher_class</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">26</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">29</span>)
 		</span>
 	</div>
 
@@ -441,75 +437,12 @@
 
 </div>
 <a name="var$cache_id" id="$cache_id"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$cache_id</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">21</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$cache_time" id="$cache_time"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$cache_time</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">49</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$caching" id="$caching"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$caching</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">23</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$caching_lifetime" id="$caching_lifetime"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$caching_lifetime</span>
 			 = <span class="var-default"> null</span>			(line <span class="line-number">24</span>)
 		</span>
 	</div>
@@ -524,139 +457,13 @@
 		
 
 </div>
-<a name="var$caching_type" id="$caching_type"><!-- --></A>
+<a name="var$cache_time" id="$cache_time"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$caching_type</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">27</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$compiled_template" id="$compiled_template"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$compiled_template</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">41</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$compiler_class" id="$compiler_class"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$compiler_class</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">25</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$compile_id" id="$compile_id"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$compile_id</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">22</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$compile_time" id="$compile_time"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$compile_time</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">43</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$force_compile" id="$force_compile"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$force_compile</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">28</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$render_time" id="$render_time"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$render_time</span>
+			<span class="var-name">$cache_time</span>
 			 = <span class="var-default"> 0</span>			(line <span class="line-number">52</span>)
 		</span>
 	</div>
@@ -671,14 +478,14 @@
 		
 
 </div>
-<a name="var$resource_name" id="$resource_name"><!-- --></A>
+<a name="var$caching" id="$caching"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$resource_name</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">32</span>)
+			<span class="var-name">$caching</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">26</span>)
 		</span>
 	</div>
 
@@ -692,14 +499,14 @@
 		
 
 </div>
-<a name="var$resource_type" id="$resource_type"><!-- --></A>
+<a name="var$caching_lifetime" id="$caching_lifetime"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$resource_type</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">31</span>)
+			<span class="var-name">$caching_lifetime</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">27</span>)
 		</span>
 	</div>
 
@@ -713,13 +520,13 @@
 		
 
 </div>
-<a name="var$template_resource" id="$template_resource"><!-- --></A>
+<a name="var$caching_type" id="$caching_type"><!-- --></A>
 <div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$template_resource</span>
+			<span class="var-name">$caching_type</span>
 			 = <span class="var-default"> null</span>			(line <span class="line-number">30</span>)
 		</span>
 	</div>
@@ -734,14 +541,203 @@
 		
 
 </div>
-<a name="var$template_source" id="$template_source"><!-- --></A>
+<a name="var$compiled_template" id="$compiled_template"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
+			<span class="var-name">$compiled_template</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">44</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$compiler_class" id="$compiler_class"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$compiler_class</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$compile_id" id="$compile_id"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$compile_id</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">25</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$compile_time" id="$compile_time"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$compile_time</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$force_compile" id="$force_compile"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$force_compile</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">31</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$render_time" id="$render_time"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$render_time</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">55</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$resource_name" id="$resource_name"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$resource_name</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">35</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$resource_type" id="$resource_type"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$resource_type</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">34</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$template_resource" id="$template_resource"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$template_resource</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">33</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$template_source" id="$template_source"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
 			<span class="var-name">$template_source</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">37</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
@@ -756,13 +752,13 @@
 
 </div>
 <a name="var$tpl_vars" id="$tpl_vars"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$tpl_vars</span>
-						(line <span class="line-number">51</span>)
+						(line <span class="line-number">54</span>)
 		</span>
 	</div>
 
@@ -794,13 +790,15 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">54</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">68</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Create template data object</p>
+<p class="description"><p>Some of the global Smarty settings copied to template scope  It load the required template resources and cacher plugins</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -810,31 +808,31 @@
 		<span class="method-name">
 			__construct
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$template_resource</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$_parent_tpl_vars</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$_cache_id</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$_compile_id</span> = <span class="var-default">null</span>])
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$template_resource</span>, [<span class="var-type">object</span>&nbsp;<span class="var-name">$_parent_tpl_vars</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$_cache_id</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$_compile_id</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$template_resource</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$template_resource</span><span class="var-description">: template resource string</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$_parent_tpl_vars</span>			</li>
+				<span class="var-type">object</span>
+				<span class="var-name">$_parent_tpl_vars</span><span class="var-description">: back pointer to parent Smarty variables or null</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$_cache_id</span>			</li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$_cache_id</span><span class="var-description">: cache id or null</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$_compile_id</span>			</li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$_compile_id</span><span class="var-description">: compile id or null</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodbuildTemplateFilepath" id="buildTemplateFilepath"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">buildTemplateFilepath</span> (line <span class="line-number">372</span>)
+		<span class="method-title">buildTemplateFilepath</span> (line <span class="line-number">467</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -855,13 +853,15 @@
 			
 	</div>
 <a name="methodcompileTemplateSource" id="compileTemplateSource"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">compileTemplateSource</span> (line <span class="line-number">177</span>)
+		<span class="method-title">compileTemplateSource</span> (line <span class="line-number">236</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compiles the template</p>
+<p class="description"><p>If the template is not evaluated the compiled template is saved on disk</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -878,19 +878,21 @@
 			
 	</div>
 <a name="methodgetCachedContent" id="getCachedContent"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCachedContent</span> (line <span class="line-number">222</span>)
+		<span class="method-title">getCachedContent</span> (line <span class="line-number">300</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the cached template output</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> |booelan the template content or false if the file does not exist</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getCachedContent
 		</span>
@@ -901,19 +903,22 @@
 			
 	</div>
 <a name="methodgetCachedFilepath" id="getCachedFilepath"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCachedFilepath</span> (line <span class="line-number">208</span>)
+		<span class="method-title">getCachedFilepath</span> (line <span class="line-number">274</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the filepath of the cached template output</p>
+<p class="description"><p>The filepath is determined by the actual resource handler of the cacher</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the cache filepath</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getCachedFilepath
 		</span>
@@ -924,19 +929,22 @@
 			
 	</div>
 <a name="methodgetCachedTimestamp" id="getCachedTimestamp"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCachedTimestamp</span> (line <span class="line-number">215</span>)
+		<span class="method-title">getCachedTimestamp</span> (line <span class="line-number">288</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the timpestamp of the cached template output</p>
+<p class="description"><p>The timestamp is determined by the actual resource handler of the cacher</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the template timestamp</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">integer</span>
 		<span class="method-name">
 			getCachedTimestamp
 		</span>
@@ -947,19 +955,21 @@
 			
 	</div>
 <a name="methodgetCompiledFilepath" id="getCompiledFilepath"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiledFilepath</span> (line <span class="line-number">150</span>)
+		<span class="method-title">getCompiledFilepath</span> (line <span class="line-number">192</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the compiled template filepath</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the template filepath</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getCompiledFilepath
 		</span>
@@ -970,19 +980,22 @@
 			
 	</div>
 <a name="methodgetCompiledTemplate" id="getCompiledTemplate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiledTemplate</span> (line <span class="line-number">164</span>)
+		<span class="method-title">getCompiledTemplate</span> (line <span class="line-number">218</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the compiled template</p>
+<p class="description"><p>It checks if the template must be compiled or just read from the template resource</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the compiled template</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getCompiledTemplate
 		</span>
@@ -993,19 +1006,21 @@
 			
 	</div>
 <a name="methodgetCompiledTimestamp" id="getCompiledTimestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiledTimestamp</span> (line <span class="line-number">157</span>)
+		<span class="method-title">getCompiledTimestamp</span> (line <span class="line-number">204</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the timpestamp of the compiled template</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the template timestamp</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">integer</span>
 		<span class="method-name">
 			getCompiledTimestamp
 		</span>
@@ -1016,19 +1031,22 @@
 			
 	</div>
 <a name="methodgetRenderedTemplate" id="getRenderedTemplate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getRenderedTemplate</span> (line <span class="line-number">248</span>)
+		<span class="method-title">getRenderedTemplate</span> (line <span class="line-number">343</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the rendered HTML output</p>
+<p class="description"><p>If the cache is valid the cached content is used, otherwise  the output is rendered from the compiled template or PHP template source</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> rendered HTML output</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getRenderedTemplate
 		</span>
@@ -1039,19 +1057,22 @@
 			
 	</div>
 <a name="methodgetTemplateFilepath" id="getTemplateFilepath"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">105</span>)
+		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">107</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the template filepath</p>
+<p class="description"><p>The template filepath is determined by the actual resource handler</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the template filepath</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getTemplateFilepath
 		</span>
@@ -1062,19 +1083,22 @@
 			
 	</div>
 <a name="methodgetTemplateSource" id="getTemplateSource"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateSource</span> (line <span class="line-number">119</span>)
+		<span class="method-title">getTemplateSource</span> (line <span class="line-number">135</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the template source code</p>
+<p class="description"><p>The template source is being read by the actual resource handler</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the template source</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getTemplateSource
 		</span>
@@ -1085,19 +1109,22 @@
 			
 	</div>
 <a name="methodgetTemplateTimestamp" id="getTemplateTimestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">112</span>)
+		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">121</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns the timpestamp of the template source</p>
+<p class="description"><p>The template timestamp is determined by the actual resource handler</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> the template timestamp</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">integer</span>
 		<span class="method-name">
 			getTemplateTimestamp
 		</span>
@@ -1108,19 +1135,22 @@
 			
 	</div>
 <a name="methodisCached" id="isCached"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">isCached</span> (line <span class="line-number">234</span>)
+		<span class="method-title">isCached</span> (line <span class="line-number">322</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Checks of a valid version redered HTML output is in the cache</p>
+<p class="description"><p>If the cache is valid the contents is stored in the template object</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> true if cache is valid</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">boolean</span>
 		<span class="method-name">
 			isCached
 		</span>
@@ -1131,19 +1161,22 @@
 			
 	</div>
 <a name="methodisEvaluated" id="isEvaluated"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">isEvaluated</span> (line <span class="line-number">136</span>)
+		<span class="method-title">isEvaluated</span> (line <span class="line-number">166</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns if the compiled template is stored or just evaluated in memory</p>
+<p class="description"><p>The status is determined by the actual resource handler</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> true if the compiled template has to be evaluated</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">boolean</span>
 		<span class="method-name">
 			isEvaluated
 		</span>
@@ -1154,19 +1187,22 @@
 			
 	</div>
 <a name="methodmustCompile" id="mustCompile"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">mustCompile</span> (line <span class="line-number">143</span>)
+		<span class="method-title">mustCompile</span> (line <span class="line-number">180</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns if the current template must be compiled by the Smarty compiler</p>
+<p class="description"><p>It does compare the timestamps of template source and the compiled templates and checks the force compile configuration</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> true if the template must be compiled</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">boolean</span>
 		<span class="method-name">
 			mustCompile
 		</span>
@@ -1177,10 +1213,10 @@
 			
 	</div>
 <a name="methodrenderTemplate" id="renderTemplate"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">renderTemplate</span> (line <span class="line-number">281</span>)
+		<span class="method-title">renderTemplate</span> (line <span class="line-number">376</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1202,13 +1238,14 @@
 			
 	</div>
 <a name="methodupdateGlobalVariables" id="updateGlobalVariables"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">updateGlobalVariables</span> (line <span class="line-number">86</span>)
+		<span class="method-title">updateGlobalVariables</span> (line <span class="line-number">508</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Update global Smarty variables in parent variable object</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -1225,19 +1262,22 @@
 			
 	</div>
 <a name="methodusesCompiler" id="usesCompiler"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">usesCompiler</span> (line <span class="line-number">129</span>)
+		<span class="method-title">usesCompiler</span> (line <span class="line-number">152</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns if the template resource uses the Smarty compiler</p>
+<p class="description"><p>The status is determined by the actual resource handler</p></p>
 	<ul class="tags">
+				<li><span class="field">return:</span> true if the template will use the compiler</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">boolean</span>
 		<span class="method-name">
 			usesCompiler
 		</span>
@@ -1248,13 +1288,14 @@
 			
 	</div>
 <a name="methodwriteCachedContent" id="writeCachedContent"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeCachedContent</span> (line <span class="line-number">229</span>)
+		<span class="method-title">writeCachedContent</span> (line <span class="line-number">311</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Writes the cached template output</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -1288,7 +1329,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 07 Nov 2008 18:23:03 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 10 Nov 2008 21:04:17 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

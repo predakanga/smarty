@@ -3,7 +3,7 @@
 /**
  * Smarty plugin
  * @package Smarty
- * @subpackage plugins
+ * @subpackage PluginsModifier
  */
 
 class Smarty_Modifier_Escape extends Smarty_Internal_PluginBase {

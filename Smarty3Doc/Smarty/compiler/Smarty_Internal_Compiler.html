@@ -28,7 +28,7 @@
 				<li><span class="field">author:</span> Uwe Tews</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---internal.compiler.php.html">/libs/sysplugins/internal.compiler.php</a> (line <span class="field">15</span>)
+			Located in <a class="field" href="_libs---sysplugins---internal.compiler.php.html">/libs/sysplugins/internal.compiler.php</a> (line <span class="field">14</span>)
 		</p>
 		
 				
@@ -53,11 +53,15 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																				<div class="var-title">
+																												<div class="var-title">
 					static <span class="var-type">mixed</span>
 					<a href="#$_tag_objects" title="details" class="var-name">$_tag_objects</a>
 				</div>
 																												<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$plugins" title="details" class="var-name">$plugins</a>
+				</div>
+																<div class="var-title">
 					<span class="var-type">mixed</span>
 					<a href="#$template" title="details" class="var-name">$template</a>
 				</div>
@@ -130,17 +134,38 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$_tag_objects" id="$_tag_objects"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">mixed</span>
 			<span class="var-name">$_tag_objects</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">17</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">16</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+	
+	
+		
+		
+
+</div>
+<a name="var$plugins" id="$plugins"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$plugins</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">22</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
 	
 	
 		
@@ -154,7 +179,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$template</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">22</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">20</span>)
 		</span>
 	</div>
 
@@ -175,7 +200,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$_tag_stack</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">20</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">18</span>)
 		</span>
 	</div>
 
@@ -216,7 +241,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method instance</span> (line <span class="line-number">43</span>)
+		<span class="method-title">static method instance</span> (line <span class="line-number">41</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -274,12 +299,12 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">compileTag</span> (line <span class="line-number">123</span>)
+		<span class="method-title">compileTag</span> (line <span class="line-number">111</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Compile Tag</p>
-<p class="description"><p>This is a call back from the lexer/parser   It executes the required compile plugin for the Smarty tag</p></p>
+<p class="description"><p>This is a call back from the lexer/parser    It executes the required compile plugin for the Smarty tag</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> compiled code</li>
 				<li><span class="field">access:</span> public</li>
@@ -308,7 +333,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">compileTemplate</span> (line <span class="line-number">58</span>)
+		<span class="method-title">compileTemplate</span> (line <span class="line-number">55</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -338,7 +363,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">trigger_template_error</span> (line <span class="line-number">195</span>)
+		<span class="method-title">trigger_template_error</span> (line <span class="line-number">185</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -369,7 +394,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">__call</span> (line <span class="line-number">160</span>)
+		<span class="method-title">__call</span> (line <span class="line-number">150</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -412,7 +437,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 07 Nov 2008 18:22:44 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 10 Nov 2008 21:03:57 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
