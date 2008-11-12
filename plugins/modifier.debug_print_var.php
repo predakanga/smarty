@@ -34,7 +34,7 @@ class Smarty_Modifier_Debug_Print_Var extends Smarty_Internal_PluginBase {
                 foreach ($var as $curr_key => $curr_val) {
                     $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
                      . '<b>' . strtr($curr_key, $_replace) . '</b> =&gt; '
-                     . $this->execute($curr_val, ++$depth, $length);
+                     . self::execute($curr_val, ++$depth, $length);
                     $depth--;
                 } 
                 break;
@@ -44,7 +44,7 @@ class Smarty_Modifier_Debug_Print_Var extends Smarty_Internal_PluginBase {
                 foreach ($object_vars as $curr_key => $curr_val) {
                     $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
                      . '<b> -&gt;' . strtr($curr_key, $_replace) . '</b> = '
-                     . $this->execute($curr_val, ++$depth, $length);
+                     . self::execute($curr_val, ++$depth, $length);
                     $depth--;
                 } 
                 break;

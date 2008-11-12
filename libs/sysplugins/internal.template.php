@@ -402,8 +402,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                     } 
                     $_tpl_vars = $_tpl_vars->parent_tpl_vars;
                 } while ($_tpl_vars != null);
-
                 unset ($_smarty_var, $_smarty_value, $_tpl_vars);
+                // special object for handling functions in PHP
+                $_f = Smarty_Internal_PHPVariableObjects::createPHPVarObj($this->smarty->function,true);
                 ob_start(); 
                 // include PHP template
                 include($this->getTemplateFilepath ());

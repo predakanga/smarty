@@ -10,5 +10,6 @@ $foo is <?=$foo?>
 <?=$this->smarty->modifier->trim($foo)?>
 <br>Arrays
 <?=$array['a']['aa']->truncate(5)?><?=$array['b']?>
-
+<br>Function
+<?=$_f->trim($array['a']['aa'])->truncate(10)?>
 DONE

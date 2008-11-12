@@ -51,9 +51,12 @@ class PHP_Variable_Object {
     * 
     * @param mixed $value the value to assign
     */
-    public function __construct ($value)
+    public function __construct ($value, $funcFlag = true)
     {
         $this->value = $value;
+        if ($funcFlag) {
+            $this->funcFlag = true;
+        } 
     } 
 
     /**
@@ -73,17 +76,21 @@ class PHP_Variable_Object {
             // variable value
             return (string)$this->value;
         } 
+        if (isset($this->funcFlag)) $this->funcFlag = true;
     } 
 
     /**
-    * Lazy load modifier and execute it
+    * Methode chaining on object methods and modifier
+    * 
+    * Lazy loads modifier if required
     * 
     * @return object variable object
     */
     public function __call($name, $args = array())
     {
         if (is_object($this->value)) {
-            if (method_exists($this->value, $name)) {
+            if (method_exists($this->value, $name) || $this->funcFlag) {
+                if (isset($this->funcFlag)) $this->funcFlag = false; 
                 // call objects methode
                 $_tmp = call_user_func_array(array($this->value, $name), $args);
                 if (is_object($_tmp)) {
