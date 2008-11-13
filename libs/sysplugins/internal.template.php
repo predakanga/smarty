@@ -89,6 +89,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->smarty->loadPlugin($this->cache_resource_class);
             $this->cache_resource_objects[$this->caching_type] = new $this->cache_resource_class;
         } 
+        // load output filter
+        if (isset($this->smarty->autoload_filters['output']) && !is_object($this->filter)) {
+            $this->smarty->loadPlugin('Smarty_Internal_Run_Filter');
+            $this->filter = new Smarty_Internal_Run_Filter;
+        } 
         // Template resource
         $this->template_resource = $template_resource; 
         // parse resource name
@@ -305,8 +310,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     } 
 
     /**
-    * Writes the cached template output 
-    *
+    * Writes the cached template output
     */
     public function writeCachedContent ()
     {
@@ -315,10 +319,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 
     /**
     * Checks of a valid version redered HTML output is in the cache
-    *
+    * 
     * If the cache is valid the contents is stored in the template object
+    * 
     * @return boolean true if cache is valid
-    */ 
+    */
     public function isCached ()
     {
         if ($this->isCached === null) {
@@ -335,11 +340,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 
     /**
     * Returns the rendered HTML output 
-    *
+    * 
     * If the cache is valid the cached content is used, otherwise
     * the output is rendered from the compiled template or PHP template source
+    * 
     * @return string rendered HTML output
-    */ 
+    */
     public function getRenderedTemplate ()
     { 
         // disable caching for evaluated code
@@ -359,10 +365,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             eval("?>" . $this->cached_template);
             $this->updateGlobalVariables();
             $this->cache_time = $this->_get_time() - $_start_time;
-            return ob_get_clean();
+            return isset($this->smarty->autoload_filters['output'])?
+            $this->filter->execute('output', ob_get_clean()) : ob_get_clean();
         } else {
             $this->updateGlobalVariables();
-            return $this->cached_template;
+            return isset($this->smarty->autoload_filters['output'])?
+            $this->filter->execute('output', $this->cached_template) : $this->cached_template;
         } 
     } 
 
@@ -402,9 +410,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                     } 
                     $_tpl_vars = $_tpl_vars->parent_tpl_vars;
                 } while ($_tpl_vars != null);
-                unset ($_smarty_var, $_smarty_value, $_tpl_vars);
+                unset ($_smarty_var, $_smarty_value, $_tpl_vars); 
                 // special object for handling functions in PHP
-                $_f = Smarty_Internal_PHPVariableObjects::createPHPVarObj($this->smarty->function,true);
+                $_f = Smarty_Internal_PHPVariableObjects::createPHPVarObj($this->smarty->function, true);
                 ob_start(); 
                 // include PHP template
                 include($this->getTemplateFilepath ());
@@ -412,7 +420,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->render_time = $this->_get_time() - $_start_time;
             $this->cached_template = ob_get_clean(); 
             // write to cache when nessecary
-            if (!$this->isEvaluated() && $this->caching) {
+            if (!$this->isEvaluated() && $this->caching)
+            { 
                 // write rendered template
                 $this->writeCachedContent($this);
             } 

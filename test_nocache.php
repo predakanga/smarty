@@ -12,6 +12,7 @@ $smarty = new Smarty;
 $smarty->force_compile = false;
 $smarty->caching = true;
 $smarty->caching_lifetime = 10;
+$smarty->autoload_filters = array('output'=>array('trimwhitespace'));
 
 $smarty->assign('a',array(1,2,3,4,5));
 

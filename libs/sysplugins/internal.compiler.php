@@ -28,7 +28,11 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         self::instance($this); 
         // get required plugins
         $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
-        $this->smarty->loadPlugin('Smarty_Internal_Templateparser'); 
+        $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
+        if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->autoload_filters['post'])) {
+            $this->smarty->loadPlugin('Smarty_Internal_Run_Filter');
+            $this->filter = new Smarty_Internal_Run_Filter;
+        } 
         // flag for nochache sections
         $this->_compiler_status->nocache = false;
         $this->_compiler_status->tag_nocache = false; 
@@ -77,6 +81,10 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->_compiler_status->current_tpl_filepath = $this->tpl_filepath; 
         // init cacher plugin
         $_template->cacher_object->initCacher($this); 
+        // run prefilter if required
+        if (isset($this->smarty->autoload_filters['pre'])) {
+            $_content = $this->filter->execute('pre', $_content);
+        } 
         // init the lexer/parser to compile the template
         $lex = new Smarty_Internal_Templatelexer($_content);
         $parser = new Smarty_Internal_Templateparser($lex); 
@@ -90,7 +98,11 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         if (!$this->compile_error) {
             // close cacher and return compiled template
-            $_template->compiled_template = $template_header . $_template->cacher_object->closeCacher($this, $parser->retvalue);
+            $_template->compiled_template = $template_header . $_template->cacher_object->closeCacher($this, $parser->retvalue); 
+            // run postfilter if required
+            if (isset($this->smarty->autoload_filters['post'])) {
+                $_template->compiled_template = $this->filter->execute('post', $_template->compiled_template);
+            } 
             return true;
         } else {
             // compilation error
@@ -101,8 +113,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *    This is a call back from the lexer/parser
-    *    It executes the required compile plugin for the Smarty tag
+    *       This is a call back from the lexer/parser
+    *       It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes

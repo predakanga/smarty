@@ -118,7 +118,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $exception_handler = array('SmartyException', 'getStaticException'); 
     // cached template objects
     static $template_objects = null;
-
+    // autoload filter
+    public $autoload_filters = array();
     /**
     * Class constructor, initializes basic smarty properties
     */
