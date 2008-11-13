@@ -17,7 +17,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     // tag stack
     public $_tag_stack = array(); 
     // current template
-    public $template = null;
+    public $template = null; 
     // required plugins
     public $plugins = array();
 
@@ -101,8 +101,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *   This is a call back from the lexer/parser
-    *   It executes the required compile plugin for the Smarty tag
+    *    This is a call back from the lexer/parser
+    *    It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -127,13 +127,23 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             } 
             // tag did not produce compiled code
             return ''; 
-        // no compile plugin found for this tag, try function plugin
+            // no compile plugin found for this tag, try function plugin
         } elseif ($this->smarty->loadPlugin("smarty_function_$tag") && is_callable("smarty_function_$tag")) {
             // call function plugin compile module
-            return $this->function_plugin($args, $tag);
+            return $this->function_plugin($args, $tag); 
+            // try block plugin
+        } elseif (strncmp($tag, 'end_', 4) != 0) {
+            if ($this->smarty->loadPlugin("smarty_block_$tag") && is_callable("smarty_block_$tag")) {
+                // call block plugin compile module
+                return $this->block_plugin($args, $tag);
+            } 
         } else {
-            $this->trigger_template_error ("unknow tag \"" . $tag . "\"");
+            if (is_callable("smarty_block_" . substr($tag, 4))) {
+                // call block plugin compile module
+                return $this->block_plugin($args, $tag);
+            } 
         } 
+        $this->trigger_template_error ("unknow tag \"" . $tag . "\"");
     } 
 
     /**

@@ -5,7 +5,7 @@
 * 
 * @package Smarty
 * @subpackage compiler
-* @author Uwe Tews
+* @author Uwe Tews 
 */
 
 class Smarty_Internal_CompileBase {
@@ -47,9 +47,9 @@ class Smarty_Internal_CompileBase {
     * @param string $ the opening tag's name
     */
 
-    function _open_tag($open_tag)
+    function _open_tag($open_tag, $data = null)
     {
-        array_push($this->compiler->_tag_stack, $open_tag);
+        array_push($this->compiler->_tag_stack, array($open_tag, $data));
     } 
 
     /**
@@ -61,11 +61,14 @@ class Smarty_Internal_CompileBase {
     */
     function _close_tag($close_tag)
     {
-        $message = '';
         if (count($this->compiler->_tag_stack) > 0) {
-            $_open_tag = array_pop($this->compiler->_tag_stack);
+            list($_open_tag, $_data) = array_pop($this->compiler->_tag_stack);
             if (in_array($_open_tag, (array)$close_tag)) {
-                return $_open_tag;
+                if (is_null($_data)) {
+                    return $_open_tag;
+                } else {
+                    return $_data;
+                } 
             } 
             $this->compiler->trigger_template_error("unclosed {" . $_open_tag . "} tag");
             return;
@@ -73,7 +76,6 @@ class Smarty_Internal_CompileBase {
         $this->compiler->trigger_template_error("unexpected closing tag");
         return;
     } 
-
 } 
 
 ?>
