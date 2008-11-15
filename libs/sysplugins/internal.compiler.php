@@ -7,10 +7,12 @@
 * perform the compiling of a template.
 * 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews 
 */
-
+/**
+* Main compiler class
+*/
 class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     // compile tag objects
     static $_tag_objects = array(); 
@@ -21,6 +23,9 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     // required plugins
     public $plugins = array();
 
+    /**
+    * Initialize compiler
+    */
     public function __construct()
     {
         parent::__construct(); 
@@ -42,6 +47,12 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->compile_error = false;
     } 
 
+    /**
+    * Method to deliver instance of compiler object
+    *
+    * @param object|nothing $new_instance $this of compiler object on initial call
+    * @return object instance of compiler object
+    */
     public static function &instance($new_instance = null)
     {
         static $instance = null;

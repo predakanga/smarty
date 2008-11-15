@@ -5,14 +5,21 @@
 *
 * Compiles the {include} tag 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
+/**
+* Smarty Internal Plugin Compile Include Class
+*/ 
 class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {include} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     { 
-        // for now do not {include} in the cache file
-        // $this->compiler->_compiler_status->tag_nocache = true;
         $this->required_attributes = array('file');
         $this->optional_attributes = array('_any'); 
         // check and get attributes
@@ -20,8 +27,15 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         // save posible attributes
         $include_file = $_attr['file'];
         if (isset($_attr['assign'])) {
+              // output will be stored in a smarty variable instead of beind displayed
             $_assign = $_attr['assign'];
-        } 
+        }
+  
+        /*
+        * if the {include} tag provides individual parameter for caching
+        * it will not be included into the common cache file and treated like
+        * a nocache section
+        */       
         if (isset($_attr['caching_lifetime'])) {
             $_caching_lifetime = $_attr['caching_lifetime'];
             $this->compiler->_compiler_status->tag_nocache = true;
@@ -33,11 +47,11 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         if ($_attr['caching'] == 'true') {
             $_caching = 'true';
         } 
-        // delete {include} attributes
-        unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching']); 
         // create template object
         $_output = "\$_template = new Smarty_Template ($include_file, \$_smarty_tpl->tpl_vars);"; 
-        // ceck if there are smarty variables defined in the {include} tag
+        // delete {include} standard attributes
+        unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching']); 
+        // remaining attributes must be assigned as smarty variable
         if (isset($_attr)) {
             // create variables
             foreach ($_attr as $_key => $_value) {

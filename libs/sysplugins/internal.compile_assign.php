@@ -2,44 +2,45 @@
 
 /**
 * Smarty Internal Plugin Compile Assign
-*
-* Compiles the {assign} tag 
+* 
+* Compiles the {assign} tag
+* 
 * @package Smarty
-* @subpackage compiler
-* @author Uwe Tews
+* @subpackage Compiler
+* @author Uwe Tews 
 */
-// compiles the {assign } tag to php
+/**
+* Smarty Internal Plugin Compile Assign Class
+*/
 class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {assign} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
         $this->required_attributes = array('var', 'value');
-        $this->optional_attributes = array('nocache', 'global'); 
-        // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $this->optional_attributes = array('global');
 
         $_nocache = 'null';
-        $_global = 'null';
-
-        if ($_attr['nocache'] == 'true') {
+        $_global = 'null'; 
+        // check for nocache attribute before _get_attributes because
+        // it shall not controll caching of the compiled code, but is a parameter
+        if ($args['nocache'] == 'true') {
             $_nocache = 'true';
             $_nocache_boolean = true;
         } 
+        unset($args['nocache']); 
+        // check and get attributes
+        $_attr = $this->_get_attributes($args);
+
         if ($_attr['global'] == 'true') {
             $_global = 'true';
             $_global_boolean = true;
         } 
-
-/* 
-        $_nocache_boolean = null;
-        $_global_boolean = null;
-        $_var = trim($_attr['var'],"'");
-        if (isset($this->compiler->template->tpl_vars->tpl_vars[$_var])) {
-            // remember mark nocache for the compiler
-            if ($_nocache_boolean === true) $this->compiler->template->tpl_vars[$_var]->nocache = true;
-        } else {
-            // create variable for compiler
-            $this->compiler->template->tpl_vars->tpl_vars[$_var] = new Smarty_variable(null, $_nocache_boolean, $_global_boolean);
-        }   */
+        // compiled output
         return "<?php \$_smarty_tpl->assign($_attr[var],$_attr[value],$_nocache,$_global);?>";
     } 
 } 

@@ -5,15 +5,18 @@
 * Compiles the {debug} tag 
 * It opens a window the the Smarty Debugging Console
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
+/**
+* Smarty Internal Plugin Compile Debug Class
+*/ 
 class Smarty_Internal_Compile_Debug extends Smarty_Internal_CompileBase {
     /**
-    * Compile {debug ...} tag.
+    * Compiles code for the {capture} tag
     * 
-    * @param string $tag_args 
-    * @return string 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
     */
     function compile($args)
     { 

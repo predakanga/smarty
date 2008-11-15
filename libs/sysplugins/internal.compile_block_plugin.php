@@ -5,10 +5,20 @@
 * Compiles code for the execution of block plugin
 * 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews 
 */
+/**
+* Smarty Internal Plugin Compile Block Plugin Class
+*/
 class Smarty_Internal_Compile_Block_Plugin extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the execution of block plugin
+    * 
+    * @param array $args array with attributes from parser
+    * @param string $tag name of block function
+    * @return string compiled code
+    */
     public function compile($args, $tag)
     {
         if (strncmp($tag, 'end_', 4) != 0) {

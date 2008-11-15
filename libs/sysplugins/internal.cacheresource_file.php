@@ -7,7 +7,7 @@
 * Version ussing nocache inserts
 * 
 * @package Smarty
-* @subpackage cacher
+* @subpackage Cacher
 * @author Uwe Tews 
 */
 
@@ -52,6 +52,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     * Writes the rendered template output to cache file
     * 
     * @param object $_template current template
+    * @return boolean status
     */
     public function writeCachedContent($_template)
     {
@@ -66,6 +67,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     * Get system filepath to cached file
     * 
     * @param object $_template current template
+    * @return string filepath of cache file
     */
     private function buildCachedFilepath ($_template)
     {

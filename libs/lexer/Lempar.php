@@ -1,5 +1,12 @@
 <?php
-/* Driver template for the PHP_ParserGenerator parser generator. (PHP port of LEMON)
+/**
+* Smarty Internal Plugin Templateparser
+*
+* This is the template parser.
+* It is generated from the internal.templateparser.y file
+* @package Smarty
+* @subpackage Compiler
+* @author Uwe Tews
 */
 
 /**

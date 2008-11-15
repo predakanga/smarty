@@ -6,10 +6,12 @@
 * Smarty block class
 * 
 * @package Smarty
-* @subpackage plugins
-* @author Monte Ohrt 
+* @subpackage PluginsInternal
+* @author Uwe Tews 
 */
-
+/**
+* Smarty Internal Plugin Debug Class
+*/ 
 class Smarty_Internal_Block extends Smarty_Internal_Base {
     /**
     * Takes unknown class methods and lazy loads plugin files for them
@@ -17,7 +19,8 @@ class Smarty_Internal_Block extends Smarty_Internal_Base {
     * plugin filename format: block.funcname.php
     * 
     * @param string $name block function name
-    * @param string $args function args
+    * @param array $args block function attributes
+    * @return string output of block function
     */
     public function __call($name, $args)
     {

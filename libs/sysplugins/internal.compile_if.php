@@ -1,69 +1,82 @@
 <?php
 /**
 * Smarty Internal Plugin Compile If
-*
-* Compiles the {if} tag 
+* 
+* Compiles the {if} tag
+* 
 * @package Smarty
-* @subpackage compiler
-* @author Uwe Tews
+* @subpackage Compiler
+* @author Uwe Tews 
 */
-
+/**
+* Smarty Internal Plugin Compile If Class
+*/
 class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
     /**
-    * Compile {if...} tag.
+    * Compiles code for the {if} tag
     * 
-    * @param string $tag_args 
-    * @return string 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
     */
     function compile($args)
     {
         $this->_open_tag('if');
-        return '<?php if (' .$args[ifexp] . '): ?>';   
-        }
+        return '<?php if (' . $args[ifexp] . '): ?>';
+    } 
 } 
 
+/**
+* Smarty Internal Plugin Compile Else Class
+*/
 class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase {
     /**
-    * Compile {else ...} tag
+    * Compiles code for the {else} tag
     * 
-    * @param string $tag_args 
-    * @return string 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
     */
     function compile($args)
     {
-            $this->_close_tag(array('if','elseif'));
-            $this->_open_tag('else');
+        $this->_close_tag(array('if', 'elseif'));
+        $this->_open_tag('else');
 
         return '<?php else: ?>';
     } 
 } 
+/**
+* Smarty Internal Plugin Compile ElseIf Class
+*/
 class Smarty_Internal_Compile_ElseIf extends Smarty_Internal_CompileBase {
     /**
-    * Compile {elseif ...} tag
+    * Compiles code for the {elseif} tag
     * 
-    * @param string $tag_args 
-    * @return string 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
     */
     function compile($args)
     {
-            $this->_close_tag(array('if','elseif'));
-            $this->_open_tag('elseif');
+        $this->_close_tag(array('if', 'elseif'));
+        $this->_open_tag('elseif');
 
-        return '<?php elseif (' .$args[ifexp] . '): ?>'; 
+        return '<?php elseif (' . $args[ifexp] . '): ?>';
     } 
 } 
 
- 
-class Smarty_Internal_Compile_End_If extends Smarty_Internal_CompileBase {
+/**
+* Smarty Internal Plugin Compile IfClose Class
+*/
+class Smarty_Internal_Compile_IfClose extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {/if} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
-        /**
-        * Compile {/if} tag
-        * 
-       * @return string 
-        */ 
-            $this->_close_tag(array('if','else','elseif'));
+        $this->_close_tag(array('if', 'else', 'elseif'));
         return "<?php endif;?>";
-         } 
+    } 
 } 
+
 ?>

@@ -4,10 +4,19 @@
 *
 * Compiles any tag which will output an expression or variable
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
+/**
+* Smarty Internal Plugin Compile Print Expression Class
+*/ 
 class Smarty_Internal_Compile_Print_Expression extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for gererting output from any expression
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     { 
         // This tag does create output

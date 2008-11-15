@@ -6,7 +6,7 @@
 * Smarty function class
 * 
 * @package Smarty
-* @subpackage plugins
+* @subpackage PluginsInternal
 * @author Monte Ohrt 
 */
 
@@ -17,7 +17,8 @@ class Smarty_Internal_Function extends Smarty_Internal_Base {
     * plugin filename format: function.funcname.php
     * 
     * @param string $name function name
-    * @param string $args function args
+    * @param array $args function arguments
+    * @return unkown function result
     */
     public function __call($name, $args)
     {

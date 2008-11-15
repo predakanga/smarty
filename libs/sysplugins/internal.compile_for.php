@@ -2,22 +2,35 @@
 /**
 * Smarty Internal Plugin Compile For
 *
-* Compiles the {for} tag 
+* Compiles the {for} {forelse} and {/for} tag 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
+/**
+* Smarty Internal Plugin Compile For Class
+*/ 
 class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
     /**
-    * Compile {for ...} tag.
-    * 
-    * @param string $tag_args 
-    * @return string 
+    * Compiles code for the {for} tag
+    *
+    * Smarty 3 does implement two different sytaxes:
+    *
+    * - {for $var in $array}
+    * For looping over arrays or iterators
+    *
+    * - {for $x=0; $x<$y; $x++}
+    * For general loops
+    *
+    * The parser is gereration different sets of attribute by which this compiler can 
+    * determin which syntax is used.
+    * @param array $args array with attributes from parser
+    * @return string compiled code
     */
     function compile($args)
     {
         if (isset($args['from'])) {
-            // {for $var in $array}  style
+            // {for $var in $array}  syntax
             $this->required_attributes = array('from', 'item'); 
             // check and get attributes
             $_attr = $this->_get_attributes($args);
@@ -38,9 +51,10 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
             $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['iteration']++;\n";
             $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->prop['index']++;\n";
             $output .= "?>";
-
+            // return compiled code
             return $output;
         } else {
+              // {for $x=0; $x<$y; $x++} syntax
             $this->required_attributes = array('ifexp', 'start', 'loop', 'varloop'); 
             // check and get attributes
             $_attr = $this->_get_attributes($args);
@@ -54,19 +68,23 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
             } 
             $output .= "  if ($_attr[ifexp]){ for (\$_foo=true;$_attr[ifexp]; \$_smarty_tpl->tpl_vars->tpl_vars[$_attr[varloop]]->value$_attr[loop]){\n";
             $output .= "?>";
-
+            // return compiled code
             return $output;
         } 
     } 
-} 
+}
+/**
+* Smarty Internal Plugin Compile Forelse Class
+*/  
 class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {forelse} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
-        /**
-        * Compile {forelse} tag
-        * 
-        * @return string 
-        */ 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
@@ -74,15 +92,19 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
         $this->_open_tag('forelse');
         return "<?php } } else { ?>";
     } 
-} 
-class Smarty_Internal_Compile_End_For extends Smarty_Internal_CompileBase {
+}
+/**
+* Smarty Internal Plugin Compile ForClose Class
+*/   
+class Smarty_Internal_Compile_ForClose extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {/for} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
-        /**
-        * Compile {/for} tag
-        * 
-        * @return string 
-        */ 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 

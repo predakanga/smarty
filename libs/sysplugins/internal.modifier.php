@@ -6,7 +6,7 @@
 * Smarty modifier class
 * 
 * @package Smarty
-* @subpackage plugins
+* @subpackage PluginsInternal
 * @author Monte Ohrt 
 */
 
@@ -23,7 +23,8 @@ class Smarty_Internal_Modifier extends Smarty_Internal_Base {
     * plugin filename format: modifier.modname.php
     * 
     * @param string $name modifier name
-    * @param string $args modifier args
+    * @param array $args modifier arguments
+    * @return unknown modifier result
     */
     public function __call($name, $args)
     {

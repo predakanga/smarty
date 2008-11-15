@@ -5,10 +5,20 @@
 * Compiles code for the execution of function plugin
 * 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews 
 */
+/**
+* Smarty Internal Plugin Compile Function Plugin Class
+*/
 class Smarty_Internal_Compile_Function_Plugin extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the execution of function plugin
+    * 
+    * @param array $args array with attributes from parser
+    * @param string $tag name of function
+    * @return string compiled code
+    */
     public function compile($args, $tag)
     { 
         // This tag does create output
@@ -18,11 +28,7 @@ class Smarty_Internal_Compile_Function_Plugin extends Smarty_Internal_CompileBas
         $this->optional_attributes = array('_any'); 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
-        if ($_attr['nocache'] === 'true') {
-            $this->compiler->_compiler_status->tag_nocache = true;
-            unset($args['nocache']);
-        }
-        // convert attributes into parameter array string 
+        // convert attributes into parameter array string
         $_paramsArray = array();
         foreach ($_attr as $_key => $_value) {
             $_paramsArray[] = "'$_key'=>$_value";

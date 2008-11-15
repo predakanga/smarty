@@ -16,23 +16,18 @@
 	<div class="info-box-title">Description</div>
 	<div class="nav-bar">
 					<span class="disabled">Description</span> |
-													<a href="#sec-vars">Vars</a>
-						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
 						
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Smarty Internal Plugin Resource String</p>
-<p class="description"><p>Implements the strings as resource for Smarty template</p></p>
-	<ul class="tags">
-				<li><span class="field">author:</span> Uwe Tews</li>
-			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---internal.resource_string.php.html">/libs/sysplugins/internal.resource_string.php</a> (line <span class="field">12</span>)
+			Located in <a class="field" href="_libs---sysplugins---internal.resource_string.php.html">/libs/sysplugins/internal.resource_string.php</a> (line <span class="field">15</span>)
 		</p>
 		
 				
-		<pre><a href="../../Smarty/plugins/Smarty_Internal_Base.html">Smarty_Internal_Base</a>
+		<pre><a href="../../Smarty/PluginsInternal/Smarty_Internal_Base.html">Smarty_Internal_Base</a>
    |
    --Smarty_Internal_Resource_String</pre>
 	
@@ -47,36 +42,33 @@
 		<div class="info-box-title">Method Summary</span></div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-																		<a href="#sec-vars">Vars</a>
-				 
-				|
-						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
 																																												
 												<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getTemplateFilepath" title="details" class="method-name">getTemplateFilepath</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">string</span>
 										<a href="#getTemplateSource" title="details" class="method-name">getTemplateSource</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">boolean</span>
 										<a href="#getTemplateTimestamp" title="details" class="method-name">getTemplateTimestamp</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">boolean</span>
 										<a href="#isEvaluated" title="details" class="method-name">isEvaluated</a>
 										()
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">boolean</span>
 										<a href="#usesCompiler" title="details" class="method-name">usesCompiler</a>
 										()
 									</div>
@@ -84,38 +76,13 @@
 		</div>
 	</div>		
 
-	<a name="sec-vars"></a>
-	<div class="info-box">
-		<div class="info-box-title">Variables</div>
-		<div class="nav-bar">
-			<a href="#sec-description">Description</a> |
-										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
-						
-			
-										| 
-									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
-							
-					</div>
-		<div class="info-box-body">
-										<h4>Inherited Variables</h4>
-				<A NAME='inherited_vars'><!-- --></A>
-									<p>Inherited from <span class="classname"><a href="../../Smarty/plugins/Smarty_Internal_Base.html">Smarty_Internal_Base</a></span></p>
-					<blockquote>
-													<span class="var-title">
-								<span class="var-name"><a href="../../Smarty/plugins/Smarty_Internal_Base.html#var$smarty">Smarty_Internal_Base::$smarty</a></span><br>
-							</span>
-											</blockquote> 
-										
-		</div>
-	</div>
 	
 	<a name="sec-methods"></a>
 	<div class="info-box">
 		<div class="info-box-title">Methods</div>
 		<div class="nav-bar">
 			<a href="#sec-description">Description</a> |
-															<a href="#sec-vars">Vars</a>
-																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
 						
 		</div>
 		<div class="info-box-body">
@@ -125,26 +92,28 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">14</span>)
+		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">23</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get filepath to template source</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> return 'string' as template source is not a file</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getTemplateFilepath
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$_template</span>			</li>
+				<span class="var-type">object</span>
+				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -153,26 +122,28 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateSource</span> (line <span class="line-number">27</span>)
+		<span class="method-title">getTemplateSource</span> (line <span class="line-number">48</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Retuen template source from resource name</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> content of template source</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			getTemplateSource
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$_template</span>			</li>
+				<span class="var-type">object</span>
+				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -181,26 +152,28 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">21</span>)
+		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">36</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Get timestamp to template source</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> false as string resources have no timestamp</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">boolean</span>
 		<span class="method-name">
 			getTemplateTimestamp
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$_template</span>			</li>
+				<span class="var-type">object</span>
+				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -209,16 +182,18 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">isEvaluated</span> (line <span class="line-number">40</span>)
+		<span class="method-title">isEvaluated</span> (line <span class="line-number">71</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return flag that this resource is evaluated</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> true</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">boolean</span>
 		<span class="method-name">
 			isEvaluated
 		</span>
@@ -232,16 +207,18 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">usesCompiler</span> (line <span class="line-number">34</span>)
+		<span class="method-title">usesCompiler</span> (line <span class="line-number">60</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Return flag that this resource uses the compiler</p>
 	<ul class="tags">
+				<li><span class="field">return:</span> true</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">boolean</span>
 		<span class="method-name">
 			usesCompiler
 		</span>
@@ -254,9 +231,9 @@
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
 									<!-- =========== Summary =========== -->
-					<p>Inherited From <span class="classname"><a href="../../Smarty/plugins/Smarty_Internal_Base.html">Smarty_Internal_Base</a></span></p>
+					<p>Inherited From <span class="classname"><a href="../../Smarty/PluginsInternal/Smarty_Internal_Base.html">Smarty_Internal_Base</a></span></p>
 					<blockquote>
-													<span class="method-name"><a href="../../Smarty/plugins/Smarty_Internal_Base.html#method__construct">Smarty_Internal_Base::__construct()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/PluginsInternal/Smarty_Internal_Base.html#method__construct">Smarty_Internal_Base::__construct()</a></span><br>
 											</blockquote>
 										
 		</div>
@@ -264,7 +241,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 10 Nov 2008 21:04:17 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sat, 15 Nov 2008 19:00:58 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

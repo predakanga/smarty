@@ -1,19 +1,24 @@
 <?php
 
 /**
- * Smarty plugin
- * @package Smarty
- * @subpackage plugins
- */
-
+* Smarty Internal Base
+* 
+* @package Smarty
+* @subpackage PluginsInternal
+* @author Monte Ohrt
+*/
+/**
+/**
+* Smarty Internal Base Class
+*/
 class Smarty_Internal_Base {
-
-  public $smarty = null;
-
-  function __construct() {
-    $this->smarty = Smarty::instance();
-  }
-  
-}
+    /**
+    * Set up instance of Smarty object
+    */
+    function __construct()
+    {
+        $this->smarty = Smarty::instance();
+    } 
+} 
 
 ?>

@@ -4,15 +4,18 @@
 *
 * Compiles the {foreach} tag 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
+/**
+* Smarty Internal Plugin Compile Foreach Class
+*/ 
 class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
     /**
-    * Compile {foreach ...} tag.
+    * Compiles code for the {foreach} tag
     * 
-    * @param string $tag_args 
-    * @return string 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
     */
     function compile($args)
     {
@@ -59,14 +62,18 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         return $output;
     } 
 } 
+/**
+* Smarty Internal Plugin Compile Foreachelse Class
+*/ 
 class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {foreachelse} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
-        /**
-        * Compile {foreachelse} tag
-        * 
-        * @return string 
-        */ 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
@@ -75,14 +82,18 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
         return "<?php }} else { ?>";
     } 
 } 
-class Smarty_Internal_Compile_End_Foreach extends Smarty_Internal_CompileBase {
+/**
+* Smarty Internal Plugin Compile ForeachClose Class
+*/ 
+class Smarty_Internal_Compile_ForeachClose extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {/foreach} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
-        /**
-        * Compile {/foreach} tag
-        * 
-        * @return string 
-        */ 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 

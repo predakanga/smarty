@@ -5,11 +5,20 @@
 *
 * Compiles the {nocache} tag 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
-// It does not generate compiled code, just sets the compile status flags
+/**
+* Smarty Internal Plugin Compile Nocache Class
+*/ 
 class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {nocache} tag
+    *
+    * This tag does not generate compiled output. It only sets a compiler flag 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
         // enter nocache mode
@@ -19,7 +28,17 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
         return true;
     } 
 } 
-class Smarty_Internal_Compile_End_Nocache extends Smarty_Internal_CompileBase {
+/**
+* Smarty Internal Plugin Compile NocacheClose Class
+*/ 
+class Smarty_Internal_Compile_NocacheClose extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {/nocache} tag
+    *
+    * This tag does not generate compiled output. It only sets a compiler flag 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
         // leave nocache mode

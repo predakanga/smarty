@@ -2,18 +2,20 @@
 /**
 * Smarty Internal Plugin Compile Capture
 *
-* Compiles the {captur} tag 
+* Compiles the {capture}...{/capture} tag 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
- 
+/**
+* Smarty Internal Plugin Compile Capture Class
+*/ 
 class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
     /**
-    * Compile {capture ...} tag.
+    * Compiles code for the {capture} tag
     * 
-    * @param string $tag_args 
-    * @return string 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
     */
     function compile($args)
     {
@@ -39,22 +41,25 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
         return $_output;
     } 
 } 
-class Smarty_Internal_Compile_End_Capture extends Smarty_Internal_CompileBase {
+/**
+* Smarty Internal Plugin Compile CaptureClose Class
+*/ 
+class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
+    /**
+    * Compiles code for the {/capture} tag
+    * 
+    * @param array $args array with attributes from parser
+    * @return string compiled code
+    */
     public function compile($args)
     {
-        /**
-        * Compile {/capture} tag
-        * 
-        * @return string 
-        */ 
-        // check and get attributes
+       // check and get attributes
         $_attr = $this->_get_attributes($args);
 
         $this->_close_tag(array('capture'));
 
         list($buffer, $assign) = array_pop($this->smarty->_capture_stack);
 
-//        $_output = "<?php \$_smarty_tpl->smarty->_smarty_vars['capture'][$buffer] = ob_get_contents();";
         $_output = "<?php ";
         if (isset($assign)) {
             $_output .= " \$_smarty_tpl->assign($assign, ob_get_contents());";

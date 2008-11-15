@@ -5,7 +5,7 @@
 * 
 * 
 * @package Smarty
-* @subpackage compiler
+* @subpackage Compiler
 * @author Uwe Tews
 */
 %name TP_
@@ -101,7 +101,7 @@ smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
 									// end of block tag  {/....}									
-smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag('end_'.i,array());}
+smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag(i.'close',array());}
 									// {if} and {elseif} tag
 smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
 									// {for} tag
