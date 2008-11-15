@@ -9,7 +9,6 @@
 		</head>
 		<body>
 						<a href="#Post-parsing">Post-parsing</a><br>
-<a href="#function.mailto.php">function.mailto.php</a><br>
 <a href="#index.php">index.php</a><br>
 <a href="#internal.base.php">internal.base.php</a><br>
 <a href="#internal.block.php">internal.block.php</a><br>
@@ -19,6 +18,7 @@
 <a href="#internal.compilebase.php">internal.compilebase.php</a><br>
 <a href="#internal.compiler.php">internal.compiler.php</a><br>
 <a href="#internal.compile_assign.php">internal.compile_assign.php</a><br>
+<a href="#internal.compile_block_plugin.php">internal.compile_block_plugin.php</a><br>
 <a href="#internal.compile_capture.php">internal.compile_capture.php</a><br>
 <a href="#internal.compile_debug.php">internal.compile_debug.php</a><br>
 <a href="#internal.compile_for.php">internal.compile_for.php</a><br>
@@ -37,6 +37,7 @@
 <a href="#internal.resource_file.php">internal.resource_file.php</a><br>
 <a href="#internal.resource_php.php">internal.resource_php.php</a><br>
 <a href="#internal.resource_string.php">internal.resource_string.php</a><br>
+<a href="#internal.run_filter.php">internal.run_filter.php</a><br>
 <a href="#internal.template.php">internal.template.php</a><br>
 <a href="#internal.templatebase.php">internal.templatebase.php</a><br>
 <a href="#internal.templatelexer.php">internal.templatelexer.php</a><br>
@@ -65,10 +66,6 @@
 <b>Warning</b> - 
 duplicate class element "Person" in file C:\www\docs\karting-germany.de\gi\__smarty3Alpha\test_object.php will be ignored.
 Use an @ignore tag on the original if you want this case to be documented.<br>
-<a name="block.textformat.php"></a>
-<h1>block.textformat.php</h1>
-<h2>Warnings:</h2><br>
-<b>Warning on line 6</b> - DocBlock would be page-level, but precedes class "Smarty_Block_Textformat", use another DocBlock to document the file<br>
 <a name="function.mailto.php"></a>
 <h1>function.mailto.php</h1>
 <h2>Warnings:</h2><br>
@@ -81,11 +78,11 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <a name="internal.base.php"></a>
 <h1>internal.base.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Base", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Base<br>
 <a name="internal.block.php"></a>
 <h1>internal.block.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Block", use another DocBlock to document the file<br>
+<b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Block<br>
 <a name="internal.cacheresource_file.php"></a>
 <h1>internal.cacheresource_file.php</h1>
 <h2>Warnings:</h2><br>
@@ -93,68 +90,72 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <a name="internal.cacher_inlinecode.php"></a>
 <h1>internal.cacher_inlinecode.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 13</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Cacher_InlineCode", use another DocBlock to document the file<br>
+<b>Warning on line 17</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Cacher_InlineCode<br>
 <a name="internal.cacher_nocacheinclude.php"></a>
 <h1>internal.cacher_nocacheinclude.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 13</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Cacher_NocacheInclude", use another DocBlock to document the file<br>
+<b>Warning on line 14</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Cacher_NocacheInclude", use another DocBlock to document the file<br>
 <a name="internal.compilebase.php"></a>
 <h1>internal.compilebase.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_CompileBase", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_CompileBase<br>
 <a name="internal.compiler.php"></a>
 <h1>internal.compiler.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 13</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compiler", use another DocBlock to document the file<br>
+<b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compiler<br>
 <a name="internal.compile_assign.php"></a>
 <h1>internal.compile_assign.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Assign", use another DocBlock to document the file<br>
+<b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Assign<br>
+<a name="internal.compile_block_plugin.php"></a>
+<h1>internal.compile_block_plugin.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Block_Plugin<br>
 <a name="internal.compile_capture.php"></a>
 <h1>internal.compile_capture.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Capture", use another DocBlock to document the file<br>
-<b>Warning on line 41</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_End_Capture<br>
+<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Capture<br>
+<b>Warning on line 46</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_CaptureClose<br>
 <a name="internal.compile_debug.php"></a>
 <h1>internal.compile_debug.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Debug", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Debug<br>
 <a name="internal.compile_for.php"></a>
 <h1>internal.compile_for.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_For", use another DocBlock to document the file<br>
-<b>Warning on line 61</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Forelse<br>
-<b>Warning on line 77</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_End_For<br>
+<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_For<br>
+<b>Warning on line 78</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Forelse<br>
+<b>Warning on line 98</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_ForClose<br>
 <a name="internal.compile_foreach.php"></a>
 <h1>internal.compile_foreach.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Foreach", use another DocBlock to document the file<br>
-<b>Warning on line 61</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Foreachelse<br>
-<b>Warning on line 77</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_End_Foreach<br>
+<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Foreach<br>
+<b>Warning on line 67</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Foreachelse<br>
+<b>Warning on line 87</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_ForeachClose<br>
 <a name="internal.compile_function_plugin.php"></a>
 <h1>internal.compile_function_plugin.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Function_Plugin", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Function_Plugin<br>
 <a name="internal.compile_if.php"></a>
 <h1>internal.compile_if.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_If", use another DocBlock to document the file<br>
-<b>Warning on line 24</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Else<br>
-<b>Warning on line 39</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_ElseIf<br>
-<b>Warning on line 56</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_End_If<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_If<br>
+<b>Warning on line 30</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Else<br>
+<b>Warning on line 48</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_ElseIf<br>
+<b>Warning on line 67</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_IfClose<br>
 <a name="internal.compile_include.php"></a>
 <h1>internal.compile_include.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Include", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Include<br>
 <a name="internal.compile_nocache.php"></a>
 <h1>internal.compile_nocache.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Nocache", use another DocBlock to document the file<br>
-<b>Warning on line 21</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_End_Nocache<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Nocache<br>
+<b>Warning on line 33</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_NocacheClose<br>
 <a name="internal.compile_print_expression.php"></a>
 <h1>internal.compile_print_expression.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Compile_Print_Expression", use another DocBlock to document the file<br>
+<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Print_Expression<br>
 <a name="internal.config.php"></a>
 <h1>internal.config.php</h1>
 <h2>Warnings:</h2><br>
@@ -162,15 +163,15 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <a name="internal.debug.php"></a>
 <h1>internal.debug.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Debug", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Debug<br>
 <a name="internal.function.php"></a>
 <h1>internal.function.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Function", use another DocBlock to document the file<br>
+<b>Warning on line 12</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Function", use another DocBlock to document the file<br>
 <a name="internal.modifier.php"></a>
 <h1>internal.modifier.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Modifier", use another DocBlock to document the file<br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Modifier<br>
 <a name="internal.phpvariableobjects.php"></a>
 <h1>internal.phpvariableobjects.php</h1>
 <h2>Warnings:</h2><br>
@@ -179,24 +180,28 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <a name="internal.pluginbase.php"></a>
 <h1>internal.pluginbase.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_PluginBase", use another DocBlock to document the file<br>
+<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_PluginBase<br>
 <a name="internal.resource_file.php"></a>
 <h1>internal.resource_file.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Resource_File", use another DocBlock to document the file<br>
+<b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Resource_File<br>
 <a name="internal.resource_php.php"></a>
 <h1>internal.resource_php.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Resource_PHP", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Resource_PHP<br>
 <a name="internal.resource_string.php"></a>
 <h1>internal.resource_string.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Resource_String", use another DocBlock to document the file<br>
+<b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Resource_String<br>
+<a name="internal.run_filter.php"></a>
+<h1>internal.run_filter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Run_Filter<br>
 <a name="internal.template.php"></a>
 <h1>internal.template.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Template<br>
-<b>Warning on line 530</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
+<b>Warning on line 540</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
 <a name="internal.templatebase.php"></a>
 <h1>internal.templatebase.php</h1>
 <h2>Warnings:</h2><br>
@@ -206,30 +211,29 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <a name="internal.templatelexer.php"></a>
 <h1>internal.templatelexer.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Templatelexer", use another DocBlock to document the file<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Templatelexer<br>
 <a name="internal.templateparser.php"></a>
 <h1>internal.templateparser.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 11</b> - no @package tag was used in a DocBlock for class TP_yyToken<br>
-<b>Warning on line 87</b> - no @package tag was used in a DocBlock for class TP_yyStackEntry<br>
-<b>Warning on line 100</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Templateparser<br>
-<b>Warning on line 1906</b> - File "C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.templateparser.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class TP_yyToken<br>
+<b>Warning on line 94</b> - no @package tag was used in a DocBlock for class TP_yyStackEntry<br>
+<b>Warning on line 107</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Templateparser<br>
 <a name="internal.write_file.php"></a>
 <h1>internal.write_file.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Write_File", use another DocBlock to document the file<br>
+<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Write_File<br>
 <a name="method.setDefaultResource.php"></a>
 <h1>method.setDefaultResource.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Method_setDefaultResource", use another DocBlock to document the file<br>
+<b>Warning on line 11</b> - DocBlock would be page-level, but precedes class "Smarty_Method_setDefaultResource", use another DocBlock to document the file<br>
 <a name="method.test.php"></a>
 <h1>method.test.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 8</b> - DocBlock would be page-level, but precedes class "Smarty_Method_Test", use another DocBlock to document the file<br>
+<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "Smarty_Method_Test", use another DocBlock to document the file<br>
 <a name="method.trigger_fatal_error.php"></a>
 <h1>method.trigger_fatal_error.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 9</b> - DocBlock would be page-level, but precedes class "Smarty_Method_Trigger_Fatal_Error", use another DocBlock to document the file<br>
+<b>Warning on line 10</b> - DocBlock would be page-level, but precedes class "Smarty_Method_Trigger_Fatal_Error", use another DocBlock to document the file<br>
 <a name="modifier.debug_print_var.php"></a>
 <h1>modifier.debug_print_var.php</h1>
 <h2>Warnings:</h2><br>
@@ -250,7 +254,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>Smarty.class.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 50</b> - no @package tag was used in a DocBlock for class Smarty<br>
-<b>Warning on line 319</b> - no @package tag was used in a DocBlock for class SmartyException<br>
+<b>Warning on line 320</b> - no @package tag was used in a DocBlock for class SmartyException<br>
 <a name="test_debug.php"></a>
 <h1>test_debug.php</h1>
 <h2>Warnings:</h2><br>
@@ -290,7 +294,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <b>Warning on line 7</b> - Page-level DocBlock precedes "require './libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 31</b> - no @package tag was used in a DocBlock for class MyObj<br>
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 10 Nov 2008 21:04:38 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sat, 15 Nov 2008 19:01:21 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</body>
 </html>
