@@ -192,7 +192,7 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 									// array variable
 variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// variable with property
-variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->prop[\''.p.'\']'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->'.p; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
 									// special variables
 variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
 										// single array index

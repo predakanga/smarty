@@ -48,7 +48,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_caching = 'true';
         } 
         // create template object
-        $_output = "\$_template = new Smarty_Template ($include_file, \$_smarty_tpl->tpl_vars);"; 
+        $_output = "<?php \$_template = new Smarty_Template ($include_file, \$_smarty_tpl->tpl_vars);"; 
         // delete {include} standard attributes
         unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching']); 
         // remaining attributes must be assigned as smarty variable
@@ -69,17 +69,11 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         }
         //was there an assign attribute 
         if (isset($_assign)) {
-            $_output .= "\$_tmp = \$_smarty_tpl->smarty->fetch(\$_template);";
+            $_output .= "\$_smarty_tpl->assign($_assign,\$_smarty_tpl->smarty->fetch(\$_template)); ?>";
         } else {
-            $_output .= "echo \$_smarty_tpl->smarty->fetch(\$_template);";
+            $_output .= "echo \$_smarty_tpl->smarty->fetch(\$_template); ?>";
         } 
-
-        if (isset($_assign)) {
-            $_output .= "\$_smarty_tpl->tpl->assign($_assign,\$_tmp);  unset(\$_tmp);";
-            // create variable for compiler
-//            $this->compiler->template->tpl_vars->tpl_vars[$_var] = new Smarty_variable(null, $_nocache_boolean, $_global_boolean);
-        } 
-        return "<?php $_output ?>";
+        return $_output;
     } 
 } 
 
