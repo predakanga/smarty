@@ -84,8 +84,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // template delimiters
     public $left_delimiter = "{";
     public $right_delimiter = "}"; 
-    // security mode
-    public $security = false; 
+    // security 
+    public $security = false;
+    public $trusted_dir = array(); 
     // debug mode
     public $debugging = false;
     public $debugging_ctrl = 'URL';
@@ -120,6 +121,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     static $template_objects = null;
     // autoload filter
     public $autoload_filters = array();
+    // check If-Modified-Since headers
+    public $cache_modified_check = false;
+
     /**
     * Class constructor, initializes basic smarty properties
     */
