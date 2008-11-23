@@ -13,7 +13,8 @@
 	<h3>Package indexes</h3>
 	<ul>
 				<li><a href="elementindex_SmartyTestScripts.html">SmartyTestScripts</a></li>
-					</ul>
+							<li><a href="elementindex_PHPunit.html">PHPunit</a></li>
+			</ul>
 <a href="elementindex.html">All elements</a>
 <br />
 <div class="index-letter-menu">
@@ -487,6 +488,13 @@
 							<div class="index-item-description">Methode to compile a Smarty template</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$compiler_tags</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html#var$compiler_tags">Smarty_Security_Policy::$compiler_tags</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This is an array of standard compiler tags.</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$cached_template</span>
 					</dt>
 		<dd class="index-item-body">
@@ -785,6 +793,13 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/Templates/Smarty.html#var$exception_handler">Smarty::$exception_handler</a> in Smarty.class.php</div>
 					</dd>
+			<dt class="field">
+						<span class="method-title">enableSecurity</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Templates/Smarty.html#methodenableSecurity">Smarty::enableSecurity()</a> in Smarty.class.php</div>
+							<div class="index-item-description">Load the plugin with securty definition and enables security</div>
+					</dd>
 		</dl>
 	<a name="f"></a>
 	<div class="index-letter-section">
@@ -793,6 +808,13 @@
 		<div style="clear: both"></div>
 	</div>
 	<dl>
+			<dt class="field">
+						<span class="var-title">$function_plugins</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html#var$function_plugins">Smarty_Security_Policy::$function_plugins</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This is an array of trusted function plugins.</div>
+					</dd>
 			<dt class="field">
 						<span class="include-title">function.counter.php</span>
 					</dt>
@@ -1228,6 +1250,47 @@
 			<div class="index-item-details"><a href="Smarty/PluginsInternal/_libs---sysplugins---internal.write_file.php.html">internal.write_file.php</a> in internal.write_file.php</div>
 					</dd>
 			<dt class="field">
+						<span class="method-title">isTrustedCompilerTag</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Security/Smarty_Internal_Security_Handler.html#methodisTrustedCompilerTag">Smarty_Internal_Security_Handler::isTrustedCompilerTag()</a> in internal.security_handler.php</div>
+							<div class="index-item-description">Check if compiler tag is truested.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">isTrustedFunctionPlugin</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Security/Smarty_Internal_Security_Handler.html#methodisTrustedFunctionPlugin">Smarty_Internal_Security_Handler::isTrustedFunctionPlugin()</a> in internal.security_handler.php</div>
+							<div class="index-item-description">Check if function plugin is truested.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">isTrustedModifier</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Security/Smarty_Internal_Security_Handler.html#methodisTrustedModifier">Smarty_Internal_Security_Handler::isTrustedModifier()</a> in internal.security_handler.php</div>
+							<div class="index-item-description">Check if modifier is trusted.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">isTrustedPhpFunction</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Security/Smarty_Internal_Security_Handler.html#methodisTrustedPhpFunction">Smarty_Internal_Security_Handler::isTrustedPhpFunction()</a> in internal.security_handler.php</div>
+							<div class="index-item-description">Check if PHP function is trusted.</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">isTrustedResourceDir</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Security/Smarty_Internal_Security_Handler.html#methodisTrustedResourceDir">Smarty_Internal_Security_Handler::isTrustedResourceDir()</a> in internal.security_handler.php</div>
+							<div class="index-item-description">Check if directory of file resource is trusted.</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">internal.security_handler.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Security/_libs---sysplugins---internal.security_handler.php.html">internal.security_handler.php</a> in internal.security_handler.php</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">isEvaluated</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1378,6 +1441,13 @@
 			<div class="index-item-details"><a href="Smarty/plugins/_plugins---modifier.debug_print_var.php.html">modifier.debug_print_var.php</a> in modifier.debug_print_var.php</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$modifiers</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html#var$modifiers">Smarty_Security_Policy::$modifiers</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This is an array of trusted modifers.</div>
+					</dd>
+			<dt class="field">
 						<span class="include-title">modifier.escape.php</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1493,6 +1563,20 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodPrintTrace">Smarty_Internal_Templateparser::PrintTrace()</a> in internal.templateparser.php</div>
 							<div class="index-item-description">Output debug information to output (php://output stream)</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$php_functions</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html#var$php_functions">Smarty_Security_Policy::$php_functions</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This is an array of trusted PHP functions.</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$php_handling</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html#var$php_handling">Smarty_Security_Policy::$php_handling</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This determines how Smarty handles &quot;&lt;?php ... ?&gt;&quot; tags in templates.</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$parent_object</span>
@@ -1877,6 +1961,44 @@
 			<div class="index-item-details"><a href="Smarty/plugins/_plugins---outputfilter.trimwhitespace.php.html#functionsmarty_outputfilter_trimwhitespace_replace">smarty_outputfilter_trimwhitespace_replace()</a> in outputfilter.trimwhitespace.php</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$secure_dir</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html#var$secure_dir">Smarty_Security_Policy::$secure_dir</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This is the list of template directories that are considered secure.</div>
+					</dd>
+			<dt class="field">
+						<span class="include-title">securitypolicy.default.php</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/_plugins---securitypolicy.default.php.html">securitypolicy.default.php</a> in securitypolicy.default.php</div>
+					</dd>
+			<dt class="field">
+						<span class="const-title">SMARTY_PHP_ALLOW</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/_plugins---securitypolicy.default.php.html#defineSMARTY_PHP_ALLOW">SMARTY_PHP_ALLOW</a> in securitypolicy.default.php</div>
+					</dd>
+			<dt class="field">
+						<span class="const-title">SMARTY_PHP_QUOTE</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/_plugins---securitypolicy.default.php.html#defineSMARTY_PHP_QUOTE">SMARTY_PHP_QUOTE</a> in securitypolicy.default.php</div>
+					</dd>
+			<dt class="field">
+						<span class="const-title">SMARTY_PHP_REMOVE</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/_plugins---securitypolicy.default.php.html#defineSMARTY_PHP_REMOVE">SMARTY_PHP_REMOVE</a> in securitypolicy.default.php</div>
+					</dd>
+			<dt class="field">
+						Smarty_Security_Policy
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html">Smarty_Security_Policy</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This class does contain the security settings</div>
+					</dd>
+			<dt class="field">
 						<span class="method-title">smarty_function_counter</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1961,6 +2083,13 @@
 							<div class="index-item-description">Smarty truncate modifier plugin</div>
 					</dd>
 			<dt class="field">
+						Smarty_Internal_Security_Handler
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Security/Smarty_Internal_Security_Handler.html">Smarty_Internal_Security_Handler</a> in internal.security_handler.php</div>
+							<div class="index-item-description">This class contains all methods for security checking</div>
+					</dd>
+			<dt class="field">
 						Smarty_Internal_Resource_File
 					</dt>
 		<dd class="index-item-body">
@@ -1986,6 +2115,18 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/Templates/Smarty.html#var$security">Smarty::$security</a> in Smarty.class.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$security_handler</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Templates/Smarty.html#var$security_handler">Smarty::$security_handler</a> in Smarty.class.php</div>
+					</dd>
+			<dt class="field">
+						<span class="var-title">$security_policy</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Templates/Smarty.html#var$security_policy">Smarty::$security_policy</a> in Smarty.class.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$smarty_debug_id</span>
@@ -2362,6 +2503,13 @@
 							<div class="index-item-description">display compiler error messages without dying</div>
 					</dd>
 			<dt class="field">
+						<span class="var-title">$trusted_dir</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsConfiguration/Smarty_Security_Policy.html#var$trusted_dir">Smarty_Security_Policy::$trusted_dir</a> in securitypolicy.default.php</div>
+							<div class="index-item-description">This is an array of directories where trusted php scripts reside.</div>
+					</dd>
+			<dt class="field">
 						<span class="var-title">$template_class</span>
 					</dt>
 		<dd class="index-item-body">
@@ -2401,19 +2549,13 @@
 						<span class="var-title">$tpl_vars</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Templates/Smarty_Internal_Template.html#var$tpl_vars">Smarty_Internal_Template::$tpl_vars</a> in internal.template.php</div>
+			<div class="index-item-details"><a href="Smarty/Templates/Smarty_Data.html#var$tpl_vars">Smarty_Data::$tpl_vars</a> in internal.templatebase.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$tpl_vars</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Templates/Smarty_Data.html#var$tpl_vars">Smarty_Data::$tpl_vars</a> in internal.templatebase.php</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$trusted_dir</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Templates/Smarty.html#var$trusted_dir">Smarty::$trusted_dir</a> in Smarty.class.php</div>
+			<div class="index-item-details"><a href="Smarty/Templates/Smarty_Internal_Template.html#var$tpl_vars">Smarty_Internal_Template::$tpl_vars</a> in internal.template.php</div>
 					</dd>
 		</dl>
 	<a name="u"></a>
@@ -2855,10 +2997,10 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_9">Smarty_Internal_Templatelexer::yy_r1_9()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_11</span>
+						<span class="method-title">yy_r1_10</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_11">Smarty_Internal_Templatelexer::yy_r1_11()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_10">Smarty_Internal_Templatelexer::yy_r1_10()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r1_12</span>
@@ -2873,58 +3015,58 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_13">Smarty_Internal_Templatelexer::yy_r1_13()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_15</span>
+						<span class="method-title">yy_r1_14</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_15">Smarty_Internal_Templatelexer::yy_r1_15()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_14">Smarty_Internal_Templatelexer::yy_r1_14()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_17</span>
+						<span class="method-title">yy_r1_16</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_17">Smarty_Internal_Templatelexer::yy_r1_17()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_16">Smarty_Internal_Templatelexer::yy_r1_16()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_19</span>
+						<span class="method-title">yy_r1_18</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_19">Smarty_Internal_Templatelexer::yy_r1_19()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_18">Smarty_Internal_Templatelexer::yy_r1_18()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_21</span>
+						<span class="method-title">yy_r1_20</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_21">Smarty_Internal_Templatelexer::yy_r1_21()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_20">Smarty_Internal_Templatelexer::yy_r1_20()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_23</span>
+						<span class="method-title">yy_r1_22</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_23">Smarty_Internal_Templatelexer::yy_r1_23()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_22">Smarty_Internal_Templatelexer::yy_r1_22()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_25</span>
+						<span class="method-title">yy_r1_24</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_25">Smarty_Internal_Templatelexer::yy_r1_25()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_24">Smarty_Internal_Templatelexer::yy_r1_24()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_27</span>
+						<span class="method-title">yy_r1_26</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_27">Smarty_Internal_Templatelexer::yy_r1_27()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_26">Smarty_Internal_Templatelexer::yy_r1_26()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_29</span>
+						<span class="method-title">yy_r1_28</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_29">Smarty_Internal_Templatelexer::yy_r1_29()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_28">Smarty_Internal_Templatelexer::yy_r1_28()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_31</span>
+						<span class="method-title">yy_r1_30</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_31">Smarty_Internal_Templatelexer::yy_r1_31()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_30">Smarty_Internal_Templatelexer::yy_r1_30()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r1_32</span>
@@ -2975,10 +3117,10 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_39">Smarty_Internal_Templatelexer::yy_r1_39()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_41</span>
+						<span class="method-title">yy_r1_40</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_41">Smarty_Internal_Templatelexer::yy_r1_41()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_40">Smarty_Internal_Templatelexer::yy_r1_40()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r1_42</span>
@@ -2987,16 +3129,16 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_42">Smarty_Internal_Templatelexer::yy_r1_42()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_44</span>
+						<span class="method-title">yy_r1_43</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_44">Smarty_Internal_Templatelexer::yy_r1_44()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_43">Smarty_Internal_Templatelexer::yy_r1_43()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r1_46</span>
+						<span class="method-title">yy_r1_45</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_46">Smarty_Internal_Templatelexer::yy_r1_46()</a> in internal.templatelexer.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_45">Smarty_Internal_Templatelexer::yy_r1_45()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r1_47</span>
@@ -3063,6 +3205,12 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_57">Smarty_Internal_Templatelexer::yy_r1_57()</a> in internal.templatelexer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">yy_r1_58</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#methodyy_r1_58">Smarty_Internal_Templatelexer::yy_r1_58()</a> in internal.templatelexer.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r2</span>

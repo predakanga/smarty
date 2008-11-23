@@ -40,6 +40,7 @@
 <a href="#internal.resource_php.php">internal.resource_php.php</a><br>
 <a href="#internal.resource_string.php">internal.resource_string.php</a><br>
 <a href="#internal.run_filter.php">internal.run_filter.php</a><br>
+<a href="#internal.security_handler.php">internal.security_handler.php</a><br>
 <a href="#internal.template.php">internal.template.php</a><br>
 <a href="#internal.templatebase.php">internal.templatebase.php</a><br>
 <a href="#internal.templatelexer.php">internal.templatelexer.php</a><br>
@@ -52,7 +53,11 @@
 <a href="#modifier.escape.php">modifier.escape.php</a><br>
 <a href="#modifier.string_format.php">modifier.string_format.php</a><br>
 <a href="#modifier.truncate.php">modifier.truncate.php</a><br>
+<a href="#ResourceTests.php">ResourceTests.php</a><br>
+<a href="#securitypolicy.default.php">securitypolicy.default.php</a><br>
+<a href="#SecurityTests.php">SecurityTests.php</a><br>
 <a href="#Smarty.class.php">Smarty.class.php</a><br>
+<a href="#smartytests.php">smartytests.php</a><br>
 <a href="#test_debug.php">test_debug.php</a><br>
 <a href="#test_if.php">test_if.php</a><br>
 <a href="#test_include.php">test_include.php</a><br>
@@ -62,10 +67,14 @@
 <a href="#test_object.php">test_object.php</a><br>
 <a href="#test_parser.php">test_parser.php</a><br>
 <a href="#test_plugin.php">test_plugin.php</a><br>
+<a href="#test_security.php">test_security.php</a><br>
 <a href="#test_smoke.php">test_smoke.php</a><br>
 <a name="Post-parsing"></a>
 <h1>Post-parsing</h1>
 <h2>Warnings:</h2><br>
+<b>Warning</b> - Class ResourceTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class SecurityTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class SmartyTests parent PHPUnit_Framework_TestSuite not found<br>
 <b>Warning</b> - 
 duplicate class element "Person" in file C:\www\docs\karting-germany.de\gi\__smarty3Alpha\test_object.php will be ignored.
 Use an @ignore tag on the original if you want this case to be documented.<br>
@@ -208,11 +217,15 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>internal.run_filter.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Run_Filter<br>
+<a name="internal.security_handler.php"></a>
+<h1>internal.security_handler.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 11</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Security_Handler<br>
 <a name="internal.template.php"></a>
 <h1>internal.template.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Template<br>
-<b>Warning on line 540</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
+<b>Warning on line 541</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
 <a name="internal.templatebase.php"></a>
 <h1>internal.templatebase.php</h1>
 <h2>Warnings:</h2><br>
@@ -261,11 +274,31 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>modifier.truncate.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 26</b> - no @package tag was used in a DocBlock for class Smarty_Modifier_Truncate<br>
+<a name="ResourceTests.php"></a>
+<h1>ResourceTests.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class ResourceTests<br>
+<a name="securitypolicy.default.php"></a>
+<h1>securitypolicy.default.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - Page-level DocBlock precedes "define SMARTY_PHP_QUOTE", use another DocBlock to document the source element<br>
+<b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Security_Policy<br>
+<a name="SecurityTests.php"></a>
+<h1>SecurityTests.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class SecurityTests<br>
 <a name="Smarty.class.php"></a>
 <h1>Smarty.class.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 50</b> - no @package tag was used in a DocBlock for class Smarty<br>
-<b>Warning on line 324</b> - no @package tag was used in a DocBlock for class SmartyException<br>
+<b>Warning on line 49</b> - no @package tag was used in a DocBlock for class Smarty<br>
+<b>Warning on line 345</b> - no @package tag was used in a DocBlock for class SmartyException<br>
+<a name="smartytests.php"></a>
+<h1>smartytests.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - Page-level DocBlock precedes "require_once 'PHPUnit/Framework.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class SmartyTests<br>
 <a name="test_debug.php"></a>
 <h1>test_debug.php</h1>
 <h2>Warnings:</h2><br>
@@ -303,13 +336,17 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>test_plugin.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 7</b> - Page-level DocBlock precedes "require './libs/Smarty.class.php'", use another DocBlock to document the source element<br>
+<a name="test_security.php"></a>
+<h1>test_security.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 7</b> - Page-level DocBlock precedes "require './libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <a name="test_smoke.php"></a>
 <h1>test_smoke.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 7</b> - Page-level DocBlock precedes "require './libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 31</b> - no @package tag was used in a DocBlock for class MyObj<br>
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 16 Nov 2008 04:00:15 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 24 Nov 2008 00:31:09 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</body>
 </html>
