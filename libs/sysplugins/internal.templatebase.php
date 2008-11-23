@@ -17,7 +17,7 @@ class Smarty_Internal_TemplateBase {
     /**
     * assigns a Smarty variable
     * 
-    * @param array $ |string $tpl_var the template variable name(s)
+    * @param array|string $tpl_var the template variable name(s)
     * @param mixed $value the value to assign
     * @param boolean $nocache if true any output of this variable will be not cached
     * @param boolean $global if true the variable will have global scope

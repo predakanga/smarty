@@ -85,7 +85,10 @@ template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
 											// comments
 template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// PHP tag
-template_element(res)::= PHP(php). {res = $this->template->cacher_object->processNocacheCode(php, $this->compiler, false,true);}	
+template_element(res)::= PHP(php). {if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
+                                      res = $this->template->cacher_object->processNocacheCode(php, $this->compiler, false,true);
+                                      } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
+                                      res = $this->template->cacher_object->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->template->cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
 //template_element(res)::= text(t). {res = $this->template->cacher_object->processNocacheCode(t, $this->compiler,false,false);}	
@@ -141,7 +144,8 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 									// simple expression
 expr(res)				 ::= exprs(e).	{res = e;}
 									// expression with modifier and optional additional modifier paramter
-expr(res)        ::= exprs(e) modifier(m) modparameters(p). {res = "\$_smarty_tpl->smarty->modifier->".m . "(". e . p .")"; } 
+expr(res)        ::= exprs(e) modifier(m) modparameters(p). {if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
+                                                               res = "\$_smarty_tpl->smarty->modifier->".m . "(". e . p .")"; }} 
 									// array
 expr(res)				 ::= array(a).	{res = a;}
 
@@ -233,7 +237,8 @@ objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 // function
 //
 										// function with parameter
-function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";}
+function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->security || $this->smarty->security_handler->isTrustedPhpFunction(f, $this->compiler)) {
+                                                      res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";}}
 										// function without parameter
 //function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$_smarty_tpl->smarty->function->".f."()";}
 

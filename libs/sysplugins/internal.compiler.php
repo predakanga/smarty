@@ -49,8 +49,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
     /**
     * Method to deliver instance of compiler object
-    *
-    * @param object|nothing $new_instance $this of compiler object on initial call
+    * 
+    * @param object $ |nothing $new_instance $this of compiler object on initial call
     * @return object instance of compiler object
     */
     public static function &instance($new_instance = null)
@@ -124,8 +124,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *       This is a call back from the lexer/parser
-    *       It executes the required compile plugin for the Smarty tag
+    *            This is a call back from the lexer/parser
+    *            It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -152,16 +152,18 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             return ''; 
             // no compile plugin found for this tag, try function plugin
         } elseif ($this->smarty->loadPlugin("smarty_function_$tag") && is_callable("smarty_function_$tag")) {
-            // call function plugin compile module
-            return $this->function_plugin($args, $tag); 
+            if (!$this->template->security || $this->smarty->security_handler->isTrustedFunctionPlugin($tag, $this)) {
+                // call function plugin compile module
+                return $this->function_plugin($args, $tag);
+            } 
             // try block plugin
-        } elseif (strncmp($tag, 'end_', 4) != 0) {
+        } elseif (substr_compare($tag, 'close', -5, 5) != 0) {
             if ($this->smarty->loadPlugin("smarty_block_$tag") && is_callable("smarty_block_$tag")) {
                 // call block plugin compile module
                 return $this->block_plugin($args, $tag);
             } 
         } else {
-            if (is_callable("smarty_block_" . substr($tag, 4))) {
+            if (is_callable("smarty_block_" . substr($tag, 0, -5))) {
                 // call block plugin compile module
                 return $this->block_plugin($args, $tag);
             } 
@@ -193,11 +195,15 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
                     // use plugin if found
                     self::$_tag_objects[$name] = new $class_name; 
                     // compile this tag
-                    return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
+                    if (!$this->template->security || $this->smarty->security_handler->isTrustedCompilerTag($name, $this)) {
+                        return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
+                    } 
                 } 
             } else {
                 // compile this tag
-                return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
+                if (!$this->template->security || $this->smarty->security_handler->isTrustedCompilerTag($name, $this)) {
+                    return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
+                } 
             } 
         } 
         // no compile plugin for this tag
@@ -220,8 +226,12 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->lex = Smarty_Internal_Templatelexer::instance();
         $this->parser = Smarty_Internal_Templateparser::instance(); 
         // get template source line which has error
+        $line = $this->lex->line;
+        if (isset($args)) {
+            $line--;
+        } 
         $match = preg_split("/\n/", $this->lex->data);
-        echo '<br>Syntax Error on line ' . $this->lex->line . ' in template "' . $this->tpl_filepath . '"<p style="font-family:courier">' . $match[$this->lex->line-1] . "<br>"; 
+        echo '<br>Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . '"<p style="font-family:courier">' . $match[$line-1] . "<br>"; 
         // to do
         if (false) {
             // find position in this line

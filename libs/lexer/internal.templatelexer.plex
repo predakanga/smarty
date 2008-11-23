@@ -74,6 +74,8 @@ class Smarty_Internal_Templatelexer
         $this->counter = 0;
         $this->line = 1;
         $this->smarty = Smarty::instance(); 
+        $this->ldel = preg_quote($this->smarty->left_delimiter); 
+        $this->rdel = preg_quote($this->smarty->right_delimiter);
      }
     public static function &instance($new_instance = null)
     {
@@ -91,16 +93,16 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 php = /\<\?php.*\?\>/
-ldels = /\{\s{1,}/
-rdels = /\s{1,}\}/
-ldelslash = /\{\//
-ldel = /\{/
-rdel = /\}/
+ldels = /SMARTYldel\s{1,}/
+rdels = /\s{1,}SMARTYrdel/
+ldelslash = /SMARTYldel\//
+ldel = /SMARTYldel/
+rdel = /SMARTYrdel/
 number = /\d+(\.\d+)?/
 boolean = /true|false/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
-commentstart = /\{\*/
-commentend = /\*\}/
+commentstart = /SMARTYldel\*/
+commentend = /\*SMARTYrdel/
 incdec = /\+\+|\-\-/
 unimath = /\s?(\+|\-)\s?/
 openP = /\(/
@@ -137,6 +139,9 @@ other = /./
 */
 /*!lex2php
 %statename START
+php {
+  $this->token = Smarty_Internal_Templateparser::TP_PHP;
+}
 commentend {
   $this->token = Smarty_Internal_Templateparser::TP_COMMENTEND;
 }

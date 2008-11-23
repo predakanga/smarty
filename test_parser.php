@@ -16,6 +16,7 @@ $smarty = new Smarty;
 $smarty->force_compile = false;
 $smarty->caching = true;
 $smarty->caching_lifetime = -1;
+$smarty->enableSecurity();
 
 $template = stripslashes($_POST['template']);
 

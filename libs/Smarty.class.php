@@ -29,7 +29,6 @@
 * @version 3.0-alpha1
 */
 
-
 /**
 * set SMARTY_DIR to absolute path to Smarty library files.
 * if not defined, include_path will be used. Sets SMARTY_DIR only if user
@@ -40,7 +39,7 @@ if (!defined('SMARTY_DIR')) {
     define('SMARTY_DIR', dirname(__FILE__) . DIRECTORY_SEPARATOR);
 } 
 
-/** 
+/**
 * load required base class for creation of the smarty object
 */
 require_once(dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR . 'internal.templatebase.php');
@@ -84,14 +83,15 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // template delimiters
     public $left_delimiter = "{";
     public $right_delimiter = "}"; 
-    // security 
+    // security
     public $security = false;
-    public $trusted_dir = array(); 
+    public $security_policy = null; 
+    public $security_handler= null; 
     // debug mode
     public $debugging = false;
     public $debugging_ctrl = 'URL';
-    public $smarty_debug_id = 'SMARTY_DEBUG'; 
-    public $request_use_auto_globals = true;
+    public $smarty_debug_id = 'SMARTY_DEBUG';
+    public $request_use_auto_globals = true; 
     // assigned tpl vars
     public $tpl_vars = null; 
     // dummy parent object
@@ -118,9 +118,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // exception handler: set null to disable
     public $exception_handler = array('SmartyException', 'getStaticException'); 
     // cached template objects
-    static $template_objects = null;
+    static $template_objects = null; 
     // autoload filter
-    public $autoload_filters = array();
+    public $autoload_filters = array(); 
     // check If-Modified-Since headers
     public $cache_modified_check = false;
 
@@ -154,7 +154,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->function = new Smarty_Internal_Function;
         $this->loadPlugin('Smarty_Internal_Block');
         $this->block = new Smarty_Internal_Block;
-        if (!$this->debugging && $this->debugging_ctrl == 'URL') {
+        if (!$this->debugging && $this->debugging_ctrl == 'URL')
+        {
             $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
             if (@strstr($_query_string, $this->smarty_debug_id)) {
                 if (@strstr($_query_string, $this->smarty_debug_id . '=on')) {
@@ -168,11 +169,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 } else {
                     // enable debugging for this page
                     $this->debugging = true;
-                }
+                } 
             } else {
                 $this->debugging = (bool)($this->request_use_auto_globals ? @$_COOKIE['SMARTY_DEBUG'] : @$GLOBALS['HTTP_COOKIE_VARS']['SMARTY_DEBUG']);
-            }
-        }
+            } 
+        } 
     } 
 
     /**
@@ -255,6 +256,26 @@ class Smarty extends Smarty_Internal_TemplateBase {
     } 
 
     /**
+    * Load the plugin with securty definition and enables security
+    * 
+    * @param string $security_policy plugin to load
+    */
+    public function enableSecurity($security_policy = 'Smarty_SecurityPolicy_Default')
+    {
+        if ($this->loadPlugin($security_policy)) {
+            if (!class_exists('Smarty_Security_Policy')) {
+                throw new SmartyException("Security policy must define class 'Smarty_Security_Policy'");
+            } 
+            $this->security_policy = new Smarty_Security_Policy();
+            $this->loadPlugin('Smarty_Internal_Security_Handler');
+            $this->security_handler = new Smarty_Internal_Security_Handler();
+            $this->security = true;
+        } else {
+            throw new SmartyException("Security policy {$security_definition} not found");
+        } 
+    } 
+
+    /**
     * Takes unknown classes and loads plugin files for them
     * class name format: Smarty_PluginType_PluginName
     * plugin filename format: plugintype.pluginname.php
@@ -298,7 +319,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function __call($name, $args)
     {
-        $plugin_filename = strtolower('method.' . $name . $this->php_ext);
+        $plugin_filename = strtolower('method . ' . $name . $this->php_ext);
         if (!file_exists($this->sysplugins_dir . $plugin_filename)) {
             throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not exist");
             die();

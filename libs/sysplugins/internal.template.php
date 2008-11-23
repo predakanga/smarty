@@ -77,6 +77,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->compiler_class = $this->smarty->compiler_class;
         $this->cacher_class = $this->smarty->cacher_class;
         $this->caching_type = $this->smarty->default_caching_type;
+        $this->security = $this->smarty->security;
         $this->cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($this->caching_type);
         $this->tpl_vars = new Smarty_Data($_parent_tpl_vars); 
         // load cacher
