@@ -30,7 +30,7 @@ class ResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testStringResurce()
     {
-        $this->assertEquals("hallo", $this->smarty->fetch('string:hallo'));
+        $this->assertEquals("hallo world", $this->smarty->fetch('string:hallo world'));
     } 
 } 
 

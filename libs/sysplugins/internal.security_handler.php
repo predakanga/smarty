@@ -109,7 +109,6 @@ class Smarty_Internal_Security_Handler extends Smarty_Internal_Base {
         if (!empty($this->smarty->security_policy->secure_dir)) {
             foreach ((array)$this->smarty->security_policy->secure_dir as $curr_dir) {
                 if (($_cd = realpath($curr_dir)) !== false) {
-                      var_dump($_cd,$_rp);
                     if ($_cd == $_rp) {
                         return true;
                     } elseif (strncmp($_rp, $_cd, strlen($_cd)) == 0 &&

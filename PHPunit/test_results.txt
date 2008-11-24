@@ -1,7 +1,7 @@
 PHPUnit 3.3.4 by Sebastian Bergmann.
 
-....
+......................
 
-Time: 0 seconds
+Time: 3 seconds
 
-OK (4 tests, 4 assertions)
+OK (22 tests, 22 assertions)
