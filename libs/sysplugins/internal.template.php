@@ -384,48 +384,46 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     */
     public function renderTemplate ()
     {
-        if ($this->cached_template === null) {
-            if ($this->usesCompiler()) {
-                if ($this->mustCompile()) {
-                    $this->compileTemplateSource();
-                } 
-                $_smarty_tpl = $this;
-                $_start_time = $this->_get_time();
-                ob_start();
-                if ($this->isEvaluated()) {
-                    eval("?>" . $this->compiled_template);
-                } else {
-                    include($this->getCompiledFilepath ());
-                } 
+        if ($this->usesCompiler()) {
+            if ($this->mustCompile()) {
+                $this->compileTemplateSource();
+            } 
+            $_smarty_tpl = $this;
+            $_start_time = $this->_get_time();
+            ob_start();
+            if ($this->isEvaluated()) {
+                eval("?>" . $this->compiled_template);
             } else {
-                // PHP template
-                $_start_time = $this->_get_time(); 
-                // Smarty variables as objects extract as objects
-                $this->smarty->loadPlugin('Smarty_Internal_PHPVariableObjects');
-                $_tpl_vars = $this->tpl_vars;
-                do {
-                    foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
-                        if (isset($_var_object->value)) {
-                            $$_smarty_var = Smarty_Internal_PHPVariableObjects::createPHPVarObj($_var_object->value);
-                        } 
+                include($this->getCompiledFilepath ());
+            } 
+        } else {
+            // PHP template
+            $_start_time = $this->_get_time(); 
+            // Smarty variables as objects extract as objects
+            $this->smarty->loadPlugin('Smarty_Internal_PHPVariableObjects');
+            $_tpl_vars = $this->tpl_vars;
+            do {
+                foreach ($_tpl_vars->tpl_vars as $_smarty_var => $_var_object) {
+                    if (isset($_var_object->value)) {
+                        $$_smarty_var = Smarty_Internal_PHPVariableObjects::createPHPVarObj($_var_object->value);
                     } 
-                    $_tpl_vars = $_tpl_vars->parent_tpl_vars;
-                } while ($_tpl_vars != null);
-                unset ($_smarty_var, $_smarty_value, $_tpl_vars); 
-                // special object for handling functions in PHP
-                $_f = Smarty_Internal_PHPVariableObjects::createPHPVarObj($this->smarty->function, true);
-                ob_start(); 
-                // include PHP template
-                include($this->getTemplateFilepath ());
-            } 
-            $this->render_time = $this->_get_time() - $_start_time;
-            $this->cached_template = ob_get_clean(); 
-            // write to cache when nessecary
-            if (!$this->isEvaluated() && $this->caching)
-            { 
-                // write rendered template
-                $this->writeCachedContent($this);
-            } 
+                } 
+                $_tpl_vars = $_tpl_vars->parent_tpl_vars;
+            } while ($_tpl_vars != null);
+            unset ($_smarty_var, $_smarty_value, $_tpl_vars); 
+            // special object for handling functions in PHP
+            $_f = Smarty_Internal_PHPVariableObjects::createPHPVarObj($this->smarty->function, true);
+            ob_start(); 
+            // include PHP template
+            include($this->getTemplateFilepath ());
+        } 
+        $this->render_time = $this->_get_time() - $_start_time;
+        $this->cached_template = ob_get_clean(); 
+        // write to cache when nessecary
+        if (!$this->isEvaluated() && $this->caching)
+        { 
+            // write rendered template
+            $this->writeCachedContent($this);
         } 
     } 
 
