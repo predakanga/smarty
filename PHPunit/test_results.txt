@@ -1,8 +1,10 @@
 PHPUnit 3.3.4 by Sebastian Bergmann.
 
-............................................................ 60 / 65
-.....
+............................................................ 60 / 66
+......
 
-Time: 10 seconds
+Time: 15 seconds
 
-OK (65 tests, 74 assertions)
+OK (66 tests, 76 assertions)
+
+Generating code coverage report, this may take a moment.

@@ -17,8 +17,11 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     */
     public static function suite()
     {
+        PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs');
+	  PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../libs/lexer');
+        PHPUnit_Util_Filter::addDirectoryToWhitelist('../plugins');
 
-        $suite = new self('Smarty - Unit Tests Report');
+        $suite = new self('Smarty 3 - Unit Tests Report');
 
         foreach (new DirectoryIterator(dirname(__FILE__)) as $file) {
             if (!$file->isDot() && !$file->isDir() && (string) $file !== 'smartytests.php' && substr((string) $file, -4) === '.php') {
@@ -34,7 +37,6 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         } 
 
         return $suite;
-    } 
-} 
-
+    }
+}
 ?>
