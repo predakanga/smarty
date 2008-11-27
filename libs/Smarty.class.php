@@ -92,6 +92,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $debugging_ctrl = 'URL';
     public $smarty_debug_id = 'SMARTY_DEBUG';
     public $request_use_auto_globals = true; 
+    public $debug_tpl = null; 
     // assigned tpl vars
     public $tpl_vars = null; 
     // dummy parent object

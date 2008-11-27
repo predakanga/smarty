@@ -76,12 +76,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="butter.png" width="46" height="10" alt="46.67%"><img src="snow.png" width="54" height="10" alt="46.67%"></td>
+                <td class="coverBarOutline"><img src="butter.png" width="66" height="10" alt="66.67%"><img src="snow.png" width="34" height="10" alt="66.67%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerMed">46.67%</td>
-          <td class="coverNumMed">7 / 15</td>
+          <td class="coverPerMed">66.67%</td>
+          <td class="coverNumMed">10 / 15</td>
         </tr>
 
         <tr>
@@ -110,12 +110,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="butter.png" width="46" height="10" alt="46.67%"><img src="snow.png" width="54" height="10" alt="46.67%"></td>
+                <td class="coverBarOutline"><img src="butter.png" width="66" height="10" alt="66.67%"><img src="snow.png" width="34" height="10" alt="66.67%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerMed">46.67%</td>
-          <td class="coverNumMed">7 / 15</td>
+          <td class="coverPerMed">66.67%</td>
+          <td class="coverNumMed">10 / 15</td>
         </tr>
 
         <tr>
@@ -132,12 +132,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="butter.png" width="42" height="10" alt="42.86%"><img src="snow.png" width="58" height="10" alt="42.86%"></td>
+                <td class="coverBarOutline"><img src="butter.png" width="64" height="10" alt="64.29%"><img src="snow.png" width="36" height="10" alt="64.29%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerMed">42.86%</td>
-          <td class="coverNumMed">6 / 14</td>
+          <td class="coverPerMed">64.29%</td>
+          <td class="coverNumMed">9 / 14</td>
         </tr>
 
 
@@ -183,20 +183,20 @@
 <span class="lineNum" id="container28"><a name="28"></a><a href="#28" id="line28">      28</a> </span>                :     */                                                                             
 <span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span>                :     public function __call($name, $args)                                           
 <span class="lineNum" id="container30"><a name="30"></a><a href="#30" id="line30">      30</a> </span>                :     {                                                                              
-<span class="lineNum" id="container31"><a name="31"></a><a href="#31" id="line31">      31</a> </span><span class="lineCov">              4 :         $plugin_name = &quot;Smarty_Modifier_{$name}&quot;;                                  </span>
+<span class="lineNum" id="container31"><a name="31"></a><a href="#31" id="line31">      31</a> </span><span class="lineCov">              5 :         $plugin_name = &quot;Smarty_Modifier_{$name}&quot;;                                  </span>
 <span class="lineNum" id="container32"><a name="32"></a><a href="#32" id="line32">      32</a> </span>                :                                                                                    
-<span class="lineNum" id="container33"><a name="33"></a><a href="#33" id="line33">      33</a> </span><span class="lineCov">              4 :         if (class_exists($plugin_name, false)) {                                   </span>
-<span class="lineNum" id="container34"><a name="34"></a><a href="#34" id="line34">      34</a> </span><span class="lineNoCov">              0 :             return call_user_func_array(array($plugin_name, 'execute'), $args);    </span>
+<span class="lineNum" id="container33"><a name="33"></a><a href="#33" id="line33">      33</a> </span><span class="lineCov">              5 :         if (class_exists($plugin_name, false)) {                                   </span>
+<span class="lineNum" id="container34"><a name="34"></a><a href="#34" id="line34">      34</a> </span><span class="lineCov">              1 :             return call_user_func_array(array($plugin_name, 'execute'), $args);    </span>
 <span class="lineNum" id="container35"><a name="35"></a><a href="#35" id="line35">      35</a> </span><span class="lineDeadCode">                :         }                                                                          </span>
 <span class="lineNum" id="container36"><a name="36"></a><a href="#36" id="line36">      36</a> </span>                :                                                                                    
-<span class="lineNum" id="container37"><a name="37"></a><a href="#37" id="line37">      37</a> </span><span class="lineCov">              4 :         if (function_exists($plugin_name)) {                                       </span>
+<span class="lineNum" id="container37"><a name="37"></a><a href="#37" id="line37">      37</a> </span><span class="lineCov">              5 :         if (function_exists($plugin_name)) {                                       </span>
 <span class="lineNum" id="container38"><a name="38"></a><a href="#38" id="line38">      38</a> </span><span class="lineNoCov">              0 :             return call_user_func_array($plugin_name, $args);                      </span>
 <span class="lineNum" id="container39"><a name="39"></a><a href="#39" id="line39">      39</a> </span><span class="lineDeadCode">                :         }                                                                          </span>
 <span class="lineNum" id="container40"><a name="40"></a><a href="#40" id="line40">      40</a> </span>                :         // try to load plugin                                                      
-<span class="lineNum" id="container41"><a name="41"></a><a href="#41" id="line41">      41</a> </span><span class="lineCov">              4 :         if ($this-&gt;smarty-&gt;loadPlugin($plugin_name)) {                             </span>
+<span class="lineNum" id="container41"><a name="41"></a><a href="#41" id="line41">      41</a> </span><span class="lineCov">              5 :         if ($this-&gt;smarty-&gt;loadPlugin($plugin_name)) {                             </span>
 <span class="lineNum" id="container42"><a name="42"></a><a href="#42" id="line42">      42</a> </span>                :             // use class plugin if found                                           
-<span class="lineNum" id="container43"><a name="43"></a><a href="#43" id="line43">      43</a> </span><span class="lineNoCov">              0 :             if (class_exists($plugin_name, false)) {                               </span>
-<span class="lineNum" id="container44"><a name="44"></a><a href="#44" id="line44">      44</a> </span><span class="lineNoCov">              0 :                 return call_user_func_array(array($plugin_name, 'execute'), $args);</span>
+<span class="lineNum" id="container43"><a name="43"></a><a href="#43" id="line43">      43</a> </span><span class="lineCov">              1 :             if (class_exists($plugin_name, false)) {                               </span>
+<span class="lineNum" id="container44"><a name="44"></a><a href="#44" id="line44">      44</a> </span><span class="lineCov">              1 :                 return call_user_func_array(array($plugin_name, 'execute'), $args);</span>
 <span class="lineNum" id="container45"><a name="45"></a><a href="#45" id="line45">      45</a> </span><span class="lineDeadCode">                :             }                                                                      </span>
 <span class="lineNum" id="container46"><a name="46"></a><a href="#46" id="line46">      46</a> </span>                :             // check if we got Smarty2 style plugin                                
 <span class="lineNum" id="container47"><a name="47"></a><a href="#47" id="line47">      47</a> </span><span class="lineNoCov">              0 :             if (function_exists($plugin_name)) {                                   </span>
@@ -224,7 +224,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.4</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.3</a> at Wed Nov 26 19:36:23 CET 2008.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.4</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.3</a> at Thu Nov 27 22:15:43 CET 2008.</td></tr>
     </table>
 
     <br />
@@ -239,23 +239,38 @@
           "footer": ""
         },
         "panel31": {
-          "header": "4 tests cover line 31",
-          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
+          "header": "5 tests cover line 31",
+          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testDebug1(CompileDebugTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
           "footer": ""
         },
         "panel33": {
-          "header": "4 tests cover line 33",
-          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
+          "header": "5 tests cover line 33",
+          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testDebug1(CompileDebugTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
+          "footer": ""
+        },
+        "panel34": {
+          "header": "1 test covers line 34",
+          "body": "<ul><li class=\"testPassed\">testDebug1(CompileDebugTests)</li></ul>",
           "footer": ""
         },
         "panel37": {
-          "header": "4 tests cover line 37",
-          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
+          "header": "5 tests cover line 37",
+          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testDebug1(CompileDebugTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
           "footer": ""
         },
         "panel41": {
-          "header": "4 tests cover line 41",
-          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
+          "header": "5 tests cover line 41",
+          "body": "<ul><li class=\"testPassed\">testAssignOld7(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew5(CompileAssignTests)</li><li class=\"testPassed\">testDebug1(CompileDebugTests)</li><li class=\"testPassed\">testTrustedModifier(SecurityTests)</li><li class=\"testPassed\">testDisabledTrustedMofifer(SecurityTests)</li></ul>",
+          "footer": ""
+        },
+        "panel43": {
+          "header": "1 test covers line 43",
+          "body": "<ul><li class=\"testPassed\">testDebug1(CompileDebugTests)</li></ul>",
+          "footer": ""
+        },
+        "panel44": {
+          "header": "1 test covers line 44",
+          "body": "<ul><li class=\"testPassed\">testDebug1(CompileDebugTests)</li></ul>",
           "footer": ""
         },
         "panel53": {

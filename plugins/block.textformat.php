@@ -93,7 +93,7 @@ function smarty_block_textformat($params, $content, &$smarty)
         } 
     } 
     $_output = implode($wrap_char . $wrap_char, $_paragraphs);
-
+    
     return $assign ? $smarty->assign($assign, $_output) : $_output;
 } 
 

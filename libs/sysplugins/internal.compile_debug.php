@@ -13,7 +13,7 @@
 */ 
 class Smarty_Internal_Compile_Debug extends Smarty_Internal_CompileBase {
     /**
-    * Compiles code for the {capture} tag
+    * Compiles code for the {debug} tag
     * 
     * @param array $args array with attributes from parser
     * @return string compiled code

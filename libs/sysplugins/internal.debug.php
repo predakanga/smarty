@@ -42,6 +42,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_TemplateBase {
         $_template = new Smarty_Template ($this->smarty->debug_tpl);
         $_template->caching = false;
         $_template->force_compile = false;
+        $_template->security = false;
         $_template->assign('template_data', $_template_data);
         $_template->assign('assigned_vars', $_assigned_vars);
         echo $this->smarty->fetch($_template);
