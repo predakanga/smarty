@@ -16,11 +16,13 @@ class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
     * Compiles code for the {if} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    function compile($args)
+    public function compile($args, $compiler)
     {
-        $this->_open_tag('if');
+        $this->compiler = $compiler; 
+       $this->_open_tag('if');
         return '<?php if (' . $args[ifexp] . '): ?>';
     } 
 } 
@@ -33,10 +35,12 @@ class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase {
     * Compiles code for the {else} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         $this->_close_tag(array('if', 'elseif'));
         $this->_open_tag('else');
 
@@ -51,10 +55,12 @@ class Smarty_Internal_Compile_ElseIf extends Smarty_Internal_CompileBase {
     * Compiles code for the {elseif} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         $this->_close_tag(array('if', 'elseif'));
         $this->_open_tag('elseif');
 
@@ -70,10 +76,12 @@ class Smarty_Internal_Compile_IfClose extends Smarty_Internal_CompileBase {
     * Compiles code for the {/if} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         $this->_close_tag(array('if', 'else', 'elseif'));
         return "<?php endif;?>";
     } 

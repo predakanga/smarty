@@ -15,10 +15,12 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
     * Compiles code for the {foreach} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         $this->required_attributes = array('from', 'item');
         $this->optional_attributes = array('name', 'key'); 
         // check and get attributes
@@ -70,10 +72,12 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
     * Compiles code for the {foreachelse} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
@@ -90,10 +94,12 @@ class Smarty_Internal_Compile_ForeachClose extends Smarty_Internal_CompileBase {
     * Compiles code for the {/foreach} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 

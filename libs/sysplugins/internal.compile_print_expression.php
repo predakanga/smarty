@@ -16,10 +16,12 @@ class Smarty_Internal_Compile_Print_Expression extends Smarty_Internal_CompileBa
     * Compiles code for gererting output from any expression
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         $this->required_attributes = array('value');
         $this->optional_attributes = array('assign'); 
         // check and get attributes

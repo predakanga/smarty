@@ -18,7 +18,6 @@ class Smarty_Internal_CompileBase {
     function __construct()
     {
         $this->smarty = Smarty::instance();
-        $this->compiler = Smarty_Internal_Compiler::instance(); 
         // initialize valid attributes
         $this->required_attributes = array();
         $this->optional_attributes = array();

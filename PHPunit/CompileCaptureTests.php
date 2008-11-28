@@ -1,6 +1,6 @@
 <?php
 /**
-* Smarty PHPunit tests compilation of assign tags
+* Smarty PHPunit tests compilation of capture tags
 * 
 * @package PHPunit
 * @author Uwe Tews 
@@ -9,13 +9,14 @@
 require_once '../libs/Smarty.class.php';
 
 /**
-* class for assign tags tests
+* class for capture tags tests
 */
 class CompileCaptureTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = new Smarty();
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
+        $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
     } 
 
@@ -28,7 +29,6 @@ class CompileCaptureTests extends PHPUnit_Framework_TestCase {
     /**
     * test capture tag
     */
-
     public function testCapture1()
     {
         $tpl = $this->smarty->createTemplate("string:{capture assign=foo}hello world{/capture}");

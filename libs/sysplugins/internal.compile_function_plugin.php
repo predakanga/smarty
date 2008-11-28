@@ -17,10 +17,12 @@ class Smarty_Internal_Compile_Function_Plugin extends Smarty_Internal_CompileBas
     * 
     * @param array $args array with attributes from parser
     * @param string $tag name of function
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args, $tag)
-    { 
+    public function compile($args, $tag, $compiler)
+    {
+        $this->compiler = $compiler; 
         // This tag does create output
         $this->compiler->has_output = true;
 

@@ -19,13 +19,14 @@ class Smarty_Internal_Security_Handler extends Smarty_Internal_Base {
     */
     function isTrustedCompilerTag($tag_name, $compiler)
     {
-        if (in_array($tag_name, array('function_plugin', 'block_plugin', 'print_expression'))) {
+        if (in_array($tag_name, array('function_plugin', 'block_plugin', 'print_expression','else'))) {
             // allow always internal compile modules
             return true;
-        } 
-        if (substr_compare($tag_name, 'close', -5, 5) == 0) {
+        }
+       
+        if (strlen($tag_name) > 5 && substr_compare($tag_name, 'close', -5, 5) == 0) {
             $tag_name = substr($tag_name, 0, -5);
-        } elseif (substr_compare($tag_name, 'else', -4, 4) == 0) {
+        } elseif (strlen($tag_name) > 4 && substr_compare($tag_name, 'else', -4, 4) == 0) {
             $tag_name = substr($tag_name, 0, -4);
         } 
         if (empty($this->smarty->security_policy->compiler_tags) || in_array($tag_name, $this->smarty->security_policy->compiler_tags)) {

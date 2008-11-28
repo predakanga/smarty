@@ -17,10 +17,12 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
     *
     * This tag does not generate compiled output. It only sets a compiler flag 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         // enter nocache mode
         $this->compiler->_compiler_status->nocache = true;
         // this tag does not return compiled code
@@ -37,10 +39,12 @@ class Smarty_Internal_Compile_NocacheClose extends Smarty_Internal_CompileBase {
     *
     * This tag does not generate compiled output. It only sets a compiler flag 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         // leave nocache mode
         $this->compiler->_compiler_status->nocache = false;
         // this tag does not return compiled code

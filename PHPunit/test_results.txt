@@ -1,10 +1,10 @@
-PHPUnit 3.3.4 by Sebastian Bergmann.
+PHPUnit 3.3.5 by Sebastian Bergmann.
 
-............................................................ 60 / 76
-................
+............................................................ 60 / 85
+.........................
 
-Time: 17 seconds
+Time: 22 seconds
 
-OK (76 tests, 86 assertions)
+OK (85 tests, 95 assertions)
 
 Generating code coverage report, this may take a moment.

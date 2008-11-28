@@ -16,6 +16,7 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = new Smarty();
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
+        $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
     } 
 
@@ -70,11 +71,13 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignOld6()
     {
+        $this->smarty->security_policy->php_functions = array('strlen');
         $tpl = $this->smarty->createTemplate("string:{assign var=foo value=strlen('bar')}{\$foo}");
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld7()
     {
+        $this->smarty->security_policy->modifiers = array('strlen');
         $tpl = $this->smarty->createTemplate("string:{assign var=foo value='bar'|strlen}{\$foo}");
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
@@ -108,11 +111,13 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignNew4()
     {
+        $this->smarty->security_policy->php_functions = array('strlen');
         $tpl = $this->smarty->createTemplate("string:{\$foo=strlen('bar')}{\$foo}");
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
     public function testAssignNew5()
     {
+        $this->smarty->security_policy->modifiers = array('strlen');
         $tpl = $this->smarty->createTemplate("string:{\$foo='bar'|strlen}{\$foo}");
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 

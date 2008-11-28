@@ -15,10 +15,12 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
     * Compiles code for the {capture} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         $this->optional_attributes = array('name', 'assign'); 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
@@ -49,10 +51,12 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
     * Compiles code for the {/capture} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
        // check and get attributes
         $_attr = $this->_get_attributes($args);
 

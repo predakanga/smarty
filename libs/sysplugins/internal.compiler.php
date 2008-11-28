@@ -80,7 +80,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         if (($_content = $_template->getTemplateSource()) === false) {
             throw new SmartyException("Unable to load template {$this->tpl_filepath}");
         } 
-        // emplate header code
+        // template header code
         $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
         $template_header .= "         compiled from \"" . $this->tpl_filepath . "\" */ ?>\n"; 
         // on empty template just return header
@@ -138,7 +138,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->has_code = true;
         $this->has_output = false; 
         // compile the smarty tag (required compile classes to compile the tag are autoloaded)
-        if (!($_output = $this->$tag($args)) === false) {
+        if (!($_output = $this->$tag($args, $this)) === false) {
             // did we get compiled code
             if ($this->has_code) {
                 // Does it create output?
@@ -154,18 +154,18 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } elseif ($this->smarty->loadPlugin("smarty_function_$tag") && is_callable("smarty_function_$tag")) {
             if (!$this->template->security || $this->smarty->security_handler->isTrustedFunctionPlugin($tag, $this)) {
                 // call function plugin compile module
-                return $this->function_plugin($args, $tag);
+                return $this->function_plugin($args, $tag, $this);
             } 
             // try block plugin
         } elseif (substr_compare($tag, 'close', -5, 5) != 0) {
             if ($this->smarty->loadPlugin("smarty_block_$tag") && is_callable("smarty_block_$tag")) {
                 // call block plugin compile module
-                return $this->block_plugin($args, $tag);
+                return $this->block_plugin($args, $tag, $this);
             } 
         } else {
             if (is_callable("smarty_block_" . substr($tag, 0, -5))) {
                 // call block plugin compile module
-                return $this->block_plugin($args, $tag);
+                return $this->block_plugin($args, $tag, $this);
             } 
         } 
         $this->trigger_template_error ("unknow tag \"" . $tag . "\"");

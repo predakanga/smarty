@@ -16,10 +16,12 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
     * Compiles code for the {include} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
-    { 
+    public function compile($args, $compiler)
+    {
+        $this->compiler = $compiler; 
         $this->required_attributes = array('file');
         $this->optional_attributes = array('_any'); 
         // check and get attributes

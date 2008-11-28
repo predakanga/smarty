@@ -16,6 +16,7 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = new Smarty();
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
+        $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
         $this->smarty->assign('foo','bar');
     } 
@@ -66,7 +67,7 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     public function testVariableText4()
     {
         $tpl = $this->smarty->createTemplate("string:A{\$foo}\nB",$this->smarty->tpl_vars);
-        $this->assertEquals("AbarB", $this->smarty->fetch($tpl));
+        $this->assertEquals("Abar\nB", $this->smarty->fetch($tpl));
     } 
     public function testVariableText5()
     {

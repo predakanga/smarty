@@ -17,10 +17,12 @@ class Smarty_Internal_Compile_Block_Plugin extends Smarty_Internal_CompileBase {
     * 
     * @param array $args array with attributes from parser
     * @param string $tag name of block function
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args, $tag)
+    public function compile($args, $tag, $compiler)
     {
+        $this->compiler = $compiler; 
         if (substr_compare($tag, 'close', -5, 5) != 0) {
             // opening tag of block plugin
             $this->required_attributes = array();

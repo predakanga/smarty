@@ -1,34 +1,38 @@
-<?php 
+<?php
 /**
 * Smarty Internal Plugin Compile For
-*
-* Compiles the {for} {forelse} and {/for} tag 
+* 
+* Compiles the {for} {forelse} and {/for} tag
+* 
 * @package Smarty
 * @subpackage Compiler
-* @author Uwe Tews
+* @author Uwe Tews 
 */
 /**
 * Smarty Internal Plugin Compile For Class
-*/ 
+*/
 class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {for} tag
-    *
+    * 
     * Smarty 3 does implement two different sytaxes:
-    *
+    * 
     * - {for $var in $array}
     * For looping over arrays or iterators
-    *
+    * 
     * - {for $x=0; $x<$y; $x++}
     * For general loops
-    *
+    * 
     * The parser is gereration different sets of attribute by which this compiler can 
     * determin which syntax is used.
+    * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         if (isset($args['from'])) {
             // {for $var in $array}  syntax
             $this->required_attributes = array('from', 'item'); 
@@ -50,11 +54,11 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
             $output .= "    foreach (\$_from as \$_smarty_tpl->tpl_vars->tpl_vars[$item]->key => \$_smarty_tpl->tpl_vars->tpl_vars[$item]->value){\n";
             $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->iteration++;\n";
             $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item]->index++;\n";
-            $output .= "?>";
+            $output .= "?>"; 
             // return compiled code
             return $output;
         } else {
-              // {for $x=0; $x<$y; $x++} syntax
+            // {for $x=0; $x<$y; $x++} syntax
             $this->required_attributes = array('ifexp', 'start', 'loop', 'varloop'); 
             // check and get attributes
             $_attr = $this->_get_attributes($args);
@@ -67,24 +71,26 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
                 $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$_statement[var]]->value = $_statement[value];\n";
             } 
             $output .= "  if ($_attr[ifexp]){ for (\$_foo=true;$_attr[ifexp]; \$_smarty_tpl->tpl_vars->tpl_vars[$_attr[varloop]]->value$_attr[loop]){\n";
-            $output .= "?>";
+            $output .= "?>"; 
             // return compiled code
             return $output;
         } 
     } 
-}
+} 
 /**
 * Smarty Internal Plugin Compile Forelse Class
-*/  
+*/
 class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {forelse} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
@@ -92,19 +98,21 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
         $this->_open_tag('forelse');
         return "<?php } } else { ?>";
     } 
-}
+} 
 /**
 * Smarty Internal Plugin Compile ForClose Class
-*/   
+*/
 class Smarty_Internal_Compile_ForClose extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {/for} tag
     * 
     * @param array $args array with attributes from parser
+    * @param object $compiler compiler object
     * @return string compiled code
     */
-    public function compile($args)
+    public function compile($args, $compiler)
     {
+        $this->compiler = $compiler; 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
