@@ -20,7 +20,13 @@ class Smarty_Internal_Resource_PHP extends Smarty_Internal_Base {
     */
     public function getTemplateFilepath($_template)
     {
-        return $_template->buildTemplateFilepath ();
+        $_filepath = $_template->buildTemplateFilepath ();
+
+        if ($_template->security) {
+            $_template->smarty->security_handler->isTrustedResourceDir($_filepath);
+        } 
+
+        return $_filepath;
     } 
 
     /**
@@ -71,6 +77,18 @@ class Smarty_Internal_Resource_PHP extends Smarty_Internal_Base {
         // does not use compiler, must be false
         return false;
     } 
+
+    /**
+    * Get filepath to compiled template
+    * 
+    * @param object $_template template object
+    * @return boolean return false as compiled template is not stored
+    */
+    public function getCompiledFilepath($_template)
+    {
+        // no filepath for PHP templates
+        return false;
+    }
 } 
 
 ?>

@@ -19,7 +19,7 @@ class Smarty_Internal_Security_Handler extends Smarty_Internal_Base {
     */
     function isTrustedCompilerTag($tag_name, $compiler)
     {
-        if (in_array($tag_name, array('function_plugin', 'block_plugin', 'print_expression','else'))) {
+        if (in_array($tag_name, array('function_plugin', 'block_plugin', 'print_expression','else','elseif'))) {
             // allow always internal compile modules
             return true;
         }

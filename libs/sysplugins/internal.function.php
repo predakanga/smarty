@@ -22,6 +22,17 @@ class Smarty_Internal_Function extends Smarty_Internal_Base {
     */
     public function __call($name, $args)
     {
+        if (function_exists($name)) {
+            // use PHP function if found
+            return call_user_func_array($name, $args);
+        } 
+        if ($name == 'isset') {
+            return isset($args[0]);
+        } 
+        if ($name == 'empty') {
+            return empty($args[0]);
+        } 
+
         $plugin_name = "Smarty_Function_{$name}";
 
         if (class_exists($plugin_name, false)) {
@@ -43,14 +54,8 @@ class Smarty_Internal_Function extends Smarty_Internal_Base {
                 return call_user_func_array($plugin_name, $args);
             } 
         } 
-
-        if (function_exists($name)) {
-            // use PHP function if found
-            return call_user_func_array($name, $args);
-        } else {
-            // nothing found, throw exception
-            throw new SmartyException("Unable to load function plugin {$name}");
-        } 
+        // nothing found, throw exception
+        throw new SmartyException("Unable to load function plugin {$name}");
     } 
 } 
 

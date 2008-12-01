@@ -53,11 +53,13 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         if ($name != null) {
             $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['total'] = count(\$_from);\n";
             $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']=0;\n";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['index']=-1;\n";
         } 
         $output .= "if (count(\$_from) > 0){\n";
         $output .= "    foreach (\$_from as " . $key_part . "\$_smarty_tpl->tpl_vars->tpl_vars[$item]->value){\n";
         if ($name != null) {
             $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']++;\n";
+            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['index']++;\n";
         } 
         $output .= "?>";
 

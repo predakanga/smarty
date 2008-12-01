@@ -85,13 +85,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $right_delimiter = "}"; 
     // security
     public $security = false;
-    public $security_policy = null; 
-    public $security_handler= null; 
+    public $security_policy = null;
+    public $security_handler = null; 
     // debug mode
     public $debugging = false;
     public $debugging_ctrl = 'URL';
     public $smarty_debug_id = 'SMARTY_DEBUG';
-    public $request_use_auto_globals = true; 
+    public $request_use_auto_globals = true;
     public $debug_tpl = null; 
     // assigned tpl vars
     public $tpl_vars = null; 
@@ -320,16 +320,18 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function __call($name, $args)
     {
-        $plugin_filename = strtolower('method . ' . $name . $this->php_ext);
-        if (!file_exists($this->sysplugins_dir . $plugin_filename)) {
-            throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not exist");
-            die();
-        } 
-        require_once($this->sysplugins_dir . $plugin_filename);
         $class_name = "Smarty_Method_{$name}";
         if (!class_exists($class_name, false)) {
-            throw new SmartyException ("Sysplugin file " . $plugin_filename . "does not define class " . $class_name);
-            die();
+            $plugin_filename = strtolower('method.' . $name . $this->php_ext);
+            if (!file_exists($this->sysplugins_dir . $plugin_filename)) {
+                throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not exist");
+                die();
+            } 
+            require_once($this->sysplugins_dir . $plugin_filename);
+            if (!class_exists($class_name, false)) {
+                throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not define class " . $class_name);
+                die();
+            } 
         } 
         $method = new $class_name;
         return $method->execute($args);

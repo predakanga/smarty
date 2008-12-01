@@ -186,7 +186,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function mustCompile ()
     {
         return $this->mustCompile === null ?
-        $this->mustCompile = ($this->usesCompiler() && ($this->force_compile || !file_exists($this->getCompiledFilepath ()) || $this->getTemplateTimestamp () === false || filemtime($this->getCompiledFilepath ()) !== $this->getTemplateTimestamp ())):
+        $this->mustCompile = ($this->usesCompiler() && ($this->force_compile || $this->isEvaluated() || $this->getCompiledTimestamp () !== $this->getTemplateTimestamp ())):
         $this->mustCompile;
     } 
 
@@ -198,7 +198,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getCompiledFilepath ()
     {
         return $this->compiled_filepath === null ?
-        $this->compiled_filepath = $this->buildCompiledFilepath() :
+        ($this->compiled_filepath = !$this->isEvaluated() ? $this->resource_objects[$this->resource_type]->getCompiledFilepath($this) : false) :
         $this->compiled_filepath;
     } 
 
@@ -209,9 +209,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     */
     public function getCompiledTimestamp ()
     {
-        return $this->compiled_timestamp === null ?
-        ($this->compiled_timestamp = file_exists($this->getCompiledFilepath()) ? filemtime($this->getCompiledFilepath()) : 0) :
-        $this->compiled_timestamp;
+         return $this->compiled_timestamp === null ?
+         ($this->compiled_timestamp = (!$this->isEvaluated() && file_exists($this->getCompiledFilepath())) ? filemtime($this->getCompiledFilepath()) : false) :
+         $this->compiled_timestamp;
     } 
 
     /**
@@ -228,7 +228,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             if ($this->mustCompile()) {
                 $this->compileTemplateSource();
             } else {
-                $this->compiled_template = file_get_contents($this->getCompiledFilepath());
+                $this->compiled_template = !$this->isEvaluated() ? file_get_contents($this->getCompiledFilepath()) : false;
             } 
         } 
         return $this->compiled_template;
@@ -261,7 +261,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 $this->write_file_object->writeFile($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
                 // make template and compiled file timestamp match
                 touch($this->getCompiledFilepath(), $this->getTemplateTimestamp());
-            } 
+            }   
         } else {
             // error compiling template
             throw new SmartyException("Error compiling template {$this->getTemplateFilepath ()}");
@@ -280,7 +280,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getCachedFilepath ()
     {
         return $this->cached_filepath === null ?
-        $this->cached_filepath = $this->cache_resource_objects[$this->caching_type]->getCachedFilepath($this) :
+        $this->cached_filepath = ($this->isEvaluated() || !$this->caching) ? false : $this->cache_resource_objects[$this->caching_type]->getCachedFilepath($this) :
         $this->cached_filepath;
     } 
 
@@ -294,7 +294,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getCachedTimestamp ()
     {
         return $this->caching_timestamp === null ?
-        $this->cached_timestamp = $this->cache_resource_objects[$this->caching_type]->getCachedTimestamp($this) :
+        $this->cached_timestamp = ($this->isEvaluated() || !$this->caching) ? false : $this->cache_resource_objects[$this->caching_type]->getCachedTimestamp($this) :
         $this->cached_timestamp;
     } 
 
@@ -306,7 +306,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getCachedContent ()
     {
         return $this->cached_content === null ?
-        $this->cached_content = $this->cacher_object->getCachedContent($this) :
+        $this->cached_content = ($this->isEvaluated() || !$this->caching) ? false : $this->cacher_object->getCachedContents($this) :
         $this->cached_content;
     } 
 
@@ -330,7 +330,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if ($this->isCached === null) {
             $this->isCached = false;
             if ($this->caching) {
-                if (!$this->mustCompile() && $this->getCompiledTimestamp() < $this->getCachedTimestamp() && ((time() <= $this->getCachedTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
+                if (!$this->mustCompile() && !$this->isEvaluated() && $this->getTemplateTimestamp() <= $this->getCachedTimestamp() && ((time() <= $this->getCachedTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
                     $this->cached_template = $this->cacher_object->getCachedContents($this);
                     $this->isCached = true;
                 } 
@@ -484,31 +484,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         // no tpl file found
         throw new SmartyException("Unable to load template {$this->resource_name}");
         return false;
-    } 
-
-    /**
-    * get system filepath to compiled file
-    */
-    private function buildCompiledFilepath ()
-    {
-        $_filepath = md5($this->resource_name); 
-        // if use_sub_dirs, break file into directories
-        if ($this->smarty->use_sub_dirs) {
-            $_filepath = substr($_filepath, 0, 3) . DIRECTORY_SEPARATOR
-             . substr($_filepath, 0, 2) . DIRECTORY_SEPARATOR
-             . substr($_filepath, 0, 1) . DIRECTORY_SEPARATOR
-             . $_filepath;
-        } 
-        $_compile_dir_sep = $this->smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
-        if (isset($this->compile_id)) {
-            $_filepath = $this->compile_id . $_compile_dir_sep . $_filepath;
-        } 
-        if ($this->caching) {
-            $_cache = '.cache';
-        } else {
-            $_cache = '';
-        } 
-        return $this->smarty->compile_dir . $_filepath . '.' . basename($this->resource_name) . $_cache . $this->smarty->php_ext;
     } 
 
     /**

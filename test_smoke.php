@@ -9,7 +9,7 @@ require('./libs/Smarty.class.php');
 
 $smarty = new Smarty;
 
-$smarty->force_compile = true;
+$smarty->force_compile = false;
 
 $smarty->assign('foo','bar');
 $smarty->assign('foo2','bar2');

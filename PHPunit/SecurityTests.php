@@ -74,7 +74,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testTrustedFunctionPlugin()
     {
-        $this->assertEquals("10", $this->smarty->fetch('string:{counter start=10}'));
+        $this->assertEquals("10", $this->smarty->fetch('string:{counter start=10 name=security}'));
     } 
 
     /**
@@ -85,7 +85,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->function_plugins = array('null');
         try {
             ob_start();
-            $this->smarty->fetch('string:{counter start=10}');
+            $this->smarty->fetch('string:{counter start=10 name=security}');
         } 
         catch (Exception $e) {
             $this->assertContains('function plugin "counter" not allowed by security setting', ob_get_clean());
@@ -101,7 +101,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->function_plugins = array('null');
         $this->smarty->security = false;
-        $this->assertEquals("10", $this->smarty->fetch('string:{counter start=10}'));
+        $this->assertEquals("10", $this->smarty->fetch('string:{counter start=10 name=security}'));
     } 
 
     /**

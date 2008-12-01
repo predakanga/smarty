@@ -25,8 +25,6 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
-        $this->_open_tag('capture');
-
         if (isset($_attr['name']))
             $buffer = $_attr['name'];
         else
@@ -36,9 +34,10 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
             $assign = $_attr['assign'];
         else
             $assign = null;
+       
+        $this->_open_tag('capture',array($buffer, $assign));
 
         $_output = "<?php ob_start(); ?>";
-        $this->smarty->_capture_stack[] = array($buffer, $assign);
 
         return $_output;
     } 
@@ -60,15 +59,14 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
        // check and get attributes
         $_attr = $this->_get_attributes($args);
 
-        $this->_close_tag(array('capture'));
-
-        list($buffer, $assign) = array_pop($this->smarty->_capture_stack);
+        $saved_attr = $this->_close_tag(array('capture'));
 
         $_output = "<?php ";
-        if (isset($assign)) {
-            $_output .= " \$_smarty_tpl->assign($assign, ob_get_contents());";
+        if (isset($saved_attr[1])) {
+            $_output .= " \$_smarty_tpl->assign($saved_attr[1], ob_get_contents());";
         } 
-        $_output .= " ob_clean(); ?>";
+        $_output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['capture'][$saved_attr[0]]=ob_get_contents();";
+        $_output .= " ob_clean(); ?>\n";
         return $_output;
     } 
 } 

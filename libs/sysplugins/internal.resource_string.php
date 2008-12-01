@@ -74,6 +74,17 @@ class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
         return true;
     } 
      
+    /**
+    * Get filepath to compiled template
+    * 
+    * @param object $_template template object
+    * @return boolean return false as compiled template is not stored
+    */
+    public function getCompiledFilepath($_template)
+    {
+        // no filepath for strings
+        return false;
+    }
 } 
 
 ?>

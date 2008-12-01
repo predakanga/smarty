@@ -16,16 +16,25 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     */
     public static function suite()
     {
+        $testorder = array('CoreTests','ClearCompiledTests','ClearCacheTests','StringResourceTests','FileResourceTests'
+                            ,'PhpResourceTests','CompileAssignTests');
+
         PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs');
         PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../libs/lexer');
         PHPUnit_Util_Filter::addDirectoryToWhitelist('../plugins');
 
-        $suite = new self('Smarty 3 - Unit Tests Report');
-        if (true) {
-            foreach (new DirectoryIterator(dirname(__FILE__)) as $file) {
-                if (!$file->isDot() && !$file->isDir() && (string) $file !== 'smartytests.php' && substr((string) $file, -4) === '.php') {
-                    require_once $file->getPathname();
-                    $class = basename($file, '.php'); 
+        $suite = new self('Smarty 3 - Unit Tests Report'); 
+        // load test which should run in specific order
+        foreach ($testorder as $class) {
+            require_once $class . '.php';
+            $suite->addTestSuite($class);
+        } 
+
+        foreach (new DirectoryIterator(dirname(__FILE__)) as $file) {
+            if (!$file->isDot() && !$file->isDir() && (string) $file !== 'smartytests.php' && substr((string) $file, -4) === '.php') {
+                $class = basename($file, '.php');
+                if (!in_array($class, $testorder)) {
+                    require_once $file->getPathname(); 
                     // to have an optional test suite, it should implement a public static function isRunnable
                     // that returns true only if all the conditions are met to run it successfully, for example
                     // it can check that an external library is present

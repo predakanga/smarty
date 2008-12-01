@@ -108,7 +108,6 @@ smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag(
 									// {if} and {elseif} tag
 smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
 									// {for} tag
-//smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v1) EQUAL expr(e1)SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('var'=>v1,'start'=>e1,'ifexp'=>ie,'loop'=>e2));}
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
 									// {for $var in $array} tag
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
@@ -145,7 +144,12 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 expr(res)				 ::= exprs(e).	{res = e;}
 									// expression with modifier and optional additional modifier paramter
 expr(res)        ::= exprs(e) modifier(m) modparameters(p). {if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
-                                                               res = "\$_smarty_tpl->smarty->modifier->".m . "(". e . p .")"; }} 
+																					                      if (m == 'isset' || m == 'empty' || is_callable(m)) {
+																					                        res = m . "(". e . p .")";
+																					                      } else {
+                                                                  res = "\$_smarty_tpl->smarty->modifier->".m . "(". e . p .")";
+                                                                }
+                                                               }}
 									// array
 expr(res)				 ::= array(a).	{res = a;}
 
@@ -236,21 +240,21 @@ objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 //
 // function
 //
-										// function with parameter
 function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->security || $this->smarty->security_handler->isTrustedPhpFunction(f, $this->compiler)) {
-                                                      res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";}}
-										// function without parameter
-//function(res)     ::= ID(f) OPENP CLOSEP.	{ res = "\$_smarty_tpl->smarty->function->".f."()";}
+																					            if (f == 'isset' || f == 'empty' || is_callable(f)) {
+																					                res = f . "(". p .")";
+																					            } else {
+                                                          res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";
+                                                      }
+                                                    }}
 
 //
 // method
 //
-										// method with parameter
 method(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = f . "(". p .")";}
 										// function without parameter
-//method(res)     ::= ID(f) OPENP CLOSEP.	{ res = f."()";}
 
-// function parameter
+// function/method parameter
 										// multiple parameters
 params(res)       ::= expr(e) COMMA params(p). { res = e.",".p;}
 										// single parameter
@@ -266,7 +270,7 @@ modifier(res)    ::= VERT ID(s). { res =  s;}
 										// multiple parameter
 modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 										// single parameter
-modparameters(res) ::= modparameter(mp). {res = mp;}
+//modparameters(res) ::= modparameter(mp). {res = mp;}
 										// no parameter
 modparameters      ::= . {return;}
 										// parameter expression

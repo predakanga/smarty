@@ -1,10 +1,44 @@
 PHPUnit 3.3.5 by Sebastian Bergmann.
 
-............................................................ 60 / 85
-.........................
+............................................................  60 / 226
+...............................................hello F............ 120 / 226
+.....................<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if !(1<2)}yes{else}no{/if}<br></p>Unexpected " !", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if not (true)}yes{else}no{/if}<br></p>Unexpected " not ", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E..................................... 180 / 226
+..............................................
 
-Time: 22 seconds
+Time: 01:08
 
-OK (85 tests, 95 assertions)
+There were 2 errors:
+
+1) testIfNot1(CompileIfTests)
+SmartyException: Error compiling template string
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:267
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:389
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:359
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\Smarty.class.php:221
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileIfTests.php:65
+
+2) testIfNot2(CompileIfTests)
+SmartyException: Error compiling template string
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:267
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:389
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:359
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\Smarty.class.php:221
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileIfTests.php:70
+
+--
+
+
+There was 1 failure:
+
+1) testCapture6(CompileCaptureTests)
+This failure pops up only during PHPunit test ?????
+Failed asserting that two strings are equal.
+expected string <hello world this is my >
+difference      <xxxxxxxxxxxxxxxx??????>
+got string      <world this is my >
+C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileCaptureTests.php:60
+
+FAILURES!
+Tests: 226, Assertions: 245, Failures: 1, Errors: 2.
 
 Generating code coverage report, this may take a moment.

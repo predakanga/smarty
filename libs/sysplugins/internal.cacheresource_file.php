@@ -34,7 +34,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     */
     public function getCachedTimestamp($_template)
     {
-        return file_exists($_template->getCachedFilepath()) ? filemtime($_template->getCachedFilepath()) : 0 ;
+        return ($_template->getCachedFilepath() && file_exists($_template->getCachedFilepath())) ? filemtime($_template->getCachedFilepath()) : false ;
     } 
 
     /**
@@ -45,7 +45,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     */
     public function getCachedContents($_template)
     {
-        return file_get_contents($_template->getCachedFilepath());
+        return  file_get_contents($_template->getCachedFilepath());
     } 
 
     /**
@@ -56,11 +56,15 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     */
     public function writeCachedContent($_template)
     {
-        if (!is_object($_template->write_file_object)) {
-            $this->smarty->loadPlugin("Smarty_Internal_Write_File");
-            $_template->write_file_object = new Smarty_Internal_Write_File;
+        if (!$_template->isEvaluated()) {
+            if (!is_object($_template->write_file_object)) {
+                $this->smarty->loadPlugin("Smarty_Internal_Write_File");
+                $_template->write_file_object = new Smarty_Internal_Write_File;
+            } 
+            return $_template->write_file_object->writeFile($_template->getCachedFilepath(), $_template->cached_template);
+        } else {
+            return false;
         } 
-        $_template->write_file_object->writeFile($_template->getCachedFilepath(), $_template->cached_template);
     } 
 
     /**
