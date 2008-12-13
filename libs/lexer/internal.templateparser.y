@@ -25,7 +25,6 @@
         $this->smarty = Smarty::instance(); 
         $this->compiler = Smarty_Internal_Compiler::instance();
         $this->template = $this->compiler->template; 
-        $this->tpl_vars = $this->compiler->template->tpl_vars; 
 				$this->nocache = false;
     }
     public static function &instance($new_instance = null)
@@ -80,18 +79,18 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 //
 											// Smarty tag
 template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
-                                            res = $this->template->cacher_object->processNocacheCode(st, $this->compiler,$this->nocache,true);
+                                            res = Smarty_Internal_Template::$cacher_object->processNocacheCode(st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
-template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = Smarty_Internal_Template::$cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// PHP tag
 template_element(res)::= PHP(php). {if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
-                                      res = $this->template->cacher_object->processNocacheCode(php, $this->compiler, false,true);
+                                      res = Smarty_Internal_Template::$cacher_object->processNocacheCode(php, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                      res = $this->template->cacher_object->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
+                                      res = Smarty_Internal_Template::$cacher_object->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
 											// Other template text
-template_element(res)::= OTHER(o). {res = $this->template->cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
-//template_element(res)::= text(t). {res = $this->template->cacher_object->processNocacheCode(t, $this->compiler,false,false);}	
+template_element(res)::= OTHER(o). {res = Smarty_Internal_Template::$cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
+//template_element(res)::= text(t). {res = Smarty_Internal_Template::$cacher_object->processNocacheCode(t, $this->compiler,false,false);}	
 
 
 //
@@ -196,11 +195,11 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 // variables 
 //
 									// simple Smarty variable
-//variable(res)    ::= DOLLAR varvar(v). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+//variable(res)    ::= DOLLAR varvar(v). { res = '$_smarty_tpl->getVariable('. v .')->value'; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// array variable
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'.a;$_v = trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->getVariable('. v .')->value'.a; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// variable with property
-variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->'.p; $_v = trim(v,"'"); if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// special variables
 variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
 										// single array index
@@ -226,7 +225,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$_smarty_tpl->tpl_vars->getVariable('. v .')->value'.oc; $_v=trim(v,"'");if($this->tpl_vars->getVariable($_v)->nocache) $this->nocache=true;}
+object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.oc; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// cahin of elements 
@@ -244,7 +243,8 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->secur
 																					            if (f == 'isset' || f == 'empty' || is_callable(f)) {
 																					                res = f . "(". p .")";
 																					            } else {
-                                                          res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";
+                                                       //   res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";
+                                                       $this->compiler->trigger_template_error ("unknown fuction\"" . f . "\"");
                                                       }
                                                     }}
 
@@ -252,7 +252,6 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->secur
 // method
 //
 method(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = f . "(". p .")";}
-										// function without parameter
 
 // function/method parameter
 										// multiple parameters

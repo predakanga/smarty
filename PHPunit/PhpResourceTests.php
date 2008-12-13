@@ -17,10 +17,13 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty = new Smarty();
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
     } 
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
@@ -164,7 +167,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($tpl->isCached());
-        $this->assertEquals('test', $tpl->cached_template);
+        $this->assertEquals('test', $tpl->cached_content);
     } 
     /**
     * test isCached caching disabled
@@ -225,7 +228,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($this->smarty->is_cached($tpl));
-        $this->assertContains('php hello world', $tpl->cached_template);
+        $this->assertContains('php hello world', $tpl->cached_content);
     } 
     /**
     * test $smarty->is_cached  caching disabled

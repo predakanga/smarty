@@ -18,11 +18,14 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->force_compile = true;
         $this->smarty->enableSecurity();
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
         $this->smarty->assign('foo', 'bar');
     } 
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
@@ -32,7 +35,7 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableScope1()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo}", $this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{\$foo}", $this->smarty);
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
     } 
 
@@ -41,7 +44,7 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableScope2()
     {
-        $data1 = new Smarty_Data($this->smarty->tpl_vars);
+        $data1 = new Smarty_Data($this->smarty);
         $data2 = new Smarty_Data($data1);
         $tpl = $this->smarty->createTemplate("string:{\$foo}", $data2);
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
@@ -52,13 +55,13 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableScope3()
     {
-        $data1 = new Smarty_Data($this->smarty->tpl_vars);
+        $data1 = new Smarty_Data($this->smarty);
         $data1->assign('foo','newvalue');
         $data2 = new Smarty_Data($data1);
         $tpl = $this->smarty->createTemplate("string:{\$foo}", $data2);
         // must see the new value
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl));
-        $tpl->tpl_vars->parent_tpl_vars = $this->smarty->tpl_vars;
+        $tpl->parent = $this->smarty;
         // rerender
         $tpl->renderTemplate();
         // must see the old value at root
@@ -70,11 +73,11 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableScope4()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo2='localvar'}{\$foo2}", $this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{\$foo2='localvar'}{\$foo2}", $this->smarty);
         // must see local value
         $this->assertEquals("localvar", $this->smarty->fetch($tpl));
         // must see $foo2
-        $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty->tpl_vars);
+        $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty);
         $this->assertEquals("", $this->smarty->fetch($tpl2));
     } 
 
@@ -85,10 +88,10 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     {
         // create variable $foo2
         $this->smarty->assign('foo2','oldvalue');
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' global=true}{\$foo2}", $this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' global=true}{\$foo2}", $this->smarty);
         // must see the new value
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl));
-        $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty->tpl_vars);
+        $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty);
         // must see the new value at root
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl2));
     } 
@@ -99,10 +102,10 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     public function testVariableScope6()
     {
         // create global variable $foo2 in template
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' global=true}{\$foo2}", $this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' global=true}{\$foo2}", $this->smarty);
         // must see the new value
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl));
-        $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty->tpl_vars);
+        $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty);
         // must see the new value at root
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl2));
     } 

@@ -24,6 +24,12 @@ class Smarty_Internal_Block extends Smarty_Internal_Base {
     */
     public function __call($name, $args)
     {
+
+        if (function_exists($name)) {
+            // use PHP function if found
+            return call_user_func_array($name, $args);
+        } 
+
         $plugin_name = "Smarty_Block_{$name}";
 
         if (class_exists($plugin_name, false)) {

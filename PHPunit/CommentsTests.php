@@ -18,10 +18,13 @@ class CommentsTests extends PHPUnit_Framework_TestCase {
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
     } 
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
@@ -37,13 +40,13 @@ class CommentsTests extends PHPUnit_Framework_TestCase {
     } 
     public function testSimpleComment2()
     {
-        $tpl = $this->smarty->createTemplate("string:{* another $foo comment *}");
+        $tpl = $this->smarty->createTemplate("string:{* another \$foo comment *}");
         $this->assertEquals("", $this->smarty->fetch($tpl));
         $this->assertContains('<?php /* comment placeholder */?>', $tpl->getCompiledTemplate());
     } 
     public function testSimpleComment3()
     {
-        $tpl = $this->smarty->createTemplate("string:{* another $foo comment *}{* another <?=$foo?> comment *}");
+        $tpl = $this->smarty->createTemplate("string:{* another \$foo comment *}{* another <?=\$foo?> comment *}");
         $this->assertEquals("", $this->smarty->fetch($tpl));
         $this->assertContains('<?php /* comment placeholder */?>', $tpl->getCompiledTemplate());
     } 

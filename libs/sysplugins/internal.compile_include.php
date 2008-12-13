@@ -2,15 +2,16 @@
 
 /**
 * Smarty Internal Plugin Compile Include
-*
-* Compiles the {include} tag 
+* 
+* Compiles the {include} tag
+* 
 * @package Smarty
 * @subpackage Compiler
-* @author Uwe Tews
+* @author Uwe Tews 
 */
 /**
 * Smarty Internal Plugin Compile Include Class
-*/ 
+*/
 class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {include} tag
@@ -21,7 +22,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
     */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
+        $this->compiler = $compiler;
         $this->required_attributes = array('file');
         $this->optional_attributes = array('_any'); 
         // check and get attributes
@@ -29,28 +30,32 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         // save posible attributes
         $include_file = $_attr['file'];
         if (isset($_attr['assign'])) {
-              // output will be stored in a smarty variable instead of beind displayed
+            // output will be stored in a smarty variable instead of beind displayed
             $_assign = $_attr['assign'];
-        }
-  
+        } 
+
         /*
         * if the {include} tag provides individual parameter for caching
         * it will not be included into the common cache file and treated like
         * a nocache section
-        */       
+        */
         if (isset($_attr['caching_lifetime'])) {
             $_caching_lifetime = $_attr['caching_lifetime'];
             $this->compiler->_compiler_status->tag_nocache = true;
         } 
-        if ($_attr['nocache'] == 'true') {
-            $_caching = 'false';
-            $this->compiler->_compiler_status->tag_nocache = true;
+        if (isset($_attr['nocache'])) {
+            if ($_attr['nocache'] == 'true') {
+                $_caching = 'false';
+                $this->compiler->_compiler_status->tag_nocache = true;
+            } 
         } 
-        if ($_attr['caching'] == 'true') {
-            $_caching = 'true';
+        if (isset($_attr['caching'])) {
+            if ($_attr['caching'] == 'true') {
+                $_caching = 'true';
+            } 
         } 
         // create template object
-        $_output = "<?php \$_template = new Smarty_Template ($include_file, \$_smarty_tpl->tpl_vars);"; 
+        $_output = "<?php \$_template = new Smarty_Template ($include_file, \$_smarty_tpl);"; 
         // delete {include} standard attributes
         unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching']); 
         // remaining attributes must be assigned as smarty variable
@@ -68,8 +73,8 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_output .= "\$_template->caching = $_caching;";
         } elseif (isset($_caching_lifetime)) {
             $_output .= "\$_template->caching = true;";
-        }
-        //was there an assign attribute 
+        } 
+        // was there an assign attribute
         if (isset($_assign)) {
             $_output .= "\$_smarty_tpl->assign($_assign,\$_smarty_tpl->smarty->fetch(\$_template)); ?>";
         } else {

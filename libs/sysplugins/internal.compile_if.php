@@ -23,7 +23,7 @@ class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
     {
         $this->compiler = $compiler; 
        $this->_open_tag('if');
-        return '<?php if (' . $args[ifexp] . '): ?>';
+        return '<?php if (' . $args['ifexp'] . '): ?>';
     } 
 } 
 
@@ -64,7 +64,7 @@ class Smarty_Internal_Compile_ElseIf extends Smarty_Internal_CompileBase {
         $this->_close_tag(array('if', 'elseif'));
         $this->_open_tag('elseif');
 
-        return '<?php elseif (' . $args[ifexp] . '): ?>';
+        return '<?php elseif (' . $args['ifexp'] . '): ?>';
     } 
 } 
 

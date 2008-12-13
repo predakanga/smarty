@@ -22,7 +22,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
     */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
+        $this->compiler = $compiler;
         $this->required_attributes = array('var', 'value');
         $this->optional_attributes = array('global');
 
@@ -30,15 +30,17 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         $_global = 'null'; 
         // check for nocache attribute before _get_attributes because
         // it shall not controll caching of the compiled code, but is a parameter
-        if ($args['nocache'] == 'true') {
-            $_nocache = 'true';
-            $_nocache_boolean = true;
+        if (isset($args['nocache'])) {
+            if ($args['nocache'] == 'true') {
+                $_nocache = 'true';
+                $_nocache_boolean = true;
+            } 
+            unset($args['nocache']);
         } 
-        unset($args['nocache']); 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
 
-        if ($_attr['global'] == 'true') {
+        if (isset($_attr['global']) && $_attr['global'] == 'true') {
             $_global = 'true';
             $_global_boolean = true;
         } 

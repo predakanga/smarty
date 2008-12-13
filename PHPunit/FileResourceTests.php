@@ -17,10 +17,13 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty = new Smarty();
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
     } 
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
@@ -200,6 +203,20 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('test', $tpl->getCachedContent());
     } 
     /**
+    * test prepare files for isCached test
+    */
+    public function testIsCachedPrepare()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->caching_lifetime = 1000;
+        $tpl = $this->smarty->createTemplate('helloworld.tpl');
+        // clean up for next tests
+        $this->smarty->clear_compiled_tpl();
+	  $this->smarty->clear_all_cache();
+        // compile and cache
+	  $this->smarty->fetch($tpl);
+    } 
+    /**
     * test isCached
     */
     public function testIsCached()
@@ -209,7 +226,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $tpl->compileTemplateSource ();
         $this->assertTrue($tpl->isCached());
-        $this->assertEquals('test', $tpl->cached_template);
+        $this->assertContains('hello world', $tpl->cached_content);
     } 
     /**
     * test isCached on touched source
@@ -219,6 +236,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
+        sleep(1);
         touch ($tpl->getTemplateFilepath ());
         $this->assertFalse($tpl->isCached());
     } 
@@ -281,7 +299,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertTrue($this->smarty->is_cached($tpl));
-        $this->assertEquals('hello world', $tpl->cached_template);
+        $this->assertEquals('hello world', $tpl->cached_content);
     } 
     /**
     * test $smarty->is_cached  caching disabled

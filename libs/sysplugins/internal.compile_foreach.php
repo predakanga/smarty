@@ -33,7 +33,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
         if (isset($_attr['key'])) {
             $key = $_attr['key'];
-            $key_part = "\$_smarty_tpl->tpl_vars->tpl_vars[$key]->value => ";
+            $key_part = "\$_smarty_tpl->tpl_vars[$key]->value => ";
         } else {
             $key = null;
             $key_part = '';
@@ -45,21 +45,21 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
             $name = null;
         } 
         $output = "<?php ";
-        $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$item] = new Smarty_Variable;\n";
+        $output .= " \$_smarty_tpl->tpl_vars[$item] = new Smarty_Variable;\n";
         if ($key != null) {
-            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars[$key] = new Smarty_Variable;\n";
+            $output .= " \$_smarty_tpl->tpl_vars[$key] = new Smarty_Variable;\n";
         } 
         $output .= " \$_from = $from; if (!is_array(\$_from) && !is_object(\$_from)) { settype(\$_from, 'array');}\n";
         if ($name != null) {
-            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['total'] = count(\$_from);\n";
-            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']=0;\n";
-            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['index']=-1;\n";
+            $output .= " \$_smarty_tpl->tpl_vars['smarty']->value['foreach'][$name]['total'] = count(\$_from);\n";
+            $output .= " \$_smarty_tpl->tpl_vars['smarty']->value['foreach'][$name]['iteration']=0;\n";
+            $output .= " \$_smarty_tpl->tpl_vars['smarty']->value['foreach'][$name]['index']=-1;\n";
         } 
         $output .= "if (count(\$_from) > 0){\n";
-        $output .= "    foreach (\$_from as " . $key_part . "\$_smarty_tpl->tpl_vars->tpl_vars[$item]->value){\n";
+        $output .= "    foreach (\$_from as " . $key_part . "\$_smarty_tpl->tpl_vars[$item]->value){\n";
         if ($name != null) {
-            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['iteration']++;\n";
-            $output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['foreach'][$name]['index']++;\n";
+            $output .= " \$_smarty_tpl->tpl_vars['smarty']->value['foreach'][$name]['iteration']++;\n";
+            $output .= " \$_smarty_tpl->tpl_vars['smarty']->value['foreach'][$name]['index']++;\n";
         } 
         $output .= "?>";
 

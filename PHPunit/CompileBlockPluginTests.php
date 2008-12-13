@@ -18,10 +18,13 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
     } 
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
@@ -36,7 +39,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     } 
     public function testBlockPlugin2()
     {
-        $tpl = $this->smarty->createTemplate("string:{textformat assign=foo}hello world{/textformat}{\$foo}",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{textformat assign=foo}hello world{/textformat}{\$foo}",$this->smarty);
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
 } 

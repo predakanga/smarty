@@ -65,7 +65,7 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
         if (isset($saved_attr[1])) {
             $_output .= " \$_smarty_tpl->assign($saved_attr[1], ob_get_contents());";
         } 
-        $_output .= " \$_smarty_tpl->tpl_vars->tpl_vars['smarty']->value['capture'][$saved_attr[0]]=ob_get_contents();";
+        $_output .= " \$_smarty_tpl->tpl_vars['smarty']->value['capture'][$saved_attr[0]]=ob_get_contents();";
         $_output .= " ob_clean(); ?>\n";
         return $_output;
     } 

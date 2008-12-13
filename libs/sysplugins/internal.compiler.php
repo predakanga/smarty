@@ -38,13 +38,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $this->smarty->loadPlugin('Smarty_Internal_Run_Filter');
             $this->filter = new Smarty_Internal_Run_Filter;
         } 
-        // flag for nochache sections
-        $this->_compiler_status->nocache = false;
-        $this->_compiler_status->tag_nocache = false; 
-        // current template file
-        $this->_compiler_status->current_tpl_filepath = ""; 
-        // assume successfull compiling
-        $this->compile_error = false;
     } 
 
     /**
@@ -72,6 +65,13 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
+        // flag for nochache sections
+        $this->_compiler_status->nocache = false;
+        $this->_compiler_status->tag_nocache = false; 
+        // current template file
+        $this->_compiler_status->current_tpl_filepath = ""; 
+        // assume successfull compiling
+        $this->compile_error = false;
         // save template object in compiler class
         $this->template = $_template; 
         // get template filepath for error messages
@@ -91,7 +91,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         $this->_compiler_status->current_tpl_filepath = $this->tpl_filepath; 
         // init cacher plugin
-        $_template->cacher_object->initCacher($this); 
+        Smarty_Internal_Template::$cacher_object->initCacher($this); 
         // run prefilter if required
         if (isset($this->smarty->autoload_filters['pre'])) {
             $_content = $this->filter->execute('pre', $_content);
@@ -109,7 +109,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         if (!$this->compile_error) {
             // close cacher and return compiled template
-            $_template->compiled_template = $template_header . $_template->cacher_object->closeCacher($this, $parser->retvalue); 
+            $_template->compiled_template = $template_header . Smarty_Internal_Template::$cacher_object->closeCacher($this, $parser->retvalue); 
             // run postfilter if required
             if (isset($this->smarty->autoload_filters['post'])) {
                 $_template->compiled_template = $this->filter->execute('post', $_template->compiled_template);
@@ -124,8 +124,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *            This is a call back from the lexer/parser
-    *            It executes the required compile plugin for the Smarty tag
+    *              This is a call back from the lexer/parser
+    *              It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -151,6 +151,13 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             // tag did not produce compiled code
             return ''; 
             // no compile plugin found for this tag, try function plugin
+        } elseif (isset($this->smarty->plugins['function'][$tag])) {
+            // test if not cacheable
+            if (!$this->smarty->plugins['function'][$tag][1]) {
+                $this->_compiler_status->tag_nocache = true;
+            } 
+            // call function plugin compile module
+            return $this->function_plugin($args, $this->smarty->plugins['function'][$tag][0], $this);
         } elseif ($this->smarty->loadPlugin("smarty_function_$tag") && is_callable("smarty_function_$tag")) {
             if (!$this->template->security || $this->smarty->security_handler->isTrustedFunctionPlugin($tag, $this)) {
                 // call function plugin compile module

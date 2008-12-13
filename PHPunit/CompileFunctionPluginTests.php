@@ -18,32 +18,38 @@ class CompileFunctionPluginTests extends PHPUnit_Framework_TestCase {
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
     } 
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
 
     /**
-    * test function plugin tag
+    * test function plugin tag in template file
     */
-    public function testFunctionPlugin1()
+    public function testFunctionPluginFromTemplateFile()
     {
-        $tpl = $this->smarty->createTemplate('string:{counter start=10}{counter}');
-        $this->assertEquals("1011", $this->smarty->fetch($tpl));
+        $tpl = $this->smarty->createTemplate('plugintest.tpl', $this->smarty->tpl_vars);
+        $this->assertEquals("10", $this->smarty->fetch($tpl));
     } 
-    public function testFunctionPlugin2()
+    /**
+    * test function plugin function definition in script
+    */
+    public function testFunctionPluginRegisteredFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{counter start=10 assign=foo}{counter}');
-        $this->assertEquals("", $this->smarty->fetch($tpl));
+        $this->smarty->register_function('plugintest','plugintest');
+        $tpl = $this->smarty->createTemplate('string:{plugintest foo=bar}', $this->smarty->tpl_vars);
+        $this->assertEquals("plugin test called bar", $this->smarty->fetch($tpl));
     } 
-    public function testFunctionPlugin3()
-    {
-        $tpl = $this->smarty->createTemplate('string:{counter start=10 assign=foo}{counter}{$foo}',$this->smarty->tpl_vars);
-        $this->assertEquals("11", $this->smarty->fetch($tpl));
-    } 
+} 
+function plugintest($params, &$smarty)
+{
+    return "plugin test called $params[foo]";
 } 
 
 ?>

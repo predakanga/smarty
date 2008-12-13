@@ -15,6 +15,8 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = new Smarty();
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
@@ -23,6 +25,7 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
@@ -32,17 +35,17 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableSpacing1()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo}",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{\$foo}",$this->smarty);
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
     } 
     public function testVariableSpacing2()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo}{\$foo}",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{\$foo}{\$foo}",$this->smarty);
         $this->assertEquals("barbar", $this->smarty->fetch($tpl));
     } 
     public function testVariableSpacing3()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo} {\$foo}",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:{\$foo} {\$foo}",$this->smarty);
         $this->assertEquals("bar bar", $this->smarty->fetch($tpl));
     } 
 
@@ -51,27 +54,27 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableText1()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo}B",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:A{\$foo}B",$this->smarty);
         $this->assertEquals("AbarB", $this->smarty->fetch($tpl));
     } 
     public function testVariableText2()
     {
-        $tpl = $this->smarty->createTemplate("string:A {\$foo}B",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:A {\$foo}B",$this->smarty);
         $this->assertEquals("A barB", $this->smarty->fetch($tpl));
     } 
     public function testVariableText3()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo} B",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:A{\$foo} B",$this->smarty);
         $this->assertEquals("Abar B", $this->smarty->fetch($tpl));
     } 
     public function testVariableText4()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo}\nB",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:A{\$foo}\nB",$this->smarty);
         $this->assertEquals("Abar\nB", $this->smarty->fetch($tpl));
     } 
     public function testVariableText5()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo}B\nC",$this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate("string:A{\$foo}B\nC",$this->smarty);
         $this->assertEquals("AbarB\nC", $this->smarty->fetch($tpl));
     } 
 

@@ -18,10 +18,13 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
+        $this->old_error_level = error_reporting();
+        error_reporting(E_ALL);
     } 
 
     public function tearDown()
     {
+        error_reporting($this->old_error_level);
         unset($this->smarty);
         Smarty::$template_objects = null;
     } 
@@ -42,7 +45,6 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
         } 
         $this->fail('Exception for required attribute "var" has not been raised.');
     } 
-
 
     public function testAssignOld1()
     {

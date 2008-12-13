@@ -6,7 +6,7 @@
 * Empties the cache folder
 * 
 * @package Smarty
-* @subpackage Smartymethod
+* @subpackage SmartyMethod
 * @author Uwe Tews 
 */
 
@@ -20,7 +20,7 @@ class Smarty_Method_Clear_All_Cache extends Smarty_Internal_Base {
     /**
     * Empty cache folder
     */
-    public function execute($args)
+    public function execute()
     {
         $count = 0;
         $cacheDirs = new RecursiveDirectoryIterator($this->smarty->cache_dir);

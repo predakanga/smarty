@@ -93,10 +93,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $smarty_debug_id = 'SMARTY_DEBUG';
     public $request_use_auto_globals = true;
     public $debug_tpl = null; 
+    // When set, smarty does uses this value as error_reporting-level.
+    public $error_reporting  =  null;
     // assigned tpl vars
-    public $tpl_vars = null; 
+    public $tpl_vars = array(); 
     // dummy parent object
-    public $parent_object = null; 
+    public $parent = null; 
     // system plugins directory
     private $sysplugins_dir = null; 
     // modifier object
@@ -123,7 +125,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // autoload filter
     public $autoload_filters = array(); 
     // check If-Modified-Since headers
-    public $cache_modified_check = false;
+    public $cache_modified_check = false; 
+    // registered plugins
+    public $plugins = array(); 
+    // registered objects
+    public $reg_objects = array();
 
     /**
     * Class constructor, initializes basic smarty properties
@@ -142,8 +148,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR; 
         // set instance object
         self::instance($this); 
-        // root data object
-        $this->tpl_vars = new Smarty_Data; 
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
         $this->loadPlugin('Smarty_Internal_PluginBase');
@@ -157,7 +161,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->block = new Smarty_Internal_Block;
         if (!$this->debugging && $this->debugging_ctrl == 'URL')
         {
-            $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
+           $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
             if (@strstr($_query_string, $this->smarty_debug_id)) {
                 if (@strstr($_query_string, $this->smarty_debug_id . '=on')) {
                     // enable debugging for this browser session
@@ -208,17 +212,21 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file or template object
     */
-    public function fetch($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
+    public function fetch($template, $parent = null, $cache_id = null, $compile_id = null)
     {
-        if ($parent_tpl_vars === null) {
+        if ($parent === null) {
             // get default Smarty data object
-            $parent_tpl_vars = $this->tpl_vars;
+            $parent = $this;
         } 
         // create template object if necessary
         ($template instanceof $this->template_class)? $_template = $template :
-        $_template = $this->createTemplate ($template, $parent_tpl_vars , $cache_id, $compile_id); 
+        $_template = $this->createTemplate ($template, $parent , $cache_id, $compile_id); 
+        $_smarty_old_error_level = $this->debugging ? error_reporting() : error_reporting(isset($this->error_reporting)
+               ? $this->error_reporting : error_reporting() & ~E_NOTICE);
         // return redered template
-        return $_template->getRenderedTemplate();
+        $_output = $_template->getRenderedTemplate();
+        error_reporting($_smarty_old_error_level);
+        return $_output;
     } 
 
     /**
@@ -226,14 +234,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * 
     * @param string $template_resource the resource handle of the template file  or template object
     */
-    public function display($template, $parent_tpl_vars = null, $cache_id = null, $compile_id = null)
-    {
-        if ($parent_tpl_vars === null) {
-            // get default Smarty data object
-            $parent_tpl_vars = $this->tpl_vars;
-        } 
+    public function display($template, $parent = null, $cache_id = null, $compile_id = null)
+    { 
         // display template
-        echo $this->fetch ($template, $parent_tpl_vars , $cache_id, $compile_id); 
+        echo $this->fetch ($template, $parent , $cache_id, $compile_id); 
         // debug output?
         if ($this->debugging) {
             $this->loadPlugin('Smarty_Internal_Debug');
@@ -250,7 +254,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public function is_cached($template, $cache_id = null, $compile_id = null)
     {
         if (!($template instanceof $this->template_class)) {
-            $template = $this->createTemplate ($template, $cache_id, $compile_id);
+            $template = $this->createTemplate ($template, $this, $cache_id, $compile_id);
         } 
         // return cache status of template
         return $template->isCached();
@@ -288,6 +292,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // if class exists, exit silently (already loaded)
         if (class_exists($class_name, false))
             return true; 
+        // if callable as function, exit silently (already loaded)
+        if (is_callable($class_name))
+            return true; 
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $class_name = strtolower($class_name);
         $name_parts = explode('_', $class_name, 3); 
@@ -299,13 +306,20 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // plugin filename is expected to be: [type].[name].php
         $plugin_filename = "{$name_parts[1]}.{$name_parts[2]}{$this->php_ext}"; 
         // if type is "internal", get plugin from sysplugins
-        if (($name_parts[1] == 'internal') && file_exists($this->sysplugins_dir . $plugin_filename)) {
-            return require_once($this->sysplugins_dir . $plugin_filename);
+        if ($name_parts[1] == 'internal') {
+            if (file_exists($this->sysplugins_dir . $plugin_filename)) {
+                require_once($this->sysplugins_dir . $plugin_filename);
+                return true;
+            } else {
+                return false;
+            } 
         } 
         // loop through plugin dirs and find the plugin
         foreach((array)$this->plugins_dir as $plugin_dir) {
-            if (file_exists($plugin_dir . $plugin_filename))
-                return require_once($plugin_dir . $plugin_filename);
+            if (file_exists($plugin_dir . $plugin_filename)) {
+                require_once($plugin_dir . $plugin_filename);
+                return true;
+            } 
         } 
         // no plugin loaded
         return false;
@@ -334,7 +348,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             } 
         } 
         $method = new $class_name;
-        return $method->execute($args);
+        return call_user_func_array(array($method, 'execute'), $args);
     } 
 } 
 
@@ -354,7 +368,7 @@ class SmartyException extends Exception {
 
     public function __toString()
     {
-        return "Code: " . $this->getCode . "<br>Error: " . htmlentities($this->getMessage()) . "<br>"
+        return "Code: " . $this->getCode() . "<br>Error: " . htmlentities($this->getMessage()) . "<br>"
          . "File: " . $this->getFile() . "<br>"
          . "Line: " . $this->getLine() . "<br>" 
         // . "Trace: " . $this->getTraceAsString()

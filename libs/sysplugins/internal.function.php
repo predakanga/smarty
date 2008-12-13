@@ -26,12 +26,6 @@ class Smarty_Internal_Function extends Smarty_Internal_Base {
             // use PHP function if found
             return call_user_func_array($name, $args);
         } 
-        if ($name == 'isset') {
-            return isset($args[0]);
-        } 
-        if ($name == 'empty') {
-            return empty($args[0]);
-        } 
 
         $plugin_name = "Smarty_Function_{$name}";
 

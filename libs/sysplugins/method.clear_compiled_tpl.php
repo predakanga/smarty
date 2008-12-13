@@ -6,7 +6,7 @@
 * Deletes compiled template files
 * 
 * @package Smarty
-* @subpackage Smartymethod
+* @subpackage SmartyMethod
 * @author Uwe Tews 
 */
 
@@ -20,7 +20,7 @@ class Smarty_Method_Clear_Compiled_Tpl extends Smarty_Internal_Base {
     /**
     * Delete compiled template file
     */
-    public function execute($args)
+    public function execute()
     {
         $count = 0;
         $compileDirs = new RecursiveDirectoryIterator($this->smarty->compile_dir);

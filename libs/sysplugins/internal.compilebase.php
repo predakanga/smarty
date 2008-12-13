@@ -17,7 +17,7 @@ class Smarty_Internal_CompileBase {
     */
     function __construct()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = Smarty::instance(); 
         // initialize valid attributes
         $this->required_attributes = array();
         $this->optional_attributes = array();
@@ -37,11 +37,6 @@ class Smarty_Internal_CompileBase {
     */
     function _get_attributes ($args)
     { 
-        // check for nocache attribute, set flag and remove it
-        if ($args['nocache'] === 'true') {
-            $this->compiler->_compiler_status->tag_nocache = true;
-        } 
-        unset($args['nocache']); 
         // check if all required attributes present
         foreach ($this->required_attributes as $attr) {
             if (!array_key_exists($attr, $args)) {
