@@ -21,7 +21,7 @@
 					</div>
 	<div class="info-box-body">
         		<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">class for security test</p>
+<p class="short-description">class core function tests</p>
 		<p class="notes">
 			Located in <a class="field" href="_PHPunit---CoreTests.php.html">/PHPunit/CoreTests.php</a> (line <span class="field">14</span>)
 		</p>
@@ -46,7 +46,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																				
+																																																																																												
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#setUp" title="details" class="method-name">setUp</a>
@@ -59,12 +59,47 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#testLoadPlugin1" title="details" class="method-name">testLoadPlugin1</a>
+										<a href="#testLoadPluginErrorReturn" title="details" class="method-name">testLoadPluginErrorReturn</a>
 										()
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#testLoadPlugin2" title="details" class="method-name">testLoadPlugin2</a>
+										<a href="#testLoadPluginExist" title="details" class="method-name">testLoadPluginExist</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLoadPluginSmartyInternalBase" title="details" class="method-name">testLoadPluginSmartyInternalBase</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLoadPluginSmartyInternalBlock" title="details" class="method-name">testLoadPluginSmartyInternalBlock</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLoadPluginSmartyInternalDebug" title="details" class="method-name">testLoadPluginSmartyInternalDebug</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLoadPluginSmartyInternalFunction" title="details" class="method-name">testLoadPluginSmartyInternalFunction</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLoadPluginSmartyInternalModifier" title="details" class="method-name">testLoadPluginSmartyInternalModifier</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLoadPluginSmartyInternalPluginBase" title="details" class="method-name">testLoadPluginSmartyInternalPluginBase</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testLoadPluginSmartyTemplateClass" title="details" class="method-name">testLoadPluginSmartyTemplateClass</a>
 										()
 									</div>
 								</div>
@@ -110,7 +145,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">tearDown</span> (line <span class="line-number">22</span>)
+		<span class="method-title">tearDown</span> (line <span class="line-number">24</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -129,14 +164,15 @@
 		
 			
 	</div>
-<a name="methodtestLoadPlugin1" id="testLoadPlugin1"><!-- --></a>
+<a name="methodtestLoadPluginErrorReturn" id="testLoadPluginErrorReturn"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testLoadPlugin1</span> (line <span class="line-number">31</span>)
+		<span class="method-title">testLoadPluginErrorReturn</span> (line <span class="line-number">42</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test unkown plugin</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -144,7 +180,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			testLoadPlugin1
+			testLoadPluginErrorReturn
 		</span>
 				()
 			</div>
@@ -152,14 +188,15 @@
 		
 			
 	</div>
-<a name="methodtestLoadPlugin2" id="testLoadPlugin2"><!-- --></a>
+<a name="methodtestLoadPluginExist" id="testLoadPluginExist"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testLoadPlugin2</span> (line <span class="line-number">39</span>)
+		<span class="method-title">testLoadPluginExist</span> (line <span class="line-number">34</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin must exist</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -167,7 +204,175 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			testLoadPlugin2
+			testLoadPluginExist
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLoadPluginSmartyInternalBase" id="testLoadPluginSmartyInternalBase"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLoadPluginSmartyInternalBase</span> (line <span class="line-number">49</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test Smarty_Internal_Base exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLoadPluginSmartyInternalBase
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLoadPluginSmartyInternalBlock" id="testLoadPluginSmartyInternalBlock"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLoadPluginSmartyInternalBlock</span> (line <span class="line-number">77</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test Smarty_Internal_Block exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLoadPluginSmartyInternalBlock
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLoadPluginSmartyInternalDebug" id="testLoadPluginSmartyInternalDebug"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLoadPluginSmartyInternalDebug</span> (line <span class="line-number">84</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test Smarty_Internal_Debug exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLoadPluginSmartyInternalDebug
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLoadPluginSmartyInternalFunction" id="testLoadPluginSmartyInternalFunction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLoadPluginSmartyInternalFunction</span> (line <span class="line-number">70</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test Smarty_Internal_Function exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLoadPluginSmartyInternalFunction
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLoadPluginSmartyInternalModifier" id="testLoadPluginSmartyInternalModifier"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLoadPluginSmartyInternalModifier</span> (line <span class="line-number">63</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test Smarty_Internal_Modifier exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLoadPluginSmartyInternalModifier
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLoadPluginSmartyInternalPluginBase" id="testLoadPluginSmartyInternalPluginBase"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLoadPluginSmartyInternalPluginBase</span> (line <span class="line-number">56</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test Smarty_Internal_PluginBase exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLoadPluginSmartyInternalPluginBase
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestLoadPluginSmartyTemplateClass" id="testLoadPluginSmartyTemplateClass"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testLoadPluginSmartyTemplateClass</span> (line <span class="line-number">91</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">loadPlugin test $template_class exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testLoadPluginSmartyTemplateClass
 		</span>
 				()
 			</div>
@@ -181,7 +386,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Mon, 01 Dec 2008 17:48:04 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sat, 13 Dec 2008 12:16:26 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
