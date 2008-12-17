@@ -83,7 +83,7 @@ class Smarty_Internal_Cacher_InlineCode extends Smarty_Internal_PluginBase {
     */
     public function getCachedContents ($_template)
     {
-        return Smarty_Internal_Template::$cache_resource_objects[$_template->caching_type]->getCachedContents($_template);
+        return $_template->cache_resource_objects[$_template->caching_type]->getCachedContents($_template);
     } 
 
     /**
@@ -96,7 +96,7 @@ class Smarty_Internal_Cacher_InlineCode extends Smarty_Internal_PluginBase {
     */
     public function writeCachedContent ($_template)
     {
-        return Smarty_Internal_Template::$cache_resource_objects[$_template->caching_type]->writeCachedContent($_template);
+        return $_template->cache_resource_objects[$_template->caching_type]->writeCachedContent($_template);
     } 
 } 
 

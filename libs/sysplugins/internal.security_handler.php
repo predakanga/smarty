@@ -10,49 +10,6 @@
 * This class contains all methods for security checking
 */
 class Smarty_Internal_Security_Handler extends Smarty_Internal_Base {
-    /**
-    * Check if compiler tag is truested.
-    * 
-    * @param object $compiler compiler object
-    * @param string $tag_name 
-    * @return boolean true if compiler tag is trusted
-    */
-    function isTrustedCompilerTag($tag_name, $compiler)
-    {
-        if (in_array($tag_name, array('function_plugin', 'block_plugin', 'print_expression','else','elseif'))) {
-            // allow always internal compile modules
-            return true;
-        }
-       
-        if (strlen($tag_name) > 5 && substr_compare($tag_name, 'close', -5, 5) == 0) {
-            $tag_name = substr($tag_name, 0, -5);
-        } elseif (strlen($tag_name) > 4 && substr_compare($tag_name, 'else', -4, 4) == 0) {
-            $tag_name = substr($tag_name, 0, -4);
-        } 
-        if (empty($this->smarty->security_policy->compiler_tags) || in_array($tag_name, $this->smarty->security_policy->compiler_tags)) {
-            return true;
-        } else {
-            $compiler->trigger_template_error ("compiler tag \"" . $tag_name . "\" not allowed by security setting");
-            return false;
-        } 
-    } 
-
-    /**
-    * Check if function plugin is truested.
-    * 
-    * @param object $compiler compiler object
-    * @param string $plugin_name 
-    * @return boolean true if function plugin is trusted
-    */
-    function isTrustedFunctionPlugin($plugin_name, $compiler)
-    {
-        if (empty($this->smarty->security_policy->function_plugins) || in_array($plugin_name, $this->smarty->security_policy->function_plugins)) {
-            return true;
-        } else {
-            $compiler->trigger_template_error ("function plugin \"" . $plugin_name . "\" not allowed by security setting");
-            return false;
-        } 
-    } 
 
     /**
     * Check if PHP function is trusted.

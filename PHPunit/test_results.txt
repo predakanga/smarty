@@ -1,24 +1,16 @@
 PHPUnit 3.3.5 by Sebastian Bergmann.
 
-............................................................  60 / 253
-............................................................ 120 / 253
-.....hello F.........................<br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unknow tag "plugintest"<br>E......<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if !(1<2)}yes{else}no{/if}<br></p>Unexpected " !", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if not (true)}yes{else}no{/if}<br></p>Unexpected " not ", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E.................... 180 / 253
-....................................F..F.................... 240 / 253
-.............
+............................................................  60 / 266
+............................................................ 120 / 266
+.......hello F.................................<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if !(1<2)}yes{else}no{/if}<br></p>Unexpected " !", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if not (true)}yes{else}no{/if}<br></p>Unexpected " not ", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E................. 180 / 266
+............................................................ 240 / 266
+..........................
 
-Time: 01:17
+Time: 01:21
 
-There were 3 errors:
+There were 2 errors:
 
-1) testFunctionPluginRegisteredFunction(CompileFunctionPluginTests)
-SmartyException: Error compiling template string
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:269
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:391
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:361
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\Smarty.class.php:227
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileFunctionPluginTests.php:47
-
-2) testIfNot1(CompileIfTests)
+1) testIfNot1(CompileIfTests)
 SmartyException: Error compiling template string
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:269
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:391
@@ -26,7 +18,7 @@ C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.templa
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\Smarty.class.php:227
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileIfTests.php:68
 
-3) testIfNot2(CompileIfTests)
+2) testIfNot2(CompileIfTests)
 SmartyException: Error compiling template string
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:269
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:391
@@ -37,7 +29,7 @@ C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileIfTests.php:73
 --
 
 
-There were 3 failures:
+There was 1 failure:
 
 1) testCapture6(CompileCaptureTests)
 This failure pops up only during PHPunit test ?????
@@ -47,15 +39,7 @@ difference      <xxxxxxxxxxxxxxxx??????>
 got string      <world this is my >
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileCaptureTests.php:63
 
-2) testNotTrustedCompilerTag(SecurityTests)
-Exception for not trusted compiler tag has not been raised.
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\SecurityTests.php:62
-
-3) testNotTrustedFunctionPlugin(SecurityTests)
-Exception for not trusted PHP function has not been raised.
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\SecurityTests.php:97
-
 FAILURES!
-Tests: 253, Assertions: 270, Failures: 3, Errors: 3.
+Tests: 266, Assertions: 289, Failures: 1, Errors: 2.
 
 Generating code coverage report, this may take a moment.

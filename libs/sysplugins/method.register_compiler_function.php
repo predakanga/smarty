@@ -20,13 +20,19 @@ class Smarty_Method_Register_Compiler_Function extends Smarty_Internal_Base {
     /**
     * Registers compiler function
     * 
-    * @param string $function name of template function
-    * @param string $function_impl name of PHP function to register
+    * @param string $compiler_tag of template function
+    * @param string $compiler_impl name of PHP function to register
     */
-    public function execute($function, $function_impl, $cacheable = true)
+    public function execute($compiler_tag, $compiler_impl, $cacheable = true)
     {
-        $this->smarty->plugins['compiler'][$function] =
-        array($function_impl, null, null, false, $cacheable);
+        if (isset($this->smarty->registered_plugins[$compiler_tag])) {
+            throw new SmartyException("Plugin tag \"{$compiler_tag}\" already registered");
+        } elseif (!is_callable($compiler_impl)) {
+            throw new SmartyException("Plugin \"{$compiler_tag}\" not callable");
+        } else {
+            $this->smarty->registered_plugins[$compiler_tag] =
+            array('compiler', $compiler_impl, $cacheable);
+        } 
     } 
 } 
 

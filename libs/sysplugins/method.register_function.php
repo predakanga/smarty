@@ -20,14 +20,20 @@ class Smarty_Method_Register_Function extends Smarty_Internal_Base {
     /**
     * Registers custom function to be used in templates
     * 
-    * @param string $function the name of the template function
+    * @param string $function_tag the name of the template function
     * @param string $function_impl the name of the PHP function to register
     * @param boolean $cacheable if true (default) this fuction is cachable
     */
-    public function execute($function, $function_impl, $cacheable = true)
+    public function execute($function_tag, $function_impl, $cacheable = true)
     {
-        $this->smarty->plugins['function'][$function] =
-        array($function_impl, $cacheable);
+        if (isset($this->smarty->registered_plugins[$function_tag])) {
+            throw new SmartyException("Plugin tag \"{$function_tag}\" already registered");
+        } elseif (!is_callable($function_impl)) {
+            throw new SmartyException("Plugin \"{$function_tag}\" not callable");
+        } else {
+            $this->smarty->registered_plugins[$function_tag] =
+            array('function', $function_impl, $cacheable);
+        } 
     } 
 } 
 ?>

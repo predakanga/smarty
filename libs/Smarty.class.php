@@ -103,8 +103,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     private $sysplugins_dir = null; 
     // modifier object
     public $modifier = null; 
-    // function object
-    public $function = null; 
     // resource type used if none given
     public $default_resource_type = 'file'; 
     // caching type
@@ -127,7 +125,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // check If-Modified-Since headers
     public $cache_modified_check = false; 
     // registered plugins
-    public $plugins = array(); 
+    public $registered_plugins = array(); 
+    // plugin search order
+    public $plugin_search_order = array('function','block','compiler'); 
+    // plugin handler object
+    public $plugin_handler = null; 
     // registered objects
     public $reg_objects = array();
 
@@ -155,10 +157,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // setup function , modifier block objects
         $this->loadPlugin('Smarty_Internal_Modifier');
         $this->modifier = new Smarty_Internal_Modifier;
-        $this->loadPlugin('Smarty_Internal_Function');
-        $this->function = new Smarty_Internal_Function;
-        $this->loadPlugin('Smarty_Internal_Block');
-        $this->block = new Smarty_Internal_Block;
+        $this->loadPlugin('Smarty_Internal_Plugin_Handler');
+        $this->plugin_handler = new Smarty_Internal_Plugin_Handler;
         if (!$this->debugging && $this->debugging_ctrl == 'URL')
         {
            $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];

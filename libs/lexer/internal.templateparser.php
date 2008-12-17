@@ -1440,20 +1440,20 @@ static public $yy_action = array(
 #line 1445 "internal.templateparser.php"
 #line 81 "internal.templateparser.y"
     function yy_r3(){if ($this->compiler->has_code) {
-                                            $this->_retvalue = Smarty_Internal_Template::$cacher_object->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler,$this->nocache,true);
+                                            $this->_retvalue = $this->template->cacher_object->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;    }
 #line 1450 "internal.templateparser.php"
 #line 85 "internal.templateparser.y"
-    function yy_r4(){ $this->_retvalue = Smarty_Internal_Template::$cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);    }
+    function yy_r4(){ $this->_retvalue = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);    }
 #line 1453 "internal.templateparser.php"
 #line 87 "internal.templateparser.y"
     function yy_r5(){if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
-                                      $this->_retvalue = Smarty_Internal_Template::$cacher_object->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler, false,true);
+                                      $this->_retvalue = $this->template->cacher_object->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                      $this->_retvalue = Smarty_Internal_Template::$cacher_object->processNocacheCode(htmlspecialchars($this->yystack[$this->yyidx + 0]->minor, ENT_QUOTES), $this->compiler, false, false);}    }
+                                      $this->_retvalue = $this->template->cacher_object->processNocacheCode(htmlspecialchars($this->yystack[$this->yyidx + 0]->minor, ENT_QUOTES), $this->compiler, false, false);}    }
 #line 1459 "internal.templateparser.php"
 #line 92 "internal.templateparser.y"
-    function yy_r6(){$this->_retvalue = Smarty_Internal_Template::$cacher_object->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler,false,false);    }
+    function yy_r6(){$this->_retvalue = $this->template->cacher_object->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler,false,false);    }
 #line 1462 "internal.templateparser.php"
 #line 100 "internal.templateparser.y"
     function yy_r7(){ $this->_retvalue = $this->compiler->compileTag('print_expression',array_merge(array('value'=>$this->yystack[$this->yyidx + -2]->minor),$this->yystack[$this->yyidx + -1]->minor));    }

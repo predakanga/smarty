@@ -57,11 +57,11 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     public function writeCachedContent($_template)
     {
         if (!$_template->isEvaluated()) {
-            if (!is_object(Smarty_Internal_Template::$write_file_object)) {
+            if (!is_object($_template->write_file_object)) {
                 $this->smarty->loadPlugin("Smarty_Internal_Write_File");
-                Smarty_Internal_Template::$write_file_object = new Smarty_Internal_Write_File;
+                $_template->write_file_object = new Smarty_Internal_Write_File;
             } 
-            return Smarty_Internal_Template::$write_file_object->writeFile($_template->getCachedFilepath(), $_template->cached_content);
+            return $_template->write_file_object->writeFile($_template->getCachedFilepath(), $_template->cached_content);
         } else {
             return false;
         } 

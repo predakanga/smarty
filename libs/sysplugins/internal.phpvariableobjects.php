@@ -117,4 +117,39 @@ class PHP_Variable_Object {
     } 
 } 
 
+/**
+* class for PHP function handling
+*/
+class PHP_Function_Handler {
+    // template object
+    public $template = null;
+
+    public function __construct($tpl)
+    {
+        $this->smarty = Smarty::instance();
+        $this->template = $tpl;
+    } 
+    /**
+    * calls PHP function from PHP template
+    * 
+    * @param string $name function name
+    * @param array $args function arguments
+    * @return unkown function result
+    */
+    public function __call($name, $args)
+    {
+        if (function_exists($name)) {
+            // test security
+            if (!$this->template->security || empty($this->smarty->security_policy->php_functions) || in_array($name, $this->smarty->security_policy->php_functions)) {
+                // use PHP function if found
+                return call_user_func_array($name, $args);
+            } else {
+                throw new SmartyException ("PHP function \"" . $name . "\" not allowed by security setting");
+            } 
+        } 
+        // nothing found, throw exception
+        throw new SmartyException("Unkown function {$name}");
+    } 
+} 
+
 ?>

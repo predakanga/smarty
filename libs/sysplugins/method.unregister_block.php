@@ -20,11 +20,13 @@ class Smarty_Method_Unregister_Block extends Smarty_Internal_Base {
     /**
     * Unregisters block function
     * 
-    * @param string $block name of template function
+    * @param string $block_tag name of template function
     */
-    public function execute($block)
+    public function execute($block_tag)
     {
-        unset($this->smarty->plugins['block'][$block]);
+        if (isset($this->smarty->registered_plugins[$block_tag]) && $this->smarty->registered_plugins[$block_tag][0] == 'block') {
+            unset($this->smarty->registered_plugins[$block_tag]);
+        } 
     } 
 } 
 

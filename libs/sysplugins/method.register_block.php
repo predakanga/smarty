@@ -20,13 +20,20 @@ class Smarty_Method_Register_Block extends Smarty_Internal_Base {
     /**
     * Registers block function to be used in templates
     * 
-    * @param string $block name of template block
+    * @param string $block_tag name of template block
     * @param string $block_impl PHP function to register
+    * @param boolean $cacheable if true (default) this fuction is cachable
     */
-    public function execute($block, $block_impl, $cacheable = true, $cache_attrs = null)
+    public function execute($block_tag, $block_impl, $cacheable = true)
     {
-        $this->smarty->plugins['block'][$block] =
-        array($block_impl, null, null, false, $cacheable, $cache_attrs);
+        if (isset($this->smarty->registered_plugins[$block_tag])) {
+            throw new SmartyException("Plugin tag \"{$block_tag}\" already registered");
+        } elseif (!is_callable($block_impl)) {
+            throw new SmartyException("Plugin \"{$block_tag}\" not callable");
+        } else {
+            $this->smarty->registered_plugins[$block_tag] =
+            array('block', $block_impl, $cacheable);
+        } 
     } 
 } 
 

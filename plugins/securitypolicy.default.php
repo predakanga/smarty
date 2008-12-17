@@ -44,24 +44,6 @@ class Smarty_Security_Policy {
     */
     public $trusted_dir = array();
 
-    /**
-    * This is an array of standard compiler tags.
-    *
-    * If empty all compiler tags are allowed.
-    * If set to 'none' none is allowed.
-    * @var array 
-    */
-    public $compiler_tags = array('assign','capture','debug','eval','for','foreach','if','include',
-            'insert','nocache');
-
-    /**
-    * This is an array of trusted function plugins.
-    *
-    * If empty all plugins are allowed.
-    * If set to 'none' none is allowed.
-    * @var array 
-    */
-    public $function_plugins = array('counter','mailto');
 
     /**
     * This is an array of trusted PHP functions.

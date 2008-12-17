@@ -41,14 +41,14 @@ class Smarty_Internal_Compile_Block_Plugin extends Smarty_Internal_CompileBase {
             $this->_open_tag($tag, $_params);
 
             // compile code
-            $output = '<?php $_block_repeat=true;$_smarty_tpl->smarty->block->' . $tag . '(' . $_params . ', null, $_smarty_tpl->smarty, $_block_repeat);while ($_block_repeat) { ob_start();?>';
+            $output = '<?php $_block_repeat=true;$_smarty_tpl->smarty->plugin_handler->' . $tag . '(' . $_params . ', null, $_smarty_tpl->smarty, $_block_repeat);while ($_block_repeat) { ob_start();?>';
         } else {
             // closing tag of block plugin
             $_params = $this->_close_tag(substr($tag,0,-5));
             // This tag does create output
             $this->compiler->has_output = true;
             // compile code
-            $output = '<?php $_block_content = ob_get_contents(); ob_end_clean(); $_block_repeat=false; echo $_smarty_tpl->smarty->block->' . substr($tag,0,-5) . '(' . $_params . ', $_block_content, $_smarty_tpl->smarty, $_block_repeat); }?>';
+            $output = '<?php $_block_content = ob_get_contents(); ob_end_clean(); $_block_repeat=false; echo $_smarty_tpl->smarty->plugin_handler->' . substr($tag,0,-5) . '(' . $_params . ', $_block_content, $_smarty_tpl->smarty, $_block_repeat); }?>';
         } 
         return $output;
     } 

@@ -20,11 +20,13 @@ class Smarty_Method_Unregister_Function extends Smarty_Internal_Base {
     /**
     * Unregisters custom function
     * 
-    * @param string $function name of template function
+    * @param string $function_tag name of template function
     */
-    public function execute($function)
+    public function execute($function_tag)
     {
-        unset($this->smarty->plugins['function'][$function]);
+        if (isset($this->smarty->registered_plugins[$function_tag]) && $this->smarty->registered_plugins[$function_tag][0] == 'function') {
+            unset($this->smarty->registered_plugins[$function_tag]);
+        } 
     } 
 } 
 ?>

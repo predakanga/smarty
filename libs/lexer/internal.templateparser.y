@@ -79,18 +79,18 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 //
 											// Smarty tag
 template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
-                                            res = Smarty_Internal_Template::$cacher_object->processNocacheCode(st, $this->compiler,$this->nocache,true);
+                                            res = $this->template->cacher_object->processNocacheCode(st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
-template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = Smarty_Internal_Template::$cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// PHP tag
 template_element(res)::= PHP(php). {if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
-                                      res = Smarty_Internal_Template::$cacher_object->processNocacheCode(php, $this->compiler, false,true);
+                                      res = $this->template->cacher_object->processNocacheCode(php, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                      res = Smarty_Internal_Template::$cacher_object->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
+                                      res = $this->template->cacher_object->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
 											// Other template text
-template_element(res)::= OTHER(o). {res = Smarty_Internal_Template::$cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
-//template_element(res)::= text(t). {res = Smarty_Internal_Template::$cacher_object->processNocacheCode(t, $this->compiler,false,false);}	
+template_element(res)::= OTHER(o). {res = $this->template->cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
+//template_element(res)::= text(t). {res = $this->template->cacher_object->processNocacheCode(t, $this->compiler,false,false);}	
 
 
 //

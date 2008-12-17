@@ -19,9 +19,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     // tag stack
     public $_tag_stack = array(); 
     // current template
-    public $template = null; 
-    // required plugins
-    public $plugins = array();
+    public $template = null;
 
     /**
     * Initialize compiler
@@ -71,7 +69,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // current template file
         $this->_compiler_status->current_tpl_filepath = ""; 
         // assume successfull compiling
-        $this->compile_error = false;
+        $this->compile_error = false; 
         // save template object in compiler class
         $this->template = $_template; 
         // get template filepath for error messages
@@ -91,7 +89,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         $this->_compiler_status->current_tpl_filepath = $this->tpl_filepath; 
         // init cacher plugin
-        Smarty_Internal_Template::$cacher_object->initCacher($this); 
+        $_template->cacher_object->initCacher($this); 
         // run prefilter if required
         if (isset($this->smarty->autoload_filters['pre'])) {
             $_content = $this->filter->execute('pre', $_content);
@@ -109,7 +107,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         if (!$this->compile_error) {
             // close cacher and return compiled template
-            $_template->compiled_template = $template_header . Smarty_Internal_Template::$cacher_object->closeCacher($this, $parser->retvalue); 
+            $_template->compiled_template = $template_header . $_template->cacher_object->closeCacher($this, $parser->retvalue); 
             // run postfilter if required
             if (isset($this->smarty->autoload_filters['post'])) {
                 $_template->compiled_template = $this->filter->execute('post', $_template->compiled_template);
@@ -124,8 +122,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *              This is a call back from the lexer/parser
-    *              It executes the required compile plugin for the Smarty tag
+    *                           This is a call back from the lexer/parser
+    *                           It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -149,33 +147,39 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
                 return $_output;
             } 
             // tag did not produce compiled code
-            return ''; 
-            // no compile plugin found for this tag, try function plugin
-        } elseif (isset($this->smarty->plugins['function'][$tag])) {
-            // test if not cacheable
-            if (!$this->smarty->plugins['function'][$tag][1]) {
-                $this->_compiler_status->tag_nocache = true;
-            } 
-            // call function plugin compile module
-            return $this->function_plugin($args, $this->smarty->plugins['function'][$tag][0], $this);
-        } elseif ($this->smarty->loadPlugin("smarty_function_$tag") && is_callable("smarty_function_$tag")) {
-            if (!$this->template->security || $this->smarty->security_handler->isTrustedFunctionPlugin($tag, $this)) {
-                // call function plugin compile module
-                return $this->function_plugin($args, $tag, $this);
-            } 
-            // try block plugin
-        } elseif (substr_compare($tag, 'close', -5, 5) != 0) {
-            if ($this->smarty->loadPlugin("smarty_block_$tag") && is_callable("smarty_block_$tag")) {
-                // call block plugin compile module
-                return $this->block_plugin($args, $tag, $this);
-            } 
+            return '';
         } else {
-            if (is_callable("smarty_block_" . substr($tag, 0, -5))) {
-                // call block plugin compile module
+            // not an internal compiler tag, check if tag is registered
+            if (!isset($this->smarty->registered_plugins[$tag]) ||
+                    (substr_compare($tag, 'close', -5, 5) == 0 &&
+                        isset($this->smarty->registered_plugins[substr($tag, 0, -5)]) && $this->smarty->registered_plugins[substr($tag, 0, -5)][0] != 'block')) {
+                // try to load plugin
+                foreach ($this->smarty->plugin_search_order as $plugin_type) {
+                    $plugin = 'smarty_' . $plugin_type . '_' . $tag;
+                    if ($this->smarty->loadPlugin($plugin)) {
+                        if (class_exists($plugin, false)) {
+                            $plugin = array($plugin, 'execute');
+                        } 
+                        if (is_callable($plugin)) {
+                            $this->smarty->registered_plugins[$tag] = array($plugin_type, $plugin, false);
+                            break;
+                        } else {
+                            throw new SmartyException("Plugin \"{$tag}\" not callable");
+                        } 
+                    } 
+                } 
+            } 
+            if ($this->smarty->registered_plugins[$tag]) {
+                $compile = $this->smarty->registered_plugins[$tag][0] . '_plugin';
+                return $this->$compile($args, $tag, $this);
+            } 
+            if (substr_compare($tag, 'close', -5, 5) == 0 &&
+                    isset($this->smarty->registered_plugins[substr($tag, 0, -5)]) && $this->smarty->registered_plugins[substr($tag, 0, -5)][0] == 'block') {
                 return $this->block_plugin($args, $tag, $this);
             } 
+
+            $this->trigger_template_error ("unknow tag \"" . $tag . "\"");
         } 
-        $this->trigger_template_error ("unknow tag \"" . $tag . "\"");
     } 
 
     /**
@@ -191,26 +195,20 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     */
     public function __call($name, $args)
     { 
+        // re-use object if already exists
+        if (isset(self::$_tag_objects[$name])) {
+            // compile this tag
+            return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
+        } 
         // build class names to search for
         $ucname = ucfirst($name);
         $classes = array("Smarty_Internal_Compile_{$ucname}", "Smarty_Compile_{$ucname}");
-
         foreach ($classes as $class_name) {
-            // re-use object if already exists
-            if (!isset(self::$_tag_objects[$name])) {
-                if ($this->smarty->loadPlugin($class_name)) {
-                    // use plugin if found
-                    self::$_tag_objects[$name] = new $class_name; 
-                    // compile this tag
-                    if (!$this->template->security || $this->smarty->security_handler->isTrustedCompilerTag($name, $this)) {
-                        return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
-                    } 
-                } 
-            } else {
+            if ($this->smarty->loadPlugin($class_name)) {
+                // use plugin if found
+                self::$_tag_objects[$name] = new $class_name; 
                 // compile this tag
-                if (!$this->template->security || $this->smarty->security_handler->isTrustedCompilerTag($name, $this)) {
-                    return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
-                } 
+                return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
             } 
         } 
         // no compile plugin for this tag
@@ -243,17 +241,20 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         if (false) {
             // find position in this line
             $counter = $this->lex->counter;
-            for ($i = 0; $i < $this->lex->line-1; $i++) {
+            for ($i = 0;
+                $i < $this->lex->line-1;
+                $i++) {
                 $counter -= strlen($match[$i]);
             } 
             $counter -= ($this->lex->line-1) * 2;
             echo $counter;
-            for ($i = 0; $i < $counter-1;$i++) {
+            for ($i = 0;
+                $i < $counter-1;
+                $i++) {
                 echo "&nbsp";
             } 
         } 
         echo '</p>';
-
         if (isset($args)) {
             // individual error message
             echo $args;

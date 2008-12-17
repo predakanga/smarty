@@ -23,9 +23,15 @@ class Smarty_Internal_Compile_Print_Expression extends Smarty_Internal_CompileBa
     {
         $this->compiler = $compiler; 
         $this->required_attributes = array('value');
-        $this->optional_attributes = array('assign'); 
+        $this->optional_attributes = array('assign','nocache'); 
         // check and get attributes
         $_attr = $this->_get_attributes($args);
+
+        if (isset($_attr['nocache'])) {
+            if ($_attr['nocache'] == 'true') {
+                $this->compiler->_compiler_status->tag_nocache = true;
+            } 
+        } 
 
         if (isset($_attr['assign'])) {
             // assign output to variable

@@ -76,12 +76,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="butter.png" width="51" height="10" alt="51.85%"><img src="snow.png" width="49" height="10" alt="51.85%"></td>
+                <td class="coverBarOutline"><img src="butter.png" width="62" height="10" alt="62.96%"><img src="snow.png" width="38" height="10" alt="62.96%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerMed">51.85%</td>
-          <td class="coverNumMed">14 / 27</td>
+          <td class="coverPerMed">62.96%</td>
+          <td class="coverNumMed">17 / 27</td>
         </tr>
 
         <tr>
@@ -110,12 +110,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="butter.png" width="51" height="10" alt="51.85%"><img src="snow.png" width="49" height="10" alt="51.85%"></td>
+                <td class="coverBarOutline"><img src="butter.png" width="62" height="10" alt="62.96%"><img src="snow.png" width="38" height="10" alt="62.96%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerMed">51.85%</td>
-          <td class="coverNumMed">14 / 27</td>
+          <td class="coverPerMed">62.96%</td>
+          <td class="coverNumMed">17 / 27</td>
         </tr>
 
         <tr>
@@ -198,12 +198,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="butter.png" width="57" height="10" alt="57.14%"><img src="snow.png" width="43" height="10" alt="57.14%"></td>
+                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerMed">57.14%</td>
-          <td class="coverNumMed">4 / 7</td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">7 / 7</td>
         </tr>
 
         <tr>
@@ -300,11 +300,11 @@
 <span class="lineNum" id="container57"><a name="57"></a><a href="#57" id="line57">      57</a> </span>                :     public function writeCachedContent($_template)                                                                                                     
 <span class="lineNum" id="container58"><a name="58"></a><a href="#58" id="line58">      58</a> </span>                :     {                                                                                                                                                  
 <span class="lineNum" id="container59"><a name="59"></a><a href="#59" id="line59">      59</a> </span><span class="lineCov">              6 :         if (!$_template-&gt;isEvaluated()) {                                                                                                              </span>
-<span class="lineNum" id="container60"><a name="60"></a><a href="#60" id="line60">      60</a> </span><span class="lineCov">              5 :             if (!is_object(Smarty_Internal_Template::$write_file_object)) {                                                                            </span>
-<span class="lineNum" id="container61"><a name="61"></a><a href="#61" id="line61">      61</a> </span><span class="lineNoCov">              0 :                 $this-&gt;smarty-&gt;loadPlugin(&quot;Smarty_Internal_Write_File&quot;);                                                                               </span>
-<span class="lineNum" id="container62"><a name="62"></a><a href="#62" id="line62">      62</a> </span><span class="lineNoCov">              0 :                 Smarty_Internal_Template::$write_file_object = new Smarty_Internal_Write_File;                                                         </span>
-<span class="lineNum" id="container63"><a name="63"></a><a href="#63" id="line63">      63</a> </span><span class="lineNoCov">              0 :             }                                                                                                                                          </span>
-<span class="lineNum" id="container64"><a name="64"></a><a href="#64" id="line64">      64</a> </span><span class="lineCov">              5 :             return Smarty_Internal_Template::$write_file_object-&gt;writeFile($_template-&gt;getCachedFilepath(), $_template-&gt;cached_content);               </span>
+<span class="lineNum" id="container60"><a name="60"></a><a href="#60" id="line60">      60</a> </span><span class="lineCov">              5 :             if (!is_object($_template-&gt;write_file_object)) {                                                                                           </span>
+<span class="lineNum" id="container61"><a name="61"></a><a href="#61" id="line61">      61</a> </span><span class="lineCov">              2 :                 $this-&gt;smarty-&gt;loadPlugin(&quot;Smarty_Internal_Write_File&quot;);                                                                               </span>
+<span class="lineNum" id="container62"><a name="62"></a><a href="#62" id="line62">      62</a> </span><span class="lineCov">              2 :                 $_template-&gt;write_file_object = new Smarty_Internal_Write_File;                                                                        </span>
+<span class="lineNum" id="container63"><a name="63"></a><a href="#63" id="line63">      63</a> </span><span class="lineCov">              2 :             }                                                                                                                                          </span>
+<span class="lineNum" id="container64"><a name="64"></a><a href="#64" id="line64">      64</a> </span><span class="lineCov">              5 :             return $_template-&gt;write_file_object-&gt;writeFile($_template-&gt;getCachedFilepath(), $_template-&gt;cached_content);                              </span>
 <span class="lineNum" id="container65"><a name="65"></a><a href="#65" id="line65">      65</a> </span><span class="lineDeadCode">                :         } else {                                                                                                                                       </span>
 <span class="lineNum" id="container66"><a name="66"></a><a href="#66" id="line66">      66</a> </span><span class="lineCov">              1 :             return false;                                                                                                                              </span>
 <span class="lineNum" id="container67"><a name="67"></a><a href="#67" id="line67">      67</a> </span>                :         }                                                                                                                                              
@@ -348,7 +348,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.5</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.3</a> at Sat Dec 13 11:55:56 CET 2008.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.5</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.3</a> at Thu Dec 18 0:09:57 CET 2008.</td></tr>
     </table>
 
     <br />
@@ -385,6 +385,21 @@
         "panel60": {
           "header": "5 tests cover line 60",
           "body": "<ul><li class=\"testPassed\">testIsCachedPrepare(FileResourceTests)</li><li class=\"testPassed\">testWriteCachedContent(FileResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(FileResourceTests)</li><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
+          "footer": ""
+        },
+        "panel61": {
+          "header": "2 tests cover line 61",
+          "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
+          "footer": ""
+        },
+        "panel62": {
+          "header": "2 tests cover line 62",
+          "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
+          "footer": ""
+        },
+        "panel63": {
+          "header": "2 tests cover line 63",
+          "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
           "footer": ""
         },
         "panel64": {
