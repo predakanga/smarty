@@ -18,12 +18,12 @@
     private $lex;
     private $internalError = false;
 
-    function __construct($lex) {
+    function __construct($lex, $compiler) {
         // set instance object
         self::instance($this); 
         $this->lex = $lex;
         $this->smarty = Smarty::instance(); 
-        $this->compiler = Smarty_Internal_Compiler::instance();
+        $this->compiler = $compiler;
         $this->template = $this->compiler->template; 
 				$this->nocache = false;
     }
@@ -60,6 +60,7 @@
 %fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
               NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL.
+              
 
 //
 // complete template
@@ -141,14 +142,6 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 //
 									// simple expression
 expr(res)				 ::= exprs(e).	{res = e;}
-									// expression with modifier and optional additional modifier paramter
-expr(res)        ::= exprs(e) modifier(m) modparameters(p). {if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
-																					                      if (m == 'isset' || m == 'empty' || is_callable(m)) {
-																					                        res = m . "(". e . p .")";
-																					                      } else {
-                                                                  res = "\$_smarty_tpl->smarty->modifier->".m . "(". e . p .")";
-                                                                }
-                                                               }}
 									// array
 expr(res)				 ::= array(a).	{res = a;}
 
@@ -172,6 +165,19 @@ math(res)        ::= MATH(m). {res = m;}
 //
 // value in expressions
 //
+value(res)        ::= value(e) modifier(m) modparameters(p). {if (m == 'isset' || m == 'empty' || is_callable(m)) {
+																					                       if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
+																					                           res = m . "(". e . p .")";
+																					                        }
+																					                    } else {
+																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
+                                                                      res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
+                                                                 } else {
+                                                                      $this->compiler->trigger_template_error ("unknown modifier\"" . m . "\"");
+                                                                 }
+                                                              }
+                                                            }
+
 									// variable
 value(res)		   ::= variable(v). { res = v; }
 									// numeric constant
@@ -228,7 +234,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.oc; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
-										// cahin of elements 
+										// chain of elements 
 objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
 objectelement(res)::= PTR ID(i).	    { res = '->'.i;}
@@ -243,7 +249,6 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->secur
 																					            if (f == 'isset' || f == 'empty' || is_callable(f)) {
 																					                res = f . "(". p .")";
 																					            } else {
-                                                       //   res = "\$_smarty_tpl->smarty->function->".f . "(". p .")";
                                                        $this->compiler->trigger_template_error ("unknown fuction\"" . f . "\"");
                                                       }
                                                     }}
@@ -264,6 +269,7 @@ params            ::= . { return;}
 //
 // modifier
 //  
+
 modifier(res)    ::= VERT ID(s). { res =  s;}
 // modifier parameter
 										// multiple parameter
@@ -280,9 +286,8 @@ modparameter(res) ::= COLON expr(mp). {res = ','.mp;}
 //
 										// single if expression
 ifexprs(res)			 ::= ifexpr(e).	{res = e;}
-ifexprs(res)			 ::= NOT ifexpr(e).	{res = '!'.e;}
-ifexprs(res)			 ::= OPENP ifexpr(e) CLOSEP.	{res = '('.e.')';}
-ifexprs(res)			 ::= NOT OPENP ifexpr(e) CLOSEP.	{res = '!('.e.')';}
+ifexprs(res)			 ::= NOT ifexprs(e).	{res = '!'.e;}
+ifexprs(res)			 ::= OPENP ifexprs(e) CLOSEP.	{res = '('.e.')';}
 
 // if expression
 										// simple expression

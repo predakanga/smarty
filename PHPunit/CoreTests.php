@@ -58,13 +58,6 @@ class CoreTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue($this->smarty->loadPlugin('Smarty_Internal_PluginBase'));
     } 
     /**
-    * loadPlugin test Smarty_Internal_Modifier exists
-    */
-    public function testLoadPluginSmartyInternalModifier()
-    {
-        $this->assertTrue($this->smarty->loadPlugin('Smarty_Internal_Modifier'));
-    } 
-    /**
     * loadPlugin test Smarty_Internal_Plugin_Handler exists
     */
     public function testLoadPluginSmartyInternalPluginHandler()

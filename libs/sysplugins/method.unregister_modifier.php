@@ -24,7 +24,9 @@ class Smarty_Method_Unregister_Modifier extends Smarty_Internal_Base {
     */
     public function execute($modifier)
     {
-        unset($this->smarty->plugins['modifier'][$modifier]);
+        if (isset($this->smarty->registered_plugins[$modifier]) && $this->smarty->registered_plugins[$modifier][0] == 'modifier') {
+            unset($this->smarty->registered_plugins[$modifier]);
+        } 
     } 
 } 
 

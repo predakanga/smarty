@@ -98,7 +98,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Compiler.html#method__call">Smarty_Internal_Compiler::__call()</a> in internal.compiler.php</div>
-							<div class="index-item-description">lazy loads compile plugin for tag and calls the compile methode</div>
+							<div class="index-item-description">lazy loads internal compile plugin for tag and calls the compile methode</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
@@ -150,14 +150,7 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/PluginsInternal/Smarty_Internal_Plugin_Handler.html#method__call">Smarty_Internal_Plugin_Handler::__call()</a> in internal.plugin_handler.php</div>
-							<div class="index-item-description">Takes unknown class methods and lazy loads plugin files for them  class name format: Smarty_Block_FuncName  plugin filename format: block.funcname.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">__call</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/PluginsInternal/Smarty_Internal_Modifier.html#method__call">Smarty_Internal_Modifier::__call()</a> in internal.modifier.php</div>
-							<div class="index-item-description">Takes unknown class method and lazy loads plugin files for them  class name format: Smarty_Modifier_ModName  plugin filename format: modifier.modname.php</div>
+							<div class="index-item-description">Call a Smarty plugin</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">__construct</span>
@@ -1387,12 +1380,6 @@
 			<div class="index-item-details"><a href="Smarty/PluginsInternal/_libs---sysplugins---internal.base.php.html">internal.base.php</a> in internal.base.php</div>
 					</dd>
 			<dt class="field">
-						<span class="include-title">internal.modifier.php</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/PluginsInternal/_libs---sysplugins---internal.modifier.php.html">internal.modifier.php</a> in internal.modifier.php</div>
-					</dd>
-			<dt class="field">
 						<span class="include-title">internal.pluginbase.php</span>
 					</dt>
 		<dd class="index-item-body">
@@ -1541,6 +1528,13 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templatelexer.html#var$line">Smarty_Internal_Templatelexer::$line</a> in internal.templatelexer.php</div>
+					</dd>
+			<dt class="field">
+						<span class="method-title">loadSmartyPlugin</span>
+					</dt>
+		<dd class="index-item-body">
+			<div class="index-item-details"><a href="Smarty/PluginsInternal/Smarty_Internal_Plugin_Handler.html#methodloadSmartyPlugin">Smarty_Internal_Plugin_Handler::loadSmartyPlugin()</a> in internal.plugin_handler.php</div>
+							<div class="index-item-description">Lazy loads plugin files  class name format: Smarty_PluginType_FuncName  plugin filename format: plugintype.funcname.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$left_delimiter</span>
@@ -1749,12 +1743,6 @@
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/SmartyMethod/_libs---sysplugins---method.unregister_resource.php.html">method.unregister_resource.php</a> in method.unregister_resource.php</div>
-					</dd>
-			<dt class="field">
-						<span class="var-title">$modifier</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Templates/Smarty.html#var$modifier">Smarty::$modifier</a> in Smarty.class.php</div>
 					</dd>
 			<dt class="field">
 						<span class="var-title">$mustCompile</span>
@@ -2340,13 +2328,6 @@
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/PluginsInternal/Smarty_Internal_Base.html">Smarty_Internal_Base</a> in internal.base.php</div>
 							<div class="index-item-description">Smarty Internal Base Class</div>
-					</dd>
-			<dt class="field">
-						Smarty_Internal_Modifier
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/PluginsInternal/Smarty_Internal_Modifier.html">Smarty_Internal_Modifier</a> in internal.modifier.php</div>
-							<div class="index-item-description">This class lazy loads plugin files for modifer and executes them.</div>
 					</dd>
 			<dt class="field">
 						Smarty_Internal_PluginBase
@@ -3802,10 +3783,10 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r22">Smarty_Internal_Templateparser::yy_r22()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r24</span>
+						<span class="method-title">yy_r26</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r24">Smarty_Internal_Templateparser::yy_r24()</a> in internal.templateparser.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r26">Smarty_Internal_Templateparser::yy_r26()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r27</span>
@@ -3820,10 +3801,10 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r28">Smarty_Internal_Templateparser::yy_r28()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r29</span>
+						<span class="method-title">yy_r31</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r29">Smarty_Internal_Templateparser::yy_r29()</a> in internal.templateparser.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r31">Smarty_Internal_Templateparser::yy_r31()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r37</span>
@@ -3976,10 +3957,10 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r71">Smarty_Internal_Templateparser::yy_r71()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r72</span>
+						<span class="method-title">yy_r73</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r72">Smarty_Internal_Templateparser::yy_r72()</a> in internal.templateparser.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r73">Smarty_Internal_Templateparser::yy_r73()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r74</span>
@@ -4036,34 +4017,28 @@
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r82">Smarty_Internal_Templateparser::yy_r82()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r83</span>
+						<span class="method-title">yy_r84</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r83">Smarty_Internal_Templateparser::yy_r83()</a> in internal.templateparser.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r84">Smarty_Internal_Templateparser::yy_r84()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r85</span>
+						<span class="method-title">yy_r86</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r85">Smarty_Internal_Templateparser::yy_r85()</a> in internal.templateparser.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r86">Smarty_Internal_Templateparser::yy_r86()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
-						<span class="method-title">yy_r87</span>
+						<span class="method-title">yy_r91</span>
 					</dt>
 		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r87">Smarty_Internal_Templateparser::yy_r87()</a> in internal.templateparser.php</div>
+			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r91">Smarty_Internal_Templateparser::yy_r91()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_r92</span>
 					</dt>
 		<dd class="index-item-body">
 			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r92">Smarty_Internal_Templateparser::yy_r92()</a> in internal.templateparser.php</div>
-					</dd>
-			<dt class="field">
-						<span class="method-title">yy_r93</span>
-					</dt>
-		<dd class="index-item-body">
-			<div class="index-item-details"><a href="Smarty/Compiler/Smarty_Internal_Templateparser.html#methodyy_r93">Smarty_Internal_Templateparser::yy_r93()</a> in internal.templateparser.php</div>
 					</dd>
 			<dt class="field">
 						<span class="method-title">yy_reduce</span>

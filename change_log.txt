@@ -1,5 +1,13 @@
-12/17/2008
+12/23/2008
+- fixed problem of not working "not" operator in if-expressions
+- added handling of compiler function plugins
+- finished work on (un)register_compiler_function methode
+- finished work on (un)register_modifier methode
+- plugin handling from plugins folder changed for modifier plugins
+  deleted - internal.modifier.php
+- added modifier chaining to parser 
 
+12/17/2008
 - finished (un)register_function methode
 - finished (un)register_block methode
 - added security checking for PHP functions in PHP templates

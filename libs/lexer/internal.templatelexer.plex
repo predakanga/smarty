@@ -132,7 +132,7 @@ greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
 in = /\s+(IN|in)\s+/
-not = /\s*\!|\s+(NOT|not)\s+/
+not = /!|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
 lor = /\s*\|\|\s*|\s+(OR|or)\s+/
 other = /./

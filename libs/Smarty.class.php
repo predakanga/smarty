@@ -101,8 +101,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $parent = null; 
     // system plugins directory
     private $sysplugins_dir = null; 
-    // modifier object
-    public $modifier = null; 
     // resource type used if none given
     public $default_resource_type = 'file'; 
     // caching type
@@ -154,9 +152,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->loadPlugin('Smarty_Internal_Base');
         $this->loadPlugin('Smarty_Internal_PluginBase');
         $this->loadPlugin($this->template_class); 
-        // setup function , modifier block objects
-        $this->loadPlugin('Smarty_Internal_Modifier');
-        $this->modifier = new Smarty_Internal_Modifier;
         $this->loadPlugin('Smarty_Internal_Plugin_Handler');
         $this->plugin_handler = new Smarty_Internal_Plugin_Handler;
         if (!$this->debugging && $this->debugging_ctrl == 'URL')

@@ -111,7 +111,11 @@ class PHP_Variable_Object {
             $args = array_merge(array($this->value), $args);
         } 
         // call modifier and save result
-        $this->_tmp = call_user_func_array(array($_smarty->modifier, $name), $args); 
+        if (is_callable($name)) {
+            $this->_tmp = call_user_func_array($name, $args);
+        } else {
+            $this->_tmp = call_user_func_array(array($_smarty->plugin_handler, $name), array($args, 'modifier'));
+        } 
         // return variable object for methode chaining
         return $this;
     } 

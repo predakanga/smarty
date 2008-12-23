@@ -37,7 +37,7 @@ class Smarty_Internal_Compile_Function_Plugin extends Smarty_Internal_CompileBas
         } 
         $_params = 'array(' . implode(",", $_paramsArray) . ')'; 
         // compile code
-        $output = '<?php echo $_smarty_tpl->smarty->plugin_handler->' . $tag . '(' . $_params . ',$_smarty_tpl->smarty);?>';
+        $output = '<?php echo $_smarty_tpl->smarty->plugin_handler->' . $tag . '(array(' . $_params . ',$_smarty_tpl->smarty),\'function\');?>';
 
         return $output;
     } 

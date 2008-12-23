@@ -290,8 +290,8 @@ class ParseyyStackEntry
         if ($tokenType === 0) {
             return 'End of Input';
         }
-        if ($tokenType > 0 && $tokenType < count(self::$yyTokenName)) {
-            return self::$yyTokenName[$tokenType];
+        if ($tokenType > 0 && $tokenType < count($this->yyTokenName)) {
+            return $this->yyTokenName[$tokenType];
         } else {
             return "Unknown";
         }
@@ -339,7 +339,7 @@ class ParseyyStackEntry
         $yytos = array_pop($this->yystack);
         if (self::$yyTraceFILE && $this->yyidx >= 0) {
             fwrite(self::$yyTraceFILE,
-                self::$yyTracePrompt . 'Popping ' . self::$yyTokenName[$yytos->major] .
+                self::$yyTracePrompt . 'Popping ' . $this->yyTokenName[$yytos->major] .
                     "\n");
         }
         $yymajor = $yytos->major;
@@ -546,8 +546,8 @@ class ParseyyStackEntry
                    && ($iFallback = self::$yyFallback[$iLookAhead]) != 0) {
                 if (self::$yyTraceFILE) {
                     fwrite(self::$yyTraceFILE, self::$yyTracePrompt . "FALLBACK " .
-                        self::$yyTokenName[$iLookAhead] . " => " .
-                        self::$yyTokenName[$iFallback] . "\n");
+                        $this->yyTokenName[$iLookAhead] . " => " .
+                        $this->yyTokenName[$iFallback] . "\n");
                 }
                 return $this->yy_find_shift_action($iFallback);
             }
@@ -623,7 +623,7 @@ class ParseyyStackEntry
             fprintf(self::$yyTraceFILE, "%sStack:", self::$yyTracePrompt);
             for($i = 1; $i <= $this->yyidx; $i++) {
                 fprintf(self::$yyTraceFILE, " %s",
-                    self::$yyTokenName[$this->yystack[$i]->major]);
+                    $this->yyTokenName[$this->yystack[$i]->major]);
             }
             fwrite(self::$yyTraceFILE,"\n");
         }
@@ -826,7 +826,7 @@ class ParseyyStackEntry
         
         if (self::$yyTraceFILE) {
             fprintf(self::$yyTraceFILE, "%sInput %s\n",
-                self::$yyTracePrompt, self::$yyTokenName[$yymajor]);
+                self::$yyTracePrompt, $this->yyTokenName[$yymajor]);
         }
         
         do {
@@ -878,7 +878,7 @@ class ParseyyStackEntry
                     if ($yymx == self::YYERRORSYMBOL || $yyerrorhit ){
                         if (self::$yyTraceFILE) {
                             fprintf(self::$yyTraceFILE, "%sDiscard input token %s\n",
-                                self::$yyTracePrompt, self::$yyTokenName[$yymajor]);
+                                self::$yyTracePrompt, $this->yyTokenName[$yymajor]);
                         }
                         $this->yy_destructor($yymajor, $yytokenvalue);
                         $yymajor = self::YYNOCODE;

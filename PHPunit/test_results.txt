@@ -1,33 +1,12 @@
 PHPUnit 3.3.5 by Sebastian Bergmann.
 
-............................................................  60 / 266
-............................................................ 120 / 266
-.......hello F.................................<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if !(1<2)}yes{else}no{/if}<br></p>Unexpected " !", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E<br>Syntax Error on line 1 in template "string"<p style="font-family:courier">{if not (true)}yes{else}no{/if}<br></p>Unexpected " not ", expected one of: "}" , " "<br><br>Syntax Error on line 0 in template "string"<p style="font-family:courier"><br></p>unexpected closing tag<br>E................. 180 / 266
-............................................................ 240 / 266
-..........................
+............................................................  60 / 276
+............................................................ 120 / 276
+......hello F..................................................... 180 / 276
+............................................................ 240 / 276
+....................................
 
-Time: 01:21
-
-There were 2 errors:
-
-1) testIfNot1(CompileIfTests)
-SmartyException: Error compiling template string
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:269
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:391
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:361
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\Smarty.class.php:227
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileIfTests.php:68
-
-2) testIfNot2(CompileIfTests)
-SmartyException: Error compiling template string
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:269
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:391
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\sysplugins\internal.template.php:361
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\libs\Smarty.class.php:227
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileIfTests.php:73
-
---
-
+Time: 01:22
 
 There was 1 failure:
 
@@ -40,6 +19,6 @@ got string      <world this is my >
 C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileCaptureTests.php:63
 
 FAILURES!
-Tests: 266, Assertions: 289, Failures: 1, Errors: 2.
+Tests: 276, Assertions: 302, Failures: 1.
 
 Generating code coverage report, this may take a moment.

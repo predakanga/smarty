@@ -96,10 +96,11 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } 
         // init the lexer/parser to compile the template
         $lex = new Smarty_Internal_Templatelexer($_content);
-        $parser = new Smarty_Internal_Templateparser($lex); 
+        $parser = new Smarty_Internal_Templateparser($lex, $this);
+            //  $parser->PrintTrace(); 
         // get tokens from lexer and parse them
         while ($lex->yylex()) {
-            // echo "<br>Parsing  {$lex->token} Token {$lex->value} \n";
+            // echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} \n";
             $parser->doParse($lex->token, $lex->value);
         } 
         // finish parsing process
@@ -122,8 +123,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *                           This is a call back from the lexer/parser
-    *                           It executes the required compile plugin for the Smarty tag
+    *                                This is a call back from the lexer/parser
+    *                                It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -149,30 +150,22 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             // tag did not produce compiled code
             return '';
         } else {
-            // not an internal compiler tag, check if tag is registered
-            if (!isset($this->smarty->registered_plugins[$tag]) ||
-                    (substr_compare($tag, 'close', -5, 5) == 0 &&
-                        isset($this->smarty->registered_plugins[substr($tag, 0, -5)]) && $this->smarty->registered_plugins[substr($tag, 0, -5)][0] != 'block')) {
-                // try to load plugin
-                foreach ($this->smarty->plugin_search_order as $plugin_type) {
-                    $plugin = 'smarty_' . $plugin_type . '_' . $tag;
-                    if ($this->smarty->loadPlugin($plugin)) {
-                        if (class_exists($plugin, false)) {
-                            $plugin = array($plugin, 'execute');
-                        } 
-                        if (is_callable($plugin)) {
-                            $this->smarty->registered_plugins[$tag] = array($plugin_type, $plugin, false);
-                            break;
-                        } else {
-                            throw new SmartyException("Plugin \"{$tag}\" not callable");
-                        } 
-                    } 
+            // not an internal compiler tag, check if tag is registered or is Smarty plugin
+            $this->smarty->plugin_handler->loadSmartyPlugin($tag, $this->smarty->plugin_search_order);
+            if (isset($this->smarty->registered_plugins[$tag])) {
+                // check no cache
+                if (!$this->smarty->registered_plugins[$tag][2]) {
+                    $this->_compiler_status->tag_nocache = true;
                 } 
+                // if compiler function plugin call it now
+                if ($this->smarty->registered_plugins[$tag][0] == 'compiler') {
+                    return call_user_func_array($this->smarty->registered_plugins[$tag][1], array($args, $this));
+                } 
+                // compile function or block plugin
+                $plugin_type = $this->smarty->registered_plugins[$tag][0] . '_plugin';
+                return $this->$plugin_type($args, $tag, $this);
             } 
-            if ($this->smarty->registered_plugins[$tag]) {
-                $compile = $this->smarty->registered_plugins[$tag][0] . '_plugin';
-                return $this->$compile($args, $tag, $this);
-            } 
+            // compile closing tag of block plugin
             if (substr_compare($tag, 'close', -5, 5) == 0 &&
                     isset($this->smarty->registered_plugins[substr($tag, 0, -5)]) && $this->smarty->registered_plugins[substr($tag, 0, -5)][0] == 'block') {
                 return $this->block_plugin($args, $tag, $this);
@@ -183,11 +176,11 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     } 
 
     /**
-    * lazy loads compile plugin for tag and calls the compile methode
+    * lazy loads internal compile plugin for tag and calls the compile methode
     * 
     * compile objects cached for reuse.
-    * class name format:  Smarty_Compile_TagName or Smarty_Internal_Compile_TagName
-    * plugin filename format: compile.tagname.php  or internal.compile_tagname.php
+    * class name format:  Smarty_Internal_Compile_TagName
+    * plugin filename format: internal.compile_tagname.php
     * 
     * @param  $tag string tag name
     * @param  $args array with tag attributes
@@ -200,18 +193,15 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             // compile this tag
             return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
         } 
-        // build class names to search for
-        $ucname = ucfirst($name);
-        $classes = array("Smarty_Internal_Compile_{$ucname}", "Smarty_Compile_{$ucname}");
-        foreach ($classes as $class_name) {
-            if ($this->smarty->loadPlugin($class_name)) {
-                // use plugin if found
-                self::$_tag_objects[$name] = new $class_name; 
-                // compile this tag
-                return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
-            } 
+        // lazy load internal compiler plugin
+        $class_name = "Smarty_Internal_Compile_{$name}";
+        if ($this->smarty->loadPlugin($class_name)) {
+            // use plugin if found
+            self::$_tag_objects[$name] = new $class_name; 
+            // compile this tag
+            return call_user_func_array(array(self::$_tag_objects[$name], 'compile'), $args);
         } 
-        // no compile plugin for this tag
+        // no internal compile plugin for this tag
         return false;
     } 
 

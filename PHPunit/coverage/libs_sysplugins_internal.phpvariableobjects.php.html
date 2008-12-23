@@ -76,12 +76,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="scarlet_red.png" width="27" height="10" alt="27.66%"><img src="snow.png" width="73" height="10" alt="27.66%"></td>
+                <td class="coverBarOutline"><img src="scarlet_red.png" width="26" height="10" alt="26.00%"><img src="snow.png" width="74" height="10" alt="26.00%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerLo">27.66%</td>
-          <td class="coverNumLo">13 / 47</td>
+          <td class="coverPerLo">26.00%</td>
+          <td class="coverNumLo">13 / 50</td>
         </tr>
 
         <tr>
@@ -163,12 +163,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="scarlet_red.png" width="22" height="10" alt="22.22%"><img src="snow.png" width="78" height="10" alt="22.22%"></td>
+                <td class="coverBarOutline"><img src="scarlet_red.png" width="20" height="10" alt="20.00%"><img src="snow.png" width="80" height="10" alt="20.00%"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerLo">22.22%</td>
-          <td class="coverNumLo">6 / 27</td>
+          <td class="coverPerLo">20.00%</td>
+          <td class="coverNumLo">6 / 30</td>
         </tr>
 
         <tr>
@@ -235,11 +235,11 @@
             </table>
           </td>
           <td class="coverPerLo">0.00%</td>
-          <td class="coverNumLo">0 / 16</td>
+          <td class="coverNumLo">0 / 19</td>
         </tr>
 
         <tr>
-          <td class="coverItem"><b><a href="#123">PHP_Function_Handler</a></b></td>
+          <td class="coverItem"><b><a href="#127">PHP_Function_Handler</a></b></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -270,7 +270,7 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#127">public function __construct($tpl)</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#131">public function __construct($tpl)</a></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -292,7 +292,7 @@
         </tr>
 
         <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#139">public function __call($name, $args)</a></td>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#143">public function __call($name, $args)</a></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -439,48 +439,52 @@
 <span class="lineNum" id="container111"><a name="111"></a><a href="#111" id="line111">     111</a> </span><span class="lineNoCov">              0 :             $args = array_merge(array($this-&gt;value), $args);                                                                                                           </span>
 <span class="lineNum" id="container112"><a name="112"></a><a href="#112" id="line112">     112</a> </span>                :         }                                                                                                                                                              
 <span class="lineNum" id="container113"><a name="113"></a><a href="#113" id="line113">     113</a> </span>                :         // call modifier and save result                                                                                                                               
-<span class="lineNum" id="container114"><a name="114"></a><a href="#114" id="line114">     114</a> </span><span class="lineNoCov">              0 :         $this-&gt;_tmp = call_user_func_array(array($_smarty-&gt;modifier, $name), $args);                                                                                   </span>
-<span class="lineNum" id="container115"><a name="115"></a><a href="#115" id="line115">     115</a> </span>                :         // return variable object for methode chaining                                                                                                                 
-<span class="lineNum" id="container116"><a name="116"></a><a href="#116" id="line116">     116</a> </span><span class="lineNoCov">              0 :         return $this;                                                                                                                                                  </span>
-<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineDeadCode">                :     }                                                                                                                                                                  </span>
-<span class="lineNum" id="container118"><a name="118"></a><a href="#118" id="line118">     118</a> </span>                : }                                                                                                                                                                      
-<span class="lineNum" id="container119"><a name="119"></a><a href="#119" id="line119">     119</a> </span>                :                                                                                                                                                                        
-<span class="lineNum" id="container120"><a name="120"></a><a href="#120" id="line120">     120</a> </span>                : /**                                                                                                                                                                    
-<span class="lineNum" id="container121"><a name="121"></a><a href="#121" id="line121">     121</a> </span>                : * class for PHP function handling                                                                                                                                      
-<span class="lineNum" id="container122"><a name="122"></a><a href="#122" id="line122">     122</a> </span>                : */                                                                                                                                                                     
-<span class="lineNum" id="container123"><a name="123"></a><a href="#123" id="line123">     123</a> </span><span class="lineCov">              1 : class PHP_Function_Handler {                                                                                                                                           </span>
-<span class="lineNum" id="container124"><a name="124"></a><a href="#124" id="line124">     124</a> </span>                :     // template object                                                                                                                                                 
-<span class="lineNum" id="container125"><a name="125"></a><a href="#125" id="line125">     125</a> </span>                :     public $template = null;                                                                                                                                           
-<span class="lineNum" id="container126"><a name="126"></a><a href="#126" id="line126">     126</a> </span>                :                                                                                                                                                                        
-<span class="lineNum" id="container127"><a name="127"></a><a href="#127" id="line127">     127</a> </span>                :     public function __construct($tpl)                                                                                                                                  
-<span class="lineNum" id="container128"><a name="128"></a><a href="#128" id="line128">     128</a> </span>                :     {                                                                                                                                                                  
-<span class="lineNum" id="container129"><a name="129"></a><a href="#129" id="line129">     129</a> </span><span class="lineCov">              3 :         $this-&gt;smarty = Smarty::instance();                                                                                                                            </span>
-<span class="lineNum" id="container130"><a name="130"></a><a href="#130" id="line130">     130</a> </span><span class="lineCov">              3 :         $this-&gt;template = $tpl;                                                                                                                                        </span>
-<span class="lineNum" id="container131"><a name="131"></a><a href="#131" id="line131">     131</a> </span><span class="lineCov">              3 :     }                                                                                                                                                                  </span>
-<span class="lineNum" id="container132"><a name="132"></a><a href="#132" id="line132">     132</a> </span>                :     /**                                                                                                                                                                
-<span class="lineNum" id="container133"><a name="133"></a><a href="#133" id="line133">     133</a> </span>                :     * calls PHP function from PHP template                                                                                                                             
-<span class="lineNum" id="container134"><a name="134"></a><a href="#134" id="line134">     134</a> </span>                :     *                                                                                                                                                                  
-<span class="lineNum" id="container135"><a name="135"></a><a href="#135" id="line135">     135</a> </span>                :     * @param string $name function name                                                                                                                                
-<span class="lineNum" id="container136"><a name="136"></a><a href="#136" id="line136">     136</a> </span>                :     * @param array $args function arguments                                                                                                                            
-<span class="lineNum" id="container137"><a name="137"></a><a href="#137" id="line137">     137</a> </span>                :     * @return unkown function result                                                                                                                                   
-<span class="lineNum" id="container138"><a name="138"></a><a href="#138" id="line138">     138</a> </span>                :     */                                                                                                                                                                 
-<span class="lineNum" id="container139"><a name="139"></a><a href="#139" id="line139">     139</a> </span>                :     public function __call($name, $args)                                                                                                                               
-<span class="lineNum" id="container140"><a name="140"></a><a href="#140" id="line140">     140</a> </span>                :     {                                                                                                                                                                  
-<span class="lineNum" id="container141"><a name="141"></a><a href="#141" id="line141">     141</a> </span><span class="lineNoCov">              0 :         if (function_exists($name)) {                                                                                                                                  </span>
-<span class="lineNum" id="container142"><a name="142"></a><a href="#142" id="line142">     142</a> </span>                :             // test security                                                                                                                                           
-<span class="lineNum" id="container143"><a name="143"></a><a href="#143" id="line143">     143</a> </span><span class="lineNoCov">              0 :             if (!$this-&gt;template-&gt;security || empty($this-&gt;smarty-&gt;security_policy-&gt;php_functions) || in_array($name, $this-&gt;smarty-&gt;security_policy-&gt;php_functions)) {</span>
-<span class="lineNum" id="container144"><a name="144"></a><a href="#144" id="line144">     144</a> </span>                :                 // use PHP function if found                                                                                                                           
-<span class="lineNum" id="container145"><a name="145"></a><a href="#145" id="line145">     145</a> </span><span class="lineNoCov">              0 :                 return call_user_func_array($name, $args);                                                                                                             </span>
-<span class="lineNum" id="container146"><a name="146"></a><a href="#146" id="line146">     146</a> </span><span class="lineDeadCode">                :             } else {                                                                                                                                                   </span>
-<span class="lineNum" id="container147"><a name="147"></a><a href="#147" id="line147">     147</a> </span><span class="lineNoCov">              0 :                 throw new SmartyException (&quot;PHP function \&quot;&quot; . $name . &quot;\&quot; not allowed by security setting&quot;);                                                          </span>
-<span class="lineNum" id="container148"><a name="148"></a><a href="#148" id="line148">     148</a> </span>                :             }                                                                                                                                                          
-<span class="lineNum" id="container149"><a name="149"></a><a href="#149" id="line149">     149</a> </span><span class="lineDeadCode">                :         }                                                                                                                                                              </span>
-<span class="lineNum" id="container150"><a name="150"></a><a href="#150" id="line150">     150</a> </span>                :         // nothing found, throw exception                                                                                                                              
-<span class="lineNum" id="container151"><a name="151"></a><a href="#151" id="line151">     151</a> </span><span class="lineNoCov">              0 :         throw new SmartyException(&quot;Unkown function {$name}&quot;);                                                                                                          </span>
-<span class="lineNum" id="container152"><a name="152"></a><a href="#152" id="line152">     152</a> </span><span class="lineDeadCode">                :     }                                                                                                                                                                  </span>
-<span class="lineNum" id="container153"><a name="153"></a><a href="#153" id="line153">     153</a> </span>                : }                                                                                                                                                                      
-<span class="lineNum" id="container154"><a name="154"></a><a href="#154" id="line154">     154</a> </span>                :                                                                                                                                                                        
-<span class="lineNum" id="container155"><a name="155"></a><a href="#155" id="line155">     155</a> </span>                : ?&gt;                                                                                                                                                                     
+<span class="lineNum" id="container114"><a name="114"></a><a href="#114" id="line114">     114</a> </span><span class="lineNoCov">              0 :         if (is_callable($name)) {                                                                                                                                      </span>
+<span class="lineNum" id="container115"><a name="115"></a><a href="#115" id="line115">     115</a> </span><span class="lineNoCov">              0 :             $this-&gt;_tmp = call_user_func_array($name, $args);                                                                                                          </span>
+<span class="lineNum" id="container116"><a name="116"></a><a href="#116" id="line116">     116</a> </span><span class="lineNoCov">              0 :         } else {                                                                                                                                                       </span>
+<span class="lineNum" id="container117"><a name="117"></a><a href="#117" id="line117">     117</a> </span><span class="lineNoCov">              0 :             $this-&gt;_tmp = call_user_func_array(array($_smarty-&gt;plugin_handler, $name), array($args, 'modifier'));                                                      </span>
+<span class="lineNum" id="container118"><a name="118"></a><a href="#118" id="line118">     118</a> </span>                :         }                                                                                                                                                              
+<span class="lineNum" id="container119"><a name="119"></a><a href="#119" id="line119">     119</a> </span>                :         // return variable object for methode chaining                                                                                                                 
+<span class="lineNum" id="container120"><a name="120"></a><a href="#120" id="line120">     120</a> </span><span class="lineNoCov">              0 :         return $this;                                                                                                                                                  </span>
+<span class="lineNum" id="container121"><a name="121"></a><a href="#121" id="line121">     121</a> </span><span class="lineDeadCode">                :     }                                                                                                                                                                  </span>
+<span class="lineNum" id="container122"><a name="122"></a><a href="#122" id="line122">     122</a> </span>                : }                                                                                                                                                                      
+<span class="lineNum" id="container123"><a name="123"></a><a href="#123" id="line123">     123</a> </span>                :                                                                                                                                                                        
+<span class="lineNum" id="container124"><a name="124"></a><a href="#124" id="line124">     124</a> </span>                : /**                                                                                                                                                                    
+<span class="lineNum" id="container125"><a name="125"></a><a href="#125" id="line125">     125</a> </span>                : * class for PHP function handling                                                                                                                                      
+<span class="lineNum" id="container126"><a name="126"></a><a href="#126" id="line126">     126</a> </span>                : */                                                                                                                                                                     
+<span class="lineNum" id="container127"><a name="127"></a><a href="#127" id="line127">     127</a> </span><span class="lineCov">              1 : class PHP_Function_Handler {                                                                                                                                           </span>
+<span class="lineNum" id="container128"><a name="128"></a><a href="#128" id="line128">     128</a> </span>                :     // template object                                                                                                                                                 
+<span class="lineNum" id="container129"><a name="129"></a><a href="#129" id="line129">     129</a> </span>                :     public $template = null;                                                                                                                                           
+<span class="lineNum" id="container130"><a name="130"></a><a href="#130" id="line130">     130</a> </span>                :                                                                                                                                                                        
+<span class="lineNum" id="container131"><a name="131"></a><a href="#131" id="line131">     131</a> </span>                :     public function __construct($tpl)                                                                                                                                  
+<span class="lineNum" id="container132"><a name="132"></a><a href="#132" id="line132">     132</a> </span>                :     {                                                                                                                                                                  
+<span class="lineNum" id="container133"><a name="133"></a><a href="#133" id="line133">     133</a> </span><span class="lineCov">              3 :         $this-&gt;smarty = Smarty::instance();                                                                                                                            </span>
+<span class="lineNum" id="container134"><a name="134"></a><a href="#134" id="line134">     134</a> </span><span class="lineCov">              3 :         $this-&gt;template = $tpl;                                                                                                                                        </span>
+<span class="lineNum" id="container135"><a name="135"></a><a href="#135" id="line135">     135</a> </span><span class="lineCov">              3 :     }                                                                                                                                                                  </span>
+<span class="lineNum" id="container136"><a name="136"></a><a href="#136" id="line136">     136</a> </span>                :     /**                                                                                                                                                                
+<span class="lineNum" id="container137"><a name="137"></a><a href="#137" id="line137">     137</a> </span>                :     * calls PHP function from PHP template                                                                                                                             
+<span class="lineNum" id="container138"><a name="138"></a><a href="#138" id="line138">     138</a> </span>                :     *                                                                                                                                                                  
+<span class="lineNum" id="container139"><a name="139"></a><a href="#139" id="line139">     139</a> </span>                :     * @param string $name function name                                                                                                                                
+<span class="lineNum" id="container140"><a name="140"></a><a href="#140" id="line140">     140</a> </span>                :     * @param array $args function arguments                                                                                                                            
+<span class="lineNum" id="container141"><a name="141"></a><a href="#141" id="line141">     141</a> </span>                :     * @return unkown function result                                                                                                                                   
+<span class="lineNum" id="container142"><a name="142"></a><a href="#142" id="line142">     142</a> </span>                :     */                                                                                                                                                                 
+<span class="lineNum" id="container143"><a name="143"></a><a href="#143" id="line143">     143</a> </span>                :     public function __call($name, $args)                                                                                                                               
+<span class="lineNum" id="container144"><a name="144"></a><a href="#144" id="line144">     144</a> </span>                :     {                                                                                                                                                                  
+<span class="lineNum" id="container145"><a name="145"></a><a href="#145" id="line145">     145</a> </span><span class="lineNoCov">              0 :         if (function_exists($name)) {                                                                                                                                  </span>
+<span class="lineNum" id="container146"><a name="146"></a><a href="#146" id="line146">     146</a> </span>                :             // test security                                                                                                                                           
+<span class="lineNum" id="container147"><a name="147"></a><a href="#147" id="line147">     147</a> </span><span class="lineNoCov">              0 :             if (!$this-&gt;template-&gt;security || empty($this-&gt;smarty-&gt;security_policy-&gt;php_functions) || in_array($name, $this-&gt;smarty-&gt;security_policy-&gt;php_functions)) {</span>
+<span class="lineNum" id="container148"><a name="148"></a><a href="#148" id="line148">     148</a> </span>                :                 // use PHP function if found                                                                                                                           
+<span class="lineNum" id="container149"><a name="149"></a><a href="#149" id="line149">     149</a> </span><span class="lineNoCov">              0 :                 return call_user_func_array($name, $args);                                                                                                             </span>
+<span class="lineNum" id="container150"><a name="150"></a><a href="#150" id="line150">     150</a> </span><span class="lineDeadCode">                :             } else {                                                                                                                                                   </span>
+<span class="lineNum" id="container151"><a name="151"></a><a href="#151" id="line151">     151</a> </span><span class="lineNoCov">              0 :                 throw new SmartyException (&quot;PHP function \&quot;&quot; . $name . &quot;\&quot; not allowed by security setting&quot;);                                                          </span>
+<span class="lineNum" id="container152"><a name="152"></a><a href="#152" id="line152">     152</a> </span>                :             }                                                                                                                                                          
+<span class="lineNum" id="container153"><a name="153"></a><a href="#153" id="line153">     153</a> </span><span class="lineDeadCode">                :         }                                                                                                                                                              </span>
+<span class="lineNum" id="container154"><a name="154"></a><a href="#154" id="line154">     154</a> </span>                :         // nothing found, throw exception                                                                                                                              
+<span class="lineNum" id="container155"><a name="155"></a><a href="#155" id="line155">     155</a> </span><span class="lineNoCov">              0 :         throw new SmartyException(&quot;Unkown function {$name}&quot;);                                                                                                          </span>
+<span class="lineNum" id="container156"><a name="156"></a><a href="#156" id="line156">     156</a> </span><span class="lineDeadCode">                :     }                                                                                                                                                                  </span>
+<span class="lineNum" id="container157"><a name="157"></a><a href="#157" id="line157">     157</a> </span>                : }                                                                                                                                                                      
+<span class="lineNum" id="container158"><a name="158"></a><a href="#158" id="line158">     158</a> </span>                :                                                                                                                                                                        
+<span class="lineNum" id="container159"><a name="159"></a><a href="#159" id="line159">     159</a> </span>                : ?&gt;                                                                                                                                                                     
 
 </pre>
         </td>
@@ -489,7 +493,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.5</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.3</a> at Thu Dec 18 0:09:57 CET 2008.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.5</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.3</a> at Tue Dec 23 15:30:39 CET 2008.</td></tr>
     </table>
 
     <br />
@@ -543,23 +547,23 @@
           "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testGetRenderedTemplate(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
           "footer": ""
         },
-        "panel123": {
-          "header": "1 test covers line 123",
+        "panel127": {
+          "header": "1 test covers line 127",
           "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li></ul>",
           "footer": ""
         },
-        "panel129": {
-          "header": "3 tests cover line 129",
+        "panel133": {
+          "header": "3 tests cover line 133",
           "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testGetRenderedTemplate(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
           "footer": ""
         },
-        "panel130": {
-          "header": "3 tests cover line 130",
+        "panel134": {
+          "header": "3 tests cover line 134",
           "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testGetRenderedTemplate(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
           "footer": ""
         },
-        "panel131": {
-          "header": "3 tests cover line 131",
+        "panel135": {
+          "header": "3 tests cover line 135",
           "body": "<ul><li class=\"testPassed\">testWriteCachedContent(PhpResourceTests)</li><li class=\"testPassed\">testGetRenderedTemplate(PhpResourceTests)</li><li class=\"testPassed\">testSmartyIsCachedPrepare(PhpResourceTests)</li></ul>",
           "footer": ""
         },
