@@ -57,9 +57,9 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELS LDELSLASH RDELS RDEL NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
+%fallback     OTHER LDELS LDELSLASH RDELS RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
-              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL.
+              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL BACKTICK.
               
 
 //
@@ -103,8 +103,26 @@ smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->c
 smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s);}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
+									// registered object tag
+smartytag(res)   ::= LDEL ID(i) PTR ID(m) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,array_merge(array('object_methode'=>m),a));}
+									// tag with modifier and optional Smarty2 style attributes
+smartytag(res)   ::= LDEL ID(i) modifier(m) modparameters(p) attributes(a) RDEL. { res =  '<?php ob_start();?>'.$this->compiler->compileTag(i,a).'<?php echo ';
+                                                                if (m == 'isset' || m == 'empty' || is_callable(m)) {
+																					                       if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
+																					                           res .= m . "(ob_get_clean()". p .");?>";
+																					                        }
+																					                    } else {
+																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
+                                                                      res .= "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(ob_get_clean()". p ."),'modifier');?>";
+                                                                 } else {
+                                                                      $this->compiler->trigger_template_error ("unknown modifier\"" . m . "\"");
+                                                                 }
+                                                              }
+                                                            }
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag(i.'close',array());}
+									// end of block object tag  {/....}									
+smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. { res =  $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
 									// {if} and {elseif} tag
 smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
 									// {for} tag
@@ -311,13 +329,13 @@ arrayelements(res)   ::=  arrayelement(a).  { res = a; }
 arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.','.a; }
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
-arrayelement(res)		 ::=  ID(e1) APTR expr(e2). { res = e1.'=>'.e2;}
 arrayelement(res)		 ::=  array(a). { res = a;}
 
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
 doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
-doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.".e.".'";}
+doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
+doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
 doublequotedcontent(res)           ::= OTHER(o). {res = o;}
 //doublequotedcontent(res)           ::= text(t). {res = t;}
 

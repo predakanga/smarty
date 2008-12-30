@@ -55,6 +55,14 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{("hello world"|truncate:6)|strlen}');
         $this->assertEquals("6", $this->smarty->fetch($tpl));
     } 
+    /**
+    * test modifier at plugin result
+    */
+    public function testModifierAtPluginResult()
+    {
+        $tpl = $this->smarty->createTemplate('string:{counter|truncate:5 start=100000}');
+        $this->assertEquals("10...", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

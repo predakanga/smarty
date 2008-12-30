@@ -26,12 +26,28 @@ class Smarty_Method_Register_Object extends Smarty_Internal_Base {
     * @param boolean $smarty_args smarty argument format, else traditional
     * @param null $ |array $block_functs list of methods that are block format
     */
-    public function execute($object, &$object_impl, $allowed = array(), $smarty_args = true, $block_methods = array())
+    public function execute($object, $object_impl, $allowed = array(), $smarty_args = true, $block_methods = array())
     {
-        settype($allowed, 'array');
-        settype($smarty_args, 'boolean');
+        // test if allowed methodes callable
+        if (!empty($allowed)) {
+            foreach ((array)$allowed as $methode) {
+                if (!is_callable(array($object_impl, $methode))) {
+                    throw new SmartyException("Undefined methode '$methode' in registered object");
+                } 
+            } 
+        } 
+        // test if block methodes callable
+        if (!empty($block_methods)) {
+            foreach ((array)$block_methods as $methode) {
+                if (!is_callable(array($object_impl, $methode))) {
+                    throw new SmartyException("Undefined methode '$methode' in registered object");
+                } 
+            } 
+        } 
+        // register the object
         $this->smarty->reg_objects[$object] =
-        array(&$object_impl, $allowed, $smarty_args, $block_methods);
+        array($object_impl, (array)$allowed, (boolean)$smarty_args, (array)$block_methods);
     } 
 } 
+
 ?>

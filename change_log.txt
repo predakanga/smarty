@@ -1,3 +1,8 @@
+12/30/2008
+- added compiler support of registered object 
+- added backtick support in doubled quoted strings for backward compatibility
+- some minor bug fixes and improvments
+
 12/23/2008
 - fixed problem of not working "not" operator in if-expressions
 - added handling of compiler function plugins

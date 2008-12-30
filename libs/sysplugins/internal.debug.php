@@ -27,7 +27,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_TemplateBase {
         // get template names
         $i = 0;
         foreach (Smarty::$template_objects as $_template_obj) {
-            // exculde the debugging template from displayed data
+            // exclude the debugging template from displayed data
             if ($this->smarty->debug_tpl != $_template_obj->resource_name) {
                 $_template_data[$i]['name'] = $_template_obj->getTemplateFilepath();
                 $_template_data[$i]['compile_time'] = $_template_obj->compile_time;
@@ -46,6 +46,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_TemplateBase {
         $_template->security = false;
         $_template->assign('template_data', $_template_data);
         $_template->assign('assigned_vars', $_assigned_vars);
+        $_template->assign('execution_time', $this->smarty->_get_time() - $this->smarty->start_time);
         echo $this->smarty->fetch($_template);
     } 
 } 

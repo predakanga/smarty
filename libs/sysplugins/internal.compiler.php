@@ -96,8 +96,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } 
         // init the lexer/parser to compile the template
         $lex = new Smarty_Internal_Templatelexer($_content);
-        $parser = new Smarty_Internal_Templateparser($lex, $this);
-            //  $parser->PrintTrace(); 
+        $parser = new Smarty_Internal_Templateparser($lex, $this); 
+        // $parser->PrintTrace();
         // get tokens from lexer and parse them
         while ($lex->yylex()) {
             // echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} \n";
@@ -123,8 +123,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *                                This is a call back from the lexer/parser
-    *                                It executes the required compile plugin for the Smarty tag
+    *                                    This is a call back from the lexer/parser
+    *                                    It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -150,7 +150,21 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             // tag did not produce compiled code
             return '';
         } else {
-            // not an internal compiler tag, check if tag is registered or is Smarty plugin
+            // not an internal compiler tag
+            // check if tag is a registered object
+            if (isset($this->smarty->reg_objects[$tag]) && isset($args['object_methode'])) {
+                $methode = $args['object_methode'];
+                unset ($args['object_methode']);
+                if (!in_array($methode, $this->smarty->reg_objects[$tag][3]) &&
+                        (empty($this->smarty->reg_objects[$tag][1]) || in_array($methode, $this->smarty->reg_objects[$tag][1]))) {
+                    return $this->object_function($args, $tag, $methode, $this);
+                } elseif (in_array($methode, $this->smarty->reg_objects[$tag][3])) {
+                    return $this->object_block_function($args, $tag, $methode, $this);
+                } else {
+                    return $this->trigger_template_error ('unallowed methode "' . $methode . '" in registered object "' . $tag . '"');
+                } 
+            } 
+            // check if tag is registered or is Smarty plugin
             $this->smarty->plugin_handler->loadSmartyPlugin($tag, $this->smarty->plugin_search_order);
             if (isset($this->smarty->registered_plugins[$tag])) {
                 // check no cache
@@ -165,10 +179,23 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
                 $plugin_type = $this->smarty->registered_plugins[$tag][0] . '_plugin';
                 return $this->$plugin_type($args, $tag, $this);
             } 
-            // compile closing tag of block plugin
-            if (substr_compare($tag, 'close', -5, 5) == 0 &&
-                    isset($this->smarty->registered_plugins[substr($tag, 0, -5)]) && $this->smarty->registered_plugins[substr($tag, 0, -5)][0] == 'block') {
-                return $this->block_plugin($args, $tag, $this);
+            // compile closing tag of block function
+            if (strlen($tag) > 5 && substr_compare($tag, 'close', -5, 5) == 0) {
+                $base_tag = substr($tag, 0, -5); 
+                // check if closing tag is a registered object
+                if (isset($this->smarty->reg_objects[$base_tag]) && isset($args['object_methode'])) {
+                    $methode = $args['object_methode'];
+                    unset ($args['object_methode']);
+                    if (in_array($methode, $this->smarty->reg_objects[$base_tag][3])) {
+                        return $this->object_block_function($args, $tag, $methode, $this);
+                    } else {
+                        return $this->trigger_template_error ('unallowed closing tag methode "' . $methode . '" in registered object "' . $base_tag . '"');
+                    } 
+                } 
+                // plugin ?
+                if (isset($this->smarty->registered_plugins[$base_tag]) && $this->smarty->registered_plugins[$base_tag][0] == 'block') {
+                    return $this->block_plugin($args, $tag, $this);
+                } 
             } 
 
             $this->trigger_template_error ("unknow tag \"" . $tag . "\"");

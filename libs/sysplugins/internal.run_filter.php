@@ -37,7 +37,7 @@ class Smarty_Internal_Run_Filter extends Smarty_Internal_Base {
                 // existing filter class
                 $output = call_user_func_array(array($plugin_name, 'execute'), array($output, $this->smarty));
             } elseif (function_exists($plugin_name)) {
-                // exiting filter function
+                // existing filter function
                 $output = call_user_func_array($plugin_name, array($output, $this->smarty));
             } elseif ($this->smarty->loadPlugin($plugin_name)) {
                 // use class plugin if found

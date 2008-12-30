@@ -1,6 +1,6 @@
 <?php
 /**
-* Smarty PHPunit tests spacimg in template output
+* Smarty PHPunit tests spacing in template output
 * 
 * @package PHPunit
 * @author Uwe Tews 
@@ -9,7 +9,7 @@
 require_once '../libs/Smarty.class.php';
 
 /**
-* class for security test
+* class for spacing test
 */
 class SpacingTests extends PHPUnit_Framework_TestCase {
     public function setUp()

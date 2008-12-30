@@ -84,7 +84,7 @@ td {
 </head>
 <body>
 
-<h1>Smarty Debug Console </h1>
+<h1>Smarty Debug Console  -  Total Time {$execution_time|string_format:"%.5f"}</h1>
 
 <h2>included templates &amp; config files (load time in seconds)</h2>
 

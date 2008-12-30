@@ -94,7 +94,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $request_use_auto_globals = true;
     public $debug_tpl = null; 
     // When set, smarty does uses this value as error_reporting-level.
-    public $error_reporting  =  null;
+    public $error_reporting = null; 
     // assigned tpl vars
     public $tpl_vars = array(); 
     // dummy parent object
@@ -125,17 +125,20 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // registered plugins
     public $registered_plugins = array(); 
     // plugin search order
-    public $plugin_search_order = array('function','block','compiler'); 
+    public $plugin_search_order = array('function', 'block', 'compiler'); 
     // plugin handler object
     public $plugin_handler = null; 
     // registered objects
-    public $reg_objects = array();
+    public $reg_objects = array(); 
+    // start time for execution time calculation
+    public $start_time = 0;
 
     /**
     * Class constructor, initializes basic smarty properties
     */
     public function __construct()
-    { 
+    {
+        $this->start_time = $this->_get_time(); 
         // set exception handler
         if (!empty($this->exception_handler))
             set_exception_handler($this->exception_handler); 
@@ -151,12 +154,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // load base plugins
         $this->loadPlugin('Smarty_Internal_Base');
         $this->loadPlugin('Smarty_Internal_PluginBase');
-        $this->loadPlugin($this->template_class); 
+        $this->loadPlugin($this->template_class);
         $this->loadPlugin('Smarty_Internal_Plugin_Handler');
         $this->plugin_handler = new Smarty_Internal_Plugin_Handler;
-        if (!$this->debugging && $this->debugging_ctrl == 'URL')
-        {
-           $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
+        if (!$this->debugging && $this->debugging_ctrl == 'URL') {
+            $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
             if (@strstr($_query_string, $this->smarty_debug_id)) {
                 if (@strstr($_query_string, $this->smarty_debug_id . '=on')) {
                     // enable debugging for this browser session
@@ -215,9 +217,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
         } 
         // create template object if necessary
         ($template instanceof $this->template_class)? $_template = $template :
-        $_template = $this->createTemplate ($template, $parent , $cache_id, $compile_id); 
+        $_template = $this->createTemplate ($template, $parent , $cache_id, $compile_id);
         $_smarty_old_error_level = $this->debugging ? error_reporting() : error_reporting(isset($this->error_reporting)
-               ? $this->error_reporting : error_reporting() & ~E_NOTICE);
+            ? $this->error_reporting : error_reporting() &~E_NOTICE); 
         // return redered template
         $_output = $_template->getRenderedTemplate();
         error_reporting($_smarty_old_error_level);
