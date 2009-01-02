@@ -31,6 +31,7 @@
 <a href="#DelimiterTests.php">DelimiterTests.php</a><br>
 <a href="#DoubleQuotedStringTests.php">DoubleQuotedStringTests.php</a><br>
 <a href="#FileResourceTests.php">FileResourceTests.php</a><br>
+<a href="#FilterTests.php">FilterTests.php</a><br>
 <a href="#function.mailto.php">function.mailto.php</a><br>
 <a href="#index.php">index.php</a><br>
 <a href="#internal.base.php">internal.base.php</a><br>
@@ -69,10 +70,12 @@
 <a href="#internal.templatelexer.php">internal.templatelexer.php</a><br>
 <a href="#internal.templateparser.php">internal.templateparser.php</a><br>
 <a href="#internal.write_file.php">internal.write_file.php</a><br>
+<a href="#LoadFilterTests.php">LoadFilterTests.php</a><br>
 <a href="#method.clear_all_assign.php">method.clear_all_assign.php</a><br>
 <a href="#method.clear_all_cache.php">method.clear_all_cache.php</a><br>
 <a href="#method.clear_assign.php">method.clear_assign.php</a><br>
 <a href="#method.clear_compiled_tpl.php">method.clear_compiled_tpl.php</a><br>
+<a href="#method.load_filter.php">method.load_filter.php</a><br>
 <a href="#method.register_block.php">method.register_block.php</a><br>
 <a href="#method.register_compiler_function.php">method.register_compiler_function.php</a><br>
 <a href="#method.register_function.php">method.register_function.php</a><br>
@@ -100,6 +103,7 @@
 <a href="#PhpResourceTests.php">PhpResourceTests.php</a><br>
 <a href="#RegisterBlockTests.php">RegisterBlockTests.php</a><br>
 <a href="#RegisterCompilerFunctionTests.php">RegisterCompilerFunctionTests.php</a><br>
+<a href="#RegisterFilterTests.php">RegisterFilterTests.php</a><br>
 <a href="#RegisterFunctionTests.php">RegisterFunctionTests.php</a><br>
 <a href="#RegisterModifierTests.php">RegisterModifierTests.php</a><br>
 <a href="#ResourceTests.php">ResourceTests.php</a><br>
@@ -129,29 +133,32 @@
 <a name="Post-parsing"></a>
 <h1>Post-parsing</h1>
 <h2>Warnings:</h2><br>
+<b>Warning</b> - Class CompileIfTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileFunctionPluginTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileForTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileForeachTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileEvalTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileFunctionPluginTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileIfTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileRegisteredObjectFunctionTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileInsertTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileIncludeTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileInsertTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class DelimiterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CoreTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileRegisteredObjectFunctionTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileEvalTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileDebugTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileCompilerPluginTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ClearCacheTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ClearAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ClearAllAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ArrayTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ClearCacheTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ClearCompiledTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CommentsTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileAssignTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileCompilerPluginTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileCaptureTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileBlockPluginTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileAssignTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CoreTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CommentsTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class DoubleQuotedStringTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ClearCompiledTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class SpacingTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class SmartyTests parent PHPUnit_Framework_TestSuite not found<br>
 <b>Warning</b> - Class SingleQuotedStringTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class FileResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class StringResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class TokenFallbackTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - 
@@ -159,17 +166,17 @@ duplicate class element "Person" in file C:\www\docs\karting-germany.de\gi\__sma
 Use an @ignore tag on the original if you want this case to be documented.<br>
 <b>Warning</b> - Class VariableVariableTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class VariableScopeTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class DelimiterTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class SecurityTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class PhpResourceTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ModifierTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class FileResourceTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class DoubleQuotedStringTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ResourceTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class RegisterBlockTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class SecurityTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ModifierTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class LoadFilterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class FilterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterModifierTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class PhpResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterFunctionTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterCompilerFunctionTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class RegisterFilterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class RegisterBlockTests parent PHPUnit_Framework_TestCase not found<br>
 <a name="ArrayTests.php"></a>
 <h1>ArrayTests.php</h1>
 <h2>Warnings:</h2><br>
@@ -286,6 +293,11 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h2>Warnings:</h2><br>
 <b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class FileResourceTests<br>
+<a name="FilterTests.php"></a>
+<h1>FilterTests.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class FilterTests<br>
 <a name="function.mailto.php"></a>
 <h1>function.mailto.php</h1>
 <h2>Warnings:</h2><br>
@@ -434,7 +446,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>internal.template.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Template<br>
-<b>Warning on line 516</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
+<b>Warning on line 514</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
 <a name="internal.templatebase.php"></a>
 <h1>internal.templatebase.php</h1>
 <h2>Warnings:</h2><br>
@@ -455,6 +467,11 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>internal.write_file.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Write_File<br>
+<a name="LoadFilterTests.php"></a>
+<h1>LoadFilterTests.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class LoadFilterTests<br>
 <a name="method.clear_all_assign.php"></a>
 <h1>method.clear_all_assign.php</h1>
 <h2>Warnings:</h2><br>
@@ -471,6 +488,10 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>method.clear_compiled_tpl.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 18</b> - no @package tag was used in a DocBlock for class Smarty_Method_Clear_Compiled_Tpl<br>
+<a name="method.load_filter.php"></a>
+<h1>method.load_filter.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class Smarty_Method_Load_Filter<br>
 <a name="method.register_block.php"></a>
 <h1>method.register_block.php</h1>
 <h2>Warnings:</h2><br>
@@ -585,6 +606,12 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class RegisterCompilerFunctionTests<br>
 <b>Warning on line 87</b> - no @package tag was used in a DocBlock for class mycompilerfunctionclass<br>
+<a name="RegisterFilterTests.php"></a>
+<h1>RegisterFilterTests.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
+<b>Warning on line 13</b> - no @package tag was used in a DocBlock for class RegisterFilterTests<br>
+<b>Warning on line 137</b> - no @package tag was used in a DocBlock for class myfilterclass<br>
 <a name="RegisterFunctionTests.php"></a>
 <h1>RegisterFunctionTests.php</h1>
 <h2>Warnings:</h2><br>
@@ -621,7 +648,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>Smarty.class.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 49</b> - no @package tag was used in a DocBlock for class Smarty<br>
-<b>Warning on line 359</b> - no @package tag was used in a DocBlock for class SmartyException<br>
+<b>Warning on line 367</b> - no @package tag was used in a DocBlock for class SmartyException<br>
 <a name="smartytests.php"></a>
 <h1>smartytests.php</h1>
 <h2>Warnings:</h2><br>
@@ -708,7 +735,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class VariableVariableTests<br>
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 30 Dec 2008 22:12:48 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Fri, 02 Jan 2009 22:18:00 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</body>
 </html>
