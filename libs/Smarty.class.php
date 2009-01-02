@@ -129,7 +129,15 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // plugin handler object
     public $plugin_handler = null; 
     // registered objects
-    public $reg_objects = array(); 
+    public $registered_objects = array(); 
+    // registered filters
+    public $registered_filters = array(); 
+    // filter handler
+    public $filter_handler = null;
+    // cache resorce objects
+    public $cache_resource_objects = array();
+    // write file object
+    public $write_file_object = null;
     // start time for execution time calculation
     public $start_time = 0;
 

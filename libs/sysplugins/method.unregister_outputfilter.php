@@ -25,7 +25,7 @@ class Smarty_Method_Unregister_Outputfilter extends Smarty_Internal_Base {
     */
     public function execute($function)
     {
-        $this->smarty->plugins['outputfilter'][$function] = array($function, null, null, false);
+        unset($this->smarty->registered_filters['output'][$function]);
     } 
 } 
 

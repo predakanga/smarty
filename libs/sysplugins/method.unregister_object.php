@@ -24,7 +24,7 @@ class Smarty_Method_Unregister_Object extends Smarty_Internal_Base {
     */
     public function execute($object)
     {
-        unset($this->smarty->reg_objects[$object]);
+        unset($this->smarty->registered_objects[$object]);
     } 
 } 
 

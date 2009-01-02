@@ -45,7 +45,7 @@ class Smarty_Method_Register_Object extends Smarty_Internal_Base {
             } 
         } 
         // register the object
-        $this->smarty->reg_objects[$object] =
+        $this->smarty->registered_objects[$object] =
         array($object_impl, (array)$allowed, (boolean)$smarty_args, (array)$block_methods);
     } 
 } 

@@ -1,3 +1,8 @@
+01/02/2009
+- added load_filter methode
+- fished work on filter handling
+- optimization of plugin loading
+
 12/30/2008
 - added compiler support of registered object 
 - added backtick support in doubled quoted strings for backward compatibility

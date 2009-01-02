@@ -27,73 +27,56 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     public function __construct()
     {
         parent::__construct(); 
-        // set instance object
-        self::instance($this); 
         // get required plugins
         $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
         $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
-        if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->autoload_filters['post'])) {
+        if (!is_object($this->smarty->filter_handler) && (isset($this->smarty->autoload_filters['pre'])  || isset($this->smarty->registered_filters['pre'])
+             || isset($this->smarty->autoload_filters['post'])  || isset($this->smarty->registered_filters['post']))) {
             $this->smarty->loadPlugin('Smarty_Internal_Run_Filter');
-            $this->filter = new Smarty_Internal_Run_Filter;
+            $this->smarty->filter_handler = new Smarty_Internal_Run_Filter;
         } 
-    } 
-
-    /**
-    * Method to deliver instance of compiler object
-    * 
-    * @param object $ |nothing $new_instance $this of compiler object on initial call
-    * @return object instance of compiler object
-    */
-    public static function &instance($new_instance = null)
-    {
-        static $instance = null;
-        if (isset($new_instance) && is_object($new_instance))
-            $instance = $new_instance;
-        return $instance;
     } 
 
     /**
     * Methode to compile a Smarty template
     * 
-    * @param  $_template template object to compile
+    * @param  $template template object to compile
     * @return bool true if compiling succeeded, false if it failed
     */
-    public function compileTemplate($_template)
+    public function compileTemplate($template)
     {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
        then written to compiled files. */ 
+        if (!is_object($template->cacher_object)) {
+            $this->smarty->loadPlugin($template->cacher_class);
+            $template->cacher_object = new $template->cacher_class;
+        } 
         // flag for nochache sections
         $this->_compiler_status->nocache = false;
         $this->_compiler_status->tag_nocache = false; 
-        // current template file
-        $this->_compiler_status->current_tpl_filepath = ""; 
         // assume successfull compiling
         $this->compile_error = false; 
         // save template object in compiler class
-        $this->template = $_template; 
+        $this->template = $template; 
         // get template filepath for error messages
-        $this->tpl_filepath = $_template->getTemplateFilepath(); 
+        $this->tpl_filepath = $template->getTemplateFilepath(); 
         // get template source
-        if (($_content = $_template->getTemplateSource()) === false) {
-            throw new SmartyException("Unable to load template {$this->tpl_filepath}");
-        } 
+        $_content = $template->getTemplateSource();
         // template header code
         $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
         $template_header .= "         compiled from \"" . $this->tpl_filepath . "\" */ ?>\n"; 
+        // run prefilter if required
+        if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre'])) {
+            $_content = $this->smarty->filter_handler->execute('pre', $_content);
+        } 
         // on empty template just return header
         if ($_content == '') {
-            $_template->compiled_template = $template_header;
+            $template->compiled_template = $template_header;
             return true;
         } 
-
-        $this->_compiler_status->current_tpl_filepath = $this->tpl_filepath; 
         // init cacher plugin
-        $_template->cacher_object->initCacher($this); 
-        // run prefilter if required
-        if (isset($this->smarty->autoload_filters['pre'])) {
-            $_content = $this->filter->execute('pre', $_content);
-        } 
+        $template->cacher_object->initCacher($this); 
         // init the lexer/parser to compile the template
         $lex = new Smarty_Internal_Templatelexer($_content);
         $parser = new Smarty_Internal_Templateparser($lex, $this); 
@@ -108,10 +91,10 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 
         if (!$this->compile_error) {
             // close cacher and return compiled template
-            $_template->compiled_template = $template_header . $_template->cacher_object->closeCacher($this, $parser->retvalue); 
+            $template->compiled_template = $template_header . $template->cacher_object->closeCacher($this, $parser->retvalue); 
             // run postfilter if required
-            if (isset($this->smarty->autoload_filters['post'])) {
-                $_template->compiled_template = $this->filter->execute('post', $_template->compiled_template);
+            if (isset($this->smarty->autoload_filters['post']) || isset($this->smarty->registered_filters['post'])) {
+                $template->compiled_template = $this->smarty->filter_handler->execute('post', $template->compiled_template);
             } 
             return true;
         } else {
@@ -152,13 +135,13 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         } else {
             // not an internal compiler tag
             // check if tag is a registered object
-            if (isset($this->smarty->reg_objects[$tag]) && isset($args['object_methode'])) {
+            if (isset($this->smarty->registered_objects[$tag]) && isset($args['object_methode'])) {
                 $methode = $args['object_methode'];
                 unset ($args['object_methode']);
-                if (!in_array($methode, $this->smarty->reg_objects[$tag][3]) &&
-                        (empty($this->smarty->reg_objects[$tag][1]) || in_array($methode, $this->smarty->reg_objects[$tag][1]))) {
+                if (!in_array($methode, $this->smarty->registered_objects[$tag][3]) &&
+                        (empty($this->smarty->registered_objects[$tag][1]) || in_array($methode, $this->smarty->registered_objects[$tag][1]))) {
                     return $this->object_function($args, $tag, $methode, $this);
-                } elseif (in_array($methode, $this->smarty->reg_objects[$tag][3])) {
+                } elseif (in_array($methode, $this->smarty->registered_objects[$tag][3])) {
                     return $this->object_block_function($args, $tag, $methode, $this);
                 } else {
                     return $this->trigger_template_error ('unallowed methode "' . $methode . '" in registered object "' . $tag . '"');
@@ -183,10 +166,10 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             if (strlen($tag) > 5 && substr_compare($tag, 'close', -5, 5) == 0) {
                 $base_tag = substr($tag, 0, -5); 
                 // check if closing tag is a registered object
-                if (isset($this->smarty->reg_objects[$base_tag]) && isset($args['object_methode'])) {
+                if (isset($this->smarty->registered_objects[$base_tag]) && isset($args['object_methode'])) {
                     $methode = $args['object_methode'];
                     unset ($args['object_methode']);
-                    if (in_array($methode, $this->smarty->reg_objects[$base_tag][3])) {
+                    if (in_array($methode, $this->smarty->registered_objects[$base_tag][3])) {
                         return $this->object_block_function($args, $tag, $methode, $this);
                     } else {
                         return $this->trigger_template_error ('unallowed closing tag methode "' . $methode . '" in registered object "' . $base_tag . '"');

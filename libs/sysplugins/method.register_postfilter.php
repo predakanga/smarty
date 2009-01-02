@@ -25,7 +25,8 @@ class Smarty_Method_Register_Postfilter extends Smarty_Internal_Base {
     */
     public function execute($function)
     {
-        $this->smarty->plugins['postfilter'][$function] = array($function, null, null, false);
+        $_name = (is_array($function)) ? $function[0] : $function;
+        $this->smarty->registered_filters['post'][$_name] = $function;
     } 
 } 
 ?>

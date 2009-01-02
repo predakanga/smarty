@@ -16,10 +16,8 @@
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     // object cache
     public $resource_objects = array();
-    public $write_file_object = null;
     public $compiler_object = null;
     public $cacher_object = null;
-    public $cache_resource_objects = array(); 
     // Smarty parameter
     public $cache_id = null;
     public $compile_id = null;
@@ -82,26 +80,26 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->security = $this->smarty->security;
         $this->cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($this->caching_type);
         $this->parent = $_parent; 
-        // load cacher
-        if (!is_object($this->cacher_object)) {
-            $this->smarty->loadPlugin($this->cacher_class);
-            $this->cacher_object = new $this->cacher_class;
-        } 
-        // load cache resource
-        if (!isset($this->cache_resource_objects[$this->caching_type])) {
-            $this->smarty->loadPlugin($this->cache_resource_class);
-            $this->cache_resource_objects[$this->caching_type] = new $this->cache_resource_class;
-        } 
-        // load output filter
-        if (isset($this->smarty->autoload_filters['output']) && !is_object($this->filter)) {
+        // load filter handler if required
+        if (!is_object($this->smarty->filter_handler) && (isset($this->smarty->autoload_filters['output'])  || isset($this->smarty->registered_filters['output']))) {
             $this->smarty->loadPlugin('Smarty_Internal_Run_Filter');
-            $this->filter = new Smarty_Internal_Run_Filter;
+            $this->smarty->filter_handler = new Smarty_Internal_Run_Filter;
         } 
         // Template resource
         $this->template_resource = $template_resource; 
         // parse resource name
         if (!$this->parseResourceName ($template_resource)) {
             throw new SmartyException ("Unable to parse resource '{$template_resource}'");
+        } 
+        // load cacher
+        if ($this->caching) {
+            $this->smarty->loadPlugin($this->cacher_class);
+            $this->cacher_object = new $this->cacher_class;
+        } 
+        // load cache resource
+        if (!$this->isEvaluated() && $this->caching && !isset($this->smarty->cache_resource_objects[$this->caching_type])) {
+            $this->smarty->loadPlugin($this->cache_resource_class);
+            $this->smarty->cache_resource_objects[$this->caching_type] = new $this->cache_resource_class;
         } 
     } 
 
@@ -251,16 +249,16 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->smarty->loadPlugin($this->compiler_class);
             $this->compiler_object = new $this->compiler_class;
         } 
-        if (!is_object($this->write_file_object)) {
+        if (!is_object($this->smarty->write_file_object)) {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");
-            $this->write_file_object = new Smarty_Internal_Write_File;
+            $this->smarty->write_file_object = new Smarty_Internal_Write_File;
         } 
         // call compiler
         if ($this->compiler_object->compileTemplate($this)) {
             // compiling succeded
             if (!$this->isEvaluated()) {
                 // write compiled template
-                $this->write_file_object->writeFile($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
+                $this->smarty->write_file_object->writeFile($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
                 // make template and compiled file timestamp match
                 touch($this->getCompiledFilepath(), $this->getTemplateTimestamp());
             }   
@@ -282,7 +280,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getCachedFilepath ()
     {
         return $this->cached_filepath === null ?
-        $this->cached_filepath = ($this->isEvaluated() || !$this->caching) ? false : $this->cache_resource_objects[$this->caching_type]->getCachedFilepath($this) :
+        $this->cached_filepath = ($this->isEvaluated() || !$this->caching) ? false : $this->smarty->cache_resource_objects[$this->caching_type]->getCachedFilepath($this) :
         $this->cached_filepath;
     } 
 
@@ -296,7 +294,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getCachedTimestamp ()
     {
         return $this->cached_timestamp === null ?
-        $this->cached_timestamp = ($this->isEvaluated() || !$this->caching) ? false : $this->cache_resource_objects[$this->caching_type]->getCachedTimestamp($this) :
+        $this->cached_timestamp = ($this->isEvaluated() || !$this->caching) ? false : $this->smarty->cache_resource_objects[$this->caching_type]->getCachedTimestamp($this) :
         $this->cached_timestamp;
     } 
 
@@ -317,7 +315,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     */
     public function writeCachedContent ()
     {
-        return $this->cacher_object->writeCachedContent($this);
+        return ($this->isEvaluated() || !$this->caching) ? false : $this->cacher_object->writeCachedContent($this);
     } 
 
     /**
@@ -368,12 +366,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             eval("?>" . $this->cached_content);
             $this->updateGlobalVariables();
             $this->cache_time = $this->_get_time() - $_start_time;
-            return isset($this->smarty->autoload_filters['output'])?
-            $this->filter->execute('output', ob_get_clean()) : ob_get_clean();
+            return (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))?
+            $this->smarty->filter_handler->execute('output', ob_get_clean()) : ob_get_clean();
         } else {
             $this->updateGlobalVariables();
-            return isset($this->smarty->autoload_filters['output'])?
-            $this->filter->execute('output', $this->cached_content) : $this->cached_content;
+            return (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))?
+            $this->smarty->filter_handler->execute('output', $this->cached_content) : $this->cached_content;
         } 
     } 
 

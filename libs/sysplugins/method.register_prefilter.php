@@ -25,7 +25,9 @@ class Smarty_Method_Register_Prefilter extends Smarty_Internal_Base {
     */
     public function execute($function)
     {
-        $this->smarty->plugins['prefilter'][$function] = array($function, null, null, false);
+        $_name = (is_array($function)) ? $function[0] : $function;
+        $this->smarty->registered_filters['pre'][$_name] = $function;
     } 
 } 
+
 ?>

@@ -24,7 +24,7 @@ class Smarty_Method_Unregister_Postfilter extends Smarty_Internal_Base {
     */
     public function execute($function)
     {
-        unset($this->smarty->plugins['postfilter'][$function]);
+        unset($this->smarty->registered_filters['post'][$function]);
     } 
 } 
 

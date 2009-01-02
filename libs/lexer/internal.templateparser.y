@@ -24,7 +24,8 @@
         $this->lex = $lex;
         $this->smarty = Smarty::instance(); 
         $this->compiler = $compiler;
-        $this->template = $this->compiler->template; 
+        $this->template = $this->compiler->template;
+        $this->cacher = $this->template->cacher_object; 
 				$this->nocache = false;
     }
     public static function &instance($new_instance = null)
@@ -80,18 +81,18 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 //
 											// Smarty tag
 template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
-                                            res = $this->template->cacher_object->processNocacheCode(st, $this->compiler,$this->nocache,true);
+                                            res = $this->cacher->processNocacheCode(st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
-template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->template->cacher_object->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// PHP tag
 template_element(res)::= PHP(php). {if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
-                                      res = $this->template->cacher_object->processNocacheCode(php, $this->compiler, false,true);
+                                      res = $this->cacher->processNocacheCode(php, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                      res = $this->template->cacher_object->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
+                                      res = $this->cacher->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
 											// Other template text
-template_element(res)::= OTHER(o). {res = $this->template->cacher_object->processNocacheCode(o, $this->compiler,false,false);}	
-//template_element(res)::= text(t). {res = $this->template->cacher_object->processNocacheCode(t, $this->compiler,false,false);}	
+template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	
+//template_element(res)::= text(t). {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
 
 
 //

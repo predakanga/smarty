@@ -24,7 +24,7 @@ class Smarty_Method_Unregister_Prefilter extends Smarty_Internal_Base {
     */
     public function execute($function)
     {
-        unset($this->smarty->plugins['prefilter'][$function]);
+        unset($this->smarty->registered_filters['pre'][$function]);
     } 
 } 
 
