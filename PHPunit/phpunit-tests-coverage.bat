@@ -36,5 +36,5 @@ REM
 REM $Id: pear-phpunit.bat 2798 2008-04-14 16:48:33Z sb $
 REM
 
-set PHPBIN=C:\wamp\bin\php\php5.2.6\php
-C:\wamp\bin\php\php5.2.6\php>test_results.txt -d safe_mode=Off "C:\wamp\bin\php\php5.2.6\pear/PHPUnit/TextUI/Command.php" --coverage-html coverage SmartyTests.php 
+set PHPBIN=C:\wamp\bin\php\php5.2.8\php
+C:\wamp\bin\php\php5.2.8\php>test_results.txt -d safe_mode=Off "C:\wamp\bin\php\php5.2.8\pear/PHPUnit/TextUI/Command.php" --coverage-html coverage SmartyTests.php 

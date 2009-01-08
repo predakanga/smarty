@@ -17,7 +17,7 @@ class Smarty_Internal_TemplateBase {
     /**
     * assigns a Smarty variable
     * 
-    * @param array $ |string $tpl_var the template variable name(s)
+    * @param array|string $tpl_var the template variable name(s)
     * @param mixed $value the value to assign
     * @param boolean $nocache if true any output of this variable will be not cached
     * @param boolean $global if true the variable will have global scope
@@ -27,38 +27,141 @@ class Smarty_Internal_TemplateBase {
         if (is_array($tpl_var)) {
             foreach ($tpl_var as $_key => $_val) {
                 if ($_key != '') {
-                    if (in_array($_key, array('this', 'smarty')))
-                        throw new SmartyException("Cannot assign value to reserved var '{$_key}'");
-                    else {
-                        $this->tpl_vars[$_key] = new Smarty_variable($_val, $nocache, $global);
-                    } 
+                    $this->check_tplvar($_key);
+                    $this->tpl_vars[$_key] = new Smarty_variable($_val, $nocache, $global);
                 } 
             } 
         } else {
             if ($tpl_var != '') {
-                if (in_array($tpl_var, array('this', 'smarty')))
-                    throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
-                else {
-                    $this->tpl_vars[$tpl_var] = new Smarty_variable($value, $nocache, $global);
+                $this->check_tplvar($tpl_var);
+                $this->tpl_vars[$tpl_var] = new Smarty_variable($value, $nocache, $global);
+            } 
+        } 
+    } 
+    /**
+    * assigns values to template variables by reference
+    * 
+    * @param string $tpl_var the template variable name
+    * @param mixed $value the referenced value to assign
+    * @param boolean $nocache if true any output of this variable will be not cached
+    * @param boolean $global if true the variable will have global scope
+    */
+    public function assign_by_ref($tpl_var, &$value, $nocache = false, $global = false)
+    {
+        if ($tpl_var != '') {
+            $this->check_tplvar($tpl_var);
+            $this->tpl_vars[$tpl_var] = new Smarty_variable(null, $nocache, $global);
+            $this->tpl_vars[$tpl_var]->value = &$value;
+        } 
+    } 
+    /**
+    * appends values to template variables
+    * 
+    * @param array|string $tpl_var the template variable name(s)
+    * @param mixed $value the value to append
+    * @param boolean $merge flag if array elements shall be merged
+    */
+    public function append($tpl_var, $value = null, $merge = false)
+    {
+        if (is_array($tpl_var)) {
+            // $tpl_var is an array, ignore $value
+            foreach ($tpl_var as $_key => $_val) {
+                if ($_key != '') {
+                    if (!isset($this->tpl_vars[$_key])) {
+                        $this->check_tplvar($_key);
+                        $this->tpl_vars[$_key] = new Smarty_variable();
+                    } 
+                    if (!is_array($this->tpl_vars[$_key]->value)) {
+                        settype($this->tpl_vars[$_key]->value, 'array');
+                    } 
+                    if ($merge && is_array($_val)) {
+                        foreach($_val as $_mkey => $_mval) {
+                            $this->tpl_vars[$_key]->value[$_mkey] = $_mval;
+                        } 
+                    } else {
+                        $this->tpl_vars[$_key]->value[] = $_val;
+                    } 
                 } 
+            } 
+        } else {
+            if ($tpl_var != '' && isset($value)) {
+                if (!isset($this->tpl_vars[$tpl_var])) {
+                    $this->check_tplvar($tpl_var);
+                    $this->tpl_vars[$tpl_var] = new Smarty_variable();
+                } 
+                if (!is_array($this->tpl_vars[$tpl_var]->value)) {
+                    settype($this->tpl_vars[$tpl_var]->value, 'array');
+                } 
+                if ($merge && is_array($value)) {
+                    foreach($value as $_mkey => $_mval) {
+                        $this->tpl_vars[$tpl_var]->value[$_mkey] = $_mval;
+                    } 
+                } else {
+                    $this->tpl_vars[$tpl_var]->value[] = $value;
+                } 
+            } 
+        } 
+    } 
+    /**
+    * appends values to template variables by reference
+    * 
+    * @param string $tpl_var the template variable name
+    * @param mixed $value the referenced value to append
+    * @param boolean $merge flag if array elements shall be merged
+    */
+    public function append_by_ref($tpl_var, &$value, $merge = false)
+    {
+        if ($tpl_var != '' && isset($value)) {
+            if (!isset($this->tpl_vars[$tpl_var])) {
+                $this->tpl_vars[$tpl_var] = new Smarty_variable();
+            } 
+            if (!@is_array($this->tpl_vars[$tpl_var]->value)) {
+                settype($this->tpl_vars[$tpl_var]->value, 'array');
+            } 
+            if ($merge && is_array($value)) {
+                foreach($value as $_key => $_val) {
+                    $this->tpl_vars[$tpl_var]->value[$_key] = &$value[$_key];
+                } 
+            } else {
+                $this->tpl_vars[$tpl_var]->value[] = &$value;
             } 
         } 
     } 
 
     /**
-    * gets the Value of a Smarty variable
+    * check if template variable name is reserved.
     * 
-    * @param string $variable the name of the Smarty variable
-    * @return mixed the value of the variable
+    * @param string $tpl_var the template variable
     */
-    public function getValue($variable)
+    private function check_tplvar($tpl_var)
     {
-        $var = $this->getVariable($variable);
-        if (!is_null($var)) {
-            return $var->value;
-        } else {
-            return null;
+        if (in_array($tpl_var, array('this', 'smarty'))) {
+            throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
         } 
+    } 
+
+    /**
+    * clear the given assigned template variable.
+    * 
+    * @param string|array $tpl_var the template variable(s) to clear
+    */
+    public function clear_assign($tpl_var)
+    {
+        if (is_array($tpl_var)) {
+            foreach ($tpl_var as $curr_var) {
+                unset($this->tpl_vars[$curr_var]);
+            } 
+        } else {
+            unset($this->tpl_vars[$tpl_var]);
+        } 
+    } 
+
+    /**
+    * clear all the assigned template variables.
+    */
+    public function clear_all_assign()
+    {
+        $this->tpl_vars = array();
     } 
 
     /**
@@ -94,7 +197,7 @@ class Smarty_Internal_TemplateBase {
     * creates a template object
     * 
     * @param string $template the resource handle of the template file
-    * @param object $parent_tpl_vars next higher level of Smarty variables
+    * @param object $parent next higher level of Smarty variables
     * @param mixed $cache_id cache id to be used with this template
     * @param mixed $compile_id compile id to be used with this template
     * @returns object template object
@@ -149,7 +252,7 @@ class Smarty_Internal_TemplateBase {
 * 
 * The Smarty data object will hold Smarty variables in the current scope
 * 
-* @param object $parent_tpl_vars next higher level of Smarty variables
+* @param object $parent tpl_vars next higher level of Smarty variables
 */
 class Smarty_Data extends Smarty_Internal_TemplateBase {
     // array template of variable objects

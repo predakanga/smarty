@@ -1,3 +1,7 @@
+01/08/2009
+- moved clear_assign and clear_all_assign to internal.templatebase.php
+- added assign_by_ref, append and append_by_ref methodes
+
 01/02/2009
 - added load_filter methode
 - fished work on filter handling

@@ -1,13 +1,13 @@
 PHPUnit 3.3.9 by Sebastian Bergmann.
 
-............................................................  60 / 318
-............................................................ 120 / 318
-...........hello F................................................ 180 / 318
-............................................................ 240 / 318
-............................................................ 300 / 318
-..................
+............................................................  60 / 335
+............................................................ 120 / 335
+............................hello F............................... 180 / 335
+............................................................ 240 / 335
+............................................................ 300 / 335
+...................................
 
-Time: 02:02
+Time: 4 seconds
 
 There was 1 failure:
 
@@ -17,9 +17,7 @@ Failed asserting that two strings are equal.
 expected string <hello world this is my >
 difference      <xxxxxxxxxxxxxxxx??????>
 got string      <world this is my >
-C:\www\docs\karting-germany.de\gi\__smarty3Alpha\PHPunit\CompileCaptureTests.php:63
+C:\wamp\www\__smarty3Alpha\PHPunit\CompileCaptureTests.php:63
 
 FAILURES!
-Tests: 318, Assertions: 344, Failures: 1.
-
-Generating code coverage report, this may take a moment.
+Tests: 335, Assertions: 360, Failures: 1.
