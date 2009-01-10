@@ -24,7 +24,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
     {
         $this->compiler = $compiler;
         $this->required_attributes = array('var', 'value');
-        $this->optional_attributes = array('global');
+        $this->optional_attributes = array('global','nocache');
 
         $_nocache = 'null';
         $_global = 'null'; 

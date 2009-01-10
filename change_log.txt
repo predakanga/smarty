@@ -1,3 +1,8 @@
+01/11/2009
+- added support of {literal} tag
+- added support of {ldelim} and {rdelim} tags
+- make code compatible to run with E_STRICT error setting
+
 01/08/2009
 - moved clear_assign and clear_all_assign to internal.templatebase.php
 - added assign_by_ref, append and append_by_ref methodes

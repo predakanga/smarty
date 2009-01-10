@@ -76,7 +76,9 @@
 <a href="#internal.templateparser.php">internal.templateparser.php</a><br>
 <a href="#internal.write_file.php">internal.write_file.php</a><br>
 <a href="#LoadFilterTests.php">LoadFilterTests.php</a><br>
+<a href="#method.clear_all_assign.php">method.clear_all_assign.php</a><br>
 <a href="#method.clear_all_cache.php">method.clear_all_cache.php</a><br>
+<a href="#method.clear_assign.php">method.clear_assign.php</a><br>
 <a href="#method.clear_cache.php">method.clear_cache.php</a><br>
 <a href="#method.clear_compiled_tpl.php">method.clear_compiled_tpl.php</a><br>
 <a href="#method.load_filter.php">method.load_filter.php</a><br>
@@ -150,7 +152,7 @@
 <b>Warning</b> - Class CompileBlockPluginTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AssignTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class AssignByRefTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ArrayTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AppendTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AppendByRefTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CacherResourceFileTests parent PHPUnit_Framework_TestCase not found<br>
@@ -160,32 +162,32 @@
 <b>Warning</b> - Class ClearCacheTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ClearAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileRegisteredObjectFunctionTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ArrayTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class AssignByRefTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class SpacingTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class SmartyTests parent PHPUnit_Framework_TestSuite not found<br>
 <b>Warning</b> - Class SingleQuotedStringTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ResourceTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class SecurityTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class StringResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class TokenFallbackTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CoreTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - 
 duplicate class element "Person" in file C:\wamp\www\__smarty3Alpha\test_object.php will be ignored.
 Use an @ignore tag on the original if you want this case to be documented.<br>
 <b>Warning</b> - Class VariableVariableTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class VariableScopeTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CoreTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterModifierTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class SecurityTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ResourceTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class FilterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterFunctionTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class LoadFilterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class FileResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class DoubleQuotedStringTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class DelimiterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ModifierTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class FilterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class LoadFilterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class PhpResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterCompilerFunctionTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterFilterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterBlockTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class PhpResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <a name="AppendByRefTests.php"></a>
 <h1>AppendByRefTests.php</h1>
 <h2>Warnings:</h2><br>
@@ -506,10 +508,18 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h2>Warnings:</h2><br>
 <b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class LoadFilterTests<br>
+<a name="method.clear_all_assign.php"></a>
+<h1>method.clear_all_assign.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class Smarty_Method_Clear_All_Assign<br>
 <a name="method.clear_all_cache.php"></a>
 <h1>method.clear_all_cache.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 18</b> - no @package tag was used in a DocBlock for class Smarty_Method_Clear_All_Cache<br>
+<a name="method.clear_assign.php"></a>
+<h1>method.clear_assign.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 18</b> - no @package tag was used in a DocBlock for class Smarty_Method_Clear_Assign<br>
 <a name="method.clear_cache.php"></a>
 <h1>method.clear_cache.php</h1>
 <h2>Warnings:</h2><br>
@@ -765,7 +775,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <b>Warning on line 8</b> - Page-level DocBlock precedes "require_once '../libs/Smarty.class.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class VariableVariableTests<br>
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 08 Jan 2009 23:41:15 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 11 Jan 2009 00:30:52 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</body>
 </html>

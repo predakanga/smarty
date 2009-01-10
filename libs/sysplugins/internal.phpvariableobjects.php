@@ -17,7 +17,7 @@ class Smarty_Internal_PHPVariableObjects {
     * @param array $data nested array with data values
     * @return array nested array of variable objects
     */
-    public function createPHPVarObj ($data)
+    static function createPHPVarObj ($data)
     {
         if (is_array($data)) {
             $_result = array();

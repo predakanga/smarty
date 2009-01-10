@@ -24,7 +24,7 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
     {
         $this->compiler = $compiler; 
         // enter nocache mode
-        $this->compiler->_compiler_status->nocache = true;
+        $this->compiler->nocache = true;
         // this tag does not return compiled code
         $this->compiler->has_code = false;
         return true;
@@ -46,7 +46,7 @@ class Smarty_Internal_Compile_NocacheClose extends Smarty_Internal_CompileBase {
     {
         $this->compiler = $compiler; 
         // leave nocache mode
-        $this->compiler->_compiler_status->nocache = false;
+        $this->compiler->nocache = false;
         // this tag does not return compiled code
         $this->compiler->has_code = false;
         return true;

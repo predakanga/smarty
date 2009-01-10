@@ -62,6 +62,7 @@ class Smarty_Internal_Templatelexer
     				'LDELSLASH' => 'closing tag',
     				'COMMENTSTART' => '{*',
     				'COMMENTEND' => '*}',
+    				'LITERALEND' => 'literal close',
     				'IN' => 'in',
     				'BOOLEAN' => 'boolean'
     				);
@@ -126,6 +127,10 @@ backtick = /`/
 andsym = /\s?\&\s?/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
+literalstart = 'SMARTYldelliteralSMARTYrdel'
+literalend = 'SMARTYldel/literalSMARTYrdel'
+ldelim = 'SMARTYldelldelimSMARTYrdel'
+rdelim = 'SMARTYldelrdelimSMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
 notequals = /\s*\!=\s*|\s+(NE|ne)\s+/
 greaterthan = /\s*\>\s*|\s+(GT|gt)\s+/
@@ -153,11 +158,23 @@ commentstart {
 si_qstr {
   $this->token = Smarty_Internal_Templateparser::TP_SI_QSTR;
 }
+literalstart {
+  $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
+}
+literalend {
+  $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
+}
+ldelim {
+  $this->token = Smarty_Internal_Templateparser::TP_LDELIMTAG;
+}
+rdelim {
+  $this->token = Smarty_Internal_Templateparser::TP_RDELIMTAG;
+}
 ldels {
-  $this->token = Smarty_Internal_Templateparser::TP_LDELS;
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
 rdels {
-  $this->token = Smarty_Internal_Templateparser::TP_RDELS;
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;

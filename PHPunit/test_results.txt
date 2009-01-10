@@ -7,7 +7,7 @@ PHPUnit 3.3.9 by Sebastian Bergmann.
 ............................................................ 300 / 335
 ...................................
 
-Time: 4 seconds
+Time: 20 seconds
 
 There was 1 failure:
 
@@ -21,3 +21,5 @@ C:\wamp\www\__smarty3Alpha\PHPunit\CompileCaptureTests.php:63
 
 FAILURES!
 Tests: 335, Assertions: 360, Failures: 1.
+
+Generating code coverage report, this may take a moment.

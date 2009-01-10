@@ -41,12 +41,12 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         */
         if (isset($_attr['caching_lifetime'])) {
             $_caching_lifetime = $_attr['caching_lifetime'];
-            $this->compiler->_compiler_status->tag_nocache = true;
+            $this->compiler->tag_nocache = true;
         } 
         if (isset($_attr['nocache'])) {
             if ($_attr['nocache'] == 'true') {
                 $_caching = 'false';
-                $this->compiler->_compiler_status->tag_nocache = true;
+                $this->compiler->tag_nocache = true;
             } 
         } 
         if (isset($_attr['caching'])) {

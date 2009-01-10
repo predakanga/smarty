@@ -58,7 +58,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELS LDELSLASH RDELS RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
+%fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
               NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL BACKTICK.
               
@@ -85,6 +85,12 @@ template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
                                          } $this->nocache=false;}	
 											// comments
 template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+											// Literal
+template_element(res)::= LITERALSTART text(t) LITERALEND. {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
+											// {ldelim}
+template_element(res)::= LDELIMTAG. {res = $this->cacher->processNocacheCode($this->smarty->left_delimiter, $this->compiler,false,false);}	
+											// {rdelim}
+template_element(res)::= RDELIMTAG. {res = $this->cacher->processNocacheCode($this->smarty->right_delimiter, $this->compiler,false,false);}	
 											// PHP tag
 template_element(res)::= PHP(php). {if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
                                       res = $this->cacher->processNocacheCode(php, $this->compiler, false,true);
@@ -340,5 +346,7 @@ doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";
 doublequotedcontent(res)           ::= OTHER(o). {res = o;}
 //doublequotedcontent(res)           ::= text(t). {res = t;}
 
-text(res)          ::= text(t) OTHER(o). {res = t.o;}
-text(res)          ::= OTHER(o). {res = o;}
+text(res)          ::= text(t) textelement(e). {res = t.e;}
+text(res)          ::= textelement(e). {res = e;}
+textelement(res)          ::= OTHER(o). {res = o;}
+textelement(res)          ::= LDEL(o). {res = o;}

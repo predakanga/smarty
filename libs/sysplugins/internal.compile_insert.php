@@ -28,7 +28,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
         // check and get attributes
         $_attr = $this->_get_attributes($args);
         // this tag must not be cached
-        $this->compiler->_compiler_status->tag_nocache = true;
+        $this->compiler->tag_nocache = true;
 
         $_output = '<?php '; 
         // save posible attributes

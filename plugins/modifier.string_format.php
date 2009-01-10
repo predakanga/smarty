@@ -20,7 +20,7 @@
 * @return string 
 */
 class Smarty_Modifier_String_Format extends Smarty_Internal_PluginBase {
-    public function execute($string, $format)
+    static function execute($string, $format)
     {
         return sprintf($format, $string);
     } 

@@ -53,8 +53,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $template->cacher_object = new $template->cacher_class;
         } 
         // flag for nochache sections
-        $this->_compiler_status->nocache = false;
-        $this->_compiler_status->tag_nocache = false; 
+        $this->nocache = false;
+        $this->tag_nocache = false; 
         // assume successfull compiling
         $this->compile_error = false; 
         // save template object in compiler class
@@ -152,7 +152,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             if (isset($this->smarty->registered_plugins[$tag])) {
                 // check no cache
                 if (!$this->smarty->registered_plugins[$tag][2]) {
-                    $this->_compiler_status->tag_nocache = true;
+                    $this->tag_nocache = true;
                 } 
                 // if compiler function plugin call it now
                 if ($this->smarty->registered_plugins[$tag][0] == 'compiler') {
