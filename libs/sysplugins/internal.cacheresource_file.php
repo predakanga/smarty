@@ -75,26 +75,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     */
     public function clearAll($exp_time = null)
     {
-        $_count = 0;
-        $_cacheDirs = new RecursiveDirectoryIterator($this->smarty->cache_dir);
-        $_cache = new RecursiveIteratorIterator($_cacheDirs, RecursiveIteratorIterator::CHILD_FIRST);
-        foreach ($_cache as $_file) {
-            if ($_file->isDir()) {
-                if (!$_cache->isDot()) {
-                    // delete folder if empty
-                    @rmdir($_file->getPathname());
-                } 
-            } else {
-                if (isset($exp_time)) {
-                    if (time() - @filemtime($_file) >= $exp_time) {
-                        $_count += unlink((string) $_file) ? 1 : 0;
-                    } 
-                } else {
-                    $_count += unlink((string) $_file) ? 1 : 0;
-                } 
-            } 
-        } 
-        return $_count;
+        return $this->clear(null, null, null, $exp_time);
     } 
     /**
     * Empty cache for a specific template
@@ -103,13 +84,23 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
     * @param string $cache_id cache id
     * @param string $compile_id compile id
     * @param integer $exp_time expiration time
-    * @param string $type resource type
     * @return integer number of cache files deleted
     */
     public function clear($resource_name, $cache_id, $compile_id, $exp_time)
     {
+        $_dir_sep = $this->smarty->use_sub_dirs ? DIRECTORY_SEPARATOR : '^';
+        if (isset($resource_name)) {
+            $_resource_part = md5($resource_name) . '.' . $resource_name . $this->smarty->php_ext;
+        } else {
+            $_resource_part = null;
+        } 
+        $_dir = $this->smarty->cache_dir;
+        if ($this->smarty->use_sub_dirs && isset($cache_id)) {
+            $_dir .= str_replace('|', $_dir_sep, $cache_id) . $_dir_sep;
+        } 
+        $_compile_pos = $this->smarty->use_sub_dirs ? 5 : 2;
         $_count = 0;
-        $_cacheDirs = new RecursiveDirectoryIterator($this->smarty->cache_dir);
+        $_cacheDirs = new RecursiveDirectoryIterator($_dir);
         $_cache = new RecursiveIteratorIterator($_cacheDirs, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($_cache as $_file) {
             if ($_file->isDir()) {
@@ -118,12 +109,22 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
                     @rmdir($_file->getPathname());
                 } 
             } else {
-                if (isset($exp_time)) {
-                    if (time() - @filemtime($_file) >= $exp_time) {
+                $_parts = explode($_dir_sep, $_file);
+                $_parts_count = count($_parts);
+                $_parts_compile_pos = $_parts_count - $_compile_pos;
+                if ($_parts_compile_pos < 0) {
+                    $_parts_compile_pos = 0;
+                } 
+                if (substr_compare((string)$_file, $_dir, 0, strlen($_dir)) == 0 &&
+                        (!isset($resource_name) || $_parts[$_parts_count-1] == $_resource_part) &&
+                        (!isset($compile_id) || $_parts[$_parts_compile_pos] == $compile_id)) {
+                    if (isset($exp_time)) {
+                        if (time() - @filemtime($_file) >= $exp_time) {
+                            $_count += unlink((string) $_file) ? 1 : 0;
+                        } 
+                    } else {
                         $_count += unlink((string) $_file) ? 1 : 0;
                     } 
-                } else {
-                    $_count += unlink((string) $_file) ? 1 : 0;
                 } 
             } 
         } 

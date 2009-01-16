@@ -1,3 +1,8 @@
+01/16/2009
+- reallow leading _ in variable names  {$_var}
+- allow array of objects  {$array.index->methode()} syntax
+- finished work on clear_cache and clear_cache_all methodes
+
 01/11/2009
 - added support of {literal} tag
 - added support of {ldelim} and {rdelim} tags

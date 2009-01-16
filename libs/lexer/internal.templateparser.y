@@ -256,7 +256,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.oc; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
+object(res)      ::= DOLLAR varvar(v) vararraydefs(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 

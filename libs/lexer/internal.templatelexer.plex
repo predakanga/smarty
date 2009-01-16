@@ -118,7 +118,7 @@ colon = /\:/
 semicolon = /\;/
 vert = /\|/
 equal = /\=/
-underl = /_/
+underl = /___/
 space = /[\s]+/
 ptr = /\->/
 aptr = /\s?=>\s?/

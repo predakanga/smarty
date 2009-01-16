@@ -17,5 +17,5 @@ $smarty->assign('values',array(1,5,60,203,2,3,4,900));
 
 // example of executing a compiled template
 $smarty->display('test_if.tpl');
-
+$i=0;
 ?>
