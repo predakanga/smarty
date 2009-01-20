@@ -215,6 +215,12 @@ value(res)	     ::= function(f). { res = f; }
 value(res)	     ::= SI_QSTR(s). { res = s; }
 									// double quoted string
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
+									// static class methode call
+value(res)	     ::= ID(c) COLON COLON method(m). { res = c.'::'.m; }
+									// static class constant
+value(res)       ::= ID(c) COLON COLON ID(v). { res = c.'::'.v;}
+									// static class variables
+value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a). { res = c.'::$'.v.a;}
 									// identifier
 value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 									// boolean
