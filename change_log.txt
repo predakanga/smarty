@@ -1,4 +1,7 @@
 01/25/2009
+- Smarty2 modfiers added to SVN
+
+01/25/2009
 - bugfix allow arrays at object properties in Smarty syntax
 - the template object is now passed as additional parameter at plugin calls
 - clear_compiled_tpl methode completed

@@ -122,7 +122,7 @@ smartytag(res)   ::= LDEL ID(i) modifier(m) modparameters(p) attributes(a) RDEL.
 																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
                                                                       res .= "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(ob_get_clean()". p ."),'modifier');?>";
                                                                  } else {
-                                                                      $this->compiler->trigger_template_error ("unknown modifier\"" . m . "\"");
+                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m . "\"");
                                                                  }
                                                               }
                                                             }
