@@ -58,12 +58,12 @@
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
-                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
+                <td class="coverBarOutline"><img src="snow.png" width="100" height="10" alt="&nbsp;"><img src="snow.png" width="0" height="10" alt="&nbsp;"></td>
               </tr>
             </table>
           </td>
-          <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">1 / 1</td>
+          <td class="coverPerNone">&nbsp;</td>
+          <td class="coverNumNone">&nbsp;</td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -88,7 +88,16 @@
           <td class="tableHead" colspan="10">&nbsp;</td>
         </tr>
         <tr>
-          <td class="coverItem"><b><a href="#22">Smarty_Modifier_String_Format</a></b></td>
+          <td class="coverItem">Functions</td>
+          <td class="coverBar" align="center" width="100">
+            <table border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td class="coverBarOutline"><img src="scarlet_red.png" width="0" height="10" alt="&nbsp;"><img src="snow.png" width="100" height="10" alt="&nbsp;"></td>
+              </tr>
+            </table>
+          </td>
+          <td class="coverPerNone">&nbsp;</td>
+          <td class="coverNumNone">&nbsp;</td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -98,6 +107,19 @@
           </td>
           <td class="coverPerHi">100.00%</td>
           <td class="coverNumHi">1 / 1</td>
+          <td class="coverBar" align="center" width="100">
+            <table border="0" cellspacing="0" cellpadding="1">
+              <tr>
+                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
+              </tr>
+            </table>
+          </td>
+          <td class="coverPerHi">100.00%</td>
+          <td class="coverNumHi">0 / 0</td>
+        </tr>
+
+        <tr>
+          <td class="coverFile" colspan="4">&nbsp;<a href="#22">function smarty_modifier_string_format($string, $format)</a></td>
           <td class="coverBar" align="center" width="100">
             <table border="0" cellspacing="0" cellpadding="1">
               <tr>
@@ -116,28 +138,6 @@
           </td>
           <td class="coverPerHi">100.00%</td>
           <td class="coverNumHi">2 / 2</td>
-        </tr>
-
-        <tr>
-          <td class="coverFile" colspan="4">&nbsp;<a href="#23">public static function execute($string, $format)</a></td>
-          <td class="coverBar" align="center" width="100">
-            <table border="0" cellspacing="0" cellpadding="1">
-              <tr>
-                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
-              </tr>
-            </table>
-          </td>
-          <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">1 / 1</td>
-          <td class="coverBar" align="center" width="100">
-            <table border="0" cellspacing="0" cellpadding="1">
-              <tr>
-                <td class="coverBarOutline"><img src="chameleon.png" width="100" height="10" alt="100.00%"><img src="snow.png" width="0" height="10" alt="100.00%"></td>
-              </tr>
-            </table>
-          </td>
-          <td class="coverPerHi">100.00%</td>
-          <td class="coverNumHi">1 / 1</td>
         </tr>
 
 
@@ -170,20 +170,16 @@
 <span class="lineNum" id="container15"><a name="15"></a><a href="#15" id="line15">      15</a> </span>                : *                                                                                                               
 <span class="lineNum" id="container16"><a name="16"></a><a href="#16" id="line16">      16</a> </span>                : * @link http://smarty.php.net/manual/en/language.modifier.string.format.php string_format (Smarty online manual)
 <span class="lineNum" id="container17"><a name="17"></a><a href="#17" id="line17">      17</a> </span>                : * @author Monte Ohrt &lt;monte at ohrt dot com&gt;                                                                    
-<span class="lineNum" id="container18"><a name="18"></a><a href="#18" id="line18">      18</a> </span>                : * @param string $                                                                                               
-<span class="lineNum" id="container19"><a name="19"></a><a href="#19" id="line19">      19</a> </span>                : * @param string $                                                                                               
-<span class="lineNum" id="container20"><a name="20"></a><a href="#20" id="line20">      20</a> </span>                : * @return string                                                                                                
+<span class="lineNum" id="container18"><a name="18"></a><a href="#18" id="line18">      18</a> </span>                : * @param string $string input string                                                                            
+<span class="lineNum" id="container19"><a name="19"></a><a href="#19" id="line19">      19</a> </span>                : * @param string $format format string                                                                           
+<span class="lineNum" id="container20"><a name="20"></a><a href="#20" id="line20">      20</a> </span>                : * @return string formatted string                                                                               
 <span class="lineNum" id="container21"><a name="21"></a><a href="#21" id="line21">      21</a> </span>                : */                                                                                                              
-<span class="lineNum" id="container22"><a name="22"></a><a href="#22" id="line22">      22</a> </span><span class="lineCov">              1 : class Smarty_Modifier_String_Format extends Smarty_Internal_PluginBase {                                        </span>
-<span class="lineNum" id="container23"><a name="23"></a><a href="#23" id="line23">      23</a> </span>                :     static function execute($string, $format)                                                                   
-<span class="lineNum" id="container24"><a name="24"></a><a href="#24" id="line24">      24</a> </span>                :     {                                                                                                           
-<span class="lineNum" id="container25"><a name="25"></a><a href="#25" id="line25">      25</a> </span><span class="lineCov">              1 :         return sprintf($format, $string);                                                                       </span>
-<span class="lineNum" id="container26"><a name="26"></a><a href="#26" id="line26">      26</a> </span><span class="lineDeadCode">                :     }                                                                                                           </span>
-<span class="lineNum" id="container27"><a name="27"></a><a href="#27" id="line27">      27</a> </span>                : }                                                                                                               
-<span class="lineNum" id="container28"><a name="28"></a><a href="#28" id="line28">      28</a> </span>                :                                                                                                                 
-<span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span>                : /* vim: set expandtab: */                                                                                       
-<span class="lineNum" id="container30"><a name="30"></a><a href="#30" id="line30">      30</a> </span>                :                                                                                                                 
-<span class="lineNum" id="container31"><a name="31"></a><a href="#31" id="line31">      31</a> </span>                : ?&gt;                                                                                                              
+<span class="lineNum" id="container22"><a name="22"></a><a href="#22" id="line22">      22</a> </span><span class="lineCov">              1 :     function smarty_modifier_string_format($string, $format)                                                    </span>
+<span class="lineNum" id="container23"><a name="23"></a><a href="#23" id="line23">      23</a> </span>                :     {                                                                                                           
+<span class="lineNum" id="container24"><a name="24"></a><a href="#24" id="line24">      24</a> </span><span class="lineCov">              1 :         return sprintf($format, $string);                                                                       </span>
+<span class="lineNum" id="container25"><a name="25"></a><a href="#25" id="line25">      25</a> </span><span class="lineDeadCode">                :     }                                                                                                           </span>
+<span class="lineNum" id="container26"><a name="26"></a><a href="#26" id="line26">      26</a> </span>                :                                                                                                                 
+<span class="lineNum" id="container27"><a name="27"></a><a href="#27" id="line27">      27</a> </span>                : ?&gt;                                                                                                              
 
 </pre>
         </td>
@@ -192,7 +188,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.9</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Tue Jan 20 18:19:33 CET 2009.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.9</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Sun Jan 25 13:39:52 CET 2009.</td></tr>
     </table>
 
     <br />
@@ -206,8 +202,8 @@
           "body": "<ul><li class=\"testPassed\">testDebug1(CompileDebugTests)</li></ul>",
           "footer": ""
         },
-        "panel25": {
-          "header": "1 test covers line 25",
+        "panel24": {
+          "header": "1 test covers line 24",
           "body": "<ul><li class=\"testPassed\">testDebug1(CompileDebugTests)</li></ul>",
           "footer": ""
         },

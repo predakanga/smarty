@@ -268,8 +268,8 @@ objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
 objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
-objectelement(res)::= PTR ID(i).	    { res = '->'.i;}
-//objectelement(res)::= PTR varvar(v).	{ res = '->'.v;}
+objectelement(res)::= PTR ID(i) vararraydefs(a).	    { res = '->'.i.a;}
+//objectelement(res)::= PTR varvar(v) vararraydefs(a).	{ res = '->'.v.a;}
 										// method
 objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 

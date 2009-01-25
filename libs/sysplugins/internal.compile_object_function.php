@@ -38,7 +38,7 @@ class Smarty_Internal_Compile_Object_Function extends Smarty_Internal_CompileBas
         } 
         $_params = 'array(' . implode(",", $_paramsArray) . ')'; 
         // compile code
-        $output = '<?php echo $_smarty_tpl->smarty->registered_objects[\''.$tag.'\'][0]->' . $methode . '(' . $_params . ',$_smarty_tpl->smarty);?>';
+        $output = '<?php echo $_smarty_tpl->smarty->registered_objects[\''.$tag.'\'][0]->' . $methode . '(' . $_params . ',$_smarty_tpl->smarty,$_smarty_tpl);?>';
 
         return $output;
     } 

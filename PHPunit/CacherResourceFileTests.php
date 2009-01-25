@@ -64,7 +64,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     /**
     * test getCachedFilepath with cache_id and compile_id
     */
-    public function testGetCachedFilepathCacheIdCompileIg()
+    public function testGetCachedFilepathCacheIdCompileId()
     {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;

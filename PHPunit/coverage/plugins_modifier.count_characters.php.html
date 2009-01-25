@@ -157,7 +157,7 @@
 <span class="lineNum" id="container2"><a name="2"></a><a href="#2" id="line2">       2</a> </span>                : /**                                                                            
 <span class="lineNum" id="container3"><a name="3"></a><a href="#3" id="line3">       3</a> </span>                :  * Smarty plugin                                                               
 <span class="lineNum" id="container4"><a name="4"></a><a href="#4" id="line4">       4</a> </span>                :  * @package Smarty                                                             
-<span class="lineNum" id="container5"><a name="5"></a><a href="#5" id="line5">       5</a> </span>                :  * @subpackage plugins                                                         
+<span class="lineNum" id="container5"><a name="5"></a><a href="#5" id="line5">       5</a> </span>                :  * @subpackage PluginsModifier                                                 
 <span class="lineNum" id="container6"><a name="6"></a><a href="#6" id="line6">       6</a> </span>                :  */                                                                            
 <span class="lineNum" id="container7"><a name="7"></a><a href="#7" id="line7">       7</a> </span>                :                                                                                
 <span class="lineNum" id="container8"><a name="8"></a><a href="#8" id="line8">       8</a> </span>                :                                                                                
@@ -170,9 +170,9 @@
 <span class="lineNum" id="container15"><a name="15"></a><a href="#15" id="line15">      15</a> </span>                :  * @link http://smarty.php.net/manual/en/language.modifier.count.characters.php
 <span class="lineNum" id="container16"><a name="16"></a><a href="#16" id="line16">      16</a> </span>                :  *          count_characters (Smarty online manual)                            
 <span class="lineNum" id="container17"><a name="17"></a><a href="#17" id="line17">      17</a> </span>                :  * @author   Monte Ohrt &lt;monte at ohrt dot com&gt;                                
-<span class="lineNum" id="container18"><a name="18"></a><a href="#18" id="line18">      18</a> </span>                :  * @param string                                                               
-<span class="lineNum" id="container19"><a name="19"></a><a href="#19" id="line19">      19</a> </span>                :  * @param boolean include whitespace in the character count                    
-<span class="lineNum" id="container20"><a name="20"></a><a href="#20" id="line20">      20</a> </span>                :  * @return integer                                                             
+<span class="lineNum" id="container18"><a name="18"></a><a href="#18" id="line18">      18</a> </span>                :  * @param string $string input string                                          
+<span class="lineNum" id="container19"><a name="19"></a><a href="#19" id="line19">      19</a> </span>                :  * @param boolean $include_spaces include whitespace in the character count    
+<span class="lineNum" id="container20"><a name="20"></a><a href="#20" id="line20">      20</a> </span>                :  * @return integer number of characters                                        
 <span class="lineNum" id="container21"><a name="21"></a><a href="#21" id="line21">      21</a> </span>                :  */                                                                            
 <span class="lineNum" id="container22"><a name="22"></a><a href="#22" id="line22">      22</a> </span><span class="lineNoCov">              0 : function smarty_modifier_count_characters($string, $include_spaces = false)    </span>
 <span class="lineNum" id="container23"><a name="23"></a><a href="#23" id="line23">      23</a> </span>                : {                                                                              
@@ -181,10 +181,7 @@
 <span class="lineNum" id="container26"><a name="26"></a><a href="#26" id="line26">      26</a> </span>                :                                                                                
 <span class="lineNum" id="container27"><a name="27"></a><a href="#27" id="line27">      27</a> </span><span class="lineNoCov">              0 :     return preg_match_all(&quot;/[^\s]/&quot;,$string, $match);                          </span>
 <span class="lineNum" id="container28"><a name="28"></a><a href="#28" id="line28">      28</a> </span><span class="lineDeadCode">                : }                                                                              </span>
-<span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span>                :                                                                                
-<span class="lineNum" id="container30"><a name="30"></a><a href="#30" id="line30">      30</a> </span>                : /* vim: set expandtab: */                                                      
-<span class="lineNum" id="container31"><a name="31"></a><a href="#31" id="line31">      31</a> </span>                :                                                                                
-<span class="lineNum" id="container32"><a name="32"></a><a href="#32" id="line32">      32</a> </span>                : ?&gt;                                                                             
+<span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span>                : ?&gt;                                                                             
 
 </pre>
         </td>
@@ -193,7 +190,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.9</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Tue Jan 20 18:19:33 CET 2009.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.9</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Sun Jan 25 13:39:52 CET 2009.</td></tr>
     </table>
 
     <br />

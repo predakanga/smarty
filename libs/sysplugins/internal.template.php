@@ -53,6 +53,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $tpl_vars = array();
     public $parent = null;
     public $render_time = 0;
+    // storage for plugin
+    public $plugin_data = array();
 
     /**
     * Create template data object

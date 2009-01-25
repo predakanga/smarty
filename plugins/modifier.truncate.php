@@ -17,15 +17,14 @@
 * 
 * @link http://smarty.php.net/manual/en/language.modifier.truncate.php truncate (Smarty online manual)
 * @author Monte Ohrt <monte at ohrt dot com> 
-* @param string $ 
-* @param integer $ 
-* @param string $ 
-* @param boolean $ 
-* @param boolean $ 
-* @return string 
+* @param string $string input string 
+* @param integer $length lenght of truncated text
+* @param string $etc end string 
+* @param boolean $break_words truncate at word boundary
+* @param boolean $middle truncate in the middle of text
+* @return string truncated string
 */
-class Smarty_Modifier_Truncate extends Smarty_Internal_PluginBase {
-    public function execute ($string, $length = 80, $etc = '...',
+    function smarty_modifier_truncate($string, $length = 80, $etc = '...',
                                   $break_words = false, $middle = false)     
     {
 
@@ -46,6 +45,4 @@ class Smarty_Modifier_Truncate extends Smarty_Internal_PluginBase {
             return $string;
         } 
     } 
-} 
-
 ?>

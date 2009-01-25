@@ -42,7 +42,7 @@ class Smarty_Internal_TemplateBase {
     * assigns values to template variables by reference
     * 
     * @param string $tpl_var the template variable name
-    * @param mixed $value the referenced value to assign
+    * @param mixed &$value the referenced value to assign
     * @param boolean $nocache if true any output of this variable will be not cached
     * @param boolean $global if true the variable will have global scope
     */
@@ -106,7 +106,7 @@ class Smarty_Internal_TemplateBase {
     * appends values to template variables by reference
     * 
     * @param string $tpl_var the template variable name
-    * @param mixed $value the referenced value to append
+    * @param mixed &$value the referenced value to append
     * @param boolean $merge flag if array elements shall be merged
     */
     public function append_by_ref($tpl_var, &$value, $merge = false)

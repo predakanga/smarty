@@ -181,7 +181,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
                 } 
             } 
 
-            $this->trigger_template_error ("unknow tag \"" . $tag . "\"");
+            $this->trigger_template_error ("unknown tag \"" . $tag . "\"");
         } 
     } 
 

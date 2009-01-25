@@ -201,9 +201,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * Sets a static instance of the smarty object. Retrieve with:
     * $smarty = Smarty::instance();
     * 
-    * @param string $id the object instance id
-    * @param obj $new_instance the Smarty object when setting
-    * @return obj reference to Smarty object
+    * @param object $new_instance the Smarty object when setting
+    * @return object reference to Smarty object
     */
     public static function &instance($new_instance = null)
     {
@@ -216,7 +215,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
     * fetches a rendered Smarty template
     * 
-    * @param string $template_resource the resource handle of the template file or template object
+    * @param string $template the resource handle of the template file or template object
+    * @param object|null $parent next higher level of Smarty variables
+    * @param mixed $cache_id cache id to be used with this template
+    * @param mixed $compile_id compile id to be used with this template
+    * @return string rendered template output
     */
     public function fetch($template, $parent = null, $cache_id = null, $compile_id = null)
     {
@@ -238,7 +241,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
     * displays a Smarty template
     * 
-    * @param string $template_resource the resource handle of the template file  or template object
+    * @param string|object $template the resource handle of the template file  or template object
+    * @param object $parent next higher level of Smarty variables
+    * @param mixed $cache_id cache id to be used with this template
+    * @param mixed $compile_id compile id to be used with this template
     */
     public function display($template, $parent = null, $cache_id = null, $compile_id = null)
     { 
@@ -255,7 +261,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
     * test if cache i valid
     * 
-    * @param string $template_resource the resource handle of the template file or template object
+    * @param string|object $template the resource handle of the template file or template object
+    * @param mixed $cache_id cache id to be used with this template
+    * @param mixed $compile_id compile id to be used with this template
+    * @return boolean cache status
     */
     public function is_cached($template, $cache_id = null, $compile_id = null)
     {
@@ -291,22 +300,23 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * class name format: Smarty_PluginType_PluginName
     * plugin filename format: plugintype.pluginname.php
     * 
-    * @param string $class_name unknown class name
+    * @param string $plugin_name class plugin name to load
+    * @return boolean
     */
-    public function loadPlugin($class_name)
+    public function loadPlugin($plugin_name)
     { 
         // if class exists, exit silently (already loaded)
-        if (class_exists($class_name, false))
+        if (class_exists($plugin_name, false))
             return true; 
         // if callable as function, exit silently (already loaded)
-        if (is_callable($class_name))
+        if (is_callable($plugin_name))
             return true; 
         // Plugin name is expected to be: Smarty_[Type]_[Name]
-        $class_name = strtolower($class_name);
-        $name_parts = explode('_', $class_name, 3); 
+        $plugin_name = strtolower($plugin_name);
+        $name_parts = explode('_', $plugin_name, 3); 
         // class name must have three parts to be valid plugin
         if (count($name_parts) < 3 || $name_parts[0] !== 'smarty') {
-            throw new SmartyException("plugin {$class_name} is not a valid name format");
+            throw new SmartyException("plugin {$plugin_name} is not a valid name format");
             return false;
         } 
         // plugin filename is expected to be: [type].[name].php
@@ -336,7 +346,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * class name format: Smarty_Method_MethodName
     * plugin filename format: method.methodname.php
     * 
-    * @param string $class_name unknown class name
+    * @param string $name unknown methode name
+    * @param array $args aurgument array
     */
     public function __call($name, $args)
     {

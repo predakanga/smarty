@@ -1,9 +1,9 @@
 <?php
 /**
-* Smarty plugin
-* 
+* Smarty plugin to format text blocks
+*
 * @package Smarty
-* @subpackage plugins
+* @subpackage PluginsBlock
 */
 
 /**
@@ -16,7 +16,8 @@
 * 
 * @link http://smarty.php.net/manual/en/language.function.textformat.php {textformat}
        (Smarty online manual)
-* @param array $ <pre>
+* @param array $params parameters
+* <pre>
 * Params:   style: string (email)
 *            indent: integer (0)
 *            wrap: integer (80)
@@ -25,11 +26,13 @@
 *            wrap_boundary: boolean (true)
 * </pre>
 * @author Monte Ohrt <monte at ohrt dot com> 
-* @param string $ contents of the block
-* @param Smarty $ clever simulation of a method
-* @return string string $content re-formatted
+* @param string $content contents of the block
+* @param object $smarty Smarty object
+* @param boolean &$repeat repeat flag
+* @param object $template template object
+* @return string content re-formatted
 */
-function smarty_block_textformat($params, $content, &$smarty)
+function smarty_block_textformat($params, $content, $smarty, &$repeat, $template)
 {
     if (is_null($content)) {
         return;
@@ -94,7 +97,7 @@ function smarty_block_textformat($params, $content, &$smarty)
     } 
     $_output = implode($wrap_char . $wrap_char, $_paragraphs);
     
-    return $assign ? $smarty->assign($assign, $_output) : $_output;
+    return $assign ? $template->assign($assign, $_output) : $_output;
 } 
 
 ?>
