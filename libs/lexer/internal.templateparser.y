@@ -208,7 +208,7 @@ value(res)		   ::= variable(v). { res = v; }
 									// numeric constant
 value(res)       ::= NUMBER(n). { res = n; }
 									// object
-value(res)       ::= object(o). { res = o; }
+//value(res)       ::= object(o). { res = o; }
 									// function call
 value(res)	     ::= function(f). { res = f; }
 									// singele quoted string
@@ -231,14 +231,14 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 //
 // variables 
 //
-									// simple Smarty variable
-//variable(res)    ::= DOLLAR varvar(v). { res = '$_smarty_tpl->getVariable('. v .')->value'; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
-									// array variable
+									// simple Smarty variable (optional array)
 variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->getVariable('. v .')->value'.a; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// special variables
 variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
+									// object
+variable(res)    ::= object(o). { res = o; }
 										// single array index
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
