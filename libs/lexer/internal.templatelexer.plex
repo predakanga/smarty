@@ -25,6 +25,7 @@ class Smarty_Internal_Templatelexer
     				'LDEL'		=> '{',
     				'RDEL'		=> '}',
     				'IDENTITY'	=> '===',
+    				'NONEIDENTITY'	=> '!==',
     				'EQUALS'	=> '==',
     				'NOTEQUALS'	=> '!=',
     				'GREATEREQUAL' => '(>=,GE)',
@@ -138,6 +139,7 @@ lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
 greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
+noneidentity = /\s*!==\s*/
 in = /\s+(IN|in)\s+/
 not = /!|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
@@ -193,6 +195,9 @@ boolean {
 }
 identity{
   $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;
+}
+noneidentity{
+  $this->token = Smarty_Internal_Templateparser::TP_NONEIDENTITY;
 }
 equals{
   $this->token = Smarty_Internal_Templateparser::TP_EQUALS;

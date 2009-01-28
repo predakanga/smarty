@@ -1,4 +1,7 @@
 01/28/2009
+- fixed '!==' if condition.
+
+01/28/2009
 - added support of {strip} {/strip} tag.
 
 01/27/2009

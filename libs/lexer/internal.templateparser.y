@@ -59,7 +59,7 @@
 // fallback definition to catch all non Smarty template text
 //
 %fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
-              VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY
+              VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL BACKTICK.
               
 
@@ -333,6 +333,7 @@ ifcond(res)        ::= LESSTHAN. {res = '<';}
 ifcond(res)        ::= GREATEREQUAL. {res = '>=';}
 ifcond(res)        ::= LESSEQUAL. {res = '<=';}
 ifcond(res)        ::= IDENTITY. {res = '===';}
+ifcond(res)        ::= NONEIDENTITY. {res = '!==';}
 
 lop(res)        ::= LAND. {res = '&&';}
 lop(res)        ::= LOR. {res = '||';}
