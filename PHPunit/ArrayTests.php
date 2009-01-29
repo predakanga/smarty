@@ -34,7 +34,7 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
     */
     public function testSimpleArrayDefinition()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=(1,2,3,4,5)}{for $bar in $foo}{$bar}{/for}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,3,4,5]}{for $bar in $foo}{$bar}{/for}', $this->smarty);
         $this->assertEquals('12345', $this->smarty->fetch($tpl));
     } 
     /**
@@ -42,7 +42,7 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
     */
     public function testSmarty2ArrayAccess()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=(1,2,3,4,5)}{$foo.0}{$foo.1}{$foo.2}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,3,4,5]}{$foo.0}{$foo.1}{$foo.2}', $this->smarty);
         $this->assertEquals('123', $this->smarty->fetch($tpl));
     } 
     /**
@@ -50,7 +50,7 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
     */
     public function testSmarty3ArrayAccess()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=(1,2,3,4,5)}{$foo[0]}{$foo[1]}{$foo[2]}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,3,4,5]}{$foo[0]}{$foo[1]}{$foo[2]}', $this->smarty);
         $this->assertEquals('123', $this->smarty->fetch($tpl));
     } 
     /**
@@ -58,7 +58,7 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
     */
     public function testIndexedArrayDefinition()
     {
-        $tpl = $this->smarty->createTemplate('string:{$x=\'d\'}{$foo=(a=>1,\'b\'=>2,"c"=>3,$x=>4)}{$foo[\'a\']}{$foo[\'b\']}{$foo[\'c\']}{$foo[\'d\']}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$x=\'d\'}{$foo=[a=>1,\'b\'=>2,"c"=>3,$x=>4]}{$foo[\'a\']}{$foo[\'b\']}{$foo[\'c\']}{$foo[\'d\']}', $this->smarty);
         $this->assertEquals('1234', $this->smarty->fetch($tpl));
     } 
     /**
@@ -66,7 +66,7 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
     */
     public function testNestedArray()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=(1,2,(a,b,c),4,5)}{$foo[2][1]}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[a,b,c],4,5]}{$foo[2][1]}', $this->smarty);
         $this->assertEquals('b', $this->smarty->fetch($tpl));
     } 
 } 

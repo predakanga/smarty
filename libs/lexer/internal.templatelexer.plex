@@ -95,7 +95,8 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-php = /\<\?php.*\?\>/
+xml = /\<\?xml.*\?\>/
+php = /\<\?.*\?\>/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
 ldelslash = /SMARTYldel\//
@@ -114,9 +115,9 @@ openB = /\[/
 closeB = /]/
 dollar = /\$/
 dot = /\./
-comma = /\,/
+comma = /\s?\,\s?/
 colon = /\:/
-semicolon = /\;/
+semicolon = /\;\s?/
 vert = /\|/
 equal = /\=/
 underl = /___/
@@ -148,6 +149,9 @@ other = /./
 */
 /*!lex2php
 %statename START
+xml {
+  $this->token = Smarty_Internal_Templateparser::TP_XML;
+}
 php {
   $this->token = Smarty_Internal_Templateparser::TP_PHP;
 }

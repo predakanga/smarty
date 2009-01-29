@@ -1,3 +1,9 @@
+01/29/2009
+- syntax for array definition changed from (1,2,3) to [1,2,3] to remove ambiguous syntax
+- allow  {for $foo in [1,2,3]} syntax
+- bugfix in double quoted strings
+- allow <?xml...?> tags in template even if short_tags are enabled
+
 01/28/2009
 - fixed '!==' if condition.
 

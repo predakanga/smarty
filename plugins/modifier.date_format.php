@@ -6,10 +6,6 @@
  */
 
 /**
- * Include the {@link shared.make_timestamp.php} plugin
- */
-    $smarty->loadPlugin('Smarty_shared_make_timestamp');
-/**
  * Smarty date_format modifier plugin
  *
  * Type:     modifier<br>
@@ -30,6 +26,11 @@
  */
 function smarty_modifier_date_format($string, $format = '%b %e, %Y', $default_date = '')
 {
+/**
+ * Include the {@link shared.make_timestamp.php} plugin
+ */
+    $smarty = Smarty::instance();
+    $smarty->loadPlugin('Smarty_shared_make_timestamp');
     if ($string != '') {
         $timestamp = smarty_make_timestamp($string);
     } elseif ($default_date != '') {

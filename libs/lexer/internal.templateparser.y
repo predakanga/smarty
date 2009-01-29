@@ -96,6 +96,8 @@ template_element(res)::= PHP(php). {if (!$this->template->security || $this->sma
                                       res = $this->cacher->processNocacheCode(php, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
                                       res = $this->cacher->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
+											// XML tag
+template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>", $this->compiler, false, false);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	
 //template_element(res)::= text(t). {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
@@ -136,6 +138,7 @@ smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler-
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
 									// {for $var in $array} tag
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN array(a) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
 
@@ -207,8 +210,6 @@ value(res)        ::= value(e) modifier(m) modparameters(p). {if (m == 'isset' |
 value(res)		   ::= variable(v). { res = v; }
 									// numeric constant
 value(res)       ::= NUMBER(n). { res = n; }
-									// object
-//value(res)       ::= object(o). { res = o; }
 									// function call
 value(res)	     ::= function(f). { res = f; }
 									// singele quoted string
@@ -338,9 +339,11 @@ ifcond(res)        ::= NONEIDENTITY. {res = '!==';}
 lop(res)        ::= LAND. {res = '&&';}
 lop(res)        ::= LOR. {res = '||';}
 
-array(res)		  ::=  OPENP arrayelements(a) CLOSEP.  { res = 'array('.a.')';}
+//array(res)		  ::=  OPENP arrayelements(a) CLOSEP.  { res = 'array('.a.')';}
+array(res)		  ::=  OPENB arrayelements(a) CLOSEB.  { res = 'array('.a.')';}
 arrayelements(res)   ::=  arrayelement(a).  { res = a; }
 arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.','.a; }
+arrayelements        ::=  .  { return; }
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
 arrayelement(res)		 ::=  array(a). { res = a;}
@@ -350,7 +353,7 @@ doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
 doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
-doublequotedcontent(res)           ::= OTHER(o). {res = o;}
+doublequotedcontent(res)           ::= OTHER(o). {res = addslashes(o);}
 //doublequotedcontent(res)           ::= text(t). {res = t;}
 
 text(res)          ::= text(t) textelement(e). {res = t.e;}

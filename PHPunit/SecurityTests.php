@@ -43,7 +43,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testTrustedPHPFunction()
     {
-        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=(1,2,3,4,5)}{count($foo)}'));
+        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{count($foo)}'));
     } 
 
     /**
@@ -54,7 +54,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->php_functions = array('null');
         try {
             ob_start();
-            $this->smarty->fetch('string:{assign var=foo value=(1,2,3,4,5)}{count($foo)}');
+            $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{count($foo)}');
         } 
         catch (Exception $e) {
             $this->assertContains('PHP function "count" not allowed by security setting', ob_get_clean());
@@ -70,7 +70,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->php_functions = array('null');
         $this->smarty->security = false;
-        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=(1,2,3,4,5)}{count($foo)}'));
+        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{count($foo)}'));
     } 
 
     /**
@@ -78,7 +78,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testTrustedModifier()
     {
-        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=(1,2,3,4,5)}{$foo|count}'));
+        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|count}'));
     } 
 
     /**
@@ -89,7 +89,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->modifiers = array('null');
         try {
             ob_start();
-            $this->smarty->fetch('string:{assign var=foo value=(1,2,3,4,5)}{$foo|count}');
+            $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|count}');
         } 
         catch (Exception $e) {
             $this->assertContains('modifier "count" not allowed by security setting', ob_get_clean());
@@ -105,7 +105,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->modifiers = array('null');
         $this->smarty->security = false;
-        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=(1,2,3,4,5)}{$foo|count}'));
+        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|count}'));
     } 
 
     /**

@@ -28,6 +28,13 @@
 * @author Uwe Tews
 * @package Smarty
 * @version 3.0-alpha1
+* @todo  Config files and related methodes
+* @todo  get_registered_object methode
+* @todo  get_template_vars methode
+* @todo  trigger_error methode
+* @todo  template_exists methode
+* @todo  {$smarty...} vars
+* @todo  fix parsing of double quoted strings
 */
 
 /**
