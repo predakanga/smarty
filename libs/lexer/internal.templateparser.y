@@ -60,7 +60,7 @@
 //
 %fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL BACKTICK.
+              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL BACKTICK AT.
               
 
 //
@@ -235,7 +235,7 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 									// simple Smarty variable (optional array)
 variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->getVariable('. v .')->value'.a; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// variable with property
-variable(res)    ::= DOLLAR varvar(v) COLON ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// special variables
 variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
 									// object
@@ -244,6 +244,7 @@ variable(res)    ::= object(o). { res = o; }
 vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
 vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
+										// no array index
 vararraydefs        ::= . {return;}
 										// Smarty2 style index 
 vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
@@ -301,13 +302,13 @@ params            ::= . { return;}
 //
 // modifier
 //  
-
 modifier(res)    ::= VERT ID(s). { res =  s;}
+
+//
 // modifier parameter
+//
 										// multiple parameter
 modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
-										// single parameter
-//modparameters(res) ::= modparameter(mp). {res = mp;}
 										// no parameter
 modparameters      ::= . {return;}
 										// parameter expression
@@ -339,8 +340,7 @@ ifcond(res)        ::= NONEIDENTITY. {res = '!==';}
 lop(res)        ::= LAND. {res = '&&';}
 lop(res)        ::= LOR. {res = '||';}
 
-//array(res)		  ::=  OPENP arrayelements(a) CLOSEP.  { res = 'array('.a.')';}
-array(res)		  ::=  OPENB arrayelements(a) CLOSEB.  { res = 'array('.a.')';}
+array(res)		       ::=  OPENB arrayelements(a) CLOSEB.  { res = 'array('.a.')';}
 arrayelements(res)   ::=  arrayelement(a).  { res = a; }
 arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.','.a; }
 arrayelements        ::=  .  { return; }
@@ -354,7 +354,7 @@ doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
 doublequotedcontent(res)           ::= OTHER(o). {res = addslashes(o);}
-//doublequotedcontent(res)           ::= text(t). {res = t;}
+//doublequotedcontent(res)           ::= text(t). {res = addslashes(t);}
 
 text(res)          ::= text(t) textelement(e). {res = t.e;}
 text(res)          ::= textelement(e). {res = e;}

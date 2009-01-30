@@ -102,8 +102,8 @@ td {
 
 <table id="table_assigned_vars">
     {for $vars in $assigned_vars}
-       <tr class="{if $vars:iteration % 2 eq 0}odd{else}even{/if}">   
-       <th>${$vars:key|escape:'html'}</th>
+       <tr class="{if $vars@iteration % 2 eq 0}odd{else}even{/if}">   
+       <th>${$vars@key|escape:'html'}</th>
        <td>{$vars|debug_print_var}</td></tr>
     {/for}
 </table>

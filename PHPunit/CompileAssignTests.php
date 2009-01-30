@@ -90,7 +90,7 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignOld9()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{for \$x in \$foo}{\$x:key}{\$x}{/for}");
+        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{for \$x in \$foo}{\$x@key}{\$x}{/for}");
         $this->assertEquals("a9b8c7d6", $this->smarty->fetch($tpl));
     } 
     /**
@@ -130,7 +130,7 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignNew7()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{for \$x in \$foo}{\$x:key}{\$x}{/for}");
+        $tpl = $this->smarty->createTemplate("string:{\$foo=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{for \$x in \$foo}{\$x@key}{\$x}{/for}");
         $this->assertEquals("a9b8c7d6", $this->smarty->fetch($tpl));
     } 
 } 

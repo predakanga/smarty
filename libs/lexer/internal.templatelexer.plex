@@ -50,6 +50,7 @@ class Smarty_Internal_Templatelexer
     				'DOLLAR'	=> '$',
     				'SEMICOLON' => ';',
     				'COLON'		=> ':',
+    				'AT'		=> '@',
     				'QUOTE'		=> '"',
     				'BACKTICK'		=> '`',
     				'VERT'		=> '|',
@@ -117,6 +118,7 @@ dollar = /\$/
 dot = /\./
 comma = /\s?\,\s?/
 colon = /\:/
+at = /@/
 semicolon = /\;\s?/
 vert = /\|/
 equal = /\=/
@@ -128,7 +130,7 @@ quote = /\"/
 backtick = /`/
 andsym = /\s?\&\s?/
 id = /\w+/
-si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
+si_qstr = '\'[^\'\\]*(?:\\.[^\'\\]*)*\''
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 ldelim = 'SMARTYldelldelimSMARTYrdel'
@@ -277,6 +279,9 @@ semicolon {
 }
 colon {
   $this->token = Smarty_Internal_Templateparser::TP_COLON;
+}
+at {
+  $this->token = Smarty_Internal_Templateparser::TP_AT;
 }
 quote {
   $this->token = Smarty_Internal_Templateparser::TP_QUOTE;

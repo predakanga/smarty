@@ -1,3 +1,7 @@
+01/30/2009
+- bugfix in single quoted strings
+- changed syntax for variable property access from $foo:property to $foo@property because of ambiguous syntax at modifiers
+
 01/29/2009
 - syntax for array definition changed from (1,2,3) to [1,2,3] to remove ambiguous syntax
 - allow  {for $foo in [1,2,3]} syntax
