@@ -32,7 +32,6 @@
 * @todo  get_registered_object methode
 * @todo  get_template_vars methode
 * @todo  trigger_error methode
-* @todo  {$smarty...} vars
 */
 
 /**

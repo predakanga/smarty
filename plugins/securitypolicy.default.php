@@ -63,6 +63,10 @@ class Smarty_Security_Policy {
     * @var array 
     */
     public $modifiers = array('escape','count');
+    /**
+    + flag if constants can be accessed from template
+    */
+    public $allow_constants = true;
 } 
 
 ?>

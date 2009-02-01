@@ -60,7 +60,7 @@
 //
 %fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID SI_QSTR EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM UNDERL BACKTICK AT.
+              NOT LAND LOR QUOTE BOOLEAN IN ANDSYM BACKTICK AT.
               
 
 //
@@ -154,8 +154,6 @@ attributes(res)  ::= . { res = array();}
 									
 									// different formats of attribute
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
-//attribute(res)   ::= SPACE ID(v) EQUAL ID(e). { res = array(v=>'e');}
-//attribute(res)   ::= SPACE ID(v) EQUAL array(a). { res = array(v=>a);}
 
 //
 // statement
@@ -233,11 +231,10 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 // variables 
 //
 									// simple Smarty variable (optional array)
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { res = '$_smarty_tpl->getVariable('. v .')->value'.a; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { if (v == '\'smarty\'') { res =  $this->compiler->compileTag(trim(v,"'"),a);} else {
+                                                         res = '$_smarty_tpl->getVariable('. v .')->value'.a; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
-									// special variables
-variable(res)    ::= DOLLAR UNDERL ID(v) vararraydefs(a). { res = '$_'. strtoupper(v).a;}
 									// object
 variable(res)    ::= object(o). { res = o; }
 										// single array index

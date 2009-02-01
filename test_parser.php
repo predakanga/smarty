@@ -23,7 +23,6 @@ if (isset($_POST['template'])) {
 } else {
     $template = null;
 } 
-
 $smarty->assign('template', $template, true);
 
 $smarty->display('test_parser.tpl');
