@@ -32,9 +32,7 @@
 * @todo  get_registered_object methode
 * @todo  get_template_vars methode
 * @todo  trigger_error methode
-* @todo  template_exists methode
 * @todo  {$smarty...} vars
-* @todo  fix parsing of double quoted strings
 */
 
 /**
