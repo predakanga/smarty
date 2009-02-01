@@ -1,6 +1,7 @@
 Smarty 3.0 Alpha 1 : Proof of Concept
 
 Author: Monte Ohrt <monte at ohrt dot com >
+Author: Uwe Tews
 
 This code is a proof of concept as a basis of the Smarty 3 template engine.
 It is by no means complete, it is only a shell of an infrastructure to build
@@ -40,9 +41,9 @@ the Smarty system now lies in the plugin directory. The core Smarty.class.php
 class is extremely slim. The fundamental idea is for Smarty to lazy-load all
 requirements (objects) on an as-needed basis.
 
-LEXER!
+LEXER/PARSER!
 
-Smarty 3 now uses a real lexing tokenizer. This opens all kinds of doors
+Smarty 3 now uses a real lexing tokenizer and a parser. This opens all kinds of doors
 such as template math, function recursion, among many other things.
 
 $smarty OBJECT SINGLETON
@@ -55,7 +56,7 @@ You can do this from anywhere in your PHP code, and get the instance. You can
 be buried in a php function, in a class method, or wherever. The $smarty
 object is quickly obtainable.
 
-Since all plugins are now classes (did I mention that yet?), They all extend
+Since all internal plugins are now classes (did I mention that yet?), They all extend
 Smarty_Internal_PluginBase, which makes $this->smarty a reference to the Smarty
 object instance. This is available to all plugins.
 
@@ -82,38 +83,73 @@ Smarty will not compile it, it will just get executed as PHP. You have full
 reign of PHP in your template code. Your assigned template vars are available
 simply as <?=$foo?> <?=$bar?>, etc.
 
-You can also use strings as templates with the "string" resource type:
+How to add modifiers in PHP templates:
+Modifier are added like a method to the variables.
+<?=$foo->escape('html')?>
+Modifier can be chained.
+<?=$foo->truncate(5)->escape('html')?>
 
+How to output function results in PHP templates:
+Functions will require a $_f prefix.
+<?=$_f->time()?>
+Again you can add modifier.
+<?=$_f->time()->truncate(2)?>
+
+
+
+WHAT IS NEW IN SMARTY TEMPLATE SYNTAX
+
+You can also use strings as templates with the "string" resource type:
 $smarty->display('string:This is my template, {$foo}!');
 
-ACCESSING PLUGINS (modifiers, functions)
+You can use complex expressions almost anywhere.
+{$x+$y} will output the sum of x and y.
+PHP functions can be used in expressions unless they are not disabled by the security policy.
+{assign var=foo value=2*(3+sqrt($bar))}
 
-We haven't landed on a syntax for accessing plugins from PHP templates.
-It needs to be simple, yet robust. Some ideas:
+You can define arrays.
+{assign var=foo value=[1,2,3]}
+{assign var=foo value=['y'=>'yellow','b'=>'blue']}
+Arrays can be nested.
+{assign var=foo value=[1,[9,8],3]}
 
-// load/run modifier in-template
-$this->modifier('truncate',$foo,$args);
+There is a new "short" syntax for assigning variables.
+{$foo=$bar+2}
 
-// load modifier into php function first
-$smarty->load->modifier('truncate','truncate');
-// execute in template;
-truncate($foo,$args);
+Arrays can be accessed now also with a new syntax
+{$foo['colour']}
+The old syntax {$foo.colour} will still work.
+
+Variable names can be variable.
+{$foo_{$x}} will output the variable foo_1 if $x has a value of 1.
+
+Object method chaining is implemented.
+{$object->method1($x)->method2($y)}
+
+New {for....} tag:
+There are two different styles.
+To loop over an array:
+{for $var in $myarray}   ....  {/for}
+$var@key            will deliver the key
+$var@iteration      will deliver the iteration
+$var@total           will deliver the total number of array entries
+
+For a counting for loop:
+{for $x=0, $y=count($foo); $x<$y; $i++}  ....  {/for}
+Any number of statements can be used separated by comma as the first
+inital expression at {for}
 
 
-Many other things are on the list, such as:
+{nocache} ... {/nocache} will declare a section of the template to be not cached.
 
-* cache file resources
-* compile file resources
-* config file resources
-* template objects
-* per template caching
-* per function caching
-* per variable caching
+You can declare output to be not cached with the nocache attribute.
+{$foo nocache=true}
+{time() nocache=true}
 
-
-Ok that pretty much wraps up the principles behind the alpha code. Please
-look through it and send any questions/suggestions/etc to the forums.
+Ok that pretty much wraps up the principles and fetures behind the alpha code.
+But this list is not complete yet. 
+Please look through it and send any questions/suggestions/etc to the forums.
 
 http://www.phpinsider.com/smarty-forum/viewtopic.php?t=14168
 
-Monte
+Monte and Uwe
