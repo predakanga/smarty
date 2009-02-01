@@ -1,4 +1,5 @@
 02/01/2009
+- allow method chaining on static classes
 - special Smarty variables  $smarty.... implemented
 - added {PHP} {/PHP} tags for backward compatibility
 

@@ -221,6 +221,8 @@ value(res)	     ::= SI_QSTR(s). { res = s; }
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 									// static class methode call
 value(res)	     ::= ID(c) COLON COLON method(m). { res = c.'::'.m; }
+									// static class methode call with object chainig
+value(res)	     ::= ID(c) COLON COLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
 									// static class constant
 value(res)       ::= ID(c) COLON COLON ID(v). { res = c.'::'.v;}
 									// static class variables
