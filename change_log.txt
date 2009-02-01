@@ -1,5 +1,6 @@
 02/01/2009
 - special Smarty variables  $smarty.... implemented
+- added {PHP} {/PHP} tags for backward compatibility
 
 01/31/2009
 - added {math} plugin for Smarty2 BC

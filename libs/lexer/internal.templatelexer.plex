@@ -97,6 +97,8 @@ class Smarty_Internal_Templatelexer
 %line $this->line
 xml = /\<\?xml.*\?\>/
 php = /\<\?.*\?\>/
+phpstart = /SMARTYldelPHPSMARTYrdel/
+phpend = /SMARTYldel\/PHPSMARTYrdel/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
 ldelslash = /SMARTYldel\//
@@ -154,6 +156,12 @@ xml {
 }
 php {
   $this->token = Smarty_Internal_Templateparser::TP_PHP;
+}
+phpstart {
+  $this->token = Smarty_Internal_Templateparser::TP_PHPSTART;
+}
+phpend {
+  $this->token = Smarty_Internal_Templateparser::TP_PHPEND;
 }
 commentend {
   $this->token = Smarty_Internal_Templateparser::TP_COMMENTEND;

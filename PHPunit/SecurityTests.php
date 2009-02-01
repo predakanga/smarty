@@ -116,6 +116,11 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
         $this->assertEquals("&lt;?php echo &quot;hello world&quot;; ?&gt;", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
     } 
+    public function testSmartyPhpQuote2()
+    {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
+        $this->assertEquals("&lt;?php echo &quot;hello world&quot;; ?&gt;", $this->smarty->fetch('string:{PHP}echo "hello world";{/PHP}'));
+    } 
     /**
     * test SMARTY_PHP_REMOVE
     */
@@ -124,6 +129,11 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_REMOVE;
         $this->assertEquals("", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
     } 
+    public function testSmartyPhpRemove2()
+    {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_REMOVE;
+        $this->assertEquals("", $this->smarty->fetch('string:{PHP} echo "hello world"; {/PHP}'));
+    } 
     /**
     * test SMARTY_PHP_ALLOW
     */
@@ -131,6 +141,11 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
         $this->assertEquals("hello world", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
+    } 
+    public function testSmartyPhpAllow2()
+    {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
+        $this->assertEquals("hello world", $this->smarty->fetch('string:{PHP} echo "hello world"; {/PHP}'));
     } 
     /**
     * test PHP handling at disabled security
