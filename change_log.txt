@@ -1,4 +1,7 @@
 02/02/2009
+- changed search order on modifiers to look at plugins folder first
+- parser bug fix for modifier on array elements  $foo.bar|modifier
+- parser bug fix on single quoted srings
 - internal: splitted up compiler plugin files 
 
 02/01/2009

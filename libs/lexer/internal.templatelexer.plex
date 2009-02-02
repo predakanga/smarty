@@ -109,6 +109,7 @@ boolean = /true|false/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
 commentstart = /SMARTYldel\*/
 commentend = /\*SMARTYrdel/
+escapedquotes = /(\\\"|\\\')/
 incdec = /\+\+|\-\-/
 unimath = /\s?(\+|\-)\s?/
 openP = /\(/
@@ -127,10 +128,10 @@ space = /[\s]+/
 ptr = /\->/
 aptr = /\s?=>\s?/
 quote = /\"/
+singlequote = /\'/
 backtick = /`/
 andsym = /\s?\&\s?/
 id = /\w+/
-si_qstr = '\'[^\'\\]*(?:\\.[^\'\\]*)*\''
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 ldelim = 'SMARTYldelldelimSMARTYrdel'
@@ -169,8 +170,11 @@ commentend {
 commentstart {
   $this->token = Smarty_Internal_Templateparser::TP_COMMENTSTART;
 }
-si_qstr {
-  $this->token = Smarty_Internal_Templateparser::TP_SI_QSTR;
+escapedquotes {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
+singlequote {
+  $this->token = Smarty_Internal_Templateparser::TP_SINGLEQUOTE;
 }
 literalstart {
   $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
