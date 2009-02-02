@@ -245,7 +245,7 @@ variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariab
 									// object
 variable(res)    ::= object(o). { res = o; }
 										// single array index
-vararraydefs(res)  ::= vararraydef(a). {res = a;}
+//vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index
 vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
 										// no array index
@@ -350,7 +350,6 @@ arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.'
 arrayelements        ::=  .  { return; }
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
-arrayelement(res)		 ::=  array(a). { res = a;}
 
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}

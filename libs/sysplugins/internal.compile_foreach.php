@@ -66,51 +66,5 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         return $output;
     } 
 } 
-/**
-* Smarty Internal Plugin Compile Foreachelse Class
-*/ 
-class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
-    /**
-    * Compiles code for the {foreachelse} tag
-    * 
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @return string compiled code
-    */
-    public function compile($args, $compiler)
-    {
-        $this->compiler = $compiler; 
-        // check and get attributes
-        $_attr = $this->_get_attributes($args);
 
-        $this->_close_tag('foreach');
-        $this->_open_tag('foreachelse');
-        return "<?php }} else { ?>";
-    } 
-} 
-/**
-* Smarty Internal Plugin Compile ForeachClose Class
-*/ 
-class Smarty_Internal_Compile_ForeachClose extends Smarty_Internal_CompileBase {
-    /**
-    * Compiles code for the {/foreach} tag
-    * 
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @return string compiled code
-    */
-    public function compile($args, $compiler)
-    {
-        $this->compiler = $compiler; 
-        // check and get attributes
-        $_attr = $this->_get_attributes($args);
-
-        $_open_tag = $this->_close_tag(array('foreach', 'foreachelse'));
-        if ($_open_tag == 'foreachelse')
-            return "<?php } ?>";
-        else
-            return "<?php }} ?>";
-    } 
-}
-
-    ?>
+?>

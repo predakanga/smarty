@@ -1,3 +1,6 @@
+02/02/2009
+- internal: splitted up compiler plugin files 
+
 02/01/2009
 - allow method chaining on static classes
 - special Smarty variables  $smarty.... implemented
