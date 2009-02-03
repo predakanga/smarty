@@ -236,7 +236,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $line--;
         } 
         $match = preg_split("/\n/", $this->lex->data);
-        echo '<br>Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . '"<p style="font-family:courier">' . $match[$line-1] . "<br>"; 
+        echo '<br>Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . '"<p style="font-family:courier">' . htmlentities($match[$line-1]) . "<br>"; 
         // to do
         if (false) {
             // find position in this line

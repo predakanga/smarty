@@ -1,3 +1,7 @@
+02/03/2009
+- allow array of objects as static class variabales.
+- use htmlentities at source output at template errors.
+
 02/02/2009
 - changed search order on modifiers to look at plugins folder first
 - parser bug fix for modifier on array elements  $foo.bar|modifier

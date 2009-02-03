@@ -60,7 +60,7 @@
 //
 %fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN IN ANDSYM BACKTICK AT.
+              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN IN ANDSYM BACKTICK HATCH AT.
               
 
 //
@@ -181,7 +181,7 @@ expr(res)        ::= exprs(e) modifier(m) modparameters(p). {if ($this->smarty->
 																					                               res = m . "(". e . p .")";
 																					                            }
 																					                         } else {
-                                                                      $this->compiler->trigger_template_error ("unknown modifier\"" . m . "\"");
+                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m . "\"");
                                                                  }
                                                               }
                                                             }
@@ -215,7 +215,7 @@ math(res)        ::= MATH(m). {res = m;}
 //																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
 //                                                                      res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
 //                                                                 } else {
-//                                                                      $this->compiler->trigger_template_error ("unknown modifier\"" . m . "\"");
+//                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m . "\"");
 //                                                                 }
 //                                                              }
 //                                                            }
@@ -238,8 +238,12 @@ value(res)	     ::= ID(c) COLON COLON method(m) objectchain(oc). { res = c.'::'.
 value(res)       ::= ID(c) COLON COLON ID(v). { res = c.'::'.v;}
 									// static class variables
 value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a). { res = c.'::$'.v.a;}
+									// static class variables with object chain
+value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
 									// identifier
 value(res)	     ::= ID(i). { res = '\''.i.'\''; }
+									// config variable
+value(res)	     ::= HATCH ID(i) HATCH. { $this->compiler->trigger_template_error ("config variables not yet supported \"" . i . "\""); res = '\''.i.'\''; }
 									// boolean
 value(res)       ::= BOOLEAN(b). { res = b; }
 									// expression

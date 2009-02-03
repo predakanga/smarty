@@ -21,7 +21,6 @@ class Smarty_Internal_Templatelexer
     public $line;
     private $state = 1;
     public $smarty_token_names = array (		// Text for parser error messages
-    				'SI_QSTR' => 'string',
     				'LDEL'		=> '{',
     				'RDEL'		=> '}',
     				'IDENTITY'	=> '===',
@@ -51,7 +50,9 @@ class Smarty_Internal_Templatelexer
     				'SEMICOLON' => ';',
     				'COLON'		=> ':',
     				'AT'		=> '@',
+    				'HATCH'		=> '#',
     				'QUOTE'		=> '"',
+    				'SINGLEQUOTE'		=> "'",
     				'BACKTICK'		=> '`',
     				'VERT'		=> '|',
     				'DOT'			=> '.',
@@ -121,6 +122,7 @@ dot = /\./
 comma = /\s?\,\s?/
 colon = /\:/
 at = /@/
+hatch = /#/
 semicolon = /\;\s?/
 vert = /\|/
 equal = /\=/
@@ -289,6 +291,9 @@ colon {
 }
 at {
   $this->token = Smarty_Internal_Templateparser::TP_AT;
+}
+hatch {
+  $this->token = Smarty_Internal_Templateparser::TP_HATCH;
 }
 quote {
   $this->token = Smarty_Internal_Templateparser::TP_QUOTE;

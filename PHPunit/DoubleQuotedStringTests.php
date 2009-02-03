@@ -69,6 +69,22 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$foo="Hello {$bar}.test World"}{$foo}', $this->smarty);
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
     } 
+    /**
+    * test escaped quotes in double quoted strings
+    */
+    public function testEscapedQuotesInDoubleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo="Hello \"\" World"}{$foo}', $this->smarty);
+        $this->assertEquals('Hello "" World', $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test single quotes in double quoted strings
+    */
+    public function testSingleQuotesInDoubleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo="Hello \'World\'"}{$foo}', $this->smarty);
+        $this->assertEquals("Hello 'World'", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

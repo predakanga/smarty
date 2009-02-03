@@ -53,6 +53,22 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello $bar World\'}{$foo}', $this->smarty);
         $this->assertEquals('Hello $bar World', $this->smarty->fetch($tpl));
     } 
+    /**
+    * test double quotes in single quoted strings
+    */
+    public function testDoubleQuotesInSingleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello "World"\'}{$foo}', $this->smarty);
+        $this->assertEquals('Hello "World"', $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test escaped single quotes in single quoted strings
+    */
+    public function testEscapedSingleQuotesInSingleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello \\\'World\'}{$foo}', $this->smarty);
+        $this->assertEquals("Hello 'World", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>
