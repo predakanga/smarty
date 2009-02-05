@@ -69,6 +69,14 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello \\\'World\'}{$foo}', $this->smarty);
         $this->assertEquals("Hello 'World", $this->smarty->fetch($tpl));
     } 
+    /**
+    * test empty single quoted strings
+    */
+    public function testEmptySingleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'\'}{$foo}', $this->smarty);
+        $this->assertEquals("", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

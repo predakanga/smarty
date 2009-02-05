@@ -228,8 +228,10 @@ value(res)       ::= NUMBER(n). { res = n; }
 value(res)	     ::= function(f). { res = f; }
 									// singele quoted string
 value(res)	     ::= SINGLEQUOTE text(t) SINGLEQUOTE. { res = "'".t."'"; }
+value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
 									// double quoted string
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
+value(res)	     ::= QUOTE QUOTE. { res = "''"; }
 									// static class methode call
 value(res)	     ::= ID(c) COLON COLON method(m). { res = c.'::'.m; }
 									// static class methode call with object chainig
