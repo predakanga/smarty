@@ -192,6 +192,25 @@ class Smarty_Internal_TemplateBase {
             return null;
         } 
     } 
+    /**
+    * gets  a config variable
+    * 
+    * @param string $variable the name of the config variable
+    * @return mixed the value of the config variable
+    */
+    public function getConfigVariable($variable)
+    {
+        $_ptr = $this;
+        while ($_ptr !== null) {
+            if (isset($_ptr->config_vars[$variable])) {
+                // found it, return it
+                return $_ptr->config_vars[$variable];
+            } 
+            // not found, try at parent
+            $_ptr = $_ptr->parent;
+        } 
+        return null;
+    } 
 
     /**
     * creates a template object
@@ -255,10 +274,12 @@ class Smarty_Internal_TemplateBase {
 * @param object $parent tpl_vars next higher level of Smarty variables
 */
 class Smarty_Data extends Smarty_Internal_TemplateBase {
-    // array template of variable objects
+    // array of variable objects
     public $tpl_vars = array(); 
     // back pointer to parent object
     public $parent = null;
+    // config vars
+    public $config_vars = array(); 
 
     /**
     * create Smarty data object

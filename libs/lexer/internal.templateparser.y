@@ -243,7 +243,7 @@ value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a) objectchain(
 									// identifier
 value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 									// config variable
-value(res)	     ::= HATCH ID(i) HATCH. { $this->compiler->trigger_template_error ("config variables not yet supported \"" . i . "\""); res = '\''.i.'\''; }
+value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
 									// boolean
 value(res)       ::= BOOLEAN(b). { res = b; }
 									// expression

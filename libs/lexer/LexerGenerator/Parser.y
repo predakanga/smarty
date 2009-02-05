@@ -204,7 +204,7 @@ require_once 'PHP/LexerGenerator/Exception.php';
 			    	if (!$yysubmatches) {
 			    		$yysubmatches = array();
 			    	}
-	                ' . $this->line . ' = substr_count(' . $this->value . ', "\n");
+	                ' . $this->line . ' += substr_count(' . $this->value . ', "\n");
 	                $r = $this->{\'yy_r' . $ruleindex . '_\' . ' . $this->token . '}();
 	            } while ($r !== null || !$r);
 		        if ($r === true) {

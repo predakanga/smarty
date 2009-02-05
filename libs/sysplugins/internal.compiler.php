@@ -83,7 +83,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // $parser->PrintTrace();
         // get tokens from lexer and parse them
         while ($lex->yylex()) {
-            // echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} \n";
+            // echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} Line {$lex->line} \n";
             $parser->doParse($lex->token, $lex->value);
         } 
         // finish parsing process
@@ -180,7 +180,6 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
                     return $this->block_plugin($args, $tag, $this);
                 } 
             } 
-
             $this->trigger_template_error ("unknown tag \"" . $tag . "\"");
         } 
     } 
@@ -233,7 +232,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // get template source line which has error
         $line = $this->lex->line;
         if (isset($args)) {
-            $line--;
+//            $line--;
         } 
         $match = preg_split("/\n/", $this->lex->data);
         echo '<br>Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . '"<p style="font-family:courier">' . htmlentities($match[$line-1]) . "<br>"; 

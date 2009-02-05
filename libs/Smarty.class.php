@@ -100,6 +100,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $debug_tpl = null; 
     // When set, smarty does uses this value as error_reporting-level.
     public $error_reporting = null; 
+    // config vars
+    public $config_vars = array(); 
     // assigned tpl vars
     public $tpl_vars = array(); 
     // dummy parent object

@@ -1675,7 +1675,7 @@ static public $yy_action = array(
     function yy_r51(){ $this->_retvalue = '\''.$this->yystack[$this->yyidx + 0]->minor.'\'';     }
 #line 1681 "internal.templateparser.php"
 #line 246 "internal.templateparser.y"
-    function yy_r52(){ $this->compiler->trigger_template_error ("config variables not yet supported \"" . $this->yystack[$this->yyidx + -1]->minor . "\""); $this->_retvalue = '\''.$this->yystack[$this->yyidx + -1]->minor.'\'';     }
+    function yy_r52(){$this->_retvalue = '$_smarty_tpl->getConfigVariable(\''. $this->yystack[$this->yyidx + -1]->minor .'\')';    }
 #line 1684 "internal.templateparser.php"
 #line 250 "internal.templateparser.y"
     function yy_r54(){ $this->_retvalue = "(". $this->yystack[$this->yyidx + -1]->minor .")";     }

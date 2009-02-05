@@ -1,3 +1,7 @@
+02/05/2009
+- update of popup plugin
+- added config variables to template parser (load config functions still missing)
+
 02/03/2009
 - allow array of objects as static class variabales.
 - use htmlentities at source output at template errors.
