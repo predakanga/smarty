@@ -25,69 +25,56 @@ class Smarty_Internal_Compile_Smarty extends Smarty_Internal_CompileBase {
         $compiled_ref = ' ';
         switch (trim($_index[0], "'")) {
             case 'foreach':
-                $compiled_ref = "\$_smarty_tpl->getVariable('smarty')->value$args";
-                $_max_index = 1;
-                break;
+                return "\$_smarty_tpl->getVariable('smarty')->value$args";
             case 'capture':
-                $compiled_ref = "\$_smarty_tpl->getVariable('smarty')->value$args";
-                $_max_index = 1;
-                break;
-
+                return "\$_smarty_tpl->getVariable('smarty')->value$args";
             case 'now':
-                $compiled_ref = 'time()';
-                $_max_index = 1;
-                break;
+                return 'time()';
 
             case 'get':
-                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_GET[$_index[1]]" : "\$GLOBALS['HTTP_GET_VARS'][$_index[1]]";
+                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_GET" : "\$GLOBALS['HTTP_GET_VARS']";
                 break;
 
             case 'post':
-                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_POST[$_index[1]]" : "\$GLOBALS['HTTP_POST_VARS'][$_index[1]]";
+                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_POST" : "\$GLOBALS['HTTP_POST_VARS']";
                 break;
 
             case 'cookies':
-                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_COOKIE[$_index[1]]" : "\$GLOBALS['HTTP_COOKIE_VARS'][$_index[1]]";
+                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_COOKIE" : "\$GLOBALS['HTTP_COOKIE_VARS']";
                 break;
 
             case 'env':
-                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_ENV[$_index[1]]" : "\$GLOBALS['HTTP_ENV_VARS'][$_index[1]]";
+                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_ENV" : "\$GLOBALS['HTTP_ENV_VARS']";
                 break;
 
             case 'server':
-                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_SERVER[$_index[1]]" : "\$GLOBALS['HTTP_SERVER_VARS'][$_index[1]]";
+                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_SERVER" : "\$GLOBALS['HTTP_SERVER_VARS']";
                 break;
 
             case 'session':
-                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_SESSION[$_index[1]]" : "\$GLOBALS['HTTP_SESSION_VARS'][$_index[1]]";
+                $compiled_ref = ($this->smarty->request_use_auto_globals) ? "\$_SESSION" : "\$GLOBALS['HTTP_SESSION_VARS']";
                 break;
 
             case 'request':
                 if ($this->smarty->request_use_auto_globals) {
-                    $compiled_ref = "\$_REQUEST[$_index[1]]";
+                    $compiled_ref = "\$_REQUEST";
                     break;
                 } 
 
             case 'template':
                 $_template_name = $compiler->template->getTemplateFilepath();
-                $compiled_ref = "'$_template_name'";
-                $_max_index = 1;
-                break;
+                return "'$_template_name'";
 
             case 'version':
                 $_version = Smarty::$_version;
-                $compiled_ref = "'$_version'";
-                $_max_index = 1;
-                break;
+                return "'$_version'";
 
             case 'const':
                 if ($this->smarty->security && !$this->smarty->security_policy->allow_constants) {
                     $compiler->trigger_template_error("(secure mode) constants not permitted");
                     break;
                 } 
-                $compiled_ref = '@' . trim($_index[1], "'");
-                $_max_index = 1;
-                break;
+                return '@' . trim($_index[1], "'");
 
             case 'config':
                 $compiled_ref = "\$this->_config[0]['vars']";
@@ -96,19 +83,19 @@ class Smarty_Internal_Compile_Smarty extends Smarty_Internal_CompileBase {
 
             case 'ldelim':
                 $_ldelim = $this->smarty->left_delimiter;
-                $compiled_ref = "'$_ldelim'";
-                break;
+                return "'$_ldelim'";
 
             case 'rdelim':
                 $_rdelim = $this->smarty->right_delimiter;
-                $compiled_ref = "'$_rdelim'";
-                break;
+                return "'$_rdelim'";
 
             default:
                 $compiler->trigger_template_error('$smarty.' . trim($_index[0], "'") . ' is an unknown reference');
                 break;
         } 
-
+        if (isset($_index[1])) {
+           $compiled_ref = $compiled_ref . "[$_index[1]]";
+           }
         return $compiled_ref;
     } 
 } 
