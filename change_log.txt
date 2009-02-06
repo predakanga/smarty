@@ -1,5 +1,6 @@
 02/06/2009
 - bugfix for request variables without index  for example $smarty.get
+- experimental solution for variable functions in static class
 
 02/05/2009
 - update of popup plugin

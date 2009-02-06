@@ -52,6 +52,15 @@ class StaticClassAccessTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{mystaticclass::square(5)}');
         $this->assertEquals('25', $this->smarty->fetch($tpl));
     } 
+    /**
+    * test static class variable methode
+    */
+    public function testStaticClassVariableMethode()
+    {
+        $tpl = $this->smarty->createTemplate('string:{mystaticclass::$foo(5)}');
+        $tpl->assign('foo','square');
+        $this->assertEquals('25', $this->smarty->fetch($tpl));
+    } 
 } 
 
 class mystaticclass {
