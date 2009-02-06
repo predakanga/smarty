@@ -27,6 +27,8 @@
         $this->template = $this->compiler->template;
         $this->cacher = $this->template->cacher_object; 
 				$this->nocache = false;
+				$this->prefix_code = array();
+				$this->prefix_number = 0;
     }
     public static function &instance($new_instance = null)
     {
@@ -81,7 +83,8 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 //
 											// Smarty tag
 template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
-                                            res = $this->cacher->processNocacheCode(st, $this->compiler,$this->nocache,true);
+                                            $tmp =''; foreach ($this->prefix_code as $code) {$tmp.=$code;} $this->prefix_code=array();
+                                            res = $this->cacher->processNocacheCode($tmp.st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
 template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
@@ -234,10 +237,12 @@ value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
 									// static class methode call
 value(res)	     ::= ID(c) COLON COLON method(m). { res = c.'::'.m; }
-value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $_var = $this->template->getVariable(trim(f,"'"))->value; res = c.'::'.$_var.'('. p .')'; }
+//value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $_var = $this->template->getVariable(trim(f,"'"))->value; res = c.'::'.$_var.'('. p .')'; }
+value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
 									// static class methode call with object chainig
 value(res)	     ::= ID(c) COLON COLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
-value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $_var = $this->template->getVariable(trim(f,"'"))->value; echo $_var; res = c.'::'.$_var.'('. p .')'.oc; }
+//value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $_var = $this->template->getVariable(trim(f,"'"))->value; echo $_var; res = c.'::'.$_var.'('. p .')'.oc; }
+value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
 									// static class constant
 value(res)       ::= ID(c) COLON COLON ID(v). { res = c.'::'.v;}
 									// static class variables
