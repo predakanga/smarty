@@ -62,7 +62,7 @@
 //
 %fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN IN ANDSYM BACKTICK HATCH AT.
+              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT.
               
 
 //
@@ -161,6 +161,7 @@ attributes(res)  ::= attribute(a). { res = a;}
 attributes(res)  ::= . { res = array();}
 									
 									// different formats of attribute
+attribute(res)   ::= SPACE ID(v) EQUAL ID(i). { res = array(v=>'\''.i.'\'');}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 
 //
@@ -170,6 +171,7 @@ statements(res)		::= statement(s). { res = array(s);}
 statements(res)		::= statements(s1) COMMA statement(s). { s1[]=s; res = s1;}
 
 statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'value'=>e);}
+statement(res)		::= DOLLAR varvar(v) EQUAL ID(i). { res = array('var' => v, 'value'=>'\''.i.'\'');}
 
 //
 // expressions
@@ -241,7 +243,6 @@ value(res)	     ::= ID(c) COLON COLON method(m). { res = c.'::'.m; }
 value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
 									// static class methode call with object chainig
 value(res)	     ::= ID(c) COLON COLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
-//value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $_var = $this->template->getVariable(trim(f,"'"))->value; echo $_var; res = c.'::'.$_var.'('. p .')'.oc; }
 value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
 									// static class constant
 value(res)       ::= ID(c) COLON COLON ID(v). { res = c.'::'.v;}
@@ -250,11 +251,13 @@ value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a). { res = c.'
 									// static class variables with object chain
 value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
 									// identifier
-value(res)	     ::= ID(i). { res = '\''.i.'\''; }
+//value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 									// config variable
 value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
 									// boolean
 value(res)       ::= BOOLEAN(b). { res = b; }
+									// null
+value(res)       ::= NULL(n). { res = n; }
 									// expression
 value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 
@@ -275,8 +278,10 @@ vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
 										// no array index
 vararraydefs        ::= . {return;}
 										// Smarty2 style index 
+vararraydef(res)   ::= DOT ID(i). { res = "['". i ."']";}
 vararraydef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
 										// PHP style index
+vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
 vararraydef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
 
 // variable identifer, supporting variable variables
@@ -374,6 +379,8 @@ arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.'
 arrayelements        ::=  .  { return; }
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
+arrayelement(res)		 ::=  ID(i). { res = '\''.i.'\'';}
+arrayelement(res)		 ::=  ID(i) APTR expr(e2). { res = '\''.i.'\'=>'.e2;}
 
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}

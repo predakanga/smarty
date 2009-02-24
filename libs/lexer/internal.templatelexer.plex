@@ -66,6 +66,7 @@ class Smarty_Internal_Templatelexer
     				'COMMENTEND' => '*}',
     				'LITERALEND' => 'literal close',
     				'IN' => 'in',
+    				'NULL' => 'null',
     				'BOOLEAN' => 'boolean'
     				);
     				
@@ -98,8 +99,8 @@ class Smarty_Internal_Templatelexer
 %line $this->line
 xml = /\<\?xml.*\?\>/
 php = /\<\?.*\?\>/
-phpstart = /SMARTYldelPHPSMARTYrdel/
-phpend = /SMARTYldel\/PHPSMARTYrdel/
+phpstart = /SMARTYldelphpSMARTYrdel/
+phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
 ldelslash = /SMARTYldel\//
@@ -107,6 +108,7 @@ ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
 number = /\d+(\.\d+)?/
 boolean = /true|false/
+null = /null/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
 commentstart = /SMARTYldel\*/
 commentend = /\*SMARTYrdel/
@@ -210,6 +212,9 @@ in {
 }
 boolean {
   $this->token = Smarty_Internal_Templateparser::TP_BOOLEAN;
+}
+null {
+  $this->token = Smarty_Internal_Templateparser::TP_NULL;
 }
 identity{
   $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;

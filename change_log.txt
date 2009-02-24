@@ -1,3 +1,9 @@
+02/24/2009
+- bugfix {php} {/php} tags for backward compatibility
+- bugfix for expressions on arrays
+- fixed usage of "null" value
+- added $smarty.foreach.foo.first and $smarty.foreach.foo.last
+
 02/06/2009
 - bugfix for request variables without index  for example $smarty.get
 - experimental solution for variable functions in static class
