@@ -1,3 +1,6 @@
+02/26/2009
+- changed $smarty.capture.foo to be global for Smarty2 BC.
+
 02/24/2009
 - bugfix {php} {/php} tags for backward compatibility
 - bugfix for expressions on arrays

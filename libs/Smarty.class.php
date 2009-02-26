@@ -145,6 +145,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $cache_resource_objects = array();
     // write file object
     public $write_file_object = null;
+    // global smarty  vars
+    public $_smarty_vars = array();
     // start time for execution time calculation
     public $start_time = 0;
 

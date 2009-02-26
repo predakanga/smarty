@@ -27,7 +27,7 @@ class Smarty_Internal_Compile_Smarty extends Smarty_Internal_CompileBase {
             case 'foreach':
                 return "\$_smarty_tpl->getVariable('smarty')->value$args";
             case 'capture':
-                return "\$_smarty_tpl->getVariable('smarty')->value$args";
+                return "\$_smarty_tpl->smarty->_smarty_vars$args";
             case 'now':
                 return 'time()';
 

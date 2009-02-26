@@ -14,5 +14,7 @@ file_put_contents('internal.templatelexer.php', $contents);
 //file_put_contents('internal.templateparser.php', $contents);
 copy('internal.templatelexer.php','../sysplugins/internal.templatelexer.php');
 copy('internal.templateparser.php','../sysplugins/internal.templateparser.php');
+//unlink('internal.templatelexer.php');
+//unlink('internal.templateparser.php');
 
 ?>
