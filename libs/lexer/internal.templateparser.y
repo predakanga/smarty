@@ -62,7 +62,7 @@
 //
 %fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT.
+              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN IN ANDSYM BACKTICK HATCH AT.
               
 
 //
@@ -177,7 +177,8 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 // expressions
 //
 									// simple expression
-expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
+//expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
+expr(res)				 ::= ID(i). { res = i; }
 expr(res)				 ::= exprs(e).	{res = e;}
 expr(res)        ::= exprs(e) modifier(m) modparameters(p). {if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
                                                                       res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
@@ -257,8 +258,6 @@ value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a) objectchain(
 value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
 									// boolean
 value(res)       ::= BOOLEAN(b). { res = b; }
-									// null
-value(res)       ::= NULL(n). { res = n; }
 									// expression
 value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 
@@ -279,11 +278,11 @@ vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
 										// no array index
 vararraydefs        ::= . {return;}
 										// Smarty2 style index 
-//vararraydef(res)   ::= DOT ID(i). { res = "['". i ."']";}
-vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
+vararraydef(res)   ::= DOT ID(i). { res = "['". i ."']";}
+vararraydef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
 										// PHP style index
-//vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
-vararraydef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
+vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
+vararraydef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
 
 // variable identifer, supporting variable variables
 										// singel identifier element

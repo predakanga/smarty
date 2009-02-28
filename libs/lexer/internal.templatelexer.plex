@@ -108,7 +108,6 @@ ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
 number = /\d+(\.\d+)?/
 boolean = /true|false/
-null = /null/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
 commentstart = /SMARTYldel\*/
 commentend = /\*SMARTYrdel/
@@ -212,9 +211,6 @@ in {
 }
 boolean {
   $this->token = Smarty_Internal_Templateparser::TP_BOOLEAN;
-}
-null {
-  $this->token = Smarty_Internal_Templateparser::TP_NULL;
 }
 identity{
   $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;
