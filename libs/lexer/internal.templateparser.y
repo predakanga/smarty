@@ -161,7 +161,7 @@ attributes(res)  ::= attribute(a). { res = a;}
 attributes(res)  ::= . { res = array();}
 									
 									// different formats of attribute
-attribute(res)   ::= SPACE ID(v) EQUAL ID(i). { res = array(v=>'\''.i.'\'');}
+//attribute(res)   ::= SPACE ID(v) EQUAL ID(i). { res = array(v=>'\''.i.'\'');}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 
 //
@@ -171,12 +171,13 @@ statements(res)		::= statement(s). { res = array(s);}
 statements(res)		::= statements(s1) COMMA statement(s). { s1[]=s; res = s1;}
 
 statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'value'=>e);}
-statement(res)		::= DOLLAR varvar(v) EQUAL ID(i). { res = array('var' => v, 'value'=>'\''.i.'\'');}
+//statement(res)		::= DOLLAR varvar(v) EQUAL ID(i). { res = array('var' => v, 'value'=>'\''.i.'\'');}
 
 //
 // expressions
 //
 									// simple expression
+expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
 expr(res)				 ::= exprs(e).	{res = e;}
 expr(res)        ::= exprs(e) modifier(m) modparameters(p). {if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
                                                                       res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
@@ -250,7 +251,7 @@ value(res)       ::= ID(c) COLON COLON ID(v). { res = c.'::'.v;}
 value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a). { res = c.'::$'.v.a;}
 									// static class variables with object chain
 value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
-									// identifier
+									// unquoted string
 //value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 									// config variable
 value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
@@ -278,11 +279,11 @@ vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
 										// no array index
 vararraydefs        ::= . {return;}
 										// Smarty2 style index 
-vararraydef(res)   ::= DOT ID(i). { res = "['". i ."']";}
-vararraydef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
+//vararraydef(res)   ::= DOT ID(i). { res = "['". i ."']";}
+vararraydef(res)   ::= DOT expr(e). { res = "[". e ."]";}
 										// PHP style index
-vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
-vararraydef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
+//vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
+vararraydef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
 
 // variable identifer, supporting variable variables
 										// singel identifier element
@@ -346,7 +347,7 @@ modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 modparameters      ::= . {return;}
 										// parameter expression
 modparameter(res) ::= COLON expr(mp). {res = ','.mp;}
-modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
+//modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
 //
 // if expressions
@@ -380,7 +381,7 @@ arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.'
 arrayelements        ::=  .  { return; }
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
-arrayelement(res)		 ::=  ID(i). { res = '\''.i.'\'';}
+//arrayelement(res)		 ::=  ID(i). { res = '\''.i.'\'';}
 arrayelement(res)		 ::=  ID(i) APTR expr(e2). { res = '\''.i.'\'=>'.e2;}
 
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
@@ -389,6 +390,7 @@ doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
 doublequotedcontent(res)           ::= OTHER(o). {res = addslashes(o);}
+//doublequotedcontent(res)           ::= OTHER(o). {res = o;}
 //doublequotedcontent(res)           ::= text(t). {res = addslashes(t);}
 
 text(res)          ::= text(t) textelement(e). {res = t.e;}

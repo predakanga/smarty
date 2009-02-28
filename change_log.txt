@@ -1,3 +1,6 @@
+02/28/2209
+- changed handling of unqouted strings
+
 02/26/2009
 - bugfix
 - changed $smarty.capture.foo to be global for Smarty2 BC.
