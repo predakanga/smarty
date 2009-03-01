@@ -52,7 +52,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     public function testModifierChaining()
     {
         $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate('string:{("hello world"|truncate:6)|strlen}');
+        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:6|strlen}');
         $this->assertEquals("6", $this->smarty->fetch($tpl));
     } 
     /**

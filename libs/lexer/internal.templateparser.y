@@ -180,7 +180,7 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 //expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
 expr(res)				 ::= ID(i). { res = i; }
 expr(res)				 ::= exprs(e).	{res = e;}
-expr(res)        ::= exprs(e) modifier(m) modparameters(p). {if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
+expr(res)        ::= expr(e) modifier(m) modparameters(p). {if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
                                                                       res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
                                                                  } else {
                                                                    if (m == 'isset' || m == 'empty' || is_callable(m)) {
@@ -345,7 +345,7 @@ modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 										// no parameter
 modparameters      ::= . {return;}
 										// parameter expression
-modparameter(res) ::= COLON expr(mp). {res = ','.mp;}
+modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
 //modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
 //

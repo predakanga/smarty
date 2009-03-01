@@ -1,4 +1,7 @@
-02/28/2209
+03/01/2009
+- modifier chaning works now as in Smarty2
+
+02/28/2009
 - changed handling of unqouted strings
 
 02/26/2009
