@@ -49,6 +49,7 @@ class Smarty_Internal_Templatelexer
     				'DOLLAR'	=> '$',
     				'SEMICOLON' => ';',
     				'COLON'		=> ':',
+    				'DOUBLECOLON'		=> '::',
     				'AT'		=> '@',
     				'HATCH'		=> '#',
     				'QUOTE'		=> '"',
@@ -121,6 +122,7 @@ closeB = /]/
 dollar = /\$/
 dot = /\./
 comma = /\s?\,\s?/
+doublecolon = /\:\:/
 colon = /\:/
 at = /@/
 hatch = /#/
@@ -286,6 +288,9 @@ dollar {
 }
 semicolon {
   $this->token = Smarty_Internal_Templateparser::TP_SEMICOLON;
+}
+doublecolon {
+  $this->token = Smarty_Internal_Templateparser::TP_DOUBLECOLON;
 }
 colon {
   $this->token = Smarty_Internal_Templateparser::TP_COLON;

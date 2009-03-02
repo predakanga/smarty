@@ -60,7 +60,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON SEMICOLON
+%fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN IN ANDSYM BACKTICK HATCH AT.
               
@@ -240,18 +240,18 @@ value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
 									// static class methode call
-value(res)	     ::= ID(c) COLON COLON method(m). { res = c.'::'.m; }
-//value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $_var = $this->template->getVariable(trim(f,"'"))->value; res = c.'::'.$_var.'('. p .')'; }
-value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
+value(res)	     ::= ID(c) DOUBLECOLON method(m). { res = c.'::'.m; }
+//value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $_var = $this->template->getVariable(trim(f,"'"))->value; res = c.'::'.$_var.'('. p .')'; }
+value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
 									// static class methode call with object chainig
-value(res)	     ::= ID(c) COLON COLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
-value(res)	     ::= ID(c) COLON COLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
+value(res)	     ::= ID(c) DOUBLECOLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
+value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
 									// static class constant
-value(res)       ::= ID(c) COLON COLON ID(v). { res = c.'::'.v;}
+value(res)       ::= ID(c) DOUBLECOLON ID(v). { res = c.'::'.v;}
 									// static class variables
-value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a). { res = c.'::$'.v.a;}
+value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) vararraydefs(a). { res = c.'::$'.v.a;}
 									// static class variables with object chain
-value(res)       ::= ID(c) COLON COLON DOLLAR ID(v) vararraydefs(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
+value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) vararraydefs(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
 									// unquoted string
 //value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 									// config variable
@@ -345,8 +345,8 @@ modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 										// no parameter
 modparameters      ::= . {return;}
 										// parameter expression
-modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
 modparameter(res) ::= COLON ID(mp). {res = ','.mp.'';}
+modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
 
 //
 // if expressions

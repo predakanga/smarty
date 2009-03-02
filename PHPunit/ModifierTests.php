@@ -63,6 +63,14 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{counter|truncate:5 start=100000}');
         $this->assertEquals("10...", $this->smarty->fetch($tpl));
     } 
+    /**
+    * test unqouted string as modifier parameter
+    */
+    public function testModifierUnqoutedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{"hello world"|replace:hello:xxxxx}');
+        $this->assertEquals("xxxxx world", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>
