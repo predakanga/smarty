@@ -1,5 +1,8 @@
+03/02/2009
+- fixed unqouted strings within modifier parameter
+
 03/01/2009
-- modifier chaning works now as in Smarty2
+- modifier chaining works now as in Smarty2
 
 02/28/2009
 - changed handling of unqouted strings

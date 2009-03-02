@@ -346,7 +346,7 @@ modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 modparameters      ::= . {return;}
 										// parameter expression
 modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
-//modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
+modparameter(res) ::= COLON ID(mp). {res = ','.mp.'';}
 
 //
 // if expressions
