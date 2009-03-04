@@ -98,7 +98,7 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-xmlstart = /\<\?xml /
+xmlstart = /\<\?xml/
 php = /\<\?.*\?\>/
 xmlend = /\?\>/
 phpstart = /SMARTYldelphpSMARTYrdel/
