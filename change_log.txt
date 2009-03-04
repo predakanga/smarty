@@ -1,5 +1,6 @@
 03/04/2009
 - added support for config variables
+- bugfix on <?xml...> tag
 
 03/02/2009
 - fixed unqouted strings within modifier parameter

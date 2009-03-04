@@ -116,7 +116,8 @@ template_element(res)::= PHPSTART text(t) PHPEND. {if (!$this->template->securit
                                       }	}
 											//
 											// XML tag
-template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>", $this->compiler, false, false);}	
+template_element(res)::= XMLSTART(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>", $this->compiler, false, false);}	
+template_element(res)::= XMLEND(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>", $this->compiler, false, false);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	
 //template_element(res)::= text(t). {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	

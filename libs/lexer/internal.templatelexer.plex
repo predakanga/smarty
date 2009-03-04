@@ -98,8 +98,9 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-xml = /\<\?xml.*\?\>/
+xmlstart = /\<\?xml /
 php = /\<\?.*\?\>/
+xmlend = /\?\>/
 phpstart = /SMARTYldelphpSMARTYrdel/
 phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /SMARTYldel\s{1,}/
@@ -157,11 +158,14 @@ other = /./
 */
 /*!lex2php
 %statename START
-xml {
-  $this->token = Smarty_Internal_Templateparser::TP_XML;
+xmlstart {
+  $this->token = Smarty_Internal_Templateparser::TP_XMLSTART;
 }
 php {
   $this->token = Smarty_Internal_Templateparser::TP_PHP;
+}
+xmlend {
+  $this->token = Smarty_Internal_Templateparser::TP_XMLEND;
 }
 phpstart {
   $this->token = Smarty_Internal_Templateparser::TP_PHPSTART;
