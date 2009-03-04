@@ -95,15 +95,26 @@ template_element(res)::= LDELIMTAG. {res = $this->cacher->processNocacheCode($th
 											// {rdelim}
 template_element(res)::= RDELIMTAG. {res = $this->cacher->processNocacheCode($this->smarty->right_delimiter, $this->compiler,false,false);}	
 											// <?php> tag
-template_element(res)::= PHP(php). {if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
-                                      res = $this->cacher->processNocacheCode(php, $this->compiler, false,true);
+template_element(res)::= PHP(phpt). {if (!$this->template->security) { 
+                                       res = $this->cacher->processNocacheCode(php, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                      res = $this->cacher->processNocacheCode(htmlspecialchars(php, ENT_QUOTES), $this->compiler, false, false);}}	
+                                       res = $this->cacher->processNocacheCode(htmlspecialchars(phpt, ENT_QUOTES), $this->compiler, false, false);
+                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
+                                       res = $this->cacher->processNocacheCode("<?php echo '".phpt."';?>", $this->compiler, false, false);
+                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
+                                       res = '';
+                                      }	}
 											// {PHP} tag
-template_element(res)::= PHPSTART text(t) PHPEND. {if (!$this->template->security || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) { 
-                                      res = $this->cacher->processNocacheCode('<?php '.t.' ?>', $this->compiler, false,true);
+template_element(res)::= PHPSTART text(t) PHPEND. {if (!$this->template->security) { 
+                                        res = $this->cacher->processNocacheCode('<?php '.t.' ?>', $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                      res = $this->cacher->processNocacheCode(htmlspecialchars('<?php '.t.' ?>', ENT_QUOTES), $this->compiler, false, false);}}	
+                                        res = $this->cacher->processNocacheCode(htmlspecialchars('<?php '.t.' ?>', ENT_QUOTES), $this->compiler, false, false);	
+                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
+                                       res = $this->cacher->processNocacheCode("<?php echo '<?php ".t." ?>';?>", $this->compiler, false, false);
+                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
+                                       res = '';
+                                      }	}
+											//
 											// XML tag
 template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>", $this->compiler, false, false);}	
 											// Other template text

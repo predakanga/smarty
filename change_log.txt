@@ -1,3 +1,6 @@
+03/04/2009
+- added support for config variables
+
 03/02/2009
 - fixed unqouted strings within modifier parameter
 - bugfix parsing of mofifier parameter

@@ -5,12 +5,12 @@ PHPUnit 3.3.15 by Sebastian Bergmann.
 ............................................................ 180 / 363
 ............................................................ 240 / 363
 ...............F............................................ 300 / 363
-............................................................ 360 / 363
+.................<?php echo "hello world"; ?>..F........................................ 360 / 363
 ...
 
 Time: 6 seconds
 
-There was 1 failure:
+There were 2 failures:
 
 1) testEscapedQuotesInDoubleQuotedString(DoubleQuotedStringTests)
 Failed asserting that two strings are equal.
@@ -19,5 +19,12 @@ difference      <      xxxxxxxx????>
 got string      <Hello \\"\\" World>
 C:\wamp\www\__smarty3Alpha\PHPunit\DoubleQuotedStringTests.php:78
 
+2) testDisabledSmartyPhpRemove(SecurityTests)
+Failed asserting that two strings are equal.
+expected string <hello world>
+difference      <xxx????????>
+got string      <php>
+C:\wamp\www\__smarty3Alpha\PHPunit\SecurityTests.php:158
+
 FAILURES!
-Tests: 363, Assertions: 424, Failures: 1.
+Tests: 363, Assertions: 424, Failures: 2.

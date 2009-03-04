@@ -140,12 +140,13 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testSmartyPhpAllow()
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
-        $this->assertEquals("hello world", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
+        $this->assertEquals('<?php echo "hello world"; ?>', $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
+        echo $this->smarty->fetch('string:<?php echo "hello world"; ?>');
     } 
     public function testSmartyPhpAllow2()
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
-        $this->assertEquals("hello world", $this->smarty->fetch('string:{php} echo "hello world"; {/php}'));
+        $this->assertEquals('<?php  echo "hello world";  ?>', $this->smarty->fetch('string:{php} echo "hello world"; {/php}'));
     } 
     /**
     * test PHP handling at disabled security

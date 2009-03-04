@@ -6,6 +6,7 @@
 * @subpackage PluginsConfiguration
 * @author Uwe Tews 
 */ 
+    define('SMARTY_PHP_PASSTHRU',   0);
     define('SMARTY_PHP_QUOTE', 1);
     define('SMARTY_PHP_REMOVE', 2);
     define('SMARTY_PHP_ALLOW', 3);
@@ -17,6 +18,7 @@ class Smarty_Security_Policy {
     * This determines how Smarty handles "<?php ... ?>" tags in templates.
     * possible values:
     * <ul>
+    *   <li>SMARTY_PHP_PASSTHRU -> echo PHP tags as they are</li>
     *   <li>SMARTY_PHP_QUOTE    -> escape tags as entities</li>
     *   <li>SMARTY_PHP_REMOVE   -> remove php tags</li>
     *   <li>SMARTY_PHP_ALLOW    -> execute php tags</li>
@@ -24,7 +26,7 @@ class Smarty_Security_Policy {
     * 
     * @var integer 
     */
-    public $php_handling = SMARTY_PHP_ALLOW;
+    public $php_handling = SMARTY_PHP_REMOVE;
 
     /**
     * This is the list of template directories that are considered secure.
