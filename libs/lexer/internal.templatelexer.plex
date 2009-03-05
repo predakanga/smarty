@@ -98,16 +98,16 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-xmlstart = /\s*\<\?xml/
+xmlstart = /\<\?xml/
 php = /\<\?.*\?\>/
 xmlend = /\?\>/
 phpstart = /SMARTYldelphpSMARTYrdel/
 phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
-ldelslash = /SMARTYldel\//
+ldelslash = /(\n|\r\n)?SMARTYldel\//
 ldel = /SMARTYldel/
-rdel = /SMARTYrdel/
+rdel = /SMARTYrdel(\n|\r\n)?/
 number = /\d+(\.\d+)?/
 boolean = /true|TRUE|True|false|FALSE|False/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/

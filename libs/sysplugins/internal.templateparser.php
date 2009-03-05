@@ -1621,7 +1621,7 @@ static public $yy_action = array(
                                       }	    }
 #line 1627 "internal.templateparser.php"
 #line 119 "internal.templateparser.y"
-    function yy_r10(){$this->_retvalue = $this->cacher->processNocacheCode("<?php echo '".$this->yystack[$this->yyidx + 0]->minor."';?>", $this->compiler, false, false);    }
+    function yy_r10(){$this->_retvalue = $this->cacher->processNocacheCode("<?php echo '".$this->yystack[$this->yyidx + 0]->minor."';?>\n", $this->compiler, true, true);    }
 #line 1630 "internal.templateparser.php"
 #line 122 "internal.templateparser.y"
     function yy_r12(){$this->_retvalue = $this->cacher->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler,false,false);    }

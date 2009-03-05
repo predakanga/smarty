@@ -99,7 +99,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $request_use_auto_globals = true;
     public $debug_tpl = null; 
     // When set, smarty does uses this value as error_reporting-level.
-    public $error_reporting = null; 
+    public $error_reporting = null;
+    // config var settings
+    public $config_overwrite = true; //Controls whether variables with the same name overwrite each other.
+    public $config_booleanize = true; //Controls whether config values of on/true/yes and off/false/no get converted to boolean
+    public $config_read_hidden = true; //Controls whether hidden config sections/vars are read from the file.
     // config vars
     public $config_vars = array(); 
     // assigned tpl vars

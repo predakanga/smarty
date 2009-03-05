@@ -1,3 +1,6 @@
+03/05/2009
+- bugfix on <?xml...> tag with caching enabled
+
 03/04/2009
 - added support for config variables
 - bugfix on <?xml...> tag
