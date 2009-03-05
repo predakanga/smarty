@@ -32,7 +32,7 @@ class Smarty_Method_Register_Object extends Smarty_Internal_Base {
         if (!empty($allowed)) {
             foreach ((array)$allowed as $methode) {
                 if (!is_callable(array($object_impl, $methode))) {
-                    throw new SmartyException("Undefined methode '$methode' in registered object");
+                    throw new Exception("Undefined methode '$methode' in registered object");
                 } 
             } 
         } 
@@ -40,7 +40,7 @@ class Smarty_Method_Register_Object extends Smarty_Internal_Base {
         if (!empty($block_methods)) {
             foreach ((array)$block_methods as $methode) {
                 if (!is_callable(array($object_impl, $methode))) {
-                    throw new SmartyException("Undefined methode '$methode' in registered object");
+                    throw new Exception("Undefined methode '$methode' in registered object");
                 } 
             } 
         } 

@@ -27,9 +27,9 @@ class Smarty_Method_Register_Function extends Smarty_Internal_Base {
     public function execute($function_tag, $function_impl, $cacheable = true)
     {
         if (isset($this->smarty->registered_plugins[$function_tag])) {
-            throw new SmartyException("Plugin tag \"{$function_tag}\" already registered");
+            throw new Exception("Plugin tag \"{$function_tag}\" already registered");
         } elseif (!is_callable($function_impl)) {
-            throw new SmartyException("Plugin \"{$function_tag}\" not callable");
+            throw new Exception("Plugin \"{$function_tag}\" not callable");
         } else {
             $this->smarty->registered_plugins[$function_tag] =
             array('function', $function_impl, $cacheable);

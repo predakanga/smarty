@@ -29,7 +29,7 @@ class Smarty_Internal_Write_File extends Smarty_Internal_Base {
         $_tmp_file = tempnam($_dirpath, 'wrt');
 
         if (!file_put_contents($_tmp_file, $_contents)) {
-            throw new SmartyException("unable to write file {$_tmp_file}");
+            throw new Exception("unable to write file {$_tmp_file}");
             return false;
         } 
         // remove original file

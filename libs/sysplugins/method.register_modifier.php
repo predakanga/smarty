@@ -26,9 +26,9 @@ class Smarty_Method_Register_Modifier extends Smarty_Internal_Base {
     public function execute($modifier, $modifier_impl)
     {
         if (isset($this->smarty->registered_plugins[$modifier])) {
-            throw new SmartyException("Plugin \"{$modifier}\" already registered");
+            throw new Exception("Plugin \"{$modifier}\" already registered");
         } elseif (!is_callable($modifier_impl)) {
-            throw new SmartyException("Plugin \"{$modifier}\" not callable");
+            throw new Exception("Plugin \"{$modifier}\" not callable");
         } else {
             $this->smarty->registered_plugins[$modifier] =
             array('modifier', $modifier_impl);

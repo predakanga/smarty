@@ -148,11 +148,11 @@ class PHP_Function_Handler {
                 // use PHP function if found
                 return call_user_func_array($name, $args);
             } else {
-                throw new SmartyException ("PHP function \"" . $name . "\" not allowed by security setting");
+                throw new Exception ("PHP function \"" . $name . "\" not allowed by security setting");
             } 
         } 
         // nothing found, throw exception
-        throw new SmartyException("Unkown function {$name}");
+        throw new Exception("Unkown function {$name}");
     } 
 } 
 

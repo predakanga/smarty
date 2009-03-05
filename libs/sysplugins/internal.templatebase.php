@@ -136,7 +136,7 @@ class Smarty_Internal_TemplateBase {
     private function check_tplvar($tpl_var)
     {
         if (in_array($tpl_var, array('this', 'smarty'))) {
-            throw new SmartyException("Cannot assign value to reserved var '{$tpl_var}'");
+            throw new Exception("Cannot assign value to reserved var '{$tpl_var}'");
         } 
     } 
 
@@ -186,7 +186,7 @@ class Smarty_Internal_TemplateBase {
                 Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable . '"'); 
                 // die();
             } else {
-                throw new SmartyException('Undefined Smarty variable "' . $variable . '"');
+                throw new Exception('Undefined Smarty variable "' . $variable . '"');
             } 
         } else {
             return null;
@@ -295,7 +295,7 @@ class Smarty_Data extends Smarty_Internal_TemplateBase {
                 $this->tpl_vars[$_key] = new Smarty_variable($_val);
             } 
         } else {
-            throw new SmartyException("Wrong type for template variables");
+            throw new Exception("Wrong type for template variables");
         } 
     } 
 } 

@@ -24,7 +24,7 @@ class Smarty_Internal_Plugin_Handler extends Smarty_Internal_Base {
             return call_user_func_array($this->smarty->registered_plugins[$name][1], $args[0]);
         } else {
             // plugin not found
-            throw new SmartyException("Unable to load plugin {$name}");
+            throw new Exception("Unable to load plugin {$name}");
         } 
     } 
     /**
@@ -51,7 +51,7 @@ class Smarty_Internal_Plugin_Handler extends Smarty_Internal_Base {
                         $this->smarty->registered_plugins[$name] = array($plugin_type, $plugin, false);
                         return true;
                     } else {
-                        throw new SmartyException("Plugin \"{$name}\" not callable");
+                        throw new Exception("Plugin \"{$name}\" not callable");
                     } 
                 } 
             } 

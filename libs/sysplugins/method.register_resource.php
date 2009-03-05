@@ -32,7 +32,7 @@ class Smarty_Method_Register_Resource extends Smarty_Internal_Base {
             $this->smarty->plugins['resource'][$type] =
             array(array(array(&$functions[0], $functions[1]) , array(&$functions[0], $functions[2]) , array(&$functions[0], $functions[3]) , array(&$functions[0], $functions[4])) , false);
         } else {
-            throw new SmartyException("malformed function-list for '$type' in register_resource");
+            throw new Exception("malformed function-list for '$type' in register_resource");
         } 
     } 
 } 

@@ -30,7 +30,7 @@ class Smarty_Method_Clear_All_Cache extends Smarty_Internal_Base {
         if (!isset($this->smarty->cache_resource_objects[$type])) {
             $_cache_resource_class = 'Smarty_Internal_CacheResource_' . $type;
             if (!$this->smarty->loadPlugin($_cache_resource_class)) {
-                throw new SmartyException("Undefined cache resource type {$type}");
+                throw new Exception("Undefined cache resource type {$type}");
             } 
             $this->smarty->cache_resource_objects[$type] = new $_cache_resource_class;
         } 

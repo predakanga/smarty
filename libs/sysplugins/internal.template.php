@@ -92,7 +92,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->template_resource = $template_resource; 
         // parse resource name
         if (!$this->parseResourceName ($template_resource)) {
-            throw new SmartyException ("Unable to parse resource '{$template_resource}'");
+            throw new Exception ("Unable to parse resource '{$template_resource}'");
         } 
         // load cacher
         if ($this->caching) {
@@ -145,7 +145,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     {
         if ($this->template_source === null) {
             if ($this->resource_objects[$this->resource_type]->getTemplateSource($this) === false) {
-                throw new SmartyException("Unable to load template {$this->template_resource}");
+                throw new Exception("Unable to load template {$this->template_resource}");
             } 
         } 
         return $this->template_source;
@@ -267,7 +267,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             }   
         } else {
             // error compiling template
-            throw new SmartyException("Error compiling template {$this->getTemplateFilepath ()}");
+            throw new Exception("Error compiling template {$this->getTemplateFilepath ()}");
             return false;
         } 
         $this->compile_time = $this->_get_time() - $_start_time;
@@ -485,7 +485,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } 
         if (file_exists($this->resource_name)) return $this->resource_name; 
         // no tpl file found
-        throw new SmartyException("Unable to load template {$this->resource_name}");
+        throw new Exception("Unable to load template {$this->resource_name}");
         return false;
     } 
 

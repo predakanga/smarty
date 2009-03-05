@@ -28,7 +28,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
         $this->compiled_timestamp = null; 
         // parse config resource name
         if (!$this->parseConfigResourceName ($config_resource)) {
-            throw new SmartyException ("Unable to parse config resource '{$config_resource}'");
+            throw new Exception ("Unable to parse config resource '{$config_resource}'");
         } 
     } 
 
@@ -84,7 +84,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
                 return $_filepath;
         } 
         // no tpl file found
-        throw new SmartyException("Unable to load config file {$this->config_resource_name}");
+        throw new Exception("Unable to load config file {$this->config_resource_name}");
         return false;
     } 
     /**
@@ -103,7 +103,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
     {
         if ($this->config_source === null) {
             if ($this->readConfigSource($this) === false) {
-                throw new SmartyException("Unable to load config file {$this->template_resource}");
+                throw new Exception("Unable to load config file {$this->template_resource}");
             } 
         } 
         return $this->config_source;
@@ -210,7 +210,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
             touch($this->getCompiledFilepath(), $this->getTimestamp());
         } else {
             // error compiling template
-            throw new SmartyException("Error compiling template {$this->getConfigFilepath ()}");
+            throw new Exception("Error compiling template {$this->getConfigFilepath ()}");
             return false;
         } 
     } 

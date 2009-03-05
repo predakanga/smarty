@@ -36,7 +36,7 @@ class Smarty_Method_Load_Filter extends Smarty_Internal_Base {
                 return;
             } 
         } 
-        throw new SmartyException("{$type}filter \"{$name}\" not callable");
+        throw new Exception("{$type}filter \"{$name}\" not callable");
     } 
 } 
 

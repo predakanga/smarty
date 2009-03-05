@@ -27,9 +27,9 @@ class Smarty_Method_Register_Block extends Smarty_Internal_Base {
     public function execute($block_tag, $block_impl, $cacheable = true)
     {
         if (isset($this->smarty->registered_plugins[$block_tag])) {
-            throw new SmartyException("Plugin tag \"{$block_tag}\" already registered");
+            throw new Exception("Plugin tag \"{$block_tag}\" already registered");
         } elseif (!is_callable($block_impl)) {
-            throw new SmartyException("Plugin \"{$block_tag}\" not callable");
+            throw new Exception("Plugin \"{$block_tag}\" not callable");
         } else {
             $this->smarty->registered_plugins[$block_tag] =
             array('block', $block_impl, $cacheable);

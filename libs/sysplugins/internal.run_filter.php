@@ -43,7 +43,7 @@ class Smarty_Internal_Run_Filter extends Smarty_Internal_Base {
                 } 
             } else {
                 // nothing found, throw exception
-                throw new SmartyException("Unable to load filter {$plugin_name}");
+                throw new Exception("Unable to load filter {$plugin_name}");
             } 
         } 
         // loop over registerd filters of specified type

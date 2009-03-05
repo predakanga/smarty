@@ -26,9 +26,9 @@ class Smarty_Method_Register_Compiler_Function extends Smarty_Internal_Base {
     public function execute($compiler_tag, $compiler_impl, $cacheable = true)
     {
         if (isset($this->smarty->registered_plugins[$compiler_tag])) {
-            throw new SmartyException("Plugin tag \"{$compiler_tag}\" already registered");
+            throw new Exception("Plugin tag \"{$compiler_tag}\" already registered");
         } elseif (!is_callable($compiler_impl)) {
-            throw new SmartyException("Plugin \"{$compiler_tag}\" not callable");
+            throw new Exception("Plugin \"{$compiler_tag}\" not callable");
         } else {
             $this->smarty->registered_plugins[$compiler_tag] =
             array('compiler', $compiler_impl, $cacheable);

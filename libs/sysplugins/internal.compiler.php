@@ -235,7 +235,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 //            $line--;
         } 
         $match = preg_split("/\n/", $this->lex->data);
-        echo '<br>Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . '"<p style="font-family:courier">' . htmlentities($match[$line-1]) . "<br>"; 
+        //$error_text = 'Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . $match[$line-1] . "\n";
+        $error_text = 'Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . '" ';
         // to do
         if (false) {
             // find position in this line
@@ -250,13 +251,12 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             for ($i = 0;
                 $i < $counter-1;
                 $i++) {
-                echo "&nbsp";
+                $error_text .= " ";
             } 
         } 
-        echo '</p>';
         if (isset($args)) {
             // individual error message
-            echo $args;
+            $error_text .= $args;
         } else {
             // exspected token from parser
             foreach ($this->parser->yy_get_expected_tokens($yymajor) as $token) {
@@ -270,9 +270,9 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
                 } 
             } 
             // output parser error message
-            echo 'Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
+            $error_text .= 'Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
         } 
-        echo "<br>"; 
+        throw new Exception($error_text);
         // set error flag
         $this->compile_error = true;
     } 

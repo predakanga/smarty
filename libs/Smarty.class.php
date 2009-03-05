@@ -296,14 +296,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         if ($this->loadPlugin($security_policy)) {
             if (!class_exists('Smarty_Security_Policy')) {
-                throw new SmartyException("Security policy must define class 'Smarty_Security_Policy'");
+                throw new Exception("Security policy must define class 'Smarty_Security_Policy'");
             } 
             $this->security_policy = new Smarty_Security_Policy();
             $this->loadPlugin('Smarty_Internal_Security_Handler');
             $this->security_handler = new Smarty_Internal_Security_Handler();
             $this->security = true;
         } else {
-            throw new SmartyException("Security policy {$security_definition} not found");
+            throw new Exception("Security policy {$security_definition} not found");
         } 
     } 
 
@@ -328,7 +328,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $name_parts = explode('_', $plugin_name, 3); 
         // class name must have three parts to be valid plugin
         if (count($name_parts) < 3 || $name_parts[0] !== 'smarty') {
-            throw new SmartyException("plugin {$plugin_name} is not a valid name format");
+            throw new Exception("plugin {$plugin_name} is not a valid name format");
             return false;
         } 
         // plugin filename is expected to be: [type].[name].php
@@ -354,6 +354,18 @@ class Smarty extends Smarty_Internal_TemplateBase {
     } 
 
     /**
+    * Sets the exception handler for Smarty.
+    * 
+    * @param mixed $handler function name or array with object/method names
+    * @return string previous exception handler
+    */
+    public function setExceptionHandler($handler)
+    { 
+        $this->exception_handler = $handler;
+        return set_exception_handler($handler);
+    }    
+    
+    /**
     * Takes unknown class methods and lazy loads sysplugin files for them
     * class name format: Smarty_Method_MethodName
     * plugin filename format: method.methodname.php
@@ -367,12 +379,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if (!class_exists($class_name, false)) {
             $plugin_filename = strtolower('method.' . $name . $this->php_ext);
             if (!file_exists($this->sysplugins_dir . $plugin_filename)) {
-                throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not exist");
+                throw new Exception("Sysplugin file " . $plugin_filename . " does not exist");
                 die();
             } 
             require_once($this->sysplugins_dir . $plugin_filename);
             if (!class_exists($class_name, false)) {
-                throw new SmartyException ("Sysplugin file " . $plugin_filename . " does not define class " . $class_name);
+                throw new Exception ("Sysplugin file " . $plugin_filename . " does not define class " . $class_name);
                 die();
             } 
         } 
@@ -389,29 +401,18 @@ class Smarty extends Smarty_Internal_TemplateBase {
 * @param string $message the error message
 * @param string $code the error code
 */
-class SmartyException extends Exception {
-    public function __construct($message, $code = null)
+class SmartyException {
+    public function printException($e)
     {
-        parent::__construct($message, $code);
+        echo "Code: " . $e->getCode() . "<br />Error: " . htmlentities($e->getMessage()) . "<br />"
+         . "File: " . $e->getFile() . "<br />"
+         . "Line: " . $e->getLine() . "<br />" 
+         . "\n";
     } 
 
-    public function __toString()
+    public static function getStaticException($e)
     {
-        return "Code: " . $this->getCode() . "<br>Error: " . htmlentities($this->getMessage()) . "<br>"
-         . "File: " . $this->getFile() . "<br>"
-         . "Line: " . $this->getLine() . "<br>" 
-        // . "Trace: " . $this->getTraceAsString()
-        . "\n";
-    } 
-
-    public function getException()
-    {
-        print $this; // returns output from __toString()
-    } 
-
-    public static function getStaticException($exception)
-    {
-        $exception->getException();
+        self::printException($e);
     } 
 } 
 

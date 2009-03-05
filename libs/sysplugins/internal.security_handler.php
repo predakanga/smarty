@@ -77,7 +77,7 @@ class Smarty_Internal_Security_Handler extends Smarty_Internal_Base {
             } 
         } 
 
-        throw new SmartyException ("directory \"" . $_rp . "\" not allowed by security setting");
+        throw new Exception ("directory \"" . $_rp . "\" not allowed by security setting");
         return false;
     } 
 } 
