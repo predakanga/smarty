@@ -153,7 +153,7 @@ smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag(
 									// end of block object tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. { res =  $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
 									// {if} and {elseif} tag
-smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('ifexp'=>ie));}
+smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
 									// {for} tag
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
 									// {for $var in $array} tag

@@ -1,6 +1,9 @@
 03/06/2009
 - final changes on config variable handling
 - parser change - unquoted strings will by be converted into single quoted strings
+- PHPunit tests extended
+- some code cleanup
+
 
 03/05/2009
 - bugfix on <?xml...> tag with caching enabled

@@ -21,9 +21,14 @@ class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
     */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
-       $this->_open_tag('if');
-        return '<?php if (' . $args['ifexp'] . '): ?>';
+        $this->compiler = $compiler;
+        $this->required_attributes = array('if condition'); 
+        // check and get attributes
+        $_attr = $this->_get_attributes($args);
+
+        $this->_open_tag('if');
+        return '<?php if (' . $args['if condition'] . '): ?>';
     } 
 } 
+
 ?>

@@ -71,6 +71,20 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{"hello world"|replace:hello:xxxxx}');
         $this->assertEquals("xxxxx world", $this->smarty->fetch($tpl));
     } 
+    /**
+    * test unknown modifier error
+    */
+    public function testUnknownModifier()
+    {
+        try {
+            $this->smarty->fetch('string:{"hello world"|unknown}');
+        } 
+        catch (Exception $e) {
+            $this->assertContains('unknown modifier "unknown"', $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for unknown modifier has not been raised.');
+    } 
 } 
 
 ?>

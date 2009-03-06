@@ -30,8 +30,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // get required plugins
         $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
         $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
-        if (!is_object($this->smarty->filter_handler) && (isset($this->smarty->autoload_filters['pre'])  || isset($this->smarty->registered_filters['pre'])
-             || isset($this->smarty->autoload_filters['post'])  || isset($this->smarty->registered_filters['post']))) {
+        if (!is_object($this->smarty->filter_handler) && (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre']) || isset($this->smarty->autoload_filters['post']) || isset($this->smarty->registered_filters['post']))) {
             $this->smarty->loadPlugin('Smarty_Internal_Run_Filter');
             $this->smarty->filter_handler = new Smarty_Internal_Run_Filter;
         } 
@@ -47,7 +46,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     {
         /* here is where the compiling takes place. Smarty
        tags in the templates are replaces with PHP code,
-       then written to compiled files. */ 
+       then written to compiled files. */
         if (!is_object($template->cacher_object)) {
             $this->smarty->loadPlugin($template->cacher_class);
             $template->cacher_object = new $template->cacher_class;
@@ -60,7 +59,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // save template object in compiler class
         $this->template = $template; 
         // get template source
-        $_content = $template->getTemplateSource();
+        $_content = $template->getTemplateSource(); 
         // template header code
         $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
         $template_header .= "         compiled from \"" . $this->template->getTemplateFilepath() . "\" */ ?>\n"; 
@@ -85,7 +84,13 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             $parser->doParse($lex->token, $lex->value);
         } 
         // finish parsing process
-        $parser->doParse(0, 0);
+        $parser->doParse(0, 0); 
+        // check for unclosed tags
+        if (count($this->_tag_stack) > 0) {
+            // get stacked info
+            list($_open_tag, $_data) = array_pop($this->_tag_stack);
+            $this->trigger_template_error("unclosed {" . $_open_tag . "} tag");
+        } 
 
         if (!$this->compile_error) {
             // close cacher and return compiled template
@@ -104,8 +109,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *                                    This is a call back from the lexer/parser
-    *                                    It executes the required compile plugin for the Smarty tag
+    *                                     This is a call back from the lexer/parser
+    *                                     It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -216,7 +221,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     * display compiler error messages without dying
     * 
     * If parameter $args is empty it is a parser detected syntax error.
-    * In this case the parser is called to obtain information about exspected tokens.
+    * In this case the parser is called to obtain information about expected tokens.
     * 
     * If parameter $args contains a string this is used as error message
     * 
@@ -230,16 +235,16 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // get template source line which has error
         $line = $this->lex->line;
         if (isset($args)) {
-//            $line--;
+            // $line--;
         } 
         $match = preg_split("/\n/", $this->lex->data);
-        $error_text = 'Syntax Error in template "' . $this->template->getTemplateFilepath() . '"  on line ' . $line . ' "'. $match[$line-1].'" ';
+        $error_text = 'Syntax Error in template "' . $this->template->getTemplateFilepath() . '"  on line ' . $line . ' "' . $match[$line-1] . '" ';
 
         if (isset($args)) {
             // individual error message
             $error_text .= $args;
         } else {
-            // exspected token from parser
+            // expected token from parser
             foreach ($this->parser->yy_get_expected_tokens($yymajor) as $token) {
                 $exp_token = $this->parser->yyTokenName[$token];
                 if (isset($this->lex->smarty_token_names[$exp_token])) {
@@ -253,7 +258,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
             // output parser error message
             $error_text .= ' - Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
         } 
-        throw new Exception($error_text);
+        throw new Exception($error_text); 
         // set error flag
         $this->compile_error = true;
     } 

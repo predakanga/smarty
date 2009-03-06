@@ -130,7 +130,7 @@ at = /@/
 hatch = /#/
 semicolon = /\;\s?/
 vert = /\|/
-equal = /\=/
+equal = /\s*=\s*/
 space = /[\s]+/
 ptr = /\->/
 aptr = /\s?=>\s?/
