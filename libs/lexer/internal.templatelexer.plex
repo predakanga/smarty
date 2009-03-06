@@ -63,9 +63,8 @@ class Smarty_Internal_Templatelexer
     				'OTHER'		=> 'text',
     				'PHP'			=> 'PHP code',
     				'LDELSLASH' => 'closing tag',
-    				'COMMENTSTART' => '{*',
-    				'COMMENTEND' => '*}',
-    				'LITERALEND' => 'literal close',
+    				'COMMENT' => 'comment',
+     				'LITERALEND' => 'literal close',
     				'IN' => 'in',
     				'NULL' => 'null',
     				'BOOLEAN' => 'boolean'
@@ -112,8 +111,7 @@ number = /\d+(\.\d+)?/
 boolean = /true|TRUE|True|false|FALSE|False/
 null = /null|NULL|Null/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
-commentstart = /SMARTYldel\*/
-commentend = /\*SMARTYrdel/
+comment = /SMARTYldel\*(.|\s)*\*SMARTYrdel/
 escapedquotes = /(\\\"|\\\')/
 incdec = /\+\+|\-\-/
 unimath = /\s?(\+|\-)\s?/
@@ -174,11 +172,8 @@ phpstart {
 phpend {
   $this->token = Smarty_Internal_Templateparser::TP_PHPEND;
 }
-commentend {
-  $this->token = Smarty_Internal_Templateparser::TP_COMMENTEND;
-}
-commentstart {
-  $this->token = Smarty_Internal_Templateparser::TP_COMMENTSTART;
+comment {
+  $this->token = Smarty_Internal_Templateparser::TP_COMMENT;
 }
 escapedquotes {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;

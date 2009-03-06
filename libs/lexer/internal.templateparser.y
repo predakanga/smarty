@@ -60,7 +60,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND XMLSTART XMLEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
+%fallback     OTHER LDELSLASH LDEL RDEL XMLSTART XMLEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT.
               
@@ -87,7 +87,7 @@ template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
                                             res = $this->cacher->processNocacheCode($tmp.st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
-template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+template_element(res)::= COMMENT(t). { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// Literal
 template_element(res)::= LITERALSTART text(t) LITERALEND. {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
 											// {ldelim}

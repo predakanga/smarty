@@ -4,6 +4,8 @@
 - PHPunit tests extended
 - some code cleanup
 - fixed problem on catenate strings with expression
+- update of count_words modifier
+- bugfix on comment tags
 
 
 03/05/2009
