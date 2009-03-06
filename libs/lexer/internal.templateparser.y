@@ -213,7 +213,7 @@ exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// arithmetic expression
 exprs(res)        ::= exprs(e) math(m) value(v). { res = e . m . v; } 
 									// catenate
-exprs(res)        ::= exprs(e) ANDSYM value(v). { res = e . '.' . v; } 
+exprs(res)        ::= exprs(e) ANDSYM value(v). { res = '('. e . ').(' . v. ')'; } 
 
 //
 // mathematical operators

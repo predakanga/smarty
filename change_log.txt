@@ -3,6 +3,7 @@
 - parser change - unquoted strings will by be converted into single quoted strings
 - PHPunit tests extended
 - some code cleanup
+- fixed problem on catenate strings with expression
 
 
 03/05/2009
