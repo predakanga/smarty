@@ -14,6 +14,7 @@
 * Main config file compiler class
 */
 class Smarty_Internal_Config_File_Compiler extends Smarty_Internal_Base {
+   public $compile_error= false;
    /**
     * Initialize compiler
     */
@@ -57,7 +58,6 @@ class Smarty_Internal_Config_File_Compiler extends Smarty_Internal_Base {
         // finish parsing process
         $parser->doParse(0, 0);
 
-//        var_dump($this->config_data);
         $config->compiled_config = serialize($this->config_data);
         if (!$this->compile_error) {
             return true;
@@ -87,11 +87,10 @@ class Smarty_Internal_Config_File_Compiler extends Smarty_Internal_Base {
 //            $line--;
         } 
         $match = preg_split("/\n/", $this->lex->data);
-        echo '<br>Syntax Error on line ' . $line . ' in config file "' . $this->tpl_filepath . '"<p style="font-family:courier">' . htmlentities($match[$line-1]) . "<br>"; 
-        echo '</p>';
+        $error_text = 'Syntax Error in config file "' . $this->config->getConfigFilepath() . '"  on line ' . $line . ' "'. $match[$line-1].'" ';
         if (isset($args)) {
             // individual error message
-            echo $args;
+            $error_text .= $args;
         } else {
             // exspected token from parser
             foreach ($this->parser->yy_get_expected_tokens($yymajor) as $token) {
@@ -105,9 +104,9 @@ class Smarty_Internal_Config_File_Compiler extends Smarty_Internal_Base {
                 } 
             } 
             // output parser error message
-            echo 'Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
+            $error_text .= ' - Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
         } 
-        echo "<br>"; 
+        throw new Exception($error_text);
         // set error flag
         $this->compile_error = true;
     } 

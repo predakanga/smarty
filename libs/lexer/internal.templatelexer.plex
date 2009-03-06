@@ -5,7 +5,7 @@
 * This is the lexer to break the template source into tokens 
 * @package Smarty
 * @subpackage Compiler
-* @author Uwe Tews
+* @author Uwe Tews    (\n|\r\n)?
 */
 /**
 * Smarty Internal Plugin Templatelexer
@@ -105,11 +105,12 @@ phpstart = /SMARTYldelphpSMARTYrdel/
 phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
-ldelslash = /(\n|\r\n)?SMARTYldel\//
+ldelslash = /SMARTYldel\//
 ldel = /SMARTYldel/
-rdel = /SMARTYrdel(\n|\r\n)?/
+rdel = /SMARTYrdel/
 number = /\d+(\.\d+)?/
 boolean = /true|TRUE|True|false|FALSE|False/
+null = /null|NULL|Null/
 math = /\s?\*(?!\})\s?|\s?(\/|\%)\s?/
 commentstart = /SMARTYldel\*/
 commentend = /\*SMARTYrdel/
@@ -145,7 +146,7 @@ rdelim = 'SMARTYldelrdelimSMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
 notequals = /\s*\!=\s*|\s+(NE|ne)\s+/
 greaterthan = /\s*\>\s*|\s+(GT|gt)\s+/
-lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
+lessthan = / *\<\s*|\s+(LT|lt)\s+/
 greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
@@ -217,6 +218,9 @@ in {
 }
 boolean {
   $this->token = Smarty_Internal_Templateparser::TP_BOOLEAN;
+}
+null {
+  $this->token = Smarty_Internal_Templateparser::TP_NULL;
 }
 identity{
   $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;

@@ -1,5 +1,10 @@
+03/06/2009
+- final changes on config variable handling
+- parser change - unquoted strings will by be converted into single quoted strings
+
 03/05/2009
 - bugfix on <?xml...> tag with caching enabled
+- changes on exception handling (by Monte)
 
 03/04/2009
 - added support for config variables

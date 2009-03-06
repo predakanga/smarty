@@ -62,7 +62,7 @@
 //
 %fallback     OTHER LDELSLASH RDEL COMMENTSTART COMMENTEND XMLSTART XMLEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN IN ANDSYM BACKTICK HATCH AT.
+              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT.
               
 
 //
@@ -100,7 +100,7 @@ template_element(res)::= PHP(phpt). {if (!$this->template->security) {
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
                                        res = $this->cacher->processNocacheCode(htmlspecialchars(phpt, ENT_QUOTES), $this->compiler, false, false);
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
-                                       res = $this->cacher->processNocacheCode("<?php echo '".phpt."';?>", $this->compiler, false, false);
+                                       res = $this->cacher->processNocacheCode("<?php echo '".phpt."';?>\n", $this->compiler, false, false);
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
                                        res = '';
                                       }	}
@@ -110,9 +110,9 @@ template_element(res)::= PHPSTART text(t) PHPEND. {if (!$this->template->securit
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
                                         res = $this->cacher->processNocacheCode(htmlspecialchars('<?php '.t.' ?>', ENT_QUOTES), $this->compiler, false, false);	
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
-                                       res = $this->cacher->processNocacheCode("<?php echo '<?php ".t." ?>';?>", $this->compiler, false, false);
+                                        res = $this->cacher->processNocacheCode("<?php echo '<?php ".t." ?>';?>\n", $this->compiler, false, false);
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
-                                       res = '';
+                                        res = '';
                                       }	}
 											//
 											// XML tag
@@ -189,8 +189,8 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 // expressions
 //
 									// simple expression
-//expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
-expr(res)				 ::= ID(i). { res = i; }
+expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
+//expr(res)				 ::= ID(i). { res = i; }
 expr(res)				 ::= exprs(e).	{res = e;}
 expr(res)        ::= expr(e) modifier(m) modparameters(p). {if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
                                                                       res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
@@ -267,9 +267,11 @@ value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) vararraydefs(a) objectchain(
 									// unquoted string
 //value(res)	     ::= ID(i). { res = '\''.i.'\''; }
 									// config variable
-value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
+//value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
 									// boolean
 value(res)       ::= BOOLEAN(b). { res = b; }
+									// null
+value(res)       ::= NULL(n). { res = n; }
 									// expression
 value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 
@@ -283,6 +285,8 @@ variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { if (v == '\'smarty\'') 
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 									// object
 variable(res)    ::= object(o). { res = o; }
+                  // config variable
+variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
 										// single array index
 //vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index

@@ -53,11 +53,10 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->php_functions = array('null');
         try {
-            ob_start();
             $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{count($foo)}');
         } 
         catch (Exception $e) {
-            $this->assertContains('PHP function "count" not allowed by security setting', ob_get_clean());
+            $this->assertContains('PHP function "count" not allowed by security setting', $e->getMessage());
             return;
         } 
         $this->fail('Exception for not trusted modifier has not been raised.');
@@ -88,11 +87,10 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->modifiers = array('null');
         try {
-            ob_start();
             $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|count}');
         } 
         catch (Exception $e) {
-            $this->assertContains('modifier "count" not allowed by security setting', ob_get_clean());
+            $this->assertContains('modifier "count" not allowed by security setting', $e->getMessage());
             return;
         } 
         $this->fail('Exception for not trusted function plugin has not been raised.');

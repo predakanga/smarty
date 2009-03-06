@@ -25,6 +25,7 @@
         $this->smarty = Smarty::instance(); 
         $this->compiler = $compiler;
         $this->current_section = null;
+        $this->hidden_section = false;
     }
     public static function &instance($new_instance = null)
     {
@@ -76,20 +77,43 @@ config(res)       ::= config(c) config_element(e). {res = c.e;}
 // config elements
 //
 											// Section defifinition
-config_element(res) ::= OPENB ID(i) CLOSEB EOL. { $this->current_section = i; res ='';}
-config_element(res) ::= ID(i) EQUAL value(v) EOL. { if ($this->current_section == null) {
-                                                      $this->compiler->config_data['vars'][i]=v;
+config_element(res) ::= OPENB ID(i) CLOSEB EOL. { $this->hidden_section = false; $this->current_section = i; res ='';}
+											// Hidden section defifinition
+config_element(res) ::= OPENB DOT ID(i) CLOSEB EOL. { if ($this->smarty->config_read_hidden) {
+                                                       $this->hidden_section = false; $this->current_section = i;
+                                                      } else {$this->hidden_section = true; } res ='';}
+// variable assignment
+config_element(res) ::= ID(i) EQUAL value(v) EOL. {if (!$this->hidden_section) {
+                                                   $value=v;
+                                                   if ($this->smarty->config_booleanize) {
+                                                       if (in_array(strtolower($value),array('on','yes','true')))
+                                                          $value = true;
+                                                       else if (in_array(strtolower($value),array('off','no','false')))
+                                                         $value = false;
+                                                   }
+                                                   if ($this->current_section == null) {
+                                                      if ($this->smarty->config_overwrite) {
+                                                           $this->compiler->config_data['vars'][i]=$value;
+                                                        } else {
+                                                          settype($this->compiler->config_data['vars'][i], 'array');
+                                                          $this->compiler->config_data['vars'][i][]=$value;
+                                                        }
                                                      } else {
-                                                      $this->compiler->config_data['sections'][$this->current_section]['vars'][i]=v;
-                                                     }  res ='';}
+                                                      if ($this->smarty->config_overwrite) {
+                                                          $this->compiler->config_data['sections'][$this->current_section]['vars'][i]=$value;
+                                                      } else {
+                                                          settype($this->compiler->config_data['sections'][$this->current_section]['vars'][i], 'array');
+                                                          $this->compiler->config_data['sections'][$this->current_section]['vars'][i][]=$value;
+                                                      }
+                                                     }}  res ='';}
+// empty and comment lines
 config_element(res) ::= EOL. { res ='';}
 config_element(res) ::= COMMENTSTART text(t) EOL. { res ='';}
 
 value(res)         ::= text(t). {res = t;}
-value(res)         ::= BOOLEANTRUE(b). {res = true;}
-value(res)         ::= BOOLEANFALSE(b). {res = false;}
 value(res)         ::= SI_QSTR(s). {res = trim(s,"'");}
 value(res)         ::= DO_QSTR(s). {res = trim(s,'"');}
+value(res)         ::= ML_QSTR(s). {res = trim(s,'"');}
 value(res)         ::= NUMBER(n). {res = (int)n;}
 
 

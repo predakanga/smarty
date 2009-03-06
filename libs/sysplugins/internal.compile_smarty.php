@@ -77,9 +77,7 @@ class Smarty_Internal_Compile_Smarty extends Smarty_Internal_CompileBase {
                 return '@' . trim($_index[1], "'");
 
             case 'config':
-                $compiled_ref = "\$this->_config[0]['vars']";
-                $_max_index = 3;
-                break;
+                return "\$_smarty_tpl->getConfigVariable($_index[1])";
 
             case 'ldelim':
                 $_ldelim = $this->smarty->left_delimiter;

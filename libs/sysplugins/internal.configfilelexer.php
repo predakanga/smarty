@@ -69,19 +69,18 @@ class Smarty_Internal_Configfilelexer
               4 => 0,
               5 => 0,
               6 => 0,
-              7 => 1,
-              9 => 1,
-              11 => 0,
+              7 => 0,
+              8 => 1,
+              10 => 1,
               12 => 0,
               13 => 0,
               14 => 0,
               15 => 0,
-              16 => 0,
             );
         if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
-        $yy_global_pattern = "/^(#)|^('[^'\\\\\\\\]*(?:\\\\\\\\.[^'\\\\\\\\]*)*')|^(\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\")|^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)/";
+        $yy_global_pattern = "/^(#)|^('[^'\\\\\\\\]*(?:\\\\\\\\.[^'\\\\\\\\]*)*')|^(\"\"\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\"\"\")|^(\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\")|^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)/";
 
         do {
             if (preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches)) {
@@ -121,20 +120,19 @@ class Smarty_Internal_Configfilelexer
                     // skip this token
                     continue;
                 } else {                    $yy_yymore_patterns = array(
-        1 => array(0, "^('[^'\\\\\\\\]*(?:\\\\\\\\.[^'\\\\\\\\]*)*')|^(\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\")|^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        2 => array(0, "^(\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\")|^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        3 => array(0, "^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        4 => array(0, "^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        5 => array(0, "^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        6 => array(0, "^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        7 => array(1, "^((\n|\r\n))|^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        9 => array(2, "^([\s]+)|^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        11 => array(2, "^(\\.)|^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        12 => array(2, "^(true|TRUE|True)|^(false|FALSE|False)|^(\\w+)|^(.)"),
-        13 => array(2, "^(false|FALSE|False)|^(\\w+)|^(.)"),
-        14 => array(2, "^(\\w+)|^(.)"),
-        15 => array(2, "^(.)"),
-        16 => array(2, ""),
+        1 => array(0, "^('[^'\\\\\\\\]*(?:\\\\\\\\.[^'\\\\\\\\]*)*')|^(\"\"\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\"\"\")|^(\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\")|^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        2 => array(0, "^(\"\"\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\"\"\")|^(\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\")|^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        3 => array(0, "^(\"[^\"\\\\\\\\]*(?:\\\\\\\\.[^\"\\\\\\\\]*)*\")|^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        4 => array(0, "^(\\[)|^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        5 => array(0, "^(])|^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        6 => array(0, "^(\\s*=\\s*)|^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        7 => array(0, "^(\\d+(\\.\\d+)?)|^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        8 => array(1, "^((\n|\r\n))|^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        10 => array(2, "^([\s]+)|^(\\.)|^(\\w+)|^(.)"),
+        12 => array(2, "^(\\.)|^(\\w+)|^(.)"),
+        13 => array(2, "^(\\w+)|^(.)"),
+        14 => array(2, "^(.)"),
+        15 => array(2, ""),
     );
 
                     // yymore is needed
@@ -204,59 +202,54 @@ class Smarty_Internal_Configfilelexer
     function yy_r1_3($yy_subpatterns)
     {
 
-  $this->token = Smarty_Internal_Configfileparser::TPC_DO_QSTR;
+  $this->token = Smarty_Internal_Configfileparser::TPC_ML_QSTR;
     }
     function yy_r1_4($yy_subpatterns)
     {
 
-  $this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
+  $this->token = Smarty_Internal_Configfileparser::TPC_DO_QSTR;
     }
     function yy_r1_5($yy_subpatterns)
     {
 
-  $this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
+  $this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
     }
     function yy_r1_6($yy_subpatterns)
     {
 
-  $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
+  $this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
     }
     function yy_r1_7($yy_subpatterns)
     {
 
+  $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
+    }
+    function yy_r1_8($yy_subpatterns)
+    {
+
   $this->token = Smarty_Internal_Configfileparser::TPC_NUMBER;
     }
-    function yy_r1_9($yy_subpatterns)
+    function yy_r1_10($yy_subpatterns)
     {
 
   $this->token = Smarty_Internal_Configfileparser::TPC_EOL;
     }
-    function yy_r1_11($yy_subpatterns)
+    function yy_r1_12($yy_subpatterns)
     {
 
   $this->token = Smarty_Internal_Configfileparser::TPC_SPACE;
     }
-    function yy_r1_12($yy_subpatterns)
+    function yy_r1_13($yy_subpatterns)
     {
 
   $this->token = Smarty_Internal_Configfileparser::TPC_DOT;
     }
-    function yy_r1_13($yy_subpatterns)
-    {
-
-  $this->token = Smarty_Internal_Configfileparser::TPC_BOOLEANTRUE;
-    }
     function yy_r1_14($yy_subpatterns)
-    {
-
-  $this->token = Smarty_Internal_Configfileparser::TPC_BOOLEANFALSE;
-    }
-    function yy_r1_15($yy_subpatterns)
     {
 
   $this->token = Smarty_Internal_Configfileparser::TPC_ID;
     }
-    function yy_r1_16($yy_subpatterns)
+    function yy_r1_15($yy_subpatterns)
     {
 
   $this->token = Smarty_Internal_Configfileparser::TPC_OTHER;

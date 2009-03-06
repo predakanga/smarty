@@ -47,10 +47,9 @@ dot = /\./
 equal = /\s*\=\s*/
 eol = /(\n|\r\n)/
 space = /[\s]+/
-booleantrue = /true|TRUE|True/
-booleanfalse = /false|FALSE|False/
 id = /\w+/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
+ml_qstr = '\"\"\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"\"\"'
 do_qstr = '\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"'
 other = /./
 */
@@ -62,6 +61,9 @@ commentstart {
 }
 si_qstr {
   $this->token = Smarty_Internal_Configfileparser::TPC_SI_QSTR;
+}
+ml_qstr {
+  $this->token = Smarty_Internal_Configfileparser::TPC_ML_QSTR;
 }
 do_qstr {
   $this->token = Smarty_Internal_Configfileparser::TPC_DO_QSTR;
@@ -86,12 +88,6 @@ space {
 }
 dot {
   $this->token = Smarty_Internal_Configfileparser::TPC_DOT;
-}
-booleantrue {
-  $this->token = Smarty_Internal_Configfileparser::TPC_BOOLEANTRUE;
-}
-booleanfalse {
-  $this->token = Smarty_Internal_Configfileparser::TPC_BOOLEANFALSE;
 }
 id {
   $this->token = Smarty_Internal_Configfileparser::TPC_ID;

@@ -35,12 +35,10 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     public function testAssignRequiredAttributeVar()
     {
         try {
-            ob_start();
             $this->smarty->fetch('string:{assign value=1}');
         } 
         catch (Exception $e) {
-            $this->assertContains('Error compiling template string', $e->getMessage());
-            $this->assertContains('missing "var" attribute', ob_get_clean());
+            $this->assertContains('missing "var" attribute', $e->getMessage());
             return;
         } 
         $this->fail('Exception for required attribute "var" has not been raised.');

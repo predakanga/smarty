@@ -59,13 +59,11 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         $this->compile_error = false; 
         // save template object in compiler class
         $this->template = $template; 
-        // get template filepath for error messages
-        $this->tpl_filepath = $template->getTemplateFilepath(); 
         // get template source
         $_content = $template->getTemplateSource();
         // template header code
         $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
-        $template_header .= "         compiled from \"" . $this->tpl_filepath . "\" */ ?>\n"; 
+        $template_header .= "         compiled from \"" . $this->template->getTemplateFilepath() . "\" */ ?>\n"; 
         // run prefilter if required
         if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre'])) {
             $_content = $this->smarty->filter_handler->execute('pre', $_content);
@@ -235,25 +233,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
 //            $line--;
         } 
         $match = preg_split("/\n/", $this->lex->data);
-        //$error_text = 'Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . $match[$line-1] . "\n";
-        $error_text = 'Syntax Error on line ' . $line . ' in template "' . $this->tpl_filepath . '" ';
-        // to do
-        if (false) {
-            // find position in this line
-            $counter = $this->lex->counter;
-            for ($i = 0;
-                $i < $this->lex->line-1;
-                $i++) {
-                $counter -= strlen($match[$i]);
-            } 
-            $counter -= ($this->lex->line-1) * 2;
-            echo $counter;
-            for ($i = 0;
-                $i < $counter-1;
-                $i++) {
-                $error_text .= " ";
-            } 
-        } 
+        $error_text = 'Syntax Error in template "' . $this->template->getTemplateFilepath() . '"  on line ' . $line . ' "'. $match[$line-1].'" ';
+
         if (isset($args)) {
             // individual error message
             $error_text .= $args;
@@ -270,7 +251,7 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
                 } 
             } 
             // output parser error message
-            $error_text .= 'Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
+            $error_text .= ' - Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
         } 
         throw new Exception($error_text);
         // set error flag

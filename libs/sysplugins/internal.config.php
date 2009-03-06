@@ -23,9 +23,12 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
         $this->config_resource_name = null;
         $this->config_filepath = null;
         $this->config_timestamp = null;
+        $this->config_source = null;
         $this->compiled_config = null;
         $this->compiled_filepath = null;
-        $this->compiled_timestamp = null; 
+        $this->compiled_timestamp = null;
+        $this->mustCompile = null; 
+        $this->compiler_object = null;
         // parse config resource name
         if (!$this->parseConfigResourceName ($config_resource)) {
             throw new Exception ("Unable to parse config resource '{$config_resource}'");
@@ -66,11 +69,6 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
             } 
         } 
         return true;
-    } 
-    // build a unique config ID
-    public function buildconfigId ($_resorce, $_cache_id, $_compile_id)
-    {
-        return md5($_resorce . md5($_cache_id) . md5($_compile_id));
     } 
 
     /*
@@ -132,7 +130,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
     } 
     public function buildCompiledFilepath()
     {
-        $_filepath = md5($this->resource_name); 
+        $_filepath = md5($this->config_resource_name); 
         // if use_sub_dirs, break file into directories
         if ($this->smarty->use_sub_dirs) {
             $_filepath = substr($_filepath, 0, 3) . DIRECTORY_SEPARATOR

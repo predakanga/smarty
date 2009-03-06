@@ -53,12 +53,10 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate("string:start {insert name='mustfail' foo='bar' assign=blar} end {\$blar}");
         try {
-            ob_start();
             $this->smarty->fetch($tpl);
         } 
         catch (Exception $e) {
-            $this->assertContains('Error compiling template string', $e->getMessage());
-            $this->assertContains('function "insert_mustfail" is not callable', ob_get_clean());
+            $this->assertContains('function "insert_mustfail" is not callable', $e->getMessage());
             return;
         } 
         $this->fail('Exception for "function is not callable" has not been raised.');
@@ -70,12 +68,10 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate("string:{insert name='mustfail' foo='bar' script='nofile.php'}");
         try {
-            ob_start();
             $this->smarty->fetch($tpl);
         } 
         catch (Exception $e) {
-            $this->assertContains('Error compiling template string', $e->getMessage());
-            $this->assertContains('missing file', ob_get_clean());
+            $this->assertContains('missing file', $e->getMessage());
             return;
         } 
         $this->fail('Exception for "missing file" has not been raised.');

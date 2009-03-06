@@ -30,14 +30,14 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase {
         // save posible attributes
         $conf_file = $_attr['file'];
         if (isset($_attr['section'])) {
-            $section = "'".$_attr['section']."'";
+            $section = $_attr['section'];
         } else {
             $section = 'null';
         } 
         $scope = '$_smarty_tpl->smarty';
-        if ($_attr['scope'] == 'local') {
+        if ($_attr['scope'] == '\'local\'') {
           $scope = '$_smarty_tpl';
-        }elseif ($_attr['scope'] == 'parent') {
+        }elseif ($_attr['scope'] == '\'parent\'') {
           $scope = '$_smarty_tpl->parent';
         }
         
