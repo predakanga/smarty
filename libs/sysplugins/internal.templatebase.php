@@ -17,7 +17,7 @@ class Smarty_Internal_TemplateBase {
     /**
     * assigns a Smarty variable
     * 
-    * @param array|string $tpl_var the template variable name(s)
+    * @param array $ |string $tpl_var the template variable name(s)
     * @param mixed $value the value to assign
     * @param boolean $nocache if true any output of this variable will be not cached
     * @param boolean $global if true the variable will have global scope
@@ -42,7 +42,7 @@ class Smarty_Internal_TemplateBase {
     * assigns values to template variables by reference
     * 
     * @param string $tpl_var the template variable name
-    * @param mixed &$value the referenced value to assign
+    * @param mixed $ &$value the referenced value to assign
     * @param boolean $nocache if true any output of this variable will be not cached
     * @param boolean $global if true the variable will have global scope
     */
@@ -57,7 +57,7 @@ class Smarty_Internal_TemplateBase {
     /**
     * appends values to template variables
     * 
-    * @param array|string $tpl_var the template variable name(s)
+    * @param array $ |string $tpl_var the template variable name(s)
     * @param mixed $value the value to append
     * @param boolean $merge flag if array elements shall be merged
     */
@@ -106,7 +106,7 @@ class Smarty_Internal_TemplateBase {
     * appends values to template variables by reference
     * 
     * @param string $tpl_var the template variable name
-    * @param mixed &$value the referenced value to append
+    * @param mixed $ &$value the referenced value to append
     * @param boolean $merge flag if array elements shall be merged
     */
     public function append_by_ref($tpl_var, &$value, $merge = false)
@@ -143,7 +143,7 @@ class Smarty_Internal_TemplateBase {
     /**
     * clear the given assigned template variable.
     * 
-    * @param string|array $tpl_var the template variable(s) to clear
+    * @param string $ |array $tpl_var the template variable(s) to clear
     */
     public function clear_assign($tpl_var)
     {
@@ -168,18 +168,25 @@ class Smarty_Internal_TemplateBase {
     * gets the object of a Smarty variable
     * 
     * @param string $variable the name of the Smarty variable
+    * @param object $_ptr optional pointer to data object
+    * @param boolean $search_parents search also in parent data
     * @return object the object of the variable
     */
-    public function getVariable($variable)
+    public function getVariable($variable, $_ptr = null, $search_parents = true)
     {
-        $_ptr = $this;
-        while ($_ptr !== null) {
+        if ($_ptr === null) {
+            $_ptr = $this;
+        } while ($_ptr !== null) {
             if (isset($_ptr->tpl_vars[$variable])) {
                 // found it, return it
                 return $_ptr->tpl_vars[$variable];
             } 
             // not found, try at parent
-            $_ptr = $_ptr->parent;
+            if ($search_parents) {
+                $_ptr = $_ptr->parent;
+            } else {
+                $_ptr = null;
+            } 
         } 
         if (Smarty::$error_unassigned) {
             if (class_exists('Smarty_Internal_Compiler', false)) {
@@ -277,9 +284,9 @@ class Smarty_Data extends Smarty_Internal_TemplateBase {
     // array of variable objects
     public $tpl_vars = array(); 
     // back pointer to parent object
-    public $parent = null;
+    public $parent = null; 
     // config vars
-    public $config_vars = array(); 
+    public $config_vars = array();
 
     /**
     * create Smarty data object

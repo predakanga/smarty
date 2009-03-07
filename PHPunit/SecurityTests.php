@@ -139,7 +139,6 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
         $this->assertEquals('<?php echo "hello world"; ?>', $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
-        echo $this->smarty->fetch('string:<?php echo "hello world"; ?>');
     } 
     public function testSmartyPhpAllow2()
     {

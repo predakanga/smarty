@@ -1,4 +1,10 @@
 03/06/2009
+- Smarty method get_template_vars implemented
+- Smarty method get_registered_object implemented
+- Smarty method trigger_error implemented
+- PHPunit tests extended
+
+03/06/2009
 - final changes on config variable handling
 - parser change - unquoted strings will by be converted into single quoted strings
 - PHPunit tests extended

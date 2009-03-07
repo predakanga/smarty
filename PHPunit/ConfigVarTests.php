@@ -42,8 +42,33 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableSection2()
     {
-        $this->smarty->config_load('test.conf','section2');
+        $this->smarty->config_load('test.conf', 'section2');
         $this->assertEquals("Welcome to Smarty!  Hello Section2", $this->smarty->fetch('string:{#title#} {#sec1#} {#sec2#}'));
+    } 
+    /**
+    * test config variables loading section2 from template
+    */
+    public function testConfigVariableSection2Template()
+    {
+        $this->assertEquals("Welcome to Smarty!  Hello Section2", $this->smarty->fetch('string:{config_load file=\'test.conf\' section=\'section2\'}{#title#} {#sec1#} {#sec2#}'));
+    } 
+    /**
+    * test config varibales loading local
+    */
+    public function testConfigVariableLocal()
+    {
+        $this->assertEquals("Welcome to Smarty!", $this->smarty->fetch('string:{config_load file=\'test.conf\' scope=\'local\'}{#title#}'));
+        // global must be empty
+        $this->assertEquals("", $this->smarty->get_config_vars('title'));
+    } 
+    /**
+    * test config varibales loading parent
+    */
+    public function testConfigVariableParent()
+    {
+        $this->assertEquals("Welcome to Smarty!", $this->smarty->fetch('string:{config_load file=\'test.conf\' scope=\'parent\'}{#title#}'));
+        // global is parent must not be empty
+        $this->assertEquals("Welcome to Smarty!", $this->smarty->get_config_vars('title'));
     } 
     /**
     * test config variables of hidden sections
@@ -53,7 +78,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->config_load('test.conf');
         $this->assertEquals("Welcome to Smarty!Hidden Section", $this->smarty->fetch('string:{#title#}{#hiddentext#}'));
-    }
+    } 
     /**
     * test config variables of disabled hidden sections
     * shall display not variables from hidden section
@@ -63,7 +88,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
         $this->smarty->config_read_hidden = false;
         $this->smarty->config_load('test.conf');
         $this->assertEquals("Welcome to Smarty!", $this->smarty->fetch('string:{#title#}{#hiddentext#}'));
-    }
+    } 
     /**
     * test config varibales loading all sections from template
     */
@@ -91,56 +116,69 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableBooleanizeOn()
     {
-       $this->assertEquals("passed", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{if #booleanon# === true}passed{/if}'));
+        $this->assertEquals("passed", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{if #booleanon# === true}passed{/if}'));
     } 
     /**
     * test config varibales booleanize off
     */
     public function testConfigVariableBooleanizeOff()
     {
-       $this->smarty->config_booleanize = false;
-       $this->assertEquals("passed", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{if #booleanon# == \'on\'}passed{/if}'));
+        $this->smarty->config_booleanize = false;
+        $this->assertEquals("passed", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{if #booleanon# == \'on\'}passed{/if}'));
+    } 
+    /**
+    * test config file syntax error
+    */
+    public function testConfigSyntaxError()
+    {
+        try {
+            $this->smarty->fetch('string:{config_load file=\'test_error.conf\'}');
+        } 
+        catch (Exception $e) {
+            $this->assertContains('Syntax Error in config file', $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for syntax errors in config files has not been raised.');
     } 
     /**
     * test get_config_vars
     */
     public function testConfigGetSingleConfigVar()
     {
-       $this->smarty->config_load('test.conf');
-       $this->assertEquals("Welcome to Smarty!", $this->smarty->get_config_vars('title'));
+        $this->smarty->config_load('test.conf');
+        $this->assertEquals("Welcome to Smarty!", $this->smarty->get_config_vars('title'));
     } 
     /**
     * test get_config_vars return all variables
     */
     public function testConfigGetAllConfigVars()
     {
-       $this->smarty->config_load('test.conf');
-       $vars = $this->smarty->get_config_vars();
-       $this->assertTrue(is_array($vars));
-       $this->assertEquals("Welcome to Smarty!", $vars['title']);
-       $this->assertEquals("Hello Section1", $vars['sec1']);
+        $this->smarty->config_load('test.conf');
+        $vars = $this->smarty->get_config_vars();
+        $this->assertTrue(is_array($vars));
+        $this->assertEquals("Welcome to Smarty!", $vars['title']);
+        $this->assertEquals("Hello Section1", $vars['sec1']);
     } 
     /**
     * test clear_config for single variable
     */
     public function testConfigClearSingleConfigVar()
     {
-       $this->smarty->config_load('test.conf');
-$this->smarty->clear_config('title');
-       $this->assertEquals("", $this->smarty->get_config_vars('title'));
+        $this->smarty->config_load('test.conf');
+        $this->smarty->clear_config('title');
+        $this->assertEquals("", $this->smarty->get_config_vars('title'));
     } 
     /**
     * test clear_config for all variables
     */
     public function testConfigClearConfigAll()
     {
-       $this->smarty->config_load('test.conf');
-       $this->smarty->clear_config();
-       $vars = $this->smarty->get_config_vars();
-       $this->assertTrue(is_array($vars));
-       $this->assertTrue(empty($vars));
+        $this->smarty->config_load('test.conf');
+        $this->smarty->clear_config();
+        $vars = $this->smarty->get_config_vars();
+        $this->assertTrue(is_array($vars));
+        $this->assertTrue(empty($vars));
     } 
- 
 } 
 
 ?>

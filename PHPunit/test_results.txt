@@ -1,30 +1,13 @@
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
-............................................................  60 / 385
-............................................................ 120 / 385
-............................................................ 180 / 385
-............................................................ 240 / 385
-.................................F.......................... 300 / 385
-.....................................<?php echo "hello world"; ?>..F.................... 360 / 385
-.........................
+............................................................  60 / 395
+............................................................ 120 / 395
+............................................................ 180 / 395
+............................................................ 240 / 395
+............................................................ 300 / 395
+............................................................ 360 / 395
+...................................
 
-Time: 6 seconds
+Time: 7 seconds
 
-There were 2 failures:
-
-1) testEscapedQuotesInDoubleQuotedString(DoubleQuotedStringTests)
-Failed asserting that two strings are equal.
-expected string <Hello "" World>
-difference      <      xxxxxxxx????>
-got string      <Hello \\"\\" World>
-C:\wamp\www\__smarty3Alpha\PHPunit\DoubleQuotedStringTests.php:78
-
-2) testDisabledSmartyPhpRemove(SecurityTests)
-Failed asserting that two strings are equal.
-expected string <hello world>
-difference      <xxx????????>
-got string      <php>
-C:\wamp\www\__smarty3Alpha\PHPunit\SecurityTests.php:156
-
-FAILURES!
-Tests: 385, Assertions: 447, Failures: 2.
+OK (395 tests, 469 assertions)

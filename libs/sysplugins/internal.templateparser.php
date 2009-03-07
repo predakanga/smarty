@@ -1604,7 +1604,7 @@ static public $yy_action = array(
 #line 1609 "internal.templateparser.php"
 #line 98 "internal.templateparser.y"
     function yy_r8(){if (!$this->template->security) { 
-                                       $this->_retvalue = $this->cacher->processNocacheCode(php, $this->compiler, false,true);
+                                       $this->_retvalue = $this->cacher->processNocacheCode($this->yystack[$this->yyidx + 0]->minor, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
                                        $this->_retvalue = $this->cacher->processNocacheCode(htmlspecialchars($this->yystack[$this->yyidx + 0]->minor, ENT_QUOTES), $this->compiler, false, false);
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {

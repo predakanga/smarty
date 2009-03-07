@@ -96,7 +96,7 @@ template_element(res)::= LDELIMTAG. {res = $this->cacher->processNocacheCode($th
 template_element(res)::= RDELIMTAG. {res = $this->cacher->processNocacheCode($this->smarty->right_delimiter, $this->compiler,false,false);}	
 											// <?php> tag
 template_element(res)::= PHP(phpt). {if (!$this->template->security) { 
-                                       res = $this->cacher->processNocacheCode(php, $this->compiler, false,true);
+                                       res = $this->cacher->processNocacheCode(phpt, $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
                                        res = $this->cacher->processNocacheCode(htmlspecialchars(phpt, ENT_QUOTES), $this->compiler, false, false);
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
