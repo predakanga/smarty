@@ -46,7 +46,7 @@ class CommentsTests extends PHPUnit_Framework_TestCase {
     } 
     public function testSimpleComment3()
     {
-        $tpl = $this->smarty->createTemplate("string:{* another \$foo comment *}{* another <?=\$foo?> comment *}");
+        $tpl = $this->smarty->createTemplate("string:{* another <?=\$foo?> comment *}");
         $this->assertEquals("", $this->smarty->fetch($tpl));
         $this->assertContains('<?php /* comment placeholder */?>', $tpl->getCompiledTemplate());
     } 

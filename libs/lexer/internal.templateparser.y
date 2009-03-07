@@ -87,7 +87,8 @@ template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
                                             res = $this->cacher->processNocacheCode($tmp.st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
-template_element(res)::= COMMENT(t). { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+//template_element(res)::= COMMENT(t). { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
 											// Literal
 template_element(res)::= LITERALSTART text(t) LITERALEND. {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
 											// {ldelim}
