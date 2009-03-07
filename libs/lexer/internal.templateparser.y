@@ -157,7 +157,8 @@ smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler-
 									// {for} tag
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
 									// {for $var in $array} tag
-smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
+// replaced with next line because config vars could an array!! smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN value(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN array(a) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
 foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
 foraction(res)	 ::= INCDEC(e). { res = e;}
@@ -241,7 +242,9 @@ math(res)        ::= MATH(m). {res = m;}
 
 									// variable
 value(res)		   ::= variable(v). { res = v; }
-									// numeric constant
+                  // config variable
+value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
+                 // numeric
 value(res)       ::= NUMBER(n). { res = n; }
 									// function call
 value(res)	     ::= function(f). { res = f; }
@@ -286,7 +289,7 @@ variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariab
 									// object
 variable(res)    ::= object(o). { res = o; }
                   // config variable
-variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
+//variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
 										// single array index
 //vararraydefs(res)  ::= vararraydef(a). {res = a;}
 										// multiple array index

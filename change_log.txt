@@ -1,4 +1,5 @@
 03/07/2009
+- fixed problem with #xxxx in double quoted string
 - new {while} tag implemented
 - made lexer and paser class configurable as $smarty property
 - Smarty method get_template_vars implemented
