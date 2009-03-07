@@ -12,7 +12,6 @@
 */
 class Smarty_Internal_Templatelexer
 {
-
     public $data;
     public $counter;
     public $token;

@@ -296,9 +296,13 @@ vararraydefs        ::= . {return;}
 										// Smarty2 style index 
 vararraydef(res)   ::= DOT ID(i). { res = "['". i ."']";}
 vararraydef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
+										// section tag index
+vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index\']').']';}
 										// PHP style index
-vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
+//vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
 vararraydef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
+										// section tag index
+//vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = $this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index'\]');}
 
 // variable identifer, supporting variable variables
 										// singel identifier element
