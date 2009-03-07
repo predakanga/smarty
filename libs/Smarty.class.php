@@ -116,11 +116,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $cache_resorce_types = array('file'); 
     // config type
     public $default_config_type = 'file'; 
-    // class used for compiling templates
+    // classes used for compiling Smarty templates
     public $compiler_class = 'Smarty_Internal_Compiler'; 
+    public $lexer_class = 'Smarty_Internal_Templatelexer'; 
+    public $parser_class = 'Smarty_Internal_Templateparser'; 
     // class used for cacher
     public $cacher_class = 'Smarty_Internal_Cacher_InlineCode'; 
-    // public $cacher_class = 'Smarty_Internal_Cacher_NocacheInclude';
     // exception handler: set null to disable
     public $exception_handler = array('SmartyException', 'getStaticException'); 
     // cached template objects
@@ -132,7 +133,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // registered plugins
     public $registered_plugins = array(); 
     // plugin search order
-    public $plugin_search_order = array('function', 'block', 'compiler'); 
+    public $plugin_search_order = array('function', 'block', 'compiler','class'); 
     // plugin handler object
     public $plugin_handler = null; 
     // registered objects

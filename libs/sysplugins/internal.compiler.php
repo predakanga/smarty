@@ -28,8 +28,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
     {
         parent::__construct(); 
         // get required plugins
-        $this->smarty->loadPlugin('Smarty_Internal_Templatelexer');
-        $this->smarty->loadPlugin('Smarty_Internal_Templateparser');
+        $this->smarty->loadPlugin($this->smarty->lexer_class);
+        $this->smarty->loadPlugin($this->smarty->parser_class);
         if (!is_object($this->smarty->filter_handler) && (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre']) || isset($this->smarty->autoload_filters['post']) || isset($this->smarty->registered_filters['post']))) {
             $this->smarty->loadPlugin('Smarty_Internal_Run_Filter');
             $this->smarty->filter_handler = new Smarty_Internal_Run_Filter;
@@ -75,8 +75,8 @@ class Smarty_Internal_Compiler extends Smarty_Internal_Base {
         // init cacher plugin
         $template->cacher_object->initCacher($this); 
         // init the lexer/parser to compile the template
-        $lex = new Smarty_Internal_Templatelexer($_content);
-        $parser = new Smarty_Internal_Templateparser($lex, $this); 
+        $lex = new $this->smarty->lexer_class($_content);
+        $parser = new $this->smarty->parser_class($lex, $this); 
         // $parser->PrintTrace();
         // get tokens from lexer and parse them
         while ($lex->yylex()) {

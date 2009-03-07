@@ -139,6 +139,8 @@ For a counting for loop:
 Any number of statements can be used separated by comma as the first
 inital expression at {for}
 
+New {while....} tag:
+{while $i<10}  ....  {/while}
 
 {nocache} ... {/nocache} will declare a section of the template to be not cached.
 

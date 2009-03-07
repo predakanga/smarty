@@ -1,4 +1,6 @@
-03/06/2009
+03/07/2009
+- new {while} tag implemented
+- made lexer and paser class configurable as $smarty property
 - Smarty method get_template_vars implemented
 - Smarty method get_registered_object implemented
 - Smarty method trigger_error implemented
