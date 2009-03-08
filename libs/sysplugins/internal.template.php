@@ -251,7 +251,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             // load compiler
             $this->smarty->loadPlugin('Smarty_Internal_CompileBase');
             $this->smarty->loadPlugin($this->compiler_class);
-            $this->compiler_object = new $this->compiler_class;
+            $this->compiler_object = new $this->compiler_class($this->smarty->template_lexer_class,$this->smarty->template_parser_class);
         } 
         if (!is_object($this->smarty->write_file_object)) {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");

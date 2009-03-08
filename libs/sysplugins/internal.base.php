@@ -11,7 +11,7 @@
 /**
 * Smarty Internal Base Class
 */
-class Smarty_Internal_Base {
+abstract class Smarty_Internal_Base {
     /**
     * Set up instance of Smarty object
     */

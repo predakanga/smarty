@@ -8,10 +8,18 @@
 * @author Uwe Tews 
 */
 
+/*
+interface TagCompilerInterface {
+    public function compile($args, $compiler);
+}
+*/ 
+
 /**
 * This class does extend all internal compile plugins
 */
-class Smarty_Internal_CompileBase {
+//abstract class Smarty_Internal_CompileBase implements TagCompilerInterface 
+abstract class Smarty_Internal_CompileBase 
+{
     /**
     * Get an instance of Smarty and compiler object
     */

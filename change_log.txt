@@ -1,4 +1,5 @@
 03/08/2009
+- some changes to make the lexer parser better configurable
 - implemented {section} tag for Smarty2 BC
 
 03/07/2009

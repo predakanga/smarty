@@ -118,8 +118,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $default_config_type = 'file'; 
     // classes used for compiling Smarty templates
     public $compiler_class = 'Smarty_Internal_Compiler'; 
-    public $lexer_class = 'Smarty_Internal_Templatelexer'; 
-    public $parser_class = 'Smarty_Internal_Templateparser'; 
+    public $template_lexer_class = 'Smarty_Internal_Templatelexer'; 
+    public $template_parser_class = 'Smarty_Internal_Templateparser'; 
     // class used for cacher
     public $cacher_class = 'Smarty_Internal_Cacher_InlineCode'; 
     // exception handler: set null to disable

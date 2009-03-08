@@ -8,8 +8,6 @@ PHPUnit 3.3.15 by Sebastian Bergmann.
 ............................................................ 360 / 402
 ..........................................
 
-Time: 28 seconds
+Time: 6 seconds
 
 OK (402 tests, 476 assertions)
-
-Generating code coverage report, this may take a moment.
