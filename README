@@ -139,6 +139,11 @@ For a counting for loop:
 Any number of statements can be used separated by comma as the first
 inital expression at {for}
 
+The {for} will replace Smarty2's {foreach} and {section}.  For BC {foreach} are {section} are still supported.
+
+NOTE:  {$bar[foo]} will always be parsed that foo is the name of a section. 
+If you want to access an array element with index foo,you must use quotes like {$bar['foo']}
+
 New {while....} tag:
 {while $i<10}  ....  {/while}
 

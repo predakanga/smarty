@@ -46,9 +46,9 @@ class CommentsTests extends PHPUnit_Framework_TestCase {
     } 
     public function testSimpleComment3()
     {
-        $tpl = $this->smarty->createTemplate("string:{* another <?=\$foo?> comment *}");
-        $this->assertEquals("", $this->smarty->fetch($tpl));
-        $this->assertContains('<?php /* comment placeholder */?>', $tpl->getCompiledTemplate());
+        $tpl = $this->smarty->createTemplate("string:{* another  comment *}some in between{* another  comment *}");
+        $this->assertEquals("some in between", $this->smarty->fetch($tpl));
+        $this->assertContains('<?php /* comment placeholder */?>some in between<?php /* comment placeholder */?>', $tpl->getCompiledTemplate());
     } 
     public function testSimpleComment4()
     {
