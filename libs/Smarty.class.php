@@ -116,10 +116,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $cache_resorce_types = array('file'); 
     // config type
     public $default_config_type = 'file'; 
-    // classes used for compiling Smarty templates
-    public $compiler_class = 'Smarty_Internal_Compiler'; 
-    public $template_lexer_class = 'Smarty_Internal_Templatelexer'; 
-    public $template_parser_class = 'Smarty_Internal_Templateparser'; 
     // class used for cacher
     public $cacher_class = 'Smarty_Internal_Cacher_InlineCode'; 
     // exception handler: set null to disable
@@ -163,7 +159,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // set default dirs
         $this->template_dir = '.' . DIRECTORY_SEPARATOR . 'templates' . DIRECTORY_SEPARATOR;
         $this->compile_dir = '.' . DIRECTORY_SEPARATOR . 'templates_c' . DIRECTORY_SEPARATOR;
-        $this->plugins_dir = array('.' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
+        $this->plugins_dir = array(dirname(__FILE__) . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->cache_dir = '.' . DIRECTORY_SEPARATOR . 'cache' . DIRECTORY_SEPARATOR;
         $this->config_dir = '.' . DIRECTORY_SEPARATOR . 'configs' . DIRECTORY_SEPARATOR;
         $this->sysplugins_dir = dirname(__FILE__) . DIRECTORY_SEPARATOR . 'sysplugins' . DIRECTORY_SEPARATOR; 

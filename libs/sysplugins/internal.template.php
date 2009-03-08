@@ -23,7 +23,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $compile_id = null;
     public $caching = null;
     public $caching_lifetime = null;
-    public $compiler_class = null;
     public $cacher_class = null;
     public $caching_type = null;
     public $force_compile = null; 
@@ -77,7 +76,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->force_compile = $this->smarty->force_compile;
         $this->caching = $this->smarty->caching;
         $this->caching_lifetime = $this->smarty->caching_lifetime;
-        $this->compiler_class = $this->smarty->compiler_class;
         $this->cacher_class = $this->smarty->cacher_class;
         $this->caching_type = $this->smarty->default_caching_type;
         $this->security = $this->smarty->security;
@@ -250,8 +248,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (!is_object($this->compiler_object)) {
             // load compiler
             $this->smarty->loadPlugin('Smarty_Internal_CompileBase');
-            $this->smarty->loadPlugin($this->compiler_class);
-            $this->compiler_object = new $this->compiler_class($this->smarty->template_lexer_class,$this->smarty->template_parser_class);
+            $this->smarty->loadPlugin('Smarty_Internal_TemplateCompilerBase');
+            $this->smarty->loadPlugin($this->resource_objects[$this->resource_type]->compiler_class);
+            $this->compiler_object = new $this->resource_objects[$this->resource_type]->compiler_class($this->resource_objects[$this->resource_type]->template_lexer_class,$this->resource_objects[$this->resource_type]->template_parser_class);
         } 
         if (!is_object($this->smarty->write_file_object)) {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");

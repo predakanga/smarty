@@ -13,6 +13,10 @@
 */
 
 class Smarty_Internal_Resource_String extends Smarty_Internal_Base {
+    // classes used for compiling Smarty templates from file resource
+    public $compiler_class = 'Smarty_Internal_SmartyTemplateCompiler'; 
+    public $template_lexer_class = 'Smarty_Internal_Templatelexer'; 
+    public $template_parser_class = 'Smarty_Internal_Templateparser'; 
 
     /**
     * Get filepath to template source
