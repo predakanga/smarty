@@ -152,12 +152,12 @@ identity = /\s*===\s*/
 noneidentity = /\s*!==\s*/
 isoddby = /\s+is\s+odd\s+by\s+/
 isnotoddby = /\s+is\s+not\s+odd\s+by\s+/
-isodd = /\s+is\s+odd\s*/
-isnotodd = /\s+is\s+not\s+odd\s*/
+isodd = /\s+is\s+odd/
+isnotodd = /\s+is\s+not\s+odd/
 isevenby = /\s+is\s+even\s+by\s+/
 isnotevenby = /\s+is\s+not\s+even\s+by\s+/
-iseven = /\s+is\s+even\s*/
-isnoteven = /\s+is\s+not\s+even\s*/
+iseven = /\s+is\s+even/
+isnoteven = /\s+is\s+not\s+even/
 isdivby = /\s+is\s+div\s+by\s+/
 isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 in = /\s+(IN|in)\s+/

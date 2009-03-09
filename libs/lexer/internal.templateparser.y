@@ -386,16 +386,16 @@ ifexprs(res)			 ::= OPENP ifexprs(e) CLOSEP.	{res = '('.e.')';}
 ifexpr(res)        ::= expr(e). {res =e;}
 ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
 ifexpr(res)			   ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
-ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.' == 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.' != 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISEVEN.	{res = '('.e1.' % 2 == 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTEVEN.	{res = '('.e1.' % 2 != 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISEVENBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 == 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTEVENBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 != 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISODD.	{res = '('.e1.' % 2 != 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTODD.	{res = '('.e1.' % 2 == 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISODDBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 != 0)';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTODDBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 == 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '!('.e1.' % '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISEVEN.	{res = '!(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTEVEN.	{res = '(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISEVENBY ifexprs(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTEVENBY ifexprs(e2).	{res = '(1 & '.e1.' / '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISODD.	{res = '(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTODD.	{res = '!(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISODDBY ifexprs(e2).	{res = '(1 & '.e1.' / '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTODDBY ifexprs(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
 
 ifcond(res)        ::= EQUALS. {res = '==';}
 ifcond(res)        ::= NOTEQUALS. {res = '!=';}

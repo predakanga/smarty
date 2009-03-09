@@ -1955,22 +1955,22 @@ static public $yy_action = array(
     function yy_r93(){$this->_retvalue = $this->yystack[$this->yyidx + -2]->minor.$this->yystack[$this->yyidx + -1]->minor.$this->yystack[$this->yyidx + 0]->minor;    }
 #line 1961 "internal.templateparser.php"
 #line 389 "internal.templateparser.y"
-    function yy_r95(){$this->_retvalue = '('.$this->yystack[$this->yyidx + -2]->minor.' % '.$this->yystack[$this->yyidx + 0]->minor.' == 0)';    }
+    function yy_r95(){$this->_retvalue = '!('.$this->yystack[$this->yyidx + -2]->minor.' % '.$this->yystack[$this->yyidx + 0]->minor.')';    }
 #line 1964 "internal.templateparser.php"
 #line 390 "internal.templateparser.y"
-    function yy_r96(){$this->_retvalue = '('.$this->yystack[$this->yyidx + -2]->minor.' % '.$this->yystack[$this->yyidx + 0]->minor.' != 0)';    }
+    function yy_r96(){$this->_retvalue = '('.$this->yystack[$this->yyidx + -2]->minor.' % '.$this->yystack[$this->yyidx + 0]->minor.')';    }
 #line 1967 "internal.templateparser.php"
 #line 391 "internal.templateparser.y"
-    function yy_r97(){$this->_retvalue = '('.$this->yystack[$this->yyidx + -1]->minor.' % 2 == 0)';    }
+    function yy_r97(){$this->_retvalue = '!(1 & '.$this->yystack[$this->yyidx + -1]->minor.')';    }
 #line 1970 "internal.templateparser.php"
 #line 392 "internal.templateparser.y"
-    function yy_r98(){$this->_retvalue = '('.$this->yystack[$this->yyidx + -1]->minor.' % 2 != 0)';    }
+    function yy_r98(){$this->_retvalue = '(1 & '.$this->yystack[$this->yyidx + -1]->minor.')';    }
 #line 1973 "internal.templateparser.php"
 #line 393 "internal.templateparser.y"
-    function yy_r99(){$this->_retvalue = '('.$this->yystack[$this->yyidx + -2]->minor.' / '.$this->yystack[$this->yyidx + 0]->minor.' % 2 == 0)';    }
+    function yy_r99(){$this->_retvalue = '!(1 & '.$this->yystack[$this->yyidx + -2]->minor.' / '.$this->yystack[$this->yyidx + 0]->minor.')';    }
 #line 1976 "internal.templateparser.php"
 #line 394 "internal.templateparser.y"
-    function yy_r100(){$this->_retvalue = '('.$this->yystack[$this->yyidx + -2]->minor.' / '.$this->yystack[$this->yyidx + 0]->minor.' % 2 != 0)';    }
+    function yy_r100(){$this->_retvalue = '(1 & '.$this->yystack[$this->yyidx + -2]->minor.' / '.$this->yystack[$this->yyidx + 0]->minor.')';    }
 #line 1979 "internal.templateparser.php"
 #line 400 "internal.templateparser.y"
     function yy_r105(){$this->_retvalue = '==';    }
