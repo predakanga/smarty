@@ -39,6 +39,21 @@ class Smarty_Internal_TemplateBase {
         } 
     } 
     /**
+    * assigns a global Smarty variable
+    * 
+    * @param string $varname the global variable name
+    * @param mixed $value the value to assign
+    * @param boolean $nocache if true any output of this variable will be not cached
+    */
+    public function assign_global($varname, $value = null, $nocache = false)
+    {
+        $_ptr = Smarty::instance();
+        if ($varname != '') {
+            $this->check_tplvar($varname);
+            $_ptr->global_tpl_vars[$varname] = new Smarty_variable($value, $nocache);
+        } 
+    } 
+    /**
     * assigns values to template variables by reference
     * 
     * @param string $tpl_var the template variable name
@@ -215,6 +230,21 @@ class Smarty_Internal_TemplateBase {
             } 
             // not found, try at parent
             $_ptr = $_ptr->parent;
+        } 
+        return null;
+    } 
+    /**
+    * gets  a global variable
+    * 
+    * @param string $variable the name of the global variable
+    * @return mixed the value of the global variable
+    */
+    public function getGlobalVariable($variable)
+    {
+        $_ptr = Smarty::instance();
+        if (isset($_ptr->global_tpl_vars[$variable])) {
+            // found it, return it
+            return $_ptr->global_tpl_vars[$variable];
         } 
         return null;
     } 

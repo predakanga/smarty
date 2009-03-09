@@ -80,6 +80,8 @@ class Smarty_Internal_Compile_Smarty extends Smarty_Internal_CompileBase {
 
             case 'config':
                 return "\$_smarty_tpl->getConfigVariable($_index[1])";
+            case 'global':
+                return "\$_smarty_tpl->smarty->getGlobalVariable($_index[1])->value";
 
             case 'ldelim':
                 $_ldelim = $this->smarty->left_delimiter;
