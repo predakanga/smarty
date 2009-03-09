@@ -88,9 +88,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $security = false;
     public $security_policy = null;
     public $security_handler = null;
-    public $direct_access_security = false;
-    // template comment handling
-    public $comment_mode = 0;
+    public $direct_access_security = true;
     // debug mode
     public $debugging = false;
     public $debugging_ctrl = 'URL';

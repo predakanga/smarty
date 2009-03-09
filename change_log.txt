@@ -1,4 +1,5 @@
 03/08/2009
+- added direct_access_security
 - PHPunit tests extended
 - added missing {if} tag conditions like "is div by" etc.
 
