@@ -82,7 +82,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
                 return $_filepath;
         } 
         // no tpl file found
-        throw new Exception("Unable to load config file {$this->config_resource_name}");
+        throw new Exception("Unable to load config file \"{$this->config_resource_name}\"");
         return false;
     } 
     /**
@@ -101,7 +101,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
     {
         if ($this->config_source === null) {
             if ($this->readConfigSource($this) === false) {
-                throw new Exception("Unable to load config file {$this->template_resource}");
+                throw new Exception("Unable to load config file \"{$this->config_resource_name}\"");
             } 
         } 
         return $this->config_source;

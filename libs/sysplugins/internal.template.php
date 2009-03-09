@@ -90,7 +90,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $this->template_resource = $template_resource; 
         // parse resource name
         if (!$this->parseResourceName ($template_resource)) {
-            throw new Exception ("Unable to parse resource '{$template_resource}'");
+            throw new Exception ("Unable to parse resource name \"{$template_resource}\"");
         } 
         // load cacher
         if ($this->caching) {

@@ -18,6 +18,7 @@ class CommentsTests extends PHPUnit_Framework_TestCase {
         $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
+        $this->smarty->comment_mode = 1;
         $this->old_error_level = error_reporting();
         error_reporting(E_ALL);
     } 
@@ -62,6 +63,21 @@ class CommentsTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals("", $this->smarty->fetch($tpl));
         $this->assertContains('<?php /* comment placeholder */?>', $tpl->getCompiledTemplate());
     } 
+    public function testSimpleComment6 ()
+    {
+        $this->smarty->comment_mode = 0;
+        $tpl = $this->smarty->createTemplate("string:{* multi line \n comment *}");
+        $this->assertEquals("", $this->smarty->fetch($tpl));
+        $this->assertNotContains('<?php /* comment placeholder */?>', $tpl->getCompiledTemplate());
+    } 
+    public function testSimpleComment7 ()
+    {
+        $this->smarty->comment_mode = 2;
+        $tpl = $this->smarty->createTemplate("string:{* multi line \n comment *}");
+        $this->assertEquals("", $this->smarty->fetch($tpl));
+        $this->assertContains('multi line', $tpl->getCompiledTemplate());
+    } 
+
 
     /**
     * test comment text combinations

@@ -69,7 +69,13 @@
 //
 // complete template
 //
-start(res)       ::= template(t). { res = t; }
+start(res)       ::= template(t). { $_tmp = '';
+                                   if ($this->smarty->direct_access_security){
+                                     $_tmp .= "<?php if(!defined('SMARTY_DIR')) exit('no direct access allowed'); ?>";
+                                    if ($this->smarty->caching) {
+                                     $_tmp.= $this->cacher->processNocacheCode("<?php if(!defined('SMARTY_DIR')) exit('no direct access allowed'); ?>", $this->compiler, true, true);
+                                    } }
+                                   res = $_tmp.t; }
 
 //
 // loop over template elements
@@ -89,7 +95,13 @@ template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
                                          } $this->nocache=false;}	
 											// comments
 //template_element(res)::= COMMENT(t). { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
-template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
+template_element(res)::= COMMENTSTART text(t) COMMENTEND. {if ($this->smarty->comment_mode ==0) {
+                                                            res = '';
+                                                           }elseif ($this->smarty->comment_mode ==1){
+                                                            res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);
+                                                           }else{
+                                                            res = $this->cacher->processNocacheCode('<?php /* '.str_replace('*/', '', t).'*/?>', $this->compiler,false,false);
+                                                           }}	
 											// Literal
 template_element(res)::= LITERALSTART text(t) LITERALEND. {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
 											// {ldelim}
