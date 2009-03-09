@@ -1,4 +1,7 @@
 03/08/2009
+- added missing {if} tag conditions like "is div by" etc.
+
+03/08/2009
 - splitted up the Compiler class to make it easier to use a coustom compiler
 - made default plugins_dir relative to Smarty root and not current working directory
 - some changes to make the lexer parser better configurable

@@ -150,6 +150,16 @@ greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/
 noneidentity = /\s*!==\s*/
+isoddby = /\s+is\s+odd\s+by\s+/
+isnotoddby = /\s+is\s+not\s+odd\s+by\s+/
+isodd = /\s+is\s+odd\s*/
+isnotodd = /\s+is\s+not\s+odd\s*/
+isevenby = /\s+is\s+even\s+by\s+/
+isnotevenby = /\s+is\s+not\s+even\s+by\s+/
+iseven = /\s+is\s+even\s*/
+isnoteven = /\s+is\s+not\s+even\s*/
+isdivby = /\s+is\s+div\s+by\s+/
+isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 in = /\s+(IN|in)\s+/
 not = /!|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
@@ -254,6 +264,37 @@ land {
 lor {
   $this->token = Smarty_Internal_Templateparser::TP_LOR;
 }
+isoddby {
+  $this->token = Smarty_Internal_Templateparser::TP_ISODDBY;
+}
+isnotoddby {
+  $this->token = Smarty_Internal_Templateparser::TP_ISNOTODDBY;
+}
+
+isodd  {
+  $this->token = Smarty_Internal_Templateparser::TP_ISODD;
+}
+isnotodd {
+  $this->token = Smarty_Internal_Templateparser::TP_ISNOTODD;
+}
+isevenby {
+  $this->token = Smarty_Internal_Templateparser::TP_ISEVENBY;
+}
+isnotevenby {
+  $this->token = Smarty_Internal_Templateparser::TP_ISNOTEVENBY;
+}
+iseven{
+  $this->token = Smarty_Internal_Templateparser::TP_ISEVEN;
+}
+isnoteven {
+  $this->token = Smarty_Internal_Templateparser::TP_ISNOTEVEN;
+}
+isdivby {
+  $this->token = Smarty_Internal_Templateparser::TP_ISDIVBY;
+}
+isnotdivby {
+  $this->token = Smarty_Internal_Templateparser::TP_ISNOTDIVBY;
+}
 openP {
   $this->token = Smarty_Internal_Templateparser::TP_OPENP;
 }
@@ -263,6 +304,7 @@ closeP {
 openB {
   $this->token = Smarty_Internal_Templateparser::TP_OPENB;
 }
+
 closeB {
   $this->token = Smarty_Internal_Templateparser::TP_CLOSEB;
 }

@@ -62,7 +62,8 @@
 //
 %fallback     OTHER LDELSLASH LDEL RDEL XMLSTART XMLEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT.
+              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
+              ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY.
               
 
 //
@@ -385,6 +386,16 @@ ifexprs(res)			 ::= OPENP ifexprs(e) CLOSEP.	{res = '('.e.')';}
 ifexpr(res)        ::= expr(e). {res =e;}
 ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
 ifexpr(res)			   ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
+ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.' == 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.' != 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISEVEN.	{res = '('.e1.' % 2 == 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTEVEN.	{res = '('.e1.' % 2 != 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISEVENBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 == 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTEVENBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 != 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISODD.	{res = '('.e1.' % 2 != 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTODD.	{res = '('.e1.' % 2 == 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISODDBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 != 0)';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTODDBY ifexprs(e2).	{res = '('.e1.' / '.e2.' % 2 == 0)';}
 
 ifcond(res)        ::= EQUALS. {res = '==';}
 ifcond(res)        ::= NOTEQUALS. {res = '!=';}
