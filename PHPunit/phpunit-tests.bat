@@ -37,4 +37,4 @@ REM $Id: pear-phpunit.bat 2798 2008-04-14 16:48:33Z sb $
 REM
 
 set PHPBIN="C:\wamp\bin\php\php5.2.8\.\php.exe"
-"C:\wamp\bin\php\php5.2.8\.\php.exe">test_results.txt "C:\wamp\bin\php\php5.2.8\phpunit" SmartyTests.php
+"C:\wamp\bin\php\php5.2.8\.\php.exe">test_results.txt "C:\wamp\bin\php\php5.2.8\phpunit" --verbose SmartyTests.php

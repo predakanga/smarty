@@ -1,4 +1,8 @@
-03/08/2009
+03/10/2009
+- couple of bugfixes and improvements
+- PHPunit tests extended
+
+03/09/2009
 - added support for global template vars.  {assign_global...}  $smarty->assign_global(...)
 - added direct_access_security
 - PHPunit tests extended

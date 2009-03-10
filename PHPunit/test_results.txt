@@ -1,13 +1,239 @@
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
-............................................................  60 / 414
-............................................................ 120 / 414
-............................................................ 180 / 414
-............................................................ 240 / 414
-............................................................ 300 / 414
-............................................................ 360 / 414
-......................................................
+Smarty 3 - Unit Tests Report
+ CoreTests
+ .......
 
-Time: 6 seconds
+ ClearCompiledTests
+ .....
 
-OK (414 tests, 490 assertions)
+ ClearCacheTests
+ ...
+
+ StringResourceTests
+ .................
+
+ FileResourceTests
+ ..............................
+
+ PhpResourceTests
+ ........................
+
+ CompileAssignTests
+ .................
+
+ AppendByRefTests
+ ...
+
+ AppendTests
+ ......
+
+ ArrayTests
+ .....
+
+ AssignByRefTests
+ .
+
+ AssignGlobalTests
+ ...F
+
+ AssignTests
+ ..
+
+ CacherResourceFileTests
+ ...........
+
+ ClearAllAssignTests
+ ....
+
+ ClearAssignTests
+ ...
+
+ CommentsTests
+ SSSSSSSSSSS
+
+ CompileBlockPluginTests
+ .....
+
+ CompileCaptureTests
+ .....
+
+ CompileCompilerPluginTests
+ ..
+
+ CompileDebugTests
+ .
+
+ CompileErrorTests
+ .....
+
+ CompileEvalTests
+ ...
+
+ CompileForeachTests
+ .......
+
+ CompileForTests
+ ..............
+
+ CompileFunctionPluginTests
+ ...
+
+ CompileIfTests
+ .........................................................
+
+ CompileIncludeTests
+ ....
+
+ CompileInsertTests
+ ....
+
+ CompilePhpTests
+ ...
+
+ CompileRegisteredObjectFunctionTests
+ ..
+
+ CompileSectionTests
+ ......
+
+ CompileStripTests
+ .
+
+ CompileWhileTests
+ .
+
+ ConfigVarTests
+ .................
+
+ ConstantsTests
+ .
+
+ DelimiterTests
+ ....
+
+ DoubleQuotedStringTests
+ .......
+
+ FilterTests
+ .....
+
+ FunctionTests
+ .
+
+ GetTemplateVarsTests
+ ......
+
+ LoadFilterTests
+ .
+
+ ModifierTests
+ ......
+
+ RegisterBlockTests
+ ......
+
+ RegisterCompilerFunctionTests
+ ......
+
+ RegisterFilterTests
+ ............
+
+ RegisterFunctionTests
+ ......
+
+ RegisterModifierTests
+ ......
+
+ ResourceTests
+ .
+
+ SecurityTests
+ ..................
+
+ SingleQuotedStringTests
+ ......
+
+ SpacingTests
+ ............
+
+ StaticClassAccessTests
+ .....
+
+ TemplateExistsTests
+ ..
+
+ TokenFallbackTests
+ ....
+
+ TriggerErrorTests
+ .
+
+ VariableScopeTests
+ ......
+
+ VariableVariableTests
+ ....
+
+ XmlTests
+ ...
+
+Time: 7 seconds
+
+There was 1 failure:
+
+1) testGlobalVarArrayTag(AssignGlobalTests)
+Failed asserting that two strings are equal.
+expected string <bar>
+difference      <xx??>
+got string      <Array>
+C:\wamp\www\__smarty3Alpha\PHPunit\AssignGlobalTests.php:68
+
+There were 11 skipped tests:
+
+1) testSimpleComment1(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+2) testSimpleComment2(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+3) testSimpleComment3(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+4) testSimpleComment4(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+5) testSimpleComment5(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+6) testSimpleComment6(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+7) testSimpleComment7(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+8) testTextComment1(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+9) testTextComment2(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+10) testTextComment3(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+11) testTextComment4(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+FAILURES!
+Tests: 422, Assertions: 484, Failures: 1, Skipped: 11.

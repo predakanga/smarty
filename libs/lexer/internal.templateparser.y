@@ -60,7 +60,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELSLASH LDEL RDEL XMLSTART XMLEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
+%fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
               ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY.
@@ -130,10 +130,20 @@ template_element(res)::= PHPSTART text(t) PHPEND. {if (!$this->template->securit
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
                                         res = '';
                                       }	}
+template_element(res)::= SHORTTAGSTART  variable(v) SHORTTAGEND. {if (!$this->template->security) { 
+                                        res = $this->cacher->processNocacheCode($this->compiler->compileTag('print_expression',array('value'=>v)), $this->compiler, false,true);
+                                      } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
+                                        res = $this->cacher->processNocacheCode(htmlspecialchars('<?php '.t.' ?>', ENT_QUOTES), $this->compiler, false, false);	
+                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
+                                        res = $this->cacher->processNocacheCode("<?php echo '<?php ".t." ?>';?>\n", $this->compiler, false, false);
+                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
+                                        res = '';
+                                      }	}
 											//
 											// XML tag
-template_element(res)::= XMLSTART(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
-template_element(res)::= XMLEND(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
+//template_element(res)::= XMLSTART(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
+//template_element(res)::= XMLEND(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
+template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	
 //template_element(res)::= text(t). {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
@@ -207,6 +217,7 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 //
 									// simple expression
 expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
+//expr(res)				 ::= UNQ_STR(s). { res = '\''.s.'\''; }
 //expr(res)				 ::= ID(i). { res = i; }
 expr(res)				 ::= exprs(e).	{res = e;}
 expr(res)        ::= expr(e) modifier(m) modparameters(p). {if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {

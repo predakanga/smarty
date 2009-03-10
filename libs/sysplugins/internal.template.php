@@ -142,7 +142,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getTemplateSource ()
     {
         if ($this->template_source === null) {
-            $this->resource_objects[$this->resource_type]->getTemplateSource($this);
+            $this->resource_objects[$this->resource_type]->getTemplateSource($this); 
             // if ($this->resource_objects[$this->resource_type]->getTemplateSource($this) === false) {
             // throw new Exception("Unable to load templates \"{$this->template_resource}\"");
             // }
@@ -250,7 +250,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->smarty->loadPlugin('Smarty_Internal_CompileBase');
             $this->smarty->loadPlugin('Smarty_Internal_TemplateCompilerBase');
             $this->smarty->loadPlugin($this->resource_objects[$this->resource_type]->compiler_class);
-            $this->compiler_object = new $this->resource_objects[$this->resource_type]->compiler_class($this->resource_objects[$this->resource_type]->template_lexer_class,$this->resource_objects[$this->resource_type]->template_parser_class);
+            $this->compiler_object = new $this->resource_objects[$this->resource_type]->compiler_class($this->resource_objects[$this->resource_type]->template_lexer_class, $this->resource_objects[$this->resource_type]->template_parser_class);
         } 
         if (!is_object($this->smarty->write_file_object)) {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");
@@ -468,7 +468,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->resource_objects[$this->resource_type] = new $_resource_class;
         } 
         // cache template object under a unique ID
-        Smarty::$template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
+        // do not cache string resources
+        if ($this->resource_type != 'string') {
+            Smarty::$template_objects[$this->buildTemplateId ($this->template_resource, $this->cache_id, $this->compile_id)] = $this;
+        } 
         return true;
     } 
 

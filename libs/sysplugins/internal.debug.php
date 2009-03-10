@@ -26,29 +26,30 @@ class Smarty_Internal_Debug extends Smarty_Internal_TemplateBase {
         } 
         // get template names
         $i = 0;
-        foreach (Smarty::$template_objects as $_template_obj) {
-            // exclude the debugging template from displayed data
-            if ($this->smarty->debug_tpl != $_template_obj->resource_name) {
-                $_template_data[$i]['name'] = $_template_obj->getTemplateFilepath();
-                $_template_data[$i]['compile_time'] = $_template_obj->compile_time;
-                $_template_data[$i]['render_time'] = $_template_obj->render_time;
-                $_template_data[$i]['cache_time'] = $_template_obj->cache_time;
-                $i++;
+        if (is_array(Smarty::$template_objects)) {
+                foreach (Smarty::$template_objects as $_template_obj) {
+                    // exclude the debugging template from displayed data
+                    if ($this->smarty->debug_tpl != $_template_obj->resource_name) {
+                        $_template_data[$i]['name'] = $_template_obj->getTemplateFilepath();
+                        $_template_data[$i]['compile_time'] = $_template_obj->compile_time;
+                        $_template_data[$i]['render_time'] = $_template_obj->render_time;
+                        $_template_data[$i]['cache_time'] = $_template_obj->cache_time;
+                        $i++;
+                    } 
+                } 
             } 
+            // prepare information of assigned variables
+            $_assigned_vars = $this->smarty->tpl_vars;
+            ksort($_assigned_vars);
+            $_template = new Smarty_Template ($this->smarty->debug_tpl);
+            $_template->caching = false;
+            $_template->force_compile = false;
+            $_template->security = false;
+            $_template->assign('template_data', $_template_data);
+            $_template->assign('assigned_vars', $_assigned_vars);
+            $_template->assign('execution_time', $this->smarty->_get_time() - $this->smarty->start_time);
+            echo $this->smarty->fetch($_template);
         } 
-        // prepare information of assigned variables
-        $_assigned_vars = $this->smarty->tpl_vars;
-        ksort($_assigned_vars);
-
-        $_template = new Smarty_Template ($this->smarty->debug_tpl);
-        $_template->caching = false;
-        $_template->force_compile = false;
-        $_template->security = false;
-        $_template->assign('template_data', $_template_data);
-        $_template->assign('assigned_vars', $_assigned_vars);
-        $_template->assign('execution_time', $this->smarty->_get_time() - $this->smarty->start_time);
-        echo $this->smarty->fetch($_template);
     } 
-} 
 
-?>
+    ?>

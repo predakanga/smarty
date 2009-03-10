@@ -27,7 +27,7 @@ class Smarty_Method_Get_Global extends Smarty_Internal_Base {
     {
         if (isset($varname)) {
             if (isset($this->smarty->global_tpl_vars[$varname])) {
-                return $this->global_tpl_vars[$varname]->value;
+                return $this->smarty->global_tpl_vars[$varname]->value;
             } else {
                 return '';
             } 
