@@ -51,10 +51,15 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     // template variables
     public $tpl_vars = array();
     public $parent = null;
-    public $render_time = 0;
     public $config_vars = array(); 
     // storage for plugin
-    public $plugin_data = array();
+    public $plugin_data = array(); 
+    // files template is depending from
+    public $file_dependency = array(); 
+    // storage for block data
+    public $block_data = array();
+
+    public $render_time = 0;
 
     /**
     * Create template data object
@@ -101,6 +106,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (!$this->isEvaluated() && $this->caching && !isset($this->smarty->cache_resource_objects[$this->caching_type])) {
             $this->smarty->loadPlugin($this->cache_resource_class);
             $this->smarty->cache_resource_objects[$this->caching_type] = new $this->cache_resource_class;
+        } 
+        if ($this->smarty->direct_access_security) {
+            $this->dir_acc_sec_string = "<?php if(!defined('SMARTY_DIR')) exit('no direct access allowed'); ?>\n";
+        } else {
+            $this->dir_acc_sec_string = '';
         } 
     } 
 
@@ -187,9 +197,27 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     */
     public function mustCompile ()
     {
-        return $this->mustCompile === null ?
-        $this->mustCompile = ($this->usesCompiler() && ($this->force_compile || $this->isEvaluated() || $this->getCompiledTimestamp () !== $this->getTemplateTimestamp ())):
-        $this->mustCompile;
+        if ($this->mustCompile === null) {
+            $this->mustCompile = ($this->usesCompiler() && ($this->force_compile || $this->isEvaluated() || $this->getCompiledTimestamp () !== $this->getTemplateTimestamp ())); 
+            // read compiled template
+            if ($this->compiled_template !== true && file_exists($this->getCompiledFilepath())) {
+                $this->compiled_template = !$this->isEvaluated() ? file_get_contents($this->getCompiledFilepath()):'';
+                $found = preg_match('~\<\?php /\*(.*)\*/ \?\>~', $this->compiled_template, $matches);
+                if ($found) {
+                    $this->file_dependency_string = $matches[0] . "\n";
+                    $tmp = unserialize($matches[1]);
+                    if (!empty($tmp)) {
+                        foreach ($tmp['file_dependency'] as $file_to_check) {
+                            If (filemtime($file_to_check[0]) != $file_to_check[1]) {
+                                $this->mustCompile = true;
+                                return $this->mustCompile;
+                            } 
+                        } 
+                    } 
+                } 
+            } 
+        } 
+        return $this->mustCompile;
     } 
 
     /**
@@ -260,8 +288,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if ($this->compiler_object->compileTemplate($this)) {
             // compiling succeded
             if (!$this->isEvaluated()) {
+                // build file dependency string
+                $this->file_dependency_string = '<?php /*' . serialize($this->file_dependency) . "*/ ?>\n"; 
                 // write compiled template
-                $this->smarty->write_file_object->writeFile($this->getCompiledFilepath(), $this->getCompiledTemplate()); 
+                $this->smarty->write_file_object->writeFile($this->getCompiledFilepath(), $this->file_dependency_string . $this->dir_acc_sec_string . $this->getCompiledTemplate()); 
                 // make template and compiled file timestamp match
                 touch($this->getCompiledFilepath(), $this->getTemplateTimestamp());
             } 
@@ -318,6 +348,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     */
     public function writeCachedContent ()
     {
+        $this->cached_content = $this->dir_acc_sec_string . $this->cached_content;
         return ($this->isEvaluated() || !$this->caching) ? false : $this->cacher_object->writeCachedContent($this);
     } 
 
@@ -367,12 +398,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $_smarty_tpl = $this;
             ob_start();
             eval("?>" . $this->cached_content);
-            $this->updateGlobalVariables();
+            $this->updateParentVariables();
             $this->cache_time = $this->_get_time() - $_start_time;
             return (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))?
             $this->smarty->filter_handler->execute('output', ob_get_clean()) : ob_get_clean();
         } else {
-            $this->updateGlobalVariables();
+            $this->updateParentVariables();
             return (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))?
             $this->smarty->filter_handler->execute('output', $this->cached_content) : $this->cached_content;
         } 
@@ -492,15 +523,20 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     } 
 
     /**
-    * Update global Smarty variables in parent variable object
+    * Update Smarty variables in parent variable object
     */
-    public function updateGlobalVariables ()
+    public function updateParentVariables ($mode = 0)
     { 
         // do we have a back pointer?
         if (is_object($this->parent)) {
+            if ($mode == 2) {
+                $_ptr = $this->smarty;
+            } else {
+                $_ptr = $this->parent;
+            } 
             foreach ($this->tpl_vars as $_key => $_value) {
                 // copy global vars back to parent
-                if ($this->tpl_vars[$_key]->global) {
+                if ($mode > 0 || $this->tpl_vars[$_key]->global) {
                     if (isset($this->parent->tpl_vars[$_key])) {
                         // variable is already defined in parent, copy value
                         $this->parent->tpl_vars[$_key]->value = $this->tpl_vars[$_key]->value;

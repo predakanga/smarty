@@ -31,9 +31,7 @@ class Smarty_Internal_TemplateCompilerBase extends Smarty_Internal_Base {
             $this->smarty->filter_handler = new Smarty_Internal_Run_Filter;
         } 
     } 
-
-//    abstract function doCompile($_content);
-
+    // abstract function doCompile($_content);
     /**
     * Methode to compile a Smarty template
     * 
@@ -56,24 +54,28 @@ class Smarty_Internal_TemplateCompilerBase extends Smarty_Internal_Base {
         $this->compile_error = false; 
         // save template object in compiler class
         $this->template = $template; 
-        // get template source
-        $_content = $template->getTemplateSource(); 
         // template header code
         $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
-        $template_header .= "         compiled from \"" . $this->template->getTemplateFilepath() . "\" */ ?>\n"; 
-        // run prefilter if required
-        if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre'])) {
-            $_content = $this->smarty->filter_handler->execute('pre', $_content);
-        } 
-        // on empty template just return header
-        if ($_content == '') {
-            $template->compiled_template = $template_header;
-            return true;
-        } 
-        // init cacher plugin
-        $template->cacher_object->initCacher($this); 
-        // call compiler
-        $_compiled_code = $this->doCompile($_content); 
+        $template_header .= "         compiled from \"" . $this->template->getTemplateFilepath() . "\" */ ?>\n";
+        do {
+            // flag for aborting current and start recompile
+            $this->abort_and_recompile = false; 
+            // get template source
+            $_content = $template->getTemplateSource(); 
+            // run prefilter if required
+            if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre'])) {
+                $_content = $this->smarty->filter_handler->execute('pre', $_content);
+            } 
+            // on empty template just return header
+            if ($_content == '') {
+                $template->compiled_template = $template_header;
+                return true;
+            } 
+            // init cacher plugin
+            $template->cacher_object->initCacher($this); 
+            // call compiler
+            $_compiled_code = $this->doCompile($_content);
+        } while ($this->abort_and_recompile);
 
         if (!$this->compile_error) {
             // close cacher and return compiled template
@@ -92,8 +94,8 @@ class Smarty_Internal_TemplateCompilerBase extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *                                      This is a call back from the lexer/parser
-    *                                      It executes the required compile plugin for the Smarty tag
+    *                                        This is a call back from the lexer/parser
+    *                                        It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes

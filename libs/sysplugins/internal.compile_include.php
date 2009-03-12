@@ -34,6 +34,12 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_assign = $_attr['assign'];
         } 
 
+        if ($_attr['scope'] == '\'parent\'') {
+            $_parent_scope = '1';
+        } elseif ($_attr['scope'] == '\'root\'') {
+            $_parent_scope = '2';
+        } 
+
         /*
         * if the {include} tag provides individual parameter for caching
         * it will not be included into the common cache file and treated like
@@ -57,12 +63,16 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         // create template object
         $_output = "<?php \$_template = new Smarty_Template ($include_file, \$_smarty_tpl);"; 
         // delete {include} standard attributes
-        unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching']); 
+        unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching'], $_attr['scope']); 
         // remaining attributes must be assigned as smarty variable
-        if (isset($_attr)) {
-            // create variables
-            foreach ($_attr as $_key => $_value) {
-                $_output .= "\$_template->assign('$_key',$_value);";
+        if (!empty($_attr)) {
+            if (!$_parent_scope) {
+                // create variables
+                foreach ($_attr as $_key => $_value) {
+                    $_output .= "\$_template->assign('$_key',$_value);";
+                } 
+            } else {
+                $this->compiler->trigger_template_error('variable passing not allowed in parent scope');
             } 
         } 
         // add caching parameter if required
@@ -79,6 +89,9 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_output .= "\$_smarty_tpl->assign($_assign,\$_smarty_tpl->smarty->fetch(\$_template)); ?>";
         } else {
             $_output .= "echo \$_smarty_tpl->smarty->fetch(\$_template); ?>";
+        } 
+        if (isset($_parent_scope)) {
+            $_output .= "<?php \$_template->updateParentVariables($_parent_scope); ?>";
         } 
         return $_output;
     } 

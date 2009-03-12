@@ -60,7 +60,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
+%fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
               ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY.
@@ -69,13 +69,7 @@
 //
 // complete template
 //
-start(res)       ::= template(t). { $_tmp = '';
-                                   if ($this->smarty->direct_access_security){
-                                     $_tmp .= "<?php if(!defined('SMARTY_DIR')) exit('no direct access allowed'); ?>";
-                                    if ($this->smarty->caching) {
-                                     $_tmp.= $this->cacher->processNocacheCode("<?php if(!defined('SMARTY_DIR')) exit('no direct access allowed'); ?>", $this->compiler, true, true);
-                                    } }
-                                   res = $_tmp.t; }
+start(res)       ::= template(t). { res = t; }
 
 //
 // loop over template elements
@@ -182,12 +176,14 @@ smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. { res =  $this->compiler->c
 smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
 									// {for} tag
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
+  foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
+  foraction(res)	 ::= INCDEC(e). { res = e;}
 									// {for $var in $array} tag
 // replaced with next line because config vars could an array!! smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN value(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN array(a) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
-foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
-foraction(res)	 ::= INCDEC(e). { res = e;}
+                  // {block} tag
+smartytag(res)   ::= BLOCKSTART  ID(i) RDEL text(t) BLOCKEND ID(i2) RDEL. { res =  $this->compiler->compileTag('block',array('id'=>i,'content'=>t));  $this->compiler->compileTag('blockclose',array('id'=>i2));}
 
 //
 //Attributes of Smarty tags 

@@ -42,9 +42,14 @@ class Smarty_Internal_SmartyTemplateCompiler extends Smarty_Internal_TemplateCom
         $parser = new $this->parser_class($lex, $this); 
         // $parser->PrintTrace();
         // get tokens from lexer and parse them
-        while ($lex->yylex()) {
+        while ($lex->yylex() && !$this->abort_and_recompile) {
             // echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} Line {$lex->line} \n";
             $parser->doParse($lex->token, $lex->value);
+        } 
+
+        if ($this->abort_and_recompile) {
+            // exit here on abort
+            return false;
         } 
         // finish parsing process
         $parser->doParse(0, 0); 

@@ -102,6 +102,8 @@ php = /\<\?php.*\?\>/
 xml = /\<\?xml.*\?\>/
 shorttagstart = /\<\?=/
 shorttagend = /\?\>/
+blockstart = /SMARTYldelblock\:/
+blockend = /SMARTYldel\/block\:/
 phpstart = /SMARTYldelphpSMARTYrdel/
 phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /SMARTYldel\s{1,}/
@@ -181,6 +183,12 @@ shorttagstart {
 }
 shorttagend {
   $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGEND;
+}
+blockstart {
+  $this->token = Smarty_Internal_Templateparser::TP_BLOCKSTART;
+}
+ blockend {
+  $this->token = Smarty_Internal_Templateparser::TP_BLOCKEND;
 }
 phpstart {
   $this->token = Smarty_Internal_Templateparser::TP_PHPSTART;
