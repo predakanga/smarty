@@ -1,4 +1,6 @@
 03/13/2009
+- changed block syntax to be Smarty like  {block:titel} -> {block name=titel}
+- compiling of {block} and {extend} tags rewriten for better performance
 - added special Smarty variable block  ($smarty.block.foo} returns the parent definition of block foo
 - optimization of {block} tag compiled code.
 - fixed problem with escaped double quotes in double quoted strings

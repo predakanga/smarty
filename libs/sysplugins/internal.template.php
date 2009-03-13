@@ -36,13 +36,14 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     private $template_filepath = null;
     public $template_source = null;
     private $template_timestamp = null; 
-    // Compiled temlate
+    // Compiled template
     private $compiled_filepath = null;
     public $compiled_template = null;
     private $compiled_timestamp = null;
     public $compile_time = 0;
     public $mustCompile = null; 
     public $suppressHeader = false; 
+    public $extract_code = false;
     // Cache file
     private $cached_filepath = null;
     public $cached_content = null;

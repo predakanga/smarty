@@ -169,7 +169,7 @@ smartytag(res)   ::= LDEL ID(i) modifier(m) modparameters(p) attributes(a) RDEL.
                                                               }
                                                             }
 									// end of block tag  {/....}									
-smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res =  $this->compiler->compileTag(i.'close',array());}
+smartytag(res)   ::= LDELSLASH ID(i)RDEL. { res =  $this->compiler->compileTag(i.'close',array());}
 									// end of block object tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. { res =  $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
 									// {if}, {elseif} and {while} tag
@@ -182,8 +182,6 @@ smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICO
 // replaced with next line because config vars could an array!! smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN value(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN array(a) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
-                  // {block} tag
-smartytag(res)   ::= BLOCKSTART  ID(i) RDEL text(t) BLOCKEND ID(i2) RDEL. { res =  $this->compiler->compileTag('block',array('id'=>i,'content'=>t));  $this->compiler->compileTag('blockclose',array('id'=>i2));}
 
 //
 //Attributes of Smarty tags 
