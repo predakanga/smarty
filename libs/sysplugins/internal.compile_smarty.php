@@ -83,8 +83,7 @@ class Smarty_Internal_Compile_Smarty extends Smarty_Internal_CompileBase {
             case 'global':
                 return "\$_smarty_tpl->smarty->getGlobalVariable($_index[1])->value";
             case 'block':
-            var_dump($_index[1]);
-                return "'".addcslashes($this->template->block_data[trim($_index[1],"'")],"'")."'";
+               return "'".addcslashes($compiler->template->block_data[trim($_index[1],"'")],"'")."'";
             case 'ldelim':
                 $_ldelim = $this->smarty->left_delimiter;
                 return "'$_ldelim'";
