@@ -1,3 +1,8 @@
+03/13/2009
+- added special Smarty variable block  ($smarty.block.foo} returns the parent definition of block foo
+- optimization of {block} tag compiled code.
+- fixed problem with escaped double quotes in double quoted strings
+
 03/12/2009
 - added support of template inheritance by {extend } and {block } tags.
 - bugfix comments within literals

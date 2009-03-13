@@ -16,7 +16,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     */
     public static function suite()
     {
-        $testorder = array('CoreTests','ClearCompiledTests','ClearCacheTests','StringResourceTests','FileResourceTests'
+        $testorder = array('DoubleQuotedStringTests','CoreTests','ClearCompiledTests','ClearCacheTests','StringResourceTests','FileResourceTests'
                             ,'PhpResourceTests','CompileAssignTests');
 
         PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs');

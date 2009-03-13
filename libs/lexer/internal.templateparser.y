@@ -275,7 +275,9 @@ value(res)	     ::= function(f). { res = f; }
 value(res)	     ::= SINGLEQUOTE text(t) SINGLEQUOTE. { res = "'".t."'"; }
 value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
 									// double quoted string
-value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; }
+value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".str_replace('\"','"',s)."'"; }
+//value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".addcslashes(str_replace(array('\"'),array('"'),s),"'")."'"; }
+//value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; var_dump(s);}
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
 									// static class methode call
 value(res)	     ::= ID(c) DOUBLECOLON method(m). { res = c.'::'.m; }
@@ -444,9 +446,9 @@ doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
 doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
-doublequotedcontent(res)           ::= OTHER(o). {res = addslashes(o);}
+doublequotedcontent(res)           ::= OTHER(o). {res = addcslashes(o,"'");}
 //doublequotedcontent(res)           ::= OTHER(o). {res = o;}
-//doublequotedcontent(res)           ::= text(t). {res = addslashes(t);}
+//doublequotedcontent(res)           ::= text(t). {res = addcslashes(t,"'");}
 
 text(res)          ::= text(t) textelement(e). {res = t.e;}
 text(res)          ::= textelement(e). {res = e;}

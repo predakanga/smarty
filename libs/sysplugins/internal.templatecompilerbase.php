@@ -55,8 +55,12 @@ class Smarty_Internal_TemplateCompilerBase extends Smarty_Internal_Base {
         // save template object in compiler class
         $this->template = $template; 
         // template header code
-        $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
-        $template_header .= "         compiled from \"" . $this->template->getTemplateFilepath() . "\" */ ?>\n";
+        $template_header = '';
+        if (!$template->suppressHeader) {
+            $template_header = "<?php /* Smarty version " . Smarty::$_version . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
+            $template_header .= "         compiled from \"" . $this->template->getTemplateFilepath() . "\" */ ?>\n";
+        } 
+
         do {
             // flag for aborting current and start recompile
             $this->abort_and_recompile = false; 
@@ -94,8 +98,8 @@ class Smarty_Internal_TemplateCompilerBase extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *                                        This is a call back from the lexer/parser
-    *                                        It executes the required compile plugin for the Smarty tag
+    *                                         This is a call back from the lexer/parser
+    *                                         It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
