@@ -55,7 +55,7 @@ abstract class Smarty_Internal_CompileBase
         if ($this->optional_attributes != array('_any')) {
             $tmp_array = array_merge($this->required_attributes, $this->optional_attributes);
             foreach ($args as $key => $dummy) {
-                if (!in_array($key, $tmp_array)) {
+                if (!in_array($key, $tmp_array) && $key != 0) {
                     $this->compiler->trigger_template_error("unexspected \"" . $key . "\" attribute");
                 } 
             } 

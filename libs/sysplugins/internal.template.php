@@ -44,9 +44,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $mustCompile = null; 
     public $suppressHeader = false; 
     public $extract_code = false;
+    // Rendered content
+    public $rendered_content = null;
     // Cache file
     private $cached_filepath = null;
-    public $cached_content = null;
     private $cached_timestamp = null;
     private $isCached = null;
     public $cache_time = 0; 
@@ -340,9 +341,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     */
     public function getCachedContent ()
     {
-        return $this->cached_content === null ?
-        $this->cached_content = ($this->isEvaluated() || !$this->caching) ? false : $this->cacher_object->getCachedContents($this) :
-        $this->cached_content;
+        return $this->rendered_content === null ?
+        $this->rendered_content = ($this->isEvaluated() || !$this->caching) ? false : $this->cacher_object->getCachedContents($this) :
+        $this->rendered_content;
     } 
 
     /**
@@ -350,7 +351,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     */
     public function writeCachedContent ()
     {
-        $this->cached_content = $this->dir_acc_sec_string . $this->cached_content;
+        $this->rendered_content = $this->dir_acc_sec_string . $this->rendered_content;
         return ($this->isEvaluated() || !$this->caching) ? false : $this->cacher_object->writeCachedContent($this);
     } 
 
@@ -367,7 +368,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->isCached = false;
             if ($this->caching) {
                 if (!$this->mustCompile() && !$this->isEvaluated() && $this->getTemplateTimestamp() <= $this->getCachedTimestamp() && ((time() <= $this->getCachedTimestamp() + $this->caching_lifetime) || $this->caching_lifetime < 0)) {
-                    $this->cached_content = $this->cacher_object->getCachedContents($this);
+                    $this->rendered_content = $this->cacher_object->getCachedContents($this);
                     $this->isCached = true;
                 } 
             } 
@@ -390,7 +391,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->caching = false;
         } 
         // read from cache or render
-        if ($this->cached_content === null && !$this->isCached()) {
+        if ($this->rendered_content === null && !$this->isCached()) {
             // render template (not loaded and not in cache)
             $this->renderTemplate();
         } 
@@ -399,7 +400,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $_start_time = $this->_get_time();
             $_smarty_tpl = $this;
             ob_start();
-            eval("?>" . $this->cached_content);
+            eval("?>" . $this->rendered_content);
             $this->updateParentVariables();
             $this->cache_time = $this->_get_time() - $_start_time;
             return (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))?
@@ -407,7 +408,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } else {
             $this->updateParentVariables();
             return (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))?
-            $this->smarty->filter_handler->execute('output', $this->cached_content) : $this->cached_content;
+            $this->smarty->filter_handler->execute('output', $this->rendered_content) : $this->rendered_content;
         } 
     } 
 
@@ -454,7 +455,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             include($this->getTemplateFilepath ());
         } 
         $this->render_time = $this->_get_time() - $_start_time;
-        $this->cached_content = ob_get_clean(); 
+        $this->rendered_content = ob_get_clean(); 
         // write to cache when nessecary
         if (!$this->isEvaluated() && $this->caching) {
             // write rendered template

@@ -242,6 +242,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             ? $this->error_reporting : error_reporting() &~E_NOTICE); 
         // return redered template
         $_output = $_template->getRenderedTemplate();
+        $_template->rendered_content = null;
         error_reporting($_smarty_old_error_level);
         return $_output;
     } 

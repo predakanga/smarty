@@ -22,16 +22,18 @@ class Smarty_Internal_Compile_BlockClose extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler)
     {
         $this->compiler = $compiler;
-        $this->optional_attributes = array('name'); 
-        // check and get attributes
-        $_attr = $this->_get_attributes($args);
-        $saved_attr = $this->_close_tag(array('block'));
-        $_name = trim($saved_attr['name'], "'"); 
-        // this tag does not return compiled code but as an exception
-        // the logic of {block} tag processing requires this
         $this->compiler->has_code = true; 
-        // turn off block extraction
-        $compiler->template->extract_code = false;
+        // turn off block code extraction
+        $compiler->template->extract_code = false; 
+        // check and get attributes
+        $this->optional_attributes = array('name');
+        $_attr = $this->_get_attributes($args);
+        $saved_attr = $this->_close_tag(array('block')); 
+        // if name does match to opening tag
+        if (isset($_attr['name']) && $saved_attr['name'] != $_attr['name']) {
+            $this->compiler->trigger_template_error('mismatching name attributes "' . $saved_attr['name'] . '" and "' . $_attr['name'] . '"');
+        } 
+        $_name = trim($saved_attr['name'], "'");
 
         if (!is_null($compiler->template->block_data[$_name])) {
             $_output = $compiler->template->block_data[$_name]['compiled'];

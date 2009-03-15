@@ -61,7 +61,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
                 $this->smarty->loadPlugin("Smarty_Internal_Write_File");
                 $this->smarty->write_file_object = new Smarty_Internal_Write_File;
             } 
-            return $this->smarty->write_file_object->writeFile($template->getCachedFilepath(), $template->cached_content);
+            return $this->smarty->write_file_object->writeFile($template->getCachedFilepath(), $template->rendered_content);
         } else {
             return false;
         } 

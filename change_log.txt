@@ -1,3 +1,7 @@
+03/15/2009
+- bugfix fetch did always repeat output of first call when calling same template several times
+- PHPunit tests extended
+
 03/13/2009
 - changed block syntax to be Smarty like  {block:titel} -> {block name=titel}
 - compiling of {block} and {extend} tags rewriten for better performance

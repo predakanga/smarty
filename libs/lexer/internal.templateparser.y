@@ -135,8 +135,6 @@ template_element(res)::= SHORTTAGSTART  variable(v) SHORTTAGEND. {if (!$this->te
                                       }	}
 											//
 											// XML tag
-//template_element(res)::= XMLSTART(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
-//template_element(res)::= XMLEND(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
 template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	
@@ -156,20 +154,20 @@ smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->co
 smartytag(res)   ::= LDEL ID(i) PTR ID(m) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,array_merge(array('object_methode'=>m),a));}
 									// tag with modifier and optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) modifier(m) modparameters(p) attributes(a) RDEL. { res =  '<?php ob_start();?>'.$this->compiler->compileTag(i,a).'<?php echo ';
-																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
-                                                                      res .= "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(ob_get_clean()". p ."),'modifier');?>";
+																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m[0],'modifier')) {
+                                                                      res .= "\$_smarty_tpl->smarty->plugin_handler->".m[0] . "(array(ob_get_clean()". p ."),'modifier');?>";
                                                                  } else {
-                                                                   if (m == 'isset' || m == 'empty' || is_callable(m)) {
-																					                            if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
-																					                              res .= m . "(ob_get_clean()". p .");?>";
+                                                                   if (m[0] == 'isset' || m[0] == 'empty' || is_callable(m[0])) {
+																					                            if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m[0], $this->compiler)) {
+																					                              res .= m[0] . "(ob_get_clean()". p .");?>";
 																					                            }
 																					                         } else {
-                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m . "\"");
+                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m[0] . "\"");
                                                                  }
                                                               }
                                                             }
 									// end of block tag  {/....}									
-smartytag(res)   ::= LDELSLASH ID(i)RDEL. { res =  $this->compiler->compileTag(i.'close',array());}
+smartytag(res)   ::= LDELSLASH ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i.'close',a);}
 									// end of block object tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. { res =  $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
 									// {if}, {elseif} and {while} tag
@@ -214,15 +212,16 @@ expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
 //expr(res)				 ::= UNQ_STR(s). { res = '\''.s.'\''; }
 //expr(res)				 ::= ID(i). { res = i; }
 expr(res)				 ::= exprs(e).	{res = e;}
-expr(res)        ::= expr(e) modifier(m) modparameters(p). {if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
-                                                                      res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
+expr(res)        ::= expr(e) modifier(m) modparameters(p). {             
+                                                            if ($this->smarty->plugin_handler->loadSmartyPlugin(m[0],'modifier')) {
+                                                                      res = "\$_smarty_tpl->smarty->plugin_handler->".m[0] . "(array(". e . p ."),'modifier')";
                                                                  } else {
-                                                                   if (m == 'isset' || m == 'empty' || is_callable(m)) {
-																					                            if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
-																					                               res = m . "(". e . p .")";
+                                                                   if (m[0] == 'isset' || m[0] == 'empty' || is_callable(m[0])) {
+																					                            if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m[0], $this->compiler)) {
+																					                               res = m[0] . "(". e . p .")";
 																					                            }
 																					                         } else {
-                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m . "\"");
+                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m[0] . "\"");
                                                                  }
                                                               }
                                                             }
@@ -245,30 +244,23 @@ math(res)        ::= UNIMATH(m). {res = m;}
 									// *,/,%
 math(res)        ::= MATH(m). {res = m;}
 
-//
-// value in expressions
-//
-//value(res)        ::= value(e) modifier(m) modparameters(p). {if (m == 'isset' || m == 'empty' || is_callable(m)) {
-//																					                       if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m, $this->compiler)) {
-//																					                           res = m . "(". e . p .")";
-//																					                        }
-//																					                    } else {
-//																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m,'modifier')) {
-//                                                                      res = "\$_smarty_tpl->smarty->plugin_handler->".m . "(array(". e . p ."),'modifier')";
-//                                                                 } else {
-//                                                                      $this->compiler->trigger_template_error ("unknown modifier \"" . m . "\"");
-//                                                                 }
-//                                                              }
-//                                                            }
 
-									// variable
+									// value
 value(res)		   ::= variable(v). { res = v; }
                   // config variable
 value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
                  // numeric
 value(res)       ::= NUMBER(n). { res = n; }
+									// boolean
+value(res)       ::= BOOLEAN(b). { res = b; }
+									// null
+value(res)       ::= NULL(n). { res = n; }
+
 									// function call
 value(res)	     ::= function(f). { res = f; }
+									// expression
+value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
+
 									// singele quoted string
 value(res)	     ::= SINGLEQUOTE text(t) SINGLEQUOTE. { res = "'".t."'"; }
 value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
@@ -277,9 +269,9 @@ value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".str_replace('\"','"
 //value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".addcslashes(str_replace(array('\"'),array('"'),s),"'")."'"; }
 //value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; var_dump(s);}
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
+
 									// static class methode call
 value(res)	     ::= ID(c) DOUBLECOLON method(m). { res = c.'::'.m; }
-//value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $_var = $this->template->getVariable(trim(f,"'"))->value; res = c.'::'.$_var.'('. p .')'; }
 value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
 									// static class methode call with object chainig
 value(res)	     ::= ID(c) DOUBLECOLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
@@ -287,25 +279,17 @@ value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP object
 									// static class constant
 value(res)       ::= ID(c) DOUBLECOLON ID(v). { res = c.'::'.v;}
 									// static class variables
-value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) vararraydefs(a). { res = c.'::$'.v.a;}
+value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a). { res = c.'::$'.v.a;}
 									// static class variables with object chain
-value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) vararraydefs(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
-									// unquoted string
-//value(res)	     ::= ID(i). { res = '\''.i.'\''; }
-									// config variable
-//value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
-									// boolean
-value(res)       ::= BOOLEAN(b). { res = b; }
-									// null
-value(res)       ::= NULL(n). { res = n; }
-									// expression
-value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
+value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
+
+
 
 //
 // variables 
 //
 									// simple Smarty variable (optional array)
-variable(res)    ::= DOLLAR varvar(v) vararraydefs(a). { if (v == '\'smarty\'') { res =  $this->compiler->compileTag(trim(v,"'"),a);} else {
+variable(res)    ::= DOLLAR varvar(v) arrayindex(a). { if (v == '\'smarty\'') { res =  $this->compiler->compileTag(trim(v,"'"),a);} else {
                                                          res = '$_smarty_tpl->getVariable('. v .')->value'.a; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
@@ -313,24 +297,27 @@ variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariab
 variable(res)    ::= object(o). { res = o; }
                   // config variable
 //variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
-										// single array index
-//vararraydefs(res)  ::= vararraydef(a). {res = a;}
-										// multiple array index
-vararraydefs(res)  ::= vararraydefs(a1) vararraydef(a2). {res = a1.a2;}
-										// no array index
-vararraydefs        ::= . {return;}
-										// Smarty2 style index 
-vararraydef(res)   ::= DOT ID(i). { res = "['". i ."']";}
-vararraydef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
-										// section tag index
-vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index\']').']';}
-										// PHP style index
-//vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = "['". i ."']";}
-vararraydef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
-										// section tag index
-//vararraydef(res)   ::= OPENB ID(i)CLOSEB. { res = $this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index'\]');}
 
-// variable identifer, supporting variable variables
+//
+// array index
+//
+										// multiple array index
+arrayindex(res)  ::= arrayindex(a1) indexdef(a2). {res = a1.a2;}
+										// no array index
+arrayindex        ::= . {return;}
+
+// single index definition
+										// Smarty2 style index 
+indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
+indexdef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
+										// section tag index
+indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index\']').']';}
+										// PHP style index
+indexdef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
+
+//
+// variable variable names
+//
 										// singel identifier element
 varvar(res)			 ::= varvarele(v). {res = v;}
 										// sequence of identifier elements
@@ -343,14 +330,14 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) vararraydefs(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
+object(res)      ::= DOLLAR varvar(v) arrayindex(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
 objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
-objectelement(res)::= PTR ID(i) vararraydefs(a).	    { res = '->'.i.a;}
-//objectelement(res)::= PTR varvar(v) vararraydefs(a).	{ res = '->'.v.a;}
+objectelement(res)::= PTR ID(i) arrayindex(a).	    { res = '->'.i.a;}
+//objectelement(res)::= PTR varvar(v) arrayindex(a).	{ res = '->'.v.a;}
 										// method
 objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 
@@ -381,7 +368,9 @@ params            ::= . { return;}
 //
 // modifier
 //  
-modifier(res)    ::= VERT ID(s). { res =  s;}
+modifier(res)    ::= VERT AT ID(m). { res =  array(m,true);}
+modifier(res)    ::= VERT ID(m). { res =  array(m,false);}
+
 
 //
 // modifier parameter
@@ -430,15 +419,20 @@ ifcond(res)        ::= NONEIDENTITY. {res = '!==';}
 lop(res)        ::= LAND. {res = '&&';}
 lop(res)        ::= LOR. {res = '||';}
 
+//
+// ARRAY element assignment
+//
 array(res)		       ::=  OPENB arrayelements(a) CLOSEB.  { res = 'array('.a.')';}
 arrayelements(res)   ::=  arrayelement(a).  { res = a; }
 arrayelements(res)   ::=  arrayelements(a1) COMMA arrayelement(a).  { res = a1.','.a; }
 arrayelements        ::=  .  { return; }
 arrayelement(res)		 ::=  expr(e). { res = e;}
 arrayelement(res)		 ::=  expr(e1) APTR expr(e2). { res = e1.'=>'.e2;}
-//arrayelement(res)		 ::=  ID(i). { res = '\''.i.'\'';}
 arrayelement(res)		 ::=  ID(i) APTR expr(e2). { res = '\''.i.'\'=>'.e2;}
 
+//
+// double qouted strings
+//
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
 doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
@@ -448,6 +442,9 @@ doublequotedcontent(res)           ::= OTHER(o). {res = addcslashes(o,"'");}
 //doublequotedcontent(res)           ::= OTHER(o). {res = o;}
 //doublequotedcontent(res)           ::= text(t). {res = addcslashes(t,"'");}
 
+//
+// text string
+//
 text(res)          ::= text(t) textelement(e). {res = t.e;}
 text(res)          ::= textelement(e). {res = e;}
 textelement(res)          ::= OTHER(o). {res = o;}

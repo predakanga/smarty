@@ -98,8 +98,8 @@ class Smarty_Internal_TemplateCompilerBase extends Smarty_Internal_Base {
     /**
     * Compile Tag
     * 
-    *                                         This is a call back from the lexer/parser
-    *                                         It executes the required compile plugin for the Smarty tag
+    *                                          This is a call back from the lexer/parser
+    *                                          It executes the required compile plugin for the Smarty tag
     * 
     * @param string $tag tag name
     * @param array $args array with tag attributes
@@ -113,14 +113,16 @@ class Smarty_Internal_TemplateCompilerBase extends Smarty_Internal_Base {
         $this->has_output = false; 
         // compile the smarty tag (required compile classes to compile the tag are autoloaded)
         if (!($_output = $this->$tag($args, $this)) === false) {
-            // did we get compiled code
-            if ($this->has_code) {
-                // Does it create output?
-                if ($this->has_output) {
-                    $_output .= "\n";
+            if ($_output !== true) {
+                // did we get compiled code
+                if ($this->has_code) {
+                    // Does it create output?
+                    if ($this->has_output) {
+                        $_output .= "\n";
+                    } 
+                    // return compiled code
+                    return $_output;
                 } 
-                // return compiled code
-                return $_output;
             } 
             // tag did not produce compiled code
             return '';

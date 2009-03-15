@@ -38,24 +38,205 @@ Smarty 3 - Unit Tests Report
  .
 
  AssignGlobalTests
+ ...F
+
+ AssignTests
  ..
-Fatal error: Cannot use string offset as an array in C:\wamp\www\__smarty3Alpha\libs\sysplugins\internal.template.php(429) : eval()'d code on line 3
 
-Call Stack:
-    0.0004      55304   1. {main}() C:\wamp\bin\php\php5.2.8\phpunit:0
-    0.6154    4253064   2. PHPUnit_TextUI_Command::main() C:\wamp\bin\php\php5.2.8\phpunit:52
-    2.4749    9539960   3. PHPUnit_TextUI_TestRunner->doRun() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\TextUI\Command.php:128
-    2.4752    9548448   4. PHPUnit_Framework_TestSuite->run() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\TextUI\TestRunner.php:324
-    4.7281   12674040   5. PHPUnit_Framework_TestSuite->run() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\Framework\TestSuite.php:621
-    4.7315   12688664   6. PHPUnit_Framework_TestSuite->runTest() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\Framework\TestSuite.php:658
-    4.7315   12688664   7. PHPUnit_Framework_TestCase->run() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\Framework\TestSuite.php:677
-    4.7315   12688664   8. PHPUnit_Framework_TestResult->run() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\Framework\TestCase.php:375
-    4.7316   12690376   9. PHPUnit_Framework_TestCase->runBare() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\Framework\TestResult.php:607
-    4.7321   12694040  10. PHPUnit_Framework_TestCase->runTest() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\Framework\TestCase.php:404
-    4.7321   12695704  11. ReflectionMethod->invoke() C:\wamp\bin\php\php5.2.8\PEAR\PHPUnit\Framework\TestCase.php:489
-    4.7321   12695704  12. AssignGlobalTests->testAssignGlobalTag() C:\wamp\www\__smarty3Alpha\PHPunit\AssignGlobalTests.php:0
-    4.7321   12696592  13. Smarty->fetch() C:\wamp\www\__smarty3Alpha\PHPunit\AssignGlobalTests.php:57
-    4.7323   12700952  14. Smarty_Internal_Template->getRenderedTemplate() C:\wamp\www\__smarty3Alpha\libs\Smarty.class.php:244
-    4.7323   12702328  15. Smarty_Internal_Template->renderTemplate() C:\wamp\www\__smarty3Alpha\libs\sysplugins\internal.template.php:393
-    4.7389   12799224  16. eval(''?><?php /* Smarty version Smarty3Alpha, created on 2009-03-13 13:40:16\n         compiled from "string" */ ?>\n<?php echo $_smarty_tpl->smarty->getGlobalVariable(\'foo\')->value[\'global\'][\'foo\'];?>\n'') C:\wamp\www\__smarty3Alpha\libs\sysplugins\internal.template.php:429
+ CacherResourceFileTests
+ ...........
 
+ ClearAllAssignTests
+ ....
+
+ ClearAssignTests
+ ...
+
+ CommentsTests
+ SSSSSSSSSSS
+
+ CompileBlockExtendTests
+ .......
+
+ CompileBlockPluginTests
+ .....
+
+ CompileCaptureTests
+ .....
+
+ CompileCompilerPluginTests
+ ..
+
+ CompileDebugTests
+ .
+
+ CompileErrorTests
+ .....
+
+ CompileEvalTests
+ ...
+
+ CompileForeachTests
+ .......
+
+ CompileForTests
+ ..............
+
+ CompileFunctionPluginTests
+ ...
+
+ CompileIfTests
+ .........................................................
+
+ CompileIncludeTests
+ ....
+
+ CompileInsertTests
+ ....
+
+ CompilePhpTests
+ ...
+
+ CompileRegisteredObjectFunctionTests
+ ..
+
+ CompileSectionTests
+ ......
+
+ CompileStripTests
+ .
+
+ CompileWhileTests
+ .
+
+ ConfigVarTests
+ .................
+
+ ConstantsTests
+ .
+
+ DelimiterTests
+ ....
+
+ FilterTests
+ .....
+
+ FunctionTests
+ .
+
+ GetTemplateVarsTests
+ ......
+
+ LoadFilterTests
+ .
+
+ ModifierTests
+ ......
+
+ RegisterBlockTests
+ ......
+
+ RegisterCompilerFunctionTests
+ ......
+
+ RegisterFilterTests
+ ............
+
+ RegisterFunctionTests
+ ......
+
+ RegisterModifierTests
+ ......
+
+ ResourceTests
+ .
+
+ SecurityTests
+ ..................
+
+ SingleQuotedStringTests
+ ......
+
+ SpacingTests
+ ............
+
+ StaticClassAccessTests
+ .....
+
+ TemplateExistsTests
+ ..
+
+ TokenFallbackTests
+ ....
+
+ TriggerErrorTests
+ .
+
+ VariableScopeTests
+ ......
+
+ VariableVariableTests
+ ....
+
+ XmlTests
+ ...
+
+Time: 6 seconds
+
+There was 1 failure:
+
+1) testGlobalVarArrayTag(AssignGlobalTests)
+Failed asserting that two strings are equal.
+expected string <bar>
+difference      <xx??>
+got string      <Array>
+C:\wamp\www\__smarty3Alpha\PHPunit\AssignGlobalTests.php:68
+
+There were 11 skipped tests:
+
+1) testSimpleComment1(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+2) testSimpleComment2(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+3) testSimpleComment3(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+4) testSimpleComment4(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+5) testSimpleComment5(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+6) testSimpleComment6(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+7) testSimpleComment7(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+8) testTextComment1(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+9) testTextComment2(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+10) testTextComment3(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+11) testTextComment4(CommentsTests)
+comment tests are skiped.
+C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
+
+FAILURES!
+Tests: 430, Assertions: 498, Failures: 1, Skipped: 11.

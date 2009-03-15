@@ -46,49 +46,49 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
 
     public function testAssignOld1()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=1}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=1}{$foo}');
         $this->assertEquals("1", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld2()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var='foo' value=1}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=\'foo\' value=1}{$foo}');
         $this->assertEquals("1", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld3()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var=\"foo\" value=1}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{assign var="foo" value=1}{$foo}');
         $this->assertEquals("1", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld4()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=bar}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=bar}{$foo}');
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld5()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=1+2}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=1+2}{$foo}');
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld6()
     {
         $this->smarty->security_policy->php_functions = array('strlen');
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=strlen('bar')}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=strlen(\'bar\')}{$foo}');
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld7()
     {
         $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value='bar'|strlen}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=\'bar\'|strlen}{$foo}');
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld8()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=[9,8,7,6]}{for \$x in \$foo}{\$x}{/for}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[9,8,7,6]}{for $x in $foo}{$x}{/for}');
         $this->assertEquals("9876", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld9()
     {
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo value=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{for \$x in \$foo}{\$x@key}{\$x}{/for}");
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[\'a\'=>9,\'b\'=>8,\'c\'=>7,\'d\'=>6]}{for $x in $foo}{$x@key}{$x}{/for}');
         $this->assertEquals("a9b8c7d6", $this->smarty->fetch($tpl));
     } 
     /**
@@ -96,23 +96,23 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testAssignNew1()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=1}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{$foo=1}{$foo}');
         $this->assertEquals("1", $this->smarty->fetch($tpl));
     } 
     public function testAssignNew2()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=bar}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{$foo=bar}{$foo}');
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
     } 
     public function testAssignNew3()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=1+2}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{$foo=1+2}{$foo}');
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
     public function testAssignNew4()
     {
         $this->smarty->security_policy->php_functions = array('strlen');
-        $tpl = $this->smarty->createTemplate("string:{\$foo=strlen('bar')}{\$foo}");
+        $tpl = $this->smarty->createTemplate('string:{$foo=strlen(\'bar\')}{$foo}');
         $this->assertEquals("3", $this->smarty->fetch($tpl));
     } 
     public function testAssignNew5()
