@@ -176,21 +176,21 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->plugin_handler = new Smarty_Internal_Plugin_Handler;
         if (!$this->debugging && $this->debugging_ctrl == 'URL') {
             $_query_string = $this->request_use_auto_globals ? $_SERVER['QUERY_STRING'] : $GLOBALS['HTTP_SERVER_VARS']['QUERY_STRING'];
-            if (@strstr($_query_string, $this->smarty_debug_id)) {
-                if (@strstr($_query_string, $this->smarty_debug_id . '=on')) {
+            if (false !== strpos($_query_string, $this->smarty_debug_id)) {
+                if (false !== strpos($_query_string, $this->smarty_debug_id . '=on')) {
                     // enable debugging for this browser session
-                    @setcookie('SMARTY_DEBUG', true);
+                    setcookie('SMARTY_DEBUG', true);
                     $this->debugging = true;
-                } elseif (@strstr($_query_string, $this->smarty_debug_id . '=off')) {
+                } elseif (false !== strpos($_query_string, $this->smarty_debug_id . '=off')) {
                     // disable debugging for this browser session
-                    @setcookie('SMARTY_DEBUG', false);
+                    setcookie('SMARTY_DEBUG', false);
                     $this->debugging = false;
                 } else {
                     // enable debugging for this page
                     $this->debugging = true;
                 } 
             } else {
-                $this->debugging = (bool)($this->request_use_auto_globals ? @$_COOKIE['SMARTY_DEBUG'] : @$GLOBALS['HTTP_COOKIE_VARS']['SMARTY_DEBUG']);
+                $this->debugging = (bool)($this->request_use_auto_globals ? $_COOKIE['SMARTY_DEBUG'] : $GLOBALS['HTTP_COOKIE_VARS']['SMARTY_DEBUG']);
             } 
         } 
     } 

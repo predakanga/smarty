@@ -1763,7 +1763,7 @@ static public $yy_action = array(
                                         $this->_retvalue = '';
                                       }	    }
 #line 1770 "internal.templateparser.php"
-#line 127 "internal.templateparser.y"
+#line 128 "internal.templateparser.y"
     function yy_r10(){if (!$this->template->security) { 
                                         $this->_retvalue = $this->cacher->processNocacheCode($this->compiler->compileTag('print_expression',array('value'=>$this->yystack[$this->yyidx + -1]->minor)), $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {

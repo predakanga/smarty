@@ -124,6 +124,7 @@ template_element(res)::= PHPSTART text(t) PHPEND. {if (!$this->template->securit
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
                                         res = '';
                                       }	}
+
 template_element(res)::= SHORTTAGSTART  variable(v) SHORTTAGEND. {if (!$this->template->security) { 
                                         res = $this->cacher->processNocacheCode($this->compiler->compileTag('print_expression',array('value'=>v)), $this->compiler, false,true);
                                       } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
@@ -133,7 +134,6 @@ template_element(res)::= SHORTTAGSTART  variable(v) SHORTTAGEND. {if (!$this->te
                                       }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
                                         res = '';
                                       }	}
-											//
 											// XML tag
 template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
 											// Other template text

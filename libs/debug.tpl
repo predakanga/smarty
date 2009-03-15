@@ -111,6 +111,12 @@ td {
 <h2>assigned config file variables (outer template scope)</h2>
 
 <table id="table_config_vars">
+    {for $vars in $config_vars}
+       <tr class="{if $vars@iteration % 2 eq 0}odd{else}even{/if}">   
+       <th>{$vars@key|escape:'html'}</th>
+       <td>{$vars|debug_print_var}</td></tr>
+    {/for}
+
 </table>
 </body>
 </html>

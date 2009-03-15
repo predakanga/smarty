@@ -109,6 +109,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     /**
     * test SMARTY_PHP_QUOTE
     */
+
     public function testSmartyPhpQuote()
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
@@ -119,6 +120,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
         $this->assertEquals("&lt;?php echo &quot;hello world&quot;; ?&gt;", $this->smarty->fetch('string:{php}echo "hello world";{/php}'));
     } 
+
     /**
     * test SMARTY_PHP_REMOVE
     */
@@ -131,10 +133,12 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_REMOVE;
         $this->assertEquals("", $this->smarty->fetch('string:{php} echo "hello world"; {/php}'));
-    } 
+    }
+ 
     /**
     * test SMARTY_PHP_ALLOW
     */
+    
     public function testSmartyPhpAllow()
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
@@ -144,7 +148,8 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
         $this->assertEquals('<?php  echo "hello world";  ?>', $this->smarty->fetch('string:{php} echo "hello world"; {/php}'));
-    } 
+    }
+ 
     /**
     * test PHP handling at disabled security
     */

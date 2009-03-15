@@ -80,6 +80,32 @@ class Smarty_Internal_Security_Handler extends Smarty_Internal_Base {
         throw new Exception ("directory \"" . $_rp . "\" not allowed by security setting");
         return false;
     } 
+    /**
+    * Check if directory of file resource is trusted.
+    * 
+    * @param string $filepath 
+    * @param object $compiler compiler object
+    * @return boolean true if directory is trusted
+    */
+    function isTrustedPHPDir($filepath)
+    {
+        $_rp = realpath($filepath);
+       if (!empty($this->smarty->security_policy->trusted_dir)) {
+            foreach ((array)$this->smarty->security_policy->trusted_dir as $curr_dir) {
+                if (($_cd = realpath($curr_dir)) !== false) {
+                    if ($_cd == $_rp) {
+                        return true;
+                    } elseif (strncmp($_rp, $_cd, strlen($_cd)) == 0 &&
+                            substr($_rp, strlen($_cd), 1) == DIRECTORY_SEPARATOR) {
+                        return true;
+                    } 
+                } 
+            } 
+        } 
+
+        throw new Exception ("directory \"" . $_rp . "\" not allowed by security setting");
+        return false;
+    } 
 } 
 
 ?>
