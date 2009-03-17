@@ -131,7 +131,7 @@ Smarty 3 - Unit Tests Report
  .
 
  ModifierTests
- ......
+ .......
 
  RegisterBlockTests
  ......
@@ -181,7 +181,7 @@ Smarty 3 - Unit Tests Report
  XmlTests
  ...
 
-Time: 6 seconds
+Time: 7 seconds
 
 There was 1 failure:
 
@@ -239,4 +239,4 @@ comment tests are skiped.
 C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
 
 FAILURES!
-Tests: 430, Assertions: 498, Failures: 1, Skipped: 11.
+Tests: 431, Assertions: 499, Failures: 1, Skipped: 11.

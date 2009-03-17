@@ -1,5 +1,9 @@
+03/17/2009
+- bugfix 
+
 03/15/2009
 - added {include_php} tag for BC
+- removed @ error suppression 
 - bugfix fetch did always repeat output of first call when calling same template several times
 - PHPunit tests extended
 

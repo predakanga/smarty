@@ -44,6 +44,7 @@ class Smarty_Internal_Compile_Extend extends Smarty_Internal_CompileBase {
         if (0 == preg_match('/(.?)(name=)(.*)/', $matches[2], $_match)) {
             $this->compiler->trigger_template_error("\"" . $matches[0] . "\" missing name attribute");
         } else {
+   
             $_name = trim($_match[3], "\"'");
             if (!isset($this->compiler->template->block_data[$_name])) {
                 // check for smarty possible tags

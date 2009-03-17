@@ -38,6 +38,12 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{"hello world"|strlen}');
         $this->assertEquals("11", $this->smarty->fetch($tpl));
     } 
+    public function testPHPFunctionModifier2()
+    {
+        $this->smarty->security_policy->modifiers = array('strlen');
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value="hello world"}{$foo|strlen}');
+        $this->assertEquals("11", $this->smarty->fetch($tpl));
+    } 
     /**
     * test plugin as modifier
     */

@@ -34,7 +34,6 @@ class Smarty_Internal_Compile_BlockClose extends Smarty_Internal_CompileBase {
             $this->compiler->trigger_template_error('mismatching name attributes "' . $saved_attr['name'] . '" and "' . $_attr['name'] . '"');
         } 
         $_name = trim($saved_attr['name'], "'");
-
         if (!is_null($compiler->template->block_data[$_name])) {
             $_output = $compiler->template->block_data[$_name]['compiled'];
         } else {

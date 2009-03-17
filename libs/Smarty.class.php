@@ -25,7 +25,7 @@
 * @link http://www.smarty.net/
 * @copyright 2008 New Digital Group, Inc.
 * @author Monte Ohrt <monte at ohrt dot com> 
-* @author Uwe Tews
+* @author Uwe Tews 
 * @package Smarty
 * @version 3.0-alpha1
 */
@@ -88,7 +88,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $security = false;
     public $security_policy = null;
     public $security_handler = null;
-    public $direct_access_security = true;
+    public $direct_access_security = true; 
     // debug mode
     public $debugging = false;
     public $debugging_ctrl = 'URL';
@@ -96,11 +96,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $request_use_auto_globals = true;
     public $debug_tpl = null; 
     // When set, smarty does uses this value as error_reporting-level.
-    public $error_reporting = null;
+    public $error_reporting = null; 
     // config var settings
     public $config_overwrite = true; //Controls whether variables with the same name overwrite each other.
     public $config_booleanize = true; //Controls whether config values of on/true/yes and off/false/no get converted to boolean
-    public $config_read_hidden = true; //Controls whether hidden config sections/vars are read from the file.
+    public $config_read_hidden = true; //Controls whether hidden config sections/vars are read from the file. 
     // config vars
     public $config_vars = array(); 
     // assigned tpl vars
@@ -113,6 +113,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     private $sysplugins_dir = null; 
     // resource type used if none given
     public $default_resource_type = 'file'; 
+    // charset of template
+    public $resource_charset = 'UTF-8'; 
     // caching type
     public $default_caching_type = 'file'; 
     // internal cache resource types
@@ -132,7 +134,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // registered plugins
     public $registered_plugins = array(); 
     // plugin search order
-    public $plugin_search_order = array('function', 'block', 'compiler','class'); 
+    public $plugin_search_order = array('function', 'block', 'compiler', 'class'); 
     // plugin handler object
     public $plugin_handler = null; 
     // registered objects
@@ -140,13 +142,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // registered filters
     public $registered_filters = array(); 
     // filter handler
-    public $filter_handler = null;
+    public $filter_handler = null; 
     // cache resorce objects
-    public $cache_resource_objects = array();
+    public $cache_resource_objects = array(); 
     // write file object
-    public $write_file_object = null;
+    public $write_file_object = null; 
     // global smarty  vars
-    public $_smarty_vars = array();
+    public $_smarty_vars = array(); 
     // start time for execution time calculation
     public $start_time = 0;
 
@@ -155,6 +157,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function __construct()
     {
+        mb_internal_encoding($this->resource_charset);
         $this->start_time = $this->_get_time(); 
         // set exception handler
         if (!empty($this->exception_handler))
@@ -224,7 +227,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * fetches a rendered Smarty template
     * 
     * @param string $template the resource handle of the template file or template object
-    * @param object|null $parent next higher level of Smarty variables
+    * @param object $ |null $parent next higher level of Smarty variables
     * @param mixed $cache_id cache id to be used with this template
     * @param mixed $compile_id compile id to be used with this template
     * @return string rendered template output
@@ -250,7 +253,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
     * displays a Smarty template
     * 
-    * @param string|object $template the resource handle of the template file  or template object
+    * @param string $ |object $template the resource handle of the template file  or template object
     * @param object $parent next higher level of Smarty variables
     * @param mixed $cache_id cache id to be used with this template
     * @param mixed $compile_id compile id to be used with this template
@@ -270,7 +273,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
     * test if cache i valid
     * 
-    * @param string|object $template the resource handle of the template file or template object
+    * @param string $ |object $template the resource handle of the template file or template object
     * @param mixed $cache_id cache id to be used with this template
     * @param mixed $compile_id compile id to be used with this template
     * @return boolean cache status
@@ -310,7 +313,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * plugin filename format: plugintype.pluginname.php
     * 
     * @param string $plugin_name class plugin name to load
-    * @return boolean
+    * @return boolean 
     */
     public function loadPlugin($plugin_name)
     { 
@@ -357,11 +360,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @return string previous exception handler
     */
     public function setExceptionHandler($handler)
-    { 
+    {
         $this->exception_handler = $handler;
         return set_exception_handler($handler);
-    }    
-    
+    } 
+
     /**
     * Takes unknown class methods and lazy loads sysplugin files for them
     * class name format: Smarty_Method_MethodName
@@ -403,7 +406,7 @@ class SmartyException {
     {
         echo "Code: " . $e->getCode() . "<br />Error: " . htmlentities($e->getMessage()) . "<br />"
          . "File: " . $e->getFile() . "<br />"
-         . "Line: " . $e->getLine() . "<br />" 
+         . "Line: " . $e->getLine() . "<br />"
          . "\n";
     } 
 

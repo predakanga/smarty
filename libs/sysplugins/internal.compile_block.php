@@ -29,7 +29,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
         $this->_open_tag('block', $_attr);
         $compiler->template->extract_code = true;
         $compiler->template->extracted_compiled_code = '';
-        $compiler->template->has_code = false;
+        $compiler->template->has_code = false; 
         return true;
     } 
 } 

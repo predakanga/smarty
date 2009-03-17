@@ -41,11 +41,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $compiled_template = null;
     private $compiled_timestamp = null;
     public $compile_time = 0;
-    public $mustCompile = null; 
-    public $suppressHeader = false; 
-    public $extract_code = false;
+    public $mustCompile = null;
+    public $suppressHeader = false;
+    public $extract_code = false; 
     // Rendered content
-    public $rendered_content = null;
+    public $rendered_content = null; 
     // Cache file
     private $cached_filepath = null;
     private $cached_timestamp = null;
@@ -155,12 +155,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function getTemplateSource ()
     {
         if ($this->template_source === null) {
-            $this->resource_objects[$this->resource_type]->getTemplateSource($this); 
-            // if ($this->resource_objects[$this->resource_type]->getTemplateSource($this) === false) {
-            // throw new Exception("Unable to load templates \"{$this->template_resource}\"");
-            // }
+            $this->resource_objects[$this->resource_type]->getTemplateSource($this);
         } 
-        return $this->template_source;
+            return $this->template_source;
     } 
 
     /**
