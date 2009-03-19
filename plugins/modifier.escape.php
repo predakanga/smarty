@@ -21,8 +21,12 @@
 * @param string $char_set character set
 * @return string escaped input string
 */
-function smarty_modifier_escape($string, $esc_type = 'html', $char_set = 'UTF-8')
+function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null)
 {
+    if ($char_set === null) {
+        $smarty = Smarty::instance();
+        $char_set = $smarty->resource_char_set;
+    } 
     switch ($esc_type) {
         case 'html':
             return htmlspecialchars($string, ENT_QUOTES, $char_set);
@@ -68,7 +72,7 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = 'UTF-8'
 
         case 'mail': 
             // safe way to display e-mail address on a web page
-            return str_replace(array('@', '.'), array(' [AT] ', ' [DOT] '), $string);
+            return mb_str_replace(array('@', '.'), array(' [AT] ', ' [DOT] '), $string);
 
         case 'nonstd': 
             // escape non-standard chars, such as ms document quotes
@@ -86,6 +90,19 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = 'UTF-8'
 
         default:
             return $string;
+    } 
+    // simulate the missing PHP mb_str_replace function
+    function mb_str_replace($needle, $replacement, $haystack)
+    {
+        $needle_len = mb_strlen($needle);
+        $replacement_len = mb_strlen($replacement);
+        $pos = mb_strpos($haystack, $needle, 0);
+        while ($pos !== false) {
+            $haystack = mb_substr($haystack, 0, $pos) . $replacement
+             . mb_substr($haystack, $pos + $needle_len);
+            $pos = mb_strpos($haystack, $needle, $pos + $replacement_len);
+        } 
+        return $haystack;
     } 
 } 
 

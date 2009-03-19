@@ -52,7 +52,7 @@ class Smarty_Internal_Config_File_Compiler extends Smarty_Internal_Base {
         // $parser->PrintTrace();
         // get tokens from lexer and parse them
         while ($lex->yylex()) {
-//            echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} Line {$lex->line} \n";
+            echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} Line {$lex->line} \n";
             $parser->doParse($lex->token, $lex->value);
         } 
         // finish parsing process

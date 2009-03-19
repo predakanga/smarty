@@ -225,7 +225,7 @@ expr(res)        ::= expr(e) modifier(m) modparameters(p). {
                                                                  }
                                                               }
                                                             }
-expr(res)				 ::= array(a).	{res = a;}
+exprs(res)				 ::= array(a).	{res = a;}
 
 									// single value
 exprs(res)        ::= value(v). { res = v; }

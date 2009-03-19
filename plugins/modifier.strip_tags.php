@@ -22,7 +22,7 @@
 function smarty_modifier_strip_tags($string, $replace_with_space = true)
 {
     if ($replace_with_space)
-        return preg_replace('!<[^>]*?>!', ' ', $string);
+        return mb_ereg_replace('!<[^>]*?>!', ' ', $string,'p');
     else
         return strip_tags($string);
 }

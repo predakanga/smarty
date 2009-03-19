@@ -31,15 +31,15 @@
        if ($length == 0)
             return '';
 
-        if (strlen($string) > $length) {
-            $length -= min($length, strlen($etc));
+        if (mb_strlen($string) > $length) {
+            $length -= min($length, mb_strlen($etc));
             if (!$break_words && !$middle) {
-                $string = preg_replace('/\s+?(\S+)?$/', '', substr($string, 0, $length + 1));
+                $string = mb_ereg_replace('/\s+?(\S+)?$/', '', mb_substr($string, 0, $length + 1),'p');
             } 
             if (!$middle) {
-                return substr($string, 0, $length) . $etc;
+                return mb_substr($string, 0, $length) . $etc;
             } else {
-                return substr($string, 0, $length / 2) . $etc . substr($string, - $length / 2);
+                return mb_substr($string, 0, $length / 2) . $etc . mb_substr($string, - $length / 2);
             } 
         } else {
             return $string;

@@ -114,7 +114,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     // resource type used if none given
     public $default_resource_type = 'file'; 
     // charset of template
-    public $resource_charset = 'UTF-8'; 
+    public $resource_char_set = 'UTF-8'; 
     // caching type
     public $default_caching_type = 'file'; 
     // internal cache resource types
@@ -157,7 +157,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function __construct()
     {
-        mb_internal_encoding($this->resource_charset);
+        mb_internal_encoding($this->resource_char_set);
         $this->start_time = $this->_get_time(); 
         // set exception handler
         if (!empty($this->exception_handler))

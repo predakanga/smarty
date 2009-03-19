@@ -1,3 +1,7 @@
+03/19/2009
+- allow array definition as modifer paramter
+- changed modifier to use multi byte string funktions. 
+
 03/17/2009
 - bugfix 
 
