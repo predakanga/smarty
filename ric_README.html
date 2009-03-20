@@ -151,6 +151,13 @@ For a counting for loop:
 Any number of statements can be used separated by comma as the first
 inital expression at {for}
 
+The {for} will replace Smarty2's {foreach} and {section}.  For BC {foreach} are {section} are still supported.
+
+NOTE:  {$bar[foo]} will always be parsed that foo is the name of a section. 
+If you want to access an array element with index foo,you must use quotes like {$bar['foo']}
+
+New {while....} tag:
+{while $i&lt;10}  ....  {/while}
 
 {nocache} ... {/nocache} will declare a section of the template to be not cached.
 
@@ -168,7 +175,7 @@ Monte and Uwe
 
 </pre>
 	<p class="notes" id="credit">
-		Documentation generated on Tue, 03 Feb 2009 01:15:26 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 08 Mar 2009 19:38:50 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</body>
 </html>
