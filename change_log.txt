@@ -1,4 +1,5 @@
 03/20/2009
+- moved /plugins folder into /libs folder
 - added noprint modifier
 - autoappend a directory separator if the xxxxx_dir definition have no trailing one
 
