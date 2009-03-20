@@ -16,7 +16,6 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
     {
 //        $this->markTestSkipped('php tests are skiped as the tags are disabled.');
         $this->smarty = new Smarty();
-        $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->force_compile = true;
         $this->old_error_level = error_reporting();
         error_reporting(E_ALL);

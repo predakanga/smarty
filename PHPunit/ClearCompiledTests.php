@@ -17,7 +17,6 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smarty = new Smarty();
         $this->old_error_level = error_reporting();
         error_reporting(E_ALL);
-        $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         if (!is_object($this->smarty->write_file_object)) {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");
             $this->smarty->write_file_object = new Smarty_Internal_Write_File;

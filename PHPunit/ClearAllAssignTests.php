@@ -18,7 +18,6 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
         $this->smarty = new Smarty();
         $this->old_error_level = error_reporting();
         error_reporting(E_ALL);
-        $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->smarty->assign('foo','foo');
         $this->smarty->data = new Smarty_Data($this->smarty);
         $this->smarty->data->assign('bar','bar');

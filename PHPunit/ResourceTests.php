@@ -16,7 +16,6 @@ class ResourceTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = new Smarty();
-        $this->smarty->plugins_dir = array('..' . DIRECTORY_SEPARATOR . 'plugins' . DIRECTORY_SEPARATOR);
         $this->old_error_level = error_reporting();
         error_reporting(E_ALL);
     } 
