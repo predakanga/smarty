@@ -1,7 +1,7 @@
 /**
 * Smarty Internal Plugin Configfileparser
 *
-* This is the template parser
+* This is the config file parser
 * 
 * 
 * @package Smarty

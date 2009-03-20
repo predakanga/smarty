@@ -95,6 +95,9 @@ class Smarty_Internal_CacheResource_File extends Smarty_Internal_PluginBase {
             $_resource_part = null;
         } 
         $_dir = $this->smarty->cache_dir;
+        if (substr($_dir, -1) != DIRECTORY_SEPARATOR) {
+            $_dir .= DIRECTORY_SEPARATOR;
+        } 
         if ($this->smarty->use_sub_dirs && isset($cache_id)) {
             $_dir .= str_replace('|', $_dir_sep, $cache_id) . $_dir_sep;
         } 

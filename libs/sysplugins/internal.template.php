@@ -512,6 +512,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function buildTemplateFilepath ()
     {
         foreach((array)$this->smarty->template_dir as $_template_dir) {
+        if (substr($_template_dir, -1) != DIRECTORY_SEPARATOR) {
+            $_template_dir .= DIRECTORY_SEPARATOR;
+        } 
+
             $_filepath = $_template_dir . $this->resource_name;
             if (file_exists($_filepath))
                 return $_filepath;

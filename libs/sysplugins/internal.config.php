@@ -27,8 +27,8 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
         $this->compiled_config = null;
         $this->compiled_filepath = null;
         $this->compiled_timestamp = null;
-        $this->mustCompile = null; 
-        $this->compiler_object = null;
+        $this->mustCompile = null;
+        $this->compiler_object = null; 
         // parse config resource name
         if (!$this->parseConfigResourceName ($config_resource)) {
             throw new Exception ("Unable to parse config resource '{$config_resource}'");
@@ -77,6 +77,10 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
     public function buildConfigFilepath ()
     {
         foreach((array)$this->smarty->config_dir as $_config_dir) {
+            if (substr($_config_dir, -1) != DIRECTORY_SEPARATOR) {
+                $_config_dir .= DIRECTORY_SEPARATOR;
+            } 
+
             $_filepath = $_config_dir . $this->config_resource_name;
             if (file_exists($_filepath))
                 return $_filepath;
@@ -138,7 +142,11 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
              . substr($_filepath, 0, 1) . DIRECTORY_SEPARATOR
              . $_filepath;
         } 
-        return $this->smarty->compile_dir . $_filepath . '.' . basename($this->config_resource_name) . '.config' . $this->smarty->php_ext;
+        $_compile_dir = $this->smarty->compile_dir;
+        if (substr($_compile_dir, -1) != DIRECTORY_SEPARATOR) {
+            $_compile_dir .= DIRECTORY_SEPARATOR;
+        } 
+        return $_compile_dir . $_filepath . '.' . basename($this->config_resource_name) . '.config' . $this->smarty->php_ext;
     } 
     /**
     * Returns the timpestamp of the compiled file
@@ -222,7 +230,7 @@ class Smarty_Internal_Config extends Smarty_Internal_Base {
     public function loadConfigVars ($sections = null, $scope)
     {
         $config_data = unserialize($this->getCompiledConfig());
-//        var_dump($config_data); 
+        // var_dump($config_data); 
         // copy global config vars
         foreach ($config_data['vars'] as $variable => $value) {
             $scope->config_vars[$variable] = $value;

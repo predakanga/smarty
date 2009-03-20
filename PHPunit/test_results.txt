@@ -53,7 +53,7 @@ Smarty 3 - Unit Tests Report
  ...
 
  CommentsTests
- SSSSSSSSSSS
+ ....
 
  CompileBlockExtendTests
  .......
@@ -181,7 +181,7 @@ Smarty 3 - Unit Tests Report
  XmlTests
  ...
 
-Time: 7 seconds
+Time: 8 seconds
 
 There was 1 failure:
 
@@ -192,51 +192,5 @@ difference      <xx??>
 got string      <Array>
 C:\wamp\www\__smarty3Alpha\PHPunit\AssignGlobalTests.php:68
 
-There were 11 skipped tests:
-
-1) testSimpleComment1(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-2) testSimpleComment2(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-3) testSimpleComment3(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-4) testSimpleComment4(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-5) testSimpleComment5(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-6) testSimpleComment6(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-7) testSimpleComment7(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-8) testTextComment1(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-9) testTextComment2(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-10) testTextComment3(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
-11) testTextComment4(CommentsTests)
-comment tests are skiped.
-C:\wamp\www\__smarty3Alpha\PHPunit\CommentsTests.php:17
-
 FAILURES!
-Tests: 431, Assertions: 499, Failures: 1, Skipped: 11.
+Tests: 424, Assertions: 503, Failures: 1.

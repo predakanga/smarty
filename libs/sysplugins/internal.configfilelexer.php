@@ -1,6 +1,15 @@
 <?php
-//  Lexer definition for Smarty3 project
-//	written by Uwe Tews
+/**
+* Smarty Internal Plugin Configfilelexer
+*
+* This is the lexer to break the config file source into tokens 
+* @package Smarty
+* @subpackage Config
+* @author Uwe Tews 
+*/
+/**
+* Smarty Internal Plugin Templatelexer
+*/
 class Smarty_Internal_Configfilelexer
 {
 

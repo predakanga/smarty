@@ -14,9 +14,9 @@
 */
 class Smarty_Internal_Resource_File extends Smarty_Internal_Base {
     // classes used for compiling Smarty templates from file resource
-    public $compiler_class = 'Smarty_Internal_SmartyTemplateCompiler'; 
-    public $template_lexer_class = 'Smarty_Internal_Templatelexer'; 
-    public $template_parser_class = 'Smarty_Internal_Templateparser'; 
+    public $compiler_class = 'Smarty_Internal_SmartyTemplateCompiler';
+    public $template_lexer_class = 'Smarty_Internal_Templatelexer';
+    public $template_parser_class = 'Smarty_Internal_Templateparser';
 
     /**
     * Get filepath to template source
@@ -109,8 +109,12 @@ class Smarty_Internal_Resource_File extends Smarty_Internal_Base {
         } else {
             $_cache = '';
         } 
-        return $_template->smarty->compile_dir . $_filepath . '.' . basename($_template->resource_name) . $_cache . $_template->smarty->php_ext;
-    }
+        $_compile_dir = $_template->smarty->compile_dir;
+        if (substr($_compile_dir, -1) != DIRECTORY_SEPARATOR) {
+            $_compile_dir .= DIRECTORY_SEPARATOR;
+        } 
+        return $_compile_dir . $_filepath . '.' . basename($_template->resource_name) . $_cache . $_template->smarty->php_ext;
+    } 
 } 
 
 ?>
