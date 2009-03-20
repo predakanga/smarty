@@ -15,15 +15,19 @@ require('./libs/Smarty.class.php');
 $smarty = new Smarty;
 
 $smarty->force_compile = false;
-$smarty->caching = true;
+$smarty->caching = false;
 $smarty->caching_lifetime = -1;
-// $smarty->enableSecurity();
+//$smarty->enableSecurity();
+$smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
 if (isset($_POST['template'])) {
-    $template = stripslashes($_POST['template']);
+//var_dump($_POST['template']);
+    $template = str_replace("\'","\\'",$_POST['template']); 
+    // $template = stripslashes($_POST['template']);
+//    var_dump($template);
 } else {
     $template = null;
 } 
-$smarty->assign('template', $template, true);
+$smarty->assign('template', $_POST['template'], true);
 
 $smarty->display('test_parser.tpl');
 

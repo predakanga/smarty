@@ -30,9 +30,6 @@ $myobj->test($foo|escape) is {$myobj->test($foo|escape)}
 
 PHP TESTS:
 
-php $foo is <?=$foo?>
-
-php $foo.$baz[1] is <?=$foo.$baz[1]?>
 
 COMMENT TESTS:
 
