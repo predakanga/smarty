@@ -23,18 +23,20 @@
 */
 function smarty_modifier_replace($string, $search, $replace)
 {
-    // simulate the missing PHP mb_str_replace function
-    function mb_str_replace($needle, $replacement, $haystack)
-    {
-        $needle_len = mb_strlen($needle);
-        $replacement_len = mb_strlen($replacement);
-        $pos = mb_strpos($haystack, $needle, 0);
-        while ($pos !== false) {
-            $haystack = mb_substr($haystack, 0, $pos) . $replacement
-             . mb_substr($haystack, $pos + $needle_len);
-            $pos = mb_strpos($haystack, $needle, $pos + $replacement_len);
+    if (!function_exists("mb_str_replace")) {
+        // simulate the missing PHP mb_str_replace function
+        function mb_str_replace($needle, $replacement, $haystack)
+        {
+            $needle_len = mb_strlen($needle);
+            $replacement_len = mb_strlen($replacement);
+            $pos = mb_strpos($haystack, $needle, 0);
+            while ($pos !== false) {
+                $haystack = mb_substr($haystack, 0, $pos) . $replacement
+                 . mb_substr($haystack, $pos + $needle_len);
+                $pos = mb_strpos($haystack, $needle, $pos + $replacement_len);
+            } 
+            return $haystack;
         } 
-        return $haystack;
     } 
     return mb_str_replace($search, $replace, $string);
 } 
