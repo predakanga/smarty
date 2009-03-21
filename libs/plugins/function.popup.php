@@ -96,12 +96,12 @@ function smarty_function_popup($params, $smarty, $template)
                 break;
 
             default:
-                throw new SmartyException ("[popup] unknown parameter $_key", E_USER_WARNING);
+                throw new Exception ("[popup] unknown parameter $_key", E_USER_WARNING);
         }
     }
 
     if (empty($text) && !isset($inarray) && empty($function)) {
-        throw new SmartyException ("overlib: attribute 'text' or 'inarray' or 'function' required");
+        throw new Exception ("overlib: attribute 'text' or 'inarray' or 'function' required");
         return false;
     }
 

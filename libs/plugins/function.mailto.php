@@ -54,7 +54,7 @@ function smarty_function_mailto($params, $smarty, $template)
     $extra = '';
 
     if (empty($params['address'])) {
-        $smarty->trigger_error("mailto: missing 'address' parameter");
+        throw new Exception ("mailto: missing 'address' parameter");
         return;
     } else {
         $address = $params['address'];
@@ -97,7 +97,7 @@ function smarty_function_mailto($params, $smarty, $template)
 
     $encode = (empty($params['encode'])) ? 'none' : $params['encode'];
     if (!in_array($encode, array('javascript', 'javascript_charcode', 'hex', 'none'))) {
-        $smarty->trigger_error("mailto: 'encode' parameter must be none, javascript or hex");
+        throw new Exception ("mailto: 'encode' parameter must be none, javascript or hex");
         return;
     } 
 
@@ -130,7 +130,7 @@ function smarty_function_mailto($params, $smarty, $template)
     } elseif ($encode == 'hex') {
         preg_match('!^(.*)(\?.*)$!', $address, $match);
         if (!empty($match[2])) {
-            $smarty->trigger_error("mailto: hex encoding does not work with extra attributes. Try javascript.");
+            throw new Exception ("mailto: hex encoding does not work with extra attributes. Try javascript.");
             return;
         } 
         $address_encode = '';

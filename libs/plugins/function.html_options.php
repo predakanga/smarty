@@ -65,7 +65,7 @@ function smarty_function_html_options($params, $smarty, $template)
                 if (!is_array($_val)) {
                     $extra .= ' ' . $_key . '="' . smarty_function_escape_special_chars($_val) . '"';
                 } else {
-                    throw new SmartyException ("html_options: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
+                    throw new Exception ("html_options: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
                 } 
                 break;
         } 

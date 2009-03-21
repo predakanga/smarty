@@ -26,7 +26,7 @@ function smarty_function_math($params, $smarty, $template)
 {
     // be sure equation parameter is present
     if (empty($params['equation'])) {
-        throw new SmartyException ("math: missing equation parameter");
+        throw new Exception ("math: missing equation parameter");
         return;
     }
 
@@ -34,7 +34,7 @@ function smarty_function_math($params, $smarty, $template)
 
     // make sure parenthesis are balanced
     if (substr_count($equation,"(") != substr_count($equation,")")) {
-        throw new SmartyException ("math: unbalanced parenthesis");
+        throw new Exception ("math: unbalanced parenthesis");
         return;
     }
 
@@ -45,7 +45,7 @@ function smarty_function_math($params, $smarty, $template)
     
     foreach($match[1] as $curr_var) {
         if ($curr_var && !in_array($curr_var, array_keys($params)) && !in_array($curr_var, $allowed_funcs)) {
-            throw new SmartyException ("math: function call $curr_var not allowed");
+            throw new Exception ("math: function call $curr_var not allowed");
             return;
         }
     }
@@ -54,11 +54,11 @@ function smarty_function_math($params, $smarty, $template)
         if ($key != "equation" && $key != "format" && $key != "assign") {
             // make sure value is not empty
             if (strlen($val)==0) {
-                throw new SmartyException ("math: parameter $key is empty");
+                throw new Exception ("math: parameter $key is empty");
                 return;
             }
             if (!is_numeric($val)) {
-                throw new SmartyException ("math: parameter $key: is not numeric");
+                throw new Exception ("math: parameter $key: is not numeric");
                 return;
             }
             $equation = preg_replace("/\b$key\b/", " \$params['$key'] ", $equation);

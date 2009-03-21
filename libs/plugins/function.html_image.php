@@ -63,7 +63,7 @@ function smarty_function_html_image($params, $smarty, $template)
                 if (!is_array($_val)) {
                     $$_key = smarty_function_escape_special_chars($_val);
                 } else {
-                    throw new SmartyException ("html_image: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
+                    throw new Exception ("html_image: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
                 } 
                 break;
 
@@ -77,14 +77,14 @@ function smarty_function_html_image($params, $smarty, $template)
                 if (!is_array($_val)) {
                     $extra .= ' ' . $_key . '="' . smarty_function_escape_special_chars($_val) . '"';
                 } else {
-                    throw new SmartyException ("html_image: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
+                    throw new Exception ("html_image: extra attribute '$_key' cannot be an array", E_USER_NOTICE);
                 } 
                 break;
         } 
     } 
 
     if (empty($file)) {
-        throw new SmartyException ("html_image: missing 'file' parameter", E_USER_NOTICE);
+        throw new Exception ("html_image: missing 'file' parameter", E_USER_NOTICE);
         return;
     } 
 
@@ -97,13 +97,13 @@ function smarty_function_html_image($params, $smarty, $template)
     if (!isset($params['width']) || !isset($params['height'])) {
         if (!$_image_data = @getimagesize($_image_path)) {
             if (!file_exists($_image_path)) {
-                throw new SmartyException ("html_image: unable to find '$_image_path'", E_USER_NOTICE);
+                throw new Exception ("html_image: unable to find '$_image_path'", E_USER_NOTICE);
                 return;
             } else if (!is_readable($_image_path)) {
-                throw new SmartyException ("html_image: unable to read '$_image_path'", E_USER_NOTICE);
+                throw new Exception ("html_image: unable to read '$_image_path'", E_USER_NOTICE);
                 return;
             } else {
-                throw new SmartyException ("html_image: '$_image_path' is not a valid image file", E_USER_NOTICE);
+                throw new Exception ("html_image: '$_image_path' is not a valid image file", E_USER_NOTICE);
                 return;
             } 
         } 

@@ -63,7 +63,7 @@ function smarty_function_html_table($params, $smarty, $template)
     $caption = '';
 
     if (!isset($params['loop'])) {
-        throw new SmartyException ("html_table: missing 'loop' parameter");
+        throw new Exception ("html_table: missing 'loop' parameter");
         return;
     } 
 
