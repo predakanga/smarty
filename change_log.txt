@@ -1,5 +1,6 @@
 
 03/21/2009
+- allow chained objects to span multiple lines
 - fixed error in modifers 
 
 03/20/2009

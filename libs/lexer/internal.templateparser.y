@@ -282,7 +282,7 @@ value(res)       ::= ID(c) DOUBLECOLON ID(v). { res = c.'::'.v;}
 value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a). { res = c.'::$'.v.a;}
 									// static class variables with object chain
 value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
-
+									// optinal space
 
 
 //
@@ -340,6 +340,7 @@ objectelement(res)::= PTR ID(i) arrayindex(a).	    { res = '->'.i.a;}
 //objectelement(res)::= PTR varvar(v) arrayindex(a).	{ res = '->'.v.a;}
 										// method
 objectelement(res)::= PTR method(f).	{ res = '->'.f;}
+
 
 //
 // function
