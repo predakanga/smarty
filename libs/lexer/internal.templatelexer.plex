@@ -115,7 +115,7 @@ math = /\s*\*(?!\})\s*|\s*(\/|\%)\s*/
 commentstart = /SMARTYldel\*/
 commentend = /\*SMARTYrdel/
 escapedquotes = /(\\\"|\\\')/
-incdec = /\+\+|\-\-/
+incdec = /(\+\+|\-\-)\s*/
 unimath = /\s*(\+|\-)\s*/
 openP = /\(/
 closeP = /\)/
@@ -128,8 +128,8 @@ doublecolon = /\:\:/
 colon = /\:/
 at = /@/
 hatch = /#/
-semicolon = /\;\s*/
-vert = /\|/
+semicolon = /\s*\;\s*/
+vert = /\s*\|/
 equal = /\s*=\s*/
 space = /[\s]+/
 ptr = /\s*\->/
@@ -146,7 +146,7 @@ rdelim = 'SMARTYldelrdelimSMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
 notequals = /\s*\!=\s*|\s+(NE|ne)\s+/
 greaterthan = /\s*\>\s*|\s+(GT|gt)\s+/
-lessthan = / *\<\s*|\s+(LT|lt)\s+/
+lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
 greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
 lessequal = /\s*<=\s*|\s+(LE|le)\s+/
 identity = /\s*===\s*/

@@ -1,5 +1,6 @@
 
 03/21/2009
+- fixed notice error in Smarty.class.php
 - allow chained objects to span multiple lines
 - fixed error in modifers 
 

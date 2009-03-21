@@ -282,7 +282,6 @@ value(res)       ::= ID(c) DOUBLECOLON ID(v). { res = c.'::'.v;}
 value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a). { res = c.'::$'.v.a;}
 									// static class variables with object chain
 value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
-									// optinal space
 
 
 //
