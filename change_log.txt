@@ -1,5 +1,6 @@
 03/22/2009
 - fixed possible sources for notice errors
+- rearrange SVN into distribution and development folders
 
 03/21/2009
 - fixed exceptions in function plugins
