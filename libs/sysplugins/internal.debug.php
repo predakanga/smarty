@@ -26,6 +26,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_TemplateBase {
         } 
         // get template names
         $i = 0;
+        $_template_data = array();
         if (is_array(Smarty::$template_objects)) {
             foreach (Smarty::$template_objects as $_template_obj) {
                 // exclude the debugging template from displayed data

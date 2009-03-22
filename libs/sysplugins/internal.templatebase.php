@@ -204,14 +204,9 @@ class Smarty_Internal_TemplateBase {
             } 
         } 
         if (Smarty::$error_unassigned) {
-            if (class_exists('Smarty_Internal_Compiler', false)) {
-                Smarty_Internal_Compiler::trigger_template_error('Undefined Smarty variable "' . $variable . '"'); 
-                // die();
-            } else {
-                throw new Exception('Undefined Smarty variable "' . $variable . '"');
-            } 
+            throw new Exception('Undefined Smarty variable "' . $variable . '"');
         } else {
-            return null;
+            return new Undefined_Smarty_Variable;
         } 
     } 
     /**
@@ -231,7 +226,11 @@ class Smarty_Internal_TemplateBase {
             // not found, try at parent
             $_ptr = $_ptr->parent;
         } 
-        return null;
+        if (Smarty::$error_unassigned) {
+            throw new Exception('Undefined config variable "' . $variable . '"');
+        } else {
+            return '';
+        } 
     } 
     /**
     * gets  a global variable
@@ -246,7 +245,11 @@ class Smarty_Internal_TemplateBase {
             // found it, return it
             return $_ptr->global_tpl_vars[$variable];
         } 
-        return null;
+        if (Smarty::$error_unassigned) {
+            throw new Exception('Undefined global variable "' . $variable . '"');
+        } else {
+            return '';
+        } 
     } 
 
     /**
@@ -358,6 +361,19 @@ class Smarty_Variable {
         $this->value = $value;
         $this->nocache = $nocache;
         $this->global = $global;
+    } 
+} 
+
+/**
+* class for undefined variable object
+* 
+* This class defines an object for undefined variable handling
+*/
+class Undefined_Smarty_Variable {
+    // return always false
+    public function __get ($name)
+    {
+        return false;
     } 
 } 
 

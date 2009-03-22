@@ -830,24 +830,24 @@ static public $yy_action = array(
     **   function yy_r0($yymsp){ ... }           // User supplied code
     **  #line <lineno> <thisfile>
     */
-#line 66 "internal.configfileparser.y"
+#line 67 "internal.configfileparser.y"
     function yy_r0(){ $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;     }
 #line 840 "internal.configfileparser.php"
-#line 72 "internal.configfileparser.y"
+#line 73 "internal.configfileparser.y"
     function yy_r1(){$this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;    }
 #line 843 "internal.configfileparser.php"
-#line 74 "internal.configfileparser.y"
+#line 75 "internal.configfileparser.y"
     function yy_r2(){$this->_retvalue = $this->yystack[$this->yyidx + -1]->minor.$this->yystack[$this->yyidx + 0]->minor;    }
 #line 846 "internal.configfileparser.php"
-#line 80 "internal.configfileparser.y"
+#line 81 "internal.configfileparser.y"
     function yy_r3(){ $this->hidden_section = false; $this->current_section = $this->yystack[$this->yyidx + -2]->minor; $this->_retvalue ='';    }
 #line 849 "internal.configfileparser.php"
-#line 82 "internal.configfileparser.y"
+#line 83 "internal.configfileparser.y"
     function yy_r4(){ if ($this->smarty->config_read_hidden) {
                                                        $this->hidden_section = false; $this->current_section = $this->yystack[$this->yyidx + -2]->minor;
                                                       } else {$this->hidden_section = true; } $this->_retvalue ='';    }
 #line 854 "internal.configfileparser.php"
-#line 86 "internal.configfileparser.y"
+#line 87 "internal.configfileparser.y"
     function yy_r5(){if (!$this->hidden_section) {
                                                    $value=$this->yystack[$this->yyidx + -1]->minor;
                                                    if ($this->smarty->config_booleanize) {
@@ -872,16 +872,16 @@ static public $yy_action = array(
                                                       }
                                                      }}  $this->_retvalue ='';    }
 #line 879 "internal.configfileparser.php"
-#line 110 "internal.configfileparser.y"
+#line 111 "internal.configfileparser.y"
     function yy_r6(){ $this->_retvalue ='';    }
 #line 882 "internal.configfileparser.php"
-#line 114 "internal.configfileparser.y"
+#line 115 "internal.configfileparser.y"
     function yy_r9(){$this->_retvalue = trim($this->yystack[$this->yyidx + 0]->minor,"'");    }
 #line 885 "internal.configfileparser.php"
-#line 115 "internal.configfileparser.y"
+#line 116 "internal.configfileparser.y"
     function yy_r10(){$this->_retvalue = trim($this->yystack[$this->yyidx + 0]->minor,'"');    }
 #line 888 "internal.configfileparser.php"
-#line 117 "internal.configfileparser.y"
+#line 118 "internal.configfileparser.y"
     function yy_r12(){$this->_retvalue = (int)$this->yystack[$this->yyidx + 0]->minor;    }
 #line 891 "internal.configfileparser.php"
 
@@ -998,8 +998,9 @@ static public $yy_action = array(
 #line 52 "internal.configfileparser.y"
 
     $this->internalError = true;
+    $this->yymajor = $yymajor;
     $this->compiler->trigger_config_file_error();
-#line 1008 "internal.configfileparser.php"
+#line 1009 "internal.configfileparser.php"
     }
 
     /**
@@ -1023,7 +1024,7 @@ static public $yy_action = array(
     $this->internalError = false;
     $this->retvalue = $this->_retvalue;
     //echo $this->retvalue."\n\n";
-#line 1033 "internal.configfileparser.php"
+#line 1034 "internal.configfileparser.php"
     }
 
     /**

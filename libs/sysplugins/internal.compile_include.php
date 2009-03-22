@@ -34,10 +34,13 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_assign = $_attr['assign'];
         } 
 
-        if ($_attr['scope'] == '\'parent\'') {
-            $_parent_scope = '1';
-        } elseif ($_attr['scope'] == '\'root\'') {
-            $_parent_scope = '2';
+        $_parent_scope = '0';
+        if (isset($_attr['scope'])) {
+            if ($_attr['scope'] == '\'parent\'') {
+                $_parent_scope = '1';
+            } elseif ($_attr['scope'] == '\'root\'') {
+                $_parent_scope = '2';
+            } 
         } 
 
         /*
@@ -66,7 +69,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         unset($_attr['file'], $_attr['assign'], $_attr['caching_lifetime'], $_attr['nocache'], $_attr['caching'], $_attr['scope']); 
         // remaining attributes must be assigned as smarty variable
         if (!empty($_attr)) {
-            if (!$_parent_scope) {
+            if ($_parent_scope == '0') {
                 // create variables
                 foreach ($_attr as $_key => $_value) {
                     $_output .= "\$_template->assign('$_key',$_value);";
@@ -90,7 +93,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         } else {
             $_output .= "echo \$_smarty_tpl->smarty->fetch(\$_template); ?>";
         } 
-        if (isset($_parent_scope)) {
+        if ($_parent_scope != '0') {
             $_output .= "<?php \$_template->updateParentVariables($_parent_scope); ?>";
         } 
         return $_output;

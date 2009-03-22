@@ -1,3 +1,5 @@
+03/22/2009
+- fixed possible sources for notice errors
 
 03/21/2009
 - fixed exceptions in function plugins

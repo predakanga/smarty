@@ -35,12 +35,13 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase {
             $section = 'null';
         } 
         $scope = '$_smarty_tpl->smarty';
-        if ($_attr['scope'] == '\'local\'') {
-          $scope = '$_smarty_tpl';
-        }elseif ($_attr['scope'] == '\'parent\'') {
-          $scope = '$_smarty_tpl->parent';
-        }
-        
+        if (isset($_attr['scope'])) {
+            if ($_attr['scope'] == '\'local\'') {
+                $scope = '$_smarty_tpl';
+            } elseif ($_attr['scope'] == '\'parent\'') {
+                $scope = '$_smarty_tpl->parent';
+            } 
+        } 
         // create config object
         $_output = "<?php \$_smarty_tpl->smarty->loadPlugin('Smarty_Internal_Config');";
         $_output .= "\$_config = new Smarty_Internal_Config($conf_file);";

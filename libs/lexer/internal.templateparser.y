@@ -54,6 +54,7 @@
 %syntax_error
 {
     $this->internalError = true;
+    $this->yymajor = $yymajor;
     $this->compiler->trigger_template_error();
 }
 
@@ -289,9 +290,9 @@ value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc
 //
 									// simple Smarty variable (optional array)
 variable(res)    ::= DOLLAR varvar(v) arrayindex(a). { if (v == '\'smarty\'') { res =  $this->compiler->compileTag(trim(v,"'"),a);} else {
-                                                         res = '$_smarty_tpl->getVariable('. v .')->value'.a; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}}
+                                                         res = '$_smarty_tpl->getVariable('. v .')->value'.a; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}}
 									// variable with property
-variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
+variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
 									// object
 variable(res)    ::= object(o). { res = o; }
                   // config variable
@@ -329,7 +330,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) arrayindex(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $_var = $this->template->getVariable(trim(v,"'")); if(!is_null($_var)) if ($_var->nocache) $this->nocache=true;}
+object(res)      ::= DOLLAR varvar(v) arrayindex(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
@@ -380,7 +381,7 @@ modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 										// no parameter
 modparameters      ::= . {return;}
 										// parameter expression
-modparameter(res) ::= COLON ID(mp). {res = ','.mp.'';}
+modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
 
 //

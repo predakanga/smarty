@@ -51,6 +51,7 @@
 %syntax_error
 {
     $this->internalError = true;
+    $this->yymajor = $yymajor;
     $this->compiler->trigger_config_file_error();
 }
 

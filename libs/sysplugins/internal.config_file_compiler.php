@@ -93,7 +93,7 @@ class Smarty_Internal_Config_File_Compiler extends Smarty_Internal_Base {
             $error_text .= $args;
         } else {
             // exspected token from parser
-            foreach ($this->parser->yy_get_expected_tokens($yymajor) as $token) {
+            foreach ($this->parser->yy_get_expected_tokens($this->parser->yymajor) as $token) {
                 $exp_token = $this->parser->yyTokenName[$token];
                 if (isset($this->lex->smarty_token_names[$exp_token])) {
                     // token type from lexer
