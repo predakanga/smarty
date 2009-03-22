@@ -6,7 +6,7 @@
 * @author Uwe Tews 
 */
 
-require_once '../libs/Smarty.class.php';
+require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for assign_global methode  and {assign_global} tag tests
@@ -16,8 +16,8 @@ class AssignGlobalTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = new Smarty();
+        $this->smarty->error_reporting = E_ALL;
         $this->old_error_level = error_reporting();
-        error_reporting(E_ALL);
     } 
 
     public function tearDown()
@@ -68,4 +68,4 @@ class AssignGlobalTests extends PHPUnit_Framework_TestCase {
 		$this->assertEquals('bar2', $this->smarty->fetch('string:{$smarty.global.foo.foo}'));
     } 
 } 
-?>
+  ?>

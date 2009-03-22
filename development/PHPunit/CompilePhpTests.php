@@ -6,7 +6,7 @@
 * @author Uwe Tews 
 */
 
-require_once '../libs/Smarty.class.php';
+require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for {php} and <?php...?> tag tests
@@ -16,9 +16,9 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
     {
 //        $this->markTestSkipped('php tests are skiped as the tags are disabled.');
         $this->smarty = new Smarty();
+        $this->smarty->error_reporting = E_ALL;
         $this->smarty->force_compile = true;
         $this->old_error_level = error_reporting();
-        error_reporting(E_ALL);
     } 
 
     public function tearDown()

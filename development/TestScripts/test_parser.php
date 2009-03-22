@@ -10,7 +10,7 @@
 * @package SmartyTestScripts
 */
 
-require('./libs/Smarty.class.php');
+require('../../distribution/libs/Smarty.class.php');
 
 $smarty = new Smarty;
 

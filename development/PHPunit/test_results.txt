@@ -1,15 +1,187 @@
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
-............................................................  60 / 424
-............................................................ 120 / 424
-.........F.................................................. 180 / 424
-............................................................ 240 / 424
-............................................................ 300 / 424
-............................................................ 360 / 424
-............................................................ 420 / 424
-....
+Smarty 3 - Unit Tests Report
+ DoubleQuotedStringTests
+ ........
 
-Time: 30 seconds
+ CoreTests
+ .......
+
+ ClearCompiledTests
+ .....
+
+ ClearCacheTests
+ ...
+
+ StringResourceTests
+ .................
+
+ FileResourceTests
+ ..............................
+
+ PhpResourceTests
+ ........................
+
+ CompileAssignTests
+ .................
+
+ AppendByRefTests
+ ...
+
+ AppendTests
+ ......
+
+ ArrayTests
+ .....
+
+ AssignByRefTests
+ .
+
+ AssignGlobalTests
+ ...F
+
+ AssignTests
+ ..
+
+ CacherResourceFileTests
+ ...........
+
+ ClearAllAssignTests
+ ....
+
+ ClearAssignTests
+ ...
+
+ CommentsTests
+ ....
+
+ CompileBlockExtendTests
+ .......
+
+ CompileBlockPluginTests
+ .....
+
+ CompileCaptureTests
+ .....
+
+ CompileCompilerPluginTests
+ ..
+
+ CompileDebugTests
+ .
+
+ CompileErrorTests
+ .....
+
+ CompileEvalTests
+ ...
+
+ CompileForeachTests
+ .......
+
+ CompileForTests
+ ..............
+
+ CompileFunctionPluginTests
+ ...
+
+ CompileIfTests
+ .........................................................
+
+ CompileIncludeTests
+ ....
+
+ CompileInsertTests
+ ....
+
+ CompilePhpTests
+ ...
+
+ CompileRegisteredObjectFunctionTests
+ ..
+
+ CompileSectionTests
+ ......
+
+ CompileStripTests
+ .
+
+ CompileWhileTests
+ .
+
+ ConfigVarTests
+ .................
+
+ ConstantsTests
+ .
+
+ DelimiterTests
+ ....
+
+ FilterTests
+ .....
+
+ FunctionTests
+ .
+
+ GetTemplateVarsTests
+ ......
+
+ LoadFilterTests
+ .
+
+ ModifierTests
+ .......
+
+ RegisterBlockTests
+ ......
+
+ RegisterCompilerFunctionTests
+ ......
+
+ RegisterFilterTests
+ ............
+
+ RegisterFunctionTests
+ ......
+
+ RegisterModifierTests
+ ......
+
+ ResourceTests
+ .
+
+ SecurityTests
+ ..................
+
+ SingleQuotedStringTests
+ ......
+
+ SpacingTests
+ ............
+
+ StaticClassAccessTests
+ .....
+
+ TemplateExistsTests
+ ..
+
+ TokenFallbackTests
+ ....
+
+ TriggerErrorTests
+ .
+
+ VariableScopeTests
+ ......
+
+ VariableVariableTests
+ ....
+
+ XmlTests
+ ...
+
+Time: 7 seconds
 
 There was 1 failure:
 
@@ -18,9 +190,7 @@ Failed asserting that two strings are equal.
 expected string <bar>
 difference      <xx??>
 got string      <Array>
-C:\wamp\www\__smarty3Alpha\PHPunit\AssignGlobalTests.php:67
+C:\wamp\www\__smarty3Alpha\development\PHPunit\AssignGlobalTests.php:67
 
 FAILURES!
 Tests: 424, Assertions: 503, Failures: 1.
-
-Generating code coverage report, this may take a moment.

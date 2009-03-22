@@ -6,7 +6,7 @@
 * @author Uwe Tews 
 */
 
-require_once '../libs/Smarty.class.php';
+require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for array tests
@@ -15,10 +15,10 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = new Smarty();
+        $this->smarty->error_reporting = E_ALL;
         $this->smarty->force_compile = true;
         $this->smarty->enableSecurity();
         $this->old_error_level = error_reporting();
-        error_reporting(E_ALL);
     } 
 
     public function tearDown()

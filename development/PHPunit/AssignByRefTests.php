@@ -6,7 +6,7 @@
 * @author Uwe Tews 
 */
 
-require_once '../libs/Smarty.class.php';
+require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for assign_by_ref tests
@@ -15,8 +15,8 @@ class AssignByRefTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = new Smarty();
+        $this->smarty->error_reporting = E_ALL;
         $this->old_error_level = error_reporting();
-        error_reporting(E_ALL);
     } 
 
     public function tearDown()

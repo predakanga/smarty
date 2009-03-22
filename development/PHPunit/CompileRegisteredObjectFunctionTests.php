@@ -6,7 +6,7 @@
 * @author Uwe Tews 
 */
 
-require_once '../libs/Smarty.class.php';
+require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for registered object function tests
@@ -15,10 +15,10 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = new Smarty();
+        $this->smarty->error_reporting = E_ALL;
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
         $this->old_error_level = error_reporting();
-        error_reporting(E_ALL);
         $this->object = new RegObject;
         $this->smarty->register_object('test', $this->object, 'myhello', false, 'myblock');
     } 
