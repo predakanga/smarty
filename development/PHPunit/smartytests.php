@@ -21,8 +21,8 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $testorder = array('DoubleQuotedStringTests','CoreTests','ClearCompiledTests','ClearCacheTests','StringResourceTests','FileResourceTests'
                             ,'PhpResourceTests','CompileAssignTests');
 
-        PHPUnit_Util_Filter::addDirectoryToWhitelist(SMARTY_DIR);
-//        PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../libs/lexer');
+//        PHPUnit_Util_Filter::addDirectoryToWhitelist(SMARTY_DIR);
+        PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../');
 //        PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
 
         $suite = new self('Smarty 3 - Unit Tests Report'); 
