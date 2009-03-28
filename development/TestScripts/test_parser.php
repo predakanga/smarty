@@ -14,7 +14,7 @@ require('../../distribution/libs/Smarty.class.php');
 
 $smarty = new Smarty;
 
-$smarty->force_compile = false;
+$smarty->force_compile = true;
 $smarty->caching = false;
 $smarty->caching_lifetime = -1;
 //$smarty->enableSecurity();

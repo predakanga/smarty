@@ -74,7 +74,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('.\templates_c\53a0059e50aff6f0cf3647bc28c42cb2.helloworld.tpl.php', $tpl->getCompiledFilepath());
+        $this->assertEquals('.\templates_c\2815259839.helloworld.tpl.php', $tpl->getCompiledFilepath());
     } 
     /**
     * test getCompiledTimestamp
@@ -160,7 +160,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('.\cache\53a0059e50aff6f0cf3647bc28c42cb2.helloworld.tpl.php', $tpl->getCachedFilepath());
+        $this->assertEquals('.\cache\2815259839.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
     * test getCachedTimestamp caching disabled
@@ -168,7 +168,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedTimestampCachingDisabled()
     {
         // create dummy cache file for the following test
-        file_put_contents('.\cache\53a0059e50aff6f0cf3647bc28c42cb2.helloworld.tpl.php', 'test');
+        file_put_contents('.\cache\2815259839.helloworld.tpl.php', 'test');
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertFalse($tpl->getCachedTimestamp());
     } 

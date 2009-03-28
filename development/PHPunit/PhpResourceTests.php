@@ -116,7 +116,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertEquals('.\cache\d8754729f921c019636c61b214eb4881.phphelloworld.php.php', $tpl->getCachedFilepath());
+        $this->assertEquals('.\cache\103847448.phphelloworld.php.php', $tpl->getCachedFilepath());
     } 
     /**
     * test getCachedTimestamp caching disabled
@@ -125,7 +125,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         // create dummy cache file
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        file_put_contents('.\cache\d8754729f921c019636c61b214eb4881.phphelloworld.php.php', 'test');
+        file_put_contents('.\cache\103847448.phphelloworld.php.php', 'test');
         $this->assertFalse($tpl->getCachedTimestamp());
     } 
     /**
