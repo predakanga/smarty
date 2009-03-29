@@ -36,7 +36,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('.\cache\28\15\25\2815259839.helloworld.tpl.php', $tpl->getCachedFilepath());
+        $this->assertEquals('.\cache\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
     * test getCachedFilepath with cache_id
@@ -47,7 +47,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar');
-        $this->assertEquals('.\cache\foo\bar\28\15\25\2815259839.helloworld.tpl.php', $tpl->getCachedFilepath());
+        $this->assertEquals('.\cache\foo\bar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
     * test getCachedFilepath with compile_id
@@ -58,7 +58,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, null, 'blar');
-        $this->assertEquals('.\cache\blar\28\15\25\2815259839.helloworld.tpl.php', $tpl->getCachedFilepath());
+        $this->assertEquals('.\cache\blar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
     * test getCachedFilepath with cache_id and compile_id
@@ -69,7 +69,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
-        $this->assertEquals('.\cache\foo\bar\blar\28\15\25\2815259839.helloworld.tpl.php', $tpl->getCachedFilepath());
+        $this->assertEquals('.\cache\foo\bar\blar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
     * test clear_cache_all with cache_id and compile_id
