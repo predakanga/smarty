@@ -49,7 +49,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testBlockPluginFromTemplateFile()
     {
-        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty);
         $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
@@ -58,7 +58,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     public function testBlockPluginFromCompiledTemplateFile()
     {
         $this->smarty->force_compile = false;
-        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty->tpl_vars);
+        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty);
         $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**

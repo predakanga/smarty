@@ -35,6 +35,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->register_function('testfunction', 'myfunction');
         $this->assertEquals('myfunction', $this->smarty->registered_plugins['testfunction'][1]);
         $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
+        $this->assertEquals('hello world', $this->smarty->fetch('string:{testfunction}'));
     } 
     /**
     * test register_function method for class
@@ -43,6 +44,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->register_function('testfunction', array('myfunctionclass', 'execute'));
         $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
+        $this->assertEquals('hello world', $this->smarty->fetch('string:{testfunction}'));
     } 
     /**
     * test register_function method for object
@@ -52,6 +54,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
         $myfunction_object = new myfunctionclass;
         $this->smarty->register_function('testfunction', array($myfunction_object, 'execute'));
         $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
+        $this->assertEquals('hello world', $this->smarty->fetch('string:{testfunction}'));
     } 
     /**
     * test unregister_function method

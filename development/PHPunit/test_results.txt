@@ -115,6 +115,12 @@ Smarty 3 - Unit Tests Report
  ConstantsTests
  .
 
+ DefaultPluginHandlerTests
+ ....
+
+ DefaultTemplateHandlerTests
+ ....
+
  DelimiterTests
  ....
 
@@ -181,7 +187,7 @@ Smarty 3 - Unit Tests Report
  XmlTests
  ...
 
-Time: 7 seconds
+Time: 4 seconds
 
 There was 1 failure:
 
@@ -193,4 +199,4 @@ got string      <Array>
 C:\wamp\www\__smarty3Alpha\development\PHPunit\AssignGlobalTests.php:67
 
 FAILURES!
-Tests: 424, Assertions: 503, Failures: 1.
+Tests: 432, Assertions: 513, Failures: 1.
