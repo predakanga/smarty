@@ -25,7 +25,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Main class with template data structures and methods</p>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---internal.template.php.html">/libs/sysplugins/internal.template.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_distribution---libs---sysplugins---internal.template.php.html">/distribution/libs/sysplugins/internal.template.php</a> (line <span class="field">16</span>)
 		</p>
 		
 				
@@ -76,9 +76,9 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																																																																																																																																																																<div class="var-title">
+																																																																																																																																																																																																																																																								<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$cached_content" title="details" class="var-name">$cached_content</a>
+					<a href="#$block_data" title="details" class="var-name">$block_data</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
@@ -130,6 +130,18 @@
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
+					<a href="#$extracted_compiled_code" title="details" class="var-name">$extracted_compiled_code</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$extract_code" title="details" class="var-name">$extract_code</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$file_dependency" title="details" class="var-name">$file_dependency</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
 					<a href="#$force_compile" title="details" class="var-name">$force_compile</a>
 				</div>
 																<div class="var-title">
@@ -146,6 +158,10 @@
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
+					<a href="#$rendered_content" title="details" class="var-name">$rendered_content</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
 					<a href="#$render_time" title="details" class="var-name">$render_time</a>
 				</div>
 																<div class="var-title">
@@ -159,6 +175,10 @@
 																<div class="var-title">
 					<span class="var-type">mixed</span>
 					<a href="#$resource_type" title="details" class="var-name">$resource_type</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$suppressHeader" title="details" class="var-name">$suppressHeader</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
@@ -198,7 +218,7 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#buildTemplateFilepath" title="details" class="method-name">buildTemplateFilepath</a>
-										()
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$file</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -277,8 +297,8 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#updateGlobalVariables" title="details" class="method-name">updateGlobalVariables</a>
-										()
+										<a href="#updateParentVariables" title="details" class="method-name">updateParentVariables</a>
+											([<span class="var-type"></span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">boolean</span>
@@ -308,14 +328,14 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$cached_content" id="$cached_content"><!-- --></A>
+			<a name="var$block_data" id="$block_data"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$cached_content</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">47</span>)
+			<span class="var-name">$block_data</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">64</span>)
 		</span>
 	</div>
 
@@ -399,7 +419,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$cache_time</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">50</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">54</span>)
 		</span>
 	</div>
 
@@ -567,7 +587,70 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$config_vars</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">55</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">58</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$extracted_compiled_code" id="$extracted_compiled_code"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$extracted_compiled_code</span>
+			 = <span class="var-default"> ''</span>			(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$extract_code" id="$extract_code"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$extract_code</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">46</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$file_dependency" id="$file_dependency"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$file_dependency</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">62</span>)
 		</span>
 	</div>
 
@@ -582,7 +665,7 @@
 
 </div>
 <a name="var$force_compile" id="$force_compile"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -603,7 +686,7 @@
 
 </div>
 <a name="var$mustCompile" id="$mustCompile"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -624,13 +707,13 @@
 
 </div>
 <a name="var$parent" id="$parent"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$parent</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">53</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">57</span>)
 		</span>
 	</div>
 
@@ -645,13 +728,34 @@
 
 </div>
 <a name="var$plugin_data" id="$plugin_data"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$plugin_data</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">57</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">60</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$rendered_content" id="$rendered_content"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$rendered_content</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">49</span>)
 		</span>
 	</div>
 
@@ -672,7 +776,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$render_time</span>
-			 = <span class="var-default"> 0</span>			(line <span class="line-number">54</span>)
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">66</span>)
 		</span>
 	</div>
 
@@ -749,8 +853,29 @@
 		
 
 </div>
-<a name="var$template_resource" id="$template_resource"><!-- --></A>
+<a name="var$suppressHeader" id="$suppressHeader"><!-- --></A>
 <div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$suppressHeader</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">45</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$template_resource" id="$template_resource"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -771,7 +896,7 @@
 
 </div>
 <a name="var$template_source" id="$template_source"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -792,13 +917,13 @@
 
 </div>
 <a name="var$tpl_vars" id="$tpl_vars"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$tpl_vars</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">52</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">56</span>)
 		</span>
 	</div>
 
@@ -830,10 +955,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">70</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -869,10 +994,10 @@
 			
 	</div>
 <a name="methodbuildTemplateFilepath" id="buildTemplateFilepath"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">buildTemplateFilepath</span> (line <span class="line-number">478</span>)
+		<span class="method-title">buildTemplateFilepath</span> (line <span class="line-number">515</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -886,17 +1011,22 @@
 		<span class="method-name">
 			buildTemplateFilepath
 		</span>
-				()
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$file</span> = <span class="var-default">null</span>])
 			</div>
 	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$file</span>			</li>
+				</ul>
 		
 			
 	</div>
 <a name="methodcompileTemplateSource" id="compileTemplateSource"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">compileTemplateSource</span> (line <span class="line-number">244</span>)
+		<span class="method-title">compileTemplateSource</span> (line <span class="line-number">273</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -918,10 +1048,10 @@
 			
 	</div>
 <a name="methodgetCachedContent" id="getCachedContent"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCachedContent</span> (line <span class="line-number">309</span>)
+		<span class="method-title">getCachedContent</span> (line <span class="line-number">340</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -943,10 +1073,10 @@
 			
 	</div>
 <a name="methodgetCachedFilepath" id="getCachedFilepath"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCachedFilepath</span> (line <span class="line-number">283</span>)
+		<span class="method-title">getCachedFilepath</span> (line <span class="line-number">314</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -969,10 +1099,10 @@
 			
 	</div>
 <a name="methodgetCachedTimestamp" id="getCachedTimestamp"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCachedTimestamp</span> (line <span class="line-number">297</span>)
+		<span class="method-title">getCachedTimestamp</span> (line <span class="line-number">328</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -995,10 +1125,10 @@
 			
 	</div>
 <a name="methodgetCompiledFilepath" id="getCompiledFilepath"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiledFilepath</span> (line <span class="line-number">200</span>)
+		<span class="method-title">getCompiledFilepath</span> (line <span class="line-number">229</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1020,10 +1150,10 @@
 			
 	</div>
 <a name="methodgetCompiledTemplate" id="getCompiledTemplate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiledTemplate</span> (line <span class="line-number">226</span>)
+		<span class="method-title">getCompiledTemplate</span> (line <span class="line-number">255</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1046,10 +1176,10 @@
 			
 	</div>
 <a name="methodgetCompiledTimestamp" id="getCompiledTimestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiledTimestamp</span> (line <span class="line-number">212</span>)
+		<span class="method-title">getCompiledTimestamp</span> (line <span class="line-number">241</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1071,10 +1201,10 @@
 			
 	</div>
 <a name="methodgetRenderedTemplate" id="getRenderedTemplate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getRenderedTemplate</span> (line <span class="line-number">353</span>)
+		<span class="method-title">getRenderedTemplate</span> (line <span class="line-number">385</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1097,10 +1227,10 @@
 			
 	</div>
 <a name="methodgetTemplateFilepath" id="getTemplateFilepath"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">114</span>)
+		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">128</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1123,10 +1253,10 @@
 			
 	</div>
 <a name="methodgetTemplateSource" id="getTemplateSource"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateSource</span> (line <span class="line-number">142</span>)
+		<span class="method-title">getTemplateSource</span> (line <span class="line-number">156</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1149,10 +1279,10 @@
 			
 	</div>
 <a name="methodgetTemplateTimestamp" id="getTemplateTimestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">128</span>)
+		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">142</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1175,10 +1305,10 @@
 			
 	</div>
 <a name="methodisCached" id="isCached"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">isCached</span> (line <span class="line-number">331</span>)
+		<span class="method-title">isCached</span> (line <span class="line-number">363</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1201,10 +1331,10 @@
 			
 	</div>
 <a name="methodisEvaluated" id="isEvaluated"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">isEvaluated</span> (line <span class="line-number">174</span>)
+		<span class="method-title">isEvaluated</span> (line <span class="line-number">185</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1227,10 +1357,10 @@
 			
 	</div>
 <a name="methodmustCompile" id="mustCompile"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">mustCompile</span> (line <span class="line-number">188</span>)
+		<span class="method-title">mustCompile</span> (line <span class="line-number">199</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1253,10 +1383,10 @@
 			
 	</div>
 <a name="methodrenderTemplate" id="renderTemplate"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">renderTemplate</span> (line <span class="line-number">388</span>)
+		<span class="method-title">renderTemplate</span> (line <span class="line-number">422</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1277,15 +1407,15 @@
 		
 			
 	</div>
-<a name="methodupdateGlobalVariables" id="updateGlobalVariables"><!-- --></a>
-<div class="evenrow">
+<a name="methodupdateParentVariables" id="updateParentVariables"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">updateGlobalVariables</span> (line <span class="line-number">494</span>)
+		<span class="method-title">updateParentVariables</span> (line <span class="line-number">549</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Update global Smarty variables in parent variable object</p>
+<p class="short-description">Update Smarty variables in parent variable object</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -1293,19 +1423,24 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			updateGlobalVariables
+			updateParentVariables
 		</span>
-				()
+					([<span class="var-type"></span>&nbsp;<span class="var-name">$mode</span> = <span class="var-default">0</span>])
 			</div>
 	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$mode</span>			</li>
+				</ul>
 		
 			
 	</div>
 <a name="methodusesCompiler" id="usesCompiler"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">usesCompiler</span> (line <span class="line-number">160</span>)
+		<span class="method-title">usesCompiler</span> (line <span class="line-number">171</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1328,10 +1463,10 @@
 			
 	</div>
 <a name="methodwriteCachedContent" id="writeCachedContent"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeCachedContent</span> (line <span class="line-number">319</span>)
+		<span class="method-title">writeCachedContent</span> (line <span class="line-number">350</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1360,11 +1495,13 @@
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodappend_by_ref">Smarty_Internal_TemplateBase::append_by_ref()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodassign">Smarty_Internal_TemplateBase::assign()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodassign_by_ref">Smarty_Internal_TemplateBase::assign_by_ref()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodassign_global">Smarty_Internal_TemplateBase::assign_global()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodbuildTemplateId">Smarty_Internal_TemplateBase::buildTemplateId()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodclear_all_assign">Smarty_Internal_TemplateBase::clear_all_assign()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodclear_assign">Smarty_Internal_TemplateBase::clear_assign()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodcreateTemplate">Smarty_Internal_TemplateBase::createTemplate()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodgetConfigVariable">Smarty_Internal_TemplateBase::getConfigVariable()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodgetGlobalVariable">Smarty_Internal_TemplateBase::getGlobalVariable()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#methodgetVariable">Smarty_Internal_TemplateBase::getVariable()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Templates/Smarty_Internal_TemplateBase.html#method_get_time">Smarty_Internal_TemplateBase::_get_time()</a></span><br>
 											</blockquote>
@@ -1374,7 +1511,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 08 Mar 2009 19:39:06 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 05 Apr 2009 17:23:03 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

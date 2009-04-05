@@ -130,6 +130,16 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate("string:{\$foo=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{for \$x in \$foo}{\$x@key}{\$x}{/for}");
         $this->assertEquals("a9b8c7d6", $this->smarty->fetch($tpl));
     } 
+    public function testAssignArrayAppend()
+    {
+        $tpl = $this->smarty->createTemplate("string:{\$foo=1}{\$foo[]=2}{for \$x in \$foo}{\$x@key}{\$x}{/for}");
+        $this->assertEquals("0112", $this->smarty->fetch($tpl));
+    } 
+    public function testAssignNestedArray()
+    {
+        $tpl = $this->smarty->createTemplate("string:{\$foo['a'][4]=1}{\$foo['a'][4]}");
+        $this->assertEquals("1", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

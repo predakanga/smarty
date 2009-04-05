@@ -82,10 +82,11 @@ class DefaultTemplateHandlerTests extends PHPUnit_Framework_TestCase {
     
 }
 
-function my_template_handler ($resource_type, $resource_name, &$template_source, &$tpl)
+function my_template_handler ($resource_type, $resource_name, &$template_source, &$template_timestamp, &$tpl)
 {
     $output = "Recsource $resource_name of type $resource_type not found";
     $template_source = $output;
+    $template_timestamp = time();
     return true;
 } 
 function my_false ($resource_type, $resource_name, &$template_source, &$tpl)

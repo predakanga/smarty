@@ -23,7 +23,7 @@ Smarty 3 - Unit Tests Report
  ........................
 
  CompileAssignTests
- .................
+ ...................
 
  AppendByRefTests
  ...
@@ -187,16 +187,16 @@ Smarty 3 - Unit Tests Report
  XmlTests
  ...
 
-Time: 4 seconds
+Time: 5 seconds
 
 There was 1 failure:
 
 1) testGlobalVarArrayTag(AssignGlobalTests)
 Failed asserting that two strings are equal.
-expected string <bar>
-difference      <xx??>
+expected string <bar2>
+difference      <xxxx?>
 got string      <Array>
 C:\wamp\www\__smarty3Alpha\development\PHPunit\AssignGlobalTests.php:67
 
 FAILURES!
-Tests: 432, Assertions: 513, Failures: 1.
+Tests: 434, Assertions: 515, Failures: 1.

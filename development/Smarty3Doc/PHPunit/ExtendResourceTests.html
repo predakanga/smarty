@@ -1,0 +1,709 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class ExtendResourceTests</title>
+			<link rel="stylesheet" href="../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class ExtendResourceTests</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+															<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">class for extend file resource tests</p>
+		<p class="notes">
+			Located in <a class="field" href="_development---ExtendResourceTests.php.html">/development/ExtendResourceTests.php</a> (line <span class="field">14</span>)
+		</p>
+		
+				
+		<pre>PHPUnit_Framework_TestCase
+   |
+   --ExtendResourceTests</pre>
+	
+			</div>
+</div>
+
+
+
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+												<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																																																																																																				
+												<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#setUp" title="details" class="method-name">setUp</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#tearDown" title="details" class="method-name">tearDown</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testCompiledTemplateFileExits" title="details" class="method-name">testCompiledTemplateFileExits</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testFinalCleanup" title="details" class="method-name">testFinalCleanup</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetCachedContent" title="details" class="method-name">testGetCachedContent</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetCachedContentCachingDisabled" title="details" class="method-name">testGetCachedContentCachingDisabled</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetCachedFilepath" title="details" class="method-name">testGetCachedFilepath</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetCachedFilepathCachingDisabled" title="details" class="method-name">testGetCachedFilepathCachingDisabled</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetCachedTimestamp" title="details" class="method-name">testGetCachedTimestamp</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetCompiledFilepath" title="details" class="method-name">testGetCompiledFilepath</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetCompiledTemplate" title="details" class="method-name">testGetCompiledTemplate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetRenderedTemplate" title="details" class="method-name">testGetRenderedTemplate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testGetTemplateSource" title="details" class="method-name">testGetTemplateSource</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsCached" title="details" class="method-name">testIsCached</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsCachedCachingDisabled" title="details" class="method-name">testIsCachedCachingDisabled</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsCachedForceCompile" title="details" class="method-name">testIsCachedForceCompile</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsCachedPrepare" title="details" class="method-name">testIsCachedPrepare</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testIsCachedTouchedSource" title="details" class="method-name">testIsCachedTouchedSource</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testSmartyIsCached" title="details" class="method-name">testSmartyIsCached</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testSmartyIsCachedCachingDisabled" title="details" class="method-name">testSmartyIsCachedCachingDisabled</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testSmartyIsCachedPrepare" title="details" class="method-name">testSmartyIsCachedPrepare</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testWriteCachedContent" title="details" class="method-name">testWriteCachedContent</a>
+										()
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="methodsetUp" id="setUp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">setUp</span> (line <span class="line-number">15</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			setUp
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtearDown" id="tearDown"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">tearDown</span> (line <span class="line-number">23</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			tearDown
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestCompiledTemplateFileExits" id="testCompiledTemplateFileExits"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testCompiledTemplateFileExits</span> (line <span class="line-number">56</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test that compiled template file exists</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testCompiledTemplateFileExits
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestFinalCleanup" id="testFinalCleanup"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testFinalCleanup</span> (line <span class="line-number">218</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">final cleanup</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testFinalCleanup
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetCachedContent" id="testGetCachedContent"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetCachedContent</span> (line <span class="line-number">101</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getCachedContent</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetCachedContent
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetCachedContentCachingDisabled" id="testGetCachedContentCachingDisabled"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetCachedContentCachingDisabled</span> (line <span class="line-number">93</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getCachedContent caching disabled</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetCachedContentCachingDisabled
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetCachedFilepath" id="testGetCachedFilepath"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetCachedFilepath</span> (line <span class="line-number">72</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getCachedFilepath</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetCachedFilepath
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetCachedFilepathCachingDisabled" id="testGetCachedFilepathCachingDisabled"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetCachedFilepathCachingDisabled</span> (line <span class="line-number">64</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getCachedFilepath if caching disabled</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetCachedFilepathCachingDisabled
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetCachedTimestamp" id="testGetCachedTimestamp"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetCachedTimestamp</span> (line <span class="line-number">82</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getCachedTimestamp caching enabled</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetCachedTimestamp
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetCompiledFilepath" id="testGetCompiledFilepath"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetCompiledFilepath</span> (line <span class="line-number">41</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getCompiledFilepath</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetCompiledFilepath
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetCompiledTemplate" id="testGetCompiledTemplate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetCompiledTemplate</span> (line <span class="line-number">46</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetCompiledTemplate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetRenderedTemplate" id="testGetRenderedTemplate"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetRenderedTemplate</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getRenderedTemplate</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetRenderedTemplate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestGetTemplateSource" id="testGetTemplateSource"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testGetTemplateSource</span> (line <span class="line-number">33</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getTemplateSource</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testGetTemplateSource
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsCached" id="testIsCached"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsCached</span> (line <span class="line-number">125</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test isCached</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsCached
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsCachedCachingDisabled" id="testIsCachedCachingDisabled"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsCachedCachingDisabled</span> (line <span class="line-number">149</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test isCached caching disabled</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsCachedCachingDisabled
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsCachedForceCompile" id="testIsCachedForceCompile"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsCachedForceCompile</span> (line <span class="line-number">157</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test isCached force compile</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsCachedForceCompile
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsCachedPrepare" id="testIsCachedPrepare"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsCachedPrepare</span> (line <span class="line-number">111</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test prepare files for isCached test</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsCachedPrepare
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestIsCachedTouchedSource" id="testIsCachedTouchedSource"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testIsCachedTouchedSource</span> (line <span class="line-number">137</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test isCached on touched source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testIsCachedTouchedSource
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestSmartyIsCached" id="testSmartyIsCached"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testSmartyIsCached</span> (line <span class="line-number">199</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testSmartyIsCached
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestSmartyIsCachedCachingDisabled" id="testSmartyIsCachedCachingDisabled"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testSmartyIsCachedCachingDisabled</span> (line <span class="line-number">210</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test $smarty-&gt;is_cached  caching disabled</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testSmartyIsCachedCachingDisabled
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestSmartyIsCachedPrepare" id="testSmartyIsCachedPrepare"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testSmartyIsCachedPrepare</span> (line <span class="line-number">188</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test $smarty-&gt;is_cached</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testSmartyIsCachedPrepare
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestWriteCachedContent" id="testWriteCachedContent"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testWriteCachedContent</span> (line <span class="line-number">168</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test is cache file is written</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testWriteCachedContent
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 05 Apr 2009 17:22:56 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</div></body>
+</html>

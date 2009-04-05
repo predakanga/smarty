@@ -24,7 +24,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Base class with template and variable methodes</p>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---internal.templatebase.php.html">/libs/sysplugins/internal.templatebase.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_distribution---libs---sysplugins---internal.templatebase.php.html">/distribution/libs/sysplugins/internal.templatebase.php</a> (line <span class="field">16</span>)
 		</p>
 		
 				
@@ -88,11 +88,11 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																												
+																																																																																																												
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#append" title="details" class="method-name">append</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$global</span> = <span class="var-default">false</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -108,6 +108,11 @@
 											<span class="method-result">void</span>
 										<a href="#assign_by_ref" title="details" class="method-name">assign_by_ref</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$global</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#assign_global" title="details" class="method-name">assign_global</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">string</span>
@@ -132,6 +137,11 @@
 																<div class="method-definition">
 											<span class="method-result">mixed</span>
 										<a href="#getConfigVariable" title="details" class="method-name">getConfigVariable</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$variable</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">mixed</span>
+										<a href="#getGlobalVariable" title="details" class="method-name">getGlobalVariable</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$variable</span>)
 									</div>
 																<div class="method-definition">
@@ -162,10 +172,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="methodappend" id="append"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">append</span> (line <span class="line-number">64</span>)
+		<span class="method-title">append</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -179,7 +189,7 @@
 		<span class="method-name">
 			append
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$global</span> = <span class="var-default">false</span>], <span class="var-type">array</span>&nbsp;<span class="var-name">$</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -195,15 +205,21 @@
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">$tpl_var</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$nocache</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$global</span>			</li>
 				</ul>
 		
 			
 	</div>
 <a name="methodappend_by_ref" id="append_by_ref"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">append_by_ref</span> (line <span class="line-number">112</span>)
+		<span class="method-title">append_by_ref</span> (line <span class="line-number">127</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -238,7 +254,7 @@
 			
 	</div>
 <a name="methodassign" id="assign"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
 		<span class="method-title">assign</span> (line <span class="line-number">25</span>)
@@ -279,10 +295,10 @@
 			
 	</div>
 <a name="methodassign_by_ref" id="assign_by_ref"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">assign_by_ref</span> (line <span class="line-number">49</span>)
+		<span class="method-title">assign_by_ref</span> (line <span class="line-number">64</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -319,11 +335,46 @@
 		
 			
 	</div>
+<a name="methodassign_global" id="assign_global"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">assign_global</span> (line <span class="line-number">48</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">assigns a global Smarty variable</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			assign_global
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$varname</span><span class="var-description">: the global variable name</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: the value to assign</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$nocache</span><span class="var-description">: if true any output of this variable will be not cached</span>			</li>
+				</ul>
+		
+			
+	</div>
 <a name="methodbuildTemplateId" id="buildTemplateId"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">buildTemplateId</span> (line <span class="line-number">258</span>)
+		<span class="method-title">buildTemplateId</span> (line <span class="line-number">291</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -359,7 +410,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">clear_all_assign</span> (line <span class="line-number">162</span>)
+		<span class="method-title">clear_all_assign</span> (line <span class="line-number">177</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -383,7 +434,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">clear_assign</span> (line <span class="line-number">148</span>)
+		<span class="method-title">clear_assign</span> (line <span class="line-number">163</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -415,7 +466,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">createTemplate</span> (line <span class="line-number">231</span>)
+		<span class="method-title">createTemplate</span> (line <span class="line-number">264</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -454,7 +505,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getConfigVariable</span> (line <span class="line-number">208</span>)
+		<span class="method-title">getConfigVariable</span> (line <span class="line-number">218</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -480,11 +531,41 @@
 		
 			
 	</div>
-<a name="methodgetVariable" id="getVariable"><!-- --></a>
+<a name="methodgetGlobalVariable" id="getGlobalVariable"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getVariable</span> (line <span class="line-number">175</span>)
+		<span class="method-title">getGlobalVariable</span> (line <span class="line-number">241</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">gets  a global variable</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> the value of the global variable</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">mixed</span>
+		<span class="method-name">
+			getGlobalVariable
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$variable</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$variable</span><span class="var-description">: the name of the global variable</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetVariable" id="getVariable"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getVariable</span> (line <span class="line-number">190</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -517,10 +598,10 @@
 			
 	</div>
 <a name="method_get_time" id="_get_time"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">_get_time</span> (line <span class="line-number">268</span>)
+		<span class="method-title">_get_time</span> (line <span class="line-number">302</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -546,7 +627,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 08 Mar 2009 19:39:07 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 05 Apr 2009 17:23:04 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

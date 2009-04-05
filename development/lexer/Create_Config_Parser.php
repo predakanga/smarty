@@ -1,6 +1,6 @@
 <?php
 // Create Parser
-passthru('C:\wamp\bin\php\php5.2.8\php ./ParserGenerator/cli.php internal.configfileparser.y');
+passthru('C:\wamp\bin\php\php5.2.9-1\php ./ParserGenerator/cli.php internal.configfileparser.y');
 
 // Create Lexer
 require_once './LexerGenerator.php';

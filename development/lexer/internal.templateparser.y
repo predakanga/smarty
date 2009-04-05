@@ -148,7 +148,12 @@ template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $
 									// output with optional attributes
 smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a));}
 									// assign new style
-smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s);}									
+//smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s);}									
+smartytag(res)   ::= LDEL varindexed(vi) EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi));}									
+//smartytag(res)   ::= LDEL DOLLAR varvar(v) OPENB CLOSEB EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array('var'=>v,'value'=>e,'index'=>''));}									
+varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'index'=>a);}
+//varindexed(res)  ::= DOLLAR varvar(v) OPENB CLOSEB. {res = array('var'=>v, 'index'=>'');}
+
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
 									// registered object tag
@@ -289,8 +294,10 @@ value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc
 // variables 
 //
 									// simple Smarty variable (optional array)
-variable(res)    ::= DOLLAR varvar(v) arrayindex(a). { if (v == '\'smarty\'') { res =  $this->compiler->compileTag(trim(v,"'"),a);} else {
-                                                         res = '$_smarty_tpl->getVariable('. v .')->value'.a; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}}
+//variable(res)    ::= DOLLAR varvar(v) arrayindex(a). { if (v == '\'smarty\'') { res =  $this->compiler->compileTag(trim(v,"'"),a);} else {
+//                                                         res = '$_smarty_tpl->getVariable('. v .')->value'.a; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}}
+variable(res)    ::= varindexed(vi). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag(trim(vi['var'],"'"),vi['index']);} else {
+                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index']; $this->nocache=$this->template->getVariable(trim(vi['var'],"'"))->nocache;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
 									// object
@@ -314,6 +321,8 @@ indexdef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
 indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index\']').']';}
 										// PHP style index
 indexdef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
+										// für assign append array
+indexdef(res)  ::= OPENB CLOSEB. {res = '';}
 
 //
 // variable variable names

@@ -64,8 +64,8 @@ class AssignGlobalTests extends PHPUnit_Framework_TestCase {
     public function testGlobalVarArrayTag()
     {
             $this->smarty->assign_global('foo',array('foo'=>'bar','foo2'=>'bar2'));
-		$this->assertEquals('bar', $this->smarty->fetch('string:{$smarty.global.foo.foo2}'));
-		$this->assertEquals('bar2', $this->smarty->fetch('string:{$smarty.global.foo.foo}'));
+		$this->assertEquals('bar2', $this->smarty->fetch('string:{$smarty.global.foo.foo2}'));
+		$this->assertEquals('bar', $this->smarty->fetch('string:{$smarty.global.foo.foo}'));
     } 
 } 
   ?>
