@@ -66,6 +66,44 @@ class CompileForeachTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{foreach item=x name=foo from=[0,1,2,3,4,5,6,7,8,9]}{$smarty.foreach.foo.index}{$smarty.foreach.foo.iteration}{foreachelse}else{/foreach}');
         $this->assertEquals("011223344556677889910", $this->smarty->fetch($tpl));
     } 
+    /**
+    * test {foreach $x as $foo} tag
+    */
+    public function testNewForeach1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[0,1,2,3,4,5,6,7,8,9]}{foreach $x in $foo}{$x}{/foreach}');
+        $this->assertEquals("0123456789", $this->smarty->fetch($tpl));
+    } 
+    public function testNewForeach2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[0,1,2,3,4,5,6,7,8,9]}{foreach $x in $foo}{$x}{foreachelse}else{/foreach}');
+        $this->assertEquals("0123456789", $this->smarty->fetch($tpl));
+    } 
+    public function testNewForeach3()
+    {
+        $tpl = $this->smarty->createTemplate('string:{foreach $x in $foo}{$x}{foreachelse}else{/foreach}');
+        $this->assertEquals("else", $this->smarty->fetch($tpl));
+    } 
+    public function testNewForeach4()
+    {
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[9,8,7,6,5,4,3,2,1,0]}{foreach $x in $foo}{$x@key}{$x}{foreachelse}else{/foreach}');
+        $this->assertEquals("09182736455463728190", $this->smarty->fetch($tpl));
+    } 
+    public function testNewForeach5()
+    {
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[0,1,2,3,4,5,6,7,8,9]}{foreach $x in $foo}{$x}{foreachelse}else{/foreach}total{$x@total}');
+        $this->assertEquals("0123456789total10", $this->smarty->fetch($tpl));
+    } 
+    public function testNewForeach6()
+    {
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[0,1,2,3,4,5,6,7,8,9]}{foreach $x in $foo}{$x@index}{$x@iteration}{foreachelse}else{/foreach}');
+        $this->assertEquals("011223344556677889910", $this->smarty->fetch($tpl));
+    } 
+    public function testNewForeach7()
+    {
+        $tpl = $this->smarty->createTemplate('string:{foreach $x in [9,8,7,6,5,4,3,2,1,0]}{$x@key}{$x}{foreachelse}else{/foreach}');
+        $this->assertEquals("09182736455463728190", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

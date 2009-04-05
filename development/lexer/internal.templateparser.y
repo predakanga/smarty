@@ -182,7 +182,7 @@ smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler-
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
-									// {for $var in $array} tag
+									// {foreach $var in $array} tag
 // replaced with next line because config vars could an array!! smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN value(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
 smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN array(a) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
