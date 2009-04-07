@@ -89,10 +89,10 @@ Smarty 3 - Unit Tests Report
  .........................................................
 
  CompileIncludeTests
- ....
+ .......
 
  CompileInsertTests
- ....
+ .....
 
  CompilePhpTests
  ...
@@ -187,7 +187,7 @@ Smarty 3 - Unit Tests Report
  XmlTests
  ...
 
-Time: 4 seconds
+Time: 5 seconds
 
 There was 1 failure:
 
@@ -199,4 +199,4 @@ got string      <Array>
 C:\wamp\www\__smarty3Alpha\development\PHPunit\AssignGlobalTests.php:67
 
 FAILURES!
-Tests: 434, Assertions: 515, Failures: 1.
+Tests: 438, Assertions: 527, Failures: 1.

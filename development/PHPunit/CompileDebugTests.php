@@ -31,12 +31,21 @@ class CompileDebugTests extends PHPUnit_Framework_TestCase {
     /**
     * test debug tag
     */
-    public function testDebug1()
+    public function testDebugTag()
     {
         $tpl = $this->smarty->createTemplate("string:{debug}");
         $_contents = $this->smarty->fetch($tpl);
         $this->assertContains("Smarty Debug Console", $_contents);
     } 
+    /**
+    * test debug property
+    */
+//    {
+//        $this->smarty->debugging = true;
+//        $tpl = $this->smarty->createTemplate("string:hello world");
+//        $_contents = $this->smarty->fetch($tpl);
+//        $this->assertContains("Smarty Debug Console", $_contents);
+//    } 
 } 
 
 ?>

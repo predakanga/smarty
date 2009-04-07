@@ -44,6 +44,14 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate("string:start {insert name='test' foo='bar' assign=blar} end {\$blar}");
         $this->assertEquals("start  end insert function parameter value bar", $this->smarty->fetch($tpl));
     } 
+    /**
+    * test inserted function with assign no output
+    */
+    public function testInsertFunctionAssignNoOutput()
+    {
+        $tpl = $this->smarty->createTemplate("string:start {insert name='test' foo='bar' assign=blar} end");
+        $this->assertEquals("start  end", $this->smarty->fetch($tpl));
+    } 
 
     /**
     * test inserted function none existing function
