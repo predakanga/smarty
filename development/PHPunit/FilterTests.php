@@ -66,11 +66,21 @@ class FilterTests extends PHPUnit_Framework_TestCase {
     {
         function myprefilter($input)
         {
-            return '{$foo}'.$input;
+            return '{$foo}' . $input;
         } 
         $this->smarty->register_prefilter('myprefilter');
         $tpl = $this->smarty->createTemplate('string:{" hello world"}');
-        $tpl->assign('foo','bar');
+        $tpl->assign('foo', 'bar');
+        $this->assertEquals("bar hello world", $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test registered pre filter class
+    */
+    public function testRegisteredPreFilterClass()
+    {
+        $this->smarty->register_prefilter(array('myprefilterclass', 'myprefilter'));
+        $tpl = $this->smarty->createTemplate('string:{" hello world"}');
+        $tpl->assign('foo', 'bar');
         $this->assertEquals("bar hello world", $this->smarty->fetch($tpl));
     } 
     /**
@@ -80,12 +90,18 @@ class FilterTests extends PHPUnit_Framework_TestCase {
     {
         function mypostfilter($input)
         {
-            return '{$foo}'.$input;
+            return '{$foo}' . $input;
         } 
         $this->smarty->register_postfilter('mypostfilter');
         $tpl = $this->smarty->createTemplate('string:{" hello world"}');
-        $tpl->assign('foo','bar');
+        $tpl->assign('foo', 'bar');
         $this->assertEquals('{$foo} hello world', $this->smarty->fetch($tpl));
+    } 
+} 
+class myprefilterclass {
+    function myprefilter($input)
+    {
+        return '{$foo}' . $input;
     } 
 } 
 

@@ -33,7 +33,7 @@ class LoadFilterTests extends PHPUnit_Framework_TestCase {
     public function testLoadFilter()
     {
         $this->smarty->load_filter('output', 'trimwhitespace');
-        $this->assertTrue(is_callable($this->smarty->registered_filters['output']['Smarty_outputfilter_trimwhitespace']));
+        $this->assertTrue(is_callable($this->smarty->registered_filters['output']['smarty_outputfilter_trimwhitespace']));
     } 
 } 
 ?>

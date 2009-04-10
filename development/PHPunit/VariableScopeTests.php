@@ -87,7 +87,7 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     {
         // create variable $foo2
         $this->smarty->assign('foo2','oldvalue');
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' scope=SMARTY_PARENT_SCOPE}{\$foo2}", $this->smarty);
+        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' scope=parent}{\$foo2}", $this->smarty);
         // must see the new value
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl));
         $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty);
@@ -101,7 +101,7 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
     public function testVariableScope6()
     {
         // create global variable $foo2 in template
-        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' scope=SMARTY_PARENT_SCOPE}{\$foo2}", $this->smarty);
+        $tpl = $this->smarty->createTemplate("string:{assign var=foo2 value='newvalue' scope=parent}{\$foo2}", $this->smarty);
         // must see the new value
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl));
         $tpl2 = $this->smarty->createTemplate("string:{\$foo2}", $this->smarty);

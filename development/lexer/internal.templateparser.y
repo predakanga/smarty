@@ -61,7 +61,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART NUMBER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
+%fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART INTEGER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
               ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY.
@@ -148,11 +148,8 @@ template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $
 									// output with optional attributes
 smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a));}
 									// assign new style
-//smartytag(res)   ::= LDEL statement(s) RDEL. { res = $this->compiler->compileTag('assign',s);}									
-smartytag(res)   ::= LDEL varindexed(vi) EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi));}									
-//smartytag(res)   ::= LDEL DOLLAR varvar(v) OPENB CLOSEB EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array('var'=>v,'value'=>e,'index'=>''));}									
+smartytag(res)   ::= LDEL varindexed(vi) EQUAL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi,a));}									
 varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'index'=>a);}
-//varindexed(res)  ::= DOLLAR varvar(v) OPENB CLOSEB. {res = array('var'=>v, 'index'=>'');}
 
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
@@ -254,9 +251,10 @@ math(res)        ::= MATH(m). {res = m;}
 									// value
 value(res)		   ::= variable(v). { res = v; }
                   // config variable
-value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
+//value(res)	     ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
                  // numeric
-value(res)       ::= NUMBER(n). { res = n; }
+value(res)       ::= INTEGER(n). { res = n; }
+value(res)       ::= INTEGER(n1) DOT INTEGER(n2). { res = n1.'.'.n2; }
 									// boolean
 value(res)       ::= BOOLEAN(b). { res = b; }
 									// null
@@ -303,7 +301,7 @@ variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariab
 									// object
 variable(res)    ::= object(o). { res = o; }
                   // config variable
-//variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
+variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
 
 //
 // array index
@@ -316,7 +314,10 @@ arrayindex        ::= . {return;}
 // single index definition
 										// Smarty2 style index 
 indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
-indexdef(res)   ::= DOT exprs(e). { res = "[". e ."]";}
+indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
+//indexdef(res)   ::= DOT DOLLAR varvar(v). { res = "[". '$_smarty_tpl->getVariable('. v .')->value'."]";}
+indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
+indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
 										// section tag index
 indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index\']').']';}
 										// PHP style index
@@ -346,7 +347,9 @@ objectchain(res) ::= objectelement(oe). {res  = oe; }
 objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
 objectelement(res)::= PTR ID(i) arrayindex(a).	    { res = '->'.i.a;}
-//objectelement(res)::= PTR varvar(v) arrayindex(a).	{ res = '->'.v.a;}
+objectelement(res)::= PTR variable(v) arrayindex(a).	    { res = '->{'.v.a.'}';}
+objectelement(res)::= PTR LDEL expr(e) RDEL arrayindex(a).	    { res = '->{'.e.a.'}';}
+objectelement(res)::= PTR ID(ii) LDEL expr(e) RDEL arrayindex(a).	    { res = '->{\''.ii.'\'.'.e.a.'}';}
 										// method
 objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 

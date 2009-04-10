@@ -38,7 +38,7 @@ Smarty 3 - Unit Tests Report
  .
 
  AssignGlobalTests
- ...F
+ ....
 
  AssignTests
  ..
@@ -89,7 +89,7 @@ Smarty 3 - Unit Tests Report
  .........................................................
 
  CompileIncludeTests
- .......
+ ........
 
  CompileInsertTests
  .....
@@ -125,7 +125,7 @@ Smarty 3 - Unit Tests Report
  ....
 
  FilterTests
- .....
+ ......
 
  FunctionTests
  .
@@ -189,14 +189,4 @@ Smarty 3 - Unit Tests Report
 
 Time: 5 seconds
 
-There was 1 failure:
-
-1) testGlobalVarArrayTag(AssignGlobalTests)
-Failed asserting that two strings are equal.
-expected string <bar2>
-difference      <xxxx?>
-got string      <Array>
-C:\wamp\www\__smarty3Alpha\development\PHPunit\AssignGlobalTests.php:67
-
-FAILURES!
-Tests: 438, Assertions: 527, Failures: 1.
+OK (440 tests, 533 assertions)

@@ -8,9 +8,9 @@
 require('../../distribution/libs/Smarty.class.php');
 
 $smarty = new Smarty;
-$smarty->left_delimiter='{';
-$smarty->right_delimiter='}';
 $smarty->force_compile = true;
+        $tpl = $this->smarty->createTemplate('test_if.tpl');
+        $result = $tpl->getCompiledTemplate();
 
 
 $smarty->display('test.tpl');

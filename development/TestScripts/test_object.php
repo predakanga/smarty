@@ -16,8 +16,8 @@ $smarty->use_sub_dirs = false;
 
  class Person
 {
-    private $m_szName;
-    private $m_iAge;
+    public $m_szName;
+    public $m_iAge;
     
     public function setName($szName)
     {
@@ -38,9 +38,14 @@ $smarty->use_sub_dirs = false;
 }  
 
 $person->object = new Person;
+$person->object->setAge(8)->setName('Peter');
 
-$smarty->assign('person',$person);
+$name= 'Name';
+
+echo $person->object->m_sz{$name};
+
+//$smarty->assign('person',$person);
 
 // example of executing a compiled template
-$smarty->display('test_object.tpl');
+//$smarty->display('test_object.tpl');
 ?>
