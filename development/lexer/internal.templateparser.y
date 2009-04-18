@@ -64,7 +64,7 @@
 %fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART INTEGER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
-              ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY.
+              ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY ISIN.
               
 
 //
@@ -302,6 +302,8 @@ variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariab
 variable(res)    ::= object(o). { res = o; }
                   // config variable
 variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
+                  // stream variable
+variable(res)	   ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2. '\')';}
 
 //
 // array index
@@ -408,6 +410,8 @@ ifexprs(res)			 ::= OPENP ifexprs(e) CLOSEP.	{res = '('.e.')';}
 										// simple expression
 ifexpr(res)        ::= expr(e). {res =e;}
 ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
+ifexpr(res)			   ::= expr(e1) ISIN array(a).	{res = 'in_array('.e1.','.a.')';}
+ifexpr(res)			   ::= expr(e1) ISIN value(v).	{res = 'in_array('.e1.',(array)'.v.')';}
 ifexpr(res)			   ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
 ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '!('.e1.' % '.e2.')';}
 ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.')';}
@@ -448,13 +452,11 @@ arrayelement(res)		 ::=  ID(i) APTR expr(e2). { res = '\''.i.'\'=>'.e2;}
 //
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
-doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  BACKTICK ID(i) BACKTICK. {res = "`".i."`";}
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
+doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
 doublequotedcontent(res)           ::= OTHER(o). {res = addcslashes(o,"'");}
-//doublequotedcontent(res)           ::= OTHER(o). {res = o;}
-//doublequotedcontent(res)           ::= text(t). {res = addcslashes(t,"'");}
 
 //
 // text string
