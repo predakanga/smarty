@@ -82,12 +82,12 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignOld8()
     {
-        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[9,8,7,6]}{foreach $x in $foo}{$x}{/foreach}');
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[9,8,7,6]}{foreach $foo as $x}{$x}{/foreach}');
         $this->assertEquals("9876", $this->smarty->fetch($tpl));
     } 
     public function testAssignOld9()
     {
-        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[\'a\'=>9,\'b\'=>8,\'c\'=>7,\'d\'=>6]}{foreach $x in $foo}{$x@key}{$x}{/foreach}');
+        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=[\'a\'=>9,\'b\'=>8,\'c\'=>7,\'d\'=>6]}{foreach $foo as $x}{$x@key}{$x}{/foreach}');
         $this->assertEquals("a9b8c7d6", $this->smarty->fetch($tpl));
     } 
     /**
@@ -122,18 +122,34 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignNew6()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=[9,8,7,6]}{foreach \$x in \$foo}{\$x}{/foreach}");
+        $tpl = $this->smarty->createTemplate("string:{\$foo=[9,8,7,6]}{foreach \$foo as \$x}{\$x}{/foreach}");
         $this->assertEquals("9876", $this->smarty->fetch($tpl));
     } 
     public function testAssignNew7()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{foreach \$x in \$foo}{\$x@key}{\$x}{/foreach}");
+        $tpl = $this->smarty->createTemplate("string:{\$foo=['a'=>9,'b'=>8,'c'=>7,'d'=>6]}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}");
         $this->assertEquals("a9b8c7d6", $this->smarty->fetch($tpl));
     } 
     public function testAssignArrayAppend()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=1}{\$foo[]=2}{foreach \$x in \$foo}{\$x@key}{\$x}{/foreach}");
+        $tpl = $this->smarty->createTemplate("string:{\$foo=1}{\$foo[]=2}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}");
         $this->assertEquals("0112", $this->smarty->fetch($tpl));
+    } 
+    public function testAssignArrayAppend2()
+    {
+        $this->smarty->assign('foo',1);
+        $tpl = $this->smarty->createTemplate("string:{\$foo[]=2}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}",$this->smarty);
+        $this->assertEquals("0112", $this->smarty->fetch($tpl));
+        $tpl2 = $this->smarty->createTemplate("string:{\$foo}",$this->smarty);
+        $this->assertEquals("1", $this->smarty->fetch($tpl2));
+    } 
+    public function testAssignArrayAppend3()
+    {
+        $this->smarty->assign('foo',1);
+        $tpl = $this->smarty->createTemplate("string:{\$foo[]=2 scope=root}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}",$this->smarty);
+        $this->assertEquals("0112", $this->smarty->fetch($tpl));
+        $tpl2 = $this->smarty->createTemplate("string:{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}",$this->smarty);
+        $this->assertEquals("0112", $this->smarty->fetch($tpl2));
     } 
     public function testAssignNestedArray()
     {

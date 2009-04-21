@@ -33,7 +33,7 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
     */
     public function testSimpleArrayDefinition()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,3,4,5]}{foreach $bar in $foo}{$bar}{/foreach}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,3,4,5]}{foreach $foo as $bar}{$bar}{/foreach}', $this->smarty);
         $this->assertEquals('12345', $this->smarty->fetch($tpl));
     } 
     /**

@@ -108,7 +108,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     public function testConfigVariableOverwriteFalse()
     {
         $this->smarty->config_overwrite = false;
-        $this->assertEquals("Overwrite1Overwrite2", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{foreach $over in #overwrite#}{$over}{/foreach}'));
+        $this->assertEquals("Overwrite1Overwrite2", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{foreach #overwrite# as $over}{$over}{/foreach}'));
     } 
     /**
     * test config varibales booleanize on

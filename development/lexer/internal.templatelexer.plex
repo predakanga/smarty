@@ -162,7 +162,7 @@ isnoteven = /\s+is\s+not\s+even/
 isdivby = /\s+is\s+div\s+by\s+/
 isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
-in = /\s+(IN|in)\s+/
+as = /\s+(AS|as)\s+/
 not = /!|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
 lor = /\s*\|\|\s*|\s+(OR|or)\s+/
@@ -230,8 +230,8 @@ rdel {
 isin {
   $this->token = Smarty_Internal_Templateparser::TP_ISIN;
 }
-in {
-  $this->token = Smarty_Internal_Templateparser::TP_IN;
+as {
+  $this->token = Smarty_Internal_Templateparser::TP_AS;
 }
 boolean {
   $this->token = Smarty_Internal_Templateparser::TP_BOOLEAN;

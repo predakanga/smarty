@@ -63,7 +63,7 @@
 //
 %fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART INTEGER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL IN ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
+              NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL AS ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
               ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY ISIN.
               
 
@@ -179,10 +179,10 @@ smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler-
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
-									// {foreach $var in $array} tag
+									// {foreach $array as $var} tag
 // replaced with next line because config vars could an array!! smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
-smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN value(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
-smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN array(a) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE array(a) AS DOLLAR varvar(v0) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
 
 //
 //Attributes of Smarty tags 
@@ -454,7 +454,7 @@ doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = 
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
 doublequotedcontent(res)           ::=  BACKTICK ID(i) BACKTICK. {res = "`".i."`";}
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
-doublequotedcontent(res)           ::=  variable(v). {res = "'.".v.".'";}
+doublequotedcontent(res)           ::=  DOLLAR ID(i). {res = "'.".'$_smarty_tpl->getVariable(\''. i .'\')->value'.".'"; $this->nocache=$this->template->getVariable(trim(i,"'"))->nocache;}
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
 doublequotedcontent(res)           ::= OTHER(o). {res = addcslashes(o,"'");}
 
