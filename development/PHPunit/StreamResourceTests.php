@@ -39,7 +39,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetTemplateFilepath()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertEquals('global://mytest', $tpl->getTemplateFilepath());
     } 
     /**
@@ -47,7 +47,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetTemplateTimestamp()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->getTemplateTimestamp());
     } 
     /**
@@ -55,7 +55,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetTemplateSource()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
         $this->assertEquals('hello world {$foo}', $tpl->getTemplateSource());
     } 
     /**
@@ -63,7 +63,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testUsesCompiler()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertTrue($tpl->usesCompiler());
     } 
     /**
@@ -71,7 +71,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testIsEvaluated()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertTrue($tpl->isEvaluated());
     } 
     /**
@@ -79,7 +79,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testMustCompile()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertTrue($tpl->mustCompile());
     } 
     /**
@@ -87,7 +87,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetCompiledFilepath()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->getCompiledFilepath());
     } 
     /**
@@ -95,7 +95,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetCompiledTimestamp()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->getCompiledTimestamp());
     } 
     /**
@@ -103,7 +103,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetCompiledTemplate()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $result = $tpl->getCompiledTemplate();
         $this->assertContains('hello world', $result);
         $this->assertContains('<?php /* Smarty version ', $result);
@@ -113,7 +113,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetCachedFilepath()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->getCachedFilepath());
     } 
     /**
@@ -121,7 +121,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetCachedTimestamp()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->getCachedTimestamp());
     } 
     /**
@@ -129,7 +129,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetCachedContent()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->getCachedContent());
     } 
     /**
@@ -137,7 +137,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testWriteCachedContent()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->writeCachedContent());
     } 
     /**
@@ -145,7 +145,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testIsCached()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest');
+        $tpl = $this->smarty->createTemplate('global:mytest');
         $this->assertFalse($tpl->isCached());
     } 
     /**
@@ -153,7 +153,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetRenderedTemplate()
     {
-        $tpl = $this->smarty->createTemplate('global://mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
         $this->assertEquals('hello world bar', $tpl->getRenderedTemplate());
     } 
     /**
@@ -165,7 +165,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 20;
         $this->smarty->clear_compiled_tpl();
         $this->smarty->clear_all_cache();
-        $tpl = $this->smarty->createTemplate('global://mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
         $this->assertEquals(0, $this->smarty->clear_all_cache());
         $this->assertEquals(0, $this->smarty->clear_compiled_tpl());
@@ -177,7 +177,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 20;
-        $tpl = $this->smarty->createTemplate('global://mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
         $this->assertFalse($this->smarty->is_cached($tpl));
     } 
