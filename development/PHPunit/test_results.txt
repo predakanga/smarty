@@ -1,3 +1,7 @@
+
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamResourceTests.php on line 221
+
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 89
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
 Smarty 3 - Unit Tests Report
@@ -23,7 +27,7 @@ Smarty 3 - Unit Tests Report
  ........................
 
  CompileAssignTests
- ...................
+ .....................
 
  AppendByRefTests
  ...
@@ -84,6 +88,9 @@ Smarty 3 - Unit Tests Report
 
  CompileFunctionPluginTests
  ...
+
+ CompileFunctionTests
+ ....
 
  CompileIfTests
  .........................................................
@@ -169,6 +176,12 @@ Smarty 3 - Unit Tests Report
  StaticClassAccessTests
  .....
 
+ StreamResourceTests
+ .................
+
+ StreamVariableTests
+ .
+
  TemplateExistsTests
  ..
 
@@ -187,6 +200,6 @@ Smarty 3 - Unit Tests Report
  XmlTests
  ...
 
-Time: 5 seconds
+Time: 4 seconds
 
-OK (440 tests, 533 assertions)
+OK (464 tests, 563 assertions)

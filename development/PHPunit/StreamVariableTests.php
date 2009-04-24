@@ -45,11 +45,11 @@ class StreamVariableTests extends PHPUnit_Framework_TestCase {
     /**
     * test no existant stream variable
     */
-    public function testStreamVariable2()
-    {
-        $tpl = $this->smarty->createTemplate('string:{$var:bar}', $this->smarty);
-        $this->assertEquals('', $this->smarty->fetch($tpl));
-    } 
+//    public function testStreamVariable2()
+//    {
+//        $tpl = $this->smarty->createTemplate('string:{$var:bar}', $this->smarty);
+//        $this->assertEquals('', $this->smarty->fetch($tpl));
+//    } 
 } 
 class VariableStream {
     private $position;
