@@ -18,6 +18,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->error_reporting = E_ALL;
         $this->old_error_level = error_reporting();
         $this->smarty->enableSecurity();
+        $this->smarty->security_policy->streams = array('global');
         $this->smarty->assign('foo', 'bar');
         stream_wrapper_register("global", "ResourceStream")
         or die("Failed to register protocol");

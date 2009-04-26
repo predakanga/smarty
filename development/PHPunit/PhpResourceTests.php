@@ -81,7 +81,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetCompiledTimestamp()
     {
-        $tpl = $this->smarty->createTemplate('php:phphelloworld.php'); 
+        $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->getCompiledTimestamp());
     } 
     /**
@@ -122,10 +122,13 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     * test getCachedTimestamp caching disabled
     */
     public function testGetCachedTimestampCachingDisabled()
-    {
+    { 
         // create dummy cache file
+        $this->smarty->caching = true;
+        $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        file_put_contents('.\cache\103847448.phphelloworld.php.php', 'test');
+        $dummy = $this->smarty->fetch($tpl);
+        $this->smarty->caching = true;
         $this->assertFalse($tpl->getCachedTimestamp());
     } 
     /**
@@ -148,14 +151,14 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse($tpl->getCachedContent());
     } 
     /**
-    * test getCachedContent 
+    * test getCachedContent
     */
     public function testGetCachedContent()
     {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertEquals('test', $tpl->getCachedContent());
+        $this->assertContains('php hello world', $tpl->getCachedContent());
     } 
     /**
     * test isCached
@@ -166,7 +169,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($tpl->isCached());
-        $this->assertEquals('test', $tpl->rendered_content);
+        $this->assertContains('php hello world', $tpl->rendered_content);
     } 
     /**
     * test isCached caching disabled
@@ -184,7 +187,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        touch ($tpl->getCachedFilepath (),time()-2);
+        sleep(1);
         touch ($tpl->getTemplateFilepath ());
         $this->assertFalse($tpl->isCached());
     } 
@@ -195,7 +198,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;
-	  $this->smarty->clear_all_cache();
+        $this->smarty->clear_all_cache();
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->smarty->fetch($tpl);
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
@@ -212,12 +215,12 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     * test $smarty->is_cached
     */
     public function testSmartyIsCachedPrepare()
-    {
+    { 
         // prepare files for next test
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->caching_lifetime = 1000; 
         // clean up for next tests
-	  $this->smarty->clear_all_cache();
+        $this->smarty->clear_all_cache();
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->smarty->fetch($tpl);
     } 
@@ -242,7 +245,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testFinalCleanup()
     {
-	  $this->smarty->clear_all_cache();
+        $this->smarty->clear_all_cache();
     } 
 } 
 

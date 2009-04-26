@@ -223,7 +223,6 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $tpl->compileTemplateSource ();
         $this->assertTrue($tpl->isCached());
         $this->assertContains('hello world', $tpl->rendered_content);
     } 
