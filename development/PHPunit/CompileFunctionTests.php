@@ -60,6 +60,14 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{function name=functest loop=0}{$loop}{if $loop < 5}{functest loop=$loop+1}{/if}{/function}{functest}');
         $this->assertEquals("012345", $this->smarty->fetch($tpl));
     } 
+    /**
+    * test inherited function call tag 
+    */
+    public function testInheritedFunction()
+    {
+        $tpl = $this->smarty->createTemplate('string:{function name=functest loop=0}{$loop}{if $loop < 5}{functest loop=$loop+1}{/if}{/function}{include file=\'test_inherit_function_tag.tpl\'}');
+        $this->assertEquals("012345", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

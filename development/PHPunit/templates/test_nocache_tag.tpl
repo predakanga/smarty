@@ -1,0 +1,1 @@
+{nocache}{$foo + 2}{/nocache}{$bar}

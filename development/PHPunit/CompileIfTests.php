@@ -36,6 +36,11 @@ class CompileIfTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{if 0<1}yes{/if}');
         $this->assertEquals("yes", $this->smarty->fetch($tpl));
     } 
+    public function testElseif1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{if false}false{elseif 0<1}yes{/if}');
+        $this->assertEquals("yes", $this->smarty->fetch($tpl));
+    } 
     public function testIf2()
     {
         $tpl = $this->smarty->createTemplate('string:{if 2<1}yes{else}no{/if}');
@@ -319,6 +324,16 @@ class CompileIfTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->php_functions = array('isset');
         $tpl = $this->smarty->createTemplate('string:{assign var=foo value=1}{if isset($foo)}yes{else}no{/if}');
         $this->assertEquals("yes", $this->smarty->fetch($tpl));    
+    } 
+    public function testIfStatement1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{if $x=true}yes{else}no{/if}');
+        $this->assertEquals(" yes", $this->smarty->fetch($tpl));
+    } 
+    public function testIfStatement2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{if $x=false}yes{else}no{/if}');
+        $this->assertEquals(" no", $this->smarty->fetch($tpl));
     } 
 } 
 

@@ -90,16 +90,20 @@ Smarty 3 - Unit Tests Report
  ...
 
  CompileFunctionTests
- ....
+ .....
 
  CompileIfTests
- .........................................................
+ ........................................................... 59 / 60
+ .
 
  CompileIncludeTests
  ........
 
  CompileInsertTests
  .....
+
+ CompileNocacheTests
+ ...
 
  CompilePhpTests
  ...
@@ -114,7 +118,7 @@ Smarty 3 - Unit Tests Report
  .
 
  CompileWhileTests
- .
+ ..
 
  ConfigVarTests
  .................
@@ -145,6 +149,9 @@ Smarty 3 - Unit Tests Report
 
  ModifierTests
  .......
+
+ PrintNocacheTests
+ ....
 
  RegisterBlockTests
  ......
@@ -202,4 +209,4 @@ Smarty 3 - Unit Tests Report
 
 Time: 6 seconds
 
-OK (464 tests, 563 assertions)
+OK (476 tests, 576 assertions)

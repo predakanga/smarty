@@ -175,6 +175,7 @@ smartytag(res)   ::= LDELSLASH ID(i) attributes(a) RDEL. { res =  $this->compile
 smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. { res =  $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
 									// {if}, {elseif} and {while} tag
 smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
+smartytag(res)   ::= LDEL ID(i)SPACE statement(ie) RDEL. { res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
 									// {for} tag
 smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
@@ -292,9 +293,7 @@ value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc
 // variables 
 //
 									// simple Smarty variable (optional array)
-//variable(res)    ::= DOLLAR varvar(v) arrayindex(a). { if (v == '\'smarty\'') { res =  $this->compiler->compileTag(trim(v,"'"),a);} else {
-//                                                         res = '$_smarty_tpl->getVariable('. v .')->value'.a; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}}
-variable(res)    ::= varindexed(vi). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag(trim(vi['var'],"'"),vi['index']);} else {
+variable(res)    ::= varindexed(vi). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('internal_smarty_var',vi['index']);} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index']; $this->nocache=$this->template->getVariable(trim(vi['var'],"'"))->nocache;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
@@ -321,7 +320,7 @@ indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
 indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
 										// section tag index
-indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('smarty','[\'section\'][\''.i.'\'][\'index\']').']';}
+indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('internal_smarty_var','[\'section\'][\''.i.'\'][\'index\']').']';}
 										// PHP style index
 indexdef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
 										// für assign append array
