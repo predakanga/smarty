@@ -90,7 +90,7 @@ Smarty 3 - Unit Tests Report
  ...
 
  CompileFunctionTests
- .....
+ ......
 
  CompileIfTests
  ........................................................... 59 / 60
@@ -209,4 +209,4 @@ Smarty 3 - Unit Tests Report
 
 Time: 6 seconds
 
-OK (476 tests, 576 assertions)
+OK (477 tests, 577 assertions)

@@ -14,7 +14,8 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = new Smarty();
+//        $this->smarty = new Smarty();
+        $this->smarty = Smarty::instance();
         $this->smarty->error_reporting = E_ALL;
         $this->smarty->enableSecurity();
         $this->smarty->force_compile = true;
@@ -24,7 +25,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     public function tearDown()
     {
         error_reporting($this->old_error_level);
-        unset($this->smarty);
+//        unset($this->smarty);
         Smarty::$template_objects = null;
     } 
 
@@ -33,8 +34,8 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testSimpleFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{functest param=\'param\'}');
-        $this->assertEquals("default param", $this->smarty->fetch($tpl));
+       $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{functest param=\'param\'}');
+       $this->assertEquals("default param", $this->smarty->fetch($tpl));
     } 
     /**
     * test simple function call tag 2
@@ -66,6 +67,14 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     public function testInheritedFunction()
     {
         $tpl = $this->smarty->createTemplate('string:{function name=functest loop=0}{$loop}{if $loop < 5}{functest loop=$loop+1}{/if}{/function}{include file=\'test_inherit_function_tag.tpl\'}');
+        $this->assertEquals("012345", $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test fuction definition in include 
+    */
+    public function testDefineFunctionInclude()
+    {
+        $tpl = $this->smarty->createTemplate('string:{include file=\'test_define_function_tag.tpl\'}{include file=\'test_inherit_function_tag.tpl\'}');
         $this->assertEquals("012345", $this->smarty->fetch($tpl));
     } 
 } 
