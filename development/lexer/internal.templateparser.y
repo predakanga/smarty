@@ -89,14 +89,6 @@ template_element(res)::= smartytag(st). {if ($this->compiler->has_code) {
                                             res = $this->cacher->processNocacheCode($tmp.st, $this->compiler,$this->nocache,true);
                                          } $this->nocache=false;}	
 											// comments
-//template_element(res)::= COMMENT(t). { res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);}	
-//template_element(res)::= COMMENTSTART text(t) COMMENTEND. {if ($this->smarty->comment_mode ==0) {
-//                                                            res = '';
-//                                                           }elseif ($this->smarty->comment_mode ==1){
-//                                                            res = $this->cacher->processNocacheCode('<?php /* comment placeholder */?>', $this->compiler,false,false);
-//                                                           }else{
-//                                                            res = $this->cacher->processNocacheCode('<?php /* '.str_replace('*/', '', t).'*/?>', $this->compiler,false,false);
-//                                                           }}	
 template_element(res)::= COMMENTSTART text(t) COMMENTEND. { res = '';}
 
 											// Literal
@@ -139,7 +131,6 @@ template_element(res)::= SHORTTAGSTART  variable(v) SHORTTAGEND. {if (!$this->te
 template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	
-//template_element(res)::= text(t). {res = $this->cacher->processNocacheCode(t, $this->compiler,false,false);}	
 
 
 //
@@ -149,8 +140,6 @@ template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $
 smartytag(res)   ::= LDEL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('print_expression',array_merge(array('value'=>e),a));}
 									// assign new style
 smartytag(res)   ::= LDEL varindexed(vi) EQUAL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi,a));}									
-varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'index'=>a);}
-
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res =  $this->compiler->compileTag(i,a);}
 									// registered object tag
@@ -174,16 +163,33 @@ smartytag(res)   ::= LDELSLASH ID(i) attributes(a) RDEL. { res =  $this->compile
 									// end of block object tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. { res =  $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
 									// {if}, {elseif} and {while} tag
-smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. { res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
-smartytag(res)   ::= LDEL ID(i)SPACE statement(ie) RDEL. { res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
+smartytag(res)   ::= LDEL ID(i)SPACE ifexprs(ie) RDEL. {if (!in_array(i,array('if','elseif','while'))) {
+                                                            $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
+                                                            }
+                                                           res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
+smartytag(res)   ::= LDEL ID(i)SPACE statement(ie) RDEL. { if (!in_array(i,array('if','elseif','while'))) {
+                                                            $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
+                                                            }
+                                                           res =  $this->compiler->compileTag(i,array('if condition'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. { res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
+smartytag(res)   ::= LDEL ID(i) SPACE statements(s) SEMICOLON ifexprs(ie) SEMICOLON DOLLAR varvar(v2) foraction(e2) RDEL. {
+                                                            if (i != 'for') {
+                                                               $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
+                                                            }
+                                                            res =  $this->compiler->compileTag(i,array('start'=>s,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
 									// {foreach $array as $var} tag
-// replaced with next line because config vars could an array!! smartytag(res)   ::= LDEL ID(i) SPACE DOLLAR varvar(v0) IN variable(v1) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
-smartytag(res)   ::= LDEL ID(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
-smartytag(res)   ::= LDEL ID(i) SPACE array(a) AS DOLLAR varvar(v0) RDEL. { res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. {
+                                                            if (i != 'foreach') {
+                                                               $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
+                                                            }
+                                                            res =  $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE array(a) AS DOLLAR varvar(v0) RDEL. { 
+                                                            if (i != 'foreach') {
+                                                               $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
+                                                            }
+                                                            res =  $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
 
 //
 //Attributes of Smarty tags 
@@ -195,8 +201,7 @@ attributes(res)  ::= attribute(a). { res = a;}
 									// no attributes
 attributes(res)  ::= . { res = array();}
 									
-									// different formats of attribute
-//attribute(res)   ::= SPACE ID(v) EQUAL ID(i). { res = array(v=>'\''.i.'\'');}
+									// attribute
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 
 //
@@ -206,15 +211,12 @@ statements(res)		::= statement(s). { res = array(s);}
 statements(res)		::= statements(s1) COMMA statement(s). { s1[]=s; res = s1;}
 
 statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'value'=>e);}
-//statement(res)		::= DOLLAR varvar(v) EQUAL ID(i). { res = array('var' => v, 'value'=>'\''.i.'\'');}
 
 //
 // expressions
 //
 									// simple expression
 expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
-//expr(res)				 ::= UNQ_STR(s). { res = '\''.s.'\''; }
-//expr(res)				 ::= ID(i). { res = i; }
 expr(res)				 ::= exprs(e).	{res = e;}
 expr(res)        ::= expr(e) modifier(m) modparameters(p). {             
                                                             if ($this->smarty->plugin_handler->loadSmartyPlugin(m[0],'modifier')) {
@@ -304,6 +306,8 @@ variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(
                   // stream variable
 variable(res)	   ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2. '\')';}
 
+varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'index'=>a);}
+
 //
 // array index
 //
@@ -316,7 +320,6 @@ arrayindex        ::= . {return;}
 										// Smarty2 style index 
 indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
-//indexdef(res)   ::= DOT DOLLAR varvar(v). { res = "[". '$_smarty_tpl->getVariable('. v .')->value'."]";}
 indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
 										// section tag index

@@ -6,8 +6,6 @@
 * @author Uwe Tews 
 */
 
-require_once SMARTY_DIR . 'Smarty.class.php';
-
 /**
 * class for clearing all assigned variables tests
 */
@@ -15,9 +13,8 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->old_error_level = error_reporting();
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
         $this->smarty->assign('foo','foo');
         $this->smarty->data = new Smarty_Data($this->smarty);
         $this->smarty->data->assign('bar','bar');
@@ -25,11 +22,9 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
         $this->smarty->tpl->assign('blar','blar');
     } 
 
-    public function tearDown()
+    public static function isRunnable()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
+        return true;
     } 
 
     /**

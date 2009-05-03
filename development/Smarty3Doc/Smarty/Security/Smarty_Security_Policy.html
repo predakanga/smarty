@@ -1,0 +1,282 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Smarty_Security_Policy</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Smarty_Security_Policy</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+													</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This class does contain the security settings</p>
+		<p class="notes">
+			Located in <a class="field" href="_distribution---libs---Security.class.php.html">/distribution/libs/Security.class.php</a> (line <span class="field">16</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																																																																																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$allow_constants" title="details" class="var-name">$allow_constants</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$allow_super_globals" title="details" class="var-name">$allow_super_globals</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$modifiers" title="details" class="var-name">$modifiers</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$php_functions" title="details" class="var-name">$php_functions</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">integer</span>
+					<a href="#$php_handling" title="details" class="var-name">$php_handling</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$secure_dir" title="details" class="var-name">$secure_dir</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$streams" title="details" class="var-name">$streams</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">array</span>
+					<a href="#$trusted_dir" title="details" class="var-name">$trusted_dir</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<span class="disabled">Vars</span>
+						
+			
+								</div>
+		<div class="info-box-body">
+			<a name="var$allow_constants" id="$allow_constants"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$allow_constants</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">80</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$allow_super_globals" id="$allow_super_globals"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$allow_super_globals</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">84</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$modifiers" id="$modifiers"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$modifiers</span>
+			 = <span class="var-default">array('escape','count')</span>			(line <span class="line-number">67</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is an array of trusted modifers.</p>
+<p class="description"><p>If empty all modifiers are allowed.  If set to 'none' none is allowed.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$php_functions" id="$php_functions"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$php_functions</span>
+			 = <span class="var-default">array('isset', 'empty',<br />            'count', 'sizeof','in_array', 'is_array','time')</span>			(line <span class="line-number">57</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is an array of trusted PHP functions.</p>
+<p class="description"><p>If empty all functions are allowed.  If set to 'none' none is allowed.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$php_handling" id="$php_handling"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">integer</span>
+			<span class="var-name">$php_handling</span>
+			 = <span class="var-default"> SMARTY_PHP_REMOVE</span>			(line <span class="line-number">29</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This determines how Smarty handles &quot;&lt;?php ... ?&gt;&quot; tags in templates.</p>
+<p class="description"><p>possible values:  <ul><li>SMARTY_PHP_PASSTHRU -&gt; echo PHP tags as they are</li><li>SMARTY_PHP_QUOTE    -&gt; escape tags as entities</li><li>SMARTY_PHP_REMOVE   -&gt; remove php tags</li><li>SMARTY_PHP_ALLOW    -&gt; execute php tags</li></ul></p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$secure_dir" id="$secure_dir"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$secure_dir</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">38</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is the list of template directories that are considered secure.</p>
+<p class="description"><p>One directory per array element.  $template_dir is in this list implicitly.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$streams" id="$streams"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$streams</span>
+			 = <span class="var-default">array('file')</span>			(line <span class="line-number">76</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is an array of trusted streams.</p>
+<p class="description"><p>If empty all streams are allowed.  If set to 'none' none is allowed.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$trusted_dir" id="$trusted_dir"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">array</span>
+			<span class="var-name">$trusted_dir</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">47</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">This is an array of directories where trusted php scripts reside.</p>
+<p class="description"><p>$security is disabled during their inclusion/execution.</p></p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 03 May 2009 15:46:54 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</div></body>
+</html>

@@ -7,24 +7,55 @@
 */
 require_once 'PHPUnit/Framework.php';
 
-define ('SMARTY_DIR','../../distribution/libs/');
+define ('SMARTY_DIR', '../../distribution/libs/');
+
+require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for running test suite
 */
 class SmartyTests extends PHPUnit_Framework_TestSuite {
+    public function __construct()
+    {
+        $this->smarty = new Smarty();
+        $this->smarty->error_reporting = E_ALL;
+    } 
+
+    public static function init()
+    {
+        $smarty = Smarty::instance();
+        $smarty->template_objects = null;
+        $smarty->config_vars = array();
+        $smarty->global_tpl_vars = array();
+        $smarty->template_functions = null;
+        $smarty->tpl_vars = array();
+        $smarty->force_compile = false;
+        $smarty->caching = false;
+        $smarty->_smarty_vars = array();
+        $smarty->registered_plugins = array();
+        $smarty->default_plugin_handler_func = null;
+        $smarty->registered_objects = array();
+        $smarty->registered_filters = array();
+        $smarty->autoload_filters = array();
+        $smarty->variable_filter = true;
+        $smarty->use_sub_dirs = false;
+        $smarty->config_overwrite = true;
+        $smarty->config_booleanize = true;
+        $smarty->config_read_hidden = true;
+        $smarty->security_policy = null;
+        $smarty->left_delimiter = '{';
+        $smarty->right_delimiter = '}';
+        $smarty->enableSecurity();
+    } 
     /**
     * look for test units and run them
     */
     public static function suite()
     {
-        $testorder = array('DoubleQuotedStringTests','CoreTests','ClearCompiledTests','ClearCacheTests','StringResourceTests','FileResourceTests'
-                            ,'PhpResourceTests','CompileAssignTests');
-
-//        PHPUnit_Util_Filter::addDirectoryToWhitelist(SMARTY_DIR);
-        PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../');
-//        PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
-
+        $testorder = array('DoubleQuotedStringTests', 'CoreTests', 'ClearCompiledTests', 'ClearCacheTests', 'StringResourceTests', 'FileResourceTests' , 'PhpResourceTests', 'CompileAssignTests'); 
+        // PHPUnit_Util_Filter::addDirectoryToWhitelist(SMARTY_DIR);
+        PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../'); 
+        // PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
         $suite = new self('Smarty 3 - Unit Tests Report'); 
         // load test which should run in specific order
         foreach ($testorder as $class) {

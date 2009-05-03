@@ -6,24 +6,19 @@
 * @author Uwe Tews 
 */
 
-require_once SMARTY_DIR . 'Smarty.class.php';
-
 /**
 * class for append_by_ref tests
 */
 class AppendByRefTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->old_error_level = error_reporting();
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
     } 
 
-    public function tearDown()
+    public static function isRunnable()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
+        return true;
     } 
 
     /**

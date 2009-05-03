@@ -6,26 +6,19 @@
 * @author Uwe Tews 
 */
 
-require_once SMARTY_DIR . 'Smarty.class.php';
-
 /**
 * class for capture tags tests
 */
 class CompileCaptureTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->smarty->enableSecurity();
-        $this->smarty->force_compile = true;
-        $this->old_error_level = error_reporting();
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
     } 
 
-    public function tearDown()
+    public static function isRunnable()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
+        return true;
     } 
 
     /**
@@ -56,7 +49,7 @@ class CompileCaptureTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{capture}hello world{/capture}{$smarty.capture.default}');
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
-    /*  The following test has been disabled. It fails only in PHPunit
+    /*  The following test has been disabled. It fails only in PHPunit  
     public function testCapture6()
     {
         $tpl = $this->smarty->createTemplate('string:{capture assign=foo}hello {capture assign=bar}this is my {/capture}world{/capture}{$foo} {$bar}');

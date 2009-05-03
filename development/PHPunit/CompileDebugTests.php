@@ -14,18 +14,13 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 class CompileDebugTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->smarty->enableSecurity();
-        $this->smarty->force_compile = true;
-        $this->old_error_level = error_reporting();
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
     } 
 
-    public function tearDown()
+    public static function isRunnable()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
+        return true;
     } 
 
     /**
@@ -40,12 +35,15 @@ class CompileDebugTests extends PHPUnit_Framework_TestCase {
     /**
     * test debug property
     */
-//    {
-//        $this->smarty->debugging = true;
-//        $tpl = $this->smarty->createTemplate("string:hello world");
-//        $_contents = $this->smarty->fetch($tpl);
-//        $this->assertContains("Smarty Debug Console", $_contents);
-//    } 
+    public function testDebugProperty()
+    {
+        $this->smarty->debugging = true;
+        $tpl = $this->smarty->createTemplate("string:hello world");
+        ob_start();
+        $this->smarty->display($tpl);
+        $_contents = ob_get_clean();
+        $this->assertContains("Smarty Debug Console", $_contents);
+    } 
 } 
 
 ?>

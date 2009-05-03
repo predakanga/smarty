@@ -6,28 +6,22 @@
 * @author Uwe Tews 
 */
 
-require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for security test
 */
 class CommentsTests extends PHPUnit_Framework_TestCase {
+
     public function setUp()
     {
-//        $this->markTestSkipped('comment tests are skiped.');
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->smarty->enableSecurity();
-        $this->smarty->force_compile = true;
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
         $this->smarty->comment_mode = 1;
-        $this->old_error_level = error_reporting();
     } 
 
-    public function tearDown()
+    public static function isRunnable()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
+        return true;
     } 
 
     /**

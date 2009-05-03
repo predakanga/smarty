@@ -14,10 +14,8 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->old_error_level = error_reporting();
-        $this->smarty->enableSecurity();
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
         $this->smarty->security_policy->streams = array('global');
         $this->smarty->assign('foo', 'bar');
         stream_wrapper_register("global", "ResourceStream")
@@ -29,10 +27,12 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
-        stream_wrapper_unregister('global');
+        stream_wrapper_unregister("global");
+    } 
+
+    public static function isRunnable()
+    {
+        return true;
     } 
 
     /**

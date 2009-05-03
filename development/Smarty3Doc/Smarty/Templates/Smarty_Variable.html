@@ -25,7 +25,7 @@
 <p class="short-description">class for the Smarty variable object</p>
 <p class="description"><p>This class defines the Smarty variable object</p></p>
 		<p class="notes">
-			Located in <a class="field" href="_distribution---libs---sysplugins---internal.templatebase.php.html">/distribution/libs/sysplugins/internal.templatebase.php</a> (line <span class="field">348</span>)
+			Located in <a class="field" href="_distribution---libs---sysplugins---internal.templatebase.php.html">/distribution/libs/sysplugins/internal.templatebase.php</a> (line <span class="field">395</span>)
 		</p>
 		
 				
@@ -50,11 +50,11 @@
 			<div class="var-summary">
 																																								<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$global" title="details" class="var-name">$global</a>
+					<a href="#$nocache" title="details" class="var-name">$nocache</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
-					<a href="#$nocache" title="details" class="var-name">$nocache</a>
+					<a href="#$scope" title="details" class="var-name">$scope</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
@@ -80,7 +80,7 @@
 												<div class="method-definition">
 											<span class="method-result">Smarty_Variable</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
-											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$global</span> = <span class="var-default">false</span>])
+											([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>])
 									</div>
 								</div>
 		</div>
@@ -99,14 +99,14 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$global" id="$global"><!-- --></A>
-<div class="oddrow">
+			<a name="var$nocache" id="$nocache"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$global</span>
-						(line <span class="line-number">352</span>)
+			<span class="var-name">$nocache</span>
+						(line <span class="line-number">398</span>)
 		</span>
 	</div>
 
@@ -120,14 +120,14 @@
 		
 
 </div>
-<a name="var$nocache" id="$nocache"><!-- --></A>
-<div class="evenrow">
+<a name="var$scope" id="$scope"><!-- --></A>
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$nocache</span>
-						(line <span class="line-number">351</span>)
+			<span class="var-name">$scope</span>
+						(line <span class="line-number">399</span>)
 		</span>
 	</div>
 
@@ -142,13 +142,13 @@
 
 </div>
 <a name="var$value" id="$value"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$value</span>
-						(line <span class="line-number">350</span>)
+						(line <span class="line-number">397</span>)
 		</span>
 	</div>
 
@@ -179,10 +179,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">360</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">407</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -196,7 +196,7 @@
 		<span class="method-name">
 			__construct
 		</span>
-					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$global</span> = <span class="var-default">false</span>])
+					([<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>])
 			</div>
 	
 			<ul class="parameters">
@@ -208,7 +208,7 @@
 				<span class="var-name">$nocache</span><span class="var-description">: if true any output of this variable will be not cached</span>			</li>
 					<li>
 				<span class="var-type">boolean</span>
-				<span class="var-name">$global</span><span class="var-description">: if true the variable will have global scope</span>			</li>
+				<span class="var-name">$scope</span><span class="var-description">: the scope the variable will have  (local,parent or root)</span>			</li>
 				</ul>
 		
 			
@@ -219,7 +219,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 05 Apr 2009 17:23:04 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 03 May 2009 15:46:48 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

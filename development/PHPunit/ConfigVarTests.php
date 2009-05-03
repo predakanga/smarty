@@ -14,18 +14,13 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 class ConfigVarTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->smarty->enableSecurity();
-        $this->smarty->force_compile = true;
-        $this->old_error_level = error_reporting();
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
     } 
 
-    public function tearDown()
+    public static function isRunnable()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
+        return true;
     } 
 
     /**
@@ -75,6 +70,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableHidden()
     {
+        $this->smarty->config_read_hidden = true;
         $this->smarty->config_load('test.conf');
         $this->assertEquals("Welcome to Smarty!Hidden Section", $this->smarty->fetch('string:{#title#}{#hiddentext#}'));
     } 
@@ -93,6 +89,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableAllSectionsTemplate()
     {
+        $this->smarty->config_overwrite = true;
         $this->assertEquals("Welcome to Smarty! Hello Section1 Hello Section2", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{#title#} {#sec1#} {#sec2#}'));
     } 
     /**
@@ -115,6 +112,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableBooleanizeOn()
     {
+        $this->smarty->config_booleanize = true;
         $this->assertEquals("passed", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{if #booleanon# === true}passed{/if}'));
     } 
     /**

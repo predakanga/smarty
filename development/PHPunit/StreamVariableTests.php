@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for stream variables tests
@@ -14,11 +13,8 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 class StreamVariableTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
-        $this->smarty->force_compile = true;
-        $this->smarty->enableSecurity();
-        $this->old_error_level = error_reporting();
+        $this->smarty = Smarty::instance();
+        SmartyTests::init();
         stream_wrapper_register("var", "VariableStream")
         or die("Failed to register protocol");
         $fp = fopen("var://foo", "r+");
@@ -28,10 +24,12 @@ class StreamVariableTests extends PHPUnit_Framework_TestCase {
 
     public function tearDown()
     {
-        error_reporting($this->old_error_level);
-        unset($this->smarty);
-        Smarty::$template_objects = null;
-        stream_wrapper_unregister('var');
+        stream_wrapper_unregister("var");
+    } 
+
+    public static function isRunnable()
+    {
+        return true;
     } 
 
     /**
