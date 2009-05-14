@@ -1,7 +1,7 @@
 
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamResourceTests.php on line 222
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamResourceTests.php on line 221
 
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 87
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 100
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
 Test Suite
@@ -148,7 +148,7 @@ Test Suite
  .
 
  ModifierTests
- .......
+ ..........
 
  PrintNocacheTests
  ....
@@ -207,6 +207,6 @@ Test Suite
  XmlTests
  ...
 
-Time: 6 seconds
+Time: 9 seconds
 
-OK (478 tests, 578 assertions)
+OK (481 tests, 585 assertions)

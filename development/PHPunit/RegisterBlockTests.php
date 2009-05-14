@@ -81,7 +81,7 @@ function myblock($params, $content, &$smarty_tpl, &$repeat)
 } 
 
 class myblockclass {
-    function execute($params, $content, &$smarty_tpl, &$repeat)
+    static function execute($params, $content, &$smarty_tpl, &$repeat)
     {
         return "hello world";
     } 

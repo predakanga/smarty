@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Smarty 3 - Unit Tests Report</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="container.css">
     <script type="text/javascript" src="yahoo-dom-event.js"></script>
@@ -12,7 +12,7 @@
 
   <body class="yui-skin-sam">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr><td class="title">Smarty 3 - Unit Tests Report</td></tr>
+      <tr><td class="title"></td></tr>
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
 
       <tr>
@@ -20,7 +20,7 @@
           <table cellpadding="1" border="0" width="100%">
             <tr>
               <td class="headerItem" width="20%">Current file:</td>
-              <td class="headerValue" width="80%"><a href="index.html">C:\wamp\www\__smarty3Alpha</a>\<a href="distribution.html">distribution</a>\<a href="distribution_libs.html">libs</a>\<a href="distribution_libs_plugins.html">plugins</a>\<a href="distribution_libs_plugins_securitypolicy.default.php.html">securitypolicy.default.php</a></td>
+              <td class="headerValue" width="80%"><a href="index.html">C:\wamp\www\__smarty3Alpha</a>\<a href="distribution.html">distribution</a>\<a href="distribution_libs.html">libs</a>\<a href="distribution_libs_Security.class.php.html">Security.class.php</a></td>
             </tr>
             <tr>
               <td class="legendItem" width="20%">Legend:</td>
@@ -136,7 +136,7 @@
 <span class="lineNum" id="container3"><a name="3"></a><a href="#3" id="line3">       3</a> </span>                : * Smarty plugin                                                           
 <span class="lineNum" id="container4"><a name="4"></a><a href="#4" id="line4">       4</a> </span>                : *                                                                         
 <span class="lineNum" id="container5"><a name="5"></a><a href="#5" id="line5">       5</a> </span>                : * @package Smarty                                                         
-<span class="lineNum" id="container6"><a name="6"></a><a href="#6" id="line6">       6</a> </span>                : * @subpackage PluginsConfiguration                                        
+<span class="lineNum" id="container6"><a name="6"></a><a href="#6" id="line6">       6</a> </span>                : * @subpackage Security                                                    
 <span class="lineNum" id="container7"><a name="7"></a><a href="#7" id="line7">       7</a> </span>                : * @author Uwe Tews                                                        
 <span class="lineNum" id="container8"><a name="8"></a><a href="#8" id="line8">       8</a> </span>                : */                                                                        
 <span class="lineNum" id="container9"><a name="9"></a><a href="#9" id="line9">       9</a> </span><span class="lineCov">              1 :     define('SMARTY_PHP_PASSTHRU',   0);                                   </span>
@@ -198,13 +198,26 @@
 <span class="lineNum" id="container65"><a name="65"></a><a href="#65" id="line65">      65</a> </span>                :     * @var array                                                          
 <span class="lineNum" id="container66"><a name="66"></a><a href="#66" id="line66">      66</a> </span>                :     */                                                                    
 <span class="lineNum" id="container67"><a name="67"></a><a href="#67" id="line67">      67</a> </span>                :     public $modifiers = array('escape','count');                          
-<span class="lineNum" id="container68"><a name="68"></a><a href="#68" id="line68">      68</a> </span>                :     /**                                                                   
-<span class="lineNum" id="container69"><a name="69"></a><a href="#69" id="line69">      69</a> </span>                :     + flag if constants can be accessed from template                     
-<span class="lineNum" id="container70"><a name="70"></a><a href="#70" id="line70">      70</a> </span>                :     */                                                                    
-<span class="lineNum" id="container71"><a name="71"></a><a href="#71" id="line71">      71</a> </span>                :     public $allow_constants = true;                                       
-<span class="lineNum" id="container72"><a name="72"></a><a href="#72" id="line72">      72</a> </span>                : }                                                                         
-<span class="lineNum" id="container73"><a name="73"></a><a href="#73" id="line73">      73</a> </span>                :                                                                           
-<span class="lineNum" id="container74"><a name="74"></a><a href="#74" id="line74">      74</a> </span>                : ?&gt;                                                                        
+<span class="lineNum" id="container68"><a name="68"></a><a href="#68" id="line68">      68</a> </span>                :                                                                           
+<span class="lineNum" id="container69"><a name="69"></a><a href="#69" id="line69">      69</a> </span>                :     /**                                                                   
+<span class="lineNum" id="container70"><a name="70"></a><a href="#70" id="line70">      70</a> </span>                :     * This is an array of trusted streams.                                
+<span class="lineNum" id="container71"><a name="71"></a><a href="#71" id="line71">      71</a> </span>                :     *                                                                     
+<span class="lineNum" id="container72"><a name="72"></a><a href="#72" id="line72">      72</a> </span>                :     * If empty all streams are allowed.                                   
+<span class="lineNum" id="container73"><a name="73"></a><a href="#73" id="line73">      73</a> </span>                :     * If set to 'none' none is allowed.                                   
+<span class="lineNum" id="container74"><a name="74"></a><a href="#74" id="line74">      74</a> </span>                :     * @var array                                                          
+<span class="lineNum" id="container75"><a name="75"></a><a href="#75" id="line75">      75</a> </span>                :     */                                                                    
+<span class="lineNum" id="container76"><a name="76"></a><a href="#76" id="line76">      76</a> </span>                :     public $streams = array('file');                                      
+<span class="lineNum" id="container77"><a name="77"></a><a href="#77" id="line77">      77</a> </span>                :     /**                                                                   
+<span class="lineNum" id="container78"><a name="78"></a><a href="#78" id="line78">      78</a> </span>                :     + flag if constants can be accessed from template                     
+<span class="lineNum" id="container79"><a name="79"></a><a href="#79" id="line79">      79</a> </span>                :     */                                                                    
+<span class="lineNum" id="container80"><a name="80"></a><a href="#80" id="line80">      80</a> </span>                :     public $allow_constants = true;                                       
+<span class="lineNum" id="container81"><a name="81"></a><a href="#81" id="line81">      81</a> </span>                :     /**                                                                   
+<span class="lineNum" id="container82"><a name="82"></a><a href="#82" id="line82">      82</a> </span>                :     + flag if super globals can be accessed from template                 
+<span class="lineNum" id="container83"><a name="83"></a><a href="#83" id="line83">      83</a> </span>                :     */                                                                    
+<span class="lineNum" id="container84"><a name="84"></a><a href="#84" id="line84">      84</a> </span>                :     public $allow_super_globals = true;                                   
+<span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span>                : }                                                                         
+<span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span>                :                                                                           
+<span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span>                : ?&gt;                                                                        
 
 </pre>
         </td>
@@ -213,7 +226,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.15</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Mon Mar 23 0:09:17 CET 2009.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.15</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Thu May 14 12:49:14 CEST 2009.</td></tr>
     </table>
 
     <br />

@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for stream resource tests

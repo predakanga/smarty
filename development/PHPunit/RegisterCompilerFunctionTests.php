@@ -80,7 +80,7 @@ function mycompilerfunction($params, &$smarty)
     return "echo 'hello world'";
 } 
 class mycompilerfunctionclass {
-    function execute($params, &$smarty)
+    static function execute($params, &$smarty)
     {
         return "echo 'hello world'";
     } 

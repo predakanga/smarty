@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-
 /**
 * class for modifier tests
 */
@@ -44,6 +43,28 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:6}');
         $this->assertEquals("hel...", $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test plugin as modifier with variable
+    */
+    public function testPluginModifierVar()
+    {
+        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:$foo}');
+        $tpl->assign('foo', 6);
+        $this->assertEquals("hel...", $this->smarty->fetch($tpl));
+    } 
+    public function testPluginModifierVar2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:$foo:"   "}');
+        $tpl->assign('foo', 6);
+        $this->assertEquals("hel   ", $this->smarty->fetch($tpl));
+    } 
+    public function testPluginModifierVar3()
+    {
+        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:$foo:$bar}');
+        $tpl->assign('foo', 6);
+        $tpl->assign('bar', '   ');
+        $this->assertEquals("hel   ", $this->smarty->fetch($tpl));
     } 
     /**
     * test modifier chaining

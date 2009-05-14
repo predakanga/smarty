@@ -80,7 +80,7 @@ function mymodifier($params, &$smarty)
     return "hello world";
 } 
 class mymodifierclass {
-    function execute($params, &$smarty)
+    static function execute($params, &$smarty)
     {
         return "hello world";
     } 

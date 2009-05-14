@@ -218,6 +218,9 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 									// simple expression
 expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
 expr(res)				 ::= exprs(e).	{res = e;}
+                 // resources/streams
+//expr(res)	       ::= ID(i) COLON expr(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. trim(i2,"'"). '\')';}
+expr(res)	       ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2 . '\')';}
 expr(res)        ::= expr(e) modifier(m) modparameters(p). {             
                                                             if ($this->smarty->plugin_handler->loadSmartyPlugin(m[0],'modifier')) {
                                                                       res = "\$_smarty_tpl->smarty->plugin_handler->".m[0] . "(array(". e . p ."),'modifier')";
@@ -273,8 +276,6 @@ value(res)	     ::= SINGLEQUOTE text(t) SINGLEQUOTE. { res = "'".t."'"; }
 value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
 									// double quoted string
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".str_replace('\"','"',s)."'"; }
-//value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".addcslashes(str_replace(array('\"'),array('"'),s),"'")."'"; }
-//value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".s."'"; var_dump(s);}
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
 
 									// static class methode call
@@ -303,8 +304,7 @@ variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariab
 variable(res)    ::= object(o). { res = o; }
                   // config variable
 variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
-                  // stream variable
-variable(res)	   ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2. '\')';}
+                  // stream access
 
 varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'index'=>a);}
 

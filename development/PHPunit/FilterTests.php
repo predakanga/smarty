@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
 * class for filter tests
@@ -95,7 +94,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
     } 
 } 
 class myprefilterclass {
-    function myprefilter($input)
+    static function myprefilter($input)
     {
         return '{$foo}' . $input;
     } 

@@ -18,7 +18,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public function __construct()
     {
         $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL;
+        $this->smarty->error_reporting = E_ALL + E_STRICT;
     } 
 
     public static function init()

@@ -130,7 +130,7 @@ function myfilter($input)
     return $input;
 } 
 class myfilterclass {
-    function execute($input)
+    static function execute($input)
     {
         return $input;
     } 

@@ -3,7 +3,7 @@
 <html lang="en">
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-    <title>Smarty 3 - Unit Tests Report</title>
+    <title></title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="container.css">
     <script type="text/javascript" src="yahoo-dom-event.js"></script>
@@ -12,7 +12,7 @@
 
   <body class="yui-skin-sam">
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-      <tr><td class="title">Smarty 3 - Unit Tests Report</td></tr>
+      <tr><td class="title"></td></tr>
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
 
       <tr>
@@ -175,15 +175,15 @@
 <span class="lineNum" id="container20"><a name="20"></a><a href="#20" id="line20">      20</a> </span>                :     */                                                                          
 <span class="lineNum" id="container21"><a name="21"></a><a href="#21" id="line21">      21</a> </span>                :     public function compile($args, $compiler)                                   
 <span class="lineNum" id="container22"><a name="22"></a><a href="#22" id="line22">      22</a> </span>                :     {                                                                           
-<span class="lineNum" id="container23"><a name="23"></a><a href="#23" id="line23">      23</a> </span><span class="lineCov">              7 :         $this-&gt;compiler = $compiler;                                            </span>
+<span class="lineNum" id="container23"><a name="23"></a><a href="#23" id="line23">      23</a> </span><span class="lineCov">             24 :         $this-&gt;compiler = $compiler;                                            </span>
 <span class="lineNum" id="container24"><a name="24"></a><a href="#24" id="line24">      24</a> </span>                :         // check and get attributes                                             
-<span class="lineNum" id="container25"><a name="25"></a><a href="#25" id="line25">      25</a> </span><span class="lineCov">              7 :         $_attr = $this-&gt;_get_attributes($args);                                 </span>
+<span class="lineNum" id="container25"><a name="25"></a><a href="#25" id="line25">      25</a> </span><span class="lineCov">             24 :         $_attr = $this-&gt;_get_attributes($args);                                 </span>
 <span class="lineNum" id="container26"><a name="26"></a><a href="#26" id="line26">      26</a> </span>                :                                                                                 
-<span class="lineNum" id="container27"><a name="27"></a><a href="#27" id="line27">      27</a> </span><span class="lineCov">              7 :         $_open_tag = $this-&gt;_close_tag(array('foreach', 'foreachelse'));        </span>
-<span class="lineNum" id="container28"><a name="28"></a><a href="#28" id="line28">      28</a> </span><span class="lineCov">              7 :         if ($_open_tag == 'foreachelse')                                        </span>
-<span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span><span class="lineCov">              7 :             return &quot;&lt;?php } ?&gt;&quot;;                                                </span>
+<span class="lineNum" id="container27"><a name="27"></a><a href="#27" id="line27">      27</a> </span><span class="lineCov">             24 :         $_open_tag = $this-&gt;_close_tag(array('foreach', 'foreachelse'));        </span>
+<span class="lineNum" id="container28"><a name="28"></a><a href="#28" id="line28">      28</a> </span><span class="lineCov">             24 :         if ($_open_tag == 'foreachelse')                                        </span>
+<span class="lineNum" id="container29"><a name="29"></a><a href="#29" id="line29">      29</a> </span><span class="lineCov">             24 :             return &quot;&lt;?php } ?&gt;&quot;;                                                </span>
 <span class="lineNum" id="container30"><a name="30"></a><a href="#30" id="line30">      30</a> </span>                :         else                                                                    
-<span class="lineNum" id="container31"><a name="31"></a><a href="#31" id="line31">      31</a> </span><span class="lineCov">              1 :             return &quot;&lt;?php }}} ?&gt;&quot;;                                              </span>
+<span class="lineNum" id="container31"><a name="31"></a><a href="#31" id="line31">      31</a> </span><span class="lineCov">             12 :             return &quot;&lt;?php }} ?&gt;&quot;;                                               </span>
 <span class="lineNum" id="container32"><a name="32"></a><a href="#32" id="line32">      32</a> </span><span class="lineDeadCode">                :     }                                                                           </span>
 <span class="lineNum" id="container33"><a name="33"></a><a href="#33" id="line33">      33</a> </span>                : }                                                                               
 <span class="lineNum" id="container34"><a name="34"></a><a href="#34" id="line34">      34</a> </span>                :                                                                                 
@@ -196,7 +196,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.15</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Mon Mar 23 0:09:17 CET 2009.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.15</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Thu May 14 12:49:14 CEST 2009.</td></tr>
     </table>
 
     <br />
@@ -208,37 +208,37 @@
       YAHOO.phpunit.container.panelsData = {
         "panel13": {
           "header": "1 test covers line 13",
-          "body": "<ul><li class=\"testPassed\">testForeach1(CompileForeachTests)</li></ul>",
+          "body": "<ul><li class=\"testPassed\">testAssignOld8(CompileAssignTests)</li></ul>",
           "footer": ""
         },
         "panel23": {
-          "header": "7 tests cover line 23",
-          "body": "<ul><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li></ul>",
+          "header": "24 tests cover line 23",
+          "body": "<ul><li class=\"testPassed\">testAssignOld8(CompileAssignTests)</li><li class=\"testPassed\">testAssignOld9(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew6(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew7(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend2(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend3(CompileAssignTests)</li><li class=\"testPassed\">testSimpleArrayDefinition(ArrayTests)</li><li class=\"testPassed\">testDebugTag(CompileDebugTests)</li><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach1(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach2(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach3(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach4(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach5(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach6(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach7(CompileForeachTests)</li><li class=\"testPassed\">testConfigVariableOverwriteFalse(ConfigVarTests)</li></ul>",
           "footer": ""
         },
         "panel25": {
-          "header": "7 tests cover line 25",
-          "body": "<ul><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li></ul>",
+          "header": "24 tests cover line 25",
+          "body": "<ul><li class=\"testPassed\">testAssignOld8(CompileAssignTests)</li><li class=\"testPassed\">testAssignOld9(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew6(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew7(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend2(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend3(CompileAssignTests)</li><li class=\"testPassed\">testSimpleArrayDefinition(ArrayTests)</li><li class=\"testPassed\">testDebugTag(CompileDebugTests)</li><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach1(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach2(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach3(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach4(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach5(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach6(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach7(CompileForeachTests)</li><li class=\"testPassed\">testConfigVariableOverwriteFalse(ConfigVarTests)</li></ul>",
           "footer": ""
         },
         "panel27": {
-          "header": "7 tests cover line 27",
-          "body": "<ul><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li></ul>",
+          "header": "24 tests cover line 27",
+          "body": "<ul><li class=\"testPassed\">testAssignOld8(CompileAssignTests)</li><li class=\"testPassed\">testAssignOld9(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew6(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew7(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend2(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend3(CompileAssignTests)</li><li class=\"testPassed\">testSimpleArrayDefinition(ArrayTests)</li><li class=\"testPassed\">testDebugTag(CompileDebugTests)</li><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach1(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach2(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach3(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach4(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach5(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach6(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach7(CompileForeachTests)</li><li class=\"testPassed\">testConfigVariableOverwriteFalse(ConfigVarTests)</li></ul>",
           "footer": ""
         },
         "panel28": {
-          "header": "7 tests cover line 28",
-          "body": "<ul><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li></ul>",
+          "header": "24 tests cover line 28",
+          "body": "<ul><li class=\"testPassed\">testAssignOld8(CompileAssignTests)</li><li class=\"testPassed\">testAssignOld9(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew6(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew7(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend2(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend3(CompileAssignTests)</li><li class=\"testPassed\">testSimpleArrayDefinition(ArrayTests)</li><li class=\"testPassed\">testDebugTag(CompileDebugTests)</li><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach1(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach2(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach3(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach4(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach5(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach6(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach7(CompileForeachTests)</li><li class=\"testPassed\">testConfigVariableOverwriteFalse(ConfigVarTests)</li></ul>",
           "footer": ""
         },
         "panel29": {
-          "header": "7 tests cover line 29",
-          "body": "<ul><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li></ul>",
+          "header": "24 tests cover line 29",
+          "body": "<ul><li class=\"testPassed\">testAssignOld8(CompileAssignTests)</li><li class=\"testPassed\">testAssignOld9(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew6(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew7(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend2(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend3(CompileAssignTests)</li><li class=\"testPassed\">testSimpleArrayDefinition(ArrayTests)</li><li class=\"testPassed\">testDebugTag(CompileDebugTests)</li><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testForeach2(CompileForeachTests)</li><li class=\"testPassed\">testForeach3(CompileForeachTests)</li><li class=\"testPassed\">testForeach4(CompileForeachTests)</li><li class=\"testPassed\">testForeach5(CompileForeachTests)</li><li class=\"testPassed\">testForeach6(CompileForeachTests)</li><li class=\"testPassed\">testForeach7(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach1(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach2(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach3(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach4(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach5(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach6(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach7(CompileForeachTests)</li><li class=\"testPassed\">testConfigVariableOverwriteFalse(ConfigVarTests)</li></ul>",
           "footer": ""
         },
         "panel31": {
-          "header": "1 test covers line 31",
-          "body": "<ul><li class=\"testPassed\">testForeach1(CompileForeachTests)</li></ul>",
+          "header": "12 tests cover line 31",
+          "body": "<ul><li class=\"testPassed\">testAssignOld8(CompileAssignTests)</li><li class=\"testPassed\">testAssignOld9(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew6(CompileAssignTests)</li><li class=\"testPassed\">testAssignNew7(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend2(CompileAssignTests)</li><li class=\"testPassed\">testAssignArrayAppend3(CompileAssignTests)</li><li class=\"testPassed\">testSimpleArrayDefinition(ArrayTests)</li><li class=\"testPassed\">testDebugTag(CompileDebugTests)</li><li class=\"testPassed\">testForeach1(CompileForeachTests)</li><li class=\"testPassed\">testNewForeach1(CompileForeachTests)</li><li class=\"testPassed\">testConfigVariableOverwriteFalse(ConfigVarTests)</li></ul>",
           "footer": ""
         },
       "dummy": ""

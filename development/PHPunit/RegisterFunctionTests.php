@@ -83,7 +83,7 @@ function myfunction($params, &$smarty)
     return "hello world";
 } 
 class myfunctionclass {
-    function execute($params, &$smarty)
+    static function execute($params, &$smarty)
     {
         return "hello world";
     } 
