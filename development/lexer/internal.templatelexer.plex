@@ -97,8 +97,9 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
+nl = /\r\n|\n|\r/
 php = /\<\?php.*\?\>/
-xml = /\<\?xml.*\?\>/
+xml = /\<\?xml/
 shorttagstart = /\<\?=/
 shorttagend = /\?\>/
 phpstart = /SMARTYldelphpSMARTYrdel/
@@ -170,6 +171,9 @@ other = /./
 */
 /*!lex2php
 %statename START
+nl {
+  $this->token = Smarty_Internal_Templateparser::TP_SPACE;
+}
 xml {
   $this->token = Smarty_Internal_Templateparser::TP_XML;
 }

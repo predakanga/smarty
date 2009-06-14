@@ -61,7 +61,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELSLASH LDEL RDEL XML PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART INTEGER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
+%fallback     OTHER LDELSLASH LDEL RDEL PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART INTEGER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
               VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
               NOT LAND LOR QUOTE SINGLEQUOTE BOOLEAN NULL AS ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
               ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY ISIN.
@@ -129,6 +129,7 @@ template_element(res)::= SHORTTAGSTART  variable(v) SHORTTAGEND. {if (!$this->te
                                       }	}
 											// XML tag
 template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
+template_element(res)::= SHORTTAGEND. {res = $this->cacher->processNocacheCode("<?php echo '?>';?>\n", $this->compiler, true, true);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	
 

@@ -65,6 +65,14 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{blockplugintest}hello world{/blockplugintest}');
         $this->assertEquals('block test', $this->smarty->fetch($tpl));
     } 
+    /**
+    * test block plugin repeat function
+    */
+    public function testBlockPluginRepeat()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->assertEquals('2345', $this->smarty->fetch('string:{testblock}{/testblock}'));
+    } 
 } 
 function myblockplugintest($params, $content, &$smarty_tpl, &$repeat)
 {
