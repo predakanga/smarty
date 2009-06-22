@@ -57,6 +57,17 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
+    * test block plugin tag in template file
+    */
+    public function testBlockPluginFromTemplateFileCache()
+    {
+        $this->smarty->force_compile = false;
+        $this->smarty->caching = 1;
+        $this->smarty->cache_lifetime = 10;
+        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty);
+        $this->assertEquals("abc", $this->smarty->fetch($tpl));
+    } 
+    /**
     * test block plugin function definition in script
     */
     public function testBlockPluginRegisteredFunction()

@@ -16,7 +16,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
         SmartyTests::init();
         $this->smarty->force_compile = true;
         $this->object = new RegObject;
-        $this->smarty->register_object('test', $this->object, 'myhello', false, 'myblock');
+        $this->smarty->register_object('objecttest', $this->object, 'myhello', false, 'myblock');
     } 
 
     public static function isRunnable()
@@ -29,7 +29,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredObjectFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{test->myhello}');
+        $tpl = $this->smarty->createTemplate('string:{objecttest->myhello}');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
 
@@ -38,7 +38,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredObjectBlockFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{test->myblock}hello world{/test->myblock}');
+        $tpl = $this->smarty->createTemplate('string:{objecttest->myblock}hello world{/objecttest->myblock}');
         $this->assertEquals('block test', $this->smarty->fetch($tpl));
     } 
 } 

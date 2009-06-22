@@ -97,7 +97,7 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-nl = /\r\n|\n|\r/
+nl = /(\r\n|\n|\r)\s*/
 php = /\<\?php.*\?\>/
 xml = /\<\?xml/
 shorttagstart = /\<\?=/

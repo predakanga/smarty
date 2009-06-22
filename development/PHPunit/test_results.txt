@@ -63,7 +63,7 @@ Test Suite
  .......
 
  CompileBlockPluginTests
- .....
+ .......
 
  CompileCaptureTests
  .....
@@ -110,6 +110,11 @@ Test Suite
 
  CompileRegisteredObjectFunctionTests
  ..
+
+ CompilerPluginTests
+ 
+ 
+ .
 
  CompileSectionTests
  ......
@@ -207,6 +212,6 @@ Test Suite
  XmlTests
  ...
 
-Time: 9 seconds
+Time: 11 seconds
 
-OK (481 tests, 585 assertions)
+OK (484 tests, 588 assertions)

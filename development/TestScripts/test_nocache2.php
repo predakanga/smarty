@@ -12,6 +12,7 @@ $smarty = new Smarty;
 $smarty->force_compile = false;
 $smarty->caching = true;
 $smarty->caching_lifetime = 10;
+$smarty->debugging = true;
 
 $smarty->assign('t1',time());
 $smarty->assign('t2',time(),true);
