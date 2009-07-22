@@ -459,6 +459,9 @@ doublequotedcontent(res)           ::=  BACKTICK ID(i) BACKTICK. {res = "`".i."`
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
 doublequotedcontent(res)           ::=  DOLLAR ID(i). {res = "'.".'$_smarty_tpl->getVariable(\''. i .'\')->value'.".'"; $this->nocache=$this->template->getVariable(trim(i,"'"))->nocache;}
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
+doublequotedcontent(res)           ::=  DOLLAR OTHER(o). {res = '$'.addcslashes(o,"'");}
+doublequotedcontent(res)           ::=  LDEL OTHER(o). {res = '{'.addcslashes(o,"'");}
+doublequotedcontent(res)           ::=  BACKTICK OTHER(o). {res = '`'.addcslashes(o,"'");}
 doublequotedcontent(res)           ::= OTHER(o). {res = addcslashes(o,"'");}
 
 //
