@@ -22,8 +22,8 @@
         // set instance object
         self::instance($this); 
         $this->lex = $lex;
-        $this->smarty = Smarty::instance(); 
         $this->compiler = $compiler;
+        $this->smarty = $this->compiler->smarty;
         $this->template = $this->compiler->template;
         $this->cacher = $this->template->cacher_object; 
 				$this->nocache = false;
@@ -276,7 +276,7 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 value(res)	     ::= SINGLEQUOTE text(t) SINGLEQUOTE. { res = "'".t."'"; }
 value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
 									// double quoted string
-value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = "'".str_replace('\"','"',s)."'"; }
+value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = '"'.s.'"'; }
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
 
 									// static class methode call
@@ -297,7 +297,7 @@ value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc
 // variables 
 //
 									// simple Smarty variable (optional array)
-variable(res)    ::= varindexed(vi). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('internal_smarty_var',vi['index']);} else {
+variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('internal_smarty_var',vi['index']);} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index']; $this->nocache=$this->template->getVariable(trim(vi['var'],"'"))->nocache;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
@@ -305,6 +305,7 @@ variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariab
 variable(res)    ::= object(o). { res = o; }
                   // config variable
 variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';}
+variable(res)	   ::= HATCH variable(v) HATCH. {res = '$_smarty_tpl->getConfigVariable('. v .')';}
                   // stream access
 
 varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'index'=>a);}
@@ -345,7 +346,9 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)      ::= DOLLAR varvar(v) arrayindex(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
+object(res)    ::= varindexed(vi) objectchain(oc). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('internal_smarty_var',vi['index']).oc;} else {
+                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index'].oc; $this->nocache=$this->template->getVariable(trim(vi['var'],"'"))->nocache;}}
+//object(res)      ::= DOLLAR varvar(v) arrayindex(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
@@ -456,13 +459,13 @@ arrayelement(res)		 ::=  ID(i) APTR expr(e2). { res = '\''.i.'\'=>'.e2;}
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
 doublequotedcontent(res)           ::=  BACKTICK ID(i) BACKTICK. {res = "`".i."`";}
-doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = "'.".v.".'";}
-doublequotedcontent(res)           ::=  DOLLAR ID(i). {res = "'.".'$_smarty_tpl->getVariable(\''. i .'\')->value'.".'"; $this->nocache=$this->template->getVariable(trim(i,"'"))->nocache;}
-doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = "'.(".e.").'";}
-doublequotedcontent(res)           ::=  DOLLAR OTHER(o). {res = '$'.addcslashes(o,"'");}
-doublequotedcontent(res)           ::=  LDEL OTHER(o). {res = '{'.addcslashes(o,"'");}
-doublequotedcontent(res)           ::=  BACKTICK OTHER(o). {res = '`'.addcslashes(o,"'");}
-doublequotedcontent(res)           ::= OTHER(o). {res = addcslashes(o,"'");}
+doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = '".'.v.'."';}
+doublequotedcontent(res)           ::=  DOLLAR ID(i). {res = '".'.'$_smarty_tpl->getVariable(\''. i .'\')->value'.'."'; $this->nocache=$this->template->getVariable(trim(i,"'"))->nocache;}
+doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {res = '".('.e.')."';}
+doublequotedcontent(res)           ::=  DOLLAR OTHER(o). {res = '$'.o;}
+doublequotedcontent(res)           ::=  LDEL OTHER(o). {res = '{'.o;}
+doublequotedcontent(res)           ::=  BACKTICK OTHER(o). {res = '`'.o;}
+doublequotedcontent(res)           ::= OTHER(o). {res = o;}
 
 //
 // text string
