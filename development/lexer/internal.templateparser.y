@@ -415,10 +415,10 @@ ifexprs(res)			 ::= OPENP ifexprs(e) CLOSEP.	{res = '('.e.')';}
 // if expression
 										// simple expression
 ifexpr(res)        ::= expr(e). {res =e;}
-ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
+ifexpr(res)        ::= expr(e1) optspace ifcond(c) optspace expr(e2). {res = e1.c.e2;}
 ifexpr(res)			   ::= expr(e1) ISIN array(a).	{res = 'in_array('.e1.','.a.')';}
 ifexpr(res)			   ::= expr(e1) ISIN value(v).	{res = 'in_array('.e1.',(array)'.v.')';}
-ifexpr(res)			   ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
+ifexpr(res)			   ::= ifexprs(e1) optspace lop(o) optspace ifexprs(e2).	{res = e1.o.e2;}
 ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '!('.e1.' % '.e2.')';}
 ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.')';}
 ifexpr(res)			   ::= ifexprs(e1) ISEVEN.	{res = '!(1 & '.e1.')';}
@@ -441,6 +441,13 @@ ifcond(res)        ::= NONEIDENTITY. {res = '!==';}
 
 lop(res)        ::= LAND. {res = '&&';}
 lop(res)        ::= LOR. {res = '||';}
+
+//
+// optinal spaces
+//
+
+optspace(res)        ::= SPACE(s). { res = s;}
+optspace             ::= . { return;}
 
 //
 // ARRAY element assignment

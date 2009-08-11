@@ -144,14 +144,14 @@ literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 ldelim = 'SMARTYldelldelimSMARTYrdel'
 rdelim = 'SMARTYldelrdelimSMARTYrdel'
-equals = /\s*==\s*|\s+(EQ|eq)\s+/
-notequals = /\s*\!=\s*|\s+(NE|ne)\s+/
-greaterthan = /\s*\>\s*|\s+(GT|gt)\s+/
-lessthan = /\s*\<\s*|\s+(LT|lt)\s+/
-greaterequal = /\s*\>=\s*|\s+(GE|ge)\s+/
-lessequal = /\s*<=\s*|\s+(LE|le)\s+/
-identity = /\s*===\s*/
-noneidentity = /\s*!==\s*/
+equals = /==|\s+(EQ|eq)\s+/
+notequals = /\!=|\s+(NE|ne)\s+/
+greaterthan = />|\s+(GT|gt)\s+/
+lessthan = /<|\s+(LT|lt)\s+/
+greaterequal = />=|\s+(GE|ge)\s+/
+lessequal = /<=|\s+(LE|le)\s+/
+identity = /===/
+noneidentity = /!==/
 isoddby = /\s+is\s+odd\s+by\s+/
 isnotoddby = /\s+is\s+not\s+odd\s+by\s+/
 isodd = /\s+is\s+odd/
@@ -165,8 +165,8 @@ isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
 not = /!|(NOT|not)\s+/
-land = /\s*\&\&\s*|\s+(AND|and)\s+/
-lor = /\s*\|\|\s*|\s+(OR|or)\s+/
+land = /\&\&|\s+(AND|and)\s+/
+lor = /\|\||\s+(OR|or)\s+/
 other = /./
 */
 /*!lex2php
