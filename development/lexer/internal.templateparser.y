@@ -203,7 +203,7 @@ attributes(res)  ::= attribute(a). { res = a;}
 attributes(res)  ::= . { res = array();}
 									
 									// attribute
-attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
+attribute(res)   ::= SPACE ID(v) optspace EQUAL optspace expr(e). { res = array(v=>e);}
 
 //
 // statement
@@ -418,6 +418,7 @@ ifexpr(res)        ::= expr(e). {res =e;}
 ifexpr(res)        ::= expr(e1) optspace ifcond(c) optspace expr(e2). {res = e1.c.e2;}
 ifexpr(res)			   ::= expr(e1) ISIN array(a).	{res = 'in_array('.e1.','.a.')';}
 ifexpr(res)			   ::= expr(e1) ISIN value(v).	{res = 'in_array('.e1.',(array)'.v.')';}
+ifexpr(res)			   ::= expr(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
 ifexpr(res)			   ::= ifexprs(e1) optspace lop(o) optspace ifexprs(e2).	{res = e1.o.e2;}
 ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '!('.e1.' % '.e2.')';}
 ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.')';}

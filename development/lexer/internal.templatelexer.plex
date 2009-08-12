@@ -130,15 +130,15 @@ colon = /\:/
 at = /@/
 hatch = /#/
 semicolon = /\s*\;\s*/
-vert = /\s*\|/
-equal = /\s*=\s*/
+vert = /\|/
+equal = /=/
 space = /[\s]+/
 ptr = /\s*\->/
 aptr = /\s*=>\s*/
 quote = /\"/
 singlequote = /\'/
 backtick = /`/
-andsym = /\s?\&\s?/
+andsym = /\s*\&\s*/
 id = /\w+/
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
@@ -165,8 +165,8 @@ isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
 not = /!|(NOT|not)\s+/
-land = /\&\&|\s+(AND|and)\s+/
-lor = /\|\||\s+(OR|or)\s+/
+land = /\s*\&\&\s*|\s+(AND|and)\s+/
+lor = /\s*\|\|\s*|\s+(OR|or)\s+/
 other = /./
 */
 /*!lex2php
