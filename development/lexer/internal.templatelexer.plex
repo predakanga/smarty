@@ -98,23 +98,23 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 nl = /(\r\n|\n|\r)\s*/
-php = /\<\?php.*\?\>/
+php = /\s*\<\?php.*\?\>/
 xml = /\<\?xml/
-shorttagstart = /\<\?=/
-shorttagend = /\?\>/
-phpstart = /SMARTYldelphpSMARTYrdel/
+shorttagstart = /\s*\<\?=/
+shorttagend = /\s*\?\>/
+phpstart = /\s*SMARTYldelphpSMARTYrdel/
 phpend = /SMARTYldel\/phpSMARTYrdel/
-ldels = /SMARTYldel\s{1,}/
+ldels = /\s*SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
-ldelslash = /SMARTYldel\//
-ldel = /SMARTYldel/
+ldelslash = /\s*SMARTYldel\//
+ldel = /\s*SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
 boolean = /true|TRUE|True|false|FALSE|False/
 null = /null|NULL|Null/
-math = /\s*\*(?!\})\s*|\s*(\/|\%)\s*/
-commentstart = /SMARTYldel\*/
-commentend = /\*SMARTYrdel/
+math = /\s*(\*|\/|\%)\s*/
+commentstart = /\s*SMARTYldel\*/
+commentend = /\s*\*SMARTYrdel/
 escapedquotes = /(\\\"|\\\')/
 incdec = /(\+\+|\-\-)\s*/
 unimath = /\s*(\+|\-)\s*/
@@ -131,7 +131,7 @@ at = /@/
 hatch = /#/
 semicolon = /\s*\;\s*/
 vert = /\|/
-equal = /=/
+equal = /\s*=\s*/
 space = /[\s]+/
 ptr = /\s*\->/
 aptr = /\s*=>\s*/
@@ -140,18 +140,18 @@ singlequote = /\'/
 backtick = /`/
 andsym = /\s*\&\s*/
 id = /\w+/
-literalstart = 'SMARTYldelliteralSMARTYrdel'
-literalend = 'SMARTYldel/literalSMARTYrdel'
-ldelim = 'SMARTYldelldelimSMARTYrdel'
-rdelim = 'SMARTYldelrdelimSMARTYrdel'
-equals = /==|\s+(EQ|eq)\s+/
-notequals = /\!=|\s+(NE|ne)\s+/
-greaterthan = />|\s+(GT|gt)\s+/
-lessthan = /<|\s+(LT|lt)\s+/
-greaterequal = />=|\s+(GE|ge)\s+/
-lessequal = /<=|\s+(LE|le)\s+/
-identity = /===/
-noneidentity = /!==/
+literalstart = '\s*SMARTYldelliteralSMARTYrdel'
+literalend = '\s*SMARTYldel/literalSMARTYrdel'
+ldelim = '\s*SMARTYldelldelimSMARTYrdel'
+rdelim = '\s*SMARTYldelrdelimSMARTYrdel'
+equals = /\s*==\s*|\s+(EQ|eq)\s+/
+notequals = /\s*\!=\s*|\s+(NE|ne)\s+/
+greaterthan = /\s*>\s*|\s+(GT|gt)\s+/
+lessthan = /\s*<\s*|\s+(LT|lt)\s+/
+greaterequal = /\s*>=\s*|\s+(GE|ge)\s+/
+lessequal = /\s*<=\s*|\s+(LE|le)\s+/
+identity = /\s*===\s*/
+noneidentity = /\s*!==\s'/
 isoddby = /\s+is\s+odd\s+by\s+/
 isnotoddby = /\s+is\s+not\s+odd\s+by\s+/
 isodd = /\s+is\s+odd/
@@ -164,7 +164,7 @@ isdivby = /\s+is\s+div\s+by\s+/
 isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
-not = /!|(NOT|not)\s+/
+not = /!\s*|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s+(AND|and)\s+/
 lor = /\s*\|\|\s*|\s+(OR|or)\s+/
 other = /./
@@ -341,9 +341,6 @@ unimath {
 math {
   $this->token = Smarty_Internal_Templateparser::TP_MATH;
 }
-space {
-  $this->token = Smarty_Internal_Templateparser::TP_SPACE;
-}
 dollar {
   $this->token = Smarty_Internal_Templateparser::TP_DOLLAR;
 }
@@ -382,6 +379,9 @@ andsym {
 }
 id {
   $this->token = Smarty_Internal_Templateparser::TP_ID;
+}
+space {
+  $this->token = Smarty_Internal_Templateparser::TP_SPACE;
 }
 other {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
