@@ -237,7 +237,6 @@ expr(res)        ::= expr(e) modifier(m) modparameters(p). {
                                                                  }
                                                               }
                                                             }
-exprs(res)				 ::= array(a).	{res = a;}
 
 									// single value
 exprs(res)        ::= value(v). { res = v; }
@@ -247,6 +246,11 @@ exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 exprs(res)        ::= exprs(e) math(m) value(v). { res = e . m . v; } 
 									// catenate
 exprs(res)        ::= exprs(e) ANDSYM value(v). { res = '('. e . ').(' . v. ')'; } 
+                  // array
+exprs(res)				::= array(a).	{res = a;}
+
+
+
 
 //
 // mathematical operators
@@ -266,19 +270,16 @@ value(res)       ::= INTEGER(n1) DOT INTEGER(n2). { res = n1.'.'.n2; }
 value(res)       ::= BOOLEAN(b). { res = b; }
 									// null
 value(res)       ::= NULL(n). { res = n; }
-
 									// function call
 value(res)	     ::= function(f). { res = f; }
 									// expression
 value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
-
 									// singele quoted string
 value(res)	     ::= SINGLEQUOTE text(t) SINGLEQUOTE. { res = "'".t."'"; }
 value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
 									// double quoted string
 value(res)	     ::= QUOTE doublequoted(s) QUOTE. { res = '"'.s.'"'; }
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
-
 									// static class methode call
 value(res)	     ::= ID(c) DOUBLECOLON method(m). { res = c.'::'.m; }
 value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
@@ -349,7 +350,6 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 object(res)    ::= varindexed(vi) objectchain(oc). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('internal_smarty_var',vi['index']).oc;} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index'].oc; $this->nocache=$this->template->getVariable(trim(vi['var'],"'"))->nocache;}}
-//object(res)      ::= DOLLAR varvar(v) arrayindex(a) objectchain(oc). { res = '$_smarty_tpl->getVariable('. v .')->value'.a.oc; $this->nocache=$this->template->getVariable(trim(v,"'"))->nocache;}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
