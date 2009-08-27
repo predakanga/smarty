@@ -90,6 +90,26 @@ class CompileIfTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{if 1 eq 1}yes{else}no{/if}');
         $this->assertEquals("yes", $this->smarty->fetch($tpl));
     } 
+    public function testIfIdentity1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=true}{if $foo===true}yes{else}no{/if}');
+        $this->assertEquals("yes", $this->smarty->fetch($tpl));
+    } 
+    public function testIfIdentity2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=true}{if $foo === true}yes{else}no{/if}');
+        $this->assertEquals("yes", $this->smarty->fetch($tpl));
+    } 
+    public function testIfNotIdentity1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=true}{if $foo!==true}yes{else}no{/if}');
+        $this->assertEquals("no", $this->smarty->fetch($tpl));
+    } 
+    public function testIfNotIdentity2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=true}{if $foo !== true}yes{else}no{/if}');
+        $this->assertEquals("no", $this->smarty->fetch($tpl));
+    } 
     public function testIfGT1()
     {
         $tpl = $this->smarty->createTemplate('string:{if 1 > 0}yes{else}no{/if}');

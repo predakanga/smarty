@@ -39,8 +39,8 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
 
     public function testAssignOld1()
     {
-        $tpl = $this->smarty->createTemplate('string:{assign var=foo value=1}{$foo}');
-        $this->assertEquals("1", $this->smarty->fetch($tpl));
+        $this->assertEquals("1", $this->smarty->fetch('string:{assign var=foo   value=1}{$foo}'));
+        $this->assertEquals("1", $this->smarty->fetch('string:{assign var = foo   value= 1}{$foo}'));
     } 
     public function testAssignOld2()
     {
@@ -89,8 +89,9 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testAssignNew1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=1}{$foo}');
-        $this->assertEquals("1", $this->smarty->fetch($tpl));
+        $this->assertEquals("1", $this->smarty->fetch('string:{$foo=1}{$foo}'));
+        $this->assertEquals("1", $this->smarty->fetch('string:{$foo =1}{$foo}'));
+        $this->assertEquals("1", $this->smarty->fetch('string:{$foo =  1}{$foo}'));
     } 
     public function testAssignNew2()
     {
@@ -99,8 +100,9 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignNew3()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=1+2}{$foo}');
-        $this->assertEquals("3", $this->smarty->fetch($tpl));
+        $this->assertEquals("3", $this->smarty->fetch('string:{$foo=1+2}{$foo}'));
+        $this->assertEquals("3", $this->smarty->fetch('string:{$foo = 1+2}{$foo}'));
+        $this->assertEquals("3", $this->smarty->fetch('string:{$foo = 1 + 2}{$foo}'));
     } 
     public function testAssignNew4()
     {
@@ -126,7 +128,7 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     } 
     public function testAssignArrayAppend()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo=1}{\$foo[]=2}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}");
+        $tpl = $this->smarty->createTemplate("string:{\$foo =1}{\$foo[] = 2}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}");
         $this->assertEquals("0112", $this->smarty->fetch($tpl));
     } 
     public function testAssignArrayAppend2()

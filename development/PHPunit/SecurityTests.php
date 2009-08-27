@@ -71,7 +71,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testTrustedModifier()
     {
-        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|count}'));
+        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|@count}'));
     } 
 
     /**
@@ -81,7 +81,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->modifiers = array('null');
         try {
-            $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|count}');
+            $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|@count}');
         } 
         catch (Exception $e) {
             $this->assertContains('modifier "count" not allowed by security setting', $e->getMessage());
@@ -97,7 +97,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->modifiers = array('null');
         $this->smarty->security = false;
-        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|count}'));
+        $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|@count}'));
     } 
 
     /**
