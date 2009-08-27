@@ -149,18 +149,18 @@ smartytag(res)   ::= LDEL(d) ID(i) attributes(a) RDEL. { preg_match('/\s*/',d,$s
 smartytag(res)   ::= LDEL(d) ID(i) PTR ID(m) attributes(a) RDEL. { preg_match('/\s*/',d,$s); res = $s[0].$this->compiler->compileTag(i,array_merge(array('object_methode'=>m),a));}
 									// tag with modifier and optional Smarty2 style attributes
 smartytag(res)   ::= LDEL(d) ID(i) modifier(m) modparameters(p) attributes(a) RDEL. { preg_match('/\s*/',d,$s); res = $s[0].'<?php ob_start();?>'.$this->compiler->compileTag(i,a).'<?php echo ';
-																					                       if ($this->smarty->plugin_handler->loadSmartyPlugin(m[0],'modifier')) {
-                                                                      res .= "\$_smarty_tpl->smarty->plugin_handler->".m[0] . "(array(ob_get_clean()". p ."),'modifier');?>";
+															                                   if ($this->smarty->plugin_handler->loadSmartyPlugin(m[0],'modifier')) {
+                                                                      res .= "\$_smarty_tpl->smarty->plugin_handler->executeModifier('".m[0] . "',array(ob_get_clean()" . p. "),".m[1].");?>";
                                                                  } else {
-                                                                   if (m[0] == 'isset' || m[0] == 'empty' || is_callable(m[0])) {
+                                                                   if (is_callable(m[0])) {
 																					                            if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m[0], $this->compiler)) {
-																					                              res .= m[0] . "(ob_get_clean()". p .");?>";
+                                                                         res .= "\$_smarty_tpl->smarty->plugin_handler->executeModifier('".m[0] . "',array(ob_get_clean()" . p. "),".m[1].");?>";
 																					                            }
 																					                         } else {
                                                                       $this->compiler->trigger_template_error ("unknown modifier \"" . m[0] . "\"");
                                                                  }
                                                               }
-                                                            }
+                                                                    }
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH(d) ID(i) attributes(a) RDEL. { preg_match('/\s*/',d,$s); res = $s[0].$this->compiler->compileTag(i.'close',a);}
 									// end of block object tag  {/....}									
@@ -224,13 +224,13 @@ expr(res)				 ::= exprs(e).	{res = e;}
                  // resources/streams
 //expr(res)	       ::= ID(i) COLON expr(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. trim(i2,"'"). '\')';}
 expr(res)	       ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2 . '\')';}
-expr(res)        ::= expr(e) modifier(m) modparameters(p). {             
+expr(res)        ::= expr(e) modifier(m) modparameters(p). {            
                                                             if ($this->smarty->plugin_handler->loadSmartyPlugin(m[0],'modifier')) {
-                                                                      res = "\$_smarty_tpl->smarty->plugin_handler->".m[0] . "(array(". e . p ."),'modifier')";
+                                                                      res = "\$_smarty_tpl->smarty->plugin_handler->executeModifier('".m[0] . "',array(". e . p. "),".m[1].")";
                                                                  } else {
-                                                                   if (m[0] == 'isset' || m[0] == 'empty' || is_callable(m[0])) {
+                                                                   if (is_callable(m[0])) {
 																					                            if (!$this->template->security || $this->smarty->security_handler->isTrustedModifier(m[0], $this->compiler)) {
-																					                               res = m[0] . "(". e . p .")";
+                                                                         res = "\$_smarty_tpl->smarty->plugin_handler->executeModifier('".m[0] . "',array(". e . p. "),".m[1].")";
 																					                            }
 																					                         } else {
                                                                       $this->compiler->trigger_template_error ("unknown modifier \"" . m[0] . "\"");
@@ -390,8 +390,8 @@ params            ::= . { return;}
 //
 // modifier
 //  
-modifier(res)    ::= VERT AT ID(m). { res =  array(m,true);}
-modifier(res)    ::= VERT ID(m). { res =  array(m,false);}
+modifier(res)    ::= VERT AT ID(m). { res =  array(m,'false');}
+modifier(res)    ::= VERT ID(m). { res =  array(m,'true');}
 
 
 //
