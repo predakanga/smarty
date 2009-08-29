@@ -130,7 +130,7 @@ template_element(res)::= SHORTTAGSTART(d)  variable(v) SHORTTAGEND. {preg_match(
                                         res .= '';
                                       }	}
 											// XML tag
-template_element(res)::= XML(xml). {res = $this->cacher->processNocacheCode("<?php echo '".xml."';?>\n", $this->compiler, true, true);}	
+template_element(res)::= XML(x). {preg_match('/\s*/',x,$s); res = $s[0].$this->cacher->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true, true);}	
 template_element(res)::= SHORTTAGEND. {res = $this->cacher->processNocacheCode("<?php echo '?>';?>\n", $this->compiler, true, true);}	
 											// Other template text
 template_element(res)::= OTHER(o). {res = $this->cacher->processNocacheCode(o, $this->compiler,false,false);}	

@@ -76,7 +76,7 @@ class Smarty_Internal_Templatelexer
         $this->data = $data;
         $this->counter = 0;
         $this->line = 1;
-        $this->smarty = $smarty; 
+        $this->smarty = $smarty;
         $this->ldel = preg_quote($this->smarty->left_delimiter); 
         $this->rdel = preg_quote($this->smarty->right_delimiter);
         $this->smarty_token_names['LDEL'] =	$this->smarty->left_delimiter;
@@ -97,16 +97,15 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-nl = /(\r\n|\n|\r)\s*/
 php = /\s*\<\?php.*\?\>/
-xml = /\<\?xml/
+xml = /\s*\<\?xml/
 shorttagstart = /\s*\<\?=/
 shorttagend = /\s*\?\>/
 phpstart = /\s*SMARTYldelphpSMARTYrdel/
 phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /\s*SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
-ldelslash = /\s*SMARTYldel\//
+ldelslash = /\s*SMARTYldel\s*\//
 ldel = /\s*SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
@@ -165,15 +164,12 @@ isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
 not = /!\s*|(NOT|not)\s+/
-land = /\s*\&\&\s*|\s+(AND|and)\s+/
-lor = /\s*\|\|\s*|\s+(OR|or)\s+/
+land = /\s*\&\&\s*|\s*(AND|and)\s+/
+lor = /\s*\|\|\s*|\s*(OR|or)\s+/
 other = /./
 */
 /*!lex2php
 %statename START
-nl {
-  $this->token = Smarty_Internal_Templateparser::TP_SPACE;
-}
 xml {
   $this->token = Smarty_Internal_Templateparser::TP_XML;
 }
@@ -216,20 +212,34 @@ ldelim {
 rdelim {
   $this->token = Smarty_Internal_Templateparser::TP_RDELIMTAG;
 }
-ldels {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-}
-rdels {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-}
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+}
+ldels {
+  if ($this->smarty->auto_literal) {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+     $this->token = Smarty_Internal_Templateparser::TP_LDEL;
+  }
+}
+rdels {
+  if ($this->smarty->auto_literal) {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+     $this->token = Smarty_Internal_Templateparser::TP_RDEL;
+  }
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
+}
+ldels {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
+rdels {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
 isin {
   $this->token = Smarty_Internal_Templateparser::TP_ISIN;

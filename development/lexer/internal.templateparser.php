@@ -1948,7 +1948,7 @@ static public $yy_action = array(
                                       }	    }
 #line 1954 "internal.templateparser.php"
 #line 133 "internal.templateparser.y"
-    function yy_r11(){$this->_retvalue = $this->cacher->processNocacheCode("<?php echo '".$this->yystack[$this->yyidx + 0]->minor."';?>\n", $this->compiler, true, true);    }
+    function yy_r11(){preg_match('/\s*/',$this->yystack[$this->yyidx + 0]->minor,$s); $this->_retvalue = $s[0].$this->cacher->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true, true);    }
 #line 1957 "internal.templateparser.php"
 #line 134 "internal.templateparser.y"
     function yy_r12(){$this->_retvalue = $this->cacher->processNocacheCode("<?php echo '?>';?>\n", $this->compiler, true, true);    }
