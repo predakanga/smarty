@@ -28,7 +28,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedFilepathSubDirs()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertEquals('.\cache\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
@@ -39,7 +39,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedFilepathCacheId()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar');
         $this->assertEquals('.\cache\foo\bar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
@@ -50,7 +50,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedFilepathCompileId()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, null, 'blar');
         $this->assertEquals('.\cache\blar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
@@ -61,7 +61,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedFilepathCacheIdCompileId()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
         $this->assertEquals('.\cache\foo\bar\blar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
@@ -72,7 +72,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testClearCacheAllCacheIdCompileId()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
@@ -86,7 +86,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testClearCacheCacheIdCompileId()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
@@ -108,7 +108,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testClearCacheCacheIdCompileId2()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
@@ -130,7 +130,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testClearCacheCacheIdCompileId3()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
@@ -152,7 +152,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testClearCacheCacheIdCompileId4()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = false;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
@@ -174,7 +174,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function testClearCacheCacheIdCompileId5()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';

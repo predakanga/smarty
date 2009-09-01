@@ -9,7 +9,7 @@ Test Suite
  ........
 
  CoreTests
- .......
+ .....
 
  ClearCompiledTests
  .....
@@ -93,8 +93,8 @@ Test Suite
  ......
 
  CompileIfTests
- ........................................................... 59 / 60
- .
+ ........................................................... 59 / 64
+ .....
 
  CompileIncludeTests
  ........
@@ -212,6 +212,6 @@ Test Suite
  XmlTests
  ...
 
-Time: 11 seconds
+Time: 10 seconds
 
-OK (484 tests, 588 assertions)
+OK (486 tests, 595 assertions)

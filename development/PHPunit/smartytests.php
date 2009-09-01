@@ -30,6 +30,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->template_functions = null;
         $smarty->tpl_vars = array();
         $smarty->force_compile = false;
+        $smarty->auto_literal = true;
         $smarty->caching = false;
         $smarty->_smarty_vars = array();
         $smarty->registered_plugins = array();

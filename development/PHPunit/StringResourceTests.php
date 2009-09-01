@@ -150,7 +150,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testNoFiles()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 20;
+        $this->smarty->cache_lifetime = 20;
         $this->smarty->clear_compiled_tpl();
         $this->smarty->clear_all_cache();
         $tpl = $this->smarty->createTemplate('string:hello world');
@@ -164,7 +164,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testSmartyIsCached()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 20;
+        $this->smarty->cache_lifetime = 20;
         $tpl = $this->smarty->createTemplate('string:hello world');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
         $this->assertFalse($this->smarty->is_cached($tpl));

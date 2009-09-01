@@ -37,13 +37,13 @@ class XmlTests extends PHPUnit_Framework_TestCase {
     public function testXmlCaching1()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch('xml.tpl'));
     } 
     public function testXmlCaching2()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
  //       $this->assertTrue($this->smarty->is_cached('xml.tpl'));
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch('xml.tpl'));
     } 

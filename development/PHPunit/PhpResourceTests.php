@@ -108,7 +108,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedFilepath()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertEquals('.\cache\103847448.phphelloworld.php.php', $tpl->getCachedFilepath());
     } 
@@ -119,7 +119,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     { 
         // create dummy cache file
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $dummy = $this->smarty->fetch($tpl);
         $this->smarty->caching = true;
@@ -131,7 +131,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedTimestamp()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue(is_integer($tpl->getCachedTimestamp()));
         $this->assertEquals(10, strlen($tpl->getCachedTimestamp()));
@@ -150,7 +150,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedContent()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertContains('php hello world', $tpl->getCachedContent());
     } 
@@ -160,7 +160,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsCached()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($tpl->isCached());
         $this->assertContains('php hello world', $tpl->rendered_content);
@@ -179,7 +179,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsCachedTouchedSource()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         sleep(1);
         touch ($tpl->getTemplateFilepath ());
@@ -191,7 +191,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testWriteCachedContent()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $this->smarty->clear_all_cache();
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->smarty->fetch($tpl);
@@ -212,7 +212,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     { 
         // prepare files for next test
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000; 
+        $this->smarty->cache_lifetime = 1000; 
         // clean up for next tests
         $this->smarty->clear_all_cache();
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
@@ -221,7 +221,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testSmartyIsCached()
     {
         $this->smarty->caching = true;
-        $this->smarty->caching_lifetime = 1000;
+        $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($this->smarty->is_cached($tpl));
         $this->assertContains('php hello world', $tpl->rendered_content);
