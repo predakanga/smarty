@@ -144,7 +144,7 @@ literalend = '\s*SMARTYldel/literalSMARTYrdel'
 ldelim = '\s*SMARTYldelldelimSMARTYrdel'
 rdelim = '\s*SMARTYldelrdelimSMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
-notequals = /\s*!=\s*|\s+(NE|ne)\s+/
+notequals = /\s*!=\s*|\s*<>\s*|\s+(NE|ne)\s+/
 greaterthan = /\s*>\s*|\s+(GT|gt)\s+/
 lessthan = /\s*<\s*|\s+(LT|lt)\s+/
 greaterequal = /\s*>=\s*|\s+(GE|ge)\s+/
