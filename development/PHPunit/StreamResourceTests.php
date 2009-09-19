@@ -13,7 +13,7 @@
 class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->security_policy->streams = array('global');
         $this->smarty->assign('foo', 'bar');
@@ -55,7 +55,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetTemplateSource()
     {
-        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest',null, null,  $this->smarty);
         $this->assertEquals('hello world {$foo}', $tpl->getTemplateSource());
     } 
     /**
@@ -153,7 +153,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetRenderedTemplate()
     {
-        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest' ,null, null, $this->smarty);
         $this->assertEquals('hello world bar', $tpl->getRenderedTemplate());
     } 
     /**
@@ -165,7 +165,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 20;
         $this->smarty->clear_compiled_tpl();
         $this->smarty->clear_all_cache();
-        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest',null, null,  $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
         $this->assertEquals(0, $this->smarty->clear_all_cache());
         $this->assertEquals(0, $this->smarty->clear_compiled_tpl());
@@ -177,7 +177,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 20;
-        $tpl = $this->smarty->createTemplate('global:mytest', $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest', null, null, $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
         $this->assertFalse($this->smarty->is_cached($tpl));
     } 

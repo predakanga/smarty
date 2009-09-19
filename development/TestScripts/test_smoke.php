@@ -9,9 +9,11 @@ require('../../distribution/libs/Smarty.class.php');
 
 $smarty = new Smarty;
 
-$smarty->force_compile = true;
-$smarty->caching = false;
-$smarty->caching_lifetime = 10;
+$smarty->force_compile = false;
+$smarty->caching = 1;
+$smarty->cache_lifetime = 100;
+$smarty->debugging = true;
+
 
 
 $smarty->assign('foo','bar');

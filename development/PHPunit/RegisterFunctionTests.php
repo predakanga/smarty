@@ -13,7 +13,7 @@
 class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
     } 
 
@@ -30,7 +30,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->register_function('testfunction', 'myfunction');
         $this->assertEquals('myfunction', $this->smarty->registered_plugins['testfunction'][1]);
         $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
-        $this->assertEquals('hello world', $this->smarty->fetch('string:{testfunction}'));
+        $this->assertEquals('hello world 1', $this->smarty->fetch('string:{testfunction value=1}'));
     } 
     /**
     * test register_function method for class
@@ -39,7 +39,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->register_function('testfunction', array('myfunctionclass', 'execute'));
         $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
-        $this->assertEquals('hello world', $this->smarty->fetch('string:{testfunction}'));
+        $this->assertEquals('hello world 2', $this->smarty->fetch('string:{testfunction value=2}'));
     } 
     /**
     * test register_function method for object
@@ -49,7 +49,45 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
         $myfunction_object = new myfunctionclass;
         $this->smarty->register_function('testfunction', array($myfunction_object, 'execute'));
         $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
-        $this->assertEquals('hello world', $this->smarty->fetch('string:{testfunction}'));
+        $this->assertEquals('hello world 3', $this->smarty->fetch('string:{testfunction value=3}'));
+    } 
+    public function testRegisterFunctionCaching1()
+    {
+        $this->smarty->caching = 1;
+        $this->smarty->cache_lifetime = 10;
+        $this->smarty->force_compile = true;
+        $this->smarty->assign('x', 0);
+        $this->smarty->assign('y', 10);
+        $this->smarty->register_function('testfunction', 'myfunction');
+        $this->assertEquals('hello world 0 10', $this->smarty->fetch('test_register_function.tpl'));
+    } 
+    public function testRegisterFunctionCaching2()
+    {
+        $this->smarty->caching = 1;
+        $this->smarty->cache_lifetime = 10;
+        $this->smarty->assign('x', 1);
+        $this->smarty->assign('y', 20);
+        $this->smarty->register_function('testfunction', 'myfunction');
+        $this->assertEquals('hello world 0 10', $this->smarty->fetch('test_register_function.tpl'));
+    } 
+    public function testRegisterFunctionCaching3()
+    {
+        $this->smarty->caching = 1;
+        $this->smarty->cache_lifetime = 10;
+        $this->smarty->force_compile = true;
+        $this->smarty->assign('x', 2);
+        $this->smarty->assign('y', 30);
+        $this->smarty->register_function('testfunction', 'myfunction', false);
+        $this->assertEquals('hello world 2 30', $this->smarty->fetch('test_register_function.tpl'));
+    } 
+    public function testRegisterFunctionCaching4()
+    {
+        $this->smarty->caching = 1;
+        $this->smarty->cache_lifetime = 10;
+        $this->smarty->assign('x', 3);
+        $this->smarty->assign('y', 40);
+        $this->smarty->register_function('testfunction', 'myfunction', false);
+        $this->assertEquals('hello world 3 30', $this->smarty->fetch('test_register_function.tpl'));
     } 
     /**
     * test unregister_function method
@@ -80,12 +118,12 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
 } 
 function myfunction($params, &$smarty)
 {
-    return "hello world";
+    return "hello world $params[value]";
 } 
 class myfunctionclass {
     static function execute($params, &$smarty)
     {
-        return "hello world";
+        return "hello world $params[value]";
     } 
 } 
 

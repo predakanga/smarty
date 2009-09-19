@@ -13,7 +13,7 @@
 class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->force_compile = true;
     } 
@@ -36,7 +36,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testBlockPluginAssign()
     {
-        $tpl = $this->smarty->createTemplate("string:{textformat assign=foo}hello world{/textformat}{\$foo}", $this->smarty);
+        $tpl = $this->smarty->createTemplate("string:{textformat assign=foo}hello world{/textformat}{\$foo}");
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
     /**
@@ -44,7 +44,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testBlockPluginFromTemplateFile()
     {
-        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty);
+        $tpl = $this->smarty->createTemplate('blockplugintest.tpl');
         $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
@@ -53,7 +53,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     public function testBlockPluginFromCompiledTemplateFile()
     {
         $this->smarty->force_compile = false;
-        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty);
+        $tpl = $this->smarty->createTemplate('blockplugintest.tpl');
         $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
@@ -64,7 +64,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
         $this->smarty->force_compile = false;
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 10;
-        $tpl = $this->smarty->createTemplate('blockplugintest.tpl', $this->smarty);
+        $tpl = $this->smarty->createTemplate('blockplugintest.tpl');
         $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
@@ -82,7 +82,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     public function testBlockPluginRepeat()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $this->assertEquals('2345', $this->smarty->fetch('string:{testblock}{/testblock}'));
+        $this->assertEquals('12345', $this->smarty->fetch('string:{testblock}{/testblock}'));
     } 
 } 
 function myblockplugintest($params, $content, &$smarty_tpl, &$repeat)

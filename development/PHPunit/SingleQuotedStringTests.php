@@ -13,7 +13,7 @@
 class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
     } 
 
@@ -27,7 +27,7 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
     */
     public function testSimpleSingleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello World\'}{$foo}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello World\'}{$foo}');
         $this->assertEquals('Hello World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -35,7 +35,7 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
     */
     public function testTagsInSingleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello {1+2} World\'}{$foo}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello {1+2} World\'}{$foo}');
         $this->assertEquals('Hello {1+2} World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -43,7 +43,7 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
     */
     public function testVarsInSingleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello $bar World\'}{$foo}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello $bar World\'}{$foo}');
         $this->assertEquals('Hello $bar World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -51,7 +51,7 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
     */
     public function testDoubleQuotesInSingleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello "World"\'}{$foo}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello "World"\'}{$foo}');
         $this->assertEquals('Hello "World"', $this->smarty->fetch($tpl));
     } 
     /**
@@ -59,7 +59,7 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
     */
     public function testEscapedSingleQuotesInSingleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello \\\'World\'}{$foo}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'Hello \\\'World\'}{$foo}');
         $this->assertEquals("Hello 'World", $this->smarty->fetch($tpl));
     } 
     /**
@@ -67,7 +67,7 @@ class SingleQuotedStringTests extends PHPUnit_Framework_TestCase {
     */
     public function testEmptySingleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'\'}{$foo}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'\'}{$foo}');
         $this->assertEquals("", $this->smarty->fetch($tpl));
     } 
 } 

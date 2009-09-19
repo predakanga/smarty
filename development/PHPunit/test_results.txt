@@ -4,214 +4,27 @@ Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty
 Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 100
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
-Test Suite
- DoubleQuotedStringTests
- ........
-
- CoreTests
- .....
-
- ClearCompiledTests
- .....
-
- ClearCacheTests
- ...
-
- StringResourceTests
- .................
-
- FileResourceTests
- ..............................
-
- PhpResourceTests
- ........................
-
- CompileAssignTests
- .....................
-
- AppendByRefTests
- ...
-
- AppendTests
- ......
-
- ArrayTests
- .....
-
- AssignByRefTests
- .
-
- AssignGlobalTests
- ....
-
- AssignTests
- ..
-
- CacherResourceFileTests
- ...........
-
- ClearAllAssignTests
- ....
-
- ClearAssignTests
- ...
-
- CommentsTests
- ....
-
- CompileBlockExtendTests
- .......
-
- CompileBlockPluginTests
- .......
-
- CompileCaptureTests
- .....
-
- CompileCompilerPluginTests
- ..
-
- CompileDebugTests
- .hello world.
-
- CompileErrorTests
- .....
-
- CompileEvalTests
- ...
-
- CompileForeachTests
- ..............
-
- CompileForTests
- .......
-
- CompileFunctionPluginTests
- ...
-
- CompileFunctionTests
- ......
-
- CompileIfTests
- ........................................................... 59 / 64
- .....
-
- CompileIncludeTests
- ........
-
- CompileInsertTests
- .....
-
- CompileNocacheTests
- ...
-
- CompilePhpTests
- ...
-
- CompileRegisteredObjectFunctionTests
- ..
-
- CompilerPluginTests
+............................................................  60 / 503
+............................................................ 120 / 503
+...................F........................................ 180 / 503
+............................................................ 240 / 503
+............................................................ 300 / 503
+......... 
  
- 
- .
+................................................... 360 / 503
+............................................................ 420 / 503
+............................................................ 480 / 503
+.......................
 
- CompileSectionTests
- ......
+Time: 45 seconds
 
- CompileStripTests
- .
+There was 1 failure:
 
- CompileWhileTests
- ..
+1) testClearCacheCacheIdCompileId(CacherResourceFileTests)
+Failed asserting that <integer:3> matches expected value <integer:2>.
+C:\wamp\www\__smarty3Alpha\development\PHPunit\CacherResourceFileTests.php:103
 
- ConfigVarTests
- .................
+FAILURES!
+Tests: 503, Assertions: 657, Failures: 1.
 
- ConstantsTests
- .
-
- DefaultPluginHandlerTests
- ....
-
- DefaultTemplateHandlerTests
- ....
-
- DelimiterTests
- ....
-
- FilterTests
- ......
-
- FunctionTests
- .
-
- GetTemplateVarsTests
- ......
-
- LoadFilterTests
- .
-
- ModifierTests
- ..........
-
- PrintNocacheTests
- ....
-
- RegisterBlockTests
- ......
-
- RegisterCompilerFunctionTests
- ......
-
- RegisterFilterTests
- ............
-
- RegisterFunctionTests
- ......
-
- RegisterModifierTests
- ......
-
- ResourceTests
- .
-
- SecurityTests
- ..................
-
- SingleQuotedStringTests
- ......
-
- SpacingTests
- ............
-
- StaticClassAccessTests
- .....
-
- StreamResourceTests
- .................
-
- StreamVariableTests
- .
-
- TemplateExistsTests
- ..
-
- TokenFallbackTests
- ....
-
- TriggerErrorTests
- .
-
- VariableScopeTests
- ......
-
- VariableVariableTests
- ....
-
- XmlTests
- ...
-
-Time: 10 seconds
-
-OK (486 tests, 595 assertions)
+Generating code coverage report, this may take a moment.

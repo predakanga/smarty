@@ -13,7 +13,7 @@
 class CompilePhpTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->security = false;
     } 

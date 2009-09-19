@@ -11,7 +11,7 @@ $smarty = new Smarty;
 
 $smarty->force_compile = false;
 $smarty->caching = true;
-$smarty->caching_lifetime = 10;
+$smarty->cache_lifetime = 10;
 
 
 $smarty->display('test_plugin.tpl');

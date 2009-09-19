@@ -14,7 +14,7 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 class CompileDebugTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
     } 
 

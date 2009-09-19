@@ -13,7 +13,7 @@
 class StreamVariableTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         stream_wrapper_register("var", "VariableStream")
         or die("Failed to register protocol");
@@ -37,19 +37,19 @@ class StreamVariableTests extends PHPUnit_Framework_TestCase {
     */
     public function testStreamVariable1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$var:foo}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$var:foo}', null, null, $this->smarty);
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
 /*
     public function testStreamVariable2()
     {
-        $tpl = $this->smarty->createTemplate('string:{var:\'foo\'}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{var:\'foo\'}', null, null, $this->smarty);
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
 
     public function testStreamVariable3()
     {
-        $tpl = $this->smarty->createTemplate('string:{var:"foo"}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{var:"foo"}', null, null, $this->smarty);
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
 */
@@ -58,7 +58,7 @@ class StreamVariableTests extends PHPUnit_Framework_TestCase {
     */
 //    public function testStreamVariable2()
 //    {
-//        $tpl = $this->smarty->createTemplate('string:{$var:bar}', $this->smarty);
+//        $tpl = $this->smarty->createTemplate('string:{$var:bar}', null, null, $this->smarty);
 //        $this->assertEquals('', $this->smarty->fetch($tpl));
 //    } 
 } 

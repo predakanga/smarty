@@ -27,7 +27,7 @@
 	<ul class="tags">
 				<li><span class="field">author:</span> Monte Ohrt &lt;<a href="mailto:monte">at ohrt dot com monte at ohrt dot com</a>&gt;</li>
 				<li><span class="field">author:</span> Uwe Tews</li>
-				<li><span class="field">version:</span> 3.0-alpha1</li>
+				<li><span class="field">version:</span> 3.0-beta</li>
 				<li><span class="field">copyright:</span> 2008 New Digital Group, Inc.</li>
 				<li><span class="field">link:</span> <a href="http://www.smarty.net/">http://www.smarty.net/</a></li>
 			</ul>
@@ -58,14 +58,6 @@
 											This is the main Smarty class
 										</td>
 				</tr>
-								<tr>
-					<td style="padding-right: 2em; vertical-align: top">
-						<a href="../Smarty/SmartyException.html">SmartyException</a>
-					</td>
-					<td>
-											Smarty Exception Handler
-										</td>
-				</tr>
 							</table>
 		</div>
 	</div>
@@ -80,14 +72,14 @@
 			|							<a href="#sec-constants">Constants</a>
 															</div>
 		<div class="info-box-body">	
-			<a name="_dirname(__FILE__)_DIRECTORY_SEPARATOR_sysplugins_DIRECTORY_SEPARATOR_internal_templatebase_php"><!-- --></a>
+			<a name="_SMARTY_SYSPLUGINS_DIR_internal_templatebase_php"><!-- --></a>
 <div class="evenrow">
 	
 	<div>
 		<span class="include-title">
 			<span class="include-type">require_once</span>
-			(<span class="include-name">dirname(__FILE__).DIRECTORY_SEPARATOR.'sysplugins'.DIRECTORY_SEPARATOR.'internal.templatebase.php'</span>)
-			(line <span class="line-number">60</span>)
+			(<span class="include-name"><a href="../Smarty/Templates/_distribution---libs---sysplugins---internal.templatebase.php.html">internal.templatebase.php</a></span>)
+			(line <span class="line-number">80</span>)
 		</span>
 	</div>
 
@@ -108,13 +100,28 @@
 				|						<span class="disabled">Constants</span>
 											</div>
 		<div class="info-box-body">	
-			<a name="defineSMARTY_CACHING_LIFETIME_CURRENT"><!-- --></a>
+			<a name="defineDS"><!-- --></a>
 <div class="oddrow">
 	
 	<div>
 		<span class="const-title">
+			<span class="const-name">DS</span> = DIRECTORY_SEPARATOR
+			(line <span class="line-number">37</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">define shorthand directory separator constant</p>
+	
+		
+</div>
+<a name="defineSMARTY_CACHING_LIFETIME_CURRENT"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
 			<span class="const-name">SMARTY_CACHING_LIFETIME_CURRENT</span> = 1
-			(line <span class="line-number">54</span>)
+			(line <span class="line-number">74</span>)
 		</span>
 	</div>
 	
@@ -123,12 +130,12 @@
 		
 </div>
 <a name="defineSMARTY_CACHING_LIVETIME_SAVED"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<span class="const-title">
 			<span class="const-name">SMARTY_CACHING_LIVETIME_SAVED</span> = 2
-			(line <span class="line-number">55</span>)
+			(line <span class="line-number">75</span>)
 		</span>
 	</div>
 	
@@ -137,12 +144,12 @@
 		
 </div>
 <a name="defineSMARTY_CACHING_OFF"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<span class="const-title">
 			<span class="const-name">SMARTY_CACHING_OFF</span> = 0
-			(line <span class="line-number">53</span>)
+			(line <span class="line-number">73</span>)
 		</span>
 	</div>
 	
@@ -152,28 +159,28 @@
 		
 </div>
 <a name="defineSMARTY_DIR"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<span class="const-title">
-			<span class="const-name">SMARTY_DIR</span> = dirname(__FILE__).DIRECTORY_SEPARATOR
-			(line <span class="line-number">39</span>)
+			<span class="const-name">SMARTY_DIR</span> = dirname(__FILE__).DS
+			(line <span class="line-number">45</span>)
 		</span>
 	</div>
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">set SMARTY_DIR to absolute path to Smarty library files.</p>
-<p class="description"><p>if not defined, include_path will be used. Sets SMARTY_DIR only if user  application has not already defined it.</p></p>
+<p class="description"><p>Sets SMARTY_DIR only if user application has not already defined it.</p></p>
 	
 		
 </div>
 <a name="defineSMARTY_GLOBAL_SCOPE"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<span class="const-title">
 			<span class="const-name">SMARTY_GLOBAL_SCOPE</span> = 3
-			(line <span class="line-number">48</span>)
+			(line <span class="line-number">68</span>)
 		</span>
 	</div>
 	
@@ -182,12 +189,12 @@
 		
 </div>
 <a name="defineSMARTY_LOCAL_SCOPE"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<span class="const-title">
 			<span class="const-name">SMARTY_LOCAL_SCOPE</span> = 0
-			(line <span class="line-number">45</span>)
+			(line <span class="line-number">65</span>)
 		</span>
 	</div>
 	
@@ -197,12 +204,40 @@
 		
 </div>
 <a name="defineSMARTY_PARENT_SCOPE"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div>
 		<span class="const-title">
 			<span class="const-name">SMARTY_PARENT_SCOPE</span> = 1
-			(line <span class="line-number">46</span>)
+			(line <span class="line-number">66</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineSMARTY_PLUGINS_DIR"><!-- --></a>
+<div class="oddrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SMARTY_PLUGINS_DIR</span> = SMARTY_DIR.'plugins'.DS
+			(line <span class="line-number">56</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineSMARTY_RESOURCE_CHAR_SET"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SMARTY_RESOURCE_CHAR_SET</span> = 'UTF-8'
+			(line <span class="line-number">59</span>)
 		</span>
 	</div>
 	
@@ -211,16 +246,32 @@
 		
 </div>
 <a name="defineSMARTY_ROOT_SCOPE"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
 		<span class="const-title">
 			<span class="const-name">SMARTY_ROOT_SCOPE</span> = 2
-			(line <span class="line-number">47</span>)
+			(line <span class="line-number">67</span>)
 		</span>
 	</div>
 	
 	<!-- ========== Info from phpDoc block ========= -->
+	
+		
+</div>
+<a name="defineSMARTY_SYSPLUGINS_DIR"><!-- --></a>
+<div class="evenrow">
+	
+	<div>
+		<span class="const-title">
+			<span class="const-name">SMARTY_SYSPLUGINS_DIR</span> = SMARTY_DIR.'sysplugins'.DS
+			(line <span class="line-number">53</span>)
+		</span>
+	</div>
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">set SMARTY_SYSPLUGINS_DIR to absolute path to Smarty internal plugins.</p>
+<p class="description"><p>Sets SMARTY_SYSPLUGINS_DIR only if user application has not already defined it.</p></p>
 	
 		
 </div>
@@ -230,7 +281,7 @@
 	
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 03 May 2009 15:46:54 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sat, 19 Sep 2009 15:07:54 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

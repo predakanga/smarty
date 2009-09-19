@@ -16,7 +16,7 @@ $smarty = new Smarty;
 
 $smarty->force_compile = false;
 $smarty->caching = false;
-$smarty->caching_lifetime = -1;
+$smarty->cache_lifetime = -1;
 // $smarty->enableSecurity();
 
  $array = array('james', 'dan', 'basit', 'ayman'); $string = null; 

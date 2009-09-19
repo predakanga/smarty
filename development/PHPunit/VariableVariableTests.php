@@ -13,7 +13,7 @@
 class VariableVariableTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
     } 
 
@@ -27,7 +27,7 @@ class VariableVariableTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableVariable1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'bar\'}{$bar=123}{${$foo}}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'bar\'}{$bar=123}{${$foo}}');
         $this->assertEquals('123', $this->smarty->fetch($tpl));
     } 
     /**
@@ -35,7 +35,7 @@ class VariableVariableTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableVariable2()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'a\'}{$bar=123}{$b{$foo}r}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'a\'}{$bar=123}{$b{$foo}r}');
         $this->assertEquals('123', $this->smarty->fetch($tpl));
     } 
     /**
@@ -43,7 +43,7 @@ class VariableVariableTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableVariable3()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'a\'}{$foo2=\'r\'}{$bar=123}{$b{$foo}{$foo2}}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'a\'}{$foo2=\'r\'}{$bar=123}{$b{$foo}{$foo2}}');
         $this->assertEquals('123', $this->smarty->fetch($tpl));
     } 
     /**
@@ -51,7 +51,7 @@ class VariableVariableTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableVariable4()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=\'ar\'}{$foo2=\'oo\'}{$bar=123}{$b{$f{$foo2}}}', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo=\'ar\'}{$foo2=\'oo\'}{$bar=123}{$b{$f{$foo2}}}');
         $this->assertEquals('123', $this->smarty->fetch($tpl));
     } 
 } 

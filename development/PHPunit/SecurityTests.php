@@ -13,8 +13,8 @@
 class SecurityTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
-        SmartyTests::init();
+         $this->smarty = SmartyTests::$smarty;
+       SmartyTests::init();
         $this->smarty->force_compile = true;
     } 
 

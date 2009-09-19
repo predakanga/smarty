@@ -18,15 +18,16 @@
 function smarty_block_testblock($params, $content, $smarty, &$repeat, $template)
 {
     static $loop = 0;
+    if (isset($content)) {
+        $loop++;
+        if ($loop < 5) {
+            $repeat = true;
+        } else {
+            $repeat = false;
+        } 
 
-    $loop++;
-    if ($loop < 5) {
-        $repeat = true;
-    } else {
-        $repeat = false;
+        return $loop;
     } 
-
-    return $loop;
 } 
 
 ?>

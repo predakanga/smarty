@@ -12,7 +12,7 @@
 class CompileCompilerPluginTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->force_compile = true;
     } 
@@ -28,7 +28,7 @@ class CompileCompilerPluginTests extends PHPUnit_Framework_TestCase {
     public function testCompilerPluginFromTemplateFile()
     {
         $this->smarty->register_compiler_function('compilerplugin', 'mycompilerplugin');
-        $tpl = $this->smarty->createTemplate('compilerplugintest.tpl', $this->smarty);
+        $tpl = $this->smarty->createTemplate('compilerplugintest.tpl');
         $this->assertEquals("Hello World", $this->smarty->fetch($tpl));
     } 
     /**
@@ -38,7 +38,7 @@ class CompileCompilerPluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->force_compile = false;
         $this->smarty->register_compiler_function('compilerplugin', 'mycompilerplugin');
-        $tpl = $this->smarty->createTemplate('compilerplugintest.tpl', $this->smarty);
+        $tpl = $this->smarty->createTemplate('compilerplugintest.tpl');
         $this->assertEquals("Hello World", $this->smarty->fetch($tpl));
     } 
 } 

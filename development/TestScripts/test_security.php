@@ -13,7 +13,7 @@ $smarty->enableSecurity();
 
 $smarty->force_compile = true;
 $smarty->caching = false;
-$smarty->caching_lifetime = 10;
+$smarty->cache_lifetime = 10;
 
 $smarty->display('test_security.tpl');
 

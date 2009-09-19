@@ -6,14 +6,13 @@
 * @author Uwe Tews 
 */
 
-
 /**
 * class for cacher resource file tests
 */
 class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
     } 
 
@@ -41,7 +40,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar');
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar');
         $this->assertEquals('.\cache\foo\bar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
@@ -52,7 +51,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, null, 'blar');
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'blar');
         $this->assertEquals('.\cache\blar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
@@ -63,7 +62,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $this->assertEquals('.\cache\foo\bar\blar\14\79\70\1479707457.helloworld.tpl.php', $tpl->getCachedFilepath());
     } 
     /**
@@ -74,7 +73,7 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
         $tpl->writeCachedContent();
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
@@ -87,36 +86,85 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
+        $this->smarty->clear_all_cache();
+        $this->smarty->use_sub_dirs = false;
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
         $tpl->writeCachedContent();
-        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar2', 'blar');
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar2', 'blar');
         $tpl2->rendered_content = 'hello world';
         $tpl2->writeCachedContent();
-        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, 'foo|bar', 'blar');
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
         $tpl3->rendered_content = 'hello world';
         $tpl3->writeCachedContent();
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
-        $this->assertEquals(2, $this->smarty->clear_cache(null,'foo|bar'));
+        $this->assertEquals(2, $this->smarty->clear_cache(null, 'foo|bar'));
         $this->assertFalse(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertFalse(file_exists($tpl3->getCachedFilepath()));
     } 
+    public function testClearCacheCacheIdCompileIdSub()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->clear_all_cache();
+        $this->smarty->use_sub_dirs = true;
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
+        $tpl->rendered_content = 'hello world';
+        $tpl->writeCachedContent();
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar2', 'blar');
+        $tpl2->rendered_content = 'hello world';
+        $tpl2->writeCachedContent();
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
+        $tpl3->rendered_content = 'hello world';
+        $tpl3->writeCachedContent();
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+        $this->assertEquals(2, $this->smarty->clear_cache(null, 'foo|bar'));
+        $this->assertFalse(file_exists($tpl->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
+        $this->assertFalse(file_exists($tpl3->getCachedFilepath()));
+    } 
+
     public function testClearCacheCacheIdCompileId2()
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
+        $this->smarty->use_sub_dirs = false;
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
         $tpl->writeCachedContent();
-        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar2', 'blar');
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar2', 'blar');
         $tpl2->rendered_content = 'hello world';
         $tpl2->writeCachedContent();
-        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, 'foo|bar', 'blar');
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
+        $tpl3->rendered_content = 'hello world';
+        $tpl3->writeCachedContent();
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+        $this->assertEquals(2, $this->smarty->clear_cache('helloworld.tpl'));
+        $this->assertFalse(file_exists($tpl->getCachedFilepath()));
+        $this->assertFalse(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+    } 
+    public function testClearCacheCacheIdCompileId2Sub()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->use_sub_dirs = true;
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
+        $tpl->rendered_content = 'hello world';
+        $tpl->writeCachedContent();
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar2', 'blar');
+        $tpl2->rendered_content = 'hello world';
+        $tpl2->writeCachedContent();
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
         $tpl3->rendered_content = 'hello world';
         $tpl3->writeCachedContent();
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
@@ -131,20 +179,44 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
+        $this->smarty->clear_all_cache();
+        $this->smarty->use_sub_dirs = false;
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
         $tpl->writeCachedContent();
-        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar2');
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar2');
         $tpl2->rendered_content = 'hello world';
         $tpl2->writeCachedContent();
-        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, 'foo|bar', 'blar');
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
         $tpl3->rendered_content = 'hello world';
         $tpl3->writeCachedContent();
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
-        $this->assertEquals(1, $this->smarty->clear_cache('helloworld.tpl',null,'blar2'));
+        $this->assertEquals(1, $this->smarty->clear_cache('helloworld.tpl', null, 'blar2'));
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertFalse(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+    } 
+    public function testClearCacheCacheIdCompileId3Sub()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->clear_all_cache();
+        $this->smarty->use_sub_dirs = true;
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
+        $tpl->rendered_content = 'hello world';
+        $tpl->writeCachedContent();
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar2');
+        $tpl2->rendered_content = 'hello world';
+        $tpl2->writeCachedContent();
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
+        $tpl3->rendered_content = 'hello world';
+        $tpl3->writeCachedContent();
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+        $this->assertEquals(1, $this->smarty->clear_cache('helloworld.tpl', null, 'blar2'));
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
         $this->assertFalse(file_exists($tpl2->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
@@ -154,19 +226,43 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = false;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
         $tpl->writeCachedContent();
-        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar2');
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar2');
         $tpl2->rendered_content = 'hello world';
         $tpl2->writeCachedContent();
-        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, 'foo|bar', 'blar');
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
         $tpl3->rendered_content = 'hello world';
         $tpl3->writeCachedContent();
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
-        $this->assertEquals(1, $this->smarty->clear_cache('helloworld.tpl',null,'blar2'));
+        $this->assertEquals(1, $this->smarty->clear_cache('helloworld.tpl', null, 'blar2'));
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertFalse(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+    } 
+    public function testClearCacheCacheIdCompileId4Sub()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->use_sub_dirs = true;
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
+        $tpl->rendered_content = 'hello world';
+        $tpl->writeCachedContent();
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar2');
+        $tpl2->rendered_content = 'hello world';
+        $tpl2->writeCachedContent();
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
+        $tpl3->rendered_content = 'hello world';
+        $tpl3->writeCachedContent();
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+        $this->assertEquals(1, $this->smarty->clear_cache('helloworld.tpl', null, 'blar2'));
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
         $this->assertFalse(file_exists($tpl2->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
@@ -175,23 +271,73 @@ class CacherResourceFileTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar');
+        $this->smarty->use_sub_dirs = false;
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $tpl->rendered_content = 'hello world';
         $tpl->writeCachedContent();
-        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, 'foo|bar', 'blar2');
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar2');
         $tpl2->rendered_content = 'hello world';
         $tpl2->writeCachedContent();
-        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, 'foo|bar', 'blar');
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
         $tpl3->rendered_content = 'hello world';
         $tpl3->writeCachedContent();
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
-        $this->assertEquals(2, $this->smarty->clear_cache(null,null,'blar'));
+        $this->assertEquals(2, $this->smarty->clear_cache(null, null, 'blar'));
         $this->assertFalse(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertFalse(file_exists($tpl3->getCachedFilepath()));
+    } 
+    public function testClearCacheCacheIdCompileId5Sub()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->use_sub_dirs = true;
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
+        $tpl->rendered_content = 'hello world';
+        $tpl->writeCachedContent();
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl',  'foo|bar', 'blar2');
+        $tpl2->rendered_content = 'hello world';
+        $tpl2->writeCachedContent();
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', 'foo|bar', 'blar');
+        $tpl3->rendered_content = 'hello world';
+        $tpl3->writeCachedContent();
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl3->getCachedFilepath()));
+        $this->assertEquals(2, $this->smarty->clear_cache(null, null, 'blar'));
+        $this->assertFalse(file_exists($tpl->getCachedFilepath()));
+        $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
+        $this->assertFalse(file_exists($tpl3->getCachedFilepath()));
+    } 
+    public function testClearCacheCacheFile()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->use_sub_dirs = false;
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('cachefile.tpl');
+        $tpl->rendered_content = 'hello world';
+        $tpl->writeCachedContent();
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertEquals(1, $this->smarty->clear_cache('cachefile.tpl'));
+        $this->assertFalse(file_exists($tpl->getCachedFilepath()));
+    } 
+    public function testClearCacheCacheFileSub()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->use_sub_dirs = true;
+        $this->smarty->clear_all_cache();
+        $tpl = $this->smarty->createTemplate('cachefile.tpl');
+        $tpl->rendered_content = 'hello world';
+        $tpl->writeCachedContent();
+        $this->assertTrue(file_exists($tpl->getCachedFilepath()));
+        $this->assertEquals(1, $this->smarty->clear_cache('cachefile.tpl'));
+        $this->assertFalse(file_exists($tpl->getCachedFilepath()));
     } 
     /**
     * final cleanup

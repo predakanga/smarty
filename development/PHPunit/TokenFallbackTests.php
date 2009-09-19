@@ -13,7 +13,7 @@
 class TokenFallbackTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
     } 
 
@@ -27,7 +27,7 @@ class TokenFallbackTests extends PHPUnit_Framework_TestCase {
     */
     public function testTokenFallback1()
     {
-        $tpl = $this->smarty->createTemplate('string:word 123 \'string\' x { x } x === x == x != x >= x ge x <= x le x > x gt ', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:word 123 \'string\' x { x } x === x == x != x >= x ge x <= x le x > x gt ');
         $this->assertEquals('word 123 \'string\' x { x } x === x == x != x >= x ge x <= x le x > x gt ', $this->smarty->fetch($tpl));
     } 
     /**
@@ -35,7 +35,7 @@ class TokenFallbackTests extends PHPUnit_Framework_TestCase {
     */
     public function testTokenFallback2()
     {
-        $tpl = $this->smarty->createTemplate('string: < x lt x ! x not x && x and x || or x ( x ) x [ x ] x -> x => ', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string: < x lt x ! x not x && x and x || or x ( x ) x [ x ] x -> x => ');
         $this->assertEquals(' < x lt x ! x not x && x and x || or x ( x ) x [ x ] x -> x => ', $this->smarty->fetch($tpl));
     } 
     /**
@@ -43,7 +43,7 @@ class TokenFallbackTests extends PHPUnit_Framework_TestCase {
     */
     public function testTokenFallback3()
     {
-        $tpl = $this->smarty->createTemplate('string: = x + x - x * x / x % x ++ x -- x $ x ; x : x " x ` x | x . x , x & ', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string: = x + x - x * x / x % x ++ x -- x $ x ; x : x " x ` x | x . x , x & ');
         $this->assertEquals(' = x + x - x * x / x % x ++ x -- x $ x ; x : x " x ` x | x . x , x & ', $this->smarty->fetch($tpl));
     } 
     /**
@@ -51,7 +51,7 @@ class TokenFallbackTests extends PHPUnit_Framework_TestCase {
     */
     public function testTokenFallback4()
     {
-        $tpl = $this->smarty->createTemplate('string: in x true x false x $a ', $this->smarty);
+        $tpl = $this->smarty->createTemplate('string: in x true x false x $a ');
         $this->assertEquals(' in x true x false x $a ', $this->smarty->fetch($tpl));
     } 
 } 

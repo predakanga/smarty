@@ -14,7 +14,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         if (!is_object($this->smarty->write_file_object)) {
             $this->smarty->loadPlugin("Smarty_Internal_Write_File");
@@ -73,11 +73,11 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     public function testClearCompiledCompileId()
     {
         $this->smarty->use_sub_dirs = true;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, null, 'blar');
+        $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'blar');
         $tpl->smarty->write_file_object->writeFile($tpl->getCompiledFilepath(), 'hello world');
-        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, null, 'blar2');
+        $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, 'blar2');
         $tpl2->smarty->write_file_object->writeFile($tpl2->getCompiledFilepath(), 'hello world');
-        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, null, 'blar');
+        $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, 'blar');
         $tpl3->smarty->write_file_object->writeFile($tpl3->getCompiledFilepath(), 'hello world');
         $this->assertTrue(file_exists($tpl->getCompiledFilepath()));
         $this->assertTrue(file_exists($tpl2->getCompiledFilepath()));

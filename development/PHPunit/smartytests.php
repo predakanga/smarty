@@ -15,15 +15,18 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 * class for running test suite
 */
 class SmartyTests extends PHPUnit_Framework_TestSuite {
+      static  $smarty = null ;
+
+
     public function __construct()
     {
-        $this->smarty = new Smarty();
-        $this->smarty->error_reporting = E_ALL + E_STRICT;
+        SmartyTests::$smarty = new Smarty();
     } 
 
     public static function init()
     {
-        $smarty = Smarty::instance();
+        $smarty = SmartyTests::$smarty;
+        $smarty->error_reporting = E_ALL + E_STRICT;
         $smarty->template_objects = null;
         $smarty->config_vars = array();
         $smarty->global_tpl_vars = array();

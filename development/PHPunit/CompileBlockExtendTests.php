@@ -13,7 +13,7 @@
 class CompileBlockExtendTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->comment_mode = 1;
     } 
@@ -79,6 +79,7 @@ class CompileBlockExtendTests extends PHPUnit_Framework_TestCase {
         $this->assertContains('-- My titel --', $result);
         $this->assertContains('-- Yes we can --', $result);
         $this->assertContains(' assigned description this is foo text ', $result);
+        $this->assertContains('this is an included parent from block_section', $result);
     } 
 } 
 

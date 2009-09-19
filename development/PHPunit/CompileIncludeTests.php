@@ -13,7 +13,7 @@
 class CompileIncludeTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->force_compile = true;
     } 
@@ -29,7 +29,8 @@ class CompileIncludeTests extends PHPUnit_Framework_TestCase {
     public function testIncludeStandard()
     {
         $tpl = $this->smarty->createTemplate('string:{include file="helloworld.tpl"}');
-        $this->assertEquals("hello world", $this->smarty->fetch($tpl));
+        $content = $this->smarty->fetch($tpl);
+        $this->assertEquals("hello world", $content);
     } 
     /**
     * Test that assign attribute does not create standard output
@@ -61,7 +62,7 @@ class CompileIncludeTests extends PHPUnit_Framework_TestCase {
     public function testIncludeLocalScope()
     {
         $this->smarty->assign('foo',1);
-        $tpl = $this->smarty->createTemplate('string: befor include {$foo} {include file=\'string:{$foo=2} in include {$foo}\'} after include {$foo}',$this->smarty);
+        $tpl = $this->smarty->createTemplate('string: befor include {$foo} {include file=\'string:{$foo=2} in include {$foo}\'} after include {$foo}', null, null, $this->smarty);
         $content = $this->smarty->fetch($tpl);
         $this->assertContains('befor include 1', $content);
         $this->assertContains('in include 2', $content);
@@ -73,7 +74,7 @@ class CompileIncludeTests extends PHPUnit_Framework_TestCase {
     public function testIncludeParentScope()
     {
         $this->smarty->assign('foo',1);
-        $tpl = $this->smarty->createTemplate('string: befor include {$foo} {include file=\'string:{$foo=2} in include {$foo}\' scope = parent} after include {$foo}',$this->smarty);
+        $tpl = $this->smarty->createTemplate('string: befor include {$foo} {include file=\'string:{$foo=2} in include {$foo}\' scope = parent} after include {$foo}', null, null, $this->smarty);
         $content = $this->smarty->fetch($tpl);
         $content2 = $this->smarty->fetch('string: root value {$foo}' );
         $this->assertContains('befor include 1', $content);
@@ -101,7 +102,7 @@ class CompileIncludeTests extends PHPUnit_Framework_TestCase {
     public function testIncludeRootScope2()
     {
         $this->smarty->assign('foo',1);
-        $tpl = $this->smarty->createTemplate('string: befor include {$foo} {include file=\'string:{$foo=2} in include {$foo}\' scope = root} after include {$foo}',$this->smarty);
+        $tpl = $this->smarty->createTemplate('string: befor include {$foo} {include file=\'string:{$foo=2} in include {$foo}\' scope = root} after include {$foo}', null, null, $this->smarty);
         $content = $this->smarty->fetch($tpl);
         $content2 = $this->smarty->fetch('string: smarty value {$foo}' );
         $this->assertContains('befor include 1', $content);

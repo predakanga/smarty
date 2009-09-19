@@ -12,14 +12,21 @@ function plugintest($params, &$smarty)
     return "plugin test called $params[foo]";
 } 
 
-$smarty = new Smarty;
-
+class tp extends Smarty { 
+public $imageURL = 'localhost//';
+function smarty_function_imageRef($params, &$smarty) { 
+return $this->imageURL . $params['file'];
+} // imageRef
+}
+ 
+$smarty = new tp;
+$smarty->register_function('imageRef', array($smarty, 'smarty_function_imageRef'), true, array('file'));
 $smarty->force_compile = false;
 $smarty->caching = true;
-$smarty->caching_lifetime = 10;
+$smarty->cache_lifetime = 10;
 
 $smarty->register_function('plugintest','plugintest');
-$smarty->display('string:{plugintest foo=bar}');
+$smarty->display('string:{imageRef file="test.img"}');
 
 
 ?>

@@ -13,7 +13,7 @@
 class CompileAssignTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
     } 
 
@@ -134,17 +134,17 @@ class CompileAssignTests extends PHPUnit_Framework_TestCase {
     public function testAssignArrayAppend2()
     {
         $this->smarty->assign('foo',1);
-        $tpl = $this->smarty->createTemplate("string:{\$foo[]=2}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}",$this->smarty);
+        $tpl = $this->smarty->createTemplate("string:{\$foo[]=2}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}", null, null, $this->smarty);
         $this->assertEquals("0112", $this->smarty->fetch($tpl));
-        $tpl2 = $this->smarty->createTemplate("string:{\$foo}",$this->smarty);
+        $tpl2 = $this->smarty->createTemplate("string:{\$foo}", null, null, $this->smarty);
         $this->assertEquals("1", $this->smarty->fetch($tpl2));
     } 
     public function testAssignArrayAppend3()
     {
         $this->smarty->assign('foo',1);
-        $tpl = $this->smarty->createTemplate("string:{\$foo[]=2 scope=root}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}",$this->smarty);
+        $tpl = $this->smarty->createTemplate("string:{\$foo[]=2 scope=root}{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}", null, null, $this->smarty);
         $this->assertEquals("0112", $this->smarty->fetch($tpl));
-        $tpl2 = $this->smarty->createTemplate("string:{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}",$this->smarty);
+        $tpl2 = $this->smarty->createTemplate("string:{foreach \$foo as \$x}{\$x@key}{\$x}{/foreach}", null, null, $this->smarty);
         $this->assertEquals("0112", $this->smarty->fetch($tpl2));
     } 
     public function testAssignNestedArray()

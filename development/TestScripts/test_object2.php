@@ -11,7 +11,7 @@ $smarty = new Smarty;
 
 $smarty->force_compile = true;
 $smarty->caching = false;
-$smarty->caching_lifetime = 60;
+$smarty->cache_lifetime = 60;
 $smarty->use_sub_dirs = false;
 
  class TestClass

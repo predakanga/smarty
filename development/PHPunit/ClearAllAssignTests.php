@@ -13,12 +13,12 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
 
     public function setUp()
     {
-        $this->smarty = Smarty::instance();
+        $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->assign('foo','foo');
         $this->smarty->data = new Smarty_Data($this->smarty);
         $this->smarty->data->assign('bar','bar');
-        $this->smarty->tpl = $this->smarty->createTemplate('string:{$foo}{$bar}{$blar}',$this->smarty->data);
+        $this->smarty->tpl = $this->smarty->createTemplate('string:{$foo}{$bar}{$blar}', null, null, $this->smarty->data);
         $this->smarty->tpl->assign('blar','blar');
     } 
 

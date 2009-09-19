@@ -31,6 +31,7 @@ class Smarty_Internal_Templatelexer
     				'NOT'			=> '(!,NOT)',
     				'LAND'		=> '(&&,AND)',
     				'LOR'			=> '(||,OR)',
+    				'LXOR'			=> 'XOR',
     				'OPENP'		=> '(',
     				'CLOSEP'	=> ')',
     				'OPENB'		=> '[',
@@ -105,7 +106,8 @@ phpstart = /\s*SMARTYldelphpSMARTYrdel/
 phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /\s*SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
-ldelslash = /\s*SMARTYldel\s*\//
+ldelslash = /\s*SMARTYldel\//
+ldelspaceslash = /\s*SMARTYldel\s{1,}\//
 ldel = /\s*SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
@@ -131,13 +133,14 @@ hatch = /#/
 semicolon = /\s*\;\s*/
 vert = /\|/
 equal = /\s*=\s*/
-space = /[\s]+/
+space = /\s+/
 ptr = /\s*\->\s*/
 aptr = /\s*=>\s*/
 quote = /\"/
 singlequote = /\'/
 backtick = /`/
 andsym = /\s*\&\s*/
+wordsequence = /([A-Za-z]\w*\s+){5,}/
 id = /\w+/
 literalstart = '\s*SMARTYldelliteralSMARTYrdel'
 literalend = '\s*SMARTYldel/literalSMARTYrdel'
@@ -166,6 +169,7 @@ as = /\s+(AS|as)\s+/
 not = /!\s*|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s*(AND|and)\s+/
 lor = /\s*\|\|\s*|\s*(OR|or)\s+/
+lxor = /\s*(XOR|xor)\s+/
 other = /./
 */
 /*!lex2php
@@ -212,8 +216,12 @@ ldelim {
 rdelim {
   $this->token = Smarty_Internal_Templateparser::TP_RDELIMTAG;
 }
-ldelslash {
-  $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+ldelspaceslash {
+  if ($this->smarty->auto_literal) {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+     $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+  }
 }
 ldels {
   if ($this->smarty->auto_literal) {
@@ -229,17 +237,14 @@ rdels {
      $this->token = Smarty_Internal_Templateparser::TP_RDEL;
   }
 }
+ldelslash {
+  $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+}
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
-}
-ldels {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-}
-rdels {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
 isin {
   $this->token = Smarty_Internal_Templateparser::TP_ISIN;
@@ -285,6 +290,9 @@ land {
 }
 lor {
   $this->token = Smarty_Internal_Templateparser::TP_LOR;
+}
+lxor {
+  $this->token = Smarty_Internal_Templateparser::TP_LXOR;
 }
 isoddby {
   $this->token = Smarty_Internal_Templateparser::TP_ISODDBY;
@@ -386,6 +394,9 @@ comma {
 }
 andsym {
   $this->token = Smarty_Internal_Templateparser::TP_ANDSYM;
+}
+wordsequence {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
 id {
   $this->token = Smarty_Internal_Templateparser::TP_ID;
