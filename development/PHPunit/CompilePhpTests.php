@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-
 /**
 * class for {php} and <?php...?> tag tests
 */
@@ -26,26 +25,52 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
     /**
     * test {php} tag
     */
-    public function testPhpSmartyTag()
+    public function testPhpSmartyTagAllowed()
     {
+        $this->smarty->php_handling = SMARTY_PHP_ALLOW;
+        $this->smarty->security = false;
         $tpl = $this->smarty->createTemplate("string:{php}echo 'hello world'; {/php}");
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
+    public function testPhpSmartyTagNotAllowed()
+    {
+        try {
+            $this->smarty->fetch("string:{php}echo 'hello world'; {/php}");
+        } 
+        catch (Exception $e) {
+            $this->assertContains('{php} is deprecated', $e->getMessage());
+            return;
+        } 
+        $this->fail('Warning {php} has not been raised.');
+    } 
     /**
     * test <?php...\> tag
+    * default is PASSTHRU
     */
     public function testPhpTag()
     {
         $tpl = $this->smarty->createTemplate("string:<?php echo 'hello world'; ?>");
-        $this->assertEquals('hello world', $this->smarty->fetch($tpl));
+        $content = $this->smarty->fetch($tpl);
+        $this->assertEquals("<?php echo 'hello world'; ?>", $content);
+    } 
+    // ALLOW
+    public function testPhpTagAllow()
+    {
+        $this->smarty->php_handling = SMARTY_PHP_ALLOW;
+        $this->smarty->security = false;
+        $tpl = $this->smarty->createTemplate("string:<?php echo 'hello world'; ?>");
+        $content = $this->smarty->fetch($tpl);
+        $this->assertEquals('hello world', $content);
     } 
     /**
     * test <?=...\> shorttag
+    * default is PASSTHRU
     */
     public function testShortTag()
     {
-        $this->smarty->assign('foo','bar');
-        $this->assertEquals('bar', $this->smarty->fetch('string:<?=$foo?>'));
+        $this->smarty->assign('foo', 'bar');
+        $content = $this->smarty->fetch('string:<?=$foo?>');
+        $this->assertEquals('<?=$foo?>', $content);
     } 
 } 
 

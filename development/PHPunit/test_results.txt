@@ -4,19 +4,35 @@ Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty
 Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 100
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
-............................................................  60 / 503
-............................................................ 120 / 503
-...................F........................................ 180 / 503
-............................................................ 240 / 503
-............................................................ 300 / 503
-......... 
+............................................................  60 / 483
+.......................................................F.... 120 / 483
+............................................................ 180 / 483
+............................................................ 240 / 483
+............................................... 
  
-................................................... 360 / 503
-............................................................ 420 / 503
-............................................................ 480 / 503
-.......................
+............. 300 / 483
+............................................................ 360 / 483
+............................................................ 420 / 483
+....................................E....................... 480 / 483
+...
 
-Time: 45 seconds
+Time: 43 seconds
+
+There was 1 error:
+
+1) testSmartyTemplateNotExists(TemplateExistsTests)
+Exception: Unable to load template "notthere.tpl"
+C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.template.php:599
+C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.resource_file.php:33
+C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.template.php:125
+C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.resource_file.php:50
+C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.template.php:139
+C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\method.template_exists.php:28
+C:\wamp\www\__smarty3Alpha\distribution\libs\Smarty.class.php:526
+C:\wamp\www\__smarty3Alpha\development\PHPunit\TemplateExistsTests.php:37
+
+--
+
 
 There was 1 failure:
 
@@ -25,6 +41,6 @@ Failed asserting that <integer:3> matches expected value <integer:2>.
 C:\wamp\www\__smarty3Alpha\development\PHPunit\CacherResourceFileTests.php:103
 
 FAILURES!
-Tests: 503, Assertions: 657, Failures: 1.
+Tests: 483, Assertions: 638, Failures: 1, Errors: 1.
 
 Generating code coverage report, this may take a moment.
