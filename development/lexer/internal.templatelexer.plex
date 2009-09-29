@@ -98,12 +98,10 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-php = /\s*\<\?php.*\?\>/
+php = /\s*\<\?php/
 xml = /\s*\<\?xml/
 shorttagstart = /\s*\<\?=/
 shorttagend = /\s*\?\>/
-phpstart = /\s*SMARTYldelphpSMARTYrdel/
-phpend = /SMARTYldel\/phpSMARTYrdel/
 ldels = /\s*SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
 ldelslash = /\s*SMARTYldel\//
@@ -186,12 +184,6 @@ shorttagstart {
 shorttagend {
   $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGEND;
 }
-phpstart {
-  $this->token = Smarty_Internal_Templateparser::TP_PHPSTART;
-}
-phpend {
-  $this->token = Smarty_Internal_Templateparser::TP_PHPEND;
-}  
 commentend {
   $this->token = Smarty_Internal_Templateparser::TP_COMMENTEND;
 }

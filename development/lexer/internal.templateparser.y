@@ -25,6 +25,11 @@
         $this->compiler = $compiler;
         $this->smarty = $this->compiler->smarty;
         $this->template = $this->compiler->template;
+        if ($this->template->security && isset($this->smarty->security_handler)) {
+              $this->sec_obj = $this->smarty->security_policy;
+        } else {
+              $this->sec_obj = $this->smarty;
+        }
         $this->cacher = $this->template->cacher_object; 
 				$this->nocache = false;
 				$this->prefix_code = array();
@@ -61,10 +66,11 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER LDELSLASH LDEL RDEL PHP SHORTTAGSTART SHORTTAGEND COMMENTEND COMMENTSTART INTEGER MATH UNIMATH INCDEC OPENP CLOSEP OPENB CLOSEB DOLLAR DOT COMMA COLON DOUBLECOLON SEMICOLON
-              VERT EQUAL SPACE PTR APTR ID EQUALS NOTEQUALS GREATERTHAN LESSTHAN GREATEREQUAL LESSEQUAL IDENTITY NONEIDENTITY
-              NOT LAND LOR LXOR QUOTE SINGLEQUOTE BOOLEAN NULL AS ANDSYM BACKTICK HATCH AT ISODD ISNOTODD ISEVEN ISNOTEVEN ISODDBY ISNOTODDBY
-              ISEVENBY ISNOTEVENBY ISDIVBY ISNOTDIVBY ISIN.
+%fallback     OTHER XML PHP SHORTTAGSTART SHORTTAGEND PHPSTART PHPEND COMMENTEND COMMENTSTART SINGLEQUOTE LITERALSTART LITERALEND
+              LDELIMTAG RDELIMTAG LDELSLASH LDEL RDEL ISIN AS BOOLEAN  NULL  IDENTITY NONEIDENTITY EQUALS NOTEQUALS GREATEREQUAL 
+              LESSEQUAL GREATERTHAN LESSTHAN NOT LAND LOR LXOR ISODDBY ISNOTODDBY ISODD ISNOTODD ISEVENBY ISNOTEVENBY ISEVEN 
+              ISNOTEVEN  ISDIVBY ISNOTDIVBY OPENP CLOSEP OPENB CLOSEB PTR APTR EQUAL INTEGER INCDEC UNIMATH MATH DOLLAR COLON 
+              DOUBLECOLON SEMICOLON  AT HATCH QUOTE BACKTICK VERT DOT COMMA ANDSYM ID SPACE. 
               
 
 //
@@ -98,37 +104,27 @@ template_element(res)::= LDELIMTAG(d). {preg_match('/\s*/',d,$s); res = $s[0].$t
 											// {rdelim}
 template_element(res)::= RDELIMTAG(d). {preg_match('/\s*/',d,$s); res = $s[0].$this->cacher->processNocacheCode($this->smarty->right_delimiter, $this->compiler,false,false);}	
 											// <?php> tag
-template_element(res)::= PHP(phpt). {if (!$this->template->security) { 
-                                       res = $this->cacher->processNocacheCode(phpt, $this->compiler, false,true);
-                                      } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->cacher->processNocacheCode(htmlspecialchars(phpt, ENT_QUOTES), $this->compiler, false, false);
-                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
-                                       res = $this->cacher->processNocacheCode("<?php echo '".phpt."';?>\n", $this->compiler, false, false);
-                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
+template_element(res)::= PHP text(t) SHORTTAGEND.  {if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
+                                       res = $this->cacher->processNocacheCode("<?php echo '<?php".str_replace("'","\'",t)."?>';?>\n", $this->compiler, false, false);
+                                      } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
+                                       res = $this->cacher->processNocacheCode(htmlspecialchars('<?php'.t.'?>', ENT_QUOTES), $this->compiler, false, false);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+                                       res = $this->cacher->processNocacheCode('<?php'.t.'?>', $this->compiler, false,true);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
                                        res = '';
-                                      }	}
-											// {PHP} tag
-template_element(res)::= PHPSTART(d) text(t) PHPEND. {preg_match('/\s*/',d,$s); res = $s[0];
-                                      if (!$this->template->security) { 
-                                        res .= $this->cacher->processNocacheCode('<?php '.t.' ?>', $this->compiler, false,true);
-                                      } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                        res .= $this->cacher->processNocacheCode(htmlspecialchars('<?php '.t.' ?>', ENT_QUOTES), $this->compiler, false, false);	
-                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
-                                        res .= $this->cacher->processNocacheCode("<?php echo '<?php ".t." ?>';?>\n", $this->compiler, false, false);
-                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
-                                        res .= '';
-                                      }	}
+                                      }
+                                     } 
 
-template_element(res)::= SHORTTAGSTART(d)  variable(v) SHORTTAGEND. {preg_match('/\s*/',d,$s); res = $s[0];
-                                       if (!$this->template->security) { 
-                                        res .= $this->cacher->processNocacheCode($this->compiler->compileTag('print_expression',array('value'=>v)), $this->compiler, false,true);
-                                      } elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_QUOTE) {
-                                        res .= $this->cacher->processNocacheCode(htmlspecialchars('<?php '.t.' ?>', ENT_QUOTES), $this->compiler, false, false);	
-                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_PASSTHRU || $this->smarty->security_policy->php_handling == SMARTY_PHP_ALLOW) {
-                                        res .= $this->cacher->processNocacheCode("<?php echo '<?php ".t." ?>';?>\n", $this->compiler, false, false);
-                                      }elseif ($this->smarty->security_policy->php_handling == SMARTY_PHP_REMOVE) {
-                                        res .= '';
-                                      }	}
+template_element(res)::= SHORTTAGSTART(d) DOLLAR ID(i) SHORTTAGEND. {preg_match('/\s*/',d,$s); res = $s[0];
+                                      if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU || $this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+                                       res .= $this->cacher->processNocacheCode("<?php echo '<?=$".i."?>'?>\n", $this->compiler, false, false);
+                                      } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
+                                       res .= $this->cacher->processNocacheCode(htmlspecialchars('<?=$'.i.'?>', ENT_QUOTES), $this->compiler, false, false);
+                                      }elseif ($this->sec_obj == SMARTY_PHP_REMOVE) {
+                                       res .= '';
+                                      }
+                                     }
+
 											// XML tag
 template_element(res)::= XML(x). {preg_match('/\s*/',x,$s); res = $s[0].$this->cacher->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true, true);}	
 template_element(res)::= SHORTTAGEND. {res = $this->cacher->processNocacheCode("<?php echo '?>';?>\n", $this->compiler, true, true);}	
@@ -206,6 +202,7 @@ attributes(res)  ::= . { res = array();}
 									
 									// attribute
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
+attribute(res)   ::= SPACE ID(v). { res = array(v=>'true');}
 
 //
 // statement
@@ -328,6 +325,7 @@ indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
 										// section tag index
 indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('internal_smarty_var','[\'section\'][\''.i.'\'][\'index\']').']';}
+indexdef(res)   ::= OPENB ID(i) DOT ID(i2) CLOSEB. { res = '['.$this->compiler->compileTag('internal_smarty_var','[\'section\'][\''.i.'\'][\''.i2.'\']').']';}
 										// PHP style index
 indexdef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
 										// für assign append array
