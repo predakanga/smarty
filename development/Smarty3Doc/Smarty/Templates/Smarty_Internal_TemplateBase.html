@@ -122,7 +122,7 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#append_by_ref" title="details" class="method-name">append_by_ref</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -132,7 +132,7 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#assign_by_ref" title="details" class="method-name">assign_by_ref</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -239,7 +239,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">append</span> (line <span class="line-number">83</span>)
+		<span class="method-title">append</span> (line <span class="line-number">75</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -283,11 +283,12 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">append_by_ref</span> (line <span class="line-number">148</span>)
+		<span class="method-title">append_by_ref</span> (line <span class="line-number">138</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">appends values to template variables by reference</p>
+<p class="description"><p>wrapper to append</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -297,22 +298,25 @@
 		<span class="method-name">
 			append_by_ref
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$tpl_var</span><span class="var-description">: the template variable name</span>			</li>
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$</span><span class="var-description">: &amp;$value the referenced value to append</span>			</li>
-					<li>
-				<span class="var-type">boolean</span>
-				<span class="var-name">$merge</span><span class="var-description">: flag if array elements shall be merged</span>			</li>
+				<span class="var-type"></span>
+				<span class="var-name">$tpl_var</span>			</li>
 					<li>
 				<span class="var-type"></span>
-				<span class="var-name">&$value</span>			</li>
+				<span class="var-name">$value</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$merge</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$nocache</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$scope</span>			</li>
 				</ul>
 		
 			
@@ -362,11 +366,12 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">assign_by_ref</span> (line <span class="line-number">66</span>)
+		<span class="method-title">assign_by_ref</span> (line <span class="line-number">62</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">assigns values to template variables by reference</p>
+<p class="description"><p>wrapper to assign</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -376,25 +381,22 @@
 		<span class="method-name">
 			assign_by_ref
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type"></span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$tpl_var</span><span class="var-description">: the template variable name</span>			</li>
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$</span><span class="var-description">: &amp;$value the referenced value to assign</span>			</li>
-					<li>
-				<span class="var-type">boolean</span>
-				<span class="var-name">$nocache</span><span class="var-description">: if true any output of this variable will be not cached</span>			</li>
-					<li>
-				<span class="var-type">boolean</span>
-				<span class="var-name">$scope</span><span class="var-description">: the scope the variable will have  (local,parent or root)</span>			</li>
+				<span class="var-type"></span>
+				<span class="var-name">$tpl_var</span>			</li>
 					<li>
 				<span class="var-type"></span>
 				<span class="var-name">&$value</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$nocache</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$scope</span>			</li>
 				</ul>
 		
 			
@@ -438,7 +440,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">buildTemplateId</span> (line <span class="line-number">320</span>)
+		<span class="method-title">buildTemplateId</span> (line <span class="line-number">314</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -473,7 +475,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">clear_all_assign</span> (line <span class="line-number">198</span>)
+		<span class="method-title">clear_all_assign</span> (line <span class="line-number">174</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -497,7 +499,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">clear_assign</span> (line <span class="line-number">184</span>)
+		<span class="method-title">clear_assign</span> (line <span class="line-number">160</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -529,7 +531,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">createTemplate</span> (line <span class="line-number">293</span>)
+		<span class="method-title">createTemplate</span> (line <span class="line-number">269</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -568,7 +570,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getConfigVariable</span> (line <span class="line-number">243</span>)
+		<span class="method-title">getConfigVariable</span> (line <span class="line-number">219</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -598,7 +600,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getStreamVariable</span> (line <span class="line-number">266</span>)
+		<span class="method-title">getStreamVariable</span> (line <span class="line-number">242</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -628,7 +630,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getVariable</span> (line <span class="line-number">211</span>)
+		<span class="method-title">getVariable</span> (line <span class="line-number">187</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -667,7 +669,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">_get_time</span> (line <span class="line-number">331</span>)
+		<span class="method-title">_get_time</span> (line <span class="line-number">325</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -693,7 +695,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 19 Sep 2009 15:07:46 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Thu, 01 Oct 2009 00:28:19 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

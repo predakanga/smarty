@@ -23,7 +23,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">class for {php} and &lt;?php...?&gt; tag tests</p>
 		<p class="notes">
-			Located in <a class="field" href="_development---PHPunit---CompilePhpTests.php.html">/development/PHPunit/CompilePhpTests.php</a> (line <span class="field">13</span>)
+			Located in <a class="field" href="_development---PHPunit---CompilePhpTests.php.html">/development/PHPunit/CompilePhpTests.php</a> (line <span class="field">12</span>)
 		</p>
 		
 				
@@ -51,7 +51,7 @@
 										<a href="#isRunnable" title="details" class="method-name">isRunnable</a>
 										()
 									</div>
-																																								
+																																																								
 																				<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#setUp" title="details" class="method-name">setUp</a>
@@ -59,12 +59,22 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#testPhpSmartyTag" title="details" class="method-name">testPhpSmartyTag</a>
+										<a href="#testPhpSmartyTagAllowed" title="details" class="method-name">testPhpSmartyTagAllowed</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testPhpSmartyTagNotAllowed" title="details" class="method-name">testPhpSmartyTagNotAllowed</a>
 										()
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#testPhpTag" title="details" class="method-name">testPhpTag</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testPhpTagAllow" title="details" class="method-name">testPhpTagAllow</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -91,7 +101,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method isRunnable</span> (line <span class="line-number">21</span>)
+		<span class="method-title">static method isRunnable</span> (line <span class="line-number">20</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -116,7 +126,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">setUp</span> (line <span class="line-number">14</span>)
+		<span class="method-title">setUp</span> (line <span class="line-number">13</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -135,11 +145,11 @@
 		
 			
 	</div>
-<a name="methodtestPhpSmartyTag" id="testPhpSmartyTag"><!-- --></a>
+<a name="methodtestPhpSmartyTagAllowed" id="testPhpSmartyTagAllowed"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testPhpSmartyTag</span> (line <span class="line-number">29</span>)
+		<span class="method-title">testPhpSmartyTagAllowed</span> (line <span class="line-number">28</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -151,7 +161,30 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			testPhpSmartyTag
+			testPhpSmartyTagAllowed
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestPhpSmartyTagNotAllowed" id="testPhpSmartyTagNotAllowed"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testPhpSmartyTagNotAllowed</span> (line <span class="line-number">35</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testPhpSmartyTagNotAllowed
 		</span>
 				()
 			</div>
@@ -160,14 +193,15 @@
 			
 	</div>
 <a name="methodtestPhpTag" id="testPhpTag"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testPhpTag</span> (line <span class="line-number">37</span>)
+		<span class="method-title">testPhpTag</span> (line <span class="line-number">50</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">test &lt;?php...\&gt; tag</p>
+<p class="description"><p>default is PASSTHRU</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -183,15 +217,39 @@
 		
 			
 	</div>
+<a name="methodtestPhpTagAllow" id="testPhpTagAllow"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testPhpTagAllow</span> (line <span class="line-number">57</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testPhpTagAllow
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 <a name="methodtestShortTag" id="testShortTag"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testShortTag</span> (line <span class="line-number">45</span>)
+		<span class="method-title">testShortTag</span> (line <span class="line-number">69</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">test &lt;?=...\&gt; shorttag</p>
+<p class="description"><p>default is PASSTHRU</p></p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -213,7 +271,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 19 Sep 2009 15:07:32 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Thu, 01 Oct 2009 00:28:05 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
