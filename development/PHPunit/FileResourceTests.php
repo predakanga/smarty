@@ -31,6 +31,41 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('.\templates\helloworld.tpl', $tpl->getTemplateFilepath());
     } 
     /**
+    * test template file exits
+    */
+    public function testTemplateFileExists1()
+    {
+        $tpl = $this->smarty->createTemplate('helloworld.tpl');
+        $this->assertTrue($tpl->isExisting());
+    } 
+    public function testTemplateFileExists2()
+    {
+        $this->assertTrue($this->smarty->template_exists('helloworld.tpl'));
+    } 
+    /**
+    * test template file is not existing
+    */
+    public function testTemplateFileNotExists1()
+    {
+        $tpl = $this->smarty->createTemplate('notthere.tpl');
+        $this->assertFalse($tpl->isExisting());
+    } 
+    public function testTemplateFileNotExists2()
+    {
+        $this->assertFalse($this->smarty->template_exists('notthere.tpl'));
+    } 
+    public function testTemplateFileNotExists3()
+    {
+        try {
+            $result = $this->smarty->fetch('notthere.tpl');
+        } 
+        catch (Exception $e) {
+            $this->assertContains('Unable to load template "file : notthere.tpl"', $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for not existing template is missing');
+    } 
+    /**
     * test getTemplateTimestamp
     */
     public function testGetTemplateTimestamp()
@@ -69,7 +104,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('.\templates_c\1479707457.helloworld.tpl.php', $tpl->getCompiledFilepath());
+        $this->assertEquals('.\templates_c\1479707457.file.helloworld.tpl.php', $tpl->getCompiledFilepath());
     } 
     /**
     * test getCompiledTimestamp

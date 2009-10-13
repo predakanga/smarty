@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-
 /**
 * class for stream resource tests
 */
@@ -55,7 +54,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetTemplateSource()
     {
-        $tpl = $this->smarty->createTemplate('global:mytest',null, null,  $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest', null, null, $this->smarty);
         $this->assertEquals('hello world {$foo}', $tpl->getTemplateSource());
     } 
     /**
@@ -125,6 +124,41 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse($tpl->getCachedTimestamp());
     } 
     /**
+    * test template file exits
+    */
+    public function testTemplateStreamExists1()
+    {
+        $tpl = $this->smarty->createTemplate('global:mytest');
+        $this->assertTrue($tpl->isExisting());
+    } 
+    public function testTemplateStreamExists2()
+    {
+        $this->assertTrue($this->smarty->template_exists('global:mytest'));
+    } 
+    /**
+    * test template is not existing
+    */
+    public function testTemplateStreamNotExists1()
+    {
+        $tpl = $this->smarty->createTemplate('global:notthere');
+        $this->assertFalse($tpl->isExisting());
+    } 
+    public function testTemplateStramNotExists2()
+    {
+        $this->assertFalse($this->smarty->template_exists('global:notthere'));
+    } 
+    public function testTemplateStramNotExists3()
+    {
+        try {
+            $result = $this->smarty->fetch('global:notthere');
+        } 
+        catch (Exception $e) {
+            $this->assertContains('Unable to load template "global : notthere"', $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for not existing template is missing');
+    } 
+    /**
     * test getCachedContent
     */
     public function testGetCachedContent()
@@ -153,7 +187,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testGetRenderedTemplate()
     {
-        $tpl = $this->smarty->createTemplate('global:mytest' ,null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest' , null, null, $this->smarty);
         $this->assertEquals('hello world bar', $tpl->getRenderedTemplate());
     } 
     /**
@@ -165,11 +199,12 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 20;
         $this->smarty->clear_compiled_tpl();
         $this->smarty->clear_all_cache();
-        $tpl = $this->smarty->createTemplate('global:mytest',null, null,  $this->smarty);
+        $tpl = $this->smarty->createTemplate('global:mytest', null, null, $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
         $this->assertEquals(0, $this->smarty->clear_all_cache());
         $this->assertEquals(0, $this->smarty->clear_compiled_tpl());
     } 
+
     /**
     * test $smarty->is_cached
     */
@@ -214,6 +249,9 @@ class ResourceStream {
     } 
     public function stream_eof()
     {
+        if (!isset($GLOBALS[$this->varname])) {
+            return true;
+        } 
         return $this->position >= strlen($GLOBALS[$this->varname]);
     } 
     public function stream_seek($offset, $whence)

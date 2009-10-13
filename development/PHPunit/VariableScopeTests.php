@@ -170,6 +170,17 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
         // must see the new value at root
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl2));
     } 
+    public function testDataArray()
+    {
+        // create global variable $foo2 in template
+        $tpl = $this->smarty->createTemplate("string:{\$foo} {\$foo2}",array('foo'=>'bar','foo2'=>'bar2'));
+        $this->assertEquals("bar bar2", $this->smarty->fetch($tpl));
+    } 
+    public function testDataArray2()
+    {
+        // create global variable $foo2 in template
+        $this->assertEquals("bar bar2", $this->smarty->fetch("string:{\$foo} {\$foo2}",array('foo'=>'bar','foo2'=>'bar2')));
+    } 
 } 
 
 ?>

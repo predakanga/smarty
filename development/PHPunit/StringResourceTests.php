@@ -23,6 +23,18 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
+    * test template string exits
+    */
+    public function testTemplateStringExists1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo}');
+        $this->assertTrue($tpl->isExisting());
+    } 
+    public function testTemplateStringExists2()
+    {
+        $this->assertTrue($this->smarty->template_exists('string:{$foo}'));
+    } 
+    /**
     * test getTemplateFilepath
     */
     public function testGetTemplateFilepath()

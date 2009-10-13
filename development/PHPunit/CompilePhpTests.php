@@ -27,7 +27,7 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
     */
     public function testPhpSmartyTagAllowed()
     {
-        $this->smarty->php_handling = SMARTY_PHP_ALLOW;
+        $this->smarty->allow_php_tag = true;
         $this->smarty->security = false;
         $tpl = $this->smarty->createTemplate("string:{php}echo 'hello world'; {/php}");
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));

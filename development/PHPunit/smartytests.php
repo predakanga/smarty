@@ -50,6 +50,9 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->left_delimiter = '{';
         $smarty->right_delimiter = '}';
         $smarty->php_handling = SMARTY_PHP_PASSTHRU;
+        $smarty->allow_php_tag = false;
+        $smarty->allow_php_templates = false;
+        $smarty->block_data= null;
         $smarty->enableSecurity();
     } 
     /**

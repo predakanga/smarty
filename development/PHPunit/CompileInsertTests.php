@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-
 /**
 * class for {insert} tests
 */
@@ -26,11 +25,26 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
     /**
     * test inserted function
     */
-    public function testInsertFunction()
+    public function testInsertFunctionSingle()
     {
         $tpl = $this->smarty->createTemplate("string:start {insert name='test' foo='bar'} end");
         $this->assertEquals("start insert function parameter value bar end", $this->smarty->fetch($tpl));
     } 
+    public function testInsertFunctionDouble()
+    {
+        $tpl = $this->smarty->createTemplate("string:start {insert name=\"test\" foo='bar'} end");
+        $this->assertEquals("start insert function parameter value bar end", $this->smarty->fetch($tpl));
+    } 
+/**
+* currently not supported
+
+    public function testInsertFunctionVariableName()
+    {
+        $tpl = $this->smarty->createTemplate("string:start {insert name=\$variable foo='bar'} end");
+        $tpl->assign('variable','test');
+        $this->assertEquals("start insert function parameter value bar end", $this->smarty->fetch($tpl));
+    } 
+**/
     /**
     * test inserted function with assign
     */
@@ -64,7 +78,7 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
         $this->fail('Exception for "function is not callable" has not been raised.');
     } 
     /**
-    * test inserted function none existing function
+    * test inserted function none existing script
     */
     public function testInsertFunctionNoneExistingScript()
     {

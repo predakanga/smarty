@@ -1,46 +1,224 @@
 
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamResourceTests.php on line 221
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__Smarty3Alpha\development\PHPunit\StreamResourceTests.php on line 259
 
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 100
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__Smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 100
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
-............................................................  60 / 483
-.......................................................F.... 120 / 483
-............................................................ 180 / 483
-............................................................ 240 / 483
-............................................... 
+Test Suite
+ DoubleQuotedStringTests
+ ........
+
+ CoreTests
+ .....
+
+ ClearCompiledTests
+ .....
+
+ ClearCacheTests
+ ...
+
+ StringResourceTests
+ ...................
+
+ FileResourceTests
+ ...................................
+
+ CompileAssignTests
+ .....................
+
+ AppendByRefTests
+ ...
+
+ AppendTests
+ ......
+
+ ArrayTests
+ .....
+
+ AssignByRefTests
+ .
+
+ AssignGlobalTests
+ ....
+
+ AssignTests
+ ..
+
+ CacherResourceFileTests
+ .....F............
+
+ ClearAllAssignTests
+ ....
+
+ ClearAssignTests
+ ...
+
+ CommentsTests
+ ....
+
+ CompileBlockExtendTests
+ .......
+
+ CompileBlockPluginTests
+ .......
+
+ CompileCaptureTests
+ .....
+
+ CompileCompilerPluginTests
+ ..
+
+ CompileDebugTests
+ ..
+
+ CompileErrorTests
+ .....
+
+ CompileEvalTests
+ ...
+
+ CompileForeachTests
+ ..............
+
+ CompileForTests
+ .......
+
+ CompileFunctionPluginTests
+ ...
+
+ CompileFunctionTests
+ ......
+
+ CompileIfTests
+ ........................................................... 59 / 64
+ .....
+
+ CompileIncludeTests
+ ........
+
+ CompileInsertTests
+ ......
+
+ CompileNocacheTests
+ ...
+
+ CompilePhpTests
+ .....
+
+ CompileRegisteredObjectFunctionTests
+ ..
+
+ CompilerPluginTests
  
-............. 300 / 483
-............................................................ 360 / 483
-............................................................ 420 / 483
-....................................E....................... 480 / 483
-...
+ 
+ .
 
-Time: 43 seconds
+ CompileSectionTests
+ ......
 
-There was 1 error:
+ CompileStripTests
+ .
 
-1) testSmartyTemplateNotExists(TemplateExistsTests)
-Exception: Unable to load template "notthere.tpl"
-C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.template.php:599
-C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.resource_file.php:33
-C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.template.php:125
-C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.resource_file.php:50
-C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\internal.template.php:139
-C:\wamp\www\__smarty3Alpha\distribution\libs\sysplugins\method.template_exists.php:28
-C:\wamp\www\__smarty3Alpha\distribution\libs\Smarty.class.php:526
-C:\wamp\www\__smarty3Alpha\development\PHPunit\TemplateExistsTests.php:37
+ CompileWhileTests
+ ..
 
---
+ ConfigVarTests
+ .................
 
+ ConstantsTests
+ .
+
+ DefaultPluginHandlerTests
+ ....
+
+ DelimiterTests
+ ....
+
+ ExtendResourceTests
+ .....
+
+ FilterTests
+ ......
+
+ FunctionTests
+ .
+
+ GetTemplateVarsTests
+ ......
+
+ LoadFilterTests
+ .
+
+ ModifierTests
+ ..........
+
+ PhpResourceTests
+ ........................
+
+ PrintNocacheTests
+ ....
+
+ RegisterBlockTests
+ ..........
+
+ RegisterCompilerFunctionTests
+ ......
+
+ RegisterFilterTests
+ .............
+
+ RegisterFunctionTests
+ ..........
+
+ RegisterModifierTests
+ ......
+
+ SecurityTests
+ ................
+
+ SingleQuotedStringTests
+ ......
+
+ SpacingTests
+ ............
+
+ StaticClassAccessTests
+ .....
+
+ StreamResourceTests
+ ......................
+
+ StreamVariableTests
+ .
+
+ TemplateExistsTests
+ ..
+
+ TokenFallbackTests
+ ....
+
+ TriggerErrorTests
+ .
+
+ VariableScopeTests
+ ................
+
+ VariableVariableTests
+ ....
+
+ XmlTests
+ ...
+
+Time: 16 seconds
 
 There was 1 failure:
 
 1) testClearCacheCacheIdCompileId(CacherResourceFileTests)
 Failed asserting that <integer:3> matches expected value <integer:2>.
-C:\wamp\www\__smarty3Alpha\development\PHPunit\CacherResourceFileTests.php:103
+expected integer <2>
+difference       <1>
+got integer      <3>
+C:\wamp\www\__Smarty3Alpha\development\PHPunit\CacherResourceFileTests.php:103
 
 FAILURES!
-Tests: 483, Assertions: 638, Failures: 1, Errors: 1.
-
-Generating code coverage report, this may take a moment.
+Tests: 525, Assertions: 723, Failures: 1.

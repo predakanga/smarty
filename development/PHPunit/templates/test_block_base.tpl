@@ -1,4 +1,8 @@
-<title>{block name='title'}-- default title --{/block}</title>
-<h1>{block name='headline'}-- default headline --{/block}</h1>
-{block name='description'}-- default description --{/block}<br>
-{block name='parent'}-- default parent --{/block}<br>
+{block name='blockbase'}--block base ok--{/block}<br>
+{block name=blocksection}--block section false--{/block}<br>
+{block name=blockpassedbysection}--block passed by section false--{/block}<br>
+{block name=blockroot}--block root false--{/block}<br>
+{block name=blockassigned}--block assigned false--{/block}<br>
+{block name='parentbase'}--base--{/block}<br>
+{block name='parentsection'}--parent from section false--{/block}<br>
+{include file='test_block_include.tpl'}

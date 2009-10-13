@@ -36,7 +36,15 @@ class RegisterFilterTests extends PHPUnit_Framework_TestCase {
     public function testRegisterPrefilterMethode()
     {
         $this->smarty->register_prefilter(array('myfilterclass','execute'));
-        $this->assertTrue(is_callable($this->smarty->registered_filters['pre']['myfilterclass']));
+        $this->assertTrue(is_callable($this->smarty->registered_filters['pre']['myfilterclass_execute']));
+    } 
+    /**
+    * test register_prefilter method for class object
+    */
+    public function testRegisterPrefilterObject()
+    {
+        $this->smarty->register_prefilter(array(new myfilterclass,'execute'));
+        $this->assertTrue(is_callable($this->smarty->registered_filters['pre']['myfilterclass_execute']));
     } 
     /**
     * test unregister_prefilter method for function
@@ -53,8 +61,8 @@ class RegisterFilterTests extends PHPUnit_Framework_TestCase {
     public function testUnregisterPrefilterMethode()
     {
         $this->smarty->register_prefilter(array('myfilterclass','execute'));
-        $this->smarty->unregister_prefilter('myfilterclass');
-        $this->assertFalse(isset($this->smarty->registered_filters['pre']['myfilterclass']));
+        $this->smarty->unregister_prefilter(array('myfilterclass','execute'));
+        $this->assertFalse(isset($this->smarty->registered_filters['pre']['myfilterclass_execute']));
     } 
     /**
     * test register_postfilter method for function
@@ -70,7 +78,7 @@ class RegisterFilterTests extends PHPUnit_Framework_TestCase {
     public function testRegisterPostfilterMethode()
     {
         $this->smarty->register_postfilter(array('myfilterclass','execute'));
-        $this->assertTrue(is_callable($this->smarty->registered_filters['post']['myfilterclass']));
+        $this->assertTrue(is_callable($this->smarty->registered_filters['post']['myfilterclass_execute']));
     } 
     /**
     * test unregister_postfilter method for function
@@ -87,8 +95,8 @@ class RegisterFilterTests extends PHPUnit_Framework_TestCase {
     public function testUnregisterPostfilterMethode()
     {
         $this->smarty->register_postfilter(array('myfilterclass','execute'));
-        $this->smarty->unregister_postfilter('myfilterclass');
-        $this->assertFalse(isset($this->smarty->registered_filters['post']['myfilterclass']));
+        $this->smarty->unregister_postfilter(array('myfilterclass','execute'));
+        $this->assertFalse(isset($this->smarty->registered_filters['post']['myfilterclass_execute']));
     } 
     /**
     * test register_outputfilter method for function
@@ -104,7 +112,7 @@ class RegisterFilterTests extends PHPUnit_Framework_TestCase {
     public function testRegisterOutputfilterMethode()
     {
         $this->smarty->register_outputfilter(array('myfilterclass','execute'));
-        $this->assertTrue(is_callable($this->smarty->registered_filters['output']['myfilterclass']));
+        $this->assertTrue(is_callable($this->smarty->registered_filters['output']['myfilterclass_execute']));
     } 
     /**
     * test unregister_outputfilter method for function
@@ -121,8 +129,8 @@ class RegisterFilterTests extends PHPUnit_Framework_TestCase {
     public function testUnregisterOutputfilterMethode()
     {
         $this->smarty->register_outputfilter(array('myfilterclass','execute'));
-        $this->smarty->unregister_outputfilter('myfilterclass');
-        $this->assertFalse(isset($this->smarty->registered_filters['output']['myfilterclass']));
+        $this->smarty->unregister_outputfilter(array('myfilterclass','execute'));
+        $this->assertFalse(isset($this->smarty->registered_filters['output']['myfilterclass_execute']));
     } 
 } 
 function myfilter($input)

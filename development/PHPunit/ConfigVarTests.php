@@ -14,7 +14,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = SmartyTests::$smarty;
-        SmartyTests::init();
+        SmartyTests::init(); 
     } 
 
     public static function isRunnable()
