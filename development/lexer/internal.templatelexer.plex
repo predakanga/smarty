@@ -57,6 +57,7 @@ class Smarty_Internal_Templatelexer
     				'DOT'			=> '.',
     				'COMMA'		=> '","',
     				'ANDSYM'		=> '"&"',
+    				'QMARK'		=> '"?"',
     				'ID'			=> 'identifier',
     				'OTHER'		=> 'text',
     				'PHP'			=> 'PHP code',
@@ -82,7 +83,6 @@ class Smarty_Internal_Templatelexer
         $this->rdel = preg_quote($this->smarty->right_delimiter);
         $this->smarty_token_names['LDEL'] =	$this->smarty->left_delimiter;
         $this->smarty_token_names['RDEL'] =	$this->smarty->right_delimiter;
-        $this->tag = false;
      }
     public static function &instance($new_instance = null)
     {
@@ -126,11 +126,10 @@ dollar = /\$/
 dot = /\./
 comma = /\s*\,\s*/
 doublecolon = /\:\:/
-colon = /\:/
+colon = /\s*\:\s*/
 at = /@/
 hatch = /#/
 semicolon = /\s*\;\s*/
-vert = /\|/
 equal = /\s*=\s*/
 space = /\s+/
 ptr = /\s*\->\s*/
@@ -138,7 +137,9 @@ aptr = /\s*=>\s*/
 quote = /\"/
 singlequote = /\'/
 backtick = /`/
+vert = /\|/
 andsym = /\s*\&\s*/
+qmark = /\s*\?\s*/
 wordsequence = /([A-Za-z]\w*\s+){5,}/
 id = /\w+/
 literalstart = '\s*SMARTYldelliteralSMARTYrdel'
@@ -236,11 +237,9 @@ ldelslash {
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
-  $this->tag = true;
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
-  $this->tag = false;
 }
 isin {
   $this->token = Smarty_Internal_Templateparser::TP_ISIN;
@@ -393,6 +392,9 @@ comma {
 }
 andsym {
   $this->token = Smarty_Internal_Templateparser::TP_ANDSYM;
+}
+qmark {
+  $this->token = Smarty_Internal_Templateparser::TP_QMARK;
 }
 wordsequence {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
