@@ -75,7 +75,7 @@ class Smarty_Internal_Templatelexer
     {
         // set instance object
         self::instance($this); 
-        $this->data = $data;
+        $this->data = preg_replace("/(\r\n|\r|\n)/", "\n", $data);
         $this->counter = 0;
         $this->line = 1;
         $this->smarty = $smarty;
@@ -99,6 +99,8 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
+text = /(.*?)(SMARTYldel)/
+emptyjava = /\{\}/
 php = /\s*\<\?php/
 xml = /\s*\<\?xml/
 shorttagstart = /\s*\<\?=/
@@ -174,7 +176,10 @@ lxor = /\s*(XOR|xor)\s+/
 other = /./
 */
 /*!lex2php
-%statename START
+%statename SMARTY
+emptyjava {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
 xml {
   $this->token = Smarty_Internal_Templateparser::TP_XML;
 }
