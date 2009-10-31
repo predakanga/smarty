@@ -60,7 +60,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
             $result = $this->smarty->fetch('notthere.tpl');
         } 
         catch (Exception $e) {
-            $this->assertContains('Unable to load template "file : notthere.tpl"', $e->getMessage());
+            $this->assertContains('Unable to load template file \'notthere.tpl\'', $e->getMessage());
             return;
         } 
         $this->fail('Exception for not existing template is missing');

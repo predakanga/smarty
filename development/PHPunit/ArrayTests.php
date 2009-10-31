@@ -61,6 +61,39 @@ class ArrayTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[a,b,c],4,5]}{$foo[2][1]}');
         $this->assertEquals('b', $this->smarty->fetch($tpl));
     } 
+    /**
+    * test array math
+    */
+    public function testArrayMath1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[7,8,9],4,5]}{$foo[2][1]+1}');
+        $this->assertEquals('9', $this->smarty->fetch($tpl));
+    } 
+    public function testArrayMath2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[7,8,9],4,5]}{$foo.2.1+1}');
+        $this->assertEquals('9', $this->smarty->fetch($tpl));
+    } 
+    public function testArrayMath3()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[7,8,9],4,5]}{2+$foo[2][1]}');
+        $this->assertEquals('10', $this->smarty->fetch($tpl));
+    } 
+    public function testArrayMath4()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[7,8,9],4,5]}{2+$foo.2.1}');
+        $this->assertEquals('10', $this->smarty->fetch($tpl));
+    } 
+    public function testArrayMath5()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[7,8,9],4,5]}{$foo[2][0]+$foo[2][1]}');
+        $this->assertEquals('15', $this->smarty->fetch($tpl));
+    } 
+    public function testArrayMath6()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo=[1,2,[7,8,9],4,5]}{$foo.2.0+$foo.2.1}');
+        $this->assertEquals('15', $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

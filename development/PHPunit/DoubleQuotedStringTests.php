@@ -41,18 +41,62 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
     /**
     * test vars in double quoted strings
     */
-    public function testVarsInDoubleQuotedString()
+    public function testVarsInDoubleQuotedString1()
     {
         $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$foo="Hello $bar World"}{$foo}',null, null,  $this->smarty);
         $this->assertEquals('Hello blah World', $this->smarty->fetch($tpl));
     } 
+    public function testVarsInDoubleQuotedString2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$buh=\'buh\'}{$foo="Hello $bar$buh World"}{$foo}',null, null,  $this->smarty);
+        $this->assertEquals('Hello blahbuh World', $this->smarty->fetch($tpl));
+    } 
     /**
     * test vars with backtick in double quoted strings
     */
-    public function testVarsBacktickInDoubleQuotedString()
+    public function testVarsBacktickInDoubleQuotedString1()
     {
         $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$foo="Hello `$bar`.test World"}{$foo}',null, null,  $this->smarty);
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
+    } 
+    public function testVarsBacktickInDoubleQuotedString2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$buh=\'buh\'}{$foo="Hello `$bar``$buh`.test World"}{$foo}',null, null,  $this->smarty);
+        $this->assertEquals('Hello blahbuh.test World', $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test variable vars with backtick in double quoted strings
+    */
+    public function testVariableVarsBacktickInDoubleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$barbuh=\'blah\'}{$buh=\'buh\'}{$foo="Hello `$bar{$buh}`.test World"}{$foo}',null, null,  $this->smarty);
+        $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test array vars with backtick in double quoted strings
+    */
+    public function testArrayVarsBacktickInDoubleQuotedString1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$bar[1][2]=\'blah\'}{$foo="Hello `$bar.1.2`.test World"}{$foo}',null, null,  $this->smarty);
+        $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
+    } 
+    public function testArrayVarsBacktickInDoubleQuotedString2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$bar[1][2]=\'blah\'}{$foo="Hello `$bar[1][2]`.test World"}{$foo}',null, null,  $this->smarty);
+        $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test smartytag in double quoted strings
+    */
+    public function testSmartytagInDoubleQuotedString1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter} World"}{$foo}',null, null,  $this->smarty);
+        $this->assertEquals('Hello 1 World', $this->smarty->fetch($tpl));
+    } 
+    public function testSmartytagInDoubleQuotedString2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter}{counter} World"}{$foo}',null, null,  $this->smarty);
+        $this->assertEquals('Hello 12 World', $this->smarty->fetch($tpl));
     } 
     /**
     * test vars in delimiter in double quoted strings

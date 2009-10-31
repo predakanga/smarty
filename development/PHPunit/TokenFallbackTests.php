@@ -54,6 +54,11 @@ class TokenFallbackTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string: in x true x false x $a ');
         $this->assertEquals(' in x true x false x $a ', $this->smarty->fetch($tpl));
     } 
+    public function testTokenFallback5()
+    {
+        $tpl = $this->smarty->createTemplate('string: ? x : x | x ?:| ');
+        $this->assertEquals(' ? x : x | x ?:| ', $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

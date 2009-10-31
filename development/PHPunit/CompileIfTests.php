@@ -342,12 +342,27 @@ class CompileIfTests extends PHPUnit_Framework_TestCase {
     public function testIfStatement1()
     {
         $tpl = $this->smarty->createTemplate('string:{if $x=true}yes{else}no{/if}');
-        $this->assertEquals(" yes", $this->smarty->fetch($tpl));
+        $this->assertEquals("yes", $this->smarty->fetch($tpl));
     } 
     public function testIfStatement2()
     {
         $tpl = $this->smarty->createTemplate('string:{if $x=false}yes{else}no{/if}');
-        $this->assertEquals(" no", $this->smarty->fetch($tpl));
+        $this->assertEquals("no", $this->smarty->fetch($tpl));
+    } 
+    public function testIfVariable1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$x=1}{if $x}yes{else}no{/if}');
+        $this->assertEquals("yes", $this->smarty->fetch($tpl));
+    } 
+    public function testIfVariable2()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$x=0}{if $x}yes{else}no{/if}');
+        $this->assertEquals("no", $this->smarty->fetch($tpl));
+    } 
+    public function testIfVariableInc1()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$x=0}{if $x++}yes{else}no{/if} {$x}');
+        $this->assertEquals("no 1", $this->smarty->fetch($tpl));
     } 
 } 
 
