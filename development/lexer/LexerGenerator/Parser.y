@@ -426,7 +426,7 @@ start ::= lexfile.
 
 lexfile ::= declare rules(B). {
     fwrite($this->out, '
-    private $_yy_state = 1;
+    public $_yy_state = 1;
     private $_yy_stack = array();
 
     function yylex()
@@ -460,7 +460,7 @@ lexfile ::= declare rules(B). {
 }
 lexfile ::= declare(D) PHPCODE(B) rules(C). {
     fwrite($this->out, '
-    private $_yy_state = 1;
+    public $_yy_state = 1;
     private $_yy_stack = array();
 
     function yylex()
@@ -500,7 +500,7 @@ lexfile ::= PHPCODE(B) declare(D) rules(C). {
         fwrite($this->out, B);
     }
     fwrite($this->out, '
-    private $_yy_state = 1;
+    public $_yy_state = 1;
     private $_yy_stack = array();
 
     function yylex()
@@ -537,7 +537,7 @@ lexfile ::= PHPCODE(A) declare(D) PHPCODE(B) rules(C). {
         fwrite($this->out, A);
     }
     fwrite($this->out, '
-    private $_yy_state = 1;
+    public $_yy_state = 1;
     private $_yy_stack = array();
 
     function yylex()

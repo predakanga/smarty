@@ -66,7 +66,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER XML PHP SHORTTAGSTART SHORTTAGEND PHPSTART PHPEND COMMENTEND COMMENTSTART SINGLEQUOTE LITERALSTART LITERALEND
+%fallback     OTHER XML PHP SHORTTAGSTART SHORTTAGEND PHPSTART PHPEND COMMENT SINGLEQUOTE LITERALSTART LITERALEND
               LDELIMTAG RDELIMTAG LDELSLASH LDEL RDEL ISIN AS BOOLEAN  NULL  IDENTITY NONEIDENTITY EQUALS NOTEQUALS GREATEREQUAL 
               LESSEQUAL GREATERTHAN LESSTHAN NOT LAND LOR LXOR ISODDBY ISNOTODDBY ISODD ISNOTODD ISEVENBY ISNOTEVENBY ISEVEN 
               ISNOTEVEN  ISDIVBY ISNOTDIVBY OPENP CLOSEP OPENB CLOSEB PTR APTR EQUAL INTEGER INCDEC UNIMATH MATH DOLLAR COLON 
@@ -90,34 +90,33 @@ template(res)       ::= template(t) template_element(e). {res = t.e;}
 // template elements
 //
 											// Smarty tag
-template_element(res)::= LDEL(d) smartytag(st) RDEL. {preg_match('/\s*/',d,$s); 
+template_element(res)::= LDEL smartytag(st) RDEL. {
                                           if ($this->compiler->has_code) {
                                             $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
-                                            res = $this->cacher->processNocacheCode($tmp.$s[0].st, $this->compiler,true);
-                                         } else { res = $s[0].st;}  $this->compiler->has_variable_string = false;}	
+                                            res = $this->cacher->processNocacheCode($tmp.st, $this->compiler,true);
+                                         } else { res = st;}  $this->compiler->has_variable_string = false;}	
 											// Smarty closing tag
-template_element(res)::= LDELSLASH(d) smartyclosetag(st) RDEL. {preg_match('/\s*/',d,$s); 
+template_element(res)::= LDELSLASH smartyclosetag(st) RDEL. { 
                                           if ($this->compiler->has_code) {
                                             $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
-                                            res = $this->cacher->processNocacheCode($tmp.$s[0].st, $this->compiler,true);
-                                         } else { res = $s[0].st;} $this->compiler->has_variable_string = false;}	
+                                            res = $this->cacher->processNocacheCode($tmp.st, $this->compiler,true);
+                                         } else { res = st;} $this->compiler->has_variable_string = false;}	
 											// Output tag
-template_element(res)::= LDEL(d) outputtag(st) RDEL. {preg_match('/\s*/',d,$s); 
+template_element(res)::= LDEL outputtag(st) RDEL. {
                                           if ($this->compiler->has_code) {
                                             $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
-                                            res = $this->cacher->processNocacheCode($tmp.$s[0].st, $this->compiler,true);
-                                         } else { res = $s[0].st;} $this->compiler->has_variable_string = false;}	
+                                            res = $this->cacher->processNocacheCode($tmp.st, $this->compiler,true);
+                                         } else { res = st;} $this->compiler->has_variable_string = false;}	
 											// comments
-template_element(res)::= COMMENTSTART(d) text(t) COMMENTEND. { preg_match('/\s*/',d,$s); res = $s[0];}
-
+template_element(res)::= COMMENT. { res = '';}
 											// Literal
-template_element(res)::= LITERALSTART(d) text(t) LITERALEND(d2). {preg_match('/\s*/',d,$s); preg_match('/\s*/',d2,$s2); res = $s[0].$this->cacher->processNocacheCode(t.$s2[0], $this->compiler,false);}	
+template_element(res)::= LITERALSTART text(t) LITERALEND. { res = $this->cacher->processNocacheCode(t, $this->compiler,false);}	
 											// {ldelim}
-template_element(res)::= LDELIMTAG(d). {preg_match('/\s*/',d,$s); res = $s[0].$this->cacher->processNocacheCode($this->smarty->left_delimiter, $this->compiler,false);}	
+template_element(res)::= LDELIMTAG. {res = $this->cacher->processNocacheCode($this->smarty->left_delimiter, $this->compiler,false);}	
 											// {rdelim}
-template_element(res)::= RDELIMTAG(d). {preg_match('/\s*/',d,$s); res = $s[0].$this->cacher->processNocacheCode($this->smarty->right_delimiter, $this->compiler,false);}	
+template_element(res)::= RDELIMTAG. { res = $this->cacher->processNocacheCode($this->smarty->right_delimiter, $this->compiler,false);}	
 											// <?php> tag
-template_element(res)::= PHP text(t) SHORTTAGEND.  {if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
+template_element(res)::= PHP OTHER(t) SHORTTAGEND.  {if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
                                        res = $this->cacher->processNocacheCode("<?php echo htmlspecialchars('<?php".str_replace("'","\'",t)."?>', ENT_QUOTES);?>\n", $this->compiler, false);
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
                                        res = $this->cacher->processNocacheCode(htmlspecialchars('<?php'.t.'?>', ENT_QUOTES), $this->compiler, false);
@@ -128,18 +127,18 @@ template_element(res)::= PHP text(t) SHORTTAGEND.  {if ($this->sec_obj->php_hand
                                       }
                                      } 
 
-template_element(res)::= SHORTTAGSTART(d) DOLLAR ID(i) SHORTTAGEND. {preg_match('/\s*/',d,$s); res = $s[0];
+template_element(res)::= SHORTTAGSTART OTHER(o) SHORTTAGEND. { 
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU || $this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
-                                       res .= $this->cacher->processNocacheCode("<?php echo '<?=$".i."?>'?>\n", $this->compiler, false);
+                                       res = $this->cacher->processNocacheCode("<?php echo '<?=".o."?>'?>\n", $this->compiler, false);
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res .= $this->cacher->processNocacheCode(htmlspecialchars('<?=$'.i.'?>', ENT_QUOTES), $this->compiler, false);
+                                       res = $this->cacher->processNocacheCode(htmlspecialchars('<?='.o.'?>', ENT_QUOTES), $this->compiler, false);
                                       }elseif ($this->sec_obj == SMARTY_PHP_REMOVE) {
-                                       res .= '';
+                                       res = '';
                                       }
                                      }
 
 											// XML tag
-template_element(res)::= XML(x). {preg_match('/\s*/',x,$s); $this->compiler->tag_nocache = true; res = $s[0].$this->cacher->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true);}	
+template_element(res)::= XML(x). { $this->compiler->tag_nocache = true; res = $this->cacher->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true);}	
 template_element(res)::= SHORTTAGEND. {$this->compiler->tag_nocache = true; res = $this->cacher->processNocacheCode("<?php echo '?>';?>\n", $this->compiler, true);}	
 											// Other template text
 //template_element(res)::= OTHER(o). { res = $this->cacher->processNocacheCode(o.$this->lex->lexText(''), $this->compiler,false);}	
@@ -343,7 +342,7 @@ value(res)	     ::= LDEL smartytag(st) RDEL. { $this->prefix_number++; $this->co
 									// simplest Smarty variable
 //variable(res)    ::= DOLLAR ID(v). { res = '$_smarty_tpl->getVariable(\''. v .'\')->value'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('v')->nocache;}
 									// Smarty variable (optional array)
-variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('internal_smarty_var',vi['index']);} else {
+variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('special_smarty_variable',vi['index']);} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index']; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"))->nocache;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"))->nocache;}
@@ -371,8 +370,8 @@ indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
 indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
 										// section tag index
-indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('internal_smarty_var','[\'section\'][\''.i.'\'][\'index\']').']';}
-indexdef(res)   ::= OPENB ID(i) DOT ID(i2) CLOSEB. { res = '['.$this->compiler->compileTag('internal_smarty_var','[\'section\'][\''.i.'\'][\''.i2.'\']').']';}
+indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('special_smarty_variable','[\'section\'][\''.i.'\'][\'index\']').']';}
+indexdef(res)   ::= OPENB ID(i) DOT ID(i2) CLOSEB. { res = '['.$this->compiler->compileTag('special_smarty_variable','[\'section\'][\''.i.'\'][\''.i2.'\']').']';}
 										// PHP style index
 indexdef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
 										// für assign append array
@@ -517,8 +516,8 @@ doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
 doublequotedcontent(res)           ::=  BACKTICK ID(i) BACKTICK. {res = "`".i."`";}
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = '".'.v.'."'; $this->compiler->has_variable_string = true;}
 doublequotedcontent(res)           ::=  DOLLAR ID(i). {res = '".'.'$_smarty_tpl->getVariable(\''. i .'\')->value'.'."'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(i,"'"))->nocache; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  LDEL(d) expr(e) RDEL. {preg_match('/\s*/',d,$s); res = $s[0].'".('.e.')."'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res) 	         ::=  LDEL(d) smartytag(st) RDEL. { preg_match('/\s*/',d,$s); $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = $s[0].'".$_tmp'.$this->prefix_number.'."'; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. { res = '".('.e.')."'; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res) 	         ::=  LDEL smartytag(st) RDEL. { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '".$_tmp'.$this->prefix_number.'."'; $this->compiler->has_variable_string = true;}
 doublequotedcontent(res)           ::=  DOLLAR OTHER(o). {res = '$'.o;}
 doublequotedcontent(res)           ::=  LDEL(d) OTHER(o). {res = d.o;}
 doublequotedcontent(res)           ::=  BACKTICK OTHER(o). {res = '`'.o;}

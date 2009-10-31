@@ -8,7 +8,7 @@
 * @author Uwe Tews 
 */
 /**
-* Smarty Internal Plugin Templatelexer
+* Smarty Internal Plugin Configfilelexer
 */
 class Smarty_Internal_Configfilelexer
 {

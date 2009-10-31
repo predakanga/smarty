@@ -103,12 +103,12 @@ class TPC_yyStackEntry
 // code external to the class is included here
 
 // declare_class is output here
-#line 12 "internal.configfileparser.y"
-class Smarty_Internal_Configfileparser#line 109 "internal.configfileparser.php"
+#line 12 "Smarty_Internal_Configfileparser.y"
+class Smarty_Internal_Configfileparser#line 109 "Smarty_Internal_Configfileparser.php"
 {
 /* First off, code is included which follows the "include_class" declaration
 ** in the input file. */
-#line 14 "internal.configfileparser.y"
+#line 14 "Smarty_Internal_Configfileparser.y"
 
     // states whether the parse was successful or not
     public $successful = true;
@@ -133,7 +133,7 @@ class Smarty_Internal_Configfileparser#line 109 "internal.configfileparser.php"
         return $instance;
     }
     
-#line 139 "internal.configfileparser.php"
+#line 139 "Smarty_Internal_Configfileparser.php"
 
 /* Next is all token values, as class constants
 */
@@ -830,24 +830,24 @@ static public $yy_action = array(
     **   function yy_r0($yymsp){ ... }           // User supplied code
     **  #line <lineno> <thisfile>
     */
-#line 67 "internal.configfileparser.y"
+#line 67 "Smarty_Internal_Configfileparser.y"
     function yy_r0(){ $this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;     }
-#line 840 "internal.configfileparser.php"
-#line 73 "internal.configfileparser.y"
+#line 840 "Smarty_Internal_Configfileparser.php"
+#line 73 "Smarty_Internal_Configfileparser.y"
     function yy_r1(){$this->_retvalue = $this->yystack[$this->yyidx + 0]->minor;    }
-#line 843 "internal.configfileparser.php"
-#line 75 "internal.configfileparser.y"
+#line 843 "Smarty_Internal_Configfileparser.php"
+#line 75 "Smarty_Internal_Configfileparser.y"
     function yy_r2(){$this->_retvalue = $this->yystack[$this->yyidx + -1]->minor.$this->yystack[$this->yyidx + 0]->minor;    }
-#line 846 "internal.configfileparser.php"
-#line 81 "internal.configfileparser.y"
+#line 846 "Smarty_Internal_Configfileparser.php"
+#line 81 "Smarty_Internal_Configfileparser.y"
     function yy_r3(){ $this->hidden_section = false; $this->current_section = $this->yystack[$this->yyidx + -2]->minor; $this->_retvalue ='';    }
-#line 849 "internal.configfileparser.php"
-#line 83 "internal.configfileparser.y"
+#line 849 "Smarty_Internal_Configfileparser.php"
+#line 83 "Smarty_Internal_Configfileparser.y"
     function yy_r4(){ if ($this->smarty->config_read_hidden) {
                                                        $this->hidden_section = false; $this->current_section = $this->yystack[$this->yyidx + -2]->minor;
                                                       } else {$this->hidden_section = true; } $this->_retvalue ='';    }
-#line 854 "internal.configfileparser.php"
-#line 87 "internal.configfileparser.y"
+#line 854 "Smarty_Internal_Configfileparser.php"
+#line 87 "Smarty_Internal_Configfileparser.y"
     function yy_r5(){if (!$this->hidden_section) {
                                                    $value=$this->yystack[$this->yyidx + -1]->minor;
                                                    if ($this->smarty->config_booleanize) {
@@ -871,19 +871,19 @@ static public $yy_action = array(
                                                           $this->compiler->config_data['sections'][$this->current_section]['vars'][$this->yystack[$this->yyidx + -3]->minor][]=$value;
                                                       }
                                                      }}  $this->_retvalue ='';    }
-#line 879 "internal.configfileparser.php"
-#line 111 "internal.configfileparser.y"
+#line 879 "Smarty_Internal_Configfileparser.php"
+#line 111 "Smarty_Internal_Configfileparser.y"
     function yy_r6(){ $this->_retvalue ='';    }
-#line 882 "internal.configfileparser.php"
-#line 115 "internal.configfileparser.y"
+#line 882 "Smarty_Internal_Configfileparser.php"
+#line 115 "Smarty_Internal_Configfileparser.y"
     function yy_r9(){$this->_retvalue = trim($this->yystack[$this->yyidx + 0]->minor,"'");    }
-#line 885 "internal.configfileparser.php"
-#line 116 "internal.configfileparser.y"
+#line 885 "Smarty_Internal_Configfileparser.php"
+#line 116 "Smarty_Internal_Configfileparser.y"
     function yy_r10(){$this->_retvalue = trim($this->yystack[$this->yyidx + 0]->minor,'"');    }
-#line 888 "internal.configfileparser.php"
-#line 118 "internal.configfileparser.y"
+#line 888 "Smarty_Internal_Configfileparser.php"
+#line 118 "Smarty_Internal_Configfileparser.y"
     function yy_r12(){$this->_retvalue = (int)$this->yystack[$this->yyidx + 0]->minor;    }
-#line 891 "internal.configfileparser.php"
+#line 891 "Smarty_Internal_Configfileparser.php"
 
     /**
      * placeholder for the left hand side in a reduce operation.
@@ -995,12 +995,12 @@ static public $yy_action = array(
      */
     function yy_syntax_error($yymajor, $TOKEN)
     {
-#line 52 "internal.configfileparser.y"
+#line 52 "Smarty_Internal_Configfileparser.y"
 
     $this->internalError = true;
     $this->yymajor = $yymajor;
     $this->compiler->trigger_config_file_error();
-#line 1009 "internal.configfileparser.php"
+#line 1009 "Smarty_Internal_Configfileparser.php"
     }
 
     /**
@@ -1018,13 +1018,13 @@ static public $yy_action = array(
         }
         /* Here code is inserted which will be executed whenever the
         ** parser accepts */
-#line 44 "internal.configfileparser.y"
+#line 44 "Smarty_Internal_Configfileparser.y"
 
     $this->successful = !$this->internalError;
     $this->internalError = false;
     $this->retvalue = $this->_retvalue;
     //echo $this->retvalue."\n\n";
-#line 1034 "internal.configfileparser.php"
+#line 1034 "Smarty_Internal_Configfileparser.php"
     }
 
     /**

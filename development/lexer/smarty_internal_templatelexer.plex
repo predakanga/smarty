@@ -18,7 +18,7 @@ class Smarty_Internal_Templatelexer
     public $value;
     public $node;
     public $line;
-    private $state = 1;
+    public $state = 1;
     public $smarty_token_names = array (		// Text for parser error messages
     				'IDENTITY'	=> '===',
     				'NONEIDENTITY'	=> '!==',
@@ -62,8 +62,7 @@ class Smarty_Internal_Templatelexer
     				'OTHER'		=> 'text',
     				'PHP'			=> 'PHP code',
     				'LDELSLASH' => 'closing tag',
-    				'COMMENTSTART' => '{*',
-    				'COMMENTEND' => '*}',
+    				'COMMENT' => 'comment',
      				'LITERALEND' => 'literal close',
     				'AS' => 'as',
     				'NULL' => 'null',
@@ -83,6 +82,7 @@ class Smarty_Internal_Templatelexer
         $this->rdel = preg_quote($this->smarty->right_delimiter);
         $this->smarty_token_names['LDEL'] =	$this->smarty->left_delimiter;
         $this->smarty_token_names['RDEL'] =	$this->smarty->right_delimiter;
+        $this->ldel_count = 0;
      }
     public static function &instance($new_instance = null)
     {
@@ -99,24 +99,25 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-text = /(.*?)(SMARTYldel)/
+textsmarty = /([\S\s]*?)(SMARTYldel|\<\?)/
+texttoshorttagend = /([\S\s]*?)\?\>/
+all = /[\S\s]+/
 emptyjava = /\{\}/
-php = /\s*\<\?php/
-xml = /\s*\<\?xml/
-shorttagstart = /\s*\<\?=/
-shorttagend = /\s*\?\>/
-ldels = /\s*SMARTYldel\s{1,}/
+php = /\<\?php/
+xml = /\<\?xml/
+shorttagstart = /\<\?=/
+shorttagend = /\?\>/
+ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
-ldelslash = /\s*SMARTYldel\//
-ldelspaceslash = /\s*SMARTYldel\s{1,}\//
-ldel = /\s*SMARTYldel/
+ldelslash = /SMARTYldel\//
+ldelspaceslash = /SMARTYldel\s{1,}\//
+ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
 boolean = /true|TRUE|True|false|FALSE|False/
 null = /null|NULL|Null/
 math = /\s*(\*|\/|\%)\s*/
-commentstart = /\s*SMARTYldel\*/
-commentend = /\s*\*SMARTYrdel/
+comment = /SMARTYldel\*((\s|.)*?)\*SMARTYrdel/
 escapedquotes = /(\\\"|\\\')/
 incdec = /(\+\+|\-\-)\s*/
 unimath = /\s*(\+|\-)\s*/
@@ -144,10 +145,10 @@ andsym = /\s*\&\s*/
 qmark = /\s*\?\s*/
 wordsequence = /([A-Za-z]\w*\s+){5,}/
 id = /\w+/
-literalstart = '\s*SMARTYldelliteralSMARTYrdel'
-literalend = '\s*SMARTYldel/literalSMARTYrdel'
-ldelim = '\s*SMARTYldelldelimSMARTYrdel'
-rdelim = '\s*SMARTYldelrdelimSMARTYrdel'
+literalstart = 'SMARTYldelliteralSMARTYrdel'
+literalend = 'SMARTYldel/literalSMARTYrdel'
+ldelim = 'SMARTYldelldelimSMARTYrdel'
+rdelim = 'SMARTYldelrdelimSMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
 notequals = /\s*!=\s*|\s*<>\s*|\s+(NE|ne)\s+/
 greaterthan = /\s*>\s*|\s+(GT|gt)\s+/
@@ -176,27 +177,37 @@ lxor = /\s*(XOR|xor)\s+/
 other = /./
 */
 /*!lex2php
+%statename TEXT
+textsmarty {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  if (substr($this->value,-2) == '<?') {
+     $this->value = substr($this->value,0,-2);
+     $this->yybegin(3);
+  } else {
+     $this->value = substr($this->value,0,-strlen($this->smarty->left_delimiter));
+     $this->yybegin(2);
+  }
+  if (strlen($this->value) == 0) {
+     return true;		// change state directly
+  } else {
+     return;				// change state after processiing token
+  }
+}
+all {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
+
+
+*/
+/*!lex2php
 %statename SMARTY
 emptyjava {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  if (!$this->ldel_count) $this->yybegin(1);
 }
-xml {
-  $this->token = Smarty_Internal_Templateparser::TP_XML;
-}
-php {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP;
-}
-shorttagstart {
-  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGSTART;
-}
-shorttagend {
-  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGEND;
-}
-commentend {
-  $this->token = Smarty_Internal_Templateparser::TP_COMMENTEND;
-}
-commentstart {
-  $this->token = Smarty_Internal_Templateparser::TP_COMMENTSTART;
+comment {
+  $this->token = Smarty_Internal_Templateparser::TP_COMMENT;
+  if (!$this->ldel_count) $this->yybegin(1);
 }
 escapedquotes {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
@@ -209,42 +220,56 @@ literalstart {
 }
 literalend {
   $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
+  if (!$this->ldel_count) $this->yybegin(1);
 }
 ldelim {
   $this->token = Smarty_Internal_Templateparser::TP_LDELIMTAG;
+  if (!$this->ldel_count) $this->yybegin(1);
 }
 rdelim {
   $this->token = Smarty_Internal_Templateparser::TP_RDELIMTAG;
+  if (!$this->ldel_count) $this->yybegin(1);
 }
 ldelspaceslash {
   if ($this->smarty->auto_literal) {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+     if (!$this->ldel_count) $this->yybegin(1);
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+     $this->ldel_count++;
   }
 }
 ldels {
   if ($this->smarty->auto_literal) {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+     if (!$this->ldel_count) $this->yybegin(1);
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
+     $this->ldel_count++;
   }
 }
 rdels {
   if ($this->smarty->auto_literal) {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+     if (!$this->ldel_count) $this->yybegin(1);
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_RDEL;
+     $this->ldel_count--;
+     if (!$this->ldel_count) $this->yybegin(1);
   }
 }
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+  $this->ldel_count++;
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
+  $this->ldel_count++;
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
+  $this->ldel_count--;
+  if (!$this->ldel_count) $this->yybegin(1);
 }
 isin {
   $this->token = Smarty_Internal_Templateparser::TP_ISIN;
@@ -411,6 +436,29 @@ space {
   $this->token = Smarty_Internal_Templateparser::TP_SPACE;
 }
 other {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
+*/
+/*!lex2php
+%statename PHP
+xml {
+  $this->token = Smarty_Internal_Templateparser::TP_XML;
+}
+php {
+  $this->token = Smarty_Internal_Templateparser::TP_PHP;
+}
+shorttagstart {
+  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGSTART;
+}
+shorttagend {
+  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGEND;
+  $this->yybegin(1);
+}
+texttoshorttagend {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  $this->value = substr($this->value,0,-2);
+}
+all {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
 */

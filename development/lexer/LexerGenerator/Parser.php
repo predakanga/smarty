@@ -1278,7 +1278,7 @@ static public $yy_action = array(
 #line 423 "Parser.y"
     function yy_r1(){
     fwrite($this->out, '
-    private $_yy_state = 1;
+    public $_yy_state = 1;
     private $_yy_stack = array();
 
     function yylex()
