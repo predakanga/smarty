@@ -24,7 +24,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Smarty Internal Plugin Resource Extend</p>
 		<p class="notes">
-			Located in <a class="field" href="_distribution---libs---sysplugins---internal.resource_extend.php.html">/distribution/libs/sysplugins/internal.resource_extend.php</a> (line <span class="field">15</span>)
+			Located in <a class="field" href="_distribution---libs---sysplugins---smarty_internal_resource_extend.php.html">/distribution/libs/sysplugins/smarty_internal_resource_extend.php</a> (line <span class="field">15</span>)
 		</p>
 		
 				
@@ -84,22 +84,22 @@
 																<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#getCompiledFilepath" title="details" class="method-name">getCompiledFilepath</a>
-											(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#getTemplateFilepath" title="details" class="method-name">getTemplateFilepath</a>
-											(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#getTemplateSource" title="details" class="method-name">getTemplateSource</a>
-											(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">integer</span>
 										<a href="#getTemplateTimestamp" title="details" class="method-name">getTemplateTimestamp</a>
-											(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">boolean</span>
@@ -109,7 +109,7 @@
 																<div class="method-definition">
 											<span class="method-result">boolean</span>
 										<a href="#isExisting" title="details" class="method-name">isExisting</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$template</span>)
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
@@ -249,7 +249,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiledFilepath</span> (line <span class="line-number">167</span>)
+		<span class="method-title">getCompiledFilepath</span> (line <span class="line-number">168</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -264,13 +264,13 @@
 		<span class="method-name">
 			getCompiledFilepath
 		</span>
-					(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">object</span>
-				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
+				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -279,7 +279,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">44</span>)
+		<span class="method-title">getTemplateFilepath</span> (line <span class="line-number">45</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -294,13 +294,13 @@
 		<span class="method-name">
 			getTemplateFilepath
 		</span>
-					(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">object</span>
-				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
+				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -309,7 +309,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateSource</span> (line <span class="line-number">73</span>)
+		<span class="method-title">getTemplateSource</span> (line <span class="line-number">74</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -324,13 +324,13 @@
 		<span class="method-name">
 			getTemplateSource
 		</span>
-					(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">object</span>
-				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
+				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -339,7 +339,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">62</span>)
+		<span class="method-title">getTemplateTimestamp</span> (line <span class="line-number">63</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -354,13 +354,13 @@
 		<span class="method-name">
 			getTemplateTimestamp
 		</span>
-					(<span class="var-type">object</span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type">object</span>
-				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
+				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -369,7 +369,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">isEvaluated</span> (line <span class="line-number">156</span>)
+		<span class="method-title">isEvaluated</span> (line <span class="line-number">157</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -394,13 +394,13 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">isExisting</span> (line <span class="line-number">30</span>)
+		<span class="method-title">isExisting</span> (line <span class="line-number">31</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Return flag if template source is existing</p>
 	<ul class="tags">
-				<li><span class="field">return:</span> true</li>
+				<li><span class="field">return:</span> result</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -409,13 +409,13 @@
 		<span class="method-name">
 			isExisting
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$template</span>)
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$template</span>			</li>
+				<span class="var-type">object</span>
+				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
 			
@@ -424,7 +424,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">saveBlockData</span> (line <span class="line-number">105</span>)
+		<span class="method-title">saveBlockData</span> (line <span class="line-number">106</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -455,7 +455,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">usesCompiler</span> (line <span class="line-number">145</span>)
+		<span class="method-title">usesCompiler</span> (line <span class="line-number">146</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -482,7 +482,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Thu, 01 Oct 2009 00:28:16 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Fri, 30 Oct 2009 19:41:35 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
