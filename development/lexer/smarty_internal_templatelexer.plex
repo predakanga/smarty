@@ -24,14 +24,15 @@ class Smarty_Internal_Templatelexer
     				'NONEIDENTITY'	=> '!==',
     				'EQUALS'	=> '==',
     				'NOTEQUALS'	=> '!=',
-    				'GREATEREQUAL' => '(>=,GE)',
-    				'LESSEQUAL' => '(<=,LE)',
-    				'GREATERTHAN' => '(>,GT)',
-    				'LESSTHAN' => '(<,LT)',
-    				'NOT'			=> '(!,NOT)',
-    				'LAND'		=> '(&&,AND)',
-    				'LOR'			=> '(||,OR)',
-    				'LXOR'			=> 'XOR',
+    				'GREATEREQUAL' => '(>=,ge)',
+    				'LESSEQUAL' => '(<=,le)',
+    				'GREATERTHAN' => '(>,gt)',
+    				'LESSTHAN' => '(<,lt)',
+    				'MOD' => '(%,mod)',
+    				'NOT'			=> '(!,not)',
+    				'LAND'		=> '(&&,and)',
+    				'LOR'			=> '(||,or)',
+    				'LXOR'			=> 'xor',
     				'OPENP'		=> '(',
     				'CLOSEP'	=> ')',
     				'OPENB'		=> '[',
@@ -114,8 +115,8 @@ ldelspaceslash = /SMARTYldel\s{1,}\//
 ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
-boolean = /true|TRUE|True|false|FALSE|False/
-null = /null|NULL|Null/
+boolean = /true|false/
+null = /null/
 math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*((\s|.)*?)\*SMARTYrdel/
 escapedquotes = /(\\\"|\\\')/
@@ -132,7 +133,7 @@ doublecolon = /\:\:/
 colon = /\s*\:\s*/
 at = /@/
 hatch = /#/
-semicolon = /\s*\;\s*/
+semicolon = /\s*\;/
 equal = /\s*=\s*/
 space = /\s+/
 ptr = /\s*\->\s*/
@@ -150,11 +151,12 @@ literalend = 'SMARTYldel/literalSMARTYrdel'
 ldelim = 'SMARTYldelldelimSMARTYrdel'
 rdelim = 'SMARTYldelrdelimSMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
-notequals = /\s*!=\s*|\s*<>\s*|\s+(NE|ne)\s+/
+notequals = /\s*!=\s*|\s*<>\s*|\s+(NE|NEQ|ne|neq)\s+/
 greaterthan = /\s*>\s*|\s+(GT|gt)\s+/
 lessthan = /\s*<\s*|\s+(LT|lt)\s+/
-greaterequal = /\s*>=\s*|\s+(GE|ge)\s+/
-lessequal = /\s*<=\s*|\s+(LE|le)\s+/
+greaterequal = /\s*>=\s*|\s+(GE|GTE|ge|gte)\s+/
+lessequal = /\s*<=\s*|\s+(LE|LTE|le|lte)\s+/
+mod = /\s+(MOD|mod)\s+/
 identity = /\s*===\s*/
 noneidentity = /\s*!==\s*/
 isoddby = /\s+is\s+odd\s+by\s+/
@@ -174,18 +176,71 @@ not = /!\s*|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s*(AND|and)\s+/
 lor = /\s*\|\|\s*|\s*(OR|or)\s+/
 lxor = /\s*(XOR|xor)\s+/
+typecast = /\((int(eger)?|bool(ean)?|float|double|real|string|binary|array|object)\)/
 other = /./
 */
 /*!lex2php
 %statename TEXT
+emptyjava {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
+comment {
+  $this->token = Smarty_Internal_Templateparser::TP_COMMENT;
+}
+xml {
+  $this->token = Smarty_Internal_Templateparser::TP_XML;
+  $this->yypushstate(self::PHP);
+}
+php {
+  $this->token = Smarty_Internal_Templateparser::TP_PHP;
+  $this->yypushstate(self::PHP);
+}
+shorttagstart {
+  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGSTART;
+  $this->yypushstate(self::PHP);
+}
+literalstart {
+  $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
+}
+literalend {
+  $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
+}
+ldelim {
+  $this->token = Smarty_Internal_Templateparser::TP_LDELIMTAG;
+}
+rdelim {
+  $this->token = Smarty_Internal_Templateparser::TP_RDELIMTAG;
+}
+ldelspaceslash {
+  if ($this->smarty->auto_literal) {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+     $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+     $this->yypushstate(self::SMARTY);
+  }
+}
+ldels {
+  if ($this->smarty->auto_literal) {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+     $this->token = Smarty_Internal_Templateparser::TP_LDEL;
+     $this->yypushstate(self::SMARTY);
+  }
+}
+ldelslash {
+  $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
+     $this->yypushstate(self::SMARTY);
+}
+ldel {
+  $this->token = Smarty_Internal_Templateparser::TP_LDEL;
+     $this->yypushstate(self::SMARTY);
+}
 textsmarty {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   if (substr($this->value,-2) == '<?') {
      $this->value = substr($this->value,0,-2);
-     $this->yybegin(3);
   } else {
      $this->value = substr($this->value,0,-strlen($this->smarty->left_delimiter));
-     $this->yybegin(2);
   }
   if (strlen($this->value) == 0) {
      return true;		// change state directly
@@ -201,14 +256,6 @@ all {
 */
 /*!lex2php
 %statename SMARTY
-emptyjava {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-  if (!$this->ldel_count) $this->yybegin(1);
-}
-comment {
-  $this->token = Smarty_Internal_Templateparser::TP_COMMENT;
-  if (!$this->ldel_count) $this->yybegin(1);
-}
 escapedquotes {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
@@ -220,56 +267,48 @@ literalstart {
 }
 literalend {
   $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
-  if (!$this->ldel_count) $this->yybegin(1);
 }
 ldelim {
   $this->token = Smarty_Internal_Templateparser::TP_LDELIMTAG;
-  if (!$this->ldel_count) $this->yybegin(1);
 }
 rdelim {
   $this->token = Smarty_Internal_Templateparser::TP_RDELIMTAG;
-  if (!$this->ldel_count) $this->yybegin(1);
 }
 ldelspaceslash {
   if ($this->smarty->auto_literal) {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-     if (!$this->ldel_count) $this->yybegin(1);
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
-     $this->ldel_count++;
+     $this->yypushstate(self::SMARTY);
   }
 }
 ldels {
   if ($this->smarty->auto_literal) {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-     if (!$this->ldel_count) $this->yybegin(1);
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
-     $this->ldel_count++;
+     $this->yypushstate(self::SMARTY);
   }
 }
 rdels {
   if ($this->smarty->auto_literal) {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-     if (!$this->ldel_count) $this->yybegin(1);
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_RDEL;
-     $this->ldel_count--;
-     if (!$this->ldel_count) $this->yybegin(1);
+     $this->yypopstate();
   }
 }
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
-  $this->ldel_count++;
+     $this->yypushstate(self::SMARTY);
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
-  $this->ldel_count++;
+     $this->yypushstate(self::SMARTY);
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
-  $this->ldel_count--;
-  if (!$this->ldel_count) $this->yybegin(1);
+     $this->yypopstate();
 }
 isin {
   $this->token = Smarty_Internal_Templateparser::TP_ISIN;
@@ -309,6 +348,9 @@ greaterthan{
 }
 lessthan{
   $this->token = Smarty_Internal_Templateparser::TP_LESSTHAN;
+}
+mod{
+  $this->token = Smarty_Internal_Templateparser::TP_MOD;
 }
 not{
   $this->token = Smarty_Internal_Templateparser::TP_NOT;
@@ -352,6 +394,9 @@ isdivby {
 }
 isnotdivby {
   $this->token = Smarty_Internal_Templateparser::TP_ISNOTDIVBY;
+}
+typecast {
+  $this->token = Smarty_Internal_Templateparser::TP_TYPECAST;
 }
 openP {
   $this->token = Smarty_Internal_Templateparser::TP_OPENP;
@@ -441,18 +486,9 @@ other {
 */
 /*!lex2php
 %statename PHP
-xml {
-  $this->token = Smarty_Internal_Templateparser::TP_XML;
-}
-php {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP;
-}
-shorttagstart {
-  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGSTART;
-}
 shorttagend {
   $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGEND;
-  $this->yybegin(1);
+  $this->yypopstate();
 }
 texttoshorttagend {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;

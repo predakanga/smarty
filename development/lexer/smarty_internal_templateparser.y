@@ -68,9 +68,9 @@
 //
 %fallback     OTHER XML PHP SHORTTAGSTART SHORTTAGEND PHPSTART PHPEND COMMENT SINGLEQUOTE LITERALSTART LITERALEND
               LDELIMTAG RDELIMTAG LDELSLASH LDEL RDEL ISIN AS BOOLEAN  NULL  IDENTITY NONEIDENTITY EQUALS NOTEQUALS GREATEREQUAL 
-              LESSEQUAL GREATERTHAN LESSTHAN NOT LAND LOR LXOR ISODDBY ISNOTODDBY ISODD ISNOTODD ISEVENBY ISNOTEVENBY ISEVEN 
+              LESSEQUAL GREATERTHAN LESSTHAN MOD NOT LAND LOR LXOR ISODDBY ISNOTODDBY ISODD ISNOTODD ISEVENBY ISNOTEVENBY ISEVEN 
               ISNOTEVEN  ISDIVBY ISNOTDIVBY OPENP CLOSEP OPENB CLOSEB PTR APTR EQUAL INTEGER INCDEC UNIMATH MATH DOLLAR COLON 
-              DOUBLECOLON SEMICOLON  AT HATCH QUOTE BACKTICK VERT DOT COMMA ANDSYM ID SPACE INSTANCEOF QMARK. 
+              DOUBLECOLON SEMICOLON  AT HATCH QUOTE BACKTICK VERT DOT COMMA ANDSYM ID SPACE INSTANCEOF QMARK TYPECAST. 
               
 
 //
@@ -84,7 +84,7 @@ start(res)       ::= template(t). { res = t; }
 											// single template element
 template(res)       ::= template_element(e). {res = e;}
 											// loop of elements
-template(res)       ::= template(t) template_element(e). {res = t.e;}
+template(res)       ::= template(t) template_element(e). { res = t.e;}
 
 //
 // template elements
@@ -163,6 +163,7 @@ smartytag(res)   ::= varindexed(vi) EQUAL expr(e) attributes(a). { res = $this->
 smartytag(res)   ::= varindexed(vi) EQUAL ternary(t) attributes(a). { res = $this->compiler->compileTag('assign',array_merge(array('value'=>t),vi,a));}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= ID(i) attributes(a). { res = $this->compiler->compileTag(i,a);}
+smartytag(res)   ::= ID(i). { res = $this->compiler->compileTag(i,array());}
 									// registered object tag
 smartytag(res)   ::= ID(i) PTR ID(m) attributes(a). { res = $this->compiler->compileTag(i,array_merge(array('object_methode'=>m),a));}
 									// tag with modifier and optional Smarty2 style attributes
@@ -239,8 +240,10 @@ attributes(res)  ::= . { res = array();}
 									
 									// attribute
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
+attribute(res)   ::= SPACE ID(v) EQUAL value(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ternary(t). { res = array(v=>t);}
 attribute(res)   ::= SPACE ID(v). { res = array(v=>'true');}
+									
 
 //
 // statement
@@ -302,6 +305,7 @@ math(res)        ::= ANDSYM. {res = ' & ';}
 
 								 // value
 value(res)		   ::= variable(v). { res = v; }
+value(res)		   ::= TYPECAST(t) variable(v). { res = t.v; }
 value(res)		   ::= variable(v) INCDEC(o). { res = v.o; }
                  // numeric
 value(res)       ::= INTEGER(n). { res = n; }
@@ -366,6 +370,8 @@ arrayindex        ::= . {return;}
 // single index definition
 										// Smarty2 style index 
 indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
+indexdef(res)   ::= DOT BOOLEAN(i). { res = "['". i ."']";}
+indexdef(res)   ::= DOT NULL(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
 indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
@@ -392,7 +398,7 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 // objects
 //
-object(res)    ::= varindexed(vi) objectchain(oc). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('internal_smarty_var',vi['index']).oc;} else {
+object(res)    ::= varindexed(vi) objectchain(oc). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('special_smarty_variable',vi['index']).oc;} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index'].oc; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"))->nocache;}}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
@@ -491,6 +497,7 @@ ifcond(res)        ::= GREATEREQUAL. {res = '>=';}
 ifcond(res)        ::= LESSEQUAL. {res = '<=';}
 ifcond(res)        ::= IDENTITY. {res = '===';}
 ifcond(res)        ::= NONEIDENTITY. {res = '!==';}
+ifcond(res)        ::= MOD. {res = '%';}
 
 lop(res)        ::= LAND. {res = '&&';}
 lop(res)        ::= LOR. {res = '||';}
