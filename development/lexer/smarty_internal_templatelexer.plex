@@ -79,11 +79,10 @@ class Smarty_Internal_Templatelexer
         $this->counter = 0;
         $this->line = 1;
         $this->smarty = $smarty;
-        $this->ldel = preg_quote($this->smarty->left_delimiter); 
-        $this->rdel = preg_quote($this->smarty->right_delimiter);
+        $this->ldel = preg_quote($this->smarty->left_delimiter,'/'); 
+        $this->rdel = preg_quote($this->smarty->right_delimiter,'/');
         $this->smarty_token_names['LDEL'] =	$this->smarty->left_delimiter;
         $this->smarty_token_names['RDEL'] =	$this->smarty->right_delimiter;
-        $this->ldel_count = 0;
      }
     public static function &instance($new_instance = null)
     {
@@ -118,7 +117,7 @@ integer = /\d+/
 boolean = /true|false/
 null = /null/
 math = /\s*(\*|\/|\%)\s*/
-comment = /SMARTYldel\*((\s|.)*?)\*SMARTYrdel/
+comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
 escapedquotes = /(\\\"|\\\')/
 incdec = /(\+\+|\-\-)\s*/
 unimath = /\s*(\+|\-)\s*/
@@ -139,6 +138,7 @@ space = /\s+/
 ptr = /\s*\->\s*/
 aptr = /\s*=>\s*/
 quote = /\"/
+singlequotestring = /'([\S\s]*?)[^\\]'/
 singlequote = /\'/
 backtick = /`/
 vert = /\|/
@@ -146,6 +146,7 @@ andsym = /\s*\&\s*/
 qmark = /\s*\?\s*/
 wordsequence = /([A-Za-z]\w*\s+){5,}/
 id = /\w+/
+literaltext = '([\S\s]*?)SMARTYldel/literalSMARTYrdel'
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 ldelim = 'SMARTYldelldelimSMARTYrdel'
@@ -200,10 +201,11 @@ shorttagstart {
   $this->yypushstate(self::PHP);
 }
 literalstart {
-  $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
+  $this->yypushstate(self::LITERAL);
+  return true;
 }
 literalend {
-  $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
+  return false;  // unexspected here just ignore
 }
 ldelim {
   $this->token = Smarty_Internal_Templateparser::TP_LDELIMTAG;
@@ -263,10 +265,11 @@ singlequote {
   $this->token = Smarty_Internal_Templateparser::TP_SINGLEQUOTE;
 }
 literalstart {
-  $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
+  $this->yypushstate(self::LITERAL);
+  return true;
 }
 literalend {
-  $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
+  return false;  // unexspected here just ignore
 }
 ldelim {
   $this->token = Smarty_Internal_Templateparser::TP_LDELIMTAG;
@@ -493,6 +496,29 @@ shorttagend {
 texttoshorttagend {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   $this->value = substr($this->value,0,-2);
+}
+all {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+}
+*/
+/*!lex2php
+%statename LITERAL
+literalstart {
+  return false;
+}
+literalend {
+  $this->yypopstate();
+  return false;
+}
+literaltext {
+  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  $this->value = substr($this->value,0,-strlen($this->smarty->left_delimiter)-strlen($this->smarty->right_delimiter)-8);
+  $this->yypopstate();
+  if (strlen($this->value) == 0) {
+     return false;		// change state directly
+  } else {
+     return;				// change state after processiing token
+  }
 }
 all {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;

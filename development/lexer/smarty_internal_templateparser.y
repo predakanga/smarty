@@ -109,8 +109,9 @@ template_element(res)::= LDEL outputtag(st) RDEL. {
                                          } else { res = st;} $this->compiler->has_variable_string = false;}	
 											// comments
 template_element(res)::= COMMENT. { res = '';}
-											// Literal
-template_element(res)::= LITERALSTART text(t) LITERALEND. { res = $this->cacher->processNocacheCode(t, $this->compiler,false);}	
+
+											// Literal is handled now wthin the lexer
+
 											// {ldelim}
 template_element(res)::= LDELIMTAG. {res = $this->cacher->processNocacheCode($this->smarty->left_delimiter, $this->compiler,false);}	
 											// {rdelim}
@@ -319,6 +320,7 @@ value(res)	     ::= function(f). { res = f; }
 									// expression
 value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 									// singele quoted string
+value(res)	     ::= SINGLEQUOTESTRING(t). { res = t; }
 value(res)	     ::= SINGLEQUOTE text(t) SINGLEQUOTE. { res = "'".t."'"; }
 value(res)	     ::= SINGLEQUOTE SINGLEQUOTE. { res = "''"; }
 									// double quoted string
@@ -373,6 +375,7 @@ indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT BOOLEAN(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT NULL(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
+indexdef(res)   ::= DOT INTEGER(n) ID(i). { res = "['". n . i ."']";}
 indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
 										// section tag index
