@@ -61,7 +61,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public static function suite()
     {
         $testorder = array('DoubleQuotedStringTests', 'CoreTests', 'ClearCompiledTests', 'ClearCacheTests', 'StringResourceTests', 'FileResourceTests' , 'CompileAssignTests'); 
-        PHPUnit_Util_Filter::addDirectoryToWhitelist('c:\wamp\www\__Smarty3Alpha\distribution\libs');
+        PHPUnit_Util_Filter::addDirectoryToWhitelist('c:\wamp\www\_Smarty3Work\distribution\libs');
         //PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../'); 
         // PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
         $suite = new self('Smarty 3 - Unit Tests Report'); 

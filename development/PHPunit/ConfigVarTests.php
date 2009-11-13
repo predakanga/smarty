@@ -1,3 +1,4 @@
+<<<<<<< .mine
 <?php
 /**
 * Smarty PHPunit tests of config  variables
@@ -37,6 +38,17 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->config_load('test.conf', 'section2');
         $this->assertEquals("Welcome to Smarty!  Hello Section2", $this->smarty->fetch('string:{#title#} {#sec1#} {#sec2#}'));
+    } 
+    /**
+    * test config variables loading indifferent scopes
+    */
+    public function testConfigVariableScope()
+    {
+        $this->smarty->config_load('test.conf', 'section2');
+        $tpl = $this->smarty->createTemplate('string:{#title#} {#sec1#} {#sec2#}');
+        $tpl->config_load('test.conf', 'section1');
+        $this->assertEquals("Welcome to Smarty!  Hello Section2", $this->smarty->fetch('string:{#title#} {#sec1#} {#sec2#}'));
+        $this->assertEquals("Welcome to Smarty! Hello Section1 ", $this->smarty->fetch($tpl));
     } 
     /**
     * test config variables loading section2 from template
