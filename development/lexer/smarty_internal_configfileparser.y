@@ -78,13 +78,13 @@ config(res)       ::= config(c) config_element(e). {res = c.e;}
 // config elements
 //
 											// Section defifinition
-config_element(res) ::= OPENB ID(i) CLOSEB EOL. { $this->hidden_section = false; $this->current_section = i; res ='';}
+config_element(res) ::= OPENB ID(i) CLOSEB opteol. { $this->hidden_section = false; $this->current_section = i; res ='';}
 											// Hidden section defifinition
-config_element(res) ::= OPENB DOT ID(i) CLOSEB EOL. { if ($this->smarty->config_read_hidden) {
+config_element(res) ::= OPENB DOT ID(i) CLOSEB opteol. { if ($this->smarty->config_read_hidden) {
                                                        $this->hidden_section = false; $this->current_section = i;
                                                       } else {$this->hidden_section = true; } res ='';}
 // variable assignment
-config_element(res) ::= ID(i) EQUAL value(v) EOL. {if (!$this->hidden_section) {
+config_element(res) ::= ID(i) EQUAL value(v) opteol. {if (!$this->hidden_section) {
                                                    $value=v;
                                                    if ($this->smarty->config_booleanize) {
                                                        if (in_array(strtolower($value),array('on','yes','true')))
@@ -109,7 +109,7 @@ config_element(res) ::= ID(i) EQUAL value(v) EOL. {if (!$this->hidden_section) {
                                                      }}  res ='';}
 // empty and comment lines
 config_element(res) ::= EOL. { res ='';}
-config_element(res) ::= COMMENTSTART text(t) EOL. { res ='';}
+config_element(res) ::= COMMENTSTART text(t) opteol. { res ='';}
 
 value(res)         ::= text(t). {res = t;}
 value(res)         ::= SI_QSTR(s). {res = trim(s,"'");}
@@ -117,6 +117,8 @@ value(res)         ::= DO_QSTR(s). {res = trim(s,'"');}
 value(res)         ::= ML_QSTR(s). {res = trim(s,'"');}
 value(res)         ::= NUMBER(n). {res = (int)n;}
 
+opteol             ::= EOL.
+opteol             ::= .
 
 text(res)          ::= text(t) textelement(e). {res = t.e;}
 text(res)          ::= textelement(e). {res = e;}
