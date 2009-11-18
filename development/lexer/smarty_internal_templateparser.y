@@ -202,11 +202,21 @@ smartytag(res)   ::= LDEL ID(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. {
                                                                $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
                                                             }
                                                             res = $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE value(v1) AS DOLLAR varvar(v2) APTR DOLLAR varvar(v0) RDEL. {
+                                                            if (i != 'foreach') {
+                                                               $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
+                                                            }
+                                                            res = $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0,'key'=>v2));}
 smartytag(res)   ::= LDEL ID(i) SPACE array(a) AS DOLLAR varvar(v0) RDEL. { 
                                                             if (i != 'foreach') {
                                                                $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
                                                             }
                                                             res = $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
+smartytag(res)   ::= LDEL ID(i) SPACE array(a) AS DOLLAR varvar(v1) APTR DOLLAR varvar(v0) RDEL. { 
+                                                            if (i != 'foreach') {
+                                                               $this->compiler->trigger_template_error ("wrong syntax for tag \"" . i . "\""); 
+                                                            }
+                                                            res = $this->compiler->compileTag(i,array('from'=>a,'item'=>v0,'key'=>v1));}
 
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i.'close',a);}
@@ -242,6 +252,7 @@ attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL value(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ternary(t). { res = array(v=>t);}
 attribute(res)   ::= SPACE ID(v). { res = array(v=>'true');}
+attribute(res)   ::= SPACE INTEGER(i) EQUAL expr(e). { res = array(i=>e);}
 									
 
 //
