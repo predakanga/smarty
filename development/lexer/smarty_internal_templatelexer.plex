@@ -18,7 +18,9 @@ class Smarty_Internal_Templatelexer
     public $value;
     public $node;
     public $line;
+    public $taglineno;
     public $state = 1;
+    public $strip = false;
     public $smarty_token_names = array (		// Text for parser error messages
     				'IDENTITY'	=> '===',
     				'NONEIDENTITY'	=> '!==',
@@ -99,7 +101,8 @@ class Smarty_Internal_Templatelexer
 %token $this->token
 %value $this->value
 %line $this->line
-textsmarty = /([\S\s]*?)(SMARTYldel|\<\?)/
+linebreak = /[\t ]*[\r\n]+[\t ]*/
+textsmarty = /([\S\s]*?)([\t ]*[\r\n]+[\t ]*|SMARTYldel|\<\?)/
 texttoshorttagend = /([\S\s]*?)\?\>/
 textdoublequoted = /([\S\s]*?)(\\\\|[^\\]"|SMARTYldel|\$|`\$)/
 dollarid = /\$\w+/
@@ -116,8 +119,8 @@ ldelspaceslash = /SMARTYldel\s{1,}\//
 ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
-boolean = /true|false/
-null = /null/
+boolean = /true|TRUE|True|false|FALSE|False/
+null = /null|NULL|Null/
 math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
 escapedquotes = /(\\\"|\\\')/
@@ -151,6 +154,8 @@ id = /\w+/
 literaltext = '([\S\s]*?)SMARTYldel/literalSMARTYrdel'
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
+stripstart = 'SMARTYldelstripSMARTYrdel'
+stripend = 'SMARTYldel/stripSMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
 notequals = /\s*!=\s*|\s*<>\s*|\s+(NE|NEQ|ne|neq)\s+/
 greaterthan = /\s*>\s*|\s+(GT|gt)\s+/
@@ -200,6 +205,21 @@ shorttagstart {
   $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGSTART;
   $this->yypushstate(self::PHP);
 }
+linebreak {
+  if ($this->strip) {
+     return false;
+  } else {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  }
+}
+stripstart {
+  $this->strip = true;
+  return false;
+}
+stripend {
+  $this->strip = false;
+  return false;
+}
 literalstart {
   $this->yypushstate(self::LITERAL);
   return true;
@@ -213,6 +233,7 @@ ldelspaceslash {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
   }
 }
 ldels {
@@ -221,22 +242,27 @@ ldels {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
   }
 }
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
 }
 textsmarty {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   if (substr($this->value,-2) == '<?') {
      $this->value = substr($this->value,0,-2);
-  } else {
+  } elseif (substr($this->value,-strlen($this->smarty->left_delimiter)) == $this->smarty->left_delimiter){
      $this->value = substr($this->value,0,-strlen($this->smarty->left_delimiter));
+  } else {
+     $this->value = rtrim($this->value);
   }
   if (strlen($this->value) == 0) {
      return true;		// rescan
@@ -269,6 +295,7 @@ ldelspaceslash {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
   }
 }
 ldels {
@@ -277,6 +304,7 @@ ldels {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
   }
 }
 rdels {
@@ -290,10 +318,12 @@ rdels {
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
@@ -517,6 +547,7 @@ ldelspaceslash {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
   }
 }
 ldels {
@@ -525,15 +556,18 @@ ldels {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
   }
 }
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
 }
 quote {
   $this->token = Smarty_Internal_Templateparser::TP_QUOTE;
@@ -543,6 +577,7 @@ backtickdollar {
   $this->token = Smarty_Internal_Templateparser::TP_BACKTICK;
   $this->value = substr($this->value,0,-1);
   $this->yypushstate(self::SMARTY);
+  $this->taglineno = $this->line;
 }
 dollarid {
   $this->token = Smarty_Internal_Templateparser::TP_DOLLARID;

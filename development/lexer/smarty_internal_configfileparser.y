@@ -58,7 +58,7 @@
 //
 // fallback definition to catch all non Smarty template text
 //
-%fallback     OTHER COMMENTSTART NUMBER OPENB CLOSEB DOT BOOLEANTRUE BOOLEANFALSE SI_QSTR DO_QSTR EQUAL SPACE ID.
+%fallback     OTHER COMMENTSTART OPENB CLOSEB DOT BOOLEANTRUE BOOLEANFALSE SI_QSTR DO_QSTR EQUAL SPACE ID.
               
 
 //
@@ -93,14 +93,14 @@ config_element(res) ::= ID(i) EQUAL value(v) opteol. {if (!$this->hidden_section
                                                          $value = false;
                                                    }
                                                    if ($this->current_section == null) {
-                                                      if ($this->smarty->config_overwrite) {
+                                                      if ($this->smarty->config_overwrite || !isset($this->compiler->config_data['vars'][i])) {
                                                            $this->compiler->config_data['vars'][i]=$value;
                                                         } else {
                                                           settype($this->compiler->config_data['vars'][i], 'array');
                                                           $this->compiler->config_data['vars'][i][]=$value;
                                                         }
                                                      } else {
-                                                      if ($this->smarty->config_overwrite) {
+                                                      if ($this->smarty->config_overwrite || !isset($this->compiler->config_data['sections'][$this->current_section]['vars'][i])) {
                                                           $this->compiler->config_data['sections'][$this->current_section]['vars'][i]=$value;
                                                       } else {
                                                           settype($this->compiler->config_data['sections'][$this->current_section]['vars'][i], 'array');
@@ -115,7 +115,6 @@ value(res)         ::= text(t). {res = t;}
 value(res)         ::= SI_QSTR(s). {res = trim(s,"'");}
 value(res)         ::= DO_QSTR(s). {res = trim(s,'"');}
 value(res)         ::= ML_QSTR(s). {res = trim(s,'"');}
-value(res)         ::= NUMBER(n). {res = (int)n;}
 
 opteol             ::= EOL.
 opteol             ::= .

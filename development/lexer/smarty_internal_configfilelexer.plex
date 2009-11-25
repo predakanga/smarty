@@ -51,7 +51,6 @@ class Smarty_Internal_Configfilelexer
 commentstart = /#/
 openB = /\[/
 closeB = /]/
-number = /\d+(\.\d+)?/
 dot = /\./
 equal = /\s*\=\s*/
 eol = /(\n|\r\n)/
@@ -85,9 +84,6 @@ closeB {
 }
 equal {
   $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
-}
-number {
-  $this->token = Smarty_Internal_Configfileparser::TPC_NUMBER;
 }
 eol {
   $this->token = Smarty_Internal_Configfileparser::TPC_EOL;
