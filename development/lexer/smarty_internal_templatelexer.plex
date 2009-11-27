@@ -104,7 +104,7 @@ class Smarty_Internal_Templatelexer
 linebreak = /[\t ]*[\r\n]+[\t ]*/
 textsmarty = /([\S\s]*?)([\t ]*[\r\n]+[\t ]*|SMARTYldel|\<\?)/
 texttoshorttagend = /([\S\s]*?)\?\>/
-textdoublequoted = /([\S\s]*?)(\\\\|[^\\]"|SMARTYldel|\$|`\$)/
+textdoublequoted = /([\S\s]*?)(SMARTYldel|\$|`\$|\\\\|[^\\]")/
 dollarid = /\$\w+/
 all = /[\S\s]+/
 emptyjava = /\{\}/
