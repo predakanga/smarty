@@ -150,7 +150,8 @@ backtickdollar = /`\$/
 vert = /\|/
 andsym = /\s*\&\s*/
 qmark = /\s*\?\s*/
-id = /\w+/
+constant = /([_]+[A-Z0-9][0-9A-Z_]*|[A-Z][0-9A-Z_]*)(?![0-9A-Z_]*[a-z])/
+id = /[0-9]*[a-zA-Z_]\w*/
 literaltext = '([\S\s]*?)SMARTYldel/literalSMARTYrdel'
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
@@ -177,6 +178,9 @@ isdivby = /\s+is\s+div\s+by\s+/
 isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
+if = /(if|elseif|while)(?![a-z])/
+for = /for(?![a-z])/
+foreach = /foreach(?![a-z.])/
 instanceof = /\s+instanceof\s+/
 not = /!\s*|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s*(AND|and)\s+/
@@ -439,9 +443,6 @@ aptr {
 equal {
   $this->token = Smarty_Internal_Templateparser::TP_EQUAL;
 }
-integer {
-  $this->token = Smarty_Internal_Templateparser::TP_INTEGER;
-}
 incdec {
   $this->token = Smarty_Internal_Templateparser::TP_INCDEC;
 }
@@ -492,8 +493,23 @@ andsym {
 qmark {
   $this->token = Smarty_Internal_Templateparser::TP_QMARK;
 }
+if {
+  $this->token = Smarty_Internal_Templateparser::TP_IF;
+}
+foreach {
+  $this->token = Smarty_Internal_Templateparser::TP_FOREACH;
+}
+for {
+  $this->token = Smarty_Internal_Templateparser::TP_FOR;
+}
+constant {
+  $this->token = Smarty_Internal_Templateparser::TP_CONSTANT;
+}
 id {
   $this->token = Smarty_Internal_Templateparser::TP_ID;
+}
+integer {
+  $this->token = Smarty_Internal_Templateparser::TP_INTEGER;
 }
 space {
   $this->token = Smarty_Internal_Templateparser::TP_SPACE;
