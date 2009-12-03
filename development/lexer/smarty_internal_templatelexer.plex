@@ -68,6 +68,8 @@ class Smarty_Internal_Templatelexer
     				'COMMENT' => 'comment',
      				'LITERALEND' => 'literal close',
     				'AS' => 'as',
+    				'TO' => 'to',
+    				'STEP' => 'step',
     				'NULL' => 'null',
     				'BOOLEAN' => 'boolean'
     				);
@@ -178,9 +180,11 @@ isdivby = /\s+is\s+div\s+by\s+/
 isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
-if = /(if|elseif|while)(?![a-z])/
-for = /for(?![a-z])/
-foreach = /foreach(?![a-z.])/
+to = /\s+(to)\s+/
+step = /\s+(step)\s+/
+if = /(if|elseif|while)(?![^\s])/
+for = /for(?![^\s])/
+foreach = /foreach(?![^\s])/
 instanceof = /\s+instanceof\s+/
 not = /!\s*|(NOT|not)\s+/
 land = /\s*\&\&\s*|\s*(AND|and)\s+/
@@ -338,6 +342,12 @@ isin {
 }
 as {
   $this->token = Smarty_Internal_Templateparser::TP_AS;
+}
+to {
+  $this->token = Smarty_Internal_Templateparser::TP_TO;
+}
+step {
+  $this->token = Smarty_Internal_Templateparser::TP_STEP;
 }
 instanceof {
   $this->token = Smarty_Internal_Templateparser::TP_INSTANCEOF;
@@ -501,9 +511,6 @@ foreach {
 }
 for {
   $this->token = Smarty_Internal_Templateparser::TP_FOR;
-}
-constant {
-  $this->token = Smarty_Internal_Templateparser::TP_CONSTANT;
 }
 id {
   $this->token = Smarty_Internal_Templateparser::TP_ID;

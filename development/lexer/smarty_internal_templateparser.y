@@ -194,6 +194,8 @@ smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace ifexprs
                                                              res = $this->compiler->compileTag(i,array('start'=>st,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
+smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v));}
+smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) STEP expr(v2) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v,'step'=>v2));}
 									// {foreach $array as $var} tag
 smartytag(res)   ::= LDEL FOREACH(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. {
                                                             res = $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
@@ -313,7 +315,7 @@ value(res)		   ::= variable(v) INCDEC(o). { res = v.o; }
 value(res)       ::= INTEGER(n). { res = n; }
 value(res)       ::= INTEGER(n1) DOT INTEGER(n2). { res = n1.'.'.n2; }
 									// constant
-value(res)       ::= CONSTANT(c). { res = c; }
+//value(res)       ::= CONSTANT(c). { res = c; }
 									// boolean
 value(res)       ::= BOOLEAN(b). { res = b; }
 									// null
@@ -340,7 +342,7 @@ value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $th
 value(res)	     ::= ID(c) DOUBLECOLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
 value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
 									// static class constant
-value(res)       ::= ID(c) DOUBLECOLON CONSTANT(v). { res = c.'::'.v;}
+value(res)       ::= ID(c) DOUBLECOLON ID(v). { res = c.'::'.v;}
 									// static class variables
 value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a). { res = c.'::$'.v.a;}
 									// static class variables with object chain
@@ -379,7 +381,7 @@ arrayindex        ::= . {return;}
 // single index definition
 										// Smarty2 style index 
 indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
-indexdef(res)   ::= DOT CONSTANT(i). { res = "['". i ."']";}
+//indexdef(res)   ::= DOT CONSTANT(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT BOOLEAN(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT NULL(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
@@ -402,7 +404,7 @@ varvar(res)			 ::= varvarele(v). {res = v;}
 varvar(res)			 ::= varvar(v1) varvarele(v2). {res = v1.'.'.v2;}
 										// fix sections of element
 varvarele(res)	 ::= ID(s). {res = '\''.s.'\'';}
-varvarele(res)	 ::= CONSTANT(s). {res = '\''.s.'\'';}
+//varvarele(res)	 ::= CONSTANT(s). {res = '\''.s.'\'';}
 										// variable sections of element
 varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 
