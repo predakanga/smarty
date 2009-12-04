@@ -21,7 +21,7 @@ class DefaultTemplateHandlerTests extends PHPUnit_Framework_TestCase {
 
     public static function isRunnable()
     {
-        return false;
+        return true;
     } 
 
     /**
@@ -55,10 +55,17 @@ class DefaultTemplateHandlerTests extends PHPUnit_Framework_TestCase {
     /**
     * test replacement by default template handler
     */
+/**
     public function testDefaultTemplateHandlerReplacement()
     {
         $this->smarty->registerDefaultTemplateHandler('my_template_handler');
         $this->assertEquals("Recsource foo.tpl of type file not found", $this->smarty->fetch('foo.tpl'));
+    }
+*/ 
+    public function testDefaultTemplateHandlerReplacementByTemplateFile()
+    {
+        $this->smarty->registerDefaultTemplateHandler('my_template_handler_file');
+        $this->assertEquals("hello world", $this->smarty->fetch('foo.tpl'));
     } 
     /**
     * test default template handler returning fals
@@ -84,6 +91,10 @@ function my_template_handler ($resource_type, $resource_name, &$template_source,
     $template_source = $output;
     $template_timestamp = time();
     return true;
+} 
+function my_template_handler_file ($resource_type, $resource_name, &$template_source, &$template_timestamp, &$tpl)
+{
+    return $tpl->smarty->template_dir[0].'helloworld.tpl';
 } 
 function my_false ($resource_type, $resource_name, &$template_source, &$tpl)
 {

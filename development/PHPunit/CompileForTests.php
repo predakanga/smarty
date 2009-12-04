@@ -59,6 +59,36 @@ class CompileForTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{for $x=0;$x<10;$x=$x+2}{$x}{/for}');
         $this->assertEquals("02468", $this->smarty->fetch($tpl));
     } 
+    public function testFor8()
+    {
+        $tpl = $this->smarty->createTemplate('string:{for $x=0 to 8}{$x}{/for}');
+        $this->assertEquals("012345678", $this->smarty->fetch($tpl));
+    } 
+    public function testFor9()
+    {
+        $tpl = $this->smarty->createTemplate('string:{for $x=0 to 8 step 2}{$x}{/for}');
+        $this->assertEquals("02468", $this->smarty->fetch($tpl));
+    } 
+    public function testFor10()
+    {
+        $tpl = $this->smarty->createTemplate('string:{for $x=0 to 8 step 2}{if $x@first}{$x} {$x@total}{/if}{/for}');
+        $this->assertEquals("0 5", $this->smarty->fetch($tpl));
+    } 
+    public function testFor11()
+    {
+        $tpl = $this->smarty->createTemplate('string:{for $x=0 to 8 step 2}{if $x@last}{$x} {$x@iteration}{/if}{/for}');
+        $this->assertEquals("8 5", $this->smarty->fetch($tpl));
+    } 
+    public function testFor12()
+    {
+        $tpl = $this->smarty->createTemplate('string:{for $x=8 to 0 step -2}{$x}{/for}');
+        $this->assertEquals("86420", $this->smarty->fetch($tpl));
+    } 
+    public function testFor13()
+    {
+        $tpl = $this->smarty->createTemplate('string:{for $x=8 to 0 step 2}{$x}{forelse}step error{/for}');
+        $this->assertEquals("step error", $this->smarty->fetch($tpl));
+    } 
 } 
 
 ?>

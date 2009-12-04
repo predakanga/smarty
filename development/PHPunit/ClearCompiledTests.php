@@ -74,11 +74,11 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'blar');
-        $tpl->smarty->write_file_object->writeFile($tpl->getCompiledFilepath(), 'hello world');
+        $tpl->smarty->write_file_object->writeFile($tpl->getCompiledFilepath(), 'hello world', $this->smarty);
         $tpl2 = $this->smarty->createTemplate('helloworld.tpl', null, 'blar2');
-        $tpl2->smarty->write_file_object->writeFile($tpl2->getCompiledFilepath(), 'hello world');
+        $tpl2->smarty->write_file_object->writeFile($tpl2->getCompiledFilepath(), 'hello world', $this->smarty);
         $tpl3 = $this->smarty->createTemplate('helloworld2.tpl', null, 'blar');
-        $tpl3->smarty->write_file_object->writeFile($tpl3->getCompiledFilepath(), 'hello world');
+        $tpl3->smarty->write_file_object->writeFile($tpl3->getCompiledFilepath(), 'hello world', $this->smarty);
         $this->assertTrue(file_exists($tpl->getCompiledFilepath()));
         $this->assertTrue(file_exists($tpl2->getCompiledFilepath()));
         $this->assertTrue(file_exists($tpl3->getCompiledFilepath()));

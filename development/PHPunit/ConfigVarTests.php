@@ -26,6 +26,21 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     /**
     * test config varibales loading all sections
     */
+    public function testConfigNumber()
+    {
+        $this->smarty->config_load('test.conf');
+        $this->assertEquals("123.4", $this->smarty->fetch('string:{#Number#}'));
+    } 
+    public function testConfigText()
+    {
+        $this->smarty->config_load('test.conf');
+        $this->assertEquals("123bvc", $this->smarty->fetch('string:{#text#}'));
+    } 
+    public function testConfigLine()
+    {
+        $this->smarty->config_load('test.conf');
+        $this->assertEquals("123 This is a line", $this->smarty->fetch('string:{#line#}'));
+    } 
     public function testConfigVariableAllSections()
     {
         $this->smarty->config_load('test.conf');
@@ -110,13 +125,17 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     {
         $this->assertEquals("Overwrite2", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{#overwrite#}'));
     } 
+    public function testConfigVariableOverwrite2()
+    {
+        $this->assertEquals("Overwrite3", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{config_load file=\'test2.conf\'}{#overwrite#}'));
+    } 
     /**
     * test config varibales overwrite false
     */
     public function testConfigVariableOverwriteFalse()
     {
         $this->smarty->config_overwrite = false;
-        $this->assertEquals("Overwrite1Overwrite2", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{foreach #overwrite# as $over}{$over}{/foreach}'));
+        $this->assertEquals("Overwrite1Overwrite2Overwrite3Welcome to Smarty! Hello Section1 Hello Section2", $this->smarty->fetch('string:{config_load file=\'test.conf\'}{config_load file=\'test2.conf\'}{foreach #overwrite# as $over}{$over}{/foreach}{#title#} {#sec1#} {#sec2#}'));
     } 
     /**
     * test config varibales booleanize on

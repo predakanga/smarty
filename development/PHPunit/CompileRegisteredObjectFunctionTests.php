@@ -32,6 +32,14 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:{objecttest->myhello}');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
+    /**
+    * test resgistered object as function with modifier
+    */
+    public function testRegisteredObjectFunctionModifier()
+    {
+        $tpl = $this->smarty->createTemplate('string:{objecttest->myhello|truncate:6}');
+        $this->assertEquals('hel...', $this->smarty->fetch($tpl));
+    } 
 
     /**
     * test resgistered object as block function

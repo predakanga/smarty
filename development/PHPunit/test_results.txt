@@ -1,7 +1,8 @@
+<<<<<<< .mine
 
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__Smarty3Alpha\development\PHPunit\StreamResourceTests.php on line 259
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\_Smarty3Work\development\PHPunit\StreamResourceTests.php on line 259
 
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\__Smarty3Alpha\development\PHPunit\StreamVariableTests.php on line 100
+Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\_Smarty3Work\development\PHPunit\StreamVariableTests.php on line 100
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
 Test Suite
@@ -33,7 +34,7 @@ Test Suite
  ......
 
  ArrayTests
- ...........
+ ...............
 
  AssignByRefTests
  .
@@ -45,7 +46,7 @@ Test Suite
  ..
 
  CacherResourceFileTests
- .....F............
+ ..................
 
  ClearAllAssignTests
  ....
@@ -56,7 +57,7 @@ Test Suite
  CommentsTests
  ....
 
- CompileBlockExtendTests
+ CompileBlockExtendsTests
  .......
 
  CompileBlockPluginTests
@@ -84,7 +85,7 @@ Test Suite
  ..............
 
  CompileForTests
- .......
+ .............
 
  CompileFunctionPluginTests
  ...
@@ -95,6 +96,9 @@ Test Suite
  CompileIfTests
  ........................................................... 59 / 67
  ........
+
+ CompileIncludePHPTests
+ ..
 
  CompileIncludeTests
  ........
@@ -109,7 +113,7 @@ Test Suite
  .....
 
  CompileRegisteredObjectFunctionTests
- ..
+ ...
 
  CompilerPluginTests
  
@@ -126,7 +130,7 @@ Test Suite
  ..
 
  ConfigVarTests
- .................
+ ......................
 
  ConstantsTests
  .
@@ -134,10 +138,13 @@ Test Suite
  DefaultPluginHandlerTests
  ....
 
+ DefaultTemplateHandlerTests
+ ....
+
  DelimiterTests
  ....
 
- ExtendResourceTests
+ ExtendsResourceTests
  .....
 
  FilterTests
@@ -218,16 +225,6 @@ Test Suite
  XmlTests
  ...
 
-Time: 12 seconds
+Time: 9 seconds
 
-There was 1 failure:
-
-1) testClearCacheCacheIdCompileId(CacherResourceFileTests)
-Failed asserting that <integer:3> matches expected value <integer:2>.
-expected integer <2>
-difference       <1>
-got integer      <3>
-C:\wamp\www\__Smarty3Alpha\development\PHPunit\CacherResourceFileTests.php:103
-
-FAILURES!
-Tests: 564, Assertions: 762, Failures: 1.
+OK (586 tests, 787 assertions)

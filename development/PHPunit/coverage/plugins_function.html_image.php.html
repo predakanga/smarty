@@ -20,7 +20,7 @@
           <table cellpadding="1" border="0" width="100%">
             <tr>
               <td class="headerItem" width="20%">Current file:</td>
-              <td class="headerValue" width="80%"><a href="index.html">C:\wamp\www\__Smarty3Alpha\distribution\libs</a>\<a href="plugins.html">plugins</a>\<a href="plugins_function.html_image.php.html">function.html_image.php</a></td>
+              <td class="headerValue" width="80%"><a href="index.html">C:\wamp\www\_Smarty3Work\distribution\libs</a>\<a href="plugins.html">plugins</a>\<a href="plugins_function.html_image.php.html">function.html_image.php</a></td>
             </tr>
             <tr>
               <td class="legendItem" width="20%">Legend:</td>
@@ -81,7 +81,7 @@
             </table>
           </td>
           <td class="coverPerLo">0.00%</td>
-          <td class="coverNumLo">0 / 74</td>
+          <td class="coverNumLo">0 / 78</td>
         </tr>
 
         <tr>
@@ -137,7 +137,7 @@
             </table>
           </td>
           <td class="coverPerLo">0.00%</td>
-          <td class="coverNumLo">0 / 74</td>
+          <td class="coverNumLo">0 / 78</td>
         </tr>
 
 
@@ -240,8 +240,8 @@
 <span class="lineNum" id="container85"><a name="85"></a><a href="#85" id="line85">      85</a> </span><span class="lineNoCov">              0 :     }                                                                                                                                                        </span>
 <span class="lineNum" id="container86"><a name="86"></a><a href="#86" id="line86">      86</a> </span>                :                                                                                                                                                              
 <span class="lineNum" id="container87"><a name="87"></a><a href="#87" id="line87">      87</a> </span><span class="lineNoCov">              0 :     if (empty($file)) {                                                                                                                                      </span>
-<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span><span class="lineNoCov">              0 :         throw new Exception (&quot;html_image: missing 'file' parameter&quot;, E_USER_NOTICE);                                                                         </span>
-<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span><span class="lineDeadCode">                :         return;                                                                                                                                              </span>
+<span class="lineNum" id="container88"><a name="88"></a><a href="#88" id="line88">      88</a> </span><span class="lineNoCov">              0 :         trigger_error(&quot;html_image: missing 'file' parameter&quot;, E_USER_NOTICE);                                                                                </span>
+<span class="lineNum" id="container89"><a name="89"></a><a href="#89" id="line89">      89</a> </span><span class="lineNoCov">              0 :         return;                                                                                                                                              </span>
 <span class="lineNum" id="container90"><a name="90"></a><a href="#90" id="line90">      90</a> </span><span class="lineDeadCode">                :     }                                                                                                                                                        </span>
 <span class="lineNum" id="container91"><a name="91"></a><a href="#91" id="line91">      91</a> </span>                :                                                                                                                                                              
 <span class="lineNum" id="container92"><a name="92"></a><a href="#92" id="line92">      92</a> </span><span class="lineNoCov">              0 :     if (substr($file, 0, 1) == '/') {                                                                                                                        </span>
@@ -253,14 +253,14 @@
 <span class="lineNum" id="container98"><a name="98"></a><a href="#98" id="line98">      98</a> </span><span class="lineNoCov">              0 :     if (!isset($params['width']) || !isset($params['height'])) {                                                                                             </span>
 <span class="lineNum" id="container99"><a name="99"></a><a href="#99" id="line99">      99</a> </span><span class="lineNoCov">              0 :         if (!$_image_data = @getimagesize($_image_path)) {                                                                                                   </span>
 <span class="lineNum" id="container100"><a name="100"></a><a href="#100" id="line100">     100</a> </span><span class="lineNoCov">              0 :             if (!file_exists($_image_path)) {                                                                                                                </span>
-<span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span><span class="lineNoCov">              0 :                 throw new Exception (&quot;html_image: unable to find '$_image_path'&quot;, E_USER_NOTICE);                                                            </span>
-<span class="lineNum" id="container102"><a name="102"></a><a href="#102" id="line102">     102</a> </span><span class="lineDeadCode">                :                 return;                                                                                                                                      </span>
+<span class="lineNum" id="container101"><a name="101"></a><a href="#101" id="line101">     101</a> </span><span class="lineNoCov">              0 :                 trigger_error(&quot;html_image: unable to find '$_image_path'&quot;, E_USER_NOTICE);                                                                   </span>
+<span class="lineNum" id="container102"><a name="102"></a><a href="#102" id="line102">     102</a> </span><span class="lineNoCov">              0 :                 return;                                                                                                                                      </span>
 <span class="lineNum" id="container103"><a name="103"></a><a href="#103" id="line103">     103</a> </span><span class="lineNoCov">              0 :             } else if (!is_readable($_image_path)) {                                                                                                         </span>
-<span class="lineNum" id="container104"><a name="104"></a><a href="#104" id="line104">     104</a> </span><span class="lineNoCov">              0 :                 throw new Exception (&quot;html_image: unable to read '$_image_path'&quot;, E_USER_NOTICE);                                                            </span>
-<span class="lineNum" id="container105"><a name="105"></a><a href="#105" id="line105">     105</a> </span><span class="lineDeadCode">                :                 return;                                                                                                                                      </span>
+<span class="lineNum" id="container104"><a name="104"></a><a href="#104" id="line104">     104</a> </span><span class="lineNoCov">              0 :                 trigger_error(&quot;html_image: unable to read '$_image_path'&quot;, E_USER_NOTICE);                                                                   </span>
+<span class="lineNum" id="container105"><a name="105"></a><a href="#105" id="line105">     105</a> </span><span class="lineNoCov">              0 :                 return;                                                                                                                                      </span>
 <span class="lineNum" id="container106"><a name="106"></a><a href="#106" id="line106">     106</a> </span><span class="lineDeadCode">                :             } else {                                                                                                                                         </span>
-<span class="lineNum" id="container107"><a name="107"></a><a href="#107" id="line107">     107</a> </span><span class="lineNoCov">              0 :                 throw new Exception (&quot;html_image: '$_image_path' is not a valid image file&quot;, E_USER_NOTICE);                                                 </span>
-<span class="lineNum" id="container108"><a name="108"></a><a href="#108" id="line108">     108</a> </span><span class="lineDeadCode">                :                 return;                                                                                                                                      </span>
+<span class="lineNum" id="container107"><a name="107"></a><a href="#107" id="line107">     107</a> </span><span class="lineNoCov">              0 :                 trigger_error(&quot;html_image: '$_image_path' is not a valid image file&quot;, E_USER_NOTICE);                                                        </span>
+<span class="lineNum" id="container108"><a name="108"></a><a href="#108" id="line108">     108</a> </span><span class="lineNoCov">              0 :                 return;                                                                                                                                      </span>
 <span class="lineNum" id="container109"><a name="109"></a><a href="#109" id="line109">     109</a> </span>                :             }                                                                                                                                                
 <span class="lineNum" id="container110"><a name="110"></a><a href="#110" id="line110">     110</a> </span><span class="lineDeadCode">                :         }                                                                                                                                                    </span>
 <span class="lineNum" id="container111"><a name="111"></a><a href="#111" id="line111">     111</a> </span><span class="lineNoCov">              0 :         if ($template-&gt;security) {                                                                                                                           </span>
@@ -300,7 +300,7 @@
 
     <table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr><td class="ruler"><img src="glass.png" width="3" height="3" alt=""></td></tr>
-      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.15</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Fri Oct 30 19:21:31 CET 2009.</td></tr>
+      <tr><td class="versionInfo">Generated by <a href="http://www.phpunit.de/">PHPUnit 3.3.15</a> and <a href="http://www.xdebug.org/">Xdebug 2.0.4</a> at Fri Dec 4 1:52:39 CET 2009.</td></tr>
     </table>
 
     <br />

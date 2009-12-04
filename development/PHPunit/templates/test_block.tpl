@@ -1,4 +1,4 @@
-{extend file='test_block_section.tpl'}
+{extends file='test_block_section.tpl'}
 {block name=blockpassedbysection}--block passed by section ok--{/block}<br>
 {block name=blockroot}--block root ok--{/block}<br>
 {block name="blockassigned"}--assigned {$foo}--{/block}<br>
