@@ -382,8 +382,9 @@ class PHP_LexerGenerator_Parser#line 171 "Parser.php"
                     }
                     // skip this token
                     continue;
-                } else {');
-        fwrite($this->out, '                    $yy_yymore_patterns = array(' . "\n");
+                }');
+//                } else {');
+/**        fwrite($this->out, '                    $yy_yymore_patterns = array(' . "\n");
         $extra = 0;
         for($i = 0; count($patterns); $i++) {
             unset($patterns[$i]);
@@ -437,7 +438,8 @@ class PHP_LexerGenerator_Parser#line 171 "Parser.php"
 	                    return true;
 			        }
                 }
-            } else {
+*/
+       fwrite($this->out, '            } else {
                 throw new Exception(\'Unexpected input at line\' . ' . $this->line . ' .
                     \': \' . ' . $this->input . '[' . $this->counter . ']);
             }

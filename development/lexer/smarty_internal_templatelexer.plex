@@ -69,7 +69,6 @@ class Smarty_Internal_Templatelexer
      				'LITERALEND' => 'literal close',
     				'AS' => 'as',
     				'TO' => 'to',
-    				'STEP' => 'step',
     				'NULL' => 'null',
     				'BOOLEAN' => 'boolean'
     				);
@@ -181,7 +180,6 @@ isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
 to = /\s+(to)\s+/
-step = /\s+(step)\s+/
 if = /(if|elseif|while)(?![^\s])/
 for = /for(?![^\s])/
 foreach = /foreach(?![^\s])/
@@ -345,9 +343,6 @@ as {
 }
 to {
   $this->token = Smarty_Internal_Templateparser::TP_TO;
-}
-step {
-  $this->token = Smarty_Internal_Templateparser::TP_STEP;
 }
 instanceof {
   $this->token = Smarty_Internal_Templateparser::TP_INSTANCEOF;

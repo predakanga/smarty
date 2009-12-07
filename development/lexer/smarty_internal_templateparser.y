@@ -113,10 +113,12 @@ template_element(res)::= PHP OTHER(t) SHORTTAGEND.  {if ($this->sec_obj->php_han
                                      } 
 
 template_element(res)::= SHORTTAGSTART OTHER(o) SHORTTAGEND. { 
-                                      if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU || $this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+                                      if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
                                        res = $this->cacher->processNocacheCode("<?php echo '<?=".o."?>'?>\n", $this->compiler, false);
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
                                        res = $this->cacher->processNocacheCode(htmlspecialchars('<?='.o.'?>', ENT_QUOTES), $this->compiler, false);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+                                       res = $this->cacher->processNocacheCode('<?='.o.'?>', $this->compiler, true);
                                       }elseif ($this->sec_obj == SMARTY_PHP_REMOVE) {
                                        res = '';
                                       }
@@ -194,8 +196,8 @@ smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace ifexprs
                                                              res = $this->compiler->compileTag(i,array('start'=>st,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
-smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v));}
-smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) STEP expr(v2) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v,'step'=>v2));}
+smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) attributes(a) RDEL. { res = $this->compiler->compileTag(i,array_merge(array('start'=>st,'to'=>v),a));}
+//smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) STEP expr(v2) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v,'step'=>v2));}
 									// {foreach $array as $var} tag
 smartytag(res)   ::= LDEL FOREACH(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. {
                                                             res = $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
@@ -355,10 +357,10 @@ value(res)	     ::= smartytag(st). { $this->prefix_number++; $this->compiler->pr
 // variables 
 //
 									// simplest Smarty variable
-//variable(res)    ::= DOLLAR ID(v). { res = '$_smarty_tpl->getVariable(\''. v .'\')->value'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('v', null, true, false)->nocache;}
+//variable(res)    ::= DOLLAR varvar(v).  { res = '$_smarty_tpl->getVariable(\''. v .'\')->value'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('v', null, true, false)->nocache;}
 									// Smarty variable (optional array)
-variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('special_smarty_variable',vi['index']);} else {
-                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['index']; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
+variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('special_smarty_variable',vi['smarty_internal_index']);} else {
+                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index']; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
 									// object
@@ -368,7 +370,7 @@ variable(res)	   ::= HATCH ID(i) HATCH. {res = '$_smarty_tpl->getConfigVariable(
 variable(res)	   ::= HATCH variable(v) HATCH. {res = '$_smarty_tpl->getConfigVariable('. v .')';}
                   // stream access
 
-varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'index'=>a);}
+varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {res = array('var'=>v, 'smarty_internal_index'=>a);}
 
 //
 // array index
@@ -380,12 +382,15 @@ arrayindex        ::= . {return;}
 
 // single index definition
 										// Smarty2 style index 
+indexdef(res)    ::= DOT DOLLAR varvar(v).  { res = '[$_smarty_tpl->getVariable('. v .')->value]'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('v', null, true, false)->nocache;}
+indexdef(res)    ::= DOT DOLLAR varvar(v) AT ID(p). { res = '[$_smarty_tpl->getVariable('. v .')->'.p.']'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
+//indexdef(res)    ::= DOT object(o). { res = '['.o.']'; }
+//indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
 //indexdef(res)   ::= DOT CONSTANT(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT BOOLEAN(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT NULL(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
-indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
 										// section tag index
 indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('special_smarty_variable','[\'section\'][\''.i.'\'][\'index\']').']';}
