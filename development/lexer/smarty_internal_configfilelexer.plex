@@ -48,14 +48,14 @@ class Smarty_Internal_Configfilelexer
 %token $this->token
 %value $this->value
 %line $this->line
-commentstart = /#/
+commentstart = /\s*#/
 openB = /\[/
 closeB = /]/
 dot = /\./
 equal = /\s*\=\s*/
 eol = /(\n|\r\n)/
 space = /[\s]+/
-id = /\w+/
+id = /[0-9]*[a-zA-Z_]\w*/
 si_qstr = '\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\''
 ml_qstr = '\"\"\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"\"\"'
 do_qstr = '\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"'

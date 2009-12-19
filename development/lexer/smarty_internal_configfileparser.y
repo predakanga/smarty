@@ -109,6 +109,7 @@ config_element(res) ::= ID(i) EQUAL value(v) opteol. {if (!$this->hidden_section
                                                      }}  res ='';}
 // empty and comment lines
 config_element(res) ::= EOL. { res ='';}
+config_element(res) ::= COMMENTSTART opteol. { res ='';}
 config_element(res) ::= COMMENTSTART text(t) opteol. { res ='';}
 
 value(res)         ::= text(t). {res = t;}
