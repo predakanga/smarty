@@ -24,8 +24,6 @@
         $this->lex = $lex;
         $this->smarty = $compiler->smarty; 
         $this->compiler = $compiler;
-        $this->current_section = null;
-        $this->hidden_section = false;
     }
     public static function &instance($new_instance = null)
     {
@@ -34,7 +32,77 @@
             $instance = $new_instance;
         return $instance;
     }
-    
+
+    private function parse_bool($str) {
+        if (in_array(strtolower($str) ,array('on','yes','true'))) {
+            $res = true;
+        } else {
+            assert(in_array(strtolower($str), array('off','no','false')));
+            $res = false;
+        }
+        return $res;
+    }
+
+    private static $escapes_single = Array('\\' => '\\',
+                                          '\'' => '\'');
+    private static function parse_single_quoted_string($qstr) {
+        $escaped_string = substr($qstr, 1, strlen($qstr)-2); //remove outer quotes
+
+        $ss = preg_split('/(\\\\.)/', $escaped_string, -1, PREG_SPLIT_DELIM_CAPTURE);
+
+        $str = "";
+        foreach ($ss as $s) {
+            if (strlen($s) === 2 && $s[0] === '\\') {
+                if (isset(self::$escapes_single[$s[1]])) {
+                    $s = self::$escapes_single[$s[1]];
+                }
+             }
+
+             $str .= $s;
+        }
+
+        return $str;
+    }
+
+    private static function parse_double_quoted_string($qstr) {
+        $inner_str = substr($qstr, 1, strlen($qstr)-2);
+        return stripcslashes($inner_str);
+    }
+
+    private static function parse_tripple_double_quoted_string($qstr) {
+        $inner_str = substr($qstr, 3, strlen($qstr)-6);
+        return stripcslashes($inner_str);
+    }
+
+    private function set_var(Array $var, Array &$target_array) {
+        $key = $var["key"];
+        $value = $var["value"];
+
+        if ($this->smarty->config_overwrite || !isset($target_array['vars'][$key])) {
+            $target_array['vars'][$key] = $value;
+        } else {
+            settype($target_array['vars'][$key], 'array');
+            $target_array['vars'][$key][] = $value;
+        }
+    }
+
+    private function add_global_vars(Array $vars) {
+        if (!isset($this->compiler->config_data['vars'])) {
+	    $this->compiler->config_data['vars'] = Array();
+        }
+        foreach ($vars as $var) {
+            $this->set_var($var, $this->compiler->config_data);
+        }
+    }
+
+    private function add_section_vars($section_name, Array $vars) {
+        if (!isset($this->compiler->config_data['sections'][$section_name]['vars'])) {
+            $this->compiler->config_data['sections'][$section_name]['vars'] = Array();
+        }
+        foreach ($vars as $var) {
+            $this->set_var($var, $this->compiler->config_data['sections'][$section_name]);
+        }
+    }
 } 
 
 
@@ -55,71 +123,39 @@
     $this->compiler->trigger_config_file_error();
 }
 
-//
-// fallback definition to catch all non Smarty template text
-//
-%fallback     OTHER COMMENTSTART OPENB CLOSEB DOT BOOLEANTRUE BOOLEANFALSE SI_QSTR DO_QSTR EQUAL SPACE ID.
-              
+// Complete config file
+start(res) ::= global_vars sections. { res = null; }
 
-//
-// complete config file
-//
-start(res)       ::= config(r). { res = r; }
+// Global vars
+global_vars(res) ::= var_list(vl). { $this->add_global_vars(vl); res = null; }
 
-//
-// loop over config file elements
-//
-											// single config element
-config(res)       ::= config_element(e). {res = e;}
-											// loop of elements
-config(res)       ::= config(c) config_element(e). {res = c.e;}
+// Sections
+sections(res) ::= section sections. { res = null; }
+sections(res) ::= . { res = null; }
 
-//
-// config elements
-//
-											// Section defifinition
-config_element(res) ::= OPENB ID(i) CLOSEB opteol. { $this->hidden_section = false; $this->current_section = i; res ='';}
-											// Hidden section defifinition
-config_element(res) ::= OPENB DOT ID(i) CLOSEB opteol. { if ($this->smarty->config_read_hidden) {
-                                                       $this->hidden_section = false; $this->current_section = i;
-                                                      } else {$this->hidden_section = true; } res ='';}
-// variable assignment
-config_element(res) ::= ID(i) EQUAL value(v) opteol. {if (!$this->hidden_section) {
-                                                   $value=v;
-                                                   if ($this->smarty->config_booleanize) {
-                                                       if (in_array(strtolower($value),array('on','yes','true')))
-                                                          $value = true;
-                                                       else if (in_array(strtolower($value),array('off','no','false')))
-                                                         $value = false;
-                                                   }
-                                                   if ($this->current_section == null) {
-                                                      if ($this->smarty->config_overwrite || !isset($this->compiler->config_data['vars'][i])) {
-                                                           $this->compiler->config_data['vars'][i]=$value;
-                                                        } else {
-                                                          settype($this->compiler->config_data['vars'][i], 'array');
-                                                          $this->compiler->config_data['vars'][i][]=$value;
-                                                        }
-                                                     } else {
-                                                      if ($this->smarty->config_overwrite || !isset($this->compiler->config_data['sections'][$this->current_section]['vars'][i])) {
-                                                          $this->compiler->config_data['sections'][$this->current_section]['vars'][i]=$value;
-                                                      } else {
-                                                          settype($this->compiler->config_data['sections'][$this->current_section]['vars'][i], 'array');
-                                                          $this->compiler->config_data['sections'][$this->current_section]['vars'][i][]=$value;
-                                                      }
-                                                     }}  res ='';}
-// empty and comment lines
-config_element(res) ::= EOL. { res ='';}
-config_element(res) ::= COMMENTSTART opteol. { res ='';}
-config_element(res) ::= COMMENTSTART text(t) opteol. { res ='';}
+section(res) ::= OPENB ID(i) CLOSEB newline var_list(vars). { $this->add_section_vars(i, vars); res = null; }
+section(res) ::= OPENB DOT ID(i) CLOSEB newline var_list(vars). { if ($this->smarty->config_read_hidden) { $this->add_section_vars(i, vars); } res = null; } //parse and check, then discard!
 
-value(res)         ::= text(t). {res = t;}
-value(res)         ::= SI_QSTR(s). {res = trim(s,"'");}
-value(res)         ::= DO_QSTR(s). {res = trim(s,'"');}
-value(res)         ::= ML_QSTR(s). {res = trim(s,'"');}
 
-opteol             ::= EOL.
-opteol             ::= .
+// Var list
+var_list(res) ::= newline var_list(vl). { res = vl; }
+var_list(res) ::= var(v) newline var_list(vl). { res = array_merge(Array(v), vl); }
+var_list(res) ::= . { res = Array(); }
 
-text(res)          ::= text(t) textelement(e). {res = t.e;}
-text(res)          ::= textelement(e). {res = e;}
-textelement(res)          ::= OTHER(o). {res = o;}
+
+// Var
+var(res) ::= ID(id) EQUAL value(v). { res = Array("key" => id, "value" => v); }
+
+value(res) ::= FLOAT(i). { res = (float) i; }
+value(res) ::= INT(i). { res = (int) i; }
+value(res) ::= BOOL(i). { res = $this->parse_bool(i); }
+value(res) ::= SINGLE_QUOTED_STRING(i). { res = self::parse_single_quoted_string(i); }
+value(res) ::= DOUBLE_QUOTED_STRING(i). { res = self::parse_double_quoted_string(i); }
+value(res) ::= TRIPPLE_DOUBLE_QUOTED_STRING(i). { res = self::parse_tripple_double_quoted_string(i); }
+value(res) ::= NAKED_STRING(i). { res = i; }
+
+
+// Newline and comments
+newline(res) ::= NEWLINE. { res = null; }
+newline(res) ::= COMMENTSTART NEWLINE. { res = null; }
+newline(res) ::= COMMENTSTART NAKED_STRING NEWLINE. { res = null; }

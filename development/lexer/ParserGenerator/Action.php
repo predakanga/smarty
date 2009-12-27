@@ -160,13 +160,14 @@ class PHP_ParserGenerator_Action {
             self::REDUCE => 'REDUCE',
             self::SHIFT => 'SHIFT'
         );
+       $sep = isset($_SERVER['_']) ? "\n" : "<br>";
         echo $map[$this->type] . ' for ' . $this->sp->name;
         if ($this->type == self::REDUCE) {
-            echo ' - rule ' . $this->x->lhs->name . "<br>";
+            echo ' - rule ' . $this->x->lhs->name . $sep;
         } elseif ($this->type == self::SHIFT) {
-            echo ' - state ' . $this->x->statenum . ', basis ' . $this->x->cfp->rp->lhs->name . "<br>";
+            echo ' - state ' . $this->x->statenum . ', basis ' . $this->x->cfp->rp->lhs->name . $sep;
         } else {
-            echo "<br>";
+            echo $sep;
         }
     }
 

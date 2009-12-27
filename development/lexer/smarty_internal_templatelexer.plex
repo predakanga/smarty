@@ -63,7 +63,11 @@ class Smarty_Internal_Templatelexer
     				'QMARK'		=> '"?"',
     				'ID'			=> 'identifier',
     				'OTHER'		=> 'text',
-    				'PHP'			=> 'PHP code',
+     				'FAKEPHPSTARTTAG'	=> 'Fake PHP start tag',
+     				'PHPSTARTTAG'	=> 'PHP start tag',
+     				'PHPENDTAG'	=> 'PHP end tag',
+ 						'LITERALSTART'  => 'Literal start',
+ 						'LITERALEND'    => 'Literal end',
     				'LDELSLASH' => 'closing tag',
     				'COMMENT' => 'comment',
      				'LITERALEND' => 'literal close',
@@ -74,14 +78,15 @@ class Smarty_Internal_Templatelexer
     				);
     				
     				
-    function __construct($data,$smarty)
+    function __construct($data,$compiler)
     {
         // set instance object
         self::instance($this); 
         $this->data = preg_replace("/(\r\n|\r|\n)/", "\n", $data);
         $this->counter = 0;
         $this->line = 1;
-        $this->smarty = $smarty;
+        $this->smarty = $compiler->smarty;
+        $this->compiler = $compiler;
         $this->ldel = preg_quote($this->smarty->left_delimiter,'/'); 
         $this->rdel = preg_quote($this->smarty->right_delimiter,'/');
         $this->smarty_token_names['LDEL'] =	$this->smarty->left_delimiter;
@@ -109,10 +114,8 @@ textdoublequoted = /([\S\s]*?)(SMARTYldel|\$|`\$|\\\\|[^\\]")/
 dollarid = /\$\w+/
 all = /[\S\s]+/
 emptyjava = /\{\}/
-php = /\<\?php/
-xml = /\<\?xml/
-shorttagstart = /\<\?=/
-shorttagend = /\?\>/
+phpstarttag = /<\?(?:php\w+|=|[a-zA-Z]+)?/
+phpendtag = /\?\>/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
 ldelslash = /SMARTYldel\//
@@ -144,7 +147,7 @@ space = /\s+/
 ptr = /\s*\->\s*/
 aptr = /\s*=>\s*/
 quote = /\"/
-singlequotestring = /''|'([\S\s]*?)[^\\]'/
+singlequotestring = /'[^'\\]*(?:\\['\\][^'\\]*)*'/
 singlequote = /\'/
 backtick = /`/
 backtickdollar = /`\$/
@@ -153,7 +156,7 @@ andsym = /\s*\&\s*/
 qmark = /\s*\?\s*/
 constant = /([_]+[A-Z0-9][0-9A-Z_]*|[A-Z][0-9A-Z_]*)(?![0-9A-Z_]*[a-z])/
 id = /[0-9]*[a-zA-Z_]\w*/
-literaltext = '([\S\s]*?)SMARTYldel/literalSMARTYrdel'
+literaltexttoend = '[\S\s]+?(SMARTYldel/?literalSMARTYrdel|<\?)'
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 stripstart = 'SMARTYldelstripSMARTYrdel'
@@ -180,7 +183,7 @@ isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
 to = /\s+(to)\s+/
-if = /(if|elseif|while)(?![^\s])/
+if = /(if|elseif|else if|while)(?![^\s])/
 for = /for(?![^\s])/
 foreach = /foreach(?![^\s])/
 instanceof = /\s+instanceof\s+/
@@ -199,18 +202,15 @@ emptyjava {
 comment {
   $this->token = Smarty_Internal_Templateparser::TP_COMMENT;
 }
-xml {
-  $this->token = Smarty_Internal_Templateparser::TP_XML;
-  $this->yypushstate(self::PHP);
-}
-php {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP;
-  $this->yypushstate(self::PHP);
-}
-shorttagstart {
-  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGSTART;
-  $this->yypushstate(self::PHP);
-}
+phpstarttag {
+  if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
+    $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;
+        $this->yypushstate(self::PHP);
+  } else {
+    $this->token = Smarty_Internal_Templateparser::TP_FAKEPHPSTARTTAG;
+    $this->value = substr($this->value, 0, 2);
+  }
+ }
 linebreak {
   if ($this->strip) {
      return false;
@@ -227,11 +227,8 @@ stripend {
   return false;
 }
 literalstart {
-  $this->yypushstate(self::LITERAL);
-  return true;
-}
-literalend {
-  return false;  // unexspected here just ignore
+   $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
+   $this->yypushstate(self::LITERAL);
 }
 ldelspaceslash {
   if ($this->smarty->auto_literal) {
@@ -287,13 +284,6 @@ escapedquotes {
 }
 singlequotestring {
   $this->token = Smarty_Internal_Templateparser::TP_SINGLEQUOTESTRING;
-}
-literalstart {
-  $this->yypushstate(self::LITERAL);
-  return true;
-}
-literalend {
-  return false;  // unexspected here just ignore
 }
 ldelspaceslash {
   if ($this->smarty->auto_literal) {
@@ -522,39 +512,55 @@ other {
 */
 /*!lex2php
 %statename PHP
-shorttagend {
-  $this->token = Smarty_Internal_Templateparser::TP_SHORTTAGEND;
-  $this->yypopstate();
-}
+phpendtag {
+   $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
+   $this->yypopstate();
+ }
 texttoshorttagend {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   $this->value = substr($this->value,0,-2);
 }
 all {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  $this->compiler->trigger_template_error ("missing PHP end tag");
 }
 */
 /*!lex2php
 %statename LITERAL
 literalstart {
-  return false;
+  $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
+  $this->yypushstate(self::LITERAL);
 }
 literalend {
+  $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
   $this->yypopstate();
-  return false;
 }
-literaltext {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-  $this->value = substr($this->value,0,-strlen($this->smarty->left_delimiter)-strlen($this->smarty->right_delimiter)-8);
-  $this->yypopstate();
-  if (strlen($this->value) == 0) {
-     return false;		// change state directly
+phpstarttag {
+  if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
+    $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;
+   } else {
+    $this->token = Smarty_Internal_Templateparser::TP_FAKEPHPSTARTTAG;
+    $this->value = substr($this->value, 0, 2);
+   }
+}
+phpendtag {
+  $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+}
+literaltexttoend {
+  $lenght_literal = strlen($this->smarty->left_delimiter.$this->smarty->right_delimiter)+7;
+  if (substr($this->value,-2,2) === '<?') {
+    $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+    $this->value = substr($this->value,0,-2);
+  } else if (substr($this->value,-$lenght_literal,$lenght_literal) === $this->smarty->left_delimiter.'literal'.$this->smarty->right_delimiter) {
+    $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+    $this->value = substr($this->value,0,-$lenght_literal);
   } else {
-     return;				// change state after processiing token
+    assert(substr($this->value,-$lenght_literal-1,$lenght_literal+1) === $this->smarty->left_delimiter.'/literal'.$this->smarty->right_delimiter);
+    $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+    $this->value = substr($this->value,0,-$lenght_literal-1);
   }
 }
 all {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  $this->compiler->trigger_template_error ("missing or misspelled literal closing tag");
 }
 */
 /*!lex2php
@@ -621,3 +627,4 @@ all {
 }
 */
 }
+?>
