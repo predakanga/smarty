@@ -1,4 +1,3 @@
-<<<<<<< .mine
 <?php
 /**
 * Smarty PHPunit tests of config  variables

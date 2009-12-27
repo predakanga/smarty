@@ -27,7 +27,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateFilepath()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertEquals('.\templates\phphelloworld.php', $tpl->getTemplateFilepath());
+        $this->assertEquals('./templates/phphelloworld.php', str_replace('\\','/',$tpl->getTemplateFilepath()));
     } 
     /**
     * test getTemplateTimestamp
@@ -52,7 +52,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testUsesCompiler()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertFalse($tpl->usesCompiler());
+        $this->assertFalse($tpl->resource_object->usesCompiler);
     } 
     /**
     * test isEvaluated
@@ -60,7 +60,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsEvaluated()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertFalse($tpl->isEvaluated());
+        $this->assertFalse($tpl->resource_object->isEvaluated);
     } 
     /**
     * test getCompiledFilepath
@@ -112,7 +112,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertEquals('.\cache\103847448.phphelloworld.php.php', $tpl->getCachedFilepath());
+        $this->assertEquals('./cache/384701014.phphelloworld.php.php', str_replace('\\','/',$tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedTimestamp caching disabled

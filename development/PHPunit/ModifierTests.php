@@ -14,6 +14,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
+        $this->smarty->security = false;
     } 
 
     public static function isRunnable()
@@ -92,6 +93,37 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals("xxxxx world", $this->smarty->fetch($tpl));
     } 
     /**
+    * test registered modifier function
+    */
+    public function testModifierRegisteredFunction()
+    {
+        $this->smarty->register_modifier('testmodifier','testmodifier');
+        $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
+        $tpl->assign('foo',2);
+        $this->assertEquals("mymodifier function 2", $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test registered modifier static class
+    */
+    public function testModifierRegisteredStaticClass()
+    {
+        $this->smarty->register_modifier('testmodifier',array('testmodifierclass','staticcall'));
+        $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
+        $tpl->assign('foo',1);
+        $this->assertEquals("mymodifier static 1", $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test registered modifier methode call
+    */
+    public function testModifierRegisteredMethodCall()
+    {
+        $obj= new testmodifierclass();
+        $this->smarty->register_modifier('testmodifier',array($obj,'method'));
+        $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
+        $tpl->assign('foo',3);
+        $this->assertEquals("mymodifier method 3", $this->smarty->fetch($tpl));
+    } 
+    /**
     * test unknown modifier error
     */
     public function testUnknownModifier()
@@ -104,6 +136,20 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
             return;
         } 
         $this->fail('Exception for unknown modifier has not been raised.');
+    } 
+} 
+function testmodifier($value)
+{
+    return "mymodifier function $value";
+} 
+class testmodifierclass {
+    static function staticcall($value)
+    {
+        return "mymodifier static $value";
+    } 
+    public function method($value)
+    {
+        return "mymodifier method $value";
     } 
 } 
 

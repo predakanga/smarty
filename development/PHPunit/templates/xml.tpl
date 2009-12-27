@@ -1,1 +1,1 @@
-{if true}<?xml version="1.0" encoding="UTF-8"?>{/if}
+<?xml version="1.0" encoding="UTF-8"?>

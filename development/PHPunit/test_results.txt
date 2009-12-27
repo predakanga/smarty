@@ -1,8 +1,3 @@
-<<<<<<< .mine
-
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\_Smarty3Work\development\PHPunit\StreamResourceTests.php on line 259
-
-Warning: Call-time pass-by-reference has been deprecated in C:\wamp\www\_Smarty3Work\development\PHPunit\StreamVariableTests.php on line 100
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
 Test Suite
@@ -10,7 +5,7 @@ Test Suite
  ...............
 
  CoreTests
- .....
+ ....
 
  ClearCompiledTests
  .....
@@ -45,8 +40,8 @@ Test Suite
  AssignTests
  ..
 
- CacherResourceFileTests
- ..................
+ CacheResourceFileTests
+ ...............EE.
 
  ClearAllAssignTests
  ....
@@ -85,7 +80,7 @@ Test Suite
  ..............
 
  CompileForTests
- .............
+ ..............
 
  CompileFunctionPluginTests
  ...
@@ -117,7 +112,6 @@ Test Suite
 
  CompilerPluginTests
  
- 
  .
 
  CompileSectionTests
@@ -134,9 +128,6 @@ Test Suite
 
  ConstantsTests
  .
-
- DefaultPluginHandlerTests
- ....
 
  DefaultTemplateHandlerTests
  ....
@@ -160,7 +151,7 @@ Test Suite
  .
 
  ModifierTests
- ..........
+ .............
 
  ObjectVariableTests
  ...
@@ -171,11 +162,8 @@ Test Suite
  PrintNocacheTests
  ....
 
- RegisterBlockTests
- ..........
-
  RegisterCompilerFunctionTests
- ......
+ ....
 
  RegisterFilterTests
  .............
@@ -184,7 +172,7 @@ Test Suite
  ..........
 
  RegisterModifierTests
- ......
+ ....
 
  SecurityTests
  ................
@@ -225,6 +213,25 @@ Test Suite
  XmlTests
  ...
 
-Time: 9 seconds
+Time: 13 seconds
 
-OK (586 tests, 787 assertions)
+There were 2 errors:
+
+1) testClearCacheCacheFile(CacheResourceFileTests)
+RecursiveDirectoryIterator::__construct(.\cache\foo\bar\blar\91): failed to open dir: No error
+C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:108
+C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:82
+C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_method_clear_all_cache.php:26
+C:\wamp\www\_Smarty3Work\distribution\libs\Smarty.class.php:534
+C:\wamp\www\_Smarty3Work\development\PHPunit\CacheResourceFileTests.php:321
+
+2) testClearCacheCacheFileSub(CacheResourceFileTests)
+RecursiveDirectoryIterator::__construct(.\cache\foo\bar\blar\91): failed to open dir: No error
+C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:108
+C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:82
+C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_method_clear_all_cache.php:26
+C:\wamp\www\_Smarty3Work\distribution\libs\Smarty.class.php:534
+C:\wamp\www\_Smarty3Work\development\PHPunit\CacheResourceFileTests.php:349
+
+FAILURES!
+Tests: 571, Assertions: 758, Errors: 2.

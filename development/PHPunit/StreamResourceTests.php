@@ -63,7 +63,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testUsesCompiler()
     {
         $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertTrue($tpl->usesCompiler());
+        $this->assertTrue($tpl->resource_object->usesCompiler);
     } 
     /**
     * test isEvaluated
@@ -71,7 +71,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsEvaluated()
     {
         $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertTrue($tpl->isEvaluated());
+        $this->assertTrue($tpl->resource_object->isEvaluated);
     } 
     /**
     * test mustCompile
@@ -256,7 +256,7 @@ class ResourceStream {
     } 
     public function stream_seek($offset, $whence)
     {
-        $l = strlen(&$GLOBALS[$this->varname]);
+        $l = strlen($GLOBALS[$this->varname]);
         $p = &$this->position;
         switch ($whence) {
             case SEEK_SET: $newPos = $offset;

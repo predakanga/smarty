@@ -51,7 +51,7 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate("string:<?php echo 'hello world'; ?>");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals("&lt;?php echo &#039;hello world&#039;; ?&gt;", $content);
+        $this->assertEquals("<?php echo 'hello world'; ?>", $content);
     } 
     // ALLOW
     public function testPhpTagAllow()

@@ -28,25 +28,7 @@ class RegisterModifierTests extends PHPUnit_Framework_TestCase {
     public function testRegisterModifier()
     {
         $this->smarty->register_modifier('testmodifier', 'mymodifier');
-        $this->assertEquals('mymodifier', $this->smarty->registered_plugins['testmodifier'][1]);
-        $this->assertEquals('modifier', $this->smarty->registered_plugins['testmodifier'][0]);
-    } 
-    /**
-    * test register_modifier method for class
-    */
-    public function testRegisterModifierClass()
-    {
-        $this->smarty->register_modifier('testmodifier', array('mymodifierclass', 'execute'));
-        $this->assertEquals('modifier', $this->smarty->registered_plugins['testmodifier'][0]);
-    } 
-    /**
-    * test register_modifier method for object
-    */
-    public function testRegisterModifierObject()
-    {
-        $mymodifier_object = new mymodifierclass;
-        $this->smarty->register_modifier('testmodifier', array($mymodifier_object, 'execute'));
-        $this->assertEquals('modifier', $this->smarty->registered_plugins['testmodifier'][0]);
+        $this->assertEquals('mymodifier', $this->smarty->registered_plugins['modifier']['testmodifier'][0]);
     } 
     /**
     * test unregister_modifier method
@@ -55,7 +37,7 @@ class RegisterModifierTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->register_modifier('testmodifier', 'mymodifier');
         $this->smarty->unregister_modifier('testmodifier');
-        $this->assertFalse(isset($this->smarty->registered_plugins['testmodifier']));
+        $this->assertFalse(isset($this->smarty->registered_plugins['modifier']['testmodifier']));
     } 
     /**
     * test unregister_modifier method not registered
@@ -63,7 +45,7 @@ class RegisterModifierTests extends PHPUnit_Framework_TestCase {
     public function testUnregisterModifierNotRegistered()
     {
         $this->smarty->unregister_modifier('testmodifier');
-        $this->assertFalse(isset($this->smarty->registered_plugins['testmodifier']));
+        $this->assertFalse(isset($this->smarty->registered_plugins['modifier']['testmodifier']));
     } 
     /**
     * test unregister_modifier method other registered
@@ -72,7 +54,7 @@ class RegisterModifierTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->register_block('testmodifier', 'mymodifier');
         $this->smarty->unregister_modifier('testmodifier');
-        $this->assertTrue(isset($this->smarty->registered_plugins['testmodifier']));
+        $this->assertTrue(isset($this->smarty->registered_plugins['block']['testmodifier']));
     } 
 } 
 function mymodifier($params, &$smarty)

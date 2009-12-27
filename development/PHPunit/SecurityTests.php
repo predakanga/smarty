@@ -178,7 +178,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch('string:{include file="./templates_2/hello.tpl"}');
         } 
         catch (Exception $e) {
-            $this->assertContains('\PHPunit\templates_2\hello.tpl" not allowed by security setting', $e->getMessage());
+            $this->assertContains('/PHPunit/templates_2/hello.tpl" not allowed by security setting', str_replace('\\','/',$e->getMessage()));
             return;
         } 
         $this->fail('Exception for not trusted directory has not been raised.');

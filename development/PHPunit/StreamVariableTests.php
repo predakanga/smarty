@@ -97,7 +97,7 @@ class VariableStream {
     } 
     public function stream_seek($offset, $whence)
     {
-        $l = strlen(&$GLOBALS[$this->varname]);
+        $l = strlen($GLOBALS[$this->varname]);
         $p = &$this->position;
         switch ($whence) {
             case SEEK_SET: $newPos = $offset;

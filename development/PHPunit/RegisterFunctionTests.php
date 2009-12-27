@@ -28,8 +28,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     public function testRegisterFunction()
     {
         $this->smarty->register_function('testfunction', 'myfunction');
-        $this->assertEquals('myfunction', $this->smarty->registered_plugins['testfunction'][1]);
-        $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
+        $this->assertEquals('myfunction', $this->smarty->registered_plugins['function']['testfunction'][0]);
         $this->assertEquals('hello world 1', $this->smarty->fetch('string:{testfunction value=1}'));
     } 
     /**
@@ -38,7 +37,6 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     public function testRegisterFunctionClass()
     {
         $this->smarty->register_function('testfunction', array('myfunctionclass', 'execute'));
-        $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
         $this->assertEquals('hello world 2', $this->smarty->fetch('string:{testfunction value=2}'));
     } 
     /**
@@ -48,7 +46,6 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $myfunction_object = new myfunctionclass;
         $this->smarty->register_function('testfunction', array($myfunction_object, 'execute'));
-        $this->assertEquals('function', $this->smarty->registered_plugins['testfunction'][0]);
         $this->assertEquals('hello world 3', $this->smarty->fetch('string:{testfunction value=3}'));
     } 
     public function testRegisterFunctionCaching1()
@@ -96,7 +93,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->register_function('testfunction', 'myfunction');
         $this->smarty->unregister_function('testfunction');
-        $this->assertFalse(isset($this->smarty->registered_plugins['testfunction']));
+        $this->assertFalse(isset($this->smarty->registered_plugins['function']['testfunction']));
     } 
     /**
     * test unregister_function method not registered
@@ -104,7 +101,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     public function testUnregisterFunctionNotRegistered()
     {
         $this->smarty->unregister_function('testfunction');
-        $this->assertFalse(isset($this->smarty->registered_plugins['testfunction']));
+        $this->assertFalse(isset($this->smarty->registered_plugins['function']['testfunction']));
     } 
     /**
     * test unregister_function method other registered
@@ -113,7 +110,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->register_block('testfunction', 'myfunction');
         $this->smarty->unregister_function('testfunction');
-        $this->assertTrue(isset($this->smarty->registered_plugins['testfunction']));
+        $this->assertTrue(isset($this->smarty->registered_plugins['block']['testfunction']));
     } 
 } 
 function myfunction($params, &$smarty)

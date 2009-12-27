@@ -28,25 +28,7 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
     public function testRegisterCompilerFunction()
     {                                   
         $this->smarty->register_compiler_function('testcompilerfunction', 'mycompilerfunction');
-        $this->assertEquals('mycompilerfunction', $this->smarty->registered_plugins['testcompilerfunction'][1]);
-        $this->assertEquals('compiler', $this->smarty->registered_plugins['testcompilerfunction'][0]);
-    } 
-    /**
-    * test register_compiler_function method for class
-    */
-    public function testRegisterCompilerFunctionClass()
-    {
-        $this->smarty->register_compiler_function('testcompilerfunction', array('mycompilerfunctionclass', 'execute'));
-        $this->assertEquals('compiler', $this->smarty->registered_plugins['testcompilerfunction'][0]);
-    } 
-    /**
-    * test register_compiler_function method for object
-    */
-    public function testRegisterCompilerFunctionObject()
-    {
-        $mycompilerfunction_object = new mycompilerfunctionclass;
-        $this->smarty->register_compiler_function('testcompilerfunction', array($mycompilerfunction_object, 'execute'));
-        $this->assertEquals('compiler', $this->smarty->registered_plugins['testcompilerfunction'][0]);
+        $this->assertEquals('mycompilerfunction', $this->smarty->registered_plugins['compiler']['testcompilerfunction'][0]);
     } 
     /**
     * test unregister_compiler_function method
@@ -72,7 +54,7 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->register_block('testcompilerfunction', 'mycompilerfunction');
         $this->smarty->unregister_compiler_function('testcompilerfunction');
-        $this->assertTrue(isset($this->smarty->registered_plugins['testcompilerfunction']));
+        $this->assertTrue(isset($this->smarty->registered_plugins['block']['testcompilerfunction']));
     } 
 } 
 function mycompilerfunction($params, &$smarty)

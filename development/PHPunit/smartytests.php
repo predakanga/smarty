@@ -15,8 +15,7 @@ require_once SMARTY_DIR . 'Smarty.class.php';
 * class for running test suite
 */
 class SmartyTests extends PHPUnit_Framework_TestSuite {
-      static  $smarty = null ;
-
+    static $smarty = null ;
 
     public function __construct()
     {
@@ -52,7 +51,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->php_handling = SMARTY_PHP_PASSTHRU;
         $smarty->allow_php_tag = false;
         $smarty->allow_php_templates = false;
-        $smarty->block_data= null;
+        $smarty->block_data = null;
         $smarty->enableSecurity();
     } 
     /**
@@ -60,10 +59,16 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     */
     public static function suite()
     {
-        $testorder = array('DoubleQuotedStringTests', 'CoreTests', 'ClearCompiledTests', 'ClearCacheTests', 'StringResourceTests', 'FileResourceTests' , 'CompileAssignTests'); 
-        PHPUnit_Util_Filter::addDirectoryToWhitelist('c:\wamp\www\_Smarty3Work\distribution\libs');
-        //PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../'); 
-        // PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
+        $testorder = array('DoubleQuotedStringTests', 'CoreTests', 'ClearCompiledTests', 'ClearCacheTests', 'StringResourceTests', 'FileResourceTests' , 'CompileAssignTests');
+        $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
+        if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {
+            // Older versions of PHPUnit did not have this function,
+            // which is used when determining which PHP files are
+            // included in the PHPUnit code coverage result.
+            PHPUnit_Util_Filter::addDirectoryToWhitelist($smarty_libs_dir); 
+            // PHPUnit_Util_Filt<er::removeDirectoryFromWhitelist('../');
+            // PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
+        } 
         $suite = new self('Smarty 3 - Unit Tests Report'); 
         // load test which should run in specific order
         foreach ($testorder as $class) {

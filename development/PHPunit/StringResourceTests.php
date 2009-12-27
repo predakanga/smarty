@@ -64,7 +64,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testUsesCompiler()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertTrue($tpl->usesCompiler());
+        $this->assertTrue($tpl->resource_object->usesCompiler);
     } 
     /**
     * test isEvaluated
@@ -72,7 +72,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsEvaluated()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertTrue($tpl->isEvaluated());
+        $this->assertTrue($tpl->resource_object->isEvaluated);
     } 
     /**
     * test mustCompile
