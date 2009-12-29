@@ -30,7 +30,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('./cache/91/20/51/91205107.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+        $this->assertEquals('./cache/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedFilepath with cache_id
@@ -41,7 +41,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar');
-        $this->assertEquals('./cache/foo/bar/91/20/51/91205107.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+        $this->assertEquals('./cache/foo/bar/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedFilepath with compile_id
@@ -52,7 +52,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'blar');
-        $this->assertEquals('./cache/blar/91/20/51/91205107.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+        $this->assertEquals('./cache/blar/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedFilepath with cache_id and compile_id
@@ -63,7 +63,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
-        $this->assertEquals('./cache/foo/bar/blar/91/20/51/91205107.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+        $this->assertEquals('./cache/foo/bar/blar/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
     } 
     /**
     * test clear_cache_all with cache_id and compile_id

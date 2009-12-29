@@ -112,7 +112,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertEquals('./cache/384701014.phphelloworld.php.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+        $this->assertEquals('./cache/ff15ff83776840b500e560cbfcb04a7c55dbd3b3.phphelloworld.php.php', str_replace('\\','/',$tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedTimestamp caching disabled

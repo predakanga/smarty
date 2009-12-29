@@ -41,7 +41,7 @@ Test Suite
  ..
 
  CacheResourceFileTests
- ...............EE.
+ ..................
 
  ClearAllAssignTests
  ....
@@ -213,25 +213,6 @@ Test Suite
  XmlTests
  ...
 
-Time: 13 seconds
+Time: 14 seconds
 
-There were 2 errors:
-
-1) testClearCacheCacheFile(CacheResourceFileTests)
-RecursiveDirectoryIterator::__construct(.\cache\foo\bar\blar\91): failed to open dir: No error
-C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:108
-C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:82
-C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_method_clear_all_cache.php:26
-C:\wamp\www\_Smarty3Work\distribution\libs\Smarty.class.php:534
-C:\wamp\www\_Smarty3Work\development\PHPunit\CacheResourceFileTests.php:321
-
-2) testClearCacheCacheFileSub(CacheResourceFileTests)
-RecursiveDirectoryIterator::__construct(.\cache\foo\bar\blar\91): failed to open dir: No error
-C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:108
-C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_cacheresource_file.php:82
-C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_method_clear_all_cache.php:26
-C:\wamp\www\_Smarty3Work\distribution\libs\Smarty.class.php:534
-C:\wamp\www\_Smarty3Work\development\PHPunit\CacheResourceFileTests.php:349
-
-FAILURES!
-Tests: 571, Assertions: 758, Errors: 2.
+OK (571 tests, 776 assertions)
