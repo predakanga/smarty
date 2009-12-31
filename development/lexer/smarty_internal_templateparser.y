@@ -512,13 +512,19 @@ arrayelement(res)		 ::=  expr(e). { res = e;}
 //
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
-doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = '".'.v.'."'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {res = '".('.e.')."'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  DOLLARID(i). {res = '".'.'$_smarty_tpl->getVariable(\''. substr(i,1) .'\')->value'.'."'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(i,"'"), null, true, false)->nocache; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {res = '".'.v.'."'; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = '{'.v.'}'; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {res = '{'.e.'}'; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res)           ::=  DOLLARID(i). {res = '{$_smarty_tpl->getVariable(\''. substr(i,1) .'\')->value}'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(i,"'"), null, true, false)->nocache; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {if (substr(v,0,1) == '\'') {
+                                                                 res = '".'.v.'."'; $this->compiler->has_variable_string = true;
+                                                                } else {
+                                                                 res = '{'.v.'}'; $this->compiler->has_variable_string = true;
+                                                                }
+                                                               }
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. { res = '".('.e.')."'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res) 	         ::=  smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '".$_tmp'.$this->prefix_number.'."'; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res) 	         ::=  smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '{$_tmp'.$this->prefix_number.'}'; $this->compiler->has_variable_string = true;}
 doublequotedcontent(res)           ::=  OTHER(o). {res = o;}
+
 
 //
 // optional space
