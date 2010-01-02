@@ -30,7 +30,14 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('./cache/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+	$expected = sprintf('./cache/%s/%s/%s/%s.helloworld.tpl.php',
+			    substr($sha1, 0, 2),
+			    substr($sha1, 2, 2),
+			    substr($sha1, 4, 2),
+			    $sha1
+			    );
+        $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedFilepath with cache_id
@@ -41,7 +48,14 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar');
-        $this->assertEquals('./cache/foo/bar/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+	$expected = sprintf('./cache/foo/bar/%s/%s/%s/%s.helloworld.tpl.php',
+			    substr($sha1, 0, 2),
+			    substr($sha1, 2, 2),
+			    substr($sha1, 4, 2),
+			    $sha1
+			    );
+        $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedFilepath with compile_id
@@ -52,7 +66,14 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'blar');
-        $this->assertEquals('./cache/blar/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+	$expected = sprintf('./cache/blar/%s/%s/%s/%s.helloworld.tpl.php',
+			    substr($sha1, 0, 2),
+			    substr($sha1, 2, 2),
+			    substr($sha1, 4, 2),
+			    $sha1
+			    );
+        $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedFilepath with cache_id and compile_id
@@ -63,7 +84,14 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
-        $this->assertEquals('./cache/foo/bar/blar/4b/f4/a2/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+	$expected = sprintf('./cache/foo/bar/blar/%s/%s/%s/%s.helloworld.tpl.php',
+			    substr($sha1, 0, 2),
+			    substr($sha1, 2, 2),
+			    substr($sha1, 4, 2),
+			    $sha1
+			    );
+        $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
     * test clear_cache_all with cache_id and compile_id

@@ -104,7 +104,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('./templates_c/4bf4a289c4129184fbd543f317e3a064a0574e1c.file.helloworld.tpl.php', str_replace('\\','/',$tpl->getCompiledFilepath()));
+	$expected = './templates_c/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.file.helloworld.tpl.php';
+        $this->assertEquals(realpath($expected), realpath($tpl->getCompiledFilepath()));
     } 
     /**
     * test getCompiledTimestamp
@@ -167,14 +168,6 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($tpl->getCompiledFilepath()));
     } 
     /**
-    * test that timestamps are equal
-    */
-    public function testTimeStamps()
-    {
-        $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertTrue($tpl->getTemplateTimestamp()==$tpl->getCompiledTimestamp());
-    } 
-    /**
     * test getCachedFilepath if caching disabled
     */
     public function testGetCachedFilepathCachingDisabled()
@@ -190,7 +183,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('./cache/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', str_replace('\\','/',$tpl->getCachedFilepath()));
+	$expected = './cache/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.helloworld.tpl.php';
+        $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
     * test getCachedTimestamp caching disabled
@@ -198,7 +192,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedTimestampCachingDisabled()
     {
         // create dummy cache file for the following test
-        file_put_contents('./cache/4bf4a289c4129184fbd543f317e3a064a0574e1c.helloworld.tpl.php', 'test');
+        file_put_contents('./cache/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.helloworld.tpl.php', 'test');
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertFalse($tpl->getCachedTimestamp());
     } 

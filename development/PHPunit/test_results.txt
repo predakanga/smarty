@@ -17,7 +17,7 @@ Test Suite
  ...................
 
  FileResourceTests
- ...................................
+ ..................................
 
  CompileAssignTests
  .....................
@@ -111,7 +111,6 @@ Test Suite
  ...
 
  CompilerPluginTests
- 
  .
 
  CompileSectionTests
@@ -215,4 +214,4 @@ Test Suite
 
 Time: 14 seconds
 
-OK (571 tests, 776 assertions)
+OK (570 tests, 775 assertions)
