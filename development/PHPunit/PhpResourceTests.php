@@ -27,7 +27,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateFilepath()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertEquals('./templates/phphelloworld.php', str_replace('\\','/',$tpl->getTemplateFilepath()));
+        $this->assertEquals('./templates/phphelloworld.php', str_replace('\\', '/', $tpl->getTemplateFilepath()));
     } 
     /**
     * test getTemplateTimestamp
@@ -112,21 +112,28 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-	$expected = './cache/'.sha1('./templates/phphelloworld.php').'.phphelloworld.php.php';
-	$this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
+        $expected = './cache/' . sha1('./templates/phphelloworld.php') . '.phphelloworld.php.php';
+        $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
-    * test getCachedTimestamp caching disabled
+    * test create cache file used by the following tests
     */
-    public function testGetCachedTimestampCachingDisabled()
+    public function testCreateCacheFile()
     { 
         // create dummy cache file
         $this->smarty->allow_php_templates = true;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $dummy = $this->smarty->fetch($tpl);
-        $this->smarty->caching = true;
+        $this->assertContains('php hello world', $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test getCachedTimestamp caching disabled
+    */
+    public function testGetCachedTimestampCachingDisabled()
+    {
+        $this->smarty->caching = false;
+        $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->getCachedTimestamp());
     } 
     /**
@@ -221,8 +228,8 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     * test $smarty->is_cached
     */
     public function testSmartyIsCachedPrepare()
-    { 
-        $this->smarty->allow_php_templates = true;
+    {
+        $this->smarty->allow_php_templates = true; 
         // prepare files for next test
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000; 
