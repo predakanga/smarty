@@ -138,7 +138,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testWriteCachedContent()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertFalse($tpl->writeCachedContent());
+        $this->assertFalse($tpl->writeCachedContent('dummy'));
     } 
     /**
     * test isCached

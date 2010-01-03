@@ -172,7 +172,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testWriteCachedContent()
     {
         $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertFalse($tpl->writeCachedContent());
+        $this->assertFalse($tpl->writeCachedContent('dummy'));
     } 
     /**
     * test isCached
