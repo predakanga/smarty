@@ -35,16 +35,17 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate("string:start {insert name=\"test\" foo='bar'} end");
         $this->assertEquals("start insert function parameter value bar end", $this->smarty->fetch($tpl));
     } 
-/**
-* currently not supported
-
     public function testInsertFunctionVariableName()
     {
         $tpl = $this->smarty->createTemplate("string:start {insert name=\$variable foo='bar'} end");
         $tpl->assign('variable','test');
         $this->assertEquals("start insert function parameter value bar end", $this->smarty->fetch($tpl));
     } 
-**/
+    public function testInsertPlugin()
+    {
+        $tpl = $this->smarty->createTemplate("string:start {insert name='plugintest' foo='bar'} end");
+        $this->assertEquals("start from insert plugin bar end", $this->smarty->fetch($tpl));
+    } 
     /**
     * test inserted function with assign
     */
@@ -72,7 +73,7 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch($tpl);
         } 
         catch (Exception $e) {
-            $this->assertContains('function "insert_mustfail" is not callable', $e->getMessage());
+            $this->assertContains("{insert} no function or plugin found for 'mustfail'", $e->getMessage());
             return;
         } 
         $this->fail('Exception for "function is not callable" has not been raised.');
@@ -87,7 +88,7 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch($tpl);
         } 
         catch (Exception $e) {
-            $this->assertContains('missing file', $e->getMessage());
+            $this->assertContains('missing script file', $e->getMessage());
             return;
         } 
         $this->fail('Exception for "missing file" has not been raised.');

@@ -1,18 +1,217 @@
 PHPUnit 3.3.15 by Sebastian Bergmann.
 
-............................................................  60 / 576
-............................................................ 120 / 576
-............................................................ 180 / 576
-............................................................ 240 / 576
-............................................................ 300 / 576
-............................................................ 360 / 576
-............................................................ 420 / 576
-............................................................ 480 / 576
-............................................................ 540 / 576
-....................................
+Test Suite
+ DoubleQuotedStringTests
+ ...............
 
-Time: 52 seconds
+ CoreTests
+ ....
 
-OK (576 tests, 781 assertions)
+ ClearCompiledTests
+ .....
 
-Generating code coverage report, this may take a moment.
+ ClearCacheTests
+ ...
+
+ StringResourceTests
+ ...................
+
+ FileResourceTests
+ ..................................
+
+ CompileAssignTests
+ .....................
+
+ AppendByRefTests
+ ...
+
+ AppendTests
+ ......
+
+ ArrayTests
+ ...............
+
+ AssignByRefTests
+ .
+
+ AssignGlobalTests
+ ....
+
+ AssignTests
+ ..
+
+ CacheResourceFileTests
+ ..................
+
+ ClearAllAssignTests
+ ....
+
+ ClearAssignTests
+ ...
+
+ CommentsTests
+ ....
+
+ CompileBlockExtendsTests
+ .......
+
+ CompileBlockPluginTests
+ .......
+
+ CompileCaptureTests
+ .....
+
+ CompileCompilerPluginTests
+ ..
+
+ CompileDebugTests
+ ..
+
+ CompileDelimiterTests
+ ..
+
+ CompileErrorTests
+ .....
+
+ CompileEvalTests
+ ...
+
+ CompileForeachTests
+ ..............
+
+ CompileForTests
+ ..............
+
+ CompileFunctionPluginTests
+ ...
+
+ CompileFunctionTests
+ ...........
+
+ CompileIfTests
+ ........................................................... 59 / 67
+ ........
+
+ CompileIncludePHPTests
+ ..
+
+ CompileIncludeTests
+ ........
+
+ CompileInsertTests
+ ........
+
+ CompileNocacheTests
+ ...
+
+ CompilePhpTests
+ ..................
+
+ CompileRegisteredObjectFunctionTests
+ ...
+
+ CompilerPluginTests
+ .
+
+ CompileSectionTests
+ ......
+
+ CompileStripTests
+ .
+
+ CompileWhileTests
+ ..
+
+ ConfigVarTests
+ ......................
+
+ ConstantsTests
+ .
+
+ DefaultTemplateHandlerTests
+ ....
+
+ DelimiterTests
+ ....
+
+ ExtendsResourceTests
+ .....
+
+ FilterTests
+ ......
+
+ FunctionTests
+ .
+
+ GetTemplateVarsTests
+ ......
+
+ LoadFilterTests
+ .
+
+ ModifierTests
+ .............
+
+ ObjectVariableTests
+ ...
+
+ PhpResourceTests
+ .........................
+
+ PrintNocacheTests
+ ....
+
+ RegisterCompilerFunctionTests
+ ....
+
+ RegisterFilterTests
+ .............
+
+ RegisterFunctionTests
+ ..........
+
+ RegisterModifierTests
+ ....
+
+ SecurityTests
+ ................
+
+ SingleQuotedStringTests
+ ......
+
+ SpacingTests
+ ............
+
+ StaticClassAccessTests
+ .....
+
+ StreamResourceTests
+ ......................
+
+ StreamVariableTests
+ .
+
+ TemplateExistsTests
+ ..
+
+ TernaryTests
+ .................
+
+ TokenFallbackTests
+ .....
+
+ TriggerErrorTests
+ .
+
+ VariableScopeTests
+ ................
+
+ VariableVariableTests
+ ....
+
+ XmlTests
+ ...
+
+Time: 14 seconds
+
+OK (591 tests, 808 assertions)
