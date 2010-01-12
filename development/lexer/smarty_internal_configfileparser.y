@@ -130,7 +130,7 @@ start(res) ::= global_vars sections. { res = null; }
 global_vars(res) ::= var_list(vl). { $this->add_global_vars(vl); res = null; }
 
 // Sections
-sections(res) ::= section sections. { res = null; }
+sections(res) ::= sections section. { res = null; }
 sections(res) ::= . { res = null; }
 
 section(res) ::= OPENB ID(i) CLOSEB newline var_list(vars). { $this->add_section_vars(i, vars); res = null; }
@@ -138,8 +138,8 @@ section(res) ::= OPENB DOT ID(i) CLOSEB newline var_list(vars). { if ($this->sma
 
 
 // Var list
-var_list(res) ::= newline var_list(vl). { res = vl; }
-var_list(res) ::= var(v) newline var_list(vl). { res = array_merge(Array(v), vl); }
+var_list(res) ::= var_list(vl) newline. { res = vl; }
+var_list(res) ::= var_list(vl) var(v). { res = array_merge(vl, Array(v)); }
 var_list(res) ::= . { res = Array(); }
 
 

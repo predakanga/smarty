@@ -74,13 +74,6 @@
     $this->compiler->trigger_template_error();
 }
 
-%left IFEXP.
-%left UNIMATH.
-//%left VAL.
-%left VERT.
-%left COLON.
-%left EXP.
-//%left MOD.
 
 //
 // complete template
@@ -127,7 +120,7 @@ template_element(res) ::= literal(l). { res = l; }
 											// <?php> tag
 template_element(res)::= PHPSTARTTAG(st) php_code(t) PHPENDTAG. {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = self::escape_start_tag(st) . t . '?<??>>';
+					                             res = self::escape_start_tag(st) . str_replace('<?','&lt;?',t) . '?<??>>';
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
                                        res = $this->compiler->processNocacheCode(htmlspecialchars(st.t.'?>', ENT_QUOTES), false);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
@@ -290,25 +283,23 @@ expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
 expr(res)				 ::= exprs(e).	{res = e;}
                  // resources/streams
 expr(res)	       ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2 . '\')';}
-//expr(res)        ::= expr(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
-//expr(res)         ::= expr(e1) ifcond(c) value(e2). [EXP]{res = e1.c.e2;}
-//expr(res)			    ::= expr(e1) lop(o) value(e2).	[EXP]{res = e1.o.e2;}
+expr(res)        ::= expr(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
 
 									// single value
-exprs(res)        ::= value(v). [EXP]{ res = v; }
+exprs(res)        ::= value(v). { res = v; }
 									// +/- value
 //exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// logical negation
 //exprs(res)		   ::= NOT value(v). { res = '!'.v; }
 									// arithmetic expression
-exprs(res)        ::= exprs(e) MATH(m) value(v). [EXP]{ res = e . trim(m) . v; } 
-exprs(res)        ::= exprs(e) UNIMATH(m) value(v). [EXP]{ res = e . trim(m) . v; } 
+exprs(res)        ::= exprs(e) MATH(m) value(v). { res = e . trim(m) . v; } 
+exprs(res)        ::= exprs(e) UNIMATH(m) value(v). { res = e . trim(m) . v; } 
 									// bit operation 
-exprs(res)        ::= exprs(e) ANDSYM(m) value(v). [EXP]{ res = e . trim(m) . v; } 
+exprs(res)        ::= exprs(e) ANDSYM(m) value(v). { res = e . trim(m) . v; } 
                   // array
-exprs(res)				::= array(a).	[EXP]{res = a;}
-exprs(res)        ::= exprs(e1) ifcond(c) exprs(e2). [EXP]{res = e1.c.e2;}
-exprs(res)			  ::= exprs(e1) lop(o) exprs(e2).	[EXP]{res = e1.o.e2;}
+exprs(res)				::= array(a).	{res = a;}
+exprs(res)        ::= exprs(e1) ifcond(c) value(e2). {res = e1.c.e2;}
+exprs(res)			  ::= exprs(e1) lop(o) value(e2).	{res = e1.o.e2;}
 
 //
 // ternary
@@ -318,52 +309,51 @@ ternary(res)				::= OPENP expr(v) CLOSEP  QMARK  expr(e1) COLON  expr(e2). { res
 
 
 								 // value
-value(res)		   ::= variable(v). [VAL]{ res = v; }
+value(res)		   ::= variable(v). { res = v; }
 									// +/- value
-value(res)        ::= UNIMATH(m) value(v). [VAL]{ res = m.v; }
+value(res)        ::= UNIMATH(m) value(v). { res = m.v; }
 									// logical negation
-value(res)		   ::= NOT value(v). [VAL]{ res = '!'.v; }
-value(res)		   ::= TYPECAST(t) value(v). [VAL]{ res = t.v; }
-value(res)		   ::= variable(v) INCDEC(o). [VAL]{ res = v.o; }
+value(res)		   ::= NOT value(v). { res = '!'.v; }
+value(res)		   ::= TYPECAST(t) value(v). { res = t.v; }
+value(res)		   ::= variable(v) INCDEC(o). { res = v.o; }
                  // numeric
-value(res)       ::= INTEGER(n). [VAL]{ res = n; }
-value(res)       ::= INTEGER(n1) DOT INTEGER(n2). [VAL]{ res = n1.'.'.n2; }
+value(res)       ::= INTEGER(n). { res = n; }
+value(res)       ::= INTEGER(n1) DOT INTEGER(n2). { res = n1.'.'.n2; }
 									// constant
-//value(res)       ::= CONSTANT(c). [VAL]{ res = c; }
+//value(res)       ::= CONSTANT(c). { res = c; }
 									// boolean
-value(res)       ::= BOOLEAN(b). [VAL]{ res = b; }
+value(res)       ::= BOOLEAN(b). { res = b; }
 									// null
-value(res)       ::= NULL(n). [VAL]{ res = n; }
+value(res)       ::= NULL(n). { res = n; }
 									// function call
-value(res)	     ::= function(f). [VAL]{ res = f; }
+value(res)	     ::= function(f). { res = f; }
 									// expression
-value(res)       ::= OPENP expr(e) CLOSEP. [VAL]{ res = "(". e .")"; }
+value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 									// singele quoted string
-value(res)	     ::= SINGLEQUOTESTRING(t). [VAL]{ res = t; }
+value(res)	     ::= SINGLEQUOTESTRING(t). { res = t; }
 									// double quoted string
-value(res)	     ::= QUOTE doublequoted(s) QUOTE. [VAL]{ $_s = str_replace(array('."".','.""'),array('.',''),'"'.s.'"'); 
+value(res)	     ::= QUOTE doublequoted(s) QUOTE. { $_s = str_replace(array('."".','.""'),array('.',''),'"'.s.'"'); 
                                                     if (substr($_s,0,3) == '"".') {
                                                       res = substr($_s,3);
                                                     } else {
                                                       res = $_s;
                                                     }
                                                   }
-value(res)	     ::= QUOTE QUOTE. [VAL]{ res = "''"; }
+value(res)	     ::= QUOTE QUOTE. { res = "''"; }
 									// static class methode call
-value(res)	     ::= ID(c) DOUBLECOLON method(m). [VAL]{ res = c.'::'.m; }
-value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. [VAL]{ $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
+value(res)	     ::= ID(c) DOUBLECOLON method(m). { res = c.'::'.m; }
+value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
 									// static class methode call with object chainig
-value(res)	     ::= ID(c) DOUBLECOLON method(m) objectchain(oc). [VAL]{ res = c.'::'.m.oc; }
-value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). [VAL]{ $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
+value(res)	     ::= ID(c) DOUBLECOLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
+value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
 									// static class constant
-value(res)       ::= ID(c) DOUBLECOLON ID(v). [VAL]{ res = c.'::'.v;}
+value(res)       ::= ID(c) DOUBLECOLON ID(v). { res = c.'::'.v;}
 									// static class variables
-value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a). [VAL]{ res = c.'::$'.v.a;}
+value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a). { res = c.'::$'.v.a;}
 									// static class variables with object chain
-value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc). [VAL]{ res = c.'::$'.v.a.oc;}
+value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
 								  // Smarty tag
-value(res)	     ::= smartytag(st). [VAL]{ $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '$_tmp'.$this->prefix_number; }
-value(res)       ::= value(e) modifier(m) modparameters(p). [MOD]{  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
+value(res)	     ::= smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '$_tmp'.$this->prefix_number; }
 
 
 //
@@ -484,12 +474,12 @@ modifier(res)    ::= VERT ID(m). { res =  m;}
 // modifier parameter
 //
 										// multiple parameter
-modparameters(res) ::= modparameters(mps) modparameter(mp). [MOD]{ res = mps.mp;}
+modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 										// no parameter
-modparameters      ::= . [MOD]{return;}
+modparameters      ::= . {return;}
 										// parameter expression
-modparameter(res) ::= COLON exprs(mp). [MOD]{res = ','.mp;}
-modparameter(res) ::= COLON ID(mp). [MOD]{res = ',\''.mp.'\'';}
+modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
+modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
 // if expressions
 										// simple expression
