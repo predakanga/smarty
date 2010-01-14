@@ -49,12 +49,11 @@ class Smarty_Internal_Configfilelexer
 %value $this->value
 %line $this->line
 commentstart = /#/
-openB = /\[/
-closeB = /\]/
+section = /\[(.*?)\]/
 equal = /=/
 whitespace = /[ \t\r]+/
 dot = /\./
-id = /\w+/
+id = /[0-9]*[a-zA-Z_]\w*/
 newline = /\n/
 single_quoted_string = /'[^'\\]*(?:\\.[^'\\]*)*'(?=[ \t\r]*[\n#])/
 double_quoted_string = /"[^"\\]*(?:\\.[^"\\]*)*"(?=[ \t\r]*[\n#])/
@@ -72,12 +71,6 @@ commentstart {
     $this->token = Smarty_Internal_Configfileparser::TPC_COMMENTSTART;
     $this->yypushstate(self::COMMENT);
 }
-openB {
-    $this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
-}
-closeB {
-    $this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
-}
 equal {
     $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
     $this->yypushstate(self::VALUE);
@@ -94,6 +87,10 @@ dot {
 id {
     $this->token = Smarty_Internal_Configfileparser::TPC_ID;
 }
+section {
+    $this->token = Smarty_Internal_Configfileparser::TPC_SECTION;
+}
+
 */
 
 /*!lex2php

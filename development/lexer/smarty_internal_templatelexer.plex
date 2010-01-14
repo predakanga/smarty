@@ -55,7 +55,6 @@ class Smarty_Internal_Templatelexer
     				'AT'		=> '@',
     				'HATCH'		=> '#',
     				'QUOTE'		=> '"',
-    				'SINGLEQUOTE'		=> "'",
     				'BACKTICK'		=> '`',
     				'VERT'		=> '|',
     				'DOT'			=> '.',
@@ -147,7 +146,7 @@ space = /\s+/
 ptr = /\s*\->\s*/
 aptr = /\s*=>\s*/
 quote = /\"/
-singlequotestring = /'[^'\\]*(?:\\['\\][^'\\]*)*'/
+singlequotestring = /'[^'\\]*(?:\\.[^'\\]*)*'/
 singlequote = /\'/
 backtick = /`/
 backtickdollar = /`\$/

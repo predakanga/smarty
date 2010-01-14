@@ -196,9 +196,11 @@ smartytag(res)   ::= LDEL ternary(t) attributes(a) RDEL. { res = $this->compiler
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL value(e) RDEL. { res = $this->compiler->compileTag('assign',array('value'=>e,'var'=>"'".i."'"));}									
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array('value'=>e,'var'=>"'".i."'"));}									
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e,'var'=>"'".i."'"),a));}									
+smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL ifexprs(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e,'var'=>"'".i."'"),a));}									
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL ternary(t) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>t,'var'=>"'".i."'"),a));}									
 smartytag(res)   ::= LDEL varindexed(vi) EQUAL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi,a));}									
 smartytag(res)   ::= LDEL varindexed(vi) EQUAL ternary(t) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>t),vi,a));}									
+smartytag(res)   ::= LDEL varindexed(vi) EQUAL ifexprs(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi,a));}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i,a);}
 smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i,a);}
@@ -214,11 +216,11 @@ smartytag(res)   ::= LDEL ID(i) PTR ID(me) modifier(m) modparameters(p) attribut
                                                                                                res .= $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>'ob_get_clean()'.p)).'?>';
                                                                                             }
 									// {if}, {elseif} and {while} tag
-smartytag(res)   ::= LDEL IF(i) SPACE ifexpr(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
-smartytag(res)   ::= LDEL IF(i) UNIMATH(m) ifexpr(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>trim(m).ie));}
+smartytag(res)   ::= LDEL IF(i) SPACE ifexprs(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
+smartytag(res)   ::= LDEL IF(i) UNIMATH(m) ifexprs(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>trim(m).ie));}
 smartytag(res)   ::= LDEL IF(i) SPACE statement(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace ifexpr(ie) SEMICOLON optspace DOLLAR varvar(v2) foraction(e2) RDEL. {
+smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace ifexprs(ie) SEMICOLON optspace DOLLAR varvar(v2) foraction(e2) RDEL. {
                                                              res = $this->compiler->compileTag(i,array('start'=>st,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
@@ -261,6 +263,7 @@ attributes(res)  ::= . { res = array();}
 									// attribute
 attribute(res)   ::= SPACE ID(v) EQUAL ID(i). { res = array(v=>"'".i."'");}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
+attribute(res)   ::= SPACE ID(v) EQUAL ifexprs(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL value(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ternary(t). { res = array(v=>t);}
 attribute(res)   ::= SPACE ID(v). { res = array(v=>'true');}
@@ -287,24 +290,21 @@ expr(res)        ::= expr(e) modifier(m) modparameters(p). {  res = $this->compi
 
 									// single value
 exprs(res)        ::= value(v). { res = v; }
-									// +/- value
-//exprs(res)        ::= UNIMATH(m) value(v). { res = m.v; }
-									// logical negation
-//exprs(res)		   ::= NOT value(v). { res = '!'.v; }
 									// arithmetic expression
 exprs(res)        ::= exprs(e) MATH(m) value(v). { res = e . trim(m) . v; } 
 exprs(res)        ::= exprs(e) UNIMATH(m) value(v). { res = e . trim(m) . v; } 
 									// bit operation 
 exprs(res)        ::= exprs(e) ANDSYM(m) value(v). { res = e . trim(m) . v; } 
+
                   // array
 exprs(res)				::= array(a).	{res = a;}
-exprs(res)        ::= exprs(e1) ifcond(c) value(e2). {res = e1.c.e2;}
-exprs(res)			  ::= exprs(e1) lop(o) value(e2).	{res = e1.o.e2;}
+//exprs(res)        ::= exprs(e1) ifcond(c) value(e2). {res = e1.c.e2;}
+//exprs(res)			  ::= exprs(e1) lop(o) value(e2).	{res = e1.o.e2;}
 
 //
 // ternary
 //
-ternary(res)				::= OPENP ifexpr(if) CLOSEP  QMARK  expr(e1)  COLON  expr(e2). { res = if.' ? '.e1.' : '.e2;}
+ternary(res)				::= OPENP ifexprs(if) CLOSEP  QMARK  expr(e1)  COLON  expr(e2). { res = if.' ? '.e1.' : '.e2;}
 ternary(res)				::= OPENP expr(v) CLOSEP  QMARK  expr(e1) COLON  expr(e2). { res = v.' ? '.e1.' : '.e2;}
 
 
@@ -481,21 +481,31 @@ modparameters      ::= . {return;}
 modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
 modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
+//
 // if expressions
+//
+										// single if expression
+ifexprs(res)			 ::= ifexpr(e).	{res = e;}
+ifexprs(res)			 ::= NOT ifexprs(e).	{res = '!'.e;}
+ifexprs(res)			 ::= OPENP ifexprs(e) CLOSEP.	{res = '('.e.')';}
+
+// if expression
 										// simple expression
 ifexpr(res)        ::= expr(e). {res =e;}
+ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
 ifexpr(res)			   ::= expr(e1) ISIN array(a).	{res = 'in_array('.e1.','.a.')';}
 ifexpr(res)			   ::= expr(e1) ISIN value(v).	{res = 'in_array('.e1.',(array)'.v.')';}
-ifexpr(res)			   ::= expr(e1) ISDIVBY expr(e2).	{res = '!('.e1.' % '.e2.')';}
-ifexpr(res)			   ::= expr(e1) ISNOTDIVBY expr(e2).	{res = '('.e1.' % '.e2.')';}
-ifexpr(res)			   ::= expr(e1) ISEVEN.	{res = '!(1 & '.e1.')';}
-ifexpr(res)			   ::= expr(e1) ISNOTEVEN.	{res = '(1 & '.e1.')';}
-ifexpr(res)			   ::= expr(e1) ISEVENBY expr(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
-ifexpr(res)			   ::= expr(e1) ISNOTEVENBY expr(e2).	{res = '(1 & '.e1.' / '.e2.')';}
-ifexpr(res)			   ::= expr(e1) ISODD.	{res = '(1 & '.e1.')';}
-ifexpr(res)			   ::= expr(e1) ISNOTODD.	{res = '!(1 & '.e1.')';}
-ifexpr(res)			   ::= expr(e1) ISODDBY expr(e2).	{res = '(1 & '.e1.' / '.e2.')';}
-ifexpr(res)			   ::= expr(e1) ISNOTODDBY expr(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
+ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '!('.e1.' % '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISEVEN.	{res = '!(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTEVEN.	{res = '(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISEVENBY ifexprs(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTEVENBY ifexprs(e2).	{res = '(1 & '.e1.' / '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISODD.	{res = '(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTODD.	{res = '!(1 & '.e1.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISODDBY ifexprs(e2).	{res = '(1 & '.e1.' / '.e2.')';}
+ifexpr(res)			   ::= ifexprs(e1) ISNOTODDBY ifexprs(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
 ifexpr(res)        ::= value(v1) INSTANCEOF(i) ID(id). {res = v1.i.id;}
 ifexpr(res)        ::= value(v1) INSTANCEOF(i) value(v2). {$this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.v2.';?>'; res = v1.i.'$_tmp'.$this->prefix_number;}
 
