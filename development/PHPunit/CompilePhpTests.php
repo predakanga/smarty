@@ -98,7 +98,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
@@ -120,7 +120,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
@@ -142,7 +142,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
@@ -165,7 +165,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
@@ -197,7 +197,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
@@ -223,7 +223,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
@@ -253,7 +253,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
     /* Disabled due to bug in PHP easiest illustrated by:
        http://bugs.php.net/bug.php?id=50654
@@ -294,7 +294,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
@@ -319,7 +319,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         if (version_compare(PHP_VERSION, '5.3.0') < 0) {
             return;
@@ -347,7 +347,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         if (version_compare(PHP_VERSION, '5.3.0') < 0) {
             return;
@@ -420,7 +420,7 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals($str, $content);
+        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;

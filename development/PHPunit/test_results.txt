@@ -123,7 +123,7 @@ Test Suite
  ..
 
  ConfigVarTests
- ......................
+ .........................
 
  ConstantsTests
  .
@@ -214,4 +214,4 @@ Test Suite
 
 Time: 14 seconds
 
-OK (591 tests, 808 assertions)
+OK (594 tests, 811 assertions)

@@ -54,6 +54,22 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals("Welcome to Smarty!  Hello Section2", $this->smarty->fetch('string:{#title#} {#sec1#} {#sec2#}'));
     } 
     /**
+    * test config variables loading section special char
+    */
+    public function testConfigVariableSectionSpecialChar()
+    {
+        $this->smarty->config_load('test.conf', '/');
+        $this->assertEquals("Welcome to Smarty!  special char", $this->smarty->fetch('string:{#title#} {#sec1#} {#sec#}'));
+    } 
+    /**
+    * test config variables loading section foo/bar
+    */
+    public function testConfigVariableSectionFooBar()
+    {
+        $this->smarty->config_load('test.conf', 'foo/bar');
+        $this->assertEquals("Welcome to Smarty!  section foo/bar", $this->smarty->fetch('string:{#title#} {#sec1#} {#sec#}'));
+    } 
+    /**
     * test config variables loading indifferent scopes
     */
     public function testConfigVariableScope()
@@ -161,7 +177,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch('string:{config_load file=\'test_error.conf\'}');
         } 
         catch (Exception $e) {
-            $this->assertContains('Syntax Error in config file', $e->getMessage());
+            $this->assertContains('Unexpected input', $e->getMessage());
             return;
         } 
         $this->fail('Exception for syntax errors in config files has not been raised.');
@@ -204,6 +220,15 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
         $vars = $this->smarty->get_config_vars();
         $this->assertTrue(is_array($vars));
         $this->assertTrue(empty($vars));
+    } 
+    /**
+    * test config varibales loading from absolute file path
+    */
+    public function testConfigAbsolutePath()
+    {
+    $file = realpath($this->smarty->config_dir.'test.conf');
+        $this->smarty->config_load($file);
+        $this->assertEquals("123.4", $this->smarty->fetch('string:{#Number#}'));
     } 
 } 
 
