@@ -17,7 +17,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->force_compile = true;
         $this->smarty->security = false;
         $this->object = new RegObject;
-        $this->smarty->register_object('objecttest', $this->object, 'myhello', false, 'myblock');
+        $this->smarty->register_object('objecttest', $this->object, 'myhello', true, 'myblock');
     } 
 
     public static function isRunnable()
