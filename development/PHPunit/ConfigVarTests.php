@@ -6,7 +6,6 @@
 * @author Uwe Tews 
 */
 
-
 /**
 * class for config variable tests
 */
@@ -14,7 +13,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = SmartyTests::$smarty;
-        SmartyTests::init(); 
+        SmartyTests::init();
     } 
 
     public static function isRunnable()
@@ -92,7 +91,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableLocal()
     {
-        $this->assertEquals("Welcome to Smarty!", $this->smarty->fetch('string:{config_load file=\'test.conf\' scope=\'local\'}{#title#}'));
+        $this->assertEquals("Welcome to Smarty!", $this->smarty->fetch('string:{config_load file=\'test.conf\' scope=\'local\'}{#title#}')); 
         // global must be empty
         $this->assertEquals("", $this->smarty->get_config_vars('title'));
     } 
@@ -101,7 +100,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableParent()
     {
-        $this->assertEquals("Welcome to Smarty!", $this->smarty->fetch('string:{config_load file=\'test.conf\' scope=\'parent\'}{#title#}'));
+        $this->assertEquals("Welcome to Smarty!", $this->smarty->fetch('string:{config_load file=\'test.conf\' scope=\'parent\'}{#title#}')); 
         // global is parent must not be empty
         $this->assertEquals("Welcome to Smarty!", $this->smarty->get_config_vars('title'));
     } 
@@ -177,7 +176,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch('string:{config_load file=\'test_error.conf\'}');
         } 
         catch (Exception $e) {
-            $this->assertContains('Unexpected input', $e->getMessage());
+            $this->assertContains('Syntax error in config file', $e->getMessage());
             return;
         } 
         $this->fail('Exception for syntax errors in config files has not been raised.');
@@ -222,11 +221,118 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(empty($vars));
     } 
     /**
+    * test config vars on data object
+    */
+    public function testConfigTextData()
+    {
+        $data = $this->smarty->createData();
+        $data->config_load('test.conf');
+        $this->assertEquals("123bvc", $this->smarty->fetch('string:{#text#}', $data));
+    } 
+    /**
+    * test get_config_vars on data object
+    */
+    public function testConfigGetSingleConfigVarData()
+    {
+        $data = $this->smarty->createData();
+        $data->config_load('test.conf');
+        $this->assertEquals("Welcome to Smarty!", $data->get_config_vars('title'));
+    } 
+    /**
+    * test get_config_vars return all variables on data object
+    */
+    public function testConfigGetAllConfigVarsData()
+    {
+        $data = $this->smarty->createData();
+        $data->config_load('test.conf');
+        $vars = $data->get_config_vars();
+        $this->assertTrue(is_array($vars));
+        $this->assertEquals("Welcome to Smarty!", $vars['title']);
+        $this->assertEquals("Hello Section1", $vars['sec1']);
+    } 
+    /**
+    * test clear_config for single variable on data object
+    */
+    public function testConfigClearSingleConfigVarData()
+    {
+        $data = $this->smarty->createData();
+        $data->config_load('test.conf');
+        $data->clear_config('title');
+        $this->assertEquals("", $data->get_config_vars('title'));
+        $this->assertEquals("Hello Section1", $data->get_config_vars('sec1'));
+    } 
+    /**
+    * test clear_config for all variables on data object
+    */
+    public function testConfigClearConfigAllData()
+    {
+        $data = $this->smarty->createData();
+        $data->config_load('test.conf');
+        $data->clear_config();
+        $vars = $data->get_config_vars();
+        $this->assertTrue(is_array($vars));
+        $this->assertTrue(empty($vars));
+    } 
+    /**
+    * test config vars on template object
+    */
+    public function testConfigTextTemplate()
+    {
+        $tpl = $this->smarty->createTemplate('string:{#text#}');
+        $tpl->config_load('test.conf');
+        $this->assertEquals("123bvc", $this->smarty->fetch($tpl));
+    } 
+    /**
+    * test get_config_vars on template object
+    */
+    public function testConfigGetSingleConfigVarTemplate()
+    {
+        $tpl = $this->smarty->createTemplate('string:{#text#}');
+        $tpl->config_load('test.conf');
+        $this->assertEquals("Welcome to Smarty!", $tpl->get_config_vars('title'));
+    } 
+    /**
+    * test get_config_vars return all variables on template object
+    */
+    public function testConfigGetAllConfigVarsTemplate()
+    {
+        $tpl = $this->smarty->createTemplate('string:{#text#}');
+        $tpl->config_load('test.conf');
+        $vars = $tpl->get_config_vars();
+        $this->assertTrue(is_array($vars));
+        $this->assertEquals("Welcome to Smarty!", $vars['title']);
+        $this->assertEquals("Hello Section1", $vars['sec1']);
+    } 
+    /**
+    * test clear_config for single variable on template object
+    */
+    public function testConfigClearSingleConfigVarTemplate()
+    {
+        $tpl = $this->smarty->createTemplate('string:{#text#}');
+        $tpl->config_load('test.conf');
+        $tpl->clear_config('title');
+        $this->assertEquals("", $tpl->get_config_vars('title'));
+        $this->assertEquals("Hello Section1", $tpl->get_config_vars('sec1'));
+    } 
+    /**
+    * test clear_config for all variables on template object
+    */
+    public function testConfigClearConfigAllTemplate()
+    {
+        $tpl = $this->smarty->createTemplate('string:{#text#}');
+        $tpl->config_load('test.conf');
+        $tpl->clear_config();
+        $vars = $tpl->get_config_vars();
+        $this->assertTrue(is_array($vars));
+        $this->assertTrue(empty($vars));
+    } 
+
+    /**
     * test config varibales loading from absolute file path
     */
     public function testConfigAbsolutePath()
     {
-    $file = realpath($this->smarty->config_dir.'test.conf');
+        $file = realpath($this->smarty->config_dir . 'test.conf');
         $this->smarty->config_load($file);
         $this->assertEquals("123.4", $this->smarty->fetch('string:{#Number#}'));
     } 

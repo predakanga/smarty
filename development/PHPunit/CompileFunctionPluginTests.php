@@ -27,7 +27,7 @@ class CompileFunctionPluginTests extends PHPUnit_Framework_TestCase {
     public function testFunctionPluginFromTemplateFile()
     {
         $tpl = $this->smarty->createTemplate('functionplugintest.tpl', $this->smarty->tpl_vars);
-        $this->assertEquals("10", $this->smarty->fetch($tpl));
+        $this->assertEquals("10\n", $this->smarty->fetch($tpl));
     } 
     /**
     * test function plugin tag in compiled template file
@@ -36,7 +36,7 @@ class CompileFunctionPluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->force_compile = false;
         $tpl = $this->smarty->createTemplate('functionplugintest.tpl', $this->smarty->tpl_vars);
-        $this->assertEquals("10", $this->smarty->fetch($tpl));
+        $this->assertEquals("10\n", $this->smarty->fetch($tpl));
     } 
     /**
     * test function plugin function definition in script

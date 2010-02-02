@@ -123,7 +123,7 @@ Test Suite
  ..
 
  ConfigVarTests
- .........................
+ ...................................
 
  ConstantsTests
  .
@@ -212,6 +212,6 @@ Test Suite
  XmlTests
  ...
 
-Time: 14 seconds
+Time: 15 seconds
 
-OK (594 tests, 811 assertions)
+OK (604 tests, 829 assertions)
