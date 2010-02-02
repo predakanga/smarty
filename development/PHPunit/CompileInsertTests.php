@@ -15,6 +15,7 @@ class CompileInsertTests extends PHPUnit_Framework_TestCase {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->force_compile = true;
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
     } 
 
     public static function isRunnable()
