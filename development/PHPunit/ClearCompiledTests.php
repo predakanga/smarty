@@ -24,47 +24,47 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test clear_compiled_tpl method for all files
+    * test utility->clearCompiledTemplate method for all files
     */
     public function testClearCompiledAll()
     {
-        $this->smarty->clear_compiled_tpl();
+        $this->smarty->utility->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
-        $this->assertEquals(2, $this->smarty->clear_compiled_tpl());
+        $this->assertEquals(2, $this->smarty->utility->clearCompiledTemplate());
     } 
     /**
-    * test clear_compiled_tpl method for a specific resource
+    * test utility->clearCompiledTemplate method for a specific resource
     */
     public function testClearCompiledResource()
     {
-        $this->smarty->clear_compiled_tpl();
+        $this->smarty->utility->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
-        $this->assertEquals(1, $this->smarty->clear_compiled_tpl('dummy'));
+        $this->assertEquals(1, $this->smarty->utility->clearCompiledTemplate('dummy'));
     } 
     /**
-    * test clear_compiled_tpl method not expired
+    * test utility->clearCompiledTemplate method not expired
     */
     public function testClearCompiledNotExpired()
     {
-        $this->smarty->clear_compiled_tpl();
+        $this->smarty->utility->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
-        $this->assertEquals(0, $this->smarty->clear_compiled_tpl(null, null, 2000));
+        $this->assertEquals(0, $this->smarty->utility->clearCompiledTemplate(null, null, 2000));
     } 
     /**
-    * test clear_compiled_tpl method expired
+    * test utility->clearCompiledTemplate method expired
     */
     public function testClearCompiledExpired()
     {
-        $this->smarty->clear_compiled_tpl();
+        $this->smarty->utility->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
-        $this->assertEquals(1, $this->smarty->clear_compiled_tpl(null, null, 500));
+        $this->assertEquals(1, $this->smarty->utility->clearCompiledTemplate(null, null, 500));
     } 
     /**
-    * test clear_compiled_tpl with compile_id
+    * test utility->clearCompiledTemplate with compile_id
     */
     public function testClearCompiledCompileId()
     {
@@ -78,7 +78,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($tpl->getCompiledFilepath()));
         $this->assertTrue(file_exists($tpl2->getCompiledFilepath()));
         $this->assertTrue(file_exists($tpl3->getCompiledFilepath()));
-        $this->assertEquals(2, $this->smarty->clear_compiled_tpl (null, 'blar'));
+        $this->assertEquals(2, $this->smarty->utility->clearCompiledTemplate (null, 'blar'));
         $this->assertFalse(file_exists($tpl->getCompiledFilepath()));
         $this->assertTrue(file_exists($tpl2->getCompiledFilepath()));
         $this->assertFalse(file_exists($tpl3->getCompiledFilepath()));

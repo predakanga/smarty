@@ -1,13 +1,13 @@
 <?php
 /**
-* Smarty PHPunit tests append_by_ref methode
+* Smarty PHPunit tests appendByRef methode
 * 
 * @package PHPunit
 * @author Uwe Tews 
 */
 
 /**
-* class for append_by_ref tests
+* class for appendByRef tests
 */
 class AppendByRefTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -22,30 +22,30 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test append_by_ref
+    * test appendByRef
     */
     public function testAppendByRef()
     {
         $bar = 'bar';
         $bar2 = 'bar2';
-        $this->smarty->append_by_ref('foo', $bar);
-        $this->smarty->append_by_ref('foo', $bar2);
+        $this->smarty->appendByRef('foo', $bar);
+        $this->smarty->appendByRef('foo', $bar2);
         $bar = 'newbar';
         $bar2 = 'newbar2';
         $this->assertEquals('newbar newbar2', $this->smarty->fetch('string:{$foo[0]} {$foo[1]}'));
     } 
     /**
-    * test append_by_ref to unassigned variable
+    * test appendByRef to unassigned variable
     */
     public function testAppendByRefUnassigned()
     {
         $bar2 = 'bar2';
-        $this->smarty->append_by_ref('foo', $bar2);
+        $this->smarty->appendByRef('foo', $bar2);
         $bar2 = 'newbar2';
         $this->assertEquals('newbar2', $this->smarty->fetch('string:{$foo[0]}'));
     } 
     /**
-    * test append_by_ref merge
+    * test appendByRef merge
     * 
     * @todo fix testAppendByRefMerge
     */
@@ -54,7 +54,7 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         /*
         $bar = array('b' => 'd');
         $this->smarty->assign('foo', array('a' => 'a', 'b' => 'b', 'c' => 'c'));
-        $this->smarty->append_by_ref('foo', $bar, true);
+        $this->smarty->appendByRef('foo', $bar, true);
         $this->assertEquals('a d c', $this->smarty->fetch('string:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
         $bar = array('b' => 'newd');
         $this->assertEquals('a newd c', $this->smarty->fetch('string:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));

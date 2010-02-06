@@ -210,7 +210,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->allow_php_templates = true;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->clear_all_cache();
+        $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->smarty->fetch($tpl);
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
@@ -234,7 +234,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000; 
         // clean up for next tests
-        $this->smarty->clear_all_cache();
+        $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->smarty->fetch($tpl);
     } 
@@ -261,7 +261,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testFinalCleanup()
     {
-        $this->smarty->clear_all_cache();
+        $this->smarty->cache->clearAll();
     } 
 } 
 

@@ -44,10 +44,10 @@ class DefaultTemplateHandlerTests extends PHPUnit_Framework_TestCase {
     public function testRegisterNoneExistentHandlerFunction()
     {
         try {
-            $this->smarty->registerDefaultTemplateHandler('foo');
+            $this->smarty->register->defaultTemplateHandler('foo');
         } 
         catch (Exception $e) {
-            $this->assertContains('Default template handler "foo" not callable', $e->getMessage());
+            $this->assertContains("Default template handler 'foo' not callable", $e->getMessage());
             return;
         } 
         $this->fail('Exception for none callable function has not been raised.');
@@ -58,13 +58,13 @@ class DefaultTemplateHandlerTests extends PHPUnit_Framework_TestCase {
 /**
     public function testDefaultTemplateHandlerReplacement()
     {
-        $this->smarty->registerDefaultTemplateHandler('my_template_handler');
+        $this->smarty->register->defaultTemplateHandler('my_template_handler');
         $this->assertEquals("Recsource foo.tpl of type file not found", $this->smarty->fetch('foo.tpl'));
     }
 */ 
     public function testDefaultTemplateHandlerReplacementByTemplateFile()
     {
-        $this->smarty->registerDefaultTemplateHandler('my_template_handler_file');
+        $this->smarty->register->defaultTemplateHandler('my_template_handler_file');
         $this->assertEquals("hello world", $this->smarty->fetch('foo.tpl'));
     } 
     /**
@@ -72,7 +72,7 @@ class DefaultTemplateHandlerTests extends PHPUnit_Framework_TestCase {
     */
     public function testDefaultTemplateHandlerReturningFalse()
     {
-        $this->smarty->registerDefaultTemplateHandler('my_false');
+        $this->smarty->register->defaultTemplateHandler('my_false');
         try {
             $this->smarty->fetch('foo.tpl');
         } 

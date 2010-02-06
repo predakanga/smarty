@@ -1,6 +1,6 @@
 <?php
 /**
-* Smarty PHPunit tests register_compiler_function / unregister_compiler_function methods
+* Smarty PHPunit tests register->compilerFunction / unregister->compilerFunction methods
 * 
 * @package PHPunit
 * @author Uwe Tews 
@@ -8,7 +8,7 @@
 
 
 /**
-* class for register_compiler_function / unregister_compiler_function methods tests
+* class for register->compilerFunction / unregister->compilerFunction methods tests
 */
 class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -23,37 +23,37 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test register_compiler_function method for function
+    * test register->compilerFunction method for function
     */
     public function testRegisterCompilerFunction()
     {                                   
-        $this->smarty->register_compiler_function('testcompilerfunction', 'mycompilerfunction');
+        $this->smarty->register->compilerFunction('testcompilerfunction', 'mycompilerfunction');
         $this->assertEquals('mycompilerfunction', $this->smarty->registered_plugins['compiler']['testcompilerfunction'][0]);
     } 
     /**
-    * test unregister_compiler_function method
+    * test unregister->compilerFunction method
     */
     public function testUnregisterCompilerFunction()
     {
-        $this->smarty->register_compiler_function('testcompilerfunction', 'mycompilerfunction');
-        $this->smarty->unregister_compiler_function('testcompilerfunction');
+        $this->smarty->register->compilerFunction('testcompilerfunction', 'mycompilerfunction');
+        $this->smarty->unregister->compilerFunction('testcompilerfunction');
         $this->assertFalse(isset($this->smarty->registered_plugins['testcompilerfunction']));
     } 
     /**
-    * test unregister_compiler_function method not registered
+    * test unregister->compilerFunction method not registered
     */
     public function testUnregisterCompilerFunctionNotRegistered()
     {
-        $this->smarty->unregister_compiler_function('testcompilerfunction');
+        $this->smarty->unregister->compilerFunction('testcompilerfunction');
         $this->assertFalse(isset($this->smarty->registered_plugins['testcompilerfunction']));
     } 
     /**
-    * test unregister_compiler_function method other registered
+    * test unregister->compilerFunction method other registered
     */
     public function testUnregisterCompilerFunctionOtherRegistered()
     {
-        $this->smarty->register_block('testcompilerfunction', 'mycompilerfunction');
-        $this->smarty->unregister_compiler_function('testcompilerfunction');
+        $this->smarty->register->block('testcompilerfunction', 'mycompilerfunction');
+        $this->smarty->unregister->compilerFunction('testcompilerfunction');
         $this->assertTrue(isset($this->smarty->registered_plugins['block']['testcompilerfunction']));
     } 
 } 

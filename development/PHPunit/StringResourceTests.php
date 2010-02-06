@@ -32,7 +32,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     } 
     public function testTemplateStringExists2()
     {
-        $this->assertTrue($this->smarty->template_exists('string:{$foo}'));
+        $this->assertTrue($this->smarty->templateExists('string:{$foo}'));
     } 
     /**
     * test getTemplateFilepath
@@ -163,12 +163,12 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 20;
-        $this->smarty->clear_compiled_tpl();
-        $this->smarty->clear_all_cache();
+        $this->smarty->utility->clearCompiledTemplate();
+        $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('string:hello world');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
-        $this->assertEquals(0, $this->smarty->clear_all_cache());
-        $this->assertEquals(0, $this->smarty->clear_compiled_tpl());
+        $this->assertEquals(0, $this->smarty->cache->clearAll());
+        $this->assertEquals(0, $this->smarty->utility->clearCompiledTemplate());
     } 
     /**
     * test $smarty->is_cached

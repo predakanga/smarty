@@ -27,7 +27,7 @@ class CompileCompilerPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompilerPluginFromTemplateFile()
     {
-        $this->smarty->register_compiler_function('compilerplugin', 'mycompilerplugin');
+        $this->smarty->register->compilerFunction('compilerplugin', 'mycompilerplugin');
         $tpl = $this->smarty->createTemplate('compilerplugintest.tpl');
         $this->assertEquals("Hello World", $this->smarty->fetch($tpl));
     } 
@@ -37,7 +37,7 @@ class CompileCompilerPluginTests extends PHPUnit_Framework_TestCase {
     public function testCompilerPluginFromCompiledTemplateFile()
     {
         $this->smarty->force_compile = false;
-        $this->smarty->register_compiler_function('compilerplugin', 'mycompilerplugin');
+        $this->smarty->register->compilerFunction('compilerplugin', 'mycompilerplugin');
         $tpl = $this->smarty->createTemplate('compilerplugintest.tpl');
         $this->assertEquals("Hello World", $this->smarty->fetch($tpl));
     } 

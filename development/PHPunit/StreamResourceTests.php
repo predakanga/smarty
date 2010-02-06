@@ -133,7 +133,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     } 
     public function testTemplateStreamExists2()
     {
-        $this->assertTrue($this->smarty->template_exists('global:mytest'));
+        $this->assertTrue($this->smarty->templateExists('global:mytest'));
     } 
     /**
     * test template is not existing
@@ -145,7 +145,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     } 
     public function testTemplateStramNotExists2()
     {
-        $this->assertFalse($this->smarty->template_exists('global:notthere'));
+        $this->assertFalse($this->smarty->templateExists('global:notthere'));
     } 
     public function testTemplateStramNotExists3()
     {
@@ -197,12 +197,12 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 20;
-        $this->smarty->clear_compiled_tpl();
-        $this->smarty->clear_all_cache();
+        $this->smarty->utility->clearCompiledTemplate();
+        $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('global:mytest', null, null, $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
-        $this->assertEquals(0, $this->smarty->clear_all_cache());
-        $this->assertEquals(0, $this->smarty->clear_compiled_tpl());
+        $this->assertEquals(0, $this->smarty->cache->clearAll());
+        $this->assertEquals(0, $this->smarty->utility->clearCompiledTemplate());
     } 
 
     /**

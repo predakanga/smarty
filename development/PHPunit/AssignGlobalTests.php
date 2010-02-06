@@ -1,13 +1,13 @@
 <?php
 /**
-* Smarty PHPunit tests assign_global methode  and {assign_global} tag
+* Smarty PHPunit tests assignGlobal methode  and {assignGlobal} tag
 * 
 * @package PHPunit
 * @author Uwe Tews 
 */
 
 /**
-* class for assign_global methode  and {assign_global} tag tests
+* class for assignGlobal methode  and {assignGlobal} tag tests
 */
 class AssignGlobalTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -22,42 +22,42 @@ class AssignGlobalTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test  assign_global and get_global
+    * test  assignGlobal and getGlobal
     */
     public function testAssignGlobalGetGlobal()
     {
-        $this->smarty->assign_global('foo', 'bar');
-        $this->assertEquals('bar', $this->smarty->get_global('foo'));
+        $this->smarty->assignGlobal('foo', 'bar');
+        $this->assertEquals('bar', $this->smarty->getGlobal('foo'));
     } 
     /**
-    * test  assign_global and get_global on arrays
+    * test  assignGlobal and getGlobal on arrays
     */
     public function testAssignGlobalGetGlobalArray()
     {
-        $this->smarty->assign_global('foo', array('foo' => 'bar', 'foo2' => 'bar2'));
+        $this->smarty->assignGlobal('foo', array('foo' => 'bar', 'foo2' => 'bar2'));
         $a1 = array('foo' => array('foo' => 'bar', 'foo2' => 'bar2'));
-        $a2 = $this->smarty->get_global();
+        $a2 = $this->smarty->getGlobal();
         $diff = array_diff($a1, $a2);
         $cmp = empty($diff);
         $this->assertTrue($cmp);
     } 
     /**
-    * test assign_global tag
+    * test assignGlobal tag
     */
     public function testAssignGlobalTag()
     {
-        $this->smarty->assign_global('foo', 'bar');
+        $this->smarty->assignGlobal('foo', 'bar');
         $this->assertEquals('bar', $this->smarty->fetch('string:{$foo}'));
         $this->assertEquals('buh', $this->smarty->fetch('string:{assign var=foo value=buh scope=global}{$foo}'));
         $this->assertEquals('buh', $this->smarty->fetch('string:{$foo}'));
-        $this->assertEquals('buh', $this->smarty->get_global('foo'));
+        $this->assertEquals('buh', $this->smarty->getGlobal('foo'));
     } 
     /**
     * test global var array element tag
     */
     public function testGlobalVarArrayTag()
     {
-        $this->smarty->assign_global('foo', array('foo' => 'bar', 'foo2' => 'bar2'));
+        $this->smarty->assignGlobal('foo', array('foo' => 'bar', 'foo2' => 'bar2'));
         $this->assertEquals('bar2', $this->smarty->fetch('string:{$foo.foo2}'));
         $this->assertEquals('bar', $this->smarty->fetch('string:{$foo.foo}'));
     } 

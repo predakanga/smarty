@@ -38,7 +38,7 @@ class ClearAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testClearAssign()
     {
-            $this->smarty->clear_assign('blar');
+            $this->smarty->clearAssign('blar');
 		$this->assertEquals('foobar', $this->smarty->fetch('string:{$foo}{$bar}{$blar}'));
     } 
     /**
@@ -46,7 +46,7 @@ class ClearAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testArrayClearAssign()
     {
-            $this->smarty->clear_assign(array('blar','foo'));
+            $this->smarty->clearAssign(array('blar','foo'));
 		$this->assertEquals('bar', $this->smarty->fetch('string:{$foo}{$bar}{$blar}'));
     } 
 } 

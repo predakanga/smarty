@@ -39,7 +39,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->default_plugin_handler_func = null;
         $smarty->registered_objects = array();
         $smarty->registered_filters = array();
-        $smarty->autoload_filters = array();
+        $smarty->autoloadFilters = array();
         $smarty->variable_filter = true;
         $smarty->use_sub_dirs = false;
         $smarty->config_overwrite = true;

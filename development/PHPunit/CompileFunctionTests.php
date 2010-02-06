@@ -85,7 +85,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->clear_all_cache();
+        $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('test_template_function.tpl');
         $tpl->assign('foo', 'foo');
         $this->assertContains('foo foo', $this->smarty->fetch($tpl));
@@ -108,7 +108,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->clear_all_cache();
+        $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('test_template_function_nocache_call.tpl');
         $tpl->assign('foo', 'foo');
         $this->assertContains('foo foo', $this->smarty->fetch($tpl));

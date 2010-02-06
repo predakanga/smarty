@@ -40,7 +40,7 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testClearAllAssignInTemplate()
     {
-            $this->smarty->tpl->clear_all_assign();
+            $this->smarty->tpl->clearAllAssign();
 		$this->assertEquals('foobar', $this->smarty->fetch($this->smarty->tpl));
     } 
     /**
@@ -48,7 +48,7 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testClearAllAssignInData()
     {
-            $this->smarty->data->clear_all_assign();
+            $this->smarty->data->clearAllAssign();
 		$this->assertEquals('fooblar', $this->smarty->fetch($this->smarty->tpl));
     } 
     /**
@@ -56,7 +56,7 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testClearAllAssignInSmarty()
     {
-            $this->smarty->clear_all_assign();
+            $this->smarty->clearAllAssign();
 		$this->assertEquals('barblar', $this->smarty->fetch($this->smarty->tpl));
     } 
 } 

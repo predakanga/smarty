@@ -1,6 +1,6 @@
 <?php
 /**
-* Smarty PHPunit tests get_template_vars method
+* Smarty PHPunit tests utility->getTemplateVars method
 * 
 * @package PHPunit
 * @author Uwe Tews 
@@ -8,7 +8,7 @@
 
 
 /**
-* class for get_template_vars method test
+* class for utility->getTemplateVars method test
 */
 class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -23,22 +23,22 @@ class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test root get_template_vars single value
+    * test root utility->getTemplateVars single value
     */
     public function testGetSingleTemplateVarScopeRoot()
     {
         $this->smarty->assign('foo', 'bar');
         $this->smarty->assign('blar', 'buh');
-        $this->assertEquals("bar", $this->smarty->get_template_vars('foo'));
+        $this->assertEquals("bar", $this->smarty->utility->getTemplateVars('foo'));
     } 
     /**
-    * test root get_template_vars all values
+    * test root utility->getTemplateVars all values
     */
     public function testGetAllTemplateVarsScopeRoot()
     {
         $this->smarty->assign('foo', 'bar');
         $this->smarty->assign('blar', 'buh');
-        $vars = $this->smarty->get_template_vars();
+        $vars = $this->smarty->utility->getTemplateVars();
         $this->assertTrue(is_array($vars));
         $this->assertEquals("bar", $vars['foo']);
         $this->assertEquals("buh", $vars['blar']);
@@ -53,7 +53,7 @@ class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
         $data2 = new Smarty_Data($data1);
         $this->smarty->assign('foo', 'bar');
         $this->smarty->assign('blar', 'buh');
-        $this->assertEquals("bar", $this->smarty->get_template_vars('foo', $data2));
+        $this->assertEquals("bar", $this->smarty->utility->getTemplateVars('foo', $data2));
     } 
     /**
     * test get all variables with data object chain
@@ -65,7 +65,7 @@ class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('foo', 'bar');
         $data1->assign('blar', 'buh');
         $data2->assign('foo2', 'bar2');
-        $vars = $this->smarty->get_template_vars(null, $data2);
+        $vars = $this->smarty->utility->getTemplateVars(null, $data2);
         $this->assertTrue(is_array($vars));
         $this->assertEquals("bar", $vars['foo']);
         $this->assertEquals("bar2", $vars['foo2']);
@@ -81,7 +81,7 @@ class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('foo', 'bar');
         $data1->assign('blar', 'buh');
         $data2->assign('foo2', 'bar2');
-        $vars = $this->smarty->get_template_vars(null, $data2, false);
+        $vars = $this->smarty->utility->getTemplateVars(null, $data2, false);
         $this->assertTrue(is_array($vars));
         $this->assertFalse(isset($vars['foo']));
         $this->assertEquals("bar2", $vars['foo2']);
@@ -97,9 +97,9 @@ class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('foo', 'bar');
         $data1->assign('blar', 'buh');
         $data2->assign('foo2', 'bar2');
-        $this->assertEquals("", $this->smarty->get_template_vars('foo', $data2, false));
-        $this->assertEquals("bar2", $this->smarty->get_template_vars('foo2', $data2, false));
-        $this->assertEquals("", $this->smarty->get_template_vars('blar', $data2, false));
+        $this->assertEquals("", $this->smarty->utility->getTemplateVars('foo', $data2, false));
+        $this->assertEquals("bar2", $this->smarty->utility->getTemplateVars('foo2', $data2, false));
+        $this->assertEquals("", $this->smarty->utility->getTemplateVars('blar', $data2, false));
     } 
 } 
 

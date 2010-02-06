@@ -23,113 +23,113 @@ class RegisterFilterTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test register_prefilter method for function
+    * test register->preFilter method for function
     */
     public function testRegisterPrefilterFunction()
     {
-        $this->smarty->register_prefilter('myfilter');
+        $this->smarty->register->preFilter('myfilter');
         $this->assertTrue(is_callable($this->smarty->registered_filters['pre']['myfilter']));
     } 
     /**
-    * test register_prefilter method for class methode
+    * test register->preFilter method for class methode
     */
     public function testRegisterPrefilterMethode()
     {
-        $this->smarty->register_prefilter(array('myfilterclass','execute'));
+        $this->smarty->register->preFilter(array('myfilterclass','execute'));
         $this->assertTrue(is_callable($this->smarty->registered_filters['pre']['myfilterclass_execute']));
     } 
     /**
-    * test register_prefilter method for class object
+    * test register->preFilter method for class object
     */
     public function testRegisterPrefilterObject()
     {
-        $this->smarty->register_prefilter(array(new myfilterclass,'execute'));
+        $this->smarty->register->preFilter(array(new myfilterclass,'execute'));
         $this->assertTrue(is_callable($this->smarty->registered_filters['pre']['myfilterclass_execute']));
     } 
     /**
-    * test unregister_prefilter method for function
+    * test unregister->preFilter method for function
     */
     public function testUnegisterPrefilterFunction()
     {
-        $this->smarty->register_prefilter('myfilter');
-        $this->smarty->unregister_prefilter('myfilter');
+        $this->smarty->register->preFilter('myfilter');
+        $this->smarty->unregister->preFilter('myfilter');
         $this->assertFalse(isset($this->smarty->registered_filters['pre']['myfilter']));
     } 
     /**
-    * test unregister_prefilter method for class methode
+    * test unregister->preFilter method for class methode
     */
     public function testUnregisterPrefilterMethode()
     {
-        $this->smarty->register_prefilter(array('myfilterclass','execute'));
-        $this->smarty->unregister_prefilter(array('myfilterclass','execute'));
+        $this->smarty->register->preFilter(array('myfilterclass','execute'));
+        $this->smarty->unregister->preFilter(array('myfilterclass','execute'));
         $this->assertFalse(isset($this->smarty->registered_filters['pre']['myfilterclass_execute']));
     } 
     /**
-    * test register_postfilter method for function
+    * test register->postFilter method for function
     */
     public function testRegisterPostfilterFunction()
     {
-        $this->smarty->register_postfilter('myfilter');
+        $this->smarty->register->postFilter('myfilter');
         $this->assertTrue(is_callable($this->smarty->registered_filters['post']['myfilter']));
     } 
     /**
-    * test register_postfilter method for class methode
+    * test register->postFilter method for class methode
     */
     public function testRegisterPostfilterMethode()
     {
-        $this->smarty->register_postfilter(array('myfilterclass','execute'));
+        $this->smarty->register->postFilter(array('myfilterclass','execute'));
         $this->assertTrue(is_callable($this->smarty->registered_filters['post']['myfilterclass_execute']));
     } 
     /**
-    * test unregister_postfilter method for function
+    * test unregister->postFilter method for function
     */
     public function testUnegisterPostfilterFunction()
     {
-        $this->smarty->register_postfilter('myfilter');
-        $this->smarty->unregister_postfilter('myfilter');
+        $this->smarty->register->postFilter('myfilter');
+        $this->smarty->unregister->postFilter('myfilter');
         $this->assertFalse(isset($this->smarty->registered_filters['post']['myfilter']));
     } 
     /**
-    * test unregister_postfilter method for class methode
+    * test unregister->postFilter method for class methode
     */
     public function testUnregisterPostfilterMethode()
     {
-        $this->smarty->register_postfilter(array('myfilterclass','execute'));
-        $this->smarty->unregister_postfilter(array('myfilterclass','execute'));
+        $this->smarty->register->postFilter(array('myfilterclass','execute'));
+        $this->smarty->unregister->postFilter(array('myfilterclass','execute'));
         $this->assertFalse(isset($this->smarty->registered_filters['post']['myfilterclass_execute']));
     } 
     /**
-    * test register_outputfilter method for function
+    * test register->outputFilter method for function
     */
     public function testRegisterOutputfilterFunction()
     {
-        $this->smarty->register_outputfilter('myfilter');
+        $this->smarty->register->outputFilter('myfilter');
         $this->assertTrue(is_callable($this->smarty->registered_filters['output']['myfilter']));
     } 
     /**
-    * test register_outputfilter method for class methode
+    * test register->outputFilter method for class methode
     */
     public function testRegisterOutputfilterMethode()
     {
-        $this->smarty->register_outputfilter(array('myfilterclass','execute'));
+        $this->smarty->register->outputFilter(array('myfilterclass','execute'));
         $this->assertTrue(is_callable($this->smarty->registered_filters['output']['myfilterclass_execute']));
     } 
     /**
-    * test unregister_outputfilter method for function
+    * test unregister->outputFilter method for function
     */
     public function testUnegisterOutputfilterFunction()
     {
-        $this->smarty->register_outputfilter('myfilter');
-        $this->smarty->unregister_outputfilter('myfilter');
+        $this->smarty->register->outputFilter('myfilter');
+        $this->smarty->unregister->outputFilter('myfilter');
         $this->assertFalse(isset($this->smarty->registered_filters['output']['myfilter']));
     } 
     /**
-    * test unregister_outputfilter method for class methode
+    * test unregister->outputFilter method for class methode
     */
     public function testUnregisterOutputfilterMethode()
     {
-        $this->smarty->register_outputfilter(array('myfilterclass','execute'));
-        $this->smarty->unregister_outputfilter(array('myfilterclass','execute'));
+        $this->smarty->register->outputFilter(array('myfilterclass','execute'));
+        $this->smarty->unregister->outputFilter(array('myfilterclass','execute'));
         $this->assertFalse(isset($this->smarty->registered_filters['output']['myfilterclass_execute']));
     } 
 } 

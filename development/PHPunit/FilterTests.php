@@ -28,7 +28,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
     */
     public function testAutoloadOutputFilter()
     {
-        $this->smarty->autoload_filters['output'] = 'trimwhitespace';
+        $this->smarty->autoloadFilters['output'] = 'trimwhitespace';
         $tpl = $this->smarty->createTemplate('string:{"    <br>hello world"}');
         $this->assertEquals("<br>hello world", $this->smarty->fetch($tpl));
     } 
@@ -37,7 +37,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
     */
     public function testLoadedOutputFilter()
     {
-        $this->smarty->load_filter('output', 'trimwhitespace');
+        $this->smarty->loadFilter('output', 'trimwhitespace');
         $tpl = $this->smarty->createTemplate('string:{"    <br>hello world"}');
         $this->assertEquals("<br>hello world", $this->smarty->fetch($tpl));
     } 
@@ -50,7 +50,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
         {
             return str_replace('   ', ' ', $input);
         } 
-        $this->smarty->register_outputfilter('myoutputfilter');
+        $this->smarty->register->outputFilter('myoutputfilter');
         $tpl = $this->smarty->createTemplate('string:{"hello   world"}');
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
@@ -63,7 +63,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
         {
             return '{$foo}' . $input;
         } 
-        $this->smarty->register_prefilter('myprefilter');
+        $this->smarty->register->preFilter('myprefilter');
         $tpl = $this->smarty->createTemplate('string:{" hello world"}');
         $tpl->assign('foo', 'bar');
         $this->assertEquals("bar hello world", $this->smarty->fetch($tpl));
@@ -73,7 +73,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredPreFilterClass()
     {
-        $this->smarty->register_prefilter(array('myprefilterclass', 'myprefilter'));
+        $this->smarty->register->preFilter(array('myprefilterclass', 'myprefilter'));
         $tpl = $this->smarty->createTemplate('string:{" hello world"}');
         $tpl->assign('foo', 'bar');
         $this->assertEquals("bar hello world", $this->smarty->fetch($tpl));
@@ -87,7 +87,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
         {
             return '{$foo}' . $input;
         } 
-        $this->smarty->register_postfilter('mypostfilter');
+        $this->smarty->register->postFilter('mypostfilter');
         $tpl = $this->smarty->createTemplate('string:{" hello world"}');
         $tpl->assign('foo', 'bar');
         $this->assertEquals('{$foo} hello world', $this->smarty->fetch($tpl));

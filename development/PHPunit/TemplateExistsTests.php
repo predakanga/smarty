@@ -1,6 +1,6 @@
 <?php
 /**
-* Smarty PHPunit tests for template_exists methode
+* Smarty PHPunit tests for templateExists methode
 * 
 * @package PHPunit
 * @author Uwe Tews 
@@ -8,7 +8,7 @@
 
 
 /**
-* class for template_exists tests
+* class for templateExists tests
 */
 class TemplateExistsTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -23,18 +23,18 @@ class TemplateExistsTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test $smarty->template_exists true
+    * test $smarty->templateExists true
     */
     public function testSmartyTemplateExists()
     {
-        $this->assertTrue($this->smarty->template_exists('helloworld.tpl'));
+        $this->assertTrue($this->smarty->templateExists('helloworld.tpl'));
     } 
     /**
-    * test $smarty->template_exists false
+    * test $smarty->templateExists false
     */
     public function testSmartyTemplateNotExists()
     {
-        $this->assertFalse($this->smarty->template_exists('notthere.tpl'));
+        $this->assertFalse($this->smarty->templateExists('notthere.tpl'));
     } 
 } 
 

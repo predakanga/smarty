@@ -40,7 +40,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     } 
     public function testTemplateFileExists2()
     {
-        $this->assertTrue($this->smarty->template_exists('helloworld.tpl'));
+        $this->assertTrue($this->smarty->templateExists('helloworld.tpl'));
     } 
     /**
     * test template file is not existing
@@ -52,7 +52,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     } 
     public function testTemplateFileNotExists2()
     {
-        $this->assertFalse($this->smarty->template_exists('notthere.tpl'));
+        $this->assertFalse($this->smarty->templateExists('notthere.tpl'));
     } 
     public function testTemplateFileNotExists3()
     {
@@ -147,7 +147,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         touch($tpl->getTemplateFilepath());
         $this->assertTrue($tpl->mustCompile()); 
         // clean up for next tests
-        $this->smarty->clear_compiled_tpl();
+        $this->smarty->utility->clearCompiledTemplate();
     } 
     /**
     * test getCompiledTemplate
@@ -234,8 +234,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         // clean up for next tests
-        $this->smarty->clear_compiled_tpl();
-	  $this->smarty->clear_all_cache();
+        $this->smarty->utility->clearCompiledTemplate();
+	  $this->smarty->cache->clearAll();
         // compile and cache
 	  $this->smarty->fetch($tpl);
     } 
@@ -288,7 +288,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-	  $this->smarty->clear_all_cache();
+	  $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->smarty->fetch($tpl);
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
@@ -310,8 +310,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         // clean up for next tests
-        $this->smarty->clear_compiled_tpl();
-	  $this->smarty->clear_all_cache();
+        $this->smarty->utility->clearCompiledTemplate();
+	  $this->smarty->cache->clearAll();
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->smarty->fetch($tpl);
     } 
@@ -336,8 +336,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testFinalCleanup()
     {
-        $this->smarty->clear_compiled_tpl();
-	  $this->smarty->clear_all_cache();
+        $this->smarty->utility->clearCompiledTemplate();
+	  $this->smarty->cache->clearAll();
     } 
 } 
 

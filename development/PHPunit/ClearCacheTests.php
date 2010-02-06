@@ -23,31 +23,31 @@ class ClearCacheTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test clear_cache_all method
+    * test cache->clear_all method
     */
     public function testClearCacheAll()
     {
-        $this->smarty->clear_all_cache();
+        $this->smarty->cache->clearAll();
         file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
-        $this->assertEquals(1, $this->smarty->clear_all_cache());
+        $this->assertEquals(1, $this->smarty->cache->clearAll());
     } 
     /**
-    * test clear_cache_all method not expired
+    * test cache->clear_all method not expired
     */
     public function testClearCacheAllNotExpired()
     {
         file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
         touch($this->smarty->cache_dir . 'dummy.php', time()-1000);
-        $this->assertEquals(0, $this->smarty->clear_all_cache(2000));
+        $this->assertEquals(0, $this->smarty->cache->clearAll(2000));
     } 
     /**
-    * test clear_cache_all method expired
+    * test cache->clear_all method expired
     */
     public function testClearCacheAllExpired()
     {
         file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
         touch($this->smarty->cache_dir . 'dummy.php', time()-1000);
-        $this->assertEquals(1, $this->smarty->clear_all_cache(500));
+        $this->assertEquals(1, $this->smarty->cache->clearAll(500));
     } 
 } 
 

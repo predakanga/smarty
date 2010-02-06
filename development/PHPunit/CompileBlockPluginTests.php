@@ -72,7 +72,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testBlockPluginRegisteredFunction()
     {
-        $this->smarty->register_block('blockplugintest', 'myblockplugintest');
+        $this->smarty->register->block('blockplugintest', 'myblockplugintest');
         $tpl = $this->smarty->createTemplate('string:{blockplugintest}hello world{/blockplugintest}');
         $this->assertEquals('block test', $this->smarty->fetch($tpl));
     } 

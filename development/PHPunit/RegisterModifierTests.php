@@ -1,6 +1,6 @@
 <?php
 /**
-* Smarty PHPunit tests register_modifier / unregister_modifier methods
+* Smarty PHPunit tests register->modifier / unregister->modifier methods
 * 
 * @package PHPunit
 * @author Uwe Tews 
@@ -8,7 +8,7 @@
 
 
 /**
-* class for register_modifier / unregister_modifier methods tests
+* class for register->modifier / unregister->modifier methods tests
 */
 class RegisterModifierTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -23,37 +23,37 @@ class RegisterModifierTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test register_modifier method for function
+    * test register->modifier method for function
     */
     public function testRegisterModifier()
     {
-        $this->smarty->register_modifier('testmodifier', 'mymodifier');
+        $this->smarty->register->modifier('testmodifier', 'mymodifier');
         $this->assertEquals('mymodifier', $this->smarty->registered_plugins['modifier']['testmodifier'][0]);
     } 
     /**
-    * test unregister_modifier method
+    * test unregister->modifier method
     */
     public function testUnregisterModifier()
     {
-        $this->smarty->register_modifier('testmodifier', 'mymodifier');
-        $this->smarty->unregister_modifier('testmodifier');
+        $this->smarty->register->modifier('testmodifier', 'mymodifier');
+        $this->smarty->unregister->modifier('testmodifier');
         $this->assertFalse(isset($this->smarty->registered_plugins['modifier']['testmodifier']));
     } 
     /**
-    * test unregister_modifier method not registered
+    * test unregister->modifier method not registered
     */
     public function testUnregisterModifierNotRegistered()
     {
-        $this->smarty->unregister_modifier('testmodifier');
+        $this->smarty->unregister->modifier('testmodifier');
         $this->assertFalse(isset($this->smarty->registered_plugins['modifier']['testmodifier']));
     } 
     /**
-    * test unregister_modifier method other registered
+    * test unregister->modifier method other registered
     */
     public function testUnregisterModifierOtherRegistered()
     {
-        $this->smarty->register_block('testmodifier', 'mymodifier');
-        $this->smarty->unregister_modifier('testmodifier');
+        $this->smarty->register->block('testmodifier', 'mymodifier');
+        $this->smarty->unregister->modifier('testmodifier');
         $this->assertTrue(isset($this->smarty->registered_plugins['block']['testmodifier']));
     } 
 } 

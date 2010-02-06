@@ -97,7 +97,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierRegisteredFunction()
     {
-        $this->smarty->register_modifier('testmodifier','testmodifier');
+        $this->smarty->register->modifier('testmodifier','testmodifier');
         $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
         $tpl->assign('foo',2);
         $this->assertEquals("mymodifier function 2", $this->smarty->fetch($tpl));
@@ -107,7 +107,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierRegisteredStaticClass()
     {
-        $this->smarty->register_modifier('testmodifier',array('testmodifierclass','staticcall'));
+        $this->smarty->register->modifier('testmodifier',array('testmodifierclass','staticcall'));
         $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
         $tpl->assign('foo',1);
         $this->assertEquals("mymodifier static 1", $this->smarty->fetch($tpl));
@@ -118,7 +118,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     public function testModifierRegisteredMethodCall()
     {
         $obj= new testmodifierclass();
-        $this->smarty->register_modifier('testmodifier',array($obj,'method'));
+        $this->smarty->register->modifier('testmodifier',array($obj,'method'));
         $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
         $tpl->assign('foo',3);
         $this->assertEquals("mymodifier method 3", $this->smarty->fetch($tpl));

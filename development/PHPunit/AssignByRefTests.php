@@ -1,13 +1,13 @@
 <?php
 /**
-* Smarty PHPunit tests assign_by_ref methode
+* Smarty PHPunit tests assignByRef methode
 * 
 * @package PHPunit
 * @author Uwe Tews 
 */
 
 /**
-* class for assign_by_ref tests
+* class for assignByRef tests
 */
 class AssignByRefTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -22,12 +22,12 @@ class AssignByRefTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test simple assign_by_ref
+    * test simple assignByRef
     */
     public function testSimpleAssignByRef()
     {
         $bar = 'bar';
-        $this->smarty->assign_by_ref('foo', $bar);
+        $this->smarty->assignByRef('foo', $bar);
         $bar = 'newbar';
         $this->assertEquals('newbar', $this->smarty->fetch('string:{$foo}'));
     } 
