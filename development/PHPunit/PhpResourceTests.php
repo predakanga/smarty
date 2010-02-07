@@ -244,7 +244,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertTrue($this->smarty->is_cached($tpl));
+        $this->assertTrue($this->smarty->isCached($tpl));
         $this->assertContains('php hello world', $tpl->rendered_content);
     } 
     /**
@@ -254,7 +254,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->allow_php_templates = true;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertFalse($this->smarty->is_cached($tpl));
+        $this->assertFalse($this->smarty->isCached($tpl));
     } 
     /**
     * final cleanup

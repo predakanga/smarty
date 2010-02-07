@@ -214,7 +214,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching_lifetime = 20;
         $tpl = $this->smarty->createTemplate('global:mytest', null, null, $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
-        $this->assertFalse($this->smarty->is_cached($tpl));
+        $this->assertFalse($this->smarty->isCached($tpl));
     } 
 } 
 

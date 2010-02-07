@@ -87,7 +87,7 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->assign('foo', 'world');
         $tpl = $this->smarty->createTemplate('extends:test_block_base.tpl|test_block_section.tpl|test_block.tpl');
-        $this->assertTrue($this->smarty->is_cached($tpl));
+        $this->assertTrue($this->smarty->isCached($tpl));
         $result = $this->smarty->fetch('extends:test_block_base.tpl|test_block_section.tpl|test_block.tpl');
         $this->assertContains('--block base ok--', $result);
         $this->assertContains('--block section ok--', $result);

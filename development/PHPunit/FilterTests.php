@@ -28,7 +28,7 @@ class FilterTests extends PHPUnit_Framework_TestCase {
     */
     public function testAutoloadOutputFilter()
     {
-        $this->smarty->autoloadFilters['output'] = 'trimwhitespace';
+        $this->smarty->autoload_filters['output'] = 'trimwhitespace';
         $tpl = $this->smarty->createTemplate('string:{"    <br>hello world"}');
         $this->assertEquals("<br>hello world", $this->smarty->fetch($tpl));
     } 

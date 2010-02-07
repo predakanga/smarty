@@ -179,7 +179,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 20;
         $tpl = $this->smarty->createTemplate('string:hello world');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
-        $this->assertFalse($this->smarty->is_cached($tpl));
+        $this->assertFalse($this->smarty->isCached($tpl));
     } 
 } 
 
