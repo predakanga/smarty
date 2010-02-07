@@ -23,7 +23,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">class for config variable tests</p>
 		<p class="notes">
-			Located in <a class="field" href="_development---PHPunit---ConfigVarTests.php.html">/development/PHPunit/ConfigVarTests.php</a> (line <span class="field">13</span>)
+			Located in <a class="field" href="_development---PHPunit---ConfigVarTests.php.html">/development/PHPunit/ConfigVarTests.php</a> (line <span class="field">12</span>)
 		</p>
 		
 				
@@ -51,10 +51,15 @@
 										<a href="#isRunnable" title="details" class="method-name">isRunnable</a>
 										()
 									</div>
-																																																																																																																																																																																																
+																																																																																																																																																																																																																																																																																																								
 																				<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#setUp" title="details" class="method-name">setUp</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigAbsolutePath" title="details" class="method-name">testConfigAbsolutePath</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -64,7 +69,27 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
+										<a href="#testConfigClearConfigAllData" title="details" class="method-name">testConfigClearConfigAllData</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigClearConfigAllTemplate" title="details" class="method-name">testConfigClearConfigAllTemplate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
 										<a href="#testConfigClearSingleConfigVar" title="details" class="method-name">testConfigClearSingleConfigVar</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigClearSingleConfigVarData" title="details" class="method-name">testConfigClearSingleConfigVarData</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigClearSingleConfigVarTemplate" title="details" class="method-name">testConfigClearSingleConfigVarTemplate</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -74,7 +99,27 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
+										<a href="#testConfigGetAllConfigVarsData" title="details" class="method-name">testConfigGetAllConfigVarsData</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigGetAllConfigVarsTemplate" title="details" class="method-name">testConfigGetAllConfigVarsTemplate</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
 										<a href="#testConfigGetSingleConfigVar" title="details" class="method-name">testConfigGetSingleConfigVar</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigGetSingleConfigVarData" title="details" class="method-name">testConfigGetSingleConfigVarData</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigGetSingleConfigVarTemplate" title="details" class="method-name">testConfigGetSingleConfigVarTemplate</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -95,6 +140,16 @@
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#testConfigText" title="details" class="method-name">testConfigText</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigTextData" title="details" class="method-name">testConfigTextData</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigTextTemplate" title="details" class="method-name">testConfigTextTemplate</a>
 										()
 									</div>
 																<div class="method-definition">
@@ -167,6 +222,16 @@
 										<a href="#testConfigVariableSection2Template" title="details" class="method-name">testConfigVariableSection2Template</a>
 										()
 									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigVariableSectionFooBar" title="details" class="method-name">testConfigVariableSectionFooBar</a>
+										()
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#testConfigVariableSectionSpecialChar" title="details" class="method-name">testConfigVariableSectionSpecialChar</a>
+										()
+									</div>
 								</div>
 		</div>
 	</div>		
@@ -186,7 +251,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method isRunnable</span> (line <span class="line-number">20</span>)
+		<span class="method-title">static method isRunnable</span> (line <span class="line-number">19</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -211,7 +276,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">setUp</span> (line <span class="line-number">14</span>)
+		<span class="method-title">setUp</span> (line <span class="line-number">13</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -230,15 +295,39 @@
 		
 			
 	</div>
-<a name="methodtestConfigClearConfigAll" id="testConfigClearConfigAll"><!-- --></a>
+<a name="methodtestConfigAbsolutePath" id="testConfigAbsolutePath"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigClearConfigAll</span> (line <span class="line-number">200</span>)
+		<span class="method-title">testConfigAbsolutePath</span> (line <span class="line-number">333</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">test clear_config for all variables</p>
+<p class="short-description">test config varibales loading from absolute file path</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigAbsolutePath
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigClearConfigAll" id="testConfigClearConfigAll"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigClearConfigAll</span> (line <span class="line-number">215</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test clearConfig for all variables</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -254,15 +343,63 @@
 		
 			
 	</div>
-<a name="methodtestConfigClearSingleConfigVar" id="testConfigClearSingleConfigVar"><!-- --></a>
-<div class="oddrow">
+<a name="methodtestConfigClearConfigAllData" id="testConfigClearConfigAllData"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigClearSingleConfigVar</span> (line <span class="line-number">191</span>)
+		<span class="method-title">testConfigClearConfigAllData</span> (line <span class="line-number">267</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">test clear_config for single variable</p>
+<p class="short-description">test clearConfig for all variables on data object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigClearConfigAllData
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigClearConfigAllTemplate" id="testConfigClearConfigAllTemplate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigClearConfigAllTemplate</span> (line <span class="line-number">320</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test clearConfig for all variables on template object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigClearConfigAllTemplate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigClearSingleConfigVar" id="testConfigClearSingleConfigVar"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigClearSingleConfigVar</span> (line <span class="line-number">206</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test clearConfig for single variable</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -278,15 +415,63 @@
 		
 			
 	</div>
-<a name="methodtestConfigGetAllConfigVars" id="testConfigGetAllConfigVars"><!-- --></a>
-<div class="evenrow">
+<a name="methodtestConfigClearSingleConfigVarData" id="testConfigClearSingleConfigVarData"><!-- --></a>
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigGetAllConfigVars</span> (line <span class="line-number">180</span>)
+		<span class="method-title">testConfigClearSingleConfigVarData</span> (line <span class="line-number">256</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">test get_config_vars return all variables</p>
+<p class="short-description">test clearConfig for single variable on data object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigClearSingleConfigVarData
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigClearSingleConfigVarTemplate" id="testConfigClearSingleConfigVarTemplate"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigClearSingleConfigVarTemplate</span> (line <span class="line-number">309</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test clearConfig for single variable on template object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigClearSingleConfigVarTemplate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigGetAllConfigVars" id="testConfigGetAllConfigVars"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigGetAllConfigVars</span> (line <span class="line-number">195</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getConfigVars return all variables</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -302,15 +487,63 @@
 		
 			
 	</div>
-<a name="methodtestConfigGetSingleConfigVar" id="testConfigGetSingleConfigVar"><!-- --></a>
-<div class="oddrow">
+<a name="methodtestConfigGetAllConfigVarsData" id="testConfigGetAllConfigVarsData"><!-- --></a>
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigGetSingleConfigVar</span> (line <span class="line-number">172</span>)
+		<span class="method-title">testConfigGetAllConfigVarsData</span> (line <span class="line-number">244</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">test get_config_vars</p>
+<p class="short-description">test getConfigVars return all variables on data object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigGetAllConfigVarsData
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigGetAllConfigVarsTemplate" id="testConfigGetAllConfigVarsTemplate"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigGetAllConfigVarsTemplate</span> (line <span class="line-number">297</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getConfigVars return all variables on template object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigGetAllConfigVarsTemplate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigGetSingleConfigVar" id="testConfigGetSingleConfigVar"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigGetSingleConfigVar</span> (line <span class="line-number">187</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getConfigVars</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -326,11 +559,59 @@
 		
 			
 	</div>
-<a name="methodtestConfigLine" id="testConfigLine"><!-- --></a>
+<a name="methodtestConfigGetSingleConfigVarData" id="testConfigGetSingleConfigVarData"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigGetSingleConfigVarData</span> (line <span class="line-number">235</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getConfigVars on data object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigGetSingleConfigVarData
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigGetSingleConfigVarTemplate" id="testConfigGetSingleConfigVarTemplate"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigLine</span> (line <span class="line-number">38</span>)
+		<span class="method-title">testConfigGetSingleConfigVarTemplate</span> (line <span class="line-number">288</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test getConfigVars on template object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigGetSingleConfigVarTemplate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigLine" id="testConfigLine"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigLine</span> (line <span class="line-number">37</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -350,10 +631,10 @@
 			
 	</div>
 <a name="methodtestConfigNumber" id="testConfigNumber"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigNumber</span> (line <span class="line-number">28</span>)
+		<span class="method-title">testConfigNumber</span> (line <span class="line-number">27</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -374,10 +655,10 @@
 			
 	</div>
 <a name="methodtestConfigSyntaxError" id="testConfigSyntaxError"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigSyntaxError</span> (line <span class="line-number">158</span>)
+		<span class="method-title">testConfigSyntaxError</span> (line <span class="line-number">173</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -398,10 +679,10 @@
 			
 	</div>
 <a name="methodtestConfigText" id="testConfigText"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigText</span> (line <span class="line-number">33</span>)
+		<span class="method-title">testConfigText</span> (line <span class="line-number">32</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -420,11 +701,59 @@
 		
 			
 	</div>
-<a name="methodtestConfigVariableAllSections" id="testConfigVariableAllSections"><!-- --></a>
+<a name="methodtestConfigTextData" id="testConfigTextData"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigTextData</span> (line <span class="line-number">226</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test config vars on data object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigTextData
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigTextTemplate" id="testConfigTextTemplate"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableAllSections</span> (line <span class="line-number">43</span>)
+		<span class="method-title">testConfigTextTemplate</span> (line <span class="line-number">279</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test config vars on template object</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigTextTemplate
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigVariableAllSections" id="testConfigVariableAllSections"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigVariableAllSections</span> (line <span class="line-number">42</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -444,10 +773,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableAllSectionsTemplate" id="testConfigVariableAllSectionsTemplate"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableAllSectionsTemplate</span> (line <span class="line-number">115</span>)
+		<span class="method-title">testConfigVariableAllSectionsTemplate</span> (line <span class="line-number">130</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -468,10 +797,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableBooleanizeOff" id="testConfigVariableBooleanizeOff"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableBooleanizeOff</span> (line <span class="line-number">150</span>)
+		<span class="method-title">testConfigVariableBooleanizeOff</span> (line <span class="line-number">165</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -492,10 +821,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableBooleanizeOn" id="testConfigVariableBooleanizeOn"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableBooleanizeOn</span> (line <span class="line-number">142</span>)
+		<span class="method-title">testConfigVariableBooleanizeOn</span> (line <span class="line-number">157</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -516,10 +845,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableHidden" id="testConfigVariableHidden"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableHidden</span> (line <span class="line-number">96</span>)
+		<span class="method-title">testConfigVariableHidden</span> (line <span class="line-number">111</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -541,10 +870,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableHiddenDisable" id="testConfigVariableHiddenDisable"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableHiddenDisable</span> (line <span class="line-number">106</span>)
+		<span class="method-title">testConfigVariableHiddenDisable</span> (line <span class="line-number">121</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -566,10 +895,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableLocal" id="testConfigVariableLocal"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableLocal</span> (line <span class="line-number">77</span>)
+		<span class="method-title">testConfigVariableLocal</span> (line <span class="line-number">92</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -590,10 +919,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableOverwrite" id="testConfigVariableOverwrite"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableOverwrite</span> (line <span class="line-number">123</span>)
+		<span class="method-title">testConfigVariableOverwrite</span> (line <span class="line-number">138</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -614,10 +943,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableOverwrite2" id="testConfigVariableOverwrite2"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableOverwrite2</span> (line <span class="line-number">127</span>)
+		<span class="method-title">testConfigVariableOverwrite2</span> (line <span class="line-number">142</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -637,10 +966,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableOverwriteFalse" id="testConfigVariableOverwriteFalse"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableOverwriteFalse</span> (line <span class="line-number">134</span>)
+		<span class="method-title">testConfigVariableOverwriteFalse</span> (line <span class="line-number">149</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -661,10 +990,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableParent" id="testConfigVariableParent"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableParent</span> (line <span class="line-number">86</span>)
+		<span class="method-title">testConfigVariableParent</span> (line <span class="line-number">101</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -685,10 +1014,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableScope" id="testConfigVariableScope"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableScope</span> (line <span class="line-number">59</span>)
+		<span class="method-title">testConfigVariableScope</span> (line <span class="line-number">74</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -709,10 +1038,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableSection2" id="testConfigVariableSection2"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableSection2</span> (line <span class="line-number">51</span>)
+		<span class="method-title">testConfigVariableSection2</span> (line <span class="line-number">50</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -733,10 +1062,10 @@
 			
 	</div>
 <a name="methodtestConfigVariableSection2Template" id="testConfigVariableSection2Template"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">testConfigVariableSection2Template</span> (line <span class="line-number">70</span>)
+		<span class="method-title">testConfigVariableSection2Template</span> (line <span class="line-number">85</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -756,13 +1085,61 @@
 		
 			
 	</div>
+<a name="methodtestConfigVariableSectionFooBar" id="testConfigVariableSectionFooBar"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigVariableSectionFooBar</span> (line <span class="line-number">66</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test config variables loading section foo/bar</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigVariableSectionFooBar
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
+<a name="methodtestConfigVariableSectionSpecialChar" id="testConfigVariableSectionSpecialChar"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">testConfigVariableSectionSpecialChar</span> (line <span class="line-number">58</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test config variables loading section special char</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			testConfigVariableSectionSpecialChar
+		</span>
+				()
+			</div>
+	
+		
+			
+	</div>
 						
 		</div>
 	</div>
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 27 Dec 2009 16:29:02 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 07 Feb 2010 11:58:04 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

@@ -1,0 +1,592 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  <html xmlns="http://www.w3.org/1999/xhtml">
+		<head>
+			<!-- template designed by Marco Von Ballmoos -->
+			<title>Docs For Class Smarty_Internal_Register</title>
+			<link rel="stylesheet" href="../../media/stylesheet.css" />
+			<meta http-equiv='Content-Type' content='text/html; charset=iso-8859-1'/>
+		</head>
+		<body>
+			<div class="page-body">			
+<h2 class="class-name">Class Smarty_Internal_Register</h2>
+
+<a name="sec-description"></a>
+<div class="info-box">
+	<div class="info-box-title">Description</div>
+	<div class="nav-bar">
+					<span class="disabled">Description</span> |
+													<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+						|											<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+						
+					</div>
+	<div class="info-box-body">
+        		<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Project:     Smarty: the PHP compiling template engine  File:        smarty_internal_register.php  SVN:         $Id: $</p>
+<p class="description"><p>This library is free software; you can redistribute it and/or  modify it under the terms of the GNU Lesser General Public  License as published by the Free Software Foundation; either  version 2.1 of the License, or (at your option) any later version.</p><p>This library is distributed in the hope that it will be useful,  but WITHOUT ANY WARRANTY; without even the implied warranty of  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU  Lesser General Public License for more details.</p><p>You should have received a copy of the GNU Lesser General Public  License along with this library; if not, write to the Free Software  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA</p><p>For questions, help, comments, discussion, etc., please join the  Smarty mailing list. Send a blank e-mail to  smarty-discussion-subscribe@googlegroups.com</p></p>
+	<ul class="tags">
+				<li><span class="field">author:</span> Monte Ohrt &lt;<a href="mailto:monte">at ohrt dot com monte at ohrt dot com</a>&gt;</li>
+				<li><span class="field">author:</span> Uwe Tews</li>
+				<li><span class="field">version:</span> 3-SVN$Rev: 3286 $</li>
+				<li><span class="field">copyright:</span> 2008 New Digital Group, Inc.</li>
+				<li><span class="field">link:</span> <a href="http://www.smarty.net/">http://www.smarty.net/</a></li>
+			</ul>
+		<p class="notes">
+			Located in <a class="field" href="_distribution---libs---sysplugins---smarty_internal_register.php.html">/distribution/libs/sysplugins/smarty_internal_register.php</a> (line <span class="field">35</span>)
+		</p>
+		
+				
+		<pre></pre>
+	
+			</div>
+</div>
+
+
+
+	<a name="sec-var-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variable Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+						<span class="disabled">Vars</span> (<a href="#sec-vars">details</a>)
+							| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+								</div>
+		<div class="info-box-body">
+			<div class="var-summary">
+																								<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$smarty" title="details" class="var-name">$smarty</a>
+				</div>
+											</div>
+		</div>
+	</div>
+
+	<a name="sec-method-summary"></a>
+	<div class="info-box">
+		<div class="info-box-title">Method Summary</span></div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+																		<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+				 
+				|
+						<span class="disabled">Methods</span> (<a href="#sec-methods">details</a>)
+		</div>
+		<div class="info-box-body">			
+			<div class="method-summary">
+																																																																																																												
+												<div class="method-definition">
+											<span class="method-result">Smarty_Internal_Register</span>
+										<a href="#__construct" title="details" class="method-name">__construct</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$smarty</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#block" title="details" class="method-name">block</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$block_tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$block_impl</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cacheable</span> = <span class="var-default">true</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$cache_attr</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#compilerFunction" title="details" class="method-name">compilerFunction</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$compiler_tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$compiler_impl</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cacheable</span> = <span class="var-default">true</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#defaultPluginHandler" title="details" class="method-name">defaultPluginHandler</a>
+											(<span class="var-type">$function_name</span>&nbsp;<span class="var-name">$function_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#defaultTemplateHandler" title="details" class="method-name">defaultTemplateHandler</a>
+											(<span class="var-type">$function_name</span>&nbsp;<span class="var-name">$function_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#modifier" title="details" class="method-name">modifier</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$modifier_name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$modifier_impl</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#outputFilter" title="details" class="method-name">outputFilter</a>
+											(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#postFilter" title="details" class="method-name">postFilter</a>
+											(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#preFilter" title="details" class="method-name">preFilter</a>
+											(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#resource" title="details" class="method-name">resource</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource_type</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$function_names</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#templateFunction" title="details" class="method-name">templateFunction</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$function_tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$function_impl</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cacheable</span> = <span class="var-default">true</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$cache_attr</span> = <span class="var-default">array()</span>])
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#templateObject" title="details" class="method-name">templateObject</a>
+											(<span class="var-type"></span>&nbsp;<span class="var-name">$object_name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$object_impl</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$allowed</span> = <span class="var-default">array()</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$smarty_args</span> = <span class="var-default">true</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$block_methods</span> = <span class="var-default">array()</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">void</span>
+										<a href="#variableFilter" title="details" class="method-name">variableFilter</a>
+											(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+									</div>
+								</div>
+		</div>
+	</div>		
+
+	<a name="sec-vars"></a>
+	<div class="info-box">
+		<div class="info-box-title">Variables</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+										<a href="#sec-var-summary">Vars</a> (<span class="disabled">details</span>)
+						
+			
+										| 
+									<a href="#sec-method-summary">Methods</a> (<a href="#sec-methods">details</a>)
+							
+					</div>
+		<div class="info-box-body">
+			<a name="var$smarty" id="$smarty"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$smarty</span>
+						(line <span class="line-number">37</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+						
+		</div>
+	</div>
+	
+	<a name="sec-methods"></a>
+	<div class="info-box">
+		<div class="info-box-title">Methods</div>
+		<div class="nav-bar">
+			<a href="#sec-description">Description</a> |
+															<a href="#sec-var-summary">Vars</a> (<a href="#sec-vars">details</a>)
+																	<a href="#sec-method-summary">Methods</a> (<span class="disabled">details</span>)
+						
+		</div>
+		<div class="info-box-body">
+			<A NAME='method_detail'></A>
+
+<a name="method__construct" id="__construct"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">39</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+	
+	<div class="method-signature">
+		<span class="method-result">Smarty_Internal_Register</span>
+		<span class="method-name">
+			__construct
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$smarty</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$smarty</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodblock" id="block"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">block</span> (line <span class="line-number">51</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers block function to be used in templates</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			block
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$block_tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$block_impl</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cacheable</span> = <span class="var-default">true</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$cache_attr</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$block_tag</span><span class="var-description">: name of template block</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$block_impl</span><span class="var-description">: PHP function to register</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$cacheable</span><span class="var-description">: if true (default) this fuction is cachable</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$cache_attr</span><span class="var-description">: caching attributes if any</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodcompilerFunction" id="compilerFunction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">compilerFunction</span> (line <span class="line-number">70</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers compiler function</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			compilerFunction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$compiler_tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$compiler_impl</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cacheable</span> = <span class="var-default">true</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$compiler_tag</span><span class="var-description">: of template function</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$compiler_impl</span><span class="var-description">: name of PHP function to register</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$cacheable</span><span class="var-description">: if true (default) this fuction is cachable</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddefaultPluginHandler" id="defaultPluginHandler"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">defaultPluginHandler</span> (line <span class="line-number">224</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers a default plugin handler</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			defaultPluginHandler
+		</span>
+					(<span class="var-type">$function_name</span>&nbsp;<span class="var-name">$function_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$function_name</span>
+				<span class="var-name">$function_name</span><span class="var-description">: mixed string | array $plugin class/methode name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methoddefaultTemplateHandler" id="defaultTemplateHandler"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">defaultTemplateHandler</span> (line <span class="line-number">238</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers a default template handler</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			defaultTemplateHandler
+		</span>
+					(<span class="var-type">$function_name</span>&nbsp;<span class="var-name">$function_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">$function_name</span>
+				<span class="var-name">$function_name</span><span class="var-description">: mixed string | array class/method name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodmodifier" id="modifier"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">modifier</span> (line <span class="line-number">108</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers modifier to be used in templates</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			modifier
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$modifier_name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$modifier_impl</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$modifier_name</span><span class="var-description">: name of template modifier</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$modifier_impl</span><span class="var-description">: name of PHP function to register</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodoutputFilter" id="outputFilter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">outputFilter</span> (line <span class="line-number">158</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers an output filter function to apply  to a template output</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			outputFilter
+		</span>
+					(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">callback</span>
+				<span class="var-name">$function_name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpostFilter" id="postFilter"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">postFilter</span> (line <span class="line-number">169</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers a postfilter function to apply  to a compiled template after compilation</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			postFilter
+		</span>
+					(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">callback</span>
+				<span class="var-name">$function_name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodpreFilter" id="preFilter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">preFilter</span> (line <span class="line-number">180</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers a prefilter function to apply  to a template before compiling</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			preFilter
+		</span>
+					(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">callback</span>
+				<span class="var-name">$function_name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodresource" id="resource"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">resource</span> (line <span class="line-number">191</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers a resource to fetch a template</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			resource
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$resource_type</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$function_names</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$resource_type</span><span class="var-description">: name of resource type</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$function_names</span><span class="var-description">: array of functions to handle resource</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtemplateFunction" id="templateFunction"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">templateFunction</span> (line <span class="line-number">90</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers custom function to be used in templates</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			templateFunction
+		</span>
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$function_tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$function_impl</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$cacheable</span> = <span class="var-default">true</span>], [<span class="var-type">array</span>&nbsp;<span class="var-name">$cache_attr</span> = <span class="var-default">array()</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$function_tag</span><span class="var-description">: the name of the template function</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$function_impl</span><span class="var-description">: the name of the PHP function to register</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$cacheable</span><span class="var-description">: if true (default) this fuction is cachable</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$cache_attr</span><span class="var-description">: caching attributes if any</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodtemplateObject" id="templateObject"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">templateObject</span> (line <span class="line-number">129</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers object to be used in templates</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			templateObject
+		</span>
+					(<span class="var-type"></span>&nbsp;<span class="var-name">$object_name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$object_impl</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$allowed</span> = <span class="var-default">array()</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$smarty_args</span> = <span class="var-default">true</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$block_methods</span> = <span class="var-default">array()</span>], <span class="var-type">string</span>&nbsp;<span class="var-name">$object</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$object</span><span class="var-description">: name of template object</span>			</li>
+					<li>
+				<span class="var-type">object</span>
+				<span class="var-name">$</span><span class="var-description">: &amp;$object_impl the referenced PHP object to register</span>			</li>
+					<li>
+				<span class="var-type">boolean</span>
+				<span class="var-name">$smarty_args</span><span class="var-description">: smarty argument format, else traditional</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$allowed</span><span class="var-description">: null | array $allowed list of allowed methods (empty = all)</span>			</li>
+					<li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$block_methods</span><span class="var-description">: null | array $block_functs list of methods that are block format</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$object_name</span>			</li>
+					<li>
+				<span class="var-type"></span>
+				<span class="var-name">$object_impl</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodvariableFilter" id="variableFilter"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">variableFilter</span> (line <span class="line-number">214</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Registers an output filter function which  runs over any variable output</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			variableFilter
+		</span>
+					(<span class="var-type">callback</span>&nbsp;<span class="var-name">$function_name</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">callback</span>
+				<span class="var-name">$function_name</span>			</li>
+				</ul>
+		
+			
+	</div>
+						
+		</div>
+	</div>
+
+
+	<p class="notes" id="credit">
+		Documentation generated on Sun, 07 Feb 2010 11:58:24 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+	</p>
+	</div></body>
+</html>

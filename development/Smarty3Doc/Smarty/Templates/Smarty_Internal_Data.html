@@ -69,7 +69,7 @@
 										</td>
 				</tr>
 								<tr>
-					<td style="padding-right: 2em"><a href="../../Smarty/Templates/Smarty_Internal_Template.html">Smarty_Internal_Template</a></td>
+					<td style="padding-right: 2em"></td>
 					<td>
 											Main class with template data structures and methods
 										</td>
@@ -113,7 +113,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																												
+																																																																																																																				
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#append" title="details" class="method-name">append</a>
@@ -121,7 +121,7 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#append_by_ref" title="details" class="method-name">append_by_ref</a>
+										<a href="#appendByRef" title="details" class="method-name">appendByRef</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
 									</div>
 																<div class="method-definition">
@@ -131,38 +131,43 @@
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#assign_by_ref" title="details" class="method-name">assign_by_ref</a>
+										<a href="#assignByRef" title="details" class="method-name">assignByRef</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#assign_global" title="details" class="method-name">assign_global</a>
+										<a href="#assignGlobal" title="details" class="method-name">assignGlobal</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#clear_all_assign" title="details" class="method-name">clear_all_assign</a>
+										<a href="#clearAllAssign" title="details" class="method-name">clearAllAssign</a>
 										()
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#clear_assign" title="details" class="method-name">clear_assign</a>
+										<a href="#clearAssign" title="details" class="method-name">clearAssign</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
-										<a href="#config_load" title="details" class="method-name">config_load</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$config_file</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sections</span> = <span class="var-default">null</span>])
+										<a href="#clearConfig" title="details" class="method-name">clearConfig</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
-											<span class="method-result">object template</span>
-										<a href="#createTemplate" title="details" class="method-name">createTemplate</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$template</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$cache_id</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$compile_id</span> = <span class="var-default">null</span>], [<span class="var-type">object</span>&nbsp;<span class="var-name">$parent</span> = <span class="var-default">null</span>])
+											<span class="method-result">void</span>
+										<a href="#configLoad" title="details" class="method-name">configLoad</a>
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$config_file</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sections</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">mixed</span>
 										<a href="#getConfigVariable" title="details" class="method-name">getConfigVariable</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$variable</span>)
+									</div>
+																<div class="method-definition">
+											<span class="method-result">string</span>
+										<a href="#getConfigVars" title="details" class="method-name">getConfigVars</a>
+											([<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">mixed</span>
@@ -279,11 +284,11 @@
 		
 			
 	</div>
-<a name="methodappend_by_ref" id="append_by_ref"><!-- --></a>
+<a name="methodappendByRef" id="appendByRef"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">append_by_ref</span> (line <span class="line-number">142</span>)
+		<span class="method-title">appendByRef</span> (line <span class="line-number">142</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -295,7 +300,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			append_by_ref
+			appendByRef
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$merge</span> = <span class="var-default">false</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
 			</div>
@@ -358,11 +363,11 @@
 		
 			
 	</div>
-<a name="methodassign_by_ref" id="assign_by_ref"><!-- --></a>
+<a name="methodassignByRef" id="assignByRef"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">assign_by_ref</span> (line <span class="line-number">63</span>)
+		<span class="method-title">assignByRef</span> (line <span class="line-number">63</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -374,7 +379,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			assign_by_ref
+			assignByRef
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$value</span>, [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$scope</span> = <span class="var-default">SMARTY_LOCAL_SCOPE</span>], <span class="var-type">mixed</span>&nbsp;<span class="var-name">$</span>)
 			</div>
@@ -399,11 +404,11 @@
 		
 			
 	</div>
-<a name="methodassign_global" id="assign_global"><!-- --></a>
+<a name="methodassignGlobal" id="assignGlobal"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">assign_global</span> (line <span class="line-number">49</span>)
+		<span class="method-title">assignGlobal</span> (line <span class="line-number">49</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -415,7 +420,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			assign_global
+			assignGlobal
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$nocache</span> = <span class="var-default">false</span>])
 			</div>
@@ -434,11 +439,11 @@
 		
 			
 	</div>
-<a name="methodclear_all_assign" id="clear_all_assign"><!-- --></a>
+<a name="methodclearAllAssign" id="clearAllAssign"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">clear_all_assign</span> (line <span class="line-number">181</span>)
+		<span class="method-title">clearAllAssign</span> (line <span class="line-number">180</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -450,7 +455,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			clear_all_assign
+			clearAllAssign
 		</span>
 				()
 			</div>
@@ -458,11 +463,11 @@
 		
 			
 	</div>
-<a name="methodclear_assign" id="clear_assign"><!-- --></a>
+<a name="methodclearAssign" id="clearAssign"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">clear_assign</span> (line <span class="line-number">167</span>)
+		<span class="method-title">clearAssign</span> (line <span class="line-number">166</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -474,7 +479,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			clear_assign
+			clearAssign
 		</span>
 					(<span class="var-type"></span>&nbsp;<span class="var-name">$tpl_var</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$</span>)
 			</div>
@@ -490,11 +495,37 @@
 		
 			
 	</div>
-<a name="methodconfig_load" id="config_load"><!-- --></a>
+<a name="methodclearConfig" id="clearConfig"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">config_load</span> (line <span class="line-number">192</span>)
+		<span class="method-title">clearConfig</span> (line <span class="line-number">303</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Deassigns a single or all config variables</p>
+	
+	<div class="method-signature">
+		<span class="method-result">void</span>
+		<span class="method-name">
+			clearConfig
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$varname</span><span class="var-description">: variable name or null</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodconfigLoad" id="configLoad"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">configLoad</span> (line <span class="line-number">191</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -506,7 +537,7 @@
 	<div class="method-signature">
 		<span class="method-result">void</span>
 		<span class="method-name">
-			config_load
+			configLoad
 		</span>
 					(<span class="var-type">string</span>&nbsp;<span class="var-name">$config_file</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$sections</span> = <span class="var-default">null</span>])
 			</div>
@@ -522,50 +553,11 @@
 		
 			
 	</div>
-<a name="methodcreateTemplate" id="createTemplate"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">createTemplate</span> (line <span class="line-number">289</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">creates a template object</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> object</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">object template</span>
-		<span class="method-name">
-			createTemplate
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$template</span>, [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$cache_id</span> = <span class="var-default">null</span>], [<span class="var-type">mixed</span>&nbsp;<span class="var-name">$compile_id</span> = <span class="var-default">null</span>], [<span class="var-type">object</span>&nbsp;<span class="var-name">$parent</span> = <span class="var-default">null</span>])
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$template</span><span class="var-description">: the resource handle of the template file</span>			</li>
-					<li>
-				<span class="var-type">object</span>
-				<span class="var-name">$parent</span><span class="var-description">: next higher level of Smarty variables</span>			</li>
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$cache_id</span><span class="var-description">: cache id to be used with this template</span>			</li>
-					<li>
-				<span class="var-type">mixed</span>
-				<span class="var-name">$compile_id</span><span class="var-description">: compile id to be used with this template</span>			</li>
-				</ul>
-		
-			
-	</div>
 <a name="methodgetConfigVariable" id="getConfigVariable"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getConfigVariable</span> (line <span class="line-number">239</span>)
+		<span class="method-title">getConfigVariable</span> (line <span class="line-number">238</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -591,11 +583,40 @@
 		
 			
 	</div>
-<a name="methodgetStreamVariable" id="getStreamVariable"><!-- --></a>
+<a name="methodgetConfigVars" id="getConfigVars"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getStreamVariable</span> (line <span class="line-number">262</span>)
+		<span class="method-title">getConfigVars</span> (line <span class="line-number">285</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Returns a single or all config variables</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> variable value or or array of variables</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">string</span>
+		<span class="method-name">
+			getConfigVars
+		</span>
+					([<span class="var-type">string</span>&nbsp;<span class="var-name">$varname</span> = <span class="var-default">null</span>])
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$varname</span><span class="var-description">: variable name or null</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetStreamVariable" id="getStreamVariable"><!-- --></a>
+<div class="evenrow">
+	
+	<div class="method-header">
+		<span class="method-title">getStreamVariable</span> (line <span class="line-number">261</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -622,10 +643,10 @@
 			
 	</div>
 <a name="methodgetVariable" id="getVariable"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getVariable</span> (line <span class="line-number">207</span>)
+		<span class="method-title">getVariable</span> (line <span class="line-number">206</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -661,10 +682,10 @@
 			
 	</div>
 <a name="method_get_time" id="_get_time"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">_get_time</span> (line <span class="line-number">331</span>)
+		<span class="method-title">_get_time</span> (line <span class="line-number">319</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -690,7 +711,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 27 Dec 2009 16:29:19 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 07 Feb 2010 11:58:22 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

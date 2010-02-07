@@ -60,6 +60,7 @@
 <a href="#function.html_select_time.php">function.html_select_time.php</a><br>
 <a href="#FunctionTests.php">FunctionTests.php</a><br>
 <a href="#GetTemplateVarsTests.php">GetTemplateVarsTests.php</a><br>
+<a href="#insert.plugintest.php">insert.plugintest.php</a><br>
 <a href="#LoadFilterTests.php">LoadFilterTests.php</a><br>
 <a href="#local_dev_settings.php">local_dev_settings.php</a><br>
 <a href="#ModifierTests.php">ModifierTests.php</a><br>
@@ -76,11 +77,13 @@
 <a href="#SingleQuotedStringTests.php">SingleQuotedStringTests.php</a><br>
 <a href="#Smarty.class.php">Smarty.class.php</a><br>
 <a href="#smartytests.php">smartytests.php</a><br>
+<a href="#smarty_internal_cache.php">smarty_internal_cache.php</a><br>
 <a href="#smarty_internal_cacheresource_file.php">smarty_internal_cacheresource_file.php</a><br>
 <a href="#smarty_internal_compilebase.php">smarty_internal_compilebase.php</a><br>
 <a href="#smarty_internal_compile_append.php">smarty_internal_compile_append.php</a><br>
 <a href="#smarty_internal_compile_assign.php">smarty_internal_compile_assign.php</a><br>
 <a href="#smarty_internal_compile_block.php">smarty_internal_compile_block.php</a><br>
+<a href="#smarty_internal_compile_call.php">smarty_internal_compile_call.php</a><br>
 <a href="#smarty_internal_compile_capture.php">smarty_internal_compile_capture.php</a><br>
 <a href="#smarty_internal_compile_config_load.php">smarty_internal_compile_config_load.php</a><br>
 <a href="#smarty_internal_compile_debug.php">smarty_internal_compile_debug.php</a><br>
@@ -96,7 +99,6 @@
 <a href="#smarty_internal_compile_ldelim.php">smarty_internal_compile_ldelim.php</a><br>
 <a href="#smarty_internal_compile_nocache.php">smarty_internal_compile_nocache.php</a><br>
 <a href="#smarty_internal_compile_private_block_plugin.php">smarty_internal_compile_private_block_plugin.php</a><br>
-<a href="#smarty_internal_compile_private_function_call.php">smarty_internal_compile_private_function_call.php</a><br>
 <a href="#smarty_internal_compile_private_function_plugin.php">smarty_internal_compile_private_function_plugin.php</a><br>
 <a href="#smarty_internal_compile_private_modifier.php">smarty_internal_compile_private_modifier.php</a><br>
 <a href="#smarty_internal_compile_private_object_block_function.php">smarty_internal_compile_private_object_block_function.php</a><br>
@@ -115,6 +117,8 @@
 <a href="#smarty_internal_data.php">smarty_internal_data.php</a><br>
 <a href="#smarty_internal_debug.php">smarty_internal_debug.php</a><br>
 <a href="#smarty_internal_filter_handler.php">smarty_internal_filter_handler.php</a><br>
+<a href="#smarty_internal_function_call_handler.php">smarty_internal_function_call_handler.php</a><br>
+<a href="#smarty_internal_register.php">smarty_internal_register.php</a><br>
 <a href="#smarty_internal_resource_extends.php">smarty_internal_resource_extends.php</a><br>
 <a href="#smarty_internal_resource_file.php">smarty_internal_resource_file.php</a><br>
 <a href="#smarty_internal_resource_php.php">smarty_internal_resource_php.php</a><br>
@@ -123,15 +127,15 @@
 <a href="#smarty_internal_resource_string.php">smarty_internal_resource_string.php</a><br>
 <a href="#smarty_internal_security_handler.php">smarty_internal_security_handler.php</a><br>
 <a href="#smarty_internal_smartytemplatecompiler.php">smarty_internal_smartytemplatecompiler.php</a><br>
+<a href="#smarty_internal_template - Kopie.php">smarty_internal_template - Kopie.php</a><br>
 <a href="#smarty_internal_template.php">smarty_internal_template.php</a><br>
 <a href="#smarty_internal_templatecompilerbase.php">smarty_internal_templatecompilerbase.php</a><br>
 <a href="#smarty_internal_templatelexer.php">smarty_internal_templatelexer.php</a><br>
 <a href="#smarty_internal_templateparser.php">smarty_internal_templateparser.php</a><br>
+<a href="#smarty_internal_unregister.php">smarty_internal_unregister.php</a><br>
+<a href="#smarty_internal_utility.php">smarty_internal_utility.php</a><br>
+<a href="#smarty_internal_wrapper.php">smarty_internal_wrapper.php</a><br>
 <a href="#smarty_internal_write_file.php">smarty_internal_write_file.php</a><br>
-<a href="#smarty_method_addpluginsdir.php">smarty_method_addpluginsdir.php</a><br>
-<a href="#smarty_method_setconfigdir.php">smarty_method_setconfigdir.php</a><br>
-<a href="#smarty_method_setpluginsdir.php">smarty_method_setpluginsdir.php</a><br>
-<a href="#smarty_method_test.php">smarty_method_test.php</a><br>
 <a href="#smarty_security.php">smarty_security.php</a><br>
 <a href="#SpacingTests.php">SpacingTests.php</a><br>
 <a href="#StaticClassAccessTests.php">StaticClassAccessTests.php</a><br>
@@ -149,59 +153,66 @@
 <a name="Post-parsing"></a>
 <h1>Post-parsing</h1>
 <h2>Warnings:</h2><br>
+<b>Warning</b> - Class ObjectVariableTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ModifierTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class LoadFilterTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class GetTemplateVarsTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ObjectVariableTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class PhpResourceTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class PrintNocacheTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class RegisterFilterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterCompilerFunctionTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterBlockTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class PrintNocacheTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class GetTemplateVarsTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class FunctionTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class FilterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class DelimiterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class DefaultTemplateHandlerTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CoreTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ConstantsTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class DelimiterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class DoubleQuotedStringTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class FileResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ExtendsResourceTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class RegisterFilterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class FilterTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class FileResourceTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class RegisterFunctionTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class RegisterModifierTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class TriggerErrorTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class TokenFallbackTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class TernaryTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class TemplateExistsTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class TriggerErrorTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class VariableScopeTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class XmlTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class VariableVariableTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - 
+duplicate class element "Smarty_Internal_Template" in file C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_template.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning</b> - 
+duplicate class element "smarty_compiler_testclose" in file C:\wamp\www\_Smarty3Work\development\PHPunit\PHPunitplugins\compiler.testclose.php will be ignored.
+Use an @ignore tag on the original if you want this case to be documented.<br>
+<b>Warning</b> - Class XmlTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class TemplateExistsTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class StringResourceTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class StreamVariableTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class SmartyTests parent PHPUnit_Framework_TestSuite not found<br>
 <b>Warning</b> - Class SingleQuotedStringTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class SecurityTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class RegisterModifierTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class SmartyTests parent PHPUnit_Framework_TestSuite not found<br>
-<b>Warning</b> - Class SpacingTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class StaticClassAccessTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class StreamVariableTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class StreamResourceTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ConstantsTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ConfigVarTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileWhileTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CommentsTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ClearCompiledTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ClearCacheTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileBlockExtendsTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class CompileBlockPluginTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileCompilerPluginTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileCaptureTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ClearCacheTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileBlockPluginTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ClearAssignTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class ClearAllAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class ArrayTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AssignByRefTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AssignGlobalTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AppendTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class AppendByRefTests parent PHPUnit_Framework_TestCase not found<br>
-<b>Warning</b> - Class ClearAllAssignTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CacheResourceFileTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class Smarty_Internal_Function_Call_Handler in file C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_function_call_handler.php has multiple possible parents named Smarty_Internal_Template.  Cannot resolve name conflict,
+ try ignoring a file that contains the conflicting parent class<br>
 <b>Warning</b> - Class CompileDebugTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileDelimiterTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompilePhpTests parent PHPUnit_Framework_TestCase not found<br>
@@ -209,6 +220,7 @@
 <b>Warning</b> - Class CompileInsertTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileRegisteredObjectFunctionTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompilerPluginTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class CompileWhileTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileStripTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileSectionTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileIncludeTests parent PHPUnit_Framework_TestCase not found<br>
@@ -221,9 +233,9 @@
 <b>Warning</b> - Class CompileIfTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - Class CompileFunctionTests parent PHPUnit_Framework_TestCase not found<br>
 <b>Warning</b> - 
-duplicate class element "smarty_compiler_testclose" in file C:\wamp\www\_Smarty3Work\development\PHPunit\PHPunitplugins\compiler.testclose.php will be ignored.
+duplicate class element "Smarty_Template" in file C:\wamp\www\_Smarty3Work\distribution\libs\sysplugins\smarty_internal_template.php will be ignored.
 Use an @ignore tag on the original if you want this case to be documented.<br>
-<b>Warning</b> - Class StreamResourceTests parent PHPUnit_Framework_TestCase not found<br>
+<b>Warning</b> - Class SpacingTests parent PHPUnit_Framework_TestCase not found<br>
 <a name="AppendByRefTests.php"></a>
 <h1>AppendByRefTests.php</h1>
 <h2>Warnings:</h2><br>
@@ -324,7 +336,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <a name="CompileFunctionTests.php"></a>
 <h1>CompileFunctionTests.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class CompileFunctionTests<br>
+<b>Warning on line 11</b> - no @package tag was used in a DocBlock for class CompileFunctionTests<br>
 <a name="CompileIfTests.php"></a>
 <h1>CompileIfTests.php</h1>
 <h2>Warnings:</h2><br>
@@ -389,7 +401,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <a name="ConfigVarTests.php"></a>
 <h1>ConfigVarTests.php</h1>
 <h2>Warnings:</h2><br>
-<b>Warning on line 12</b> - no @package tag was used in a DocBlock for class ConfigVarTests<br>
+<b>Warning on line 11</b> - no @package tag was used in a DocBlock for class ConfigVarTests<br>
 <a name="ConstantsTests.php"></a>
 <h1>ConstantsTests.php</h1>
 <h2>Warnings:</h2><br>
@@ -439,6 +451,10 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>GetTemplateVarsTests.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 12</b> - no @package tag was used in a DocBlock for class GetTemplateVarsTests<br>
+<a name="insert.plugintest.php"></a>
+<h1>insert.plugintest.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 4</b> - File "C:\wamp\www\_Smarty3Work\development\PHPunit\PHPunitplugins\insert.plugintest.php" has no page-level DocBlock, use @package in the first DocBlock to create one<br>
 <a name="LoadFilterTests.php"></a>
 <h1>LoadFilterTests.php</h1>
 <h2>Warnings:</h2><br>
@@ -506,11 +522,17 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>Smarty.class.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 108</b> - no @package tag was used in a DocBlock for class Smarty<br>
+<h2>Errors:</h2><br>
+<b>Error on line 589</b> - "@return" tag was used without any parameters, illegal<br>
 <a name="smartytests.php"></a>
 <h1>smartytests.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 7</b> - Page-level DocBlock precedes "require_once 'PHPUnit/Framework.php'", use another DocBlock to document the source element<br>
 <b>Warning on line 16</b> - no @package tag was used in a DocBlock for class SmartyTests<br>
+<a name="smarty_internal_cache.php"></a>
+<h1>smarty_internal_cache.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Cache", use another DocBlock to document the file<br>
 <a name="smarty_internal_cacheresource_file.php"></a>
 <h1>smarty_internal_cacheresource_file.php</h1>
 <h2>Warnings:</h2><br>
@@ -531,7 +553,11 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>smarty_internal_compile_block.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Block<br>
-<b>Warning on line 40</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Blockclose<br>
+<b>Warning on line 46</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Blockclose<br>
+<a name="smarty_internal_compile_call.php"></a>
+<h1>smarty_internal_compile_call.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Call<br>
 <a name="smarty_internal_compile_capture.php"></a>
 <h1>smarty_internal_compile_capture.php</h1>
 <h2>Warnings:</h2><br>
@@ -569,7 +595,7 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>smarty_internal_compile_function.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Function<br>
-<b>Warning on line 47</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Functionclose<br>
+<b>Warning on line 51</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Functionclose<br>
 <a name="smarty_internal_compile_if.php"></a>
 <h1>smarty_internal_compile_if.php</h1>
 <h2>Warnings:</h2><br>
@@ -602,10 +628,6 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>smarty_internal_compile_private_block_plugin.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 13</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Private_Block_Plugin<br>
-<a name="smarty_internal_compile_private_function_call.php"></a>
-<h1>smarty_internal_compile_private_function_call.php</h1>
-<h2>Warnings:</h2><br>
-<b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Compile_Private_Function_Call<br>
 <a name="smarty_internal_compile_private_function_plugin.php"></a>
 <h1>smarty_internal_compile_private_function_plugin.php</h1>
 <h2>Warnings:</h2><br>
@@ -675,9 +697,9 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>smarty_internal_data.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Data<br>
-<b>Warning on line 345</b> - no @package tag was used in a DocBlock for class Smarty_Data<br>
-<b>Warning on line 375</b> - no @package tag was used in a DocBlock for class Smarty_Variable<br>
-<b>Warning on line 400</b> - no @package tag was used in a DocBlock for class Undefined_Smarty_Variable<br>
+<b>Warning on line 333</b> - no @package tag was used in a DocBlock for class Smarty_Data<br>
+<b>Warning on line 366</b> - no @package tag was used in a DocBlock for class Smarty_Variable<br>
+<b>Warning on line 391</b> - no @package tag was used in a DocBlock for class Undefined_Smarty_Variable<br>
 <a name="smarty_internal_debug.php"></a>
 <h1>smarty_internal_debug.php</h1>
 <h2>Warnings:</h2><br>
@@ -686,6 +708,14 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>smarty_internal_filter_handler.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Filter_Handler<br>
+<a name="smarty_internal_function_call_handler.php"></a>
+<h1>smarty_internal_function_call_handler.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 11</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Function_Call_Handler<br>
+<a name="smarty_internal_register.php"></a>
+<h1>smarty_internal_register.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Register", use another DocBlock to document the file<br>
 <a name="smarty_internal_resource_extends.php"></a>
 <h1>smarty_internal_resource_extends.php</h1>
 <h2>Warnings:</h2><br>
@@ -718,11 +748,16 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>smarty_internal_smartytemplatecompiler.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 14</b> - no @package tag was used in a DocBlock for class Smarty_Internal_SmartyTemplateCompiler<br>
+<a name="smarty_internal_template - Kopie.php"></a>
+<h1>smarty_internal_template - Kopie.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Template<br>
+<b>Warning on line 824</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
 <a name="smarty_internal_template.php"></a>
 <h1>smarty_internal_template.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 15</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Template<br>
-<b>Warning on line 782</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
+<b>Warning on line 816</b> - no @package tag was used in a DocBlock for class Smarty_Template<br>
 <a name="smarty_internal_templatecompilerbase.php"></a>
 <h1>smarty_internal_templatecompilerbase.php</h1>
 <h2>Warnings:</h2><br>
@@ -737,14 +772,22 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <b>Warning on line 12</b> - DocBlock would be page-level, but precedes class "TP_yyToken", use another DocBlock to document the file<br>
 <b>Warning on line 76</b> - no @package tag was used in a DocBlock for class TP_yyStackEntry<br>
 <b>Warning on line 87</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Templateparser<br>
+<a name="smarty_internal_unregister.php"></a>
+<h1>smarty_internal_unregister.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Unregister", use another DocBlock to document the file<br>
+<a name="smarty_internal_utility.php"></a>
+<h1>smarty_internal_utility.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 34</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Utility", use another DocBlock to document the file<br>
+<a name="smarty_internal_wrapper.php"></a>
+<h1>smarty_internal_wrapper.php</h1>
+<h2>Warnings:</h2><br>
+<b>Warning on line 38</b> - DocBlock would be page-level, but precedes class "Smarty_Internal_Wrapper", use another DocBlock to document the file<br>
 <a name="smarty_internal_write_file.php"></a>
 <h1>smarty_internal_write_file.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 12</b> - no @package tag was used in a DocBlock for class Smarty_Internal_Write_File<br>
-<a name="smarty_method_test.php"></a>
-<h1>smarty_method_test.php</h1>
-<h2>Warnings:</h2><br>
-<b>Warning on line 74</b> - Page-level DocBlock precedes "function Smarty_Method_Test", use another DocBlock to document the source element<br>
 <a name="smarty_security.php"></a>
 <h1>smarty_security.php</h1>
 <h2>Warnings:</h2><br>
@@ -804,20 +847,8 @@ Use an @ignore tag on the original if you want this case to be documented.<br>
 <h1>XmlTests.php</h1>
 <h2>Warnings:</h2><br>
 <b>Warning on line 12</b> - no @package tag was used in a DocBlock for class XmlTests<br>
-<a name="smarty_method_addpluginsdir.php"></a>
-<h1>smarty_method_addpluginsdir.php</h1>
-<h2>Errors:</h2><br>
-<b>Error on line 19</b> - "@return" tag was used without any parameters, illegal<br>
-<a name="smarty_method_setconfigdir.php"></a>
-<h1>smarty_method_setconfigdir.php</h1>
-<h2>Errors:</h2><br>
-<b>Error on line 19</b> - "@return" tag was used without any parameters, illegal<br>
-<a name="smarty_method_setpluginsdir.php"></a>
-<h1>smarty_method_setpluginsdir.php</h1>
-<h2>Errors:</h2><br>
-<b>Error on line 22</b> - "@return" tag was used without any parameters, illegal<br>
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 27 Dec 2009 16:29:31 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 07 Feb 2010 11:58:35 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</body>
 </html>
