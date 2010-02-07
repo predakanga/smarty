@@ -45,7 +45,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     public function testBlockPluginFromTemplateFile()
     {
         $tpl = $this->smarty->createTemplate('blockplugintest.tpl');
-        $this->assertEquals("abc\n", $this->smarty->fetch($tpl));
+        $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
     * test block plugin tag in compiled template file
@@ -54,7 +54,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->force_compile = false;
         $tpl = $this->smarty->createTemplate('blockplugintest.tpl');
-        $this->assertEquals("abc\n", $this->smarty->fetch($tpl));
+        $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
     * test block plugin tag in template file
@@ -65,7 +65,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 10;
         $tpl = $this->smarty->createTemplate('blockplugintest.tpl');
-        $this->assertEquals("abc\n", $this->smarty->fetch($tpl));
+        $this->assertEquals("abc", $this->smarty->fetch($tpl));
     } 
     /**
     * test block plugin function definition in script

@@ -203,18 +203,16 @@ STR;
         $this->smarty->security = false;
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals("  LALA\n ?>\n\n \"! ?> /*\n LALA\nLALA ;\nLALA;1+1;LALA2;1+1;", $content);
+        $this->assertEquals("  LALA\n ?>\n\n \"! ?> /*\n LALA\nLALA ;\nLALA;1+1;LALA2;1+1;", str_replace("\r",'',$content));
     }
 
     public function testEmbeddingsInHEREDOC1() {
       $str = <<< STR
 <?php
-\$a = Array("\nEOT\n?>'" => 1);
+\$a = Array("EOT?>'" => 1);
 
 echo <<< EOT
-{\$a["
-EOT
-?>'"]}
+{\$a["EOT?>'"]}
 EOT;
 ?>
 STR;
