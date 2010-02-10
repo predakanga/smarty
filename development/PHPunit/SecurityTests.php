@@ -106,7 +106,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testSmartyPhpQuote()
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
-        $this->assertEquals("&lt;?php echo &quot;hello world&quot;; ?&gt;", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
+        $this->assertEquals("&lt;?php echo \"hello world\"; ?&gt;", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
     } 
     public function testSmartyPhpQuote2()
     {

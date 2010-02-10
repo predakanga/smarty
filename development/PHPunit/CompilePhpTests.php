@@ -96,6 +96,8 @@ echo "a{\$e['f']->d_attr}a"
 ?>
 STR;
 
+        $this->smarty->left_delimiter = '{{';
+        $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
@@ -118,6 +120,8 @@ echo "{\$a["{\$b["?>"]}"]}";
 ?>
 STR;
 
+        $this->smarty->left_delimiter = '{{';
+        $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
@@ -219,6 +223,8 @@ STR;
 
 //' Fix emacs highlighting which chokes on preceding open quote
 
+        $this->smarty->left_delimiter = '{{';
+        $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
@@ -249,6 +255,8 @@ STR;
 
 //' Fix emacs highlighting which chokes on preceding open quote
 
+        $this->smarty->left_delimiter = '{{';
+        $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
@@ -266,6 +274,8 @@ B
 ]}
 ZZ;
 ?>
+        $this->smarty->left_delimiter = '{{';
+        $this->smarty->right_delimiter = '}}';
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
         $this->smarty->security = false;
         $tpl = $this->smarty->createTemplate("string:$str");
@@ -290,6 +300,8 @@ STR;
 
 //" Fix emacs highlighting which chokes on preceding open quote
 
+        $this->smarty->left_delimiter = '{{';
+        $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
@@ -315,6 +327,8 @@ STR;
 
 //" Fix emacs highlighting which chokes on preceding open quote
 
+        $this->smarty->left_delimiter = '{{';
+        $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));

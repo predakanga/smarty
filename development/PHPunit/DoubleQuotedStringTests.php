@@ -124,6 +124,14 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
        $this->assertEquals("Hello 'World'", $this->smarty->fetch($tpl));
     } 
     /**
+    * test single quote tags in double quoted strings
+    */
+    public function testSingleQuoteTagsInDoubleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {\'World\'} Test"}{$foo}',null, null,  $this->smarty);
+       $this->assertEquals("Hello World Test", $this->smarty->fetch($tpl));
+    } 
+    /**
     * test empty double quoted strings
     */
     public function testEmptyDoubleQuotedString()
