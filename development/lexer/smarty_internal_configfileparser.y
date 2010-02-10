@@ -133,14 +133,8 @@ global_vars(res) ::= var_list(vl). { $this->add_global_vars(vl); res = null; }
 sections(res) ::= sections section. { res = null; }
 sections(res) ::= . { res = null; }
 
-section(res) ::= SECTION(s)newline var_list(vars). { $section = trim(s,'[]');
-                                                     if (substr($section, 0, 1) != '.') {
-                                                        $this->add_section_vars($section, vars);
-                                                     } elseif ($this->smarty->config_read_hidden) {
-                                                        $this->add_section_vars(substr($section,1), vars);
-                                                     }
-                                                     res = null;}
-                                                     
+section(res) ::= OPENB SECTION(i) CLOSEB newline var_list(vars). { $this->add_section_vars(i, vars); res = null; }
+section(res) ::= OPENB DOT SECTION(i) CLOSEB newline var_list(vars). { if ($this->smarty->config_read_hidden) { $this->add_section_vars(i, vars); } res = null; } //parse and check, then discard!
 
 // Var list
 var_list(res) ::= var_list(vl) newline. { res = vl; }

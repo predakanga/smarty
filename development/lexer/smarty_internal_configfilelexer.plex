@@ -49,7 +49,9 @@ class Smarty_Internal_Configfilelexer
 %value $this->value
 %line $this->line
 commentstart = /#/
-section = /\[(.*?)\]/
+openB = /\[/
+closeB = /\]/
+section = /.*?(?=[\.=\[\]\r\n])/
 equal = /=/
 whitespace = /[ \t\r]+/
 dot = /\./
@@ -71,6 +73,13 @@ commentstart {
     $this->token = Smarty_Internal_Configfileparser::TPC_COMMENTSTART;
     $this->yypushstate(self::COMMENT);
 }
+openB {
+    $this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
+    $this->yypushstate(self::SECTION);
+}
+closeB {
+    $this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
+}
 equal {
     $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
     $this->yypushstate(self::VALUE);
@@ -81,14 +90,8 @@ whitespace {
 newline {
     $this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
 }
-dot {
-    $this->token = Smarty_Internal_Configfileparser::TPC_DOT;
-}
 id {
     $this->token = Smarty_Internal_Configfileparser::TPC_ID;
-}
-section {
-    $this->token = Smarty_Internal_Configfileparser::TPC_SECTION;
 }
 
 */
@@ -162,6 +165,19 @@ naked_string {
 }
 newline {
     $this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
+    $this->yypopstate();
+}
+
+*/
+
+/*!lex2php
+%statename SECTION
+
+dot {
+    $this->token = Smarty_Internal_Configfileparser::TPC_DOT;
+}
+section {
+    $this->token = Smarty_Internal_Configfileparser::TPC_SECTION;
     $this->yypopstate();
 }
 

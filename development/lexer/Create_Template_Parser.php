@@ -21,7 +21,7 @@ $contents = '<?php
 * @author Uwe Tews
 */
 '.substr($contents,6);
-file_put_contents('smarty_internal_templateparser.php', $contents."?>\n");
+file_put_contents('smarty_internal_templateparser.php', $contents."?>\r\n");
 copy('smarty_internal_templatelexer.php','../../distribution/libs/sysplugins/smarty_internal_templatelexer.php');
 copy('smarty_internal_templateparser.php','../../distribution/libs/sysplugins/smarty_internal_templateparser.php');
 

@@ -33,6 +33,7 @@
         $this->compiler->has_variable_string = false;
 				$this->compiler->prefix_code = array();
 				$this->prefix_number = 0;
+				$this->allowed_php = false;
     }
     public static function &instance($new_instance = null)
     {
@@ -106,6 +107,9 @@ template(res)       ::= template(t) template_element(e). {if ($this->template->e
 //
 											// Smarty tag
 template_element(res)::= smartytag(st). {
+                                          if ($this->allowed_php) {
+                                           $this->compiler->trigger_template_error ('Smarty tags are not allowed inside &lt;?php ?> tags');
+                                          }
                                           if ($this->compiler->has_code) {
                                             $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
                                             res = $this->compiler->processNocacheCode($tmp.st,true);
@@ -117,14 +121,31 @@ template_element(res)::= COMMENT. { res = '';}
 											// Literal
 template_element(res) ::= literal(l). { res = l; }
 
-											// <?php> tag
-template_element(res)::= PHPSTARTTAG(st) php_code(t) PHPENDTAG. {
+											// <?php tag
+template_element(res)::= PHPSTARTTAG(st). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = self::escape_start_tag(st) . str_replace('<?','&lt;?',t) . '?<??>>';
+					                             res = self::escape_start_tag(st);
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st.t.'?>', ENT_QUOTES), false);
+                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st, ENT_QUOTES), false);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
-                                       res = $this->compiler->processNocacheCode('<?php'.t.'?>', true);
+                                       if ($this->allowed_php) {
+                                           $this->compiler->trigger_template_error ('&lt;?php ?> tags can not be nested');
+                                       }
+				                               $this->allowed_php = true;
+                                       res = $this->compiler->processNocacheCode(st, true);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
+                                       res = '';
+                                      }
+                                     }
+
+template_element(res)::= PHPENDTAG(et). {
+                                      if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
+					                             res = '?<??>>';
+                                      } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
+                                       res = $this->compiler->processNocacheCode(htmlspecialchars(et, ENT_QUOTES), false);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+				                               $this->allowed_php = false;
+                                       res = $this->compiler->processNocacheCode('?>', true);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
                                        res = '';
                                       }
@@ -147,26 +168,13 @@ template_element(res)::= FAKEPHPSTARTTAG(t). {if ($this->lex->strip) {
 
 
 
-php_code(res) ::= php_code_element(c1) php_code(c2). { res = c1.c2; }
-php_code(res) ::= . { res = ''; }
-
-php_code_element(res) ::= PHP_CODE(c). { res = c; }
-php_code_element(res) ::= PHP_CODE_START_DOUBLEQUOTE(c1) php_dq_contents(c2) PHP_CODE_DOUBLEQUOTE(c3). { res = c1.c2.c3; }
-php_code_element(res) ::= PHP_HEREDOC_START(c1) php_dq_contents(c2) PHP_HEREDOC_END(c3). { res = c1.c2.c3; }
-php_code_element(res) ::= PHP_NOWDOC_START(c1)  php_dq_contents(c2) PHP_NOWDOC_END(c3) . { res = c1.c2.c3; }
-
-php_dq_contents(res) ::= php_dq_content(c1) php_dq_contents(c2). { res = c1.c2; }
-php_dq_contents(res) ::= . { res = ''; }
-
-php_dq_content(res) ::= PHP_DQ_CONTENT(c). { res = c; }
-php_dq_content(res) ::= PHP_DQ_EMBED_START(c1) php_code(c2) PHP_DQ_EMBED_END(c3). { res = c1.c2.c3; }
 
 
 
 literal(res) ::= LITERALSTART LITERALEND. { res = ''; }
 literal(res) ::= LITERALSTART literal_elements(l) LITERALEND. { res = l; }
  
-literal_elements(res) ::= literal_element(l1) literal_elements(l2). { res = l1.l2; }
+literal_elements(res) ::= literal_elements(l1) literal_element(l2). { res = l1.l2; }
 literal_elements(res) ::= . { res = ''; }
 
 literal_element(res) ::= literal(l). { res = l; }
@@ -225,7 +233,7 @@ smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace ifexprs
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
 smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) attributes(a) RDEL. { res = $this->compiler->compileTag(i,array_merge(array('start'=>st,'to'=>v),a));}
-//smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) STEP expr(v2) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v,'step'=>v2));}
+smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) STEP expr(v2) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v,'step'=>v2));}
 									// {foreach $array as $var} tag
 smartytag(res)   ::= LDEL FOREACH(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. {
                                                             res = $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}

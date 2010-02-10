@@ -82,7 +82,8 @@ class Smarty_Internal_Templatelexer
     {
         // set instance object
         self::instance($this); 
-        $this->data = preg_replace("/(\r\n|\r|\n)/", "\n", $data);
+//        $this->data = preg_replace("/(\r\n|\r|\n)/", "\n", $data);
+        $this->data = $data;
         $this->counter = 0;
         $this->line = 1;
         $this->smarty = $compiler->smarty;
@@ -108,13 +109,13 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 linebreak = /[\t ]*[\r\n]+[\t ]*/
-textsmarty = /([\S\s]*?)([\t ]*[\r\n]+[\t ]*|SMARTYldel|\<\?)/
-textdoublequoted = /([\S\s]*?)(SMARTYldel|\$|`\$|\\\\|[^\\]")/
+textsmarty = /([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel|<\?|\?>))/
+textdoublequoted = /([^"\\]*?)((?:\\.[^"\\]*?)*?)(?=(SMARTYldel|\$|`\$|"))/
 dollarid = /\$\w+/
 all = /[\S\s]+/
 emptyjava = /\{\}/
 phpstarttag = /<\?(?:php\w+|=|[a-zA-Z]+)?/
-phpendtag = /\?\>/
+phpendtag = /\?>/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
 ldelslash = /SMARTYldel\//
@@ -126,7 +127,6 @@ boolean = /true|TRUE|True|false|FALSE|False/
 null = /null|NULL|Null/
 math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
-escapedquotes = /(\\\"|\\\')/
 incdec = /(\+\+|\-\-)\s*/
 unimath = /\s*(\+|\-)\s*/
 openP = /\(\s*/
@@ -155,7 +155,7 @@ andsym = /\s*\&\s*/
 qmark = /\s*\?\s*/
 constant = /([_]+[A-Z0-9][0-9A-Z_]*|[A-Z][0-9A-Z_]*)(?![0-9A-Z_]*[a-z])/
 id = /[0-9]*[a-zA-Z_]\w*/
-literaltexttoend = '[\S\s]+?(SMARTYldel/?literalSMARTYrdel|<\?)'
+literaltexttoend = '([\S\s]*?)(?=(SMARTYldel/?literalSMARTYrdel|<\?))'
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 stripstart = 'SMARTYldelstripSMARTYrdel'
@@ -182,6 +182,7 @@ isnotdivby = /\s+is\s+not\s+div\s+by\s+/
 isin = /\s+is\s+in\s+/
 as = /\s+(AS|as)\s+/
 to = /\s+(to)\s+/
+step = /\s+(step)\s+/
 if = /(if|elseif|else if|while)(?![^\s])/
 for = /for(?![^\s])/
 foreach = /foreach(?![^\s])/
@@ -192,19 +193,6 @@ lor = /\s*\|\|\s*|\s*(OR|or)\s+/
 lxor = /\s*(XOR|xor)\s+/
 typecast = /\((int(eger)?|bool(ean)?|float|double|real|string|binary|array|object)\)/
 other = /./
-php_to_state_change = /[\s\S]+?(\?\>|\/\*|'|"|\<\<\<\s*'?\w+'?\r?\n|\/\/|#)/
-php_to_ml_comment_end = /[\s\S]*\*\//
-php_to_sl_comment_end = /.+?(?=\?\>|\n)/
-php_heredoc_start = /\<\<\<\s*\w+\r?\n/
-php_nowdoc_start = /\<\<\<\s*'\w+'\r?\n/
-php_heredoc_line = /[^\n]*\n/
-php_to_single_quote_string_end = /(?:[^\\']|\\.)*'/
-php_to_double_quote_string_sep = /(?:\\.|[^"\\])+?(?="|\{\$|\$\{)/
-php_start_embed = /\{\$|\{\$/
-php_end_embed = /\}/
-php_embed_to_sep = /[^'"\}]+?(?='|"|\}|\<\<\<\s*'?\w+'?\r?\n)/
-double_quote = /"/
-single_quote = /'/
 */
 /*!lex2php
 %statename TEXT
@@ -217,11 +205,13 @@ comment {
 phpstarttag {
   if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
     $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;
-        $this->yypushstate(self::PHP);
   } else {
     $this->token = Smarty_Internal_Templateparser::TP_FAKEPHPSTARTTAG;
     $this->value = substr($this->value, 0, 2);
   }
+ }
+phpendtag {
+    $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
  }
 linebreak {
   if ($this->strip) {
@@ -272,16 +262,6 @@ ldel {
 }
 textsmarty {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-  if (substr($this->value,-2) == '<?') {
-     $this->value = substr($this->value,0,-2);
-  } elseif (substr($this->value,-strlen($this->smarty->left_delimiter)) == $this->smarty->left_delimiter){
-     $this->value = substr($this->value,0,-strlen($this->smarty->left_delimiter));
-  } else {
-     $this->value = rtrim($this->value);
-  }
-  if (strlen($this->value) == 0) {
-     return true;		// rescan
-  }
 }
 all {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
@@ -291,9 +271,6 @@ all {
 */
 /*!lex2php
 %statename SMARTY
-escapedquotes {
-  $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-}
 singlequotestring {
   $this->token = Smarty_Internal_Templateparser::TP_SINGLEQUOTESTRING;
 }
@@ -345,6 +322,9 @@ as {
 }
 to {
   $this->token = Smarty_Internal_Templateparser::TP_TO;
+}
+step {
+  $this->token = Smarty_Internal_Templateparser::TP_STEP;
 }
 instanceof {
   $this->token = Smarty_Internal_Templateparser::TP_INSTANCEOF;
@@ -523,198 +503,6 @@ other {
 }
 */
 /*!lex2php
-%statename PHP
-phpendtag {
-  $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
-  $this->yypopstate();
-}
-php_to_state_change {
-   switch ($yy_subpatterns[0]) {
-   case '?>':
-      $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;
-      $this->value = substr($this->value, 0, -2);
-      break;
-   case "'":
-      $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;
-      $this->yypushstate(self::PHP_SINGLE_QUOTED_STRING);
-      break;
-   case '"':
-      $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE_START_DOUBLEQUOTE;
-      $this->yypushstate(self::PHP_DOUBLE_QUOTED_STRING);
-      break;
-   case '/*':
-      $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;
-      $this->yypushstate(self::PHP_ML_COMMENT);
-      break;
-   case '//':
-   case '#':
-      $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;
-      $this->yypushstate(self::PHP_SL_COMMENT);
-      break;
-   default:
-      $res = preg_match('/\A<<<\s*\'?(\w+)(\'?)\r?\n\z/', $yy_subpatterns[0], $matches);
-      assert($res === 1);
-      $is_nowdoc = $matches[2] === "'";
-      $this->token = $is_nowdoc
-        ? Smarty_Internal_Templateparser::TP_PHP_NOWDOC_START
-        : Smarty_Internal_Templateparser::TP_PHP_HEREDOC_START;
-      $this->heredoc_id_stack[] = $matches[1];
-      $this->yypushstate($is_nowdoc ? self::PHP_NOWDOC : self::PHP_HEREDOC);
-      break;
-   }
-}
-all {
-  $this->compiler->trigger_template_error ("missing PHP end tag");
-}
-*/
-/*!lex2php
-%statename PHP_ML_COMMENT
-php_to_ml_comment_end {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;  
-  $this->yypopstate();
-}
-all {
-  $this->compiler->trigger_template_error("missing PHP comment end */");
-}
-*/
-/*!lex2php
-%statename PHP_SL_COMMENT
-php_to_sl_comment_end {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;  
-  $this->yypopstate();
-}
-all {
-  /* this can happen for "//?>" */
-  $this->yypopstate();
-  return true;
-}
-*/
-/*!lex2php
-%statename PHP_NOWDOC
-php_heredoc_line {
-  $heredoc_id = $this->heredoc_id_stack[sizeof($this->heredoc_id_stack)-1];
-  if (   $this->value === $heredoc_id."\n"
-      || $this->value === $heredoc_id."\r\n"
-      || $this->value === $heredoc_id.";\n"
-      || $this->value === $heredoc_id.";\r\n"
-     ) {
-    $this->token = Smarty_Internal_Templateparser::TP_PHP_NOWDOC_END;
-    array_pop($this->heredoc_id_stack);
-    $this->yypopstate();
-  } else {
-    $this->token = Smarty_Internal_Templateparser::TP_PHP_DQ_CONTENT;
-  }
-}
-all {
-  $this->compiler->trigger_template_error("missing PHP NOWDOC end");
-}
-*/
-/*!lex2php
-%statename PHP_HEREDOC
-php_start_embed {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_DQ_EMBED_START;
-  $this->yypushstate(self::PHP_RETURNING_TO_HEREDOC_FROM_EMBEDDED);    
-  $this->yypushstate(self::PHP_DOUBLE_QUOTED_STRING_EMBEDDED);    
-}
-php_heredoc_line {
-  $heredoc_id = $this->heredoc_id_stack[sizeof($this->heredoc_id_stack)-1];
-  if (   $this->value === $heredoc_id."\n"
-      || $this->value === $heredoc_id."\r\n"
-      || $this->value === $heredoc_id.";\n"
-      || $this->value === $heredoc_id.";\r\n"
-     ) {
-    $this->token = Smarty_Internal_Templateparser::TP_PHP_HEREDOC_END;
-    array_pop($this->heredoc_id_stack);
-    $this->yypopstate();
-  } else {
-    $this->token = Smarty_Internal_Templateparser::TP_PHP_DQ_CONTENT;
-    if (preg_match('/(.*?)(\{\$\|\$\{)/', $this->value, $matches)) {
-      $this->value = $matches[1];
-    }
-  }
-}
-all {
-  $this->compiler->trigger_template_error("missing PHP HEREDOC end");
-}
-*/
-/*!lex2php
-%statename PHP_RETURNING_TO_HEREDOC_FROM_EMBEDDED
-php_heredoc_line {
-  $this->yypopstate();
-  $heredoc_id = $this->heredoc_id_stack[sizeof($this->heredoc_id_stack)-1];
-  if (   $this->value === $heredoc_id."\n"
-      || $this->value === $heredoc_id."\r\n"
-      || $this->value === $heredoc_id.";\n"
-      || $this->value === $heredoc_id.";\r\n"
-     ) {
-    //Make sure it isn't interpreted as HEREDOC end.
-    $this->token = Smarty_Internal_Templateparser::TP_PHP_DQ_CONTENT;
-  } else {
-    return true; //retry in PHP_HEREDOC state
-  }
-}
-*/
-/*!lex2php
-%statename PHP_SINGLE_QUOTED_STRING
-php_to_single_quote_string_end {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;  
-  $this->yypopstate();
-}
-all {
-  $this->compiler->trigger_template_error("missing PHP single quoted string end");
-}
-*/
-/*!lex2php
-%statename PHP_DOUBLE_QUOTED_STRING
-php_start_embed {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_DQ_EMBED_START;
-  $this->yypushstate(self::PHP_DOUBLE_QUOTED_STRING_EMBEDDED);
-}
-double_quote {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE_DOUBLEQUOTE;
-  $this->yypopstate();
-}
-php_to_double_quote_string_sep {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_DQ_CONTENT;
-}
-all {
-  $this->compiler->trigger_template_error("missing PHP double quoted string end");
-}
-*/
-/*!lex2php
-%statename PHP_DOUBLE_QUOTED_STRING_EMBEDDED
-double_quote {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE_START_DOUBLEQUOTE;
-  $this->yypushstate(self::PHP_DOUBLE_QUOTED_STRING);
-}
-single_quote {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;
-  $this->yypushstate(self::PHP_SINGLE_QUOTED_STRING);
-}
-php_heredoc_start {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_HEREDOC_START;
-  $res = preg_match('/\A\<\<\<\s*(\w+)\r?\n\z/', $this->value, $matches);
-  assert($res === 1);
-  $this->heredoc_id_stack[] = $matches[1];
-  $this->yypushstate(self::PHP_HEREDOC);
-}
-php_nowdoc_start {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_NOWDOC_START;
-  $res = preg_match('/\A\<\<\<\s*\'(\w+)\'\r?\n\z/', $this->value, $matches);
-  assert($res === 1);
-  $this->heredoc_id_stack[] = $matches[1];
-  $this->yypushstate(self::PHP_NOWDOC);
-}
-php_end_embed {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_DQ_EMBED_END;
-  $this->yypopstate();
-}
-php_embed_to_sep {
-  $this->token = Smarty_Internal_Templateparser::TP_PHP_CODE;
-}
-*/
-
-/*!lex2php
 %statename LITERAL
 literalstart {
   $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
@@ -733,21 +521,10 @@ phpstarttag {
    }
 }
 phpendtag {
-  $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+  $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
 }
 literaltexttoend {
-  $lenght_literal = strlen($this->smarty->left_delimiter.$this->smarty->right_delimiter)+7;
-  if (substr($this->value,-2,2) === '<?') {
-    $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
-    $this->value = substr($this->value,0,-2);
-  } else if (substr($this->value,-$lenght_literal,$lenght_literal) === $this->smarty->left_delimiter.'literal'.$this->smarty->right_delimiter) {
-    $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
-    $this->value = substr($this->value,0,-$lenght_literal);
-  } else {
-    assert(substr($this->value,-$lenght_literal-1,$lenght_literal+1) === $this->smarty->left_delimiter.'/literal'.$this->smarty->right_delimiter);
-    $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
-    $this->value = substr($this->value,0,-$lenght_literal-1);
-  }
+  $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
 }
 all {
   $this->compiler->trigger_template_error ("missing or misspelled literal closing tag");
@@ -801,16 +578,6 @@ dollar {
 }
 textdoublequoted {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
-  if (substr($this->value,-strlen($this->smarty->left_delimiter)) == $this->smarty->left_delimiter) {
-     $this->value = substr($this->value,0,-strlen($this->smarty->left_delimiter));
-  } elseif (substr($this->value,-2) == '`$') {
-    $this->value = substr($this->value,0,-2);  
-  } elseif (strpbrk(substr($this->value,-1),'"$') !== false) {
-    $this->value = substr($this->value,0,-1);
-  } 
-  if (strlen($this->value) == 0) {
-     return true;		// rescan
-  }
 }
 all {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
