@@ -33,7 +33,6 @@
         $this->compiler->has_variable_string = false;
 				$this->compiler->prefix_code = array();
 				$this->prefix_number = 0;
-				$this->allowed_php = false;
     }
     public static function &instance($new_instance = null)
     {
@@ -75,6 +74,8 @@
     $this->compiler->trigger_template_error();
 }
 
+%left VERT.
+%left COLON.
 
 //
 // complete template
@@ -107,9 +108,6 @@ template(res)       ::= template(t) template_element(e). {if ($this->template->e
 //
 											// Smarty tag
 template_element(res)::= smartytag(st). {
-                                          if ($this->allowed_php) {
-                                           $this->compiler->trigger_template_error ('Smarty tags are not allowed inside &lt;?php ?> tags');
-                                          }
                                           if ($this->compiler->has_code) {
                                             $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
                                             res = $this->compiler->processNocacheCode($tmp.st,true);
@@ -121,36 +119,28 @@ template_element(res)::= COMMENT. { res = '';}
 											// Literal
 template_element(res) ::= literal(l). { res = l; }
 
-											// <?php tag
-template_element(res)::= PHPSTARTTAG(st). {
+											// <?php> tag
+template_element(res)::= PHPSTARTTAG(st) php_code(t) PHPENDTAG. {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = self::escape_start_tag(st);
+					                             res = self::escape_start_tag(st) . str_replace('<?','&lt;?',t) . '?<??>>';
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st, ENT_QUOTES), false);
+                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st.t.'?>', ENT_QUOTES), false);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
-                                       if ($this->allowed_php) {
-                                           $this->compiler->trigger_template_error ('&lt;?php ?> tags can not be nested');
-                                       }
-				                               $this->allowed_php = true;
-                                       res = $this->compiler->processNocacheCode(st, true);
+                                       res = $this->compiler->processNocacheCode('<?php'.t.'?>', true);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
                                        res = '';
                                       }
                                      }
 
-template_element(res)::= PHPENDTAG(et). {
-                                      if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = '?<??>>';
-                                      } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars(et, ENT_QUOTES), false);
-                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
-				                               $this->allowed_php = false;
-                                       res = $this->compiler->processNocacheCode('?>', true);
-                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
-                                       res = '';
-                                      }
+template_element(res)::= FAKEPHPSTARTTAG(t). {if ($this->lex->strip) {
+                                       res = preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(t));	
+                                     } else {
+                                       res = self::escape_start_tag(t);	
                                      }
+                                    }
 
+											// XML tag
+template_element(res)::= XMLTAG. { $this->compiler->tag_nocache = true; res = $this->compiler->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true);}	
 
 											// Other template text
 template_element(res)::= OTHER(o). {if ($this->lex->strip) {
@@ -159,15 +149,21 @@ template_element(res)::= OTHER(o). {if ($this->lex->strip) {
                                        res = o;	
                                      }
                                     }
-template_element(res)::= FAKEPHPSTARTTAG(t). {if ($this->lex->strip) {
-                                       res = preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(t));	
-                                     } else {
-                                       res = self::escape_start_tag(t);	
-                                     }
-                                    }
 
 
+php_code(res) ::= php_code_element(c1) php_code(c2). { res = c1.c2; }
+php_code(res) ::= . { res = ''; }
 
+php_code_element(res) ::= PHP_CODE(c). { res = c; }
+php_code_element(res) ::= PHP_CODE_START_DOUBLEQUOTE(c1) php_dq_contents(c2) PHP_CODE_DOUBLEQUOTE(c3). { res = c1.c2.c3; }
+php_code_element(res) ::= PHP_HEREDOC_START(c1) php_dq_contents(c2) PHP_HEREDOC_END(c3). { res = c1.c2.c3; }
+php_code_element(res) ::= PHP_NOWDOC_START(c1)  php_dq_contents(c2) PHP_NOWDOC_END(c3) . { res = c1.c2.c3; }
+
+php_dq_contents(res) ::= php_dq_content(c1) php_dq_contents(c2). { res = c1.c2; }
+php_dq_contents(res) ::= . { res = ''; }
+
+php_dq_content(res) ::= PHP_DQ_CONTENT(c). { res = c; }
+php_dq_content(res) ::= PHP_DQ_EMBED_START(c1) php_code(c2) PHP_DQ_EMBED_END(c3). { res = c1.c2.c3; }
 
 
 
@@ -294,7 +290,6 @@ expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
 expr(res)				 ::= exprs(e).	{res = e;}
                  // resources/streams
 expr(res)	       ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2 . '\')';}
-expr(res)        ::= expr(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
 
 									// single value
 exprs(res)        ::= value(v). { res = v; }
@@ -348,20 +343,14 @@ value(res)	     ::= QUOTE doublequoted(s) QUOTE. { $_s = str_replace(array('."".
                                                     }
                                                   }
 value(res)	     ::= QUOTE QUOTE. { res = "''"; }
-									// static class methode call
-value(res)	     ::= ID(c) DOUBLECOLON method(m). { res = c.'::'.m; }
-value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'; }
-									// static class methode call with object chainig
-value(res)	     ::= ID(c) DOUBLECOLON method(m) objectchain(oc). { res = c.'::'.m.oc; }
-value(res)	     ::= ID(c) DOUBLECOLON DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = c.'::$_tmp'.$this->prefix_number.'('. p .')'.oc; }
-									// static class constant
-value(res)       ::= ID(c) DOUBLECOLON ID(v). { res = c.'::'.v;}
-									// static class variables
-value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a). { res = c.'::$'.v.a;}
-									// static class variables with object chain
-value(res)       ::= ID(c) DOUBLECOLON DOLLAR ID(v) arrayindex(a) objectchain(oc). { res = c.'::$'.v.a.oc;}
+									// static class access
+value(res)	     ::= ID(c) DOUBLECOLON static_class_access(r). {if (!$this->template->security || $this->smarty->security_handler->isTrustedStaticClass(c, $this->compiler)) {
+                                                                  res = c.'::'.r; 
+                                                                }}
 								  // Smarty tag
 value(res)	     ::= smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '$_tmp'.$this->prefix_number; }
+                  // modifier
+value(res)        ::= value(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
 
 
 //
@@ -472,6 +461,18 @@ params            ::= . { return;}
 modifier(res)    ::= VERT AT ID(m). { res =  m;}
 modifier(res)    ::= VERT ID(m). { res =  m;}
 
+									// static class methode call
+static_class_access(res)	     ::= method(m). { res = m; }
+static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'; }
+									// static class methode call with object chainig
+static_class_access(res)	     ::= method(m) objectchain(oc). { res = c.'::'.m.oc; }
+static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'.oc; }
+									// static class constant
+static_class_access(res)       ::= ID(v). { res = v;}
+									// static class variables
+static_class_access(res)       ::=  DOLLAR ID(v) arrayindex(a). { res = '$'.v.a;}
+									// static class variables with object chain
+static_class_access(res)       ::= DOLLAR ID(v) arrayindex(a) objectchain(oc). { res = '$'.v.a.oc;}
 
 //
 // filter
@@ -486,7 +487,7 @@ modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 										// no parameter
 modparameters      ::= . {return;}
 										// parameter expression
-modparameter(res) ::= COLON exprs(mp). {res = ','.mp;}
+modparameter(res) ::= COLON value(mp). {res = ','.mp;}
 modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
 //
@@ -548,14 +549,21 @@ arrayelement(res)		 ::=  expr(e). { res = e;}
 //
 doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
 doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
-doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {res = '{'.v.'}'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {res = '{'.e.'}'; $this->compiler->has_variable_string = true;}
+doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {if (substr(v,0,1) == '\'' || substr(v,0,1) == '@') {
+                                                                 		     res = '".'.v.'."';
+                                                                	      } else {
+                                                                         res = '{'.v.'}'; 
+                                                                        }
+                                                                       $this->compiler->has_variable_string = true;
+                                                                       }
+doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {res = '".('.e.')."'; $this->compiler->has_variable_string = true;}
 doublequotedcontent(res)           ::=  DOLLARID(i). {res = '{$_smarty_tpl->getVariable(\''. substr(i,1) .'\')->value}'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(i,"'"), null, true, false)->nocache; $this->compiler->has_variable_string = true;}
 doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {if (substr(v,0,1) == '\'') {
-                                                                 res = '".'.v.'."'; $this->compiler->has_variable_string = true;
+                                                                 res = '".'.v.'."';
                                                                 } else {
-                                                                 res = '{'.v.'}'; $this->compiler->has_variable_string = true;
+                                                                 res = '{'.v.'}'; 
                                                                 }
+                                                                $this->compiler->has_variable_string = true;
                                                                }
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. { res = '".('.e.')."'; $this->compiler->has_variable_string = true;}
 doublequotedcontent(res) 	         ::=  smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '{$_tmp'.$this->prefix_number.'}'; $this->compiler->has_variable_string = true;}
