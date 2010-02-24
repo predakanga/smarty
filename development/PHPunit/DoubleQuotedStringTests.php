@@ -86,6 +86,14 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
     } 
     /**
+    * test expression in backtick in double quoted strings
+    */
+    public function testExpressionBacktickInDoubleQuotedString()
+    {
+        $tpl = $this->smarty->createTemplate('string:{$a=1}{"`$a+1`"}',null, null,  $this->smarty);
+        $this->assertEquals('2', $this->smarty->fetch($tpl));
+    } 
+     /**
     * test smartytag in double quoted strings
     */
     public function testSmartytagInDoubleQuotedString1()

@@ -50,7 +50,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{count($foo)}');
         } 
         catch (Exception $e) {
-            $this->assertContains('PHP function "count" not allowed by security setting', $e->getMessage());
+            $this->assertContains("PHP function 'count' not allowed by security setting", $e->getMessage());
             return;
         } 
         $this->fail('Exception for not trusted modifier has not been raised.');
@@ -84,7 +84,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|@count}');
         } 
         catch (Exception $e) {
-            $this->assertContains('modifier "count" not allowed by security setting', $e->getMessage());
+            $this->assertContains("modifier 'count' not allowed by security setting", $e->getMessage());
             return;
         } 
         $this->fail('Exception for not trusted function plugin has not been raised.');
@@ -106,7 +106,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testSmartyPhpQuote()
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
-        $this->assertEquals("&lt;?php echo \"hello world\"; ?&gt;", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
+        $this->assertEquals("&lt;?php echo &quot;hello world&quot;; ?&gt;", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
     } 
     public function testSmartyPhpQuote2()
     {
@@ -178,7 +178,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch('string:{include file="./templates_2/hello.tpl"}');
         } 
         catch (Exception $e) {
-            $this->assertContains('/PHPunit/templates_2/hello.tpl" not allowed by security setting', str_replace('\\','/',$e->getMessage()));
+            $this->assertContains("/PHPunit/templates_2/hello.tpl' not allowed by security setting", str_replace('\\','/',$e->getMessage()));
             return;
         } 
         $this->fail('Exception for not trusted directory has not been raised.');
@@ -191,6 +191,43 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security = false;
         $this->assertEquals("hello world", $this->smarty->fetch('string:{include file="./templates_2/hello.tpl"}'));
+    } 
+
+        /**
+    * test trusted static class
+    */
+    public function testTrustedStaticClass()
+    {
+        $this->smarty->security_policy->static_classes = array('mysecuritystaticclass');
+        $tpl = $this->smarty->createTemplate('string:{mysecuritystaticclass::square(5)}');
+        $this->assertEquals('25', $this->smarty->fetch($tpl));
+    } 
+
+    /**
+    * test not trusted PHP function
+    */
+    public function testNotTrustedStaticClass()
+    {
+        $this->smarty->security_policy->static_classes = array('null');
+        try {
+            $this->smarty->fetch('string:{mysecuritystaticclass::square(5)}');
+        } 
+        catch (Exception $e) {
+            $this->assertContains("access to static class 'mysecuritystaticclass' not allowed by security setting", $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for not trusted static class has not been raised.');
+    } 
+
+    
+} 
+class mysecuritystaticclass {
+    const STATIC_CONSTANT_VALUE = 3;
+    public static $static_var = 5;
+    
+    static function square($i)
+    {
+        return $i*$i;
     } 
 } 
 

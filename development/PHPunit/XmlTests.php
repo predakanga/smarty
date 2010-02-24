@@ -1,15 +1,14 @@
 <?php
 /**
-* Smarty PHPunit tests  of the <?xml...> tag handling
-* 
-* @package PHPunit
-* @author Uwe Tews 
-*/
-
+ * Smarty PHPunit tests  of the <?xml...> tag handling
+ * 
+ * @package PHPunit
+ * @author Uwe Tews 
+ */
 
 /**
-* class for <?xml...> tests
-*/
+ * class for <?xml...> tests
+ */
 class XmlTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
@@ -24,28 +23,62 @@ class XmlTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test standard xml
-    */
+     * test standard xml
+     */
     public function testXml()
     {
         $tpl = $this->smarty->createTemplate('xml.tpl');
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch($tpl));
     } 
     /**
-    * test standard xml
-    */
-    public function testXmlCaching1()
+     * test standard xml SMARTY_PHP_QUOTE
+     */
+    public function testXmlPhpQuote()
     {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
+        $tpl = $this->smarty->createTemplate('xml.tpl');
+        $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch($tpl));
+    } 
+    /**
+     * test standard xml SMARTY_PHP_ALLOW
+     */
+    public function testXmlPhpAllow()
+    {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
+        $tpl = $this->smarty->createTemplate('xml.tpl');
+        $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch($tpl));
+    } 
+    /**
+     * test standard xml
+     */
+    public function testXmlCaching()
+    {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_PASSTHRU;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $content = $this->smarty->fetch('xml.tpl');
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $content);
     } 
-    public function testXmlCaching2()
+    /*
+    * test standard xml
+    */
+    public function testXmlCachingPhpQuote()
     {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
- //       $this->assertTrue($this->smarty->is_cached('xml.tpl'));
+        $content = $this->smarty->fetch('xml.tpl');
+        $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $content);
+    } 
+
+    /*
+    * test standard xml
+    */
+    public function testXmlCachingPhpAllow()
+    {
+        $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
         $content = $this->smarty->fetch('xml.tpl');
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $content);
     } 

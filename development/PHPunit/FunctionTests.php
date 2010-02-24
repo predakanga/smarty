@@ -31,7 +31,7 @@ class FunctionTests extends PHPUnit_Framework_TestCase {
             $this->smarty->fetch('string:{unknown()}');
         } 
         catch (Exception $e) {
-            $this->assertContains('PHP function "unknown" not allowed by security setting', $e->getMessage());
+            $this->assertContains("PHP function 'unknown' not allowed by security setting", $e->getMessage());
             return;
         } 
         $this->fail('Exception for unknown function has not been raised.');
