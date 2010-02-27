@@ -33,6 +33,7 @@
         $this->compiler->has_variable_string = false;
 				$this->compiler->prefix_code = array();
 				$this->prefix_number = 0;
+				$this->block_nesting_level = 0;
     }
     public static function &instance($new_instance = null)
     {
@@ -111,7 +112,12 @@ template_element(res)::= smartytag(st). {
                                           if ($this->compiler->has_code) {
                                             $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
                                             res = $this->compiler->processNocacheCode($tmp.st,true);
-                                         } else { res = st;}  $this->compiler->has_variable_string = false;}	
+                                         } else { 
+                                           res = st;
+                                         }  
+                                         $this->compiler->has_variable_string = false;
+                                         $this->block_nesting_level = count($this->compiler->_tag_stack);
+                                        }	
 
 											// comments
 template_element(res)::= COMMENT. { res = '';}
@@ -200,11 +206,9 @@ smartytag(res)   ::= LDEL ternary(t) attributes(a) RDEL. { res = $this->compiler
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL value(e) RDEL. { res = $this->compiler->compileTag('assign',array('value'=>e,'var'=>"'".i."'"));}									
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL expr(e) RDEL. { res = $this->compiler->compileTag('assign',array('value'=>e,'var'=>"'".i."'"));}									
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e,'var'=>"'".i."'"),a));}									
-smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL ifexprs(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e,'var'=>"'".i."'"),a));}									
 smartytag(res)   ::= LDEL DOLLAR ID(i) EQUAL ternary(t) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>t,'var'=>"'".i."'"),a));}									
 smartytag(res)   ::= LDEL varindexed(vi) EQUAL expr(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi,a));}									
 smartytag(res)   ::= LDEL varindexed(vi) EQUAL ternary(t) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>t),vi,a));}									
-smartytag(res)   ::= LDEL varindexed(vi) EQUAL ifexprs(e) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>e),vi,a));}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i,a);}
 smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i,a);}
@@ -220,12 +224,12 @@ smartytag(res)   ::= LDEL ID(i) PTR ID(me) modifier(m) modparameters(p) attribut
                                                                                                res .= $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>'ob_get_clean()'.p)).'?>';
                                                                                             }
 									// {if}, {elseif} and {while} tag
-smartytag(res)   ::= LDEL IF(i) SPACE ifexprs(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
-smartytag(res)   ::= LDEL IF(i) UNIMATH(m) ifexprs(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>trim(m).ie));}
+smartytag(res)   ::= LDEL IF(i) SPACE expr(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
 smartytag(res)   ::= LDEL IF(i) SPACE statement(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace ifexprs(ie) SEMICOLON optspace DOLLAR varvar(v2) foraction(e2) RDEL. {
+smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace expr(ie) SEMICOLON optspace DOLLAR varvar(v2) foraction(e2) RDEL. {
                                                              res = $this->compiler->compileTag(i,array('start'=>st,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
+
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
 smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) attributes(a) RDEL. { res = $this->compiler->compileTag(i,array_merge(array('start'=>st,'to'=>v),a));}
@@ -267,7 +271,6 @@ attributes(res)  ::= . { res = array();}
 									// attribute
 attribute(res)   ::= SPACE ID(v) EQUAL ID(i). { res = array(v=>"'".i."'");}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
-attribute(res)   ::= SPACE ID(v) EQUAL ifexprs(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL value(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ternary(t). { res = array(v=>t);}
 attribute(res)   ::= SPACE ID(v). { res = array(v=>'true');}
@@ -285,31 +288,45 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 //
 // expressions
 //
-									// simple expression
-expr(res)				 ::= ID(i). { res = '\''.i.'\''; }
-expr(res)				 ::= exprs(e).	{res = e;}
-                 // resources/streams
-expr(res)	       ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2 . '\')';}
 
 									// single value
-exprs(res)        ::= value(v). { res = v; }
+expr(res)        ::= value(v). { res = v; }
+expr(res)        ::= ID(i). { res = "'".i."'"; }
+                 // resources/streams
+expr(res)	       ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2 . '\')';}
 									// arithmetic expression
-exprs(res)        ::= exprs(e) MATH(m) value(v). { res = e . trim(m) . v; } 
-exprs(res)        ::= exprs(e) UNIMATH(m) value(v). { res = e . trim(m) . v; } 
+expr(res)        ::= expr(e) MATH(m) value(v). { res = e . trim(m) . v; } 
+expr(res)        ::= expr(e) UNIMATH(m) value(v). { res = e . trim(m) . v; } 
 									// bit operation 
-exprs(res)        ::= exprs(e) ANDSYM(m) value(v). { res = e . trim(m) . v; } 
+expr(res)        ::= expr(e) ANDSYM(m) value(v). { res = e . trim(m) . v; } 
 
                   // array
-exprs(res)				::= array(a).	{res = a;}
-//exprs(res)        ::= exprs(e1) ifcond(c) value(e2). {res = e1.c.e2;}
-//exprs(res)			  ::= exprs(e1) lop(o) value(e2).	{res = e1.o.e2;}
+expr(res)				::= array(a).	{res = a;}
+
+// if expression
+										// simple expression
+expr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
+expr(res)			   ::= expr(e1) ISIN array(a).	{res = 'in_array('.e1.','.a.')';}
+expr(res)			   ::= expr(e1) ISIN value(v).	{res = 'in_array('.e1.',(array)'.v.')';}
+expr(res)			   ::= expr(e1) lop(o) expr(e2).	{res = e1.o.e2;}
+expr(res)			   ::= expr(e1) ISDIVBY expr(e2).	{res = '!('.e1.' % '.e2.')';}
+expr(res)			   ::= expr(e1) ISNOTDIVBY expr(e2).	{res = '('.e1.' % '.e2.')';}
+expr(res)			   ::= expr(e1) ISEVEN.	{res = '!(1 & '.e1.')';}
+expr(res)			   ::= expr(e1) ISNOTEVEN.	{res = '(1 & '.e1.')';}
+expr(res)			   ::= expr(e1) ISEVENBY expr(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
+expr(res)			   ::= expr(e1) ISNOTEVENBY expr(e2).	{res = '(1 & '.e1.' / '.e2.')';}
+expr(res)			   ::= expr(e1) ISODD.	{res = '(1 & '.e1.')';}
+expr(res)			   ::= expr(e1) ISNOTODD.	{res = '!(1 & '.e1.')';}
+expr(res)			   ::= expr(e1) ISODDBY expr(e2).	{res = '(1 & '.e1.' / '.e2.')';}
+expr(res)			   ::= expr(e1) ISNOTODDBY expr(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
+expr(res)        ::= value(v1) INSTANCEOF(i) ID(id). {res = v1.i.id;}
+expr(res)        ::= value(v1) INSTANCEOF(i) value(v2). {$this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.v2.';?>'; res = v1.i.'$_tmp'.$this->prefix_number;}
+
 
 //
 // ternary
 //
-ternary(res)				::= OPENP ifexprs(if) CLOSEP  QMARK  expr(e1)  COLON  expr(e2). { res = if.' ? '.e1.' : '.e2;}
 ternary(res)				::= OPENP expr(v) CLOSEP  QMARK  expr(e1) COLON  expr(e2). { res = v.' ? '.e1.' : '.e2;}
-
 
 								 // value
 value(res)		   ::= variable(v). { res = v; }
@@ -335,14 +352,7 @@ value(res)       ::= OPENP expr(e) CLOSEP. { res = "(". e .")"; }
 									// singele quoted string
 value(res)	     ::= SINGLEQUOTESTRING(t). { res = t; }
 									// double quoted string
-value(res)	     ::= QUOTE doublequoted(s) QUOTE. { $_s = str_replace(array('."".','.""'),array('.',''),'"'.s.'"'); 
-                                                    if (substr($_s,0,3) == '"".') {
-                                                      res = substr($_s,3);
-                                                    } else {
-                                                      res = $_s;
-                                                    }
-                                                  }
-value(res)	     ::= QUOTE QUOTE. { res = "''"; }
+value(res)	     ::= doublequoted_with_quotes(s). { res = s; }
 									// static class access
 value(res)	     ::= ID(c) DOUBLECOLON static_class_access(r). {if (!$this->template->security || $this->smarty->security_handler->isTrustedStaticClass(c, $this->compiler)) {
                                                                   res = c.'::'.r; 
@@ -384,19 +394,17 @@ arrayindex        ::= . {return;}
 										// Smarty2 style index 
 indexdef(res)    ::= DOT DOLLAR varvar(v).  { res = '[$_smarty_tpl->getVariable('. v .')->value]'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('v', null, true, false)->nocache;}
 indexdef(res)    ::= DOT DOLLAR varvar(v) AT ID(p). { res = '[$_smarty_tpl->getVariable('. v .')->'.p.']'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
-//indexdef(res)    ::= DOT object(o). { res = '['.o.']'; }
-//indexdef(res)   ::= DOT variable(v). { res = "[".v."]";}
 indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
 //indexdef(res)   ::= DOT CONSTANT(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT BOOLEAN(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT NULL(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
-indexdef(res)   ::= DOT LDEL exprs(e) RDEL. { res = "[". e ."]";}
+indexdef(res)   ::= DOT LDEL expr(e) RDEL. { res = "[". e ."]";}
 										// section tag index
 indexdef(res)   ::= OPENB ID(i)CLOSEB. { res = '['.$this->compiler->compileTag('private_special_variable','[\'section\'][\''.i.'\'][\'index\']').']';}
 indexdef(res)   ::= OPENB ID(i) DOT ID(i2) CLOSEB. { res = '['.$this->compiler->compileTag('private_special_variable','[\'section\'][\''.i.'\'][\''.i2.'\']').']';}
 										// PHP style index
-indexdef(res)   ::= OPENB exprs(e) CLOSEB. { res = "[". e ."]";}
+indexdef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
 										// für assign append array
 indexdef(res)  ::= OPENB CLOSEB. {res = '';}
 
@@ -418,6 +426,8 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 object(res)    ::= varindexed(vi) objectchain(oc). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']).oc;} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].oc; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
+object(res)    ::= varindexed(vi) DOUBLECOLON ID(id). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']).'::'.id;} else {
+                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].'::'.id; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
@@ -490,34 +500,7 @@ modparameters      ::= . {return;}
 modparameter(res) ::= COLON value(mp). {res = ','.mp;}
 modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
-//
-// if expressions
-//
-										// single if expression
-ifexprs(res)			 ::= ifexpr(e).	{res = e;}
-ifexprs(res)			 ::= NOT ifexprs(e).	{res = '!'.e;}
-ifexprs(res)			 ::= OPENP ifexprs(e) CLOSEP.	{res = '('.e.')';}
-
-// if expression
-										// simple expression
-ifexpr(res)        ::= expr(e). {res =e;}
-ifexpr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
-ifexpr(res)			   ::= expr(e1) ISIN array(a).	{res = 'in_array('.e1.','.a.')';}
-ifexpr(res)			   ::= expr(e1) ISIN value(v).	{res = 'in_array('.e1.',(array)'.v.')';}
-ifexpr(res)			   ::= ifexprs(e1) lop(o) ifexprs(e2).	{res = e1.o.e2;}
-ifexpr(res)			   ::= ifexprs(e1) ISDIVBY ifexprs(e2).	{res = '!('.e1.' % '.e2.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTDIVBY ifexprs(e2).	{res = '('.e1.' % '.e2.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISEVEN.	{res = '!(1 & '.e1.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTEVEN.	{res = '(1 & '.e1.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISEVENBY ifexprs(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTEVENBY ifexprs(e2).	{res = '(1 & '.e1.' / '.e2.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISODD.	{res = '(1 & '.e1.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTODD.	{res = '!(1 & '.e1.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISODDBY ifexprs(e2).	{res = '(1 & '.e1.' / '.e2.')';}
-ifexpr(res)			   ::= ifexprs(e1) ISNOTODDBY ifexprs(e2).	{res = '!(1 & '.e1.' / '.e2.')';}
-ifexpr(res)        ::= value(v1) INSTANCEOF(i) ID(id). {res = v1.i.id;}
-ifexpr(res)        ::= value(v1) INSTANCEOF(i) value(v2). {$this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.v2.';?>'; res = v1.i.'$_tmp'.$this->prefix_number;}
-
+// if conditions and operators
 ifcond(res)        ::= EQUALS. {res = '==';}
 ifcond(res)        ::= NOTEQUALS. {res = '!=';}
 ifcond(res)        ::= GREATERTHAN. {res = '>';}
@@ -547,27 +530,24 @@ arrayelement(res)		 ::=  expr(e). { res = e;}
 //
 // double qouted strings
 //
-doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). {res = o1.o2;}
-doublequoted(res)          ::= doublequotedcontent(o). {res = o;}
-doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {if (substr(v,0,1) == '\'' || substr(v,0,1) == '@') {
-                                                                 		     res = '".'.v.'."';
-                                                                	      } else {
-                                                                         res = '{'.v.'}'; 
-                                                                        }
-                                                                       $this->compiler->has_variable_string = true;
-                                                                       }
-doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {res = '".('.e.')."'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  DOLLARID(i). {res = '{$_smarty_tpl->getVariable(\''. substr(i,1) .'\')->value}'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(i,"'"), null, true, false)->nocache; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {if (substr(v,0,1) == '\'') {
-                                                                 res = '".'.v.'."';
-                                                                } else {
-                                                                 res = '{'.v.'}'; 
-                                                                }
-                                                                $this->compiler->has_variable_string = true;
-                                                               }
-doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. { res = '".('.e.')."'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res) 	         ::=  smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '{$_tmp'.$this->prefix_number.'}'; $this->compiler->has_variable_string = true;}
-doublequotedcontent(res)           ::=  OTHER(o). {res = o;}
+doublequoted_with_quotes(res) ::= QUOTE QUOTE. { res = "''"; }
+doublequoted_with_quotes(res) ::= QUOTE doublequoted(s) QUOTE. { res = s->to_smarty_php(); }
+
+doublequoted(res)          ::= doublequoted(o1) doublequotedcontent(o2). { o1->append_subtree(o2); res = o1; }
+doublequoted(res)          ::= doublequotedcontent(o). { res = new _smarty_doublequoted($this, o); }
+
+doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. { res = new _smarty_code($this, v); }
+doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. { res = new _smarty_code($this, e); }
+doublequotedcontent(res)           ::=  DOLLARID(i). {
+   res = new _smarty_code($this, '$_smarty_tpl->getVariable(\''. substr(i,1) .'\')->value');
+   $this->compiler->tag_nocache = $this->compiler->tag_nocache | $this->template->getVariable(trim(i,"'"), null, true, false)->nocache;
+  }
+doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. { res = new _smarty_code($this, v); }
+doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. { res = new _smarty_code($this, '('.e.')'); }
+doublequotedcontent(res) 	   ::=  smartytag(st). {
+   res = new _smarty_tag($this, st);
+  }
+doublequotedcontent(res)           ::=  OTHER(o). { res = new _smarty_dq_content($this, o); }
 
 
 //

@@ -111,7 +111,7 @@ class Smarty_Internal_Templatelexer
 linebreak = /[\t ]*[\r\n]+[\t ]*/
 textsmarty = /([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel|\<\?))/
 textdoublequoted = /([^"\\]*?)((?:\\.[^"\\]*?)*?)(?=(SMARTYldel|\$|`\$|"))/
-dollarid = /\$\w+/
+dollarid = /\$[0-9]*[a-zA-Z_]\w*/
 all = /[\S\s]+/
 emptyjava = /\{\}/
 phpstarttag = /<\?(?:php\w+|=|[a-zA-Z]+)?/
