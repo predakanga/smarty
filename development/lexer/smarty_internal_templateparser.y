@@ -34,6 +34,7 @@
 				$this->compiler->prefix_code = array();
 				$this->prefix_number = 0;
 				$this->block_nesting_level = 0;
+				$this->is_xml = false;
     }
     public static function &instance($new_instance = null)
     {
@@ -125,14 +126,29 @@ template_element(res)::= COMMENT. { res = '';}
 											// Literal
 template_element(res) ::= literal(l). { res = l; }
 
-											// <?php> tag
-template_element(res)::= PHPSTARTTAG(st) php_code(t) PHPENDTAG. {
+											// '<?php' tag
+template_element(res)::= PHPSTARTTAG(st). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = self::escape_start_tag(st) . str_replace('<?','&lt;?',t) . '?<??>>';
+					                             res = self::escape_start_tag(st);
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st.t.'?>', ENT_QUOTES), false);
+                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st, ENT_QUOTES),false);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
-                                       res = $this->compiler->processNocacheCode('<?php'.t.'?>', true);
+                                       res = $this->compiler->processNocacheCode('<?php', true);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
+                                       res = '';
+                                      }
+                                     }
+											// '?>' tag
+template_element(res)::= PHPENDTAG. {if ($this->is_xml) {
+                                       $this->compiler->tag_nocache = true; 
+                                       $this->is_xml = true; 
+                                       res = $this->compiler->processNocacheCode("<?php echo '?>';?>", $this->compiler, true);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
+					                             res = '?<??>>';
+                                      } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
+                                       res = $this->compiler->processNocacheCode(htmlspecialchars('?>', ENT_QUOTES), false);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+                                       res = $this->compiler->processNocacheCode('?>', true);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
                                        res = '';
                                       }
@@ -146,7 +162,7 @@ template_element(res)::= FAKEPHPSTARTTAG(t). {if ($this->lex->strip) {
                                     }
 
 											// XML tag
-template_element(res)::= XMLTAG. { $this->compiler->tag_nocache = true; res = $this->compiler->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true);}	
+template_element(res)::= XMLTAG. { $this->compiler->tag_nocache = true; $this->is_xml = true; res = $this->compiler->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true);}	
 
 											// Other template text
 template_element(res)::= OTHER(o). {if ($this->lex->strip) {
@@ -155,22 +171,6 @@ template_element(res)::= OTHER(o). {if ($this->lex->strip) {
                                        res = o;	
                                      }
                                     }
-
-
-php_code(res) ::= php_code_element(c1) php_code(c2). { res = c1.c2; }
-php_code(res) ::= . { res = ''; }
-
-php_code_element(res) ::= PHP_CODE(c). { res = c; }
-php_code_element(res) ::= PHP_CODE_START_DOUBLEQUOTE(c1) php_dq_contents(c2) PHP_CODE_DOUBLEQUOTE(c3). { res = c1.c2.c3; }
-php_code_element(res) ::= PHP_HEREDOC_START(c1) php_dq_contents(c2) PHP_HEREDOC_END(c3). { res = c1.c2.c3; }
-php_code_element(res) ::= PHP_NOWDOC_START(c1)  php_dq_contents(c2) PHP_NOWDOC_END(c3) . { res = c1.c2.c3; }
-
-php_dq_contents(res) ::= php_dq_content(c1) php_dq_contents(c2). { res = c1.c2; }
-php_dq_contents(res) ::= . { res = ''; }
-
-php_dq_content(res) ::= PHP_DQ_CONTENT(c). { res = c; }
-php_dq_content(res) ::= PHP_DQ_EMBED_START(c1) php_code(c2) PHP_DQ_EMBED_END(c3). { res = c1.c2.c3; }
-
 
 
 literal(res) ::= LITERALSTART LITERALEND. { res = ''; }
@@ -475,7 +475,7 @@ modifier(res)    ::= VERT ID(m). { res =  m;}
 static_class_access(res)	     ::= method(m). { res = m; }
 static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'; }
 									// static class methode call with object chainig
-static_class_access(res)	     ::= method(m) objectchain(oc). { res = c.'::'.m.oc; }
+static_class_access(res)	     ::= method(m) objectchain(oc). { res = m.oc; }
 static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'.oc; }
 									// static class constant
 static_class_access(res)       ::= ID(v). { res = v;}
