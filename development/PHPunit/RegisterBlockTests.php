@@ -19,7 +19,7 @@ class RegisterBlockTests extends PHPUnit_Framework_TestCase {
 
     public static function isRunnable()
     {
-        return false;
+        return true;
     } 
 
     /**
@@ -59,7 +59,7 @@ class RegisterBlockTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('y', 10);
         $this->smarty->assign('z', 100);
         $this->smarty->register->block('testblock', 'myblock');
-        $this->assertEquals('1 10 100', $this->smarty->fetch('test_register->block.tpl'));
+        $this->assertEquals('1 10 100', $this->smarty->fetch('test_register_block.tpl'));
     } 
     public function testRegisterBlockCaching2()
     {
@@ -69,7 +69,7 @@ class RegisterBlockTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('y', 20);
         $this->smarty->assign('z', 200);
         $this->smarty->register->block('testblock', 'myblock');
-        $this->assertEquals('1 10 100', $this->smarty->fetch('test_register->block.tpl'));
+        $this->assertEquals('1 10 100', $this->smarty->fetch('test_register_block.tpl'));
     } 
     public function testRegisterBlockCaching3()
     {
@@ -80,7 +80,7 @@ class RegisterBlockTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('y', 30);
         $this->smarty->assign('z', 300);
         $this->smarty->register->block('testblock', 'myblock', false);
-        $this->assertEquals('3 30 300', $this->smarty->fetch('test_register->block.tpl'));
+        $this->assertEquals('3 30 300', $this->smarty->fetch('test_register_block.tpl'));
     } 
     public function testRegisterBlockCaching4()
     {
@@ -90,7 +90,7 @@ class RegisterBlockTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('y', 40);
         $this->smarty->assign('z', 400);
         $this->smarty->register->block('testblock', 'myblock', false);
-        $this->assertEquals('3 40 300', $this->smarty->fetch('test_register->block.tpl'));
+        $this->assertEquals('3 40 300', $this->smarty->fetch('test_register_block.tpl'));
     } 
     /**
     * test unregister->block method

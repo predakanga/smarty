@@ -27,6 +27,7 @@ class FunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testUnknownFunction()
     {
+        $this->smarty->enableSecurity();
         try {
             $this->smarty->fetch('string:{unknown()}');
         } 

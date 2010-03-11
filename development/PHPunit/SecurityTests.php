@@ -62,7 +62,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testDisabledTrustedPHPFunction()
     {
         $this->smarty->security_policy->php_functions = array('null');
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{count($foo)}'));
     } 
 
@@ -96,7 +96,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testDisabledTrustedMofifer()
     {
         $this->smarty->security_policy->modifiers = array('null');
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $this->assertEquals("5", $this->smarty->fetch('string:{assign var=foo value=[1,2,3,4,5]}{$foo|@count}'));
     } 
 
@@ -106,7 +106,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testSmartyPhpQuote()
     {
         $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
-        $this->assertEquals("&lt;?php echo &quot;hello world&quot;; ?&gt;", $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
+        $this->assertEquals('&lt;?php echo "hello world"; ?&gt;', $this->smarty->fetch('string:<?php echo "hello world"; ?>'));
     } 
     public function testSmartyPhpQuote2()
     {
@@ -189,7 +189,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testDisabledTrustedDirectory()
     {
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $this->assertEquals("hello world", $this->smarty->fetch('string:{include file="./templates_2/hello.tpl"}'));
     } 
 

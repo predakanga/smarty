@@ -1,20 +1,20 @@
 <?php
 /**
-* Smarty PHPunit tests compilation of {php} and <?php...?> tag
-* 
-* @package PHPunit
-* @author Uwe Tews 
-*/
+ * Smarty PHPunit tests compilation of {php} and <?php...?> tag
+ * 
+ * @package PHPunit
+ * @author Uwe Tews 
+ */
 
 /**
-* class for {php} and <?php...?> tag tests
-*/
+ * class for {php} and <?php...?> tag tests
+ */
 class CompilePhpTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
     } 
 
     public static function isRunnable()
@@ -23,12 +23,12 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test {php} tag
-    */
+     * test {php} tag
+     */
     public function testPhpSmartyTagAllowed()
     {
         $this->smarty->allow_php_tag = true;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:{php}echo 'hello world'; {/php}");
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
@@ -44,9 +44,9 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
         $this->fail('Warning {php} has not been raised.');
     } 
     /**
-    * test <?php...\> tag
-    * default is PASSTHRU
-    */
+     * test <?php...\> tag
+     * default is PASSTHRU
+     */
     public function testPhpTag()
     {
         $tpl = $this->smarty->createTemplate("string:<?php echo 'hello world'; ?>");
@@ -57,15 +57,15 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
     public function testPhpTagAllow()
     {
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:<?php echo 'hello world'; ?>");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals('hello world', $content);
     } 
     /**
-    * test <?=...\> shorttag
-    * default is PASSTHRU
-    */
+     * test <?=...\> shorttag
+     * default is PASSTHRU
+     */
     public function testShortTag()
     {
         $this->smarty->assign('foo', 'bar');
@@ -73,8 +73,9 @@ class CompilePhpTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('<?=$foo?>', $content);
     } 
 
-    public function testEndTagInStrings1() {
-      $str = <<< STR
+    public function testEndTagInStrings1()
+    {
+        $str = <<< STR
 <?php
 \$a = Array("?>" => 3 );
 \$b = Array("?>" => "?>");
@@ -100,17 +101,18 @@ STR;
         $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals('{$a["?>"]}3{$a["{$b["?>"]}"]}7a8a', $content);
-    }
+    } 
 
-    public function testEndTagInStrings2() {
-      $str = <<< STR
+    public function testEndTagInStrings2()
+    {
+        $str = <<< STR
 <?php
 \$a = Array("?>" => 3 );
 \$b = Array("?>" => "?>");
@@ -124,17 +126,18 @@ STR;
         $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals('33', $content);
-    }
+    } 
 
-    public function testEndTagInStrings3() {
-      $str = <<< STR
+    public function testEndTagInStrings3()
+    {
+        $str = <<< STR
 <?php
 echo 'a?>a';
 echo '?>\\\\';
@@ -146,17 +149,18 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals('a?>a?>\\\\\'?>a/*2', $content);
-    }
+    } 
 
-    public function testEndTagInStrings4() {
-      $str = <<< STR
+    public function testEndTagInStrings4()
+    {
+        $str = <<< STR
 <?php
 echo "a?>a";
 echo "?>\\\\";
@@ -169,17 +173,18 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals('a?>a?>\\"?>\\"?>a/*2', $content);
-    }
+    } 
 
-    public function testEndTagInHEREDOC() {
-      $str = <<< STR
+    public function testEndTagInHEREDOC()
+    {
+        $str = <<< STR
 <?php
 echo <<< LALA
   LALA
@@ -196,22 +201,21 @@ LALA2
 ;
 ?>
 STR;
-
-//" Fix emacs highlighting which chokes on preceding open quote
-
+        // " Fix emacs highlighting which chokes on preceding open quote
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals("  LALA\n ?>\n\n \"! ?> /*\n LALA\nLALA ;\nLALA;1+1;LALA2;1+1;", str_replace("\r",'',$content));
-    }
+        $this->assertEquals("  LALA\n ?>\n\n \"! ?> /*\n LALA\nLALA ;\nLALA;1+1;LALA2;1+1;", str_replace("\r", '', $content));
+    } 
 
-    public function testEmbeddingsInHEREDOC1() {
-      $str = <<< STR
+    public function testEmbeddingsInHEREDOC1()
+    {
+        $str = <<< STR
 <?php
 \$a = Array("EOT?>'" => 1);
 
@@ -220,24 +224,23 @@ echo <<< EOT
 EOT;
 ?>
 STR;
-
-//' Fix emacs highlighting which chokes on preceding open quote
-
+        // ' Fix emacs highlighting which chokes on preceding open quote
         $this->smarty->left_delimiter = '{{';
         $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals("1", $content);
-    }
+    } 
 
-    public function testEmbeddingsInHEREDOC2() {
-      $str = <<< STR
+    public function testEmbeddingsInHEREDOC2()
+    {
+        $str = <<< STR
 <?php
 \$a = Array("\nEOT\n?>'" => 1);
 
@@ -252,16 +255,14 @@ EOT
 ;
 ?>
 STR;
-
-//' Fix emacs highlighting which chokes on preceding open quote
-
+        // ' Fix emacs highlighting which chokes on preceding open quote
         $this->smarty->left_delimiter = '{{';
         $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
-    /* Disabled due to bug in PHP easiest illustrated by:
+        /* Disabled due to bug in PHP easiest illustrated by:
        http://bugs.php.net/bug.php?id=50654
 
 <?php
@@ -282,11 +283,11 @@ ZZ;
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals("11", $content);
 */
-    }
+    } 
 
-
-    public function testEmbeddedHEREDOC() {
-      $str = <<< STR
+    public function testEmbeddedHEREDOC()
+    {
+        $str = <<< STR
 <?php
 \$a = Array("4\"" => 3);
 \$b = Array("aa\"?>" => 4);
@@ -297,24 +298,23 @@ EOT
   ]}";
 ?>
 STR;
-
-//" Fix emacs highlighting which chokes on preceding open quote
-
+        // " Fix emacs highlighting which chokes on preceding open quote
         $this->smarty->left_delimiter = '{{';
         $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals("3", $content);
-    }
+    } 
 
-    public function testEmbeddedNOWDOC() {
-      $str = <<< STR
+    public function testEmbeddedNOWDOC()
+    {
+        $str = <<< STR
 <?php
 \$a = Array("aa\"?>" => 3);
 
@@ -324,27 +324,26 @@ EOT
   ]}";
 ?>
 STR;
-
-//" Fix emacs highlighting which chokes on preceding open quote
-
+        // " Fix emacs highlighting which chokes on preceding open quote
         $this->smarty->left_delimiter = '{{';
         $this->smarty->right_delimiter = '}}';
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         if (version_compare(PHP_VERSION, '5.3.0') < 0) {
             return;
-        }
+        } 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals("3", $content);
-}
+    } 
 
-    public function testEndTagInNOWDOC() {
-      $str = <<< STR
+    public function testEndTagInNOWDOC()
+    {
+        $str = <<< STR
 <?php
 echo <<< 'LALA'
 aa ?> bb
@@ -356,71 +355,71 @@ LALA2
 ?>
 STR;
 
-
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         if (version_compare(PHP_VERSION, '5.3.0') < 0) {
             return;
-        }
+        } 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals("aa ?> bbLALA2;1+1;?>", $content);
-    }
+    } 
 
-    public function testNewlineHEREDOC() {
+    public function testNewlineHEREDOC()
+    {
         $sprintf_str = "<?php echo <<<STR%sa%1\$sSTR;%1\$s?>";
-	foreach (Array("\n", "\r\n") as $newline_chars) {
+        foreach (Array("\n", "\r\n") as $newline_chars) {
             $str = sprintf($sprintf_str, $newline_chars);
 
             $this->smarty->php_handling = SMARTY_PHP_PASSTHRU;
-            $this->smarty->security = true;
+            $this->smarty->enableSecurity();
             $tpl = $this->smarty->createTemplate("string:$str");
-            $content = $this->smarty->fetch($tpl);
-	    //For some reason $content doesn't preserve newline format. Not a big problem, I think.
+            $content = $this->smarty->fetch($tpl); 
+            // For some reason $content doesn't preserve newline format. Not a big problem, I think.
             $this->assertEquals(preg_replace("/\r\n/", "\n", $str),
-				preg_replace("/\r\n/", "\n", $content)
-				);
+                preg_replace("/\r\n/", "\n", $content)
+                );
 
             $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-            $this->smarty->security = false;
+            $this->smarty->disableSecurity();
             $tpl = $this->smarty->createTemplate("string:$str");
             $content = $this->smarty->fetch($tpl);
             $this->assertEquals("a", $content);
-        }
-    }
+        } 
+    } 
 
-    public function testNewlineNOWDOC() {
+    public function testNewlineNOWDOC()
+    {
         $sprintf_str = "<?php echo <<<'STR'%sa%1\$sSTR;%1\$s?>";
-	foreach (Array("\n", "\r\n") as $newline_chars) {
+        foreach (Array("\n", "\r\n") as $newline_chars) {
             $str = sprintf($sprintf_str, $newline_chars);
 
             $this->smarty->php_handling = SMARTY_PHP_PASSTHRU;
-            $this->smarty->security = true;
+            $this->smarty->enableSecurity();
             $tpl = $this->smarty->createTemplate("string:$str");
-            $content = $this->smarty->fetch($tpl);
-	    //For some reason $content doesn't preserve newline format. Not a big problem, I think.
+            $content = $this->smarty->fetch($tpl); 
+            // For some reason $content doesn't preserve newline format. Not a big problem, I think.
             $this->assertEquals(preg_replace("/\r\n/", "\n", $str),
-				preg_replace("/\r\n/", "\n", $content)
-				);
+                preg_replace("/\r\n/", "\n", $content)
+                );
 
             if (version_compare(PHP_VERSION, '5.3.0') >= 0) {
                 $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-                $this->smarty->security = false;
+                $this->smarty->disableSecurity();
                 $tpl = $this->smarty->createTemplate("string:$str");
                 $content = $this->smarty->fetch($tpl);
                 $this->assertEquals("a", $content);
-	    }
-        }
-    }
+            } 
+        } 
+    } 
 
-
-
-    public function testEndTagInComment() {
-      $str = <<< STR
+    public function testEndTagInComment()
+    {
+        $str = <<< STR
 <?php
 
 /*
@@ -432,16 +431,14 @@ STR;
 
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
-        $this->assertEquals(str_replace("\r",'',$str), str_replace("\r",'',$content));
+        $this->assertEquals(str_replace("\r", '', $str), str_replace("\r", '', $content));
 
         $this->smarty->php_handling = SMARTY_PHP_ALLOW;
-        $this->smarty->security = false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:$str");
         $content = $this->smarty->fetch($tpl);
         $this->assertEquals('2', $content);
-    }
-
+    } 
 } 
-
 
 ?>

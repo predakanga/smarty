@@ -27,7 +27,7 @@ class CompileIncludePHPTests extends PHPUnit_Framework_TestCase {
     */
     public function testIncludePhpStringFileName()
     {
-        $this->smarty->security=false;
+        $this->smarty->disableSecurity();
         $tpl = $this->smarty->createTemplate("string:start {include_php file='scripts/test_include_php.php'} end");
         $result= $this->smarty->fetch($tpl);
         $this->assertContains("test include php", $result);
@@ -37,8 +37,8 @@ class CompileIncludePHPTests extends PHPUnit_Framework_TestCase {
     */
     public function testIncludePhpVariableFileName()
     {
-        $this->smarty->security=false;
-        $tpl = $this->smarty->createTemplate('string:start {include_php file="$filename" once=false} end');
+        $this->smarty->disableSecurity();
+         $tpl = $this->smarty->createTemplate('string:start {include_php file="$filename" once=false} end');
         $tpl->assign('filename','scripts/test_include_php.php');
         $result= $this->smarty->fetch($tpl);
         $this->assertContains("test include php", $result);
