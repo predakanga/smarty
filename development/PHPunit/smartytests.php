@@ -67,7 +67,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
             // which is used when determining which PHP files are
             // included in the PHPUnit code coverage result.
             PHPUnit_Util_Filter::addDirectoryToWhitelist($smarty_libs_dir); 
-            // PHPUnit_Util_Filt<er::removeDirectoryFromWhitelist('../');
+            PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../');
             // PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
         } 
         $suite = new self('Smarty 3 - Unit Tests Report'); 

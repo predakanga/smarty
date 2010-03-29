@@ -91,8 +91,14 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     public function testModifierInsideExpression()
     {
         $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:6|strlen + "hello world"|truncate:8|strlen}');
+        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:6|strlen + ("hello world"|truncate:8|strlen)}');
         $this->assertEquals("14", $this->smarty->fetch($tpl));
+    } 
+    public function testModifierInsideExpression2()
+    {
+        $this->smarty->security_policy->modifiers = array('round');
+        $tpl = $this->smarty->createTemplate('string:{1.1*7.1|round}');
+        $this->assertEquals("8", $this->smarty->fetch($tpl));
     } 
     /**
     * test modifier at plugin result

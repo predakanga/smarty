@@ -150,7 +150,7 @@ Test Suite
  .
 
  ModifierTests
- ...............
+ ................
 
  ObjectVariableTests
  ...
@@ -212,6 +212,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 01:31
+Time: 02:07
 
-OK (620 tests, 845 assertions)
+OK (621 tests, 846 assertions)
