@@ -303,6 +303,9 @@ expr(res)        ::= expr(e) ANDSYM(m) value(v). { res = e . trim(m) . v; }
                   // array
 expr(res)				::= array(a).	{res = a;}
 
+                  // modifier
+expr(res)        ::= expr(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
+
 // if expression
 										// simple expression
 expr(res)        ::= expr(e1) ifcond(c) expr(e2). {res = e1.c.e2;}
@@ -359,8 +362,6 @@ value(res)	     ::= ID(c) DOUBLECOLON static_class_access(r). {if (!$this->templ
                                                                 }}
 								  // Smarty tag
 value(res)	     ::= smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '$_tmp'.$this->prefix_number; }
-                  // modifier
-value(res)        ::= value(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
 
 
 //
@@ -498,6 +499,7 @@ modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
 modparameters      ::= . {return;}
 										// parameter expression
 modparameter(res) ::= COLON value(mp). {res = ','.mp;}
+modparameter(res) ::= COLON array(mp). {res = ','.mp;}
 modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
 // if conditions and operators
