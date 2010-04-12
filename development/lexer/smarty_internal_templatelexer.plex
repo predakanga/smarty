@@ -73,8 +73,6 @@ class Smarty_Internal_Templatelexer
      				'LITERALEND' => 'literal close',
     				'AS' => 'as',
     				'TO' => 'to',
-    				'NULL' => 'null',
-    				'BOOLEAN' => 'boolean'
     				);
     				
     				
@@ -123,8 +121,6 @@ ldelspaceslash = /SMARTYldel\s{1,}\//
 ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
-boolean = /true|TRUE|True|false|FALSE|False/
-null = /null|NULL|Null/
 math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
 incdec = /(\+\+|\-\-)\s*/
@@ -330,12 +326,6 @@ step {
 }
 instanceof {
   $this->token = Smarty_Internal_Templateparser::TP_INSTANCEOF;
-}
-boolean {
-  $this->token = Smarty_Internal_Templateparser::TP_BOOLEAN;
-}
-null {
-  $this->token = Smarty_Internal_Templateparser::TP_NULL;
 }
 identity{
   $this->token = Smarty_Internal_Templateparser::TP_IDENTITY;

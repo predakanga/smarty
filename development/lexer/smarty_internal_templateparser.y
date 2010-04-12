@@ -269,7 +269,14 @@ attributes(res)  ::= attribute(a). { res = a;}
 attributes(res)  ::= . { res = array();}
 									
 									// attribute
-attribute(res)   ::= SPACE ID(v) EQUAL ID(i). { res = array(v=>"'".i."'");}
+attribute(res)   ::= SPACE ID(v) EQUAL ID(id). { if (preg_match('~^true$~i', id)) {
+                                                  res = array(v=>'true');
+                                                 } elseif (preg_match('~^false$~i', id)) {
+                                                  res = array(v=>'false');
+                                                 } elseif (preg_match('~^null$~i', id)) {
+                                                  res = array(v=>'null');
+                                                 } else
+                                                  res = array(v=>"'".id."'");}
 attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL value(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ternary(t). { res = array(v=>t);}
@@ -291,7 +298,6 @@ statement(res)		::= DOLLAR varvar(v) EQUAL expr(e). { res = array('var' => v, 'v
 
 									// single value
 expr(res)        ::= value(v). { res = v; }
-expr(res)        ::= ID(i). { res = "'".i."'"; }
                  // resources/streams
 expr(res)	       ::= DOLLAR ID(i) COLON ID(i2). {res = '$_smarty_tpl->getStreamVariable(\''. i .'://'. i2 . '\')';}
 									// arithmetic expression
@@ -342,12 +348,15 @@ value(res)		   ::= variable(v) INCDEC(o). { res = v.o; }
                  // numeric
 value(res)       ::= INTEGER(n). { res = n; }
 value(res)       ::= INTEGER(n1) DOT INTEGER(n2). { res = n1.'.'.n2; }
-									// constant
-//value(res)       ::= CONSTANT(c). { res = c; }
-									// boolean
-value(res)       ::= BOOLEAN(b). { res = b; }
-									// null
-value(res)       ::= NULL(n). { res = n; }
+                 // ID, true, false, null
+value(res)       ::= ID(id). { if (preg_match('~^true$~i', id)) {
+                                res = 'true';
+                               } elseif (preg_match('~^false$~i', id)) {
+                                res = 'false';
+                               } elseif (preg_match('~^null$~i', id)) {
+                                res = 'null';
+                               } else
+                               res = "'".id."'"; }
 									// function call
 value(res)	     ::= function(f). { res = f; }
 									// expression
@@ -396,9 +405,6 @@ arrayindex        ::= . {return;}
 indexdef(res)    ::= DOT DOLLAR varvar(v).  { res = '[$_smarty_tpl->getVariable('. v .')->value]'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('v', null, true, false)->nocache;}
 indexdef(res)    ::= DOT DOLLAR varvar(v) AT ID(p). { res = '[$_smarty_tpl->getVariable('. v .')->'.p.']'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
 indexdef(res)   ::= DOT ID(i). { res = "['". i ."']";}
-//indexdef(res)   ::= DOT CONSTANT(i). { res = "['". i ."']";}
-indexdef(res)   ::= DOT BOOLEAN(i). { res = "['". i ."']";}
-indexdef(res)   ::= DOT NULL(i). { res = "['". i ."']";}
 indexdef(res)   ::= DOT INTEGER(n). { res = "[". n ."]";}
 indexdef(res)   ::= DOT LDEL expr(e) RDEL. { res = "[". e ."]";}
 										// section tag index
@@ -418,7 +424,6 @@ varvar(res)			 ::= varvarele(v). {res = v;}
 varvar(res)			 ::= varvar(v1) varvarele(v2). {res = v1.'.'.v2;}
 										// fix sections of element
 varvarele(res)	 ::= ID(s). {res = '\''.s.'\'';}
-//varvarele(res)	 ::= CONSTANT(s). {res = '\''.s.'\'';}
 										// variable sections of element
 varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 
@@ -500,7 +505,6 @@ modparameters      ::= . {return;}
 										// parameter expression
 modparameter(res) ::= COLON value(mp). {res = ','.mp;}
 modparameter(res) ::= COLON array(mp). {res = ','.mp;}
-modparameter(res) ::= COLON ID(mp). {res = ',\''.mp.'\'';}
 
 // if conditions and operators
 ifcond(res)        ::= EQUALS. {res = '==';}
