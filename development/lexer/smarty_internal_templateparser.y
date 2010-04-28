@@ -379,10 +379,21 @@ value(res)	     ::= smartytag(st). { $this->prefix_number++; $this->compiler->pr
 									// simplest Smarty variable
 //variable(res)    ::= DOLLAR varvar(v).  { res = '$_smarty_tpl->getVariable(\''. v .'\')->value'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('v', null, true, false)->nocache;}
 									// Smarty variable (optional array)
-variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']);} else {
-                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index']; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
+variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']);
+                                      } else {
+                                      if (isset($this->compiler->local_var[vi['var']])) {
+                                          res = '$_smarty_tpl->tpl_vars['. vi['var'] .']->value'.vi['smarty_internal_index'];
+                                         } else {
+                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'];
+                                         }
+                                       $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
 									// variable with property
-variable(res)    ::= DOLLAR varvar(v) AT ID(p). { res = '$_smarty_tpl->getVariable('. v .')->'.p; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
+variable(res)    ::= DOLLAR varvar(v) AT ID(p). {if (isset($this->compiler->local_var[v])) {
+                                                  res = '$_smarty_tpl->tpl_vars['. v .']->'.p;
+                                                 } else {
+                                                  res = '$_smarty_tpl->getVariable('. v .')->'.p;
+                                                 }
+                                                  $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
 									// object
 variable(res)    ::= object(o). { res = o; }
                   // config variable
@@ -544,9 +555,12 @@ doublequoted(res)          ::= doublequotedcontent(o). { res = new _smarty_doubl
 
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. { res = new _smarty_code($this, v); }
 doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. { res = new _smarty_code($this, e); }
-doublequotedcontent(res)           ::=  DOLLARID(i). {
-   res = new _smarty_code($this, '$_smarty_tpl->getVariable(\''. substr(i,1) .'\')->value');
-   $this->compiler->tag_nocache = $this->compiler->tag_nocache | $this->template->getVariable(trim(i,"'"), null, true, false)->nocache;
+doublequotedcontent(res)           ::=  DOLLARID(i). {if (isset($this->compiler->local_var["'".substr(i,1)."'"])) {
+                                                       res = new _smarty_code($this, '$_smarty_tpl->tpl_vars[\''. substr(i,1) .'\']->value');
+                                                      } else {
+                                                       res = new _smarty_code($this, '$_smarty_tpl->getVariable(\''. substr(i,1) .'\')->value');
+                                                      }
+                                                      $this->compiler->tag_nocache = $this->compiler->tag_nocache | $this->template->getVariable(trim(i,"'"), null, true, false)->nocache;
   }
 doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. { res = new _smarty_code($this, v); }
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. { res = new _smarty_code($this, '('.e.')'); }
