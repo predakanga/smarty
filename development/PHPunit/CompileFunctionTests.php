@@ -26,7 +26,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testSimpleFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{functest param=\'param\'}');
+        $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{call name=functest param=\'param\'}');
         $this->assertEquals("default param", $this->smarty->fetch($tpl));
     } 
     /**
@@ -34,7 +34,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testSimpleFunction2()
     {
-        $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{functest param=\'param\'} {functest param=\'param2\'}');
+        $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{call name=functest param=\'param\'} {call name=functest param=\'param2\'}');
         $this->assertEquals("default param default param2", $this->smarty->fetch($tpl));
     } 
     /**
@@ -42,7 +42,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testOverwriteDefaultFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{functest param=\'param\' default=\'overwrite\'} {functest param=\'param2\'}');
+        $tpl = $this->smarty->createTemplate('string:{function name=functest default=\'default\'}{$default} {$param}{/function}{call name=functest param=\'param\' default=\'overwrite\'} {call name=functest param=\'param2\'}');
         $this->assertEquals("overwrite param default param2", $this->smarty->fetch($tpl));
     } 
     /**
@@ -50,7 +50,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRecursiveFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{function name=functest loop=0}{$loop}{if $loop < 5}{functest loop=$loop+1}{/if}{/function}{functest}');
+        $tpl = $this->smarty->createTemplate('string:{function name=functest loop=0}{$loop}{if $loop < 5}{call name=functest loop=$loop+1}{/if}{/function}{call name=functest}');
         $this->assertEquals("012345", $this->smarty->fetch($tpl));
     } 
     /**
@@ -58,7 +58,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testInheritedFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{function name=functest loop=0}{$loop}{if $loop < 5}{functest loop=$loop+1}{/if}{/function}{include file=\'test_inherit_function_tag.tpl\'}');
+        $tpl = $this->smarty->createTemplate('string:{function name=functest loop=0}{$loop}{if $loop < 5}{call name=functest loop=$loop+1}{/if}{/function}{include file=\'test_inherit_function_tag.tpl\'}');
         $this->assertEquals("012345", $this->smarty->fetch($tpl));
     } 
     /**
