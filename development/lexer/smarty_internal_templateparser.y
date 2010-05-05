@@ -473,6 +473,8 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->secur
 // method
 //
 method(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = f . "(". p .")";}
+//method(res)     ::= DOLLAR ID(f) OPENP params(p) CLOSEP.	{ res = '{$_var=$_smarty_tpl->getVariable(\''. f .'\')->value ? $_var : $this->trigger_error("cannot access property \"f\"")}' . '('. p .')';}
+method(res)     ::= DOLLAR ID(f) OPENP params(p) CLOSEP.	{ $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')';}
 
 // function/method parameter
 										// multiple parameters
@@ -490,10 +492,10 @@ modifier(res)    ::= VERT ID(m). { res =  m;}
 
 									// static class methode call
 static_class_access(res)	     ::= method(m). { res = m; }
-static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'; }
+//static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP. { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'; }
 									// static class methode call with object chainig
 static_class_access(res)	     ::= method(m) objectchain(oc). { res = m.oc; }
-static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'.oc; }
+// static_class_access(res)	     ::= DOLLAR ID(f) OPENP params(p) CLOSEP objectchain(oc). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')'.oc; }
 									// static class constant
 static_class_access(res)       ::= ID(v). { res = v;}
 									// static class variables
