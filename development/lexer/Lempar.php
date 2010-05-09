@@ -155,7 +155,7 @@ class ParseyyStackEntry
 
     function __destruct()
     {
-        while ($this->yyidx >= 0) {
+        while ($this->yystack !== Array()) {
             $this->yy_pop_parser_stack();
         }
         if (is_resource(self::$yyTraceFILE)) {
@@ -191,7 +191,7 @@ class ParseyyStackEntry
                         $this->yystack[$this->yyidx]->stateno,
                         self::$yyRuleInfo[$yyruleno]['lhs']);
                     if (isset(self::$yyExpectedTokens[$nextstate])) {
-                        $expected += self::$yyExpectedTokens[$nextstate];
+		        $expected = array_merge($expected, self::$yyExpectedTokens[$nextstate]);
                             if (in_array($token,
                                   self::$yyExpectedTokens[$nextstate], true)) {
                             $this->yyidx = $yyidx;
@@ -226,6 +226,8 @@ class ParseyyStackEntry
             }
             break;
         } while (true);
+	$this->yyidx = $yyidx;
+	$this->yystack = $stack;
         return array_unique($expected);
     }
 

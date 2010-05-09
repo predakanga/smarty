@@ -123,6 +123,12 @@
     $this->compiler->trigger_config_file_error();
 }
 
+%stack_overflow
+{
+    $this->internalError = true;
+    $this->compiler->trigger_config_file_error("Stack overflow in configfile parser");
+}
+
 // Complete config file
 start(res) ::= global_vars sections. { res = null; }
 
