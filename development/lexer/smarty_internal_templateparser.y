@@ -268,7 +268,7 @@ smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. {  res = $this->compiler->c
 //Attributes of Smarty tags 
 //
 									// list of attributes
-attributes(res)  ::= attributes(a1) attribute(a2). { res = array_merge(a1,a2);}
+attributes(res)  ::= attributes(a1) attribute(a2). { res = a1; res[key(a2)] = a2[key(a2)];}
 									// single attribute
 attributes(res)  ::= attribute(a). { res = a;}
 									// no attributes
@@ -287,7 +287,7 @@ attribute(res)   ::= SPACE ID(v) EQUAL expr(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL value(e). { res = array(v=>e);}
 attribute(res)   ::= SPACE ID(v) EQUAL ternary(t). { res = array(v=>t);}
 attribute(res)   ::= SPACE ID(v). { res = array(v=>'true');}
-attribute(res)   ::= SPACE INTEGER(i) EQUAL expr(e). { res = array(i=>e);}
+attribute(res)   ::= SPACE INTEGER(i) EQUAL expr(e). {res = array(i=>e);}
 									
 
 //
@@ -375,6 +375,8 @@ value(res)	     ::= doublequoted_with_quotes(s). { res = s; }
 value(res)	     ::= ID(c) DOUBLECOLON static_class_access(r). {if (!$this->template->security || $this->smarty->security_handler->isTrustedStaticClass(c, $this->compiler)) {
                                                                   res = c.'::'.r; 
                                                                 }}
+value(res)    ::= varindexed(vi) DOUBLECOLON static_class_access(r). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']).'::'.r;} else {
+                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].'::'.r; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
 								  // Smarty tag
 value(res)	     ::= smartytag(st). { $this->prefix_number++; $this->compiler->prefix_code[] = '<?php ob_start();?>'.st.'<?php $_tmp'.$this->prefix_number.'=ob_get_clean();?>'; res = '$_tmp'.$this->prefix_number; }
 
@@ -449,8 +451,6 @@ varvarele(res)	 ::= LDEL expr(e) RDEL. {res = '('.e.')';}
 //
 object(res)    ::= varindexed(vi) objectchain(oc). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']).oc;} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].oc; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
-object(res)    ::= varindexed(vi) DOUBLECOLON ID(id). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']).'::'.id;} else {
-                                                         res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].'::'.id; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
 										// single element
 objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
