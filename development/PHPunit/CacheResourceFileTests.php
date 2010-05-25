@@ -98,6 +98,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
     */
     public function testClearCacheAllCacheIdCompileId()
     {
+        $this->smarty->cache->clearAll();
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;

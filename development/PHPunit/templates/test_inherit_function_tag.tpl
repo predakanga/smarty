@@ -1,1 +1,1 @@
-{call name=functest}
+{call name=functest4}
