@@ -167,6 +167,9 @@ Test Suite
  RegisterCompilerFunctionTests
  ....
 
+ RegisteredResourceTests
+ ..
+
  RegisterFilterTests
  .............
 
@@ -175,6 +178,9 @@ Test Suite
 
  RegisterModifierTests
  ....
+
+ ResourcePluginTests
+ ..
 
  SecurityTests
  ..................
@@ -212,6 +218,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 01:04
+Time: 01:08
 
-OK (621 tests, 846 assertions)
+OK (625 tests, 852 assertions)
