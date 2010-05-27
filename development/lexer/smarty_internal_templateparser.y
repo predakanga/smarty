@@ -457,7 +457,7 @@ objectchain(res) ::= objectelement(oe). {res  = oe; }
 objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
 objectelement(res)::= PTR ID(i) arrayindex(a).	    { res = '->'.i.a;}
-objectelement(res)::= PTR variable(v) arrayindex(a).	    { res = '->{'.v.a.'}';}
+objectelement(res)::= PTR DOLLAR varvar(v) arrayindex(a).	    { res = '->{$_smarty_tpl->getVariable('. v .')->value'.a.'}'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
 objectelement(res)::= PTR LDEL expr(e) RDEL arrayindex(a).	    { res = '->{'.e.a.'}';}
 objectelement(res)::= PTR ID(ii) LDEL expr(e) RDEL arrayindex(a).	    { res = '->{\''.ii.'\'.'.e.a.'}';}
 										// method
