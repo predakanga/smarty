@@ -97,12 +97,12 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testSmartytagInDoubleQuotedString1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter} World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter start=1} World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello 1 World', $this->smarty->fetch($tpl));
     } 
     public function testSmartytagInDoubleQuotedString2()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter}{counter} World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter start=1}{counter} World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello 12 World', $this->smarty->fetch($tpl));
     } 
     /**

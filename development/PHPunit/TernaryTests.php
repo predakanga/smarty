@@ -97,7 +97,7 @@ class TernaryTests extends PHPUnit_Framework_TestCase {
     */
     public function testTernaryOutputTemplateFunction1()
     {
-        $tpl = $this->smarty->createTemplate("string:{({counter} == 1) ? 'yes' : 'no'}");
+        $tpl = $this->smarty->createTemplate("string:{({counter start=1} == 1) ? 'yes' : 'no'}");
         $this->assertEquals('yes', $this->smarty->fetch($tpl));
     } 
     /**
