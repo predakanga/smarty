@@ -217,7 +217,6 @@ smartytag(res)   ::= LDEL varindexed(vi) EQUAL expr(e) attributes(a) RDEL. { res
 smartytag(res)   ::= LDEL varindexed(vi) EQUAL ternary(t) attributes(a) RDEL. { res = $this->compiler->compileTag('assign',array_merge(array('value'=>t),vi,a));}									
 									// tag with optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i,a);}
-smartytag(res)   ::= LDEL FOREACH(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i,a);}
 smartytag(res)   ::= LDEL ID(i) RDEL. { res = $this->compiler->compileTag(i,array());}
 									// registered object tag
 smartytag(res)   ::= LDEL ID(i) PTR ID(m) attributes(a) RDEL. { res = $this->compiler->compileTag(i,array_merge(array('object_methode'=>m),a));}
@@ -230,32 +229,30 @@ smartytag(res)   ::= LDEL ID(i) PTR ID(me) modifier(m) modparameters(p) attribut
                                                                                                res .= $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>'ob_get_clean()'.p)).'?>';
                                                                                             }
 									// {if}, {elseif} and {while} tag
-smartytag(res)   ::= LDEL IF(i) SPACE expr(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
-smartytag(res)   ::= LDEL IF(i) SPACE statement(ie) RDEL. { res = $this->compiler->compileTag((i == 'else if')? 'elseif' : i,array('if condition'=>ie));}
+smartytag(res)   ::= LDELIF(i) SPACE expr(ie) RDEL. { $tag = trim(substr(i,$this->lex->ldel_length)); res = $this->compiler->compileTag(($tag == 'else if')? 'elseif' : $tag,array('if condition'=>ie));}
+smartytag(res)   ::= LDELIF(i) SPACE statement(ie) RDEL. { $tag = trim(substr(i,$this->lex->ldel_length)); res = $this->compiler->compileTag(($tag == 'else if')? 'elseif' : $tag,array('if condition'=>ie));}
 									// {for} tag
-smartytag(res)   ::= LDEL FOR(i) SPACE statements(st) SEMICOLON optspace expr(ie) SEMICOLON optspace DOLLAR varvar(v2) foraction(e2) RDEL. {
-                                                             res = $this->compiler->compileTag(i,array('start'=>st,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
+smartytag(res)   ::= LDELFOR SPACE statements(st) SEMICOLON optspace expr(ie) SEMICOLON optspace DOLLAR varvar(v2) foraction(e2) RDEL. {
+                                                             res = $this->compiler->compileTag('for',array('start'=>st,'ifexp'=>ie,'varloop'=>v2,'loop'=>e2));}
 
   foraction(res)	 ::= EQUAL expr(e). { res = '='.e;}
   foraction(res)	 ::= INCDEC(e). { res = e;}
-smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) attributes(a) RDEL. { res = $this->compiler->compileTag(i,array_merge(array('start'=>st,'to'=>v),a));}
-smartytag(res)   ::= LDEL FOR(i) SPACE statement(st) TO expr(v) STEP expr(v2) RDEL. { res = $this->compiler->compileTag(i,array('start'=>st,'to'=>v,'step'=>v2));}
+smartytag(res)   ::= LDELFOR SPACE statement(st) TO expr(v) attributes(a) RDEL. { res = $this->compiler->compileTag('for',array_merge(array('start'=>st,'to'=>v),a));}
+smartytag(res)   ::= LDELFOR SPACE statement(st) TO expr(v) STEP expr(v2) RDEL. { res = $this->compiler->compileTag('for',array('start'=>st,'to'=>v,'step'=>v2));}
+									// {foreach} tag
+smartytag(res)   ::= LDELFOREACH attributes(a) RDEL. { res = $this->compiler->compileTag('foreach',a);}
 									// {foreach $array as $var} tag
-smartytag(res)   ::= LDEL FOREACH(i) SPACE value(v1) AS DOLLAR varvar(v0) RDEL. {
-                                                            res = $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0));}
-smartytag(res)   ::= LDEL FOREACH(i) SPACE value(v1) AS DOLLAR varvar(v2) APTR DOLLAR varvar(v0) RDEL. {
-                                                            res = $this->compiler->compileTag(i,array('from'=>v1,'item'=>v0,'key'=>v2));}
-smartytag(res)   ::= LDEL FOREACH(i) SPACE array(a) AS DOLLAR varvar(v0) RDEL. { 
-                                                            res = $this->compiler->compileTag(i,array('from'=>a,'item'=>v0));}
-smartytag(res)   ::= LDEL FOREACH(i) SPACE array(a) AS DOLLAR varvar(v1) APTR DOLLAR varvar(v0) RDEL. { 
-                                                            res = $this->compiler->compileTag(i,array('from'=>a,'item'=>v0,'key'=>v1));}
+smartytag(res)   ::= LDELFOREACH SPACE value(v1) AS DOLLAR varvar(v0) RDEL. {
+                                                            res = $this->compiler->compileTag('foreach',array('from'=>v1,'item'=>v0));}
+smartytag(res)   ::= LDELFOREACH SPACE value(v1) AS DOLLAR varvar(v2) APTR DOLLAR varvar(v0) RDEL. {
+                                                            res = $this->compiler->compileTag('foreach',array('from'=>v1,'item'=>v0,'key'=>v2));}
+smartytag(res)   ::= LDELFOREACH SPACE array(a) AS DOLLAR varvar(v0) RDEL. { 
+                                                            res = $this->compiler->compileTag('foreach',array('from'=>a,'item'=>v0));}
+smartytag(res)   ::= LDELFOREACH SPACE array(a) AS DOLLAR varvar(v1) APTR DOLLAR varvar(v0) RDEL. { 
+                                                            res = $this->compiler->compileTag('foreach',array('from'=>a,'item'=>v0,'key'=>v1));}
 
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res = $this->compiler->compileTag(i.'close',array());}
-smartytag(res)   ::= LDELSLASH specialclose(i) RDEL. { res = $this->compiler->compileTag(i.'close',array());}
-specialclose(res)::= IF(i). { res = i; }
-specialclose(res)::= FOR(i). { res = i; }
-specialclose(res)::= FOREACH(i). { res = i; }
 smartytag(res)   ::= LDELSLASH ID(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i.'close',a);}
 smartytag(res)   ::= LDELSLASH ID(i) modifier(m) modparameters(p) attributes(a) RDEL. {  res = '<?php ob_start();?>'.$this->compiler->compileTag(i.'close',a).'<?php echo ';
                                                                                          res .= $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>'ob_get_clean()'.p)).'?>';
