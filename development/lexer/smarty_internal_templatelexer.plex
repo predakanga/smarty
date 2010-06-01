@@ -241,7 +241,7 @@ ldelspaceslash {
   }
 }
 ldelif {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELIF;
@@ -250,7 +250,7 @@ ldelif {
   }
 }
 ldelfor {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOR;
@@ -259,7 +259,7 @@ ldelfor {
   }
 }
 ldelforeach {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOREACH;
@@ -310,7 +310,7 @@ ldelspaceslash {
   }
 }
 ldelif {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELIF;
@@ -319,7 +319,7 @@ ldelif {
   }
 }
 ldelfor {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOR;
@@ -328,7 +328,7 @@ ldelfor {
   }
 }
 ldelforeach {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOREACH;
@@ -581,7 +581,7 @@ ldelspaceslash {
   }
 }
 ldelif {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELIF;
@@ -590,7 +590,7 @@ ldelif {
   }
 }
 ldelfor {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOR;
@@ -599,7 +599,7 @@ ldelfor {
   }
 }
 ldelforeach {
-  if ($this->smarty->auto_literal && substr($this->value,$this->ldel_length,1) == ' ') {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOREACH;
