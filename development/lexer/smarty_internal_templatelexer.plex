@@ -122,6 +122,7 @@ ldelspaceslash = /SMARTYldel\s{1,}\//
 ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
 integer = /\d+/
+hex =  /0[xX][0-9a-fA-F]+/
 math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
 incdec = /(\+\+|\-\-)\s*/
@@ -150,7 +151,7 @@ andsym = /\s*\&\s*/
 qmark = /\s*\?\s*/
 constant = /([_]+[A-Z0-9][0-9A-Z_]*|[A-Z][0-9A-Z_]*)(?![0-9A-Z_]*[a-z])/
 id = /[0-9]*[a-zA-Z_]\w*/
-literaltexttoend = '([\S\s]*?)(?=(SMARTYldel/?literalSMARTYrdel|<\?))'
+literaltexttoend = '([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel/?literalSMARTYrdel|<\?))'
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 stripstart = 'SMARTYldelstripSMARTYrdel'
@@ -527,6 +528,9 @@ andsym {
 qmark {
   $this->token = Smarty_Internal_Templateparser::TP_QMARK;
 }
+hex {
+  $this->token = Smarty_Internal_Templateparser::TP_HEX;
+}
 id {
   $this->token = Smarty_Internal_Templateparser::TP_ID;
 }
@@ -551,6 +555,10 @@ literalend {
   $this->token = Smarty_Internal_Templateparser::TP_LITERALEND;
   $this->yypopstate();
 }
+linebreak {
+  $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+}
+
 phpstarttag {
   if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
     $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;

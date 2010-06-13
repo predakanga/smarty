@@ -349,8 +349,11 @@ value(res)		   ::= NOT value(v). { res = '!'.v; }
 value(res)		   ::= TYPECAST(t) value(v). { res = t.v; }
 value(res)		   ::= variable(v) INCDEC(o). { res = v.o; }
                  // numeric
+value(res)       ::= HEX(n). { res = n; }
 value(res)       ::= INTEGER(n). { res = n; }
 value(res)       ::= INTEGER(n1) DOT INTEGER(n2). { res = n1.'.'.n2; }
+value(res)       ::= INTEGER(n1) DOT. { res = n1.'.'; }
+value(res)       ::= DOT INTEGER(n1). { res = '.'.n1; }
                  // ID, true, false, null
 value(res)       ::= ID(id). { if (preg_match('~^true$~i', id)) {
                                 res = 'true';
