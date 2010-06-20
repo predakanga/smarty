@@ -190,7 +190,7 @@ template_element(res)::= ASPENDTAG(et). {
                                        res = $this->compiler->processNocacheCode(htmlspecialchars('%>', ENT_QUOTES), false);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
                                         if ($this->asp_tags) {
-                                          res = $this->compiler->processNocacheCode('<%', true);
+                                          res = $this->compiler->processNocacheCode('%>', true);
                                         } else {
                                          res = '%<?php ?>>';
                                         }
