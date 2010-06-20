@@ -35,6 +35,7 @@
 				$this->prefix_number = 0;
 				$this->block_nesting_level = 0;
 				$this->is_xml = false;
+				$this->asp_tags = (ini_get('asp_tags') != '0');
     }
     public static function &instance($new_instance = null)
     {
@@ -159,6 +160,48 @@ template_element(res)::= PHPENDTAG. {if ($this->is_xml) {
                                        res = '';
                                       }
                                      }
+
+											// '<%' tag
+template_element(res)::= ASPSTARTTAG(st). {
+                                      if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
+					                             res = '<<?php ?>%';
+                                      } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
+                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st, ENT_QUOTES),false);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+                                        if ($this->asp_tags) {
+                                          res = $this->compiler->processNocacheCode('<%', true);
+                                        } else {
+                                         res = '<<?php ?>%';
+                                        }
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
+                                        if ($this->asp_tags) {
+                                         res = '';
+                                        } else {
+                                         res = '<<?php ?>%';
+                                        }
+                                      }
+                                    }
+	
+											// '%>' tag
+template_element(res)::= ASPENDTAG(et). {
+                                      if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
+					                             res = '%<?php ?>>';
+                                      } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
+                                       res = $this->compiler->processNocacheCode(htmlspecialchars('%>', ENT_QUOTES), false);
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
+                                        if ($this->asp_tags) {
+                                          res = $this->compiler->processNocacheCode('<%', true);
+                                        } else {
+                                         res = '%<?php ?>>';
+                                        }
+                                      }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
+                                        if ($this->asp_tags) {
+                                         res = '';
+                                        } else {
+                                         res = '%<?php ?>>';
+                                        }
+                                      }
+                                    }
 
 template_element(res)::= FAKEPHPSTARTTAG(t). {if ($this->lex->strip) {
                                        res = preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(t));	

@@ -108,13 +108,15 @@ class Smarty_Internal_Templatelexer
 %value $this->value
 %line $this->line
 linebreak = /[\t ]*[\r\n]+[\t ]*/
-textsmarty = /([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel|\<\?|\?>))/
+textsmarty = /([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel|<\?|\?>|<%|%>))/
 textdoublequoted = /([^"\\]*?)((?:\\.[^"\\]*?)*?)(?=(SMARTYldel|\$|`\$|"))/
 dollarid = /\$[0-9]*[a-zA-Z_]\w*/
 all = /[\S\s]+/
 emptyjava = /\{\}/
 phpstarttag = /<\?(?:php\w+|=|[a-zA-Z]+)?/
-phpendtag = /\?\>/
+phpendtag = /\?>/
+aspstarttag = /<%/
+aspendtag = /%>/
 ldels = /SMARTYldel\s{1,}/
 rdels = /\s{1,}SMARTYrdel/
 ldelslash = /SMARTYldel\//
@@ -124,7 +126,7 @@ rdel = /SMARTYrdel/
 integer = /\d+/
 hex =  /0[xX][0-9a-fA-F]+/
 math = /\s*(\*|\/|\%)\s*/
-comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
+comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel\r?\n?/
 incdec = /(\+\+|\-\-)\s*/
 unimath = /\s*(\+|\-)\s*/
 openP = /\(\s*/
@@ -151,7 +153,7 @@ andsym = /\s*\&\s*/
 qmark = /\s*\?\s*/
 constant = /([_]+[A-Z0-9][0-9A-Z_]*|[A-Z][0-9A-Z_]*)(?![0-9A-Z_]*[a-z])/
 id = /[0-9]*[a-zA-Z_]\w*/
-literaltexttoend = '([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel/?literalSMARTYrdel|<\?))'
+literaltexttoend = '([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel/?literalSMARTYrdel|<\?|<%))'
 literalstart = 'SMARTYldelliteralSMARTYrdel'
 literalend = 'SMARTYldel/literalSMARTYrdel'
 stripstart = 'SMARTYldelstripSMARTYrdel'
@@ -212,6 +214,12 @@ phpstarttag {
  }
 phpendtag {
   $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
+}
+aspstarttag {
+  $this->token = Smarty_Internal_Templateparser::TP_ASPSTARTTAG;
+}
+aspendtag {
+  $this->token = Smarty_Internal_Templateparser::TP_ASPENDTAG;
 }
 linebreak {
   if ($this->strip) {
@@ -569,6 +577,12 @@ phpstarttag {
 }
 phpendtag {
   $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+}
+aspstarttag {
+  $this->token = Smarty_Internal_Templateparser::TP_ASPSTARTTAG;
+}
+aspendtag {
+  $this->token = Smarty_Internal_Templateparser::TP_ASPENDTAG;
 }
 literaltexttoend {
   $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
