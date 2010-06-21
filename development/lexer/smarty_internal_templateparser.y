@@ -138,7 +138,7 @@ template_element(res)::= PHPSTARTTAG(st). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
 					                             res = self::escape_start_tag(st);
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st, ENT_QUOTES),false);
+                                       res = htmlspecialchars(st, ENT_QUOTES);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
                                        res = $this->compiler->processNocacheCode('<?php', true);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
@@ -151,9 +151,9 @@ template_element(res)::= PHPENDTAG. {if ($this->is_xml) {
                                        $this->is_xml = true; 
                                        res = $this->compiler->processNocacheCode("<?php echo '?>';?>", $this->compiler, true);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = '?<??>>';
+					                             res = '?<?php ?>>';
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars('?>', ENT_QUOTES), false);
+                                       res = htmlspecialchars('?>', ENT_QUOTES);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
                                        res = $this->compiler->processNocacheCode('?>', true);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
@@ -166,7 +166,7 @@ template_element(res)::= ASPSTARTTAG(st). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
 					                             res = '<<?php ?>%';
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars(st, ENT_QUOTES),false);
+                                       res = htmlspecialchars(st, ENT_QUOTES);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
                                         if ($this->asp_tags) {
                                           res = $this->compiler->processNocacheCode('<%', true);
@@ -187,7 +187,7 @@ template_element(res)::= ASPENDTAG(et). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
 					                             res = '%<?php ?>>';
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = $this->compiler->processNocacheCode(htmlspecialchars('%>', ENT_QUOTES), false);
+                                       res = htmlspecialchars('%>', ENT_QUOTES);
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
                                         if ($this->asp_tags) {
                                           res = $this->compiler->processNocacheCode('%>', true);
