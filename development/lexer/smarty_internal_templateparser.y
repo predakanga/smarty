@@ -303,7 +303,6 @@ smartytag(res)   ::= LDELSLASH ID(i) modifier(m) modparameters(p) attributes(a) 
 									// end of block object tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. {  res = $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
 
-
 //
 //Attributes of Smarty tags 
 //
@@ -415,9 +414,16 @@ value(res)	     ::= SINGLEQUOTESTRING(t). { res = t; }
 									// double quoted string
 value(res)	     ::= doublequoted_with_quotes(s). { res = s; }
 									// static class access
-value(res)	     ::= ID(c) DOUBLECOLON static_class_access(r). {if (!$this->template->security || $this->smarty->security_handler->isTrustedStaticClass(c, $this->compiler)) {
-                                                                  res = c.'::'.r; 
-                                                                }}
+value(res)	     ::= ID(c) DOUBLECOLON static_class_access(r). {if ((!$this->template->security || $this->smarty->security_handler->isTrustedStaticClass(c, $this->compiler)) || isset($this->smarty->registered_classes[c])) {
+                      																				   if (isset($this->smarty->registered_classes[c])) {
+                                                                  res = $this->smarty->registered_classes[c].'::'.r;
+                      																				   } else {
+                                                                  res = c.'::'.r;
+                                                                 } 
+                                                                } else {
+                                                                 $this->compiler->trigger_template_error ("static class '".c."' is undefined or not allowed by security setting");
+                                                                }
+                                                               }
 value(res)    ::= varindexed(vi) DOUBLECOLON static_class_access(r). { if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']).'::'.r;} else {
                                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].'::'.r; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
 								  // Smarty tag
