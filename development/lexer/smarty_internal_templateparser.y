@@ -481,7 +481,7 @@ indexdef(res)   ::= OPENB ID(i) DOT ID(i2) CLOSEB. { res = '['.$this->compiler->
 										// PHP style index
 indexdef(res)   ::= OPENB expr(e) CLOSEB. { res = "[". e ."]";}
 										// für assign append array
-indexdef(res)  ::= OPENB CLOSEB. {res = '';}
+indexdef(res)  ::= OPENB CLOSEB. {res = '[]';}
 
 //
 // variable variable names
