@@ -6,7 +6,7 @@
   <sect1 id="smarty.php.errors">
    <title>Errori Smarty/PHP</title>
    <para>
-    Smarty Ë in grado di trovare molti errori, ad esempio attributi
+    Smarty √® in grado di trovare molti errori, ad esempio attributi
     mancanti nei tag, o nomi di variabile non corretti. Quando questo
     succede, vedrete un errore simile al seguente:
    </para>
@@ -24,8 +24,8 @@ Fatal error: Smarty: [in index.tpl line 28]: syntax error: missing section name
    </example>
    <para>
     Smarty vi mostra il nome del template, il numero di riga e l'errore.
-    DopodichÈ, vi viene mostrato anche il numero reale di riga nella classe
-    Smarty alla quale si Ë verificato l'errore.
+    Dopodich√©, vi viene mostrato anche il numero reale di riga nella classe
+    Smarty alla quale si √® verificato l'errore.
    </para>
 
    <para>
@@ -45,8 +45,8 @@ Parse error: parse error in /path/to/smarty/templates_c/index.tpl.php on line 75
       
    <para>
     Quando vi trovate davanti un errore di parsing PHP, il numero di riga
-    indicato corrisponder‡ allo script PHP compilato, non al template sorgente.
-    Normalmente dando un'occhiata al template si riesce a capire dov'Ë 
+    indicato corrisponder√† allo script PHP compilato, non al template sorgente.
+    Normalmente dando un'occhiata al template si riesce a capire dov'√® 
     l'errore di sintassi. Ecco alcuni errori comuni da controllare: mancanza
     del tag di chiusura per blocchi {if}{/if} o {section}{/section}, oppure
     problemi di sintassi all'interno di un tag {if}. Se non riuscite a trovare

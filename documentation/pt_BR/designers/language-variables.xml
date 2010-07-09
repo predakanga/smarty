@@ -2,16 +2,16 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.5 Maintainer: thomasgm Status: ready -->
  <chapter id="language.variables">
-  <title>Vari·veis</title>
+  <title>Vari√°veis</title>
   <para>
-   No Smarty h· v·rios tipos diferentes de vari·veis. O tipo da vari·vel depende do prefixo que 
-   ela usa (ou do sÌmbolo pelo qual ela est· contida).
+   No Smarty h√° v√°rios tipos diferentes de vari√°veis. O tipo da vari√°vel depende do prefixo que 
+   ela usa (ou do s√≠mbolo pelo qual ela est√° contida).
   </para>
   <para>
-   Vari·veis no Smarty podem tanto serem exibidas diretamente ou usadas como argumentos 
-   para atributos de funÁıes e modificadores, dentro de expressıes condicionais, etc. 
-   Para que uma vari·vel seja exibida o nome dela deve estar dentro dos delimitadores 
-   e n„o pode conter nenhum outro caracter. Veja os exemplos abaixo:
+   Vari√°veis no Smarty podem tanto serem exibidas diretamente ou usadas como argumentos 
+   para atributos de fun√ß√µes e modificadores, dentro de express√µes condicionais, etc. 
+   Para que uma vari√°vel seja exibida o nome dela deve estar dentro dos delimitadores 
+   e n√£o pode conter nenhum outro caracter. Veja os exemplos abaixo:
   <programlisting>
 <![CDATA[
 {$Nome}

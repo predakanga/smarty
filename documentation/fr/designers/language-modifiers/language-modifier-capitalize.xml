@@ -5,8 +5,8 @@
 <sect1 id="language.modifier.capitalize">
  <title>capitalize</title>
  <para>
-  Met la première lettre de chaque mot d'une variable en majuscule.
-  C'est l'équivalent de la fonction PHP
+  Met la premiÃ¨re lettre de chaque mot d'une variable en majuscule.
+  C'est l'Ã©quivalent de la fonction PHP
   <ulink url="&url.php-manual;ucfirst">
   <varname>ucfirst()</varname></ulink>.
  </para>
@@ -19,21 +19,21 @@
    <colspec colname="desc" />
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>1</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>No</entry>
      <entry>&false;</entry>
-     <entry>Détermine si oui ou non les mots contenant des chiffres
-     doivent être mis en majuscule</entry>
+     <entry>DÃ©termine si oui ou non les mots contenant des chiffres
+     doivent Ãªtre mis en majuscule</entry>
     </row>
    </tbody>
   </tgroup>
@@ -50,7 +50,7 @@ $smarty->assign('titreArticle', 'Le nouveau php5 est vraiment performant !');
 ]]>
    </programlisting>
    <para>
-    Où le template est :
+    OÃ¹ le template est :
    </para>
    <programlisting>
 <![CDATA[

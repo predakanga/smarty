@@ -3,7 +3,7 @@
   <sect1 id="caching.setting.up">
    <title>Impostare il Caching</title>
    <para>
-    La prima cosa da fare è abilitare il caching. Per farlo bisogna
+    La prima cosa da fare Ã¨ abilitare il caching. Per farlo bisogna
     impostare <link linkend="variable.caching">$caching</link> = true (o 1.)
    </para>
    <example>
@@ -26,21 +26,21 @@ $smarty->display('index.tpl');
     causa la normale generazione del template, ma oltre a questo salva
     una copia dell'output in un file (la copia in cache) nella <link 
     linkend="variable.cache.dir">$cache_dir</link>. Alla chiamata successiva
-    di display('index.tpl'), verrà usata la copia in cache invece di 
+    di display('index.tpl'), verrÃ  usata la copia in cache invece di 
     generare di nuovo il template.
    </para>
    <note>
     <title>Nota tecnica</title>
     <para>
      I file nella $cache_dir vengono chiamati con nomi simili al nome del
-     template. Sebbene abbiano l'estensione ".php", in realtà non sono
+     template. Sebbene abbiano l'estensione ".php", in realtÃ  non sono
      script php eseguibili. Non editateli!
     </para>
    </note>
    <para>
     Ogni pagina in cache ha un tempo di vita limitato, determinato da
     <link linkend="variable.cache.lifetime">$cache_lifetime</link>. Il
-    valore di default è 3600 secondi, cioè 1 ora. Dopo questo tempo, la
+    valore di default Ã¨ 3600 secondi, cioÃ¨ 1 ora. Dopo questo tempo, la
     cache viene rigenerata. E' possibile dare a file singoli il proprio
     tempo di scadenza impostando $caching = 2. Consultate la documentazione
     di <link linkend="variable.cache.lifetime">$cache_lifetime</link> per i dettagli.
@@ -53,7 +53,7 @@ $smarty->display('index.tpl');
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 2; // la durata è per singolo file
+$smarty->caching = 2; // la durata Ã¨ per singolo file
 
 // impostiamo il cache_lifetime per index.tpl a 5 minuti
 $smarty->cache_lifetime = 300;
@@ -63,10 +63,10 @@ $smarty->display('index.tpl');
 $smarty->cache_lifetime = 3600;
 $smarty->display('home.tpl');
 
-// NOTA: l'impostazione seguente di $cache_lifetime non funzionerà
-// con $caching = 2. La scadenza per home.tpl è stata già impostata
-// a 1 ora, e non rispetterà più il valore di $cache_lifetime.
-// La cache di home.tpl scadrà sempre dopo 1 ora.
+// NOTA: l'impostazione seguente di $cache_lifetime non funzionerÃ 
+// con $caching = 2. La scadenza per home.tpl Ã¨ stata giÃ  impostata
+// a 1 ora, e non rispetterÃ  piÃ¹ il valore di $cache_lifetime.
+// La cache di home.tpl scadrÃ  sempre dopo 1 ora.
 $smarty->cache_lifetime = 30; // 30 seconds
 $smarty->display('home.tpl');
 ?>
@@ -74,10 +74,10 @@ $smarty->display('home.tpl');
     </programlisting>
    </example>
    <para>
-    Se <link linkend="variable.compile.check">$compile_check</link> è abilitato,
+    Se <link linkend="variable.compile.check">$compile_check</link> Ã¨ abilitato,
     tutti i file di template e di configurazione che sono coinvolti nel file
     della cache vengono verificati per vedere se sono stati modificati. Se qualcuno
-    dei file ha subito una modifica dopo che la cache è stata generata, il file
+    dei file ha subito una modifica dopo che la cache Ã¨ stata generata, il file
     della cache viene rigenerato. Questo provoca un piccolo sovraccarico, quindi,
     per avere prestazioni ottimali, lasciate $compile_check a false.
    </para>
@@ -98,14 +98,14 @@ $smarty->display('index.tpl');
     </programlisting>
    </example>
    <para>
-    Se <link linkend="variable.force.compile">$force_compile</link> è abilitato,
+    Se <link linkend="variable.force.compile">$force_compile</link> Ã¨ abilitato,
     i file della cache verranno sempre rigenerati. Di fatto questo disabilita
     il caching. $force_compile normalmente serve solo per scopi di debug, un
-    modo più efficiente di disabilitare il caching è di impostare  <link
+    modo piÃ¹ efficiente di disabilitare il caching Ã¨ di impostare  <link
     linkend="variable.caching">$caching</link> = false (o 0.)
    </para>
    <para>
-    La funzione <link linkend="api.is.cached">is_cached()</link> può essere
+    La funzione <link linkend="api.is.cached">is_cached()</link> puÃ² essere
     usata per verificare se un template ha una cache valida oppure no. Se avete
     un template in cache che necessita di qualcosa come una lettura da un 
     database, potete usare questa funzione per saltare quella parte.
@@ -121,7 +121,7 @@ $smarty = new Smarty;
 $smarty->caching = true;
 
 if(!$smarty->is_cached('index.tpl')) {
-    // Non c'è cache disponibile, assegnamo le variabili qui.
+    // Non c'Ã¨ cache disponibile, assegnamo le variabili qui.
     $contents = get_database_contents();
     $smarty->assign($contents);
 }
@@ -134,7 +134,7 @@ $smarty->display('index.tpl');
    <para>
     Potete mantenere parti di una pagina dinamiche con la funzione del template
     <link linkend="language.function.insert">insert</link>. Diciamo che l'intera
-    pagina può essere messa in cache eccetto un banner che viene visualizzato
+    pagina puÃ² essere messa in cache eccetto un banner che viene visualizzato
     in fondo a destra nella page. Usando la funzione insert per il banner, potete
     tenere questo elemento dinamico all'interno del contenuto in cache. Consultate
     la documentazione su <link linkend="language.function.insert">insert</link> per

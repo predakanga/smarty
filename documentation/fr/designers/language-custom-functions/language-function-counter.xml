@@ -7,16 +7,16 @@
  <para>
   <varname>{counter}</varname> affiche un compteur.
   <varname>{counter}</varname> retient la valeur
-  du compte à chaque itération. Vous pouvez adapter le nombre, l'intervale
-  et la direction du compteur, ainsi que décider d'afficher ou non
-  les valeurs. Vous pouvez lancer plusieurs compteurs simultanément en
-  leur donnant des noms uniques. Si vous ne donnez pas de nom à un
-  compteur, <quote>default</quote> sera utilisé.
+  du compte Ã  chaque itÃ©ration. Vous pouvez adapter le nombre, l'intervale
+  et la direction du compteur, ainsi que dÃ©cider d'afficher ou non
+  les valeurs. Vous pouvez lancer plusieurs compteurs simultanÃ©ment en
+  leur donnant des noms uniques. Si vous ne donnez pas de nom Ã  un
+  compteur, <quote>default</quote> sera utilisÃ©.
  </para>
  <para>
-  Si vous donnez une valeur à l'attribut <parameter>assign</parameter>,
-  alors la sortie de la fonction <varname>{counter}</varname> sera assignée
-  à la variable de template donnée plutôt que d'être directement affichée.
+  Si vous donnez une valeur Ã  l'attribut <parameter>assign</parameter>,
+  alors la sortie de la fonction <varname>{counter}</varname> sera assignÃ©e
+  Ã  la variable de template donnÃ©e plutÃ´t que d'Ãªtre directement affichÃ©e.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -37,46 +37,46 @@
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry><emphasis>default</emphasis></entry>
      <entry>Le nom du compteur</entry>
     </row>
     <row>
      <entry>start</entry>
-     <entry>numérique</entry>
+     <entry>numÃ©rique</entry>
      <entry>Non</entry>
      <entry><emphasis>1</emphasis></entry>
      <entry>La valeur initiale du compteur</entry>
     </row>
     <row>
      <entry>skip</entry>
-     <entry>numérique</entry>
+     <entry>numÃ©rique</entry>
      <entry>Non</entry>
      <entry><emphasis>1</emphasis></entry>
      <entry>L'intervale du compteur</entry>
     </row>
     <row>
      <entry>direction</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>up</emphasis></entry>
-     <entry>la direction du compteur (up/down) [compte / décompte]</entry>
+     <entry>la direction du compteur (up/down) [compte / dÃ©compte]</entry>
     </row>
     <row>
      <entry>print</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&true;</emphasis></entry>
      <entry>S'il faut afficher cette valeur ou non</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>La variable dans laquelle la valeur du compteur
-     sera assignée.</entry>
+     sera assignÃ©e.</entry>
     </row>
    </tbody>
   </tgroup>

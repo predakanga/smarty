@@ -14,9 +14,9 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-    El primer parámetro en el modificador de plugin es el valor sobre
+    El primer parÃ¡metro en el modificador de plugin es el valor sobre
     el cual el modificador es precisa para funcionar. El resto de los
-    parámetros pueden ser opcionales, dependiendo de cual tipo de operación 
+    parÃ¡metros pueden ser opcionales, dependiendo de cual tipo de operaciÃ³n 
     va a ser ejecutada.
     </para>
     <para>
@@ -30,8 +30,8 @@
     <example>
      <title> Plugin modificador simple</title>
      <para>
-      Este plugin básicamente es un alias de una función incorporada
-      en PHP. Este no tiene ningun parámetro adicional.
+      Este plugin bÃ¡sicamente es un alias de una funciÃ³n incorporada
+      en PHP. Este no tiene ningun parÃ¡metro adicional.
      </para>
      <programlisting role="php">
 <![CDATA[

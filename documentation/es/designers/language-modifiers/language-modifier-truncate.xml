@@ -11,11 +11,11 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>Desdcripción</entry>
+      <entry>DesdcripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -24,7 +24,7 @@
       <entry>integer</entry>
       <entry>No</entry>
       <entry>80</entry>
-      <entry>Este determina para cuantos carácteres truncar.</entry>
+      <entry>Este determina para cuantos carÃ¡cteres truncar.</entry>
      </row>
      <row>
       <entry>2</entry>
@@ -40,7 +40,7 @@
       <entry>No</entry>
       <entry>false</entry>
       <entry>Este determina cuando truncar o no o al final de una
-        palabra(false), o un carácter exacto(true).
+        palabra(false), o un carÃ¡cter exacto(true).
       </entry>
      </row>
      <row>
@@ -57,12 +57,12 @@
   </informaltable>
   <para>
    Este trunca la variable en una cantidad de cacarteres, el default es 80.
-   Como segundo parámetro opcional, usted puede especificar una cadena
-   para mostrar al final si la variable fue truncada. Los carácteres en la
+   Como segundo parÃ¡metro opcional, usted puede especificar una cadena
+   para mostrar al final si la variable fue truncada. Los carÃ¡cteres en la
    cadena son incluidos tamando el original para el truncamiento. 
    Por default, truncate intentara cortar al final de una palabra.
-   Se usted quisiera cortar una cantidad exacta de carácteres, pase el 
-   tercer parámetro, que es opcional, como true.
+   Se usted quisiera cortar una cantidad exacta de carÃ¡cteres, pase el 
+   tercer parÃ¡metro, que es opcional, como true.
   </para>
   <example>
    <title>truncate</title>

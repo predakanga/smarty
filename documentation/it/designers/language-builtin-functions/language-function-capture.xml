@@ -40,10 +40,10 @@
        capture si usa per intercettare l'output del template assegnandolo
        ad una variabile invece di visualizzarlo. Qualsiasi contenuto compreso
        fra {capture name="foo"} e {/capture} viene aggiunto alla variabile
-       specificata nell'attributo name. Il contenuto catturato puÚ essere
+       specificata nell'attributo name. Il contenuto catturato pu√≤ essere
        usato nel template utilizzando la variabile speciale $smarty.capture.foo
-       dove foo Ë il nome passato nell'attributo name. Se non fornite un
-       attributo name, verr‡ usato "default". Tutti i comandi {capture}
+       dove foo √® il nome passato nell'attributo name. Se non fornite un
+       attributo name, verr√† usato "default". Tutti i comandi {capture}
        devono essere chiusi con {/capture}. E' possibile nidificarli.
       </para>
 	  <note>
@@ -67,7 +67,7 @@
         <title>catturare il contenuto del template</title>
         <programlisting>
 <![CDATA[
-{* vogliamo stampare la riga di tabella solo se c'Ë del contenuto *}
+{* vogliamo stampare la riga di tabella solo se c'√® del contenuto *}
 {capture name=banner}
 {include file="get_banner.tpl"}
 {/capture}

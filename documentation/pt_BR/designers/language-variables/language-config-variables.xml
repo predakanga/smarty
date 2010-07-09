@@ -2,18 +2,18 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->       
 <sect1 id="language.config.variables">
-			<title>Vari·veis carregadas de arquivos de configuraÁ„o</title>
+			<title>Vari√°veis carregadas de arquivos de configura√ß√£o</title>
 			<para>
-             Vari·veis que s„o carregadas de arquivos de configuraÁ„o s„o referenciadas
-             colocando-se elas entre cancelas (#), ou com a vari·vel smarty
+             Vari√°veis que s√£o carregadas de arquivos de configura√ß√£o s√£o referenciadas
+             colocando-se elas entre cancelas (#), ou com a vari√°vel smarty
 			 <link
 			 linkend="language.variables.smarty.config">$smarty.config</link>.
-			 A segunda sintaxe È ˙til para coloca-las
+			 A segunda sintaxe √© √∫til para coloca-las
              entre aspas em um atributo.
 			</para>
 <example>
 
-<title>Vari·veis de configuraÁ„o</title>
+<title>Vari√°veis de configura√ß√£o</title>
 <programlisting>
 foo.conf:
 
@@ -56,7 +56,7 @@ index.tpl: (sintaxe alternativa)
 &lt;/html&gt;
 
 
-SAÕDA: (mesma para ambos exemplos)
+SA√çDA: (mesma para ambos exemplos)
 
 &lt;html&gt;
 &lt;title&gt;This is mine&lt;/title&gt;
@@ -72,9 +72,9 @@ SAÕDA: (mesma para ambos exemplos)
 &lt;/html&gt;</programlisting>
 </example>
 			<para>
-            Vari·veis de um arquivo de configuraÁ„o n„o podem ser usadas atÈ
-            que sejam carregadas de um arquivo de configuraÁ„o. Este procedimento
-            È explicado posteriormente neste documento em
+            Vari√°veis de um arquivo de configura√ß√£o n√£o podem ser usadas at√©
+            que sejam carregadas de um arquivo de configura√ß√£o. Este procedimento
+            √© explicado posteriormente neste documento em
             <command>config_load</command>.
 			</para>
 </sect1>

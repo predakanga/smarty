@@ -10,8 +10,8 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-				Isso limpa completamente o cache de template. Como um parâmetro 
-				opcional, você pode fornecer um ano mínimo em segundos
+				Isso limpa completamente o cache de template. Como um parÃ¢metro 
+				opcional, vocÃª pode fornecer um ano mÃ­nimo em segundos
 			        que o arquivo de cache deve ter antes deles serem apagados. 
 			</para>
 <example>

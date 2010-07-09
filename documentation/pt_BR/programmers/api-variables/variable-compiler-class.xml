@@ -5,8 +5,8 @@
       <title>$compiler_class</title>
       <para>
        Especifica o nome do compilador de classes que
-       Smarty ir· usar para compilar templates. O padr„o È 'Smarty_Compiler'.
-       Para usu·rios avanÁados somente.
+       Smarty ir√° usar para compilar templates. O padr√£o √© 'Smarty_Compiler'.
+       Para usu√°rios avan√ßados somente.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

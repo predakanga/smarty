@@ -3,17 +3,17 @@
 <refentry id="api.clear.config">
  <refnamediv>
   <refname>clear_config()</refname>
-  <refpurpose>Esto limpia todas las variables de configuración</refpurpose>
+  <refpurpose>Esto limpia todas las variables de configuraciÃ³n</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>clear_config</methodname>
    <methodparam choice="opt"><type>string</type><parameter>var</parameter></methodparam>
   </methodsynopsis>
   <para>
    Esto limpia todas las variables de 
-   <link linkend="language.config.variables">configuración asignadas</link>. 
+   <link linkend="language.config.variables">configuraciÃ³n asignadas</link>. 
    Si es proporcionado el nombre de una variable, solo esa variable es limpiada.
   </para>
   <example>
@@ -31,7 +31,7 @@ $smarty->clear_config('foobar');
    </programlisting>
   </example>
   <para>
-  Ver también
+  Ver tambiÃ©n
   <link linkend="api.get.config.vars">get_config_vars()</link>,
   <link linkend="language.config.variables">config variables</link>,
   <link linkend="config.files">config files</link>,

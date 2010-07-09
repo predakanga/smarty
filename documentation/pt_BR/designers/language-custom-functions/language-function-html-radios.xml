@@ -14,16 +14,16 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>name</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>radio</emphasis></entry>
                         <entry>nome da radio list</entry>
                     </row>
@@ -39,12 +39,12 @@
                         <entry>array</entry>
                         <entry>Sim, a menos que utilizando atributo de options</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>uma matriz de saÌda pra radio buttons</entry>
+                        <entry>uma matriz de sa√≠da pra radio buttons</entry>
                     </row>
                     <row>
                         <entry>checked</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
                         <entry>O elemento do radio marcado</entry>
                     </row>
@@ -58,7 +58,7 @@
                     <row>
                         <entry>separator</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
                         <entry>string de texto para separar cada item de radio</entry>
                     </row>
@@ -66,13 +66,13 @@
                 </tgroup>
             </informaltable>
 			<para>
-			html_radios È uma funÁ„o personalizada que cria grupo de botıes de radio html
-			com os dados fornecidos.  Ele est· atento para qual item est· selecionado por padr„o.
-			Atributos obrigatÛrios s„o 'values' e 'output', a menos que vocÍ use 'options' no lugar disso. Toda 
-			saÌda È compatÌvel com XHTML.
+			html_radios √© uma fun√ß√£o personalizada que cria grupo de bot√µes de radio html
+			com os dados fornecidos.  Ele est√° atento para qual item est√° selecionado por padr√£o.
+			Atributos obrigat√≥rios s√£o 'values' e 'output', a menos que voc√™ use 'options' no lugar disso. Toda 
+			sa√≠da √© compat√≠vel com XHTML.
 			</para>
 			<para>
-			Todos os par‚metros que n„o est„o na lista acima s„o impressos como
+			Todos os par√¢metros que n√£o est√£o na lista acima s√£o impressos como
 			nome/valor de dentro de cada tag &lt;input&gt; criada.
 			</para>
 

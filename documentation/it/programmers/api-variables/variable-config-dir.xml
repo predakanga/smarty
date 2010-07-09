@@ -3,9 +3,9 @@
     <sect1 id="variable.config.dir">
       <title>$config_dir</title>
       <para>
-       Questa Ë la directory usata per memorizzare i file di configurazione
-       usati nei template. Il default Ë "./configs2, che significa
-       che Smarty cercher‡ la directory dei file di configurazione
+       Questa √® la directory usata per memorizzare i file di configurazione
+       usati nei template. Il default √® "./configs2, che significa
+       che Smarty cercher√† la directory dei file di configurazione
        nella stessa directory dello script php in esecuzione.
       </para>
 	 <note>

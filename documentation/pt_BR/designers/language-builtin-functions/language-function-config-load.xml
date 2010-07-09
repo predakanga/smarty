@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,28 +25,28 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome do arquivo de configuraÁ„o para incluir</entry>
+                        <entry>O nome do arquivo de configura√ß√£o para incluir</entry>
                     </row>
                     <row>
                         <entry>section</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome da seÁ„o a carregar</entry>
+                        <entry>O nome da se√ß√£o a carregar</entry>
                     </row>
                     <row>
                         <entry>scope</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>local</emphasis></entry>
                         <entry>
-                         Como o escopo das vari·veis carregadas È tratado, 
+                         Como o escopo das vari√°veis carregadas √© tratado, 
                          o qual deve ser um entre local, parent ou global. local
-						 indica que as vari·veis s„o carregadas no contexto do
-						 template local apenas. parent indica que as vari·veis s„o carregadas
+						 indica que as vari√°veis s√£o carregadas no contexto do
+						 template local apenas. parent indica que as vari√°veis s√£o carregadas
 						 no contexto atual e no template que o chamou. global indica
-						 que as vari·veis est„o
-						 disponÌveis para todos os templates.
+						 que as vari√°veis est√£o
+						 dispon√≠veis para todos os templates.
 						</entry>
                     </row>
                     <row>
@@ -55,22 +55,22 @@
                         <entry>No</entry>
                         <entry><emphasis>No</emphasis></entry>
                         <entry>
-						 Quando ou n„o as vari·veis s„o visiveis para o template
+						 Quando ou n√£o as vari√°veis s√£o visiveis para o template
 						 superior(aquele que chamou este), o mesmo que scope=parent.
 						 NOTA: este atributo esta obsoleto devido ao atributo scope, mas
-						 ainda È suportado. Se scope for indicado, este valor È ignorado.
+						 ainda √© suportado. Se scope for indicado, este valor √© ignorado.
 						</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 Esta funÁ„o È usada para carregar as vari·veis de um arquivo de configuraÁ„o
-			 dentro de um template. Veja <link linkend="config.files">Arquivos de ConfiguraÁ„o</link>
-			 para mais informaÁıes.
+			 Esta fun√ß√£o √© usada para carregar as vari√°veis de um arquivo de configura√ß√£o
+			 dentro de um template. Veja <link linkend="config.files">Arquivos de Configura√ß√£o</link>
+			 para mais informa√ß√µes.
 			</para>
 <example>
-<title>FunÁ„o config_load</title>
+<title>Fun√ß√£o config_load</title>
 
 <programlisting>
 <![CDATA[
@@ -92,18 +92,18 @@
 </programlisting>
 </example>
 			<para>
-			 Arquivos de configuraÁ„o podem conter seÁıes tambÈm. VocÍ pode carregar
-			 vari·veis de uma seÁ„o adicionando o atributo
+			 Arquivos de configura√ß√£o podem conter se√ß√µes tamb√©m. Voc√™ pode carregar
+			 vari√°veis de uma se√ß√£o adicionando o atributo
             <emphasis>section</emphasis>.
 			</para>
             <para>
-            NOTA: <emphasis>Config file sections</emphasis> e a funÁ„o embutida de 
-            template <emphasis>section</emphasis> n„o tem nada a ver um com o outro,
+            NOTA: <emphasis>Config file sections</emphasis> e a fun√ß√£o embutida de 
+            template <emphasis>section</emphasis> n√£o tem nada a ver um com o outro,
             eles apenas tem uma mesma
-            convenÁ„o de nomes.
+            conven√ß√£o de nomes.
             </para>
 <example>
-<title>FunÁ„o config_load com seÁıes</title>
+<title>Fun√ß√£o config_load com se√ß√µes</title>
 <programlisting>
 <![CDATA[
 {config_load file="cores.conf" section="Consumidor"}

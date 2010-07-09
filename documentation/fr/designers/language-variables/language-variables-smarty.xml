@@ -3,17 +3,17 @@
 <!-- EN-Revision: 1.18 Maintainer: yannick Status: ready -->
 
 <sect1 id="language.variables.smarty">
- <title>Variable réservée {$smarty}</title>
+ <title>Variable rÃ©servÃ©e {$smarty}</title>
  <para>
-  La variable PHP réservée <parameter>{$smarty}</parameter> peut être
-  utilisée pour accéder à plusieurs
-  variables d'environnements. En voici la liste complète.
+  La variable PHP rÃ©servÃ©e <parameter>{$smarty}</parameter> peut Ãªtre
+  utilisÃ©e pour accÃ©der Ã  plusieurs
+  variables d'environnements. En voici la liste complÃ¨te.
  </para>
 
  <sect2 id="language.variables.smarty.request">
-  <title>Variables de requête</title>
+  <title>Variables de requÃªte</title>
   <para>
-   Les <ulink url="&url.php-manual;reserved.variables">variables de requête</ulink>
+   Les <ulink url="&url.php-manual;reserved.variables">variables de requÃªte</ulink>
    comme <literal>$_GET</literal>, <literal>$_POST</literal>,
    <literal>$_COOKIE</literal>, <literal>$_SERVER</literal>,
    <literal>$_ENV</literal> et <literal>$_SESSION</literal>
@@ -21,16 +21,16 @@
    <link linkend="variable.request.vars.order"><varname>$request_vars_order</varname></link>
    et
    <link linkend="variable.request.use.auto.globals"><varname>$request_use_auto_globals</varname></link>)
-   peuvent être utilisées comme dans l'exemple suivant :
+   peuvent Ãªtre utilisÃ©es comme dans l'exemple suivant :
   </para>
   <example>
-   <title>Afficher des variables de requête</title>
+   <title>Afficher des variables de requÃªte</title>
    <programlisting>
 <![CDATA[
 {* Affiche la valeur de page dans l'url ($_GET) http://www.example.com/index.php?page=foo *}
 {$smarty.get.page}
 
-{* affiche la variable "page" récupérée depuis un formulaire ($_POST['page']) *}
+{* affiche la variable "page" rÃ©cupÃ©rÃ©e depuis un formulaire ($_POST['page']) *}
 {$smarty.post.page}
 
 {* affiche la valeur du cookie "utilisateur" ($_COOKIE['username']) *}
@@ -52,9 +52,9 @@
   </example>
   <note>
    <para>
-    Pour des raisons historiques, <parameter>{$SCRIPT_NAME}</parameter> peut être accédé
+    Pour des raisons historiques, <parameter>{$SCRIPT_NAME}</parameter> peut Ãªtre accÃ©dÃ©
     directement, cependant, <parameter>{$smarty.server.SCRIPT_NAME}</parameter> est
-    la solution proposée pour accéder à cette valeur.
+    la solution proposÃ©e pour accÃ©der Ã  cette valeur.
    </para>
    <programlisting>
 <![CDATA[
@@ -69,16 +69,16 @@
   <title>{$smarty.now}</title>
   <para>
    Le <ulink url="&url.php-manual;function.time">timestamp</ulink>
-   courant peut être récupéré grâce à <parameter>{$smarty.now}</parameter>.
-   La valeur correspond au nombre de secondes écoulées depuis
-   Epoch (1 Janvier 1970) et peut être passé directement au modificateur
+   courant peut Ãªtre rÃ©cupÃ©rÃ© grÃ¢ce Ã  <parameter>{$smarty.now}</parameter>.
+   La valeur correspond au nombre de secondes Ã©coulÃ©es depuis
+   Epoch (1 Janvier 1970) et peut Ãªtre passÃ© directement au modificateur
    de variable date
    <link linkend="language.modifier.date.format"><varname>date_format</varname></link> 
-   à des fins d'affichage. Notez que
+   Ã  des fins d'affichage. Notez que
    <ulink url="&url.php-manual;function.time"><varname>time()</varname></ulink>
-   est appelé à chaque invocation, i.e.
-   un script qui prend 3 secondes à s'exécuter avec <parameter>$smarty.now</parameter>
-   au début et à la fin montrera les 3 secondes de différence.
+   est appelÃ© Ã  chaque invocation, i.e.
+   un script qui prend 3 secondes Ã  s'exÃ©cuter avec <parameter>$smarty.now</parameter>
+   au dÃ©but et Ã  la fin montrera les 3 secondes de diffÃ©rence.
   <example>
    <title>Utilisation de {$smarty.now}</title>
    <programlisting>
@@ -94,13 +94,13 @@
  <sect2 id="language.variables.smarty.const">
   <title>{$smarty.const}</title>
   <para>
-   Vous pouvez directement accéder aux constantes PHP.
+   Vous pouvez directement accÃ©der aux constantes PHP.
    Voir aussi les <link linkend="smarty.constants">constantes smarty</link>.
   </para>
   <informalexample>
    <programlisting role="php">
 <![CDATA[
-// la constante définie dans PHP
+// la constante dÃ©finie dans PHP
 define('_MY_CONST_VAL','CHERRIES');
 ]]>
 </programlisting>
@@ -119,24 +119,24 @@ define('_MY_CONST_VAL','CHERRIES');
  <sect2 id="language.variables.smarty.capture">
   <title>{$smarty.capture}</title>
   <para>
-   La sortie du template réalisée via
+   La sortie du template rÃ©alisÃ©e via
    <link linkend="language.function.capture"><varname>{capture}..{/capture}</varname></link> 
-   peut être récupérée par l'intermédiaire de la variable
+   peut Ãªtre rÃ©cupÃ©rÃ©e par l'intermÃ©diaire de la variable
    <parameter>{$smarty.capture}</parameter>. Voir la section
    sur <link linkend="language.function.capture"><varname>{capture}</varname></link> pour un
-   exemple à ce sujet.
+   exemple Ã  ce sujet.
   </para>
  </sect2>
 
  <sect2 id="language.variables.smarty.config">
   <title>{$smarty.config}</title>
   <para>
-   La variable <parameter>{$smarty.config}</parameter> peut être utilisée pour désigner une
+   La variable <parameter>{$smarty.config}</parameter> peut Ãªtre utilisÃ©e pour dÃ©signer une
    <link linkend="language.config.variables">variable d'un fichier de configuration</link>.
    <parameter>{$smarty.config.foo}</parameter> est un synonyme de
    <parameter>{#foo#}</parameter>. Voir la section
    <link linkend="language.function.config.load">{config_load}</link>
-   pour un exemple à ce sujet.
+   pour un exemple Ã  ce sujet.
   </para>
  </sect2>
 
@@ -144,7 +144,7 @@ define('_MY_CONST_VAL','CHERRIES');
   <title>{$smarty.section}, {$smarty.foreach}</title>
   <para>
    La variable <link linkend="language.function.section"><varname>{section}</varname></link> 
-   peut être utilisée pour accéder aux propriétés
+   peut Ãªtre utilisÃ©e pour accÃ©der aux propriÃ©tÃ©s
    des boucles <parameter>{$smarty.section}</parameter> et
    <parameter>{$smarty.foreach}</parameter>. Voir la documentation de
    <link linkend="language.function.section"><varname>{section}</varname></link> et
@@ -181,11 +181,11 @@ banner.tpl
  <sect2 id="language.variables.smarty.version">
   <title>{$smarty.version}</title>
   <para>
-   Retourne la version de Smarty ayant servie à compiler le template.
+   Retourne la version de Smarty ayant servie Ã  compiler le template.
   </para>
   <programlisting>
 <![CDATA[
-<div id="footer">Généré par Smarty {$smarty.version}</div>
+<div id="footer">GÃ©nÃ©rÃ© par Smarty {$smarty.version}</div>
 ]]>
   </programlisting>
  </sect2>
@@ -193,7 +193,7 @@ banner.tpl
  <sect2 id="language.variables.smarty.ldelim">
   <title>{$smarty.ldelim}, {$smarty.rdelim}</title>
   <para>
-   Ces variables sont utilisées pour afficher le délémiteur gauche et le délimiteur droit. Lisez aussi
+   Ces variables sont utilisÃ©es pour afficher le dÃ©lÃ©miteur gauche et le dÃ©limiteur droit. Lisez aussi
    la partie <link linkend="language.function.ldelim">
    <varname>{ldelim},{rdelim}</varname></link>.
   </para>

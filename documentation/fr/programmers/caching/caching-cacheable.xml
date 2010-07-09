@@ -3,37 +3,37 @@
 <!-- EN-Revision: 1.10 Maintainer: didou Status: ready -->
 
 <sect1 id="caching.cacheable">
- <title>Contrôler la mise en cache des sorties des Plugins</title>
+ <title>ContrÃ´ler la mise en cache des sorties des Plugins</title>
  <para>
-  Depuis Smarty-2.6.0, la mise en cache des plugins peut être déclarée lors
-  de leur inscription. Les troisièmes paramètres de
+  Depuis Smarty-2.6.0, la mise en cache des plugins peut Ãªtre dÃ©clarÃ©e lors
+  de leur inscription. Les troisiÃ¨mes paramÃ¨tres de
   <link linkend="api.register.block"><varname>register_block()</varname></link>,
   <link linkend="api.register.compiler.function">
    <varname>register_compiler_function()</varname></link>
-  et <link linkend="api.register.block"><varname>register_function()</varname></link> sont appelés
-  <parameter>$cacheable</parameter> et valent &true; par défaut, ce qui est
-  aussi le comportement par défaut des versions de Smarty précédent la 2.6.0
+  et <link linkend="api.register.block"><varname>register_function()</varname></link> sont appelÃ©s
+  <parameter>$cacheable</parameter> et valent &true; par dÃ©faut, ce qui est
+  aussi le comportement par dÃ©faut des versions de Smarty prÃ©cÃ©dent la 2.6.0
  </para>
 
  <para>
   Lors de l'inscription d'un plugin avec <literal>$cacheable=false</literal>, le plugin est
-  appelé à chaque fois que la page est affichée, même si la page vient du
+  appelÃ© Ã  chaque fois que la page est affichÃ©e, mÃªme si la page vient du
   cache. La fonction plugin se comporte presque comme la fonction
   <link linkend="plugins.inserts"><varname>{insert}</varname></link>.
   </para>
 
   <para>
-   Contrairement à <link linkend="plugins.inserts"><varname>{insert}</varname></link>
-   les attributs pour le plugin ne sont pas mis en cache par défaut. Celà peut
-   être le cas en utilisant le quatrième paramètre
+   Contrairement Ã  <link linkend="plugins.inserts"><varname>{insert}</varname></link>
+   les attributs pour le plugin ne sont pas mis en cache par dÃ©faut. CelÃ  peut
+   Ãªtre le cas en utilisant le quatriÃ¨me paramÃ¨tre
    <parameter>$cache_attrs</parameter>. <parameter>$cache_attrs</parameter>
-   est un tableau de noms d'attributs qui doivent être mis en cache, pour que
-   la fonction plugin reçoive les valeurs telles qu'elles étaient définies lorsque
-   la page a été mise en cache, à chaque récupération à partir du cache.
+   est un tableau de noms d'attributs qui doivent Ãªtre mis en cache, pour que
+   la fonction plugin reÃ§oive les valeurs telles qu'elles Ã©taient dÃ©finies lorsque
+   la page a Ã©tÃ© mise en cache, Ã  chaque rÃ©cupÃ©ration Ã  partir du cache.
   </para>
 
   <example>
-   <title>Eviter la mise en cache du résultat d'un plugin</title>
+   <title>Eviter la mise en cache du rÃ©sultat d'un plugin</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -51,7 +51,7 @@ function remaining_seconds($params, &$smarty) {
 $smarty->register_function('remaining', 'remaining_seconds', false, array('endtime'));
 
 if (!$smarty->is_cached('index.tpl')) {
-    // récupération de $obj à partir de la page et assignation...
+    // rÃ©cupÃ©ration de $obj Ã  partir de la page et assignation...
     $smarty->assign_by_ref('obj', $obj);
 }
 
@@ -60,7 +60,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Où <filename>index.tpl</filename> contient :
+    OÃ¹ <filename>index.tpl</filename> contient :
    </para>
    <programlisting>
 <![CDATA[
@@ -69,10 +69,10 @@ Time Remaining: {remaining endtime=$obj->endtime}
    </programlisting>
    <para>
     Le nombre de secondes avant que la date de fin de <literal>$obj</literal> ne soit atteinte
-    change à chaque affichage de la page, même si la page est mise en cache. 
+    change Ã  chaque affichage de la page, mÃªme si la page est mise en cache. 
     Comme l'attribut endtime est mis en cache, il n'y a que l'objet qui ait 
-    besoin d'être extrait de la base de données lors de la mise en cache de 
-    la page, mais pas lors des affichages ultérieurs de la page.
+    besoin d'Ãªtre extrait de la base de donnÃ©es lors de la mise en cache de 
+    la page, mais pas lors des affichages ultÃ©rieurs de la page.
    </para>
   </example>
 
@@ -95,17 +95,17 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Où <filename>index.tpl</filename> contient :
+    OÃ¹ <filename>index.tpl</filename> contient :
    </para>
    <programlisting>
 <![CDATA[
-Création de la page : {'0'|date_format:'%D %H:%M:%S'}
+CrÃ©ation de la page : {'0'|date_format:'%D %H:%M:%S'}
 
 {dynamic}
 
 Heure actuelle : {'0'|date_format:'%D %H:%M:%S'}
 
-... faîtes quelque chose ici ...
+... faÃ®tes quelque chose ici ...
 
 {/dynamic}
 ]]>
@@ -114,9 +114,9 @@ Heure actuelle : {'0'|date_format:'%D %H:%M:%S'}
 
   <para>
    Lors du rechargement de la page, vous remarquerez que les deux dates sont 
-   différentes. L'une est <quote>dynamic</quote> et l'autre est <quote>static</quote>.
+   diffÃ©rentes. L'une est <quote>dynamic</quote> et l'autre est <quote>static</quote>.
    Vous pouvez faire ce que vous voulez entre <literal>{dynamic}...{/dynamic}</literal>
-   et être sûrs que cela ne sera pas mis en cache comme le reste de la page.
+   et Ãªtre sÃ»rs que cela ne sera pas mis en cache comme le reste de la page.
   </para>
 
  </sect1>

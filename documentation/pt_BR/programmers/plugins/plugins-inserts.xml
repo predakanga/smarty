@@ -3,7 +3,7 @@
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->   
 <sect1 id="plugins.inserts"><title>Inserts</title>
     <para>
-     Plugins Insert são usados para implementar funções que são invocadas por tags 
+     Plugins Insert sÃ£o usados para implementar funÃ§Ãµes que sÃ£o invocadas por tags 
      <link linkend="language.function.insert"><command>insert</command></link>
      no template.
     </para>
@@ -15,15 +15,15 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     O primeiro parâmetro para a função é um array
+     O primeiro parÃ¢metro para a funÃ§Ã£o Ã© um array
       associativo de atributos passados para o 
       insert. Ou acessa esses valores diretamente,
       i.e. <varname>$params['start']</varname> ou usa
-     <varname>extract($params)</varname> para importá-los para dentro da tabela símbolo.
+     <varname>extract($params)</varname> para importÃ¡-los para dentro da tabela sÃ­mbolo.
     </para>
     <para>
-     A função insert deve retornar o
-      resultado que será substituído  no lugar da tag
+     A funÃ§Ã£o insert deve retornar o
+      resultado que serÃ¡ substituÃ­do  no lugar da tag
       <command>insert</command> no template.
     </para>
     <example>

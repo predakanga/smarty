@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -30,32 +30,32 @@
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome de uma vari·vel que ir·
-                        conter toda a saÌda do template</entry>
+                        <entry>O nome de uma vari√°vel que ir√°
+                        conter toda a sa√≠da do template</entry>
                     </row>
                     <row>
                         <entry>[var ...]</entry>
                         <entry>[var type]</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>Vari·vel para passar localmente para o template</entry>
+                        <entry>Vari√°vel para passar localmente para o template</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 Tags include s„o usadas para incluir outros templates no template
-			 atual. Quaisquer vari·veis disponÌveis no template atual tambÈm estar„o  
-			 disponÌveis junto com template incluÌdo. A tag include deve ter o atributo
-			 "file",  o qual contÈm o caminho do arquivo a incluir.
+			 Tags include s√£o usadas para incluir outros templates no template
+			 atual. Quaisquer vari√°veis dispon√≠veis no template atual tamb√©m estar√£o  
+			 dispon√≠veis junto com template inclu√≠do. A tag include deve ter o atributo
+			 "file",  o qual cont√©m o caminho do arquivo a incluir.
 			</para>
 			<para>
-			 VocÍ pode opcionalmente passar o atributo <emphasis>assign</emphasis>,
-			 o qual ir· especificar o nome de uma vari·vel de template para a qual
-			 conter· todo o conte˙do do <emphasis>include</emphasis> ao
-			 invÈs de mostr·-lo.
+			 Voc√™ pode opcionalmente passar o atributo <emphasis>assign</emphasis>,
+			 o qual ir√° especificar o nome de uma vari√°vel de template para a qual
+			 conter√° todo o conte√∫do do <emphasis>include</emphasis> ao
+			 inv√©s de mostr√°-lo.
 			</para>
 <example>
 <title>function include</title>
@@ -63,26 +63,26 @@
 <![CDATA[
 {include file="cabecalho.tpl"}
 
-{* O conte˙do do template vem aqui *}
+{* O conte√∫do do template vem aqui *}
 
 {include file="rodape.tpl"}
 ]]>
 </programlisting>
 </example>
 			<para>
-			 VocÍ pode tambÈm passar vari·veis para o template incluÌdo como atributos.
-			 Quaisquer vari·veis passadas para um template incluÌdo como atributos 
-			 est„o disponÌveis somente dentro do escopo do template incluÌdo.
-			 As vari·veis passadas como atributos sobrescrevem as vari·veis de 
+			 Voc√™ pode tamb√©m passar vari√°veis para o template inclu√≠do como atributos.
+			 Quaisquer vari√°veis passadas para um template inclu√≠do como atributos 
+			 est√£o dispon√≠veis somente dentro do escopo do template inclu√≠do.
+			 As vari√°veis passadas como atributos sobrescrevem as vari√°veis de 
 			 template atuais, no caso de ambas terem o mesmo nome.
 			</para>
 <example>
-<title>FunÁ„o include passando vari·veis</title>
+<title>Fun√ß√£o include passando vari√°veis</title>
 <programlisting>
 <![CDATA[
 {include file="cabecalho.tpl" title="Menu Principal" table_bgcolor="#c0c0c0"}
 
-{* O conte˙do de template vem aqui *}
+{* O conte√∫do de template vem aqui *}
 
 {include file="rodape.tpl" logo="http://meu.dominio.com/logo.gif"}
 ]]>
@@ -91,10 +91,10 @@
 			<para>
 			Use a sintaxe de <link
 			linkend="template.resources">template resources</link> para
-			incluir arquivos fora do diretÛrio $template_dir.
+			incluir arquivos fora do diret√≥rio $template_dir.
 			</para>
 <example>
-<title>Exemplos de recursos para a funÁ„o include</title>
+<title>Exemplos de recursos para a fun√ß√£o include</title>
 <programlisting>
 <![CDATA[
 {* caminho absoluto *}

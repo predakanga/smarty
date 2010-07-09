@@ -8,7 +8,7 @@
     <ulink url="&url.php-manual;if"><command>if</command></ulink> de php, 
     con algunas adiciones para la herramienta de template.
 			Todo <emphasis>{if}</emphasis> debe tener su <emphasis>{/if}</emphasis>. 
-   <emphasis>{else}</emphasis> y <emphasis>{elseif}</emphasis> también son
+   <emphasis>{else}</emphasis> y <emphasis>{elseif}</emphasis> tambiÃ©n son
    permitidos. 
    Toda las condicionales de PHP son reconcidas, tal como 
    <emphasis>||</emphasis>, <emphasis>or</emphasis>,
@@ -92,7 +92,7 @@
                         <entry>!</entry>
                         <entry>not</entry>
                         <entry>not $a</entry>
-                        <entry>negación (unary)</entry>
+                        <entry>negaciÃ³n (unary)</entry>
                         <entry>!</entry>
                     </row>
                     <row>
@@ -162,7 +162,7 @@
 	...
 {/if}
 
-{* La siguiente sintaxis no funcionara, el calificador de condición
+{* La siguiente sintaxis no funcionara, el calificador de condiciÃ³n
    deben estar separados entre ellos por espacios *}
 {if $name=="Fred" || $name=="Wilma"}
 	...
@@ -174,7 +174,7 @@
 	...
 {/if}
 
-{* Usted también puede colocar funciones de PHP *}
+{* Usted tambiÃ©n puede colocar funciones de PHP *}
 {if count($var) gt 0}
 	...
 {/if}

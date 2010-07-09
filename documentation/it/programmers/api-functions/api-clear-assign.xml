@@ -13,7 +13,7 @@
   </methodsynopsis>
   <para>
    Annulla il valore di una variabile assegnata in precedenza.
-   Può essere un valore singolo, o un array di valori.
+   PuÃ² essere un valore singolo, o un array di valori.
   </para>
   <example>
    <title>clear_assign</title>
@@ -23,7 +23,7 @@
 // annullamento di una singola variabile
 $smarty->clear_assign("Name");
 
-// annullamento di più variabili
+// annullamento di piÃ¹ variabili
 $smarty->clear_assign(array("Name", "Address", "Zip"));
 ?>
 ]]>

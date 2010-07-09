@@ -4,7 +4,7 @@
 		<sect1 id="language.modifier.count.paragraphs">
 			<title>count_paragraphs</title>
 			<para>
-			 Isto é usado para contar o número de paragrafos em uma variável.
+			 Isto Ã© usado para contar o nÃºmero de paragrafos em uma variÃ¡vel.
 			</para>
 <example>
 <title>count_paragraphs</title>

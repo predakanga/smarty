@@ -4,10 +4,10 @@
 <sect1 id="variable.config.overwrite">
       <title>$config_overwrite</title>
       <para>
-       Se configurado para true, variáveis lidas no arquivo de configurações irão sobrescrever
-       uma a outra. Do contrário, as variáveis serão guardadas em um array. Isso é
-	   útil se você quer armazenar arrays de dados em arquivos de configuração, somente lista
-	   tempos de cada elemento múltiplo. true por padrão.
+       Se configurado para true, variÃ¡veis lidas no arquivo de configuraÃ§Ãµes irÃ£o sobrescrever
+       uma a outra. Do contrÃ¡rio, as variÃ¡veis serÃ£o guardadas em um array. Isso Ã©
+	   Ãºtil se vocÃª quer armazenar arrays de dados em arquivos de configuraÃ§Ã£o, somente lista
+	   tempos de cada elemento mÃºltiplo. true por padrÃ£o.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

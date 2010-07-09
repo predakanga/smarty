@@ -2,7 +2,7 @@
 <!-- $Revision: 2972 $ -->
    <sect1 id="plugins.outputfilters"><title>Filtros de Salida</title>
     <para>
-     Los Filtros de salida operan en la salida del template, despuÈs 
+     Los Filtros de salida operan en la salida del template, despu√©s 
      que el template es cargado y ejecutado, pero antes que la salida 
      sea mostrada.
     </para>
@@ -14,9 +14,9 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     El primer par·metro de la funciÛn de filtro de salida es la
+     El primer par√°metro de la funci√≥n de filtro de salida es la
      salida del template que necesita ser procesada, y el segundo 
-     par·metro es la instancia del Smarty invocando el plugin. 
+     par√°metro es la instancia del Smarty invocando el plugin. 
      El plugin debe hacer el procesamiento y retornar los resultados.
     </para>
     <example>

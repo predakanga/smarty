@@ -14,12 +14,12 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     Il primo parametro Ë un array associativo di attributi
+     Il primo parametro √® un array associativo di attributi
      passati all'insert.
     </para>
     <para>
      Ci si aspetta che la funzione insert restituisca il risultato che
-     sar‡ posizionato in luogo del tag <command>insert</command> nel
+     sar√† posizionato in luogo del tag <command>insert</command> nel
      template.
     </para>
     <example>

@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>Descripci髇</entry>
+                        <entry>Descripci贸n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -38,7 +38,7 @@
             </informaltable>
 			<para>
     {assign} es usado para definir valores a las variables de template
-    <emphasis role="bold">durante la ejecuci髇</emphasis> del template.
+    <emphasis role="bold">durante la ejecuci贸n</emphasis> del template.
 			</para>
 <example>
  <title>{assign}</title>
@@ -65,7 +65,7 @@ The value of $name is Bob.
   Puedes accesar {assign} variables desde  php usando
   <link linkend="api.get.template.vars">get_template_vars()</link>.
   sin embargo, las variables solo estan disponibles despues/durante 
-  la ejecuci髇 del template como en el siguiente ejemplo
+  la ejecuci贸n del template como en el siguiente ejemplo
   </para>
 <programlisting>
 <![CDATA[
@@ -97,7 +97,7 @@ echo $smarty->get_template_vars('foo');
  </example>
 
  <para>
- La siguiente funci髇 <emphasis>optionally</emphasis> tambi閚 puede asignar variables al template.
+ La siguiente funci贸n <emphasis>optionally</emphasis> tambi茅n puede asignar variables al template.
   </para>
 
  <para>
@@ -114,7 +114,7 @@ echo $smarty->get_template_vars('foo');
  </para>
 
  <para>
- Ver tambi閚 <link linkend="api.assign">assign()</link>
+ Ver tambi茅n <link linkend="api.assign">assign()</link>
  y <link linkend="api.get.template.vars">get_template_vars()</link>.
  </para>
 </sect1>

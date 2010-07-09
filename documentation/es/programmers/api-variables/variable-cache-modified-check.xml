@@ -12,7 +12,7 @@
        <link linkend="language.function.insert"><command>{insert}</command></link>.
       </para>
   <para>
-  Ver también 
+  Ver tambiÃ©n 
   <link linkend="variable.caching">$caching</link>,
    <link linkend="variable.cache.lifetime">$cache_lifetime</link>,
   <link linkend="variable.cache.handler.func">$cache_handler_func</link>,

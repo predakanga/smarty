@@ -4,8 +4,8 @@
      <sect1 id="variable.use.sub.dirs">
       <title>$use_sub_dirs</title>
       <para>
-	  Configure isso para false se seu ambiente de PHP não permite a criação de
-	  subdiretórios pela Smarty. Subdiretórios são muito eficientes, então use-os se você
+	  Configure isso para false se seu ambiente de PHP nÃ£o permite a criaÃ§Ã£o de
+	  subdiretÃ³rios pela Smarty. SubdiretÃ³rios sÃ£o muito eficientes, entÃ£o use-os se vocÃª
 	  conseguir. 
       </para>
 </sect1>

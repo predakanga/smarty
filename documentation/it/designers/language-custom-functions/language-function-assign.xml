@@ -22,14 +22,14 @@
                     <row>
                         <entry>var</entry>
                         <entry>stringa</entry>
-                        <entry>sì</entry>
+                        <entry>sÃ¬</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Nome della variabile valorizzata</entry>
                     </row>
                     <row>
                         <entry>value</entry>
                         <entry>stringa</entry>
-                        <entry>sì</entry>
+                        <entry>sÃ¬</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Valore assegnato alla variabile</entry>
                     </row>
@@ -37,7 +37,7 @@
                 </tgroup>
             </informaltable>
 			<para>
-			assign è usato per assegnare valori alle variabili del template
+			assign Ã¨ usato per assegnare valori alle variabili del template
 			durante l'esecuzione dello stesso.
 			</para>
 <example>

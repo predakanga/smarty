@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -46,7 +46,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el texto para el tÌtulo</entry>
+                        <entry>Def√≠ne el texto para el t√≠tulo</entry>
                     </row>
                     <row>
                         <entry>fgcolor</entry>
@@ -67,98 +67,98 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el color del texto dentro de la caja popup</entry>
+                        <entry>Def√≠ne el color del texto dentro de la caja popup</entry>
                     </row>
                     <row>
                         <entry>capcolor</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el color del tÌtulo de la caja</entry>
+                        <entry>Def√≠ne el color del t√≠tulo de la caja</entry>
                     </row>
                     <row>
                         <entry>closecolor</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el color del texto para cerrar</entry>
+                        <entry>Def√≠ne el color del texto para cerrar</entry>
                     </row>
                     <row>
                         <entry>textfont</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el color del texto para ser usado en el texto principal</entry>
+                        <entry>Def√≠ne el color del texto para ser usado en el texto principal</entry>
                     </row>
                     <row>
                         <entry>captionfont</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el tipo de letra para ser usado en el TÌtulo</entry>
+                        <entry>Def√≠ne el tipo de letra para ser usado en el T√≠tulo</entry>
                     </row>
                     <row>
                         <entry>closefont</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el tipo de letra para el texto "Close"</entry>
+                        <entry>Def√≠ne el tipo de letra para el texto "Close"</entry>
                     </row>
                     <row>
                         <entry>textsize</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el tipo de letra del texto principal</entry>
+                        <entry>Def√≠ne el tipo de letra del texto principal</entry>
                     </row>
                     <row>
                         <entry>captionsize</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el tamaÒo del tipo de letra del tÌtulo</entry>
+                        <entry>Def√≠ne el tama√±o del tipo de letra del t√≠tulo</entry>
                     </row>
                     <row>
                         <entry>closesize</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el tamaÒo del tipo de letra del texto "Close"</entry>
+                        <entry>Def√≠ne el tama√±o del tipo de letra del texto "Close"</entry>
                     </row>
                     <row>
                         <entry>width</entry>
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el ancho de la caja</entry>
+                        <entry>Def√≠ne el ancho de la caja</entry>
                     </row>
                     <row>
                         <entry>height</entry>
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne la altura de la caja</entry>
+                        <entry>Def√≠ne la altura de la caja</entry>
                     </row>
                     <row>
                         <entry>left</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>false</emphasis></entry>
-                        <entry>Hace que el popups vaya para la izquierda del ratÛn</entry>
+                        <entry>Hace que el popups vaya para la izquierda del rat√≥n</entry>
                     </row>
                     <row>
                         <entry>right</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>false</emphasis></entry>
-                        <entry>Hace que el popups vaya para la derecha del ratÛn</entry>
+                        <entry>Hace que el popups vaya para la derecha del rat√≥n</entry>
                     </row>
                     <row>
                         <entry>center</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>false</emphasis></entry>
-                        <entry>Hace que el popups vaya al centro del ratÛn</entry>
+                        <entry>Hace que el popups vaya al centro del rat√≥n</entry>
                     </row>
                     <row>
                         <entry>above</entry>
@@ -166,7 +166,7 @@
                         <entry>No</entry>
                         <entry><emphasis>false</emphasis></entry>
                         <entry> Hace que el popups vaya por encima del
-                           ratÛ. NOTA:solamente es posible si el height fue definido
+                           rat√≥. NOTA:solamente es posible si el height fue definido
 						                  </entry>
                     </row>
                     <row>
@@ -174,7 +174,7 @@
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>false</emphasis></entry>
-                        <entry>Hace que el popups vaya por abajo del ratÛn</entry>
+                        <entry>Hace que el popups vaya por abajo del rat√≥n</entry>
                     </row>
                     <row>
                         <entry>border</entry>
@@ -188,7 +188,7 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>A que distancia del ratÛn aparecera el popup, horizontalmente
+                        <entry>A que distancia del rat√≥n aparecera el popup, horizontalmente
                         </entry>
                     </row>
                     <row>
@@ -196,7 +196,7 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>A que distancia del ratÛn aparecera el popup, verticalmente
+                        <entry>A que distancia del rat√≥n aparecera el popup, verticalmente
                         </entry>
                     </row>
                     <row>
@@ -204,7 +204,7 @@
                         <entry>url to image</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne una imagen para usar en vez del color del popup.
+                        <entry>Def√≠ne una imagen para usar en vez del color del popup.
 						                  </entry>
                     </row>
                     <row>
@@ -212,10 +212,10 @@
                         <entry>url to image</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry> defÌne una imagen para ser usada como borde en
+                        <entry> def√≠ne una imagen para ser usada como borde en
                          vez de un color para el popup.  
-                         NOTA:Usted debe definir bgcolor como "" o el color aparecera tambiÈn. 
-                         NOTA: Cuando tuviera un link "Close", el Netscape rediseÒara las
+                         NOTA:Usted debe definir bgcolor como "" o el color aparecera tambi√©n. 
+                         NOTA: Cuando tuviera un link "Close", el Netscape redise√±ara las
                          celdas de la tabla, haciendo que las cosas aparezcan incorrectamente
 						                  </entry>
                     </row>
@@ -224,36 +224,36 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el texto "Close" a otra cosa</entry>
+                        <entry>Def√≠ne el texto "Close" a otra cosa</entry>
                     </row>
                     <row>
                         <entry>noclose</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>No muestra el texto "Close" pegado con el tÌtulo</entry>
+                        <entry>No muestra el texto "Close" pegado con el t√≠tulo</entry>
                     </row>
                     <row>
                         <entry>status</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el texto en la barra de estado del navegador </entry>
+                        <entry>Def√≠ne el texto en la barra de estado del navegador </entry>
                     </row>
                     <row>
                         <entry>autostatus</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el texto en la barra de estado para el texto del popup.  
-                         NOTA: sobreescribe la definiciÛn del status.</entry>
+                        <entry>Def√≠ne el texto en la barra de estado para el texto del popup.  
+                         NOTA: sobreescribe la definici√≥n del status.</entry>
                     </row>
                     <row>
                         <entry>autostatuscap</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne el texto de la barra de estado como el texto del tÌtulo 
+                        <entry>Def√≠ne el texto de la barra de estado como el texto del t√≠tulo 
                          NOTA: sobreescribe el status y autostatus
 						                  </entry>
                     </row>
@@ -262,9 +262,9 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-						<entry> Indica al overLib desde que Ìndice de la
+						<entry> Indica al overLib desde que √≠ndice de la
       matriz ol_text debe leer el texto, localizada en overlib.js.  
-      Este par·metro puede ser usado en vez del texto
+      Este par√°metro puede ser usado en vez del texto
 						</entry>
                     </row>
                     <row>
@@ -272,22 +272,22 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Indica al overLib a partir de que Ìndice de la
-                           matriz ol_caps leer el tÌtulo</entry>
+                        <entry>Indica al overLib a partir de que √≠ndice de la
+                           matriz ol_caps leer el t√≠tulo</entry>
                     </row>
                     <row>
                         <entry>capicon</entry>
                         <entry>url</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Muestra la imagen antes del tÌtulo</entry>
+                        <entry>Muestra la imagen antes del t√≠tulo</entry>
                     </row>
                     <row>
                         <entry>snapx</entry>
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Instantanea el popup a una posiciÛn
+                        <entry>Instantanea el popup a una posici√≥n
                          constante en una cuadricula horizontal</entry>
                     </row>
                     <row>
@@ -295,7 +295,7 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Instantanea el popup a una posiciÛn
+                        <entry>Instantanea el popup a una posici√≥n
                          constante en una cuadricula vertical</entry>
                     </row>
                     <row>
@@ -303,7 +303,7 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Cierra el popups en una posiciÛn horizontal
+                        <entry>Cierra el popups en una posici√≥n horizontal
                            Nota: pasa por encima de otros colocados horizontal</entry>
                     </row>
                     <row>
@@ -311,7 +311,7 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Cierra popups en posiciÛn vertical
+                        <entry>Cierra popups en posici√≥n vertical
                            Note: pasa por encima de otros colocados vertical</entry>
                     </row>
                     <row>
@@ -319,7 +319,7 @@
                         <entry>url</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>DefÌne una imagen para ser usada como fondo en
+                        <entry>Def√≠ne una imagen para ser usada como fondo en
                            vez de la tabla</entry>
                     </row>
                     <row>
@@ -329,7 +329,7 @@
                         <entry><emphasis>n/a</emphasis></entry>
                         <entry>Rellena el fondo de la imagen con espacios en blanco
                            horizontal para colocar el texto.  
-                           Nota: este es un comando de dos par·metros</entry>
+                           Nota: este es un comando de dos par√°metros</entry>
                     </row>
                     <row>
                         <entry>pady</entry>
@@ -338,7 +338,7 @@
                         <entry><emphasis>n/a</emphasis></entry>
                         <entry>Rellena el fondo de la imagen con espacios en blanco
                            vertical para colocar el texto.  
-                           Nota: este es un comando de dos par·metros</entry>
+                           Nota: este es un comando de dos par√°metros</entry>
                     </row>
                     <row>
                         <entry>fullhtml</entry>
@@ -347,7 +347,7 @@
                         <entry><emphasis>n/a</emphasis></entry>
                         <entry>Permite a usted controlar completamente el html sobre
                            la figura de fondo. 
-                           El cÛdigo HTML es esperado en el atributo "text"</entry>
+                           El c√≥digo HTML es esperado en el atributo "text"</entry>
                     </row>
                     <row>
                         <entry>frame</entry>
@@ -355,14 +355,14 @@
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
                         <entry>Controla popups en frames diferentes. Para mayores informes 
-                        sobre esta funciÛn vea la pagina de overlib</entry>
+                        sobre esta funci√≥n vea la pagina de overlib</entry>
                     </row>
                     <row>
                         <entry>timeout</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>LLama especificamente a una funciÛn javascript
+                        <entry>LLama especificamente a una funci√≥n javascript
                            y toma el valor que retorna, como el texto que se
                            va a mostrar en la ventana popup</entry>
                     </row>
@@ -379,16 +379,16 @@
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Determina autom·ticamente si el popup debe
-                           aparecer a la izquierda o a la derecha del ratÛn. </entry>
+                        <entry>Determina autom√°ticamente si el popup debe
+                           aparecer a la izquierda o a la derecha del rat√≥n. </entry>
                     </row>
                     <row>
                         <entry>vauto</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-						<entry>Determina autom·ticamente si el popup debe
-           aparecer abajo o arriba del ratÛn.</entry>
+						<entry>Determina autom√°ticamente si el popup debe
+           aparecer abajo o arriba del rat√≥n.</entry>
                     </row>
                 </tbody>
                 </tgroup>
@@ -416,7 +416,7 @@ snapx=10 snapy=10}>mypage</a>
   </programlisting>
  </example>
  <para>
- Ver tambiÈn <link linkend="language.function.popup.init">{popup_init}</link>
+ Ver tambi√©n <link linkend="language.function.popup.init">{popup_init}</link>
  y <ulink url="&url.overLib;">overLib</ulink>.
  </para>
 </sect1>

@@ -4,15 +4,15 @@
 <sect1 id="variable.error.reporting">
  <title>$error_reporting</title>
  <para>
-  Quando este valor È definido para um valor n„o nulo, o seu valor È usado como o nÌvel de
+  Quando este valor √© definido para um valor n√£o nulo, o seu valor √© usado como o n√≠vel de
   <ulink url="&url.php-manual;error_reporting">error_reporting</ulink>
   do php dentro de <link linkend="api.display">display()</link>
   e <link linkend="api.fetch">fetch()</link>. Quando <link
    linkend="chapter.debugging.console">debugging</link> esta ativado este valor
-  È ignorado e o nÌvel de erro È mantido intocado.
+  √© ignorado e o n√≠vel de erro √© mantido intocado.
  </para>
  <para>
-  Veja tambÈm
+  Veja tamb√©m
   <link linkend="api.trigger.error">trigger_error()</link>,
   <link linkend="chapter.debugging.console">debugging</link>
   e

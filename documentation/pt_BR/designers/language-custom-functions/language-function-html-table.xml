@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -30,35 +30,35 @@
                     <row>
                         <entry>cols</entry>
                         <entry>inteiro</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>3</emphasis></entry>
-                        <entry>n˙mero de colunas na tabela</entry>
+                        <entry>n√∫mero de colunas na tabela</entry>
                     </row>
                     <row>
                         <entry>table_attr</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>border="1"</emphasis></entry>
                         <entry>atributos para a tag table</entry>
                     </row>
                     <row>
                         <entry>tr_attr</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
-                        <entry>atributos para a tag  tr (arrays est„o em ciclo)</entry>
+                        <entry>atributos para a tag  tr (arrays est√£o em ciclo)</entry>
                     </row>
                     <row>
                         <entry>td_attr</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
-                        <entry>atributos para a tag (arrays est„o em ciclo)</entry>
+                        <entry>atributos para a tag (arrays est√£o em ciclo)</entry>
                     </row>
                     <row>
                         <entry>trailpad</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>&amp;nbsp;</emphasis></entry>
                         <entry>values to pad the trailing cells on last row with
 						(se algum)</entry>
@@ -67,30 +67,30 @@
                     <row>
                         <entry>hdir</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>right</emphasis></entry>
-                        <entry>direÁao de uma linha para ser representada. PossÌveis valores: <emphasis>left</emphasis>/<emphasis>right</emphasis></entry>
+                        <entry>dire√ßao de uma linha para ser representada. Poss√≠veis valores: <emphasis>left</emphasis>/<emphasis>right</emphasis></entry>
                     </row>
                     <row>
                         <entry>vdir</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>down</emphasis></entry>
-                        <entry>direÁ„o das colunas para serem representadas. PossÌveis valores: <emphasis>up</emphasis>/<emphasis>down</emphasis></entry>
+                        <entry>dire√ß√£o das colunas para serem representadas. Poss√≠veis valores: <emphasis>up</emphasis>/<emphasis>down</emphasis></entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			<emphasis>html_table</emphasis> È uma funÁ„o personalizada que transforma um array de dados
+			<emphasis>html_table</emphasis> √© uma fun√ß√£o personalizada que transforma um array de dados
 			em uma tabela HTML. O atributo <emphasis>cols</emphasis> determina a quantidade de colunas que  
-			a tabela ter·. Os valores <emphasis>table_attr</emphasis>, <emphasis>tr_attr</emphasis> e
+			a tabela ter√°. Os valores <emphasis>table_attr</emphasis>, <emphasis>tr_attr</emphasis> e
 			<emphasis>td_attr</emphasis> determinam os atributos dados para a tabela, tags tr e td. Se <emphasis>tr_attr</emphasis> ou
-			<emphasis>td_attr</emphasis> s„o arrays, eles entrar„o em ciclo.
-			<emphasis>trailpad</emphasis> È o 
+			<emphasis>td_attr</emphasis> s√£o arrays, eles entrar√£o em ciclo.
+			<emphasis>trailpad</emphasis> √© o 
 			valor colocado dentro do trailing
-			cells na ˙ltima linha da tabela
-			se h· alguma presente.
+			cells na √∫ltima linha da tabela
+			se h√° alguma presente.
 			</para>
 <example>
 <title>html_table</title>

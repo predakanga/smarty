@@ -5,7 +5,7 @@
 <sect1 id="language.modifier.strip.tags">
  <title>strip_tags</title>
  <para>
-  Supprime toutes les balises, et plus généralement tout ce qui se trouve
+  Supprime toutes les balises, et plus gÃ©nÃ©ralement tout ce qui se trouve
   entre <literal>&lt;</literal> et <literal>&gt;</literal>.
  </para>
   <informaltable frame="all">
@@ -17,7 +17,7 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>Position du paramètre</entry>
+      <entry>Position du paramÃ¨tre</entry>
       <entry>Type</entry>
       <entry>Requis</entry>
       <entry>Defaut</entry>
@@ -30,7 +30,7 @@
       <entry>bool</entry>
       <entry>Non</entry>
       <entry>&true;</entry>
-      <entry>Si l'on remplace les éléments par ' ' ou par ''</entry>
+      <entry>Si l'on remplace les Ã©lÃ©ments par ' ' ou par ''</entry>
      </row>
     </tbody>
    </tgroup>
@@ -50,12 +50,12 @@ $smarty->assign('articleTitle',
 ]]>
 </programlisting>
 <para>
-Où le template est :
+OÃ¹ le template est :
 </para>
 <programlisting>
 <![CDATA[
 {$titreArticle}
-{$titreArticle|strip_tags} {* identique à {$titreArticle|strip_tags:true} *}
+{$titreArticle|strip_tags} {* identique Ã  {$titreArticle|strip_tags:true} *}
 {$titreArticle|strip_tags:false}
 ]]>
 </programlisting>

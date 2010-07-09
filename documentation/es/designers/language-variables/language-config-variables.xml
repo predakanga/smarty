@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
   <sect1 id="language.config.variables">
-			<title>Variables cargadas desde archivos de configuraci髇</title>
+			<title>Variables cargadas desde archivos de configuraci贸n</title>
 			<para>
     Las variables que son cargadas de 
-    <link linkend="config.files">archivos de configuraci髇</link> son
+    <link linkend="config.files">archivos de configuraci贸n</link> son
     referenciadas incluyendo entre ellas el signo(#), o como variables 
     de Smarty
     <link linkend="language.variables.smarty.config">$smarty.config</link>.
@@ -12,7 +12,7 @@
     dentro de comillas.
 			</para>
    <example>
-    <title>Variables de configuraci髇</title>
+    <title>Variables de configuraci贸n</title>
     <para>
      foo.conf:
     </para>
@@ -86,14 +86,14 @@ rowBgColor = "#cccccc"
     </screen>
    </example>
 			<para>
-    Las variables de un archivo de configuraci髇 no pueden ser 
-    usadas hasta despu閟 de que son cargadas por los archivos de
-    configuraci髇.
+    Las variables de un archivo de configuraci贸n no pueden ser 
+    usadas hasta despu茅s de que son cargadas por los archivos de
+    configuraci贸n.
     Este procedimento es explicado posteriormente en este documento en 
     <link linkend="language.function.config.load"><command>{config_load}</command></link>.
 			</para>
    <para>
-    Ver tambi閚 <link linkend="language.syntax.variables">Variables</link> y
+    Ver tambi茅n <link linkend="language.syntax.variables">Variables</link> y
     <link linkend="language.variables.smarty">$smarty reserved variables</link>
    </para>
 

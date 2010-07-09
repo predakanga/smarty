@@ -9,8 +9,8 @@
   <title>Erreurs Smarty/PHP</title>
   <para>
    Smarty peut identifier de nombreuses erreurs comme des attributs de
-   balises manquants ou de noms de variables malformés. Dans ce cas-là,
-   vous verrez apparaître une erreur semblable à :
+   balises manquants ou de noms de variables malformÃ©s. Dans ce cas-lÃ ,
+   vous verrez apparaÃ®tre une erreur semblable Ã  :
   </para>
   <example>
    <title>erreurs Smarty</title>
@@ -26,15 +26,15 @@ in /path/to/smarty/Smarty.class.php on line 1041
   </example>
 
   <para>
-   Smarty vous indique le nom du template, le numéro de la ligne et l'erreur.
-   Après cela, vous pouvez connaître le numéro de ligne où il y a eu erreur dans
-   la définition de la classe Smarty.
+   Smarty vous indique le nom du template, le numÃ©ro de la ligne et l'erreur.
+   AprÃ¨s cela, vous pouvez connaÃ®tre le numÃ©ro de ligne oÃ¹ il y a eu erreur dans
+   la dÃ©finition de la classe Smarty.
   </para>
 
   <para>
-   Il y a certaines erreurs que Smarty ne peut pas détecter, comme les
+   Il y a certaines erreurs que Smarty ne peut pas dÃ©tecter, comme les
    balises fermantes manquantes. Ce type d'erreurs est la plupart du temps
-   repéré dans la phase de compilation PHP du template compilé.
+   repÃ©rÃ© dans la phase de compilation PHP du template compilÃ©.
   </para>
 
   <example>
@@ -46,16 +46,16 @@ Parse error: parse error in /path/to/smarty/templates_c/index.tpl.php on line 75
    </screen>
   </example>
   <para>
-   Quand vous rencontrez une erreur d'analyse PHP, le numéro de la ligne
-   indiqué est celui du fichier PHP compilé et non du template. Vous pouvez alors
-   regarder le template et détecter l'erreur. Voici quelques erreurs fréquentes :
+   Quand vous rencontrez une erreur d'analyse PHP, le numÃ©ro de la ligne
+   indiquÃ© est celui du fichier PHP compilÃ© et non du template. Vous pouvez alors
+   regarder le template et dÃ©tecter l'erreur. Voici quelques erreurs frÃ©quentes :
    balises fermantes pour
    <link linkend="language.function.if"><varname>{if}{/if}</varname></link> 
    ou
    <link linkend="language.function.if"><varname>{section}{/section}</varname></link> 
    manquantes, ou syntaxe logique incorrecte dans une instruction <varname>{if}</varname>.
-   Si vous ne trouvez pas l'erreur, vous devrez alors ouvrir le fichier PHP compilé et aller à la
-   ligne correspondante pour trouver d'où vient l'erreur.
+   Si vous ne trouvez pas l'erreur, vous devrez alors ouvrir le fichier PHP compilÃ© et aller Ã  la
+   ligne correspondante pour trouver d'oÃ¹ vient l'erreur.
   </para>
   <example>
    <title>Autres erreurs communes</title>
@@ -83,9 +83,9 @@ Warning: Smarty error: unable to read resource: "site.conf" in...
        <link linkend="language.function.config.load"><varname>{config_load}</varname></link>
        est dans un template (ou
        <link linkend="api.config.load"><varname>config_load()</varname></link>
-       a été appelé) et soit
+       a Ã©tÃ© appelÃ©) et soit
        <link linkend="variable.config.dir"><varname>$config_dir</varname></link>
-       est incohérent, n'existe pas, ou
+       est incohÃ©rent, n'existe pas, ou
        <filename>site.conf</filename> n'est pas dans le dossier.
       </para>
      </listitem>
@@ -102,7 +102,7 @@ Warning: Smarty error: unable to read resource: "site.conf" in...
      <para>
       Soit le dossier
       <link linkend="variable.compile.dir"><parameter>$compile_dir</parameter></link>
-      n'est pas correctement défini, le dossier n'existe pas, ou
+      n'est pas correctement dÃ©fini, le dossier n'existe pas, ou
       <filename>templates_c</filename> est un fichier et non un dossier.
      </para>
     </listitem>
@@ -116,7 +116,7 @@ Warning: Smarty error: unable to read resource: "site.conf" in...
     <listitem>
      <para>
       Le dossier <link linkend="variable.compile.dir"><parameter>$compile_dir</parameter></link>
-      n'est pas accessible en écriture par le serveur web. Voir le bas
+      n'est pas accessible en Ã©criture par le serveur web. Voir le bas
       de la page sur l'<link linkend="installing.smarty.basic">installation de
        Smarty</link> pour les permissions.
      </para>
@@ -133,10 +133,10 @@ or is not a directory. in /..
     <listitem>
      <para>
       Cela signifie que
-      <link linkend="variable.caching"><parameter>$caching</parameter></link> est activé et soit
+      <link linkend="variable.caching"><parameter>$caching</parameter></link> est activÃ© et soit
       le dossier
       <link linkend="variable.cache.dir"><parameter>$cache_dir</parameter></link>
-      n'est pas correctement défini, le dossier n'existe pas, ou
+      n'est pas correctement dÃ©fini, le dossier n'existe pas, ou
       <filename>cache</filename> est un fichier et non un dossier.
      </para>
     </listitem>
@@ -151,10 +151,10 @@ Fatal error: Smarty error: unable to write to $cache_dir '/...
     <listitem>
      <para>
       Cela signifie que
-      <link linkend="variable.caching"><parameter>$caching</parameter></link> est activé et
+      <link linkend="variable.caching"><parameter>$caching</parameter></link> est activÃ© et
       le dossier
       <link linkend="variable.cache.dir"><parameter>$cache_dir</parameter></link>
-      n'est pas accessible en écriture par le serveur web. Voir le bas
+      n'est pas accessible en Ã©criture par le serveur web. Voir le bas
       de la page sur l'<link linkend="installing.smarty.basic">installation de
        Smarty</link> pour les permissions.
      </para>
@@ -164,7 +164,7 @@ Fatal error: Smarty error: unable to write to $cache_dir '/...
 
   <para>
    Voir aussi
-   <link linkend="chapter.debugging.console">le débogage</link>,
+   <link linkend="chapter.debugging.console">le dÃ©bogage</link>,
    <link linkend="variable.error.reporting"><parameter>$error_reporting</parameter></link> et
    <link linkend="api.trigger.error"><varname>trigger_error()</varname></link>.
   </para>

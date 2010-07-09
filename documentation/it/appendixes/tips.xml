@@ -10,11 +10,11 @@
     Certe volte potreste voler stampare un valore di default per una
     variabile vuota invece di stampare niente, ad esempio "&amp;nbsp;" 
     in modo che gli sfondi delle tabelle funzionino regolarmente. Molti
-    userebbero una {if} per gestire questo caso, ma c'Ë un modo pi˘ veloce
-    con Smarty, che Ë l'uso del modificatore <emphasis>default</emphasis>.
+    userebbero una {if} per gestire questo caso, ma c'√® un modo pi√π veloce
+    con Smarty, che √® l'uso del modificatore <emphasis>default</emphasis>.
    </para>
    <example>
-    <title>Stampare &amp;nbsp; quando una variabile Ë vuota</title>
+    <title>Stampare &amp;nbsp; quando una variabile √® vuota</title>
     <programlisting>
 <![CDATA[
 {* il modo lungo *}
@@ -37,9 +37,9 @@
   <sect1 id="tips.default.var.handling">
    <title>Gestione dei default delle variabili</title>
    <para>
-    Se una variabile viene usata pi˘ volte nel template, applicarle ogni
-    volta il modificatore default puÚ diventare pesante. E' possibile
-    rimediare a ciÚ assegnando alla variabile il suo valore di default
+    Se una variabile viene usata pi√π volte nel template, applicarle ogni
+    volta il modificatore default pu√≤ diventare pesante. E' possibile
+    rimediare a ci√≤ assegnando alla variabile il suo valore di default
     con la funzione <link 
     linkend="language.function.assign">assign</link>.
    </para>
@@ -59,8 +59,8 @@
   <sect1 id="tips.passing.vars">
    <title>Passare una variabile titolo ad un template di intestazione</title>
    <para>
-    Quando la maggior parte dei template usa gli stessi intestazione e piÈ di
-    pagina, Ë abbastanza comune creare dei template a parte per questi ultimi
+    Quando la maggior parte dei template usa gli stessi intestazione e pi√© di
+    pagina, √® abbastanza comune creare dei template a parte per questi ultimi
     e poi includerli negli altri. Ma cosa succede se l'intestazione ha bisogno
     di avere un titolo diverso a seconda della pagina in cui ci troviamo?
     Potete passare il titolo all'intestazione nel momento dell'inclusione.
@@ -104,11 +104,11 @@ footer.tpl
    </example>
    <para>
     Quando viene disegnata la pagina principale, il titolo "Main Page" viene
-    passato a header.tpl, e quindi sar‡ usato come titolo. Quando viene
-    disegnata la pagina degli archivi, il titolo sar‡ "Archives". Notate
+    passato a header.tpl, e quindi sar√† usato come titolo. Quando viene
+    disegnata la pagina degli archivi, il titolo sar√† "Archives". Notate
     che nell'esempio degli archivi abbiamo usato una variabile del file
     archives_page.conf invece che una definita nel codice. Notate anche che
-    se la variabile $title non Ë impostata viene stampato "BC News", attraverso
+    se la variabile $title non √® impostata viene stampato "BC News", attraverso
     il modificatore di variabile <emphasis>default</emphasis>.
    </para>
   </sect1>
@@ -136,7 +136,7 @@ footer.tpl
 ]]>
     </programlisting>
     <para>
-     Questo stamper‡:
+     Questo stamper√†:
     </para>
     <screen>
 <![CDATA[
@@ -149,7 +149,7 @@ Jan 4, 2001
 ]]>
     </programlisting>
     <para>
-     Questo stamper‡:
+     Questo stamper√†:
     </para>
     <screen>
 <![CDATA[
@@ -166,8 +166,8 @@ Jan 4, 2001
    </example>
    <para>
     Quando usate {html_select_date} in un template, il programmatore
-    probabilmente vorr‡ convertire l'output del modulo in un formato
-    timestamp. Ecco una funzione che puÚ aiutarvi in questo.
+    probabilmente vorr√† convertire l'output del modulo in un formato
+    timestamp. Ecco una funzione che pu√≤ aiutarvi in questo.
    </para>
    <example>
     <title>convertire le date provenienti da un modulo in timestamp</title>
@@ -203,12 +203,12 @@ function makeTimeStamp($year="", $month="", $day="")
    <title>WAP/WML</title>
    <para>
     I template WAP/WML richiedono header php di tipo Content-Type che deve
-    essere passato insieme al template. Il modo pi˘ semplice per farlo sarebbe
+    essere passato insieme al template. Il modo pi√π semplice per farlo sarebbe
     scrivere una funzione utente che stampi l'header. Tuttavia, se usate 
     il caching, questo sistema non funziona, per cui lo faremo con il tag
     insert (ricordate che i tag insert non vanno in cache!). Assicuratevi
     che nulla sia inviato in output al browser prima del template, altrimenti
-    l'header non potr‡ essere spedito.
+    l'header non potr√† essere spedito.
    </para>
    <example>
     <title>usare insert per scrivere un header Content-Type WML</title>
@@ -269,7 +269,7 @@ function insert_header($params)
    <title>Template a componenti</title>
    <para>
     Tradizionalmente, programmare le applicazioni a template funziona
-    cosÏ: per prima cosa si accumulano le variabili nell'applicazione
+    cos√¨: per prima cosa si accumulano le variabili nell'applicazione
     PHP (magari con query al database). Poi, si istanzia l'oggetto
     Smarty, si assegnano le variabili e si visualizza il template.
     Allora supponiamo di avere, ad esempio, un riquadro che visualizza
@@ -328,8 +328,8 @@ Stock Name: {$ticker.name} Stock Price: {$ticker.price}
    <title>Offuscare gli indirizzi E-mail</title>
    <para>
     Vi siete mai chiesti come fanno i vostri indirizzi E-mail a finire su
-    cosÏ tante mailing list di spam? Uno dei modi che hanno gli spammer 
-    per raccogliere indirizzi E-mail Ë dalle pagine web. Per combattere
+    cos√¨ tante mailing list di spam? Uno dei modi che hanno gli spammer 
+    per raccogliere indirizzi E-mail √® dalle pagine web. Per combattere
     questo problema, potete fare in modo che gli indirizzi E-mail appaiano
     in maniera criptata da javascript nel sorgente HTML, anche se continueranno
     ad essere visti e a funzionare correttamente nel browser. E' possibile
@@ -349,9 +349,9 @@ Send inquiries to
    <note>
     <title>Nota tecnica</title>
     <para>
-     Questo metodo non Ë sicuro al 100%. Uno spammer, concettualmente, potrebbe
+     Questo metodo non √® sicuro al 100%. Uno spammer, concettualmente, potrebbe
      programmare il suo raccoglitore di e-mail per decodificare questi valori,
-     ma non Ë una cosa semplice.
+     ma non √® una cosa semplice.
     </para>
    </note>
   </sect1>

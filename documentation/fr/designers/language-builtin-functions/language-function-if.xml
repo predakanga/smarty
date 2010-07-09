@@ -5,13 +5,13 @@
 <sect1 id="language.function.if">
  <title>{if},{elseif},{else}</title>
  <para>
-  L'instruction <varname>{if}</varname> dans Smarty dispose de la même flexibilité que l'instruction
+  L'instruction <varname>{if}</varname> dans Smarty dispose de la mÃªme flexibilitÃ© que l'instruction
   PHP <ulink url="&url.php-manual;if">if</ulink>,
-  avec quelques fonctionnalités supplémentaires pour le
-  moteur de template. Tous les <varname>{if}</varname> doivent être
-  utilisés de pair avec un <varname>{/if}</varname>.
-  <varname>{else}</varname> et <varname>{elseif}</varname> sont également
-  des balises autorisées. Toutes les conditions et fonctions PHP sont reconnues,
+  avec quelques fonctionnalitÃ©s supplÃ©mentaires pour le
+  moteur de template. Tous les <varname>{if}</varname> doivent Ãªtre
+  utilisÃ©s de pair avec un <varname>{/if}</varname>.
+  <varname>{else}</varname> et <varname>{elseif}</varname> sont Ã©galement
+  des balises autorisÃ©es. Toutes les conditions et fonctions PHP sont reconnues,
   comme <emphasis>||</emphasis>, <emphasis>or</emphasis>,
   <emphasis>&amp;&amp;</emphasis>, <emphasis>and</emphasis>,
   <emphasis>is_array()</emphasis>, etc.
@@ -22,9 +22,9 @@
   <link linkend="variable.security.settings"><parameter>$security_settings</parameter></link> (?!).
  </para>
  <para>
-  La liste suivante présente les opérateurs reconnus, qui doivent être entourés d'espaces.
-  Remarquez que les éléments listés entre [crochets] sont optionnels. Les équivalents 
-  PHP sont indiqués lorsque applicables.
+  La liste suivante prÃ©sente les opÃ©rateurs reconnus, qui doivent Ãªtre entourÃ©s d'espaces.
+  Remarquez que les Ã©lÃ©ments listÃ©s entre [crochets] sont optionnels. Les Ã©quivalents 
+  PHP sont indiquÃ©s lorsque applicables.
  </para>
 
  <informaltable frame="all">
@@ -36,7 +36,7 @@
    <colspec colname="php" />
    <thead>
     <row>
-     <entry>Opérateur</entry>
+     <entry>OpÃ©rateur</entry>
      <entry>Syntaxe alternative</entry>
      <entry>Exemple de syntaxe</entry>
      <entry>Signification</entry>
@@ -48,56 +48,56 @@
      <entry>==</entry>
      <entry>eq</entry>
      <entry>$a eq $b</entry>
-     <entry>égalité</entry>
+     <entry>Ã©galitÃ©</entry>
      <entry>==</entry>
     </row>
     <row>
      <entry>!=</entry>
      <entry>ne, neq</entry>
      <entry>$a neq $b</entry>
-     <entry>différence</entry>
+     <entry>diffÃ©rence</entry>
      <entry>!=</entry>
     </row>
     <row>
      <entry>&gt;</entry>
      <entry>gt</entry>
      <entry>$a gt $b</entry>
-     <entry>supérieur à</entry>
+     <entry>supÃ©rieur Ã </entry>
      <entry>&gt;</entry>
     </row>
     <row>
      <entry>&lt;</entry>
      <entry>lt</entry>
      <entry>$a lt $b</entry>
-     <entry>inférieur à</entry>
+     <entry>infÃ©rieur Ã </entry>
      <entry>&lt;</entry>
     </row>
     <row>
      <entry>&gt;=</entry>
      <entry>gte, ge</entry>
      <entry>$a ge $b</entry>
-     <entry>supérieur ou égal à</entry>
+     <entry>supÃ©rieur ou Ã©gal Ã </entry>
      <entry>&gt;=</entry>
     </row>
     <row>
      <entry>&lt;=</entry>
      <entry>lte, le</entry>
      <entry>$a le $b</entry>
-     <entry>inférieur ou égal à</entry>
+     <entry>infÃ©rieur ou Ã©gal Ã </entry>
      <entry>&lt;=</entry>
     </row>
     <row>
      <entry>===</entry>
      <entry></entry>
      <entry>$a === 0</entry>
-     <entry>égalité (type et valeur)</entry>
+     <entry>Ã©galitÃ© (type et valeur)</entry>
      <entry>===</entry>
     </row>
     <row>
      <entry>!</entry>
      <entry>not</entry>
      <entry>not $a</entry>
-     <entry>négation</entry>
+     <entry>nÃ©gation</entry>
      <entry>!</entry>
     </row>
     <row>
@@ -125,7 +125,7 @@
      <entry>is [not] even by</entry>
      <entry></entry>
      <entry>$a is not even by $b</entry>
-     <entry>paritée de groupe</entry>
+     <entry>paritÃ©e de groupe</entry>
      <entry>($a / $b) % 2 == 0</entry>
     </row>
     <row>
@@ -157,32 +157,32 @@
   Bienvenue, qui que vous soyez.
 {/if}
 
-{* Un exemple avec l'opérateur or *}
+{* Un exemple avec l'opÃ©rateur or *}
 {if $name eq 'Fred' or $name eq 'Wilma'}
   ...
 {/if}
 
-{* même chose que ci-dessus *}
+{* mÃªme chose que ci-dessus *}
 {if $name == 'Fred' || $name == 'Wilma'}
   ...
 {/if}
 
-{* les parenthèses sont autorisées *}
+{* les parenthÃ¨ses sont autorisÃ©es *}
 {if ( $amount < 0 or $amount > 1000 ) and $volume >= #minVolAmt#}
   ...
 {/if}
 
-{* vous pouvez également faire appel aux fonctions PHP *}
+{* vous pouvez Ã©galement faire appel aux fonctions PHP *}
 {if count($var) gt 0}
   ...
 {/if}
 
-{* Vérifie si c'est un tableau. *}
+{* VÃ©rifie si c'est un tableau. *}
 {if is_array($foo) }
 .....
 {/if}
 
-{* Vérifie si la variable est nulle. *}
+{* VÃ©rifie si la variable est nulle. *}
 {if isset($foo) }
   .....
 {/if}

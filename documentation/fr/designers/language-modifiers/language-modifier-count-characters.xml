@@ -5,7 +5,7 @@
 <sect1 id="language.modifier.count.characters">
  <title>count_characters</title>
  <para>
-  Compte le nombre de caractères dans une variable.
+  Compte le nombre de caractÃ¨res dans une variable.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -16,7 +16,7 @@
    <colspec colname="desc" />
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Defaut</entry>
@@ -40,13 +40,13 @@
 <![CDATA[
 <?php
 
-$smarty->assign('titreArticle', 'Vagues de froid liées à la température.');
+$smarty->assign('titreArticle', 'Vagues de froid liÃ©es Ã  la tempÃ©rature.');
 
 ?>
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -60,7 +60,7 @@ $smarty->assign('titreArticle', 'Vagues de froid liées à la température.');
   </para>
   <screen>
 <![CDATA[
-Vagues de froid liées à la température.
+Vagues de froid liÃ©es Ã  la tempÃ©rature.
 33
 39
 ]]>

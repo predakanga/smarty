@@ -55,7 +55,6 @@ smartyweb: FORCE
 	@test -d smartyweb || mkdir smartyweb
 	$(JADE) $(CATALOG) -d $(SMARTYWEB_STYLESHEET) -V use-output-dir -t sgml $(XMLDCL) manual.xml
 	$(PHP) scripts/generate_smartyweb.php
-	$(PHP) scripts/html_syntax.php php smartyweb/
 
 pdf: FORCE
 	${FOP} -xml manual.xml -xsl xsl/fo.xsl -pdf manual.pdf

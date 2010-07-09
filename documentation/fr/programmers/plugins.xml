@@ -5,26 +5,26 @@
  <title>Etendre Smarty avec des plugins</title>
  <para>
   La version 2.0 a introduit l'architecture de plugin qui est
-  utilisée pour pratiquement toutes les fonctionnalités
+  utilisÃ©e pour pratiquement toutes les fonctionnalitÃ©s
   personnalisables de Smarty. Ceci comprend :
   <itemizedlist spacing="compact">
    <listitem><simpara>les fonctions</simpara></listitem>
    <listitem><simpara>les modificateurs</simpara></listitem>
    <listitem><simpara>les fonctions de blocs</simpara></listitem>
    <listitem><simpara>les fonctions de compilation</simpara></listitem>
-   <listitem><simpara>les filtres de pré-compilation</simpara></listitem>
+   <listitem><simpara>les filtres de prÃ©-compilation</simpara></listitem>
    <listitem><simpara>les filtres de post-compilation</simpara></listitem>
    <listitem><simpara>les filtres de sorties</simpara></listitem>
    <listitem><simpara>les ressources</simpara></listitem>
    <listitem><simpara>les insertions</simpara></listitem>
   </itemizedlist>
-  A part pour les ressources, la compatibilité avec les anciennes
-  façons d'enregistrer les fonctions de gestion avec l'API register_
-  est conservée. Si vous n'avez pas utilisé cette API et que vous avez
-  à la place directement modifié les variables de classes
+  A part pour les ressources, la compatibilitÃ© avec les anciennes
+  faÃ§ons d'enregistrer les fonctions de gestion avec l'API register_
+  est conservÃ©e. Si vous n'avez pas utilisÃ© cette API et que vous avez
+  Ã  la place directement modifiÃ© les variables de classes
   <literal>$custom_funcs</literal>, <literal>$custom_mods</literal> et
   d'autres, vous devez alors modifier vos scripts pour utiliser
-  l'API ou convertir vos fonctionnalités personnalisées en plugins.
+  l'API ou convertir vos fonctionnalitÃ©s personnalisÃ©es en plugins.
  </para>
  
  &programmers.plugins.plugins-howto;

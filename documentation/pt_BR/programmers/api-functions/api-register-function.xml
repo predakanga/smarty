@@ -13,24 +13,24 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-	     Use isso para registrar funções de plugins dinamicamente para o template.
-	     Passe no template o nome da função, 
-	     seguido pelo nome da função PHP que implemente isso.
+	     Use isso para registrar funÃ§Ãµes de plugins dinamicamente para o template.
+	     Passe no template o nome da funÃ§Ã£o, 
+	     seguido pelo nome da funÃ§Ã£o PHP que implemente isso.
 			</para>
 			<para>
-             A chamada para função-php <parameter>impl</parameter> pode ser (a) 
-	     uma string contendo o nome da função ou (b) um array no formato
+             A chamada para funÃ§Ã£o-php <parameter>impl</parameter> pode ser (a) 
+	     uma string contendo o nome da funÃ§Ã£o ou (b) um array no formato
 	     <literal>array(&amp;$object, $method)</literal> com
-             <literal>&amp;$object</literal> sendo uma referência para um
+             <literal>&amp;$object</literal> sendo uma referÃªncia para um
              objeto e <literal>$method</literal> sendo uma string
-             contendo o nome do método ou (c) um array no formato
+             contendo o nome do mÃ©todo ou (c) um array no formato
              <literal>array(&amp;$class, $method)</literal> com
              <literal>$class</literal> sendo um nome de classe e 
-             <literal>$method</literal> sendo um método
+             <literal>$method</literal> sendo um mÃ©todo
              desta classe.
                         </para>
 			<para>
-<parameter>$cacheable</parameter> e <parameter>$cache_attrs</parameter> podem ser omitidos na maioria dos casos. Veja <link linkend="caching.cacheable">Controlando modos de Saída Cache dos Plugins</link> para obter informações apropriadas.
+<parameter>$cacheable</parameter> e <parameter>$cache_attrs</parameter> podem ser omitidos na maioria dos casos. Veja <link linkend="caching.cacheable">Controlando modos de SaÃ­da Cache dos Plugins</link> para obter informaÃ§Ãµes apropriadas.
 			</para>
 <example>
 <title>register_function</title>
@@ -44,7 +44,7 @@ function print_current_date ($params) {
     return strftime($format,time());
 }
 
-// agora você pode usar isso no Smarty para mostrar a data atual: {date_now}
+// agora vocÃª pode usar isso no Smarty para mostrar a data atual: {date_now}
 // ou, {date_now format="%Y/%m/%d"} para formatar isso.</programlisting>
 </example>
 </sect1>

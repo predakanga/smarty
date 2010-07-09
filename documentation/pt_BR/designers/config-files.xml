@@ -2,35 +2,35 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.2 Maintainer: thomasgm Status: ready -->
   <chapter id="config.files">
-   <title>Arquivos de Configuração</title>
+   <title>Arquivos de ConfiguraÃ§Ã£o</title>
    <para>
-    Arquivos de configuração são úteis para designers que gerenciam variáveis globais 
-	para os templates à partir de um arquivo. Um exemplo são as cores do template. 
-	Normalmente se você quisesse mudar o tema de cores de uma aplicação, você teria 
-	que abrir cada arquivo de template e alterar as cores. Com arquivos de configurações, 
+    Arquivos de configuraÃ§Ã£o sÃ£o Ãºteis para designers que gerenciam variÃ¡veis globais 
+	para os templates Ã  partir de um arquivo. Um exemplo sÃ£o as cores do template. 
+	Normalmente se vocÃª quisesse mudar o tema de cores de uma aplicaÃ§Ã£o, vocÃª teria 
+	que abrir cada arquivo de template e alterar as cores. Com arquivos de configuraÃ§Ãµes, 
 	as cores podem ser armazenadas em um lugar, e apenas um arquivo precisaria ser alterado.
    </para>
    <example>
-    <title>Exemplo de sintaxe de um arquivo de configuração</title>
+    <title>Exemplo de sintaxe de um arquivo de configuraÃ§Ã£o</title>
     <programlisting>
 <![CDATA[
-# variáveis globais
+# variÃ¡veis globais
 tituloPagina = "Menu Principal"
 corfundoPagina = #000000
 corfundoTabela = #000000
 corlinhaTabela = #00ff00
 
 [Consumidor]
-tituloPagina = "Informações do Consumidor"
+tituloPagina = "InformaÃ§Ãµes do Consumidor"
 
 [Login]
 tituloPagina = "Login"
 focus = "nomeusuario"
-Intro = """Este é um valor que ultrapassa uma 
-           linha. Você deve colocá-lo 
-           dentre três aspas."""
+Intro = """Este Ã© um valor que ultrapassa uma 
+           linha. VocÃª deve colocÃ¡-lo 
+           dentre trÃªs aspas."""
 
-# seção invisível
+# seÃ§Ã£o invisÃ­vel
 [.BancoDeDados]
 host=meu.dominio.com
 bd=LIVRODEVISITAS
@@ -40,32 +40,32 @@ senha=foobar
 </programlisting>
    </example>
    <para>
-    Valores de variáveis de arquivos de configuração pode estar entre aspas, 
-	mas não é necessário. Você pode usar tanto aspas simples como duplas. 
-	Se você tiver um valor que ocupe mais de uma linha, coloque-o dentre três aspas 
-	("""). Você pode colocar comentários em arquivos de configuração com qualquer 
-	sintaxe que não é válida para um arquivo de configuração. Nós recomendamos usar um 
-	<literal>#</literal> (cancela) no início de cada linha que contém o comentário.
+    Valores de variÃ¡veis de arquivos de configuraÃ§Ã£o pode estar entre aspas, 
+	mas nÃ£o Ã© necessÃ¡rio. VocÃª pode usar tanto aspas simples como duplas. 
+	Se vocÃª tiver um valor que ocupe mais de uma linha, coloque-o dentre trÃªs aspas 
+	("""). VocÃª pode colocar comentÃ¡rios em arquivos de configuraÃ§Ã£o com qualquer 
+	sintaxe que nÃ£o Ã© vÃ¡lida para um arquivo de configuraÃ§Ã£o. NÃ³s recomendamos usar um 
+	<literal>#</literal> (cancela) no inÃ­cio de cada linha que contÃ©m o comentÃ¡rio.
    </para>
    <para>
-    Este arquivo de configuração tem duas seções. Nomes de seções devem estar entre conchetes []. 
-	Nomes de seção podem ser string arbritraria que não contenham os símbolos 
-	<literal>[</literal> ou <literal>]</literal>. As quatro variáveis no topo são variáveis globais, 
-	ou variáveis que não pertencem à uma seção. Estas variáveis sempre são carregadas do arquivo de 
-	configuração. Se uma seção em particular é carregada, então as variáveis globais e as variáveis 
-	desta seção também são carregadas. Se uma variável de seção e global já existirem, 
-	a variável de seção será utilizada. Se você tiver duas variáveis na mesma seção com o mesmo nome, 
-	a última será utilizada.
+    Este arquivo de configuraÃ§Ã£o tem duas seÃ§Ãµes. Nomes de seÃ§Ãµes devem estar entre conchetes []. 
+	Nomes de seÃ§Ã£o podem ser string arbritraria que nÃ£o contenham os sÃ­mbolos 
+	<literal>[</literal> ou <literal>]</literal>. As quatro variÃ¡veis no topo sÃ£o variÃ¡veis globais, 
+	ou variÃ¡veis que nÃ£o pertencem Ã  uma seÃ§Ã£o. Estas variÃ¡veis sempre sÃ£o carregadas do arquivo de 
+	configuraÃ§Ã£o. Se uma seÃ§Ã£o em particular Ã© carregada, entÃ£o as variÃ¡veis globais e as variÃ¡veis 
+	desta seÃ§Ã£o tambÃ©m sÃ£o carregadas. Se uma variÃ¡vel de seÃ§Ã£o e global jÃ¡ existirem, 
+	a variÃ¡vel de seÃ§Ã£o serÃ¡ utilizada. Se vocÃª tiver duas variÃ¡veis na mesma seÃ§Ã£o com o mesmo nome, 
+	a Ãºltima serÃ¡ utilizada.
    </para>
    <para>
-    Arquivos de configuração são carregados no template usando a função embutida <command>config_load</command>.
+    Arquivos de configuraÃ§Ã£o sÃ£o carregados no template usando a funÃ§Ã£o embutida <command>config_load</command>.
    </para>
    <para>
-    Você pode esconder as variáveis ou uma seção inteira colocando um ponto 
-	antes do nome da seção ou variávei. Isso é útil em casos no qual sua aplicação lê 
-	arquivos de configuração e obtém dados sensíveis que não são necessários para o sistema 
-	de templates. Se a edição de seus templates é terceirizada, você terá certeza que eles não 
-	irão ler os dados sensíveis do arquivo de configuração que é carregado no template.
+    VocÃª pode esconder as variÃ¡veis ou uma seÃ§Ã£o inteira colocando um ponto 
+	antes do nome da seÃ§Ã£o ou variÃ¡vei. Isso Ã© Ãºtil em casos no qual sua aplicaÃ§Ã£o lÃª 
+	arquivos de configuraÃ§Ã£o e obtÃ©m dados sensÃ­veis que nÃ£o sÃ£o necessÃ¡rios para o sistema 
+	de templates. Se a ediÃ§Ã£o de seus templates Ã© terceirizada, vocÃª terÃ¡ certeza que eles nÃ£o 
+	irÃ£o ler os dados sensÃ­veis do arquivo de configuraÃ§Ã£o que Ã© carregado no template.
    </para>
 </chapter>
 <!-- Keep this comment at the end of the file

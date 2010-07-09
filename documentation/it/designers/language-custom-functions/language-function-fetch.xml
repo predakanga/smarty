@@ -22,7 +22,7 @@
     <row>
      <entry>file</entry>
      <entry>stringa</entry>
-     <entry>sÏ</entry>
+     <entry>s√¨</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>il file o l'indirizzo http o ftp da caricare</entry>
     </row>
@@ -39,16 +39,16 @@
  <para>
   fetch si usa per recuperare file dal filesystem locale, oppure da
   un indirizzo http o ftp, e visualizzarne il contenuto. Se il nome 
-  del file inizia per "http://", la pagina web verr‡ letta e 
+  del file inizia per "http://", la pagina web verr√† letta e 
   visualizzata. Se il nome del file inizia per "ftp://", il file
-  verr‡ recuperato dal server ftp e visualizzato. Per i file locali
+  verr√† recuperato dal server ftp e visualizzato. Per i file locali
   deve essere indicato l'intero percorso sul filesystem oppure un
   percorso relativo all'indirizzo dello script php in esecuzione.
  </para>
  <para>
   Se fornite lo speciale attributo "assign", l'output della funzione
-  fetch verr‡ assegnato a questa variabile invece di essere stampato
-  in output. (novit‡ di Smarty 1.5.0)
+  fetch verr√† assegnato a questa variabile invece di essere stampato
+  in output. (novit√† di Smarty 1.5.0)
  </para>
  <note>
   <title>Nota tecnica</title>
@@ -61,7 +61,7 @@
  <note>
   <title>Nota tecnica</title>
   <para>
-   Se Ë attivata la security del template e state cercando di
+   Se √® attivata la security del template e state cercando di
    caricare un file dal filesystem locale, saranno consentiti
    soltanto file compresi in una delle directory definite sicure
    ($secure_dir).

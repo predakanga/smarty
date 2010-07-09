@@ -19,48 +19,48 @@
      bloque {func} .. {/func}.
     </para>
     <para>
-     Por default la implementaciÛn de su funciÛn es llamada dos
+     Por default la implementaci√≥n de su funci√≥n es llamada dos
      veces por el Smarty: una vez por la etiqueta de apertura, y 
      la otra por la etiqueta de cierre 
      (vea <literal>&amp;$repeat</literal> abajo para ver como hacer
      cambios a esto).
     </para>
     <para>
-     Solo la etiqueta de apertura de la funciÛn de bloque puede tener
+     Solo la etiqueta de apertura de la funci√≥n de bloque puede tener
      atributos. Todos los atributos pasados a las funciones de template 
      estan contenidos en <parameter>$params</parameter> como un arreglo
      asociativo. Usted puede accesar a cualquiera de estos valores 
      directamente, e.g. <varname>$params['start']</varname>. 
-     Los atributos de la etiqueta de apertura son tambiÈn son accesibles 
-     a su funciÛn cuando se procesa la etiqueta de cierre.
+     Los atributos de la etiqueta de apertura son tambi√©n son accesibles 
+     a su funci√≥n cuando se procesa la etiqueta de cierre.
     </para>
     <para>
      El valor de la variable <parameter>$content</parameter> depende de
-     que si su funciÛn es llamada por la etiqueta de cierre o de apertura.
-     En caso de que la etiqueta sea de apertura, este ser·
-     <literal>null</literal>, si la etiqueta es de cierre el valor ser· 
+     que si su funci√≥n es llamada por la etiqueta de cierre o de apertura.
+     En caso de que la etiqueta sea de apertura, este ser√°
+     <literal>null</literal>, si la etiqueta es de cierre el valor ser√° 
      del contenido del bloque del template. Se debe observar que el bloque 
      del template ya a sido procesado por el Smarty, asi todo lo que usted 
-     recibir· es la salida del template, no el template original.
+     recibir√° es la salida del template, no el template original.
     </para>
 
     <para>
-     El par·metro <parameter>&amp;$repeat</parameter> es pasado por
-     referencia para la funci&oacute;n de implementaciÛn y proporciona
-     la posibilidad de controlar cuantas veces ser· mostrado el bloque.
+     El par√°metro <parameter>&amp;$repeat</parameter> es pasado por
+     referencia para la funci&oacute;n de implementaci√≥n y proporciona
+     la posibilidad de controlar cuantas veces ser√° mostrado el bloque.
      Por default <parameter>$repeat</parameter> es <literal>true</literal>
      en la primera llamada de la block-function (etiqueta de apertura del 
      bloque) y <literal>false</literal> en todas las llamadas subsecuentes 
-     a la funciÛn de boque (etiqueta de cierre del boque). Cada vez que es 
-     implementada la funciÛn retorna con el <parameter>&amp;$repeat</parameter>
+     a la funci√≥n de boque (etiqueta de cierre del boque). Cada vez que es 
+     implementada la funci√≥n retorna con el <parameter>&amp;$repeat</parameter>
      siendo true, el contenido entre {func} .. {/func} es evaluado y es 
-     implementado a la funciÛn es llamada nuevamente con el nuevo contenido 
-     del bloque en el par·metro <parameter>$content</parameter>.
+     implementado a la funci√≥n es llamada nuevamente con el nuevo contenido 
+     del bloque en el par√°metro <parameter>$content</parameter>.
 	   </para>
 
     <para>
      Si usted tiene funciones de bloque anidadas, es posible descubrir 
-     cual es el padre de la funciÛn de bloque accesando la variable
+     cual es el padre de la funci√≥n de bloque accesando la variable
      <varname>$smarty->_tag_stack</varname>.
      Solo hacer un var_dump() sobre ella y la estrutura estara visible.
     </para>
@@ -70,7 +70,7 @@
      <link linkend="api.unregister.block">unregister_block()</link>.
     </para>
     <example>
-     <title>FunciÛn de bloque</title>
+     <title>Funci√≥n de bloque</title>
      <programlisting role="php">
 <![CDATA[
 <?php

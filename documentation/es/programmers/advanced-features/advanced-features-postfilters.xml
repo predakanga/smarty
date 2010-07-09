@@ -4,14 +4,14 @@
     <title>Postfilters</title>
     <para>
      Los postfilters de template son funciones de PHP con las cuales sus 
-     templates son corridos inmediatamente despu閟 de ser compilados. 
+     templates son corridos inmediatamente despu茅s de ser compilados. 
      Los postfilters pueden ser <link linkend="api.register.postfilter">
-     registrado</link> o cargados del directorio de plugins usando la funci髇 
+     registrado</link> o cargados del directorio de plugins usando la funci贸n 
      <link linkend="api.load.filter">load_filter()</link> o por la variable
-     de configuraci髇 
+     de configuraci贸n 
      <link linkend="variable.autoload.filters">$autoload_filters</link>.
-     El Smarty pasara el c骴igo fuente del template
-     compilado como el primer argumento, y espera que la funci髇 retorne el
+     El Smarty pasara el c贸digo fuente del template
+     compilado como el primer argumento, y espera que la funci贸n retorne el
      resultado del procesamiento.
     </para>
     <example>

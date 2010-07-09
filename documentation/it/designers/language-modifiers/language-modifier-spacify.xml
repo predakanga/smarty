@@ -24,13 +24,13 @@
       <entry>stringa</entry>
       <entry>No</entry>
       <entry><emphasis>uno spazio</emphasis></entry>
-      <entry>E' ciÚ che viene inserito fra i caratteri della variabile.</entry>
+      <entry>E' ci√≤ che viene inserito fra i caratteri della variabile.</entry>
       </row>
      </tbody>
     </tgroup>
   </informaltable>
   <para>
-   spacify Ë un modo per inserire uno spazio fra tutti i caratteri di una variabile.
+   spacify √® un modo per inserire uno spazio fra tutti i caratteri di una variabile.
    E' possibile, opzionalmente, passare un diverso carattere (o stringa) da inserire.
   </para>
   <example>
@@ -45,7 +45,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -55,7 +55,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

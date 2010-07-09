@@ -8,14 +8,14 @@
  <note>
   <title>Notes techniques</title>
   <para>
-   <varname>{include_php}</varname> est presque obsolète dans Smarty.
-   Vous pouvez obtenir des résultats équivalents en utilisant les fonctions utilisateur.
-   La seule raison qui peut vous pousser à utiliser <varname>{include_php}</varname>
-   est que vous avez besoin de mettre une de vos fonction en quarantaine vis à vis du 
-   répertoire <link linkend="variable.plugins.dir"><filename>plugins/</filename></link>
-   ou de votre application. Reportez-vous à l'exemple des
+   <varname>{include_php}</varname> est presque obsolÃ¨te dans Smarty.
+   Vous pouvez obtenir des rÃ©sultats Ã©quivalents en utilisant les fonctions utilisateur.
+   La seule raison qui peut vous pousser Ã  utiliser <varname>{include_php}</varname>
+   est que vous avez besoin de mettre une de vos fonction en quarantaine vis Ã  vis du 
+   rÃ©pertoire <link linkend="variable.plugins.dir"><filename>plugins/</filename></link>
+   ou de votre application. Reportez-vous Ã  l'exemple des
    <link linkend="tips.componentized.templates">templates composants</link>
-   pour plus de détails.
+   pour plus de dÃ©tails.
   </para>
  </note>
 
@@ -31,61 +31,61 @@
      <entry>Nom attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>file</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le nom du fichier PHP à inclure</entry>
+     <entry>Le nom du fichier PHP Ã  inclure</entry>
     </row>
     <row>
      <entry>once</entry>
-     <entry>boléen</entry>
+     <entry>bolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&true;</emphasis></entry>
      <entry>Inclure plusieurs fois ou non le fichier PHP si
-      plusieurs demandes d'inclusions sont faîtes.</entry>
+      plusieurs demandes d'inclusions sont faÃ®tes.</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>le nom de la variable PHP dans laquelle la sortie
-      sera assignée plutôt que directement affichée.</entry>
+      sera assignÃ©e plutÃ´t que directement affichÃ©e.</entry>
     </row>
    </tbody>
   </tgroup>
  </informaltable>
 
  <para>
-  Les balises <varname>{include_php}</varname> sont utilisées pour inclure directement
+  Les balises <varname>{include_php}</varname> sont utilisÃ©es pour inclure directement
   un script PHP dans vos templates. Si
-  <link linkend="variable.security"><parameter>$security</parameter></link> est activé,
-  alors le script à exécuter doit être placé dans le chemin
+  <link linkend="variable.security"><parameter>$security</parameter></link> est activÃ©,
+  alors le script Ã  exÃ©cuter doit Ãªtre placÃ© dans le chemin
   <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>. La balise
   <varname>{include_php}</varname> attends l'attribut <parameter>file</parameter>,
-  qui contient le chemin du fichier PHP à inclure, relatif à
+  qui contient le chemin du fichier PHP Ã  inclure, relatif Ã 
   <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>, ou absolu.
  </para>
  <para>
-  Par défaut, les fichiers PHP ne sont inclus qu'une seule fois, même si
+  Par dÃ©faut, les fichiers PHP ne sont inclus qu'une seule fois, mÃªme si
   la demande d'inclusion survient plusieurs fois dans le template.
-  Vous pouvez demander à ce que ce fichier soit inclus à chaque demande
-  grâce à l'attribut <parameter>once</parameter>. Mettre l'attribut once à
-  &false; aura pour effet d'inclure le script PHP à chaque fois que demandé
+  Vous pouvez demander Ã  ce que ce fichier soit inclus Ã  chaque demande
+  grÃ¢ce Ã  l'attribut <parameter>once</parameter>. Mettre l'attribut once Ã 
+  &false; aura pour effet d'inclure le script PHP Ã  chaque fois que demandÃ©
   dans le template.
  </para>
  <para>
-  Vous pouvez donner une valeur à l'attribut optionnel
-  <parameter>assign</parameter>, pour demander à la fonction
+  Vous pouvez donner une valeur Ã  l'attribut optionnel
+  <parameter>assign</parameter>, pour demander Ã  la fonction
   <varname>{include_php}</varname> d'assigner la sortie du script PHP
-  à la variable spécifiée plutôt que d'en afficher directement le résultat.
+  Ã  la variable spÃ©cifiÃ©e plutÃ´t que d'en afficher directement le rÃ©sultat.
  </para>
  <para>
   L'objet Smarty est disponible en tant que <parameter>$this</parameter> dans le script PHP inclus.
@@ -97,7 +97,7 @@
 <![CDATA[
 <?php
 
-// charge des variables depuis une base de données mysql et les assigne au template.
+// charge des variables depuis une base de donnÃ©es mysql et les assigne au template.
 require_once('MySQL.class.php');
 $sql = new MySQL;
 $sql->query('select * from site_nav_sections order by name',SQL_ALL);
@@ -107,11 +107,11 @@ $this->assign('sections',$sql->record);
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
-{* chemin absolu, ou relatif à $trusted_dir *}
+{* chemin absolu, ou relatif Ã  $trusted_dir *}
 {include_php file='/chemin/vers/load_nav.php'}
 
 {foreach item='nav' from=$navigation}

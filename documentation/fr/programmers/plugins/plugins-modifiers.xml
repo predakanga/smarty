@@ -6,9 +6,9 @@
  <title>Modificateurs</title>
  <para>
   Les <link linkend="language.modifiers">modificateurs</link>
-  sont de petites fonctions appliquées à une variable
-  de template avant qu'elle ne soit affichée ou utilisée dans un autre contexte.
-  Les modificateurs peuvent être chaînés entre eux.
+  sont de petites fonctions appliquÃ©es Ã  une variable
+  de template avant qu'elle ne soit affichÃ©e ou utilisÃ©e dans un autre contexte.
+  Les modificateurs peuvent Ãªtre chaÃ®nÃ©s entre eux.
  </para>
  <funcsynopsis>
   <funcprototype>
@@ -18,20 +18,20 @@
   </funcprototype>
  </funcsynopsis>
  <para>
-  Le premier paramètre passé au modificateur est la valeur
-  sur laquelle le modificateur est supposé opérer. Les autres paramétres
-  peuvent être optionnels, dépendant de quel genre d'opération doit être
-  effectué.
+  Le premier paramÃ¨tre passÃ© au modificateur est la valeur
+  sur laquelle le modificateur est supposÃ© opÃ©rer. Les autres paramÃ©tres
+  peuvent Ãªtre optionnels, dÃ©pendant de quel genre d'opÃ©ration doit Ãªtre
+  effectuÃ©.
  </para>
  <para>
   Le modificateur doit <ulink url="&url.php-manual;return">retourner</ulink>
-  le résultat de son exécution.
+  le rÃ©sultat de son exÃ©cution.
  </para>
  <example>
   <title>Plugin modificateur simple</title>
   <para>
-   Ce plugin est un alias d'une fonction PHP. Il n'a aucun paramètre
-   supplémentaires.
+   Ce plugin est un alias d'une fonction PHP. Il n'a aucun paramÃ¨tre
+   supplÃ©mentaires.
   </para>
   <programlisting role="php">
 <![CDATA[
@@ -42,7 +42,7 @@
  * Fichier :  modifier.capitalize.php
  * Type :     modificateur
  * Name :     capitalize
- * Rôle :     met une majuscule aux mots d'une phrase
+ * RÃ´le :     met une majuscule aux mots d'une phrase
  * -------------------------------------------------------------
  */
 function smarty_modifier_capitalize($string)
@@ -65,8 +65,8 @@ function smarty_modifier_capitalize($string)
  * Fichier :  modifier.truncate.php
  * Type :     modificateur
  * Name :     truncate
- * Rôle :     Tronque une chaene a une certaine longueur si
- *            nécessaire, la coupe optionnellement au milieu
+ * RÃ´le :     Tronque une chaene a une certaine longueur si
+ *            nÃ©cessaire, la coupe optionnellement au milieu
  *            d'un mot et ajoute la chaene $etc 
  * -------------------------------------------------------------
  */

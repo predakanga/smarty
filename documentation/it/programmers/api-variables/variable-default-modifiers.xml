@@ -7,7 +7,7 @@
           in un template. Ad esempio, per fare l'escape HTML ad ogni variabile per
           default, usate array('escape:"htmlall"'); per rendere una variabile
           esente dai modificatori di default, passatele lo speciale modificatore 
-          "smarty" con il parametro "nodefaults", così: {$var|smarty:nodefaults}.
+          "smarty" con il parametro "nodefaults", cosÃ¬: {$var|smarty:nodefaults}.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

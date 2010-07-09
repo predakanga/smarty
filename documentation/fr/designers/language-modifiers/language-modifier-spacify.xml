@@ -5,9 +5,9 @@
 <sect1 id="language.modifier.spacify">
  <title>spacify</title>
  <para>
-  <varname>spacify</varname> est un moyen pour insérer un espace entre tous les caractères
-  d'une variable. Optionnellement, vous pouvez lui passer un caractère
-  (ou une chaîne) différent de l'espace à insérer.
+  <varname>spacify</varname> est un moyen pour insÃ©rer un espace entre tous les caractÃ¨res
+  d'une variable. Optionnellement, vous pouvez lui passer un caractÃ¨re
+  (ou une chaÃ®ne) diffÃ©rent de l'espace Ã  insÃ©rer.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -18,7 +18,7 @@
    <colspec colname="desc"/>
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Defaut</entry>
@@ -28,10 +28,10 @@
    <tbody>
     <row>
      <entry>1</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry><emphasis>espace</emphasis></entry>
-     <entry>Ce qui est inséré entre chaque caractère de la variable.</entry>
+     <entry>Ce qui est insÃ©rÃ© entre chaque caractÃ¨re de la variable.</entry>
     </row>
    </tbody>
   </tgroup>
@@ -42,14 +42,14 @@
 <![CDATA[
 <?php
 
-$smarty->assign('titreArticle', 'Quelque chose s\'est mal passé et à provoqué
+$smarty->assign('titreArticle', 'Quelque chose s\'est mal passÃ© et Ã  provoquÃ©
 cet accident, disent les experts');
 
 ?>
 ]]>
 </programlisting>
 <para>
-Où le template est :
+OÃ¹ le template est :
 </para>
 <programlisting>
 <![CDATA[
@@ -63,7 +63,7 @@ Affichera :
 </para>
 <screen>
 <![CDATA[
-Quelquechose s'est mal passé et à provoqué cet accident, disent les experts.
+Quelquechose s'est mal passÃ© et Ã  provoquÃ© cet accident, disent les experts.
 Q u e l q u e c h o s e   .... snip ....   l e s   e x p e r t s .
 Q^^u^^e^^l^^q^^u.... snip .... ^r^^t^^s^^.
 ]]>

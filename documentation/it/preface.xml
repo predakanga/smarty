@@ -3,25 +3,25 @@
  <preface id="preface">
   <title>Prefazione</title>
   <para>
-   Indubbiamente è una delle domande più frequenti sulle mailing list del 
-   PHP: perché devo rendere i miei script PHP indipendenti dal layout? Se
-   è vero che PHP è conosciuto come "linguaggio di scripting incorporato in
+   Indubbiamente Ã¨ una delle domande piÃ¹ frequenti sulle mailing list del 
+   PHP: perchÃ© devo rendere i miei script PHP indipendenti dal layout? Se
+   Ã¨ vero che PHP Ã¨ conosciuto come "linguaggio di scripting incorporato in
    HTML", dopo aver realizzato un paio di progetti che mescolano liberamente
    PHP e HTML nasce l'idea che separare forma e contenuti sia una buona cosa.
    Inoltre, in molte aziende i ruoli dei grafici (progettisti del layout)
    e dei programmatori sono separati. La ricerca di una soluzione con i
-   template è quindi una conseguenza naturale.
+   template Ã¨ quindi una conseguenza naturale.
   </para>
   <para>
    Ad esempio, nella nostra azienda lo sviluppo di un applicazione procede
-   così: dopo che sono stati redatti i documenti con le specifiche richieste,
+   cosÃ¬: dopo che sono stati redatti i documenti con le specifiche richieste,
    i progettisti delle interfacce creano dei modelli di interfaccia e li danno
    ai programmatori. Questi implementano la logica di business in PHP e usano
    i modelli di interfaccia per creare scheletri di template. A questo punto
    il progetto passa al progettista HTML/creatore di layout per le pagine web,
    che porta i template al loro massimo splendore. Il progetto potrebbe ancora
    andare avanti e indietro un paio di volte fra programmazione e HTML. Quindi
-   è importante avere un buon supporto per i template, perché i programmatori
+   Ã¨ importante avere un buon supporto per i template, perchÃ© i programmatori
    non vogliono avere a che fare con l'HTML e non vogliono che i progettisti
    HTML facciano danni col codice PHP. I grafici hanno bisogno di supporto per
    i file di configurazione, i blocchi dinamici e altri elementi di interfaccia,
@@ -32,7 +32,7 @@
    Dando un'occhiata alle diverse soluzioni di template attualmente disponibili
    per PHP, vediamo che la maggior parte di esse fornisce solo un modo rudimentale
    per sostituire variabili nei template e hanno delle forme limitate di 
-   funzionalità relative ai blocchi dinamici. Ma le nostre necessità erano un
+   funzionalitÃ  relative ai blocchi dinamici. Ma le nostre necessitÃ  erano un
    po' maggiori di queste. Noi volevamo che i programmatori evitassero DEL TUTTO
    di avere a che fare con l'HTML, ma questo era quasi inevitabile. Ad esempio,
    se un grafico voleva alternare i colori di sfondo su un blocco dinamico, questo
@@ -41,33 +41,33 @@
    da questi le variabili nei template. La lista potrebbe continuare ancora.
   </para>
   <para>
-   Iniziammo così a scrivere una specifica per un motore di template verso la fine
+   Iniziammo cosÃ¬ a scrivere una specifica per un motore di template verso la fine
    del 1999. Dopo avere finito le specifiche, iniziammo a lavorare su un motore
    scritto in C che, speravamo, avrebbe potuto essere incluso in PHP. Non solo 
-   però ci scontrammo con molti complicati ostacoli tecnici, ma c'era anche un
+   perÃ² ci scontrammo con molti complicati ostacoli tecnici, ma c'era anche un
    dibattito molto acceso su cosa esattamente un motore di template avrebbe dovuto
    fare e cosa no. Da questa esperienza decidemmo che il motore sarebbe stato scritto
-   in PHP come classe, in modo che ognuno potesse usarlo come gli pareva. Così 
+   in PHP come classe, in modo che ognuno potesse usarlo come gli pareva. CosÃ¬ 
    scrivemmo un motore che faceva proprio quello e <productname>SmartTemplate</productname>
-   venne alla luce (nota: questa classe non è mai stata pubblicata). Era una classe
+   venne alla luce (nota: questa classe non Ã¨ mai stata pubblicata). Era una classe
    che faceva quasi tutto quello che volevamo: sostituzione delle variabili, 
    supporto per l'inclusione di altri template, integrazione con i file di
-   configurazione, incorporazione del codice PHP, limitate funzionalità con 
+   configurazione, incorporazione del codice PHP, limitate funzionalitÃ  con 
    istruzioni 'if' e molti altri robusti blocchi dinamici che potevano essere
    nidificati ripetutamente. Tutto questo veniva fatto con le espressioni regolari
-   e il codice che ne venne fuori era, per così dire, impenetrabile. Era anche
+   e il codice che ne venne fuori era, per cosÃ¬ dire, impenetrabile. Era anche
    notevolmente lento nelle grosse applicazioni, per via di tutta l'analisi (parsing)
    ed il lavoro sulle espressioni regolari che doveva fare ad ogni invocazione.
-   Il problema più grosso dal punto di vista di un programmatore era tutto il
+   Il problema piÃ¹ grosso dal punto di vista di un programmatore era tutto il
    lavoro necessario nello script PHP per creare ed elaborare i template ed i
-   blocchi dinamici. Come rendere tutto questo più semplice?
+   blocchi dinamici. Come rendere tutto questo piÃ¹ semplice?
   </para>
   <para>
-   Così nacque la visione di quello che poi è diventato Smarty. Sappiamo quanto
-   è veloce PHP senza il sovraccarico dell'analisi dei template. Sappiamo anche
+   CosÃ¬ nacque la visione di quello che poi Ã¨ diventato Smarty. Sappiamo quanto
+   Ã¨ veloce PHP senza il sovraccarico dell'analisi dei template. Sappiamo anche
    quanto il linguaggio possa apparire meticoloso ed estremamente noioso per il
-   grafico medio, e questo può essere mascherato con una sintassi di template
-   molto più semplice. Allora, perché non combinare i due punti di forza? Così
+   grafico medio, e questo puÃ² essere mascherato con una sintassi di template
+   molto piÃ¹ semplice. Allora, perchÃ© non combinare i due punti di forza? CosÃ¬
    nacque Smarty...
   </para>
  </preface>

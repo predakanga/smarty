@@ -4,9 +4,9 @@
 <sect1 id="variable.trusted.dir">
       <title>$trusted_dir</title>
       <para>
-	   $trusted_dir  somente usado quando $security est· habilitado. Isso È um array
-	   de todos os diretÛrios que s„o considerados confi·veis. DiretÛrios confi·veis
-	   s„o onde vocÍ ir· deixar seus scripts php que s„o executados diretamente para o
+	   $trusted_dir  somente usado quando $security est√° habilitado. Isso √© um array
+	   de todos os diret√≥rios que s√£o considerados confi√°veis. Diret√≥rios confi√°veis
+	   s√£o onde voc√™ ir√° deixar seus scripts php que s√£o executados diretamente para o
 	   template com <link linkend="language.function.include.php">{include_php}</link>.
       </para>
 </sect1>

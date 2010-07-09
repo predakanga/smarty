@@ -3,20 +3,20 @@
      <sect1 id="variable.compile.check">
       <title>$compile_check</title>
       <para>
-    En cada llamada de la aplicaciÛn PHP, Smarty prueba para ver si el
+    En cada llamada de la aplicaci√≥n PHP, Smarty prueba para ver si el
     template actual fue modificado (diferentes time stamp) desde la 
-    ultima compilaciÛn. Si este fue modificado, se recompilara el template. 
+    ultima compilaci√≥n. Si este fue modificado, se recompilara el template. 
     Si el template no fue compilado, este ira a compilar de cualquier 
-    manera esa configuraciÛn. Por default esta variable es determinada como 
-    true. Una vez que la aplicaciÛn esta en producciÛn (los templates no 
+    manera esa configuraci√≥n. Por default esta variable es determinada como 
+    true. Una vez que la aplicaci√≥n esta en producci√≥n (los templates no 
     seran modificados), el paso compile_check no es necesario. asegurese de 
     determinar $compile_check a "false" para un mejor funcionamiento.  
-    Note que si usted modifica est· para "false" y el archivo de template
-    est· modificado, usted *no* vera los cambios desde el template hasta que 
+    Note que si usted modifica est√° para "false" y el archivo de template
+    est√° modificado, usted *no* vera los cambios desde el template hasta que 
     no sea recompilado. Si el <link linkend="variable.caching">caching</link> 
-    esta habilitado y compile_check est· habilitado, entonces los archivos de 
+    esta habilitado y compile_check est√° habilitado, entonces los archivos de 
     cache tienen que ser regenerados si el archivo de template es muy complejo 
-    o el archivo de configuraciÛn fue actualizado.
+    o el archivo de configuraci√≥n fue actualizado.
     vea <link linkend="variable.force.compile">$force_compile</link>
     o <link linkend="api.clear.compiled.tpl">clear_compiled_tpl()</link>.
       </para>

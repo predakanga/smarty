@@ -12,11 +12,11 @@
                 <colspec colname="desc"/>
                 <thead>
                     <row>
-                        <entry>PosiÁ„o do Par‚metro</entry>
+                        <entry>Posi√ß√£o do Par√¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,20 +25,20 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Esta È a express„o regular a ser substituÌda.</entry>
+                        <entry>Esta √© a express√£o regular a ser substitu√≠da.</entry>
                     </row>
                     <row>
                         <entry>2</entry>
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Esta È a string que ir· substituir a express„o regular.</entry>
+                        <entry>Esta √© a string que ir√° substituir a express√£o regular.</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			Uma express„o regular para localizar e substituir na vari·vel. Use a sintaxe
+			Uma express√£o regular para localizar e substituir na vari√°vel. Use a sintaxe
 			para preg_replace() do manual do PHP.
 			</para>
 <example>

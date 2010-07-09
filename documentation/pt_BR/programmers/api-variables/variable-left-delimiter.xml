@@ -4,8 +4,8 @@
 <sect1 id="variable.left.delimiter">
       <title>$left_delimiter</title>
       <para>
-       Este é o delimitador esquerdo usado para a linguagem de template.
-       O padrão é "{".			
+       Este Ã© o delimitador esquerdo usado para a linguagem de template.
+       O padrÃ£o Ã© "{".			
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

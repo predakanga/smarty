@@ -3,16 +3,16 @@
 <refentry id="api.unregister.function">
  <refnamediv>
   <refname>unregister_function()</refname>
-  <refpurpose>des-registrar dinámicamente una función de plugin del template</refpurpose>
+  <refpurpose>des-registrar dinÃ¡micamente una funciÃ³n de plugin del template</refpurpose>
  </refnamediv>
  <refsect1>
-  <title> Descripción</title>
+  <title> DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_function</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Pase en el template el nombre de la función.
+   Pase en el template el nombre de la funciÃ³n.
   </para>
   <example>
    <title>unregister_function()</title>
@@ -28,7 +28,7 @@ $smarty->unregister_function("fetch");
    </programlisting>
   </example>
     <para>
-     Ver también <link linkend="api.register.function">register_function() </link>.
+     Ver tambiÃ©n <link linkend="api.register.function">register_function() </link>.
     </para>
 
  </refsect1>

@@ -3,7 +3,7 @@
  <sect1 id="language.modifier.count.paragraphs">
   <title>count_paragraphs</title>
   <para>
-   Este es usado para contar el número de parrafos en la variable.
+   Este es usado para contar el nÃºmero de parrafos en la variable.
   </para>
   <example>
    <title>count_paragraphs</title>
@@ -41,7 +41,7 @@ Man is Fatally Slain. Death Causes Loneliness, Feeling of Isolation.
    </screen>
   </example>
   <para>
-   ver también <link linkend="language.modifier.count.characters">count_characters</link>,
+   ver tambiÃ©n <link linkend="language.modifier.count.characters">count_characters</link>,
    <link linkend="language.modifier.count.sentences">count_sentences</link> y
    <link linkend="language.modifier.count.words">count_words</link>.
   </para>

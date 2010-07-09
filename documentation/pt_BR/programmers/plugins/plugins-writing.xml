@@ -5,27 +5,27 @@
     <title>Escrevendo Plugins</title>
     <para>
      Os Plugins podem ser ou lidos pela Smarty automaticamente do sistema de arquivos ou eles podem
-     ser registrados no tempo de execução via uma das funções
-     de API register_* . Eles podem também ser
-     com o uso da função API unregister_* .
+     ser registrados no tempo de execuÃ§Ã£o via uma das funÃ§Ãµes
+     de API register_* . Eles podem tambÃ©m ser
+     com o uso da funÃ§Ã£o API unregister_* .
     </para>
     <para>
-     Para os plugins que são registrados no tempo de execução, o nome da(s) função(ões) de plugin
-     não têm que seguir a convenção de aparência.
+     Para os plugins que sÃ£o registrados no tempo de execuÃ§Ã£o, o nome da(s) funÃ§Ã£o(Ãµes) de plugin
+     nÃ£o tÃªm que seguir a convenÃ§Ã£o de aparÃªncia.
     </para>
     <para>
-     Se um plugin depende de alguma funcionalidade fornecida por um outro plugin (como é o caso com alguns
+     Se um plugin depende de alguma funcionalidade fornecida por um outro plugin (como Ã© o caso com alguns
      plugins embutidos com a Smarty), 
-     então a forma apropriada para ler o plugin necessário é esta:
+     entÃ£o a forma apropriada para ler o plugin necessÃ¡rio Ã© esta:
     </para>
     <programlisting>
 require_once $smarty->_get_plugin_filepath('function', 'html_options');</programlisting>
     <para>
-     Como uma regra geral, o objeto da Smarty é sempre passado para os plugins como o último parâmetro
-      (com duas exceções: modificadores não passam o objeto da Smarty em tudo e blocks passam
+     Como uma regra geral, o objeto da Smarty Ã© sempre passado para os plugins como o Ãºltimo parÃ¢metro
+      (com duas exceÃ§Ãµes: modificadores nÃ£o passam o objeto da Smarty em tudo e blocks passam
      <parameter>&amp;$repeat</parameter> depois do objeto da Smarty 
      para manter compatibilidade a antigas
-     versões da Smarty).
+     versÃµes da Smarty).
     </para>
 </sect1>
 <!-- Keep this comment at the end of the file

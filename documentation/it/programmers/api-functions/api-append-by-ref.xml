@@ -16,11 +16,11 @@
   <para>
    Si usa per aggiungere valori al template per riferimento.
    Se aggiungete una variabile per riferimento e poi cambiate il
-   suo valore, il template vedr‡ il valore modificato. Per gli
+   suo valore, il template vedr√† il valore modificato. Per gli
    oggetti, append_by_ref() evita anche la copia in memoria 
    dell'oggetto aggiunto. Consultate il manuale di PHP sui riferimenti
    alle variabili per una spiegazione approfondita. Se passate il
-   terzo parametro opzionale a true, il valore verr‡ fuso nell'array
+   terzo parametro opzionale a true, il valore verr√† fuso nell'array
    corrente invece che aggiunto.
   </para>
   &note.parameter.merge;

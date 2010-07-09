@@ -15,7 +15,7 @@
      <entry>Tipo</entry>
      <entry>Requerido</entry>
      <entry>Default</entry>
-     <entry>DescripciÛn</entry>
+     <entry>Descripci√≥n</entry>
     </row>
    </thead>
    <tbody>
@@ -73,14 +73,14 @@
  </informaltable>
  <para>
   {html_checkboxes} es una 
-  <link linkend="language.custom.functions">funciÛn personalizada</link> 
+  <link linkend="language.custom.functions">funci√≥n personalizada</link> 
   que crea un grupo de checkbox con datos privistos. Este cuida cuales items(s) 
   estan selecionados por default. Los atributos requeridos son 
   values y output, a menos que usted use options.
   Toda la salida es compatible con XHTML.
  </para>
  <para>
-  Todos los par·metros que no esten en la lista de arriba 
+  Todos los par√°metros que no esten en la lista de arriba 
   son mostrados como nombre/valor dentro de cada etiqueta 
   &lt;input&gt; creada.
  </para>
@@ -174,7 +174,7 @@ $smarty->assign('contact',$db->getRow($sql));
 </programlisting>
  </example>
  <para>
-  Vea tambiÈn
+  Vea tambi√©n
   <link linkend="language.function.html.radios">{html_radios}</link>
   y <link linkend="language.function.html.options">{html_options}</link>
  </para>

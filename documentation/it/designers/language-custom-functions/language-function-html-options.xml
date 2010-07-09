@@ -22,16 +22,16 @@
     <row>
      <entry>values</entry>
      <entry>array</entry>
-     <entry>sì, a meno che si usi l'attributo options</entry>
+     <entry>sÃ¬, a meno che si usi l'attributo options</entry>
      <entry><emphasis>nessuno</emphasis></entry>
-     <entry>array di valori per il menù a discesa</entry>
+     <entry>array di valori per il menÃ¹ a discesa</entry>
     </row>
     <row>
      <entry>output</entry>
      <entry>array</entry>
-     <entry>sì, a meno che si usi l'attributo options</entry>
+     <entry>sÃ¬, a meno che si usi l'attributo options</entry>
      <entry><emphasis>nessuno</emphasis></entry>
-     <entry>array di output per il menù a discesa</entry>
+     <entry>array di output per il menÃ¹ a discesa</entry>
     </row>
     <row>
      <entry>selected</entry>
@@ -43,7 +43,7 @@
     <row>
      <entry>options</entry>
      <entry>array associativo</entry>
-     <entry>sì, a meno che si usino values e output</entry>
+     <entry>sÃ¬, a meno che si usino values e output</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>array associativo di valori e output</entry>
     </row>
@@ -58,28 +58,28 @@
   </tgroup>
  </informaltable>
 			<para>
-			html_options è una funzione utente che usa i dati forniti per creare
-                        un gruppo di opzioni, cioè di valori option per un menù a discesa
+			html_options Ã¨ una funzione utente che usa i dati forniti per creare
+                        un gruppo di opzioni, cioÃ¨ di valori option per un menÃ¹ a discesa
                         (casella select). Si occupa anche di quale o quali valori devono
                         essere preselezionati. Gli attributi obbligatori sono values e output,
                         a meno che non usiate invece options.
 			</para>
 			<para>
-			Se uno dei valori forniti è un array, verrà trattato come un gruppo
+			Se uno dei valori forniti Ã¨ un array, verrÃ  trattato come un gruppo
 			di opzioni (OPTGROUP), e visualizzato di conseguenza. E' possibile
-			creare gruppi ricorsivi (a più livelli). Tutto l'output generato è
+			creare gruppi ricorsivi (a piÃ¹ livelli). Tutto l'output generato Ã¨
 			compatibile XHTML.
 			</para>
 			<para>
 			Se viene fornito l'attributo opzionale <emphasis>name</emphasis>,
-			la lista di opzioni verrà racchiusa con il tag
+			la lista di opzioni verrÃ  racchiusa con il tag
 			&lt;select name="groupname"&gt;&lt;/select&gt;. In caso contrario
-                        verrà generata solo la lista di opzioni.
+                        verrÃ  generata solo la lista di opzioni.
 			</para>
 			<para>
 			Tutti i parametri non compresi nella lista qui sopra verranno
 			stampati come coppie nome/valore nel tag &lt;select&gt;.
-			Saranno ignorati se l'attributo <emphasis>name</emphasis> non è
+			Saranno ignorati se l'attributo <emphasis>name</emphasis> non Ã¨
 			presente.
 			</para>
 <example>

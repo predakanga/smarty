@@ -14,76 +14,76 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>Obrigatório</entry>       
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>ObrigatÃ³rio</entry>       
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>prefix</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>Date_</entry>
-                        <entry>Com o que prefixar o nome da variável</entry>
+                        <entry>Com o que prefixar o nome da variÃ¡vel</entry>
                     </row>
                     <row>
                         <entry>time</entry>
                         <entry>timestamp/YYYY-MM-DD</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>tempo atual no formato timestamp do unix ou YYYY-MM-DD</entry>
                         <entry>qual date/time usar</entry>
                     </row>
                     <row>
                         <entry>start_year</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>ano atual</entry>
                         <entry>o primeiro ano no menu dropdown, ou o
-						número do ano, ou relativo ao ano atual (+/- N)</entry>
+						nÃºmero do ano, ou relativo ao ano atual (+/- N)</entry>
                     </row>
                     <row>
                         <entry>end_year</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>da mesma forma que start_year</entry>
-                        <entry>o último ano no menu dropdown, ou o
-						número do ano, ou relativo ao ano atual (+/- N)</entry>
+                        <entry>o Ãºltimo ano no menu dropdown, ou o
+						nÃºmero do ano, ou relativo ao ano atual (+/- N)</entry>
                     </row>
                     <row>
                         <entry>display_days</entry>
                         <entry>boolean</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>true</entry>
-                        <entry>se mostra os dias ou não</entry>
+                        <entry>se mostra os dias ou nÃ£o</entry>
                     </row>
                     <row>
                         <entry>display_months</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry>true</entry>
-                        <entry>se mostra os meses ou não</entry>
+                        <entry>se mostra os meses ou nÃ£o</entry>
                     </row>
                     <row>
                         <entry>display_years</entry>
                         <entry>boolean</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>true</entry>
-                        <entry>se mostra os anos ou não</entry>
+                        <entry>se mostra os anos ou nÃ£o</entry>
                     </row>
                     <row>
                         <entry>month_format</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>%B</entry>
-                        <entry>qual o formato do mês (strftime)</entry>
+                        <entry>qual o formato do mÃªs (strftime)</entry>
                     </row>
                     <row>
                         <entry>day_format</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>%02d</entry>
-                        <entry>a saída do dia seria em qual formato (sprintf)</entry>
+                        <entry>a saÃ­da do dia seria em qual formato (sprintf)</entry>
                     </row>
                     <row>
                         <entry>day_value_format</entry>
@@ -95,24 +95,24 @@
                     <row>
                         <entry>year_as_text</entry>
                         <entry>booleano</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>false</entry>
-                        <entry>se mostra ou não o ano como texto</entry>
+                        <entry>se mostra ou nÃ£o o ano como texto</entry>
                     </row>
                     <row>
                         <entry>reverse_years</entry>
                         <entry>booleano</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>false</entry>
                         <entry>mostra os anos na ordem reversa</entry>
                     </row>
                     <row>
                         <entry>field_array</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>null</entry>
                         <entry>
-							se um nome é dado, as caixas de seleção serão exibidos assim que os resultados
+							se um nome Ã© dado, as caixas de seleÃ§Ã£o serÃ£o exibidos assim que os resultados
 							forem devolvidos ao PHP
 							na forma de name[Day], name[Year], name[Month].
 						</entry>
@@ -127,14 +127,14 @@
                     <row>
                         <entry>month_size</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>null</entry>
                         <entry>adiciona o atributo de tamanho para a tag de select se for dada</entry>
                     </row>
                     <row>
                         <entry>year_size</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>null</entry>
                         <entry>adiciona o atributo de tamanho para a tag de select se for dada</entry>
                     </row>
@@ -149,7 +149,7 @@
                     <row>
                         <entry>day_extra</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>null</entry>
                         <entry>adiciona atributos
                         extras para todas as tags select/input se forem dadas</entry>
@@ -157,7 +157,7 @@
                     <row>
                         <entry>month_extra</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>null</entry>
                         <entry>adiciona atributos extras
                         para todas as tags select/input se forem dadas</entry>
@@ -165,7 +165,7 @@
                     <row>
                         <entry>year_extra</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>null</entry>
                         <entry>adiciona atributos extras
                         para todas as tags select/input se forem dadas</entry>
@@ -173,34 +173,34 @@
                     <row>
                         <entry>field_order</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>MDY</entry>
                         <entry>a ordem para se mostrar os campos</entry>
                     </row>
                     <row>
                         <entry>field_separator</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>\n</entry>
                         <entry>string exibida entre os diferentes campos</entry>
                     </row>
                     <row>
                         <entry>month_value_format</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>%m</entry>
-						<entry>formato strftime dos valores do mês, o padrão é
-						%m para número de mês.</entry>
+						<entry>formato strftime dos valores do mÃªs, o padrÃ£o Ã©
+						%m para nÃºmero de mÃªs.</entry>
                     </row>
                     <row>
                         <entry>year_empty</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry>null</entry>
-                        <entry>Se for fornecido então o primeiro eleemento do select-box 'anos' 
-						terá este nome e o valor "". Isto é útil para fazer o select-box ler 
-						"Por favor selecione um ano" por exemplo. Note que você pode usar valores 
-						como "-MM-DD" como atributos de tempo para indicar um ano não selecionado.
+                        <entry>Se for fornecido entÃ£o o primeiro eleemento do select-box 'anos' 
+						terÃ¡ este nome e o valor "". Isto Ã© Ãºtil para fazer o select-box ler 
+						"Por favor selecione um ano" por exemplo. Note que vocÃª pode usar valores 
+						como "-MM-DD" como atributos de tempo para indicar um ano nÃ£o selecionado.
 						</entry>
                     </row>
                     <row>
@@ -208,9 +208,9 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry>null</entry>
-                        <entry>Caso fornecido então o primeiro elemento do select-box 'meses' terá 
-						este nome e o valor "". Note que você pode suar valores como "YYYY--DD" como 
-						atributos de tempo para indicar meses não selecionados.
+                        <entry>Caso fornecido entÃ£o o primeiro elemento do select-box 'meses' terÃ¡ 
+						este nome e o valor "". Note que vocÃª pode suar valores como "YYYY--DD" como 
+						atributos de tempo para indicar meses nÃ£o selecionados.
 						</entry>
                     </row>
                     <row>
@@ -218,17 +218,17 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry>null</entry>
-                        <entry>Caso fornecido então o primeiro elemento do select-box 'dias' terá 
-						este nome e o valor "". Note que você pode usar valores como "YYYY-MM-" como 
-						atributos de tempo para indicar dias não selecionados.
+                        <entry>Caso fornecido entÃ£o o primeiro elemento do select-box 'dias' terÃ¡ 
+						este nome e o valor "". Note que vocÃª pode usar valores como "YYYY-MM-" como 
+						atributos de tempo para indicar dias nÃ£o selecionados.
 						</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			html_select_date é uma função personalizada que cria menus dropdowns
-			de data para você. Ele pode mostrar qualquer um/ou todos os anos, meses e dias.
+			html_select_date Ã© uma funÃ§Ã£o personalizada que cria menus dropdowns
+			de data para vocÃª. Ele pode mostrar qualquer um/ou todos os anos, meses e dias.
 			</para>
 <example>
 <title>html_select_date</title>
@@ -298,10 +298,10 @@ MOSTRA
 <title>html_select_date</title>
 <programlisting>
 <![CDATA[
-{* ano de começo e fim pode ser relativo ao ano atual *}
+{* ano de comeÃ§o e fim pode ser relativo ao ano atual *}
 {html_select_date prefix="StartDate" time=$time start_year="-5" end_year="+1" display_days=false}
 
-MOSTRA: (o ano atual é 2000)
+MOSTRA: (o ano atual Ã© 2000)
 
 <select name="StartDateMonth">
 <option value="1">January</option>

@@ -3,9 +3,9 @@
   <sect1 id="advanced.features.outputfilters">
    <title>Filtri di output</title>
    <para>
-    Quando il template viene richiamato via display() o fetch(), Ë possibile
-    eseguire uno o pi˘ filtri sul suo output. CiÚ Ë diverso dai postfiltri,
-    perchÈ questi ultimi lavorano sul template compilato prima che venga
+    Quando il template viene richiamato via display() o fetch(), √® possibile
+    eseguire uno o pi√π filtri sul suo output. Ci√≤ √® diverso dai postfiltri,
+    perch√© questi ultimi lavorano sul template compilato prima che venga
     salvato su disco, mentre i filtri dioutput lavorano sull'output del
     template quando viene eseguito.
    </para>
@@ -16,7 +16,7 @@
     dalla directory plugins con la funzione
     <link linkend="api.load.filter">load_filter()</link> oppure impostando la
     variabile <link linkend="variable.autoload.filters">$autoload_filters</link>.
-    Smarty passer‡ l'output del template come primo argomento, e si aspetter‡
+    Smarty passer√† l'output del template come primo argomento, e si aspetter√†
     che la funzione restituisca il risultato dell'esecuzione.
    </para>
    <example>
@@ -37,7 +37,7 @@ function protect_email($tpl_output, &$smarty)
 $smarty->register_outputfilter("protect_email");
 $smarty->display("index.tpl");
 
-// ora ogni indirizzo email nell'output del template avr‡ una semplice
+// ora ogni indirizzo email nell'output del template avr√† una semplice
 // protezione contro gli spambot
 ?>
 ]]>

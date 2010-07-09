@@ -5,13 +5,13 @@
 <sect1 id="language.modifier.truncate">
  <title>truncate</title>
  <para>
-  Tronque une variable à une certaine longueur, par défaut 80.
-  Un second paramètre optionnel permet de spécifier une chaîne à afficher
-  à la fin de la variable une fois tronquée. Les caractères de fin sont
-  inclus dans la longueur de la chaîne à tronquer. Par défaut,
-  <varname>truncate</varname> tentera de couper la chaîne à la fin d'un mot.
-  Si vous voulez tronquer la chaîne au caractère exact, donnez la valeur &true; au
-  dernier paramètre optionnel.
+  Tronque une variable Ã  une certaine longueur, par dÃ©faut 80.
+  Un second paramÃ¨tre optionnel permet de spÃ©cifier une chaÃ®ne Ã  afficher
+  Ã  la fin de la variable une fois tronquÃ©e. Les caractÃ¨res de fin sont
+  inclus dans la longueur de la chaÃ®ne Ã  tronquer. Par dÃ©faut,
+  <varname>truncate</varname> tentera de couper la chaÃ®ne Ã  la fin d'un mot.
+  Si vous voulez tronquer la chaÃ®ne au caractÃ¨re exact, donnez la valeur &true; au
+  dernier paramÃ¨tre optionnel.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -22,7 +22,7 @@
    <colspec colname="desc"/>
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Defaut</entry>
@@ -35,34 +35,34 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry>80</entry>
-     <entry>Le nombre de caractères maximums au-delà duquel
+     <entry>Le nombre de caractÃ¨res maximums au-delÃ  duquel
      on effectue le troncage</entry>
     </row>
     <row>
      <entry>2</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry>...</entry>
-     <entry>Le texte qui remplace le texte tronqué. Sa longueur est
-      incluse dans la configuration de la longueur à tronquer.</entry>
+     <entry>Le texte qui remplace le texte tronquÃ©. Sa longueur est
+      incluse dans la configuration de la longueur Ã  tronquer.</entry>
     </row>
     <row>
      <entry>3</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry>&false;</entry>
-     <entry>Détermine si le troncage est effectué sur
-      le dernier mot (&false;), ou au caractère exact (&true;).
+     <entry>DÃ©termine si le troncage est effectuÃ© sur
+      le dernier mot (&false;), ou au caractÃ¨re exact (&true;).
      </entry>
     </row>
     <row>
      <entry>4</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry>&false;</entry>
-     <entry>Ceci détermine si le troncage intervient à la fin de la
-      chaîne (&false;), ou au milieu de la chaîne (&true;). Notez que si
-      ceci vaut &true;, alors les limites de mots sont ignorées.</entry>
+     <entry>Ceci dÃ©termine si le troncage intervient Ã  la fin de la
+      chaÃ®ne (&false;), ou au milieu de la chaÃ®ne (&true;). Notez que si
+      ceci vaut &true;, alors les limites de mots sont ignorÃ©es.</entry>
      </row>
    </tbody>
   </tgroup>
@@ -73,13 +73,13 @@
 <![CDATA[
 <?php
 
-$smarty->assign('titreArticle', 'Deux soeurs réunies après 18 ans de séparation.');
+$smarty->assign('titreArticle', 'Deux soeurs rÃ©unies aprÃ¨s 18 ans de sÃ©paration.');
 
 ?>
 ]]>
 </programlisting>
 <para>
-Où le template est :
+OÃ¹ le template est :
 </para>
 <programlisting>
 <![CDATA[
@@ -98,13 +98,13 @@ Ce qui donne en sortie :
 </para>
 <screen>
 <![CDATA[
-Deux soeurs réunies après 18 ans de séparation.
-Deux soeurs réunies après...
-Deux soeurs réunies après
-Deux soeurs réunies après---
-Deux soeurs réunies après 18 a
-Deux soeurs réunies après 1...
-Deux soeurs ... de séparation.
+Deux soeurs rÃ©unies aprÃ¨s 18 ans de sÃ©paration.
+Deux soeurs rÃ©unies aprÃ¨s...
+Deux soeurs rÃ©unies aprÃ¨s
+Deux soeurs rÃ©unies aprÃ¨s---
+Deux soeurs rÃ©unies aprÃ¨s 18 a
+Deux soeurs rÃ©unies aprÃ¨s 1...
+Deux soeurs ... de sÃ©paration.
 ]]>
 </screen>
  </example>

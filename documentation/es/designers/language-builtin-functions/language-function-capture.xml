@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
        <link linkend="language.variables.smarty.capture">$smarty.capture.foo</link>
        en donde foo es el valor 
        pasado para el atributo name. Si usted no pasa un atributo name, 
-       entonces ser· usado "default". Todos lo comandos {capture} deben 
+       entonces ser√° usado "default". Todos lo comandos {capture} deben 
        estar entre {/capture}. Usted puede anidar(colocar uno dentro de 
        otro) comandos capture.
       </para>
@@ -91,7 +91,7 @@
        </example>
       </para>
  <para>
-  Ver TambiÈn
+  Ver Tambi√©n
   <link linkend="language.variables.smarty.capture">$smarty.capture</link>,
    <link linkend="language.function.eval">{eval}</link>,
   <link linkend="language.function.fetch">{fetch}</link>,

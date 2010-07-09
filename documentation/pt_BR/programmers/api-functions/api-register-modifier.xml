@@ -12,20 +12,20 @@
          </funcsynopsis>
          <para>
 	  Use isso para modificar dinamicamente plugins registrados.
-	  Passe no template o nome do modificador, seguido da função PHP
+	  Passe no template o nome do modificador, seguido da funÃ§Ã£o PHP
 	  que implemente isso.
          </para>
          <para>
-	  A chamada da função-php <parameter>impl</parameter> 
-	  pode ser (a) uma strin contendo o nome da função
+	  A chamada da funÃ§Ã£o-php <parameter>impl</parameter> 
+	  pode ser (a) uma strin contendo o nome da funÃ§Ã£o
 	  ou (b) um array no formato
 	  <literal>array(&amp;$object, $method)</literal> com
-	  <literal>&amp;$object</literal> sendo uma referência para um
+	  <literal>&amp;$object</literal> sendo uma referÃªncia para um
 	  objeto e <literal>$method</literal> sendo uma string
-	  contendo o nome do método ou (c) um array no formato
+	  contendo o nome do mÃ©todo ou (c) um array no formato
 	  <literal>array(&amp;$class, $method)</literal> com
 	  <literal>$class</literal> sendo um nome de classe e
-	  <literal>$method</literal> sendo um método desta classe.
+	  <literal>$method</literal> sendo um mÃ©todo desta classe.
 	</para>
 
 <example>

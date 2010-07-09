@@ -6,22 +6,22 @@
   <refpurpose>Despliega un mensaje de error</refpurpose>
  </refnamediv>
  <refsect1>
-  <title> Descripción </title>
+  <title> DescripciÃ³n </title>
   <methodsynopsis>
    <type>void</type><methodname>trigger_error</methodname>
    <methodparam><type>string</type><parameter>error_msg</parameter></methodparam>
    <methodparam choice="opt"><type>int</type><parameter>level</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Esta función puede ser usada para la salida de un mensaje de error
-   usando Smarty. El parámetro <parameter>level</parameter> es uno de
-   los valores usados para la función de php 
+   Esta funciÃ³n puede ser usada para la salida de un mensaje de error
+   usando Smarty. El parÃ¡metro <parameter>level</parameter> es uno de
+   los valores usados para la funciÃ³n de php 
    <ulink url="&url.php-manual;trigger_error">trigger_error()</ulink>, 
    ex.: E_USER_NOTICE, E_USER_WARNING, etc. 
    Por default es E_USER_WARNING.
   </para>
    <para>
-    Ver también 
+    Ver tambiÃ©n 
     <link linkend="variable.error.reporting">$error_reporting</link>,
     <link linkend="chapter.debugging.console">debugging</link>
     y

@@ -6,13 +6,13 @@
   <refpurpose>Des-registra dinamicamente un postfiltro</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción </title>
+  <title>DescripciÃ³n </title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_postfilter</methodname>
    <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
   </methodsynopsis>
     <para>
-    Ver también 
+    Ver tambiÃ©n 
     <link linkend="api.unregister.postfilter">register_postfilter()</link>
     y <link linkend="plugins.prefilters.postfilters">template post filters</link>.
 </para>

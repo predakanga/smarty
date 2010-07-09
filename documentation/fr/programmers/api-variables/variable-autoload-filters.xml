@@ -5,8 +5,8 @@
 <sect1 id="variable.autoload.filters">
  <title>$autoload_filters</title>
  <para>
-  Si vous désirez charger des filtres a chaque invocation
-  de templates, vous pouvez le spécifier en utilisant cette
+  Si vous dÃ©sirez charger des filtres a chaque invocation
+  de templates, vous pouvez le spÃ©cifier en utilisant cette
   variable. Les types de filtres et les valeurs sont des
   tableaux comportant le nom des filtres.
   <informalexample>

@@ -14,13 +14,13 @@
       Los Sub directorios son mas eficientes, entonces aprovechelo si puede.
       </para>
       <para>
-      Teóricamente usted obtiene mayor eficiencia en sun sistema de archivos con 10 directorios
+      TeÃ³ricamente usted obtiene mayor eficiencia en sun sistema de archivos con 10 directorios
       que contengan 100 archivos, que con un directorio que contenga 1000 archivos.
       Este era ciertamente un caso con Solaris 7 (UFS)... con un nuevo sistema de archivos 
       como ext3 y un levantado especial, la diferencia es casi nula.
       </para>
      <note>
-     <title>Nota Técnica</title>
+     <title>Nota TÃ©cnica</title>
      <para>
      $use_sub_dirs=true doesn't trabaja con 
      <ulink url="&url.php-manual;features.safe-mode">safe_mode=On</ulink>,
@@ -28,13 +28,13 @@
      </para>
      </note>
       <note>
-      <title>Nota Técnica</title>
+      <title>Nota TÃ©cnica</title>
       <para>
           Desde Smarty-2.6.2 <varname>use_sub_dirs</varname> esta por default en false.
       </para>
       </note>
  <para>
-  Ver también 
+  Ver tambiÃ©n 
   <link linkend="variable.compile.dir">$compile_dir</link>,
    y
   <link linkend="variable.cache.dir">$cache_dir</link>.

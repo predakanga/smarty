@@ -5,7 +5,7 @@
 <refentry id="api.get.template.vars">
  <refnamediv>
   <refname>get_template_vars()</refname>
-  <refpurpose>Retourne la valeur assignée passée en paramètre</refpurpose>
+  <refpurpose>Retourne la valeur assignÃ©e passÃ©e en paramÃ¨tre</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,22 +14,22 @@
    <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Si aucun paramètre n'est donné, un tableau de toutes les variables
-   <link linkend="api.assign">assignées</link> est retourné.
+   Si aucun paramÃ¨tre n'est donnÃ©, un tableau de toutes les variables
+   <link linkend="api.assign">assignÃ©es</link> est retournÃ©.
   </para>
   <example>
    <title>Exemple avec get_template_vars</title>
    <programlisting role="php">
 <![CDATA[
 <?php
-// récupère la variable 'foo' assignée au template
+// rÃ©cupÃ¨re la variable 'foo' assignÃ©e au template
 // get assigned template var 'foo'
 $myVar = $smarty->get_template_vars('foo');
 
-// récupère toutes les variables assignées a ce template
+// rÃ©cupÃ¨re toutes les variables assignÃ©es a ce template
 $all_tpl_vars = $smarty->get_template_vars();
 
-// les affiche a l'écran
+// les affiche a l'Ã©cran
 print_r($all_tpl_vars);
 ?>
 ]]>

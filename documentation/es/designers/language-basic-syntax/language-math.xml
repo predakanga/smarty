@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
 <sect1 id="language.math">
- <title>Matemáticas</title>
+ <title>MatemÃ¡ticas</title>
  <para>
-  Las matemáticas pueden ser aplicadas directamente al los valores de
+  Las matemÃ¡ticas pueden ser aplicadas directamente al los valores de
   las variables.
  </para>
  <example>
-  <title>Ejemplos de matemáticas</title>
+  <title>Ejemplos de matemÃ¡ticas</title>
   <programlisting>
 <![CDATA[
 {$foo+1}
@@ -28,7 +28,7 @@
  </example>
 
 <para>
- Ver también la función<link linkend="language.function.math">{math}</link>.
+ Ver tambiÃ©n la funciÃ³n<link linkend="language.function.math">{math}</link>.
 </para>
 
 </sect1>

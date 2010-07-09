@@ -4,23 +4,23 @@
  <chapter id="plugins">
   <title>Extendendo a Smarty com Plugins</title>
   <para>
-   A Versão 2.0 introduziu a arquitetura de plugin que é usada para quase todas as 
-    funcionalidades customizáveis da Smarty. Isto inclui:
+   A VersÃ£o 2.0 introduziu a arquitetura de plugin que Ã© usada para quase todas as 
+    funcionalidades customizÃ¡veis da Smarty. Isto inclui:
    <itemizedlist spacing="compact">
-    <listitem><simpara>funções</simpara></listitem>
+    <listitem><simpara>funÃ§Ãµes</simpara></listitem>
     <listitem><simpara>modificadores</simpara></listitem>
-    <listitem><simpara>funções de bloco</simpara></listitem>
-    <listitem><simpara>funções de compilador</simpara></listitem>
+    <listitem><simpara>funÃ§Ãµes de bloco</simpara></listitem>
+    <listitem><simpara>funÃ§Ãµes de compilador</simpara></listitem>
     <listitem><simpara>prefiltros</simpara></listitem>
     <listitem><simpara>posfiltros</simpara></listitem>
-    <listitem><simpara>filtros de saída</simpara></listitem>
+    <listitem><simpara>filtros de saÃ­da</simpara></listitem>
     <listitem><simpara>recursos</simpara></listitem>
     <listitem><simpara>inserir</simpara></listitem>
    </itemizedlist>
-   Com a exceção de recursos, a compatibilidade com a forma antiga de funções de 
-   manipulador de registro via register_* API é preservada. Se você não usou o API mas no lugar disso 
-   modificou as variáveis de classe <literal>$custom_funcs</literal>, <literal>$custom_mods</literal>, e
-   outras diretamente, então você vai 
+   Com a exceÃ§Ã£o de recursos, a compatibilidade com a forma antiga de funÃ§Ãµes de 
+   manipulador de registro via register_* API Ã© preservada. Se vocÃª nÃ£o usou o API mas no lugar disso 
+   modificou as variÃ¡veis de classe <literal>$custom_funcs</literal>, <literal>$custom_mods</literal>, e
+   outras diretamente, entÃ£o vocÃª vai 
    precisar ajustar seus scripts para ou usar API ou converter suas 
    funcionalidade customizadas em plugins.
   </para>

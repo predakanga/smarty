@@ -5,7 +5,7 @@
 <sect1 id="variable.request.vars.order">
  <title>$request_vars_order</title>
  <para>
-  L'ordre dans lequel les variables de requêtes sont enregistrées,
+  L'ordre dans lequel les variables de requÃªtes sont enregistrÃ©es,
   identique a variables_order dans php.ini.
  </para>
  <para>

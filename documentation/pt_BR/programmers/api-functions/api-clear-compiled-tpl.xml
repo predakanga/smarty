@@ -10,9 +10,9 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-			Isso limpa a vers„o compilada do recurso de template especificado,
+			Isso limpa a vers√£o compilada do recurso de template especificado,
 			ou todos os arquivos de templates compilados se nenhum for especificado.
-			Essa funÁ„o È para uso avanÁado somente, n„o normalmente necess·ria.
+			Essa fun√ß√£o √© para uso avan√ßado somente, n√£o normalmente necess√°ria.
 			</para>
 <example>
 <title>clear_compiled_tpl</title>

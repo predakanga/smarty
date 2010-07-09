@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,62 +25,62 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>a equaÁ„o ‡ ser executar</entry>
+                        <entry>a equa√ß√£o √† ser executar</entry>
                     </row>
                     <row>
                         <entry>format</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
                         <entry>o formato do resultado (sprintf)</entry>
                     </row>
                     <row>
                         <entry>var</entry>
-                        <entry>numÈrico</entry>
+                        <entry>num√©rico</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>valor da vari·vel da equaÁ„o</entry>
+                        <entry>valor da vari√°vel da equa√ß√£o</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>vari·vel de template cuja saÌda ser· atribuida</entry>
+                        <entry>vari√°vel de template cuja sa√≠da ser√° atribuida</entry>
                     </row>
                     <row>
                         <entry>[var ...]</entry>
-                        <entry>numÈrica</entry>
+                        <entry>num√©rica</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>valor da vari·vel da equaÁ„o</entry>
+                        <entry>valor da vari√°vel da equa√ß√£o</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-            math permite o desenhista de template fazer equaÁıes matem·ticas no template. 
-            Qualquer vari·vel de template numÈrica pode ser usada nas equaÁıes, e o resultado
-            È exibido no lugar da tag. As vari·veis usadas na equaÁ„o s„o passadas como par‚metros,
-            que podem ser vari·veis de template
-            ou valores est·ticos.  +, -, /, *, abs, ceil, cos,
+            math permite o desenhista de template fazer equa√ß√µes matem√°ticas no template. 
+            Qualquer vari√°vel de template num√©rica pode ser usada nas equa√ß√µes, e o resultado
+            √© exibido no lugar da tag. As vari√°veis usadas na equa√ß√£o s√£o passadas como par√¢metros,
+            que podem ser vari√°veis de template
+            ou valores est√°ticos.  +, -, /, *, abs, ceil, cos,
             exp, floor, log, log10, max, min, pi, pow, rand, round, sin, sqrt,
-            srans and tan s„o todos os operadores v·lidos. Verifique a documentaÁ„o do PHP para
-            mais informaÁıes acerca destas funÁıes matem·ticas.
+            srans and tan s√£o todos os operadores v√°lidos. Verifique a documenta√ß√£o do PHP para
+            mais informa√ß√µes acerca destas fun√ß√µes matem√°ticas.
 			</para>
 			<para>
-			Se vocÍ fornece o atributo especial "assign", a saÌda da funÁ„o matem·tica ser·
-			atribuÌdo para esta vari·vel
-			de template ao invÈs de ser exibida para o template.
+			Se voc√™ fornece o atributo especial "assign", a sa√≠da da fun√ß√£o matem√°tica ser√°
+			atribu√≠do para esta vari√°vel
+			de template ao inv√©s de ser exibida para o template.
 			</para>
 			<note>
-				<title>Nota TÈcnica</title>
+				<title>Nota T√©cnica</title>
 				<para>
-				math È uma funÁ„o de performance cara devido ao uso da funÁ„o do php eval().
-				Fazendo a matem·tica no PHP È muito mais eficiente, ent„o sempre È possÌvel fazer
-				os c·lculos matem·ticos no PHP e lanÁar os resultados para o template. Definitivamente
-				evite chamadas de funÁıes de 
-				matem·ticas repetitivamente, como dentro de loops de section.
+				math √© uma fun√ß√£o de performance cara devido ao uso da fun√ß√£o do php eval().
+				Fazendo a matem√°tica no PHP √© muito mais eficiente, ent√£o sempre √© poss√≠vel fazer
+				os c√°lculos matem√°ticos no PHP e lan√ßar os resultados para o template. Definitivamente
+				evite chamadas de fun√ß√µes de 
+				matem√°ticas repetitivamente, como dentro de loops de section.
             	</para>
 			</note>
 <example>
@@ -108,7 +108,7 @@ MOSTRA:
 100
 
 
-{* VocÍ pode usar parenteses *}
+{* Voc√™ pode usar parenteses *}
 
 {math equation="(( x + y ) / z )" x=2 y=10 z=2}
 
@@ -117,7 +117,7 @@ MOSTRA:
 6
 
 
-{* vocÍ pode fornecer um par‚metro de formato em sprintf *}
+{* voc√™ pode fornecer um par√¢metro de formato em sprintf *}
 
 {math equation="x + y" x=4.4444 y=5.0000 format="%.2f"}
 

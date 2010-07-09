@@ -9,20 +9,20 @@
   <title>SMARTY_DIR</title>
   <para>
    Il doit s'agir du <emphasis role="bold">chemin complet</emphasis>
-   du répertoire où se trouvent les fichiers classes de Smarty.
-   S'il n'est pas défini dans votre script, Smarty essaiera alors d'en
-   déterminer automatiquement la valeur.
-   S'il est défini, le chemin <emphasis role="bold">doit se terminer par un slash</emphasis>.
+   du rÃ©pertoire oÃ¹ se trouvent les fichiers classes de Smarty.
+   S'il n'est pas dÃ©fini dans votre script, Smarty essaiera alors d'en
+   dÃ©terminer automatiquement la valeur.
+   S'il est dÃ©fini, le chemin <emphasis role="bold">doit se terminer par un slash</emphasis>.
   </para>
   <example>
    <title>SMARTY_DIR</title>
    <programlisting role="php">
 <![CDATA[
 <?php
-// définit le chemin du répertoire de Smarty sur un système *nix
+// dÃ©finit le chemin du rÃ©pertoire de Smarty sur un systÃ¨me *nix
 define('SMARTY_DIR', '/usr/local/lib/php/Smarty-v.e.r/libs/');
 
-// définit le chemin du répertoire de Smarty sur un système Windows
+// dÃ©finit le chemin du rÃ©pertoire de Smarty sur un systÃ¨me Windows
 define('SMARTY_DIR', 'c:/webroot/libs/Smarty-v.e.r/libs/');
 
 // inclut la classe Smarty. Notez le 'S' en majuscule
@@ -40,12 +40,12 @@ require_once(SMARTY_DIR . 'Smarty.class.php');
  <sect1 id="constant.smarty.core.dir">
   <title>SMARTY_CORE_DIR</title>
   <para>
-   Il doit s'agir du <emphasis>chemin complet</emphasis> du répertoire où
+   Il doit s'agir du <emphasis>chemin complet</emphasis> du rÃ©pertoire oÃ¹
    se trouvent les fichiers internes de Smarty. S'il n'est
-   pas défini, Smarty placera comme valeur par défaut la
-   valeur de la constante précédente
+   pas dÃ©fini, Smarty placera comme valeur par dÃ©faut la
+   valeur de la constante prÃ©cÃ©dente
    <link linkend="constant.smarty.dir"><constant>SMARTY_DIR</constant></link>. S'il est
-   défini, le chemin doit se terminer par un slash. Utilisez cette
+   dÃ©fini, le chemin doit se terminer par un slash. Utilisez cette
    constante lorsque vous incluez manuellement n'importe
    quel fichier core.*.
   </para>

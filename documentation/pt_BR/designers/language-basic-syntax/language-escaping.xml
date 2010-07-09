@@ -3,24 +3,24 @@
 <!-- EN-Revision: 1.7 Maintainer: fernandoc Status: ready -->
 
 <sect1 id="language.escaping">
- <title>Escapando da interpretaÁ„o do Smarty</title>
+ <title>Escapando da interpreta√ß√£o do Smarty</title>
  <para>
-  Algumas vezes È desej·vel ou mesmo necess·rio fazer o Smarty ignorar sessıes
-  que em outro caso ele interpretaria. Um exemplo classico È embutindo Javascript ou
-  cÛdigo CSS no template. O problema aparece porque estas linguagens usam os
-  caracteres { e } que s„o os
-  <link linkend="language.function.ldelim">delimitadores</link> padr„o para o Smarty.
+  Algumas vezes √© desej√°vel ou mesmo necess√°rio fazer o Smarty ignorar sess√µes
+  que em outro caso ele interpretaria. Um exemplo classico √© embutindo Javascript ou
+  c√≥digo CSS no template. O problema aparece porque estas linguagens usam os
+  caracteres { e } que s√£o os
+  <link linkend="language.function.ldelim">delimitadores</link> padr√£o para o Smarty.
  </para>
 
  <para>
-  A coisa mais simples È evitar a situaÁ„o em sÌ separando o seu cÛdigo Javascript e
-  CSS nos seus prÛprios arquivos e ent„o usar os mÈtodos padrıes do HTML para acessa-los.
+  A coisa mais simples √© evitar a situa√ß√£o em s√≠ separando o seu c√≥digo Javascript e
+  CSS nos seus pr√≥prios arquivos e ent√£o usar os m√©todos padr√µes do HTML para acessa-los.
  </para>
 
  <para>
-  Incluir conte˙do literal È possÌvel usando blocos <link
+  Incluir conte√∫do literal √© poss√≠vel usando blocos <link
   linkend="language.function.literal">{literal} .. {/literal}</link>.
-  De modo similar ao uso de entidades HTML, vocÍ pode usar <link
+  De modo similar ao uso de entidades HTML, voc√™ pode usar <link
   linkend="language.function.ldelim">{ldelim}</link>,<link
   linkend="language.function.ldelim">{rdelim}</link> ou <link
   linkend="language.variables.smarty.ldelim">{$smarty.ldelim}</link>
@@ -28,7 +28,7 @@
  </para>
 
  <para>
-  As vezes È conveniente simplesmente mudar <link
+  As vezes √© conveniente simplesmente mudar <link
   linkend="variable.left.delimiter">$left_delimiter</link> e
   <link linkend="variable.right.delimiter">$right_delimiter</link>.
  </para>
@@ -49,7 +49,7 @@ $smarty->display('example.tpl');
 ]]>
   </programlisting>
   <para>
-   Aonde example.tpl È:
+   Aonde example.tpl √©:
   </para>
   <programlisting>
 <![CDATA[
@@ -65,7 +65,7 @@ Welcome <!--{$name}--> to Smarty
   </programlisting>
  </example>
  <para>
-  Veja tambÈm <link linkend="language.modifier.escape">escape modifier</link>
+  Veja tamb√©m <link linkend="language.modifier.escape">escape modifier</link>
  </para>
 </sect1>
 <!-- Keep this comment at the end of the file

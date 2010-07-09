@@ -5,9 +5,9 @@
 <sect1 id="plugins.outputfilters">
  <title>Filtres de sortie</title>
  <para>
-  Les plugins de filtres de sortie opèrent sur la sortie du template,
-  après que le template a été chargé et exécuté, mais avant que
-  la sortie ne soit affichée.
+  Les plugins de filtres de sortie opÃ¨rent sur la sortie du template,
+  aprÃ¨s que le template a Ã©tÃ© chargÃ© et exÃ©cutÃ©, mais avant que
+  la sortie ne soit affichÃ©e.
  </para>
  <funcsynopsis>
   <funcprototype>
@@ -17,10 +17,10 @@
   </funcprototype>
  </funcsynopsis>
  <para>
-  Le premier paramètre passé à la fonction du filtre de sortie est la
-  sortie du template qui doit être modifiée et le second paramètre
-  est l'instance de Smarty appelant le plugin. Le plugin est supposé
-  faire un traitement et en retourner le résultat.
+  Le premier paramÃ¨tre passÃ© Ã  la fonction du filtre de sortie est la
+  sortie du template qui doit Ãªtre modifiÃ©e et le second paramÃ¨tre
+  est l'instance de Smarty appelant le plugin. Le plugin est supposÃ©
+  faire un traitement et en retourner le rÃ©sultat.
  </para>
  <example>
   <title>Plugin de filtre de sortie</title>
@@ -33,7 +33,7 @@
  * Fichier :  outputfilter.protect_email.php
  * Type :     filtre de sortie
  * Nom :      protect_email
- * Rôle:     Convertie les @ en %40 pour protéger des 
+ * RÃ´le:     Convertie les @ en %40 pour protÃ©ger des 
  *           robots spammers.
  * -------------------------------------------------------------
  */

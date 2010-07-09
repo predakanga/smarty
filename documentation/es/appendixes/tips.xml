@@ -5,10 +5,10 @@
   <para>
   </para>
   <sect1 id="tips.blank.var.handling">
-   <title>Manipulación de Variables Vacias</title>
+   <title>ManipulaciÃ³n de Variables Vacias</title>
    <para>
     Cuando usted en algunas ocaciones quiere imprimir un valor que 
-    usted defíne a una variable vacia en vez de imprimir nada, tal 
+    usted defÃ­ne a una variable vacia en vez de imprimir nada, tal 
     como imprimir "&amp;nbsp;" a fin de que el plano del fondo de 
     la tabla funcione correctamente. Muchos usarian una sentencia 
     <link linkend="language.function.if">{if}</link> para manejar esto, 
@@ -41,13 +41,13 @@
   </sect1>
 
   <sect1 id="tips.default.var.handling">
-   <title>Manipulación del valor default de una variable</title>
+   <title>ManipulaciÃ³n del valor default de una variable</title>
    <para>
     Si una variable es usada frecuentemente en sus templates, 
     aplicando el modificador default toda vez que este es 
     mencionado puede evitar un bit desagradable. Usted puede 
-    remediar esto con la atribución de un valor por default a 
-    la variable con la función 
+    remediar esto con la atribuciÃ³n de un valor por default a 
+    la variable con la funciÃ³n 
     <link linkend="language.function.assign">{assign}</link>.
    </para>
    <example>
@@ -64,7 +64,7 @@ usted lo exiba *}
     </programlisting>
    </example>
    <para>
-    Vea tambiéen <link linkend="language.modifier.default">default</link> y
+    Vea tambiÃ©en <link linkend="language.modifier.default">default</link> y
     <link linkend="tips.blank.var.handling">Blank Variable Handling</link>.
    </para>
 
@@ -73,7 +73,7 @@ usted lo exiba *}
    <title>Pasando la variable titulo a la cabecera del template</title>
    <para>
     Cuando la mayoria de sus templates usan los mismo encabezados y 
-    los mismos pies de pagina, es común dividirlos uno en cada template 
+    los mismos pies de pagina, es comÃºn dividirlos uno en cada template 
     y entonces incluirlos <link linkend="language.function.include">{include}</link>. 
     Que pasara si el encabezado necesita tener un titulo diferente, 
     dependiendo de que pagina estas viniendo? usted puede pasar el 
@@ -127,9 +127,9 @@ usted lo exiba *}
     </programlisting>
    </example>
    <para>
-   Cuando la pagina principal es mostrada, el titulo de la "Página 
+   Cuando la pagina principal es mostrada, el titulo de la "PÃ¡gina 
    Principal" es pasado al template <filename>header.tpl</filename>, 
-   y será posteriormente usado como el titulo. Cuando la pagina de archivo 
+   y serÃ¡ posteriormente usado como el titulo. Cuando la pagina de archivo 
    es mostrada, el titulo sera "Archivos". Observelo en el ejemplo de archivo, 
    nosotros estamos usando una variable del archivo 
    <filename>archives_page.conf</filename> en vez de una variable codificada 
@@ -142,10 +142,10 @@ usted lo exiba *}
    <title>Fechas</title>
    <para>
     Como una regla basica, siempre pase fechas al Smarty como timestamps.
-    Esto permite al diseñador de template utilizar
+    Esto permite al diseÃ±ador de template utilizar
     <link linkend="language.modifier.date.format">date_format</link>
-    para el control completo sobre el formato de fechas, y también 
-    facilita la comparación de fechas si es necesario.
+    para el control completo sobre el formato de fechas, y tambiÃ©n 
+    facilita la comparaciÃ³n de fechas si es necesario.
    </para>
    <note>
     <para>
@@ -193,8 +193,8 @@ Jan 4, 2001
    <para>
     Cuando usa <link linkend="language.function.html.select.date">{html_select_date}</link> 
     en un template, el programador normalmente va a querer convertir 
-    la salida de un formulario de vuelta al formato timestamp. Aquí 
-    esta una función para ayudar con esto.
+    la salida de un formulario de vuelta al formato timestamp. AquÃ­ 
+    esta una funciÃ³n para ayudar con esto.
    </para>
    <example>
     <title>Convirtiendo elementos en forma de fecha de vuelta a un timestamp</title>
@@ -225,7 +225,7 @@ function makeTimeStamp($year="", $month="", $day="")
     </programlisting>
    </example>
    <para>
-   Vea también 
+   Vea tambiÃ©n 
    <link linkend="language.function.html.select.date">{html_select_date}</link>,
    <link linkend="language.function.html.select.time">{html_select_time}</link>,
    <link linkend="language.modifier.date.format">date_format</link>
@@ -238,8 +238,8 @@ function makeTimeStamp($year="", $month="", $day="")
    <para>
     Los templates WAP/WML requieren de un encabezado de 
     <ulink url="&url.php-manual;header">Content-Type</ulink> de 
-    PHP para ser pasado junto con el template. La forma mas fácil de 
-    hacer esto seria escribir una función de manera habitual que imprima 
+    PHP para ser pasado junto con el template. La forma mas fÃ¡cil de 
+    hacer esto seria escribir una funciÃ³n de manera habitual que imprima 
     el encabezado. Si usted esta usando el sistema de  
     <link linkend="caching">cache</link>, este no funcionara, entonces 
     nosotros haremos esto usando una etiqueta de 
@@ -254,7 +254,7 @@ function makeTimeStamp($year="", $month="", $day="")
 <?php
 
 // Asegurarse que el apache esta configurado para las extenciones .wml !
-// ponga esta función en algun lugar de su aplicación, o en Smarty.addons.php
+// ponga esta funciÃ³n en algun lugar de su aplicaciÃ³n, o en Smarty.addons.php
 function insert_header($params) 
 {
    // this function expects $content argument
@@ -307,16 +307,16 @@ Pretty easy isn't it?
    <para>
     Tradicionalmente, programar templates en sus aplicaciones es de  
     la siguiente forma: Primero, usted acumula sus variables dentro de su 
-    aplicación PHP, (talvez como requisiciones de una base de datos).
+    aplicaciÃ³n PHP, (talvez como requisiciones de una base de datos).
     Entonces, usted instancia su objeto Smarty 
     <link linkend="api.assign">assign()</link>, atribuye valores a 
     las variables y muestra el template 
     <link linkend="api.display">display()</link>. Por ejemplo nosotros 
     tenemos un registrador de existencias en nuestro template. Nosotros 
-    recolectaremos los datos de las existencias en nuestra aplicación,
+    recolectaremos los datos de las existencias en nuestra aplicaciÃ³n,
     entonces damos valor a estas variables en el template y lo mostramos.
     Ahora esto seria genial si usted adicionara este registrador de
-    almacenamiento (stock ticker) a cualquier aplicación simplemente
+    almacenamiento (stock ticker) a cualquier aplicaciÃ³n simplemente
     incluyendolo en el template, y no preocuparse hacerca de como ir
     a traer los datos al frente?
    </para>
@@ -340,14 +340,14 @@ Pretty easy isn't it?
 // configura nuestra funci&oacute;n para traer los datos almacenados
 function fetch_ticker($symbol) 
 {
-   // ponga la lógica aquí que traera $ticker_name
+   // ponga la lÃ³gica aquÃ­ que traera $ticker_name
    // y $ticker_price de algun recurso
    return $ticker_info;
 }
 
 function smarty_function_load_ticker($params, &$smarty) 
 {
-   // llama la función
+   // llama la funciÃ³n
    $ticker_info = fetch_ticker($params['symbol']);
    
    // asigna las variables al template
@@ -368,7 +368,7 @@ Stock Name: {$ticker.name} Stock Price: {$ticker.price}
     </programlisting>
    </example>
    <para>
-    Vea también <link linkend="language.function.include.php">{include_php}</link>,
+    Vea tambiÃ©n <link linkend="language.function.include.php">{include_php}</link>,
     <link linkend="language.function.include">{include}</link> y
     <link linkend="language.function.php">{php}</link>.
    </para>
@@ -398,15 +398,15 @@ Send inquiries to
     </programlisting>
    </example>
    <note>
-    <title>Nota Técnica</title>
+    <title>Nota TÃ©cnica</title>
     <para>
-     Este metodo no es 100% a pueba de fallas. Un spammer podría crear
+     Este metodo no es 100% a pueba de fallas. Un spammer podrÃ­a crear
      un programa para recolectar el e-mail y para decodificar estos 
-     valores, mas no es muy común.
+     valores, mas no es muy comÃºn.
     </para>
    </note>
    <para>
-    Vea también <link linkend="language.modifier.escape">escape</link>
+    Vea tambiÃ©n <link linkend="language.modifier.escape">escape</link>
     y <link linkend="language.function.mailto">{mailto}</link>.
    </para>
   </sect1>

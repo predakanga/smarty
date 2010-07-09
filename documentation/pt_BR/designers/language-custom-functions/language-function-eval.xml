@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,43 +25,43 @@
                         <entry>mixed</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Vari·vel (ou string) para avaliar</entry>
+                        <entry>Vari√°vel (ou string) para avaliar</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>A vari·vel de template que
-                        receber· a saÌda</entry>
+                        <entry>A vari√°vel de template que
+                        receber√° a sa√≠da</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			eval È usado para avaliar uma vari·vel como template. Isto pode ser usado para
-			coisas como embutir tags/vari·veis de template dentro de vari·veis
-			ou tags/vari·veis dentro de vari·veis em um arquivo de configuraÁ„o.
+			eval √© usado para avaliar uma vari√°vel como template. Isto pode ser usado para
+			coisas como embutir tags/vari√°veis de template dentro de vari√°veis
+			ou tags/vari√°veis dentro de vari√°veis em um arquivo de configura√ß√£o.
 			</para>
 			<para>
-			 Se vocÍ indicar o atributo especial "assign", a saÌda da funÁ„o
-			 eval ir· para esta vari·vel de template ao
-			 invÈs de aparecer no template.
+			 Se voc√™ indicar o atributo especial "assign", a sa√≠da da fun√ß√£o
+			 eval ir√° para esta vari√°vel de template ao
+			 inv√©s de aparecer no template.
 			</para>
 			<note>
-			<title>Nota TÈcnica</title>
+			<title>Nota T√©cnica</title>
 			<para>
-			 Vari·veis avaliadas s„o tratadas igual a templates. Elas seguem
-			 o mesmo funcionamento para escapar e para seguranÁa como
+			 Vari√°veis avaliadas s√£o tratadas igual a templates. Elas seguem
+			 o mesmo funcionamento para escapar e para seguran√ßa como
 			 se fossem templates.
 			</para>
 			</note>
 			<note>
-			<title>Nota TÈcnica</title>
+			<title>Nota T√©cnica</title>
 			<para>
-			 Vari·veis avaliadas s„o compiladas a cada invocaÁ„o, as versıes
-			 compiladas n„o s„o salvas. Entretando, se vocÍ tiver o cache ativado,
-			 a saÌda vai ficar no cache junto com o resto do template.
+			 Vari√°veis avaliadas s√£o compiladas a cada invoca√ß√£o, as vers√µes
+			 compiladas n√£o s√£o salvas. Entretando, se voc√™ tiver o cache ativado,
+			 a sa√≠da vai ficar no cache junto com o resto do template.
 			</para>
 			</note>
 <example>

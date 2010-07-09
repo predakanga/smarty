@@ -4,9 +4,9 @@
 <sect1 id="variable.cache.handler.func">
       <title>$cache_handler_func</title>
       <para>
-       Você pode fornecer uma função padrão para manipular arquivos de cache ao invés de
-       usar o método built-in usando o $cache_dir. Veja a 
-       seção <link linkend="section.template.cache.handler.func">cache
+       VocÃª pode fornecer uma funÃ§Ã£o padrÃ£o para manipular arquivos de cache ao invÃ©s de
+       usar o mÃ©todo built-in usando o $cache_dir. Veja a 
+       seÃ§Ã£o <link linkend="section.template.cache.handler.func">cache
        handler function section</link> para obter detalhes.
       </para>
 </sect1>

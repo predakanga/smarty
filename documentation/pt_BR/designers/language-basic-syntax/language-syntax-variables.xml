@@ -5,25 +5,25 @@
 <sect1 id="language.syntax.variables">
  <title>Variables</title>
  <para>
-  Vaiaveis do template começam com o sinal de $dollar. Elas podem conter números,
+  Vaiaveis do template comeÃ§am com o sinal de $dollar. Elas podem conter nÃºmeros,
   letras e sublinhados, parecido com
-  <ulink url="&url.php-manual;language.variables">variável PHP</ulink>.
-  Você pode referenciar arrays
-  pelo índice número ou não numérico. Também pode
+  <ulink url="&url.php-manual;language.variables">variÃ¡vel PHP</ulink>.
+  VocÃª pode referenciar arrays
+  pelo Ã­ndice nÃºmero ou nÃ£o numÃ©rico. TambÃ©m pode
   referenciar propriedades e metodos de objetos.</para>
   <para>
-  <link linkend="language.config.variables">Variáveis do arquivo de configuração</link>
-  são excessões a sintaxe de $dollar
-  e são ao invés referenciadas com #cancelas#, ou
-  via a variável 
+  <link linkend="language.config.variables">VariÃ¡veis do arquivo de configuraÃ§Ã£o</link>
+  sÃ£o excessÃµes a sintaxe de $dollar
+  e sÃ£o ao invÃ©s referenciadas com #cancelas#, ou
+  via a variÃ¡vel 
   <link linkend="language.variables.smarty.config">$smarty.config</link>.
  </para>
  <example>
-  <title>Variáveis</title>
+  <title>VariÃ¡veis</title>
   <programlisting>
 <![CDATA[
-{$foo}        <-- mostrando uma variável simples (não array/objeto)
-{$foo[4]}     <-- mostrando o quito elemento de uma array que começa em zero
+{$foo}        <-- mostrando uma variÃ¡vel simples (nÃ£o array/objeto)
+{$foo[4]}     <-- mostrando o quito elemento de uma array que comeÃ§a em zero
 {$foo.bar}    <-- mostrando o valor da chave "bar" da array, similar ao PHP $foo['bar']
 {$foo.$bar}   <-- display variable key value of an array, similar to PHP $foo[$bar]
 {$foo->bar}   <-- display the object property "bar"
@@ -49,14 +49,14 @@ Many other combinations are allowed
   </programlisting>
  </example>
  
- <para>Variáveis de requisição como $_GET, $_SESSION etc estão disponíveis através
- da variável reservada <emphasis role="bold">
+ <para>VariÃ¡veis de requisiÃ§Ã£o como $_GET, $_SESSION etc estÃ£o disponÃ­veis atravÃ©s
+ da variÃ¡vel reservada <emphasis role="bold">
  <link linkend="language.variables.smarty">$smarty</link></emphasis>.
  </para>
  
  <para>
-  Veja também <link linkend="language.variables.smarty">Variáveis reservadas do $smarty</link>,
-  <link linkend="language.config.variables">Variáveis da Configuração</link>
+  Veja tambÃ©m <link linkend="language.variables.smarty">VariÃ¡veis reservadas do $smarty</link>,
+  <link linkend="language.config.variables">VariÃ¡veis da ConfiguraÃ§Ã£o</link>
   <link linkend="language.function.assign">{assign}</link>
   e
   <link linkend="api.assign">assign()</link>.

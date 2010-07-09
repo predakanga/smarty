@@ -5,7 +5,7 @@
 <refentry id="api.unregister.postfilter">
  <refnamediv>
   <refname>unregister_postfilter()</refname>
-  <refpurpose>Désallouer dynamiquement un filtre de post-compilation</refpurpose>
+  <refpurpose>DÃ©sallouer dynamiquement un filtre de post-compilation</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>

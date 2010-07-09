@@ -5,7 +5,7 @@
 <sect1 id="language.function.fetch">
  <title>{fetch}</title>
  <para>
-  <varname>{fetch}</varname> est utilisé pour récupérer des fichiers depuis le système de
+  <varname>{fetch}</varname> est utilisÃ© pour rÃ©cupÃ©rer des fichiers depuis le systÃ¨me de
   fichier local, depuis un serveur http ou ftp, et en afficher le contenu.
  </para>
 
@@ -13,11 +13,11 @@
   <listitem>
    <para>
     Si le nom du fichier commence par <parameter>http://</parameter>, la page internet sera
-    récupérée, puis affichée.
+    rÃ©cupÃ©rÃ©e, puis affichÃ©e.
     <note>
      <para>
       Ceci ne supporte pas les redirections http. Assurez vous d'inclure les
-      slash de fin sur votre page web si nécessaire.
+      slash de fin sur votre page web si nÃ©cessaire.
      </para>
     </note>
    </para>
@@ -26,22 +26,22 @@
   <listitem>
    <para>
     Si le nom du fichier commence par <parameter>ftp://</parameter>,
-    le fichier sera récupéré depuis le serveur ftp, et affiché.
+    le fichier sera rÃ©cupÃ©rÃ© depuis le serveur ftp, et affichÃ©.
    </para>
   </listitem>
 
   <listitem>
    <para>
-    Pour les fichiers du système local, le chemin doit être absolu ou
-    relatif au chemin d'exécution du script PHP.
+    Pour les fichiers du systÃ¨me local, le chemin doit Ãªtre absolu ou
+    relatif au chemin d'exÃ©cution du script PHP.
     <note>
      <para>
       Si la variable de template <link linkend="variable.security">
        <parameter>$security</parameter></link>
-      est activée et que vous récupérez un fichier depuis le système
+      est activÃ©e et que vous rÃ©cupÃ©rez un fichier depuis le systÃ¨me
       de fichiers local, <varname>{fetch}</varname>
       ne permettra que les fichiers se trouvant dans un des dossiers
-      définis dans les <link linkend="variable.secure.dir">dossiers sécurisés</link>.
+      dÃ©finis dans les <link linkend="variable.secure.dir">dossiers sÃ©curisÃ©s</link>.
      </para>
     </note>
    </para>
@@ -49,9 +49,9 @@
 
   <listitem>
    <para>
-    Si l'attribut <parameter>assign</parameter> est défini, l'affichage
-    de la fonction <varname>{fetch}</varname> sera assignée à cette
-    variable de template au lieu d'être affichée dans le template.
+    Si l'attribut <parameter>assign</parameter> est dÃ©fini, l'affichage
+    de la fonction <varname>{fetch}</varname> sera assignÃ©e Ã  cette
+    variable de template au lieu d'Ãªtre affichÃ©e dans le template.
    </para>
   </listitem>
  </itemizedlist>
@@ -75,18 +75,18 @@
    <tbody>
     <row>
      <entry>file</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le fichier, site http ou ftp à récupérer</entry>
+     <entry>Le fichier, site http ou ftp Ã  rÃ©cupÃ©rer</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Le nom de la variable PHP dans laquelle la sortie
-      sera assignée plutôt que d'être directement affichée.
+      sera assignÃ©e plutÃ´t que d'Ãªtre directement affichÃ©e.
      </entry>
     </row>
    </tbody>
@@ -99,15 +99,15 @@
 {* Inclus du javascript dans votre template *}
 {fetch file='/export/httpd/www.example.com/docs/navbar.js'}
 
-{* récupère les informations météo d'un autre site sur votre page *}
+{* rÃ©cupÃ¨re les informations mÃ©tÃ©o d'un autre site sur votre page *}
 {fetch file='http://www.myweather.com/68502/'}
 
-{* récupère les titres depuis un fichier ftp *}
+{* rÃ©cupÃ¨re les titres depuis un fichier ftp *}
 {fetch file='ftp://user:password@ftp.example.com/path/to/currentheadlines.txt'}
 {* comme ci-dessus mais avec des variables *}
 {fetch file="ftp://`$user`:`$password`@`$server`/`$path`"}
 
-{* assigne le contenu récupéré à une variable de template *}
+{* assigne le contenu rÃ©cupÃ©rÃ© Ã  une variable de template *}
 {fetch file='http://www.myweather.com/68502/' assign='weather'}
 {if $weather ne ''}
 <div id="weather">{$weather}</div>

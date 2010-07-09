@@ -10,30 +10,30 @@
        el scripts PHP. 
        <emphasis role="bold">Este directorio debe ser regrabable por el
         servidor web</emphasis>
-       (<link linkend="installing.smarty.basic">ver intalaciÛn</link>).
-       Usted puede usar tambiÈn su propia  
-       <link linkend="section.template.cache.handler.func">funciÛn habitual 
+       (<link linkend="installing.smarty.basic">ver intalaci√≥n</link>).
+       Usted puede usar tambi√©n su propia  
+       <link linkend="section.template.cache.handler.func">funci√≥n habitual 
         de mantenimiento</link> de cache para manipular los archivos de cache, que 
-       ignorar· est· configuraciÛn.
+       ignorar√° est√° configuraci√≥n.
        Ver tambien <link linkend="variable.use.sub.dirs">$use_sub_dirs</link>.
       </para>
 
       <note>
-       <title>Nota TÈcnica</title>
+       <title>Nota T√©cnica</title>
        <para>
-       Esta configuraciÛn debe ser cualquiera de estas dos, un path
+       Esta configuraci√≥n debe ser cualquiera de estas dos, un path
        relativo o absoluto. include_path no es usado para escribir archivos.
        </para>
       </note>
       <note>
-       <title>Nota TÈcnica</title>
+       <title>Nota T√©cnica</title>
        <para>
         No es recomendado colocar este directorio bajo el directorio 
         document root del servidor web.
        </para>
       </note>
   <para>
-  Ver tambiÈn 
+  Ver tambi√©n 
   <link linkend="variable.caching">$caching</link>,
   <link linkend="variable.use.sub.dirs">$use_sub_dirs</link>,
   <link linkend="variable.cache.lifetime">$cache_lifetime</link>,

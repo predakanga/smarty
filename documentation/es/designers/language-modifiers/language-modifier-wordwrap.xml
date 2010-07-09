@@ -11,11 +11,11 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>PosiciÛn del Parametro</entry>
+      <entry>Posici√≥n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>DescripciÛn</entry>
+      <entry>Descripci√≥n</entry>
      </row>
     </thead>
     <tbody>
@@ -39,7 +39,7 @@
       <entry>No</entry>
       <entry>false</entry>
       <entry>Este determina cuando cortar o no, o al final de una
-       palabra(false), o en un car·cter exacto(true).
+       palabra(false), o en un car√°cter exacto(true).
       </entry>
      </row>
     </tbody>
@@ -47,12 +47,12 @@
   </informaltable>
   <para>
    Este <command>wordwrap</command> corta una cadena para un ancho de columna, 
-   el default es 80. Como segundo par·metro opcional, usted puede especificar 
-   la cadena que ser· usada para cortar el texto para la prÛxima linea (el default 
+   el default es 80. Como segundo par√°metro opcional, usted puede especificar 
+   la cadena que ser√° usada para cortar el texto para la pr√≥xima linea (el default 
    es un retorno de carro \n). Por default, (wordwrap) intentara cortar al final 
-   de una palabra. Si usted quisiera cortar un tamaÒo exacto de cacarteres, 
-   pase al tercer par·metro, que es opcional, como true.
-   Este es equivalente a la funciÛn <ulink url="&url.php-manual;wordwrap">wordwrap()</ulink> de PHP.
+   de una palabra. Si usted quisiera cortar un tama√±o exacto de cacarteres, 
+   pase al tercer par√°metro, que es opcional, como true.
+   Este es equivalente a la funci√≥n <ulink url="&url.php-manual;wordwrap">wordwrap()</ulink> de PHP.
   </para>
   <example>
    <title>wordwrap</title>
@@ -108,7 +108,7 @@ years.
    </screen>
   </example>
     <para>
-     Ver TambiÈn <link linkend="language.modifier.nl2br">nl2br</link>
+     Ver Tambi√©n <link linkend="language.modifier.nl2br">nl2br</link>
      y <link linkend="language.function.textformat">{textformat}</link>.
     </para>
 </sect1>

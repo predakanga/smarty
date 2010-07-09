@@ -22,7 +22,7 @@
     <row>
      <entry>text</entry>
      <entry>stringa</entry>
-     <entry>sÏ</entry>
+     <entry>s√¨</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>testo o codice html da visualizzare nel popup</entry>
     </row>
@@ -31,7 +31,7 @@
      <entry>stringa</entry>
      <entry>mo</entry>
      <entry><emphasis>onMouseOver</emphasis></entry>
-     <entry>evento usato per attivare il popup. PuÚ essere
+     <entry>evento usato per attivare il popup. Pu√≤ essere
 	onMouseOver oppure onClick</entry>
     </row>
     <row>
@@ -39,7 +39,7 @@
      <entry>booleano</entry>
      <entry>no</entry>
      <entry><emphasis>false</emphasis></entry>
-     <entry>fa sÏ che il popup rimanga visibile fino a quando non viene chiuso</entry>
+     <entry>fa s√¨ che il popup rimanga visibile fino a quando non viene chiuso</entry>
     </row>
     <row>
      <entry>caption</entry>
@@ -166,7 +166,7 @@
      <entry>no</entry>
      <entry><emphasis>false</emphasis></entry>
      <entry>posiziona il popup al di sopra del mouse. NOTA: possibile
-	solo se Ë stata impostata l'altezza</entry>
+	solo se √® stata impostata l'altezza</entry>
     </row>
     <row>
      <entry>below</entry>
@@ -180,7 +180,7 @@
      <entry>intero</entry>
      <entry>no</entry>
      <entry><emphasis>nessuno</emphasis></entry>
-     <entry>rende il bordo del popup pi˘ grosso o pi˘ sottile</entry>
+     <entry>rende il bordo del popup pi√π grosso o pi√π sottile</entry>
     </row>
     <row>
      <entry>offsetx</entry>
@@ -211,8 +211,8 @@
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>definisce un'immagine da usare invece del colore per
         il bordo del popup. NOTA: dovete impostare il bgcolor a "", 
-        altrimenti il colore si vedr‡ comunque. NOTA: quando Ë 
-        presente un link di chiusura, Netscape ridisegner‡ le 
+        altrimenti il colore si vedr√† comunque. NOTA: quando √® 
+        presente un link di chiusura, Netscape ridisegner√† le 
         celle della tabella, rendendo la visualizzazione
         non corretta</entry>
     </row>
@@ -261,7 +261,7 @@
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>comunica ad overLib di leggere il testo da questo indice 
      dell'array ol_text, che si trova in overlib.js. Questo parametro 
-     puÚ essere usato al posto di text</entry>
+     pu√≤ essere usato al posto di text</entry>
     </row>
     <row>
      <entry>caparray</entry>
@@ -340,7 +340,7 @@
      <entry>no</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>consente di utilizzare codice html per l'immagine di sfondo.
-        Il codice html dovr‡ trovarsi nell'attributo text</entry>
+        Il codice html dovr√† trovarsi nell'attributo text</entry>
     </row>
     <row>
      <entry>frame</entry>
@@ -363,7 +363,7 @@
      <entry>intero</entry>
      <entry>no</entry>
      <entry><emphasis>nessuno</emphasis></entry>
-     <entry>fa sÏ che il popup si comporti come un tooltip. Verr‡
+     <entry>fa s√¨ che il popup si comporti come un tooltip. Verr√†
         visualizzato solo dopo questo ritardo in millisecondi.</entry>
     </row>
     <row>

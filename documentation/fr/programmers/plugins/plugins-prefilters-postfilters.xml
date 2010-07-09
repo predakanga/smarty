@@ -3,11 +3,11 @@
 <!-- EN-Revision: 1.3 Maintainer: yannick Status: ready -->
 
 <sect1 id="plugins.prefilters.postfilters">
- <title>filtres de pré-compilation/filtres de post-compilation</title>
+ <title>filtres de prÃ©-compilation/filtres de post-compilation</title>
  <para>
-  Les filtres de pré-compilation et les filtres de post-compilation ont des concepts très
-  proches. Ils différent dans leur exécution, plus précisément dans le
-  moment où ils sont exécutés.
+  Les filtres de prÃ©-compilation et les filtres de post-compilation ont des concepts trÃ¨s
+  proches. Ils diffÃ©rent dans leur exÃ©cution, plus prÃ©cisÃ©ment dans le
+  moment oÃ¹ ils sont exÃ©cutÃ©s.
  </para>
  <funcsynopsis>
   <funcprototype>
@@ -17,12 +17,12 @@
   </funcprototype>
  </funcsynopsis>
  <para>
-  Les filtres de pré-compilation sont utilisés pour transformer la source d'un template
-  juste avant la compilation. Le premier paramètre passé à la fonction
-  de filtre de pré-compilation est la source du template, éventuellement modifiée par
-  d'autres filtres de pré-compilations. Le plugin est supposé retourner la source modifiée.
-  Notez que cette source n'est sauvegardée nulle part, elle est seulement
-  utilisé pour la compilation.
+  Les filtres de prÃ©-compilation sont utilisÃ©s pour transformer la source d'un template
+  juste avant la compilation. Le premier paramÃ¨tre passÃ© Ã  la fonction
+  de filtre de prÃ©-compilation est la source du template, Ã©ventuellement modifiÃ©e par
+  d'autres filtres de prÃ©-compilations. Le plugin est supposÃ© retourner la source modifiÃ©e.
+  Notez que cette source n'est sauvegardÃ©e nulle part, elle est seulement
+  utilisÃ© pour la compilation.
  </para>
  <funcsynopsis>
   <funcprototype>
@@ -32,12 +32,12 @@
   </funcprototype>
  </funcsynopsis>
  <para>
-  Les filtres de post-compilation sont utilisés pour modifier la sortie du template
-  (le code PHP) juste après que la compilation a été faîte mais juste
-  avant que le template ne soit sauvegardé sur le système de fichiers.
-  Le premier paramètre passé à la fonction de filtre de post-compilation est le code
-  du template compilé, éventuellement déja modifié par d'autres filtres de post-compilations.
-  Le plugin est censé retourner la version modifiée du code.
+  Les filtres de post-compilation sont utilisÃ©s pour modifier la sortie du template
+  (le code PHP) juste aprÃ¨s que la compilation a Ã©tÃ© faÃ®te mais juste
+  avant que le template ne soit sauvegardÃ© sur le systÃ¨me de fichiers.
+  Le premier paramÃ¨tre passÃ© Ã  la fonction de filtre de post-compilation est le code
+  du template compilÃ©, Ã©ventuellement dÃ©ja modifiÃ© par d'autres filtres de post-compilations.
+  Le plugin est censÃ© retourner la version modifiÃ©e du code.
  </para>
  <example>
   <title>Plugin de filtre de post-compilation</title>
@@ -48,9 +48,9 @@
  * Smarty plugin
  * -------------------------------------------------------------
  * Fichier :  prefilter.pre01.php
- * Type :     filtre de pré-compilation
+ * Type :     filtre de prÃ©-compilation
  * Nom :      pre01
- * Rôle :     Passe les balises HTML en minuscules.
+ * RÃ´le :     Passe les balises HTML en minuscules.
  * -------------------------------------------------------------
  */
  function smarty_prefilter_pre01($source, &$smarty)
@@ -72,7 +72,7 @@
  * Fichier :  postfilter.post01.php
  * Type:      filtre de post-compilation
  * Nom :      post01
- * Rôle :     Renvoie du code qui liste toutes les variables
+ * RÃ´le :     Renvoie du code qui liste toutes les variables
  *            du template.
  * -------------------------------------------------------------
  */

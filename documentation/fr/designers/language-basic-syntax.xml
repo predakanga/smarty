@@ -5,16 +5,16 @@
 <chapter id="language.basic.syntax">
  <title>Bases syntaxiques</title>
  <para>
-  Toutes les balises Smarty sont entourées de délimiteurs. Par défaut,
+  Toutes les balises Smarty sont entourÃ©es de dÃ©limiteurs. Par dÃ©faut,
   ils sont <literal>{</literal> et
-  <literal>}</literal>, mais ils peuvent être <link linkend="variable.left.delimiter">modifiés</link>.
+  <literal>}</literal>, mais ils peuvent Ãªtre <link linkend="variable.left.delimiter">modifiÃ©s</link>.
  </para>
  <para>
-  Pour les exemples de ce manuel, nous supposons que vous utiliserez leur valeur par défaut.
-  Dans Smarty, le contenu qui est situé en dehors des délimiteurs
-  est affiché comme contenu statique, inchangé. Lorsque Smarty rencontre
+  Pour les exemples de ce manuel, nous supposons que vous utiliserez leur valeur par dÃ©faut.
+  Dans Smarty, le contenu qui est situÃ© en dehors des dÃ©limiteurs
+  est affichÃ© comme contenu statique, inchangÃ©. Lorsque Smarty rencontre
   des balises de template, il tente de les comprendre et en affiche la sortie
-  appropriée, en lieu et place.
+  appropriÃ©e, en lieu et place.
  </para>
 
  &designers.language-basic-syntax.language-syntax-comments;

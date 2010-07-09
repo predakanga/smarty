@@ -4,11 +4,11 @@
 <sect1 id="variable.config.read.hidden">
       <title>$config_read_hidden</title>
       <para>
-	   Se configurado para true, esconde seções (nomes de seções começados com um período)
-	   no arquivo de configuração podem ser lidos do template. Tipicamente você deixaria
-	   isto como false, desta forma você pode armazenar dados sensitivos no arquivo de configuração
-	   como um parâmetro de banco de
-	   dados e sem preocupar-se sobre o template carregá-los. false é o padrão.
+	   Se configurado para true, esconde seÃ§Ãµes (nomes de seÃ§Ãµes comeÃ§ados com um perÃ­odo)
+	   no arquivo de configuraÃ§Ã£o podem ser lidos do template. Tipicamente vocÃª deixaria
+	   isto como false, desta forma vocÃª pode armazenar dados sensitivos no arquivo de configuraÃ§Ã£o
+	   como um parÃ¢metro de banco de
+	   dados e sem preocupar-se sobre o template carregÃ¡-los. false Ã© o padrÃ£o.
 	   </para>
 </sect1>
 <!-- Keep this comment at the end of the file

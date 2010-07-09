@@ -5,7 +5,7 @@
       <para>
           Impostate questo valore a false se il vostro ambiente PHP non consente
           la creazione di sottodirectory da parte di Smarty. Le sottodirectory sono
-          più efficienti, quindi usatele se potete.
+          piÃ¹ efficienti, quindi usatele se potete.
       </para>
       <note>
       <title>Nota tecnica</title>

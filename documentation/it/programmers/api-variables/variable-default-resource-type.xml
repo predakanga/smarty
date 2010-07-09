@@ -4,7 +4,7 @@
       <title>$default_resource_type</title>
       <para>
           Dice a Smarty che tipo di risorsa usare implicitamente. Il valore di
-          default è 'file', il che significa che $smarty->display('index.tpl'); 
+          default Ã¨ 'file', il che significa che $smarty->display('index.tpl'); 
           e $smarty->display('file:index.tpl'); hanno identico significato. 
           Leggete il capitolo <link linkend="template.resources">risorse</link>
           per i dettagli.

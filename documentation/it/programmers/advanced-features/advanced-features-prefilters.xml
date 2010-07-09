@@ -5,14 +5,14 @@
  <para>
   I prefiltri sui template sono funzioni PHP che vengono eseguite sui template
   prima della compilazione. Sono utili per pre-processare i template allo
-  scopo di rimuovere commenti non desiderati, tenere d'occhio ciÚ che i
+  scopo di rimuovere commenti non desiderati, tenere d'occhio ci√≤ che i
   progettisti mettono nei template, ecc. I prefiltri possono essere
   <link linkend="api.register.prefilter">registrati</link> oppure caricati
   dalla directory plugins con la funzione <link
   linkend="api.load.filter">load_filter()</link> o impostando la variabile
   <link linkend="variable.autoload.filters">$autoload_filters</link>.
-  Smarty passer‡ il codice sorgente del template come primo parametro,
-  e si aspetter‡ che la funzione restituisca il codice sorgente risultante.
+  Smarty passer√† il codice sorgente del template come primo parametro,
+  e si aspetter√† che la funzione restituisca il codice sorgente risultante.
  </para>
  <example>
   <title>uso di un prefiltro</title>
@@ -32,7 +32,7 @@ $smarty->display("index.tpl");
 ]]>
   </programlisting>
   <para>
-   Questo rimuover‡ tutti i commenti dal sorgente del template.
+   Questo rimuover√† tutti i commenti dal sorgente del template.
   </para>
  </example>
 </sect1>

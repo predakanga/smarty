@@ -5,7 +5,7 @@
 <refentry id="api.unregister.outputfilter">
  <refnamediv>
   <refname>unregister_outputfilter()</refname>
-  <refpurpose>Désalloue dynamiquement un filtre de sortie</refpurpose>
+  <refpurpose>DÃ©salloue dynamiquement un filtre de sortie</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,7 +14,7 @@
    <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour désallouer dynamiquement un filtre de sortie.
+   UtilisÃ©e pour dÃ©sallouer dynamiquement un filtre de sortie.
   </para>
   <para>
    Voir aussi

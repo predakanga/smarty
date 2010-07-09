@@ -6,9 +6,9 @@
  <title>{html_radios}</title>
  <para>
   <varname>{html_radios}</varname> est une
-  <link linkend="language.custom.functions">fonction personnalisée</link>
-  qui crée des boutons radio html à partir des données fournies. Elle prend en
-  charge les éléments sélectionnés par défaut.
+  <link linkend="language.custom.functions">fonction personnalisÃ©e</link>
+  qui crÃ©e des boutons radio html Ã  partir des donnÃ©es fournies. Elle prend en
+  charge les Ã©lÃ©ments sÃ©lectionnÃ©s par dÃ©faut.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -29,7 +29,7 @@
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>radio</emphasis></entry>
      <entry>Nom de la liste boutons radio</entry>
@@ -37,7 +37,7 @@
     <row>
      <entry>values</entry>
      <entry>tableau</entry>
-     <entry>Oui, à moins que vous n'utilisiez l'attribut
+     <entry>Oui, Ã  moins que vous n'utilisiez l'attribut
      options</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Le tableau des valeurs des boutons radio</entry>
@@ -45,40 +45,40 @@
     <row>
      <entry>output</entry>
      <entry>tableau</entry>
-     <entry>Oui, à moins que vous n'utilisiez l'attribut
+     <entry>Oui, Ã  moins que vous n'utilisiez l'attribut
      options</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Un tableau de libellés pour les boutons radio</entry>
+     <entry>Un tableau de libellÃ©s pour les boutons radio</entry>
     </row>
     <row>
      <entry>checked</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>Les boutons radios sélectionnés</entry>
+     <entry>Les boutons radios sÃ©lectionnÃ©s</entry>
     </row>
     <row>
      <entry>options</entry>
      <entry>tableau associatif</entry>
-     <entry>Oui, à moins que vous n'utilisiez values
+     <entry>Oui, Ã  moins que vous n'utilisiez values
      et outputs</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Un tableau associatif valeurs / libellés</entry>
+     <entry>Un tableau associatif valeurs / libellÃ©s</entry>
     </row>
     <row>
      <entry>separator</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>Chaîne de séparation à placer entre les
+     <entry>ChaÃ®ne de sÃ©paration Ã  placer entre les
      boutons radio</entry>
    </row>
    <row>
     <entry>assign</entry>
-    <entry>chaîne de caractères</entry>
+    <entry>chaÃ®ne de caractÃ¨res</entry>
     <entry>Non</entry>
     <entry><emphasis>empty</emphasis></entry>
-    <entry>Assigne les balises des boutons radio à un tableau plutôt que de les afficher</entry>
+    <entry>Assigne les balises des boutons radio Ã  un tableau plutÃ´t que de les afficher</entry>
     </row>
    </tbody>
   </tgroup>
@@ -87,8 +87,8 @@
  <itemizedlist>
   <listitem><para>
     Les attributs requis sont <parameter>values</parameter> et
-    <parameter>output</parameter>, à moins que vous n'utilisez
-    <parameter>options</parameter> à la place.
+    <parameter>output</parameter>, Ã  moins que vous n'utilisez
+    <parameter>options</parameter> Ã  la place.
    </para></listitem>
 
   <listitem><para>
@@ -96,14 +96,14 @@
    </para></listitem>
 
   <listitem><para>
-    Tous les paramètres qui ne sont pas dans la liste ci-dessus sont
-    affichés sous la forme de paire nom/valeur dans la balise
-    <literal>&lt;input&gt;</literal> créées.
+    Tous les paramÃ¨tres qui ne sont pas dans la liste ci-dessus sont
+    affichÃ©s sous la forme de paire nom/valeur dans la balise
+    <literal>&lt;input&gt;</literal> crÃ©Ã©es.
    </para></listitem>
     </itemizedlist>
 
  <example>
-  <title>{html_radios} : Première exemple</title>
+  <title>{html_radios} : PremiÃ¨re exemple</title>
   <programlisting role="php">
 <![CDATA[
 <?php
@@ -122,7 +122,7 @@ $smarty->assign('customer_id', 1001);
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -132,7 +132,7 @@ $smarty->assign('customer_id', 1001);
   </programlisting>
  </example>
  <example>
- <title>{html_radios} : Deuxième exemple</title>
+ <title>{html_radios} : DeuxiÃ¨me exemple</title>
   <programlisting>
 <![CDATA[
 <?php
@@ -148,7 +148,7 @@ $smarty->assign('customer_id', 1001);
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -170,7 +170,7 @@ $smarty->assign('customer_id', 1001);
   </screen>
  </example>
  <example>
-  <title>{html_radios} - Exemple avec une base de données (e.g. PEAR ou ADODB):</title>
+  <title>{html_radios} - Exemple avec une base de donnÃ©es (e.g. PEAR ou ADODB):</title>
   <programlisting role="php">
 <![CDATA[
 <?php
@@ -186,7 +186,7 @@ $smarty->assign('contact',$db->getRow($sql));
 ]]>
   </programlisting>
   <para>
-   La variable assignée depuis la base de données ci-dessus sera affichée
+   La variable assignÃ©e depuis la base de donnÃ©es ci-dessus sera affichÃ©e
    avec le template :
   </para>
   <programlisting>

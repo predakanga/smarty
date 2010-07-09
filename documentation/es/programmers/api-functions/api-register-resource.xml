@@ -6,25 +6,25 @@
   <refpurpose>Registra dinamicamente un plugin de recurso</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>DescripciÛn </title>
+  <title>Descripci√≥n </title>
   <methodsynopsis>
    <type>void</type><methodname>register_resource</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
    <methodparam><type>array</type><parameter>resource_funcs</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Use esto para registrar din·micamente un 
+   Use esto para registrar din√°micamente un 
    <link linkend="template.resources">recurso de plugin</link> con Smarty.
    Pase el nombre o el recurso y o el arreglo de funciones que implementa
    esto. Vea <link linkend="template.resources">template resources</link>
-   para mayor informaciÛn de como configurar una funciÛn para mandar llamar 
+   para mayor informaci√≥n de como configurar una funci√≥n para mandar llamar 
    templates.
   </para>
   <note>
-   <title>Nota tÈcnica</title>
+   <title>Nota t√©cnica</title>
    <para>
     El nombre del recurso debe tener al menos dos caracteres de largo.
-    Un nombre de recurso de un car·cter ser· ignorado y usado como parte 
+    Un nombre de recurso de un car√°cter ser√° ignorado y usado como parte 
     del path del archivo como, $smarty-&#62;display('c:/path/to/index.tpl');
    </para>
   </note>
@@ -35,7 +35,7 @@
    y "trusted". Con 5 elementos el primer elemento 
    tiene que ser un objeto por referencia o un nombre de clase del objeto 
    o una clase implementando el recurso y los 4 elementos siguientes tiene 
-   que ser los nombres de los mÈtodos implementando "source", "timestamp",
+   que ser los nombres de los m√©todos implementando "source", "timestamp",
    "secure" y "trusted".
   </para>
   <example>
@@ -52,7 +52,7 @@ $smarty->register_resource('db', array('db_get_template',
    </programlisting>
   </example>
   <para>
-  Ver tambiÈn <link linkend="api.unregister.resource">unregister_resource()</link>
+  Ver tambi√©n <link linkend="api.unregister.resource">unregister_resource()</link>
   y <link linkend="template.resources">template resources</link>
 </para>
 

@@ -17,21 +17,21 @@
        </funcprototype>
       </funcsynopsis>
       <para>
-	   Isso é usado para adicionar vlaores para o template por referência.
-	   Se você adicionar uma variável por referência e então alterar este valor
-	   o valor adicionado enxergará a alteração também. Para objetos,
-	   append_by_ref() também evita uma cópia em memória do objeto adicionado. 
-	   Veja o manual do PHP em referenciando variáveis para uma melhor explanação sobre o assunto.
-	   Se você passar o terceiro parâmetro opcional para true,
-	   o valor irá ser mesclado com o array atual ao invés de adicioná-lo.   
+	   Isso Ã© usado para adicionar vlaores para o template por referÃªncia.
+	   Se vocÃª adicionar uma variÃ¡vel por referÃªncia e entÃ£o alterar este valor
+	   o valor adicionado enxergarÃ¡ a alteraÃ§Ã£o tambÃ©m. Para objetos,
+	   append_by_ref() tambÃ©m evita uma cÃ³pia em memÃ³ria do objeto adicionado. 
+	   Veja o manual do PHP em referenciando variÃ¡veis para uma melhor explanaÃ§Ã£o sobre o assunto.
+	   Se vocÃª passar o terceiro parÃ¢metro opcional para true,
+	   o valor irÃ¡ ser mesclado com o array atual ao invÃ©s de adicionÃ¡-lo.   
       </para>
 	  <note>
-	  <title>Notas Técnicas</title>
+	  <title>Notas TÃ©cnicas</title>
 	  <para>
-	  O parâmetro de união respeita a chave do array, então se você mesclar
-	  dois índices númericos de arrays, eles devem sobrescrever-se um ao outro ou
-	  em resultados não sequências de chave. Isso é diferente da função de PHP array_merge()
-	  que apaga as chaves numéricas e as renumera.
+	  O parÃ¢metro de uniÃ£o respeita a chave do array, entÃ£o se vocÃª mesclar
+	  dois Ã­ndices nÃºmericos de arrays, eles devem sobrescrever-se um ao outro ou
+	  em resultados nÃ£o sequÃªncias de chave. Isso Ã© diferente da funÃ§Ã£o de PHP array_merge()
+	  que apaga as chaves numÃ©ricas e as renumera.
 	  </para>
 	  </note>
       <example>

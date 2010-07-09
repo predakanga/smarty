@@ -14,61 +14,61 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>Obrigatório</entry>
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>ObrigatÃ³rio</entry>
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>name</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>default</emphasis></entry>
                         <entry>O nome do bloco capturado</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>O nome da variável para dar o valor da saída capturada</entry>
+                        <entry>O nome da variÃ¡vel para dar o valor da saÃ­da capturada</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
       <para>
-       capture é usado para coletar toda a saída do template em uma variável ao invés
-       de mostra-lo. Qualquer conteúdo entre {capture
-       name="foo"} e {/capture} coletado na variável especificada no atributo name.
-       O conteúdo capturado pode ser usado no template a partir da variável especial
-       $smarty.capture.foo aonde foo é o valor passado para o atributo name. Se você não
-       passar um atributo name, então será usado "default". Todos os comandos
-       {capture} devem ter o seu {/capture}. Você pode aninhar(colocar um dentro de outro)
+       capture Ã© usado para coletar toda a saÃ­da do template em uma variÃ¡vel ao invÃ©s
+       de mostra-lo. Qualquer conteÃºdo entre {capture
+       name="foo"} e {/capture} coletado na variÃ¡vel especificada no atributo name.
+       O conteÃºdo capturado pode ser usado no template a partir da variÃ¡vel especial
+       $smarty.capture.foo aonde foo Ã© o valor passado para o atributo name. Se vocÃª nÃ£o
+       passar um atributo name, entÃ£o serÃ¡ usado "default". Todos os comandos
+       {capture} devem ter o seu {/capture}. VocÃª pode aninhar(colocar um dentro de outro)
        comandos capture.
       </para>
 	  <note>
 	  <title>Nota Tecnica</title>
       <para>
-       Smarty 1.4.0 - 1.4.4 coloca o conteúdo capturado dentro da variável
+       Smarty 1.4.0 - 1.4.4 coloca o conteÃºdo capturado dentro da variÃ¡vel
        chamada $return. A partir do 1.4.5, este funcionamento foi mudado
-       para usar o atributo name, então atualize os seus templates de acordo.
+       para usar o atributo name, entÃ£o atualize os seus templates de acordo.
       </para>
 	  </note>
       <caution>
        <para>
-        Tenha cuidado quando capturar a saída do comando <command>insert</command>.
-        Se você tiver o cache em on e você tiver comandos <command>insert</command>
-        que você espera que funcione com conteúdo do cache, 
-        não capture este conteúdo.
+        Tenha cuidado quando capturar a saÃ­da do comando <command>insert</command>.
+        Se vocÃª tiver o cache em on e vocÃª tiver comandos <command>insert</command>
+        que vocÃª espera que funcione com conteÃºdo do cache, 
+        nÃ£o capture este conteÃºdo.
        </para>
       </caution>
       <para>
        <example>
-        <title>capturando conteúdo do template</title>
+        <title>capturando conteÃºdo do template</title>
         <programlisting>
 <![CDATA[
-{* nós não queremos mostrar uma linha de tabela à não ser que haja conteúdo para ela *}
+{* nÃ³s nÃ£o queremos mostrar uma linha de tabela Ã  nÃ£o ser que haja conteÃºdo para ela *}
 {capture name=banner}
 {include file="pegar_banner.tpl"}
 {/capture}

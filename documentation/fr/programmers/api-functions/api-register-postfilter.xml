@@ -5,7 +5,7 @@
 <refentry id="api.register.postfilter">
  <refnamediv>
   <refname>register_postfilter()</refname>
-  <refpurpose>Déclare dynamiquement des filtres de post-compilation</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement des filtres de post-compilation</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,12 +14,12 @@
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour déclarer dynamiquement des
+   UtilisÃ©e pour dÃ©clarer dynamiquement des
    <link linkend="advanced.features.postfilters">filtres de post-compilation</link> pour y faire
-   passer des templates une fois qu'ils ont été compilés. Reportez-vous
-   à la section
+   passer des templates une fois qu'ils ont Ã©tÃ© compilÃ©s. Reportez-vous
+   Ã  la section
    <link linkend="advanced.features.postfilters">filtres de post-compilation de templates</link>
-   pour avoir plus de renseignements sur la façon de paramétrer les fonctions
+   pour avoir plus de renseignements sur la faÃ§on de paramÃ©trer les fonctions
    de post-compilation.
   </para>
    &api.register.snippet;

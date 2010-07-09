@@ -3,10 +3,10 @@
 <chapter id="chapter.debugging.console">
  <title>Console di Debugging</title>
  <para>
-  C'è una console di debugging inclusa in Smarty. La console vi informa di
+  C'Ã¨ una console di debugging inclusa in Smarty. La console vi informa di
   tutti i template che sono stati inclusi, le variabili assegnate e quelle
   dei file di configurazione per la chiamata attuale del template. Nella
-  distribuzione di Smarty è incluso un template chiamato "debug.tpl" che
+  distribuzione di Smarty Ã¨ incluso un template chiamato "debug.tpl" che
   controlla la formattazione della console. Impostate $debugging a true in
   Smarty, e se necessario impostate $debug_tpl con il percorso del file
   debug.tpl (di default si trova nella SMARTY_DIR). Quando caricate la pagina,

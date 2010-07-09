@@ -12,7 +12,7 @@
     <colspec colname="desc" />
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Posibles Valores</entry>
@@ -80,7 +80,7 @@ $smarty->assign('articleTitle',
    </screen>
   </example>
   <para>
-   Ver también <link linkend="language.escaping">Escaping Smarty Parsing</link>
+   Ver tambiÃ©n <link linkend="language.escaping">Escaping Smarty Parsing</link>
    y <link linkend="tips.obfuscating.email">Obfuscating E-mail Addresses</link>.
   </para>
  </sect1>

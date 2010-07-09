@@ -13,31 +13,31 @@
                 <colspec colname="desc" />
                 <thead>
                     <row>
-                        <entry>PosiÁ„o do Par‚metro</entry>
+                        <entry>Posi√ß√£o do Par√¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
-                        <entry>Valores PossÌveis</entry>
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Valores Poss√≠veis</entry>
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>1</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>html,htmlall,url,quotes,hex,hexentity,javascript</entry>
                         <entry>html</entry>
-                        <entry>Este È o formato de escape para usar.</entry>
+                        <entry>Este √© o formato de escape para usar.</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			Este È usado para escapar html, url, aspas simples em uma vari·vel que j· n„o esteja 
+			Este √© usado para escapar html, url, aspas simples em uma vari√°vel que j√° n√£o esteja 
 			escapada, escapar hex, hexentity ou javascript.
-			Por padr„o, È escapado
-			o html da vari·vel.
+			Por padr√£o, √© escapado
+			o html da vari√°vel.
 			</para>
 <example>
 <title>escape</title>

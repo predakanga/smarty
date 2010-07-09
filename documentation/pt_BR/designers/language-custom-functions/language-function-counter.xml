@@ -14,69 +14,69 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>Obrigatório</entry>       
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>ObrigatÃ³rio</entry>       
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>name</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>default</emphasis></entry>
                         <entry>O nome do contador</entry>
                     </row>
                     <row>
                         <entry>start</entry>
                         <entry>number</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>1</emphasis></entry>
-                        <entry>O número no qual a contagem se inicia</entry>
+                        <entry>O nÃºmero no qual a contagem se inicia</entry>
                     </row>
                     <row>
                         <entry>skip</entry>
                         <entry>number</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>1</emphasis></entry>
                         <entry>O intervalo entre as contagens</entry>
                     </row>
                     <row>
                         <entry>direction</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>up</emphasis></entry>
-                        <entry>A direção para contar (up/down)</entry>
+                        <entry>A direÃ§Ã£o para contar (up/down)</entry>
                     </row>
                     <row>
                         <entry>print</entry>
                         <entry>boolean</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Quando mostrar ou não o valor</entry>
+                        <entry>Quando mostrar ou nÃ£o o valor</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>A variável de template que vai 
-                        receber a saída</entry>
+                        <entry>A variÃ¡vel de template que vai 
+                        receber a saÃ­da</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			counter é usada para mostrar uma contagem. counter irá se lembrar de
-			count em cada interação. Você pode ajustar o número, o intervalo
-			e a direção da contagem, assim como detrminar quando
-			mostrar ou não a contagem. Você pode ter vários contadores ao
-			mesmo tempo, dando um nome único para cada um. Se você não der um nome,
-			o nome 'default' será usado.
+			counter Ã© usada para mostrar uma contagem. counter irÃ¡ se lembrar de
+			count em cada interaÃ§Ã£o. VocÃª pode ajustar o nÃºmero, o intervalo
+			e a direÃ§Ã£o da contagem, assim como detrminar quando
+			mostrar ou nÃ£o a contagem. VocÃª pode ter vÃ¡rios contadores ao
+			mesmo tempo, dando um nome Ãºnico para cada um. Se vocÃª nÃ£o der um nome,
+			o nome 'default' serÃ¡ usado.
 			</para>
 			<para>
-			 Se você indicar o atributo especial "assign", a saída da função counter
-			 será passada para essa variável de template ao invés de
+			 Se vocÃª indicar o atributo especial "assign", a saÃ­da da funÃ§Ã£o counter
+			 serÃ¡ passada para essa variÃ¡vel de template ao invÃ©s de
 			 ser mostrada no template.
 			</para>
 <example>

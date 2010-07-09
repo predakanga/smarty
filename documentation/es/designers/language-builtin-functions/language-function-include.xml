@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>requerido</entry>
                         <entry>Default</entry>
-                        <entry>Descripción</entry>
+                        <entry>DescripciÃ³n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -47,7 +47,7 @@
 			<para>
     Las etiquetas {include} son usadas para incluir otros templates en 
     el template actual. Cualquier variable disponible en el template 
-    actual, también esta disponible dentro del template incluido.
+    actual, tambiÃ©n esta disponible dentro del template incluido.
     La etiqueta {include} debe tener el atributo "file", el cual contiene 
     la ruta del archivo a incluir.
 			</para>
@@ -77,14 +77,14 @@
   </programlisting>
 </example>
 			<para>
-            Usted también puede pasar variables al template incluidas como
+            Usted tambiÃ©n puede pasar variables al template incluidas como
             atributos. Cualquier variable pasada al template incluidas como 
             atributos estan disponibles solamente dentro el espacio del template.
             Las variables pasadas como atributos sobreescriben a las variables
             del template actual, en el caso en el que estas tengan el mismo nombre.
 			</para>
 <example>
-<title>Función {include} pasando variables</title>
+<title>FunciÃ³n {include} pasando variables</title>
   <programlisting>
 <![CDATA[
 {include file="header.tpl" title="Main Menu" table_bgcolor="#c0c0c0"}
@@ -135,7 +135,7 @@
     <link linkend="variable.template.dir">$template_dir</link>.
 			</para>
 <example>
-<title>Ejemplos de recursos para la función include</title>
+<title>Ejemplos de recursos para la funciÃ³n include</title>
   <programlisting>
 <![CDATA[
 {* ruta absoluta *}
@@ -152,7 +152,7 @@
 ]]>
   </programlisting>
  <para>
-  ver también
+  ver tambiÃ©n
   <link linkend="language.function.include.php">{include_php}</link>,
   <link linkend="language.function.php">{php}</link>,
   <link linkend="template.resources">Template Resources</link> y

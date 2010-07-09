@@ -4,12 +4,12 @@
       <title>$compile_check</title>
       <para>
            Ad ogni chiamata dell'applicazione PHP, Smarty controlla se il template
-           corrente è stato modificato (cioè se il timestamp è cambiato) dall'ultima
-           volta che è stato compilato. Se è cambiato, Smarty ricompila il template.
-           Se il template non è stato mai compilato, sarà compilato indipendentemente
-           da questa impostazione. Per default questa variabile è impostata a true.
+           corrente Ã¨ stato modificato (cioÃ¨ se il timestamp Ã¨ cambiato) dall'ultima
+           volta che Ã¨ stato compilato. Se Ã¨ cambiato, Smarty ricompila il template.
+           Se il template non Ã¨ stato mai compilato, sarÃ  compilato indipendentemente
+           da questa impostazione. Per default questa variabile Ã¨ impostata a true.
            Una volta che l'applicazione viene messa in produzione (quind i template
-           non cambieranno più), il passo di compile_check non è più necessario.
+           non cambieranno piÃ¹), il passo di compile_check non Ã¨ piÃ¹ necessario.
            Assicuratevi di impostare $compile_check a "false" per massimizzare le
            prestazioni. Notate che se impostate questo valore a "false" e un file
            di template viene modificato, *non* vedrete la modifica fino a quando

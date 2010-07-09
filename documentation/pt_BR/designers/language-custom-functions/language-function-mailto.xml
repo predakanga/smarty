@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>Obrigatório</entry>       
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>ObrigatÃ³rio</entry>       
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,20 +25,20 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O endereço de email</entry>
+                        <entry>O endereÃ§o de email</entry>
                     </row>
                     <row>
                         <entry>text</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O texto à ser exibido, o padrão
-                               é o endereço de email</entry>
+                        <entry>O texto Ã  ser exibido, o padrÃ£o
+                               Ã© o endereÃ§o de email</entry>
                     </row>
                     <row>
                         <entry>encode</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>none</emphasis></entry>
                         <entry>Como codificar o e-mail.
                                Pode ser none,
@@ -47,48 +47,48 @@
                     <row>
                         <entry>cc</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>Endereço de e-mail para mandar uma cópia carbono(cc).
-                               Separe os endereços por vírgula.</entry>
+                        <entry>EndereÃ§o de e-mail para mandar uma cÃ³pia carbono(cc).
+                               Separe os endereÃ§os por vÃ­rgula.</entry>
                     </row>
                     <row>
                         <entry>bcc</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>Endereço de e-mail para mandar uma cópia carbono cega(bcc).
-						       Separe os endereços por vírgula.</entry>
+                        <entry>EndereÃ§o de e-mail para mandar uma cÃ³pia carbono cega(bcc).
+						       Separe os endereÃ§os por vÃ­rgula.</entry>
                     </row>
                     <row>
                         <entry>subject</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
                         <entry>Assunto do e-mail.</entry>
                     </row>
                     <row>
                         <entry>newsgroups</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
                         <entry>newsgroup para postar.
-						       Separe os endereços por vírgula.</entry>
+						       Separe os endereÃ§os por vÃ­rgula.</entry>
                     </row>
                     <row>
                         <entry>followupto</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>Endereço para acompanhar.
-						       Separe os endereços por vírgula.</entry>
+                        <entry>EndereÃ§o para acompanhar.
+						       Separe os endereÃ§os por vÃ­rgula.</entry>
                     </row>
                     <row>
                         <entry>extra</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>Qualquer outra informação que você
+                        <entry>Qualquer outra informaÃ§Ã£o que vocÃª
                                queira passar para o link, como
                                classes de planilhas de estilo</entry>
                     </row>
@@ -96,15 +96,15 @@
                 </tgroup>
             </informaltable>
 			<para>
-			mailto automatiza o processo de criação de links de e-mail e opcionalmente
-			codifica eles. Codificar o e-mail torna mais difícil para
-			web spiders pegarem endereços no seu site.
+			mailto automatiza o processo de criaÃ§Ã£o de links de e-mail e opcionalmente
+			codifica eles. Codificar o e-mail torna mais difÃ­cil para
+			web spiders pegarem endereÃ§os no seu site.
 			</para>
 			<note>
-				<title>Nota Técnica</title>
+				<title>Nota TÃ©cnica</title>
 				<para>
-				javascript é provavelmente o meio de codificação mais
-				utilizado, entretanto você pode usar codificação hexadecimal também.
+				javascript Ã© provavelmente o meio de codificaÃ§Ã£o mais
+				utilizado, entretanto vocÃª pode usar codificaÃ§Ã£o hexadecimal tambÃ©m.
             	</para>
 			</note>
 <example>

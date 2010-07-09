@@ -1,63 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 1.3 Maintainer: thomasgm Status: ready -->
  <preface id="preface">
-  <title>Pref·cio</title>
+  <title>Pref√°cio</title>
   <para>
-   Esta È sem d˙vida uma das perguntas mais freq¸entes nas listas de discussıes sobre PHP: 
-   como eu faÁo meus scripts em PHP independentes do layout? O PHP È vendido como sendo uma 
-   "linguagem de script embutida no HTML", apÛs escrever alguns projetos que misturam HTML e 
-   PHP naturalmente vem uma idÈia de que a separaÁ„o da forma e conte˙do È uma boa pr·tica [TM]. 
-   AlÈm disso, em muitas empresas os papÈis de designer e programador s„o separados. 
-   Conseq¸entemente, a busca por um sistema de templates continua.
+   Esta √© sem d√∫vida uma das perguntas mais freq√ºentes nas listas de discuss√µes sobre PHP: 
+   como eu fa√ßo meus scripts em PHP independentes do layout? O PHP √© vendido como sendo uma 
+   "linguagem de script embutida no HTML", ap√≥s escrever alguns projetos que misturam HTML e 
+   PHP naturalmente vem uma id√©ia de que a separa√ß√£o da forma e conte√∫do √© uma boa pr√°tica [TM]. 
+   Al√©m disso, em muitas empresas os pap√©is de designer e programador s√£o separados. 
+   Conseq√ºentemente, a busca por um sistema de templates continua.
   </para>
   <para>
-   Na nossa empresa por exemplo, o desenvolvimento de uma aplicaÁ„o È feito da seguinte 
-   maneira: ApÛs a documentaÁ„o necess·ria estar pronta, o designer faz o esboÁo da interface 
-   e entrega ao programador. O programador implementa as regras de negÛcio no PHP e usa o 
-   esboÁo da interface para criar o esqueleto dos templates. O projeto ent„o est· nas m„os 
-   da pessoa respons·vel pelo layout HTML da p·gina que ent„o transforma o esboÁo em um layout 
-   realmente funcional. O projeto talvez v· e volte entre programaÁ„o/designer HTML v·rias vezes. 
-   PorÈm, È importante ter um bom suporte ‡ templates porque os programadores n„o querem ter que 
-   ficar mexendo com HTML e n„o querem que os designers estraguem seus cÛdigos PHP. Os designers 
-   precisam de ajuda para alterar os arquivos de configuraÁ„o, blocos din‚micos e outros 
-   problemas relacionados ‡ interface usada, mas eles n„o querem ocupar-se com as complexidades 
-   da linguagem de programaÁ„o PHP.
+   Na nossa empresa por exemplo, o desenvolvimento de uma aplica√ß√£o √© feito da seguinte 
+   maneira: Ap√≥s a documenta√ß√£o necess√°ria estar pronta, o designer faz o esbo√ßo da interface 
+   e entrega ao programador. O programador implementa as regras de neg√≥cio no PHP e usa o 
+   esbo√ßo da interface para criar o esqueleto dos templates. O projeto ent√£o est√° nas m√£os 
+   da pessoa respons√°vel pelo layout HTML da p√°gina que ent√£o transforma o esbo√ßo em um layout 
+   realmente funcional. O projeto talvez v√° e volte entre programa√ß√£o/designer HTML v√°rias vezes. 
+   Por√©m, √© importante ter um bom suporte √† templates porque os programadores n√£o querem ter que 
+   ficar mexendo com HTML e n√£o querem que os designers estraguem seus c√≥digos PHP. Os designers 
+   precisam de ajuda para alterar os arquivos de configura√ß√£o, blocos din√¢micos e outros 
+   problemas relacionados √† interface usada, mas eles n√£o querem ocupar-se com as complexidades 
+   da linguagem de programa√ß√£o PHP.
   </para>
   <para>
-   Analisando muitas das soluÁıes de templates disponÌveis para PHP hoje em dia, a 
-   maioria somente disponibilizada uma forma rudimentar de substituiÁ„o de vari·veis 
+   Analisando muitas das solu√ß√µes de templates dispon√≠veis para PHP hoje em dia, a 
+   maioria somente disponibilizada uma forma rudimentar de substitui√ß√£o de vari√°veis 
    dentro dos templates e trabalham de forma limitada com as funcionalidades dos blocos 
-   din‚micos. Mas nossas necessidades necessitam de um pouco mais do que isso. NÛs n„o 
-   querÌamos que programadores mexendo com layout em HTML, mas isso È praticamente inevit·vel. 
-   Por exemplo, se um designer quiser que as cores de fundo se alternam em blocos din‚micos, 
-   isso tem que ser feito pelo programador antecipadamente. NÛs tambÈm precisamos que os designers 
-   possam usar seus prÛprios arquivos de configuraÁ„o, e usar as vari·veis definidas nestes arquivos 
+   din√¢micos. Mas nossas necessidades necessitam de um pouco mais do que isso. N√≥s n√£o 
+   quer√≠amos que programadores mexendo com layout em HTML, mas isso √© praticamente inevit√°vel. 
+   Por exemplo, se um designer quiser que as cores de fundo se alternam em blocos din√¢micos, 
+   isso tem que ser feito pelo programador antecipadamente. N√≥s tamb√©m precisamos que os designers 
+   possam usar seus pr√≥prios arquivos de configura√ß√£o, e usar as vari√°veis definidas nestes arquivos 
    em seus templates. E a lista de necessidades continua...
   </para>
   <para>
-   NÛs comeÁamos ‡ escrever as especificaÁıes para um sistema de templates por volta de 1999. 
-   ApÛs o tÈrmino das especificaÁıes, nÛs comeÁamos a escrever um sistema de template em C 
-   que esper·vamos ser aceito para rodar com o PHP. N„o sÛ esbarramos em muitas barreiras 
-   tÈcnicas, como tambÈm houve um enorme debate sobre o que exatamente um sistema de template 
-   deveria ou n„o fazer. ¿ partir desta experiÍncia, nÛs decidimos que o sistema de template 
+   N√≥s come√ßamos √† escrever as especifica√ß√µes para um sistema de templates por volta de 1999. 
+   Ap√≥s o t√©rmino das especifica√ß√µes, n√≥s come√ßamos a escrever um sistema de template em C 
+   que esper√°vamos ser aceito para rodar com o PHP. N√£o s√≥ esbarramos em muitas barreiras 
+   t√©cnicas, como tamb√©m houve um enorme debate sobre o que exatamente um sistema de template 
+   deveria ou n√£o fazer. √Ä partir desta experi√™ncia, n√≥s decidimos que o sistema de template 
    fosse escrito para ser uma classe do PHP, para que qualquer um usa-se da forma que lhe fosse 
-   mais conveniente, ent„o nÛs escrevemos um sistema que fazia exatamente, foi aÌ que surgiu o 
-   <productname>SmartTemplate</productname> (obs: esta classe nunca foi enviada ao p˙blico). 
-   Foi uma classe que fez quase tudo que nÛs querÌamos: substituiÁ„o de vari·veis, suporte ‡ 
-   inclus„o de outros templates, integraÁ„o com arquivos de configuraÁ„o, cÛdigo PHP embutido, 
-   funcionalidades 'if' limitada e blocos din‚micos muito mais robustos que poderiam ser aninhados 
-   muitas vezes. Foi tudo feito usando expressıes reguladores e cÛdigos confusos, como dirÌamos, 
-   impenetr·vel. Era um sistema tambÈm extremamente lento em grandes aplicativos por causa de todo 
-   o trabalho que era feito pelas expressıes regulares e o 'parsing'(interpretaÁ„o) em cada chamada 
+   mais conveniente, ent√£o n√≥s escrevemos um sistema que fazia exatamente, foi a√≠ que surgiu o 
+   <productname>SmartTemplate</productname> (obs: esta classe nunca foi enviada ao p√∫blico). 
+   Foi uma classe que fez quase tudo que n√≥s quer√≠amos: substitui√ß√£o de vari√°veis, suporte √† 
+   inclus√£o de outros templates, integra√ß√£o com arquivos de configura√ß√£o, c√≥digo PHP embutido, 
+   funcionalidades 'if' limitada e blocos din√¢micos muito mais robustos que poderiam ser aninhados 
+   muitas vezes. Foi tudo feito usando express√µes reguladores e c√≥digos confusos, como dir√≠amos, 
+   impenetr√°vel. Era um sistema tamb√©m extremamente lento em grandes aplicativos por causa de todo 
+   o trabalho que era feito pelas express√µes regulares e o 'parsing'(interpreta√ß√£o) em cada chamada 
    ao aplicativo. O maior problema do ponto de vista de um programador foi o espantoso trabalho que 
-   era necess·rio para configurar e processar os blocos din‚micos dos templates. Como farÌamos 
+   era necess√°rio para configurar e processar os blocos din√¢micos dos templates. Como far√≠amos 
    esse sistema ser simples de usar?
   </para>
   <para>
-   Foi ent„o que veio a vis„o do que hoje È conhecido como Smarty. NÛs sabemos o qu„o 
-   r·pido È um cÛdigo PHP sem o sobrecarregamento de um sistema de templates. NÛs tambÈm 
-   sabemos qu„o meticuloso e assustador È a linguagem PHP aos olhos de um designer atual, 
-   e isso tudo poderia ser mascarado usando uma sintaxe simples nos templates. Ent„o o que 
-   acontece se nÛs combinarmos essas duas forÁas? Assim, nasceu o Smarty...
+   Foi ent√£o que veio a vis√£o do que hoje √© conhecido como Smarty. N√≥s sabemos o qu√£o 
+   r√°pido √© um c√≥digo PHP sem o sobrecarregamento de um sistema de templates. N√≥s tamb√©m 
+   sabemos qu√£o meticuloso e assustador √© a linguagem PHP aos olhos de um designer atual, 
+   e isso tudo poderia ser mascarado usando uma sintaxe simples nos templates. Ent√£o o que 
+   acontece se n√≥s combinarmos essas duas for√ßas? Assim, nasceu o Smarty...
   </para>
  </preface>

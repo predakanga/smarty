@@ -5,7 +5,7 @@
 <refentry id="api.unregister.modifier">
  <refnamediv>
   <refname>unregister_modifier()</refname>
-  <refpurpose>Désalloue dynamiquement un plugin modificateur de variable</refpurpose>
+  <refpurpose>DÃ©salloue dynamiquement un plugin modificateur de variable</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,7 +14,7 @@
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Passez en paramètre le nom du modificateur de templates.
+   Passez en paramÃ¨tre le nom du modificateur de templates.
   </para>
   <example>
    <title>Exemple avec unregister_modifier()</title>
@@ -23,7 +23,7 @@
 <?php
 
 // nous ne voulons pas que les designers de templates
-// suppriment les balises des élements
+// suppriment les balises des Ã©lements
 
 $smarty->unregister_modifier('strip_tags');
 

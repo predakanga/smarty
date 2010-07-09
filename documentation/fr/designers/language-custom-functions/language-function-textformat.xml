@@ -7,14 +7,14 @@
  <para>
   <varname>{textformat}</varname> est une
   <link linkend="plugins.block.functions">fonction de bloc</link>
-  utilisée pour formater du texte.
-  Elle nettoie la chaîne de ses espaces et caractères spéciaux, puis
-  formate les paragraphes en ajustant ces derniers à une certaine limite,
+  utilisÃ©e pour formater du texte.
+  Elle nettoie la chaÃ®ne de ses espaces et caractÃ¨res spÃ©ciaux, puis
+  formate les paragraphes en ajustant ces derniers Ã  une certaine limite,
   puis en indentant les lignes.
  </para>
  <para>
-  Vous pouvez soit utiliser un style prédéfini, soit définir explicitement
-  chaque attribut. Actuellement, seul le style prédéfini <quote>email</quote> est
+  Vous pouvez soit utiliser un style prÃ©dÃ©fini, soit dÃ©finir explicitement
+  chaque attribut. Actuellement, seul le style prÃ©dÃ©fini <quote>email</quote> est
   disponible.
  </para>
  <informaltable frame="all">
@@ -36,10 +36,10 @@
    <tbody>
     <row>
      <entry>style</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Style prédéfini</entry>
+     <entry>Style prÃ©dÃ©fini</entry>
     </row>
     <row>
      <entry>indent</entry>
@@ -55,14 +55,14 @@
      <entry>Non</entry>
      <entry><emphasis>0</emphasis></entry>
      <entry>Taille de l'indentation de la
-     première ligne</entry>
+     premiÃ¨re ligne</entry>
     </row>
     <row>
      <entry>indent_char</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>(single space)</emphasis></entry>
-     <entry>Le caractère (ou la chaîne) à utiliser pour
+     <entry>Le caractÃ¨re (ou la chaÃ®ne) Ã  utiliser pour
      indenter</entry>
     </row>
     <row>
@@ -70,15 +70,15 @@
      <entry>number</entry>
      <entry>Non</entry>
      <entry><emphasis>80</emphasis></entry>
-     <entry>À combien de caractères doit on ajuster chaque
+     <entry>Ã€ combien de caractÃ¨res doit on ajuster chaque
      ligne</entry>
     </row>
     <row>
      <entry>wrap_char</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>\n</emphasis></entry>
-     <entry>Le caractère (ou chaîne de caractères) avec lequel
+     <entry>Le caractÃ¨re (ou chaÃ®ne de caractÃ¨res) avec lequel
      terminer les lignes</entry>
     </row>
     <row>
@@ -86,16 +86,16 @@
      <entry>boolean</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
-     <entry>Si true, wrap réduira les lignes au caractère exact
-     au lieu d'ajuster à la fin d'un mot</entry>
+     <entry>Si true, wrap rÃ©duira les lignes au caractÃ¨re exact
+     au lieu d'ajuster Ã  la fin d'un mot</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Le nom de la variable PHP dans laquelle la
-     sortie sera assignée</entry>
+     sortie sera assignÃ©e</entry>
     </row>
    </tbody>
   </tgroup>

@@ -14,16 +14,16 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>Obrigatório</entry>       
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>ObrigatÃ³rio</entry>       
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>name</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>default</emphasis></entry>
                         <entry>O nome do ciclo</entry>
                     </row>
@@ -33,63 +33,63 @@
                         <entry>Sim</entry>
                         <entry><emphasis>n/d</emphasis></entry>
 						<entry>Os valores do ciclo, ou uma lista delimitada
-						por vírgula (veja o atributo delimiter),
+						por vÃ­rgula (veja o atributo delimiter),
 						ou uma matriz de valores.</entry>
                     </row>
                     <row>
                         <entry>print</entry>
                         <entry>boolean</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Quando mostrar ou não o valor</entry>
+                        <entry>Quando mostrar ou nÃ£o o valor</entry>
                     </row>
                     <row>
                         <entry>advance</entry>
                         <entry>boolean</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Quando avançar ou não para o próximo valor</entry>
+                        <entry>Quando avanÃ§ar ou nÃ£o para o prÃ³ximo valor</entry>
                     </row>
                     <row>
                         <entry>delimiter</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>,</emphasis></entry>
                         <entry>O delimitador para usar no atributo 'values'.</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>A variável de template que
-                        receberá a saída</entry>
+                        <entry>A variÃ¡vel de template que
+                        receberÃ¡ a saÃ­da</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 Cycle é usado para fazer um clico através de um conjunto de valores.
-			 Isto torna fácil alternar entre duas ou mais cores em uma tabela,
+			 Cycle Ã© usado para fazer um clico atravÃ©s de um conjunto de valores.
+			 Isto torna fÃ¡cil alternar entre duas ou mais cores em uma tabela,
 			 ou entre uma matriz de valores.
 			</para>
 			<para>
-			 Você pode usar o cycle em mais de um conjunto de valores
-			 no seu template. Dê a cada conjunto de valores
-			 um nome único.
+			 VocÃª pode usar o cycle em mais de um conjunto de valores
+			 no seu template. DÃª a cada conjunto de valores
+			 um nome Ãºnico.
 			</para>
 			<para>
-			 Você pode fazer com que o valor atual não seja mostrado
-			 definindo o atributo print para false. Isto é útil para
+			 VocÃª pode fazer com que o valor atual nÃ£o seja mostrado
+			 definindo o atributo print para false. Isto Ã© Ãºtil para
 			 pular um valor.
 			</para>
 			<para>
-			 O atributo advance é usado para repetir um valor. Quando definido
-			 para false, a próxima chamada para cycle irá mostrar o mesmo valor.
+			 O atributo advance Ã© usado para repetir um valor. Quando definido
+			 para false, a prÃ³xima chamada para cycle irÃ¡ mostrar o mesmo valor.
 			</para>
 			<para>
-			 Se você indicar o atributo especial "assign", a saída da função
-			 cycle será passada para uma variável de template ao invés de ser
+			 Se vocÃª indicar o atributo especial "assign", a saÃ­da da funÃ§Ã£o
+			 cycle serÃ¡ passada para uma variÃ¡vel de template ao invÃ©s de ser
 			 mostrado diretamente no template.
 			</para>
 <example>

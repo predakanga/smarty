@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>Descripci髇</entry>
+                        <entry>Descripci贸n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>3</emphasis></entry>
-                        <entry>N鷐ero de columnas para la tabla. Si el atributo cols esta vacio, 
+                        <entry>N煤mero de columnas para la tabla. Si el atributo cols esta vacio, 
                          los renglones seran determinados, entonces el numero de columnas 
                          sera calculado por el numero de renglones y el numero de elementos a 
                          mostrar para ser ajustado a las columnas de todos los elementos que seran 
@@ -44,7 +44,7 @@
                     <entry>integer</entry>
                     <entry>No</entry>
                     <entry><emphasis>empty</emphasis></entry>
-                    <entry> N鷐ero de renglones en la tabla. Si el atributo rows es vacio, 
+                    <entry> N煤mero de renglones en la tabla. Si el atributo rows es vacio, 
                      las columnas seran determinadas, entonces el numero de renglones sera 
                      calculado por el numero de columnas y el numero de elementos a mostrar 
                      para ser ajustado el numero de renglones al total de elementos a ser mostrados.
@@ -55,7 +55,7 @@
                     <entry>string</entry>
                     <entry>No</entry>
                     <entry><emphasis>cols</emphasis></entry>
-                    <entry> Direcci髇 consecutiva de los elementos en el arreglo para ser representados.
+                    <entry> Direcci贸n consecutiva de los elementos en el arreglo para ser representados.
                      <emphasis>cols</emphasis> manera en que los elementos son mostrados columna 
                      por columna.  <emphasis>rows</emphasis> manera en que los elementos son mostrados 
                      renglon por renglon.
@@ -96,7 +96,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>right</emphasis></entry>
-                        <entry> direcci髇 de una linea para ser representada.  posibles valores: 
+                        <entry> direcci贸n de una linea para ser representada.  posibles valores: 
                          <emphasis>left</emphasis> (left-to-right), <emphasis>right</emphasis> (right-to-left)
                         </entry>
                     </row>
@@ -105,7 +105,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>down</emphasis></entry>
-                        <entry>Direcci髇 de las columnas para ser representadas.  posibles valores:
+                        <entry>Direcci贸n de las columnas para ser representadas.  posibles valores:
                               <emphasis>down</emphasis> (top-to-bottom), <emphasis>up</emphasis> (bottom-to-top)
                         </entry>
                     </row>
@@ -114,9 +114,9 @@
             </informaltable>
 			<para>
     {html_table} Es una 
-    <link linkend="language.custom.functions">funci髇 customizada</link> 
+    <link linkend="language.custom.functions">funci贸n customizada</link> 
     que transforma un arreglo de datos en una tabla HTML. El atributo 
-    <emphasis>cols</emphasis> determina el n鷐ero de columnas que tendra la tabla.
+    <emphasis>cols</emphasis> determina el n煤mero de columnas que tendra la tabla.
     Los valores <emphasis>table_attr</emphasis>, <emphasis>tr_attr</emphasis> y 
     <emphasis>td_attr</emphasis> determinan los atributos dados para las etiquetas 
     tabla, tr y td. Si <emphasis>tr_attr</emphasis> o  <emphasis>td_attr</emphasis>

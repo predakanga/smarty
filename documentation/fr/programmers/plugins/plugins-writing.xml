@@ -5,20 +5,20 @@
 <sect1 id="plugins.writing">
  <title>Ecrire des plugins</title>
  <para>
-  Les plugins peuvent être soit chargés automatiquement par Smarty
-  depuis le système de fichier, soit être déclarés
-  pendant l'exécution via une fonction register_* de l'API. Ils peuvent
-  aussi être désalloués en utilisant une fonction unregister_* de
+  Les plugins peuvent Ãªtre soit chargÃ©s automatiquement par Smarty
+  depuis le systÃ¨me de fichier, soit Ãªtre dÃ©clarÃ©s
+  pendant l'exÃ©cution via une fonction register_* de l'API. Ils peuvent
+  aussi Ãªtre dÃ©sallouÃ©s en utilisant une fonction unregister_* de
   l'API.
  </para>
  <para>
-  Pour les plugins qui ne sont pas enregistrés pendant l'exécution, le nom
-  des fonctions n'ont pas à suivre la convention de nommage.
+  Pour les plugins qui ne sont pas enregistrÃ©s pendant l'exÃ©cution, le nom
+  des fonctions n'ont pas Ã  suivre la convention de nommage.
  </para>
  <para>
-  Si certaines fonctionnalités d'un plugin dépendent d'un autre plugin
+  Si certaines fonctionnalitÃ©s d'un plugin dÃ©pendent d'un autre plugin
   (comme c'est le cas de certains plugins accompagnant Smarty), alors 
-  la maniére appropriée de charger le plugin est la suivante :
+  la maniÃ©re appropriÃ©e de charger le plugin est la suivante :
  </para>
  <programlisting role="php">
 <![CDATA[
@@ -28,17 +28,17 @@ require_once $smarty->_get_plugin_filepath('function', 'html_options');
 ]]>
  </programlisting>
  <para>
-  Une règle générale est que chaque objet Smarty est toujours passé au plugin
-  en tant que dernier paramètre, sauf pour deux exceptions :
+  Une rÃ¨gle gÃ©nÃ©rale est que chaque objet Smarty est toujours passÃ© au plugin
+  en tant que dernier paramÃ¨tre, sauf pour deux exceptions :
  </para>
  <itemizedlist>
  <listitem><para>
-   les modificateurs ne sont pas passés du tout à l'objet Smarty
+   les modificateurs ne sont pas passÃ©s du tout Ã  l'objet Smarty
  </para></listitem>
  <listitem><para>
-   les blocs récupèrent le paramètre
- <parameter>$repeat</parameter> passé après l'objet Smarty afin de
- conserver une compatibilité avec les anciennes versions de Smarty.
+   les blocs rÃ©cupÃ¨rent le paramÃ¨tre
+ <parameter>$repeat</parameter> passÃ© aprÃ¨s l'objet Smarty afin de
+ conserver une compatibilitÃ© avec les anciennes versions de Smarty.
  </para></listitem>
  </itemizedlist>
 </sect1>

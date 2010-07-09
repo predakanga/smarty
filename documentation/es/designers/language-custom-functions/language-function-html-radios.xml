@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -66,14 +66,14 @@
             </informaltable>
 			<para>
     {html_radios} es una 
-    <link linkend="language.custom.functions">funciÛn customizada</link> 
+    <link linkend="language.custom.functions">funci√≥n customizada</link> 
     que crea grupos de botones de radio html con los datos proporcionados. 
     Este esta atento para saber cual objeto esta selccionado por default.
     Los atributos requeridos son valores y salidas, a menos que usted 
     use option en lugar de eso. Toda salida es compatible con XHTML.
 			</para>
 			<para>
-   Todos los par·metros que no estan en la lista de arriba son impresos 
+   Todos los par√°metros que no estan en la lista de arriba son impresos 
    como pares de name/value dentro de cada etiqueta &lt;input&gt; creada.
 			</para>
 
@@ -173,7 +173,7 @@ y el template:
 </programlisting>
  </example>
   <para>
-   ver tambiÈn
+   ver tambi√©n
    <link linkend="language.function.html.checkboxes">{html_checkboxes}</link>
    y <link linkend="language.function.html.options">{html_options}</link>
  </para>

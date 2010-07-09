@@ -13,7 +13,7 @@
   </methodsynopsis>
   <para>
    Annulla l'intera cache del template. Come parametro opzionale
-   potete fornire un'et‡ minima in secondi che i file della 
+   potete fornire un'et√† minima in secondi che i file della 
    cache devono avere prima di essere eliminati.
   </para>
   <example>

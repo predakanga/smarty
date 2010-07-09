@@ -3,27 +3,27 @@
 <!-- EN-Revision: 1.5 Maintainer: yannick Status: ready -->
 
 <sect1 id="advanced.features.prefilters">
- <title>Filtres de pré-compilation</title>
+ <title>Filtres de prÃ©-compilation</title>
  <para>
-  Les filtres de pré-compilation sont des fonctions PHP que vos templates
-  exécutent <emphasis>avant qu'ils ne soient compilés</emphasis>. Celà peut être utile
-  pour pré-traiter vos templates afin d'enlever les commentaires
+  Les filtres de prÃ©-compilation sont des fonctions PHP que vos templates
+  exÃ©cutent <emphasis>avant qu'ils ne soient compilÃ©s</emphasis>. CelÃ  peut Ãªtre utile
+  pour prÃ©-traiter vos templates afin d'enlever les commentaires
   inutiles, garder un oeil sur ce que les gens mettent dans leurs templates, etc.
  </para>
  <para>
-  Les filtre de pré-compilations peuvent être soit
-  <link linkend="api.register.prefilter">déclarés</link>, soit chargés
-  à partir des <link linkend="variable.plugins.dir">répertoires de plugins</link>
+  Les filtre de prÃ©-compilations peuvent Ãªtre soit
+  <link linkend="api.register.prefilter">dÃ©clarÃ©s</link>, soit chargÃ©s
+  Ã  partir des <link linkend="variable.plugins.dir">rÃ©pertoires de plugins</link>
   en utilisant la fonction <link linkend="api.load.filter"><varname>load_filter()</varname></link> ou
-  en réglant la variable
+  en rÃ©glant la variable
   <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>.
  </para>
  <para>
-  Smarty passera à la fonction le code source en tant que premier argument,
-  et attendra en retour le code modifié.
+  Smarty passera Ã  la fonction le code source en tant que premier argument,
+  et attendra en retour le code modifiÃ©.
  </para>
  <example>
-  <title>Utilisation un filtre de pré-compilation de template</title>
+  <title>Utilisation un filtre de prÃ©-compilation de template</title>
   <para>
    Ceci va effacer tous les commentaires de la source du template.
   </para>
@@ -36,7 +36,7 @@ function remove_dw_comments($tpl_source, &$smarty)
     return preg_replace("/<!--#.*-->/U",'',$tpl_source);
 }
 
-// enregistrer le filtre de pré-compilation
+// enregistrer le filtre de prÃ©-compilation
 $smarty->register_prefilter('remove_dw_comments');
 $smarty->display('index.tpl');
 ?>

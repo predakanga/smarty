@@ -61,7 +61,7 @@
      <entry>true</entry>
      <entry>se mostrare o no il valore "am/pm" (antimeridiano / pomeridiano). 
                Questo valore non viene mai mostrato (e quindi il parametro
-               ignorato) se use_24_hours è true.</entry>
+               ignorato) se use_24_hours Ã¨ true.</entry>
     </row>
     <row>
      <entry>use_24_hours</entry>
@@ -75,14 +75,14 @@
      <entry>intero</entry>
      <entry>no</entry>
      <entry>1</entry>
-     <entry>intervallo dei minuti nel menù a discesa relativo</entry>
+     <entry>intervallo dei minuti nel menÃ¹ a discesa relativo</entry>
     </row>
     <row>
      <entry>second_interval</entry>
      <entry>intero</entry>
      <entry>no</entry>
      <entry>1</entry>
-     <entry>intervallo dei secondi nel menù a discesa relativo</entry>
+     <entry>intervallo dei secondi nel menÃ¹ a discesa relativo</entry>
     </row>
     <row>
      <entry>field_array</entry>
@@ -130,12 +130,12 @@
   </tgroup>
  </informaltable>
  <para>
-  html_select_time è una funzione utente che crea per voi menù a discesa per
+  html_select_time Ã¨ una funzione utente che crea per voi menÃ¹ a discesa per
   la selezione di un orario. Potete scegliere quali campi visualizzare fra
   ore, minuti, secondi e antimeridiano/postmeridiano.
  </para>
  <para>
-  L'attributo time può avere vari formati. Può essere un timestamp o
+  L'attributo time puÃ² avere vari formati. PuÃ² essere un timestamp o
   una stringa nel formato YYYYMMDDHHMMSS o una stringa leggibile
   dalla funzione php strtotime().
  </para>

@@ -5,11 +5,11 @@
 <sect1 id="variable.default.resource.type">
  <title>$default_resource_type</title>
  <para>
-  Ceci dit à smarty quel type de ressource utiliser implicitement. La valeur
-  par défaut est <literal>file</literal>, signifiant que
+  Ceci dit Ã  smarty quel type de ressource utiliser implicitement. La valeur
+  par dÃ©faut est <literal>file</literal>, signifiant que
   <literal>$smarty->display('index.tpl')</literal> et
-  <literal>$smarty->display('file:index.tpl')</literal> sont la même chose. Voyez le chapitre
-  <link linkend="template.resources">ressource</link> pour plus de détails.
+  <literal>$smarty->display('file:index.tpl')</literal> sont la mÃªme chose. Voyez le chapitre
+  <link linkend="template.resources">ressource</link> pour plus de dÃ©tails.
  </para>
 </sect1>
 

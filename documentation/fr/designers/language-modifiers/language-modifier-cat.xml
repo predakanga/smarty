@@ -5,7 +5,7 @@
 <sect1 id="language.modifier.cat">
  <title>cat</title>
  <para>
-  Cette valeur est concaténée à la variable donnée.
+  Cette valeur est concatÃ©nÃ©e Ã  la variable donnÃ©e.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -16,7 +16,7 @@
    <colspec colname="desc" />
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>cat</entry>
@@ -26,10 +26,10 @@
    <tbody>
     <row>
      <entry>1</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>Valeur à concaténer à la variable donnée.</entry>
+     <entry>Valeur Ã  concatÃ©ner Ã  la variable donnÃ©e.</entry>
     </row>
    </tbody>
   </tgroup>
@@ -40,13 +40,13 @@
 <![CDATA[
 <?php
 
-$smarty->assign('articleTitle', "'Les devins ont prévus que le monde existera toujours");
+$smarty->assign('articleTitle', "'Les devins ont prÃ©vus que le monde existera toujours");
 
 ?>
 ]]>
    </programlisting>
    <para>
-    Où le template est :
+    OÃ¹ le template est :
    </para>
    <programlisting>
 <![CDATA[
@@ -58,7 +58,7 @@ $smarty->assign('articleTitle', "'Les devins ont prévus que le monde existera to
    </para>
    <screen>
 <![CDATA[
-Les devins ont prévus que le monde existera toujours demain.
+Les devins ont prÃ©vus que le monde existera toujours demain.
 ]]>
    </screen>
  </example>

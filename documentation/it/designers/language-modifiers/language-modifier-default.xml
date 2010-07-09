@@ -24,14 +24,14 @@
       <entry>stringa</entry>
       <entry>No</entry>
       <entry><emphasis>vuoto</emphasis></entry>
-      <entry>E' il valore di default da stampare se la variabile Ë vuota.</entry>
+      <entry>E' il valore di default da stampare se la variabile √® vuota.</entry>
      </row>
     </tbody>
    </tgroup>
   </informaltable>
   <para>
    E' usato per impostare un valore di default per una variabile. Se la
-   variabile Ë vuota o non impostata, il valore di default viene stampato
+   variabile √® vuota o non impostata, il valore di default viene stampato
    al suo posto. Prende un parametro.
   </para>
   <example>
@@ -48,7 +48,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -57,7 +57,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

@@ -5,13 +5,13 @@
 <chapter id="config.files">
  <title>Fichiers de configuration</title>
  <para>
-  Les fichiers de configuration sont un moyen interressant pour gérer
-  des variables depuis un seul et même fichier. L'exemple le plus courant
-  étant le schéma de couleurs du template. Normalement, pour changer le
-  schéma de couleur d'une application, vous devriez aller
-  dans chaque template et changer la couleur des éléments (ou les classes css).
+  Les fichiers de configuration sont un moyen interressant pour gÃ©rer
+  des variables depuis un seul et mÃªme fichier. L'exemple le plus courant
+  Ã©tant le schÃ©ma de couleurs du template. Normalement, pour changer le
+  schÃ©ma de couleur d'une application, vous devriez aller
+  dans chaque template et changer la couleur des Ã©lÃ©ments (ou les classes css).
   Avec un fichier de configuration, il vous est possible de conserver
-  la couleur dans un seul endroit, puis de la mettre à jour une seule fois.
+  la couleur dans un seul endroit, puis de la mettre Ã  jour une seule fois.
  </para>
  <example>
   <title>Exemple de fichier de configuration</title>
@@ -44,41 +44,41 @@ pass=foobar
  </example>
  <para>
   Les valeurs des <link linkend="language.config.variables">variables de fichiers de configuration</link> 
-  peuvent être entre guillemets, sans que celà soit nécessaire. Si vous vouler utiliser des
+  peuvent Ãªtre entre guillemets, sans que celÃ  soit nÃ©cessaire. Si vous vouler utiliser des
   valeurs sur plusieurs lignes, vous devrez les entourer de triples
-  guillemets ("""). Vous pouvez insérer des commentaires dans les fichiers de
+  guillemets ("""). Vous pouvez insÃ©rer des commentaires dans les fichiers de
   configuration en utilisant une syntaxe quelquonque, non valide.
-  Nous recommandons l'utilisation de <literal>#</literal> (dièse) en début
+  Nous recommandons l'utilisation de <literal>#</literal> (diÃ¨se) en dÃ©but
   de ligne.
  </para>
  <para>
   Cet exemple de fichier de configuration contient deux sections. Les noms des
-  sections sont entourés de crochets []. Les noms de section peuvent être
-  des chaînes, ne contenant aucun des symboles <literal>[</literal> et
-  <literal>]</literal>. Dans notre exemple, les 4 variables du début sont
+  sections sont entourÃ©s de crochets []. Les noms de section peuvent Ãªtre
+  des chaÃ®nes, ne contenant aucun des symboles <literal>[</literal> et
+  <literal>]</literal>. Dans notre exemple, les 4 variables du dÃ©but sont
   des variables dites globales, qui ne sont pas contenue dans une section.
-  Ces variables sont toujours chargées depuis le fichier de configuration.
-  Si une section est chargée, alors toutes les variables de cette section
-  ainsi que les variables globales sont chargées. Si une variable existe
-  à la fois en tant que globale et à la fois en tant que variable de
+  Ces variables sont toujours chargÃ©es depuis le fichier de configuration.
+  Si une section est chargÃ©e, alors toutes les variables de cette section
+  ainsi que les variables globales sont chargÃ©es. Si une variable existe
+  Ã  la fois en tant que globale et Ã  la fois en tant que variable de
   section, la variable de section est prioritaire.
-  Si vous appelez deux variables dans une même section de la même façon,
-  la dernière déclarée prime. (voir
+  Si vous appelez deux variables dans une mÃªme section de la mÃªme faÃ§on,
+  la derniÃ¨re dÃ©clarÃ©e prime. (voir
   <link linkend="variable.config.overwrite"><parameter>$config_overwrite</parameter></link>)
  </para>
  <para>
-  Les fichiers de configuration sont chargés dans le template grâce aux
+  Les fichiers de configuration sont chargÃ©s dans le template grÃ¢ce aux
   fonctions <link
   linkend="language.function.config.load"><varname>{config_load}</varname></link>
   (voir aussi <link linkend="api.config.load"><varname>config_load()</varname></link>).
  </para>
  <para>
-  Vous pouvez masquer des variables ou des sections entières en préfixant
+  Vous pouvez masquer des variables ou des sections entiÃ¨res en prÃ©fixant
   le nom de la variable ou le nom de la section avec une virgule.
-  Ce procédé est utile si votre application récupère ses données depuis
-  plusieurs fichiers de configuration et récupère des données sensibles dont
-  vos templates n'ont pas besoin. Si des tiers éditent des templates, vous
-  êtes sûr que ces derniers n'accèderont pas à ces données de configuration
+  Ce procÃ©dÃ© est utile si votre application rÃ©cupÃ¨re ses donnÃ©es depuis
+  plusieurs fichiers de configuration et rÃ©cupÃ¨re des donnÃ©es sensibles dont
+  vos templates n'ont pas besoin. Si des tiers Ã©ditent des templates, vous
+  Ãªtes sÃ»r que ces derniers n'accÃ¨deront pas Ã  ces donnÃ©es de configuration
   en les chargeant depuis le template.
  </para>
  <para>

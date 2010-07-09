@@ -15,11 +15,11 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     El primer parámetro de la función es un arreglo asociativo de
+     El primer parÃ¡metro de la funciÃ³n es un arreglo asociativo de
      atributos pasados al insert. 
     </para>
     <para>
-     La función insert debe retornar el resultado que ira a sustituir
+     La funciÃ³n insert debe retornar el resultado que ira a sustituir
      el lugar de la etiqueta <command>insert</command> en el template.
     </para>
     <example>

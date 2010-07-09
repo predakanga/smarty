@@ -14,13 +14,13 @@
    <title>ldelim, rdelim</title>
    <programlisting>
 <![CDATA[
-{* questo stamper‡ i delimitatori *}
+{* questo stamper√† i delimitatori *}
 
 {ldelim}funcname{rdelim} is how functions look in Smarty!
 ]]>
    </programlisting>
    <para>
-    L'esempio sopra produrr‡:
+    L'esempio sopra produrr√†:
    </para>
    <screen>
 <![CDATA[

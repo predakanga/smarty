@@ -29,9 +29,9 @@
     <row>
      <entry>values</entry>
      <entry>misto</entry>
-     <entry>sÏ</entry>
+     <entry>s√¨</entry>
      <entry><emphasis>nessuno</emphasis></entry>
-     <entry>Valori da usare nel ciclo: puÚ essere
+     <entry>Valori da usare nel ciclo: pu√≤ essere
      una lista delimitata da un separatore (vedere attributo
      delimiter), oppure un array di valori.</entry>
     </row>
@@ -68,24 +68,24 @@
  </informaltable>
  <para>
   Cycle si usa per effettuare un ciclo alternato fra un insieme di valori. 
-  Ci d‡ la possibilit‡ di alternare facilmente due o pi˘ colori in una 
+  Ci d√† la possibilit√† di alternare facilmente due o pi√π colori in una 
   tabella, o di effettuare un ciclo su un array di valori.
  </para>
  <para>
-  Potete effettuare il ciclo su pi˘ di un insieme di valori nel template 
+  Potete effettuare il ciclo su pi√π di un insieme di valori nel template 
   fornendo l'attributo name, se date ad ogni insieme un nome diverso.
  </para>
  <para>
   Potete evitare che il valore corrente venga stampato impostando 
-  l'attributo set a false. PuÚ essere utile per saltare un valore.
+  l'attributo set a false. Pu√≤ essere utile per saltare un valore.
  </para>
  <para>
   L'attributo advance serve per ripetere un valore. Se lo impostate a
-  false, l'iterazione successiva del ciclo stamper‡ lo stesso valore.
+  false, l'iterazione successiva del ciclo stamper√† lo stesso valore.
  </para>
  <para>
   Se fornite lo speciale attributo "assign", l'output della funzione cycle
-  verr‡ assegnato a questa variabile invece di essere stampato in output.
+  verr√† assegnato a questa variabile invece di essere stampato in output.
  </para>
  <example>
   <title>cycle</title>

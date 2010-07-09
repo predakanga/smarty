@@ -6,7 +6,7 @@
            Quando a questa variabile viene dato un valore non-null,
            il suo valore viene usato come livello di error_reporting
            di php all'interno di display() e fetch(). Quando il debugging
-           è abilitato questo valore è ignorato e il livello degli 
+           Ã¨ abilitato questo valore Ã¨ ignorato e il livello degli 
            errori viene lasciato invariato.
       </para>
 </sect1>

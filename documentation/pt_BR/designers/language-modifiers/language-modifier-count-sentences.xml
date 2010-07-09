@@ -4,7 +4,7 @@
 <sect1 id="language.modifier.count.sentences">
 			<title>count_sentences</title>
 			<para>
-			Isto é usado para contar o número de sentenças em uma variável.
+			Isto Ã© usado para contar o nÃºmero de sentenÃ§as em uma variÃ¡vel.
 			</para>
 <example>
 <title>count_sentences</title>

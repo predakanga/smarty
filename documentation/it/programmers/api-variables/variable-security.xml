@@ -3,16 +3,16 @@
      <sect1 id="variable.security">
       <title>$security</title>
       <para>
-       E' una variabile booleana, per default è false. Security viene
+       E' una variabile booleana, per default Ã¨ false. Security viene
        utile per situazioni in cui avete affidato la modifica dei template
        a terzi (ad esempio via ftp) di cui non vi fidate completamente,
        e volete quindi ridurre il rischio di compromettere la sicurezza
        del sistema attraverso il linguaggio del template. Attivare security
        comporta l'applicazione delle seguenti regole al linguaggio del
-       template, a parte ciò che può essere modificato con $security_settings:
+       template, a parte ciÃ² che puÃ² essere modificato con $security_settings:
       </para>
       <itemizedlist>
-       <listitem><para>Se $php_handling è impostato a SMARTY_PHP_ALLOW viene
+       <listitem><para>Se $php_handling Ã¨ impostato a SMARTY_PHP_ALLOW viene
          implicitamente modificato a SMARTY_PHP_PASSTHRU</para></listitem>
        <listitem><para>Non sono ammesse funzioni PHP nelle istruzioni IF,
          ad esclusione di quelle specificate in $security_settings</para></listitem>
@@ -21,7 +21,7 @@
        <listitem><para>I file locali possono essere letti con {fetch} solo dalle
          directory elencate nell'array $secure_dir</para></listitem>
        <listitem><para>I tag {php}{/php} non sono consentiti</para></listitem>
-       <listitem><para>Non è possibile usare funzioni PHP come modificatori,
+       <listitem><para>Non Ã¨ possibile usare funzioni PHP come modificatori,
          ad esclusione di quelle specificate in $security_settings</para></listitem>
       </itemizedlist>
 </sect1>

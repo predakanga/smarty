@@ -22,14 +22,14 @@
      <row>
       <entry>1</entry>
       <entry>stringa</entry>
-      <entry>SÏ</entry>
+      <entry>S√¨</entry>
       <entry><emphasis>nessuno</emphasis></entry>
       <entry>E' l'espressione regolare da sostituire.</entry>
      </row>
      <row>
       <entry>2</entry>
       <entry>stringa</entry>
-      <entry>SÏ</entry>
+      <entry>S√¨</entry>
       <entry><emphasis>nessuno</emphasis></entry>
       <entry>E' la stringa di testo da usare per la sostituzione.</entry>
      </row>
@@ -54,7 +54,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -65,7 +65,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

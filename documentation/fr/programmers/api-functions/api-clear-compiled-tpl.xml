@@ -5,7 +5,7 @@
 <refentry id="api.clear.compiled.tpl">
  <refnamediv>
   <refname>clear_compiled_tpl()</refname>
-  <refpurpose>Efface la version compilée d'un template spécifié</refpurpose>
+  <refpurpose>Efface la version compilÃ©e d'un template spÃ©cifiÃ©</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -17,27 +17,27 @@
    <methodparam choice="opt"><type>int</type><parameter>exp_time</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour effacer la version compilée du template spécifié ou
-   de tous les templates si aucun n'est spécifié. 
+   UtilisÃ©e pour effacer la version compilÃ©e du template spÃ©cifiÃ© ou
+   de tous les templates si aucun n'est spÃ©cifiÃ©. 
    Si vous passez uniquement un
    <link linkend="variable.compile.id"><parameter>$compile_id</parameter></link>,
-   le template compilé correspondant à ce
+   le template compilÃ© correspondant Ã  ce
    <link linkend="variable.compile.id"><parameter>$compile_id</parameter></link>
-   sera effacé. Si vous passez un exp_time, les templates compilés plus vieux que 
+   sera effacÃ©. Si vous passez un exp_time, les templates compilÃ©s plus vieux que 
    <parameter>exp_time</parameter> secondes
-   seront effacés, par défaut, tous les templates compilés seront
-   effacés au vû de leurs âges. Cette fonction est destinée à un usage 
-   avancé et n'est habituellement pas utilisée.
+   seront effacÃ©s, par dÃ©faut, tous les templates compilÃ©s seront
+   effacÃ©s au vÃ» de leurs Ã¢ges. Cette fonction est destinÃ©e Ã  un usage 
+   avancÃ© et n'est habituellement pas utilisÃ©e.
   </para>
   <example>
    <title>Exemple avec clear_compiled_tpl()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
-// efface la version compilée du template spécifié
+// efface la version compilÃ©e du template spÃ©cifiÃ©
 $smarty->clear_compiled_tpl('index.tpl');
 
-// efface tout le contenu du répertoire des templates compilés
+// efface tout le contenu du rÃ©pertoire des templates compilÃ©s
 $smarty->clear_compiled_tpl();
 ?>
 ]]>

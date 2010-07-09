@@ -6,13 +6,13 @@
   <refpurpose>Retorna el valor asignado a una variable</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>descripción</title>
+  <title>descripciÃ³n</title>
   <methodsynopsis>
    <type>array</type><methodname>get_template_vars</methodname>
    <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Si no tiene un parámetro dado, un arreglo de todas las variables 
+   Si no tiene un parÃ¡metro dado, un arreglo de todas las variables 
    <link linkend="api.assign">asignadas</link> es retornado.
   </para>
   <example>
@@ -33,7 +33,7 @@ print_r($tpl_vars);
    </programlisting>
   </example>
   <para>
-  Ver también <link linkend="api.assign">assign()</link>,
+  Ver tambiÃ©n <link linkend="api.assign">assign()</link>,
   <link linkend="language.function.assign">{assign}</link>,
   <link linkend="api.assign.by.ref">assign_by_ref()</link>,
   <link linkend="api.append">append()</link>,

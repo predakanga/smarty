@@ -5,7 +5,7 @@
 <refentry id="api.config.load">
  <refnamediv>
   <refname>config_load()</refname>
-  <refpurpose>Charge les données d'un fichier de configuration et les assigne au template</refpurpose>
+  <refpurpose>Charge les donnÃ©es d'un fichier de configuration et les assigne au template</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -15,7 +15,7 @@
    <methodparam choice="opt"><type>string</type><parameter>section</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour charger des données d'un <link linkend="config.files">fichier
+   UtilisÃ©e pour charger des donnÃ©es d'un <link linkend="config.files">fichier
    de configuration</link> et les assigner a un template. Cette fonction fonctionne
    exactement comme la fonction de template <link
    linkend="language.function.config.load"><varname>{config_load}</varname></link>.
@@ -23,13 +23,13 @@
   <note>
    <title>Note technique</title>
    <para>
-    Comme pour Smarty 2.4.0, les variables de templates assignées
-    sont conservées entre chaque appel à 
+    Comme pour Smarty 2.4.0, les variables de templates assignÃ©es
+    sont conservÃ©es entre chaque appel Ã  
     <link linkend="api.fetch"><varname>fetch()</varname></link> et 
     <link linkend="api.display"><varname>display()</varname></link>.
-    Les variables de configuration chargées avec <varname>config_load()</varname> sont
-    globales. Les fichiers de configuration sont aussi compilés pour une
-    exécution plus rapide et respecte les réglages de <link
+    Les variables de configuration chargÃ©es avec <varname>config_load()</varname> sont
+    globales. Les fichiers de configuration sont aussi compilÃ©s pour une
+    exÃ©cution plus rapide et respecte les rÃ©glages de <link
     linkend="variable.force.compile"><parameter>$force_compile</parameter></link> et de <link
     linkend="variable.compile.check"><parameter>$compile_check</parameter></link>.
    </para>

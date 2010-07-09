@@ -2,30 +2,30 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->  
 <sect1 id="advanced.features.outputfilters">
-   <title>Output Filters (Filtros de Saída)</title>
+   <title>Output Filters (Filtros de SaÃ­da)</title>
    <para>
-    Quando o template é invocado via display() ou fetch(), sua saída pode ser enviada
-    através de um ou mais filtros de saída. Estes diferem dos postfilters porque postfilters
-    operam em templates compilados antes de serem salvos para o disco, e os filtros de saída
-    operam na saída do template quando
-    ele é executado.
+    Quando o template Ã© invocado via display() ou fetch(), sua saÃ­da pode ser enviada
+    atravÃ©s de um ou mais filtros de saÃ­da. Estes diferem dos postfilters porque postfilters
+    operam em templates compilados antes de serem salvos para o disco, e os filtros de saÃ­da
+    operam na saÃ­da do template quando
+    ele Ã© executado.
    </para>
 
    <para>
-    Filtros de Saída podem ser ou 
+    Filtros de SaÃ­da podem ser ou 
     <link linkend="api.register.outputfilter">registrado</link> ou carregado
-    do diretório de plugins usando a função
-    <link linkend="api.load.filter">load_filter()</link> ou configurando a variável
+    do diretÃ³rio de plugins usando a funÃ§Ã£o
+    <link linkend="api.load.filter">load_filter()</link> ou configurando a variÃ¡vel
     <link linkend="variable.autoload.filters">$autoload_filters</link>.
-    O Smarty passará a saída como o primeiro argumento,
-    e espera a função retornar o resultado
+    O Smarty passarÃ¡ a saÃ­da como o primeiro argumento,
+    e espera a funÃ§Ã£o retornar o resultado
     do processamento.
    </para>
    <example>
-    <title>usando um filtro de saída de template</title>
+    <title>usando um filtro de saÃ­da de template</title>
     <programlisting>
 &lt;?php
-// ponha isto em sua aplicação
+// ponha isto em sua aplicaÃ§Ã£o
 function protect_email($tpl_output, &amp;$smarty)
 {
     $tpl_output =
@@ -38,8 +38,8 @@ function protect_email($tpl_output, &amp;$smarty)
 $smarty->register_outputfilter("protect_email");
 $smarty->display("index.tpl");
 
-// agora qualquer ocorrência de um endereço de email na saída do template terá uma
-// simples proteção contra spambots
+// agora qualquer ocorrÃªncia de um endereÃ§o de email na saÃ­da do template terÃ¡ uma
+// simples proteÃ§Ã£o contra spambots
 ?&gt;</programlisting>
    </example>
 </sect1>

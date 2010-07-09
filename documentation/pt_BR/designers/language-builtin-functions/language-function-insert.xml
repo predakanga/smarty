@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,103 +25,103 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome da funÁ„o insert (insert_name)</entry>
+                        <entry>O nome da fun√ß√£o insert (insert_name)</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome da vari·vel que
-                        ir· receber a saÌda</entry>
+                        <entry>O nome da vari√°vel que
+                        ir√° receber a sa√≠da</entry>
                     </row>
                     <row>
                         <entry>script</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome de um script php que ser· incluido
-                        antes que a funÁ„o insert seja chamada</entry>
+                        <entry>O nome de um script php que ser√° incluido
+                        antes que a fun√ß√£o insert seja chamada</entry>
                     </row>
                     <row>
                         <entry>[var ...]</entry>
                         <entry>[var type]</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>Vari·vel para passar para a funÁ„o insert</entry>
+                        <entry>Vari√°vel para passar para a fun√ß√£o insert</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
 			 Tags insert funcionam parecido com as tags include, exceto que as tags
-			 insert n„o v„o para o cache quando <link
-			linkend="caching">caching</link> esta ativado. Ela ser·
-			executada a cada invocaÁ„o do template.
+			 insert n√£o v√£o para o cache quando <link
+			linkend="caching">caching</link> esta ativado. Ela ser√°
+			executada a cada invoca√ß√£o do template.
 			</para>
             <para>
-             Digamos que vocÍ tenha um template com um banner no topo da p·gina. O
+             Digamos que voc√™ tenha um template com um banner no topo da p√°gina. O
              banner pode conter uma mistura de html, imagens, flash, etc.
-             Assim nÛs n„o podemos usar um link estatico aqui, e nÛs n„o 
-             queremos que este conte˙do fique no cache junto com a p·gina. E aÌ que entra a tag 
+             Assim n√≥s n√£o podemos usar um link estatico aqui, e n√≥s n√£o 
+             queremos que este conte√∫do fique no cache junto com a p√°gina. E a√≠ que entra a tag 
              insert: o template conhece os valores #banner_location_id# e
-             #site_id# (obtidos de um arquivo de configuraÁ„o), e precisa chamar
-             uma funÁ„o para obter o conte˙do do banner.
+             #site_id# (obtidos de um arquivo de configura√ß√£o), e precisa chamar
+             uma fun√ß√£o para obter o conte√∫do do banner.
 			</para>
 <example>
-<title>funÁ„o insert</title>
+<title>fun√ß√£o insert</title>
 <programlisting>
 {* exemplo de como obter um banner *}
 {insert name="getBanner" lid=#banner_location_id# sid=#site_id#}</programlisting>
 </example>
 			<para>
-			 Neste exemplo, nÛs estamos usando o nome "getBanner" e passando os par‚metros
-			 #banner_location_id# e #site_id#. O Smarty ir· procurar por uma funÁ„o chamada
-			 insert_getBanner() na sua aplicaÁ„o PHP, passando os valores de 
+			 Neste exemplo, n√≥s estamos usando o nome "getBanner" e passando os par√¢metros
+			 #banner_location_id# e #site_id#. O Smarty ir√° procurar por uma fun√ß√£o chamada
+			 insert_getBanner() na sua aplica√ß√£o PHP, passando os valores de 
 			 #banner_location_id# e #site_id# como primeiro argumento em uma
-			 matriz associativa. Todos os nomes de funÁ„o insert em sua
-			 aplicaÁ„o devem ser precedidas por "insert_" para prevenir possÌveis
-			 problemas com nomes de funÁıes repetidos. Sua funÁ„o insert_getBanner()
+			 matriz associativa. Todos os nomes de fun√ß√£o insert em sua
+			 aplica√ß√£o devem ser precedidas por "insert_" para prevenir poss√≠veis
+			 problemas com nomes de fun√ß√µes repetidos. Sua fun√ß√£o insert_getBanner()
 			 deve fazer alguma coisa com os valores passados e retornar os resultados.
-			 Estes resultados s„o mostrados no template no lugar da tag insert.
-			 Neste exemplo, o Smarty ir· chamar esta funÁ„o:
+			 Estes resultados s√£o mostrados no template no lugar da tag insert.
+			 Neste exemplo, o Smarty ir√° chamar esta fun√ß√£o:
 			 insert_getBanner(array("lid" => "12345","sid" => "67890"));
 			 e mostrar o resultado retornado no lugar da tag insert.
 			</para>
 			<para>
-			 Se vocÍ passar o atributo "assign", a saÌda da tag insert ser·
-			 dada para esta vari·vel ao invÈs de ser mostrada
+			 Se voc√™ passar o atributo "assign", a sa√≠da da tag insert ser√°
+			 dada para esta vari√°vel ao inv√©s de ser mostrada
 			 no template.
             </para>
 			<note>
 			 <title>Nota</title>
 			  <para>
-			   definir a saÌda para uma vari·vel n„o È
-			   ˙til quando o cache esta ativo.
+			   definir a sa√≠da para uma vari√°vel n√£o √©
+			   √∫til quando o cache esta ativo.
 			  </para>
 			</note>
 			<para>
-			 Se vocÍ passar o atributo "script", este script php ser· incluido
-			 (apenas uma vez) antes da execuÁ„o da funÁ„o insert. Este
-			 È o caso onde a funÁ„o insert n„o existe ainda, e um script
-			 php deve ser incluÌdo antes para faze-la funcionar. O caminho pode
-			 ser absoluto ou relativo ‡ vari·vel $trusted_dir. Quando a seguranÁa esta
-			 ativada, o script deve estar no local definido na vari·vel $trusted_dir.
+			 Se voc√™ passar o atributo "script", este script php ser√° incluido
+			 (apenas uma vez) antes da execu√ß√£o da fun√ß√£o insert. Este
+			 √© o caso onde a fun√ß√£o insert n√£o existe ainda, e um script
+			 php deve ser inclu√≠do antes para faze-la funcionar. O caminho pode
+			 ser absoluto ou relativo √† vari√°vel $trusted_dir. Quando a seguran√ßa esta
+			 ativada, o script deve estar no local definido na vari√°vel $trusted_dir.
 			</para>
 			<para>
-			 O objeto Smarty È passado como segundo argumento. Deste modo
-			 vocÍ pode refenciar o objeto Smarty
-			 de dentro da funÁ„o.
+			 O objeto Smarty √© passado como segundo argumento. Deste modo
+			 voc√™ pode refenciar o objeto Smarty
+			 de dentro da fun√ß√£o.
 			</para>
 			<note>
 			<title>Nota Tecnica</title>
 			<para>
-			 … possÌvel ter partes do template fora do cache.
-			 se vocÍ tiver <link linkend="caching">caching</link>
-             ativado, tags insert n„o estar„o no cache. Ela ser· executada
-             dinamicamente a cada vez que a p·gina seja criada, mesmo com
-             p·ginas em cache. Isto funciona bem para coisas como banners, pesquisa,
-             previsıes do tempo, resultados de pesquisa, ·reas de opni„o do usu·rio, etc.
+			 √â poss√≠vel ter partes do template fora do cache.
+			 se voc√™ tiver <link linkend="caching">caching</link>
+             ativado, tags insert n√£o estar√£o no cache. Ela ser√° executada
+             dinamicamente a cada vez que a p√°gina seja criada, mesmo com
+             p√°ginas em cache. Isto funciona bem para coisas como banners, pesquisa,
+             previs√µes do tempo, resultados de pesquisa, √°reas de opni√£o do usu√°rio, etc.
 			</para>
 			</note>
 </sect1>

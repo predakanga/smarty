@@ -11,11 +11,11 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>Descripción</entry>
+      <entry>DescripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -38,7 +38,7 @@
   </informaltable>
   <para>
    Una simple busqueda y substituir en la variable. Esta es equivalente a la
-   función <ulink url="&url.php-manual;str_replace">str_replace()</ulink> de PHP.
+   funciÃ³n <ulink url="&url.php-manual;str_replace">str_replace()</ulink> de PHP.
   </para>
   <example>
    <title>replace</title>
@@ -73,7 +73,7 @@ Child's   Stool   Great   for   Use   in   Garden.
    </screen>
   </example>
   <para>
-   ver también <link linkend="language.modifier.regex.replace">regex_replace</link>
+   ver tambiÃ©n <link linkend="language.modifier.regex.replace">regex_replace</link>
    y <link linkend="language.modifier.escape">escape</link>.
   </para>
 

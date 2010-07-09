@@ -5,7 +5,7 @@
 <refentry id="api.register.outputfilter">
  <refnamediv>
   <refname>register_outputfilter()</refname>
-  <refpurpose>Déclare dynamiquement des filtres de sortie</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement des filtres de sortie</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,10 +14,10 @@
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour déclarer dynamiquement des
+   UtilisÃ©e pour dÃ©clarer dynamiquement des
    <link linkend="plugins.outputfilters">filtres de sortie</link>, pour
-   agir sur la sortie d'un template avant qu'il ne soit <link linkend="api.display">affiché</link>.
-   Reportez-vous à la section <link linkend="advanced.features.outputfilters">
+   agir sur la sortie d'un template avant qu'il ne soit <link linkend="api.display">affichÃ©</link>.
+   Reportez-vous Ã  la section <link linkend="advanced.features.outputfilters">
    filtres de sortie</link> pour plus d'information sur le sujet.
   </para>
    &api.register.snippet;

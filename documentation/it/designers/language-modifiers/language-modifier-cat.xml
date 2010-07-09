@@ -44,7 +44,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -52,7 +52,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[    

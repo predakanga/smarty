@@ -35,7 +35,7 @@ function callback_html_number_entities_decode($matches) {
 }
 
 function callback_highlight_php($matches) {
-	$with_tags = preg_replace_callback("!&#([0-9]+);!", "callback_html_number_entities_decode", $matches[1]);
+	$with_tags = preg_replace_callback("!&#([0-9]+);!u", "callback_html_number_entities_decode", $matches[1]);
 	if ($GLOBALS["TYPE"] == "php") {
 		return "\n<?php\nhighlight_string('". addcslashes($with_tags, "'\\") ."');\n?>\n";
 	} else { // "html"

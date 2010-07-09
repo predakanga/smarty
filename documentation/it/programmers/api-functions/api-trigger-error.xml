@@ -13,10 +13,10 @@
    <methodparam choice="opt"><type>int</type><parameter>level</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Questa funzione può essere usata per produrre in output un messaggio
+   Questa funzione puÃ² essere usata per produrre in output un messaggio
    di errore attraverso Smarty. Il parametro <parameter>level</parameter>
-   può contenere uno dei valori usati per la funzione PHP trigger_error(),
-   cioè E_USER_NOTICE, E_USER_WARNING, ecc. Per default il suo valore è 
+   puÃ² contenere uno dei valori usati per la funzione PHP trigger_error(),
+   cioÃ¨ E_USER_NOTICE, E_USER_WARNING, ecc. Per default il suo valore Ã¨ 
    E_USER_WARNING.
   </para>
  </refsect1>

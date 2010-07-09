@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>Descripci髇</entry>
+                        <entry>Descripci贸n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -24,14 +24,14 @@
                         <entry>string</entry>
                         <entry>Yes</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>La direcci髇 de correo electronico(e-mail)</entry>
+                        <entry>La direcci贸n de correo electronico(e-mail)</entry>
                     </row>
                     <row>
                         <entry>text</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>El texto para mostrar, el default es la direcci髇 de correo (e-mail)</entry>
+                        <entry>El texto para mostrar, el default es la direcci贸n de correo (e-mail)</entry>
                     </row>
                     <row>
                         <entry>encode</entry>
@@ -48,7 +48,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry> La direcci髇 de correo(e-mail) para mandar una 
+                        <entry> La direcci贸n de correo(e-mail) para mandar una 
                          copia el carbon(cc). Separados por una coma.
 						                  </entry>
                     </row>
@@ -57,7 +57,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Direcci髇 de correo electronico(e-mail) para mandar 
+                        <entry>Direcci贸n de correo electronico(e-mail) para mandar 
                         una copia al carbon ofuscada(bcc). Separando las direcciones por comas.
 						                  </entry>
                     </row>
@@ -81,7 +81,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Direcciones para acompa馻r. Separe las direcciones con comas.
+                        <entry>Direcciones para acompa帽ar. Separe las direcciones con comas.
 						                  </entry>
                     </row>
                     <row>
@@ -89,7 +89,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry> Cualquier otra informaci髇 que usted quiera pasar 
+                        <entry> Cualquier otra informaci贸n que usted quiera pasar 
                          por el link, tal como plantillas de estilo
 							                 </entry>
                     </row>
@@ -97,16 +97,16 @@
                 </tgroup>
             </informaltable>
 			<para>
-    {mailto} automatiza el proceso de creaci髇 de links de correo
+    {mailto} automatiza el proceso de creaci贸n de links de correo
    electronico(e-mail) y opcionalmente los codifica. 
-   Codificar el correo electronico(e-mail) hace mas dif韈il que 
+   Codificar el correo electronico(e-mail) hace mas dif铆cil que 
    las web spiders tomen las direciones de nuestro sitio.
 			</para>
 			<note>
-				<title>Nota T閏nica</title>
+				<title>Nota T茅cnica</title>
 				<para>
     javascript es probablemente el codificador mas utilizado, aunque 
-    usted puede utilizar tambi閚 codificaci髇 hexadecimal.
+    usted puede utilizar tambi茅n codificaci贸n hexadecimal.
     </para>
 			</note>
 <example>
@@ -146,7 +146,7 @@
 </programlisting>
  </example>
  <para>
- ver tambi閚
+ ver tambi茅n
  <link linkend="language.modifier.escape">escape</link>,
  <link linkend="tips.obfuscating.email">Obfuscating E-mail Addresses</link>
  y <link linkend="language.function.textformat">{textformat}</link>

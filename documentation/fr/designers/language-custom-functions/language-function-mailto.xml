@@ -5,16 +5,16 @@
 <sect1 id="language.function.mailto">
  <title>{mailto}</title>
  <para>
-  <varname>{mailto}</varname> crée un lien <literal>mailto:</literal>
-  automatiquement encodé (optionnel).
-  L'encodage rend la tâche de récupération des e-mails sur votre
+  <varname>{mailto}</varname> crÃ©e un lien <literal>mailto:</literal>
+  automatiquement encodÃ© (optionnel).
+  L'encodage rend la tÃ¢che de rÃ©cupÃ©ration des e-mails sur votre
   site plus difficiles aux "web spiders".
  </para>
  <note>
   <title>Note technique</title>
   <para>
    Javascript n'est certainement pas la forme d'encodage la plus robuste.
-   Vous pouvez également utiliser un encodage hexadécimal.
+   Vous pouvez Ã©galement utiliser un encodage hexadÃ©cimal.
   </para>
  </note>
  <informaltable frame="all">
@@ -29,28 +29,28 @@
      <entry>Nom attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>address</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>L'adresse email</entry>
     </row>
     <row>
      <entry>text</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le texte à afficher, par défaut l'adresse email</entry>
+     <entry>Le texte Ã  afficher, par dÃ©faut l'adresse email</entry>
     </row>
     <row>
      <entry>encode</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>none</emphasis></entry>
      <entry>Comment encoder l'adresse email.
@@ -59,47 +59,47 @@
     </row>
     <row>
      <entry>cc</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Les adresses email en copie (Cc).
-     Séparez les entrées par une virgule.</entry>
+     SÃ©parez les entrÃ©es par une virgule.</entry>
     </row>
     <row>
      <entry>bcc</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Les adresses email en copie cachées (Bcc).
-     Séparez les entrées par une virgule.</entry>
+     <entry>Les adresses email en copie cachÃ©es (Bcc).
+     SÃ©parez les entrÃ©es par une virgule.</entry>
     </row>
     <row>
      <entry>subject</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Sujet de l'email.</entry>
     </row>
     <row>
      <entry>newsgroups</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Newsgroup où poster le message.
-     Séparez les entrées par une virgule.</entry>
+     <entry>Newsgroup oÃ¹ poster le message.
+     SÃ©parez les entrÃ©es par une virgule.</entry>
     </row>
     <row>
      <entry>followupto</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Adresses où transmettre le message.
-      Séparez les entrées par une virgule.
+     <entry>Adresses oÃ¹ transmettre le message.
+      SÃ©parez les entrÃ©es par une virgule.
      </entry>
     </row>
     <row>
      <entry>extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Toute information que vous souhaitez passer au lien,
@@ -120,11 +120,11 @@
 
 {mailto address="moi@example.com" encode="javascript"}
 <script type="text/javascript" language="javascript">
- eval(unescape('%64%6f% ... coupé ...%61%3e%27%29%3b'))
+ eval(unescape('%64%6f% ... coupÃ© ...%61%3e%27%29%3b'))
 </script>
 
 {mailto address="moi@example.com" encode="hex"}
-<a href="mailto:%6d%65.. coupé..3%6f%6d">&#x6d;&..coupé...#x6f;&#x6d;</a>
+<a href="mailto:%6d%65.. coupÃ©..3%6f%6d">&#x6d;&..coupÃ©...#x6f;&#x6d;</a>
 
 {mailto address="moi@example.com" subject="Hello to you!"}
 <a href="mailto:moi@example.com?subject=Hello%20to%20you%21" >me@example.com</a>
@@ -138,7 +138,7 @@
 {mailto address="moi@example.com" encode="javascript_charcode"}
 <script type="text/javascript" language="javascript">
 <!--
-{document.write(String.fromCharCode(60,97, ... coupé ....60,47,97,62))}
+{document.write(String.fromCharCode(60,97, ... coupÃ© ....60,47,97,62))}
 //-->
 </script>
 ]]>

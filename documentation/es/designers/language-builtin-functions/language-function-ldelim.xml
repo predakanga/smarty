@@ -51,7 +51,7 @@ function foo() {
    </screen>
 
   </example>
-  <para>Vea también <link linkend="language.escaping">Escaping Smarty Parsing</link> </para>
+  <para>Vea tambiÃ©n <link linkend="language.escaping">Escaping Smarty Parsing</link> </para>
  </sect1>
 
 <!-- Keep this comment at the end of the file

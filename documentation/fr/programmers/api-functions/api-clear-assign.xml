@@ -5,7 +5,7 @@
 <refentry id="api.clear.assign">
  <refnamediv>
   <refname>clear_assign()</refname>
-  <refpurpose>Efface la valeur d'une variable assignée</refpurpose>
+  <refpurpose>Efface la valeur d'une variable assignÃ©e</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>

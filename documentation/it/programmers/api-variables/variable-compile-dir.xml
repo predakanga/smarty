@@ -3,9 +3,9 @@
    <sect1 id="variable.compile.dir">
     <title>$compile_dir</title>
     <para>
-     Questo Ë il nome della directory dove vengono messi i template
-     compilati. Per default Ë "./templates_c", che significa che
-     Smarty cercher‡ la directory di compilazione sotto la stessa
+     Questo √® il nome della directory dove vengono messi i template
+     compilati. Per default √® "./templates_c", che significa che
+     Smarty cercher√† la directory di compilazione sotto la stessa
      directory dello script php in esecuzione.
     </para>
     <note>

@@ -11,7 +11,7 @@
          </funcsynopsis>
          <para>
 	  Use isso para dinamicamente desregistrar um recurso de plugin.
-	  Passe no par‚metro nome o nome do recurso.
+	  Passe no par√¢metro nome o nome do recurso.
          </para>
 <example>
 <title>unregister_resource</title>

@@ -6,24 +6,24 @@
    Caching es usado para aumentar la velocidad de llamada de
    <link linkend="api.display">display()</link> o 
    <link linkend="api.fetch">fetch()</link> salvando esto en un
-   archivo de salida. Si hay una versiÛn de cache disponible 
+   archivo de salida. Si hay una versi√≥n de cache disponible 
    para la llamada, este es mostrado en vez de regresar la salida 
-   de datos. Caching puede hacer cosas tremendamente r·pidas,
+   de datos. Caching puede hacer cosas tremendamente r√°pidas,
    especialmente templates con largo tiempo de computo.
    Desde la salida de datos de 
    <link linkend="api.display">display()</link> o
-   <link linkend="api.fetch">fetch()</link> est· en
-   cache, un archivo de cache podrÌa ser compuesto por diversos 
-   archivos de templates, archivos de configuraciÛn, etc.
+   <link linkend="api.fetch">fetch()</link> est√° en
+   cache, un archivo de cache podr√≠a ser compuesto por diversos 
+   archivos de templates, archivos de configuraci√≥n, etc.
    </para>
    <para>
-   Dado que sus templates son din·micos, es importante tener cuidado 
+   Dado que sus templates son din√°micos, es importante tener cuidado 
    de como usa la cache y por cuanto tiempo. Por ejemplo, si usted esta 
    mostrando la pagina principal de su web site y esta no tiene cambios 
    muy frecuentes en su contenido, esta puede funcionar bien en la cache 
    por una hora o mas. por otro lado, si usted esta mostrando una pagina 
-   con un mapa de tiempo que contenga nueva informaciÛn por minuto, no 
-   tiene sentido hacer cache nuestra p·gina.
+   con un mapa de tiempo que contenga nueva informaci√≥n por minuto, no 
+   tiene sentido hacer cache nuestra p√°gina.
    </para>
 &programmers.caching.caching-setting-up;
 &programmers.caching.caching-multiple-caches;

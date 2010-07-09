@@ -5,9 +5,9 @@
  <para>
   Incluso en Smarty existe una consola para debug. La consola informa 
   a usted de todos los templates incluidos, las variables definidas y 
-  las variables de archivos de configuraci髇 de la llamada actual del 
+  las variables de archivos de configuraci贸n de la llamada actual del 
   template. Incluso un template llamado "debug.tpl" viene con la 
-  distribuci髇 de Smarty el cual controla el formateo de la consola.
+  distribuci贸n de Smarty el cual controla el formateo de la consola.
   Defina <link linkend="variable.debugging">$debugging</link> en true en 
   el Smarty, y si es necesario defina 
   <link linkend="variable.debug.tpl">$debug_tpl</link> para la ruta 
@@ -15,15 +15,15 @@
   default). Cuando usted carga una pagina, una consola en javascript 
   abrira una ventana popup y dara a usted el nombre de todos los templates 
   incluidos y las variables definidas en la pagina actual. Para ver las 
-  variables disponibles para un template en particular, vea la funci髇
+  variables disponibles para un template en particular, vea la funci贸n
   <link linkend="language.function.debug">{debug}</link>. Para desabilitar 
   la consola del debug, defina $debugging en false. Usted puede activar
   temporalmente la consola del debug colocando SMARTY_DEBUG en la URL si
-  usted activo esta opci髇 con 
+  usted activo esta opci贸n con 
   <link linkend="variable.debugging.ctrl">$debugging_ctrl</link>.
  </para>
  <note>
-  <title>Nota T閏nica</title>
+  <title>Nota T茅cnica</title>
   <para>
    La consola de debug no funciona cuando usted usa la API <link
    linkend="api.fetch">fetch()</link>, solo cuando estuviera usando  
@@ -37,12 +37,12 @@
  </note>
  <note>
   <para>
-   Los tiempos de carga de cada template y de archivos de configuraci髇
+   Los tiempos de carga de cada template y de archivos de configuraci贸n
    son en segundos, o en fracciones de segundo.
   </para>
  </note>
     <para>
-    Vea tambi閚 
+    Vea tambi茅n 
     <link linkend="troubleshooting">troubleshooting</link>,
     <link linkend="variable.error.reporting">$error_reporting</link>
     y <link linkend="api.trigger.error">trigger_error()</link>.

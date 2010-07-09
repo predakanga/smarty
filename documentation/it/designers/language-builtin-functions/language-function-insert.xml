@@ -22,7 +22,7 @@
                     <row>
                         <entry>name</entry>
                         <entry>stringa</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Nome della funzione di insert (insert_name)</entry>
                     </row>
@@ -31,7 +31,7 @@
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
-                        <entry>Nome della variabile del template cui verr‡
+                        <entry>Nome della variabile del template cui verr√†
                                                 assegnato l'output</entry>
                     </row>
                     <row>
@@ -61,10 +61,10 @@
 			</para>
             <para>
              Diciamo che abbiamo un template con uno spazio banner in cima
-             alla pagina. Il banner puÚ contenere qualsiasi mescolanza di HTML,
+             alla pagina. Il banner pu√≤ contenere qualsiasi mescolanza di HTML,
              immagini, flash, ecc., quindi non possiamo usare un link statico,
              e non vogliamo che questo contenuto sia messo in cache con la 
-             pagina. Ecco quindi l'utilit‡ del tag insert: il template conosce i
+             pagina. Ecco quindi l'utilit√† del tag insert: il template conosce i
              valori di #banner_location_id# e #site_id# (presi da un file di 
              configurazione), e ha bisogno di chiamare una funzione per ottenere
              il contenuto del banner.
@@ -77,32 +77,32 @@
 </example>
 			<para>
 			In questo esempio stiamo usando il nome "getBanner" e passiamo i
-			parametri #banner_location_id# e #site_id#. Smarty cercher‡ una
+			parametri #banner_location_id# e #site_id#. Smarty cercher√† una
 			funzione chiamata insert_getBanner() nell'applicazione PHP, passandole
 			i valori di #banner_location_id# e #site_id# come primo argomento
 			in un array associativo. Tutti i nomi di funzioni di insert
 			nell'applicazione devono essere prefissati con "insert_", per evitare
 			possibili conflitti nei nomi di funzione. La nostra funzione
-			insert_getBanner() far‡ qualcosa con i valori passati e restituir‡
-			il risultato, che verr‡ visualizzato nel templat al posto del tag
+			insert_getBanner() far√† qualcosa con i valori passati e restituir√†
+			il risultato, che verr√† visualizzato nel templat al posto del tag
 			insert.
 			In questo esempio, Smarty chiamerebbe questa funzione:
 			insert_getBanner(array("lid" => "12345","sid" => "67890"));
 			e visualizzerebbe il risultato restituito al posto del tag insert.
 			</para>
 			<para>
-			Se fornite l'attributo "assign", l'output del tag insert verr‡ 
+			Se fornite l'attributo "assign", l'output del tag insert verr√† 
 			assegnato a questa variabile invece di essere mostrato nel template.
-			NOTA: assegnare l'output ad una variabile non Ë molto utile se il
-			caching Ë abilitato.
+			NOTA: assegnare l'output ad una variabile non √® molto utile se il
+			caching √® abilitato.
 			</para>
 			<para>
-			Se fornite l'attributo "script", questo script verr‡ incluso (una
+			Se fornite l'attributo "script", questo script verr√† incluso (una
 			volta sola) prima dell'esecuzione della funzione di insert. Questo
-			caso puÚ presentarsi quando la funzione di insert puÚ non esistere
+			caso pu√≤ presentarsi quando la funzione di insert pu√≤ non esistere
                         ancora, e uno script php deve essere quindi incluso per farla 
-                        funzionare. Il percorso puÚ essere assoluto o relativo a $trusted_dir.
-                        Se la security Ë abilitata, lo script deve trovarsi in $trusted_dir.
+                        funzionare. Il percorso pu√≤ essere assoluto o relativo a $trusted_dir.
+                        Se la security √® abilitata, lo script deve trovarsi in $trusted_dir.
 			</para>
 			<para>
 			Come secondo argomento viene passato l'oggetto Smarty. In questo

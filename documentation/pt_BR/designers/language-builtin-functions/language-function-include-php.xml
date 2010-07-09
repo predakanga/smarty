@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>Obrigatório</entry>       
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>ObrigatÃ³rio</entry>       
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -30,69 +30,69 @@
                     <row>
                         <entry>once</entry>
                         <entry>boolean</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Quando incluir ou não o arquivo php mais de uma vez se
-                        incluído várias vezes</entry>
+                        <entry>Quando incluir ou nÃ£o o arquivo php mais de uma vez se
+                        incluÃ­do vÃ¡rias vezes</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>O nome da variável
-                        que receberá a saída do arquivo php</entry>
+                        <entry>O nome da variÃ¡vel
+                        que receberÃ¡ a saÃ­da do arquivo php</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<note>
-			<title>Nota Técnica</title>
+			<title>Nota TÃ©cnica</title>
 			<para>
-			include_php está quase sendo retirado do Smarty, você pode obter a mesma funcionalidade 
-			usando uma função customizada em um template. A única razão para usar o include_php é 
-			se você realmente precisar deixar função php fora do diretório de plugin ou código da 
-			sua aplicação. Veja a seção 
+			include_php estÃ¡ quase sendo retirado do Smarty, vocÃª pode obter a mesma funcionalidade 
+			usando uma funÃ§Ã£o customizada em um template. A Ãºnica razÃ£o para usar o include_php Ã© 
+			se vocÃª realmente precisar deixar funÃ§Ã£o php fora do diretÃ³rio de plugin ou cÃ³digo da 
+			sua aplicaÃ§Ã£o. Veja a seÃ§Ã£o 
 			<link linkend="tips.componentized.templates">templates componentizados</link> 
 			para mais detalhes.
 			</para>
 			</note>
 			<para>
-			Tags include_php são usadas para incluir um script php no seu template.
-			Se a segurança estiver ativada, então o script php deve estar localizado
-			no diretório especificado na variável $trusted_dir. A tag include_php 
-			deve ter o atributo	"file", o qual contém o caminho para o arquivo php  
-			incluído, pode ser um camiho tanto absoluto ou relativo a $trusted_dir.
+			Tags include_php sÃ£o usadas para incluir um script php no seu template.
+			Se a seguranÃ§a estiver ativada, entÃ£o o script php deve estar localizado
+			no diretÃ³rio especificado na variÃ¡vel $trusted_dir. A tag include_php 
+			deve ter o atributo	"file", o qual contÃ©m o caminho para o arquivo php  
+			incluÃ­do, pode ser um camiho tanto absoluto ou relativo a $trusted_dir.
 			</para>
 			<para>
-			include_php é um bom meio de manipular templates componentizados,
-			e manter o código PHP separado dos arquivos de template. Digamos 
-			que você tenha um template que mostre a navegação do seu site, o qual
-			é preenchido automaticamente a partir de um banco de dados. Você pode 
-			manter a sua lógica PHP que obtém os dados em um diretório separado,
-			e inclui-la no topo do template. Agora você pode incluir este template
-			em qualquer lugar sem se preocupar se a informação do banco de dados foi
+			include_php Ã© um bom meio de manipular templates componentizados,
+			e manter o cÃ³digo PHP separado dos arquivos de template. Digamos 
+			que vocÃª tenha um template que mostre a navegaÃ§Ã£o do seu site, o qual
+			Ã© preenchido automaticamente a partir de um banco de dados. VocÃª pode 
+			manter a sua lÃ³gica PHP que obtÃ©m os dados em um diretÃ³rio separado,
+			e inclui-la no topo do template. Agora vocÃª pode incluir este template
+			em qualquer lugar sem se preocupar se a informaÃ§Ã£o do banco de dados foi
 			obtida antes de usar.
 			</para>
 			<para>
-			 Por padrão, os arquivos php são incluídos apenas uma vez mesmo 
-			 se incluídos várias vezes no template. Você pode especificar que ele 
-			 seja incluído todas as vezes com o atributo <emphasis>once</emphasis>.
-			 Definindo once para false irá incluir o script php a cada vez que
-			 ele seja incluído no template.
+			 Por padrÃ£o, os arquivos php sÃ£o incluÃ­dos apenas uma vez mesmo 
+			 se incluÃ­dos vÃ¡rias vezes no template. VocÃª pode especificar que ele 
+			 seja incluÃ­do todas as vezes com o atributo <emphasis>once</emphasis>.
+			 Definindo once para false irÃ¡ incluir o script php a cada vez que
+			 ele seja incluÃ­do no template.
 			</para>
 			<para>
-			 Você pode opcionalmente passar o atributo <emphasis>assign</emphasis>,
-			 o qual irá especificar uma variável de template a qual irá conter
-			 toda a saída de 
+			 VocÃª pode opcionalmente passar o atributo <emphasis>assign</emphasis>,
+			 o qual irÃ¡ especificar uma variÃ¡vel de template a qual irÃ¡ conter
+			 toda a saÃ­da de 
 			 <emphasis>include_php</emphasis> em vez de mostra-la.
 			</para>
 			<para>
-			 O objeto smarty esta disponível como $this dentro do 
-			 script php que você incluiu.
+			 O objeto smarty esta disponÃ­vel como $this dentro do 
+			 script php que vocÃª incluiu.
 			</para>
 <example>
-<title>Função include_php</title>
+<title>FunÃ§Ã£o include_php</title>
 <programlisting>
 <![CDATA[
 load_nav.php
@@ -100,7 +100,7 @@ load_nav.php
 
 <?php
 
-	// carrega variáveis de um banco de dados mysql e define elas para o template
+	// carrega variÃ¡veis de um banco de dados mysql e define elas para o template
 	require_once("MySQL.class.php");
 	$sql = new MySQL;
 	$sql->query("select * from site_nav_sections order by name",SQL_ALL);

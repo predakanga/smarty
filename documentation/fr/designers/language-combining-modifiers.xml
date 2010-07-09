@@ -4,9 +4,9 @@
 <chapter id="language.combining.modifiers">
  <title>Combiner des modificateurs de variable.</title>
  <para>
-  Vous pouvez appliquer un nombre quelquonque de modificateurs à une variable.
-  Ils seront invoqués dans l'ordre d'apparition, de la gauche vers la droite.
-  Ils doivent être séparés par un <literal>|</literal> (pipe).
+  Vous pouvez appliquer un nombre quelquonque de modificateurs Ã  une variable.
+  Ils seront invoquÃ©s dans l'ordre d'apparition, de la gauche vers la droite.
+  Ils doivent Ãªtre sÃ©parÃ©s par un <literal>|</literal> (pipe).
  </para>
  <example>
   <title>Combiner des modificateurs</title>
@@ -15,13 +15,13 @@
 <?php
 
 $smarty->assign('titreArticle', 'Les fumeurs sont productifs, mais la mort
-tue l\'efficacitée.');
+tue l\'efficacitÃ©e.');
 
 ?>
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -33,12 +33,12 @@ tue l\'efficacitée.');
 ]]>
   </programlisting>
   <para>
-   Celà va afficher :
+   CelÃ  va afficher :
   </para>
   <screen>
 <![CDATA[
-Les fumeurs sont productifs, mais la mort tue l'efficacitée.
-L E S   F U M E U R S   S O N T   P R O D U C T I F S ,   M A I S   L A   M O R T   T U E   L ' E F F I C A C I T É E .
+Les fumeurs sont productifs, mais la mort tue l'efficacitÃ©e.
+L E S   F U M E U R S   S O N T   P R O D U C T I F S ,   M A I S   L A   M O R T   T U E   L ' E F F I C A C I T Ã‰ E .
 L E S   F U M E U R S   S O N T   P R O D U C T I F S ,   M A I S   L A   M...
 L E S   F U M E U R S   S O N T   P R O D U C T I F S ,   M A I S   L A   M...
 L e s   f u m e u r s   s o n t   p r o d u c t i f s , . . .

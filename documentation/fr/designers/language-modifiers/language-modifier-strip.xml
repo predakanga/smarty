@@ -6,12 +6,12 @@
  <title>strip</title>
  <para>
   Remplace les espaces multiples, les nouvelles lignes et les tabulations
-  par un espace simple, ou une chaîne donnée.
+  par un espace simple, ou une chaÃ®ne donnÃ©e.
  </para>
  <note>
   <title>Note</title>
   <para>
-   Si vous voulez réaliser cette action sur un bloc complet du template,
+   Si vous voulez rÃ©aliser cette action sur un bloc complet du template,
    utilisez la fonction <link linkend="language.function.strip"><varname>{strip}</varname></link>.
   </para>
  </note>
@@ -20,14 +20,14 @@
   <programlisting role="php">
 <![CDATA[
 <?php
-$smarty->assign('titreArticle', "Une réunion autour\n d'un feu de cheminée\t
-est toujours agréable.");
+$smarty->assign('titreArticle', "Une rÃ©union autour\n d'un feu de cheminÃ©e\t
+est toujours agrÃ©able.");
 $smarty->display('index.tpl');
 ?>
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -41,11 +41,11 @@ $smarty->display('index.tpl');
   </para>
   <screen>
  <![CDATA[
-Une réunion autour
- d'un feu de cheminée     est toujours agréable.
-Une réunion autour d'un feu de cheminée est toujours agréable.
-Une&nbsp;réunion&nbsp;autour&nbsp;d'un&nbsp;feu&nbsp;de&nbsp;cheminée&nbsp;est&nbsp;toujours
-&nbsp;agréable.
+Une rÃ©union autour
+ d'un feu de cheminÃ©e     est toujours agrÃ©able.
+Une rÃ©union autour d'un feu de cheminÃ©e est toujours agrÃ©able.
+Une&nbsp;rÃ©union&nbsp;autour&nbsp;d'un&nbsp;feu&nbsp;de&nbsp;cheminÃ©e&nbsp;est&nbsp;toujours
+&nbsp;agrÃ©able.
 ]]>
   </screen>
  </example>

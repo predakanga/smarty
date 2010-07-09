@@ -3,30 +3,30 @@
    <sect1 id="caching.groups">
     <title>Gruppi di Cache</title>
      <para>
-      Potete raggruppare le cache in modo più elaborato impostando gruppi
+      Potete raggruppare le cache in modo piÃ¹ elaborato impostando gruppi
       di cache_id. Per fare questo separate ogni sottogruppo con una barra
       verticale "|" nel valore di cache_id. Potete usare tutti i sottogruppi
       che volete.
      </para>
      <para>
       Potete pensare ai gruppi di cche come ad una gerarchia di directory.
-      Ad esempio, un gruppo di cache "a|b|c" può essere concepito come la
+      Ad esempio, un gruppo di cache "a|b|c" puÃ² essere concepito come la
       struttura di directory "/a/b/c". clear_cache(null,"a|b|c") equivale a 
       cancellare i file "/a/b/c/*". clear_cache(null,"a|b") sarebbe come
       cancellare i file "/a/b/*". Se specificate un compile_id, ad esempio
-      clear_cache(null,"a|b","foo"), sarà considerato come un ulteriore
+      clear_cache(null,"a|b","foo"), sarÃ  considerato come un ulteriore
       sottogruppo "a/b/c/foo/". Se specificate un nome di template, ad
-      esempio clear_cache("foo.tpl","a|b|c"), Smarty tenterà di cancellare
+      esempio clear_cache("foo.tpl","a|b|c"), Smarty tenterÃ  di cancellare
       "/a/b/c/foo.tpl". NON POTETE cancellare un template specifico sotto
-      più gruppi di cache, ad es. "a/b/*/foo.tpl"; i gruppi di cache funzionano
+      piÃ¹ gruppi di cache, ad es. "a/b/*/foo.tpl"; i gruppi di cache funzionano
       SOLO da sinistra a destra. Dovrete raggruppare i vostri template sotto
       un singolo sottogruppo di cache per poterli cancellare tutti insieme.
      </para>
      <para>
       I gruppi di cache non vanno confusi con la gerarchia della vostra directory
-      dei template: i gruppi di cache infatti non sanno qual è la struttura
+      dei template: i gruppi di cache infatti non sanno qual Ã¨ la struttura
       dei template. Ad esempio, se avete una struttura di template tipo
-      "themes/blu/index.tpl" e volete avere la possibilità di cancellare 
+      "themes/blu/index.tpl" e volete avere la possibilitÃ  di cancellare 
       tutti i file di cache per il tema "blue", dovrete creare un gruppo di
       cache che riproduce la struttura dei template, ad esempio 
       display("themes/blue/index.tpl","themes|blue"), e poi eliminarli
@@ -46,7 +46,7 @@ $smarty->caching = true;
 $smarty->clear_cache(null,"sports|basketball");
 
 // eliminiamo tutti i file di cache che hanno "sports" come primo gruppo di cache
-// questo include "sports|basketball", nonché "sports|(anything)|(anything)|(anything)|..."
+// questo include "sports|basketball", nonchÃ© "sports|(anything)|(anything)|(anything)|..."
 $smarty->clear_cache(null,"sports");
 
 // eliminiamo il file di cache foo.tpl con "sports|basketball" come cache_id

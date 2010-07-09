@@ -6,15 +6,15 @@
   <refpurpose>Resgistr dinamicamente postfiltros</refpurpose>
  </refnamediv>
  <refsect1>
-  <title> Descripción</title>
+  <title> DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>register_postfilter</methodname>
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Use esto para registrar dinámicamente  <link
+   Use esto para registrar dinÃ¡micamente  <link
     linkend="advanced.features.postfilters">postfiltros</link> para 
-   correr templates directos después de ser compilados.
+   correr templates directos despuÃ©s de ser compilados.
    Vea <link linkend="advanced.features.postfilters">postfiltros 
    de template</link> para mayores informes de como configurar 
    funciones de postfiltering.
@@ -25,7 +25,7 @@
    <orderedlist numeration="loweralpha">
    <listitem>
      <para>
-      una cadena conteniendo un nombre de función
+      una cadena conteniendo un nombre de funciÃ³n
      </para>
    </listitem><listitem>
      <para>
@@ -33,19 +33,19 @@
       <literal>array(&amp;$object, $method)</literal> con
       <literal>&amp;$object</literal> siendo una referencia para un
       objeto y <literal>$method</literal> siendo una cadena conteniendo
-      el nombre de un método 
+      el nombre de un mÃ©todo 
      </para>
    </listitem><listitem>
      <para>
       un arreglo con la forma 
     <literal>array(&amp;$class, $method)</literal> con
     <literal>$class</literal> siendo un nombre de clase y
-    <literal>$method</literal> siendo un método de esta clase.
+    <literal>$method</literal> siendo un mÃ©todo de esta clase.
      </para>
    </listitem>
    </orderedlist>
   <para>
-  Vea También
+  Vea TambiÃ©n
   <link linkend="api.unregister.postfilter">unregister_postfilter()</link>,
   <link linkend="api.register.prefilter">register_prefilter()</link>,
   <link linkend="api.register.outputfilter">register_ouputfilter()</link>,

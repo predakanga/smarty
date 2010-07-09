@@ -3,8 +3,8 @@
 		<sect1 id="language.function.php">
    <title>{php}</title>
 			<para>
-    Las etiquetas {php} permiten a suetdd incrustar cÛdigo php directamente
-   en el template.  No ser· escapado, no importando la definiciÛn de
+    Las etiquetas {php} permiten a suetdd incrustar c√≥digo php directamente
+   en el template.  No ser√° escapado, no importando la definici√≥n de
    <link linkend="variable.php.handling">$php_handling</link>.
    Esto es solo para usuario avanzados y normalmente no es necesario.
 			</para>
@@ -21,14 +21,14 @@
   </programlisting>
 </example>
 <note>
-<title>Nota tÈcnica</title>
+<title>Nota t√©cnica</title>
 <para>
    Para poder tener acceso a las variables de PHP puede ser necesario usar la palabra clave  
    <ulink url="&url.php-manual;global">global</ulink> de PHP.
 </para>
 </note>
  <para>
-  ver TambiÈn
+  ver Tambi√©n
   <link linkend="variable.php.handling">$php_handling</link>,
   <link linkend="language.function.include.php">{include_php}</link>,
   <link linkend="language.function.include">{include}</link> y

@@ -5,9 +5,9 @@
 <sect1 id="variable.compiler.class">
  <title>$compiler_class</title>
  <para>
-  Spécifie le nom de la classe du compilateur qui va être utilisée pour
-  compiler les templates. Le compilateur par défaut est
-  'Smarty_Compiler'. Réservé aux utilisateurs avancés.
+  SpÃ©cifie le nom de la classe du compilateur qui va Ãªtre utilisÃ©e pour
+  compiler les templates. Le compilateur par dÃ©faut est
+  'Smarty_Compiler'. RÃ©servÃ© aux utilisateurs avancÃ©s.
  </para>
 </sect1>
 

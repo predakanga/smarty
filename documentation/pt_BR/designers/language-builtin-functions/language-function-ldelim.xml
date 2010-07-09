@@ -4,23 +4,23 @@
 		<sect1 id="language.function.ldelim">
 			<title>ldelim,rdelim</title>
 			<para>
-            ldelim e rdelim são usados para mostrar os delimitadores de templates literalmente, 
-			no nosso caso "{" ou "}". Ou você pode usar {literal}{/literal} para 
-			interpretar blocos de texto literalmente. Veja também {$smarty.ldelim} e {$smarty.rdelim}
+            ldelim e rdelim sÃ£o usados para mostrar os delimitadores de templates literalmente, 
+			no nosso caso "{" ou "}". Ou vocÃª pode usar {literal}{/literal} para 
+			interpretar blocos de texto literalmente. Veja tambÃ©m {$smarty.ldelim} e {$smarty.rdelim}
 			</para>
 <example>
 <title>ldelim, rdelim</title>
 <programlisting>
 <![CDATA[
-{* isto fará com que os delimitadores de template sejam tratados literalmente *}
+{* isto farÃ¡ com que os delimitadores de template sejam tratados literalmente *}
 
-{ldelim}funcname{rdelim} é como a função aparecer no Smarty!
+{ldelim}funcname{rdelim} Ã© como a funÃ§Ã£o aparecer no Smarty!
 ]]>
 </programlisting>
-<para>O exemplo acima exibirá:</para>
+<para>O exemplo acima exibirÃ¡:</para>
 <programlisting>
 <![CDATA[
-{funcname} é como a função aparecer no Smarty
+{funcname} Ã© como a funÃ§Ã£o aparecer no Smarty
 ]]>
 </programlisting>
 </example>

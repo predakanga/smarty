@@ -10,7 +10,7 @@
           </funcprototype>
          </funcsynopsis>
          <para>
-          Essa função checa se o template especificado existe. Isso pode
+          Essa funÃ§Ã£o checa se o template especificado existe. Isso pode
 	  aceitar um path para o template no filesystem ou um recurso de string
 	  especificando o template.
          </para>

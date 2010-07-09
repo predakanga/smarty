@@ -22,7 +22,7 @@
                     <row>
                         <entry>file</entry>
                         <entry>stringa</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Nome del file di template da includere</entry>
                     </row>
@@ -31,7 +31,7 @@
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
-                        <entry>Nome della variabile cui sar‡ assegnato
+                        <entry>Nome della variabile cui sar√† assegnato
                                                 l'output dell'include</entry>
                     </row>
                     <row>
@@ -51,9 +51,9 @@
 	    che contiene il percorso del template da includere.
 			</para>
 			<para>
-			Opzionalmente si puÚ passare l'attributo <emphasis>assign</emphasis>,
+			Opzionalmente si pu√≤ passare l'attributo <emphasis>assign</emphasis>,
 			che specifica un nome di variabile del template alla quale
-			sar‡ assegnato l'output dell'<emphasis>include</emphasis>, invece
+			sar√† assegnato l'output dell'<emphasis>include</emphasis>, invece
 			di essere visualizzato.
 			</para>
 <example>

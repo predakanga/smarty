@@ -5,9 +5,9 @@
 <sect1 id="variable.config.fix.newlines">
  <title>$config_fix_newlines</title>
  <para>
-  Si cette variable est mise à &true;, les caractéres de nouvelles lignes mac et dos
+  Si cette variable est mise Ã  &true;, les caractÃ©res de nouvelles lignes mac et dos
   (<literal>'\r'</literal> et <literal>'\r\n'</literal>) sont convertis en
-  <literal>'\n'</literal> quand ils sont analysés. &true; par défaut.
+  <literal>'\n'</literal> quand ils sont analysÃ©s. &true; par dÃ©faut.
  </para>
 </sect1>
 

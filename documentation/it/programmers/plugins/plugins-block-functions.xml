@@ -25,7 +25,7 @@
      modificare questo comportamento).
     </para>
     <para>
-     Solo il tag di apertura della funzione di blocco puÚ avere attributi.
+     Solo il tag di apertura della funzione di blocco pu√≤ avere attributi.
      Tutti gli attributi passati dal template alle funzioni relative sono
      contenuti in <parameter>$params</parameter> nella forma di array 
      associativo. Potete accedere a questi valori, ad esempio, con
@@ -36,17 +36,17 @@
     <para>
      Il valore di <parameter>$content</parameter> dipende se la funzione 
      viene chiamata per il tag di apertura o per quello di chiusura. Nel
-     caso del tag di apertura, sar‡ <literal>null</literal>, mentre nel
-     caso del tag di chiusura sar‡ il contenuto del blocco di template.
-     Notate che il blocco sar‡ gi‡ stato elaborato da Smarty, quindi ciÚ
-     che riceverete sar‡ l'output del template, non il sorgente.
+     caso del tag di apertura, sar√† <literal>null</literal>, mentre nel
+     caso del tag di chiusura sar√† il contenuto del blocco di template.
+     Notate che il blocco sar√† gi√† stato elaborato da Smarty, quindi ci√≤
+     che riceverete sar√† l'output del template, non il sorgente.
     </para>
 
     <para>
-     Il parametro <parameter>&amp;$repeat</parameter> Ë passato alla 
-     funzione per riferimento e le fornisce la possibilit‡ di controllare
+     Il parametro <parameter>&amp;$repeat</parameter> √® passato alla 
+     funzione per riferimento e le fornisce la possibilit√† di controllare
      quante volte il blocco viene visualizzato. Per default 
-     <parameter>$repeat</parameter> Ë <literal>true</literal> alla prima
+     <parameter>$repeat</parameter> √® <literal>true</literal> alla prima
      chiamata della funzione (al tag di apertura), e <literal>false</literal>
      per tutte le chiamate successive (al tag di chiusura).
      Ogni volta che la funzione termina con il valore di
@@ -58,7 +58,7 @@
 	</para>
 
     <para>
-     Se avete funzioni di blocco nidificate, potete scoprire qual Ë il
+     Se avete funzioni di blocco nidificate, potete scoprire qual √® il
      blocco genitore attraverso la variabile
      <varname>$smarty->_tag_stack</varname>. Fate un var_dump() su
      questa variabile e la struttura dovrebbe apparirvi evidente.

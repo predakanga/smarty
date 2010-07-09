@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->   
-<sect1 id="plugins.compiler.functions"><title>Funções Compiladoras</title>
+<sect1 id="plugins.compiler.functions"><title>FunÃ§Ãµes Compiladoras</title>
     <para>
-     Funções compiladoras só são chamadas durante a compilação do template.
-     Elas são úteis para injeção de código PHP ou conteúdo estático time-sensitive
-     dentro do template. Se há ambos, uma função 
-     compiladora e uma função customizável
-     registrada sob o mesmo nome, a função compiladora tem precedência.
+     FunÃ§Ãµes compiladoras sÃ³ sÃ£o chamadas durante a compilaÃ§Ã£o do template.
+     Elas sÃ£o Ãºteis para injeÃ§Ã£o de cÃ³digo PHP ou conteÃºdo estÃ¡tico time-sensitive
+     dentro do template. Se hÃ¡ ambos, uma funÃ§Ã£o 
+     compiladora e uma funÃ§Ã£o customizÃ¡vel
+     registrada sob o mesmo nome, a funÃ§Ã£o compiladora tem precedÃªncia.
     </para>
     <funcsynopsis>
      <funcprototype>
@@ -17,9 +17,9 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     À função compiladora são passados dois parâmetros: 
+     Ã€ funÃ§Ã£o compiladora sÃ£o passados dois parÃ¢metros: 
      a tag string de argumento da tag - basicamente, tudo a partir
-     do nome da função até o delimitador de fechamento, e o objeto da Smarty. É suposto que retorna o código PHP
+     do nome da funÃ§Ã£o atÃ© o delimitador de fechamento, e o objeto da Smarty. Ã‰ suposto que retorna o cÃ³digo PHP
      para ser injetado dentro do template compilado.
     </para>
     <para>
@@ -28,7 +28,7 @@
      <link linkend="api.unregister.compiler.function">unregister_compiler_function()</link>.
     </para>
     <example>
-     <title>função compiladora simples</title>
+     <title>funÃ§Ã£o compiladora simples</title>
      <programlisting>
 &lt;?php
 /*
@@ -47,13 +47,13 @@ function smarty_compiler_tplheader($tag_arg, &amp;$smarty)
 }
 ?&gt;</programlisting>
      <para>
-      Esta função pode ser chamada em um template da seguinte forma:
+      Esta funÃ§Ã£o pode ser chamada em um template da seguinte forma:
      </para>
      <programlisting>
-{* esta função é executada somente no tempo de compilação *}
+{* esta funÃ§Ã£o Ã© executada somente no tempo de compilaÃ§Ã£o *}
 {tplheader}</programlisting>
      <para>
-      O código PHP resultante no template compilado seria algo assim:
+      O cÃ³digo PHP resultante no template compilado seria algo assim:
      </para>
      <programlisting>
 &lt;php

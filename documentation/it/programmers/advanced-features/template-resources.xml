@@ -97,7 +97,7 @@ $smarty->display("file:F:/path/to/my/templates/menu.tpl");
     <para>
      Potete ottenere template da qualsiasi risorsa alla quale sia 
      possibile accedere con PHP: database, socket, directory LDAP, e
-     così via. Potete farlo scrivendo una funzione plugin per le
+     cosÃ¬ via. Potete farlo scrivendo una funzione plugin per le
      risorse e registrandola a Smarty.
     </para>
 
@@ -109,7 +109,7 @@ $smarty->display("file:F:/path/to/my/templates/menu.tpl");
 
     <note>
      <para>
-      Notate che non è possibile modificare il comportamento della risorsa
+      Notate che non Ã¨ possibile modificare il comportamento della risorsa
       <literal>file</literal>, ma potete fornire una risorsa che legge i
       template dal filesystem in maniera diversa registrandola con un altro
       nome di risorsa.
@@ -190,7 +190,7 @@ $smarty->display("db:index.tpl");
     <para>
      Potete specificare una funzione da usare per ottenere i contenuti
      del template nel caso in cui non sia possibile leggerlo dalla
-     risorsa appropriata. Un uso possibile di questa funzione è di
+     risorsa appropriata. Un uso possibile di questa funzione Ã¨ di
      creare al volo template che non esistono.
     </para>
     <example>
@@ -211,7 +211,7 @@ function make_template ($resource_type, $resource_name, &$template_source, &$tem
 			return true;
 		}
     } else {
-		// non è un file
+		// non Ã¨ un file
 		return false;
     }
 }

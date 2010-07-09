@@ -5,7 +5,7 @@
 <refentry id="api.append.by.ref">
  <refnamediv>
   <refname>append_by_ref()</refname>
-  <refpurpose>Ajoute des valeurs par référence</refpurpose>
+  <refpurpose>Ajoute des valeurs par rÃ©fÃ©rence</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -16,16 +16,16 @@
    <methodparam choice="opt"><type>bool</type><parameter>merge</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour <link linkend="api.append">ajouter</link> des valeurs à un
-   template par référence plutôt que par copie.
-   Si vous ajoutez une variable par référence puis changez sa
-   valeur, le changement est aussi répercuté sur la valeur assignée.
+   UtilisÃ©e pour <link linkend="api.append">ajouter</link> des valeurs Ã  un
+   template par rÃ©fÃ©rence plutÃ´t que par copie.
+   Si vous ajoutez une variable par rÃ©fÃ©rence puis changez sa
+   valeur, le changement est aussi rÃ©percutÃ© sur la valeur assignÃ©e.
    Pour les <link linkend="advanced.features.objects">objets</link>,
-   <varname>append_by_ref()</varname> ne fait pas de copie en mémoire de l'objet
-   assigné. Voir la documentation PHP pour plus d'informations sur les
-   références de variable.
-   Si vous passez le troisième paramètre à &true;, la valeur 
-   sera fusionnée avec le tableau courant plutôt que d'être ajoutée.
+   <varname>append_by_ref()</varname> ne fait pas de copie en mÃ©moire de l'objet
+   assignÃ©. Voir la documentation PHP pour plus d'informations sur les
+   rÃ©fÃ©rences de variable.
+   Si vous passez le troisiÃ¨me paramÃ¨tre Ã  &true;, la valeur 
+   sera fusionnÃ©e avec le tableau courant plutÃ´t que d'Ãªtre ajoutÃ©e.
   </para>
   &note.parameter.merge;
   <example>

@@ -11,11 +11,11 @@
     <colspec colname="desc" />
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>Descripción</entry>
+      <entry>DescripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -31,7 +31,7 @@
    </tgroup>
   </informaltable>
   <para>
-   Este es usado para contar el número de carácteres en una variable.
+   Este es usado para contar el nÃºmero de carÃ¡cteres en una variable.
   </para>
   <example>
    <title>count_characters</title>
@@ -66,7 +66,7 @@ Cold Wave Linked to Temperatures.
    </screen>
   </example>
   <para>
-   ver también
+   ver tambiÃ©n
    <link linkend="language.modifier.count.words">count_words</link>,
    <link linkend="language.modifier.count.sentences">count_sentences</link> y
    <link linkend="language.modifier.count.paragraphs">count_paragraphs</link>.

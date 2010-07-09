@@ -22,14 +22,14 @@
                     <row>
                         <entry>name</entry>
                         <entry>stringa</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Nome della sezione</entry>
                     </row>
                     <row>
                         <entry>loop</entry>
                         <entry>[$variable_name]</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Nome della variabile che determina il numero
                            di iterazioni del ciclo</entry>
@@ -39,13 +39,13 @@
                         <entry>intero</entry>
                         <entry>no</entry>
 						<entry><emphasis>0</emphasis></entry> <entry>L'indice
-						dal quale inizier‡ il ciclo. Se il valore Ë negativo,
-						la posizione di partenza Ë calcolata dalla fine dell'array.
+						dal quale inizier√† il ciclo. Se il valore √® negativo,
+						la posizione di partenza √® calcolata dalla fine dell'array.
 						Ad esempio, se ci sono sette valori nell'array da ciclare
-						e start Ë -2, l'indice di partenza sar‡ 5. Valori non
-						validi (cioË al di fuori della lunghezza dell'array da
+						e start √® -2, l'indice di partenza sar√† 5. Valori non
+						validi (cio√® al di fuori della lunghezza dell'array da
 						ciclare) saranno automaticamente convertiti al valore
-						valido pi˘ vicino.</entry>
+						valido pi√π vicino.</entry>
                     </row>
                     <row>
                         <entry>step</entry>
@@ -53,8 +53,8 @@
                         <entry>no</entry>
                         <entry><emphasis>1</emphasis></entry>
 						<entry>Il valore di passo da usare per attraversare
-						l'array da ciclare. Ad esempio, step=2 cicler‡ sugli
-						indici 0,2,4, ecc. Se step Ë negativo il ciclo proceder‡
+						l'array da ciclare. Ad esempio, step=2 cicler√† sugli
+						indici 0,2,4, ecc. Se step √® negativo il ciclo proceder√†
 						sull'array all'indietro.</entry>
                     </row>
                     <row>
@@ -79,10 +79,10 @@
             <emphasis>section</emphasis> devono essere chiusi con
             <emphasis>/section</emphasis>. I parametri obbligatori sono
             <emphasis>name</emphasis> e <emphasis>loop</emphasis>. Il nome
-            della sezione puÚ essere quello che preferite, formato da lettere,
+            della sezione pu√≤ essere quello che preferite, formato da lettere,
             numeri e underscore. Le sezioni possono essere nidificate, ed i nomi
             delle sezioni nidificate devono essere diversi fra loro. La variabile
-            loop (di solito un array di valori) determina quante volte sar‡
+            loop (di solito un array di valori) determina quante volte sar√†
             eseguito il ciclo. Quando stampate una variabile all'interno di una
             sezione, il nome della sezione deve essere indicato a fianco del
             nome della variabile fra parentesi quadre [].
@@ -93,7 +93,7 @@
 <title>section</title>
 <programlisting>
 
-{* questo esempio stamper‡ tutti i valori dell'array $custid *}
+{* questo esempio stamper√† tutti i valori dell'array $custid *}
 {section name=customer loop=$custid}
 	id: {$custid[customer]}&lt;br&gt;
 {/section}
@@ -152,10 +152,10 @@ address: 5605 apple st&lt;br&gt;
 <example>
 <title>sezioni nidificate</title>
 <programlisting>
-{* le sezioni possono essere nidificate a qualsiasi profondit‡. Con
+{* le sezioni possono essere nidificate a qualsiasi profondit√†. Con
    le sezioni nidificate potete accedere a strutture di dati complesse,
    ad esempio array multidimensionali. In questo esempio, $contact_type[customer]
-   Ë un array di tipi di contatto per il cliente corrente. *}
+   √® un array di tipi di contatto per il cliente corrente. *}
 {section name=customer loop=$custid}
 	id: {$custid[customer]}&lt;br&gt;
 	name: {$name[customer]}&lt;br&gt;
@@ -195,7 +195,7 @@ e-mail: jane@myexample.com&lt;br&gt;
 <example>
 <title>sezioni e array associativi</title>
 <programlisting>
-{* questo Ë un esempio di stampa di un array associativo
+{* questo √® un esempio di stampa di un array associativo
    di dati in una sezione *}
 {section name=customer loop=$contacts}
 	name: {$contacts[customer].name}&lt;br&gt;
@@ -234,14 +234,14 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 {/section}</programlisting>
 </example>
 		<para>
-		Le sezioni hanno anche le proprie variabili di gestione delle propriet‡.
-		Vengono indicate cosÏ: {$smarty.section.nomesezione.nomevariabile}
+		Le sezioni hanno anche le proprie variabili di gestione delle propriet√†.
+		Vengono indicate cos√¨: {$smarty.section.nomesezione.nomevariabile}
 		</para>
 		<note>
 		 <para>
-		  A partire da Smarty 1.5.0, la sintassi per le variabili delle propriet‡
-		  di sessione Ë cambiata da {%nomesezione.nomevariabile%} a
-		  {$smarty.section.sectionname.varname}. La vecchia sintassi Ë ancora
+		  A partire da Smarty 1.5.0, la sintassi per le variabili delle propriet√†
+		  di sessione √® cambiata da {%nomesezione.nomevariabile%} a
+		  {$smarty.section.sectionname.varname}. La vecchia sintassi √® ancora
 		  supportata, ma negli esempi del manuale troverete solo riferimenti
 		  alla nuova.
 		 </para>
@@ -256,13 +256,13 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			<note>
 				<title>Nota tecnica</title>
 				<para>
-				Se le propriet‡ step e start non vengono modificate, index
-				funziona allo stesso modo della propriet‡ iteration, ad 
+				Se le propriet√† step e start non vengono modificate, index
+				funziona allo stesso modo della propriet√† iteration, ad 
 				eccezione del fatto che parte da 0 invece che da 1.
 				</para>
 			</note>
 	<example>
-	<title>propriet‡ index</title>
+	<title>propriet√† index</title>
 	<programlisting>
 	{section name=customer loop=$custid}
 	{$smarty.section.customer.index} id: {$custid[customer]}&lt;br&gt;
@@ -281,10 +281,10 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			<title>index_prev</title>
 			<para>
 			index_prev visualizza l'indice del ciclo precedente.
-			Sul primo ciclo Ë impostata a -1.
+			Sul primo ciclo √® impostata a -1.
 			</para>
 	<example>
-	<title>propriet‡ index_prev</title>
+	<title>propriet√† index_prev</title>
 	<programlisting>
 	{section name=customer loop=$custid}
 	{$smarty.section.customer.index} id: {$custid[customer]}&lt;br&gt;
@@ -314,7 +314,7 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 		l'attributo step, quando presente).
 			</para>
 	<example>
-	<title>propriet‡ index_next</title>
+	<title>propriet√† index_next</title>
 	<programlisting>
 	{section name=customer loop=$custid}
 	{$smarty.section.customer.index} id: {$custid[customer]}&lt;br&gt;
@@ -343,14 +343,14 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			</para>
 			<note>
 			 <para>
-			  Al contrario di index, questa propriet‡ non Ë influenzata dalle
-                          propriet‡ start, step e max. Inoltre iteration comincia da 1
-                          invece che da 0 come index. rownum Ë un alias di iteration, e
+			  Al contrario di index, questa propriet√† non √® influenzata dalle
+                          propriet√† start, step e max. Inoltre iteration comincia da 1
+                          invece che da 0 come index. rownum √® un alias di iteration, e
                           funziona in modo identico.
 			 </para>
 			</note>
 	<example>
-	<title>propriet‡ iteration</title>
+	<title>propriet√† iteration</title>
 	<programlisting>
 	{section name=customer loop=$custid start=5 step=2}
 	current loop iteration: {$smarty.section.customer.iteration}&lt;br&gt;
@@ -379,10 +379,10 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			<sect2 id="section.property.first">
 			<title>first</title>
 			<para>
-		first vale true se l'iterazione attuale Ë la prima.
+		first vale true se l'iterazione attuale √® la prima.
 			</para>
 	<example>
-	<title>propriet‡ first</title>
+	<title>propriet√† first</title>
 	<programlisting>
 	{section name=customer loop=$custid}
 	{if $smarty.section.customer.first}
@@ -411,10 +411,10 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			<sect2 id="section.property.last">
 			<title>last</title>
 			<para>
-		last vale true se l'attuale iterazione Ë l'ultima.
+		last vale true se l'attuale iterazione √® l'ultima.
 			</para>
 	<example>
-	<title>propriet‡ last</title>
+	<title>propriet√† last</title>
 	<programlisting>
 	{section name=customer loop=$custid}
 	{if $smarty.section.customer.first}
@@ -447,7 +447,7 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			da uno. E' un alias di iteration, e funziona in modo identico.
 			</para>
 	<example>
-	<title>propriet‡ rownum</title>
+	<title>propriet√† rownum</title>
 	<programlisting>
 	{section name=customer loop=$custid}
 	{$smarty.section.customer.rownum} id: {$custid[customer]}&lt;br&gt;
@@ -466,10 +466,10 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			<title>loop</title>
 			<para>
 			loop visualizza l'index dell'ultimo ciclo visualizzato dalla
-			sezione. PuÚ essere usato all'interno o dopo la sezione.
+			sezione. Pu√≤ essere usato all'interno o dopo la sezione.
 			</para>
 	<example>
-	<title>propriet‡ index</title>
+	<title>propriet√† index</title>
 	<programlisting>
 	{section name=customer loop=$custid}
 	{$smarty.section.customer.index} id: {$custid[customer]}&lt;br&gt;
@@ -490,10 +490,10 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			<sect2 id="section.property.show">
 			<title>show</title>
 			<para>
-        	<emphasis>show</emphasis> Ë usato come parametro per la sezione.
-        	<emphasis>show</emphasis> Ë un valore booleano, true o false. Se
-        	false, la sezione non verr‡ visualizzata. Se Ë presente un sectionelse,
-        	verr‡ visualizzato questo.
+        	<emphasis>show</emphasis> √® usato come parametro per la sezione.
+        	<emphasis>show</emphasis> √® un valore booleano, true o false. Se
+        	false, la sezione non verr√† visualizzata. Se √® presente un sectionelse,
+        	verr√† visualizzato questo.
 			</para>
 	<example>
 	<title>attributo show</title>
@@ -525,10 +525,10 @@ e-mail: jane@myexample.com&lt;p&gt;</programlisting>
 			<title>total</title>
 			<para>
 			total visualizza il numero totale di iterazioni che la sezione
-			eseguir‡. PuÚ essere usato all'interno o dopo la sezione.
+			eseguir√†. Pu√≤ essere usato all'interno o dopo la sezione.
 			</para>
 	<example>
-	<title>propriet‡ total</title>
+	<title>propriet√† total</title>
 	<programlisting>
 	{section name=customer loop=$custid step=2}
 	{$smarty.section.customer.index} id: {$custid[customer]}&lt;br&gt;

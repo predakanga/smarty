@@ -19,18 +19,18 @@
      linkend="variable.cache.lifetime">$cache_lifetime</link> inmediatamente 
     antes de  <link linkend="api.fetch">buscar</link> el template para tener 
     el control cuando este cache en particular expira. 
-    Vea tambiÈn <link linkend="api.is.cached">is_cached()</link>.
+    Vea tambi√©n <link linkend="api.is.cached">is_cached()</link>.
       </para>
       <para>
-       Si <link linkend="variable.compile.check">$compile_check</link> est· habilitado, 
+       Si <link linkend="variable.compile.check">$compile_check</link> est√° habilitado, 
        el contenido del cache se regenerara si alguno de los dos templates o archivos 
-       de configuraciÛn que son parte de este cache estuviera modificado. 
-       Si <link linkend="variable.force.compile">$force_compile</link> est· habilitado, 
+       de configuraci√≥n que son parte de este cache estuviera modificado. 
+       Si <link linkend="variable.force.compile">$force_compile</link> est√° habilitado, 
        el contenido del cache siempre sera regenerado.
       </para>
 
 <para>
-  Ver TambiÈn 
+  Ver Tambi√©n 
   <link linkend="variable.cache.dir">$cache_dir</link>,
   <link linkend="variable.cache.lifetime">$cache_lifetime</link>,
   <link linkend="variable.cache.handler.func">$cache_handler_func</link>,

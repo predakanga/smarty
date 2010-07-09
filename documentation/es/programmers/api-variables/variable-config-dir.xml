@@ -4,14 +4,14 @@
       <title>$config_dir</title>
       <para>
        Este es el directorio usado para almacenar 
-       <link linkend="config.files">archivos de configuración</link> 
+       <link linkend="config.files">archivos de configuraciÃ³n</link> 
        usados en los templates. 
        El default es <filename class="directory">"./configs"</filename>, 
        esto significa que lo buscara en el directorio de templates en 
        el mismo directorio que esta ejecutando el script php.
       </para>
 	 <note>
-	 <title>Nota Técnica</title>
+	 <title>Nota TÃ©cnica</title>
 	 <para>
     No es recomendado colocar este directorio bajo el directorio 
     document root de su servidor web.

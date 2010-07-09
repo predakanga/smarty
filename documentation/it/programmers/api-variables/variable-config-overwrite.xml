@@ -3,10 +3,10 @@
      <sect1 id="variable.config.overwrite">
       <title>$config_overwrite</title>
       <para>
-       Se è impostato a true, le variabili lette dai file di configurazione si
+       Se Ã¨ impostato a true, le variabili lette dai file di configurazione si
        sovrascriveranno l'una con l'altra. Diversamente, verranno messe in un 
        array. E' utile se volete memorizzare array di dati nei file di configurazione,
-       è sufficiente elencare più volte ogni elemento. true per default.
+       Ã¨ sufficiente elencare piÃ¹ volte ogni elemento. true per default.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

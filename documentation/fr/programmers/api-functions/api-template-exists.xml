@@ -5,7 +5,7 @@
 <refentry id="api.template.exists">
  <refnamediv>
   <refname>template_exists()</refname>
-  <refpurpose>Vérifie si un template spécifique existe</refpurpose>
+  <refpurpose>VÃ©rifie si un template spÃ©cifique existe</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -15,14 +15,14 @@
   </methodsynopsis>
   <para>
    Elle accepte soit un chemin vers le template, soit une ressource de type
-   chaîne de caractères spécifiant le nom du template.
+   chaÃ®ne de caractÃ¨res spÃ©cifiant le nom du template.
   </para>
 
   <example>
    <title>template_exists()</title>
    <para>
     Cet exemple utilise <literal>$_GET['page']</literal> pour inclure le contenu d'un template.
-    Si le template n'existe pas, une page d'erreur sera affiché à la place.
+    Si le template n'existe pas, une page d'erreur sera affichÃ© Ã  la place.
     Le fichier <filename>page_container.tpl</filename> :
    </para>
    <programlisting role="php">
@@ -46,7 +46,7 @@
 <![CDATA[
 <?php
 
-// Définit le nom du fichier eg index.inc.tpl
+// DÃ©finit le nom du fichier eg index.inc.tpl
 $mid_template = $_GET['page'].'.inc.tpl';
 
 if( !$smarty->template_exists($mid_template) ){

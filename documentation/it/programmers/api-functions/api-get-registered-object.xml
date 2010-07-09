@@ -26,7 +26,7 @@ function smarty_block_foo($params, &$smarty)
   if (isset($params['object'])) {
     // ottengo il riferimento all'oggetto registrato
     $obj_ref = &$smarty->get_registered_object($params['object']);
-    // $obj_ref ora è un riferimento all'oggetto
+    // $obj_ref ora Ã¨ un riferimento all'oggetto
   }
 }
 ?>

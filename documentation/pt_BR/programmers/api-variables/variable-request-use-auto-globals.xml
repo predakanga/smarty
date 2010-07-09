@@ -4,14 +4,14 @@
 <sect1 id="variable.request.use.auto.globals">
       <title>$request_use_auto_globals</title>
       <para>
-	   Especifica se a Smarty deve usar vari·veis globais do php $HTTP_*_VARS[]
-	   ($request_use_auto_globals=false que È o valor padr„o) ou
+	   Especifica se a Smarty deve usar vari√°veis globais do php $HTTP_*_VARS[]
+	   ($request_use_auto_globals=false que √© o valor padr√£o) ou
 	   $_*[] ($request_use_auto_globals=true). Isso afeta templates
 	   que fazem uso do {$smarty.request.*}, {$smarty.get.*} etc. .
-	   AtenÁ„o: Se vocÍ setar $request_use_auto_globals para true, <link
+	   Aten√ß√£o: Se voc√™ setar $request_use_auto_globals para true, <link
 	   linkend="variable.request.vars.order">variable.request.vars.order
-	   </link> n„o ter„o efeito mas valores de configuraÁıes do php
-	   <literal>gpc_order</literal> s„o usados.
+	   </link> n√£o ter√£o efeito mas valores de configura√ß√µes do php
+	   <literal>gpc_order</literal> s√£o usados.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

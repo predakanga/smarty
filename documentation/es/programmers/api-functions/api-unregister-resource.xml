@@ -6,13 +6,13 @@
   <refpurpose>Des-registra dinamicamente un plugin de recurso</refpurpose>
  </refnamediv>
  <refsect1>
-  <title> Descripción</title>
+  <title> DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_resource</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Pase en el parámetro el nombre del recurso.
+   Pase en el parÃ¡metro el nombre del recurso.
   </para>
   <example>
    <title>unregister_resource()</title>
@@ -25,7 +25,7 @@ $smarty->unregister_resource("db");
    </programlisting>
   </example>
  <para>
- Ver también 
+ Ver tambiÃ©n 
  <link linkend="api.register.resource">register_resource()</link>
  y
  <link linkend="template.resources">template resources</link>

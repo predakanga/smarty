@@ -6,18 +6,18 @@
   <refpurpose>Des-registra dinamicamente un plugin de bloque de funciones</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_block</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Use esto para des-registrar dinámicamente un 
+   Use esto para des-registrar dinÃ¡micamente un 
    <link linkend="plugins.block.functions">bloque de funciones de plugin</link>. 
-   Pase en el bloque el <parameter>nombre</parameter> de la función.
+   Pase en el bloque el <parameter>nombre</parameter> de la funciÃ³n.
   </para>
       <para>
-      Ver también 
+      Ver tambiÃ©n 
       <link linkend="api.register.block">register_block()</link>
       y
       <link linkend="plugins.block.functions">Block Functions Plugins</link>.

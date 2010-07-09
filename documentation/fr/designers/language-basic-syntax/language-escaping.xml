@@ -3,38 +3,38 @@
 <!-- EN-Revision: 1.8 Maintainer: gerald Status: ready -->
 
 <sect1 id="language.escaping">
- <title>Désactiver l'analyse de Smarty</title>
+ <title>DÃ©sactiver l'analyse de Smarty</title>
  <para>
-  Il est quelques fois utile, voir nécessaire, de demander à Smarty d'ignorer
-  certaines sections que seraient analysées sinon. Un exemple classique est 
-  l'incorporation de code Javascript ou CSS dans les templates. Le problème 
-  est que ces langages utilisent les caractères { et }, qui sont aussi les 
-  <link linkend="language.function.ldelim">délimiteurs</link> Smarty par défaut.
+  Il est quelques fois utile, voir nÃ©cessaire, de demander Ã  Smarty d'ignorer
+  certaines sections que seraient analysÃ©es sinon. Un exemple classique est 
+  l'incorporation de code Javascript ou CSS dans les templates. Le problÃ¨me 
+  est que ces langages utilisent les caractÃ¨res { et }, qui sont aussi les 
+  <link linkend="language.function.ldelim">dÃ©limiteurs</link> Smarty par dÃ©faut.
  </para>
 
  <para>
-  Le plus simple pour éviter une telle situation est de placer vos codes 
-  Javascript et CSS dans des fichiers séparés, puis d'utiliser les méthodes 
-  standards HTML pour y accéder.
+  Le plus simple pour Ã©viter une telle situation est de placer vos codes 
+  Javascript et CSS dans des fichiers sÃ©parÃ©s, puis d'utiliser les mÃ©thodes 
+  standards HTML pour y accÃ©der.
  </para>
 
  <para>
   Inclure du contenu tel quel est possible en utilisant les blocs
   <link linkend="language.function.literal"><varname>{literal} .. {/literal}</varname></link>.
-  Similairement à l'utilisation d'entités HTML, vous pouvez utiliser
+  Similairement Ã  l'utilisation d'entitÃ©s HTML, vous pouvez utiliser
   <link linkend="language.function.ldelim"><varname>{ldelim}</varname></link> et
   <link linkend="language.function.ldelim"><varname>{rdelim}</varname></link>, ou
   <link linkend="language.variables.smarty.ldelim"><varname>{$smarty.ldelim}</varname></link> 
-  pour afficher les délimiteurs.
+  pour afficher les dÃ©limiteurs.
  </para>
 
  <para>
-  Il est souvent plus simple de modifier les délimiteurs de Smarty :
+  Il est souvent plus simple de modifier les dÃ©limiteurs de Smarty :
   <link linkend="variable.left.delimiter"><parameter>$left_delimiter</parameter></link> et
   <link linkend="variable.right.delimiter"><parameter>$right_delimiter</parameter></link>.
   </para>
   <example>
-   <title>Exemple de changement de délimiteur</title>
+   <title>Exemple de changement de dÃ©limiteur</title>
 <programlisting role="php">
 <![CDATA[
 <?php
@@ -50,7 +50,7 @@ $smarty->display('example.tpl');
 ]]>
   </programlisting>
   <para>
-   Où le template est:
+   OÃ¹ le template est:
   </para>
   <programlisting>
 <![CDATA[

@@ -6,13 +6,13 @@
   <refpurpose>Des-registra dinamicamente un objeto</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción </title>
+  <title>DescripciÃ³n </title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_object</methodname>
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
   </methodsynopsis>
    <para>
-     Ver también <link linkend="api.register.object">register_object()</link>
+     Ver tambiÃ©n <link linkend="api.register.object">register_object()</link>
      y <link linkend="advanced.features.objects">objects section</link>
    </para>
          

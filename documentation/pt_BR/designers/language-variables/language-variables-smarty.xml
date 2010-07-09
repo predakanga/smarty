@@ -2,42 +2,42 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->
         <sect1 id="language.variables.smarty">
-         <title>A vari·vel reservada {$smarty}</title>
+         <title>A vari√°vel reservada {$smarty}</title>
          <para>
-          A vari·vel reservada {$smarty} pode ser utilizada para acessar vari·veis
+          A vari√°vel reservada {$smarty} pode ser utilizada para acessar vari√°veis
           especiais do template. Segue uma lista completa.
          </para>
 
          <sect2 id="language.variables.smarty.request">
-          <title>Vari·veis Request</title>
+          <title>Vari√°veis Request</title>
           <para>
-           Vari·veis request como get, post, cookies, server,
+           Vari√°veis request como get, post, cookies, server,
            environment, e session podem ser acessadas como mostrado
            nos exemplos abaixo:
           </para>
           <example>
 
-           <title>Mostrando v·ri·veis request</title>
+           <title>Mostrando v√°ri√°veis request</title>
            <programlisting>
 {* mostra o valor de page da URL (GET) http://www.domain.com/index.php?page=foo *}
 {$smarty.get.page}
 
-{* mostra a vari·vel "page" de um formul·rio (POST) *}
+{* mostra a vari√°vel "page" de um formul√°rio (POST) *}
 {$smarty.post.page}
 
 {* mostra o valor do cookie "username" *}
 {$smarty.cookies.username}
 
-{* mostra a vari·vel do servidor "SERVER_NAME" *}
+{* mostra a vari√°vel do servidor "SERVER_NAME" *}
 {$smarty.server.SERVER_NAME}
 
-{* mostra a vari·vel de ambiente do sistema "PATH" *}
+{* mostra a vari√°vel de ambiente do sistema "PATH" *}
 {$smarty.env.PATH}
 
-{* mostra a vari·vel de session do php "id" *}
+{* mostra a vari√°vel de session do php "id" *}
 {$smarty.session.id}
 
-{* mostra a vari·vel "username" da uni„o de get/post/cookies/server/env *}
+{* mostra a vari√°vel "username" da uni√£o de get/post/cookies/server/env *}
 {$smarty.request.username}</programlisting>
 </example>
 		</sect2>
@@ -46,7 +46,7 @@
 			<title>{$smarty.now}</title>
 			<para>
              O timestamp atual pode ser acessado com {$smarty.now}.
-             O n˙mero reflete o n˙mero de segundos passados desde o assim chamado
+             O n√∫mero reflete o n√∫mero de segundos passados desde o assim chamado
              Epoch (1 de Janeiro de 1970) e pode ser passado diretamente para o
              modificador date_format para mostrar a data.
 			</para>
@@ -61,7 +61,7 @@
         <sect2 id="language.variables.smarty.const">
 			<title>{$smarty.const}</title>
 			<para>
-             VocÍ pode acessar o valor de constantes PHP diretamente.
+             Voc√™ pode acessar o valor de constantes PHP diretamente.
 			</para>
 <example>
 
@@ -74,8 +74,8 @@
 		<sect2 id="language.variables.smarty.capture">
 			<title>{$smarty.capture}</title>
 			<para>
-			 A saÌda capturada via {capture}..{/capture} pode ser acessada usando a vari·vel
-             {$smarty}. Veja a a seÁ„o sobre
+			 A sa√≠da capturada via {capture}..{/capture} pode ser acessada usando a vari√°vel
+             {$smarty}. Veja a a se√ß√£o sobre
 			<link linkend="language.function.capture">capture</link> para um exemplo.
 			</para>
 		</sect2>
@@ -83,8 +83,8 @@
 		<sect2 id="language.variables.smarty.config">
 			<title>{$smarty.config}</title>
 			<para>
-			A vari·vel {$smarty} pode ser usada para referir vari·veis de configuraÁ„o carregadas.
-            {$smarty.config.foo} È um sinonimo para {#foo#}. Veja a seÁ„o sobre
+			A vari√°vel {$smarty} pode ser usada para referir vari√°veis de configura√ß√£o carregadas.
+            {$smarty.config.foo} √© um sinonimo para {#foo#}. Veja a se√ß√£o sobre
 			<link linkend="language.function.config.load">config_load</link> para um exemplo.
 			</para>
 		</sect2>
@@ -92,8 +92,8 @@
         <sect2 id="language.variables.smarty.loops">
 			<title>{$smarty.section}, {$smarty.foreach}</title>
 			<para>
-			A vari·vel {$smarty} pode ser usada para se referir a propriedades 'section' e
-			'foreach' de loop. Veja a documentaÁ„o sobre
+			A vari√°vel {$smarty} pode ser usada para se referir a propriedades 'section' e
+			'foreach' de loop. Veja a documenta√ß√£o sobre
 			<link linkend="language.function.section">section</link> e
 			<link linkend="language.function.foreach">foreach</link>.
 			</para>
@@ -102,7 +102,7 @@
 		<sect2 id="language.variables.smarty.template">
 			<title>{$smarty.template}</title>
 			<para>
-             Esta vari·vel contÈm o nome do template
+             Esta vari√°vel cont√©m o nome do template
              atual que esta sendo processado.
 			</para>
 		</sect2>

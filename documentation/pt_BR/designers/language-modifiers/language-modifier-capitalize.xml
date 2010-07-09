@@ -4,7 +4,7 @@
       <sect1 id="language.modifier.capitalize">
        <title>capitalize</title>
        <para>
-        Isto È usado para converter para mai˙sculas a primeira letra de todas as palavras em uma vari·vel.
+        Isto √© usado para converter para mai√∫sculas a primeira letra de todas as palavras em uma vari√°vel.
        </para>
        <example>
         <title>capitalize</title>
@@ -20,7 +20,7 @@ index.tpl:
 {$articleTitle}
 {$articleTitle|capitalize}
 
-SAÕDA:
+SA√çDA:
 
 Police begin campaign to rundown jaywalkers.
 Police Begin Campaign To Rundown Jaywalkers.</programlisting>

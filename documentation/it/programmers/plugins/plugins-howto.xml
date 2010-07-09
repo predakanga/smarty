@@ -13,15 +13,15 @@
     I pre/postfiltri e i filtri di output sono casi un po' speciali. Siccome
     non vengono menzionati nei template, devono essere registrati o caricati
     esplicitamente attraverso le funzioni di interfaccia prima che il 
-    template venga eseguito. L'ordine in cui vengono eseguiti più filtri
+    template venga eseguito. L'ordine in cui vengono eseguiti piÃ¹ filtri
     dello stesso tipo dipende dall'ordine in cui sono stati registrati
     o caricati.
    </para>
    <para>
-    La <link linkend="variable.plugins.dir">$plugins_dir</link> può
+    La <link linkend="variable.plugins.dir">$plugins_dir</link> puÃ²
     essere una stringa che contiene un percorso oppure un array
-    che ne contiene diversi. Per installare un plugin, è sufficiente
-    installarlo in una delle directory e Smarty lo userà automaticamente.
+    che ne contiene diversi. Per installare un plugin, Ã¨ sufficiente
+    installarlo in una delle directory e Smarty lo userÃ  automaticamente.
    </para>
 </sect1>
 

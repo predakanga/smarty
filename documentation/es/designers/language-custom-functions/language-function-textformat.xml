@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>Descripción</entry>
+                        <entry>DescripciÃ³n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -31,21 +31,21 @@
                         <entry>number</entry>
                         <entry>No</entry>
                         <entry><emphasis>0</emphasis></entry>
-                        <entry>Número de caracteres para endentar cada linea.</entry>
+                        <entry>NÃºmero de caracteres para endentar cada linea.</entry>
                     </row>
                     <row>
                         <entry>indent_first</entry>
                         <entry>number</entry>
                         <entry>No</entry>
                         <entry><emphasis>0</emphasis></entry>
-                        <entry>Número de caracteres para endentar la primera linea</entry>
+                        <entry>NÃºmero de caracteres para endentar la primera linea</entry>
                     </row>
                     <row>
                         <entry>indent_char</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>(single space)</emphasis></entry>
-                        <entry>El carácter (o cadena de caracteres) para endentar</entry>
+                        <entry>El carÃ¡cter (o cadena de caracteres) para endentar</entry>
                     </row>
                     <row>
                         <entry>wrap</entry>
@@ -67,7 +67,7 @@
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>false</emphasis></entry>
-                        <entry>Si es true, wrap saltara la linea en el carácter exacto 
+                        <entry>Si es true, wrap saltara la linea en el carÃ¡cter exacto 
                            en vez de saltar al final de la palabra. </entry>
                     </row>
                     <row>
@@ -75,19 +75,19 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>La variable del template que recibirá la salida </entry>
+                        <entry>La variable del template que recibirÃ¡ la salida </entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-    {textformat} es una <link linkend="plugins.block.functions">función de bloque</link> 
-    usada para formatear texto. Básicamente limpa espacios y caracteres especiales, y 
-    formatea los párrafos cortando el texto al final de la palabra y endentando lineas.
+    {textformat} es una <link linkend="plugins.block.functions">funciÃ³n de bloque</link> 
+    usada para formatear texto. BÃ¡sicamente limpa espacios y caracteres especiales, y 
+    formatea los pÃ¡rrafos cortando el texto al final de la palabra y endentando lineas.
 			</para>
 			<para>
-   Usted puede definir los parámetros explícitamente, o usar un estilo pre-definido. 
-   Actualmente el único estilo disponible es "email".
+   Usted puede definir los parÃ¡metros explÃ­citamente, o usar un estilo pre-definido. 
+   Actualmente el Ãºnico estilo disponible es "email".
 			</para>
 <example>
  <title>{textformat}</title>
@@ -264,7 +264,7 @@
   </screen>
  </example>
   <para>
-  Ver también
+  Ver tambiÃ©n
    <link linkend="language.function.strip">{strip}</link>
   y <link linkend="language.modifier.wordwrap">{wordwrap}</link>.
  </para>

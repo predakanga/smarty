@@ -5,7 +5,7 @@
 <refentry id="api.register.object">
  <refnamediv>
   <refname>register_object()</refname>
-  <refpurpose>Enregistre un objet à utiliser dans un template</refpurpose>
+  <refpurpose>Enregistre un objet Ã  utiliser dans un template</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -19,7 +19,7 @@
    <methodparam><type>array</type><parameter>block_methods</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Reportez-vous à la section
+   Reportez-vous Ã  la section
    <link linkend="advanced.features.objects">objet</link> de
    ce manuel pour plus d'informations.
   </para>

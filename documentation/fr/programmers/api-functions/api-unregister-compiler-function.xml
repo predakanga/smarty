@@ -5,7 +5,7 @@
 <refentry id="api.unregister.compiler.function">
  <refnamediv>
   <refname>unregister_compiler_function()</refname>
-  <refpurpose>Désalloue dynamiquement une fonction de compilation</refpurpose>
+  <refpurpose>DÃ©salloue dynamiquement une fonction de compilation</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,7 +14,7 @@
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Passez en paramètre le nom <parameter>name</parameter> de
+   Passez en paramÃ¨tre le nom <parameter>name</parameter> de
    la fonction de compilation.
   </para>
   <para>

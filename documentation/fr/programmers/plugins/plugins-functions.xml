@@ -13,21 +13,21 @@
  </funcsynopsis>
  <para>
   Tous les <link linkend="language.syntax.attributes">attributs</link>
-  passés aux fonctions de template à partir du template
+  passÃ©s aux fonctions de template Ã  partir du template
   sont contenus dans le tableau associatif <parameter>$params</parameter>.
  </para>
  <para>
-  Le retour de la fonction sera substituée à la balise de fonction
+  Le retour de la fonction sera substituÃ©e Ã  la balise de fonction
   du template (fonction
   <link linkend="language.function.fetch"><varname>{fetch}</varname></link>
-  par exemple). Sinon, la fonction peut simplement accomplir une autre tâche sans sortie
+  par exemple). Sinon, la fonction peut simplement accomplir une autre tÃ¢che sans sortie
   (la fonction <link linkend="language.function.assign">
    <varname>{assign}</varname></link> par exemple).
  </para>
  <para>
   Si la fonction a besoin d'assigner des variables aux templates ou d'utiliser
-  d'autres fonctionnalités fournies par Smarty, elle peut recevoir un
-  objet <parameter>$smarty</parameter> pour celà.
+  d'autres fonctionnalitÃ©s fournies par Smarty, elle peut recevoir un
+  objet <parameter>$smarty</parameter> pour celÃ .
  </para>
  <para>
   <example>
@@ -41,7 +41,7 @@
  * Fichier :  function.eightball.php
  * Type :     fonction
  * Nom :      eightball
- * Rôle :     renvoie une phrase magique au hasard
+ * RÃ´le :     renvoie une phrase magique au hasard
  * -------------------------------------------------------------
  */
 function smarty_function_eightball($params, &$smarty)
@@ -62,7 +62,7 @@ function smarty_function_eightball($params, &$smarty)
   </example>
  </para>
  <para>
-  peut être utilisée dans le template de la façon suivante :
+  peut Ãªtre utilisÃ©e dans le template de la faÃ§on suivante :
  </para>
  <programlisting>
 Question: Will we ever have time travel?

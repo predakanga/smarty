@@ -4,16 +4,16 @@
 <sect1 id="variable.plugins.dir">
       <title>$plugins_dir</title>
       <para>
-	   Esse È o diretÛrio onde Smarty ir· procurar por plugins que s„o necess·rios.
-	   O Padr„o È "plugins" sob o SMARTY_DIR. Se vocÍes especificar um
-	   path relativo, Smarty ir· primeiro procurar sob o SMARTY_DIR, ent„o
-	   relativo para o cwd (current working directory), ent„o relativo para cada
+	   Esse √© o diret√≥rio onde Smarty ir√° procurar por plugins que s√£o necess√°rios.
+	   O Padr√£o √© "plugins" sob o SMARTY_DIR. Se voc√™es especificar um
+	   path relativo, Smarty ir√° primeiro procurar sob o SMARTY_DIR, ent√£o
+	   relativo para o cwd (current working directory), ent√£o relativo para cada
 	   entrada no seu PHP include path.
       </para>
 	  <note>
-	  <title>Notas tÈcnicas</title>
+	  <title>Notas t√©cnicas</title>
 	  <para>
-	  Para uma melhor performance, n„o configure seu plugins_dir para ter que usar o
+	  Para uma melhor performance, n√£o configure seu plugins_dir para ter que usar o
 	  PHP include path. Use um path absoluto, ou um path relativo para
 	  SMARTY_DIR ou o cwd.
 	  </para>

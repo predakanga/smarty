@@ -22,7 +22,7 @@
    <para>
     Questo metodo si usa per assegnare valori ai template per riferimento.
     Se assegnate una variabile per riferimento e poi cambiate il suo 
-    valore, il template vedr‡ il valore modificato. Per gli oggetti,
+    valore, il template vedr√† il valore modificato. Per gli oggetti,
     assign_by_ref() evita anche la copia in memoria dell'oggetto
     assegnato. Consultate il manuale PHP sui riferimenti alle variabili
     per una spiegazione approfondita.

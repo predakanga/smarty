@@ -8,9 +8,9 @@
      o <link linkend="api.fetch">fetch()</link>.
      Vamos a decir que una llamada a 
      display('index.tpl') debe tener varios contenidos de salida diferentes 
-     dependiendo de alguna condiciÛn, y usted quiere separar los caches para 
+     dependiendo de alguna condici√≥n, y usted quiere separar los caches para 
      cada una. Usted puede hacer esto pasando un cache_id como un segundo 
-     par·metro en la llamada de la funciÛn.
+     par√°metro en la llamada de la funci√≥n.
     </para>
     <example>
      <title>Pasando un cache_id para display()</title>
@@ -37,24 +37,24 @@ $smarty->display('index.tpl',$my_cache_id);
      "article_id" fue pasado en URL y es usado como el cache_id.
     </para>
     <note>
-     <title>Nota TÈcnica</title>
+     <title>Nota T√©cnica</title>
      <para>
      Tenga mucho cuidado cuando pase valores del cliente (web browser) 
-     dentro de Smarty (o alguna aplicaciÛn PHP). Aunque el ejemplo de 
-     arriba usar el article_id desde una URL parece facil, esto podrÌa 
+     dentro de Smarty (o alguna aplicaci√≥n PHP). Aunque el ejemplo de 
+     arriba usar el article_id desde una URL parece facil, esto podr√≠a 
      tener fatales consecuencias. El cache_id es usado para crear un 
      directorio en el sistema de archivos, entonces si el usuario decide 
      pasar un valor extremadamente largo para article_id, o escribir un 
-     script que envia article_ids aleatorios en un paso r·pido, esto 
-     posiblemente podrÌa causar problemas a nivel del servidor. Tenga la 
-     certeza de limpiar alg˙n dato pasado antes de usarlo. En este ejemplo, 
+     script que envia article_ids aleatorios en un paso r√°pido, esto 
+     posiblemente podr√≠a causar problemas a nivel del servidor. Tenga la 
+     certeza de limpiar alg√∫n dato pasado antes de usarlo. En este ejemplo, 
      tal vez usted sabia que el article_id tiene un largo de 10 caracteres
-     este es constituido solamente de alfanumÈricos, y debe ser un article_id 
+     este es constituido solamente de alfanum√©ricos, y debe ser un article_id 
      valido en la base de datos. Verifique esto!
      </para>
     </note>
     <para>
-    Asegurarse de pasar el mismo cache_id como el segundo par·metro
+    Asegurarse de pasar el mismo cache_id como el segundo par√°metro
     para <link linkend="api.is.cached">is_cached()</link> y 
     <link linkend="api.clear.cache">clear_cache()</link>.
     </para>
@@ -83,7 +83,7 @@ $smarty->display('index.tpl',$my_cache_id);
     </example>
     <para>
      Usted puede limpar todos los caches para un cache_id en particular 
-     pasando el primer par·metro null a 
+     pasando el primer par√°metro null a 
      <link linkend="api.clear.cache">clear_cache()</link>..
     </para>
     <example>

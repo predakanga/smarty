@@ -6,7 +6,7 @@
   <refpurpose>Despliega el Template</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción </title>
+  <title>DescripciÃ³n </title>
   <methodsynopsis>
    <type>void</type><methodname>display</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
@@ -17,10 +17,10 @@
    Este despliega el template diferente de <link
     linkend="api.fetch">fetch()</link>. Cargando un tipo valido de path
    <link linkend="template.resources">template resource</link>.
-   Como un segundo parámetro opcional, usted puede pasar un
+   Como un segundo parÃ¡metro opcional, usted puede pasar un
    identificador de cache.
    Vea el <link linkend="caching">caching section</link> para mayor
-   información.
+   informaciÃ³n.
   </para>
   &parameter.compileid;
   <example>
@@ -61,7 +61,7 @@ $smarty->display("index.tpl");
    <link linkend="variable.template.dir">$template_dir</link>.
   </para>
   <example>
-   <title>Ejemplos de recursos de la función display</title>
+   <title>Ejemplos de recursos de la funciÃ³n display</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -81,7 +81,7 @@ $smarty->display('db:header.tpl');
    </programlisting>
   </example>
     <para>
-     Ver también <link linkend="api.fetch">fetch()</link> y
+     Ver tambiÃ©n <link linkend="api.fetch">fetch()</link> y
      <link linkend="api.template.exists">template_exists()</link>.
     </para>
  </refsect1>

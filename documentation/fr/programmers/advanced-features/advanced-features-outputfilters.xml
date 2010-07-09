@@ -5,25 +5,25 @@
 <sect1 id="advanced.features.outputfilters">
  <title>Filtres de sortie</title>
  <para>
-  Quand le template est appelé via les fonctions
+  Quand le template est appelÃ© via les fonctions
   <link linkend="api.display"><varname>display()</varname></link> ou
   <link linkend="api.fetch"><varname>fetch()</varname></link>,
-  sa sortie est envoyée à travers un ou plusieurs filtres de sorties.
-  Ils diffèrent des <link linkend="advanced.features.postfilters">filtres
-   de post-compilation</link> dans le sens où ils agissent sur la sortie
-  des templates, une fois exécutés, et non sur les sources des templates.
+  sa sortie est envoyÃ©e Ã  travers un ou plusieurs filtres de sorties.
+  Ils diffÃ¨rent des <link linkend="advanced.features.postfilters">filtres
+   de post-compilation</link> dans le sens oÃ¹ ils agissent sur la sortie
+  des templates, une fois exÃ©cutÃ©s, et non sur les sources des templates.
  </para>
 
  <para>
-  Les filtres de sortie peuvent être soit
-  <link linkend="api.register.outputfilter">déclarés</link> soit
-  chargés depuis les <link linkend="variable.plugins.dir">répertoires
+  Les filtres de sortie peuvent Ãªtre soit
+  <link linkend="api.register.outputfilter">dÃ©clarÃ©s</link> soit
+  chargÃ©s depuis les <link linkend="variable.plugins.dir">rÃ©pertoires
   des plugins</link> en utilisant la fonction
   <link linkend="api.load.filter"><varname>load_filter()</varname></link>
-  ou en réglant la variable
+  ou en rÃ©glant la variable
   <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>.
   Smarty passera la sortie du template en premier argument et attendra
-  de la fonction qu'elle retourne le résultat de l'exécution.
+  de la fonction qu'elle retourne le rÃ©sultat de l'exÃ©cution.
  </para>
  <example>
   <title>Utilisation d'un filtre de sortie</title>
@@ -43,7 +43,7 @@ function protect_email($tpl_output, &$smarty)
 $smarty->register_outputfilter('protect_email');
 $smarty->display('index.tpl');
 
-// dorénavant toute occurence d'un adresse email dans le résultat du template
+// dorÃ©navant toute occurence d'un adresse email dans le rÃ©sultat du template
 // aura un protection simple contre les robots spammers
 ?>
 ]]>

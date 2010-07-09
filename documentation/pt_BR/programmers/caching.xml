@@ -4,22 +4,22 @@
 <chapter id="caching">
    <title>Caching</title>
    <para>
-   Caching È usado para aumentar a velocidade de chamada para <link
+   Caching √© usado para aumentar a velocidade de chamada para <link
    linkend="api.display">display()</link> ou <link
-   linkend="api.fetch">fetch()</link> salvando isso num arquivo de saÌda. Se h· uma vers„o
-   de cache disponÌvel para a chamada, isso È mostrado ao invÈs de regerar a saÌda de dados.
-   Caching pode fazer coisas tremendamente r·pidas,
-   especialmente templates com longo tempo computacional. Desde a saÌda de dados do
-   display() ou fetch() est· em cache, um arquivo de cache poderia ser composto por
-   diversos arquivos de templates, arquivos de configuraÁ„o, etc.
+   linkend="api.fetch">fetch()</link> salvando isso num arquivo de sa√≠da. Se h√° uma vers√£o
+   de cache dispon√≠vel para a chamada, isso √© mostrado ao inv√©s de regerar a sa√≠da de dados.
+   Caching pode fazer coisas tremendamente r√°pidas,
+   especialmente templates com longo tempo computacional. Desde a sa√≠da de dados do
+   display() ou fetch() est√° em cache, um arquivo de cache poderia ser composto por
+   diversos arquivos de templates, arquivos de configura√ß√£o, etc.
    </para>
    <para>
-   Desde que templates sejam din‚micos, È importante isso ter cuidado com
-   o que vocÍ est· fazendo cache e por quanto tempo. Por exemplo, se vocÍ est· mostrando
-   a p·gina principal do seu website na qual as alteraÁıes de conte˙do s„o muito frequentes,
-   isso funciona bem para cache dessa por uma hora ou mais. Um outro modo, se vocÍ est·
-   mostrando uma p·gina com um mapa do tempo contendo novas informaÁıes por minuto, n„o
-   faz sentido fazer cache nesta p·gina.
+   Desde que templates sejam din√¢micos, √© importante isso ter cuidado com
+   o que voc√™ est√° fazendo cache e por quanto tempo. Por exemplo, se voc√™ est√° mostrando
+   a p√°gina principal do seu website na qual as altera√ß√µes de conte√∫do s√£o muito frequentes,
+   isso funciona bem para cache dessa por uma hora ou mais. Um outro modo, se voc√™ est√°
+   mostrando uma p√°gina com um mapa do tempo contendo novas informa√ß√µes por minuto, n√£o
+   faz sentido fazer cache nesta p√°gina.
    </para>
 &programmers.caching.caching-setting-up;
 &programmers.caching.caching-multiple-caches;

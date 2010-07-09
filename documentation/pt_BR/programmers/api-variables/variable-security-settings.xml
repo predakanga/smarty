@@ -4,21 +4,21 @@
 <sect1 id="variable.security.settings">
       <title>$security_settings</title>
       <para>
-       Essas configurações são usadas para cancelar ou especificar configurações
-       de segurança quando security está habilitado. Estas possuem as seguintes configurações possíveis:
+       Essas configuraÃ§Ãµes sÃ£o usadas para cancelar ou especificar configuraÃ§Ãµes
+       de seguranÃ§a quando security estÃ¡ habilitado. Estas possuem as seguintes configuraÃ§Ãµes possÃ­veis:
       </para>
       <itemizedlist>
        <listitem><para>PHP_HANDLING - true/false. Se setado para true,
-         a configuração de $php_handling não é checada para security.</para></listitem>
-       <listitem><para>IF_FUNCS - Isso é um array de nomes de funções PHP permitidas
+         a configuraÃ§Ã£o de $php_handling nÃ£o Ã© checada para security.</para></listitem>
+       <listitem><para>IF_FUNCS - Isso Ã© um array de nomes de funÃ§Ãµes PHP permitidas
          nos blocos IF.</para></listitem>
        <listitem><para>INCLUDE_ANY - true/false. Se setado para true, algum
-         template pode ser incluído para um arquivo do sistema, apesar de toda a lista de
+         template pode ser incluÃ­do para um arquivo do sistema, apesar de toda a lista de
          $secure_dir.</para></listitem>
        <listitem><para>PHP_TAGS - true/false. Se setado para true, as tags {php}{/php}
-         são permitidas nos templates.</para></listitem>
-       <listitem><para>MODIFIER_FUNCS - Isso é um array de nomes de funções PHP permitidas
-         usadas como modificadores de variável.</para></listitem>
+         sÃ£o permitidas nos templates.</para></listitem>
+       <listitem><para>MODIFIER_FUNCS - Isso Ã© um array de nomes de funÃ§Ãµes PHP permitidas
+         usadas como modificadores de variÃ¡vel.</para></listitem>
       </itemizedlist>
 </sect1>
 <!-- Keep this comment at the end of the file

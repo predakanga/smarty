@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
    
-<!-- EN-Revision: 1.1 Maintainer: nobody Status: ready --><sect1 id="plugins.functions"><title>Funções de Template</title>
+<!-- EN-Revision: 1.1 Maintainer: nobody Status: ready --><sect1 id="plugins.functions"><title>FunÃ§Ãµes de Template</title>
     <funcsynopsis>
      <funcprototype>
       <funcdef>void <function>smarty_function_<replaceable>name</replaceable></function></funcdef>
@@ -10,32 +10,32 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     Todos os atributos passados para as funções de template a
-      partir do template estão contidas em
+     Todos os atributos passados para as funÃ§Ãµes de template a
+      partir do template estÃ£o contidas em
       <parameter>$params</parameter> como um array associativo. Ou acessa esses valores
       diretamente i.e <varname>$params['start']</varname> ou usa
      <varname>extract($params)</varname> para 
-     importá-los para dentro da tabela símbolo.
+     importÃ¡-los para dentro da tabela sÃ­mbolo.
     </para>
     <para>
-	 A saída (valor de retorno) da função será substituída no lugar da tag da função no template
-     (a função <function>fetch</function>, por exemplo). Alternativamente, a função pode simplesmente executar
-     alguma outra tarefa sem ter alguma saída
-     (a função <function>assign</function>).
+	 A saÃ­da (valor de retorno) da funÃ§Ã£o serÃ¡ substituÃ­da no lugar da tag da funÃ§Ã£o no template
+     (a funÃ§Ã£o <function>fetch</function>, por exemplo). Alternativamente, a funÃ§Ã£o pode simplesmente executar
+     alguma outra tarefa sem ter alguma saÃ­da
+     (a funÃ§Ã£o <function>assign</function>).
     </para>
     <para>
-     Se a função precisa passar valores a algumas variáveis para o template ou utilizar alguma outra funcionalidade
+     Se a funÃ§Ã£o precisa passar valores a algumas variÃ¡veis para o template ou utilizar alguma outra funcionalidade
      fornecida com a Smarty, ela pode usar 
      o objeto <parameter>$smarty</parameter> fornecido para fazer isso.
     </para>
     <para>
-     Veja também:
+     Veja tambÃ©m:
      <link linkend="api.register.function">register_function()</link>,
      <link linkend="api.unregister.function">unregister_function()</link>.
     </para>
     <para>
      <example>
-      <title>função de plugin com saída</title>
+      <title>funÃ§Ã£o de plugin com saÃ­da</title>
       <programlisting>
 &lt;?php
 /*
@@ -66,11 +66,11 @@ function smarty_function_eightball($params, &amp;$smarty)
      que pode ser usada no template da seguinte forma:
     </para>
     <programlisting>
-Pergunta: Nós sempre teremos tempo para viajar?
+Pergunta: NÃ³s sempre teremos tempo para viajar?
 Resposta: {eightball}.</programlisting>
     <para>
      <example>
-      <title>função de plugin sem saída</title>
+      <title>funÃ§Ã£o de plugin sem saÃ­da</title>
       <programlisting>
 &lt;?php
 /*

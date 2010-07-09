@@ -5,7 +5,7 @@
       <para>
        Se ci sono alcuni filtri che volete caricare ad ogni chiamata del
        template, potete specificarli usando questa variabile e Smarty li
-       caricher‡ automaticamente. La variabile Ë un array associativo
+       caricher√† automaticamente. La variabile √® un array associativo
        dove le chiavi sono i tipi di filtro ed i valori sono array con i
        nomi dei filtri. Ad esempio:
        <informalexample>

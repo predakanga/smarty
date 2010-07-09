@@ -15,7 +15,7 @@
      <entry>Tipo</entry>
      <entry>Requerido</entry>
      <entry>Default</entry>
-     <entry>Descripción</entry>
+     <entry>DescripciÃ³n</entry>
     </row>
    </thead>
    <tbody>
@@ -31,15 +31,15 @@
  </informaltable>
  <para>
   {debug} Muestra el debug de la consola en la pagina. 
-  Esto funciona independente de la definición de 
+  Esto funciona independente de la definiciÃ³n de 
   <link linkend="chapter.debugging.console">debug</link>.
-  Ya que este es ejecutado en tiempo de ejecución, este solo
+  Ya que este es ejecutado en tiempo de ejecuciÃ³n, este solo
   puede mostrar las variables definidas, no en el template, es 
   decir en uso. Usted puede ver todas las variables disponibles 
   del template con scope.
  </para>
   <para>
-   Ver también <link linkend="chapter.debugging.console">Debugging console</link>
+   Ver tambiÃ©n <link linkend="chapter.debugging.console">Debugging console</link>
   </para>
 
 </sect1>

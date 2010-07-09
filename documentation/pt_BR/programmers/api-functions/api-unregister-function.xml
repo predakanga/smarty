@@ -10,13 +10,13 @@
           </funcprototype>
          </funcsynopsis>
          <para>
-	  Use isso para desregistrar dinamicamente uma função de plugin do template.
-          Passe no template o nome da função.
+	  Use isso para desregistrar dinamicamente uma funÃ§Ã£o de plugin do template.
+          Passe no template o nome da funÃ§Ã£o.
          </para>
 <example>
 <title>unregister_function</title>
 <programlisting>
-// nós não queremos que designers template tenham acesso aos nossos arquivos do sistema
+// nÃ³s nÃ£o queremos que designers template tenham acesso aos nossos arquivos do sistema
 
 $smarty->unregister_function("fetch");</programlisting>
 </example>

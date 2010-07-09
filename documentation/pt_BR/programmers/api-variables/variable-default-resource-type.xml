@@ -4,10 +4,10 @@
 <sect1 id="variable.default.resource.type">
       <title>$default_resource_type</title>
       <para>
-	  Isso diz à Smarty qual tipo de recurso usar implicitamente.
-	  O valor padrão é 'file', significando que $smarty->display('index.tpl'); e
-	  $smarty->display('file:index.tpl'); são idênticos no significado.
-	  Veja o capítulo  <link linkend="template.resources">resource</link> para detalhes.
+	  Isso diz Ã  Smarty qual tipo de recurso usar implicitamente.
+	  O valor padrÃ£o Ã© 'file', significando que $smarty->display('index.tpl'); e
+	  $smarty->display('file:index.tpl'); sÃ£o idÃªnticos no significado.
+	  Veja o capÃ­tulo  <link linkend="template.resources">resource</link> para detalhes.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

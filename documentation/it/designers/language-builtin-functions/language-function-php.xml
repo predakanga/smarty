@@ -4,10 +4,10 @@
 			<title>php</title>
 			<para>
 			I tag php vi consentono di incorporare codice php direttamente
-			nel template. Non sar‡ fatto l'escape, indipendentemente
+			nel template. Non sar√† fatto l'escape, indipendentemente
 			dall'impostazione di <link
 			linkend="variable.php.handling">$php_handling</link>.
-			Questa funzione Ë solo per utenti avanzati, normalmente non
+			Questa funzione √® solo per utenti avanzati, normalmente non
 			dovreste averne bisogno.
 			</para>
 <example>

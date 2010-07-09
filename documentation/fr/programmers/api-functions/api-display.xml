@@ -17,11 +17,11 @@
    </methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour afficher un template. Il faut fournir un type et un
+   UtilisÃ©e pour afficher un template. Il faut fournir un type et un
    chemin de <link
    linkend="template.resources">ressource template</link>
-   valides. Vous pouvez passer en second paramètre un identifiant
-   de fichier de <parameter>$cache id</parameter>. Reportez-vous à la section
+   valides. Vous pouvez passer en second paramÃ¨tre un identifiant
+   de fichier de <parameter>$cache id</parameter>. Reportez-vous Ã  la section
    <link linkend="caching">cache</link> pour plus de renseignements.
   </para>
   &parameter.compileid;
@@ -34,11 +34,11 @@ include(SMARTY_DIR.'Smarty.class.php');
 $smarty = new Smarty();
 $smarty->caching = true;
 
-// ne fait un appel à la base de données que si le fichier
+// ne fait un appel Ã  la base de donnÃ©es que si le fichier
 // de cache n'existe pas
 if(!$smarty->is_cached('index.tpl')) {
 
-    // quelques données
+    // quelques donnÃ©es
     $address = '245 N 50th';
     $db_data = array(
                        'Ville' => 'Lincoln',
@@ -61,7 +61,7 @@ $smarty->display('index.tpl');
   <para>
    Utilisez la syntaxe des <link
    linkend="template.resources">ressources templates</link>
-   pour afficher des fichiers en-dehors du répertoire
+   pour afficher des fichiers en-dehors du rÃ©pertoire
    <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>.
   </para>
   <example>
@@ -72,13 +72,13 @@ $smarty->display('index.tpl');
 // chemin absolu
 $smarty->display('/usr/local/include/templates/header.tpl');
 
-// chemin absolu (mêm chose)
+// chemin absolu (mÃªm chose)
 $smarty->display('file:/usr/local/include/templates/header.tpl');
 
-// chemin absolu Windows (on DOIT utiliser le préfixe "file:")
+// chemin absolu Windows (on DOIT utiliser le prÃ©fixe "file:")
 $smarty->display('file:C:/www/pub/templates/header.tpl');
 
-// inclue à partir de la ressource template nommée "db"
+// inclue Ã  partir de la ressource template nommÃ©e "db"
 $smarty->display('db:header.tpl');
 ?>
 ]]>

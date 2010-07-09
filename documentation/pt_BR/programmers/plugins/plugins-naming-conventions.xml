@@ -2,9 +2,9 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->   
 <sect1 id="plugins.naming.conventions">
-    <title>Convenções de Aparência</title>
+    <title>ConvenÃ§Ãµes de AparÃªncia</title>
     <para>
-     Arquivos e funções de Plugin devem seguir uma convenção de aparência muito específica
+     Arquivos e funÃ§Ãµes de Plugin devem seguir uma convenÃ§Ã£o de aparÃªncia muito especÃ­fica
      a fim de ser localizada pela Smarty.
     </para>
     <para>
@@ -18,7 +18,7 @@
      </blockquote>
     </para>
     <para>
-     Onde <literal>tipo</literal> é um dos seguintes tipos de plugin:
+     Onde <literal>tipo</literal> Ã© um dos seguintes tipos de plugin:
      <itemizedlist spacing="compact">
       <listitem><simpara>function</simpara></listitem>
       <listitem><simpara>modifier</simpara></listitem>
@@ -32,8 +32,8 @@
      </itemizedlist>
     </para>
     <para>
-     E <literal>nome</literal> seria um identificador válido (letras,
-     números, e underscores apenas).
+     E <literal>nome</literal> seria um identificador vÃ¡lido (letras,
+     nÃºmeros, e underscores apenas).
     </para>
     <para>
      Alguns exemplos: <literal>function.html_select_date.php</literal>,
@@ -41,7 +41,7 @@
      <literal>modifier.spacify.php</literal>.
     </para>
     <para>
-     As funções de plugin dentro dos arquivos do plugin devem ser nomeadas da seguinte forma:
+     As funÃ§Ãµes de plugin dentro dos arquivos do plugin devem ser nomeadas da seguinte forma:
      <blockquote>
       <para>
        <function>smarty_<replaceable>tipo</replaceable>_<replaceable>nome</replaceable></function>
@@ -50,12 +50,12 @@
     </para>
     <para>
      O significado de <literal>tipo</literal> e
-     <literal>nome</literal> são os mesmos de antes.
+     <literal>nome</literal> sÃ£o os mesmos de antes.
     </para>
     <para>
-     A Smarty mostrará mensagens de erro apropriadas se o arquivo de plugins que é necessário não é encontrado,
-      ou se o arquivo ou a função de plugin 
-      estão nomeadas inadequadamente.
+     A Smarty mostrarÃ¡ mensagens de erro apropriadas se o arquivo de plugins que Ã© necessÃ¡rio nÃ£o Ã© encontrado,
+      ou se o arquivo ou a funÃ§Ã£o de plugin 
+      estÃ£o nomeadas inadequadamente.
     </para>
 </sect1>
 <!-- Keep this comment at the end of the file

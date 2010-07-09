@@ -4,7 +4,7 @@
   <title>nl2br</title>
   <para>
    Todos los saltos de linea seran convertidos a etiquetas &lt;br /&gt; 
-   como datos de la variable. Esto equivale a la función  
+   como datos de la variable. Esto equivale a la funciÃ³n  
    <ulink url="&url.php-manual;nl2br">nl2br()</ulink> de PHP.
   </para>
   <example>
@@ -38,7 +38,7 @@ Sun or rain expected<br />today, dark tonight
    </screen>
   </example>
   <para>
-   Ver también <link linkend="language.modifier.wordwrap">word_wrap</link>,
+   Ver tambiÃ©n <link linkend="language.modifier.wordwrap">word_wrap</link>,
    <link linkend="language.modifier.count.paragraphs">count_paragraphs</link>
    y <link linkend="language.modifier.count.sentences">count_sentences</link>.
   </para>

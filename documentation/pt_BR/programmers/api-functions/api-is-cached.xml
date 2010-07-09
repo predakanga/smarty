@@ -11,9 +11,9 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-                Isso retorna true se há um cache válido para esse template.
+                Isso retorna true se hÃ¡ um cache vÃ¡lido para esse template.
 		Isso somente funciona se <link
-                linkend="variable.caching">caching</link> está setado para true.
+                linkend="variable.caching">caching</link> estÃ¡ setado para true.
 			</para>
 <example>
 <title>is_cached</title>
@@ -27,8 +27,8 @@ if(!$smarty->is_cached("index.tpl")) {
 $smarty->display("index.tpl");</programlisting>
 </example>
             <para>
-                Você pode também passar um cache id como um segundo parâmetro opcional
-		no caso você quer múltiplos caches para o template dado.
+                VocÃª pode tambÃ©m passar um cache id como um segundo parÃ¢metro opcional
+		no caso vocÃª quer mÃºltiplos caches para o template dado.
             </para>
 <example>
 <title>is_cached with multiple-cache template</title>

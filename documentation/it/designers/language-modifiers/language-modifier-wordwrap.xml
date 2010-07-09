@@ -31,7 +31,7 @@
       <entry>stringa</entry>
       <entry>No</entry>
       <entry>\n</entry>
-      <entry>Questa Ë la stringa usata per andare a capo.</entry>
+      <entry>Questa √® la stringa usata per andare a capo.</entry>
      </row>
      <row>
       <entry>3</entry>
@@ -45,10 +45,10 @@
    </tgroup>
   </informaltable>
   <para>
-   Dispone una stringa su pi˘ righe usando come riferimento una certa
+   Dispone una stringa su pi√π righe usando come riferimento una certa
    larghezza di colonna, per default 80. Come secondo parametro opzionale
    potete specificare una stringa da usare per separare le righe (il
-   default Ë \n). Per default, wordwrap cercher‡ di andare a capo dopo
+   default √® \n). Per default, wordwrap cercher√† di andare a capo dopo
    una parola intera. Se volete che vada a capo all'esatta larghezza in
    caratteri, passate il terzo parametro opzionale come true.
   </para>
@@ -66,7 +66,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[ 
@@ -82,7 +82,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

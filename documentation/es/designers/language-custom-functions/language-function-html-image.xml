@@ -16,7 +16,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -53,24 +53,24 @@
                         <entry>string</entry>
                         <entry>no</entry>
                         <entry><emphasis>""</emphasis></entry>
-                        <entry>descripciÛn alternativa de la imagen</entry>
+                        <entry>descripci√≥n alternativa de la imagen</entry>
                     </row>
                     <row>
                         <entry>href</entry>
                         <entry>string</entry>
                         <entry>no</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>valor href a donde la imagen ser· ligada</entry>
+                        <entry>valor href a donde la imagen ser√° ligada</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
     {html_image} es una 
-    <link linkend="language.custom.functions">funciÛn habitual</link>
+    <link linkend="language.custom.functions">funci√≥n habitual</link>
     que genera una etiqueta HTML para una imagen. La altura y lo largo 
-    son autom·ticamente calculadas a partir del archivo de la imagen si 
-    ning˙n valor suplido.
+    son autom√°ticamente calculadas a partir del archivo de la imagen si 
+    ning√∫n valor suplido.
 			</para>
 			<para>
    basedir es el directorio base en el cual las rutas relativas de las 
@@ -91,13 +91,13 @@
    creada &lt;img&gt;.
 			</para>
 			<note>
-				<title>Nota TÈcnica</title>
+				<title>Nota T√©cnica</title>
 				<para>
      {html_image} requiere un acceso a disco para leer la imagen y 
      calcular la altura y el largo. Si usted no usa <link
       linkend="caching">cache</link> en el template, 
      generalmente es mejor evitar {html_image} y utilizar
-     las etiquetas de imagen est·ticas para un optimo funcionamiento.
+     las etiquetas de imagen est√°ticas para un optimo funcionamiento.
     </para>
 			</note>
    <example>

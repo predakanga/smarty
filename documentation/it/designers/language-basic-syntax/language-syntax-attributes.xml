@@ -6,7 +6,7 @@
   La maggior parte delle funzioni accetta attributi che specificano
   o modificano il loro comportamento. Gli attributi delle funzioni
   Smarty assomigliano agli attributi HTML. I valori statici non hanno
-  bisogno di essere racchiusi fra virgolette, ma è raccomandato farlo
+  bisogno di essere racchiusi fra virgolette, ma Ã¨ raccomandato farlo
   per le stringhe. Possono essere usate anche variabili, che non devno
   essere fra virgolette.
  </para>

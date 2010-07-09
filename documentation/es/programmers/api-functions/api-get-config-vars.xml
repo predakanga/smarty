@@ -3,18 +3,18 @@
 <refentry id="api.get.config.vars">
  <refnamediv>
   <refname>get_config_vars()</refname>
-  <refpurpose>retorna el valor asignado a la variable de configuración</refpurpose>
+  <refpurpose>retorna el valor asignado a la variable de configuraciÃ³n</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>array</type><methodname>get_config_vars</methodname>
    <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Si no tiene un parámetro asignado, un arreglo de todas las  
+   Si no tiene un parÃ¡metro asignado, un arreglo de todas las  
    <link linkend="language.config.variables">variables
-    de los archivos de configuración</link> es retornado.
+    de los archivos de configuraciÃ³n</link> es retornado.
   </para>
   <example>
    <title>get_config_vars()</title>
@@ -34,7 +34,7 @@ print_r($config_vars);
    </programlisting>
   </example>
   <para>
-   Ver también
+   Ver tambiÃ©n
   <link linkend="api.clear.config">clear_config()</link>,
    <link linkend="language.function.config.load">{config_load}</link>,
   <link linkend="api.config.load">config_load()</link>

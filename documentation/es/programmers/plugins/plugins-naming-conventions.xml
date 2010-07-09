@@ -3,7 +3,7 @@
    <sect1 id="plugins.naming.conventions">
     <title>Nombres convencionales</title>
     <para>
-    Los archivos y funciones de Plugin deben seguir una convención 
+    Los archivos y funciones de Plugin deben seguir una convenciÃ³n 
     de apariencia muy especifica a fin de que pueda ser localizada 
     por el Smarty.
     </para>
@@ -33,7 +33,7 @@
     </para>
     <para>
      Y <literal>name</literal> seria un identificador valido (solo, letras,
-     números, y underscores).
+     nÃºmeros, y underscores).
     </para>
     <para>
      Algunos ejemplos: <literal>function.html_select_date.php</literal>,
@@ -55,7 +55,7 @@
     <para>
      El Smarty mostrara mensajes de error apropiados si el archivo de 
      plugins que es necesario no es encontrado, o si el archivo a la 
-     función de plugin esta nombrado inadecuadamente.
+     funciÃ³n de plugin esta nombrado inadecuadamente.
     </para>
    </sect1>
 

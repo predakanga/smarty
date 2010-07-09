@@ -5,18 +5,18 @@
 <sect1 id="language.function.strip">
  <title>{strip}</title>
  <para>
-  Il est fréquent que les designers web rencontrent des problèmes
+  Il est frÃ©quent que les designers web rencontrent des problÃ¨mes
   dus aux espaces et retours chariots, qui affectent le rendu HTML
-  ("fonctionnalités" des navigateurs), les obligeant à coller les
-  balises les unes aux autres. Cette solution rend généralement le
-  code illisible et impossible à maintenir.
+  ("fonctionnalitÃ©s" des navigateurs), les obligeant Ã  coller les
+  balises les unes aux autres. Cette solution rend gÃ©nÃ©ralement le
+  code illisible et impossible Ã  maintenir.
  </para>
  <para>
-  Tout contenu situé entre les balises <varname>{strip}{/strip}</varname> se verra
-  allégé des espaces superflus et des retours chariots en début ou en fin
-  de ligne, avant qu'il ne soit affiché. De la sorte, vous pouvez
+  Tout contenu situÃ© entre les balises <varname>{strip}{/strip}</varname> se verra
+  allÃ©gÃ© des espaces superflus et des retours chariots en dÃ©but ou en fin
+  de ligne, avant qu'il ne soit affichÃ©. De la sorte, vous pouvez
   conserver vos templates lisibles, sans vous soucier des effets
-  indésirables que peuvent apporter les espaces superflus.
+  indÃ©sirables que peuvent apporter les espaces superflus.
  </para>
  <note>
   <para>
@@ -29,7 +29,7 @@
   <title>Balises strip</title>
   <programlisting>
 <![CDATA[
-{* la suite sera affichée sur une seule ligne *}
+{* la suite sera affichÃ©e sur une seule ligne *}
 {strip}
 <table border='0'>
  <tr>
@@ -55,9 +55,9 @@
  <para>
   Notez que dans l'exemple ci-dessus, toutes les lignes commencent et
   se terminent par des	balises HTML. Sachez que si vous avez du texte
-  en début ou en fin de ligne dans des balises strip, ce dernier sera collé
-  au suivant/précédent et risque de ne pas être affiché selon
-  l'effet désiré.
+  en dÃ©but ou en fin de ligne dans des balises strip, ce dernier sera collÃ©
+  au suivant/prÃ©cÃ©dent et risque de ne pas Ãªtre affichÃ© selon
+  l'effet dÃ©sirÃ©.
  </para>
  <para>
   Voir aussi

@@ -3,48 +3,48 @@
 <!-- EN-Revision: 1.8 Maintainer: gerald Status: ready -->
 
 <chapter id="chapter.debugging.console">
- <title>Console de débogage</title>
+ <title>Console de dÃ©bogage</title>
  <para>
-  Il existe une console de débogage dans Smarty. La console vous indique
+  Il existe une console de dÃ©bogage dans Smarty. La console vous indique
   toutes les templates <link linkend="language.function.include">incluses</link>,
-  les variables <link linkend="api.assign">assignées</link> et chargées depuis un fichier de
+  les variables <link linkend="api.assign">assignÃ©es</link> et chargÃ©es depuis un fichier de
   <link linkend="language.config.variables">configuration</link> pour le template courant.
-  Un template appelé <literal>debug.tpl</literal> est inclus dans la distribution de Smarty qui contrôle
-  le formattage de la console. Définissez <link linkend="variable.debugging">$debugging</link>
-  à &true; dans Smarty et, si besoin, vous pouvez définir
+  Un template appelÃ© <literal>debug.tpl</literal> est inclus dans la distribution de Smarty qui contrÃ´le
+  le formattage de la console. DÃ©finissez <link linkend="variable.debugging">$debugging</link>
+  Ã  &true; dans Smarty et, si besoin, vous pouvez dÃ©finir
   <link linkend="variable.debug.tpl"><parameter>$debug_tpl</parameter></link>
-  de façon à ce que ce dernier contienne le chemin du template à utiliser(dans
+  de faÃ§on Ã  ce que ce dernier contienne le chemin du template Ã  utiliser(dans
   <link linkend="constant.smarty.dir"><constant>SMARTY_DIR</constant></link> par defaut).
-  Lorsque vous chargez la page, une console javascript est censée surgir
-  et vous donner les noms de toutes les variables inclues et assignées dans
+  Lorsque vous chargez la page, une console javascript est censÃ©e surgir
+  et vous donner les noms de toutes les variables inclues et assignÃ©es dans
   votre page courante. Pour voir toutes les variables d'un template particulier,
   voir la fonction <link linkend="language.function.debug"><varname>{debug}</varname></link>.
-  Pour désactiver la console de débogage, définissez 
-  <link linkend="variable.debugging"><parameter>$debugging</parameter></link> à &false;.
-  Vous pouvez également temporairement activer le débogage en indiquant
+  Pour dÃ©sactiver la console de dÃ©bogage, dÃ©finissez 
+  <link linkend="variable.debugging"><parameter>$debugging</parameter></link> Ã  &false;.
+  Vous pouvez Ã©galement temporairement activer le dÃ©bogage en indiquant
   <literal>SMARTY_DEBUG</literal> dans l'url si tant est que l'option
   <link linkend="variable.debugging.ctrl"><parameter>$debugging_ctrl</parameter></link>
-  soit activée.
+  soit activÃ©e.
  </para>
   <note>
    <title>Note technique</title>
    <para>
-    La console de débogage ne fonctionne pas si vous utilisez l'API
+    La console de dÃ©bogage ne fonctionne pas si vous utilisez l'API
     <link linkend="api.fetch"><varname>fetch()</varname></link>,
     mais seulement lorsque vous utilisez
     <link linkend="api.display"><varname>display()</varname></link>.
-    C'est en effet un jeu d'instructions javascripts à la fin du template qui déclenchent
-    l'ouverture de la fenêtre. Si vous n'aimez pas javascript, vous pouvez modifier
-    <literal>debug.tpl</literal> pour formater les données de la façon qui vous conviendra le
-    mieux. Les données de débogage ne sont pas mises en cache et les
+    C'est en effet un jeu d'instructions javascripts Ã  la fin du template qui dÃ©clenchent
+    l'ouverture de la fenÃªtre. Si vous n'aimez pas javascript, vous pouvez modifier
+    <literal>debug.tpl</literal> pour formater les donnÃ©es de la faÃ§on qui vous conviendra le
+    mieux. Les donnÃ©es de dÃ©bogage ne sont pas mises en cache et les
     informations de debug.tpl ne sont pas incluses dans la sortie de la
-    console de débogage.
+    console de dÃ©bogage.
    </para>
   </note>
   <note>
    <para>
     Le temps de chargement des templates et des fichiers de configuration sont
-    indiqués en secondes.
+    indiquÃ©s en secondes.
    </para>
   </note>
   <para>

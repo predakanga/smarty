@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -24,14 +24,14 @@
                         <entry>string</entry>
                         <entry>Si</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>El nombre de la funciÛn insert(insert_name)</entry>
+                        <entry>El nombre de la funci√≥n insert(insert_name)</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>El nombre de la variable del template que recibir· la
+                        <entry>El nombre de la variable del template que recibir√° la
                          salida</entry>
                     </row>
                     <row>
@@ -39,15 +39,15 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>El nombre de un php que ser· incluido antes que la 
-                         funciÛn insert sea llamada </entry>
+                        <entry>El nombre de un php que ser√° incluido antes que la 
+                         funci√≥n insert sea llamada </entry>
                     </row>
                     <row>
                         <entry>[var ...]</entry>
                         <entry>[var type]</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Variable para pasar a la funciÛn insert</entry>
+                        <entry>Variable para pasar a la funci√≥n insert</entry>
                     </row>
                 </tbody>
                 </tgroup>
@@ -57,20 +57,20 @@
        linkend="language.function.include">{include}</link>, excepto
    que las etiquetas insert no van para el cache cuando
    <link linkend="caching">caching</link> esta activado. 
-   Esta sera executada a cada invocaciÛn del template.
+   Esta sera executada a cada invocaci√≥n del template.
 			</para>
             <para>
              Digamos que usted tiene un template con un banner en la parte de arriba
              de la pagina. El banner puede contener cualquier mezcla de HTML, imagenes,
-             flash, etc.  AsÌ nosotros no podemos usar una liga(link) estatica aquÌ, 
+             flash, etc.  As√≠ nosotros no podemos usar una liga(link) estatica aqu√≠, 
              y nosotros no queremos que este el contenido oculto con la pagina.
-             AquÌ vemos la etiqueta {insert}: el template conoce los valores 
+             Aqu√≠ vemos la etiqueta {insert}: el template conoce los valores 
              #banner_location_id# y #site_id# (obtenidos de un <link
-              linkend="config.files">archivo de configuraciÛn</link>), 
-             y necesita llamar una funciÛn para obtener el contenido del banner.
+              linkend="config.files">archivo de configuraci√≥n</link>), 
+             y necesita llamar una funci√≥n para obtener el contenido del banner.
 			</para>
 <example>
- <title>funciÛn {insert}</title>
+ <title>funci√≥n {insert}</title>
 <programlisting>
 {* ejemplo de traer un banner *}
 {insert name="getBanner" lid=#banner_location_id# sid=#site_id#}
@@ -78,29 +78,29 @@
 </example>
 			<para>
    En este ejemplo, nosotros estamos usando el nombre "getBanner" 
-   y pasando los par·metros #banner_location_id# y #site_id#.
-   El Smarty lo buscara en la funciÛn llamada insert_getBanner() 
-   en su aplicaciÛn PHP, pasando los valores de #banner_location_id# 
+   y pasando los par√°metros #banner_location_id# y #site_id#.
+   El Smarty lo buscara en la funci√≥n llamada insert_getBanner() 
+   en su aplicaci√≥n PHP, pasando los valores de #banner_location_id# 
    y #site_id# como primer argumento en una matriz asociativa.
-   Todos los nombres de las funciones insert en su aplicaciÛn deben 
+   Todos los nombres de las funciones insert en su aplicaci√≥n deben 
    ser precedidas por "insert_" para prevenir posibles problemas con 
-   nombres de funciones repetidos. Su funciÛn insert_getBanner() debe 
+   nombres de funciones repetidos. Su funci√≥n insert_getBanner() debe 
    hacer algo con los valores pasados y retornar los resultados. 
    Estos resultados son mostrados en el template en lugar de la 
-   etiqueta insert. En este ejemplo, el Smarty llamara esta funciÛn:
+   etiqueta insert. En este ejemplo, el Smarty llamara esta funci√≥n:
    insert_getBanner(array("lid" =&#62; "12345","sid" =&#62; "67890")); y 
    mostrara el resultado retornado en el lugar de la etiqueta insert.
 			</para>
 			<para>
    Si usted proporciona el atributo "assign", la salida de la etiqueta 
-   {insert} ser· dada a esta variable en vez de ser una salida en el template.
+   {insert} ser√° dada a esta variable en vez de ser una salida en el template.
    Nota: definir la salida a una variable no es util cuando el  <link
     linkend="variable.caching">cache</link> esta habilitado.
 			</para>
 			<para>
-   Si usted proporciona el atributo "script", este script php ser·
-   incluido (solo una vez) antes de la ejecuciÛn de la funciÛn {insert}.
-   Este es el caso donde la funciÛn insert no exista todavia, y el 
+   Si usted proporciona el atributo "script", este script php ser√°
+   incluido (solo una vez) antes de la ejecuci√≥n de la funci√≥n {insert}.
+   Este es el caso donde la funci√≥n insert no exista todavia, y el 
    script php debe ser incluido antes para que pueda funcionar.
    La ruta puede ser absuluta o relativa a <link
     linkend="variable.trusted.dir">$trusted_dir</link>.
@@ -109,8 +109,8 @@
 			</para>
 			<para>
     El objeto Smarty es pasado como segundo argumento. De este modo 
-    puede referenciar y modificar informaciÛn del objeto Smarty dentro 
-    de la funciÛn.
+    puede referenciar y modificar informaci√≥n del objeto Smarty dentro 
+    de la funci√≥n.
 			</para>
 			<note>
 			<title>Nota Tecnica</title>
@@ -118,10 +118,10 @@
             Es posible tener partes del template fuera de la cache.
             Si usted tuviera <link linkend="caching">caching</link> 
             activado, la etiqueta insert no podra heredar por la cache. 
-            Esta sera ejecutada din·micamente cada vez que la pagina
+            Esta sera ejecutada din√°micamente cada vez que la pagina
             sea creada, igual con paginas en cache. Esto funciona bien
             para cosas como banners, encuestas, clima, busqueda de 
-            resultados, areas de opiniÛn de usuario, etc.
+            resultados, areas de opini√≥n de usuario, etc.
 			</para>
 			</note>
 </sect1>

@@ -5,7 +5,7 @@
 <refentry id="api.unregister.function">
  <refnamediv>
   <refname>unregister_function()</refname>
-  <refpurpose>Désalloue dynamiquement un plugin de fonction de templates</refpurpose>
+  <refpurpose>DÃ©salloue dynamiquement un plugin de fonction de templates</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,7 +14,7 @@
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Passez en paramètres le nom de la fonction de templates.
+   Passez en paramÃ¨tres le nom de la fonction de templates.
   </para>
   <example>
    <title>Exemple avec unregister_function()</title>
@@ -22,8 +22,8 @@
 <![CDATA[
 <?php
 
-// nous ne voulons pas que les designers de templates aient accès
-// au système de fichiers.
+// nous ne voulons pas que les designers de templates aient accÃ¨s
+// au systÃ¨me de fichiers.
 $smarty->unregister_function('fetch');
 
 ?>

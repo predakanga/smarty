@@ -5,25 +5,25 @@
    <para>
     Come alternativa all'uso del meccanismo di default per la cache basato
     sui file, potete specificare una funzione personalizzata di gestione
-    che verr‡ usata per leggere, scrivere ed eliminare i file in cache.
+    che verr√† usata per leggere, scrivere ed eliminare i file in cache.
    </para>
    <para>
-    Create una funzione nella vostra applicazione che Smarty user‡ come
+    Create una funzione nella vostra applicazione che Smarty user√† come
     gestore della cache. Impostate il nome di questa funzione nella variabile
     di classe <link linkend="variable.cache.handler.func">$cache_handler_func</link>.
-    Smarty ora user‡ questa funzione per gestire i dati della cache. Il primo
-    parametro Ë l'azione, che puÚ essere 'read', 'write' o 'clear'. Il
-    secondo parametro Ë l'oggetto Smarty. Il terzo parametro Ë il contenuto in
+    Smarty ora user√† questa funzione per gestire i dati della cache. Il primo
+    parametro √® l'azione, che pu√≤ essere 'read', 'write' o 'clear'. Il
+    secondo parametro √® l'oggetto Smarty. Il terzo parametro √® il contenuto in
     cache. In una 'write', Smarty passa il contenuto da mettere in cache in
     questo parametro. In una 'read', Smarty si aspetta che la funzione prenda questo
     parametro per riferimento e che lo riempia con i dati della cache.
     In una 'clear', il parametro non viene usato, quindi passate una variabile
-    dummy. Il quarto parametro Ë il nome del file del template (necessario
-    per le read e le write), il quinto parametro Ë il cache_id (opzionale), e 
-    il sesto Ë il compile_id (opzionale).
+    dummy. Il quarto parametro √® il nome del file del template (necessario
+    per le read e le write), il quinto parametro √® il cache_id (opzionale), e 
+    il sesto √® il compile_id (opzionale).
    </para>
    <para>
-    Nota: l'ultimo parametro ($exp_time) Ë stato aggiunto in Smarty-2.6.0.
+    Nota: l'ultimo parametro ($exp_time) √® stato aggiunto in Smarty-2.6.0.
    </para>
    <example>
     <title>esempio con l'uso di MySQL per la cache</title>
@@ -43,7 +43,7 @@ $smarty->cache_handler_func = 'mysql_cache_handler';
 $smarty->display('index.tpl');
 
 
-il database mysql avr‡ questo formato:
+il database mysql avr√† questo formato:
 	
 create database SMARTY_CACHE;
 

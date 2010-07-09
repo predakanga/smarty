@@ -2,12 +2,12 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.2 Maintainer: thomasgm Status: ready -->
    <sect1 id="language.math">
-    <title>Matemática</title>
+    <title>MatemÃ¡tica</title>
     <para>
-    Matemática pode ser aplicada diretamente aos valores de variáveis.
+    MatemÃ¡tica pode ser aplicada diretamente aos valores de variÃ¡veis.
     </para>
     <example>
-     <title>Exemplos de matemática</title>
+     <title>Exemplos de matemÃ¡tica</title>
      <programlisting>
 <![CDATA[
 {$foo+1}

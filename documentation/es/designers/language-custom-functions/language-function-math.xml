@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -24,7 +24,7 @@
                         <entry>string</entry>
                         <entry>Si</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>La ecuaciÛn a ejecutar</entry>
+                        <entry>La ecuaci√≥n a ejecutar</entry>
                     </row>
                     <row>
                         <entry>format</entry>
@@ -38,7 +38,7 @@
                         <entry>numeric</entry>
                         <entry>Si</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Valor de la variable de la ecuaciÛn</entry>
+                        <entry>Valor de la variable de la ecuaci√≥n</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
@@ -52,36 +52,36 @@
                         <entry>numeric</entry>
                         <entry>Si</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Valor de la variable de la ecuaciÛn</entry>
+                        <entry>Valor de la variable de la ecuaci√≥n</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-    {math} permite diseÒar ecuaciones matem·ticas dentro del template.
-    Cualquier variable numÈrica del template puede ser usada en
+    {math} permite dise√±ar ecuaciones matem√°ticas dentro del template.
+    Cualquier variable num√©rica del template puede ser usada en
     ecuaciones, y el resultado es mostrado en lugar de la etiqueta.
-    Las variables usadas en ecuaciones son pasadas como par·metros, 
-    que pueden ser variables de template o valores est·ticos.
+    Las variables usadas en ecuaciones son pasadas como par√°metros, 
+    que pueden ser variables de template o valores est√°ticos.
     +, -, /, *, abs, ceil, cos, exp, floor, log, log10, max, min, 
     pi, pow, rand, round, sin, sqrt, srans y tan son todos los 
-    operadores validos. Verifique la documentaciÛn de PHP para mas
-    informaciÛn acerca de estas funciones matem·ticas.
+    operadores validos. Verifique la documentaci√≥n de PHP para mas
+    informaci√≥n acerca de estas funciones matem√°ticas.
 			</para>
 			<para>
    Si usted proporciona el atributo especial "assign", la salida de la
-   funciÛn matem·tica ser· atribuido a esta variable de template en
+   funci√≥n matem√°tica ser√° atribuido a esta variable de template en
    vez de ser mostrada en el template.
 			</para>
 			<note>
-				<title>Nota TÈcnica</title>
+				<title>Nota T√©cnica</title>
 				<para>
-     {math} es una funciÛn de muy alto rendimiento debido a que se puede 
-     usar con la funciÛn <ulink url="&url.php-manual;eval">eval()</ulink> 
-     de PHP. Hacer las matem·ticas en PHP es mucho mas eficiente, asi en 
-     cualquier momento es posible hacer calculos matem·ticos en PHP asignarlos 
-     a una variable y lanzar los resultados al template. DefÌnitivamente evite 
-     llamadas repetitivas de funciones matem·ticas, dentro de los ciclos 
+     {math} es una funci√≥n de muy alto rendimiento debido a que se puede 
+     usar con la funci√≥n <ulink url="&url.php-manual;eval">eval()</ulink> 
+     de PHP. Hacer las matem√°ticas en PHP es mucho mas eficiente, asi en 
+     cualquier momento es posible hacer calculos matem√°ticos en PHP asignarlos 
+     a una variable y lanzar los resultados al template. Def√≠nitivamente evite 
+     llamadas repetitivas de funciones matem√°ticas, dentro de los ciclos 
      <link linkend="language.function.section">{section}</link>.
      </para>
 			</note>

@@ -4,21 +4,21 @@
       <title>$config_overwrite</title>
       <para>
        Si es asignado true, las variables leidas en el 
-       <link linkend="config.files">archivo de configuraci髇</link> se 
+       <link linkend="config.files">archivo de configuraci贸n</link> se 
        sobreescribiran unas a otras. De lo contrario, las variables seran 
-       guardadas en un arreglo. Esto es 鷗il si usted quiere almacenar 
-       arreglos de datos en archivos de configuraci髇, solamente lista 
-       tiempos de cada elemento m鷏tiplo. true por default.
+       guardadas en un arreglo. Esto es 煤til si usted quiere almacenar 
+       arreglos de datos en archivos de configuraci贸n, solamente lista 
+       tiempos de cada elemento m煤ltiplo. true por default.
       </para>
   <example>
-    <title>Arreglo de variables de configuraci髇</title>
+    <title>Arreglo de variables de configuraci贸n</title>
     <para>
       Este ejemplo utiliza 
       <link linkend="language.function.cycle">{cycle}</link> para
       la salida a una tabla alternando colores por renglon rojo/verde/azul 
       con $config_overwrite = false.
     </para>
-    <para>El archivo de configuraci髇.</para>
+    <para>El archivo de configuraci贸n.</para>
     <programlisting>
 <![CDATA[
 # row colors
@@ -44,7 +44,7 @@ rowColors = #0000FF
     </programlisting>
   </example>
     <para>
-    Ver tambi閚 
+    Ver tambi茅n 
     <link linkend="language.function.config.load">{config_load}</link>,
     <link linkend="config.files">config files</link>,
     <link linkend="api.get.config.vars">get_config_vars()</link>,

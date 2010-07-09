@@ -38,18 +38,18 @@ $smarty->assign(array('Ville' => 'Lincoln','Pays' => 'Nebraska'));
 $myArray = array('no' => 10, 'label' => 'Peanuts');
 $smarty->assign('foo',$myArray);
 
-// Passe une ligne d'une base de données (eg adodb)
+// Passe une ligne d'une base de donnÃ©es (eg adodb)
 $sql = 'select id, name, email from contacts where contact ='.$id;
 $smarty->assign('contact', $db->getRow($sql));
 ?>
 ]]>
    </programlisting>
    <para>
-    Accéder à cela dans un template avec
+    AccÃ©der Ã  cela dans un template avec
    </para>
    <programlisting>
 <![CDATA[
-{* notez que les variables sont sensibles à la casse, comme en PHP *}
+{* notez que les variables sont sensibles Ã  la casse, comme en PHP *}
 {$Name}
 {$Address}
 {$city}

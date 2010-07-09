@@ -2,11 +2,11 @@
 <!-- $Revision: 2972 $ -->
    <sect1 id="plugins.compiler.functions"><title>Funciones Compiladoras</title>
     <para>
-     Las funciones compiladoras solo son llamadas durante la compilaci髇
-     del template. Estas son 鷗iles para inyectar codigo PHP o contenido
-     est醫ico time-sensitive dentro del template. Si existen ambas, una 
-     funci髇 compiladora y una funci髇 habitual registrada bajo el mismo 
-     nombre, la funci髇 compiladora tiene precedencia.
+     Las funciones compiladoras solo son llamadas durante la compilaci贸n
+     del template. Estas son 煤tiles para inyectar codigo PHP o contenido
+     est谩tico time-sensitive dentro del template. Si existen ambas, una 
+     funci贸n compiladora y una funci贸n habitual registrada bajo el mismo 
+     nombre, la funci贸n compiladora tiene precedencia.
     </para>
     <funcsynopsis>
      <funcprototype>
@@ -16,19 +16,19 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     En las funciones compiladoras son pasados dos par醡etros:
+     En las funciones compiladoras son pasados dos par谩metros:
      la etiqueta string del argumento de la etiqueta - basicamente, 
-     todo a partir del nombre de la funci髇 hasta el delimitador del 
+     todo a partir del nombre de la funci贸n hasta el delimitador del 
      cierre, y el objeto del Smarty. Es supuesto que retorna el codigo 
      PHP para ser inyectado dentro del template compilado.
     </para>
     <para>
-     Vea tambi閚
+     Vea tambi茅n
      <link linkend="api.register.compiler.function">register_compiler_function()</link>,
      <link linkend="api.unregister.compiler.function">unregister_compiler_function()</link>.
     </para>
     <example>
-     <title>Funci髇 compiladora simple</title>
+     <title>Funci贸n compiladora simple</title>
      <programlisting role="php">
 <![CDATA[
 <?php
@@ -50,10 +50,10 @@ function smarty_compiler_tplheader($tag_arg, &$smarty)
 ]]>
 </programlisting>
      <para>
-     Esta funci髇 puede ser llamada en un template de la siguiente forma:
+     Esta funci贸n puede ser llamada en un template de la siguiente forma:
      </para>
      <programlisting>
-{* esta funci髇 es ejecutada solamente en tiempo de compilaci髇 *}
+{* esta funci贸n es ejecutada solamente en tiempo de compilaci贸n *}
 {tplheader}
      </programlisting>
      <para>

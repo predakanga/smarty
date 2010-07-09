@@ -12,18 +12,18 @@
                 <colspec colname="desc"/>
                 <thead>
                     <row>
-                        <entry>PosiÁ„o do Par‚metro</entry>
+                        <entry>Posi√ß√£o do Par√¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>1</entry>
                         <entry>integer</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>80</entry>
                         <entry>Este determina para
                         quantos caracteres truncar.</entry>
@@ -31,28 +31,28 @@
                     <row>
                         <entry>2</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>...</entry>
-                        <entry>Este È o texto para adicionar se truncar.</entry>
+                        <entry>Este √© o texto para adicionar se truncar.</entry>
                     </row>
                     <row>
                         <entry>3</entry>
                         <entry>boolean</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>false</entry>
-                        <entry>Isto determina quando truncar ou n„o ao final de uma
+                        <entry>Isto determina quando truncar ou n√£o ao final de uma
                         palavra(false), ou no caractere exato (true).</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			Isto trunca a vari·vel para uma quantidade de caracteres, o padr„o È 80. 
-			Como segundo par‚metro opcional, vocÍ pode especificar uma string para mostrar
-			ao final se a vari·vel foi truncada. Os caracteres da string s„o incluÌdos no tamanho
-			original para a truncagem. por padr„o, truncate ir· tentar cortar ao final de uma palavra.
-			Se vocÍ quizer cortar na quantidade exata de caracteres, passe o terceiro
-			par‚metro, que È opcional,
+			Isto trunca a vari√°vel para uma quantidade de caracteres, o padr√£o √© 80. 
+			Como segundo par√¢metro opcional, voc√™ pode especificar uma string para mostrar
+			ao final se a vari√°vel foi truncada. Os caracteres da string s√£o inclu√≠dos no tamanho
+			original para a truncagem. por padr√£o, truncate ir√° tentar cortar ao final de uma palavra.
+			Se voc√™ quizer cortar na quantidade exata de caracteres, passe o terceiro
+			par√¢metro, que √© opcional,
 			como true.
 			</para>
 <example>

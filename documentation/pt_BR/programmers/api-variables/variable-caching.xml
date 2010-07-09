@@ -4,22 +4,22 @@
 <sect1 id="variable.caching">
       <title>$caching</title>
       <para>
-	   Isto diz à Smarty se há ou não saída de cache para o template.
-	   Por padrão isso está setado para 0, ou desabilitado. Se seu template gerar
-	   conteúdo redundante, é necessário ligar o caching. Isso
-	   irá resultar num ganho significativo de performance. Você pode também ter múltiplos
+	   Isto diz Ã  Smarty se hÃ¡ ou nÃ£o saÃ­da de cache para o template.
+	   Por padrÃ£o isso estÃ¡ setado para 0, ou desabilitado. Se seu template gerar
+	   conteÃºdo redundante, Ã© necessÃ¡rio ligar o caching. Isso
+	   irÃ¡ resultar num ganho significativo de performance. VocÃª pode tambÃ©m ter mÃºltiplos
 	   caches para o mesmo template. Um valor de 1 ou 2 caching habilitados. 1 diz
-	   à Smarty para usar a variável atual $cache_lifetime para  determinar se o 
-	   cache expirou. Um valor 2 diz à Smarty para usar o valor cache_lifetime
-	   então para quando o cache foi gerado. Desta maneira você pode setar o
+	   Ã  Smarty para usar a variÃ¡vel atual $cache_lifetime para  determinar se o 
+	   cache expirou. Um valor 2 diz Ã  Smarty para usar o valor cache_lifetime
+	   entÃ£o para quando o cache foi gerado. Desta maneira vocÃª pode setar o
 	   cache_lifetime imediatamente antes de buscar o template para ter controle
-	   sobre quando este cache em particular expira. Veja também <link
+	   sobre quando este cache em particular expira. Veja tambÃ©m <link
 	   linkend="api.is.cached">is_cached</link>.
       </para>
       <para>
-	   Se $compile_check está habilitado, o conteúdo do cache irá ser regerado se
-	   algum dos templates ou arquivos de configuração que são parte deste cache estiverem
-	   alterados. Se $force_compile está habilitado, o conteúdo do cache irá sempre ser
+	   Se $compile_check estÃ¡ habilitado, o conteÃºdo do cache irÃ¡ ser regerado se
+	   algum dos templates ou arquivos de configuraÃ§Ã£o que sÃ£o parte deste cache estiverem
+	   alterados. Se $force_compile estÃ¡ habilitado, o conteÃºdo do cache irÃ¡ sempre ser
 	   regerado.
       </para>
 </sect1>

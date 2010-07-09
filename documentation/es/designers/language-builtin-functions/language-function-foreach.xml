@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>Descripción</entry>
+                        <entry>DescripciÃ³n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -58,16 +58,16 @@
     <emphasis role="bold">matriz asociativa simple</emphasis>.
     La sintaxis para <emphasis>foreach</emphasis> es mucho mas simple que 
     <emphasis>section</emphasis>, pero tiene una desventaja de que solo puede ser 
-    usada en una única matriz.
+    usada en una Ãºnica matriz.
     La etiqueta  <emphasis>foreach</emphasis> debe tener su par 
     <emphasis>/foreach</emphasis>.
-    Los parámetros requeridos son <emphasis>from</emphasis> e 
+    Los parÃ¡metros requeridos son <emphasis>from</emphasis> e 
     <emphasis>item</emphasis>. El nombre del ciclo(loop) foreach puede ser 
-    cualquier cosa que usted quiera, hecho de letras, números y subrayados. 
+    cualquier cosa que usted quiera, hecho de letras, nÃºmeros y subrayados. 
     Los ciclos(loop) <emphasis>foreach</emphasis> pueden ser anidados, 
     y el nombre de los ciclos(loop) anidados debe ser diferente uno de
     otro. La variable <emphasis>from</emphasis> (normalmente una matriz de valores) 
-    determina el número de veces del ciclo(loop) <emphasis>foreach</emphasis>.
+    determina el nÃºmero de veces del ciclo(loop) <emphasis>foreach</emphasis>.
     <emphasis>foreachelse</emphasis> y ejecutando cuando no hubieren mas valores 
     en la variable <emphasis>from</emphasis>.
 			</para>
@@ -166,9 +166,9 @@ id: 1002<br />
  </example>
 
 		<para>
-   El ciclo(Loop) foreach también tiene sus propias variables para
+   El ciclo(Loop) foreach tambiÃ©n tiene sus propias variables para
    manipular las propiedades del foreach.
-   Estas son indicadas así: 
+   Estas son indicadas asÃ­: 
    <link linkend="language.variables.smarty.loops">{$smarty.foreach.foreachname.varname}</link> 
    con foreachname siendo el nombre especificado del atributo
    <emphasis>name</emphasis> del foreach.
@@ -180,15 +180,15 @@ id: 1002<br />
 			<sect2 id="foreach.property.iteration">
 			<title>iteration</title>
 			<para>
-    iteration es usado para mostrar la interación actual del ciclo(loop).
-    iteration siempre comienza en 1 incrementado en uno cada interación.
+    iteration es usado para mostrar la interaciÃ³n actual del ciclo(loop).
+    iteration siempre comienza en 1 incrementado en uno cada interaciÃ³n.
 			</para>
 			</sect2>
 
 			<sect2 id="foreach.property.first">
 			<title>first</title>
 			<para>
-    <emphasis>first</emphasis> Toma el valor true si la interación actual del 
+    <emphasis>first</emphasis> Toma el valor true si la interaciÃ³n actual del 
      foreach es la primera.
 			</para>
 			</sect2>
@@ -196,7 +196,7 @@ id: 1002<br />
 			<sect2 id="foreach.property.last">
 			<title>last</title>
 			<para>
-      <emphasis>last</emphasis> Toma el valor de true si la interación actual 
+      <emphasis>last</emphasis> Toma el valor de true si la interaciÃ³n actual 
        del foreach es la ultima.
 			</para>
 			</sect2>
@@ -204,18 +204,18 @@ id: 1002<br />
 			<sect2 id="foreach.property.show">
 			<title>show</title>
 			<para>
-         <emphasis>show</emphasis> Es usado como parámetro para el foreach.
+         <emphasis>show</emphasis> Es usado como parÃ¡metro para el foreach.
          <emphasis>show</emphasis> Es un valor booleano, true o false.
-         Si es false, el foreach no será mostrado.  Si tuviera un
-         foreachelse presente, este será alternativamente mostrado.
+         Si es false, el foreach no serÃ¡ mostrado.  Si tuviera un
+         foreachelse presente, este serÃ¡ alternativamente mostrado.
 			</para>
 
 			</sect2>
 			<sect2 id="foreach.property.total">
 			<title>total</title>
 			<para>
-      <emphasis>total</emphasis> Es usado para mostrar el número de interaciones 
-      del foreach. Este puede ser usado dentro o después de el.
+      <emphasis>total</emphasis> Es usado para mostrar el nÃºmero de interaciones 
+      del foreach. Este puede ser usado dentro o despuÃ©s de el.
 			</para>
   <para>
    Ver tambien <link linkend="language.function.section">{section}</link> y

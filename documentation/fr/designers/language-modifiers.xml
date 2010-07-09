@@ -5,41 +5,41 @@
 <chapter id="language.modifiers">
  <title>Modificateurs de variables</title>
  <para>
-  Les modificateurs de variables peuvent être appliqués aux
+  Les modificateurs de variables peuvent Ãªtre appliquÃ©s aux
   <link linkend="language.syntax.variables">variables</link>,
   <link linkend="language.custom.functions">fonctions utilisateurs</link>
-  ou chaînes de caractères. Pour appliquer un modificateur
+  ou chaÃ®nes de caractÃ¨res. Pour appliquer un modificateur
   de variable, tappez une valeure suivie de <literal>|</literal>
   (pipe) et du nom du modificateur. Un modificateur de variable
-  est succeptible d'accepter des paramètres additionnels, qui en affectent
-  le comportement. Ces paramètres suivent le nom du modificateur et
-  sont séparés par un <literal>:</literal> (deux points).
-  <emphasis>Toutes les fonctions PHP peuvent être utilisées en tant que modifieurs
+  est succeptible d'accepter des paramÃ¨tres additionnels, qui en affectent
+  le comportement. Ces paramÃ¨tres suivent le nom du modificateur et
+  sont sÃ©parÃ©s par un <literal>:</literal> (deux points).
+  <emphasis>Toutes les fonctions PHP peuvent Ãªtre utilisÃ©es en tant que modifieurs
    implicitement</emphasis> (plus d'informations ci-dessous) et les modificateurs peuvent
-  être <link linkend="language.combining.modifiers">combinés</link>.
+  Ãªtre <link linkend="language.combining.modifiers">combinÃ©s</link>.
  </para>
  <example>
   <title>Exemple de modificateur</title>
   <programlisting>
 <![CDATA[
-{* applique un modificateur à une variable *}
+{* applique un modificateur Ã  une variable *}
 {$titre|upper}
 
-{* modificateur avec paramètres *}
+{* modificateur avec paramÃ¨tres *}
 {$titre|truncate:40:'...'}
 
-{* applique un modificateur à un paramètre de fonction *}
+{* applique un modificateur Ã  un paramÃ¨tre de fonction *}
 {html_table loop=$mavariable|upper}
-{* avec paramètres *}
+{* avec paramÃ¨tres *}
 {html_table loop=$mavariable|truncate:40:'...'}
 
-{* applique un modificateur à une chaine de caractères *}
+{* applique un modificateur Ã  une chaine de caractÃ¨res *}
 {'foobar'|upper}
 
 {* utilise date_format pour mettre en forme la date *}
 {$smarty.now|date_format:"%d/%m/%Y"}
 
-{* applique un modificateur à une fonction utilisateur *}
+{* applique un modificateur Ã  une fonction utilisateur *}
 {mailto|upper address='smarty@example.com'}
 
 {* utilisation de la fonction PHP str_repeat *}
@@ -48,7 +48,7 @@
 {* Compteur PHP *}
 {$myArray|@count}
 
-{* mélange aléatoire des IP du serveur grâce à PHP *}
+{* mÃ©lange alÃ©atoire des IP du serveur grÃ¢ce Ã  PHP *}
 {$smarty.server.SERVER_ADDR|shuffle}
 
 (* ceci va mettre en majuscule et tronque le tableau *}
@@ -61,15 +61,15 @@
  <itemizedlist>
  <listitem>
  <para>
-  Si vous appliquez un modificateur de variable à un tableau plutôt qu'à une
-  variable simple, le modificateur sera appliqué à chaque valeur du tableau.
-  Si vous souhaitez que le modificateur travaille réellement avec le tableau
-  en tant que tel, vous devez préfixer le nom du modificateur avec un symbole
+  Si vous appliquez un modificateur de variable Ã  un tableau plutÃ´t qu'Ã  une
+  variable simple, le modificateur sera appliquÃ© Ã  chaque valeur du tableau.
+  Si vous souhaitez que le modificateur travaille rÃ©ellement avec le tableau
+  en tant que tel, vous devez prÃ©fixer le nom du modificateur avec un symbole
   <literal>@</literal>
   <note>
    <title>Exemple</title>
    <para><literal>{$articleTitle|@count}</literal> - affichera le nombre
-    d'éléments dans le tableau <parameter>$articleTitle</parameter> en utilisant
+    d'Ã©lÃ©ments dans le tableau <parameter>$articleTitle</parameter> en utilisant
     la fonction PHP <ulink url="&url.php-manual;count"><varname>count()</varname></ulink>
     comme modificateur.
    </para>
@@ -79,9 +79,9 @@
 
  <listitem>
   <para>
-  Les modificateurs sont chargés automatiquement depuis votre répertoire
+  Les modificateurs sont chargÃ©s automatiquement depuis votre rÃ©pertoire
   de plugin <link linkend="variable.plugins.dir"><parameter>$plugins_dir</parameter></link>
-  ou peuvent être enregistrés explicitement avec
+  ou peuvent Ãªtre enregistrÃ©s explicitement avec
   <link linkend="api.register.modifier"><varname>register_modifier()</varname></link> ;
   ceci est utile pour partager une fonction dans un scirpt PHP et les templates Smarty.
  </para>
@@ -89,21 +89,21 @@
 
   <listitem>
  <para>
-  Toutes les fonction PHP peuvent être utilisées comme modificateur,
-  sans autre déclaration, tel que dans l'exemple ci-dessus.
+  Toutes les fonction PHP peuvent Ãªtre utilisÃ©es comme modificateur,
+  sans autre dÃ©claration, tel que dans l'exemple ci-dessus.
   Cepdendant, l'utilisation de fonctions PHP comme modificateurs
-  contient deux petits pièges à éviter :
+  contient deux petits piÃ¨ges Ã  Ã©viter :
   <itemizedlist>
-   <listitem><para>Le premier - quelques fois, l'ordre des paramètres de la fonction
+   <listitem><para>Le premier - quelques fois, l'ordre des paramÃ¨tres de la fonction
      n'est pas celui attendu. Le formattage de <literal>$foo</literal>  avec
      <literal>{"%2.f"|sprintf:$foo}</literal> fonctionne actuellement, mais
      n'est pas aussi intuitif que
      <literal>{$foo|string_format:"%2.f"}</literal>, ce qui est fournit par Smarty.
     </para></listitem>
    <listitem><para>
-     Le deuxième - Si <link linkend="variable.security">
-      <parameter>$security</parameter></link> est activé, toutes les fonctions PHP
-     qui devront être utilisées comme modificateurs, doivent être déclarées dans l'élément
+     Le deuxiÃ¨me - Si <link linkend="variable.security">
+      <parameter>$security</parameter></link> est activÃ©, toutes les fonctions PHP
+     qui devront Ãªtre utilisÃ©es comme modificateurs, doivent Ãªtre dÃ©clarÃ©es dans l'Ã©lÃ©ment
      <literal>MODIFIER_FUNCS</literal> du tableau
      <link linkend="variable.security.settings">
       <parameter>$security_settings</parameter></link>.
@@ -114,8 +114,8 @@
  <para>
   Voir aussi
   <link linkend="api.register.modifier"><varname>register_modifier()</varname></link>,
-  <link linkend="language.combining.modifiers">les modificateurs combinés</link>.
-  et <link linkend="plugins">étendre Smarty avec des plugins</link>.
+  <link linkend="language.combining.modifiers">les modificateurs combinÃ©s</link>.
+  et <link linkend="plugins">Ã©tendre Smarty avec des plugins</link>.
  </para>
 
  &designers.language-modifiers.language-modifier-capitalize;

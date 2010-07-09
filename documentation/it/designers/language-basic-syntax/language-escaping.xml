@@ -3,14 +3,14 @@
 <sect1 id="language.escaping">
  <title>Evitare il parsing di Smarty</title>
  <para>
-  A volte è desiderabile o necessario che Smarty ignori sezioni che altrimenti
-  verrebbero analizzate. Un esempio tipico è l'incorporazione di codice Javascript
+  A volte Ã¨ desiderabile o necessario che Smarty ignori sezioni che altrimenti
+  verrebbero analizzate. Un esempio tipico Ã¨ l'incorporazione di codice Javascript
   o CSS in un template. Il problema nasce dal fatto che questi linguaggi utilizzano
   i caratteri { e } che per Smarty sono i delimitatori di default.
  </para>
 
  <para>
-  La cosa più semplice sarebbe evitare queste situazioni tenendo il codice Javascript
+  La cosa piÃ¹ semplice sarebbe evitare queste situazioni tenendo il codice Javascript
   e CSS separato in appositi file e usando i collegamenti standard dell'HTML per
   recuperarli.
  </para>
@@ -18,7 +18,7 @@
  <para>
   E' possibile includere contenuto letterale usando blocchi di questo tipo: 
   <link linkend="language.function.literal">{literal} .. {/literal}</link>.
-  Potete anche usare, in modo simile alle entità HTML, <link
+  Potete anche usare, in modo simile alle entitÃ  HTML, <link
   linkend="language.function.ldelim">{ldelim}</link>,<link
   linkend="language.function.ldelim">{rdelim}</link> oppure <link
   linkend="language.variables.smarty.ldelim">{$smarty.ldelim}</link>,<link
@@ -47,7 +47,7 @@ $smarty->display('example.tpl');
 ]]>
   </programlisting>
   <para>
-   Dove example.tpl è:
+   Dove example.tpl Ã¨:
   </para>
   <programlisting>
 <![CDATA[

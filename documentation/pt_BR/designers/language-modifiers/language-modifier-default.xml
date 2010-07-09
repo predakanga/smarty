@@ -12,28 +12,28 @@
                 <colspec colname="desc" />
                 <thead>
                     <row>
-                        <entry>PosiÁ„o do Par‚metro</entry>
+                        <entry>Posi√ß√£o do Par√¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>1</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>vazio</emphasis></entry>
-                        <entry>Este È o valor padr„o para mostrar se a vari·vel
+                        <entry>Este √© o valor padr√£o para mostrar se a vari√°vel
                         estiver vazia.</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			Isto È usado para definir um valor padr„o para uma vari·vel. Se a vari·vel estiver
-			vazia ou n„o for definida, o valor padr„o dado È mostrado.
+			Isto √© usado para definir um valor padr√£o para uma vari√°vel. Se a vari√°vel estiver
+			vazia ou n√£o for definida, o valor padr√£o dado √© mostrado.
 			Default usa um argumento.
 			</para>
 <example>

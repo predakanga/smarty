@@ -5,13 +5,13 @@
  <title>Variables</title>
  <para>
   Las variable de Template que comiencen con signo de pesos. 
-  Pueden contener números, letras y guiones bajos, muy parecido a 
+  Pueden contener nÃºmeros, letras y guiones bajos, muy parecido a 
   las <ulink url="&url.php-manual;language.variables">variables de PHP</ulink>. 
-  Usted también puede hacer referencia a arreglos que puden ser numericos o 
-  no-numericos. También puede hacer referencia a métodos y propiedades de objetos. 
+  Usted tambiÃ©n puede hacer referencia a arreglos que puden ser numericos o 
+  no-numericos. TambiÃ©n puede hacer referencia a mÃ©todos y propiedades de objetos. 
   <link linkend="language.config.variables">Config file variables</link> es una 
-  excepción de la sintaxis del signo de pesos. 
-  También puede ser referenciado entre #signos de numeros#, o con la
+  excepciÃ³n de la sintaxis del signo de pesos. 
+  TambiÃ©n puede ser referenciado entre #signos de numeros#, o con la
   variable especial <link linkend="language.variables.smarty.config">$smarty.config</link>.
  </para>
  <example>
@@ -42,7 +42,7 @@ Many other combinations are allowed
   </programlisting>
  </example>
   <para>
-   Vea también <link linkend="language.variables.smarty">$smarty reserved variables</link>
+   Vea tambiÃ©n <link linkend="language.variables.smarty">$smarty reserved variables</link>
    y <link linkend="language.config.variables">Config Variables</link>.
   </para>
 </sect1>

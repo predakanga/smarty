@@ -10,22 +10,22 @@
 			</funcprototype>
 			</funcsynopsis>
                 <para>
-                 Use isso para registrar dinamicamente filtros de saída para operações
-		 na saída do template antes de mostrá-lo. Veja
-                 <link linkend="advanced.features.outputfilters">Filtros de Saída de Templates</link>
-                 para maiores informações de como configurar uma
-                 função de filtro de saída. 
+                 Use isso para registrar dinamicamente filtros de saÃ­da para operaÃ§Ãµes
+		 na saÃ­da do template antes de mostrÃ¡-lo. Veja
+                 <link linkend="advanced.features.outputfilters">Filtros de SaÃ­da de Templates</link>
+                 para maiores informaÃ§Ãµes de como configurar uma
+                 funÃ§Ã£o de filtro de saÃ­da. 
                 </para>
                 <para>
-                 A chamada da função-php <parameter>function</parameter> pode
-		 ser (a) uma string contendo um nome de função ou (b) um array no formato
+                 A chamada da funÃ§Ã£o-php <parameter>function</parameter> pode
+		 ser (a) uma string contendo um nome de funÃ§Ã£o ou (b) um array no formato
                  <literal>array(&amp;$object, $method)</literal> com
-                 <literal>&amp;$object</literal> sendo uma referência para um
+                 <literal>&amp;$object</literal> sendo uma referÃªncia para um
                  objeto e <literal>$method</literal> sendo uma string
-                 contendo o nome do método ou (c) um array no formato
+                 contendo o nome do mÃ©todo ou (c) um array no formato
                  <literal>array(&amp;$class, $method)</literal> com
                  <literal>$class</literal> sendo um nome de classe e
-                 <literal>$method</literal> sendo um método
+                 <literal>$method</literal> sendo um mÃ©todo
                  desta classe.
                 </para>
 </sect1>

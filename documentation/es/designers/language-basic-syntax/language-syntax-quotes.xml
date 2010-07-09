@@ -5,8 +5,8 @@
  <para>
   Smarty puede reconocer <link linkend="language.syntax.variables">variables</link> 
   <link linkend="api.assign">asignadas</link> entre comillas aunque estas 
-  solo tengan números, letras, guiones bajos y corchetes[].
-  Con cualquier otro carácter(puntos, referencia de objetos, etc.) las 
+  solo tengan nÃºmeros, letras, guiones bajos y corchetes[].
+  Con cualquier otro carÃ¡cter(puntos, referencia de objetos, etc.) las 
   variables deben estar entre apostrofos.
   Usted no puede incrustar <link linkend="language.modifiers">modificadores</link>,
   Estos deben ser siempre aplicados fuera de las comillas.
@@ -32,7 +32,7 @@ PRACTICAL EXAMPLES:
   </programlisting>
  </example>
  <para>
-  Ver también <link linkend="language.modifier.escape">escape</link>.
+  Ver tambiÃ©n <link linkend="language.modifier.escape">escape</link>.
  </para>
 
 </sect1>

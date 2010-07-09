@@ -11,11 +11,11 @@
     <colspec colname="desc" />
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>Descripción</entry>
+      <entry>DescripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -43,11 +43,11 @@
    Las fechas pueden ser pasadas a Smarty como <ulink
     url="&url.php-manual;function.time">timestamps</ulink> 
    unix, timestamps mysql, o como cualquier cadena compuesta de mes dia 
-   año (pasada por <ulink url="&url.php-manual;strtotime">strtotime()</ulink>). 
-   El diseñador puede usar entonces date_format para tener un control completo 
+   aÃ±o (pasada por <ulink url="&url.php-manual;strtotime">strtotime()</ulink>). 
+   El diseÃ±ador puede usar entonces date_format para tener un control completo 
    del formateo de la fecha. Si la fecha pasada para 
-   <command>date_format</command> estuviera vacia y un segundo parámetro fuera
-   pasado, este será usado como la fecha a formatear.
+   <command>date_format</command> estuviera vacia y un segundo parÃ¡metro fuera
+   pasado, este serÃ¡ usado como la fecha a formatear.
   </para>
   <example>
    <title>date_format</title>
@@ -88,13 +88,13 @@ Monday, February 5, 2001
    </screen>
   </example>
   <para>
-    <command>date_format</command> especificadores de conversión:
+    <command>date_format</command> especificadores de conversiÃ³n:
    <itemizedlist>
     <listitem><para>
-     %a - nombre del día de la semana abreviado de acuerdo al local actual
+     %a - nombre del dÃ­a de la semana abreviado de acuerdo al local actual
     </para></listitem>
     <listitem><para>
-     %A - nombre del día de la semana anterior de acuerdo al local actual
+     %A - nombre del dÃ­a de la semana anterior de acuerdo al local actual
     </para></listitem>
     <listitem><para>
      %b - nombre del mes abreviado de acuerdo al local actual
@@ -103,52 +103,52 @@ Monday, February 5, 2001
      %B - nombre del mes anterior de acuerdo al local actual
     </para></listitem>
     <listitem><para>
-     %c - Representación preferencial de la fecha y hora local actual
+     %c - RepresentaciÃ³n preferencial de la fecha y hora local actual
     </para></listitem>
     <listitem><para>
-     %C - año con dos dígitos (o año dividido por 100 y truncadopara un entero, intervalo de 00 a 99)
+     %C - aÃ±o con dos dÃ­gitos (o aÃ±o dividido por 100 y truncadopara un entero, intervalo de 00 a 99)
     </para></listitem>
     <listitem><para>
-     %d - día del mes como un número decimal (intervalo de 00 a 31)
+     %d - dÃ­a del mes como un nÃºmero decimal (intervalo de 00 a 31)
     </para></listitem>
     <listitem><para>
      %D - Lo mismo que %m/%d/%y
     </para></listitem>
     <listitem><para>
-     %e - Día del mes como un número decimal, un único dígito y precedido por un
+     %e - DÃ­a del mes como un nÃºmero decimal, un Ãºnico dÃ­gito y precedido por un
          espacio (intervalo de 1 a 31)
     </para></listitem>
     <listitem><para>
-     %g - Año basado en la semana, sin el siglo [00,99]
+     %g - AÃ±o basado en la semana, sin el siglo [00,99]
     </para></listitem>
     <listitem><para>
-     %G - Año basado en la semana, incluyendo el siglo [0000,9999]
+     %G - AÃ±o basado en la semana, incluyendo el siglo [0000,9999]
     </para></listitem>
     <listitem><para>
      %h - Lo mismo que %b
     </para></listitem>
     <listitem><para>
-     %H - Hora como un número decimal usando un relój de 24 horas (intervalo de 00 a 23)
+     %H - Hora como un nÃºmero decimal usando un relÃ³j de 24 horas (intervalo de 00 a 23)
     </para></listitem>
     <listitem><para>
-     %I - Hora como un número decimal usando un relój de 12 horas (intervalo de 01 a 12) 
+     %I - Hora como un nÃºmero decimal usando un relÃ³j de 12 horas (intervalo de 01 a 12) 
     </para></listitem>
     <listitem><para>
-     %j - Día del año como um número decimal (intervalo de 001 a 366)
+     %j - DÃ­a del aÃ±o como um nÃºmero decimal (intervalo de 001 a 366)
     </para></listitem>
     <listitem><para>
-     %k - Hora (relój de 24 horas) digítos únicos que son precedidos por un
+     %k - Hora (relÃ³j de 24 horas) digÃ­tos Ãºnicos que son precedidos por un
       espacio en blanco (intervalo de 0 a 23)
     </para></listitem>
     <listitem><para>
-     %l - Hora como un número decimal usando un relój de 12 horas, digítos
-     únicos son precedidos por un espacio en blanco (intervalo de 1 a 12)
+     %l - Hora como un nÃºmero decimal usando un relÃ³j de 12 horas, digÃ­tos
+     Ãºnicos son precedidos por un espacio en blanco (intervalo de 1 a 12)
     </para></listitem>
     <listitem><para>
-     %m - Mes como número decimal (intervalo de 01 a 12)
+     %m - Mes como nÃºmero decimal (intervalo de 01 a 12)
     </para></listitem>
     <listitem><para>
-     %M - Minuto como un número decimal
+     %M - Minuto como un nÃºmero decimal
     </para></listitem>
     <listitem><para>
      %n - Caracter de nueva linea
@@ -158,13 +158,13 @@ Monday, February 5, 2001
           o la cadena correspondiente a la local actual
     </para></listitem>
     <listitem><para>
-     %r - Hora con notación a.m. y p.m.
+     %r - Hora con notaciÃ³n a.m. y p.m.
     </para></listitem>
     <listitem><para>
-     %R - Hora con notación de 24 horas
+     %R - Hora con notaciÃ³n de 24 horas
     </para></listitem>
     <listitem><para>
-     %S - Segundo como número decimal
+     %S - Segundo como nÃºmero decimal
     </para></listitem>
     <listitem><para>
      %t - Caracter tab
@@ -173,58 +173,58 @@ Monday, February 5, 2001
      %T - Hora actual, igual a %H:%M:%S
     </para></listitem>
     <listitem><para>
-     %u - Día de la semana como un número decimal [1,7], representando con 1 el lunes
+     %u - DÃ­a de la semana como un nÃºmero decimal [1,7], representando con 1 el lunes
     </para></listitem>
     <listitem><para>
-    %U - Número de la semana del año actual como un número decimal, 
+    %U - NÃºmero de la semana del aÃ±o actual como un nÃºmero decimal, 
      comenzando con el primer domingo como primer dia de la primera semana
     </para></listitem>
     <listitem><para>
-     %V - Número de la semana del año actual como número decimal de acuerdo 
+     %V - NÃºmero de la semana del aÃ±o actual como nÃºmero decimal de acuerdo 
       con el ISO 8601:1988, intervalo de 01 a 53, en donde 1 es la primera 
-      semana que tenga por lo menos cuatro dias en el año actual, siendo 
+      semana que tenga por lo menos cuatro dias en el aÃ±o actual, siendo 
       domingo el primer dia de la semana.
     </para></listitem>
     <listitem><para>
-     %w - Día de la semana como decimal, siendo domingo 0
+     %w - DÃ­a de la semana como decimal, siendo domingo 0
     </para></listitem>
     <listitem><para>
-     %W - Número de la semana del año actual como número decimal, 
+     %W - NÃºmero de la semana del aÃ±o actual como nÃºmero decimal, 
       comenzando con el primer lunes como primer dia de la primera semana
     </para></listitem>
     <listitem><para>
-     %x - Representación preferida para la fecha local actual sin la hora
+     %x - RepresentaciÃ³n preferida para la fecha local actual sin la hora
     </para></listitem>
     <listitem><para>
-     %X - Representación preferida de la hora local actual sin la fecha
+     %X - RepresentaciÃ³n preferida de la hora local actual sin la fecha
     </para></listitem>
     <listitem><para>
-     %y - Año como número decimal sin el siglo(intervalo de 00 a 99)
+     %y - AÃ±o como nÃºmero decimal sin el siglo(intervalo de 00 a 99)
     </para></listitem>
     <listitem><para>
-     %Y - Año como número decimal incluyendo el siglo
+     %Y - AÃ±o como nÃºmero decimal incluyendo el siglo
     </para></listitem>
     <listitem><para>
-     %Z - Zona horaria, o nombre, o abreviación
+     %Z - Zona horaria, o nombre, o abreviaciÃ³n
     </para></listitem>
     <listitem><para>
-     %% - Un carácter `%'
+     %% - Un carÃ¡cter `%'
     </para></listitem>
    </itemizedlist>
    <note>
     <title>NOTA PARA PROGRAMADORES:</title>
     <para>
       <command>date_format</command> es escencialmente una envoltura para la 
-     función <ulink url="&url.php-manual;strftime">strftime()</ulink> de PHP. 
+     funciÃ³n <ulink url="&url.php-manual;strftime">strftime()</ulink> de PHP. 
      Usted debera tener mas o menos especificadores de conversiones disponibles 
-     de acuerdo con la función  <ulink url="&url.php-manual;strftime">strftime()</ulink> 
+     de acuerdo con la funciÃ³n  <ulink url="&url.php-manual;strftime">strftime()</ulink> 
      del sistema operacional en donde PHP fue compilado. Cheque en la pagina 
      del manual de su sistema una lista completa de especificadores validos.
     </para>
    </note>
   </para>
   <para>
-   Ver también <link linkend="language.variables.smarty.now">$smarty.now</link>,
+   Ver tambiÃ©n <link linkend="language.variables.smarty.now">$smarty.now</link>,
    <ulink url="&url.php-manual;strftime">php function strftime()</ulink>,
    <link linkend="language.function.html.select.date">{html_select_date}</link>
    y <link linkend="tips.dates">date tips</link>.

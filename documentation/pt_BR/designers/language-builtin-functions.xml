@@ -2,11 +2,11 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.3 Maintainer: thomasgm Status: ready -->
 <chapter id="language.builtin.functions">
- <title>Funções internas</title>
+ <title>FunÃ§Ãµes internas</title>
  <para>
-  O Smarty contém várias funções internas. Funções internas são parte integral 
-  da linguagem de template. Você não pode criar funções personalizadas com o 
-  mesmo nome de uma função interna, e também não pode modificar funções internas.
+  O Smarty contÃ©m vÃ¡rias funÃ§Ãµes internas. FunÃ§Ãµes internas sÃ£o parte integral 
+  da linguagem de template. VocÃª nÃ£o pode criar funÃ§Ãµes personalizadas com o 
+  mesmo nome de uma funÃ§Ã£o interna, e tambÃ©m nÃ£o pode modificar funÃ§Ãµes internas.
  </para>
 
  &designers.language-builtin-functions.language-function-capture;

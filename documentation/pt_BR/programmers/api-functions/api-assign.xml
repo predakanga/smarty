@@ -15,7 +15,7 @@
        </funcprototype>
       </funcsynopsis>
       <para>
-       Isso é usado para fixar valores para o template. Você pode
+       Isso Ã© usado para fixar valores para o template. VocÃª pode
        explicitamente passar pares de nomes/valores, ou um array associativo
        contendo o par de nome/valor. 
       </para>

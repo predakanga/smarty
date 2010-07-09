@@ -5,14 +5,14 @@
 <sect1 id="variable.force.compile">
  <title>$force_compile</title>
  <para>
-  Celà oblige Smarty à (re)compiler les templates à chaque
-  invocation. Ce réglage supplante
+  CelÃ  oblige Smarty Ã  (re)compiler les templates Ã  chaque
+  invocation. Ce rÃ©glage supplante
   <link linkend="variable.compile.check"><parameter>$compile_check</parameter></link>.
-  Par défaut, il vaut &false;. Ceci est commode pour le développement
-  et le <link linkend="chapter.debugging.console">débogage</link>
-  mais ne devrait jamais être utilisé dans un environnment de production.
-  Si le système de <link linkend="variable.caching">cache</link> est actif, les
-  fichiers du cache seront regénérés à chaque appel.
+  Par dÃ©faut, il vaut &false;. Ceci est commode pour le dÃ©veloppement
+  et le <link linkend="chapter.debugging.console">dÃ©bogage</link>
+  mais ne devrait jamais Ãªtre utilisÃ© dans un environnment de production.
+  Si le systÃ¨me de <link linkend="variable.caching">cache</link> est actif, les
+  fichiers du cache seront regÃ©nÃ©rÃ©s Ã  chaque appel.
  </para>
 </sect1>
 

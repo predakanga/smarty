@@ -5,7 +5,7 @@
 <refentry id="api.register.function">
  <refnamediv>
   <refname>register_function()</refname>
-  <refpurpose>Déclare dynamiquement des plugins de fonction de templates</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement des plugins de fonction de templates</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -17,15 +17,15 @@
    <methodparam choice="opt"><type>mixed</type><parameter>cache_attrs</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Il faut passer en paramètres le nom de la <link linkend="plugins.functions">fonction
-   de templates</link>, suivi par le nom de la fonction PHP qui l'implémente.
+   Il faut passer en paramÃ¨tres le nom de la <link linkend="plugins.functions">fonction
+   de templates</link>, suivi par le nom de la fonction PHP qui l'implÃ©mente.
   </para>
    &api.register.snippet;
   <para>
-   Les paramètres <parameter>cacheable</parameter> et
-   <parameter>cache_attrs</parameter> peut être omis dans la
+   Les paramÃ¨tres <parameter>cacheable</parameter> et
+   <parameter>cache_attrs</parameter> peut Ãªtre omis dans la
    plupart des cas. Voir <link 
-   linkend="caching.cacheable">Contrôler la mise en cache des sorties des Plugins</link>
+   linkend="caching.cacheable">ContrÃ´ler la mise en cache des sorties des Plugins</link>
    pour plus d'informations concernant cette utilisation.
   </para>
   <example>
@@ -46,13 +46,13 @@ function print_current_date ($params) {
 ]]>
    </programlisting>
    <para>
-    Où le template est :
+    OÃ¹ le template est :
    </para>
    <programlisting>
 <![CDATA[
 {date_now}
 
-{* ou, formaté différemment *}
+{* ou, formatÃ© diffÃ©remment *}
 {date_now format="%Y/%m/%d"}
 ]]>
    </programlisting>

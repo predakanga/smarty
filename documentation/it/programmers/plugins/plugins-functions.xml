@@ -14,14 +14,14 @@
      associativo.
     </para>
     <para>
-     L'output (valore di ritorno) della funzione sostituir‡ il tag della
+     L'output (valore di ritorno) della funzione sostituir√† il tag della
      funzione nel template (ad esempio con la funzione <function>fetch</function>).
      In alternativa, la funzione potrebbe semplicemente svolgere qualche
      altro compito, senza produrre output (funzione <function>assign</function>).
     </para>
     <para>
      Se la funzione deve assegnare variabili al template, o usare qualche
-     altra funzionalit‡ di Smarty, puÚ usare per questo l'oggetto
+     altra funzionalit√† di Smarty, pu√≤ usare per questo l'oggetto
      <parameter>$smarty</parameter> che le viene passato.
     </para>
     <para>
@@ -62,7 +62,7 @@ function smarty_function_eightball($params, &$smarty)
      </example>
     </para>
     <para>
-     che puÚ essere usata cosÏ nel template:
+     che pu√≤ essere usata cos√¨ nel template:
     </para>
     <programlisting>
 Question: Will we ever have time travel?

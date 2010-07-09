@@ -20,7 +20,7 @@ Your last login was on {$lastLoginDate}.
 ]]>
      </programlisting>
      <para>
-      Questo visualizzer‡:
+      Questo visualizzer√†:
      </para>
      <screen>
 <![CDATA[
@@ -53,7 +53,7 @@ $smarty->display('index.tpl');
 ]]>
     </programlisting>
     <para>
-     dove il contenuto di index.tpl Ë:
+     dove il contenuto di index.tpl √®:
     </para>
     <programlisting>
 <![CDATA[
@@ -65,7 +65,7 @@ $smarty->display('index.tpl');
 ]]>
     </programlisting>
     <para>
-     questo visualizzer‡:
+     questo visualizzer√†:
     </para>
     <screen>
 <![CDATA[
@@ -100,7 +100,7 @@ $smarty->display('index.tpl');
 ]]>
     </programlisting>
     <para>
-     dove index.tpl Ë:
+     dove index.tpl √®:
     </para>
     <programlisting>
 <![CDATA[
@@ -112,7 +112,7 @@ $smarty->display('index.tpl');
 ]]>
      </programlisting>
      <para>
-      Questo visualizzer‡:
+      Questo visualizzer√†:
      </para>
      <screen>
 <![CDATA[
@@ -127,12 +127,12 @@ zaphod@slartibartfast.com<br />
    <sect2 id="language.variables.objects">
 			 <title>Oggetti</title>
 			 <para>
-			  Le propriet‡ di oggetti valorizzate da PHP possono essere
-			  referenziate indicando il nome della propriet‡ dopo il
+			  Le propriet√† di oggetti valorizzate da PHP possono essere
+			  referenziate indicando il nome della propriet√† dopo il
 			  simbolo '-&gt;'
 			 </para>
     <example>
-     <title>accesso alle propriet‡ degli oggetti</title>
+     <title>accesso alle propriet√† degli oggetti</title>
      <programlisting>
 <![CDATA[
 name: {$person->name}<br />
@@ -140,7 +140,7 @@ email: {$person->email}<br />
 ]]>
      </programlisting>
      <para>
-      Questo visualizzer‡:
+      Questo visualizzer√†:
      </para>
      <screen>
 <![CDATA[

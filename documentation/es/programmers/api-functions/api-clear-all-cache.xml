@@ -12,7 +12,7 @@
    <methodparam choice="opt"><type>int</type><parameter>expire_time</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Como un par·metro opcional, usted puede proporcionar un periodo minimo 
+   Como un par√°metro opcional, usted puede proporcionar un periodo minimo 
    en segundos que el archivo de cache debe tener antes de ser anulado.
   </para>
   <example>
@@ -27,7 +27,7 @@ $smarty->clear_all_cache();
    </programlisting>
   </example>
   <para>
-  Ver tambiÈn 
+  Ver tambi√©n 
   <link linkend="api.clear.cache">clear_cache()</link>,
   <link linkend="api.is.cached">is_cached()</link>
   y

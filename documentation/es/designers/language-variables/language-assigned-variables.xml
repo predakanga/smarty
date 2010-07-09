@@ -4,9 +4,9 @@
     <title>Variables definidas desde PHP</title>
     <para>
      Las variables que son <link linkend="api.assign">asignadas</link> desde PHP 
-     son referenciadas precedidas estas con una seÒal de cifrado <literal>$</literal>. 
-     Las variables definidas dentro del template como una funciÛn
-     <link linkend="language.function.assign">assign</link> tambiÈn son 
+     son referenciadas precedidas estas con una se√±al de cifrado <literal>$</literal>. 
+     Las variables definidas dentro del template como una funci√≥n
+     <link linkend="language.function.assign">assign</link> tambi√©n son 
      mostradas de esta manera.
     </para>
     <example>
@@ -57,8 +57,8 @@ This weeks meeting is in New York.
  <sect2 id="language.variables.assoc.arrays">
    <title>Arreglos asociativos</title>
    <para>
-    Usted tambiÈn puede referenciar matrices asociativas en variables
-    que son definidas desde PHP especificando la clave despuÈs del
+    Usted tambi√©n puede referenciar matrices asociativas en variables
+    que son definidas desde PHP especificando la clave despu√©s del
     simbolo '.'(punto).
    </para>
    <example>
@@ -103,13 +103,13 @@ zaphod@slartibartfast.com<br />
   </example>
  </sect2>
  <sect2 id="language.variables.array.indexes">
-  <title>Õndices de Matrices</title>
+  <title>√çndices de Matrices</title>
    <para>
-    Usted podra referencia matrizes por su Ìndice, muy semejantes a la
+    Usted podra referencia matrizes por su √≠ndice, muy semejantes a la
     sintaxis de PHP.
    </para>
    <example>
-   <title>Accesando matrices por sus Ìndices</title>
+   <title>Accesando matrices por sus √≠ndices</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -153,7 +153,7 @@ zaphod@slartibartfast.com<br />
     <para>
      Las propiedades de los <link linkend="advanced.features.objects">objetos</link> 
      definidos desde PHP pueden ser referenciados especificando el nombre de la propiedad 
-     despuÈs del simbolo '-&gt;'.
+     despu√©s del simbolo '-&gt;'.
     </para>
   <example>
    <title>Accesando propiedades de los Objetos</title>

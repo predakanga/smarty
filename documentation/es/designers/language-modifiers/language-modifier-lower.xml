@@ -3,7 +3,7 @@
  <sect1 id="language.modifier.lower">
   <title>lower</title>
   <para>
-   Esta es usada para convertir a minúsculas una variable.
+   Esta es usada para convertir a minÃºsculas una variable.
   </para>
   <example>
    <title>lower</title>
@@ -36,7 +36,7 @@ two convicts evade noose, jury hung.
    </screen>
   </example>
   <para>
-   ver también <link linkend="language.modifier.upper">upper</link> y
+   ver tambiÃ©n <link linkend="language.modifier.upper">upper</link> y
    <link linkend="language.modifier.capitalize">Capitalize</link>.
   </para>
  </sect1>

@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,21 +25,21 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>O nome da vari·vel que est· sendo definida</entry>
+                        <entry>O nome da vari√°vel que est√° sendo definida</entry>
                     </row>
                     <row>
                         <entry>value</entry>
                         <entry>string</entry>
                         <entry>Yes</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>O valor que est· sendo definido</entry>
+                        <entry>O valor que est√° sendo definido</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			assign È usado para definir o valor de uma vari·vel 
-			de template durante a execuÁ„o do template.
+			assign √© usado para definir o valor de uma vari√°vel 
+			de template durante a execu√ß√£o do template.
 			</para>
 <example>
 <title>assign</title>
@@ -47,11 +47,11 @@
 <![CDATA[
 {assign var="nome" value="Bob"}
 
-O valor de $nome È {$nome}.
+O valor de $nome √© {$nome}.
 
 MOSTRA:
 
-O valor de $nome È Bob.
+O valor de $nome √© Bob.
 ]]>
 </programlisting>
 </example>

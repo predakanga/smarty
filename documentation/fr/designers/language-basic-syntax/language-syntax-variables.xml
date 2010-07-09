@@ -8,14 +8,14 @@
   Les variables de template commence par un signe dollar (<literal>$</literal>).
   Elles peuvent contenir des nombres, des lettres et des underscores, tout
   comme une <ulink url="&url.php-manual;language.variables">variable PHP</ulink>.
-  Vous pouvez référencer des tableaux indexés
-  numériquement ou non. Vous pouvez aussi référencer des propriétés d'objet
-  ainsi que des méthodes.
+  Vous pouvez rÃ©fÃ©rencer des tableaux indexÃ©s
+  numÃ©riquement ou non. Vous pouvez aussi rÃ©fÃ©rencer des propriÃ©tÃ©s d'objet
+  ainsi que des mÃ©thodes.
  </para>
  <para>
   Les <link linkend="language.config.variables">variables des fichiers de
-  configuration</link> sont une exception à la synthaxe utilisant un signe dollar. Elles peuvent être
-  référencées en les entourant du signe dièse (<literal>#</literal>) ou via la variable spéciale
+  configuration</link> sont une exception Ã  la synthaxe utilisant un signe dollar. Elles peuvent Ãªtre
+  rÃ©fÃ©rencÃ©es en les entourant du signe diÃ¨se (<literal>#</literal>) ou via la variable spÃ©ciale
   <link linkend="language.variables.smarty.config"><parameter>$smarty.config</parameter></link>.
  </para>
  <example>
@@ -23,25 +23,25 @@
   <programlisting>
 <![CDATA[
 {$foo}        <-- affiche une variable simple (qui n'estpas un tableau ou un objet)
-{$foo[4]}     <-- affiche le 5ème élément d'un tableau indexé
-{$foo.bar}    <-- affiche la clé "bar" d'un tableau, identique à $foo['bar'] en PHP
-{$foo.$bar}   <-- affiche la valeur de la clé d'un tableau, identique à $foo[$bar] en PHP
-{$foo->bar}   <-- affiche la propriété "bar" de l'objet
-{$foo->bar()} <-- affiche la valeur retournée de la méthode "bar" de l'objet
+{$foo[4]}     <-- affiche le 5Ã¨me Ã©lÃ©ment d'un tableau indexÃ©
+{$foo.bar}    <-- affiche la clÃ© "bar" d'un tableau, identique Ã  $foo['bar'] en PHP
+{$foo.$bar}   <-- affiche la valeur de la clÃ© d'un tableau, identique Ã  $foo[$bar] en PHP
+{$foo->bar}   <-- affiche la propriÃ©tÃ© "bar" de l'objet
+{$foo->bar()} <-- affiche la valeur retournÃ©e de la mÃ©thode "bar" de l'objet
 {#foo#}       <-- affiche la variable du fichier de configuration "foo"
 {$smarty.config.foo} <-- synonyme pour {#foo#}
 {$foo[bar]}   <-- synthaxe uniquement valide dans une section de boucle, voir {section}
 {assign var=foo value='baa'}{$foo} <--  affiche "baa", voir {assign}
 
-Plusieurs autres combinaisons sont autorisées
+Plusieurs autres combinaisons sont autorisÃ©es
 
 {$foo.bar.baz}
 {$foo.$bar.$baz}
 {$foo[4].baz}
 {$foo[4].$baz}
 {$foo.bar.baz[4]}
-{$foo->bar($baz,2,$bar)} <-- passage de paramètres
-{"foo"}       <-- les valeurs statiques sont autorisées
+{$foo->bar($baz,2,$bar)} <-- passage de paramÃ¨tres
+{"foo"}       <-- les valeurs statiques sont autorisÃ©es
 
 {* affiche la variable serveur "SERVER_NAME" ($_SERVER['SERVER_NAME'])*}
 {$smarty.server.SERVER_NAME}
@@ -50,10 +50,10 @@ Plusieurs autres combinaisons sont autorisées
  </example>
 
  <para>
-  Les variables spéciales comme <literal>$_GET</literal>, <literal>$_SESSION</literal>, etc.
-  sont également disponibles, lisez le chapitre sur les variables réservées
+  Les variables spÃ©ciales comme <literal>$_GET</literal>, <literal>$_SESSION</literal>, etc.
+  sont Ã©galement disponibles, lisez le chapitre sur les variables rÃ©servÃ©es
   <emphasis><link linkend="language.variables.smarty"><parameter>$smarty</parameter></link></emphasis>
-  pour plus de détails.
+  pour plus de dÃ©tails.
  </para>
 
  <para>

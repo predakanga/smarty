@@ -4,10 +4,10 @@
 <sect1 id="variable.autoload.filters">
       <title>$autoload_filters</title>
       <para>
-       Se há algum filtro que você deseja carregar em cada chamada de template,
-       você pode especificar-lhes usando essa variável e a Smarty irá
-       automaticamente carregá-los para você. A variável é um array associativo
-       onde as chaves são tipos de filtro e os valores são arrays de nomes de filtros. 
+       Se hÃ¡ algum filtro que vocÃª deseja carregar em cada chamada de template,
+       vocÃª pode especificar-lhes usando essa variÃ¡vel e a Smarty irÃ¡
+       automaticamente carregÃ¡-los para vocÃª. A variÃ¡vel Ã© um array associativo
+       onde as chaves sÃ£o tipos de filtro e os valores sÃ£o arrays de nomes de filtros. 
        Por exemplo:
        <informalexample>
         <programlisting>

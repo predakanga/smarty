@@ -5,10 +5,10 @@
 <sect1 id="language.modifier.indent">
  <title>indent</title>
  <para>
-  Indente chacune des lignes d'une chaîne. Comme paramètre optionnel,
-  vous pouvez spécifier le nombre de caractères à utiliser pour l'indentation (4 par défaut).
-  Comme second paramètre optionnel, vous
-  pouvez spécifier le caractère à utiliser pour l'indentation (utilisez
+  Indente chacune des lignes d'une chaÃ®ne. Comme paramÃ¨tre optionnel,
+  vous pouvez spÃ©cifier le nombre de caractÃ¨res Ã  utiliser pour l'indentation (4 par dÃ©faut).
+  Comme second paramÃ¨tre optionnel, vous
+  pouvez spÃ©cifier le caractÃ¨re Ã  utiliser pour l'indentation (utilisez
   <literal>"\t"</literal> pour les tabulations).
  </para>
  <informaltable frame="all">
@@ -20,7 +20,7 @@
    <colspec colname="desc"/>
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Defaut</entry>
@@ -33,14 +33,14 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry>4</entry>
-     <entry>De combien de caractères l'indentation doit être effectuée.</entry>
+     <entry>De combien de caractÃ¨res l'indentation doit Ãªtre effectuÃ©e.</entry>
     </row>
     <row>
      <entry>2</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry>(espace)</entry>
-     <entry>Caractère à utiliser pour l'indentation.</entry>
+     <entry>CaractÃ¨re Ã  utiliser pour l'indentation.</entry>
     </row>
    </tbody>
   </tgroup>
@@ -60,7 +60,7 @@ Statistics show that teen pregnancy drops off significantly after 25.'
 ]]>
 </programlisting>
 <para>
-Où le template est :
+OÃ¹ le template est :
 </para>
 <programlisting>
 <![CDATA[

@@ -5,7 +5,7 @@
 <refentry id="api.fetch">
  <refnamediv>
   <refname>fetch()</refname>
-  <refpurpose>Retourne le résultat du template</refpurpose>
+  <refpurpose>Retourne le rÃ©sultat du template</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -17,12 +17,12 @@
    </methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour renvoyer le résultat du template plutôt que de
+   UtilisÃ©e pour renvoyer le rÃ©sultat du template plutÃ´t que de
    l'<link linkend="api.display">afficher</link>.
    Il faut passer un type et un chemin de <link
    linkend="template.resources">ressource template</link>
-   valides. Vous pouvez passer un identifiant de cache <parameter>$cache id</parameter> en deuxième
-   paramètre. Reportez-vous à la section <link linkend="caching">cache
+   valides. Vous pouvez passer un identifiant de cache <parameter>$cache id</parameter> en deuxiÃ¨me
+   paramÃ¨tre. Reportez-vous Ã  la section <link linkend="caching">cache
    </link> pour plus de renseignements.
   </para>
   &parameter.compileid;
@@ -38,12 +38,12 @@ $smarty = new Smarty;
 
 $smarty->caching = true;
 
-// ne fait un appel à la base de données que si le fichier
+// ne fait un appel Ã  la base de donnÃ©es que si le fichier
 // de cache n'existe pas
 if(!$smarty->is_cached('index.tpl'))
 {
 
-    // quelques données
+    // quelques donnÃ©es
     $address = '245 N 50th';
     $db_data = array(
                         'Ville' => 'Lincoln',
@@ -57,7 +57,7 @@ if(!$smarty->is_cached('index.tpl'))
 
 }
 
-// récupère le résultat
+// rÃ©cupÃ¨re le rÃ©sultat
 $output = $smarty->fetch('index.tpl');
 
 // fait quelque chose avec $output ici
@@ -79,7 +79,7 @@ echo $output;
 <![CDATA[
 Cher {$contact.name},
 
-Bienvenu et merci d'être devenu membre de notre groupe d'utilisateur,
+Bienvenu et merci d'Ãªtre devenu membre de notre groupe d'utilisateur,
 
 Cliquez sur le lien ci-dessous pour vous identifier avec votre nom d'utilisateur '{$contact.login_id}'
 et vous pourrez utiliser nos forums.
@@ -114,7 +114,7 @@ numbered word you have read
      <![CDATA[
 <?php
 
-// Récupération du contact depuis une base de données eg utilisation de pear ou adodb
+// RÃ©cupÃ©ration du contact depuis une base de donnÃ©es eg utilisation de pear ou adodb
 $query  = 'select name, email, login_id from contacts where contact_id='.$contact_id;
 $contact = $db->getRow($sql);
 $smarty->assign('contact', $contact);

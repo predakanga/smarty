@@ -24,7 +24,7 @@
     mantenute fra le diverse chiamate di fetch() e display(). Le 
     variabili di configurazione caricate con config_load() hanno 
     sempre uno scope globale. Anche i file di configurazione vengono
-    compilati per una esecuzione più veloce, e rispettano le 
+    compilati per una esecuzione piÃ¹ veloce, e rispettano le 
     impostazioni di <link linkend="variable.force.compile">force_compile</link>
     e <link linkend="variable.compile.check">compile_check</link>.
    </para>

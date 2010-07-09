@@ -6,9 +6,9 @@
  <title>{html_image}</title>
  <para>
   <varname>{html_image}</varname> est une
-  <link linkend="language.custom.functions">fonction utilisateur</link> qui génère la balise
-  HTML pour une image. La hauteur et la longueur de l'image sont calculés
-  automatiquement depuis le fichier image si aucune n'est spécifiée.
+  <link linkend="language.custom.functions">fonction utilisateur</link> qui gÃ©nÃ¨re la balise
+  HTML pour une image. La hauteur et la longueur de l'image sont calculÃ©s
+  automatiquement depuis le fichier image si aucune n'est spÃ©cifiÃ©e.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -22,60 +22,60 @@
      <entry>Nom attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>file</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>nom/chemin des images</entry>
     </row>
     <row>
      <entry>height</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>Hauteur de l'image actuelle</emphasis></entry>
-     <entry>Hauteur de l'image à afficher</entry>
+     <entry>Hauteur de l'image Ã  afficher</entry>
     </row>
     <row>
      <entry>width</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>Longueur de l'image actuelle</emphasis></entry>
-     <entry>Longueur de l'image à afficher</entry>
+     <entry>Longueur de l'image Ã  afficher</entry>
     </row>
     <row>
      <entry>basedir</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>non</entry>
      <entry><emphasis>racine du serveur web</emphasis></entry>
-     <entry>Répertoire depuis lequel baser le calcul des
+     <entry>RÃ©pertoire depuis lequel baser le calcul des
      chemins relatifs</entry>
    </row>
    <row>
     <entry>alt</entry>
-    <entry>chaîne de caractères</entry>
+    <entry>chaÃ®ne de caractÃ¨res</entry>
     <entry>non</entry>
     <entry><emphasis><quote></quote></emphasis></entry>
     <entry>Description alternative de l'image</entry>
    </row>
    <row>
     <entry>href</entry>
-    <entry>chaîne de caractères</entry>
+    <entry>chaÃ®ne de caractÃ¨res</entry>
     <entry>non</entry>
     <entry><emphasis>n/a</emphasis></entry>
     <entry>valeur de l'attribut href, indiquant le lien vers l'image</entry>
     </row>
     <row>
      <entry>path_prefix</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Préfixe pour le chemin de la sortie</entry>
+     <entry>PrÃ©fixe pour le chemin de la sortie</entry>
     </row>
    </tbody>
   </tgroup>
@@ -84,37 +84,37 @@
  <itemizedlist>
   <listitem><para>
     <parameter>basedir</parameter> est le dossier de base dans lequel
-    les images sont basées. S'il n'est pas fourni, la variable d'environnement
-    <varname>$_ENV['DOCUMENT_ROOT']</varname> sera utilisée.
+    les images sont basÃ©es. S'il n'est pas fourni, la variable d'environnement
+    <varname>$_ENV['DOCUMENT_ROOT']</varname> sera utilisÃ©e.
     Si <link linkend="variable.security"><parameter>$security</parameter></link>
-    est activé, le chemin vers l'image doit être présent dans le
-    <link linkend="variable.secure.dir">dossier de sécurité</link>.
+    est activÃ©, le chemin vers l'image doit Ãªtre prÃ©sent dans le
+    <link linkend="variable.secure.dir">dossier de sÃ©curitÃ©</link>.
    </para></listitem>
 
   <listitem><para>
     <parameter>href</parameter> est la valeur de l'attribut href de l'image.
     Si le lien est fourni, une balise <literal>&lt;a href="LINKVALUE"&gt;&lt;a&gt;</literal>
-    sera placée autour de la balise de l'image.
+    sera placÃ©e autour de la balise de l'image.
    </para> </listitem>
 
   <listitem><para>
-    <parameter>path_prefix</parameter> est un préfixe optionnel que vous pouvez fournir.
-    Il est utile si vous voulez fournir un nom de serveur différent pour l'image.
+    <parameter>path_prefix</parameter> est un prÃ©fixe optionnel que vous pouvez fournir.
+    Il est utile si vous voulez fournir un nom de serveur diffÃ©rent pour l'image.
    </para></listitem>
 
   <listitem><para>
-    Tous les paramètres qui ne sont pas dans la liste ci-dessus sont affichés
+    Tous les paramÃ¨tres qui ne sont pas dans la liste ci-dessus sont affichÃ©s
     sous la forme d'une paire nom/valeur dans la balise
-    <literal>&lt;img&gt;</literal> créée.
+    <literal>&lt;img&gt;</literal> crÃ©Ã©e.
    </para></listitem>
 </itemizedlist>
 
  <note>
   <title>Note technique</title>
   <para>
-   <varname>{html_image}</varname> requiert un accès au disque dur pour lire l'image et
+   <varname>{html_image}</varname> requiert un accÃ¨s au disque dur pour lire l'image et
    calculer ses dimensions. Si vous n'utilisez pas un <link linkend="caching">cache</link>,
-   il est généralement préférable d'éviter d'utiliser <varname>{html_image}</varname>
+   il est gÃ©nÃ©ralement prÃ©fÃ©rable d'Ã©viter d'utiliser <varname>{html_image}</varname>
    et de laisser les balises images statiques pour de meilleures
    performances.
   </para>
@@ -129,7 +129,7 @@
 ]]>
   </programlisting>
   <para>
-   L'affichage possible du template ci-dessus pourrait être :
+   L'affichage possible du template ci-dessus pourrait Ãªtre :
   </para>
   <screen>
 <![CDATA[

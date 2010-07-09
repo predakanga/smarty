@@ -3,8 +3,8 @@
   <sect1 id="advanced.features.outputfilters">
    <title>Filtros de salida</title>
    <para>
-    Cuando el template es invocado a través de display() o fetch(), 
-    su salida puede ser enviada a través de uno o mas filtros de salida.
+    Cuando el template es invocado a travÃ©s de display() o fetch(), 
+    su salida puede ser enviada a travÃ©s de uno o mas filtros de salida.
     Este es diferente a los postfilters porque los postfilters operan en
     los templates compilados antes de ser salvados en disco, y los filtros 
     de salida operan en la salida del template cuando este es ejecutado.
@@ -13,19 +13,19 @@
    <para>
     Los Filtros de Salida pueden ser 
     <link linkend="api.register.outputfilter">registrado</link> o
-    cargados del directorio de plugins usando la función
+    cargados del directorio de plugins usando la funciÃ³n
     <link linkend="api.load.filter">load_filter()</link> o 
     configurando a variable
     <link linkend="variable.autoload.filters">$autoload_filters</link>.
     El Smarty pasara la salida como el primer argumento, y espera
-    que la función retorne el resultado del procesamiento.
+    que la funciÃ³n retorne el resultado del procesamiento.
    </para>
    <example>
     <title>Usando un filtro de salida de template</title>
     <programlisting role="php">
 <![CDATA[
 <?php
-// ponga esto en su aplicación
+// ponga esto en su aplicaciÃ³n
 function protect_email($tpl_output, &$smarty)
 {
     $tpl_output =

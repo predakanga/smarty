@@ -10,7 +10,7 @@
        destinadas a la pagina del template actual.
       </para>
       <para>
-      Ver también 
+      Ver tambiÃ©n 
       <link linkend="language.function.debug">{debug}</link>,
       <link linkend="variable.debug.tpl">$debug_tpl</link>,
       y <link linkend="variable.debugging.ctrl">$debugging_ctrl</link>

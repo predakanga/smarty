@@ -25,13 +25,13 @@ ini_set('pcre.backtrack_limit', 150000); // Default is 100000, available since P
 set_time_limit(0);
 
 $search = array(
-    '/\{/',
-    '/\}/',
-    '/%%%tmpldelim%%%/',
-    '/%%%tmprdelim%%%/',
-    '/HREF="\/?(.*)\.tpl(.*)"/U',
-    '/(<HTML.*<META.*HTTP-EQUIV="Content-type".*charset=(.*?)".*?<BODY[^>]+>)/mSs',
-    '/(<\/BODY\s*><\/HTML\s*>)/mS'
+    '/\{/u',
+    '/\}u/',
+    '/%%%tmpldelim%%%/u',
+    '/%%%tmprdelim%%%/u',
+    '/HREF="\/?(.*)\.tpl(.*)"/Uu',
+    '/(<HTML.*<META.*HTTP-EQUIV="Content-type".*charset=(.*?)".*?<BODY[^>]+>)/mSsu',
+    '/(<\/BODY\s*><\/HTML\s*>)/mSu'
 );
 
 $replace = array(

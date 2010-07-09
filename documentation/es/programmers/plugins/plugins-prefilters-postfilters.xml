@@ -4,7 +4,7 @@
     <title>Prefiltros/Postfiltros</title>
     <para>
      Los Plugins Prefilter y postfilter con muy similares en concepto; 
-     donde ellos difieren es en la ejecuci髇  -- mas precisamente en el 
+     donde ellos difieren es en la ejecuci贸n  -- mas precisamente en el 
      tiempo sus ejecuciones.
     </para>
     <funcsynopsis>
@@ -16,10 +16,10 @@
     </funcsynopsis>
     <para>
      Los Prefilters son usados para procesar el fuente del template inmediatamente 
-     antes de la compilaci髇. El primer par醡etro de la funci髇 del prefilter es el 
+     antes de la compilaci贸n. El primer par谩metro de la funci贸n del prefilter es el 
      fuente del template, posiblemente modificado por algunos otros prefilters. 
-     El Plugin es supuesto que retorne el fuente modificado. Observe que este c骴igo 
-     no es salvado en ningun lugar, este es solo usado para la compilaci髇.
+     El Plugin es supuesto que retorne el fuente modificado. Observe que este c贸digo 
+     no es salvado en ningun lugar, este es solo usado para la compilaci贸n.
     </para>
     <funcsynopsis>
      <funcprototype>
@@ -30,11 +30,11 @@
     </funcsynopsis>
     <para>
      Los Postfilters son usados para procesar la salida compilada del template 
-     (el c骴igo PHP) inmediatamente despu閟 de que la compilacion es terminada 
+     (el c贸digo PHP) inmediatamente despu茅s de que la compilacion es terminada 
      pero antes de que el template compilado sea salvado en el sistema de archivos. 
-     El primer par醡etro para la funci髇 postfilter es el c骴igo del template 
+     El primer par谩metro para la funci贸n postfilter es el c贸digo del template 
      compilado, posiblemente modificado por otros postfilters. 
-     El plugin se supone retornara la versi髇 modificada de este c骴igo. 
+     El plugin se supone retornara la versi贸n modificada de este c贸digo. 
     </para>
     <example>
      <title>prefilter plugin</title>

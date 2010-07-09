@@ -8,8 +8,8 @@
 	 <sect1 id="constant.smarty.dir">
       <title>SMARTY_DIR</title>
       <para>
-       Isso deve ser o caminho completo do path para a localizaÁ„o dos arquivos de classe da Smarty.
-       Se isso n„o for definido, ent„o a Smarty ir· tentar determinar
+       Isso deve ser o caminho completo do path para a localiza√ß√£o dos arquivos de classe da Smarty.
+       Se isso n√£o for definido, ent√£o a Smarty ir√° tentar determinar
        o valor apropriado automaticamente. Se definido, o path
        deve finalizar com uma barra.
       </para>

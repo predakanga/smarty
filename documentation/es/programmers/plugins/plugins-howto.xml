@@ -5,9 +5,9 @@
    <para>
     Los plugins son siempre cargados cuando son requeridos. solo los 
     calificativos especificos, funciones, recursos, etc convocados en 
-    scripts del template seran leidos. Adem·s, cada plugin es cargado 
+    scripts del template seran leidos. Adem√°s, cada plugin es cargado 
     una sola vez, aun si usted tiene corriendo varias instancias 
-    diferentes de Smarty dentro de la misma peticiÛn.
+    diferentes de Smarty dentro de la misma petici√≥n.
    </para>
    <para>
     Pre/posfiltros y salidas de filtros son una parte de un caso especial.
@@ -21,7 +21,7 @@
     El <link linkend="variable.plugins.dir">directorio de directory</link> 
     puede ser una cadena que contenga una ruta o un arreglo que contenga 
     multiples rutas. Para instalar un plugin, simplemente coloquelo en el 
-    directorio y el Smarty lo usara autom·ticamente.
+    directorio y el Smarty lo usara autom√°ticamente.
    </para>
 </sect1>
 

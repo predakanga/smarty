@@ -18,7 +18,7 @@
      </blockquote>
     </para>
     <para>
-     Dove <literal>tipo</literal> Ë uno di questi tipi di plugin:
+     Dove <literal>tipo</literal> √® uno di questi tipi di plugin:
      <itemizedlist spacing="compact">
       <listitem><simpara>function</simpara></listitem>
       <listitem><simpara>modifier</simpara></listitem>
@@ -54,7 +54,7 @@
      gli stessi visti prima.
     </para>
     <para>
-     Smarty produrr‡ i messaggi di errore appropriati se il file del plugin
+     Smarty produrr√† i messaggi di errore appropriati se il file del plugin
      di cui ha bisogno non viene trovato, o se il file o la funzione hanno
      un nome non appropriato.
     </para>

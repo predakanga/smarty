@@ -5,7 +5,7 @@
 <refentry id="api.get.config.vars">
  <refnamediv>
   <refname>get_config_vars()</refname>
-  <refpurpose>Retourne la valeur de la variable de configuration passée en paramètre</refpurpose>
+  <refpurpose>Retourne la valeur de la variable de configuration passÃ©e en paramÃ¨tre</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,8 +14,8 @@
    <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Si aucun paramètre n'est donné, un tableau de toutes les variables de
-   configuration chargées est retourné.
+   Si aucun paramÃ¨tre n'est donnÃ©, un tableau de toutes les variables de
+   configuration chargÃ©es est retournÃ©.
   </para>
   <example>
    <title>Exemple avec get_config_vars()</title>
@@ -23,13 +23,13 @@
 <![CDATA[
 <?php
 
-// récupère la variable de configuration chargée #foo#
+// rÃ©cupÃ¨re la variable de configuration chargÃ©e #foo#
 $foo = $smarty->get_config_vars('foo');
 
-// récupère toutes les variables de configuration chargées
+// rÃ©cupÃ¨re toutes les variables de configuration chargÃ©es
 $all_config_vars = $smarty->get_config_vars();
 
-// les affiche a l'écran
+// les affiche a l'Ã©cran
 print_r($all_config_vars);
 ?>
 ]]>

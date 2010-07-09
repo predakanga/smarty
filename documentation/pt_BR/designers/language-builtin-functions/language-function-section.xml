@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,74 +25,74 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome da seÁ„o</entry>
+                        <entry>O nome da se√ß√£o</entry>
                     </row>
                     <row>
                         <entry>loop</entry>
                         <entry>[$variable_name]</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome da vari·vel para determinar o
-                        n˙mero de interaÁıes</entry>
+                        <entry>O nome da vari√°vel para determinar o
+                        n√∫mero de intera√ß√µes</entry>
                     </row>
                     <row>
                         <entry>start</entry>
                         <entry>integer</entry>
-                        <entry>N„o</entry>
-						<entry><emphasis>0</emphasis></entry> <entry>A posiÁ„o
-						do Ìndice que a seÁ„o vai comeÁar.  Se o valor 
-						È negativo, a posiÁ„o de inicio È calculada a partir 
+                        <entry>N√£o</entry>
+						<entry><emphasis>0</emphasis></entry> <entry>A posi√ß√£o
+						do √≠ndice que a se√ß√£o vai come√ßar.  Se o valor 
+						√© negativo, a posi√ß√£o de inicio √© calculada a partir 
 						do final da matriz. Por exemplo, se houverem
 						sete valores na matriz e 'start' for -2, o
-						Ìndice inicial È 5. Valores inv·lidos (valores fora do
-						tamanho da matriz) s„o automaticamente corrigidos 
-						para o valor v·lido mais prÛximo.</entry>
+						√≠ndice inicial √© 5. Valores inv√°lidos (valores fora do
+						tamanho da matriz) s√£o automaticamente corrigidos 
+						para o valor v√°lido mais pr√≥ximo.</entry>
                     </row>
                     <row>
                         <entry>step</entry>
                         <entry>integer</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>1</emphasis></entry>
-						<entry>O valor do passo que ser· usado para percorrer 
-						a matriz. Por exemplo, step=2 ir· percorrer 
-						os Ìndices 0,2,4, etc. Se step for negativo, ele ir· caminhar
-						pela matriz de tr·s para frente.</entry>
+						<entry>O valor do passo que ser√° usado para percorrer 
+						a matriz. Por exemplo, step=2 ir√° percorrer 
+						os √≠ndices 0,2,4, etc. Se step for negativo, ele ir√° caminhar
+						pela matriz de tr√°s para frente.</entry>
                     </row>
                     <row>
                         <entry>max</entry>
                         <entry>integer</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>1</emphasis></entry>
-						<entry>Define o n˙mero m·ximo de loops
+						<entry>Define o n√∫mero m√°ximo de loops
 						para a section.</entry>
                     </row>
                     <row>
                         <entry>show</entry>
                         <entry>boolean</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Determina quando mostrar ou n„o esta section</entry>
+                        <entry>Determina quando mostrar ou n√£o esta section</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 Os 'sections' de template s„o usados para percorrer os dados de uma matriz. 
+			 Os 'sections' de template s√£o usados para percorrer os dados de uma matriz. 
 			 Todas as tags <emphasis>section</emphasis> devem ser finalizadas com <emphasis>/section</emphasis>. 
-			 Os par‚metros obrigatÛrios s„o <emphasis>name</emphasis> e <emphasis>loop</emphasis>. 
-			 O nome da 'section' pode ser o que vocÍ quiser, contendo letras, n˙meros e sublinhados. 
-			 As 'sections' podem ser aninhadas, e os nomes das sections devem ser ˙nicos. A vari·vel 
-			 'loop' (normalmente uma matriz de valores) determina o n˙mero de vezes que a section 
-			 ser· percorrida. Quando estiver exibindo uma vari·vel dentro de uma section, 
-			 o nome da section deve estar ao lado da vari·vel dentro de conchetes []. 
-			 <emphasis>sectionelse</emphasis> È executado quando n„o houver valores na 
-			 vari·vel 'loop'.
+			 Os par√¢metros obrigat√≥rios s√£o <emphasis>name</emphasis> e <emphasis>loop</emphasis>. 
+			 O nome da 'section' pode ser o que voc√™ quiser, contendo letras, n√∫meros e sublinhados. 
+			 As 'sections' podem ser aninhadas, e os nomes das sections devem ser √∫nicos. A vari√°vel 
+			 'loop' (normalmente uma matriz de valores) determina o n√∫mero de vezes que a section 
+			 ser√° percorrida. Quando estiver exibindo uma vari√°vel dentro de uma section, 
+			 o nome da section deve estar ao lado da vari√°vel dentro de conchetes []. 
+			 <emphasis>sectionelse</emphasis> √© executado quando n√£o houver valores na 
+			 vari√°vel 'loop'.
 			</para>
 <example>
 <title>section</title>
 <programlisting>
 <![CDATA[
-{* este exemplo ir· mostrar todos os valores da matriz $custid *}
+{* este exemplo ir√° mostrar todos os valores da matriz $custid *}
 {section name=consumidor loop=$custid}
 	id: {$custid[consumidor]}<br>
 {/section}
@@ -109,18 +109,18 @@ id: 1002<br>
 </example>
 
 <example>
-<title>loop de vari·vel section</title>
+<title>loop de vari√°vel section</title>
 <programlisting>
 <![CDATA[
-{* a vari·vel 'loop' somente determina o n˙mero de vezes que ir· percorrer a matriz. 
-   VocÍ pode acessar qualquer vari·vel do template dentro da section. 
-   Este exemplo assume que $custid, $nome e $endereco s„o todas 
-   matrizes contendo o mesmo n˙mero de valores *}
+{* a vari√°vel 'loop' somente determina o n√∫mero de vezes que ir√° percorrer a matriz. 
+   Voc√™ pode acessar qualquer vari√°vel do template dentro da section. 
+   Este exemplo assume que $custid, $nome e $endereco s√£o todas 
+   matrizes contendo o mesmo n√∫mero de valores *}
 
 {section name=consumidor loop=$custid}
 	id: {$custid[consumidor]}<br>
 	nome: {$nome[consumidor]}<br>
-	endereÁo: {$endereco[customer]}<br>
+	endere√ßo: {$endereco[customer]}<br>
 	<p>
 {/section}
 ]]>
@@ -130,15 +130,15 @@ id: 1002<br>
 <![CDATA[
 id: 1000<br>
 nome: John Smith<br>
-endereÁo: 253 N 45th<br>
+endere√ßo: 253 N 45th<br>
 <p>
 id: 1001<br>
 nome: Jack Jones<br>
-endereÁo: 417 Mulberry ln<br>
+endere√ßo: 417 Mulberry ln<br>
 <p>
 id: 1002<br>
 nome: Jane Munson<br>
-endereÁo: 5605 apple st<br>
+endere√ßo: 5605 apple st<br>
 <p>
 ]]>
 </programlisting>
@@ -148,13 +148,13 @@ endereÁo: 5605 apple st<br>
 <title>Nomes de section</title>
 <programlisting>
 <![CDATA[
-{* o nome da seÁ„o pode ser o que vocÍ qusier, 
-   e È usado para referenciar os dados contido na seÁ„o *}
+{* o nome da se√ß√£o pode ser o que voc√™ qusier, 
+   e √© usado para referenciar os dados contido na se√ß√£o *}
 
 {section name=meusdados loop=$custid}
 	id: {$custid[meusdados]}<br>
 	nome: {$nome[meusdados]}<br>
-	endereÁo: {$endereco[meusdados]}<br>
+	endere√ßo: {$endereco[meusdados]}<br>
 	<p>
 {/section}
 ]]>
@@ -165,9 +165,9 @@ endereÁo: 5605 apple st<br>
 <title>sections aninhadas</title>
 <programlisting>
 <![CDATA[
-{* sections podem ser aninhadas atÈ o nÌvel que vocÍ quiser. Com sections aninhadas, 
-   vocÍ pode acessar complexas estruturas de dados, tais como matrizes multi-dimensionais. 
-   Neste exemplo, $contact_type[customer] È uma matriz contendo os tipos de contatos 
+{* sections podem ser aninhadas at√© o n√≠vel que voc√™ quiser. Com sections aninhadas, 
+   voc√™ pode acessar complexas estruturas de dados, tais como matrizes multi-dimensionais. 
+   Neste exemplo, $contact_type[customer] √© uma matriz contendo os tipos de contatos 
    do consumidor atualmente selecionado. *}
 
 {section name=customer loop=$custid}
@@ -213,8 +213,8 @@ e-mail: jane@mydomain.com<br>
 <title>sections e matrizes associativas</title>
 <programlisting>
 <![CDATA[
-{* Este È um exemplo de exibiÁ„o de uma matriz associativa 
-   dentro de uma seÁ„o *}
+{* Este √© um exemplo de exibi√ß√£o de uma matriz associativa 
+   dentro de uma se√ß√£o *}
 
 {section name=consumidor loop=$contatos}
 	nome: {$contatos[consumidor].nome}<br>
@@ -249,42 +249,42 @@ e-mail: jane@mydomain.com<p>
 <title>sectionelse</title>
 <programlisting>
 <![CDATA[
-{* sectionelse ir· executar se n„o houverem mais valores em $custid *}
+{* sectionelse ir√° executar se n√£o houverem mais valores em $custid *}
 
 {section name=consumidor loop=$custid}
 	id: {$custid[consumidor]}<br>
 {sectionelse}
-	n„o h· valores em $custid.
+	n√£o h√° valores em $custid.
 {/section}
 ]]>
 </programlisting>
 </example>
 		<para>
-		 Sections tambÈm tem as suas prÛprias vari·veis que manipulam as propriedades da section.
-		 Estas s„o indicadas assim: {$smarty.section.nomesection.nomevariavel}
+		 Sections tamb√©m tem as suas pr√≥prias vari√°veis que manipulam as propriedades da section.
+		 Estas s√£o indicadas assim: {$smarty.section.nomesection.nomevariavel}
 		</para>
         <note>
          <title>Nota</title>
           <para>
-		   A partir do Smarty 1.5.0, a sintaxe para as vari·veis de propriedades da section 
+		   A partir do Smarty 1.5.0, a sintaxe para as vari√°veis de propriedades da section 
 		   mudou de {%nomesecao.nomevariavel%} para {$smarty.section.nomesection.nomevariavel}. A 
-		   sintaxe antiga ainda È suportada, mas vocÍ ver· referÍncias somente ‡ nova sintaxe no 
+		   sintaxe antiga ainda √© suportada, mas voc√™ ver√° refer√™ncias somente √† nova sintaxe no 
 		   manual.
           </para>
         </note>
 			<sect2 id="section.property.index">	
 			<title>index</title>
 			<para>
-			index È usado para mostrar o Ìndice atual do loop, comeÁando em zero
+			index √© usado para mostrar o √≠ndice atual do loop, come√ßando em zero
 			(ou pelo atributo start caso tenha sido definido), e incrementado por um 
 			(ou pelo atributo step caso tenha sido definido).
 			</para>
 			<note>
-				<title>Nota TÈcnica:</title>
+				<title>Nota T√©cnica:</title>
 				<para>
-                 Se as propriedades 'start' e 'step' da section n„o foram modificadas, 
-				 elas ir„o funcionar da mesma maneira que a propriedade 'interation' da 
-				 section funcionam, exceto que ela comeÁa do 0 ao invÈs de 1.
+                 Se as propriedades 'start' e 'step' da section n√£o foram modificadas, 
+				 elas ir√£o funcionar da mesma maneira que a propriedade 'interation' da 
+				 section funcionam, exceto que ela come√ßa do 0 ao inv√©s de 1.
 				</para>
 			</note>
 	<example>
@@ -309,8 +309,8 @@ e-mail: jane@mydomain.com<p>
 			<sect2 id="section.property.index.prev">	
 			<title>index_prev</title>
 			<para>
-			index_prev È usado para mostrar o Ìndice anterior do loop.
-        	No primeiro loop, o valor dele È -1.
+			index_prev √© usado para mostrar o √≠ndice anterior do loop.
+        	No primeiro loop, o valor dele √© -1.
 			</para>
 	<example>
 	<title>propriedade index_prev da section</title>
@@ -318,9 +318,9 @@ e-mail: jane@mydomain.com<p>
 <![CDATA[
 {section name=consumidor loop=$custid}
 	{$smarty.section.consumidor.index} id: {$custid[consumidor]}<br>
-	{* Para sua informaÁ„o, $custid[consumidor.index] e $custid[consumidor] tem o mesmo significado *}
+	{* Para sua informa√ß√£o, $custid[consumidor.index] e $custid[consumidor] tem o mesmo significado *}
 	{if $custid[consumidor.index_prev] ne $custid[consumidor.index]}
-		O id do consumidor ir· mudar<br>
+		O id do consumidor ir√° mudar<br>
 	{/if}
 {/section}
 ]]>
@@ -329,11 +329,11 @@ e-mail: jane@mydomain.com<p>
 <programlisting>
 <![CDATA[
 0 id: 1000<br>
-   	O id do consumidor ir· mudar<br>
+   	O id do consumidor ir√° mudar<br>
 1 id: 1001<br>
-   	O id do consumidor ir· mudar<br>
+   	O id do consumidor ir√° mudar<br>
 2 id: 1002<br>
-   	O id do consumidor ir· mudar<br>
+   	O id do consumidor ir√° mudar<br>
 ]]>
 </programlisting>
 	</example>
@@ -341,8 +341,8 @@ e-mail: jane@mydomain.com<p>
 			<sect2 id="section.property.index.next">
 			<title>index_next</title>
 			<para>
-        	 index_next È usado para mostrar o prÛximo indice do loop. No ˙ltimo loop,
-        	 isto ainda È um mais o Ìndice atual( respeitando a definiÁ„o
+        	 index_next √© usado para mostrar o pr√≥ximo indice do loop. No √∫ltimo loop,
+        	 isto ainda √© um mais o √≠ndice atual( respeitando a defini√ß√£o
         	 do atributo step, caso tenha sido definido.)
 			</para>
 	<example>
@@ -351,9 +351,9 @@ e-mail: jane@mydomain.com<p>
 <![CDATA[
 {section name=consumidor loop=$custid}
 	{$smarty.section.consumidor.index} id: {$custid[consumidor]}<br>
-	{* Para sua informaÁ„o, $custid[consumidor.index] e $custid[consumidor] tem o mesmo significado *}
+	{* Para sua informa√ß√£o, $custid[consumidor.index] e $custid[consumidor] tem o mesmo significado *}
 	{if $custid[consumidor.index_next] ne $custid[consumidor.index]}
-    	O id do consumidor ir· mudar<br>
+    	O id do consumidor ir√° mudar<br>
 	{/if}
 {/section}
 ]]>
@@ -362,11 +362,11 @@ e-mail: jane@mydomain.com<p>
 <programlisting>
 <![CDATA[
 0 id: 1000<br>
-   	O id do consumidor ir· mudar<br>
+   	O id do consumidor ir√° mudar<br>
 1 id: 1001<br>
-   	O id do consumidor ir· mudar<br>
+   	O id do consumidor ir√° mudar<br>
 2 id: 1002<br>
-   	O id do consumidor ir· mudar<br>
+   	O id do consumidor ir√° mudar<br>
 ]]>
 </programlisting>
 	</example>
@@ -374,15 +374,15 @@ e-mail: jane@mydomain.com<p>
 			<sect2 id="section.property.iteration">
 			<title>iteration</title>
 			<para>
-        	iteration È usado para mostrar a interaÁ„o atual do loop.
+        	iteration √© usado para mostrar a intera√ß√£o atual do loop.
 			</para>
 			<note>
 			 <title>Nota:</title>
 			  <para>
-			   'interation' n„o È afetado pelas propriedades start, step e max da section, 
-			   diferentemente da propriedade index. Interation diferente de 'index' comeÁa 
-			   com 1 ao invÈs de 0. 'rownum' È um sinÙnimo de 'interation', eles exercem a 
-			   mesma funÁ„o.
+			   'interation' n√£o √© afetado pelas propriedades start, step e max da section, 
+			   diferentemente da propriedade index. Interation diferente de 'index' come√ßa 
+			   com 1 ao inv√©s de 0. 'rownum' √© um sin√¥nimo de 'interation', eles exercem a 
+			   mesma fun√ß√£o.
 			  </para>
 			 </note>
 	<example>
@@ -390,11 +390,11 @@ e-mail: jane@mydomain.com<p>
 	<programlisting>
 <![CDATA[
 {section name=consumidor loop=$custid start=5 step=2}
-	interaÁ„o atual do loop: {$smarty.section.consumidor.iteration}<br>
+	intera√ß√£o atual do loop: {$smarty.section.consumidor.iteration}<br>
 	{$smarty.section.consumidor.index} id: {$custid[consumidor]}<br>
-	{* Para sua informaÁ„o, $custid[consumidor.index] e $custid[consumidor] tem o mesmo significado *}
+	{* Para sua informa√ß√£o, $custid[consumidor.index] e $custid[consumidor] tem o mesmo significado *}
 	{if $custid[consumidor.index_next] ne $custid[consumidor.index]}
-    	O id do consumidor ir· mudar<br>
+    	O id do consumidor ir√° mudar<br>
 	{/if}
 {/section}
 ]]>
@@ -402,15 +402,15 @@ e-mail: jane@mydomain.com<p>
 <para>MOSTRA:</para>
 <programlisting>
 <![CDATA[
-interaÁ„o atual do loop: 1
+intera√ß√£o atual do loop: 1
 5 id: 1000<br>
-   	O id do consumidor ir· mudar<br>
-interaÁ„o atual do loop: 2
+   	O id do consumidor ir√° mudar<br>
+intera√ß√£o atual do loop: 2
 7 id: 1001<br>
-   	O id do consumidor ir· mudar<br>
-interaÁ„o atual do loop: 3
+   	O id do consumidor ir√° mudar<br>
+intera√ß√£o atual do loop: 3
 9 id: 1002<br>
-   	O id do consumidor ir· mudar<br>
+   	O id do consumidor ir√° mudar<br>
 ]]>
 </programlisting>
 	</example>
@@ -418,8 +418,8 @@ interaÁ„o atual do loop: 3
 			<sect2 id="section.property.first">
 			<title>first</title>
 			<para>
-        	 first È definido como true se a interaÁ„o atual da section
-        	 È a primeira.
+        	 first √© definido como true se a intera√ß√£o atual da section
+        	 √© a primeira.
 			</para>
 	<example>
 	<title>propriedade first da section</title>
@@ -453,8 +453,8 @@ interaÁ„o atual do loop: 3
 			<sect2 id="section.property.last">
 			<title>last</title>
 			<para>
-        	last È definido como true se a interaÁ„o atual da 
-        	section È a ˙ltima.
+        	last √© definido como true se a intera√ß√£o atual da 
+        	section √© a √∫ltima.
 			</para>
 	<example>
 	<title>propriedade last da section</title>
@@ -488,9 +488,9 @@ interaÁ„o atual do loop: 3
 			<sect2 id="section.property.rownum">	
 			<title>rownum</title>
 			<para>
-			rownum È usado para mostrar a interaÁ„o atual do loop,
-			comeÁando em um. … um sinÙnimo de iteration, 
-			eles exercem a mesma funÁ„o.
+			rownum √© usado para mostrar a intera√ß√£o atual do loop,
+			come√ßando em um. √â um sin√¥nimo de iteration, 
+			eles exercem a mesma fun√ß√£o.
 			</para>
 	<example>
 	<title>propriedade rownum da section</title>
@@ -514,8 +514,8 @@ interaÁ„o atual do loop: 3
 			<sect2 id="section.property.loop">	
 			<title>loop</title>
 			<para>
-			loop È usado para exibir o n˙mero do ˙ltimo Ìndice que a section percorreu. 
-			Ele pode ser usado dentro ou apÛs o tÈrmino da section.
+			loop √© usado para exibir o n√∫mero do √∫ltimo √≠ndice que a section percorreu. 
+			Ele pode ser usado dentro ou ap√≥s o t√©rmino da section.
 			</para>
 	<example>
 	<title>propridade index da section</title>
@@ -543,16 +543,16 @@ Foram mostrados 3 consumidores acima.
 			<sect2 id="section.property.show">	
 			<title>show</title>
 			<para>
-            <emphasis>show</emphasis> È usado como um par‚metro da section. <emphasis>show</emphasis> 
-			È um valor booleano, verdadeiro ou falso. Caso seja falso, a section n„o ser· mostrada. 
-			Se existir uma sectionelse presente, ela ser· exibida.
+            <emphasis>show</emphasis> √© usado como um par√¢metro da section. <emphasis>show</emphasis> 
+			√© um valor booleano, verdadeiro ou falso. Caso seja falso, a section n√£o ser√° mostrada. 
+			Se existir uma sectionelse presente, ela ser√° exibida.
 			</para>
 	<example>
 	<title>atributo show da section</title>
 	<programlisting>
 <![CDATA[
 {* $mostrar_info_consumidor talvez tenha que ser enviada pela 
-   aplicaÁ„o PHP, para decidir quando mostrar ou n„o mostrar esta section *}
+   aplica√ß√£o PHP, para decidir quando mostrar ou n√£o mostrar esta section *}
 
 {section name=consumidor loop=$custid show=$mostrar_info_consumidor}
 	{$smarty.section.consumidor.rownum} id: {$custid[consumidor]}<br>
@@ -561,7 +561,7 @@ Foram mostrados 3 consumidores acima.
 {if $smarty.section.consumidor.show}
 	a section foi mostrada.
 {else}
-	a section n„o foi mostrada.
+	a section n√£o foi mostrada.
 {/if}
 ]]>
 </programlisting>
@@ -580,8 +580,8 @@ a section foi mostrada.
 			<sect2 id="section.property.total">	
 			<title>total</title>
 			<para>
-			total È usado para exibir o n˙mero de interaÁıes que esta section ir· percorrer. 
-			Ela pode ser usada dentro ou apÛs a section.
+			total √© usado para exibir o n√∫mero de intera√ß√µes que esta section ir√° percorrer. 
+			Ela pode ser usada dentro ou ap√≥s a section.
 			</para>
 	<example>
 	<title>propriedade total da section</title>

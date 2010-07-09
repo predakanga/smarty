@@ -6,19 +6,19 @@
   <refpurpose>Registra dinamicamente filtros de salida</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción </title>
+  <title>DescripciÃ³n </title>
   <methodsynopsis>
    <type>void</type><methodname>register_outputfilter</methodname>
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Use este para registrar dinámicamente <link
+   Use este para registrar dinÃ¡micamente <link
     linkend="plugins.outputfilters">filtros de salida</link> para
    operaciones en la <link linkend="api.display">salida</link> 
    del template antes de mostrarlo.
    Vea  <link linkend="advanced.features.outputfilters">Filtros de 
    Salida de Templates</link> para mayores informes de como 
-   configurar una función de filtro de salida.
+   configurar una funciÃ³n de filtro de salida.
   </para>
   <para>
    La llamada de la funcion-php <parameter>function</parameter> puede ser
@@ -26,7 +26,7 @@
    <orderedlist numeration="loweralpha">
    <listitem>
      <para>
-       una cadena conteniendo un nombre de función
+       una cadena conteniendo un nombre de funciÃ³n
      </para>
    </listitem><listitem>
      <para>
@@ -40,12 +40,12 @@
     un arreglo con la forma
      <literal>array(&amp;$class, $method)</literal> con
      <literal>$class</literal> siendo el nombre de la clase y
-     <literal>$method</literal> siendo un método de esta clase.
+     <literal>$method</literal> siendo un mÃ©todo de esta clase.
      </para>
    </listitem>
    </orderedlist>
 <para>
-Vea también 
+Vea tambiÃ©n 
 <link linkend="api.unregister.outputfilter">unregister_outputfilter()</link>,
 <link linkend="api.register.prefilter">register_prefilter()</link>,
 <link linkend="api.register.postfilter">register_postfilter()</link>,

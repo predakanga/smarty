@@ -4,22 +4,22 @@
       <title>$security_settings</title>
       <para>
        Sono valori usati per modificare o specificare le impostazioni di
-       sicurezza quando $security è abilitata. Queste sono le impostazioni
+       sicurezza quando $security Ã¨ abilitata. Queste sono le impostazioni
        possibili:
       </para>
       <itemizedlist>
-       <listitem><para>PHP_HANDLING - true/false. Se è impostato a true,
+       <listitem><para>PHP_HANDLING - true/false. Se Ã¨ impostato a true,
          l'impostazione di $php_handling non viene verificata per la 
          sicurezza.</para></listitem>
        <listitem><para>IF_FUNCS - E' un array con i nomi delle funzioni PHP
          consentite nelle istruzioni IF.</para></listitem>
        <listitem><para>INCLUDE_ANY - true/false. Se impostata a true, qualsiasi
-         template può essere incluso dal filesystem, indipendentemente dalla
+         template puÃ² essere incluso dal filesystem, indipendentemente dalla
         lista di $secure_dir.</para></listitem>
-       <listitem><para>PHP_TAGS - true/false. Se impostato a true, è consentito
+       <listitem><para>PHP_TAGS - true/false. Se impostato a true, Ã¨ consentito
          l'uso dei tag {php}{/php} nei template.</para></listitem>
        <listitem><para>MODIFIER_FUNCS - E' un array coi nomi delle funzioni PHP
-         di cui è consentito l'uso come modificatori delle variabili.</para></listitem>
+         di cui Ã¨ consentito l'uso come modificatori delle variabili.</para></listitem>
       </itemizedlist>
 </sect1>
 <!-- Keep this comment at the end of the file

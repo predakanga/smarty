@@ -10,24 +10,24 @@
     <methodparam choice="opt"><type>string</type><parameter>compile_id</parameter></methodparam>
    </methodsynopsis>
 			<para>
-                Isso retorna a saída do template ao invés de mostrá-lo.
-		Fornecendo um tipo ou path válido  <link
+                Isso retorna a saÃ­da do template ao invÃ©s de mostrÃ¡-lo.
+		Fornecendo um tipo ou path vÃ¡lido  <link
                 linkend="template.resources">template resource</link>. 
-		Como um segundo parâmetro opcional, você pode passar o cache id.
+		Como um segundo parÃ¢metro opcional, vocÃª pode passar o cache id.
 		Veja o <link linkend="caching">caching
-                section</link> para maiores informações.
+                section</link> para maiores informaÃ§Ãµes.
 			</para>
 			<para>
-				Como um terceiro parâmetro opcional, você pode passar um compile id.
-				Isso está no evento que você quer compilar diferentes versões do
+				Como um terceiro parÃ¢metro opcional, vocÃª pode passar um compile id.
+				Isso estÃ¡ no evento que vocÃª quer compilar diferentes versÃµes do
 				mesmo template, como ter templates compilados separadamente para
-				diferentes linguagens. Outro uso para compile_id é quando você
+				diferentes linguagens. Outro uso para compile_id Ã© quando vocÃª
 				usa mais do que um $template_dir mas somente um $compile_dir. Seta
 				um compile_id em separado para cada $template_dir, de outra maneira
-				templates com mesmo nome irão sobrescrever-se uns aos outros. Você
-				pode também setar a variável <link
-				linkend="variable.compile.id">$compile_id</link> ao invés
-				de passá-la para cada chamada de fetch().
+				templates com mesmo nome irÃ£o sobrescrever-se uns aos outros. VocÃª
+				pode tambÃ©m setar a variÃ¡vel <link
+				linkend="variable.compile.id">$compile_id</link> ao invÃ©s
+				de passÃ¡-la para cada chamada de fetch().
 			</para>
 <example>
 <title>fetch</title>

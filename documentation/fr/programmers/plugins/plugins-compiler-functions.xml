@@ -5,11 +5,11 @@
 <sect1 id="plugins.compiler.functions">
  <title>Fonctions de compilation</title>
  <para>
-  Les fonctions de compilation sont appelées durant la compilation du template.
+  Les fonctions de compilation sont appelÃ©es durant la compilation du template.
   Elles sont utiles pour injecter du code PHP ou du contenu "statique variant
   avec le temps" (bandeau de pub par ex.). Si une fonction de compilation et
-  une <link linkend="language.custom.functions">fonction personnalisée</link>
-  ont le même nom, la fonction de compilation a priorité.
+  une <link linkend="language.custom.functions">fonction personnalisÃ©e</link>
+  ont le mÃªme nom, la fonction de compilation a prioritÃ©.
  </para>
  <funcsynopsis>
   <funcprototype>
@@ -19,10 +19,10 @@
   </funcprototype>
  </funcsynopsis>
  <para>
-  Les fonctions de compilation ont deux paramètres : une chaîne contenant
-  la balise - en gros, tout, depuis le nom de la fonction jusqu'au délimiteur de fin - et
-  l'objet Smarty. Elles sont censées retourner le code PHP qui doit être
-  injecté dans le template compilé.
+  Les fonctions de compilation ont deux paramÃ¨tres : une chaÃ®ne contenant
+  la balise - en gros, tout, depuis le nom de la fonction jusqu'au dÃ©limiteur de fin - et
+  l'objet Smarty. Elles sont censÃ©es retourner le code PHP qui doit Ãªtre
+  injectÃ© dans le template compilÃ©.
  </para>
  <example>
   <title>Fonction de compilation simple</title>
@@ -35,7 +35,7 @@
  * Fichier :   compiler.tplheader.php
  * Type :      compilation
  * Nom :       tplheader
- * Rôle :      Renvoie l'en-tête contenant le nom du fichier
+ * RÃ´le :      Renvoie l'en-tÃªte contenant le nom du fichier
  *             source et le temps de compilation.
  * -------------------------------------------------------------
  */
@@ -47,16 +47,16 @@ function smarty_compiler_tplheader($tag_arg, &amp;$smarty)
 ]]>
   </programlisting>
   <para>
-   Cette fonction peut-être appelée depuis le template comme suivant :
+   Cette fonction peut-Ãªtre appelÃ©e depuis le template comme suivant :
   </para>
   <programlisting>
 <![CDATA[
-{* cette fonction n'est executée que lors de la compilation *}
+{* cette fonction n'est executÃ©e que lors de la compilation *}
 {tplheader}
 ]]>
   </programlisting>
   <para>
-   Le code PHP résultant dans les templates compilés ressemblerait à ça :
+   Le code PHP rÃ©sultant dans les templates compilÃ©s ressemblerait Ã  Ã§a :
   </para>
   <programlisting role="php">
 <![CDATA[

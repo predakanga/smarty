@@ -4,22 +4,22 @@
 <sect1 id="variable.compile.dir">
       <title>$compile_dir</title>
       <para>
-       Esse È o nome do diretÛrio onde os template compilados est„o localizados
-       Por padr„o isso È "./templates_c", significando que isso ir·
-       olhar para o diretÛrio de templates no mesmo diretÛrio que est· executando 
+       Esse √© o nome do diret√≥rio onde os template compilados est√£o localizados
+       Por padr√£o isso √© "./templates_c", significando que isso ir√°
+       olhar para o diret√≥rio de templates no mesmo diret√≥rio que est√° executando 
        o script PHP.
       </para>
 	 <note>
-	 <title>Notas TÈcnicas</title>
+	 <title>Notas T√©cnicas</title>
 	 <para>
-       Essa configuraÁ„o deve ser  um path relativo ou um path absoluto.
-       include_path n„o È usado para escrever em arquivos.
+       Essa configura√ß√£o deve ser  um path relativo ou um path absoluto.
+       include_path n√£o √© usado para escrever em arquivos.
       </para>
 	 </note>
 	 <note>
-	 <title>Notas TÈcnicas</title>
+	 <title>Notas T√©cnicas</title>
 	 <para>
-          N„o È recomendado colocar este diretÛrio sob um diretÛrio 
+          N√£o √© recomendado colocar este diret√≥rio sob um diret√≥rio 
 	  document root do seu webserver.
       </para>
 	 </note>

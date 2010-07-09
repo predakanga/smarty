@@ -34,7 +34,7 @@
   </informaltable>
   <para>
    E' usato per fare un escape di tipo html, url, su apici per una variabile
-   su cui non sia gi‡ stato fatto l'escape, hex (esadecimale), hexentity o 
+   su cui non sia gi√† stato fatto l'escape, hex (esadecimale), hexentity o 
    javascript.
    Per default viene applicato un escape di tipo html.
   </para>
@@ -52,7 +52,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -65,7 +65,7 @@ $smarty->display('index.tpl');
 <a href="mailto:{$EmailAddress|escape:"hex"}">{$EmailAddress|escape:"hexentity"}</a>
 ]]>
    </programlisting>
-   <para>Questo stamper‡:
+   <para>Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

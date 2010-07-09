@@ -5,17 +5,17 @@
 <sect1 id="variable.caching">
  <title>$caching</title>
  <para>
-  Ce paramètre demande à Smarty de mettre ou non en cache la sortie des
+  Ce paramÃ¨tre demande Ã  Smarty de mettre ou non en cache la sortie des
   templates.
-  Par défaut, ce réglage est à 0 (désactivé). Si vos templates
-  générent du contenu redondant, il est conseillé d'activer le
-  cache. Celà permettra un gain de performance conséquent.
+  Par dÃ©faut, ce rÃ©glage est Ã  0 (dÃ©sactivÃ©). Si vos templates
+  gÃ©nÃ©rent du contenu redondant, il est conseillÃ© d'activer le
+  cache. CelÃ  permettra un gain de performance consÃ©quent.
  </para>
 
  <para>
   Vous pouvez aussi avoir de
   <link linkend="caching.multiple.caches">nombreux fichiers de cache</link>
-  pour un même template.
+  pour un mÃªme template.
  </para>
 
  <itemizedlist>
@@ -26,27 +26,27 @@
   <listitem><para>
     1 indique a Smarty d'utiliser la variable
     <link linkend="variable.cache.lifetime"><parameter>$cache_lifetime</parameter></link>
-    pour déterminer si le fichier de cache a expiré.
+    pour dÃ©terminer si le fichier de cache a expirÃ©.
    </para></listitem>
   <listitem><para>
-    Une valeur de 2 indique à Smarty d'utiliser la valeur
+    Une valeur de 2 indique Ã  Smarty d'utiliser la valeur
     <link linkend="variable.cache.lifetime"><parameter>$cache_lifetime</parameter></link>
-    spécifiée à la
-  génération du cache. Ainsi vous pouvez régler
-  la durée de vie d'un fichier de cache avant de <link linkend="api.fetch">récupérer</link>
-    le template pour avoir un certain contrôle quand ce fichier en particulier expire. Voir
+    spÃ©cifiÃ©e Ã  la
+  gÃ©nÃ©ration du cache. Ainsi vous pouvez rÃ©gler
+  la durÃ©e de vie d'un fichier de cache avant de <link linkend="api.fetch">rÃ©cupÃ©rer</link>
+    le template pour avoir un certain contrÃ´le quand ce fichier en particulier expire. Voir
   aussi <link linkend="api.is.cached"><varname>is_cached()</varname></link>.
    </para></listitem>
 
   <listitem><para>
     Si <link linkend="variable.compile.check"><parameter>$compile_check</parameter></link>
-    est actif, le contenu du cache sera regénéré si un des templates ou un des fichiers de
-    configuration qui fait partie de ce fichier de cache a été modifié.
+    est actif, le contenu du cache sera regÃ©nÃ©rÃ© si un des templates ou un des fichiers de
+    configuration qui fait partie de ce fichier de cache a Ã©tÃ© modifiÃ©.
    </para></listitem>
   <listitem><para>
     Si <link linkend="variable.force.compile">
      <parameter>$force_compile</parameter></link> est actif, le contenu du cache
-    est toujours regénéré.
+    est toujours regÃ©nÃ©rÃ©.
    </para></listitem>
  </itemizedlist>
 

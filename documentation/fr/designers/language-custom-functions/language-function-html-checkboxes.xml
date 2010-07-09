@@ -7,8 +7,8 @@
  <para>
   <varname>{html_checkboxes}</varname> est une
   <link linkend="language.custom.functions">fonction utilisateur</link>
-  qui crée un groupe de cases à cocher avec les données fournies. Elle prend
-  en compte la liste des éléments sélectionnés par défaut.
+  qui crÃ©e un groupe de cases Ã  cocher avec les donnÃ©es fournies. Elle prend
+  en compte la liste des Ã©lÃ©ments sÃ©lectionnÃ©s par dÃ©faut.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -29,39 +29,39 @@
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>checkbox</emphasis></entry>
-     <entry>Nom de la liste de cases à cocher</entry>
+     <entry>Nom de la liste de cases Ã  cocher</entry>
     </row>
     <row>
      <entry>values</entry>
      <entry>array</entry>
-     <entry>Oui, à moins que vous n'utilisiez l'attribut
+     <entry>Oui, Ã  moins que vous n'utilisiez l'attribut
       option</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Un tableau de valeurs pour les cases à
+     <entry>Un tableau de valeurs pour les cases Ã 
       cocher</entry>
     </row>
     <row>
      <entry>output</entry>
      <entry>array</entry>
-     <entry>Oui, à moins que vous n'utilisiez l'attribut
+     <entry>Oui, Ã  moins que vous n'utilisiez l'attribut
       option</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Un tableau de sortie pour les cases à cocher</entry>
+     <entry>Un tableau de sortie pour les cases Ã  cocher</entry>
     </row>
     <row>
      <entry>selected</entry>
-     <entry>chaîne de caractères/tableau</entry>
+     <entry>chaÃ®ne de caractÃ¨res/tableau</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>Les éléments cochés de la liste</entry>
+     <entry>Les Ã©lÃ©ments cochÃ©s de la liste</entry>
     </row>
     <row>
      <entry>options</entry>
      <entry>Tableau associatif</entry>
-     <entry>Oui, à moins que vous n'utilisiez values et
+     <entry>Oui, Ã  moins que vous n'utilisiez values et
       output</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Un tableau associatif de valeurs et
@@ -69,32 +69,32 @@
     </row>
     <row>
      <entry>separator</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>chaîne de caractère pour séparer chaque case
-      à cocher</entry>
+     <entry>chaÃ®ne de caractÃ¨re pour sÃ©parer chaque case
+      Ã  cocher</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>Assigne les balises d'un checkbox à un tableau plutôt que de les afficher</entry>
+     <entry>Assigne les balises d'un checkbox Ã  un tableau plutÃ´t que de les afficher</entry>
     </row>
     <row>
      <entry>labels</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>true</emphasis></entry>
-     <entry>Ajoute la balise &lt;label&gt;- à la sortie</entry>
+     <entry>Ajoute la balise &lt;label&gt;- Ã  la sortie</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>Assigne la sortie à un tableau dont chaque checkbox est un élément.</entry>
+     <entry>Assigne la sortie Ã  un tableau dont chaque checkbox est un Ã©lÃ©ment.</entry>
     </row>
    </tbody>
   </tgroup>
@@ -104,8 +104,8 @@
   <listitem>
    <para>
     Les attributs requis sont <parameter>values</parameter> et
-    <parameter>output</parameter>, à moins que vous utilisez
-    <parameter>options</parameter> à la place.
+    <parameter>output</parameter>, Ã  moins que vous utilisez
+    <parameter>options</parameter> Ã  la place.
    </para>
   </listitem>
   <listitem>
@@ -115,9 +115,9 @@
   </listitem>
   <listitem>
    <para>
-    Tous les paramètres qui ne sont pas dans la liste ci-dessus
-    sont affichés sous la forme de paires nom/valeur dans chaque
-    balise &lt;input&gt; crées.
+    Tous les paramÃ¨tres qui ne sont pas dans la liste ci-dessus
+    sont affichÃ©s sous la forme de paires nom/valeur dans chaque
+    balise &lt;input&gt; crÃ©es.
    </para>
   </listitem>
  </itemizedlist>
@@ -141,7 +141,7 @@ $smarty->assign('customer_id', 1001);
 ]]>
   </programlisting>
   <para>
-   où index.tpl est :
+   oÃ¹ index.tpl est :
   </para>
   <programlisting>
 <![CDATA[
@@ -177,7 +177,7 @@ $smarty->assign('customer_id', 1001);
 ]]>
   </programlisting>
   <para>
-   Les deux examples donnent à l'écran :
+   Les deux examples donnent Ã  l'Ã©cran :
   </para>
   <screen>
 <![CDATA[
@@ -191,7 +191,7 @@ $smarty->assign('customer_id', 1001);
  </example>
  <example>
   <title>
-   Exemple avec une base de données (eg PEAR ou ADODB) :
+   Exemple avec une base de donnÃ©es (eg PEAR ou ADODB) :
   </title>
   <programlisting role="php">
 <![CDATA[
@@ -207,7 +207,7 @@ $smarty->assign('contact',$db->getRow($sql));
 ]]>
   </programlisting>
   <para>
-   Le résultat des requêtes de la base de données sera affiché avec :
+   Le rÃ©sultat des requÃªtes de la base de donnÃ©es sera affichÃ© avec :
   </para>
   <programlisting>
 <![CDATA[

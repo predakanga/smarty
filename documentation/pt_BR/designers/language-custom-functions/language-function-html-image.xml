@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -30,69 +30,69 @@
                     <row>
                         <entry>border</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>0</emphasis></entry>
                         <entry>tamanho da borda de contorno da imagem</entry>
                     </row>
                     <row>
                         <entry>height</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>altura atual da imagem</emphasis></entry>
                         <entry>altura com a qual a imagem deve ser mostrada</entry>
                     </row>
                     <row>
                         <entry>width</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>largura atual da imagem</emphasis></entry>
                         <entry>largura com a qual a imagem deve ser mostrada</entry>
                     </row>
                     <row>
                         <entry>basedir</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>doc root do servidor</emphasis></entry>
-                        <entry>diretÛrio de base a caminhos relativos</entry>
+                        <entry>diret√≥rio de base a caminhos relativos</entry>
                     </row>
                     <row>
                         <entry>alt</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>""</emphasis></entry>
-                        <entry>descriÁ„o alternativa da imagem</entry>
+                        <entry>descri√ß√£o alternativa da imagem</entry>
                     </row>
                     <row>
                         <entry>href</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>valor href para aonde a imagem ser· linkada</entry>
+                        <entry>valor href para aonde a imagem ser√° linkada</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			html_image È uma funÁ„o customizada que gera uma tag HTML para uma imagem.
-			A altura e a largura s„o automaticamente calculadas a partir do arquivo de imagem se
-			nenhum valor È fornecido.
+			html_image √© uma fun√ß√£o customizada que gera uma tag HTML para uma imagem.
+			A altura e a largura s√£o automaticamente calculadas a partir do arquivo de imagem se
+			nenhum valor √© fornecido.
 			</para>
 			<para>
-			basedir È o diretÛrio base do qual caminhos relativos de imagens est„o baseados.
-			Se n„o fornecido, o document root do servidor (vari·vel de ambiente DOCUMENT_ROOT) È usada
-			como o diretÛrio base. Se a seguranÁa est· habilitada, o caminho para a imagem deve estar dentro
-			de um diretÛrio seguro.
+			basedir √© o diret√≥rio base do qual caminhos relativos de imagens est√£o baseados.
+			Se n√£o fornecido, o document root do servidor (vari√°vel de ambiente DOCUMENT_ROOT) √© usada
+			como o diret√≥rio base. Se a seguran√ßa est√° habilitada, o caminho para a imagem deve estar dentro
+			de um diret√≥rio seguro.
 			</para>
 			<para>
-			<parameter>href</parameter> È o valor href para onde a imagem ser· linkada. Se um link È fornecido,
-			uma tag	&lt;a href="LINKVALUE"&gt;&lt;a&gt; È posta em volta da tag da imagem.
+			<parameter>href</parameter> √© o valor href para onde a imagem ser√° linkada. Se um link √© fornecido,
+			uma tag	&lt;a href="LINKVALUE"&gt;&lt;a&gt; √© posta em volta da tag da imagem.
 			</para>
 			<note>
-				<title>Nota TÈcnica</title>
+				<title>Nota T√©cnica</title>
 				<para>
 				html_image requer um acesso ao disco para ler a imagem e calcular
-				a altura e a largura. Se vocÍ n„o usa caching de template, normalmente È 
-				melhor evitar html_image e deixar as tags de imagem est·ticas para performance
+				a altura e a largura. Se voc√™ n√£o usa caching de template, normalmente √© 
+				melhor evitar html_image e deixar as tags de imagem est√°ticas para performance
 				otimizada.		
             	</para>
 			</note>
@@ -112,7 +112,7 @@ index.tpl:
 {html_image file="/path/from/docroot/pumpkin.jpg"}
 {html_image file="../path/relative/to/currdir/pumpkin.jpg"}
 
-MOSTRA: (possÌvel)
+MOSTRA: (poss√≠vel)
 
 <img src="pumpkin.jpg" alt="" border="0" width="44" height="68" />
 <img src="/path/from/docroot/pumpkin.jpg" alt="" border="0" width="44" height="68" />

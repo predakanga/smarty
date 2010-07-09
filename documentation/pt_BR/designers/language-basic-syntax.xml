@@ -2,17 +2,17 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.4 Maintainer: thomasgm Status: ready -->
  <chapter id="language.basic.syntax">
-  <title>Sintaxe Básica</title>
+  <title>Sintaxe BÃ¡sica</title>
   <para>
-   Todas as tags de template do Smarty contém delimitadores. Por padrão, 
-   estes delimitadores são <literal>{</literal> e <literal>}</literal>, 
+   Todas as tags de template do Smarty contÃ©m delimitadores. Por padrÃ£o, 
+   estes delimitadores sÃ£o <literal>{</literal> e <literal>}</literal>, 
    mas eles podem ser alterados.
   </para>
   <para>
-   Para os exemplos à seguir, nós assumiremos que você está usando os delimitadores 
-   padrão. Para o Smarty, todo o conteúdo fora dos delimitadores é mostrado como 
-   conteúdo estático, ou inalterável. Quando o Smarty encontra tags de template, 
-   ele tenta interpretá-las, e então mostra a saída apropriada em seu lugar.
+   Para os exemplos Ã  seguir, nÃ³s assumiremos que vocÃª estÃ¡ usando os delimitadores 
+   padrÃ£o. Para o Smarty, todo o conteÃºdo fora dos delimitadores Ã© mostrado como 
+   conteÃºdo estÃ¡tico, ou inalterÃ¡vel. Quando o Smarty encontra tags de template, 
+   ele tenta interpretÃ¡-las, e entÃ£o mostra a saÃ­da apropriada em seu lugar.
   </para>
 
  &designers.language-basic-syntax.language-syntax-comments;

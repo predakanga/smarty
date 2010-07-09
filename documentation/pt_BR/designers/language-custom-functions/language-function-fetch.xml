@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -30,40 +30,40 @@
                     <row>
                         <entry>assign</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>A vari·vel de template
-                        que vai receber a saÌda</entry>
+                        <entry>A vari√°vel de template
+                        que vai receber a sa√≠da</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 fetch È usado para obter arquivos do sistema de arquivos local,
-			 http ou ftp, e mostrar o seu conte˙do. Se o nome do arquivo comeÁar
-			 com "http://", a p·gina do web site ser· obtida e mostrada. Se o
-			 nome do arquivo comeÁar com "ftp://", o arquivo ser· obtido do servidor
+			 fetch √© usado para obter arquivos do sistema de arquivos local,
+			 http ou ftp, e mostrar o seu conte√∫do. Se o nome do arquivo come√ßar
+			 com "http://", a p√°gina do web site ser√° obtida e mostrada. Se o
+			 nome do arquivo come√ßar com "ftp://", o arquivo ser√° obtido do servidor
 			 ftp e mostrado. Para arquivos locais, o caminho completo do sistema de 
 			 arquivos deve ser dado, ou um caminho relativo ao script php executado.
 			</para>
 			<para>
-			 Se vocÍ indicar o atributo especial "assign", a saÌda da funÁ„o
- 			 fetch ser· passada para uma vari·vel de template ao invÈs de 
+			 Se voc√™ indicar o atributo especial "assign", a sa√≠da da fun√ß√£o
+ 			 fetch ser√° passada para uma vari√°vel de template ao inv√©s de 
  			 ser mostrado no template. (novo no Smarty 1.5.0)
 			</para>
 			<note>
-				<title>Nota TÈcnica</title>
+				<title>Nota T√©cnica</title>
 				<para>
-				 fetch n„o suporta redirecionamento http, tenha
-				 certeza de incluir a barra no final aonde necess·rio.
+				 fetch n√£o suporta redirecionamento http, tenha
+				 certeza de incluir a barra no final aonde necess√°rio.
             	</para>
 			</note>
 			<note>
-				<title>Nota TÈcnica</title>
+				<title>Nota T√©cnica</title>
 				<para>
-				 Se a seguranÁa do template esta ativada e vocÍ
+				 Se a seguran√ßa do template esta ativada e voc√™
 				 estiver obtendo um arquivo do sistema de arquivos locais, fetch
-				 ir· funcionar apenas em arquivos de um dos diretÛrios
+				 ir√° funcionar apenas em arquivos de um dos diret√≥rios
 				 definidos como seguros. ($secure_dir)
             	</para>
 			</note>
@@ -77,10 +77,10 @@
 {* embute algum texto sobre o tempo de outro web site *}
 {fetch file="http://www.myweather.com/68502/"}
 
-{* obtÈm um arquivo de notÌcias via ftp *}
+{* obt√©m um arquivo de not√≠cias via ftp *}
 {fetch file="ftp://user:password@ftp.domain.com/path/to/currentheadlines.txt"}
 
-{* coloca o conte˙do obtido para uma var·vel de template *}
+{* coloca o conte√∫do obtido para uma var√°vel de template *}
 {fetch file="http://www.myweather.com/68502/" assign="weather"}
 {if $weather ne ""}
 	<b>{$weather}</b>

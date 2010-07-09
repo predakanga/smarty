@@ -4,9 +4,9 @@
 <sect1 id="variable.php.handling">
       <title>$php_handling</title>
       <para>
-       Isso diz ‡ Smarty como manipular cÛdigos PHP contido nos
-       templates. H· quatro possÌveis configuraÁıes, padr„o sendo
-       SMARTY_PHP_PASSTHRU. Note que isso N√O far· efeito com cÛdigos php
+       Isso diz √† Smarty como manipular c√≥digos PHP contido nos
+       templates. H√° quatro poss√≠veis configura√ß√µes, padr√£o sendo
+       SMARTY_PHP_PASSTHRU. Note que isso N√ÉO far√° efeito com c√≥digos php
        dentro de tags <link linkend="language.function.php">{php}{/php}</link>
        no template.
       </para>    
@@ -15,14 +15,14 @@
        <listitem><para>SMARTY_PHP_QUOTE - Smarty quotes the
        tags as html entities.</para></listitem>
        <listitem><para>SMARTY_PHP_REMOVE - Smarty
-       ir· remover as tags do template.</para></listitem>
-       <listitem><para>SMARTY_PHP_ALLOW - Smarty ir· executar as 
-       tags como cÛdigos PHP.</para></listitem>
+       ir√° remover as tags do template.</para></listitem>
+       <listitem><para>SMARTY_PHP_ALLOW - Smarty ir√° executar as 
+       tags como c√≥digos PHP.</para></listitem>
       </itemizedlist>
       <para>
-       NOTE: Usando cÛdigos PHP code dentro de templates È altamente desencorajado.
+       NOTE: Usando c√≥digos PHP code dentro de templates √© altamente desencorajado.
        Use <link linkend="language.custom.functions">custom functions</link> ou
-       <link linkend="language.modifiers">modifiers</link> ao invÈs disso.
+       <link linkend="language.modifiers">modifiers</link> ao inv√©s disso.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

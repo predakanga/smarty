@@ -5,11 +5,11 @@
 <sect1 id="variable.cache.modified.check">
  <title>$cache_modified_check</title>
  <para>
-  Si cette variable est à &true;, Smarty respectera l'en-tête
-  If-Modified-Since envoyé par le client. Si la date de dernière
-  modification du fichier de cache n'a pas changé depuis la dernière
-  visite, alors un en-tête <literal>'304: Not Modified'</literal> sera envoyé à la place
-  du contenu. Celà ne fonctionne qu'avec du contenu mis en cache hors de la
+  Si cette variable est Ã  &true;, Smarty respectera l'en-tÃªte
+  If-Modified-Since envoyÃ© par le client. Si la date de derniÃ¨re
+  modification du fichier de cache n'a pas changÃ© depuis la derniÃ¨re
+  visite, alors un en-tÃªte <literal>'304: Not Modified'</literal> sera envoyÃ© Ã  la place
+  du contenu. CelÃ  ne fonctionne qu'avec du contenu mis en cache hors de la
   balise <link linkend="language.function.insert"><varname>{insert}</varname></link>.
  </para>
  <para>

@@ -7,7 +7,7 @@
       El default es "{".
       </para>
  <para>
-  Ver también  <link linkend="variable.right.delimiter">$right_delimiter</link>
+  Ver tambiÃ©n  <link linkend="variable.right.delimiter">$right_delimiter</link>
   y <link linkend="language.escaping">escaping smarty parsing</link>.
  </para>
 

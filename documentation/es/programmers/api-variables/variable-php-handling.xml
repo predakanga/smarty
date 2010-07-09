@@ -3,9 +3,9 @@
      <sect1 id="variable.php.handling">
       <title>$php_handling</title>
       <para>
-      Este informa al Smarty como manipular códigos PHP contenidos en los 
+      Este informa al Smarty como manipular cÃ³digos PHP contenidos en los 
       templates. Hay cuatro posibles configuraciones, siendo el default
-      SMARTY_PHP_PASSTHRU. Observe que esto NO afectara los códigos php 
+      SMARTY_PHP_PASSTHRU. Observe que esto NO afectara los cÃ³digos php 
       dentro de las etiquetas 
       <link linkend="language.function.php">{php}{/php}</link> en el template.
       </para>    
@@ -16,7 +16,7 @@
        <listitem><para>SMARTY_PHP_REMOVE -  Smarty borra las etiquetas del
        template.</para></listitem>
        <listitem><para>SMARTY_PHP_ALLOW - Smarty ejecuta las etiquetas como
-       código PHP.</para></listitem>
+       cÃ³digo PHP.</para></listitem>
       </itemizedlist>
       <note>
        <para>

@@ -11,13 +11,13 @@
     <methodparam choice="opt"><type>int</type><parameter>expire time</parameter></methodparam>
    </methodsynopsis>
 			<para>
-				Isso limpa o cache de um template específico. Se você tem
-				múltiplos caches para este arquivo, você limpa o cache
-				específico fornecendo o cache id como o segundo parâmetro.
-				Você pode também passar um compile id como um terceiro parâmetro.
-				Você pode "agrupar" templates juntos e então eles podem ser removidos
-				como um grupo. Veja o <link linkend="caching">caching section</link> para maiores informações. Como um quarto
-				parâmetro opcional, você pode fornecer um ano mínimo em segundos 
+				Isso limpa o cache de um template especÃ­fico. Se vocÃª tem
+				mÃºltiplos caches para este arquivo, vocÃª limpa o cache
+				especÃ­fico fornecendo o cache id como o segundo parÃ¢metro.
+				VocÃª pode tambÃ©m passar um compile id como um terceiro parÃ¢metro.
+				VocÃª pode "agrupar" templates juntos e entÃ£o eles podem ser removidos
+				como um grupo. Veja o <link linkend="caching">caching section</link> para maiores informaÃ§Ãµes. Como um quarto
+				parÃ¢metro opcional, vocÃª pode fornecer um ano mÃ­nimo em segundos 
 				que o arquivo de cache deve
 				ter antes dele ser apagado.
 			</para>

@@ -5,27 +5,27 @@
 <sect1 id="variable.php.handling">
  <title>$php_handling</title>
  <para>
-  Indique ‡ Smarty comment interprÈter le code PHP
-  intÈgrÈ dans les templates. Il y a quatre valeurs possibles, par
-  dÈfaut <constant>SMARTY_PHP_PASSTHRU</constant>. Notez
-  que cel‡ n'affecte PAS le code PHP entourÈ des balises
+  Indique √† Smarty comment interpr√©ter le code PHP
+  int√©gr√© dans les templates. Il y a quatre valeurs possibles, par
+  d√©faut <constant>SMARTY_PHP_PASSTHRU</constant>. Notez
+  que cel√† n'affecte PAS le code PHP entour√© des balises
   <link linkend="language.function.php"><varname>{php}{/php}</varname></link>
   dans le template.
  </para>
  <itemizedlist>
-  <listitem><para><constant>SMARTY_PHP_PASSTHRU</constant> - Smarty Ècrit les balises
+  <listitem><para><constant>SMARTY_PHP_PASSTHRU</constant> - Smarty √©crit les balises
    telles quelles.</para></listitem>
   <listitem><para><constant>SMARTY_PHP_QUOTE</constant> - Smarty transforme les balises
-   en entitÈs HTML.</para></listitem>
+   en entit√©s HTML.</para></listitem>
   <listitem><para><constant>SMARTY_PHP_REMOVE</constant> - Smarty supprime les balises
    des templates.</para></listitem>
-  <listitem><para><constant>SMARTY_PHP_ALLOW</constant> - Smarty exÈcute les balises
+  <listitem><para><constant>SMARTY_PHP_ALLOW</constant> - Smarty ex√©cute les balises
    comme du code PHP.</para></listitem>
  </itemizedlist>
  <note>
   <para>
-   IntÈgrer du code PHP dans les templates est vivement
-   dÈconseillÈ. PrÈfÈrez les
+   Int√©grer du code PHP dans les templates est vivement
+   d√©conseill√©. Pr√©f√©rez les
    <link linkend="language.custom.functions">fonctions utilisateurs</link> ou les
    <link linkend="language.modifiers">modificateurs de variables</link>.
   </para>

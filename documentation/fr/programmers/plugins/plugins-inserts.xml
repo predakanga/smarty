@@ -5,8 +5,8 @@
 <sect1 id="plugins.inserts">
  <title>Insertions</title>
  <para>
-  Les plugins d'insertion sont utilisés pour implémenter les fonctions
-  qui sont appelées par les balises
+  Les plugins d'insertion sont utilisÃ©s pour implÃ©menter les fonctions
+  qui sont appelÃ©es par les balises
   <link linkend="language.function.insert"><varname>{insert}</varname></link>
   dans les templates.
  </para>
@@ -18,12 +18,12 @@
   </funcprototype>
  </funcsynopsis>
  <para>
-  Le premier paramètre passé à la fonction est une tableau associatif
+  Le premier paramÃ¨tre passÃ© Ã  la fonction est une tableau associatif
   d'attributs. 
  </para>
  <para>
-  La fonction d'insertion est supposée retourner le résultat qui sera
-  substitué à la balise <varname>{insert}</varname> dans le template.
+  La fonction d'insertion est supposÃ©e retourner le rÃ©sultat qui sera
+  substituÃ© Ã  la balise <varname>{insert}</varname> dans le template.
  </para>
  <example>
   <title>Plugin d'insertion</title>
@@ -36,7 +36,7 @@
  * Fichier :  insert.time.php
  * Type :     temps
  * Nom :      time
- * Rôle :     Insert la date/heure courante conformément
+ * RÃ´le :     Insert la date/heure courante conformÃ©ment
  *            au format
  * -------------------------------------------------------------
  */

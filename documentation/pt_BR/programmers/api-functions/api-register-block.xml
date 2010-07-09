@@ -13,25 +13,25 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-             Use isso para registrar dinamicamente blocos de funções de plugins.
-	     Passe no bloco de nomes de função, seguido por uma chamada de função PHP
+             Use isso para registrar dinamicamente blocos de funÃ§Ãµes de plugins.
+	     Passe no bloco de nomes de funÃ§Ã£o, seguido por uma chamada de funÃ§Ã£o PHP
 	     que implemente isso. 
 			</para>
 
 			<para>
-             A chamada de uma função-php <parameter>impl</parameter> pode ser (a)
-	     uma string contendo o nome da função ou (b) um array no formato
+             A chamada de uma funÃ§Ã£o-php <parameter>impl</parameter> pode ser (a)
+	     uma string contendo o nome da funÃ§Ã£o ou (b) um array no formato
              <literal>array(&amp;$object, $method)</literal> com
-             <literal>&amp;$object</literal> sendo uma referência para um
+             <literal>&amp;$object</literal> sendo uma referÃªncia para um
              objeto e <literal>$method</literal> sendo uma string
-             contendo o nome do método ou (c) um array no formato
+             contendo o nome do mÃ©todo ou (c) um array no formato
              <literal>array(&amp;$class, $method)</literal> com
              <literal>$class</literal> sendo um nome de classe e
              <literal>$method</literal> sendo um 
-             método desta classe.
+             mÃ©todo desta classe.
 			</para>
 			<para>
-<parameter>$cacheable</parameter> e <parameter>$cache_attrs</parameter> podem ser omitidos na maior parte dos casos. Veja <link linkend="caching.cacheable">Controlando modos de Saída de Cache dos Plugins</link> para obter informações apropriadas.
+<parameter>$cacheable</parameter> e <parameter>$cache_attrs</parameter> podem ser omitidos na maior parte dos casos. Veja <link linkend="caching.cacheable">Controlando modos de SaÃ­da de Cache dos Plugins</link> para obter informaÃ§Ãµes apropriadas.
 			</para>
 <example>
 <title>register_block</title>

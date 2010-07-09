@@ -4,22 +4,22 @@
 <sect1 id="advanced.features.postfilters">
     <title>Postfilters</title>
     <para>
-     Os postfilters de template s„o funÁıes de PHP nas quais seus templates s„o rodados
+     Os postfilters de template s√£o fun√ß√µes de PHP nas quais seus templates s√£o rodados
      imediatamente depois de serem compilados. Os postfilters podem ser ou 
-     <link linkend="api.register.postfilter">registrado</link>carrgados do diretÛrio de
-     plugins usando a funÁ„o
+     <link linkend="api.register.postfilter">registrado</link>carrgados do diret√≥rio de
+     plugins usando a fun√ß√£o
      <link linkend="api.load.filter">load_filter()</link> ou pela
-     vari·vel de configuraÁ„o
+     vari√°vel de configura√ß√£o
      <link linkend="variable.autoload.filters">$autoload_filters</link>.
-     O Smarty passar· o cÛdigo fonte do template compilado
+     O Smarty passar√° o c√≥digo fonte do template compilado
      como o primeiro argumento, e espera
-     a funÁ„o retornar o resultado do processamento.
+     a fun√ß√£o retornar o resultado do processamento.
     </para>
     <example>
      <title>usando um postfilter de template</title>
      <programlisting>
 &lt;?php
-// ponha isto em sua aplicaÁ„o
+// ponha isto em sua aplica√ß√£o
 function add_header_comment($tpl_source, &amp;$smarty)
 {
     return "&lt;?php echo \"&lt;!-- Created by Smarty! --&gt;\n\" ?&gt;\n".$tpl_source;

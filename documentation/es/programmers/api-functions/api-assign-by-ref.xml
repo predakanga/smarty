@@ -6,7 +6,7 @@
   <refpurpose>pasando valores por referencia</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>assign_by_ref</methodname>
    <methodparam><type>string</type><parameter>varname</parameter></methodparam>
@@ -15,17 +15,17 @@
   <para>
    Este es usado para <link linkend="api.assign">asignar</link> valores por 
    referencia al template en vez de hacer una copia. Vea el manual de PHP en 
-   la parte sobre referencia de variables para una explicación mas detallada.
+   la parte sobre referencia de variables para una explicaciÃ³n mas detallada.
   </para>
   <note>
-   <title>Nota Técnica</title>
+   <title>Nota TÃ©cnica</title>
    <para>
     Este es usado para asignar valores por referencia al template.
     Si ested asigna una variable por referencia entonces cambiara 
-    este valor, el valor asignado exprimentara el cambio también.
+    este valor, el valor asignado exprimentara el cambio tambiÃ©n.
     Para <link linkend="advanced.features.objects">objetos</link>, 
-    assign_by_ref() también exite una copia del objetos asignado en memoria. 
-    Vea el manual de PHP en refereciando variables para una mejor explicación.
+    assign_by_ref() tambiÃ©n exite una copia del objetos asignado en memoria. 
+    Vea el manual de PHP en refereciando variables para una mejor explicaciÃ³n.
    </para>
   </note>
   <example>
@@ -41,7 +41,7 @@ $smarty->assign_by_ref('Address', $address);
    </programlisting>
   </example>
      <para>
-       Ver también <link linkend="api.assign">assign()</link>,
+       Ver tambiÃ©n <link linkend="api.assign">assign()</link>,
        <link linkend="api.clear.all.assign">clear_all_assign()</link>,
        <link linkend="api.append">append()</link>
        y <link linkend="language.function.assign">{assign}</link>

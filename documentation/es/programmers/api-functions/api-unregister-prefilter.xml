@@ -6,13 +6,13 @@
   <refpurpose>Des-registra dinamicamente un prefiltro</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción </title>
+  <title>DescripciÃ³n </title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_prefilter</methodname>
    <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
   </methodsynopsis>
   <para>
-    Ver también 
+    Ver tambiÃ©n 
     <link linkend="api.register.prefilter">register_prefilter()</link>
     y <link linkend="plugins.prefilters.postfilters">pre filters</link>.
   </para>

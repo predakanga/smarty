@@ -2,16 +2,16 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->
 <sect1 id="language.assigned.variables">
-    <title>Vari·veis definidas do PHP</title>
+    <title>Vari√°veis definidas do PHP</title>
     <para>
-     Vari·veis que s„o definidas do PHP s„o referenciadas precedendo elas
-     com um sinal de sifr„o <literal>$</literal>. Vari·veis definidas dentro do template
-     com a funÁ„o  <link linkend="language.function.assign">assign</link>
-     tambÈm s„o mostradas desta maneira.
+     Vari√°veis que s√£o definidas do PHP s√£o referenciadas precedendo elas
+     com um sinal de sifr√£o <literal>$</literal>. Vari√°veis definidas dentro do template
+     com a fun√ß√£o  <link linkend="language.function.assign">assign</link>
+     tamb√©m s√£o mostradas desta maneira.
     </para>
     <example>
 
-     <title>Vari·veis definidas</title>
+     <title>Vari√°veis definidas</title>
 <programlisting>
 Hello {$firstname}, glad to see you could make it.
 &lt;p&gt;
@@ -27,12 +27,12 @@ Your last login was on January 11th, 2001.</programlisting>
     <sect2 id="language.variables.assoc.arrays">
      <title>Associative arrays</title>
       <para>
-       VocÍ tambÈm pode referenciar matrizes associativas que s„o definidas no PHP
-       especificando a chave depois do sÌmbolo '.'
+       Voc√™ tamb√©m pode referenciar matrizes associativas que s√£o definidas no PHP
+       especificando a chave depois do s√≠mbolo '.'
        (ponto).
       </para>
 <example>
-<title>Acessando vari·veis de matriz associativa</title>
+<title>Acessando vari√°veis de matriz associativa</title>
 <programlisting>
 index.php:
 
@@ -61,13 +61,13 @@ zaphod@slartibartfast.com&lt;br&gt;
 </example>
 	</sect2>
         <sect2 id="language.variables.array.indexes">
-   	 <title>Õndices de Matrizes</title>
+   	 <title>√çndices de Matrizes</title>
 	  <para>
-           VocÍ pode referencia matrizes pelo seu Ìndice, muito
+           Voc√™ pode referencia matrizes pelo seu √≠ndice, muito
            parecido com a sintaxe nativa do PHP.
 	</para>
 <example>
-<title>Acesando matrizes por seus Ìndices</title>
+<title>Acesando matrizes por seus √≠ndices</title>
 <programlisting>
 index.php:
 
@@ -99,7 +99,7 @@ zaphod@slartibartfast.com&lt;br&gt;
 	<title>Objetos</title>
 	<para>
          Propriedades de objetos definidos do PHP podem ser referenciados
-         especificando-se o nome da propriedade depois do sÌmbolo '-&gt;'.
+         especificando-se o nome da propriedade depois do s√≠mbolo '-&gt;'.
 	</para>
 <example>
 <title>Acessando propriedades de objetos</title>

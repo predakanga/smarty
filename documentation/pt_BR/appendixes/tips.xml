@@ -6,15 +6,15 @@
    <para>
    </para>
    <sect1 id="tips.blank.var.handling">
-		<title>ManipulaÁ„o de Vari·vel Vazia</title>
+		<title>Manipula√ß√£o de Vari√°vel Vazia</title>
 		<para>
-		H· momentos que vocÍ quer mostrar um valor padr„o para uma vari·vel vazia ao invÈs de n„o mostrar nada, 
+		H√° momentos que voc√™ quer mostrar um valor padr√£o para uma vari√°vel vazia ao inv√©s de n√£o mostrar nada, 
 		tal como mostrar "&amp;nbsp;" para que os planos de fundo de tabelas funcionem corretamente. Muitos 
-		usariam uma instruÁ„o {if} para fazer isso, mas h· um macete que pode ser feito usando-se o 
-		modificador de vari·vel <emphasis>padr„o</emphasis> do Smarty.
+		usariam uma instru√ß√£o {if} para fazer isso, mas h√° um macete que pode ser feito usando-se o 
+		modificador de vari√°vel <emphasis>padr√£o</emphasis> do Smarty.
 		</para>
 <example>
-<title>Imprimindo &amp;nbsp; quando uma vari·vel est· vazia</title>
+<title>Imprimindo &amp;nbsp; quando uma vari√°vel est√° vazia</title>
 <programlisting>
 <![CDATA[
 {* A forma mais longa *}
@@ -35,43 +35,43 @@
 	</sect1>
 
     <sect1 id="tips.default.var.handling">
-		<title>ManipulaÁ„o do valor padr„o de uma Vari·vel</title>
+		<title>Manipula√ß√£o do valor padr√£o de uma Vari√°vel</title>
 		<para>
-        Se uma vari·vel È usada freq¸entemente em seus templates, aplicar o modificador de vari·vel 
-		<emphasis>padr„o</emphasis> toda vez pode se tornar algo muito desagrad·vel. VocÍ pode evitar 
-		isto atribuindo um valor padr„o para a vari·vel usando a funÁ„o <link linkend="language.function.assign">assign</link>.
+        Se uma vari√°vel √© usada freq√ºentemente em seus templates, aplicar o modificador de vari√°vel 
+		<emphasis>padr√£o</emphasis> toda vez pode se tornar algo muito desagrad√°vel. Voc√™ pode evitar 
+		isto atribuindo um valor padr√£o para a vari√°vel usando a fun√ß√£o <link linkend="language.function.assign">assign</link>.
 		</para>
 <example>
-<title>Atribuindo o valor padr„o para uma vari·vel de template</title>
+<title>Atribuindo o valor padr√£o para uma vari√°vel de template</title>
 <programlisting>
 <![CDATA[
 {* coloque isto em algum lugar no topo de seu template *}
-{assign var="titulo" value=$titulo|default:"sem tÌtulo"}
+{assign var="titulo" value=$titulo|default:"sem t√≠tulo"}
 
-{* Se o $titulo estava vazio, ele agora contÈm o valor "sem titulo" quando vocÍ exibÌ-lo *}
+{* Se o $titulo estava vazio, ele agora cont√©m o valor "sem titulo" quando voc√™ exib√≠-lo *}
 {$titulo}
 ]]>
 </programlisting>
 </example>
 	</sect1>
     <sect1 id="tips.passing.vars">
-		<title>Passando a vari·vel titulo para o template de cabeÁalho</title>
+		<title>Passando a vari√°vel titulo para o template de cabe√ßalho</title>
 		<para>
-        Quando a maioria de seus templates usam os mesmos cabeÁalhos e mesmos rodapÈs, È
-		comum dividi-los um em cada template e ent„o incluÌ-los. Mas o que fazer se o 
-		cabeÁalho precisa ter um titulo diferente, dependendo de que p·gina ele est· vindo? 
-		VocÍ pode passar o titulo para o 
-		cabeÁalho quando ele È incluÌdo.
+        Quando a maioria de seus templates usam os mesmos cabe√ßalhos e mesmos rodap√©s, √©
+		comum dividi-los um em cada template e ent√£o inclu√≠-los. Mas o que fazer se o 
+		cabe√ßalho precisa ter um titulo diferente, dependendo de que p√°gina ele est√° vindo? 
+		Voc√™ pode passar o titulo para o 
+		cabe√ßalho quando ele √© inclu√≠do.
 		</para>
 <example>
-<title>Passando a vari·vel titulo para o template de cabeÁalho</title>
+<title>Passando a vari√°vel titulo para o template de cabe√ßalho</title>
 <programlisting>
 <![CDATA[
 paginaprincipal.tpl
 ------------
 
-{include file="cabecalho.tpl" titulo="P·gina Principal"}
-{* O conte˙do do template vem aqui *}
+{include file="cabecalho.tpl" titulo="P√°gina Principal"}
+{* O conte√∫do do template vem aqui *}
 {include file="rodape.tpl"}
 
 
@@ -80,7 +80,7 @@ arquivos.tpl
 
 {config_load file="pagina_arquivos.conf"}
 {include file="cabecalho.tpl" titulo=#tituloPaginaArquivos#}
-{* O conte˙do do template vem aqui *}
+{* O conte√∫do do template vem aqui *}
 {include file="rodape.tpl"}
 
 
@@ -101,12 +101,12 @@ footer.tpl
 </programlisting>
 </example>
 	<para>        
-       Quando a p·gina for extraÌda, o tÌtulo da "P·gina Principal" È passado ao template 'cabecalho.tpl', 
-	   e ser· imediatamente usado como tÌtulo da p·gina. Quando a p·gina de arquivos È extraÌda, o tÌtulo 
-	   muda para "Arquivos". No que no exemplo de arquivos, nÛs estamos usando uma vari·vel que vem do 
-	   arquivo 'pagina_arquivos.conf' ao invÈs de uma vari·vel definida no cÛdigo. Note tambÈm que "BC News" 
-	   È mostrado somente se a vari·vel $titulo n„o conter valor algum, isto È feito usando-se o modificador 
-	   de vari·veis <emphasis>padr„o</emphasis>.
+       Quando a p√°gina for extra√≠da, o t√≠tulo da "P√°gina Principal" √© passado ao template 'cabecalho.tpl', 
+	   e ser√° imediatamente usado como t√≠tulo da p√°gina. Quando a p√°gina de arquivos √© extra√≠da, o t√≠tulo 
+	   muda para "Arquivos". No que no exemplo de arquivos, n√≥s estamos usando uma vari√°vel que vem do 
+	   arquivo 'pagina_arquivos.conf' ao inv√©s de uma vari√°vel definida no c√≥digo. Note tamb√©m que "BC News" 
+	   √© mostrado somente se a vari√°vel $titulo n√£o conter valor algum, isto √© feito usando-se o modificador 
+	   de vari√°veis <emphasis>padr√£o</emphasis>.
 	</para>
 	</sect1>
     <sect1 id="tips.dates">
@@ -114,12 +114,12 @@ footer.tpl
        <para>
        Em geral, sempre envie datas ao Smarty no formato timestamp. Deste modo o desginer do template 
 	   pode usar o modificador <link linkend="language.modifier.date.format">date_format</link> 
-	   para ter um controle total sobre a formataÁ„o da data, e tambÈm facilita a comparaÁ„o de datas 
-	   se necess·rio.
+	   para ter um controle total sobre a formata√ß√£o da data, e tamb√©m facilita a compara√ß√£o de datas 
+	   se necess√°rio.
        </para>
        <para>
-	   Nota: No Smarty 1.4.0, vocÍ pode enviar datas ao Smarty no formato unix timestamp, 
-	   mysql timestamp, ou qualer outra data que possa ser lida pela funÁ„o strtotime().
+	   Nota: No Smarty 1.4.0, voc√™ pode enviar datas ao Smarty no formato unix timestamp, 
+	   mysql timestamp, ou qualer outra data que possa ser lida pela fun√ß√£o strtotime().
        </para>
    <example>
     <title>usando date_format</title>
@@ -129,7 +129,7 @@ footer.tpl
 ]]>
     </programlisting>
     <para>
-     Ir· mostrar:
+     Ir√° mostrar:
     </para>
     <screen>
 <![CDATA[
@@ -142,7 +142,7 @@ Jan 4, 2001
 ]]>
     </programlisting>
     <para>
-     Ir· mostrar:
+     Ir√° mostrar:
     </para>
     <screen>
 <![CDATA[
@@ -158,16 +158,16 @@ Jan 4, 2001
     </programlisting>
    </example>
 		<para>
-         Quando se est· usando {html_select_date} em um template, o programador normalmente vai querer 
-		 converter a saÌda de um formul·rio de volta para o formato timestamp. Abaixo est· uma funÁ„o 
-		 que ir· ajud·-lo ‡ fazer isto.
+         Quando se est√° usando {html_select_date} em um template, o programador normalmente vai querer 
+		 converter a sa√≠da de um formul√°rio de volta para o formato timestamp. Abaixo est√° uma fun√ß√£o 
+		 que ir√° ajud√°-lo √† fazer isto.
 		</para>
 <example>
 <title>Convertendo datas de volta ao formato timestamp</title>
 <programlisting role="php">
 <![CDATA[
 <?php
-// presume-se que os elementos de seu formul·rio s„o chamados de 
+// presume-se que os elementos de seu formul√°rio s√£o chamados de 
 // startDate_Day, startDate_Month, startDate_Year
 
 $startDate = makeTimeStamp($startDate_Year,$startDate_Month,$startDate_Day);
@@ -191,24 +191,24 @@ function makeTimeStamp($year="",$month="",$day="")
     <sect1 id="tips.wap">
 		<title>WAP/WML</title>
 		<para>
-        Os templates WAP/WML exigem um cabeÁalho com o tipo de conte˙do (Content-Type) PHP para serem 
-		passados junto com o template. O modo mais f·cil de se fazer isso seria escrever uma funÁ„o 
-		personalizada que envia-se este cabeÁalho. Se vocÍ est· usando cache, isto n„o ir· funcionar, 
-		ent„o nÛs faremos isso usando a tag insert (lembre-se que tags de insert n„o s„o guardadas no cache!). 
-		Certifique-se de que nada È enviado ao navegador antes do template, caso contr·rio o cabeÁalho n„o ir· 
+        Os templates WAP/WML exigem um cabe√ßalho com o tipo de conte√∫do (Content-Type) PHP para serem 
+		passados junto com o template. O modo mais f√°cil de se fazer isso seria escrever uma fun√ß√£o 
+		personalizada que envia-se este cabe√ßalho. Se voc√™ est√° usando cache, isto n√£o ir√° funcionar, 
+		ent√£o n√≥s faremos isso usando a tag insert (lembre-se que tags de insert n√£o s√£o guardadas no cache!). 
+		Certifique-se de que nada √© enviado ao navegador antes do template, caso contr√°rio o cabe√ßalho n√£o ir√° 
 		funcionar.
 		</para>
 <example>
-<title>Usando insert para escrever um cabeÁalho WML Content-Type</title>
+<title>Usando insert para escrever um cabe√ßalho WML Content-Type</title>
 <programlisting role="php">
 <![CDATA[
 <?php
-// certifique-se que o apache est· configurado para reconhecer extensıes .wml!
-// coloque esta funÁ„o em algum lugar de seu aplicativo, ou no arquivo Smarty.addons.php
+// certifique-se que o apache est√° configurado para reconhecer extens√µes .wml!
+// coloque esta fun√ß√£o em algum lugar de seu aplicativo, ou no arquivo Smarty.addons.php
 
 function insert_header($params) 
 {
-   // esta funÁ„o espera o argumento $content
+   // esta fun√ß√£o espera o argumento $content
    if (empty($params['content'])) {
        return;
    }
@@ -219,7 +219,7 @@ function insert_header($params)
 ]]>
 </programlisting>
 <para>
-seu template do Smarty deve comeÁar com a tag insert, veja o exemplo ‡ seguir:
+seu template do Smarty deve come√ßar com a tag insert, veja o exemplo √† seguir:
 </para>
 <programlisting>
 <![CDATA[
@@ -243,7 +243,7 @@ Pressione OK para continuar...
 <!-- begin second card --> 
 <card id="two">  
 <p> 
-Bem f·cil isso, n„o È?
+Bem f√°cil isso, n√£o √©?
 </p> 
 </card> 
 </wml>
@@ -254,18 +254,18 @@ Bem f·cil isso, n„o È?
 	<sect1 id="tips.componentized.templates">
 		<title>Templates componentizados</title>
 		<para>
-         Tradicionalmente, programar templates para suas aplicaÁıes È feito da seguinte maneira: 
-		 Primeiro, vocÍ guardar suas vari·veis junto com a aplicaÁ„o PHP, (talvez obtendo-as de consultas 
-		 ‡ banco de dados). ApÛs, vocÍ instancia seu objeto Smarty, atribui valores ‡s vari·veis e 
-		 mostra o template. Digamos que nÛs temos um registrador de estoque em nosso template. NÛs 
-		 coletarÌamos os dados do estoque em nossa aplicaÁ„o, e ent„o atribuÌriamos valores as vari·veis 
-		 referentes ‡ ele no template e depois exibirÌamos o template na tela. Agora n„o seria legal 
-		 se vocÍ pudesse adicionar este registrador de esto em qualquer aplicaÁ„o simplesmente incluindo 
+         Tradicionalmente, programar templates para suas aplica√ß√µes √© feito da seguinte maneira: 
+		 Primeiro, voc√™ guardar suas vari√°veis junto com a aplica√ß√£o PHP, (talvez obtendo-as de consultas 
+		 √† banco de dados). Ap√≥s, voc√™ instancia seu objeto Smarty, atribui valores √†s vari√°veis e 
+		 mostra o template. Digamos que n√≥s temos um registrador de estoque em nosso template. N√≥s 
+		 coletar√≠amos os dados do estoque em nossa aplica√ß√£o, e ent√£o atribu√≠riamos valores as vari√°veis 
+		 referentes √† ele no template e depois exibir√≠amos o template na tela. Agora n√£o seria legal 
+		 se voc√™ pudesse adicionar este registrador de esto em qualquer aplica√ß√£o simplesmente incluindo 
 		 um template nela, e sem se preocupar com a busca dos dados futuramente?
 		</para>
         <para>
-		VocÍ pode fazer isto escrevendo um plugin personalizado que obteria o 
-		conte˙do e atribuiria ele ‡ uma vari·vel definida no template.
+		Voc√™ pode fazer isto escrevendo um plugin personalizado que obteria o 
+		conte√∫do e atribuiria ele √† uma vari√°vel definida no template.
         </para>
 <example>
 <title>Template componentizado</title>
@@ -273,22 +273,22 @@ Bem f·cil isso, n„o È?
 <![CDATA[
 <?php
 
-// coloque o arquivo "function.load_ticker.php" no diretÛrio plugin
+// coloque o arquivo "function.load_ticker.php" no diret√≥rio plugin
 
-// configura nossa funÁ„o para pegar os dados do estoque
+// configura nossa fun√ß√£o para pegar os dados do estoque
 function fetch_ticker($symbol) 
 {
-   // coloque a lÛgica que obtÈm os dados de 
-   // algum recurso e guarde na vari·vel $ticker_info
+   // coloque a l√≥gica que obt√©m os dados de 
+   // algum recurso e guarde na vari√°vel $ticker_info
    return $ticker_info;
 }
 
 function smarty_function_load_ticker($params, &$smarty) 
 {
-   // chama a funÁ„o
+   // chama a fun√ß√£o
    $ticker_info = fetch_ticker($params['symbol']);
    
-   // atribuite o valor ‡ uma vari·vel no template
+   // atribuite o valor √† uma vari√°vel no template
    $smarty->assign($params['assign'], $ticker_info);
 }
 ?>
@@ -303,38 +303,38 @@ index.tpl
 
 {load_ticker symbol="YHOO" assign="ticker"}
 
-Nome no estoque: {$ticker.name} PreÁo no estoque: {$ticker.price}
+Nome no estoque: {$ticker.name} Pre√ßo no estoque: {$ticker.price}
 ]]>
     </programlisting>
 </example>
 	</sect1>
 	<sect1 id="tips.obfuscating.email">
-		<title>Ofuscando endereÁos de E-mail</title>
+		<title>Ofuscando endere√ßos de E-mail</title>
 		<para>
-         VocÍ j· se espantou como seu endereÁo de E-mail entra em tantas listas de spam? 
-		 A ˙nica forma dos spammers coletarem seu(s) endereÁo(s) de E-mail(s) È de p·ginas web. 
-		 Para ajudar ‡ combater este problema, vocÍ pode fazer seu endereÁo de E-mail aparecer em javascript 
-		 misturado em cÛdigo HTML, e ainda assim ele ir· aparecer e funcionar corretamente no navegador. 
-		 Isto È feito com o plugin chamado 'mailto'.
+         Voc√™ j√° se espantou como seu endere√ßo de E-mail entra em tantas listas de spam? 
+		 A √∫nica forma dos spammers coletarem seu(s) endere√ßo(s) de E-mail(s) √© de p√°ginas web. 
+		 Para ajudar √† combater este problema, voc√™ pode fazer seu endere√ßo de E-mail aparecer em javascript 
+		 misturado em c√≥digo HTML, e ainda assim ele ir√° aparecer e funcionar corretamente no navegador. 
+		 Isto √© feito com o plugin chamado 'mailto'.
 		</para>
 <example>
-<title>Exemplo de ofuscamento de um EndereÁo de E-mail</title>
+<title>Exemplo de ofuscamento de um Endere√ßo de E-mail</title>
 <programlisting>
 <![CDATA[
 index.tpl
 ---------
 
-envia informaÁıes para
-{mailto address=$EmailAddress encode="javascript" subject="Ol·"}
+envia informa√ß√µes para
+{mailto address=$EmailAddress encode="javascript" subject="Ol√°"}
 
 ]]>
 </programlisting>
 </example>
 	<note>
-	<title>Nota tÈcnica</title>
+	<title>Nota t√©cnica</title>
 	<para>
-	Este mÈtodo n„o È 100% a prova de falha. Um spammer poderia criar um programa
-	para coletar o e-mail e decodificar estes valores, mas È muito pouco prov·vel.
+	Este m√©todo n√£o √© 100% a prova de falha. Um spammer poderia criar um programa
+	para coletar o e-mail e decodificar estes valores, mas √© muito pouco prov√°vel.
 	</para>
 	</note>
 	</sect1>

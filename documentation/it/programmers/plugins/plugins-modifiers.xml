@@ -15,7 +15,7 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     Il primo parametro passato al plugin modificatore è il valore sul
+     Il primo parametro passato al plugin modificatore Ã¨ il valore sul
      quale il modificatore stesso deve operare. Gli altri parametri
      possono essere opzionali, a seconda del tipo di operazione che
      deve essere eseguita.
@@ -56,7 +56,7 @@ function smarty_modifier_capitalize($string)
     </example>
     <para></para>
     <example>
-     <title>un plugin modificatore più complesso</title>
+     <title>un plugin modificatore piÃ¹ complesso</title>
      <programlisting role="php">
 <![CDATA[
 <?php

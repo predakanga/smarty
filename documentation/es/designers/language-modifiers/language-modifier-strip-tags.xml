@@ -11,11 +11,11 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>descripción</entry>
+      <entry>descripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
    </tgroup>
   </informaltable>
   <para>
-   Este retira las etiquetas de marcación, basicamente todo entre &lt; y &gt;.
+   Este retira las etiquetas de marcaciÃ³n, basicamente todo entre &lt; y &gt;.
   </para>
   <example>
    <title>strip_tags</title>

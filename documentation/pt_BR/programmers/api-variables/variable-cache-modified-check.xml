@@ -4,10 +4,10 @@
 <sect1 id="variable.cache.modified.check">
       <title>$cache_modified_check</title>
       <para>
-       Se configurado para true, Smarty ir· respeitar o If-Modified-Since
+       Se configurado para true, Smarty ir√° respeitar o If-Modified-Since
        header enviado para o cliente. Se o timestamp do arquivo de cache
-       n„o foi alterado desde a ˙ltima visita, ent„o um header "304 Not Modified" 
-       ir· ser enviado ao invÈs do conte˙do. Isso funciona somente em arquivos
+       n√£o foi alterado desde a √∫ltima visita, ent√£o um header "304 Not Modified" 
+       ir√° ser enviado ao inv√©s do conte√∫do. Isso funciona somente em arquivos
        de cache sem tags <command>insert</command>.
       </para>
 </sect1>

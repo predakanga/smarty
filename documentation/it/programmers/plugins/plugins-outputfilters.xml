@@ -3,7 +3,7 @@
    <sect1 id="plugins.outputfilters"><title>Filtri di Output</title>
     <para>
      I plugin filtro di output lavorano sull'output di un template, dopo
-     che il template è stato caricato ed eseguito, ma prima che l'output
+     che il template Ã¨ stato caricato ed eseguito, ma prima che l'output
      che venga visualizzato.
     </para>
     <funcsynopsis>
@@ -14,8 +14,8 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     Il primo parametro passato alla funzione filtro è l'output del
-     template che deve essere elaborato, e il secondo parametro è 
+     Il primo parametro passato alla funzione filtro Ã¨ l'output del
+     template che deve essere elaborato, e il secondo parametro Ã¨ 
      l'istanza di Smarty che sta chiamando il plugin. Ci si aspetta che
      questo effettui l'elaborazione e restituisca il risultato.
     </para>

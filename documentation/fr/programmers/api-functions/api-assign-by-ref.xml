@@ -5,7 +5,7 @@
 <refentry id="api.assign.by.ref">
  <refnamediv>
   <refname>assign_by_ref()</refname>
-  <refpurpose>Assigne des valeurs par référence</refpurpose>
+  <refpurpose>Assigne des valeurs par rÃ©fÃ©rence</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -15,19 +15,19 @@
    <methodparam><type>mixed</type><parameter>var</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour <link linkend="api.assign">assigner</link> des valeurs aux
-   templates par référence plutôt que par copie. Référez-vous au manuel PHP
-   pour une explication plus précise sur les références des variables.
+   UtilisÃ©e pour <link linkend="api.assign">assigner</link> des valeurs aux
+   templates par rÃ©fÃ©rence plutÃ´t que par copie. RÃ©fÃ©rez-vous au manuel PHP
+   pour une explication plus prÃ©cise sur les rÃ©fÃ©rences des variables.
  </para>
  <note>
   <title>Note technique</title>
   <para>
-   Si vous assignez une variable par référence puis changez sa
-   valeur, le changement est aussi répercuté sur la valeur assignée.
+   Si vous assignez une variable par rÃ©fÃ©rence puis changez sa
+   valeur, le changement est aussi rÃ©percutÃ© sur la valeur assignÃ©e.
    Pour les <link linkend="advanced.features.objects">objets</link>, 
-   <varname>assign_by_ref()</varname> ne fait pas de copie en mémoire de l'objet
-   assigné. Référez-vous au manuel PHP pour une explication plus précise sur
-   les références de variable.
+   <varname>assign_by_ref()</varname> ne fait pas de copie en mÃ©moire de l'objet
+   assignÃ©. RÃ©fÃ©rez-vous au manuel PHP pour une explication plus prÃ©cise sur
+   les rÃ©fÃ©rences de variable.
   </para>
  </note>
  <example>

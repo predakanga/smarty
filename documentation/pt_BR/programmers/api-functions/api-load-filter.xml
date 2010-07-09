@@ -11,7 +11,7 @@
           </funcprototype>
          </funcsynopsis>
          <para>
-          Essa função pode ser usada para carregar um filtro de plugin. O primeiro
+          Essa funÃ§Ã£o pode ser usada para carregar um filtro de plugin. O primeiro
 	  argumento especifica o tipo do filtro para carregar e pode ser um
 	  dos seguintes: 'pre', 'post', ou 'output'. O segundo argumento
 	  especifica o nome do filtro de plugin, por exemplo, 'trim'.

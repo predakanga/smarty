@@ -11,58 +11,58 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     Funções de Block são funções da forma: {func} .. {/func}. Em outras palavras, ele enclausura
-     um bloco de template e opera no conteúdo deste bloco. Funções de Block tem precedência sobre 
-     funções customizadas com mesmo nome,
-     assim, você não pode ter ambas, função customizável {func} e
-     função de Bloco {func} .. {/func}.
+     FunÃ§Ãµes de Block sÃ£o funÃ§Ãµes da forma: {func} .. {/func}. Em outras palavras, ele enclausura
+     um bloco de template e opera no conteÃºdo deste bloco. FunÃ§Ãµes de Block tem precedÃªncia sobre 
+     funÃ§Ãµes customizadas com mesmo nome,
+     assim, vocÃª nÃ£o pode ter ambas, funÃ§Ã£o customizÃ¡vel {func} e
+     funÃ§Ã£o de Bloco {func} .. {/func}.
     </para>
     <para>
-     Por definição a implementação de sua função é chamada duas vezes pela Smarty: uma vez pela tag de abertura,
+     Por definiÃ§Ã£o a implementaÃ§Ã£o de sua funÃ§Ã£o Ã© chamada duas vezes pela Smarty: uma vez pela tag de abertura,
     e outra pela tag de fechamento 
     (veja <literal>&amp;$repeat</literal> abaixo para como mudar isto).
     </para>
     <para>
-     Apenas a tag de abertura da função de bloco pode ter atributos. 
-     Todos os atributos passados para as funções de
-     template estão contidos em <parameter>$params</parameter> como um array associativo. Você pode ou acessar
+     Apenas a tag de abertura da funÃ§Ã£o de bloco pode ter atributos. 
+     Todos os atributos passados para as funÃ§Ãµes de
+     template estÃ£o contidos em <parameter>$params</parameter> como um array associativo. VocÃª pode ou acessar
      esses valores diretamente, i.e. <varname>$params['start']</varname>
      ou usar <varname>extract($params)</varname> 
-     para importá-los para dentro da tabela símbolo. Os atributos da tag de
-     abertura são também acessíveis a sua função 
+     para importÃ¡-los para dentro da tabela sÃ­mbolo. Os atributos da tag de
+     abertura sÃ£o tambÃ©m acessÃ­veis a sua funÃ§Ã£o 
       quando processando a tag de fechamento.
     </para>
     <para>
-     O valor da variável <parameter>$content</parameter> 
-     depende de que se sua função é chamada pela tag de 
-     fechamento ou de abertura. Caso seja a de abertura, ele será
+     O valor da variÃ¡vel <parameter>$content</parameter> 
+     depende de que se sua funÃ§Ã£o Ã© chamada pela tag de 
+     fechamento ou de abertura. Caso seja a de abertura, ele serÃ¡
      <literal>null</literal>, se for a de fechamento
-     o valor será do conteúdo do bloco de template. 
-     Note que o bloco de template já terá sido processado pela
-     Smarty, então tudo que você receberá é saída do template, não o template original.
+     o valor serÃ¡ do conteÃºdo do bloco de template. 
+     Note que o bloco de template jÃ¡ terÃ¡ sido processado pela
+     Smarty, entÃ£o tudo que vocÃª receberÃ¡ Ã© saÃ­da do template, nÃ£o o template original.
     </para>
 
     <para>
-     O parâmetro <parameter>&amp;$repeat</parameter> é passado por 
-     referência para a função de implementação
+     O parÃ¢metro <parameter>&amp;$repeat</parameter> Ã© passado por 
+     referÃªncia para a funÃ§Ã£o de implementaÃ§Ã£o
       e fornece uma possibilidade para ele controlar quantas
-      vezes o bloco é mostrado. Por definição
-       <parameter>$repeat</parameter> é <literal>true</literal> na primeira chamada da block-function
+      vezes o bloco Ã© mostrado. Por definiÃ§Ã£o
+       <parameter>$repeat</parameter> Ã© <literal>true</literal> na primeira chamada da block-function
      (a tag de abertura do bloco) e <literal>false</literal>
-     em todas as chamadas subsequentes à função de bloco
+     em todas as chamadas subsequentes Ã  funÃ§Ã£o de bloco
      (a tag de fechamento do bloco). Cada vez que a
-     implementação da função retorna com o <parameter>&amp;$repeat</parameter> 
-     sendo true, o conteúdo entre {func} .. {/func} é avaliado 
-     e a implementação da função é chamada novamente com
-     o novo conteúdo do bloco no parâmetro <parameter>$content</parameter>.
+     implementaÃ§Ã£o da funÃ§Ã£o retorna com o <parameter>&amp;$repeat</parameter> 
+     sendo true, o conteÃºdo entre {func} .. {/func} Ã© avaliado 
+     e a implementaÃ§Ã£o da funÃ§Ã£o Ã© chamada novamente com
+     o novo conteÃºdo do bloco no parÃ¢metro <parameter>$content</parameter>.
 
 	</para>
 
     <para>
-     Se você tem funções de bloco aninhadas, é possível 
-     descobrir qual é a função de bloco pai acessando
-     a variável <varname>$smarty->_tag_stack</varname>. Apenas faça um var_dump()
-     nela e a estrutura estaria visível.
+     Se vocÃª tem funÃ§Ãµes de bloco aninhadas, Ã© possÃ­vel 
+     descobrir qual Ã© a funÃ§Ã£o de bloco pai acessando
+     a variÃ¡vel <varname>$smarty->_tag_stack</varname>. Apenas faÃ§a um var_dump()
+     nela e a estrutura estaria visÃ­vel.
     </para>
     <para>
      See also:
@@ -70,7 +70,7 @@
      <link linkend="api.unregister.block">unregister_block()</link>.
     </para>
     <example>
-     <title>função de bloco</title>
+     <title>funÃ§Ã£o de bloco</title>
      <programlisting>
 &lt;?php
 /*

@@ -3,12 +3,12 @@
  <sect1 id="language.function.literal">
   <title>literal</title>
   <para>
-   I tag literal vi consentono di far sÏ che un blocco di dati venga letto
-   "letteralmente". CiÚ Ë utile tipicamente quando avete un blocco javascript
+   I tag literal vi consentono di far s√¨ che un blocco di dati venga letto
+   "letteralmente". Ci√≤ √® utile tipicamente quando avete un blocco javascript
    o CSS nel quale le parentesi graffe si confonderebbero con i delimitatori
-   del template. Tutto ciÚ che si trova fra {literal} e {/literal} non viene
-   interpretato, ma visualizzato cosÏ com'Ë. Se avete bisogno di usare tag
-   del template all'interno del blocco literal, considerate la possibilit‡ di
+   del template. Tutto ci√≤ che si trova fra {literal} e {/literal} non viene
+   interpretato, ma visualizzato cos√¨ com'√®. Se avete bisogno di usare tag
+   del template all'interno del blocco literal, considerate la possibilit√† di
    usare invece <link linkend="language.function.ldelim">{ldelim}{rdelim}</link>
    per fare l'escape dei singoli delimitatori.
   </para>

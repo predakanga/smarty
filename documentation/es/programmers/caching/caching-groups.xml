@@ -4,7 +4,7 @@
     <title>Cache Groups</title>
      <para>
       Usted puede hacer agrupamientos mas elaborados configurando grupos de
-      cache_id.  Esto se logra con la separación de cada sub-grupo con una
+      cache_id.  Esto se logra con la separaciÃ³n de cada sub-grupo con una
       barra vertical "|" en el valor del cache_id. Usted puede tener tantos 
       sub-grupos como guste.
      </para>

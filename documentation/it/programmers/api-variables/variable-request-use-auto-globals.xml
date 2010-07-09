@@ -4,8 +4,8 @@
       <title>$request_use_auto_globals</title>
       <para>
            Specifica se Smarty deve usare gli array di php $HTTP_*_VARS[]
-	   ($request_use_auto_globals=false che è il valore di default) o
-	   $_*[] ($request_use_auto_globals=true). Ciò ha effetto sui template
+	   ($request_use_auto_globals=false che Ã¨ il valore di default) o
+	   $_*[] ($request_use_auto_globals=true). CiÃ² ha effetto sui template
 	   che usano {$smarty.request.*}, {$smarty.get.*} ecc. .
 	   Attenzione: Se impostate $request_use_auto_globals a true, <link
 	   linkend="variable.request.vars.order">$request_vars_order</link> 

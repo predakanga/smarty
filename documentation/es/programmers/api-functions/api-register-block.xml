@@ -6,7 +6,7 @@
   <refpurpose>Registra dinamicamente bloques de funciones de plugins </refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripci髇</title>
+  <title>Descripci贸n</title>
   <methodsynopsis>
    <type>void</type><methodname>register_block</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
@@ -15,21 +15,21 @@
    <methodparam><type>mixed</type><parameter>cache_attrs</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Use este para registrar din醡icamente bloques de funciones de 
-   plugins. Pase el bloque de nombres de funci髇, seguido por una 
-   llamada de funci髇 PHP que implemente esto.
+   Use este para registrar din谩micamente bloques de funciones de 
+   plugins. Pase el bloque de nombres de funci贸n, seguido por una 
+   llamada de funci贸n PHP que implemente esto.
   </para>
   <para>
    La llamada de una funcion-php <parameter>impl</parameter>
    puede ser cualquier (a) cadena conteniendo el nombre de la 
-   funci髇 o (b) un arreglo con el formato 
+   funci贸n o (b) un arreglo con el formato 
    <literal>array(&amp;$object, $method)</literal> con
    <literal>&amp;$object</literal> siendo la referencia a un 
    objeto y <literal>$method</literal> siendo una cadena
-   conteniendo el nombre del m閠odo o (c) un arreglo con el 
+   conteniendo el nombre del m茅todo o (c) un arreglo con el 
    formato <literal>array(&amp;$class, $method)</literal> con
    <literal>$class</literal> siendo un nombre de clase y
-   <literal>$method</literal> siendo un m閠odo de esta clase.
+   <literal>$method</literal> siendo un m茅todo de esta clase.
   </para>
   <para>
    <parameter>cacheable</parameter> y <parameter>cache_attrs</parameter>
@@ -68,7 +68,7 @@ Hello, world!
    </programlisting>
   </example>
     <para>
-    Ver tambi閚
+    Ver tambi茅n
     <link linkend="api.unregister.block">unregister_block()</link>
     y
     <link linkend="plugins.block.functions">Plugin Block Functions</link>.

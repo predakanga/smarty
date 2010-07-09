@@ -1,80 +1,80 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
  <preface id="preface">
-  <title>PrÛlogo</title>
+  <title>Pr√≥logo</title>
   <para>
    Esta es indudablemente una de las preguntas que mas se hacen en las listas 
-   de correo de PHP: Como hacer mis scripts de PHP independientes del diseÒo?.
+   de correo de PHP: Como hacer mis scripts de PHP independientes del dise√±o?.
    Mientras PHP se encarga de como "incrustar scripts en lenguaje HTML",
-   despuÈs de escribir los proyectos que mezclan PHP y HTML libremente, 
+   despu√©s de escribir los proyectos que mezclan PHP y HTML libremente, 
    esto trae como consecuencia la idea de separar la forma y el contenido, 
-   muy buena idea[TM].  En adiciÛn, en muchas compaÒias la 
-   interpretaciÛn de esquema es diseÒador y programador por separado. 
-   Por consiguiente, la busqueda trae como soluciÛn una plantilla(template).
+   muy buena idea[TM].  En adici√≥n, en muchas compa√±ias la 
+   interpretaci√≥n de esquema es dise√±ador y programador por separado. 
+   Por consiguiente, la busqueda trae como soluci√≥n una plantilla(template).
   </para>
   <para>
-   Por ejemplo en nuestra compaÒia, el desarrollo de una aplicaciÛn es
-   como sigue: DespuÈs de tener la documentaciÛn necesaria, el 
-   diseÒador de web diseÒa el prototipo de la interfaz y la entrega al 
+   Por ejemplo en nuestra compa√±ia, el desarrollo de una aplicaci√≥n es
+   como sigue: Despu√©s de tener la documentaci√≥n necesaria, el 
+   dise√±ador de web dise√±a el prototipo de la interfaz y la entrega al 
    programador.  El programador implementa las reglas de negocio en PHP y usa el
    prototipo para crear el "esqueleto" de la plantilla.  
    El proyeto esta en manos de la persona responsable del HTML designer/web page 
    que produzca la plantilla para su gloria completa.  El proyecto debe ir y regresar 
-   entre programaciÛn/HTML varias veces.  De esa manera, es importante para 
+   entre programaci√≥n/HTML varias veces.  De esa manera, es importante para 
    tener un buen suporte de templates porque los programadores no quieren hacer nada 
-   con HTML ni quieren diseÒo HTML al rededor del codigo PHP.
-   Los diseÒadores precisan de soporte para archivos de configuraciÛn, bloques
-   din·micos y otras interfaces usadas, mas ellos no quieren ocuparse con las
-   compejidades del lenguaje de programaciÛn PHP.
+   con HTML ni quieren dise√±o HTML al rededor del codigo PHP.
+   Los dise√±adores precisan de soporte para archivos de configuraci√≥n, bloques
+   din√°micos y otras interfaces usadas, mas ellos no quieren ocuparse con las
+   compejidades del lenguaje de programaci√≥n PHP.
   </para>
   <para>
    Buscando, actualmente existen muchas soluciones de templates disponibles para
    PHP, la mayor parte de ellos les provee de una forma rudimentaria de 
-   sustituciÛn de variables dentro del template y hace una forma limitada 
-   de la funcionalidad din·mica del bloque.  
+   sustituci√≥n de variables dentro del template y hace una forma limitada 
+   de la funcionalidad din√°mica del bloque.  
    Pero nuestras necesidades requieren mas que eso.  
    Porque no queremos programadores que no quieran tener trato con HTML del todo, 
    pero esto puede ser casi inevitable.
-   Por ejemplo, si un diseÒador quiere alternar colores de fondo sobre bloques 
-   din·micos, esto tuvo que trabajarse con el programador anticipadamente.
-   Nosotros necesitamos tambiÈn que los diseÒadores esten capacitados para 
-   usar archivos de configuraciÛn, y colocar variables de ellos dentro de 
+   Por ejemplo, si un dise√±ador quiere alternar colores de fondo sobre bloques 
+   din√°micos, esto tuvo que trabajarse con el programador anticipadamente.
+   Nosotros necesitamos tambi√©n que los dise√±adores esten capacitados para 
+   usar archivos de configuraci√≥n, y colocar variables de ellos dentro de 
    los templates.  La lista continua.
   </para>
   <para>
-   Nosotros empezamos escribiendo por fuera una especulaciÛn para un
+   Nosotros empezamos escribiendo por fuera una especulaci√≥n para un
    motor de plantillas(templates) atrasado de 1999.
-   DespuÈs de terminar la especulaciÛn, comenzamos a trabajar 
+   Despu√©s de terminar la especulaci√≥n, comenzamos a trabajar 
    un motor de plantillas escrito en C que esperanzadoramente fue aceptado 
    para ser incorporado con PHP.
    No solamente nos encontramos con algunas complicadas barreras tecnicas, 
-   si no tambiÈn hubo acalorados debates sobre lo que exactamente 
+   si no tambi√©n hubo acalorados debates sobre lo que exactamente 
    debia de hacer o no un motor de plantillas.
-   De esta experiencia, decidimos que un motor de platillas deverÌa 
+   De esta experiencia, decidimos que un motor de platillas dever√≠a 
    ser escrito en PHP como una clase, para que cualquiera lo use de la misma
    forma como ellos ven.
-   AsÌ nosotros escribimos un motor que es <productname>SmartTemplate
+   As√≠ nosotros escribimos un motor que es <productname>SmartTemplate
    </productname> nunca volvio a existir(nota: esa clase nunca fue
-   enviada al p˙blico).  Esta era una clase que ralizaba casi todo lo que nosotros 
-   necesitabamos: sustituciÛn de variables regulares, soporte incluso 
-   de otras plantillas, integraciÛn con archivos de configuraciÛn, 
-   incrustaciÛn de cÛdigo PHP, funcionalidades 'if' limitada y muchos
-   mas bloques din·micos robustos que podrÌan ser anidados muchas veces.
-   Todo esto con expresiones regulares y el cÛdigo producido seria mejor, como 
+   enviada al p√∫blico).  Esta era una clase que ralizaba casi todo lo que nosotros 
+   necesitabamos: sustituci√≥n de variables regulares, soporte incluso 
+   de otras plantillas, integraci√≥n con archivos de configuraci√≥n, 
+   incrustaci√≥n de c√≥digo PHP, funcionalidades 'if' limitada y muchos
+   mas bloques din√°micos robustos que podr√≠an ser anidados muchas veces.
+   Todo esto con expresiones regulares y el c√≥digo producido seria mejor, como 
    diriamos nosotros, impenetrable.  
-   Eso era tambiÈn notoriamente lento en grandes aplicaciones por todas 
+   Eso era tambi√©n notoriamente lento en grandes aplicaciones por todas 
    las interpretaciones y expresiones regulares trabajando en cada 
-   requisiciÛn.
+   requisici√≥n.
    El mayor problema del punto de vista de un programador era todo el trabajo
    necesario en el procesamiento del scripts PHP y procesamiento de bloques
-   din·micos de la plantilla. Como hacemos eso facilmente?
+   din√°micos de la plantilla. Como hacemos eso facilmente?
   </para>
   <para>
-   Entonces se origino la visiÛn de que finalmente se convirtiera en
-   Smarty. Nosotros sabemos que r·pido es el cÛdigo PHP sin las cabeceras 
-   y la interpretaciÛn de plantillas(templates).
-   TambiÈn sabemos que meticuloso y arrogante es el lenguaje PHP su poder 
-   debe ser aceptable para un diseÒador, y este podrÌa ser enmascarado con 
+   Entonces se origino la visi√≥n de que finalmente se convirtiera en
+   Smarty. Nosotros sabemos que r√°pido es el c√≥digo PHP sin las cabeceras 
+   y la interpretaci√≥n de plantillas(templates).
+   Tambi√©n sabemos que meticuloso y arrogante es el lenguaje PHP su poder 
+   debe ser aceptable para un dise√±ador, y este podr√≠a ser enmascarado con 
    una simples sintaxis de plantillas(templates).
    Entonces que pasara si nosotros convinamos las dos fuerzas?
    De esta manera, nacio Smarty...

@@ -5,7 +5,7 @@
 <sect1 id="language.modifier.replace">
  <title>replace</title>
  <para>
-  Un simple remplacement de chaîne de caractères. C'est l'équivalent
+  Un simple remplacement de chaÃ®ne de caractÃ¨res. C'est l'Ã©quivalent
   de la fonction PHP
   <ulink url="&url.php-manual;str_replace"><varname>str_replace()</varname></ulink>.
  </para>
@@ -18,7 +18,7 @@
    <colspec colname="desc"/>
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Defaut</entry>
@@ -28,17 +28,17 @@
    <tbody>
     <row>
      <entry>1</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>chaîne à remplacer.</entry>
+     <entry>chaÃ®ne Ã  remplacer.</entry>
     </row>
     <row>
      <entry>2</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>chaîne de remplacement.</entry>
+     <entry>chaÃ®ne de remplacement.</entry>
     </row>
    </tbody>
   </tgroup>

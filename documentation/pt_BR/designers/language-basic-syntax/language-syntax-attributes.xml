@@ -4,11 +4,11 @@
    <sect1 id="language.syntax.attributes">
     <title>Atributos</title>
     <para>
-     A maioria das funÁıes contÈm atributos que especificam ou modificam 
-	 o seu comportamento. Atributos para funÁıes do Smarty s„o muito parecidos 
-	 com atributos da HTML. Valores est·ticos n„o precisam ficar entre aspas, 
-	 mas recomenda-se usar aspas para strings literais. Vari·veis tambÈm podem 
-	 ser usadas, e n„o precisam estar entre aspas.
+     A maioria das fun√ß√µes cont√©m atributos que especificam ou modificam 
+	 o seu comportamento. Atributos para fun√ß√µes do Smarty s√£o muito parecidos 
+	 com atributos da HTML. Valores est√°ticos n√£o precisam ficar entre aspas, 
+	 mas recomenda-se usar aspas para strings literais. Vari√°veis tamb√©m podem 
+	 ser usadas, e n√£o precisam estar entre aspas.
     </para>
     <para>
      Alguns atributos exigem valores booleanos (verdadeiro ou falso). Estes valores 
@@ -18,7 +18,7 @@
      <literal>no</literal>.
     </para>
     <example>
-     <title>Sintaxe de atributos de funÁıes</title>
+     <title>Sintaxe de atributos de fun√ß√µes</title>
      <programlisting>
 <![CDATA[
 {include file="cabecalho.tpl"}

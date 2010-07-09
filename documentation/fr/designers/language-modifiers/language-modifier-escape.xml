@@ -5,12 +5,12 @@
 <sect1 id="language.modifier.escape">
  <title>escape</title>
  <para>
-  <varname>escape</varname> est utilisé pour encoder / échapper
+  <varname>escape</varname> est utilisÃ© pour encoder / Ã©chapper
   une variable pour quelles soient compatibles
-  avec les <literal>url</literal> <literal>html</literal>, avec les hexadécimaux,
-  avec les entités hexadécimales, avec <literal>javascript</literal>
+  avec les <literal>url</literal> <literal>html</literal>, avec les hexadÃ©cimaux,
+  avec les entitÃ©s hexadÃ©cimales, avec <literal>javascript</literal>
   et avec les e-mails.
-  Par défaut, ce paramètre est <literal>html</literal>.
+  Par dÃ©faut, ce paramÃ¨tre est <literal>html</literal>.
  </para>
  <informaltable frame="all">
   <tgroup cols="6">
@@ -22,18 +22,18 @@
    <colspec colname="desc" />
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Valeurs possibles</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>1</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry>
       <literal>html</literal>, <literal>htmlall</literal>,
@@ -43,19 +43,19 @@
       <literal>javascript</literal>, <literal>mail</literal>
      </entry>
      <entry><literal>html</literal></entry>
-     <entry>Format d'échappement à utiliser.</entry>
+     <entry>Format d'Ã©chappement Ã  utiliser.</entry>
     </row>
     <row>
      <entry>2</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry>
       <literal>ISO-8859-1</literal>, <literal>UTF-8</literal>, ... n'importe quel jeu de
-      caractères supporté par
+      caractÃ¨res supportÃ© par
       <ulink url="&url.php-manual;htmlentities"><varname>htmlentities()</varname></ulink>
      </entry>
      <entry><literal>ISO-8859-1</literal></entry>
-     <entry>Le jeu de caractères passé à htmlentities()</entry>
+     <entry>Le jeu de caractÃ¨res passÃ© Ã  htmlentities()</entry>
     </row>
    </tbody>
   </tgroup>
@@ -84,10 +84,10 @@ $smarty->assign('EmailAddress','smarty@example.com');
 {$articleTitle|escape}
 &#039;Stiff Opposition Expected to Casketless Funeral Plan&#039;
 
-{$articleTitle|escape:'html'}    {* échappe les caractères  & " ' < > *}
+{$articleTitle|escape:'html'}    {* Ã©chappe les caractÃ¨res  & " ' < > *}
 &#039;Stiff Opposition Expected to Casketless Funeral Plan&#039;
 
-{$articleTitle|escape:'htmlall'} {* échappe toutes les entités html *}
+{$articleTitle|escape:'htmlall'} {* Ã©chappe toutes les entitÃ©s html *}
 &#039;Stiff Opposition Expected to Casketless Funeral Plan&#039;
 
 <a href="?title={$articleTitle|escape:'url'}">cliquez-ici</a>
@@ -108,19 +108,19 @@ smarty [AT] example [DOT] com
 
    <example>
   <title>Autres exemples</title>
-  <para>Les fonctions PHP peuvent être utilisées comme modificateurs, suivant la
+  <para>Les fonctions PHP peuvent Ãªtre utilisÃ©es comme modificateurs, suivant la
    configuration de
    <link linkend="variable.security">
    <varname>$security</varname></link>.
   </para>
   <screen>
 <![CDATA[
-{* le paramètre "rewind" enregistre l'emplacement courant *}
+{* le paramÃ¨tre "rewind" enregistre l'emplacement courant *}
 <a href="{$SCRIPT_NAME}?page=foo&rewind={$smarty.server.REQUEST_URI|urlencode}">click here</a>
 ]]>
   </screen>
   <para>
-   Et ceci est utile pour les e-mails, mais lisez plutôt la documentation de
+   Et ceci est utile pour les e-mails, mais lisez plutÃ´t la documentation de
    <link linkend="language.function.mailto"><varname>{mailto}</varname></link></para>
 <screen>
 <![CDATA[
@@ -131,7 +131,7 @@ smarty [AT] example [DOT] com
  </example>
  <para>
   Voir aussi la
-  l'<link linkend="language.escaping">anayse Smarty d'échappement</link>,
+  l'<link linkend="language.escaping">anayse Smarty d'Ã©chappement</link>,
   <link linkend="language.function.mailto"><varname>{mailto}</varname></link> et
   le <link linkend="tips.obfuscating.email">mascage des adresses e-mail</link>.
  </para>

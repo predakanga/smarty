@@ -10,7 +10,7 @@
   In Smarty le variabili possono essere visualizzate direttamente oppure
   usate come argomenti per gli attributi e i modificatori delle funzioni, 
   oppure in espressioni condizionali, ecc. Per stampare una variabile,
-  è sufficiente includerla fra i delimitatori in modo che sia l'unica 
+  Ã¨ sufficiente includerla fra i delimitatori in modo che sia l'unica 
   cosa contenuta fra essi. Esempi:
   <programlisting>
 <![CDATA[

@@ -3,16 +3,16 @@
 <chapter id="config.files">
  <title>Config Files</title>
  <para>
-  Los archivos de configuración son utiles para diseñar y administrar
+  Los archivos de configuraciÃ³n son utiles para diseÃ±ar y administrar
   variables globales para los templates a partir de un archivo.
   Un ejemplo son los colores del template. Normalmente si usted quiere 
-  cambiar el esquema de colores de una aplicación, usted debe ir a cada 
+  cambiar el esquema de colores de una aplicaciÃ³n, usted debe ir a cada 
   uno de los archivos del template y cambiar los colores.
-  Con un archivo de configuración, los colores pueden estar mantenidos 
+  Con un archivo de configuraciÃ³n, los colores pueden estar mantenidos 
   en un lugar y solo necesita actualizar este para cambiar los colores.
  </para>
  <example>
-  <title>Ejemplo de sintaxis de un archivo de configuración</title>
+  <title>Ejemplo de sintaxis de un archivo de configuraciÃ³n</title>
   <programlisting>
 <![CDATA[
 # global variables
@@ -45,41 +45,41 @@ pass=foobar
   necesario. Usted puede usar comillas simples o dobles. Si usted 
   tuviera un valor que ocupe mas de una linea, coloque todo el valor 
   entre tres comillas ("""). Usted puede colocar comentarios en un 
-  archivo de configuración con cualquier sintaxis que no sea valida 
-  en un archivo de configuración. Nosotros recomendamos usar un 
+  archivo de configuraciÃ³n con cualquier sintaxis que no sea valida 
+  en un archivo de configuraciÃ³n. Nosotros recomendamos usar un 
   <literal>#</literal> en el princio de cada linea.
  </para>
  <para>
-  Este archivo de configuración tiene dos secciones. Los nombres de 
-  secciones debe estar entre corchetes []. Los nombres de sección 
+  Este archivo de configuraciÃ³n tiene dos secciones. Los nombres de 
+  secciones debe estar entre corchetes []. Los nombres de secciÃ³n 
   pueden ser cadenas arbitrarias que no contengan los simbolos
   <literal>[</literal> or <literal>]</literal>. Las cuatro variables 
-  en la cabecera son variables globales, o no son variables de sección.
-  Estas variables son siempre cargadas del archivo de configuración. Si 
-  una sección en particular fuera cargada, entonces las variables 
-  globales y las variables de esta sección son cargadas. Si una variable 
-  existe como global y dentro de una sección, la variable de sección 
-  será utilizada. Si usted tuviera dos variables en la misma sección con 
-  el mismo nombre, la ultima será utilizada.
+  en la cabecera son variables globales, o no son variables de secciÃ³n.
+  Estas variables son siempre cargadas del archivo de configuraciÃ³n. Si 
+  una secciÃ³n en particular fuera cargada, entonces las variables 
+  globales y las variables de esta secciÃ³n son cargadas. Si una variable 
+  existe como global y dentro de una secciÃ³n, la variable de secciÃ³n 
+  serÃ¡ utilizada. Si usted tuviera dos variables en la misma secciÃ³n con 
+  el mismo nombre, la ultima serÃ¡ utilizada.
  </para>
  <para>
-  Los archivos de configuración son cargados en el template con una
-  función incrustada <link linkend="language.function.config.load">
+  Los archivos de configuraciÃ³n son cargados en el template con una
+  funciÃ³n incrustada <link linkend="language.function.config.load">
    <command>{config_load}</command></link>.
-  (Ver También <link linkend="api.config.load"><command>config_load()</command></link> ).
+  (Ver TambiÃ©n <link linkend="api.config.load"><command>config_load()</command></link> ).
 
  </para>
  <para>
   Usted puede ocultar variables o secciones enteras colocando un punto 
-  antes del nombre de la variable. Esto es útil si su aplicación lee los 
-  archivos de configuración y los datos sensibles a partir de ellos que 
+  antes del nombre de la variable. Esto es Ãºtil si su aplicaciÃ³n lee los 
+  archivos de configuraciÃ³n y los datos sensibles a partir de ellos que 
   la herramienta del template no lo necesita. Si usted tiene a otras 
-  personas realizando la edición de templates, usted tendra la certesa 
-  que ellos no leeran datos sensibles del archivo de configuración 
+  personas realizando la ediciÃ³n de templates, usted tendra la certesa 
+  que ellos no leeran datos sensibles del archivo de configuraciÃ³n 
   cargando estos en el template.
  </para>
  <para>
-  Ver También <link
+  Ver TambiÃ©n <link
   linkend="language.function.config.load">{config_load}</link>, <link
   linkend="variable.config.overwrite">$config_overwrite</link>, <link
   linkend="api.get.config.vars">get_config_vars()</link>, <link

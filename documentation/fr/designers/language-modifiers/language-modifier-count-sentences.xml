@@ -22,7 +22,7 @@ $smarty->assign('articleTitle',
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -36,8 +36,8 @@ $smarty->assign('articleTitle',
   <screen>
 <![CDATA[
 Deux navires rentrent en collision
-- Un des deux coule. Des vaches enragées blessent un fermier
-à coups de haches.
+- Un des deux coule. Des vaches enragÃ©es blessent un fermier
+Ã  coups de haches.
 2
 ]]>
   </screen>

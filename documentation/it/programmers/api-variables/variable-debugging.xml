@@ -5,7 +5,7 @@
       <para>
        Questa variabile abilita la <link
         linkend="chapter.debugging.console">console di debugging</link>.
-       La console è una finestra javascript che vi informa sui template
+       La console Ã¨ una finestra javascript che vi informa sui template
        inclusi e sulle variabili valorizzate per la pagina attuale.
       </para>
 </sect1>

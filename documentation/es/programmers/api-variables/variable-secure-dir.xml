@@ -7,10 +7,10 @@
       considerados seguros.  
       <link linkend="language.function.include">{include}</link> y 
       <link linkend="language.function.fetch">{fetch}</link> usan estos (directorios) 
-      cuando <link linkend="variable.security">security está habilitada</link>.
+      cuando <link linkend="variable.security">security estÃ¡ habilitada</link>.
       </para>
 <para>
- Ver también 
+ Ver tambiÃ©n 
  <link linkend="variable.security.settings">Security settings</link>,
  y <link linkend="variable.trusted.dir">$trusted_dir</link>.
 </para>

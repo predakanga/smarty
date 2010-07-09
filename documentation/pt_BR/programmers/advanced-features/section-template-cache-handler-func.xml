@@ -2,29 +2,29 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->  
 <sect1 id="section.template.cache.handler.func">
-   <title>FunÁ„o Manipuladora de Cache</title>
+   <title>Fun√ß√£o Manipuladora de Cache</title>
    <para>
-    Como uma alternativa ao uso do mecanismo de caching padr„o baseado em arquivo, vocÍ pode 
-    especificar uma funÁ„o de manipulaÁ„o de cache customizada que ser· usada para ler, escrever
+    Como uma alternativa ao uso do mecanismo de caching padr√£o baseado em arquivo, voc√™ pode 
+    especificar uma fun√ß√£o de manipula√ß√£o de cache customizada que ser√° usada para ler, escrever
     e limpar arquivos de cache.
    </para>
    <para>
-    Crie uma funÁ„o em sua aplicaÁ„o que o Smarty usar· como um manipulador de cache. Defina o 
-    nome dela na vari·vel de classe
+    Crie uma fun√ß√£o em sua aplica√ß√£o que o Smarty usar√° como um manipulador de cache. Defina o 
+    nome dela na vari√°vel de classe
     <link linkend="variable.cache.handler.func">$cache_handler_func</link>.
-     O Smarty agora usar· esta para manipular dados no cache. O primeiro argumento È a aÁ„o,
-     que È um desses 'read', 'write' e 'clear'. O segundo par‚metro È o objeto do Smarty. O
-     terceiro par‚metro È o conte˙do que est· no cache. 
-     No write, o Smarty passa o conte˙do em
-     cache nestes par‚metros. No 'read', o Smarty espera sua funÁ„o aceitar este par‚metro por
-     referÍncia e preenche ele com os dados em cache. No 'clear', passa uma vari·vel simulacra aqui
-     visto que ela n„o È usada. O quarto par‚metro
-     È o nome do arquivo de template (necess·rio para
-     ler/escrever), o quinto par‚metro È a cache_id (opcional),
-     e o sexto È a compile_id (opcional).
+     O Smarty agora usar√° esta para manipular dados no cache. O primeiro argumento √© a a√ß√£o,
+     que √© um desses 'read', 'write' e 'clear'. O segundo par√¢metro √© o objeto do Smarty. O
+     terceiro par√¢metro √© o conte√∫do que est√° no cache. 
+     No write, o Smarty passa o conte√∫do em
+     cache nestes par√¢metros. No 'read', o Smarty espera sua fun√ß√£o aceitar este par√¢metro por
+     refer√™ncia e preenche ele com os dados em cache. No 'clear', passa uma vari√°vel simulacra aqui
+     visto que ela n√£o √© usada. O quarto par√¢metro
+     √© o nome do arquivo de template (necess√°rio para
+     ler/escrever), o quinto par√¢metro √© a cache_id (opcional),
+     e o sexto √© a compile_id (opcional).
    </para>
    <para>
-    Note que: O ˙ltimo par‚metro ($exp_time)foi adicionado no Smarty-2.6.0.
+    Note que: O √∫ltimo par√¢metro ($exp_time)foi adicionado no Smarty-2.6.0.
    </para>
    <example>
     <title>exemplo usando MySQL como uma fonte de cache</title>

@@ -4,50 +4,50 @@
 <sect1 id="advanced.features.objects">
     <title>Objetos</title>
     <para>
-     O Smarty permite acesso a objetos do PHP através de seus templates. Há duas formas de acessá-los.
-     Uma forma é registrar objetos para o template, então os acessa via sintaxe similar a funções
-      customizáveis. A outra forma é atribuir objetos para os templates e acessá-los como se fossem
-       uma variável atribuída. O primeiro método tem uma sintaxe de template muito mais legal. E também
-       mais segura, à medida que um objeto registrado pode ser restrito a certos métodos e
-       propriedades. Entretanto, um objeto registrado não pode ser
+     O Smarty permite acesso a objetos do PHP atravÃ©s de seus templates. HÃ¡ duas formas de acessÃ¡-los.
+     Uma forma Ã© registrar objetos para o template, entÃ£o os acessa via sintaxe similar a funÃ§Ãµes
+      customizÃ¡veis. A outra forma Ã© atribuir objetos para os templates e acessÃ¡-los como se fossem
+       uma variÃ¡vel atribuÃ­da. O primeiro mÃ©todo tem uma sintaxe de template muito mais legal. E tambÃ©m
+       mais segura, Ã  medida que um objeto registrado pode ser restrito a certos mÃ©todos e
+       propriedades. Entretanto, um objeto registrado nÃ£o pode ser
        posto em loop ou ser atribuido em arrays de
-       objetos, etc. O método que você escolher será determinado pelas suas necessidades, mas use o
-       primeiro método se possível para 
-       manter um mínimo de sintaxe no template.
+       objetos, etc. O mÃ©todo que vocÃª escolher serÃ¡ determinado pelas suas necessidades, mas use o
+       primeiro mÃ©todo se possÃ­vel para 
+       manter um mÃ­nimo de sintaxe no template.
     </para>
 	<para>
-    Se a segurança está habilitada, nenhum dos métodos privados ou funções podem acessados
-	(começando com "_"). Se um método e propriedade de um mesmo nome existir, o método será
+    Se a seguranÃ§a estÃ¡ habilitada, nenhum dos mÃ©todos privados ou funÃ§Ãµes podem acessados
+	(comeÃ§ando com "_"). Se um mÃ©todo e propriedade de um mesmo nome existir, o mÃ©todo serÃ¡
 	usado.
 	</para>
 	<para>
-	Você pode restringir os métodos e propriedades que podem ser acessados listando os em um array
-	como o terceiro parâmetro de registração.
+	VocÃª pode restringir os mÃ©todos e propriedades que podem ser acessados listando os em um array
+	como o terceiro parÃ¢metro de registraÃ§Ã£o.
 	</para>
 	<para>
-	Por definição, parâmetros passados para objetos através dos templates são passados da mesma
-	forma que funções customizáveis os obtém. Um array associativo é passado como o primeiro parâmetro,
-	 e o objeto smarty como o segundo. Se você quer que os parâmetros passados um de cada vez
-	  por cada argumento como passagem de parâmetro de objeto tradicional, defina o quarto parâmetro 
-	  de registração para falso.
+	Por definiÃ§Ã£o, parÃ¢metros passados para objetos atravÃ©s dos templates sÃ£o passados da mesma
+	forma que funÃ§Ãµes customizÃ¡veis os obtÃ©m. Um array associativo Ã© passado como o primeiro parÃ¢metro,
+	 e o objeto smarty como o segundo. Se vocÃª quer que os parÃ¢metros passados um de cada vez
+	  por cada argumento como passagem de parÃ¢metro de objeto tradicional, defina o quarto parÃ¢metro 
+	  de registraÃ§Ã£o para falso.
 	</para>
 	<para>
-	O quinto parâmetro opcional só tem efeito com <parameter>format</parameter> 
-	sendo <literal>true</literal> e contém 
-	uma lista de métods de ob que seriam tratados como
-	blocos. Isso significa que estes métodos 
+	O quinto parÃ¢metro opcional sÃ³ tem efeito com <parameter>format</parameter> 
+	sendo <literal>true</literal> e contÃ©m 
+	uma lista de mÃ©tods de ob que seriam tratados como
+	blocos. Isso significa que estes mÃ©todos 
 	tem uma tag de fechamento no template
 	(<literal>{foobar->meth2}...{/foobar->meth2}</literal>) e
-	os parâmetros para os métodos tem a mesma sinopse como os parâmetros para 
-	block-function-plugins: Eles pegam 4 parâmetros
+	os parÃ¢metros para os mÃ©todos tem a mesma sinopse como os parÃ¢metros para 
+	block-function-plugins: Eles pegam 4 parÃ¢metros
 	<parameter>$params</parameter>,
 	<parameter>$content</parameter>,
 	<parameter>&amp;$smarty</parameter> e
-	<parameter>&amp;$repeat</parameter> e eles também comportam-se como
+	<parameter>&amp;$repeat</parameter> e eles tambÃ©m comportam-se como
 	block-function-plugins.
 	</para>
     <example>
-     <title>usando um objeto registrado ou atribuído</title>
+     <title>usando um objeto registrado ou atribuÃ­do</title>
      <programlisting>
 &lt;?php
 // O objeto
@@ -59,14 +59,14 @@ class My_Object {
 }
 
 $myobj = new My_Object;
-// registrando o objeto (será por referência)
+// registrando o objeto (serÃ¡ por referÃªncia)
 $smarty->register_object("foobar",$myobj);
-// Se você quer restringie acesso a certos métodos ou propriedades, liste-os 
+// Se vocÃª quer restringie acesso a certos mÃ©todos ou propriedades, liste-os 
 $smarty->register_object("foobar",$myobj,array('meth1','meth2','prop1'));
-// Se você quer usar o formato de parâmetro de objeto tradicional, passe um booleano de false
+// Se vocÃª quer usar o formato de parÃ¢metro de objeto tradicional, passe um booleano de false
 $smarty->register_object("foobar",$myobj,null,false);
 
-// Você pode também atribuir objetos. Atribua por referência quando possível.
+// VocÃª pode tambÃ©m atribuir objetos. Atribua por referÃªncia quando possÃ­vel.
 $smarty->assign_by_ref("myobj", $myobj);
 
 $smarty->display("index.tpl");
@@ -77,11 +77,11 @@ TEMPLATE:
 {* accessa nosso objeto registrado *}
 {foobar->meth1 p1="foo" p2=$bar}
 
-{* você pode também atribuir a saída *}
+{* vocÃª pode tambÃ©m atribuir a saÃ­da *}
 {foobar->meth1 p1="foo" p2=$bar assign="output"}
 the output was {$output}
 
-{* acessa nosso objeto atribuído *}
+{* acessa nosso objeto atribuÃ­do *}
 {$myobj->meth1("foo",$bar)}</programlisting>
     </example>
 </sect1>

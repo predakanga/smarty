@@ -22,7 +22,7 @@
                     <row>
                         <entry>var</entry>
                         <entry>misto</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>variabile (o stringa) da valorizzare</entry>
                     </row>
@@ -31,20 +31,20 @@
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
-                        <entry>la variabile cui verr‡ assegnato l'output</entry>
+                        <entry>la variabile cui verr√† assegnato l'output</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
 			eval si usa per valorizzare una variabile come se fosse un
-			template. Si puÚ usare per incorporare tag o variabili di template
+			template. Si pu√≤ usare per incorporare tag o variabili di template
 			dentro altre variabili, oppure tag o variabili nelle variabili dei
 			file di configurazione.
 			</para>
 			<para>
 			Se fornite lo speciale attributo "assign" l'output della funzione
-			eval sar‡ assegnato a questa variabile invece di essere stampato
+			eval sar√† assegnato a questa variabile invece di essere stampato
 			in output.
 			</para>
 			<note>
@@ -60,7 +60,7 @@
 			<para>
 			Le variabili valorizzate con eval vengono compilate ad ogni chiamata:
 			la versione compilata non viene salvata! Comunque, se avete il
-			caching abilitato, l'output verr‡ messo in cache con il resto del
+			caching abilitato, l'output verr√† messo in cache con il resto del
 			template.
 			</para>
 			</note>

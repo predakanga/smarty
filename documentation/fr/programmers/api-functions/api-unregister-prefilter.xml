@@ -5,7 +5,7 @@
 <refentry id="api.unregister.prefilter">
  <refnamediv>
   <refname>unregister_prefilter()</refname>
-  <refpurpose>Désalloue dynamiquement un filtre de pré-compilation</refpurpose>
+  <refpurpose>DÃ©salloue dynamiquement un filtre de prÃ©-compilation</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -16,7 +16,7 @@
   <para>
    Voir aussi
    <link linkend="api.register.prefilter"><varname>register_prefilter()</varname></link> et
-   les <link linkend="plugins.prefilters.postfilters">pré-filtres</link>.
+   les <link linkend="plugins.prefilters.postfilters">prÃ©-filtres</link>.
   </para>
  </refsect1>
 </refentry>

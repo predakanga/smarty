@@ -5,69 +5,69 @@
 <sect1 id="advanced.features.objects">
  <title>Objets</title>
  <para>
-  Smarty donne l'accès aux <ulink url="&url.php-manual;object">objets</ulink>
-  PHP à travers les templates. Il y a 2 moyens d'y avoir accès.
+  Smarty donne l'accÃ¨s aux <ulink url="&url.php-manual;object">objets</ulink>
+  PHP Ã  travers les templates. Il y a 2 moyens d'y avoir accÃ¨s.
  </para>
  <itemizedlist spacing="compact">
  <listitem><para>
-  Le premier consiste à
+  Le premier consiste Ã 
   <link linkend="api.register.object">allouer les objets</link>
   au template puis de les utiliser avec une syntaxe similaire a celles
-  des <link linkend="language.custom.functions">fonctions personnalisées</link>.
+  des <link linkend="language.custom.functions">fonctions personnalisÃ©es</link>.
  </para></listitem>
  <listitem><para>
-  Le deuxième moyen consiste à <link linkend="api.assign">assigner</link> des objets
+  Le deuxiÃ¨me moyen consiste Ã  <link linkend="api.assign">assigner</link> des objets
   aux templates et de les utiliser comme n'importe quelle
   variable.
  </para></listitem>
  </itemizedlist>
  <para>
-  La première méthode a une syntaxe beaucoup plus sympathique.
-  Elle est aussi plus sécurisée, puisqu'un objet alloué ne peut avoir accès
-  qu'a certaines méthodes et propriétés. Néanmoins,
-  <emphasis role="bold">un objet alloué ne peut pas avoir de lien sur lui-même 
-  ou être mis dans un tableau d'objet</emphasis>, etc.
-  Vous devez choisir la méthode qui correspond a vos
-  besoins, mais tGchez d'utiliser la première méthode autant que possible
-  afin de réduire la syntaxe des templates au minimum.
+  La premiÃ¨re mÃ©thode a une syntaxe beaucoup plus sympathique.
+  Elle est aussi plus sÃ©curisÃ©e, puisqu'un objet allouÃ© ne peut avoir accÃ¨s
+  qu'a certaines mÃ©thodes et propriÃ©tÃ©s. NÃ©anmoins,
+  <emphasis role="bold">un objet allouÃ© ne peut pas avoir de lien sur lui-mÃªme 
+  ou Ãªtre mis dans un tableau d'objet</emphasis>, etc.
+  Vous devez choisir la mÃ©thode qui correspond a vos
+  besoins, mais tGchez d'utiliser la premiÃ¨re mÃ©thode autant que possible
+  afin de rÃ©duire la syntaxe des templates au minimum.
  </para>
  <para>
-  Si l'option de <link linkend="variable.security">sécurité</link>
-  est activée, aucune méthode ou fonctions privées
-  n'est accessible (commentant par "_"). S'il existe une méthode et une
-  propriété du même nom, c'est la méthode qui sera utilisée.
+  Si l'option de <link linkend="variable.security">sÃ©curitÃ©</link>
+  est activÃ©e, aucune mÃ©thode ou fonctions privÃ©es
+  n'est accessible (commentant par "_"). S'il existe une mÃ©thode et une
+  propriÃ©tÃ© du mÃªme nom, c'est la mÃ©thode qui sera utilisÃ©e.
  </para>
  <para>
-  Vous pouvez restreindre l'accès aux méthodes et aux propriétés en
-  les listant dans un tableau en tant que troisième paramètre
+  Vous pouvez restreindre l'accÃ¨s aux mÃ©thodes et aux propriÃ©tÃ©s en
+  les listant dans un tableau en tant que troisiÃ¨me paramÃ¨tre
   d'allocation.
  </para>
  <para>
-  Par défaut, les paramètres passés aux objets depuis le template le sont de la
-  même façon que les <link linkend="language.custom.functions">fonctions utilisateurs</link> 
-  les récupèrent.
-  Le premier paramètre correspond à un tableau associatif, le second à l'objet
-  Smarty. Si vous souhaitez que les paramètres soient passés un à un, comme
-  dans un appel traditionnel, définissez registration, quatrième paramètre optionnel,
-  à &false;.
+  Par dÃ©faut, les paramÃ¨tres passÃ©s aux objets depuis le template le sont de la
+  mÃªme faÃ§on que les <link linkend="language.custom.functions">fonctions utilisateurs</link> 
+  les rÃ©cupÃ¨rent.
+  Le premier paramÃ¨tre correspond Ã  un tableau associatif, le second Ã  l'objet
+  Smarty. Si vous souhaitez que les paramÃ¨tres soient passÃ©s un Ã  un, comme
+  dans un appel traditionnel, dÃ©finissez registration, quatriÃ¨me paramÃ¨tre optionnel,
+  Ã  &false;.
  </para>
  <para>
-  Le cinquième paramètre optionnel n'a d'effet que si le paramètre
+  Le cinquiÃ¨me paramÃ¨tre optionnel n'a d'effet que si le paramÃ¨tre
   <parameter>format</parameter> vaut <literal>true</literal> et il contient
-  une liste de méthodes qui doivent être traitées comme des blocks. Celà signifie
-  que ces méthodes ont un tag fermant dans le template
-  (<literal>{foobar->meth2}...{/foobar->meth2}</literal>) et que les paramètres
-  de ces méthodes fonctionnent de la même façon que les paramètres des
+  une liste de mÃ©thodes qui doivent Ãªtre traitÃ©es comme des blocks. CelÃ  signifie
+  que ces mÃ©thodes ont un tag fermant dans le template
+  (<literal>{foobar->meth2}...{/foobar->meth2}</literal>) et que les paramÃ¨tres
+  de ces mÃ©thodes fonctionnent de la mÃªme faÃ§on que les paramÃ¨tres des
   <link linkend="plugins.block.functions">blocks de fonctions des plugins</link> :
-  Ils contiennent 4 paramètres
+  Ils contiennent 4 paramÃ¨tres
   <parameter>$params</parameter>,
   <parameter>$content</parameter>,
   <parameter>&amp;$smarty</parameter> et
-  <parameter>&amp;$repeat</parameter> et ils fonctionnent de la même
-  façon que les blocks de fonctions des plugins.
+  <parameter>&amp;$repeat</parameter> et ils fonctionnent de la mÃªme
+  faÃ§on que les blocks de fonctions des plugins.
  </para>
  <example>
-  <title>Utilisation d'un objet alloué ou assigné</title>
+  <title>Utilisation d'un objet allouÃ© ou assignÃ©</title>
   <programlisting role="php">
 <![CDATA[
 <?php
@@ -82,12 +82,12 @@ class My_Object() {
 $myobj = new My_Object;
 // enregistre l'objet
 $smarty->register_object('foobar',$myobj);
-// on restreint l'accès a certaines méthodes et propriétés en les listant
+// on restreint l'accÃ¨s a certaines mÃ©thodes et propriÃ©tÃ©s en les listant
 $smarty->register_object('foobar',$myobj,array('meth1','meth2','prop1'));
-// pour utiliser le format habituel de paramètre objet, passez le booléen = false
+// pour utiliser le format habituel de paramÃ¨tre objet, passez le boolÃ©en = false
 $smarty->register_object('foobar',$myobj,null,false);
 
-// on peut aussi assigner des objets. Assignez par référence quand c'est possible
+// on peut aussi assigner des objets. Assignez par rÃ©fÃ©rence quand c'est possible
 $smarty->assign_by_ref('myobj', $myobj);
 
 $smarty->display('index.tpl');
@@ -97,11 +97,11 @@ $smarty->display('index.tpl');
 ]]>
   </programlisting>
   <para>
-   Et voici comment accéder à vos objets dans <filename>index.tpl</filename> :
+   Et voici comment accÃ©der Ã  vos objets dans <filename>index.tpl</filename> :
   </para>
   <programlisting>
 <![CDATA[
-{* accès a notre objet enregistré *}
+{* accÃ¨s a notre objet enregistrÃ© *}
 {foobar->meth1 p1="foo" p2=$bar}
 
 {* on peut aussi assigner la sortie *}

@@ -4,7 +4,7 @@
        <chapter id="language.combining.modifiers">
         <title>Combinando Modificadores</title>
         <para>
-         VocÍ pode aplicar a quantidade de moficadores que quiser ‡ uma vari·vel. Eles ser„o aplicados 
+         Voc√™ pode aplicar a quantidade de moficadores que quiser √† uma vari√°vel. Eles ser√£o aplicados 
 		 na ordem em que foram combinados, da esquerda para direita. Eles devem ser separados 
 		 com o caracter <literal>|</literal> (pipe).
         </para>
@@ -29,7 +29,7 @@ index.tpl:
 ]]>
   </programlisting>
  <para>
-  O texto acima mostrar·:
+  O texto acima mostrar√°:
  </para>
  <screen>
 <![CDATA[

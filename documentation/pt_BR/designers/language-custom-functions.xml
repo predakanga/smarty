@@ -2,9 +2,9 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.3 Maintainer: thomasgm Status: ready -->
         <chapter id="language.custom.functions">
-         <title>Funções Personalizadas</title>
+         <title>FunÃ§Ãµes Personalizadas</title>
         <para>
-         O Smarty contém várias funções personalizadas que você 
+         O Smarty contÃ©m vÃ¡rias funÃ§Ãµes personalizadas que vocÃª 
 		 pode usar em seus templates.
         </para>
 &designers.language-custom-functions.language-function-assign;

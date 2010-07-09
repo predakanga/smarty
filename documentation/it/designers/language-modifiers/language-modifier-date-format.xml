@@ -31,7 +31,7 @@
       <entry>stringa</entry>
       <entry>No</entry>
       <entry>nessuno</entry>
-      <entry>E' la data di default se la variabile in input Ë vuota.</entry>
+      <entry>E' la data di default se la variabile in input √® vuota.</entry>
      </row>
     </tbody>
    </tgroup>
@@ -42,8 +42,8 @@
    timestamp MySql o una qualsiasi stringa contenente mese giorno anno
    (riconoscibile da strtotime). I progettisti quindi possono usare
    date_format per avere il pieno controllo della formattazione della data.
-   Se la data passata a date_format Ë vuota ed Ë presente un secondo parametro,
-   verr‡ usato questo come data da formattare.
+   Se la data passata a date_format √® vuota ed √® presente un secondo parametro,
+   verr√† usato questo come data da formattare.
   </para>
   <example>
    <title>date_format</title>
@@ -59,7 +59,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -72,7 +72,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[
@@ -113,7 +113,7 @@ Monday, February 5, 2001
      %D - corrisponde a %m/%d/%y
     </para></listitem>
     <listitem><para>
-     %e - giorno del mese come numero decimale; la cifra singola Ë preceduta da uno spazio (range da 1 a 31)
+     %e - giorno del mese come numero decimale; la cifra singola √® preceduta da uno spazio (range da 1 a 31)
     </para></listitem>
     <listitem><para>
      %g - anno in base alle settimane, su due cifre [00,99]
@@ -167,19 +167,19 @@ Monday, February 5, 2001
      %T - ora corrente, con formato equivalente a %H:%M:%S
     </para></listitem>
     <listitem><para>
-     %u - giorno della settimana come numero decimale [1,7], in cui 1 rappresenta LunedÏ
+     %u - giorno della settimana come numero decimale [1,7], in cui 1 rappresenta Luned√¨
     </para></listitem>
     <listitem><para>
      %U - numero della settimana nell'anno come numero decimale, partendo dalla prima Domenica come primo giorno della prima settimana
     </para></listitem>
     <listitem><para>
-     %V - Il numero della settimana ISO 8601:1988 come numero decimale, range da 01 a 53, dove la settimana 1 Ë la prima ad avere almeno 4 giorni nell'anno, e LunedÏ Ë il primo giorno della settimana.
+     %V - Il numero della settimana ISO 8601:1988 come numero decimale, range da 01 a 53, dove la settimana 1 √® la prima ad avere almeno 4 giorni nell'anno, e Luned√¨ √® il primo giorno della settimana.
     </para></listitem>
     <listitem><para>
-     %w - giorno della settimana come numero decimale, dove la Domenica Ë 0
+     %w - giorno della settimana come numero decimale, dove la Domenica √® 0
     </para></listitem>
     <listitem><para>
-     %W - numero della settimana nell'anno come numero decimale, partendo dal primo lunedÏ come primo giorno della prima settimana
+     %W - numero della settimana nell'anno come numero decimale, partendo dal primo luned√¨ come primo giorno della prima settimana
     </para></listitem>
     <listitem><para>
      %x - rappresentazione preferita della data secondo l'impostazione di "locale", senza l'ora
@@ -203,9 +203,9 @@ Monday, February 5, 2001
    <note>
     <title>Nota per i programmatori</title>
     <para>
-     date_format Ë fondamentalmente un involucro per la funzione PHP strftime().
-     Potete avere disponibili pi˘ o meno specificatori di conversione, in base
-     alla funzione strftime() del sistema su cui PHP Ë stato compilato. Controllate
+     date_format √® fondamentalmente un involucro per la funzione PHP strftime().
+     Potete avere disponibili pi√π o meno specificatori di conversione, in base
+     alla funzione strftime() del sistema su cui PHP √® stato compilato. Controllate
      le pagine di manuale del vostro sistema per una lista completa degli 
      specificatori validi.
     </para>

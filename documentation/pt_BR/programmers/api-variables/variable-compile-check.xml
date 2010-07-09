@@ -4,18 +4,18 @@
 <sect1 id="variable.compile.check">
       <title>$compile_check</title>
       <para>
-	   Em cima de cada requisição da aplicação PHP , Smarty testa para ver se o
-	   template atual foi alterado (diferentes time stamp) desde a última 
-	   compilação. Se isso foi alterado, ele irá recompilar o template. Se o template
-	   não foi compilado, ele irá compilar de qualquer maneira dessa configuração.
-	   Por padrão esta variável é setada como true. Uma vez que a aplicação está
-	   em produção (templates não serão alterados), o passo compile_check
-	   não é necessário. Tenha certeza de setar $compile_check para "false" para
-	   maior performance. Note que se você alterar isso para "false" e o
-	   arquivo de template está alterado, você *não* irá ver a alteração desde que
-	   o template seja recompilado. Se caching está habilitado e
-	   compile_check está habilitado, então os arquivos de cache não serão regerados se
-	   um complexo arquivo de ou um arquivo de configuração foi atualizado. Veja <link
+	   Em cima de cada requisiÃ§Ã£o da aplicaÃ§Ã£o PHP , Smarty testa para ver se o
+	   template atual foi alterado (diferentes time stamp) desde a Ãºltima 
+	   compilaÃ§Ã£o. Se isso foi alterado, ele irÃ¡ recompilar o template. Se o template
+	   nÃ£o foi compilado, ele irÃ¡ compilar de qualquer maneira dessa configuraÃ§Ã£o.
+	   Por padrÃ£o esta variÃ¡vel Ã© setada como true. Uma vez que a aplicaÃ§Ã£o estÃ¡
+	   em produÃ§Ã£o (templates nÃ£o serÃ£o alterados), o passo compile_check
+	   nÃ£o Ã© necessÃ¡rio. Tenha certeza de setar $compile_check para "false" para
+	   maior performance. Note que se vocÃª alterar isso para "false" e o
+	   arquivo de template estÃ¡ alterado, vocÃª *nÃ£o* irÃ¡ ver a alteraÃ§Ã£o desde que
+	   o template seja recompilado. Se caching estÃ¡ habilitado e
+	   compile_check estÃ¡ habilitado, entÃ£o os arquivos de cache nÃ£o serÃ£o regerados se
+	   um complexo arquivo de ou um arquivo de configuraÃ§Ã£o foi atualizado. Veja <link
 	   linkend="variable.force.compile">$force_compile</link> ou <link
 	   linkend="api.clear.compiled.tpl">clear_compiled_tpl</link>.
       </para>

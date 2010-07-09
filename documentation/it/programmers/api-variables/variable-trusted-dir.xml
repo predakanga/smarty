@@ -3,7 +3,7 @@
      <sect1 id="variable.trusted.dir">
       <title>$trusted_dir</title>
       <para>
-	   $trusted_dir viene usata solo quando $security è abilitata. E' un array
+	   $trusted_dir viene usata solo quando $security Ã¨ abilitata. E' un array
 	   di tutte le directory che sono considerate affidabili. Le directory
 	   affidabili sono quelle dalle quali possono essere eseguiti script php
 	   direttamente dai template con <link 

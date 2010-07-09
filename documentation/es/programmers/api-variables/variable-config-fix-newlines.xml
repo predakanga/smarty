@@ -4,7 +4,7 @@
       <title>$config_fix_newlines</title>
       <para>
     Si es asignado true, mac y dos newlines (\r y \r\n) en el archivo de
-    configuración seran convertidos a \n cuando estos fueran interpretados.  
+    configuraciÃ³n seran convertidos a \n cuando estos fueran interpretados.  
     true es el defaut.
 	   </para>
 </sect1>

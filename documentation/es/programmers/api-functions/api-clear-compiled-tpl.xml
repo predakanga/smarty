@@ -6,7 +6,7 @@
   <refpurpose>Esto limpia la vesion compilada del recurso de un template especifico</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>clear_compiled_tpl</methodname>
    <methodparam choice="opt"><type>string</type><parameter>tpl_file</parameter></methodparam>
@@ -14,7 +14,7 @@
    <methodparam choice="opt"><type>int</type><parameter>exp_time</parameter></methodparam>
   </methodsynopsis>
   <para>
-    Esto limpia la versión compilada del recurso del template especificado,
+    Esto limpia la versiÃ³n compilada del recurso del template especificado,
     o todos los archivos de templates compilados si no fueron especificados.
     si usted pasa <link linkend="variable.compile.id">$compile_id</link> solo
     sera compilado este template especificado 
@@ -22,7 +22,7 @@
     Si usted lo pasa con ex_time, entonces solo compilara los templates 
     anteriores al exp_time segundo seran limpiados, por default todos los 
     templates son compilados y limpiados independientemente de su tiempo de vida.
-    Esta función es solo para uso avanzado, normalmente no es necesaria.
+    Esta funciÃ³n es solo para uso avanzado, normalmente no es necesaria.
   </para>
   <example>
    <title>clear_compiled_tpl()</title>

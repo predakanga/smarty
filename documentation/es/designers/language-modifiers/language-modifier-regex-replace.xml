@@ -11,11 +11,11 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>Posici髇 del Parametro</entry>
+      <entry>Posici贸n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>requerido</entry>
       <entry>Default</entry>
-      <entry>Descripci髇</entry>
+      <entry>Descripci贸n</entry>
      </row>
     </thead>
     <tbody>
@@ -24,20 +24,20 @@
       <entry>string</entry>
       <entry>Si</entry>
       <entry><emphasis>n/a</emphasis></entry>
-      <entry>Esta es la expresi髇 regular a ser substituida.</entry>
+      <entry>Esta es la expresi贸n regular a ser substituida.</entry>
      </row>
      <row>
       <entry>2</entry>
       <entry>string</entry>
       <entry>Si</entry>
       <entry><emphasis>n/a</emphasis></entry>
-      <entry>Esta es la cadena que sustituira a la expresi髇 regular.</entry>
+      <entry>Esta es la cadena que sustituira a la expresi贸n regular.</entry>
      </row>
     </tbody>
    </tgroup>
   </informaltable>
   <para>
-   Localiza una expresi髇 regular y la remplaza en la variable. Use la sintaxis para 
+   Localiza una expresi贸n regular y la remplaza en la variable. Use la sintaxis para 
    <ulink url="&url.php-manual;preg_replace">preg_replace()</ulink> del manual de PHP.
   </para>
   <example>
@@ -74,7 +74,7 @@ Infertility unlikely to be passed on, experts say.
    </screen>
   </example>
   <para>
-   Vea tambi閚 <link linkend="language.modifier.replace">replace</link>
+   Vea tambi茅n <link linkend="language.modifier.replace">replace</link>
    y <link linkend="language.modifier.escape">escape</link>.
   </para>
  </sect1>

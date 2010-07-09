@@ -5,7 +5,7 @@
       <para>
            Identificatore persistente di compilazione. In alternativa a passare
            lo stesso compile_id ad ogni chiamata di funzione, potete impostare
-           questa variabile ed il suo valore verr‡ usato implicitamente da quel
+           questa variabile ed il suo valore verr√† usato implicitamente da quel
            momento in poi.
       </para>
 </sect1>

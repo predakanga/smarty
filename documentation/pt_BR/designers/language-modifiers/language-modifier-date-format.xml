@@ -12,27 +12,27 @@
                 <colspec colname="desc" />
                 <thead>
                     <row>
-                        <entry>Posição do Parâmetro</entry>
+                        <entry>PosiÃ§Ã£o do ParÃ¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>1</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>%b %e, %Y</entry>
-                        <entry>Este é o formato para a data mostrada.</entry>
+                        <entry>Este Ã© o formato para a data mostrada.</entry>
                     </row>
                     <row>
                         <entry>2</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>n/a</entry>
-                        <entry>Esta é a data padrão se a entrada estiver vazia.</entry>
+                        <entry>Esta Ã© a data padrÃ£o se a entrada estiver vazia.</entry>
                     </row>
                 </tbody>
                 </tgroup>
@@ -40,10 +40,10 @@
 	<para>
             Isto formata a data e hora no formato strftime() indicado.
             Datas podem ser passadas para o Smarty como timestamps unix, timestamps mysql,
-            ou qualquer string composta de mês dia ano(interpretavel por strtotime).
-            Designers podem então usar date_format para ter um controle completo da formatação
-            da data. Se a data passada para date_format estiver vazia e um segundo parâmetro
-            for passado, este será usado como a data 
+            ou qualquer string composta de mÃªs dia ano(interpretavel por strtotime).
+            Designers podem entÃ£o usar date_format para ter um controle completo da formataÃ§Ã£o
+            da data. Se a data passada para date_format estiver vazia e um segundo parÃ¢metro
+            for passado, este serÃ¡ usado como a data 
             para formatar.
 			</para>
 <example>
@@ -81,84 +81,84 @@ Monday, February 5, 2001
 
 %A - nome do dia da semana inteiro de acordo com o local atual
 
-%b - nome do mês abreviado de acordo com o local atual
+%b - nome do mÃªs abreviado de acordo com o local atual
 
-%B - nome do mês inteiro de acordo com o local atual
+%B - nome do mÃªs inteiro de acordo com o local atual
 
-%c - representação preferencial de data e hora para o local atual
+%c - representaÃ§Ã£o preferencial de data e hora para o local atual
 
-%C - ano com dois dígitos (o ano dividido por 100 e truncado para um inteiro, intervalo de 00 a 99)
+%C - ano com dois dÃ­gitos (o ano dividido por 100 e truncado para um inteiro, intervalo de 00 a 99)
 
-%d - dia do mês como um número decimal (intervalo de 00 a 31)
+%d - dia do mÃªs como um nÃºmero decimal (intervalo de 00 a 31)
 
 %D - o mesmo que %m/%d/%y
 
-%e - dia do mês como um número decimal, um único dígito é precedido por um
-espaço (intervalo de 1 a 31)
+%e - dia do mÃªs como um nÃºmero decimal, um Ãºnico dÃ­gito Ã© precedido por um
+espaÃ§o (intervalo de 1 a 31)
 
-%g - ano baseado na semana, sem o século [00,99]
+%g - ano baseado na semana, sem o sÃ©culo [00,99]
 
-%G - ano baseado na semana, incluindo o século [0000,9999]
+%G - ano baseado na semana, incluindo o sÃ©culo [0000,9999]
 
 %h - o mesmo que %b
 
-%H - hora como um número decimal usando um relógio de 24 horas (intervalo de 00 a 23)
+%H - hora como um nÃºmero decimal usando um relÃ³gio de 24 horas (intervalo de 00 a 23)
 
-%I - hora como um número decimal usando um relógio de 12 horas (intervalo de 01 a 12)
+%I - hora como um nÃºmero decimal usando um relÃ³gio de 12 horas (intervalo de 01 a 12)
 
-%j - dia do ano como um número decimal (intervalo de 001 a 366)
+%j - dia do ano como um nÃºmero decimal (intervalo de 001 a 366)
 
-%k - hora (relógio de 24 horas) digítos únicos são precedidos por um espaço em branco (intervalo de 0 a 23)
+%k - hora (relÃ³gio de 24 horas) digÃ­tos Ãºnicos sÃ£o precedidos por um espaÃ§o em branco (intervalo de 0 a 23)
       
-%l - hora como um número decimal usando um relógio de 12 horas, digítos unicos são precedidos
-por um espaço em branco (intervalo de 1 a 12)
+%l - hora como um nÃºmero decimal usando um relÃ³gio de 12 horas, digÃ­tos unicos sÃ£o precedidos
+por um espaÃ§o em branco (intervalo de 1 a 12)
 
-%m - mês como número decimal (intervalo de 01 a 12)
+%m - mÃªs como nÃºmero decimal (intervalo de 01 a 12)
 
-%M - minuto como um número decimal
+%M - minuto como um nÃºmero decimal
 
 %n - caractere de nova linha 
 
 %p - ou `am' ou `pm' de acordo com o valor de hora dado, ou as strings correspondentes ao local atual 
 
-%r - hora na notação a.m. e p.m.  
+%r - hora na notaÃ§Ã£o a.m. e p.m.  
 
-%R - hora na notação de 24 horas
+%R - hora na notaÃ§Ã£o de 24 horas
 
-%S - segundo como número decimal 
+%S - segundo como nÃºmero decimal 
 
 %t - caractere tab 
 
 %T - hora atual, igual a %H:%M:%S 
 
-%u - dia da semana como um número decimal [1,7], com 1 representando segunda-feira 
+%u - dia da semana como um nÃºmero decimal [1,7], com 1 representando segunda-feira 
 
-%U - número da semana do ano atual como um número decimal, começando com o primeiro domingo como primeiro dia da primeira semana 
+%U - nÃºmero da semana do ano atual como um nÃºmero decimal, comeÃ§ando com o primeiro domingo como primeiro dia da primeira semana 
 
-%V - número da semana do ano atual como um número decimal de acordo com The ISO 8601:1988,
-intervalo de 01 a 53, aonde a semana 1 é a primeira semana que tenha pelo menos quatro dias no ano atual, sendo domingo o primeiro dia da semana. 
+%V - nÃºmero da semana do ano atual como um nÃºmero decimal de acordo com The ISO 8601:1988,
+intervalo de 01 a 53, aonde a semana 1 Ã© a primeira semana que tenha pelo menos quatro dias no ano atual, sendo domingo o primeiro dia da semana. 
 
 %w - dia da semana como decimal, domingo sendo 0 
 
-%W - número da semana do ano atual como número decimal, começando com a primeira segunda como primeiro dia da primeira semana  
+%W - nÃºmero da semana do ano atual como nÃºmero decimal, comeÃ§ando com a primeira segunda como primeiro dia da primeira semana  
 
-%x - representação preferencial da data para o local atualsem a hora 
+%x - representaÃ§Ã£o preferencial da data para o local atualsem a hora 
 
-%X - representação preferencial da hora para o local atual sem a data 
+%X - representaÃ§Ã£o preferencial da hora para o local atual sem a data 
 
-%y - ano como número decimal sem o século (intervalo de 00 a 99) 
+%y - ano como nÃºmero decimal sem o sÃ©culo (intervalo de 00 a 99) 
 
-%Y - ano como número decimal incluindo o século 
+%Y - ano como nÃºmero decimal incluindo o sÃ©culo 
 
-%Z - zona horária ou nome ou abreviação 
+%Z - zona horÃ¡ria ou nome ou abreviaÃ§Ã£o 
 
 %% - um caractere `%' 
 
 
-NOTA PARA PROGRAMADORES: date_format é essencialmente um wrapper para a função strftime() do PHP.
-Você deverá ter mais ou menos especificadores de conversão disponíveis de acordo com a 
-função strftime() do sistema operacional aonde o PHP foi compilado. De uma olhada
-na página de manual do seu sistema para uma lista completa dos especificadores válidos.</programlisting>
+NOTA PARA PROGRAMADORES: date_format Ã© essencialmente um wrapper para a funÃ§Ã£o strftime() do PHP.
+VocÃª deverÃ¡ ter mais ou menos especificadores de conversÃ£o disponÃ­veis de acordo com a 
+funÃ§Ã£o strftime() do sistema operacional aonde o PHP foi compilado. De uma olhada
+na pÃ¡gina de manual do seu sistema para uma lista completa dos especificadores vÃ¡lidos.</programlisting>
 </example>
 
 </sect1>

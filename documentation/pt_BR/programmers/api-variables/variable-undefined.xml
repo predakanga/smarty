@@ -4,9 +4,9 @@
 <sect1 id="variable.undefined">
       <title>$undefined</title>
       <para>
-       Isso seta o valor de $undefined para Smarty, o padr„o È null.
-       Atualmente isso È somente usado para setar vari·veis indefinidas em
-       $global_assign para o valor padr„o.
+       Isso seta o valor de $undefined para Smarty, o padr√£o √© null.
+       Atualmente isso √© somente usado para setar vari√°veis indefinidas em
+       $global_assign para o valor padr√£o.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

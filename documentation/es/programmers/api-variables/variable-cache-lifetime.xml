@@ -3,30 +3,30 @@
    <sect1 id="variable.cache.lifetime">
     <title>$cache_lifetime</title>
     <para>
-     Este es la duración del tiempo en segundos que un cache de template 
-     es valido. Una vez que este tiempo está expirado, el cache sera 
+     Este es la duraciÃ³n del tiempo en segundos que un cache de template 
+     es valido. Una vez que este tiempo estÃ¡ expirado, el cache sera 
      regenerado. $caching debe ser asignado a "true" para $cache_lifetime 
-     hasta tener algún propósito. Un valor de -1 forza el cache a nunca 
+     hasta tener algÃºn propÃ³sito. Un valor de -1 forza el cache a nunca 
      expirar. Un valor de 0 forzara a que el cache sea siempre regenerado 
-     (bueno solo para probar, el método mas eficiente para desabilitar cache 
+     (bueno solo para probar, el mÃ©todo mas eficiente para desabilitar cache 
      es asignar <link linkend="variable.caching">$caching</link> = false.)
     </para>
     <para>
      Si <link linkend="variable.force.compile">$force_compile</link> 
-     está habilitado, los archivos de cache serán regenerados todo el 
+     estÃ¡ habilitado, los archivos de cache serÃ¡n regenerados todo el 
      tiempo, efectivamente desabilitando caching. Usted puede limpiar 
-     todos los archivos de cache con la función 
+     todos los archivos de cache con la funciÃ³n 
      <link linkend="api.clear.all.cache">clear_all_cache()</link>,
-     o archivos individuales de cache (o grupos) con la función 
+     o archivos individuales de cache (o grupos) con la funciÃ³n 
      <link linkend="api.clear.cache">clear_cache()</link>.
     </para>
     <note>
-     <title>Nota Técnica</title>
+     <title>Nota TÃ©cnica</title>
      <para>
        Si usted quisiera dar a ciertos templates su propio tiempo de 
        vida de cache, usted puede hacer esto asignando 
        <link linkend="variable.caching">$caching</link> = 2, entonces 
-       determina $cache_lifetime a un único valor justo antes de llamar 
+       determina $cache_lifetime a un Ãºnico valor justo antes de llamar 
        <link linkend="api.display">display()</link>
        o <link linkend="api.fetch">fetch()</link>.
      </para>

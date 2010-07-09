@@ -6,10 +6,10 @@
    <sect1 id="constant.smarty.dir">
     <title>SMARTY_DIR</title>
     <para>
-     Esta debe ser la ruta completa del path para la localizaciÛn 
+     Esta debe ser la ruta completa del path para la localizaci√≥n 
      de los archivos de clases de Smarty. Si esta no fuera definida, 
      Entonces Smarty intentara determinar el valor apropiado 
-     autom·ticamente. Si es definido, el path <emphasis role="bold">
+     autom√°ticamente. Si es definido, el path <emphasis role="bold">
       debe finalizar con una diagonal</emphasis>.
     </para>
     <example>
@@ -34,7 +34,7 @@ require_once(SMARTY_DIR.'Smarty.class.php');
      </programlisting>
     </example>
   <para>
-  Ver tambiÈn 
+  Ver tambi√©n 
   <link linkend="language.variables.smarty.const">$smarty.const</link>
   y
   <link
@@ -44,7 +44,7 @@ require_once(SMARTY_DIR.'Smarty.class.php');
 <sect1 id="constant.smarty.core.dir">
     <title>SMARTY_CORE_DIR</title>
     <para>
-     Esta debe ser la ruta completa de localizaciÛn del sistema de archivos 
+     Esta debe ser la ruta completa de localizaci√≥n del sistema de archivos 
      de Smarty core. Si no es definido, Smarty tomara por default esta constante de 
      <emphasis>libs/</emphasis>
      bajo el sub-directory <link linkend="constant.smarty.dir">SMARTY_DIR</link>.
@@ -66,7 +66,7 @@ require_once(SMARTY_CORE_DIR.'core.get_microtime.php');
     </example>
 
     <para>
-    Ver tambiÈn 
+    Ver tambi√©n 
     <link linkend="language.variables.smarty.const">$smarty.const</link>
     </para>
    </sect1>

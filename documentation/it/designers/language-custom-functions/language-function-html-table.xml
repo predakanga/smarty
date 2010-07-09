@@ -22,7 +22,7 @@
                     <row>
                         <entry>loop</entry>
                         <entry>array</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>array di dati da visualizzare nella tabella</entry>
                     </row>
@@ -81,14 +81,14 @@
                 </tgroup>
             </informaltable>
 			<para>
-			<emphasis>html_table</emphasis> Ë una funzione utente che formatta
+			<emphasis>html_table</emphasis> √® una funzione utente che formatta
 			un array di dati in una tabella HTML. L'attributo <emphasis>cols</emphasis>
 			determina il numero di colonne che formeranno la tabella. I valori
 			di <emphasis>table_attr</emphasis>, <emphasis>tr_attr</emphasis> e
 			<emphasis>td_attr</emphasis> determinano gli attributi dei tag table,
 			tr e td. Se <emphasis>tr_attr</emphasis> o <emphasis>td_attr</emphasis>
-                        sono array, la funzione user‡ un ciclo per alternarne i valori.
-			<emphasis>trailpad</emphasis> Ë il valore da usare nelle ultime celle
+                        sono array, la funzione user√† un ciclo per alternarne i valori.
+			<emphasis>trailpad</emphasis> √® il valore da usare nelle ultime celle
                         da aggiungere all'ultima riga, nel caso in cui il numero di valori
                         nell'array loop non sia divisibile per il numero di colonne.
 			</para>

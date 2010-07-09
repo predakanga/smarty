@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -59,15 +59,15 @@
             </informaltable>
 			<para>
     {html_options} es una 
-    <link linkend="language.custom.functions">funciÛn customizada</link> 
+    <link linkend="language.custom.functions">funci√≥n customizada</link> 
     que crea un grupo html &lt;select&gt;&lt;option&gt; con los datos proporcionados. 
     Este se encarga de cuidar cuales datos han sido selecionado por default.
    Los atributos son valores y salidas, a menos que usted utilice
    options en lugar de eso.
 			</para>
 			<para>
-   Si un valor es una matriz, este ser· tratado como un &lt;optgroup&gt; html,
-   y mostrara los grupos. La recursiÛn es soportada por &lt;optgroup&gt;.
+   Si un valor es una matriz, este ser√° tratado como un &lt;optgroup&gt; html,
+   y mostrara los grupos. La recursi√≥n es soportada por &lt;optgroup&gt;.
    Todas las salidas son compatibles con XHTML.
 			</para>
 			<para>
@@ -77,7 +77,7 @@
    De otra manera solo es generada la lista de opciones.
 			</para>
 			<para>
-   Todos los par·metros que no estan en la lista de arriba son 
+   Todos los par√°metros que no estan en la lista de arriba son 
    exibidos como name/value-pairs dentro de las etiquetas &lt;select&gt;. 
    Estas son ignoradas si la opcion <emphasis>name</emphasis> no es dada.
 			</para>
@@ -183,7 +183,7 @@ Donde el template es:
   </programlisting>
  </example>
    <para>
-    vea tambiÈn
+    vea tambi√©n
     <link linkend="language.function.html.checkboxes">{html_checkboxes}</link>
     y <link linkend="language.function.html.radios">{html_radios}</link>
  </para>

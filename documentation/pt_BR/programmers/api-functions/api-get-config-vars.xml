@@ -8,8 +8,8 @@
     <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
    </methodsynopsis>
 			<para>
-				Isso retorna o valor da variável de configuração dada.
-				Se nenhum parâmetro é dado, um array de todas as variáveis dos arquivos de configurações é retornado.
+				Isso retorna o valor da variÃ¡vel de configuraÃ§Ã£o dada.
+				Se nenhum parÃ¢metro Ã© dado, um array de todas as variÃ¡veis dos arquivos de configuraÃ§Ãµes Ã© retornado.
 			</para>
 <example>
 <title>get_config_vars</title>

@@ -6,20 +6,20 @@
    Il caching si usa per velocizzare una chiamata a <link
    linkend="api.display">display()</link> o <link
    linkend="api.fetch">fetch()</link> salvando il suo output
-   su un file. Se una versione della chiamata è disponibile
+   su un file. Se una versione della chiamata Ã¨ disponibile
    in cache, viene visualizzata questa invece di rigenerare
-   l'output. Il caching può velocizzare tremendamente le cose,
+   l'output. Il caching puÃ² velocizzare tremendamente le cose,
    specialmente con i template che richiedono maggiori tempi
    di elaborazione. Se l'output di display() o fetch() viene
-   salvato in cache, un file della cache può concettualmente
+   salvato in cache, un file della cache puÃ² concettualmente
    essere composto di diversi file di template, di configurazione ecc.
    </para>
    <para>
-   Siccome i template sono dinamici, è importante stare attenti
-   a ciò che mettete in cache e per quanto tempo. Ad esempio, se
+   Siccome i template sono dinamici, Ã¨ importante stare attenti
+   a ciÃ² che mettete in cache e per quanto tempo. Ad esempio, se
    state visualizzando la home page del vostro sito, i cui contenuti
-   non cambiano troppo spesso, può essere utile mettere in cache
-   questa pagina per un'ora o più. D'altra parte, se state
+   non cambiano troppo spesso, puÃ² essere utile mettere in cache
+   questa pagina per un'ora o piÃ¹. D'altra parte, se state
    visualizzando una pagina con una mappa del tempo atmosferico che
    viene aggiornata di minuto in minuto, non avrebbe senso mettere
    in cache questa pagina.

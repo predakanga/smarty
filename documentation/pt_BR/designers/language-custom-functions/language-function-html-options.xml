@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -32,12 +32,12 @@
                         <entry>array</entry>
                         <entry>Sim, a menos que usando atributos de options</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>uma matriz de saÌda para o menu dropdown</entry>
+                        <entry>uma matriz de sa√≠da para o menu dropdown</entry>
                     </row>
                     <row>
                         <entry>selected</entry>
                         <entry>string/array</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
                         <entry>o elemento do options selecionado</entry>
                     </row>
@@ -51,7 +51,7 @@
                     <row>
                         <entry>name</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
                         <entry>nome do grupo selecionado</entry>
                     </row>
@@ -59,24 +59,24 @@
                 </tgroup>
             </informaltable>
 			<para>
-			html_options È uma funÁ„o personalizada que cria um grupo html option com os dados fornecidos.
-			Ela est· atenta de quais itens est„o selecionados por padr„o. Atributos obrigatÛrios s„o 'values' e
-			'output', a menos que vocÍ use options no lugar.
+			html_options √© uma fun√ß√£o personalizada que cria um grupo html option com os dados fornecidos.
+			Ela est√° atenta de quais itens est√£o selecionados por padr√£o. Atributos obrigat√≥rios s√£o 'values' e
+			'output', a menos que voc√™ use options no lugar.
 			</para>
 			<para>
-			Se um valor dado È um array, ele ser· tratado como um OPTGROUP html,
-			e mostrar· os grupos.
-			Recursividade È suportada pelo OPTGROUP. Todas as saÌdas s„o compatÌveis com XHTML.
+			Se um valor dado √© um array, ele ser√° tratado como um OPTGROUP html,
+			e mostrar√° os grupos.
+			Recursividade √© suportada pelo OPTGROUP. Todas as sa√≠das s√£o compat√≠veis com XHTML.
 			</para>
 			<para>
-			Se o atributo opcional <emphasis>name</emphasis> È dado, as tags
-			&lt;select name="groupname"&gt;&lt;/select&gt; ir„o incluir a lista de opÁıes dentro dela. 
-			Caso contr·rio apenas a lista de opÁıes È gerada.
+			Se o atributo opcional <emphasis>name</emphasis> √© dado, as tags
+			&lt;select name="groupname"&gt;&lt;/select&gt; ir√£o incluir a lista de op√ß√µes dentro dela. 
+			Caso contr√°rio apenas a lista de op√ß√µes √© gerada.
 			</para>
 			<para>
-			Todos os par‚metros que n„o est„o na lista acima s„o exibidos como
-			nome/valor dentro de &lt;select&gt;-tag. Eles s„o ignorados se o opcional
-			 <emphasis>name</emphasis> n„o È fornecido.
+			Todos os par√¢metros que n√£o est√£o na lista acima s√£o exibidos como
+			nome/valor dentro de &lt;select&gt;-tag. Eles s√£o ignorados se o opcional
+			 <emphasis>name</emphasis> n√£o √© fornecido.
 			</para>
 <example>
 <title>html_options</title>

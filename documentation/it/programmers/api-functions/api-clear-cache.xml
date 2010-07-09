@@ -16,13 +16,13 @@
   </methodsynopsis>
   <para>
    Elimina la cache per un <parameter>template</parameter> specifico. Se
-   avete più cache per questo template, potete eliminarne una specifica
+   avete piÃ¹ cache per questo template, potete eliminarne una specifica
    fornendo il <parameter>cache_id</parameter> come secondo parametro.
    Potete anche passare un <parameter>compile_id</parameter> come terzo
    parametro. Potete "raggruppare" i template in modo da rimuoverli in
    gruppo. Leggete la <link linkend="caching">sezione sul caching</link>
    per maggiori informazioni. Come quarto parametro opzionale potete fornire
-   un'età minima in secondi che il file di cache deve avere prima di essere
+   un'etÃ  minima in secondi che il file di cache deve avere prima di essere
    eliminato.
   </para>
   <example>
@@ -33,7 +33,7 @@
 // eliminazione della cache per un template
 $smarty->clear_cache("index.tpl");
 
-// eliminazione di una particolare cache in un template a più cache
+// eliminazione di una particolare cache in un template a piÃ¹ cache
 $smarty->clear_cache("index.tpl", "CACHEID");
 ?>
 ]]>

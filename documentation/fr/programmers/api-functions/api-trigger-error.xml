@@ -15,17 +15,17 @@
    <methodparam choice="opt"><type>int</type><parameter>level</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Cette fonction peut-être utilisée pour afficher un message d'erreur
-   en utilisant Smarty. Le paramètre <parameter>level</parameter>
-   peut prendre l'une des valeures utilisées par la fonction PHP
+   Cette fonction peut-Ãªtre utilisÃ©e pour afficher un message d'erreur
+   en utilisant Smarty. Le paramÃ¨tre <parameter>level</parameter>
+   peut prendre l'une des valeures utilisÃ©es par la fonction PHP
    <ulink url="&url.php-manual;trigger_error"><varname>trigger_error()</varname></ulink>,
-   i.e. <literal>E_USER_NOTICE</literal>, <literal>E_USER_WARNING</literal>, etc. Par défaut
+   i.e. <literal>E_USER_NOTICE</literal>, <literal>E_USER_WARNING</literal>, etc. Par dÃ©faut
    il s'agit de <literal>E_USER_WARNING</literal>.
   </para>
   <para>
    Voir aussi
    <link linkend="variable.error.reporting"><parameter>$error_reporting</parameter></link>,
-   le <link linkend="chapter.debugging.console">débogage</link> et
+   le <link linkend="chapter.debugging.console">dÃ©bogage</link> et
    <link linkend="smarty.php.errors">Troubleshooting</link>.
  </para>
  </refsect1>

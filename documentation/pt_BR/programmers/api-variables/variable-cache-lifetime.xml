@@ -4,28 +4,28 @@
 <sect1 id="variable.cache.lifetime">
       <title>$cache_lifetime</title>
       <para>
-	   Isso é o comprimento de tempo em segundos que um cache de template é válido.
-	   Uma vez que este tempo está expirado, o cache irá ser regerado. $caching deve
-	   ser configurado para "true" para $cache_lifetime para ter algum propósito. Um valor de -1
-	   irá forçar o cache a nunca expirar. Um valor de 0 irá fazer com que o cache seja sempre regerado 
-	   (bom somente para testes, o método mais eficiente de desabilitar caching é setá-lo para
+	   Isso Ã© o comprimento de tempo em segundos que um cache de template Ã© vÃ¡lido.
+	   Uma vez que este tempo estÃ¡ expirado, o cache irÃ¡ ser regerado. $caching deve
+	   ser configurado para "true" para $cache_lifetime para ter algum propÃ³sito. Um valor de -1
+	   irÃ¡ forÃ§ar o cache a nunca expirar. Um valor de 0 irÃ¡ fazer com que o cache seja sempre regerado 
+	   (bom somente para testes, o mÃ©todo mais eficiente de desabilitar caching Ã© setÃ¡-lo para
 	   <link
 	   linkend="variable.caching">$caching</link> = false.)
       </para>
 	  <para>
-	   Se <link linkend="variable.force.compile">$force_compile</link> está
-	   habilitado, os arquivos de cache serão regerados todo o tempo, eficazmente
-	   desativando caching. Você pode limpar todos os arquivos de cache com a função <link
+	   Se <link linkend="variable.force.compile">$force_compile</link> estÃ¡
+	   habilitado, os arquivos de cache serÃ£o regerados todo o tempo, eficazmente
+	   desativando caching. VocÃª pode limpar todos os arquivos de cache com a funÃ§Ã£o <link
 	   linkend="api.clear.all.cache">clear_all_cache()</link>, ou
-	   arquivos individuais de cache (ou grupos) com a função <link
+	   arquivos individuais de cache (ou grupos) com a funÃ§Ã£o <link
 	   linkend="api.clear.cache">clear_cache()</link>.
 	  </para>
 	  <note>
-	  <title>Notas Técnicas</title>
+	  <title>Notas TÃ©cnicas</title>
 	  <para>
-	  Se você quiser dar para certos templates seu próprio tempo de vida de um cache, 
-	  você poderia fazer isso configurando <link linkend="variable.caching">$caching</link> = 2,
-	  então configure $cache_lifetime para um único valor somente antes de chamar display()
+	  Se vocÃª quiser dar para certos templates seu prÃ³prio tempo de vida de um cache, 
+	  vocÃª poderia fazer isso configurando <link linkend="variable.caching">$caching</link> = 2,
+	  entÃ£o configure $cache_lifetime para um Ãºnico valor somente antes de chamar display()
 	  ou fetch().
 	  </para>
 	  </note>

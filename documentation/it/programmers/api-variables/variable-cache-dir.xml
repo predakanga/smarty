@@ -3,11 +3,11 @@
      <sect1 id="variable.cache.dir">
       <title>$cache_dir</title>
       <para>
-       Questo Ë il nome della directory dove vengono salvati i file
-       della cache. Per default Ë "./cache", che significa che Smarty
-       cercher‡ la directory della cache nella stessa directory dello
+       Questo √® il nome della directory dove vengono salvati i file
+       della cache. Per default √® "./cache", che significa che Smarty
+       cercher√† la directory della cache nella stessa directory dello
        script php in esecuzione. Potete anche usare una funzione 
-       personalizzata di gestione della cache, che ignorer‡ questa
+       personalizzata di gestione della cache, che ignorer√† questa
        impostazione.
       </para>
       <note>

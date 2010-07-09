@@ -9,7 +9,7 @@
    <link linkend="variable.left.delimiter">cambiar</link>.
  </para>
  <para>
-   Para estos ejemplos, nosotros asumiremos que usted est· usando los
+   Para estos ejemplos, nosotros asumiremos que usted est√° usando los
    delimitadores por default. En Smarty, todo el contenido fuera de los 
    delimitadores es mostrado como contenido estatico, o igual(sin cambios). 
    Cuando Smarty encuentra etiquetas en el template, trata de interpretarlos,

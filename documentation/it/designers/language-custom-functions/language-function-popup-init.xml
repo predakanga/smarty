@@ -3,19 +3,19 @@
 <sect1 id="language.function.popup.init">
  <title>popup_init</title>
  <para>
-  popup è un'integrazione di overLib, una libreria usata per
+  popup Ã¨ un'integrazione di overLib, una libreria usata per
   le finestre popup. Tali finestre (si tratta di finestre interne
   al documento, non finestre di programma come quelle che si aprono
   con "javascript:window.open...") si usano per informazioni
   relative al contesto, ad esempio aiuto o suggerimenti.
   popup_init deve essere chiamata una volta all'inizio di ogni
   pagina in cui pensate di utilizzare la funzione <link
-  linkend="language.function.popup">popup</link>. overLib è stata
+  linkend="language.function.popup">popup</link>. overLib Ã¨ stata
   scritta da Erik Bosrup, e la sua homepage si trova all'indirizzo
   http://www.bosrup.com/web/overlib/.
  </para>
  <para>
-  A partire dalla versione di Smarty 2.1.2, overLib NON fa più
+  A partire dalla versione di Smarty 2.1.2, overLib NON fa piÃ¹
   parte della release. Quindi scaricate overLib, piazzate il file
   overlib.js sotto la vostra document root e indicate il percorso
   relativo a questo file come parametro "src" di popup_init.

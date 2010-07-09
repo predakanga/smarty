@@ -12,28 +12,28 @@
          </funcsynopsis>
          <para>
           Use isso para registrar dinamicamente um recurso de plugin com a Smarty.
-	      Passe no nome o recurso e o array de funções
+	      Passe no nome o recurso e o array de funÃ§Ãµes
 	      PHP que implementam isso. Veja
           <link linkend="template.resources">template resources</link>
-          para maiores informações de como configurar uma função para retornar
+          para maiores informaÃ§Ãµes de como configurar uma funÃ§Ã£o para retornar
 	  templates. 
          </para>
 		 <note>
-		 <title>Notas Técnicas</title>
+		 <title>Notas TÃ©cnicas</title>
 		 <para>
 		 Um nome de recurso deve ter ao menos dois caracteres de comprimento.
-		 Um caracter do nome de recurso irá ser ignorado e usado como parte do
+		 Um caracter do nome de recurso irÃ¡ ser ignorado e usado como parte do
 		 path do arquivo como, $smarty->display('c:/path/to/index.tpl');
 		 </para>
 		 </note>
          <para>
-          A função-php-array <parameter>resource_funcs</parameter>
-          deve ter 4 ou 5 elementos. Com 4 elementos os elementos são
-	      as functions-callbacks para as respectivas funções "source",
+          A funÃ§Ã£o-php-array <parameter>resource_funcs</parameter>
+          deve ter 4 ou 5 elementos. Com 4 elementos os elementos sÃ£o
+	      as functions-callbacks para as respectivas funÃ§Ãµes "source",
           "timestamp", "secure" e "trusted" de recurso.
-          Com 5 elementos o primeiro elemento tem que ser um objeto por referência
+          Com 5 elementos o primeiro elemento tem que ser um objeto por referÃªncia
 	      ou um nome de classe do objeto ou uma classe implementando o recurso e os 4
-	      elementos seguintes tem que ter os nomes de métodos
+	      elementos seguintes tem que ter os nomes de mÃ©todos
 	      implementando "source", "timestamp",
           "secure" e "trusted".
          </para>

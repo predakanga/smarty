@@ -3,10 +3,10 @@
      <sect1 id="variable.compile.id">
       <title>$compile_id</title>
       <para>
-      Identificador de compilaciÛn persistente. Como una alternativa
-      para pasar el mismo compile_id a cada llamada de funciÛn, usted 
-      puede asignar este compile_id y este ser· usado implicitamente 
-      despuÈs.
+      Identificador de compilaci√≥n persistente. Como una alternativa
+      para pasar el mismo compile_id a cada llamada de funci√≥n, usted 
+      puede asignar este compile_id y este ser√° usado implicitamente 
+      despu√©s.
       </para>
  <para>
   Con el compile_id usted puede trabajar con limitacion porque usted 
@@ -22,7 +22,7 @@
   <link linkend="plugins.prefilters.postfilters">prefilter</link>
   este localiza su template (es decir: traduce al lenguaje las dependencias por partes)
   y lo compila, entonces usted debe usar el lenguaje actual como $compile_id
-  y usted obtendr· un conjunto de plantillas compiladas para cada idioma que usted utilice. 
+  y usted obtendr√° un conjunto de plantillas compiladas para cada idioma que usted utilice. 
  </para>
  <para>
   otro ejemplo puede ser si usa el mismo directorio para compilar 

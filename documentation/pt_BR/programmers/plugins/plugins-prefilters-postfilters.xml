@@ -4,9 +4,9 @@
 <sect1 id="plugins.prefilters.postfilters">
     <title>Prefiltros/Posfiltros</title>
     <para>
-     Plugins Prefilter e postfilter s„o muito similares 
-     em conceito; onde eles diferem È na execuÁ„o -- mais 
-     precisamente no tempo de suas execuÁıes.
+     Plugins Prefilter e postfilter s√£o muito similares 
+     em conceito; onde eles diferem √© na execu√ß√£o -- mais 
+     precisamente no tempo de suas execu√ß√µes.
     </para>
     <funcsynopsis>
      <funcprototype>
@@ -16,11 +16,11 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     Prefilters s„o usados para processar o fonte do template
-     imediatamente antes da compilaÁ„o. O primeiro par‚metro da
-     funÁ„o de prefilter È o fonte do template, possivelmente modificado por alguns outros prefilters. O Plugin
-      È suposto retornar o fonte modificado. Note que este fonte n„o È salvo em lugar nenhum, ele sÛ È usado para
-      a compilaÁ„o.
+     Prefilters s√£o usados para processar o fonte do template
+     imediatamente antes da compila√ß√£o. O primeiro par√¢metro da
+     fun√ß√£o de prefilter √© o fonte do template, possivelmente modificado por alguns outros prefilters. O Plugin
+      √© suposto retornar o fonte modificado. Note que este fonte n√£o √© salvo em lugar nenhum, ele s√≥ √© usado para
+      a compila√ß√£o.
     </para>
     <funcsynopsis>
      <funcprototype>
@@ -30,12 +30,12 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     Postfilters s„o usados para processar a saÌda compilada do template (o cÛdigo PHP) imediatamente apÛs
-     a compilaÁ„o ser feita e antes do template compilado ser 
-     salvo no sistema de arquivo. O primeiro par‚metro
-     para a funÁ„o postfilter È o cÛdigo do template compilado,
+     Postfilters s√£o usados para processar a sa√≠da compilada do template (o c√≥digo PHP) imediatamente ap√≥s
+     a compila√ß√£o ser feita e antes do template compilado ser 
+     salvo no sistema de arquivo. O primeiro par√¢metro
+     para a fun√ß√£o postfilter √© o c√≥digo do template compilado,
      possivelmente modificado por outros postfilters. 
-     O plugin È suposto retornar a vers„o modificada deste cÛdigo.
+     O plugin √© suposto retornar a vers√£o modificada deste c√≥digo.
     </para>
     <example>
      <title>Plugin prefilter</title>

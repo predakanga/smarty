@@ -50,14 +50,14 @@ function smarty_compiler_tplheader($tag_arg, &$smarty)
 ]]>
 </programlisting>
      <para>
-      Questa funzione puÚ essere chiamata dal template in questo modo:
+      Questa funzione pu√≤ essere chiamata dal template in questo modo:
      </para>
      <programlisting>
 {* questa funzione viene eseguita solo al momento della compilazione *}
 {tplheader}
      </programlisting>
      <para>
-      Il codice PHP risultante nel template compilato sar‡ qualcosa di questo tipo:
+      Il codice PHP risultante nel template compilato sar√† qualcosa di questo tipo:
      </para>
      <programlisting role="php">
 <![CDATA[

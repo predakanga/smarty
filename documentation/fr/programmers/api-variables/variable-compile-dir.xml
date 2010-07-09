@@ -5,25 +5,25 @@
 <sect1 id="variable.compile.dir">
  <title>$compile_dir</title>
  <para>
-  C'est le nom du répertoire où se trouvent les templates
-  compilés. Par défaut, il s'agit de <filename class="directory">./templates_c</filename>,
-  ce qui signifie que Smarty va chercher ce répertoire
-  dans le même répertoire que le script PHP en cours d'exécution.
-  <emphasis role="bold">Ce dossier doit être accessible en écriture
+  C'est le nom du rÃ©pertoire oÃ¹ se trouvent les templates
+  compilÃ©s. Par dÃ©faut, il s'agit de <filename class="directory">./templates_c</filename>,
+  ce qui signifie que Smarty va chercher ce rÃ©pertoire
+  dans le mÃªme rÃ©pertoire que le script PHP en cours d'exÃ©cution.
+  <emphasis role="bold">Ce dossier doit Ãªtre accessible en Ã©criture
   par le serveur web.</emphasis>
   (<link linkend="installing.smarty.basic">Voir l'installation</link> pour plus d'informations).
  </para>
  <note>
   <title>Note technique</title>
   <para>
-   Ce réglage doit être soit un chemin absolu, soit un chemin
-   relatif. include_path n'est pas utilisé pour écrire des fichiers.
+   Ce rÃ©glage doit Ãªtre soit un chemin absolu, soit un chemin
+   relatif. include_path n'est pas utilisÃ© pour Ã©crire des fichiers.
   </para>
  </note>
  <note>
   <title>Note technique</title>
   <para>
-   Il n'est pas conseillé de mettre ce répertoire
+   Il n'est pas conseillÃ© de mettre ce rÃ©pertoire
    sous la racine de l'arborescence Web.
   </para>
  </note>

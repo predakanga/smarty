@@ -4,23 +4,23 @@
 <sect1 id="plugins.howto">
    <title>Como os Plugins Funcionam</title>
    <para>
-    Plugins s„o sempre lidos quando requisitados. Apenas os modificadores especÌficos,
-    funÁıes, recursos, etc convocados em scripts de template ser„o lidos. AlÈm disso, cada plugin
-    È lido apenas uma vez, mesmo se vocÍ tem v·rias inst‚ncias diferentes da Smarty rodando na mesma
-    requisiÁ„o.
+    Plugins s√£o sempre lidos quando requisitados. Apenas os modificadores espec√≠ficos,
+    fun√ß√µes, recursos, etc convocados em scripts de template ser√£o lidos. Al√©m disso, cada plugin
+    √© lido apenas uma vez, mesmo se voc√™ tem v√°rias inst√¢ncias diferentes da Smarty rodando na mesma
+    requisi√ß√£o.
    </para>
    <para>
-    Pre/posfiltros e filtros de saÌda s„o uma parte de um caso especial. Visto que eles n„o s„o mencionados
-    nos templates, eles devem ser registrados ou lidos explicitamente via funÁıes de API antes do template
+    Pre/posfiltros e filtros de sa√≠da s√£o uma parte de um caso especial. Visto que eles n√£o s√£o mencionados
+    nos templates, eles devem ser registrados ou lidos explicitamente via fun√ß√µes de API antes do template
     ser processado.
     A ordem em que multiplos filtros do mesmo
-    tipo s„o executados dependem da ordem em que eles s„o registrados ou lidos.
+    tipo s√£o executados dependem da ordem em que eles s√£o registrados ou lidos.
    </para>
    <para>
-    O <link linkend="variable.plugins.dir">diretÛrio de plugins</link>
+    O <link linkend="variable.plugins.dir">diret√≥rio de plugins</link>
     pode ser uma string contendo um caminho ou um array
     contendo multiplos caminhos. Para instalar um plugin, 
-    simplesmente coloque-o em um dos diretÛrios e a Smarty ir· us·-lo automaticamente.
+    simplesmente coloque-o em um dos diret√≥rios e a Smarty ir√° us√°-lo automaticamente.
    </para>
 </sect1>
 <!-- Keep this comment at the end of the file

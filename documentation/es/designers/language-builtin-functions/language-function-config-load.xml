@@ -15,7 +15,7 @@
      <entry>Tipo</entry>
      <entry>Requerido</entry>
      <entry>Default</entry>
-     <entry>Descripci髇</entry>
+     <entry>Descripci贸n</entry>
     </row>
    </thead>
    <tbody>
@@ -24,14 +24,14 @@
      <entry>string</entry>
      <entry>Si</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>El nombre del archivo de configuraci髇 a incluir</entry>
+     <entry>El nombre del archivo de configuraci贸n a incluir</entry>
     </row>
     <row>
      <entry>section</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>El nombre de la secci髇 a cargar</entry>
+     <entry>El nombre de la secci贸n a cargar</entry>
     </row>
     <row>
      <entry>scope</entry>
@@ -64,14 +64,14 @@
   </tgroup>
  </informaltable>
  <para>
-  Esta funci髇 es usada para cargar las <link
+  Esta funci贸n es usada para cargar las <link
    linkend="language.config.variables">#variables#</link> 
-  de un archivo de configuraci髇 dentro de un template.
+  de un archivo de configuraci贸n dentro de un template.
   Vea <link linkend="config.files">Config Files</link> para mayor 
-  informaci髇.
+  informaci贸n.
  </para>
  <example>
-  <title>Funci髇 {config_load}</title>
+  <title>Funci贸n {config_load}</title>
   <para>
      ejemplo.conf
   </para>
@@ -111,21 +111,21 @@ pageTitle = "Customer Info"
  </programlisting>
  </example>
  <para>
-  Los <link linkend="config.files">archivos de configuraci髇</link> 
-  pueden contener secciones tambi閚. Usted puede cargar variables de 
-  una secci髇 adicionando el atributo <emphasis>'section'</emphasis>.
+  Los <link linkend="config.files">archivos de configuraci贸n</link> 
+  pueden contener secciones tambi茅n. Usted puede cargar variables de 
+  una secci贸n adicionando el atributo <emphasis>'section'</emphasis>.
  </para>
  <note>
   <para>
-   <emphasis>Config file sections</emphasis> es la funci髇 integrada 
+   <emphasis>Config file sections</emphasis> es la funci贸n integrada 
    de template  <link
     linkend="language.function.section"><emphasis>{section}</emphasis></link> 
    no tiene nada que ver uno con el otro, ellos justamente por casualidad 
-   tiene en com鷑 el convensionalismo del nombre.
+   tiene en com煤n el convensionalismo del nombre.
   </para>
  </note>
  <example>
-  <title>Funci髇 config_load con section</title>
+  <title>Funci贸n config_load con section</title>
   <programlisting>
 <![CDATA[
 {config_load file="ejemplo.conf" section="Customer"}
@@ -146,7 +146,7 @@ pageTitle = "Customer Info"
   </programlisting>
  </example>
  <para>
-  Vea tambi閚 <link linkend="config.files">Config files</link>,
+  Vea tambi茅n <link linkend="config.files">Config files</link>,
   <link linkend="language.config.variables">Config variables</link>,
   <link linkend="variable.config.dir">$config_dir</link>,
   <link linkend="api.get.config.vars">get_config_vars()</link>

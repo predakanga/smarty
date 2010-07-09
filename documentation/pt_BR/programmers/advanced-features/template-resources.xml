@@ -4,19 +4,19 @@
   <sect1 id="template.resources">
    <title>Recursos (Resources)</title>
    <para>
-	Os templates podem vir de uma variedade de fontes. Quando você exibe (display) ou
-	 busca (fetch) um template, ou inclui um template de dentro de outro template, você 
+	Os templates podem vir de uma variedade de fontes. Quando vocÃª exibe (display) ou
+	 busca (fetch) um template, ou inclui um template de dentro de outro template, vocÃª 
 	 fornece um tipo de recurso, seguido pelo
 	 caminho e nome do template apropriado. Se um 
-	 recurso não é dado explicitamente o valor de 
-	 <link linkend="variable.default.resource.type">$default_resource_type</link> é assumido.
+	 recurso nÃ£o Ã© dado explicitamente o valor de 
+	 <link linkend="variable.default.resource.type">$default_resource_type</link> Ã© assumido.
    </para>
    <sect2 id="templates.from.template.dir">
     <title>Templates partindo do $template_dir</title>
     <para>
-     Templates a partir do $template_dir não exigem um recurso de template,
-     apesar de você usar o arquivo: resource for consistancy.
-     Apenas forneça o caminho para o template que você quer usar em relação ao diretório
+     Templates a partir do $template_dir nÃ£o exigem um recurso de template,
+     apesar de vocÃª usar o arquivo: resource for consistancy.
+     Apenas forneÃ§a o caminho para o template que vocÃª quer usar em relaÃ§Ã£o ao diretÃ³rio
      root $template_dir.
     </para>
     <example>
@@ -33,14 +33,14 @@ $smarty->display("file:admin/menu.tpl"); // Igual ao de cima
     </example>
    </sect2>
    <sect2 id="templates.from.any.dir">
-    <title>Templates partindo de qualquer diretório</title>
+    <title>Templates partindo de qualquer diretÃ³rio</title>
     <para>
      Os Templates de fora do $template_dir exigem o arquivo:
      tipo de recurso do template,
      seguido pelo caminho absoluto e nome do template.
     </para>
     <example>
-     <title>usando templates partindo de qualquer diretório</title>
+     <title>usando templates partindo de qualquer diretÃ³rio</title>
      <programlisting>
 // de dentro do script PHP
 $smarty->display("file:/export/templates/index.tpl");
@@ -53,8 +53,8 @@ $smarty->display("file:/path/to/my/templates/menu.tpl");
     <sect3 id="templates.windows.filepath">
      <title>Caminhos de arquivos do Windows</title>
      <para>
-      Se você está usando uma máquina windows, caminhos de arquivos normalmente incluem uma letra
-      do drive (C:) no começo do nome do caminho.
+      Se vocÃª estÃ¡ usando uma mÃ¡quina windows, caminhos de arquivos normalmente incluem uma letra
+      do drive (C:) no comeÃ§o do nome do caminho.
       Esteja certo de usar "file:" no caminho para
       evitar conflitos de nome e obter os resultados desejados.
      </para>
@@ -74,35 +74,35 @@ $smarty->display("file:F:/path/to/my/templates/menu.tpl");
    <sect2 id="templates.from.elsewhere">
     <title>Templates partindo de outras fontes</title>
     <para>
-     Você pode resgatar templates usando qualquer fonte possível de você acessar com PHP: banco
+     VocÃª pode resgatar templates usando qualquer fonte possÃ­vel de vocÃª acessar com PHP: banco
       de dados, sockets, LDAP, e assim por diante.
-      Você faz isto escrevendo as funções de plugin
+      VocÃª faz isto escrevendo as funÃ§Ãµes de plugin
       de recurso e registrando elas com o Smarty.
     </para>
 
     <para>
-     Veja a seção <link linkend="plugins.resources">plugins de recurso</link>
-     para mais informação sobre as funções
-     que você deve fornecer.
+     Veja a seÃ§Ã£o <link linkend="plugins.resources">plugins de recurso</link>
+     para mais informaÃ§Ã£o sobre as funÃ§Ãµes
+     que vocÃª deve fornecer.
     </para>
 
     <note>
      <para>
-      Note que você pode ativar manualmente o recurso de <literal>arquivo</literal> embutido, mas não pode fornecer um recurso que busca templates a partir do sistema de arquivos de alguma outra forma registrando sob um outro nome de recurso.
+      Note que vocÃª pode ativar manualmente o recurso de <literal>arquivo</literal> embutido, mas nÃ£o pode fornecer um recurso que busca templates a partir do sistema de arquivos de alguma outra forma registrando sob um outro nome de recurso.
       <literal>file</literal> resource, but you can provide a resource
       that fetches templates from the file system in some other way by
       registering under another resource name.
      </para>
     </note>
     <example>
-     <title>usando recursos customizáveis</title>
+     <title>usando recursos customizÃ¡veis</title>
      <programlisting>
 // no script PHP
 
-// ponha estas funções em algum lugar de sua aplicação
+// ponha estas funÃ§Ãµes em algum lugar de sua aplicaÃ§Ã£o
 function db_get_template ($tpl_name, &amp;$tpl_source, &amp;$smarty_obj)
 {
-    // faça o banco de dados chamar aqui para buscar o seu template,
+    // faÃ§a o banco de dados chamar aqui para buscar o seu template,
     // preenchendo o $tpl_source
     $sql = new SQL;
     $sql->query("select tpl_source
@@ -118,7 +118,7 @@ function db_get_template ($tpl_name, &amp;$tpl_source, &amp;$smarty_obj)
 
 function db_get_timestamp($tpl_name, &amp;$tpl_timestamp, &amp;$smarty_obj)
 {
-    // faça o banco de dados chamar daqui para preencher a $tpl_timestamp.
+    // faÃ§a o banco de dados chamar daqui para preencher a $tpl_timestamp.
     $sql = new SQL;
     $sql->query("select tpl_timestamp
                    from my_table
@@ -133,13 +133,13 @@ function db_get_timestamp($tpl_name, &amp;$tpl_timestamp, &amp;$smarty_obj)
 
 function db_get_secure($tpl_name, &amp;$smarty_obj)
 {
-    // assume-se que todos os templates são seguros
+    // assume-se que todos os templates sÃ£o seguros
     return true;
 }
 
 function db_get_trusted($tpl_name, &amp;$smarty_obj)
 {
-    // não usado para templates
+    // nÃ£o usado para templates
 }
 
 // registrar o nome de recurso "db"
@@ -157,36 +157,36 @@ $smarty->display("db:index.tpl");
    </sect2>
 
    <sect2 id="default.template.handler.function">
-    <title>Função Manipuladora de Template Padrão</title>
+    <title>FunÃ§Ã£o Manipuladora de Template PadrÃ£o</title>
     <para>
-     Você pode especificar a função que é usada para devolver o conteúdo do template no evento
-     em que o template não pode ser devolvido de seu recurso. Um uso disto é para criar templates
-     que não existem "on-the-fly" 
-     (templates cujo conteúdo flutua muito, bastante variável).
+     VocÃª pode especificar a funÃ§Ã£o que Ã© usada para devolver o conteÃºdo do template no evento
+     em que o template nÃ£o pode ser devolvido de seu recurso. Um uso disto Ã© para criar templates
+     que nÃ£o existem "on-the-fly" 
+     (templates cujo conteÃºdo flutua muito, bastante variÃ¡vel).
     </para>
     <example>
-     <title>usando a função manipuladora de template padrão</title>
+     <title>usando a funÃ§Ã£o manipuladora de template padrÃ£o</title>
      <programlisting>
 &lt;?php
-// ponha esta função em algum lugar de sua aplicação
+// ponha esta funÃ§Ã£o em algum lugar de sua aplicaÃ§Ã£o
 
 function make_template ($resource_type, $resource_name, &amp;$template_source, &amp;$template_timestamp, &amp;$smarty_obj)
 {
 	if( $resource_type == 'file' ) {
 		if ( ! is_readable ( $resource_name )) {
-			// cria um arquivo de template, retorna o conteúdo.
+			// cria um arquivo de template, retorna o conteÃºdo.
 			$template_source = "This is a new template.";
 			$template_timestamp = time();
 			$smarty_obj->_write_file($resource_name,$template_source);
 			return true;
 		}
     } else {
-		// não é arquivo
+		// nÃ£o Ã© arquivo
 		return false;
     }
 }
 
-// defina a manipuladora padrão
+// defina a manipuladora padrÃ£o
 $smarty->default_template_handler_func = 'make_template';
 ?&gt;</programlisting>
     </example>

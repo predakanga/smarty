@@ -4,10 +4,10 @@
 		<sect1 id="language.function.php">
 			<title>php</title>
 			<para>
-             Tags php permitem que cÛdigos php sejam embutidos diretamente nos templates. 
-			 Eles n„o ser„o interpretados, n„o importando a definiÁ„o de 
-			 <link linkend="variable.php.handling">$php_handling</link>. Esta opÁ„o È 
-			 somente para usu·rios avanÁados e normalmente n„o È necess·ria.
+             Tags php permitem que c√≥digos php sejam embutidos diretamente nos templates. 
+			 Eles n√£o ser√£o interpretados, n√£o importando a defini√ß√£o de 
+			 <link linkend="variable.php.handling">$php_handling</link>. Esta op√ß√£o √© 
+			 somente para usu√°rios avan√ßados e normalmente n√£o √© necess√°ria.
 			</para>
 <example>
 <title>Tags php</title>

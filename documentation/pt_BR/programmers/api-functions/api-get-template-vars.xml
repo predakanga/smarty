@@ -8,8 +8,8 @@
     <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
    </methodsynopsis>
 			<para>
-				Isso retorna o valor de uma vari·vel fixada. Se nenhum par‚metro
-				È dado, um array de todas as vari·vels fixadas È retornado.
+				Isso retorna o valor de uma vari√°vel fixada. Se nenhum par√¢metro
+				√© dado, um array de todas as vari√°vels fixadas √© retornado.
 			</para>
 <example>
 <title>get_template_vars</title>

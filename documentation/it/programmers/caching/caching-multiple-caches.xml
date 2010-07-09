@@ -3,8 +3,8 @@
    <sect1 id="caching.multiple.caches">
     <title>Cache multiple per una pagina</title>
     <para>
-     Potete avere pi˘ file di cache per una singola chiamata a display()
-     o fetch(). Diciamo che una chiamata a display('index.tpl') puÚ avere
+     Potete avere pi√π file di cache per una singola chiamata a display()
+     o fetch(). Diciamo che una chiamata a display('index.tpl') pu√≤ avere
      diversi output in base a una certa condizione, e volete cache separate
      per ciascun caso. Potete farlo passando alla funzione un cache_id come 
      secondo parametro.
@@ -28,7 +28,7 @@ $smarty->display('index.tpl',$my_cache_id);
     </example>
     <para>
      Qui sopra passiamo la variabile $my_cache_id a display() come 
-     cache_id. Per ogni valore di $my_cache_id verr‡ generato un file
+     cache_id. Per ogni valore di $my_cache_id verr√† generato un file
      di cache per index.tpl. In questo esempio, "article_id" proveniva
      dall'URL e viene usato come cache_id.
     </para>
@@ -43,7 +43,7 @@ $smarty->display('index.tpl',$my_cache_id);
       molto lungo come article_id, o se scrive uno script che spedisce velocemente
       valori casuali, potremmo avere dei problemi sul server. Assicuratevi di
       validare qualsiasi dato ricevuto in input prima di usarlo. In questo caso,
-      potreste sapere che article_id ha una lunghezza di 10 caratteri, Ë composto
+      potreste sapere che article_id ha una lunghezza di 10 caratteri, √® composto
       solo di caratteri alfanumerici, e deve essere un article_id valido sul
       database. Verificatelo!
      </para>
@@ -66,7 +66,7 @@ $smarty->caching = true;
 $my_cache_id = $_GET['article_id'];
 
 if(!$smarty->is_cached('index.tpl',$my_cache_id)) {
-    // Non c'Ë un file di cache disponibile, assegnamo le variabili qui.
+    // Non c'√® un file di cache disponibile, assegnamo le variabili qui.
     $contents = get_database_contents();
     $smarty->assign($contents);
 }

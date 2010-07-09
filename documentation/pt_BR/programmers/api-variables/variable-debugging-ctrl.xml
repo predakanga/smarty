@@ -4,11 +4,11 @@
 <sect1 id="variable.debugging.ctrl">
       <title>$debugging_ctrl</title>
       <para>
-       Isso permite caminhos alternativos de habilitar o debug. NONE n„o significa
-       que mÈtodos alternativos s„o permitidos. URL significa quando a palavra
-       SMARTY_DEBUG foi encontrado na QUERY_STRING, que o debug est· habilitado
+       Isso permite caminhos alternativos de habilitar o debug. NONE n√£o significa
+       que m√©todos alternativos s√£o permitidos. URL significa quando a palavra
+       SMARTY_DEBUG foi encontrado na QUERY_STRING, que o debug est√° habilitado
        para a chamada do script.
-       Se $debugging È true, esse valor È ignorado.
+       Se $debugging √© true, esse valor √© ignorado.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

@@ -6,7 +6,7 @@
   <refpurpose>agregando elementos a una matriz asignada</refpurpose>
  </refnamediv> 
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>append</methodname>
    <methodparam><type>mixed</type><parameter>var</parameter></methodparam>
@@ -22,8 +22,8 @@
     Si usted adiciona una cadena como valor, este se convertira en 
     un valor del arreglo y entonces lo adiciona. Usted puede 
     explicitamente pasar pares de nombres/valores, o arreglos asociativos
-    conteniendo los pares nombre/valor. Si usted pasa el tercer parámetro 
-    opcional como true, el valor se únira al arreglo actual en vez de ser
+    conteniendo los pares nombre/valor. Si usted pasa el tercer parÃ¡metro 
+    opcional como true, el valor se Ãºnira al arreglo actual en vez de ser
     adicionado.
   </para>
   &note.parameter.merge;
@@ -42,7 +42,7 @@ $smarty->append(array('city' => 'Lincoln', 'state' => 'Nebraska'));
 ]]>
    </programlisting>
   </example>
-    <para>Ver también
+    <para>Ver tambiÃ©n
        <link linkend="api.append.by.ref">append_by_ref()</link>,
        <link linkend="api.assign">assign()</link>
        y

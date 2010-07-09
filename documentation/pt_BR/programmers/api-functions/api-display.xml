@@ -10,21 +10,21 @@
     <methodparam choice="opt"><type>string</type><parameter>compile_id</parameter></methodparam>
    </methodsynopsis>
 			<para>
-                Isso mostra o template. Fornecendo um válido <link
+                Isso mostra o template. Fornecendo um vÃ¡lido <link
                 linkend="template.resources">template resource</link>
-                tipo e path. Como um segundo parâmetro opcional, você pode passar
+                tipo e path. Como um segundo parÃ¢metro opcional, vocÃª pode passar
 		um cache id. Veja o <link linkend="caching">caching
-                section</link> para maiores informações.
+                section</link> para maiores informaÃ§Ãµes.
 			</para>
 			<para>
-				Como um terceiro parâmetro opcional, você pode passar um compile id.
-				Isso está no evento que você quer compilar diferentes versões do
+				Como um terceiro parÃ¢metro opcional, vocÃª pode passar um compile id.
+				Isso estÃ¡ no evento que vocÃª quer compilar diferentes versÃµes do
 				mesmo template, como ter templates compilados separadamente para diferentes linguagens.
-				Outro uso para compile_id é quando você usa mais do que um $template_dir
+				Outro uso para compile_id Ã© quando vocÃª usa mais do que um $template_dir
 				mas somente um $compile_dir. Seta um compile_id em separado para cada $template_dir,
-				de outra maneira templates com mesmo nome irão sobrescrever-se um ao outro.
-				Você pode também setar a variável <link
-				linkend="variable.compile.id">$compile_id</link> ao invés de 
+				de outra maneira templates com mesmo nome irÃ£o sobrescrever-se um ao outro.
+				VocÃª pode tambÃ©m setar a variÃ¡vel <link
+				linkend="variable.compile.id">$compile_id</link> ao invÃ©s de 
 				passar isso para cada chamada
 				de display().
 			</para>	
@@ -62,7 +62,7 @@ $smarty->display("index.tpl");</programlisting>
 			mostrar arquivos fora do  $template_dir directory.
 			</para>
 <example>
-<title>Exemplos de recursos da função display</title>
+<title>Exemplos de recursos da funÃ§Ã£o display</title>
 <programlisting>
 // absolute filepath
 $smarty->display("/usr/local/include/templates/header.tpl");

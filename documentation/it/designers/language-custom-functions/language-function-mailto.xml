@@ -22,7 +22,7 @@
     <row>
      <entry>address</entry>
      <entry>stringa</entry>
-     <entry>sì</entry>
+     <entry>sÃ¬</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>l'indirizzo e-mail</entry>
     </row>
@@ -32,14 +32,14 @@
      <entry>no</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>il testo da visualizzare sul link; il default
-                              è l'indirizzo e-mail</entry>
+                              Ã¨ l'indirizzo e-mail</entry>
     </row>
     <row>
      <entry>encode</entry>
      <entry>stringa</entry>
      <entry>no</entry>
      <entry><emphasis>none</emphasis></entry>
-     <entry>Come codificare l'indirizzo. Può essere
+     <entry>Come codificare l'indirizzo. PuÃ² essere
      <literal>none</literal>, <literal>hex</literal> o
      <literal>javascript</literal>.</entry>
     </row>
@@ -94,12 +94,12 @@
 	<para>
   	        La funzione mailto automatizza la creazione di link mailto e,
 		opzionalmente, li codifica. Codificare gli indirizzi e-mail
-		rende più difficile per i web spider raccoglierli dal vostro sito.
+		rende piÃ¹ difficile per i web spider raccoglierli dal vostro sito.
 	</para>
 	<note>
 		<title>Nota tecnica</title>
 		<para>
-			javascript è probabilmente il metodo più completo di
+			javascript Ã¨ probabilmente il metodo piÃ¹ completo di
                  codifica, ma potete usare anche la codifica esadecimale.
   </para>
 	</note>

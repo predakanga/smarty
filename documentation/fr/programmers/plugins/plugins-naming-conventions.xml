@@ -6,10 +6,10 @@
  <title>Conventions de nommage</title>
  <para>
   Les fichiers et les fonctions de plugins doivent suivre une convention
-  de nommage très spécifique pour être localisés par Smarty.
+  de nommage trÃ¨s spÃ©cifique pour Ãªtre localisÃ©s par Smarty.
  </para>
  <para>
-  Les fichiers de <emphasis role="bold">plugins</emphasis> doivent être nommés de la façon suivante :
+  Les fichiers de <emphasis role="bold">plugins</emphasis> doivent Ãªtre nommÃ©s de la faÃ§on suivante :
   <blockquote>
    <para>
     <filename>
@@ -21,7 +21,7 @@
 
  <itemizedlist>
   <listitem><para>
-    Où <literal>type</literal> est l'une des valeurs suivantes :
+    OÃ¹ <literal>type</literal> est l'une des valeurs suivantes :
     <itemizedlist spacing="compact">
      <listitem><simpara>function</simpara></listitem>
      <listitem><simpara>modifier</simpara></listitem>
@@ -37,7 +37,7 @@
   </listitem>
 
   <listitem><para>
-    Et <literal>nom</literal> doit être un identifiant valide : lettres, nombres
+    Et <literal>nom</literal> doit Ãªtre un identifiant valide : lettres, nombres
     et underscore seulement, voir les
     <ulink url="&url.php-manual;language.variables">variables php</ulink>.
    </para></listitem>
@@ -50,8 +50,8 @@
   </listitem>
  </itemizedlist>
  <para>
-  Les fonctions de <emphasis role="bold">plugins</emphasis> dans les fichiers de plugins doivent être
-  nommées de la façon suivante :
+  Les fonctions de <emphasis role="bold">plugins</emphasis> dans les fichiers de plugins doivent Ãªtre
+  nommÃ©es de la faÃ§on suivante :
   <blockquote>
    <para>
     <function>smarty_<replaceable>type</replaceable>_<replaceable>nom</replaceable></function>
@@ -61,8 +61,8 @@
 
  <itemizedlist>
   <listitem><para>
-    Les significations de <literal>type</literal> et de <literal>nom</literal> sont les mêmes
-    que précédemment.
+    Les significations de <literal>type</literal> et de <literal>nom</literal> sont les mÃªmes
+    que prÃ©cÃ©demment.
    </para></listitem>
   <listitem><para>
     Un exemple de nom de modificateur <varname>foo</varname> serait
@@ -70,9 +70,9 @@
    </para></listitem>
  </itemizedlist>
  <para>
-  Smarty donnera des messages d'erreurs appropriés si le fichier de plugin
-  n'est pas trouvé ou si le fichier ou la fonction de plugin ne sont
-  pas nommés correctement.
+  Smarty donnera des messages d'erreurs appropriÃ©s si le fichier de plugin
+  n'est pas trouvÃ© ou si le fichier ou la fonction de plugin ne sont
+  pas nommÃ©s correctement.
  </para>
 </sect1>
 

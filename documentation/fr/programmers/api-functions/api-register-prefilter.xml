@@ -5,7 +5,7 @@
 <refentry id="api.register.prefilter">
  <refnamediv>
   <refname>register_prefilter()</refname>
-  <refpurpose>Déclare dynamiquement des filtres de pré-compilation</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement des filtres de prÃ©-compilation</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,13 +14,13 @@
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour déclarer dynamiquement des
-   <link   linkend="advanced.features.prefilters">filtres de pré-compilation</link> pour y faire
-   passer des templates avant qu'ils ne soient compilés. Reportez-vous
-   à la section
-   <link linkend="advanced.features.postfilters">filtres de pré-compilation de templates</link>
-   pour avoir plus de renseignements sur la façon de paramétrer les fonctions
-   de pré-compilation.
+   UtilisÃ©e pour dÃ©clarer dynamiquement des
+   <link   linkend="advanced.features.prefilters">filtres de prÃ©-compilation</link> pour y faire
+   passer des templates avant qu'ils ne soient compilÃ©s. Reportez-vous
+   Ã  la section
+   <link linkend="advanced.features.postfilters">filtres de prÃ©-compilation de templates</link>
+   pour avoir plus de renseignements sur la faÃ§on de paramÃ©trer les fonctions
+   de prÃ©-compilation.
   </para>
   &api.register.snippet;
    <para>

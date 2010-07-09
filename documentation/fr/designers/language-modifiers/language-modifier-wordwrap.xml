@@ -5,12 +5,12 @@
 <sect1 id="language.modifier.wordwrap">
  <title>wordwrap</title>
  <para>
-  Ajuste une chaîne de caractères à une taille de colonne, par défaut 80.
-  Un second paramètre optionnel vous permet de spécifier la chaîne à utiliser
-  pour l'ajustement à la nouvelle ligne (retour chariot <literal>"\n"</literal> par défaut).
-  Par défaut, <varname>wordwrap</varname> tente un ajustement à la fin d'un mot.
-  Si vous voulez autoriser le découpage des mots pour un ajustement au caractère près,
-  passez &true; au troisième paramètre optionnel. Ceci est l'équivalent de la
+  Ajuste une chaÃ®ne de caractÃ¨res Ã  une taille de colonne, par dÃ©faut 80.
+  Un second paramÃ¨tre optionnel vous permet de spÃ©cifier la chaÃ®ne Ã  utiliser
+  pour l'ajustement Ã  la nouvelle ligne (retour chariot <literal>"\n"</literal> par dÃ©faut).
+  Par dÃ©faut, <varname>wordwrap</varname> tente un ajustement Ã  la fin d'un mot.
+  Si vous voulez autoriser le dÃ©coupage des mots pour un ajustement au caractÃ¨re prÃ¨s,
+  passez &true; au troisiÃ¨me paramÃ¨tre optionnel. Ceci est l'Ã©quivalent de la
   fonction PHP <ulink url="&url.php-manual;wordwrap"><varname>wordwrap()</varname></ulink>.
  </para>
  <informaltable frame="all">
@@ -22,7 +22,7 @@
    <colspec colname="desc"/>
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Defaut</entry>
@@ -39,18 +39,18 @@
     </row>
     <row>
      <entry>2</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>\n</entry>
-     <entry>chaîne de caractères utilisée pour l'ajustement.</entry>
+     <entry>chaÃ®ne de caractÃ¨res utilisÃ©e pour l'ajustement.</entry>
     </row>
     <row>
      <entry>3</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry>&false;</entry>
-     <entry>Détermine si l'ajustement se fait en fin de mot
-     (&false;) ou au caractère exact (&true;).</entry>
+     <entry>DÃ©termine si l'ajustement se fait en fin de mot
+     (&false;) ou au caractÃ¨re exact (&true;).</entry>
     </row>
    </tbody>
   </tgroup>
@@ -67,7 +67,7 @@ $smarty->assign('articleTitle',
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -87,27 +87,27 @@ $smarty->assign('articleTitle',
   </para>
   <screen>
 <![CDATA[
-Une femme aveugle obtient un nouveau rein d'un père qu'elle n'a pas vu depuis des années.
+Une femme aveugle obtient un nouveau rein d'un pÃ¨re qu'elle n'a pas vu depuis des annÃ©es.
 
 Une femme aveugle obtient un
-nouveau rein d'un père
+nouveau rein d'un pÃ¨re
 qu'elle n'a pas vu depuis
-des années.
+des annÃ©es.
 
 Une femme aveugle
 obtient un nouveau
-rein d'un père
+rein d'un pÃ¨re
 qu'elle n'a pas vu
-depuis des années.
+depuis des annÃ©es.
 
 Une femme aveugle obtient un<br>;
-nouveau rein d'un père<br>;
+nouveau rein d'un pÃ¨re<br>;
 qu'elle n'a pas vu depuis<br>;
-des années.
+des annÃ©es.
 
 Une femme aveugle obtient un n
-ouveau rein d'un père qu'elle
-n'a pas vu depuis des années.
+ouveau rein d'un pÃ¨re qu'elle
+n'a pas vu depuis des annÃ©es.
 ]]>
   </screen>
  </example>

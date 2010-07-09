@@ -6,7 +6,7 @@
   <refpurpose>limpia el valor de una variable asignada</refpurpose>
  </refnamediv>
  <refsect1>
-  <title> Descripción</title>
+  <title> DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>clear_assign</methodname>
    <methodparam><type>mixed</type><parameter>var</parameter></methodparam>
@@ -29,7 +29,7 @@ $smarty->clear_assign(array('Name', 'Address', 'Zip'));
    </programlisting>
   </example>
   <para>
-    Ver también
+    Ver tambiÃ©n
     <link linkend="api.clear.all.assign">clear_all_assign()</link>,
     <link linkend="api.clear.config">clear_config()</link>,
     <link linkend="api.get.template.vars">get_template_vars()</link>,

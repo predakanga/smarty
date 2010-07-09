@@ -4,24 +4,24 @@
 <sect1 id="variable.cache.dir">
       <title>$cache_dir</title>
       <para>
-       Isso È o nome do diretÛrio onde os caches do template s„o 
-       armazenados. Por padr„o isso È "./cache", significando que isso ir· olhar
-       para o diretÛrio de cache no mesmo diretÛrio que executar scripts PHP.
-       VocÍ pode tambe usar sua prÛpria funÁ„o customizada de manuseamento de cache
+       Isso √© o nome do diret√≥rio onde os caches do template s√£o 
+       armazenados. Por padr√£o isso √© "./cache", significando que isso ir√° olhar
+       para o diret√≥rio de cache no mesmo diret√≥rio que executar scripts PHP.
+       Voc√™ pode tambe usar sua pr√≥pria fun√ß√£o customizada de manuseamento de cache
        para manipular arquivos de cache,
-       que ir„o ignorar esta configuraÁ„o.
+       que ir√£o ignorar esta configura√ß√£o.
       </para>
 	  <note>
-	  <title>Notas TÈcnicas</title>
+	  <title>Notas T√©cnicas</title>
 	  <para>
-       Essa configuraÁ„o deve ser ou um relativo 
-       ou absoluto path. include_path n„o È usado para escrever em arquivos.
+       Essa configura√ß√£o deve ser ou um relativo 
+       ou absoluto path. include_path n√£o √© usado para escrever em arquivos.
       </para>
 	  </note>
 	  <note>
-		  <title>Notas TÈcnicas</title>
+		  <title>Notas T√©cnicas</title>
 		  <para>
-    	   N„o È recomendado colocar este diretÛrio sob um diretÛrio 
+    	   N√£o √© recomendado colocar este diret√≥rio sob um diret√≥rio 
 	   document root do seu webserver.
     	  </para>
 	  </note>

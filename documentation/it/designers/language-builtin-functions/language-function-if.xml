@@ -4,7 +4,7 @@
 			<title>if,elseif,else</title>
 			<para>
 			Le istruzioni <emphasis>{if}</emphasis> in Smarty hanno praticamente la 
-			stessa flessibilit‡ delle istruzioni if PHP, con qualche caratteristica
+			stessa flessibilit√† delle istruzioni if PHP, con qualche caratteristica
 			aggiuntiva per il motore di template.
 			Ogni <emphasis>{if}</emphasis> deve essere chiuso con un
 			<emphasis>{/if}</emphasis>. Sono previsti anche <emphasis>{else}</emphasis>
@@ -14,7 +14,7 @@
 			</para>
 
 			<para>
-	    Quella che segue Ë una lista degli operatori riconosciuti, che devono
+	    Quella che segue √® una lista degli operatori riconosciuti, che devono
 	    essere separati con degli spazi dagli elementi circostanti. Notate che
 	    gli elementi mostrati fra [parentesi quadre] sono opzionali. Quando esistono
 	    sono mostrati gli equivalenti in PHP.
@@ -104,7 +104,7 @@
                         <entry>is [not] even</entry>
                         <entry></entry>
                         <entry>$a is not even</entry>
-                        <entry>[non] Ë un numero pari (unario)</entry>
+                        <entry>[non] √® un numero pari (unario)</entry>
                         <entry>$a % 2 == 0</entry>
                     </row>
                     <row>
@@ -118,7 +118,7 @@
                         <entry>is [not] odd</entry>
                         <entry></entry>
                         <entry>$a is not odd</entry>
-                        <entry>[non] Ë un numero dispari (unario)</entry>
+                        <entry>[non] √® un numero dispari (unario)</entry>
                         <entry>$a % 2 != 0</entry>
                     </row>
                     <row>
@@ -180,12 +180,12 @@
 	...
 {/if}
 
-{* test se var Ë divisibile per 4 *}
+{* test se var √® divisibile per 4 *}
 {if $var is div by 4}
 	...
 {/if}
 
-{* test se var Ë pari, raggruppato per due. Ad es.:
+{* test se var √® pari, raggruppato per due. Ad es.:
 0=pari, 1=pari, 2=dispari, 3=dispari, 4=pari, 5=pari, etc. *}
 {if $var is even by 2}
 	...

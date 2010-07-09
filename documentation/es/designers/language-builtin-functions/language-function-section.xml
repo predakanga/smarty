@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>Descripción</entry>
+                        <entry>DescripciÃ³n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -31,19 +31,19 @@
                         <entry>mixed</entry>
                         <entry>Si</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>El nombre de la variable para determinar el número de iteracciones</entry>
+                        <entry>El nombre de la variable para determinar el nÃºmero de iteracciones</entry>
                     </row>
                     <row>
                         <entry>start</entry>
                         <entry>integer</entry>
                         <entry>No</entry>
 					                  	<entry><emphasis>0</emphasis></entry> 
-                        <entry> La posición del índice de la section donde va a comenzar.  
-                         Si el valor es negativo, la posición del inicio se calculara
+                        <entry> La posiciÃ³n del Ã­ndice de la section donde va a comenzar.  
+                         Si el valor es negativo, la posiciÃ³n del inicio se calculara
                          a partir del final de la matriz. Por ejemplo, si hubieran 7 valores 
-                         en la matriz y comienza por -2, el índice inicial es 5.
-                         Valores inválidos (valores fuera del tamaño de la matriz) son
-                         automáticamente truncados para el valor valido mas próximo.
+                         en la matriz y comienza por -2, el Ã­ndice inicial es 5.
+                         Valores invÃ¡lidos (valores fuera del tamaÃ±o de la matriz) son
+                         automÃ¡ticamente truncados para el valor valido mas prÃ³ximo.
 						                  </entry>
                     </row>
                     <row>
@@ -52,7 +52,7 @@
                         <entry>No</entry>
                         <entry><emphasis>1</emphasis></entry>
 						<entry>El valor del step que sera usado para el loop de la matriz. 
-       Por ejemplo, step=2 realizara el loop con los índices 0,2,4, etc.
+       Por ejemplo, step=2 realizara el loop con los Ã­ndices 0,2,4, etc.
        Si step es negativo, este avanzara en la matriz de atras para adelante.
 						</entry>
                     </row>
@@ -61,14 +61,14 @@
                         <entry>integer</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-						<entry>Defíne el número máximo de ciclos(loops) para la section.</entry>
+						<entry>DefÃ­ne el nÃºmero mÃ¡ximo de ciclos(loops) para la section.</entry>
                     </row>
                     <row>
                         <entry>show</entry>
                         <entry>boolean</entry>
                         <entry>No</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Determina cuando mostrar o no esta sección</entry>
+                        <entry>Determina cuando mostrar o no esta secciÃ³n</entry>
                     </row>
                 </tbody>
                 </tgroup>
@@ -78,13 +78,13 @@
            un <emphasis role="bold">arreglo de datos</emphasis>. 
            (al agiual que un <link linkend="language.function.foreach">{foreach}</link>).
            Todas las etiquetas <emphasis>section</emphasis> 
-           deben tener su par <emphasis>/section</emphasis>.  Los parámetros 
+           deben tener su par <emphasis>/section</emphasis>.  Los parÃ¡metros 
            requeridos son <emphasis>name</emphasis> y <emphasis>loop</emphasis>.
            El nombre de la section puede ser el que usted quiera, formado por 
-           letras, números y subrayados. Las sections pueden ser anidadas, y los 
+           letras, nÃºmeros y subrayados. Las sections pueden ser anidadas, y los 
            nombres de la section anidadas deben ser diferentes unos de otros. 
            Las variables del loop (normalmente una matriz de valores) determina 
-           el número de veces del loop de la section. Cuando estuviera mostrando 
+           el nÃºmero de veces del loop de la section. Cuando estuviera mostrando 
            una variable dentro de una section, el nombre de la section debe estar 
            al lado de la variable dentro de corchetes []. 
            <emphasis>sectionelse</emphasis> es ejecutado cuando no hubiera valores 
@@ -175,10 +175,10 @@ $smarty->assign('address',$addr);
 </programlisting>
   <programlisting>
 <![CDATA[
-{* la variable del loop solo determina el número de veces del ciclo.
+{* la variable del loop solo determina el nÃºmero de veces del ciclo.
    Usted puede accesar a cualquier variable del template dentro de la section.
    Este ejemplo asume que $custid, $name y $address son todas matrizes
-   conteniendo el mismo número de valores *}
+   conteniendo el mismo nÃºmero de valores *}
 {section name=customer loop=$custid}
 	id: {$custid[customer]}&lt;br&gt;
 	name: {$name[customer]}&lt;br&gt;
@@ -413,7 +413,7 @@ $smarty->assign('contacts',$db->getAll($sql) );
   </programlisting>
  </example>
 		<para>
-  Las sections también tiene sus propias variables que manipulan las
+  Las sections tambiÃ©n tiene sus propias variables que manipulan las
   propiedades de section. Estas son indicadas asi: 
   <link linkend="language.variables.smarty.loops">{$smarty.section.sectionname.varname}</link>
 		</para>
@@ -429,7 +429,7 @@ $smarty->assign('contacts',$db->getAll($sql) );
 			<sect2 id="section.property.index">
 			<title>index</title>
 			<para>
-   index es usado para mostrar el índice actual del cliclo(loop), comenzando 
+   index es usado para mostrar el Ã­ndice actual del cliclo(loop), comenzando 
    en cero (o comienza con el atributo dado), e incrementando por uno (o por 
    un atributo de paso dado).
 			</para>
@@ -469,7 +469,7 @@ $smarty->assign('contacts',$db->getAll($sql) );
 			<sect2 id="section.property.index.prev">
 			<title>index_prev</title>
 			<para>
-   El index_prev es usado para mostrar el índice anterior del loop(ciclo).
+   El index_prev es usado para mostrar el Ã­ndice anterior del loop(ciclo).
    del primer loop(ciclo) esto es definido como -1.
 			</para>
  </sect2>
@@ -477,9 +477,9 @@ $smarty->assign('contacts',$db->getAll($sql) );
 			<sect2 id="section.property.index.next">
 			<title>index_next</title>
 			<para>
-         El index_next es usado para mostrar el próximo indice del loop. 
-         del último loop, esto es uno mas que el índice actual( respetando 
-         la definición del atributo step que se a dado.)
+         El index_next es usado para mostrar el prÃ³ximo indice del loop. 
+         del Ãºltimo loop, esto es uno mas que el Ã­ndice actual( respetando 
+         la definiciÃ³n del atributo step que se a dado.)
 			</para>
 	<example>
 <title>{section} propiedades del index_next y index_prev</title>
@@ -532,13 +532,13 @@ index  id    index_prev prev_id index_next next_id
 			<sect2 id="section.property.iteration">
 			<title>iteration</title>
 			<para>
-       iteration es usado para mostrar la iteración actual del loop(ciclo).
+       iteration es usado para mostrar la iteraciÃ³n actual del loop(ciclo).
 			</para>
 			<note>
 			 <para>
      Esto no es afectado por las propiedades del section start, step y max,
      distinto de las propriedades del  <link linkend="section.property.index">index</link>. 
-     Iteration también comineza con 1 en vez de 0 como index. 
+     Iteration tambiÃ©n comineza con 1 en vez de 0 como index. 
      <link linkend="section.property.rownum">rownum</link> es un alias de iteration, 
      estas funcionan de manera identica.
 			 </para>
@@ -608,7 +608,7 @@ iteration=6 index=15 id=3015<br />
 			<title>first</title>
 			<para>
    first es definido como true se la 
-   <link linkend="section.property.iteration">iteración</link> 
+   <link linkend="section.property.iteration">iteraciÃ³n</link> 
    actual de la section es la primera.
 			</para>
    </sect2>
@@ -617,7 +617,7 @@ iteration=6 index=15 id=3015<br />
 			<title>last</title>
 			<para>
    last es definido como true si la 
-   <link linkend="section.property.iteration">iteración</link> 
+   <link linkend="section.property.iteration">iteraciÃ³n</link> 
    actual del section es la ultima.
 			</para>
   <example>
@@ -654,7 +654,7 @@ iteration=6 index=15 id=3015<br />
 			<sect2 id="section.property.rownum">
 			<title>rownum</title>
 			<para>
-   rownum es usado para mostrar la interación actual del loop(ciclo),
+   rownum es usado para mostrar la interaciÃ³n actual del loop(ciclo),
    comenzando con 1. Es un alias para 
    <link linkend="section.property.iteration">iteration</link>, estas 
    funcionan de modo identico.
@@ -664,7 +664,7 @@ iteration=6 index=15 id=3015<br />
 			<sect2 id="section.property.loop">
 			<title>loop</title>
 			<para>
-   loop es usado para mostrar el ultimo número del índice del
+   loop es usado para mostrar el ultimo nÃºmero del Ã­ndice del
    loop(ciclo) de esta section. Esto puede ser usado dentro o fuera del section.
 			</para>
   <example>
@@ -696,10 +696,10 @@ There were 3 customers shown above.
 			<sect2 id="section.property.show">
 			<title>show</title>
 			<para>
-        <emphasis>show</emphasis>Es usado como parámetro para section. 
+        <emphasis>show</emphasis>Es usado como parÃ¡metro para section. 
         <emphasis>show</emphasis> Es un valor booleano, true o false.  
-        Si es false, la section no será mostrada. Si existiera un 
-        sectionelse presente, este será alternativamente mostrado.
+        Si es false, la section no serÃ¡ mostrada. Si existiera un 
+        sectionelse presente, este serÃ¡ alternativamente mostrado.
 			</para>
 	<example>
 	<title>section atributos de show</title>
@@ -738,7 +738,7 @@ the section was shown.
 			<sect2 id="section.property.total">
 			<title>total</title>
 			<para>
-   total es usado para mostrar el número de iteraciones que está
+   total es usado para mostrar el nÃºmero de iteraciones que estÃ¡
    section tendra. Este puede ser usado dentro o fuera del section.
 			</para>
 	<example>
@@ -766,7 +766,7 @@ There were 3 customers shown above.
    </screen>
   </example>
   <para>
-   Ver también <link linkend="language.function.foreach">{foreach}</link>
+   Ver tambiÃ©n <link linkend="language.function.foreach">{foreach}</link>
    y <link linkend="language.variables.smarty.loops">$smarty.section</link>.
   </para>
  </sect2>

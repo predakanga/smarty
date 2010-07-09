@@ -6,7 +6,7 @@
  <title>{config_load}</title>
 
  <para>
-  <varname>{config_load}</varname> est utiliseé pour charger des variables
+  <varname>{config_load}</varname> est utiliseÃ© pour charger des variables
   <link linkend="language.config.variables"><parameter>#variables#</parameter></link>
   depuis un <link linkend="config.files">fichier de configuration</link>
   dans un template.
@@ -24,51 +24,51 @@
      <entry>Nom attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>file</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le nom du fichier de configuration à inclure</entry>
+     <entry>Le nom du fichier de configuration Ã  inclure</entry>
     </row>
     <row>
      <entry>section</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le nom de la section à charger</entry>
+     <entry>Le nom de la section Ã  charger</entry>
     </row>
     <row>
      <entry>scope</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>non</entry>
      <entry><emphasis>local</emphasis></entry>
      <entry>
-      La façon dont la portée des variables est définie, soit
+      La faÃ§on dont la portÃ©e des variables est dÃ©finie, soit
       local, parent ou global. local signifie que la variable est
-      chargée dans le contexte du template. parent indique que
+      chargÃ©e dans le contexte du template. parent indique que
       la variable est disponible tant dans le template qui
-      l'a inclus que dans le template parent, ayant réalisé
+      l'a inclus que dans le template parent, ayant rÃ©alisÃ©
       l'inclusion du sous template. global signifie que la variable
       est diponible dans tous les templates.
      </entry>
     </row>
     <row>
      <entry>global</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>No</emphasis></entry>
      <entry>
       Si oui ou non les variables sont disponibles pour les
-      templates parents, identique à scope=parent.
-      Note: Cet attribut est obsolète depuis l'apparition
-      de l'attribut scope, il est toutefois toujours supporté.
-      Si scope est défini, global est ignoré.
+      templates parents, identique Ã  scope=parent.
+      Note: Cet attribut est obsolÃ¨te depuis l'apparition
+      de l'attribut scope, il est toutefois toujours supportÃ©.
+      Si scope est dÃ©fini, global est ignorÃ©.
      </entry>
     </row>
    </tbody>
@@ -89,9 +89,9 @@ bodyBgColor = #000000
 tableBgColor = #000000
 rowBgColor = #00ff00
 
-#section de variables personnalisées
+#section de variables personnalisÃ©es
 [Customer]
-pageTitle = "Info personnalisée"
+pageTitle = "Info personnalisÃ©e"
 ]]>
   </programlisting>
   <para>et le template</para>
@@ -116,7 +116,7 @@ pageTitle = "Info personnalisée"
  </example>
  <para>
   Les <link linkend="config.files">fichiers de configuration</link> peuvent contenir des sections.
-  Vous pouvez charger des variables d'une section donnée avec le
+  Vous pouvez charger des variables d'une section donnÃ©e avec le
   nouvel attribut <parameter>section</parameter>.
  </para>
  <note>
@@ -124,7 +124,7 @@ pageTitle = "Info personnalisée"
    Les <emphasis>sections</emphasis> des fichiers de configuration
    et la fonction native
    <link linkend="language.function.section"><varname>{section}</varname></link>
-   n'ont rien en commun, il s'avère simplement qu'elles portent le même nom.
+   n'ont rien en commun, il s'avÃ¨re simplement qu'elles portent le mÃªme nom.
   </para>
  </note>
  <example>

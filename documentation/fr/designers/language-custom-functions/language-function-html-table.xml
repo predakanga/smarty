@@ -6,8 +6,8 @@
  <title>{html_table}</title>
  <para>
   <varname>{html_table}</varname> est une
-  <link linkend="language.custom.functions">fonction personnalisée</link>
-  qui transforme un tableau de données dans un tabeau HTML.
+  <link linkend="language.custom.functions">fonction personnalisÃ©e</link>
+  qui transforme un tableau de donnÃ©es dans un tabeau HTML.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -21,7 +21,7 @@
      <entry>Nom de l'attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
@@ -31,7 +31,7 @@
      <entry>tableau</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Tableau de données à parcourir</entry>
+     <entry>Tableau de donnÃ©es Ã  parcourir</entry>
     </row>
     <row>
      <entry>cols</entry>
@@ -39,14 +39,14 @@
      <entry>Non</entry>
      <entry><emphasis>3</emphasis></entry>
      <entry>
-      Nombre de colonnes de la table ou une liste de noms de colonnes séparés par une
+      Nombre de colonnes de la table ou une liste de noms de colonnes sÃ©parÃ©s par une
       virgule ou un tableau contenant les noms des colonnes. Si l'attribut "cols" est vide,
-      mais que des lignes sont données, alors le nombre de colonnes sera calculé
-      en utilisant le nombre de lignes et le nombre d'éléments à afficher pour qu'il y 
-      ait juste assez de colonnes pour afficher tous les éléments. Si les lignes et 
-      les colonnes sont omis tous les deux, la valeur par défaut de "cols" sera appliquée,
-      à savoir 3. Si fourni en tant que liste ou tableau, le nombre de colonnes
-      est calculé par rapport au nombre d'éléments de la liste ou du tableau.
+      mais que des lignes sont donnÃ©es, alors le nombre de colonnes sera calculÃ©
+      en utilisant le nombre de lignes et le nombre d'Ã©lÃ©ments Ã  afficher pour qu'il y 
+      ait juste assez de colonnes pour afficher tous les Ã©lÃ©ments. Si les lignes et 
+      les colonnes sont omis tous les deux, la valeur par dÃ©faut de "cols" sera appliquÃ©e,
+      Ã  savoir 3. Si fourni en tant que liste ou tableau, le nombre de colonnes
+      est calculÃ© par rapport au nombre d'Ã©lÃ©ments de la liste ou du tableau.
      </entry>
     </row>
     <row>
@@ -56,43 +56,43 @@
      <entry><emphasis>empty</emphasis></entry>
      <entry>
       Nombre de lignes de la table. Si l'attribut "rows" est vide, mais que des colonnes
-      sont données, alors le nombre de lignes sera calculée en utilisant le nombre de colonnes
-      et le nombre d'éléments à afficher pour qu'il y ait juste assez de lignes pour afficher
-      tous les éléments.
+      sont donnÃ©es, alors le nombre de lignes sera calculÃ©e en utilisant le nombre de colonnes
+      et le nombre d'Ã©lÃ©ments Ã  afficher pour qu'il y ait juste assez de lignes pour afficher
+      tous les Ã©lÃ©ments.
      </entry>
     </row>
     <row>
      <entry>inner</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>No</entry>
      <entry><emphasis>cols</emphasis></entry>
      <entry>
-      La direction du rendu des éléments consécutifs dans la boucle du tableau.
-      <emphasis>cols</emphasis> signifie que les éléments doivent être
+      La direction du rendu des Ã©lÃ©ments consÃ©cutifs dans la boucle du tableau.
+      <emphasis>cols</emphasis> signifie que les Ã©lÃ©ments doivent Ãªtre
       afficher colonnes par colonnes.
-      <emphasis>rows</emphasis> signifie que les éléments doivent être
+      <emphasis>rows</emphasis> signifie que les Ã©lÃ©ments doivent Ãªtre
       afficher lignes par lignes.
      </entry>
     </row>
     <row>
      <entry>caption</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>No</entry>
      <entry><emphasis>empty</emphasis></entry>
      <entry>
-      Texte à utiliser pour l'élément <literal>&lt;caption&gt;</literal> du tableau.
+      Texte Ã  utiliser pour l'Ã©lÃ©ment <literal>&lt;caption&gt;</literal> du tableau.
      </entry>
     </row>
     <row>
      <entry>table_attr</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>border="1"</emphasis></entry>
      <entry>attributs pour la balise <literal>&lt;table&gt;</literal></entry>
     </row>
     <row>
      <entry>th_attr</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>No</entry>
      <entry><emphasis>empty</emphasis></entry>
      <entry>Attributs pour les balises <literal>&lt;th&gt;</literal>
@@ -100,14 +100,14 @@
     </row>
     <row>
      <entry>tr_attr</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
      <entry>Attributs pour les balises <literal>&lt;tr&gt;</literal> (les tableaux sont parcourus)</entry>
     </row>
     <row>
      <entry>td_attr</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
      <entry>Attributs pour les balises <literal>&lt;td&gt;</literal>
@@ -115,15 +115,15 @@
     </row>
     <row>
      <entry>trailpad</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>&amp;nbsp;</emphasis></entry>
      <entry>Valeur avec laquelle remplir les cellules
-     restantes de la dernière ligne (si il y en a)</entry>
+     restantes de la derniÃ¨re ligne (si il y en a)</entry>
     </row>
     <row>
      <entry>hdir</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>right</emphasis></entry>
      <entry>
@@ -133,7 +133,7 @@
     </row>
     <row>
      <entry>vdir</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>down</emphasis></entry>
      <entry>
@@ -148,13 +148,13 @@
 
  <itemizedlist>
   <listitem><para>
-    L'attribut <parameter>cols</parameter> détermine le nombre
+    L'attribut <parameter>cols</parameter> dÃ©termine le nombre
     de colonnes dans le tableau.
    </para></listitem>
 
   <listitem><para>
     Les valeurs <parameter>table_attr</parameter>, <parameter>tr_attr</parameter>
-    et <parameter>td_attr</parameter> déterminent les attributs fournis dans les balises
+    et <parameter>td_attr</parameter> dÃ©terminent les attributs fournis dans les balises
     <literal>&lt;table&gt;</literal>, <literal>&lt;tr&gt;</literal>
     et <literal>&lt;td&gt;</literal>.
    </para></listitem>
@@ -165,8 +165,8 @@
    </para></listitem>
 
   <listitem><para>
-    <parameter>trailpad</parameter> est la valeur utilisée pour compléter les cellules
-    vides de la dernière ligne s'il y en a.
+    <parameter>trailpad</parameter> est la valeur utilisÃ©e pour complÃ©ter les cellules
+    vides de la derniÃ¨re ligne s'il y en a.
    </para></listitem>
    </itemizedlist>
 
@@ -182,7 +182,7 @@ $smarty->display('index.tpl');
 ]]>
   </programlisting>
   <para>
-   Les variables assignées depuis PHP peuvent être affichées comme le démontre
+   Les variables assignÃ©es depuis PHP peuvent Ãªtre affichÃ©es comme le dÃ©montre
    cet exemple.
   </para>
   <programlisting>
@@ -199,7 +199,7 @@ $smarty->display('index.tpl');
 </table>
 
 
-{**** Deuxième exemple ****}
+{**** DeuxiÃ¨me exemple ****}
 {html_table loop=$data cols=4 table_attr='border="0"'}
 
 <table border="0">
@@ -211,7 +211,7 @@ $smarty->display('index.tpl');
 </table>
 
 
-{**** Troisième exemple ****}
+{**** TroisiÃ¨me exemple ****}
 {html_table loop=$data cols="first,second,third,fourth" tr_attr=$tr}
 
 <table border="1">

@@ -14,86 +14,86 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>prefix</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>Time_</entry>
-                        <entry>com o que prefixar o nome da vari·vel</entry>
+                        <entry>com o que prefixar o nome da vari√°vel</entry>
                     </row>
                     <row>
                         <entry>time</entry>
                         <entry>timestamp</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>tempo atual</entry>
                         <entry>qual date/time para usar</entry>
                     </row>
                     <row>
                         <entry>display_hours</entry>
                         <entry>booleano</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>true</entry>
-                        <entry>Exibir ou n„o as horas</entry>
+                        <entry>Exibir ou n√£o as horas</entry>
                     </row>
                     <row>
                         <entry>display_minutes</entry>
                         <entry>booleano</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>true</entry>
-                        <entry>Exibir ou n„o os minutos</entry>
+                        <entry>Exibir ou n√£o os minutos</entry>
                     </row>
                     <row>
                         <entry>display_seconds</entry>
                         <entry>booleano</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>true</entry>
-                        <entry>Exibir ou n„o os segundos</entry>
+                        <entry>Exibir ou n√£o os segundos</entry>
                     </row>
                     <row>
                         <entry>display_meridian</entry>
                         <entry>booleano</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>true</entry>
-                        <entry>Exibir ou n„o no formato (am/pm)</entry>
+                        <entry>Exibir ou n√£o no formato (am/pm)</entry>
                     </row>
                     <row>
                         <entry>use_24_hours</entry>
                         <entry>booleano</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>true</entry>
-                        <entry>Usar ou n„o relÛgio de 24 horas</entry>
+                        <entry>Usar ou n√£o rel√≥gio de 24 horas</entry>
                     </row>
                     <row>
                         <entry>minute_interval</entry>
                         <entry>inteiro</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>1</entry>
-                        <entry>intervalo dos n˙meros dos minutos do menu dropdown</entry>
+                        <entry>intervalo dos n√∫meros dos minutos do menu dropdown</entry>
                     </row>
                     <row>
                         <entry>second_interval</entry>
                         <entry>integer</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>1</entry>
-                        <entry>intervalo dos n˙meros dos segundos do menu dropdown</entry>
+                        <entry>intervalo dos n√∫meros dos segundos do menu dropdown</entry>
                     </row>
                     <row>
                         <entry>field_array</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>n/a</entry>
                         <entry>exibe valores para o array deste nome</entry>
                     </row>
                     <row>
                         <entry>all_extra</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>null</entry>
                         <entry>adiciona atributos
                         extras para tags select/input se fornecidas</entry>
@@ -101,7 +101,7 @@
                     <row>
                         <entry>hour_extra</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>null</entry>
                         <entry>adiciona atributos
                         extras para tags select/input se fornecidas</entry>
@@ -109,7 +109,7 @@
                     <row>
                         <entry>minute_extra</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>null</entry>
                         <entry>adiciona atributos
                         extras para tags select/input tags se fornecidas</entry>
@@ -125,7 +125,7 @@
                     <row>
                         <entry>meridian_extra</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>null</entry>
                         <entry>adiciona atributos
                         extras para tags select/input se fornecidas</entry>
@@ -134,7 +134,7 @@
                 </tgroup>
             </informaltable>
 			<para>
-			html_select_time È uma funÁ„o personalizada que cria menus dropdowns de hora para vocÍ. Ela pode mostrar
+			html_select_time √© uma fun√ß√£o personalizada que cria menus dropdowns de hora para voc√™. Ela pode mostrar
 			alguns valores, ou tudo de hora,
 			minuto, segundo e ainda no formato am/pm.
 			</para>

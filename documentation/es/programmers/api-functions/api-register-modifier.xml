@@ -3,10 +3,10 @@
 <refentry id="api.register.modifier">
  <refnamediv>
   <refname>register_modifier()</refname>
-  <refpurpose>mofidica dinámicamente plugins registrados</refpurpose>
+  <refpurpose>mofidica dinÃ¡micamente plugins registrados</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>register_modifier</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
@@ -14,14 +14,14 @@
   </methodsynopsis>
   <para>
    Pase en el template el nombre del modificador, seguido de la
-   función PHP que implemente esto.
+   funciÃ³n PHP que implemente esto.
   </para>
   <para>
    La llamada de la funcion-php <parameter>impl</parameter> puede ser
   </para>
   <orderedlist numeration="loweralpha">
   <listitem>
-    <para>una cadena conteniendo el nombre de la función 
+    <para>una cadena conteniendo el nombre de la funciÃ³n 
     </para>
   </listitem><listitem>
     <para>un arreglo con la forma <literal>array(&amp;$object, $method)</literal> con 
@@ -61,7 +61,7 @@ $smarty->register_modifier('sslash', 'stripslashes');
 
   </example>
    <para>
-    Ver También
+    Ver TambiÃ©n
     <link linkend="api.unregister.modifier">unregister_modifier()</link>,
     <link linkend="api.register.function">register_function()</link>,
     <link linkend="language.modifiers">modifiers</link>,

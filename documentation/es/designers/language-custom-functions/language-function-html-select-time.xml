@@ -15,7 +15,7 @@
      <entry>Tipo</entry>
      <entry>Requerido</entry>
      <entry>Default</entry>
-     <entry>Descripción</entry>
+     <entry>DescripciÃ³n</entry>
     </row>
    </thead>
    <tbody>
@@ -73,14 +73,14 @@
      <entry>integer</entry>
      <entry>No</entry>
      <entry>1</entry>
-     <entry>número de los intervalos de los minutos del menu dropdown</entry>
+     <entry>nÃºmero de los intervalos de los minutos del menu dropdown</entry>
     </row>
     <row>
      <entry>second_interval</entry>
      <entry>integer</entry>
      <entry>No</entry>
      <entry>1</entry>
-     <entry>número de los intervalos de los segundos del menu dropdown</entry>
+     <entry>nÃºmero de los intervalos de los segundos del menu dropdown</entry>
     </row>
     <row>
      <entry>field_array</entry>
@@ -134,7 +134,7 @@
  </informaltable>
  <para>
   {html_select_time} es una 
-  <link linkend="language.custom.functions">función customizada</link>
+  <link linkend="language.custom.functions">funciÃ³n customizada</link>
   que crea menus dropdowns de tiempo para usted. Esta puede mostrar 
   algunos valores, o todo en hora, minuto, segundo y am/pm.
  </para>
@@ -315,7 +315,7 @@ template code:
   </screen>
  </example>
    <para>
-    Ver también
+    Ver tambiÃ©n
     <link linkend="language.variables.smarty.now">$smarty.now</link>,
     <link linkend="language.function.html.select.date">{html_select_date}</link>
     y <link linkend="tips.dates">date tips</link>.

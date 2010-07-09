@@ -5,7 +5,7 @@
  <para>
   Usted puede aplicar cualquier cantidad de modificadores para una variable.
   Estos seran aplicados en el orden en el que fueron combinados, de izquierda 
-  a derecha. Estos deben ser separados con el car·cter <literal>|</literal>(pipe).
+  a derecha. Estos deben ser separados con el car√°cter <literal>|</literal>(pipe).
  </para>
  <example>
   <title>Combinando Modificadores</title>

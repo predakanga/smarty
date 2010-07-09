@@ -5,7 +5,7 @@
 <refentry id="api.register.compiler.function">
  <refnamediv>
   <refname>register_compiler_function()</refname>
-  <refpurpose>Déclare dynamiquement un plugin de fonction de compilation</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement un plugin de fonction de compilation</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -16,14 +16,14 @@
    <methodparam><type>bool</type><parameter>cacheable</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Il faut passer en paramètres le nom de la <link linkend="plugins.compiler.functions">fonction
-   de compilation</link>, suivi par la fonction PHP qui l'implémente.
+   Il faut passer en paramÃ¨tres le nom de la <link linkend="plugins.compiler.functions">fonction
+   de compilation</link>, suivi par la fonction PHP qui l'implÃ©mente.
   </para>
    &api.register.snippet;
   <para>
-   Le paramètre <parameter>cacheable</parameter> peut être omis dans la
+   Le paramÃ¨tre <parameter>cacheable</parameter> peut Ãªtre omis dans la
    plupart des cas. Voir <link 
-   linkend="caching.cacheable">Contrôler la mise en cache des sorties des Plugins</link>
+   linkend="caching.cacheable">ContrÃ´ler la mise en cache des sorties des Plugins</link>
    pour plus d'informations concernant cette utilisation.
   </para>
   <para>

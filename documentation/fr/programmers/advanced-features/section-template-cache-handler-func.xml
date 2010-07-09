@@ -5,16 +5,16 @@
 <sect1 id="section.template.cache.handler.func">
  <title>Fonction de gestion du cache</title>
  <para>
-  Une alternative au mécanisme de cache par défaut (basé sur des fichiers
-  de cache) consiste à spécifier une fonction de gestion de cache utilisateur
-  qui sera utilisée pour lire, écrire et effacer les fichiers de cache.
+  Une alternative au mÃ©canisme de cache par dÃ©faut (basÃ© sur des fichiers
+  de cache) consiste Ã  spÃ©cifier une fonction de gestion de cache utilisateur
+  qui sera utilisÃ©e pour lire, Ã©crire et effacer les fichiers de cache.
  </para>
  <para>
-  Il suffit de créer dans votre application une fonction que Smarty
+  Il suffit de crÃ©er dans votre application une fonction que Smarty
   utilisera pour la gestion du cache et d'assigner le nom de cette
-  fonction à la variable de classe
+  fonction Ã  la variable de classe
   <link linkend="variable.cache.handler.func">$cache_handler_func</link>.
-  Smarty utilisera alors cette fonction pour gérer les données du cache.
+  Smarty utilisera alors cette fonction pour gÃ©rer les donnÃ©es du cache.
  </para>
 
  <itemizedlist>
@@ -24,34 +24,34 @@
  </para></listitem>
 
  <listitem><para>
-   Le second paramètre est l'objet Smarty.
+   Le second paramÃ¨tre est l'objet Smarty.
  </para></listitem>
 
  <listitem><para>
-   Le troisième est le contenu
-   du cache. Pour écrire, Smarty passe le contenu du cache dans ces paramètres.
-   Pour lire, Smarty s'attend à ce que votre fonction accepte ce paramètre
-   par référence et que vous le remplissiez avec les données du cache. Pour effacer,
-   il suffit de passer une variable fictive car cette dernière n'est pas utilisée.
+   Le troisiÃ¨me est le contenu
+   du cache. Pour Ã©crire, Smarty passe le contenu du cache dans ces paramÃ¨tres.
+   Pour lire, Smarty s'attend Ã  ce que votre fonction accepte ce paramÃ¨tre
+   par rÃ©fÃ©rence et que vous le remplissiez avec les donnÃ©es du cache. Pour effacer,
+   il suffit de passer une variable fictive car cette derniÃ¨re n'est pas utilisÃ©e.
  </para></listitem>
 
  <listitem><para>
-   Le quatrième paramètre est le nom du fichier de template (utile pour
-   lire/écrire).
+   Le quatriÃ¨me paramÃ¨tre est le nom du fichier de template (utile pour
+   lire/Ã©crire).
  </para></listitem>
 
  <listitem><para>
-   Le cinquième paramètre est l'identifiant <parameter>$cache_id</parameter>.
+   Le cinquiÃ¨me paramÃ¨tre est l'identifiant <parameter>$cache_id</parameter>.
  </para></listitem>
 
  <listitem><para>
-   Le sixième est l'identifiant optionnel <link linkend="variable.compile.id">
+   Le sixiÃ¨me est l'identifiant optionnel <link linkend="variable.compile.id">
  <parameter>$compile_id</parameter></link>.
  </para></listitem>
 
  <listitem><para>
-   Le septième et dernier paramètre <parameter>$exp_time</parameter>
-   a été ajouté dans Smarty-2.6.0.
+   Le septiÃ¨me et dernier paramÃ¨tre <parameter>$exp_time</parameter>
+   a Ã©tÃ© ajoutÃ© dans Smarty-2.6.0.
 </para></listitem>
 
 </itemizedlist>
@@ -87,14 +87,14 @@ CacheContents MEDIUMTEXT NOT NULL
 
 function mysql_cache_handler($action, &$smarty_obj, &$cache_content, $tpl_file=null, $cache_id=null, $compile_id=null)
 {
-  // l'hôte de la bd, l'utilisateur, et le mot de passe
+  // l'hÃ´te de la bd, l'utilisateur, et le mot de passe
   $db_host = 'localhost';
   $db_user = 'myuser';
   $db_pass = 'mypass';
   $db_name = 'SMARTY_CACHE';
   $use_gzip = false;
 
-  // crée un identifiant de cache unique
+  // crÃ©e un identifiant de cache unique
   $CacheID = md5($tpl_file.$cache_id.$compile_id);
 
   if(! $link = mysql_pconnect($db_host, $db_user, $db_pass)) {
@@ -105,7 +105,7 @@ function mysql_cache_handler($action, &$smarty_obj, &$cache_content, $tpl_file=n
 
   switch ($action) {
     case 'read':
-      // récupère le cache dans la base de données
+      // rÃ©cupÃ¨re le cache dans la base de donnÃ©es
       $results = mysql_query("select CacheContents from CACHE_PAGES where CacheID='$CacheID'");
       if(!$results) {
         $smarty_obj->_trigger_error_msg('cache_handler: query failed.');
@@ -120,7 +120,7 @@ function mysql_cache_handler($action, &$smarty_obj, &$cache_content, $tpl_file=n
       $return = $results;
       break;
     case 'write':
-      // sauvegarde le cache dans la base de données
+      // sauvegarde le cache dans la base de donnÃ©es
 
       if($use_gzip && function_exists("gzcompress")) {
         // compresse le contenu pour gagner de la place
@@ -138,7 +138,7 @@ function mysql_cache_handler($action, &$smarty_obj, &$cache_content, $tpl_file=n
       $return = $results;
       break;
     case 'clear':
-      // efface les données du cache
+      // efface les donnÃ©es du cache
       if(empty($cache_id) && empty($compile_id) && empty($tpl_file)) {
         // les efface toutes
         $results = mysql_query('delete from CACHE_PAGES');

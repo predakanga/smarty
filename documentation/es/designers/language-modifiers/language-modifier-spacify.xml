@@ -11,11 +11,11 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>Descripción</entry>
+      <entry>DescripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -24,14 +24,14 @@
       <entry>string</entry>
       <entry>No</entry>
       <entry><emphasis>one space</emphasis></entry>
-      <entry>Este se inserta entre cada carácter de la variable.</entry>
+      <entry>Este se inserta entre cada carÃ¡cter de la variable.</entry>
       </row>
      </tbody>
     </tgroup>
   </informaltable>
   <para>
-   Inserta un espacio entre cada carácter de una variable. Usted puede 
-   opcionalmente pasar un carácter (o una cadena) diferente para insertar.
+   Inserta un espacio entre cada carÃ¡cter de una variable. Usted puede 
+   opcionalmente pasar un carÃ¡cter (o una cadena) diferente para insertar.
   </para>
   <example>
    <title>spacify</title>
@@ -66,7 +66,7 @@ S^^o^^m^^e^^t^^h^^i^^n^^g^^ ^^W^^e^^n^^t^^ ^^W^^r^^o^^n^^g^^ ^^i^^n^^ ^^J^^e^^t^
    </screen>
   </example>
     <para>
-    Ver también <link linkend="language.modifier.wordwrap">wordwrap</link>
+    Ver tambiÃ©n <link linkend="language.modifier.wordwrap">wordwrap</link>
     y <link linkend="language.modifier.nl2br">nl2br</link>.
     </para>
 </sect1>

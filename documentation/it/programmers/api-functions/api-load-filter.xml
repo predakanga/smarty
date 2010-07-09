@@ -13,8 +13,8 @@
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Questa funzione può essere usata per caricare un plugin filtro. 
-   Il primo parametro specifica il tipo di filtro da caricare e può
+   Questa funzione puÃ² essere usata per caricare un plugin filtro. 
+   Il primo parametro specifica il tipo di filtro da caricare e puÃ²
    avere uno di questi valori: 'pre', 'post' o 'output'. Il secondo
    parametro specifica il nome del plugin filtro, ad esempio 'trim'.
   </para>

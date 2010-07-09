@@ -22,7 +22,7 @@
                     <row>
                         <entry>file</entry>
                         <entry>stringa</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Nome del file php da includere</entry>
                     </row>
@@ -31,15 +31,15 @@
                         <entry>booleano</entry>
                         <entry>no</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Se includere o no il file php pi˘ di una volta nel
-                                              caso venga richiesto pi˘ volte</entry>
+                        <entry>Se includere o no il file php pi√π di una volta nel
+                                              caso venga richiesto pi√π volte</entry>
                     </row>
                     <row>
                         <entry>assign</entry>
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
-                        <entry>Nome della variabile cui sar‡ assegnato l'output
+                        <entry>Nome della variabile cui sar√† assegnato l'output
                                                 di include_php</entry>
                     </row>
                 </tbody>
@@ -48,10 +48,10 @@
 	        <note>
 	        <title>Nota Tecnica</title>
             <para>
-            include_php Ë deprecato da Smarty, in quanto potete ottenere la
-            stessa funzionalit‡ attraverso una funzione utente.
-            L'unica ragione per usare include_php Ë se avete una reale
-            necessit‡ di tenere fuori la funzione php dalla directory dei plugin
+            include_php √® deprecato da Smarty, in quanto potete ottenere la
+            stessa funzionalit√† attraverso una funzione utente.
+            L'unica ragione per usare include_php √® se avete una reale
+            necessit√† di tenere fuori la funzione php dalla directory dei plugin
             o dal vostro codice applicativo. Vedere l'<link
             linkend="tips.componentized.templates">esempio di template a 
             componenti</link> per i dettagli.
@@ -59,13 +59,13 @@
 	        </note>
 			<para>
 			i tag include_php sono usati per includere uno script php nel
-			template. Se la security Ë abilitata, lo script php si deve
+			template. Se la security √® abilitata, lo script php si deve
 			trovare nel percorso di $trusted_dir. Il tag include_php deve
 			avere l'attributo "file", che contiene il percorso al file da
-			includere, che puÚ essere assoluto relativo alla directory $trusted_dir.
+			includere, che pu√≤ essere assoluto relativo alla directory $trusted_dir.
 			</para>
 			<para>
-			include_php Ë un ottimo modo per gestire template a componenti, e
+			include_php √® un ottimo modo per gestire template a componenti, e
 			tiene il codice PHP separato dai file dei template. Diciamo che abbiamo
 			un template che mostra la navigazione del nostro sito, che viene
 			prelevata dinamicamente da un database. Possiamo tenere la logica PHP
@@ -76,18 +76,18 @@
 			</para>
 			<para>
 			Per default, i file php sono inclusi una sola volta, anche se richiesti
-			pi˘ volte nel template. Potete specificare che devono essere inclusi
+			pi√π volte nel template. Potete specificare che devono essere inclusi
 			ogni volta con l'attributo <emphasis>once</emphasis>. Se impostate
-			once a false, lo script verr‡ incluso tutte le volte che viene
+			once a false, lo script verr√† incluso tutte le volte che viene
 			richiesto nel template.
 			</para>
 			<para>
 			Opzionalmente potete passare l'attributo <emphasis>assign</emphasis>,
-			che specifica un nome di variabile cui sar‡ assegnato l'output di
+			che specifica un nome di variabile cui sar√† assegnato l'output di
                         <emphasis>include_php</emphasis>, invece di essere visualizzato.
 			</para>
 			<para>
-			L'oggetto smarty Ë disponibile come $this all'interno dello script
+			L'oggetto smarty √® disponibile come $this all'interno dello script
 			PHP che viene incluso.
 			</para>
 <example>

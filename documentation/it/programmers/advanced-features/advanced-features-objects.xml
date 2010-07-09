@@ -4,39 +4,39 @@
  <title>Oggetti</title>
  <para>
   Smarty consente di accedere agli oggetti PHP attraverso i template. Ci sono
-     due modi per farlo. Uno Ë registrare gli oggetti al template, quindi accedere
+     due modi per farlo. Uno √® registrare gli oggetti al template, quindi accedere
      ad essi attraverso una sintassi simile a quella delle funzioni utente. L'altro
-     modo Ë di assegnare gli oggetti ai template ed accedere loro come ad una
+     modo √® di assegnare gli oggetti ai template ed accedere loro come ad una
      qualsiasi variabile assegnata. Il primo metodo ha una sintassi del template
-     migliore. E' anche pi˘ sicuro, perchÈ su un oggetto registrato potete impedire
-     l'accesso a certi metodi o propriet‡. D'altra parte, su un oggetto registrato
+     migliore. E' anche pi√π sicuro, perch√© su un oggetto registrato potete impedire
+     l'accesso a certi metodi o propriet√†. D'altra parte, su un oggetto registrato
      non potete effettuare dei cicli o metterlo in un array di oggetti, ecc.
-     Il metodo che sceglierete dipender‡ dalle vostre necessit‡, ma quando possibile
+     Il metodo che sceglierete dipender√† dalle vostre necessit√†, ma quando possibile
      usate sempre il primo metodo, per mantenere la sintassi del template al massimo
-     della semplicit‡.
+     della semplicit√†.
  </para>
 	<para>
-  Se la security Ë abilitata, non Ë possibile accedere a metodi o funzioni private
-    (che cominciano con "_") dell'oggetto. Quando esistono un metodo e una propriet‡
-    con lo stesso nome, verr‡ usato il metodo.
+  Se la security √® abilitata, non √® possibile accedere a metodi o funzioni private
+    (che cominciano con "_") dell'oggetto. Quando esistono un metodo e una propriet√†
+    con lo stesso nome, verr√† usato il metodo.
 	</para>
 	<para>
-	Potete impedire l'accesso a certi metodi e propriet‡ elencandoli in un array
+	Potete impedire l'accesso a certi metodi e propriet√† elencandoli in un array
 	come terzo parametro di registrazione.
 	</para>
 	<para>
 	Per default, i parametri passati agli oggetti attraverso i template sono
 	passati nello stesso modo in cui li leggono le funzioni utente. Il primo
-	parametro Ë un array associativo, e il secondo Ë l'oggetto smarty. Se
+	parametro √® un array associativo, e il secondo √® l'oggetto smarty. Se
 	volete i parameteri passati uno alla volta per ogni argomento come nel
 	tradizionale passaggio di parametri per gli oggetti, impostate il quarto
 	parametro di registrazione a false.
 	</para>
 	<para>
 	Il quinto parametro opzionale ha effetto soltanto quando
-	<parameter>format</parameter> Ë <literal>true</literal> e
+	<parameter>format</parameter> √® <literal>true</literal> e
 	contiene una lista di metodi che devono essere trattati come
-	blocchi. CiÚ significa che questi metodi hanno un tag di
+	blocchi. Ci√≤ significa che questi metodi hanno un tag di
 	chiusura nel template
 	(<literal>{foobar->meth2}...{/foobar->meth2}</literal>) e i
 	parametri passati al metodo hanno la stessa struttura di
@@ -60,9 +60,9 @@ class My_Object {
 }
 
 $myobj = new My_Object;
-// registriamo l'oggetto (sar‡ usato per riferimento)
+// registriamo l'oggetto (sar√† usato per riferimento)
 $smarty->register_object("foobar",$myobj);
-// se vogliamo impedire l'accesso a metodi o propriet‡, elenchiamoli
+// se vogliamo impedire l'accesso a metodi o propriet√†, elenchiamoli
 $smarty->register_object("foobar",$myobj,array('meth1','meth2','prop1'));
 // se vogliamo usare il formato tradizionale per i parametri, passiamo un false
 $smarty->register_object("foobar",$myobj,null,false);

@@ -29,14 +29,14 @@
                     <row>
                         <entry>values</entry>
                         <entry>array</entry>
-                        <entry>sì, a meno che si usi l'attributo options</entry>
+                        <entry>sÃ¬, a meno che si usi l'attributo options</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>array di valori per i pulsanti radio</entry>
                     </row>
                     <row>
                         <entry>output</entry>
                         <entry>array</entry>
-                        <entry>sì, a meno che si usi l'attributo options</entry>
+                        <entry>sÃ¬, a meno che si usi l'attributo options</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>array di output per i pulsanti radio</entry>
                     </row>
@@ -50,7 +50,7 @@
                     <row>
                         <entry>options</entry>
                         <entry>array associativo</entry>
-                        <entry>sì, a meno che si usino values e output</entry>
+                        <entry>sÃ¬, a meno che si usino values e output</entry>
                         <entry><emphasis>n/a</emphasis></entry>
                         <entry>array associativo di valori e output</entry>
                     </row>
@@ -65,11 +65,11 @@
                 </tgroup>
             </informaltable>
 			<para>
-			html_radios è una funzione utente che usa i dati forniti per creare
+			html_radios Ã¨ una funzione utente che usa i dati forniti per creare
 			un gruppo di pulsanti radio html. Si occupa anche di quale deve
 			essere selezionato per default. Gli attributi obbligatori sono values
 			e output, a meno che non usiate invece options. Tutto l'output
-			generato è compatibile XHTML.
+			generato Ã¨ compatibile XHTML.
 			</para>
 			<para>
 			Tutti i parametri non compresi nella lista qui sopra verranno

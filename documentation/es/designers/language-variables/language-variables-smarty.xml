@@ -4,7 +4,7 @@
    <title>La variable reservada {$smarty}</title>
    <para>
    La variable reservada {$smarty} puede ser utilizada para accesar a
-   variables especiales del template. A continuaci髇 una lista completa.
+   variables especiales del template. A continuaci贸n una lista completa.
    </para>
 
    <sect2 id="language.variables.smarty.request">
@@ -56,8 +56,8 @@
 			<title>{$smarty.now}</title>
 			<para>
     El <ulink url="&url.php-manual;function.time">timestamp</ulink> 
-    actual puede ser accesado con {$smarty.now}. El n鷐ero refleja el 
-    n鷐ero de segundos pasados desde la llamada Epoca (1 de Enero de 1970) 
+    actual puede ser accesado con {$smarty.now}. El n煤mero refleja el 
+    n煤mero de segundos pasados desde la llamada Epoca (1 de Enero de 1970) 
     y puede ser pasado directamente para el modificador 
     <link linkend="language.modifier.date.format">date_format</link> para 
     mostrar la fecha.
@@ -76,7 +76,7 @@
 			<title>{$smarty.const}</title>
 			<para>
 		 	Usted puede accesar al valor de constantes PHP directamente.
-    Ver tambi閚 <link linkend="smarty.constants">smarty constants</link>
+    Ver tambi茅n <link linkend="smarty.constants">smarty constants</link>
 
 			</para>
    <example>
@@ -95,7 +95,7 @@
     La salida capturada via  
     <link linkend="language.function.capture">{capture}..{/capture}</link> 
     puede ser accesada usando la variable {$smarty}. 
-    vea la secci髇 <link linkend="language.function.capture">{capture}</link>
+    vea la secci贸n <link linkend="language.function.capture">{capture}</link>
     para un ejemplo.
 			</para>
 		</sect2>
@@ -104,8 +104,8 @@
 			<title>{$smarty.config}</title>
 			<para>
     La variable {$smarty} puede ser usada para referir 
-    <link linkend="language.config.variables">variables de configuraci髇</link> 
-    cargadas. {$smarty.config.foo} es un sin髇imo para {#foo#}. vea la secci髇
+    <link linkend="language.config.variables">variables de configuraci贸n</link> 
+    cargadas. {$smarty.config.foo} es un sin贸nimo para {#foo#}. vea la secci贸n
     sobre <link linkend="language.function.config.load">{config_load}</link> 
     para un ejemplo.
 			</para>
@@ -115,7 +115,7 @@
 			<title>{$smarty.section}, {$smarty.foreach}</title>
 			<para>
     La variable {$smarty} puede ser usada para hacer referencia a las 
-    propiedades 'section' y 'foreach' del loop. Ver la documentaci髇 
+    propiedades 'section' y 'foreach' del loop. Ver la documentaci贸n 
     sobre <link linkend="language.function.section">section</link> y
     <link linkend="language.function.foreach">foreach</link>.
 			</para>
@@ -131,7 +131,7 @@
 		<sect2 id="language.variables.smarty.version">
 			<title>{$smarty.version}</title>
 			<para>
-    Esta variable contiene la versi髇 Smarty con que es compilado el template.
+    Esta variable contiene la versi贸n Smarty con que es compilado el template.
 			</para>
 		</sect2>
 		<sect2 id="language.variables.smarty.ldelim">
@@ -141,7 +141,7 @@
     Ver tambien <link linkend="language.function.ldelim">{ldelim},{rdelim}</link>.
 			</para>
    <para>
-    Ver tambi閚 <link linkend="language.syntax.variables">Variables</link> 
+    Ver tambi茅n <link linkend="language.syntax.variables">Variables</link> 
     y <link linkend="language.config.variables">Config Variables</link>
    </para>
 		</sect2>

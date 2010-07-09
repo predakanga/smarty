@@ -5,9 +5,9 @@
 <sect1 id="language.function.cycle">
  <title>{cycle}</title>
  <para>
-  <varname>{cycle}</varname> est utilisé pour boucler sur un ensemble de valeurs.
-  Très pratique pour alterner entre deux ou plusieurs couleurs dans un tableau,
-  ou plus généralement pour boucler sur les valeurs d'un tableau.
+  <varname>{cycle}</varname> est utilisÃ© pour boucler sur un ensemble de valeurs.
+  TrÃ¨s pratique pour alterner entre deux ou plusieurs couleurs dans un tableau,
+  ou plus gÃ©nÃ©ralement pour boucler sur les valeurs d'un tableau.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -28,7 +28,7 @@
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>default</emphasis></entry>
      <entry>Le nom du cycle</entry>
@@ -39,44 +39,44 @@
      <entry>Oui</entry>
      <entry><emphasis>N/A</emphasis></entry>
      <entry>Les valeurs sur lesquelles boucler, soit une liste
-      séparée par des virgules, (voir l'attribut delimiter),
+      sÃ©parÃ©e par des virgules, (voir l'attribut delimiter),
      soit un tableau de valeurs</entry>
     </row>
     <row>
      <entry>print</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&true;</emphasis></entry>
      <entry>S'il faut afficher ou non cette valeur</entry>
     </row>
     <row>
      <entry>advance</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&true;</emphasis></entry>
-     <entry>Oui ou non aller à la prochaîne valeur</entry>
+     <entry>Oui ou non aller Ã  la prochaÃ®ne valeur</entry>
     </row>
     <row>
      <entry>delimiter</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>,</emphasis></entry>
-     <entry>Le délimiteur à utiliser dans la liste.</entry>
+     <entry>Le dÃ©limiteur Ã  utiliser dans la liste.</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>La variable de template dans laquelle la sortie
-     sera assignée</entry>
+     sera assignÃ©e</entry>
     </row>
     <row>
      <entry>reset</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
-     <entry>Le cycle sera défini à la première valeur</entry>
+     <entry>Le cycle sera dÃ©fini Ã  la premiÃ¨re valeur</entry>
     </row>
    </tbody>
   </tgroup>
@@ -85,21 +85,21 @@
  <itemizedlist>
  <listitem>
  <para>
-  Vous pouvez définir plusieurs <varname>{cycle}</varname> dans votre template, en leur
+  Vous pouvez dÃ©finir plusieurs <varname>{cycle}</varname> dans votre template, en leur
   donnant des noms uniques (attribut <parameter>name</parameter>).
  </para></listitem>
  <listitem><para>
-  Vous pouvez empêcher la valeur courante de s'afficher en définissant
-  l'attribut <parameter>print</parameter> à &false;. Ce procédé peut être
-  utile pour discrètement passer outre une valeur de la liste.
+  Vous pouvez empÃªcher la valeur courante de s'afficher en dÃ©finissant
+  l'attribut <parameter>print</parameter> Ã  &false;. Ce procÃ©dÃ© peut Ãªtre
+  utile pour discrÃ¨tement passer outre une valeur de la liste.
  </para></listitem>
  <listitem><para>
-  L'attribut <parameter>advance</parameter> est utilisé pour répéter une valeur. Lorsque
-  définit à &false;, le prochain appel de <varname>{cycle}</varname> ramènera la même valeur.
+  L'attribut <parameter>advance</parameter> est utilisÃ© pour rÃ©pÃ©ter une valeur. Lorsque
+  dÃ©finit Ã  &false;, le prochain appel de <varname>{cycle}</varname> ramÃ¨nera la mÃªme valeur.
  </para></listitem>
  <listitem><para>
-   Si vous définissez l'attribut spécial <parameter>assign</parameter>, la sortie de la fonction
-   <varname>{cycle}</varname> y sera assignée plutôt que d'être directement affichée.
+   Si vous dÃ©finissez l'attribut spÃ©cial <parameter>assign</parameter>, la sortie de la fonction
+   <varname>{cycle}</varname> y sera assignÃ©e plutÃ´t que d'Ãªtre directement affichÃ©e.
   </para></listitem>
 </itemizedlist>
  <example>

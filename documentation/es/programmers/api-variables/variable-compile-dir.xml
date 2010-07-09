@@ -4,32 +4,32 @@
     <title>$compile_dir</title>
     <para>
      Ese es el nombre del directorio donde los templates compilados
-     est·n localizados, Por default est·n en  
+     est√°n localizados, Por default est√°n en  
      <filename class="directory">"./templates_c"</filename> , esto 
      significa que lo buscara en el directorio de templates en el 
      mismo directorio que esta ejecutando el script php.
      <emphasis role="bold">Este directorio debe tener permiso de 
       escritura para el servidor web</emphasis>
-     (<link linkend="installing.smarty.basic">ver la instalaciÛn</link>).
-     tambiÈn <link linkend="variable.use.sub.dirs">$use_sub_dirs</link>.
+     (<link linkend="installing.smarty.basic">ver la instalaci√≥n</link>).
+     tambi√©n <link linkend="variable.use.sub.dirs">$use_sub_dirs</link>.
 
     </para>
     <note>
-     <title>Nota TÈcnica</title>
+     <title>Nota T√©cnica</title>
       <para>
-       Esa configuraciÛn debe ser un path relativo o un path
+       Esa configuraci√≥n debe ser un path relativo o un path
        absoluto. include_path no se usa para escribir archivos.
       </para>
      </note>
      <note>
-      <title>Nota TÈcnica</title>
+      <title>Nota T√©cnica</title>
       <para>
        No es recomendado colocar este directorio bajo el directorio 
        document root de su servidor web.
       </para>
      </note>
      <para>
-     Ver tambiÈn <link linkend="variable.compile.id">$compile_id</link>
+     Ver tambi√©n <link linkend="variable.compile.id">$compile_id</link>
      y <link linkend="variable.use.sub.dirs">$use_sub_dirs</link>.
      </para>
 

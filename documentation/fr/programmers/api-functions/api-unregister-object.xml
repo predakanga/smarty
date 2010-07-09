@@ -5,7 +5,7 @@
 <refentry id="api.unregister.object">
  <refnamediv>
   <refname>unregister_object()</refname>
-  <refpurpose>Désalloue dynamiquement un objet</refpurpose>
+  <refpurpose>DÃ©salloue dynamiquement un objet</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>

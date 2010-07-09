@@ -4,13 +4,13 @@
 		<sect1 id="language.modifier.strip">
 			<title>strip</title>
 			<para>
-			Isto substitui todos os espaços repetidos, novas linhas e tabs por
-			um único espaço ou a string indicada.
+			Isto substitui todos os espaÃ§os repetidos, novas linhas e tabs por
+			um Ãºnico espaÃ§o ou a string indicada.
 			</para>
 			<note>
 			<title>Nota</title>
 			<para>
-			 Se você quer substituir blocos de texto do template, use a função <link
+			 Se vocÃª quer substituir blocos de texto do template, use a funÃ§Ã£o <link
              linkend="language.function.strip">strip</link>.
 			</para>
 			</note>

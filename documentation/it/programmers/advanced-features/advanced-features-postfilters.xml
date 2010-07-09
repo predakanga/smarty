@@ -9,8 +9,8 @@
   dalla directory plugins con la funzione <link
   linkend="api.load.filter">load_filter()</link> o impostando la variabile
   <link linkend="variable.autoload.filters">$autoload_filters</link>.
-  Smarty passer‡ il codice del template compilato come primo parametro,
-  e si aspetter‡ che la funzione restituisca il template risultante.
+  Smarty passer√† il codice del template compilato come primo parametro,
+  e si aspetter√† che la funzione restituisca il template risultante.
  </para>
  <example>
   <title>uso di un postfiltro</title>
@@ -30,7 +30,7 @@ $smarty->display("index.tpl");
 ]]>
   </programlisting>
   <para>
-   Questo far‡ sÏ che il template compilato index.tpl appaia cosÏ:
+   Questo far√† s√¨ che il template compilato index.tpl appaia cos√¨:
   </para>
   <screen>
 <![CDATA[

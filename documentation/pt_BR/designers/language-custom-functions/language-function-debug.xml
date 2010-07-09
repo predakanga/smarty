@@ -14,29 +14,29 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>output</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>html</emphasis></entry>
-                        <entry>Tipo de saÌda, html ou javascript</entry>
+                        <entry>Tipo de sa√≠da, html ou javascript</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 {debug} mostra o console de debug na p·gina. Ele funciona independente
-			 da definiÁ„o de <link linkend="chapter.debugging.console">debug</link>.
-			 J· que ele È executado em tempo de execuÁ„o, ele È capaz apenas de
-			 mostrar as vari·veis definidas, e n„o os templates
-			 que est„o em uso. Mas vocÍ pode ver todas as vari·veis
-			 disponÌveis no escopo do template.
+			 {debug} mostra o console de debug na p√°gina. Ele funciona independente
+			 da defini√ß√£o de <link linkend="chapter.debugging.console">debug</link>.
+			 J√° que ele √© executado em tempo de execu√ß√£o, ele √© capaz apenas de
+			 mostrar as vari√°veis definidas, e n√£o os templates
+			 que est√£o em uso. Mas voc√™ pode ver todas as vari√°veis
+			 dispon√≠veis no escopo do template.
 			</para>
 </sect1>
 <!-- Keep this comment at the end of the file

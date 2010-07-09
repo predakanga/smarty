@@ -4,11 +4,11 @@
  <title>Introduzione</title>
 
  <chapter id="what.is.smarty">
-  <title>Cos'Ë Smarty?</title>
+  <title>Cos'√® Smarty?</title>
   <para>
-   Smarty Ë un motore di template per PHP. Pi˘ specificatamente, fornisce un
+   Smarty √® un motore di template per PHP. Pi√π specificatamente, fornisce un
    modo semplice di separare la logica e il contenuto dell'applicazione dalla
-   sua presentazione. Questo concetto si puÚ comprendere meglio in una situazione
+   sua presentazione. Questo concetto si pu√≤ comprendere meglio in una situazione
    in cui il programmatore ed il progettista dei template hanno ruoli diversi,
    o nella maggior parte dei casi non sono la stessa persona. 
   </para>
@@ -17,43 +17,43 @@
    diciamo che dovete creare una pagina web che mostra un articolo di giornale.
    Il titolo, il sommario, l'autore e il corpo dell'articolo sono gli elementi
    del contenuto: non contengono informazioni su come saranno presentati. Vengono
-   passati a Smarty dall'applicazione, dopodichÈ il grafico modifica i template
+   passati a Smarty dall'applicazione, dopodich√© il grafico modifica i template
    e usa una combinazione di tag HTML e tag di template per formattare la
    presentazione di questi elementi (tabelle HTML, colori di sfondo, dimensione
    dei caratteri, fogli di stile ecc.). Un giorno il programmatore ha bisogno 
    di cambiare il sistema in cui viene ottenuto il contenuto dell'articolo (si
    tratta di una modifica alla logica dell'applicazione). Questa modifica non
-   influisce sul lavoro del grafico, infatti il contenuto arriver‡ al template
+   influisce sul lavoro del grafico, infatti il contenuto arriver√† al template
    esattamente uguale a prima. Allo stesso modo, se il grafico vuole ridisegnare
-   completamente il template, questo non richieder‡ modifica alla logica 
-   applicativa. Quindi, il programmatore puÚ fare modifice alla logica senza
-   bisogno di ristrutturare i template, e il grafico puÚ modificare i template
+   completamente il template, questo non richieder√† modifica alla logica 
+   applicativa. Quindi, il programmatore pu√≤ fare modifice alla logica senza
+   bisogno di ristrutturare i template, e il grafico pu√≤ modificare i template
    senza rovinare la logica dell'applicazione.
   </para>
   <para>
-   Uno degli obiettivi progettuali di Smarty Ë la separazione della logica di 
+   Uno degli obiettivi progettuali di Smarty √® la separazione della logica di 
    business dalla logica di presentazione. Questo significa che i template possono
    contenere logica, a condizione che tale logica sia esclusivamente relativa alla
    presentazione. Cose come includere un altro template, alternare i colori delle
    righe di tabella, mostrare un dato in maiuscolo, ciclare su un array di dati
    per visualizzarli, ecc., sono tutti esempi di logica di presentazione. Questo non
    significa che Smarty forza una separazione fra la logica di business e quella di
-   presentazione. Smarty non puÚ sapere che cosa Ë una cosa e cosa Ë l'altra, per
+   presentazione. Smarty non pu√≤ sapere che cosa √® una cosa e cosa √® l'altra, per
    cui se mettete logica di business nel template sono affari vostri. Inoltre,
    se <emphasis>non volete</emphasis> alcuna logica nei template, potete 
-   sicuramente ottenere ciÚ riducendo il contenuto a solo testo e variabili.
+   sicuramente ottenere ci√≤ riducendo il contenuto a solo testo e variabili.
   </para>
   <para>
-   Uno degli aspetti caratteristici di Smarty Ë la compilazione dei template. Questo
+   Uno degli aspetti caratteristici di Smarty √® la compilazione dei template. Questo
    significa che Smarty legge i file dei template e crea script PHP a partire da
    questi. Una volta creati, questi script vengono eseguiti da quel momento in poi:
    di conseguenza si evita una costosa analisi dei template ad ogni richiesta, e
-   ogni template puÚ avvantaggiarsi pienamente di strumenti per velocizzare 
+   ogni template pu√≤ avvantaggiarsi pienamente di strumenti per velocizzare 
    l'esecuzione come Zend Accelerator (<ulink url="&url.zend;">&url.zend;</ulink>) 
    o PHP Accelerator (<ulink url="&url.ion-accel;">&url.ion-accel;</ulink>).
   </para>
   <para>
-   Ecco alcune delle funzionalit‡ di Smarty:
+   Ecco alcune delle funzionalit√† di Smarty:
   </para>
   <itemizedlist>
    <listitem>
@@ -63,12 +63,12 @@
    </listitem>
    <listitem>
     <para>
-     E' efficiente, perchÈ Ë l'analizzatore di PHP a fare il "lavoro sporco".
+     E' efficiente, perch√© √® l'analizzatore di PHP a fare il "lavoro sporco".
     </para>
    </listitem>
    <listitem>
     <para>
-     Non c'Ë sovraccarico per l'analisi del template, che viene compilato una sola volta.
+     Non c'√® sovraccarico per l'analisi del template, che viene compilato una sola volta.
     </para>
    </listitem>
    <listitem>
@@ -85,14 +85,14 @@
    </listitem>
    <listitem>
     <para>
-     La sintassi dei tag di delimitazione dei template Ë configurabile: potete usare
+     La sintassi dei tag di delimitazione dei template √® configurabile: potete usare
      {}, {{}}, &lt;!--{}--&gt;, ecc.
     </para>
    </listitem>
    <listitem>
     <para>
      I costrutti if/elseif/else/endif vengono passati al PHP, quindi la sintassi delle
-     espressioni condizionali puÚ essere semplice o complicata a vostro piacimento.
+     espressioni condizionali pu√≤ essere semplice o complicata a vostro piacimento.
     </para>
    </listitem>
    <listitem>
@@ -103,8 +103,8 @@
    <listitem>
     <para>
      E' possibile incorporare direttamente codice PHP nei file di template, sebbene
-     non dovrebbe essercene bisogno (e nemmeno Ë raccomandato), essendo il motore
-     cosÏ personalizzabile.
+     non dovrebbe essercene bisogno (e nemmeno √® raccomandato), essendo il motore
+     cos√¨ personalizzabile.
     </para>
    </listitem>
    <listitem>
@@ -164,8 +164,8 @@ debug.tpl
     Smarty usa una costante PHP chiamata <link
     linkend="constant.smarty.dir">SMARTY_DIR</link> che contiene il path di sistema
     della directory delle librerie di Smarty. Fondamentalmente, se la vostra applicazione
-    Ë in grado di trovare il file <filename>Smarty.class.php</filename>, non avete bisogno
-    di impostare SMARTY_DIR, in quanto Smarty la trover‡ da solo. Tuttavia, se
+    √® in grado di trovare il file <filename>Smarty.class.php</filename>, non avete bisogno
+    di impostare SMARTY_DIR, in quanto Smarty la trover√† da solo. Tuttavia, se
     <filename>Smarty.class.php</filename> non si trova nel vostro include_path, o se non
     fornite alla vostra applicazione un percorso assoluto per questo file, allora dovete
     definire manualmente SMARTY_DIR. La costante SMARTY_DIR <emphasis>deve</emphasis> 
@@ -234,21 +234,21 @@ $smarty = new Smarty;
    </example>
 
    <para>
-    Ora che i file delle librerie sono al loro posto, Ë ora di impostare le
+    Ora che i file delle librerie sono al loro posto, √® ora di impostare le
     directory di Smarty per la vostra applicazione. Smarty necessita di quattro
     directory chiamate (per default) <filename class="directory">templates</filename>,
     <filename class="directory">templates_c</filename>, <filename 
     class="directory">configs</filename> e <filename class="directory">cache</filename>. 
-    Ciascuna di queste Ë definibile dalle propriet‡
+    Ciascuna di queste √® definibile dalle propriet√†
     della classe Smarty <varname>$template_dir</varname>,
     <varname>$compile_dir</varname>, <varname>$config_dir</varname>, e
     <varname>$cache_dir</varname> rispettivamente. E' altamente raccomandato
     impostare un insieme separato di queste directory per ogni applicazione che
-    user‡ Smarty.
+    user√† Smarty.
    </para>
    <para>
     Assicuratevi di conoscere il percorso della document root del vostro web 
-    server. Nel nostro esempio, la document root Ë <filename 
+    server. Nel nostro esempio, la document root √® <filename 
     class="directory">/web/www.mydomain.com/docs/</filename>.
     Le directory di Smarty vengono accedute solo dalle librerie di Smarty e mai
     direttamente dal browser. Tuttavia, per evitare problemi di sicurezza, si
@@ -264,8 +264,8 @@ $smarty = new Smarty;
     <filename class="directory">/web/www.mydomain.com/smarty/guestbook/</filename>.
    </para>
    <para>
-    Avrete bisogno di almeno un file sotto la document root, e quello sar‡ lo script
-    a cui puÚ accedere ilbrowser. Lo chiameremo <filename>index.php</filename>, 
+    Avrete bisogno di almeno un file sotto la document root, e quello sar√† lo script
+    a cui pu√≤ accedere ilbrowser. Lo chiameremo <filename>index.php</filename>, 
     e lo metteremo in una sottodirectory della document root chiamata <filename 
     class="directory">/guestbook/</filename>.
    </para>
@@ -274,9 +274,9 @@ $smarty = new Smarty;
     <title>Nota tecnica</title>
     <para>
      Conviene impostare il web server in modo che "index.php" possa essere identificato
-     come indice di default della directory, cosÏ se provate a richiedere
-     "http://www.example.com/guestbook/", lo script index.php verr‡ eseguito senza
-     "index.php" nell'URL. In Apache questo puÚ essere impostato aggiungendo
+     come indice di default della directory, cos√¨ se provate a richiedere
+     "http://www.example.com/guestbook/", lo script index.php verr√† eseguito senza
+     "index.php" nell'URL. In Apache questo pu√≤ essere impostato aggiungendo
      "index.php" alla fine dell'impostazione DirectoryIndex (le voci vanno separate
      con uno spazio l'una dall'altra).
     </para>
@@ -311,7 +311,7 @@ $smarty = new Smarty;
     Smarty necessita del diritto di scrittura su <emphasis>$compile_dir</emphasis> e su
     <emphasis>$cache_dir</emphasis>, quindi assicuratevi che l'utente del web
     server possa scriverci sopra. Di solito si tratta dell'utente "nobody" e
-    gruppo "nobody". Per utenti di OS X, il default Ë utente "www" e gruppo "www".
+    gruppo "nobody". Per utenti di OS X, il default √® utente "www" e gruppo "www".
     Se usate Apache, potete guardare nel file httpd.conf (di solito in 
     "/usr/local/apache/conf/") per vedere quale utente e gruppo vengono usati.
    </para>
@@ -334,13 +334,13 @@ chmod 770 /web/www.example.com/smarty/guestbook/cache/
     <para>
      chmod 770 vi garantisce una notevole sicurezza, in quanto consente solo 
      all'utente e al gruppo "nobody" l'accesso in lettura/scrittura alle directory.
-     Se volete consentire la lettura a chiunque (soprattutto per vostra comodit‡,
+     Se volete consentire la lettura a chiunque (soprattutto per vostra comodit√†,
      se volete guardare questi file), potete impostare invece 775.
     </para>
    </note>
 
    <para>
-    Ora dobbiamo creare il file index.tpl che Smarty caricher‡. Si trover‡ nella
+    Ora dobbiamo creare il file index.tpl che Smarty caricher√†. Si trover√† nella
     directory $template_dir.
    </para>
 
@@ -359,7 +359,7 @@ Hello, {$name}!
    <note>
     <title>Nota tecnica</title>
     <para>
-     {* Smarty *} Ë un commento del template. Non Ë obbligatorio, ma Ë buona pratica
+     {* Smarty *} √® un commento del template. Non √® obbligatorio, ma √® buona pratica
      iniziare tutti i file di template con questo commento. Rende semplice 
      riconoscere il file, indipendentemente dalla sua estensione. Ad esempio,
      un editor di testo potrebbe riconoscere il file ed attivare una particolare
@@ -371,7 +371,7 @@ Hello, {$name}!
     Ora editiamo index.php. Creeremo un'istanza di Smarty, valorizzeremo una
     variabile del template e faremo il display del file index.tpl. Nel nostro
     ambiente di esempio, "/usr/local/lib/php/Smarty" si trova nell'include_path.
-    Assicuratevi che sia cosÏ anche per voi, oppure usate percorsi assoluti.
+    Assicuratevi che sia cos√¨ anche per voi, oppure usate percorsi assoluti.
    </para>
 
    <example>
@@ -404,7 +404,7 @@ $smarty->display('index.tpl');
      Nell'esempio stiamo usando percorsi assoluti per tutte le directory
      di Smarty. Se <filename
      class="directory">/web/www.example.com/smarty/guestbook/</filename> fa 
-     parte dell'include_path di PHP, questo non Ë necessario. Comunque, Ë pi˘
+     parte dell'include_path di PHP, questo non √® necessario. Comunque, √® pi√π
      efficiente e (per esperienza) meno soggetto ad errori usare percorsi
      assoluti. Questo vi garantisce che Smarty prenda i file dalle directory
      giuste.
@@ -423,18 +423,18 @@ $smarty->display('index.tpl');
    <title>Installazione avanzata</title>
 
    <para>
-    Questo Ë il seguito della <link
+    Questo √® il seguito della <link
     linkend="installing.smarty.basic">installazione di base</link>, siete pregati
     di leggerla prima!
    </para>
    <para>
-    Un modo leggermente pi˘ flessibile di installare Smarty Ë di estendere la
-    classe e inizializzare il vostro ambiente di Smarty. CosÏ, invece di impostare
+    Un modo leggermente pi√π flessibile di installare Smarty √® di estendere la
+    classe e inizializzare il vostro ambiente di Smarty. Cos√¨, invece di impostare
     ripetutamente i percorsi delle directory, riassegnare le stesse variabili ecc.,
     possiamo farlo in un unico punto. 
     Creiamo una nuova directory "/php/includes/guestbook/" e un file chiamato
     <filename>setup.php</filename>. Nel nostro ambiente di esempio, "/php/includes" fa parte
-    dell'include_path. Assicuratevi che sia cosÏ anche per voi, oppure usate percorsi
+    dell'include_path. Assicuratevi che sia cos√¨ anche per voi, oppure usate percorsi
     assoluti.
    </para>
 
@@ -447,7 +447,7 @@ $smarty->display('index.tpl');
 // caricamento delle librerie di Smarty
 require('Smarty.class.php');
 
-// Il file setup.php Ë un buon punto dal quale caricare
+// Il file setup.php √® un buon punto dal quale caricare
 // le librerie necessarie all'applicazione, quindi
 // potete farlo qui. Ad esempio:
 // require('guestbook/guestbook.lib.php');
@@ -500,8 +500,8 @@ $smarty->display('index.tpl');
   </example>
 
   <para>
-   Come potete vedere, Ë molto semplice creare un'istanza di Smarty, basta usare
-   Smarty_GuestBook che inizializza automaticamente tutto ciÚ che serve alla
+   Come potete vedere, √® molto semplice creare un'istanza di Smarty, basta usare
+   Smarty_GuestBook che inizializza automaticamente tutto ci√≤ che serve alla
    nostra applicazione.
   </para>
 

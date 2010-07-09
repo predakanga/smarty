@@ -5,13 +5,13 @@
 <sect1 id="variable.config.booleanize">
  <title>$config_booleanize</title>
  <para>
-  Si cette variable est à &true;, les valeurs <literal>on/true/yes</literal>
+  Si cette variable est Ã  &true;, les valeurs <literal>on/true/yes</literal>
   et <literal>off/false/no</literal> dans
   <link linkend="config.files">les fichiers de configuration</link>
-  sont automitiquement converties en booléen. De cette façon vous pouvez
-  utiliser ces valeurs dans le template de la façon suivante : <literal>{if #foobar#}...{/if}</literal>.
-  Si foobar est à <literal>on</literal>, <literal>true</literal> ou <literal>yes</literal>,
-  l'instruction <varname>{if}</varname> sera exécutée. &true; par défaut.
+  sont automitiquement converties en boolÃ©en. De cette faÃ§on vous pouvez
+  utiliser ces valeurs dans le template de la faÃ§on suivante : <literal>{if #foobar#}...{/if}</literal>.
+  Si foobar est Ã  <literal>on</literal>, <literal>true</literal> ou <literal>yes</literal>,
+  l'instruction <varname>{if}</varname> sera exÃ©cutÃ©e. &true; par dÃ©faut.
  </para>
 </sect1>
 

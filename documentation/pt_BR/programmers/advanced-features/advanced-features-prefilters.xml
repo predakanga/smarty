@@ -4,23 +4,23 @@
 <sect1 id="advanced.features.prefilters">
     <title>Prefilters</title>
     <para>
-     Os prefilters de Template são funções de PHP nas quais seus templates são rodados
-     antes de serem compilados. Isto é bom para preprocessamento de seus templates para remover 
-     comentários indesejados, mantendo o olho no que as pessoas estão colocando nos seus templates,
+     Os prefilters de Template sÃ£o funÃ§Ãµes de PHP nas quais seus templates sÃ£o rodados
+     antes de serem compilados. Isto Ã© bom para preprocessamento de seus templates para remover 
+     comentÃ¡rios indesejados, mantendo o olho no que as pessoas estÃ£o colocando nos seus templates,
       etc.  Prefilters podem ser ou <link linkend="api.register.prefilter">registrado</link>
-       ou carregado do diretório de plugins usando a função
+       ou carregado do diretÃ³rio de plugins usando a funÃ§Ã£o
        <link linkend="api.load.filter">load_filter()</link> 
-       ou pela configuração da variável 
+       ou pela configuraÃ§Ã£o da variÃ¡vel 
        <link linkend="variable.autoload.filters">$autoload_filters</link>.
-    O Smarty passará o código fonte do template como o
-     primeiro argumeto, e espera a função retornar
-    o código fonte do template resultante.
+    O Smarty passarÃ¡ o cÃ³digo fonte do template como o
+     primeiro argumeto, e espera a funÃ§Ã£o retornar
+    o cÃ³digo fonte do template resultante.
     </para>
     <example>
      <title>Usando um prefilter de template</title>
      <programlisting>
 &lt;?php
-// Ponha isto em sua aplicação
+// Ponha isto em sua aplicaÃ§Ã£o
 function remove_dw_comments($tpl_source, &amp;$smarty)
 {
     return preg_replace("/&lt;!--#.*--&gt;/U","",$tpl_source);
@@ -32,7 +32,7 @@ $smarty->display("index.tpl");
 ?&gt;
 
 {* Smarty template index.tpl *}
-&lt;!--# esta linha será removida pelo prefilter --&gt;</programlisting>
+&lt;!--# esta linha serÃ¡ removida pelo prefilter --&gt;</programlisting>
     </example>
 </sect1>
 <!-- Keep this comment at the end of the file

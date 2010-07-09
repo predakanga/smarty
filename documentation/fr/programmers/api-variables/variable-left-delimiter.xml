@@ -5,13 +5,13 @@
 <sect1 id="variable.left.delimiter">
  <title>$left_delimiter</title>
  <para>
-  Il s'agit du délimiteur gauche utilisé par le moteur de templates. La
-  valeur par défaut est <literal>{</literal>.
+  Il s'agit du dÃ©limiteur gauche utilisÃ© par le moteur de templates. La
+  valeur par dÃ©faut est <literal>{</literal>.
  </para>
  <para>
   Voir aussi
   <link linkend="variable.right.delimiter"><parameter>$right_delimiter</parameter></link> et
-  l'<link linkend="language.escaping">analyse d'échapement Smarty</link>.
+  l'<link linkend="language.escaping">analyse d'Ã©chapement Smarty</link>.
  </para>
 </sect1>
 

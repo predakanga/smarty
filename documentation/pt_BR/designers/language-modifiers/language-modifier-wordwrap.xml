@@ -12,18 +12,18 @@
                 <colspec colname="desc"/>
                 <thead>
                     <row>
-                        <entry>PosiÁ„o do Par‚metro</entry>
+                        <entry>Posi√ß√£o do Par√¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>1</entry>
                         <entry>integer</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>80</entry>
 						<entry>Isto determina em
 						quantas colunas quebrar.</entry>
@@ -31,28 +31,28 @@
                     <row>
                         <entry>2</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>\n</entry>
-                        <entry>Esta È a string usada para quebrar.</entry>
+                        <entry>Esta √© a string usada para quebrar.</entry>
                     </row>
                     <row>
                         <entry>3</entry>
                         <entry>boolean</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry>false</entry>
-                        <entry>Isto determina quando quebrar ou n„o ao final de uma palavra
+                        <entry>Isto determina quando quebrar ou n√£o ao final de uma palavra
                         (false), ou no caractere exato (true).</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			Isto quebra uma string para uma largura de coluna, o padr„o È 80. 
-			Como segundo par‚metro opcional, vocÍ pode especificar a string que ser· usada
-			para quebrar o texto para a prÛxima linha
-			(o padr„o È um retorno de carro \n).
-			Por padr„o, wordwrap ir· tentar quebrar ao final de uma palavra. Se
-			vocÍ quiser quebrar no tamanho exato de caracteres, passe o terceiro par‚metro, que È opcional, como true.
+			Isto quebra uma string para uma largura de coluna, o padr√£o √© 80. 
+			Como segundo par√¢metro opcional, voc√™ pode especificar a string que ser√° usada
+			para quebrar o texto para a pr√≥xima linha
+			(o padr√£o √© um retorno de carro \n).
+			Por padr√£o, wordwrap ir√° tentar quebrar ao final de uma palavra. Se
+			voc√™ quiser quebrar no tamanho exato de caracteres, passe o terceiro par√¢metro, que √© opcional, como true.
 			</para>
 <example>
 <title>wordwrap</title>

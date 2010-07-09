@@ -4,24 +4,24 @@
 <sect1 id="variable.security">
       <title>$security</title>
       <para>
-       $security true/false, o padr„o È false. Security È bom para situaÁıes
-       quando vocÍ tem partes inconfi·veis editando o template
-       (via ftp por exemplo) e vocÍ quer reduzir os riscos de comprometimento
-       da seguranÁa do sistema atravÈs da linguagem de template.
+       $security true/false, o padr√£o √© false. Security √© bom para situa√ß√µes
+       quando voc√™ tem partes inconfi√°veis editando o template
+       (via ftp por exemplo) e voc√™ quer reduzir os riscos de comprometimento
+       da seguran√ßa do sistema atrav√©s da linguagem de template.
        Habilitando-o faz-se cumprir as regras da linguagem de template,
        a menos que especificamente cancelada com $security_settings:
       </para>
       <itemizedlist>
-       <listitem><para>Se $php_handling est· setado para SMARTY_PHP_ALLOW, isso È implicitamente
+       <listitem><para>Se $php_handling est√° setado para SMARTY_PHP_ALLOW, isso √© implicitamente
          alterado para SMARTY_PHP_PASSTHRU</para></listitem>
-       <listitem><para>FunÁıs PHP n„o s„o permitidas em blocos IF,
+       <listitem><para>Fun√ß√µs PHP n√£o s√£o permitidas em blocos IF,
          exceto estes especificados no $security_settings</para></listitem>
-       <listitem><para>templates podem ser somente incluidos no diretÛrio
+       <listitem><para>templates podem ser somente incluidos no diret√≥rio
          listado em $secure_dir array</para></listitem>
-       <listitem><para>Arquivos locais podem ser somente trazidos do diretÛrio
+       <listitem><para>Arquivos locais podem ser somente trazidos do diret√≥rio
          listado em $secure_dir usando no array {fetch}</para></listitem>
-       <listitem><para>Estas tags {php}{/php} n„o s„o permitidas</para></listitem>
-       <listitem><para>FunÁıes PHP n„o s„o permitidas como modificadores, exceto 
+       <listitem><para>Estas tags {php}{/php} n√£o s√£o permitidas</para></listitem>
+       <listitem><para>Fun√ß√µes PHP n√£o s√£o permitidas como modificadores, exceto 
          estes especificados no $security_settings</para></listitem>
       </itemizedlist>
 </sect1>

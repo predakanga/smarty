@@ -6,9 +6,9 @@
  <title>{section},{sectionelse}</title>
   <para>
   Une <varname>{section}</varname>
-  sert à boucler dans des <emphasis role="bold">tableaux de données</emphasis>,
-  contrairement à <link linkend="language.function.foreach"><varname>{foreach}</varname></link>
-  qui est utilisé pour boucler dans un
+  sert Ã  boucler dans des <emphasis role="bold">tableaux de donnÃ©es</emphasis>,
+  contrairement Ã  <link linkend="language.function.foreach"><varname>{foreach}</varname></link>
+  qui est utilisÃ© pour boucler dans un
    <emphasis role="bold">simple tableau associatif</emphasis>.
   Chaque balise <varname>{section}</varname> doit aller de paire avec une
   balise <varname>{/section}</varname> fermante.
@@ -26,14 +26,14 @@
      <entry>Nom attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Le nom de la section</entry>
@@ -43,7 +43,7 @@
      <entry>mixed</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Valeur qui détermine le nombre de fois que la boucle sera exécutée</entry>
+     <entry>Valeur qui dÃ©termine le nombre de fois que la boucle sera exÃ©cutÃ©e</entry>
     </row>
     <row>
      <entry>start</entry>
@@ -52,12 +52,12 @@
      <entry><emphasis>0</emphasis></entry>
      <entry>
       La position de l'index ou la section commencera son
-      parcours. Si la valeur donnée est négative, la position de
-      départ est calculée depuis la fin du tableau. Par exemple,
-      s'il existe 7 valeurs dans le tableau à parcourir et que start
-      est à -2, l'index de départ sera 5. Les valeurs incorrectes
-      (en dehors de la portée du tableau) sont automatiquements
-      tronquées à la valeur correcte la plus proche
+      parcours. Si la valeur donnÃ©e est nÃ©gative, la position de
+      dÃ©part est calculÃ©e depuis la fin du tableau. Par exemple,
+      s'il existe 7 valeurs dans le tableau Ã  parcourir et que start
+      est Ã  -2, l'index de dÃ©part sera 5. Les valeurs incorrectes
+      (en dehors de la portÃ©e du tableau) sont automatiquements
+      tronquÃ©es Ã  la valeur correcte la plus proche
      </entry>
     </row>
     <row>
@@ -65,9 +65,9 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry><emphasis>1</emphasis></entry>
-     <entry>La valeur du pas qui sera utilisé pour parcourir le
+     <entry>La valeur du pas qui sera utilisÃ© pour parcourir le
       tableau.Par exemple, step=2 parcourera les indices
-      0,2,4, etc. Si step est négatif, le tableau sera parcouru en sens
+      0,2,4, etc. Si step est nÃ©gatif, le tableau sera parcouru en sens
       inverse</entry>
     </row>
     <row>
@@ -75,15 +75,15 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Définit le nombre maximum de fois que le tableau sera
+     <entry>DÃ©finit le nombre maximum de fois que le tableau sera
      parcouru</entry>
     </row>
     <row>
      <entry>show</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>No</entry>
      <entry><emphasis>&true;</emphasis></entry>
-     <entry>Détermine s'il est nécessaire d'afficher la
+     <entry>DÃ©termine s'il est nÃ©cessaire d'afficher la
      section ou non</entry>
     </row>
    </tbody>
@@ -92,45 +92,45 @@
 
  <itemizedlist>
    <listitem><para>
-   Les paramètres requis sont <parameter>name</parameter> et <parameter>loop</parameter>.
+   Les paramÃ¨tres requis sont <parameter>name</parameter> et <parameter>loop</parameter>.
    </para></listitem>
 
    <listitem><para>
     Le <parameter>name</parameter> de la <varname>{section}</varname> est, selon votre choix, 
-    composé de lettres, chiffres et underscores, comme pour les
+    composÃ© de lettres, chiffres et underscores, comme pour les
     <ulink url="&url.php-manual;language.variables">variables PHP</ulink>.
     </para></listitem>
 
     <listitem><para>
-    Les sections peuvent être imbriquées mais leurs noms doivent être uniques.
+    Les sections peuvent Ãªtre imbriquÃ©es mais leurs noms doivent Ãªtre uniques.
    </para></listitem>
 
    <listitem><para>
    L'attribut <parameter>loop</parameter>, habituellement un tableau de valeurs,
-   détermine le nombre de fois que
+   dÃ©termine le nombre de fois que
    <varname>{section}</varname> doit boucler.
    </para></listitem>
 
    <listitem><para>
      Lors de l'affichage d'une variable dans une <varname>{section}</varname>, le nom de la
-   <varname>{section}</varname> doit être fournis après le nom de la variable entre crochets [].
+   <varname>{section}</varname> doit Ãªtre fournis aprÃ¨s le nom de la variable entre crochets [].
    </para></listitem>
 
    <listitem><para>
-   <varname>{sectionelse}</varname> est exécuté lorsqu'aucune valeur n'est trouvée dans la variable à
+   <varname>{sectionelse}</varname> est exÃ©cutÃ© lorsqu'aucune valeur n'est trouvÃ©e dans la variable Ã 
    parcourir.
    </para></listitem>
 
   <listitem><para>
-  <varname>{section}</varname> a également ces propres variables qui gérent les propriétés
+  <varname>{section}</varname> a Ã©galement ces propres variables qui gÃ©rent les propriÃ©tÃ©s
   de la <varname>{section}</varname>.
-  Ces propriétés sont accessibles comme ceci : <link linkend="language.variables.smarty.loops">
+  Ces propriÃ©tÃ©s sont accessibles comme ceci : <link linkend="language.variables.smarty.loops">
   <parameter>{$smarty.section.name.property}</parameter></link>
-  où <quote>name</quote> est l'attribut <parameter>name</parameter>.
+  oÃ¹ <quote>name</quote> est l'attribut <parameter>name</parameter>.
   </para></listitem>
 
   <listitem><para>
-  Les propriétés de <varname>{section}</varname> sont
+  Les propriÃ©tÃ©s de <varname>{section}</varname> sont
   <link linkend="section.property.index"><parameter>index</parameter></link>,
   <link linkend="section.property.index.prev"><parameter>index_prev</parameter></link>,
   <link linkend="section.property.index.next"><parameter>index_next</parameter></link>,
@@ -147,7 +147,7 @@
  <example>
   <title>Boucler dans un simple tableau avec {section}</title>
 <para>
-<link linkend="api.assign"><varname>assign()</varname></link> un tableau à Smarty
+<link linkend="api.assign"><varname>assign()</varname></link> un tableau Ã  Smarty
 </para>
 <programlisting role="php">
 <![CDATA[
@@ -189,7 +189,7 @@ id: 1000<br />
 
 
    <example>
-  <title>{section} sans un tableau assigné</title>
+  <title>{section} sans un tableau assignÃ©</title>
 <programlisting>
 <![CDATA[
 {section name=foo start=10 loop=20 step=2}
@@ -217,9 +217,9 @@ id: 1000<br />
 <example>
   <title>Nommage d'une {section}</title>
   <para>
-   Le <parameter>name</parameter> de la <varname>{section}</varname> peut être ce que vous
+   Le <parameter>name</parameter> de la <varname>{section}</varname> peut Ãªtre ce que vous
    voulez, voir les <ulink url="&url.php-manual;language.variables">variables PHP</ulink>.
-   Il sera utilisé pour référencer les données de la <varname>{section}</varname>.
+   Il sera utilisÃ© pour rÃ©fÃ©rencer les donnÃ©es de la <varname>{section}</varname>.
   </para>
   <programlisting>
 <![CDATA[
@@ -236,9 +236,9 @@ id: 1000<br />
  <example>
   <title>Boucler dans un tableau associatif avec {section}</title>
   <para>
-   Voici un exemple d'affichage d'un tableau associatif de données avec
+   Voici un exemple d'affichage d'un tableau associatif de donnÃ©es avec
    <varname>{section}</varname>. Ce qui suit est le script PHP assignant
-   le tableau <parameter>$contacts</parameter> à Smarty.
+   le tableau <parameter>$contacts</parameter> Ã  Smarty.
   </para>
   <programlisting role="php">
   <![CDATA[
@@ -297,10 +297,10 @@ $smarty->assign('contacts',$data);
 </example>
 
  <example>
-  <title>{section} démontrant l'utilisation de la variable <varname>loop</varname></title>
+  <title>{section} dÃ©montrant l'utilisation de la variable <varname>loop</varname></title>
   <para>Cet exemple suppose que <parameter>$custid</parameter>, <parameter>$name</parameter>
-  et <parameter>$address</parameter> sont tous des tableaux contenant le même
-  nombre de valeurs. Tout d'abord, le script PHP qui assigne les tableaux à Smarty.</para>
+  et <parameter>$address</parameter> sont tous des tableaux contenant le mÃªme
+  nombre de valeurs. Tout d'abord, le script PHP qui assigne les tableaux Ã  Smarty.</para>
 <programlisting role="php">
 <![CDATA[
 <?php
@@ -317,9 +317,9 @@ $smarty->assign('address',$addr);
 ?>
 ]]>
 </programlisting>
-<para>La variable <parameter>loop</parameter> détermine uniquement le nombre
+<para>La variable <parameter>loop</parameter> dÃ©termine uniquement le nombre
  de fois qu'il faut boucler.
- Vous pouvez accéder à n'importe quelle variable du template dans la
+ Vous pouvez accÃ©der Ã  n'importe quelle variable du template dans la
  <varname>{section}</varname></para>
   <programlisting>
 <![CDATA[
@@ -359,10 +359,10 @@ $smarty->assign('address',$addr);
 
 
  <example>
-  <title>{section} imbriquée</title>
+  <title>{section} imbriquÃ©e</title>
   <para>
-   Les sections peuvent être imbriquées autant de fois que vous le voulez.
-   Avec les sections imbriquées, vous pouvez accéder aux structures de données
+   Les sections peuvent Ãªtre imbriquÃ©es autant de fois que vous le voulez.
+   Avec les sections imbriquÃ©es, vous pouvez accÃ©der aux structures de donnÃ©es
    complexes, comme les tableaux multi-dimentionnels. Voici un script PHP qui assigne les
    tableaux.
   </para>
@@ -440,9 +440,9 @@ $smarty->assign('contact_info', $info);
 
 
 <example>
-<title>Exemple avec une base de données et {sectionelse}</title>
-  <para>Les résultats d'une recherche dans une base de données
-   (e.g. ADODB ou PEAR) sont assignés à Smarty</para>
+<title>Exemple avec une base de donnÃ©es et {sectionelse}</title>
+  <para>Les rÃ©sultats d'une recherche dans une base de donnÃ©es
+   (e.g. ADODB ou PEAR) sont assignÃ©s Ã  Smarty</para>
     <programlisting role="php">
   <![CDATA[
 <?php
@@ -452,7 +452,7 @@ $smarty->assign('contacts', $db->getAll($sql));
 ?>
 ]]>
 </programlisting>
-<para>Le template pour afficher le résultat de la base de données dans un tableau HTML</para>
+<para>Le template pour afficher le rÃ©sultat de la base de donnÃ©es dans un tableau HTML</para>
   <programlisting>
 <![CDATA[
 <table>
@@ -466,7 +466,7 @@ $smarty->assign('contacts', $db->getAll($sql));
     <td>{$contacts[co].email}</td>
   <tr>
 {sectionelse}
-  <tr><td colspan="5">Aucun élément n'a été trouvé</td></tr>
+  <tr><td colspan="5">Aucun Ã©lÃ©ment n'a Ã©tÃ© trouvÃ©</td></tr>
 {/section}
 </table>
 ]]>
@@ -477,21 +477,21 @@ $smarty->assign('contacts', $db->getAll($sql));
  <sect2 id="section.property.index">
   <title>.index</title>
   <para>
-   <parameter>index</parameter> contient l'index courant du tableau, en commençant par zéro ou par
-   <parameter>start</parameter> s'il est fourni. Il s'incrémente d'un en un ou de
+   <parameter>index</parameter> contient l'index courant du tableau, en commenÃ§ant par zÃ©ro ou par
+   <parameter>start</parameter> s'il est fourni. Il s'incrÃ©mente d'un en un ou de
    <parameter>step</parameter> s'il est fourni.
   </para>
   <note>
    <title>Note technique</title>
    <para>
-    Si les propriétés <parameter>step</parameter> et <parameter>start</parameter>
-    ne sont pas modifiés, alors le fonctionnement est le même que celui de la propriété
+    Si les propriÃ©tÃ©s <parameter>step</parameter> et <parameter>start</parameter>
+    ne sont pas modifiÃ©s, alors le fonctionnement est le mÃªme que celui de la propriÃ©tÃ©
     <link linkend="section.property.iteration"><parameter>iteration</parameter></link>,
-    mise à part qu'il commence à zéro au lieu de un.
+    mise Ã  part qu'il commence Ã  zÃ©ro au lieu de un.
    </para>
   </note>
   <example>
-<title>Exemple avec la propriété <varname>index</varname></title>
+<title>Exemple avec la propriÃ©tÃ© <varname>index</varname></title>
 <para>
 <note><title>FYI</title>
 <para><literal>$custid[customer.index]</literal> et
@@ -522,8 +522,8 @@ $smarty->assign('contacts', $db->getAll($sql));
  <sect2 id="section.property.index.prev">
   <title>.index_prev</title>
   <para>
-   <parameter>index_prev</parameter> est l'index de la boucle précédente.
-   Lors de la première boucle, il vaut -1.
+   <parameter>index_prev</parameter> est l'index de la boucle prÃ©cÃ©dente.
+   Lors de la premiÃ¨re boucle, il vaut -1.
   </para>
  </sect2>
 
@@ -536,7 +536,7 @@ $smarty->assign('contacts', $db->getAll($sql));
   </para>
 
   <example>
-<title>Exemple avec les propriétés <varname>index</varname>, <varname>index_next</varname>
+<title>Exemple avec les propriÃ©tÃ©s <varname>index</varname>, <varname>index_next</varname>
  et <varname>index_prev</varname></title>
 <programlisting role="php">
 <![CDATA[
@@ -586,22 +586,22 @@ index  id    index_prev prev_id index_next next_id
  <sect2 id="section.property.iteration">
   <title>.iteration</title>
   <para>
-   <parameter>iteration</parameter> contient l'itération courante de la boucle et commence à un.
+   <parameter>iteration</parameter> contient l'itÃ©ration courante de la boucle et commence Ã  un.
   </para>
   <note>
    <para>
-    Ceci n'est pas affecté par les propriétés <varname>{section}</varname>
+    Ceci n'est pas affectÃ© par les propriÃ©tÃ©s <varname>{section}</varname>
     <parameter>start</parameter>, <parameter>step</parameter> et
-    <parameter>max</parameter> contrairement à la propriété
+    <parameter>max</parameter> contrairement Ã  la propriÃ©tÃ©
     <link linkend="section.property.index"><parameter>index</parameter></link>.
-    <parameter>iteration</parameter> commence également à un au lieu de zéro
-    contrairement à <parameter>index</parameter>.
+    <parameter>iteration</parameter> commence Ã©galement Ã  un au lieu de zÃ©ro
+    contrairement Ã  <parameter>index</parameter>.
     <link linkend="section.property.rownum"><parameter>rownum</parameter></link>
     est un alias de <parameter>iteration</parameter>,  ils sont identiques.
    </para>
   </note>
   <example>
-<title>Exemple avec la propriété <varname>iteration</varname></title>
+<title>Exemple avec la propriÃ©tÃ© <varname>iteration</varname></title>
 <programlisting role="php">
 <![CDATA[
 <?php
@@ -611,7 +611,7 @@ $smarty->assign('arr',$id);
 ?>
 ]]>
 </programlisting>
-<para>Le template pour afficher tous les autres éléments du tableau <literal>$arr</literal> comme
+<para>Le template pour afficher tous les autres Ã©lÃ©ments du tableau <literal>$arr</literal> comme
  <literal>step=2</literal></para>
    <programlisting>
 <![CDATA[
@@ -636,11 +636,11 @@ iteration=6 index=15 id=3015<br />
 ]]>
    </screen>
   <para>
-   Un autre exemple d'utilisation de la propriété
-   <parameter>iteration</parameter> est d'afficher un bloc d'en-tête d'un tableau toutes
+   Un autre exemple d'utilisation de la propriÃ©tÃ©
+   <parameter>iteration</parameter> est d'afficher un bloc d'en-tÃªte d'un tableau toutes
    les 5 lignes.
    Utilisez la fonction <link linkend="language.function.if"><varname>{if}</varname></link>
-   avec l'opérateur mod.
+   avec l'opÃ©rateur mod.
   </para>
    <programlisting>
 <![CDATA[
@@ -667,7 +667,7 @@ iteration=6 index=15 id=3015<br />
  <sect2 id="section.property.first">
   <title>.first</title>
   <para>
-   <parameter>first</parameter> est défini à &true; si l'itération courante de
+   <parameter>first</parameter> est dÃ©fini Ã  &true; si l'itÃ©ration courante de
    <varname>{section}</varname> est l'initiale.
   </para>
  </sect2>
@@ -676,15 +676,15 @@ iteration=6 index=15 id=3015<br />
  <sect2 id="section.property.last">
   <title>.last</title>
   <para>
-   <parameter>last</parameter> est défini à &true;
-   si l'itération courante de la section est la dernière.
+   <parameter>last</parameter> est dÃ©fini Ã  &true;
+   si l'itÃ©ration courante de la section est la derniÃ¨re.
   </para>
   <example>
-   <title>Exemple avec les propriétés  <varname>first</varname> et <varname>last</varname></title>
+   <title>Exemple avec les propriÃ©tÃ©s  <varname>first</varname> et <varname>last</varname></title>
    <para>
     Cet exemple boucle sur le tableau <varname>$customers</varname>,
-    affiche un bloc d'en-tête lors de la première itération et, lors de la dernière,
-    affiche un bloc de pied de page. Utilise aussi la propriété
+    affiche un bloc d'en-tÃªte lors de la premiÃ¨re itÃ©ration et, lors de la derniÃ¨re,
+    affiche un bloc de pied de page. Utilise aussi la propriÃ©tÃ©
    <link linkend="section.property.total"><parameter>total</parameter></link>.
    </para>
    <programlisting>
@@ -714,10 +714,10 @@ iteration=6 index=15 id=3015<br />
  <sect2 id="section.property.rownum">
   <title>.rownum</title>
   <para>
-   <parameter>rownum</parameter> contient l'itération courante de la boucle,
-   commençant à un. C'est un alias de <link
+   <parameter>rownum</parameter> contient l'itÃ©ration courante de la boucle,
+   commenÃ§ant Ã  un. C'est un alias de <link
    linkend="section.property.iteration"><parameter>iteration</parameter></link>,
-   ils fonctionnent exactement de la même façon.
+   ils fonctionnent exactement de la mÃªme faÃ§on.
   </para>
  </sect2>
 
@@ -725,10 +725,10 @@ iteration=6 index=15 id=3015<br />
   <title>.loop</title>
   <para>
    <parameter>loop</parameter> contient le dernier index de la boucle de la section.
-   Il peut être utilisé dans ou après la <varname>{section}</varname>.
+   Il peut Ãªtre utilisÃ© dans ou aprÃ¨s la <varname>{section}</varname>.
      </para>
   <example>
-   <title>Exemple avec la propriété <varname>loop</varname></title>
+   <title>Exemple avec la propriÃ©tÃ© <varname>loop</varname></title>
    <programlisting>
 <![CDATA[
 {section name=customer loop=$custid}
@@ -754,14 +754,14 @@ There are 3 customers shown above.
  <sect2 id="section.property.show">
   <title>.show</title>
   <para>
-   <parameter>show</parameter> est utilisé en tant que paramètre à la section et est une valeur booléenne.
-   S'il vaut &false;, la section ne sera pas affichée. S'il y a un
-   <varname>{sectionelse}</varname>, il sera affiché de façon alternative.
+   <parameter>show</parameter> est utilisÃ© en tant que paramÃ¨tre Ã  la section et est une valeur boolÃ©enne.
+   S'il vaut &false;, la section ne sera pas affichÃ©e. S'il y a un
+   <varname>{sectionelse}</varname>, il sera affichÃ© de faÃ§on alternative.
   </para>
   <example>
-   <title>Exemple avec la propriété <varname>show</varname></title>
-   <para>Une valeur booléenne <varname>$show_customer_info</varname> est passée
-    depuis l'application PHP, pour réguler l'affichage ou non de cette section.</para>
+   <title>Exemple avec la propriÃ©tÃ© <varname>show</varname></title>
+   <para>Une valeur boolÃ©enne <varname>$show_customer_info</varname> est passÃ©e
+    depuis l'application PHP, pour rÃ©guler l'affichage ou non de cette section.</para>
    <programlisting>
 <![CDATA[
 {section name=customer loop=$customers show=$show_customer_info}
@@ -793,12 +793,12 @@ the section was shown.
  <sect2 id="section.property.total">
   <title>.total</title>
   <para>
-   <parameter>total</parameter> contient le nombre d'itérations que cette
-   <varname>{section}</varname> bouclera. Il peut être utilisé dans ou après une
+   <parameter>total</parameter> contient le nombre d'itÃ©rations que cette
+   <varname>{section}</varname> bouclera. Il peut Ãªtre utilisÃ© dans ou aprÃ¨s une
    <varname>{section}</varname>.
   </para>
   <example>
-   <title>Exemple avec la propriété <varname>total</varname></title>
+   <title>Exemple avec la propriÃ©tÃ© <varname>total</varname></title>
    <programlisting>
 <![CDATA[
 {section name=customer loop=$custid step=2}

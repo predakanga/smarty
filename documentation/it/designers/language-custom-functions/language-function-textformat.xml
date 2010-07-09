@@ -81,14 +81,14 @@
                 </tgroup>
             </informaltable>
 			<para>
-			textformat è una funzione di blocco usata per formattare il testo.
+			textformat Ã¨ una funzione di blocco usata per formattare il testo.
 			Fondamentalmente rimuove spazi e caratteri speciali, e formatta
 			i paragrafi spezzando le righe ad una certa lunghezza ed inserendo
 			dei rientri.
 			</para>
 			<para>
 			Potete impostare i parametri esplicitamente oppure usare uno
-			stile predefinito. Attualmente "email" è l'unico stile disponibile.
+			stile predefinito. Attualmente "email" Ã¨ l'unico stile disponibile.
 			</para>
 <example>
 <title>textformat</title>

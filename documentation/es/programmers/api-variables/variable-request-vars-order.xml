@@ -7,7 +7,7 @@
       similar al variables_order en el php.ini
       </para>
  <para>
- Ver también <link linkend="language.variables.smarty">$smarty.request</link>
+ Ver tambiÃ©n <link linkend="language.variables.smarty">$smarty.request</link>
  y <link linkend="variable.request.use.auto.globals">$request_use_auto_globals</link>.
  </para>
 

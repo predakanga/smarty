@@ -6,7 +6,7 @@
   <refpurpose>Retorna true si hay cache valido para ese template</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>DescripciÛn </title>
+  <title>Descripci√≥n </title>
   <methodsynopsis>
    <type>bool</type><methodname>is_cached</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
@@ -15,8 +15,8 @@
   </methodsynopsis>
   <para>
    Esto solamente funciona si <link linkend="variable.caching">
-   caching</link> est· asignado a true.
-  ver tambiÈn <link linkend="caching">caching section</link>.
+   caching</link> est√° asignado a true.
+  ver tambi√©n <link linkend="caching">caching section</link>.
   </para>
   <example>
    <title>is_cached()</title>
@@ -35,8 +35,8 @@ $smarty->display("index.tpl");
    </programlisting>
   </example>
   <para>
-   Usted tambiÈn puede pasar un identificador de $cache como un 
-   segundo par·metro opcional en el caso que usted quiera 
+   Usted tambi√©n puede pasar un identificador de $cache como un 
+   segundo par√°metro opcional en el caso que usted quiera 
    <link linkend="caching.multiple.caches">multiples caches</link> 
    para el template dado.
   </para>
@@ -70,7 +70,7 @@ $smarty->display("index.tpl", "FrontPage");
 
 
   <note>
-  <title>Nota tÈcnica</title>
+  <title>Nota t√©cnica</title>
   <para>
    Si <literal>is_cached</literal> retorna true el carga actualmente 
    la salida del cache y lo guarda internamente. cualquier subsecuente
@@ -86,7 +86,7 @@ $smarty->display("index.tpl", "FrontPage");
   </para>
   </note>
     <para>
-    Ver tambiÈn 
+    Ver tambi√©n 
     <link linkend="api.clear.cache">clear_cache()</link>,
     <link linkend="api.clear.all.cache">clear_all_cache()</link>,
     y 

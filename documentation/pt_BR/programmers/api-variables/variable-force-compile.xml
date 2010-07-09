@@ -4,11 +4,11 @@
 <sect1 id="variable.force.compile">
       <title>$force_compile</title>
       <para>
-       Isso forÁa Smarty para (re)compilar templates a cada requisiÁ„o.
-       Essa configuraÁ„o sobreescreve $compile_check. Por padr„o
-       isso est· desabilitado. Isso È ˙til para desenvolvimento e debug.
-       Isso nunca deve ser usado em ambiente de produÁ„o. Se caching
-       est· habilitado, os arquivo(s) de cache ser„o regerados ‡ todo momento.
+       Isso for√ßa Smarty para (re)compilar templates a cada requisi√ß√£o.
+       Essa configura√ß√£o sobreescreve $compile_check. Por padr√£o
+       isso est√° desabilitado. Isso √© √∫til para desenvolvimento e debug.
+       Isso nunca deve ser usado em ambiente de produ√ß√£o. Se caching
+       est√° habilitado, os arquivo(s) de cache ser√£o regerados √† todo momento.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

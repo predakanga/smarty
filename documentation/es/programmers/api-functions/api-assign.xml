@@ -6,7 +6,7 @@
   <refpurpose>pasando valores para el template</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>assign</methodname>
    <methodparam><type>mixed</type><parameter>var</parameter></methodparam>
@@ -61,7 +61,7 @@ $smarty->assign('contact', $db->getRow($sql));
   </para>
 
   <para>
- Vea también <link linkend="api.assign.by.ref">assign_by_ref()</link>,
+ Vea tambiÃ©n <link linkend="api.assign.by.ref">assign_by_ref()</link>,
  <link linkend="api.get.template.vars">get_template_vars()</link>,
  <link linkend="api.clear.assign">clear_assign()</link>,
  <link linkend="api.append">append()</link>

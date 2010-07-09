@@ -20,15 +20,15 @@
   </para>
   <para>
    Il parametro <parameter>function</parameter>, contenente la funzione
-   callback, può avere uno dei seguenti valori: (a) una stringa
+   callback, puÃ² avere uno dei seguenti valori: (a) una stringa
    contenente il nome della funzione (b) un array nella forma
    <literal>array(&amp;$oggetto, $metodo)</literal>, dove
-   <literal>&amp;$oggetto</literal> è il riferimento ad un
-   oggetto e <literal>$metodo</literal> è una stringa contenente
+   <literal>&amp;$oggetto</literal> Ã¨ il riferimento ad un
+   oggetto e <literal>$metodo</literal> Ã¨ una stringa contenente
    il nome di un metodo (c) un array nella forma
    <literal>array(&amp;$classe, $metodo)</literal> dove
-   <literal>$classe</literal> è un nome di classe e
-   <literal>$metodo</literal> è un metodo statico della
+   <literal>$classe</literal> Ã¨ un nome di classe e
+   <literal>$metodo</literal> Ã¨ un metodo statico della
    classe.
   </para>
  </refsect1>

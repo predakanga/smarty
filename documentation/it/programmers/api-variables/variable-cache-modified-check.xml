@@ -3,9 +3,9 @@
      <sect1 id="variable.cache.modified.check">
       <title>$cache_modified_check</title>
       <para>
-       Se Ë impostato a true, Smarty rispetter‡ l'header If-Modified-Since
-       spedito dal client. Se il timestamp del file in cache non Ë
-       cambiato dall'ultima visita, verr‡ inviato un header 
+       Se √® impostato a true, Smarty rispetter√† l'header If-Modified-Since
+       spedito dal client. Se il timestamp del file in cache non √®
+       cambiato dall'ultima visita, verr√† inviato un header 
        "304 Not Modified" invece del contenuto. Questo funziona solo sul
        contenuto in cache senza tag <command>insert</command>.
       </para>

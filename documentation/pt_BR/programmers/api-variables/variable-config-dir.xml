@@ -4,15 +4,15 @@
 <sect1 id="variable.config.dir">
       <title>$config_dir</title>
       <para>
-       Este È o diretÛrio usado para armazenar arquivos de configuraÁ„o usados nos
-       templates. O padr„o È "./configs", significando que isso ir·
-       olhar para o diretÛrio de templates no mesmo diretÛrio que est· executando 
+       Este √© o diret√≥rio usado para armazenar arquivos de configura√ß√£o usados nos
+       templates. O padr√£o √© "./configs", significando que isso ir√°
+       olhar para o diret√≥rio de templates no mesmo diret√≥rio que est√° executando 
        o script PHP.
       </para>
 	 <note>
-	 <title>Notas TÈcnicas</title>
+	 <title>Notas T√©cnicas</title>
 	 <para>
-          N„o È recomendado colocar este diretÛrio sob um diretÛrio 
+          N√£o √© recomendado colocar este diret√≥rio sob um diret√≥rio 
 	  document root do seu webserver.
       </para>
 	 </note>

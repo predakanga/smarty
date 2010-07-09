@@ -10,7 +10,7 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-				Isso limpa o valor de uma vari·vel fixada. Isso
+				Isso limpa o valor de uma vari√°vel fixada. Isso
 				pode ser um valor simples, ou um array de valores.
 			</para>
 <example>

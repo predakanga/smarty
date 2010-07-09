@@ -5,18 +5,18 @@
 <sect1 id="variable.error.reporting">
  <title>$error_reporting</title>
  <para>
-  Lorsque cette valeur est configurÈe ‡ une valeur non nulle,
-  sa valeur est utilisÈe comme le
+  Lorsque cette valeur est configur√©e √† une valeur non nulle,
+  sa valeur est utilis√©e comme le
   <ulink url="&url.php-manual;error_reporting"><varname>error_reporting</varname></ulink>-level
-  de PHP ‡ l'intÈrieur de <link linkend="api.display"><varname>display()</varname></link>
+  de PHP √† l'int√©rieur de <link linkend="api.display"><varname>display()</varname></link>
   et <link linkend="api.fetch"><varname>fetch()</varname></link>. Lorsque le <link
-  linkend="chapter.debugging.console">dÈboguage</link>
-  est ignorÈ, cette valeur est ignorÈe et error-level est non-modifiÈ.
+  linkend="chapter.debugging.console">d√©boguage</link>
+  est ignor√©, cette valeur est ignor√©e et error-level est non-modifi√©.
  </para>
  <para>
   Voir aussi
   <link linkend="api.trigger.error"><varname>trigger_error()</varname></link>,
-  le <link linkend="chapter.debugging.console">dÈbogage</link> et
+  le <link linkend="chapter.debugging.console">d√©bogage</link> et
   <link linkend="troubleshooting">Troubleshooting</link>.
  </para>
 </sect1>

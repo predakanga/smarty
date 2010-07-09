@@ -7,7 +7,7 @@
 			 racchiudendole fra due simboli cancelletto (#), oppure attraverso
 			 la variabile <link
 			 linkend="language.variables.smarty.config">$smarty.config</link>.
-			 La seconda sintassi è utile per includerle in valori di attributi
+			 La seconda sintassi Ã¨ utile per includerle in valori di attributi
 			 indicati fra virgolette.
 			</para>
    <example>
@@ -65,7 +65,7 @@ rowBgColor = "#cccccc"
 ]]>
     </programlisting>
     <para>
-     questo è l'output prodotto da entrambi gli esempi:
+     questo Ã¨ l'output prodotto da entrambi gli esempi:
     </para>
     <screen>
 <![CDATA[
@@ -87,7 +87,7 @@ rowBgColor = "#cccccc"
 			<para>
 			Le variabili dei file di configurazione non possono essere usate
 			fino a dopo che sono state caricate dal file che le contiene.
-			Questa procedura viene spiegata più avanti in questo documento, 
+			Questa procedura viene spiegata piÃ¹ avanti in questo documento, 
 			in <command>config_load</command>.
 			</para>
 </sect1>

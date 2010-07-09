@@ -5,13 +5,13 @@
 <sect1 id="variable.config.read.hidden">
  <title>$config_read_hidden</title>
  <para>
-  Si cette variable est à &true;, les sections cachées (dont les noms
+  Si cette variable est Ã  &true;, les sections cachÃ©es (dont les noms
   commencent par un point) dans les <link linkend="config.files">fichiers de configuration</link>
-  peuvent être lues depuis les templates. On laisse habituellement celà à &false;, de
-  cette façon vous pouvez stocker des données sensibles dans les fichiers
-  de configuration, par exemple des paramètres de base de données,
-  sans vous soucier de la façon dont les templates les chargent.
-  Mise à &false; par défaut.
+  peuvent Ãªtre lues depuis les templates. On laisse habituellement celÃ  Ã  &false;, de
+  cette faÃ§on vous pouvez stocker des donnÃ©es sensibles dans les fichiers
+  de configuration, par exemple des paramÃ¨tres de base de donnÃ©es,
+  sans vous soucier de la faÃ§on dont les templates les chargent.
+  Mise Ã  &false; par dÃ©faut.
  </para>
 </sect1>
 

@@ -31,15 +31,15 @@
        <entry>stringa</entry>
        <entry>No</entry>
        <entry>(uno spazio)</entry>
-       <entry>Questo Ë il carattere usato per l'indentazione.</entry>
+       <entry>Questo √® il carattere usato per l'indentazione.</entry>
       </row>
      </tbody>
     </tgroup>
   </informaltable>
   <para>
    Questo modificatore effettua un'indentazione della stringa ad ogni riga, per
-   default di 4 caratteri. Come parametro opzionale si puÚ specificare di quanti
-   caratteri deve essere l'indentazione. Si puÚ indicare anche, come secondo 
+   default di 4 caratteri. Come parametro opzionale si pu√≤ specificare di quanti
+   caratteri deve essere l'indentazione. Si pu√≤ indicare anche, come secondo 
    parametro opzionale, quale carattere usare per l'indentazione (usare "\t"
    per il tabulatore).
   </para>
@@ -59,7 +59,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -73,7 +73,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

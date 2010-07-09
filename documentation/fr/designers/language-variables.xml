@@ -5,17 +5,17 @@
 <chapter id="language.variables">
  <title>Variables</title>
  <para>
-  Smarty possède différents types de variables. Le type de ces variables dépend
-  du symbole qui les préfixe, ou des symboles qui les entourent.
+  Smarty possÃ¨de diffÃ©rents types de variables. Le type de ces variables dÃ©pend
+  du symbole qui les prÃ©fixe, ou des symboles qui les entourent.
  </para>
  <para>
-  Les variables de Smarty peuvent être soit affichées directement, soit utilisées
+  Les variables de Smarty peuvent Ãªtre soit affichÃ©es directement, soit utilisÃ©es
   comme <link linkend="language.syntax.attributes">arguments</link> pour les 
   <link linkend="language.syntax.functions">fonctions</link>
-  et <link linkend="language.modifiers">modificateurs</link>, à l'intérieur d'expressions
+  et <link linkend="language.modifiers">modificateurs</link>, Ã  l'intÃ©rieur d'expressions
   conditionnelles, etc.
   Pour afficher une variable, il suffit de l'entourer par des
-  <link linkend="variable.left.delimiter">délimiteurs</link> de
+  <link linkend="variable.left.delimiter">dÃ©limiteurs</link> de
   telle sorte qu'elle soit la seule chose qu'ils contiennent.
   <example>
    <title>Exemple de variables</title>
@@ -31,9 +31,9 @@
 </example>
 <note>
  <title>Astuce</title>
- <para>La façon de la simple d'analyser les variables Smarty est
+ <para>La faÃ§on de la simple d'analyser les variables Smarty est
   d'utiliser la
-  <link linkend="chapter.debugging.console">console de débogage</link>.
+  <link linkend="chapter.debugging.console">console de dÃ©bogage</link>.
  </para>
 </note>
  </para>

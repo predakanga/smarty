@@ -14,14 +14,14 @@
     un arreglo asociativo.
     </para>
     <para>
-     La salida(valor de retorno) de la función será substituida en
-     el lugar de la etiqueta de la función en el template (la función
+     La salida(valor de retorno) de la funciÃ³n serÃ¡ substituida en
+     el lugar de la etiqueta de la funciÃ³n en el template (la funciÃ³n
      <function>fetch</function>, por ejemplo).
-     Alternativamente, la función puede simplemente ejecutar alguna 
-     otra tarea sin tener alguna salida (la función <function>assign</function>).
+     Alternativamente, la funciÃ³n puede simplemente ejecutar alguna 
+     otra tarea sin tener alguna salida (la funciÃ³n <function>assign</function>).
     </para>
     <para>
-     Si la función necesita pasar valores a algunas variables del template 
+     Si la funciÃ³n necesita pasar valores a algunas variables del template 
      o utilizar alguna otra funcionalidad del Smarty, esta puede usar el 
      objeto <parameter>$smarty</parameter> alimentandolo para hacer eso.
     </para>
@@ -32,7 +32,7 @@
     </para>
     <para>
      <example>
-      <title>Función de plugin con salida</title>
+      <title>FunciÃ³n de plugin con salida</title>
       <programlisting role="php">
 <![CDATA[
 <?php
@@ -71,7 +71,7 @@ Answer: {eightball}.
     </programlisting>
     <para>
      <example>
-      <title>Función de plugin sin salida</title>
+      <title>FunciÃ³n de plugin sin salida</title>
       <programlisting role="php">
 <![CDATA[
 <?php

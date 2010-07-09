@@ -4,15 +4,15 @@
 
 <sect1 id="plugins.resources"><title>Ressources</title>
  <para>
-  Les plugins ressources sont un moyen générique de fournir des sources
-  de templates ou des composants de scripts PHP à Smarty. Quelques exemples
-  de ressources : bases de données, LDAP, mémoire partagée, sockets, etc.
+  Les plugins ressources sont un moyen gÃ©nÃ©rique de fournir des sources
+  de templates ou des composants de scripts PHP Ã  Smarty. Quelques exemples
+  de ressources : bases de donnÃ©es, LDAP, mÃ©moire partagÃ©e, sockets, etc.
  </para>
  <para>
-  Il y au total quatre fonctions qui ont besoin d'être enregistrées pour
-  chaque type de ressource. Chaque fonction reçoit le nom de la ressource demandée
-  comme premier paramètre et l'objet Smarty comme dernier paramètre.
-  Les autres paramètres dépendent de la fonction.
+  Il y au total quatre fonctions qui ont besoin d'Ãªtre enregistrÃ©es pour
+  chaque type de ressource. Chaque fonction reÃ§oit le nom de la ressource demandÃ©e
+  comme premier paramÃ¨tre et l'objet Smarty comme dernier paramÃ¨tre.
+  Les autres paramÃ¨tres dÃ©pendent de la fonction.
  </para>
  <funcsynopsis>
   <funcprototype>
@@ -42,37 +42,37 @@
  <itemizedlist>
   <listitem>
    <para>
-    La première fonction est supposée récupérer la ressource. Son second
-    paramètre est une variable passée par référence où le résultat doit être
-    stocké. La fonction est supposée retourner &true; si
-    elle réussit à récupérer la ressource et &false; sinon.
+    La premiÃ¨re fonction est supposÃ©e rÃ©cupÃ©rer la ressource. Son second
+    paramÃ¨tre est une variable passÃ©e par rÃ©fÃ©rence oÃ¹ le rÃ©sultat doit Ãªtre
+    stockÃ©. La fonction est supposÃ©e retourner &true; si
+    elle rÃ©ussit Ã  rÃ©cupÃ©rer la ressource et &false; sinon.
    </para></listitem>
 
   <listitem><para>
-    La seconde fonction est supposée récupérer la date de dernière modification
-    de la ressource demandée (comme un timestamp UNIX). Le second paramètre
-    est une variable passée par référence dans laquelle la date doit
-    être stockée. La fonction est supposée renvoyer &true; si elle
-    réussit à récupérer la date et &false; sinon.
+    La seconde fonction est supposÃ©e rÃ©cupÃ©rer la date de derniÃ¨re modification
+    de la ressource demandÃ©e (comme un timestamp UNIX). Le second paramÃ¨tre
+    est une variable passÃ©e par rÃ©fÃ©rence dans laquelle la date doit
+    Ãªtre stockÃ©e. La fonction est supposÃ©e renvoyer &true; si elle
+    rÃ©ussit Ã  rÃ©cupÃ©rer la date et &false; sinon.
    </para></listitem>
 
   <listitem><para>
-    La troisième fonction est supposée retourner &true;
-    ou &false; selon si la ressource demandée est sûre
-    ou non. La fonction est utilisée seulement pour les ressources templates
-    mais doit tout de même être définie.
+    La troisiÃ¨me fonction est supposÃ©e retourner &true;
+    ou &false; selon si la ressource demandÃ©e est sÃ»re
+    ou non. La fonction est utilisÃ©e seulement pour les ressources templates
+    mais doit tout de mÃªme Ãªtre dÃ©finie.
    </para></listitem>
 
   <listitem><para>
-    La quatrième fonction est supposée retourner &true;
+    La quatriÃ¨me fonction est supposÃ©e retourner &true;
     ou &false; selon si l'on peut faire confiance ou
-    non à la ressource demandée. Cette fonction est utilisée seulement
-    pour les composants de scripts PHP demandés par les balises
+    non Ã  la ressource demandÃ©e. Cette fonction est utilisÃ©e seulement
+    pour les composants de scripts PHP demandÃ©s par les balises
     <link linkend="language.function.include.php">
      <varname>{include_php}</varname></link> ou
     <link linkend="language.function.insert"><varname>{insert}</varname></link>
     ayant un attribut <parameter>src</parameter>. Quoiqu'il en soit,
-    elle doit être définie pour les ressources templates.
+    elle doit Ãªtre dÃ©finie pour les ressources templates.
    </para></listitem>
  </itemizedlist>
 
@@ -87,12 +87,12 @@
 * Fichier :  resource.db.php
 * Type :     ressource
 * Nom :      db
-* Rôle :     Récupére des templates depuis une base de données
+* RÃ´le :     RÃ©cupÃ©re des templates depuis une base de donnÃ©es
 * -------------------------------------------------------------
 */
 function smarty_resource_db_source($tpl_name, &$tpl_source, &$smarty)
 {
-   // fait des requêtes BD pour récupérer votre template
+   // fait des requÃªtes BD pour rÃ©cupÃ©rer votre template
    // et remplir $tpl_source
    $sql = new SQL;
    $sql->query("select tpl_source
@@ -108,7 +108,7 @@ function smarty_resource_db_source($tpl_name, &$tpl_source, &$smarty)
 
 function smarty_resource_db_timestamp($tpl_name, &$tpl_timestamp, &$smarty)
 {
-   // fait des requêtes BD pour remplir $tpl_timestamp
+   // fait des requÃªtes BD pour remplir $tpl_timestamp
    $sql = new SQL;
    $sql->query("select tpl_timestamp
    from my_table
@@ -129,7 +129,7 @@ function smarty_resource_db_secure($tpl_name, &$smarty)
 
 function smarty_resource_db_trusted($tpl_name, &$smarty)
 {
-   // inutilisée pour les templates
+   // inutilisÃ©e pour les templates
 }
 ?>
 ]]>

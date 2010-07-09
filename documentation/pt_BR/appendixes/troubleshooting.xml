@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- EN-Revision: 1.4 Maintainer: thomasgm Status: ready -->
 <chapter id="troubleshooting">
-   <title>Localização de Erros</title>
+   <title>LocalizaÃ§Ã£o de Erros</title>
    <para></para>
    <sect1 id="smarty.php.errors">
        <title>Erros do Smarty/PHP</title>
        <para>
-      O Smarty pode obter muitos erros, tais como: atributos de tags perdidos ou nomes de variáveis
-      mal formadas. Se isto acontece, você verá um erro similar ao seguir:
+      O Smarty pode obter muitos erros, tais como: atributos de tags perdidos ou nomes de variÃ¡veis
+      mal formadas. Se isto acontece, vocÃª verÃ¡ um erro similar ao seguir:
        </para>
 
 <example>
@@ -21,31 +21,31 @@ Fatal error: Smarty: [in index.tpl line 28]: syntax error: missing section name
 </example>
 
        <para>
-        O Smarty te mostra o nome do template, o número da linha e o erro.
-        Depois disso, o erro consiste do número da linha da classe Smarty em que o erro
+        O Smarty te mostra o nome do template, o nÃºmero da linha e o erro.
+        Depois disso, o erro consiste do nÃºmero da linha da classe Smarty em que o erro
 	ocorreu.
        </para>
        
        <para>
-       Há certos erros que o Smarty não consegue detectar, tais como uma tag de fechamento errada. 
+       HÃ¡ certos erros que o Smarty nÃ£o consegue detectar, tais como uma tag de fechamento errada. 
 	   Estes tipos de erro geralmente acabam gerando erros em tempo de processamento do interpretador 
 	   de erros do PHP.
        </para>
 
 <example>
-<title>Erros de análise do PHP</title>
+<title>Erros de anÃ¡lise do PHP</title>
 <programlisting>
 Parse error: parse error in /path/to/smarty/templates_c/index.tpl.php on line 75</programlisting>
 </example>
        
        <para>
-        Quando você encontra um erro de análise do PHP, o número da linha do erro corresponderá ao 
-	    script PHP compilado, não o template em si. Normalmente você pode no template localizar o
-	    erro de sintaxe. Aqui algumas coisas para você procurar:
+        Quando vocÃª encontra um erro de anÃ¡lise do PHP, o nÃºmero da linha do erro corresponderÃ¡ ao 
+	    script PHP compilado, nÃ£o o template em si. Normalmente vocÃª pode no template localizar o
+	    erro de sintaxe. Aqui algumas coisas para vocÃª procurar:
         falta de fechamento de tags para <link linkend="language.function.if">{if}{/if}</link> ou
-        <link linkend="language.function.section">{section}{/section}</link>, ou erro de lógica dentro de uma tag {if}.
-        Se você não conseguir encontrar o erro, talvez seja necessário abrir 
-		o arquivo PHP compilado e ir até o número da linha exibido, para saber 
+        <link linkend="language.function.section">{section}{/section}</link>, ou erro de lÃ³gica dentro de uma tag {if}.
+        Se vocÃª nÃ£o conseguir encontrar o erro, talvez seja necessÃ¡rio abrir 
+		o arquivo PHP compilado e ir atÃ© o nÃºmero da linha exibido, para saber 
 		onde se encontra o erro correspondente no template.
        </para>
        

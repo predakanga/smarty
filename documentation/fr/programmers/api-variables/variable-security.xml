@@ -5,42 +5,42 @@
 <sect1 id="variable.security">
  <title>$security</title>
  <para>
-  Cette variable vaut &false; par défaut. La sécurité est de rigueur
-  quand vous n'êtes pas complétement sûr des personnes qui éditent les templates
-  (par ftp par exemple) et que vous voulez réduire le risque que
-  la sécurité du système soit compromise par le langage de template.
-  Activer cette option de sécurité applique les régles suivantes
-  au langage de template, à moins que
+  Cette variable vaut &false; par dÃ©faut. La sÃ©curitÃ© est de rigueur
+  quand vous n'Ãªtes pas complÃ©tement sÃ»r des personnes qui Ã©ditent les templates
+  (par ftp par exemple) et que vous voulez rÃ©duire le risque que
+  la sÃ©curitÃ© du systÃ¨me soit compromise par le langage de template.
+  Activer cette option de sÃ©curitÃ© applique les rÃ©gles suivantes
+  au langage de template, Ã  moins que
   <link linkend="variable.security.settings"><parameter>$security_settings</parameter></link>
-  ne spécifie le contraire :
+  ne spÃ©cifie le contraire :
  </para>
  <itemizedlist>
   <listitem>
    <para>
     Si <link linkend="variable.php.handling"><parameter>$php_handling</parameter></link>
-    est réglée à <constant>SMARTY_PHP_ALLOW</constant>, cela est implicitement
-    changé à <constant>SMARTY_PHP_PASSTHRU</constant>.
+    est rÃ©glÃ©e Ã  <constant>SMARTY_PHP_ALLOW</constant>, cela est implicitement
+    changÃ© Ã  <constant>SMARTY_PHP_PASSTHRU</constant>.
    </para>
   </listitem>
   <listitem>
    <para>
-    Les fonctions PHP ne sont pas autorisées dans les
+    Les fonctions PHP ne sont pas autorisÃ©es dans les
     instructions <link linkend="language.function.if"><varname>{if}</varname></link>,
-    à part celles déclarées dans
+    Ã  part celles dÃ©clarÃ©es dans
     <link linkend="variable.security.settings"><parameter>$security_settings</parameter></link>.
    </para>
   </listitem>
   <listitem>
    <para>
-    Les templates ne peuvent être inclus que depuis
-    des répertoires listés dans le tableau
+    Les templates ne peuvent Ãªtre inclus que depuis
+    des rÃ©pertoires listÃ©s dans le tableau
     <link linkend="variable.secure.dir"><parameter>$secure_dir</parameter></link>.
    </para>
   </listitem>
   <listitem>
    <para>
-    Les fichiers locaux ne peuvent être récupérés que depuis
-    les répertoires listés dans le tableau
+    Les fichiers locaux ne peuvent Ãªtre rÃ©cupÃ©rÃ©s que depuis
+    les rÃ©pertoires listÃ©s dans le tableau
     <link linkend="variable.secure.dir"><parameter>$secure_dir</parameter></link> en
     utilisant <link linkend="language.function.fetch"><varname>{fetch}</varname></link>.
    </para>
@@ -48,13 +48,13 @@
   <listitem>
    <para>
     Les balises <link linkend="language.function.php"><varname>{php}{/php}</varname></link>
-    ne sont pas autorisées.
+    ne sont pas autorisÃ©es.
    </para>
   </listitem>
   <listitem>
    <para>
-    Les fonctions PHP ne sont pas autorisées en tant
-    modificateurs, à part celles spécifiées dans
+    Les fonctions PHP ne sont pas autorisÃ©es en tant
+    modificateurs, Ã  part celles spÃ©cifiÃ©es dans
     <link linkend="variable.security.settings"><parameter>$security_settings</parameter></link>.
    </para>
   </listitem>

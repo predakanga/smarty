@@ -5,17 +5,17 @@
 			<title>if,elseif,else</title>
 			<para>
 			 Comandos {if} no Smarty tem muito da mesma flexibilidade do php,
-			 com algumas caracterÌsticas ‡ mais para o sistema de template. 
+			 com algumas caracter√≠sticas √† mais para o sistema de template. 
 			 Todo <emphasis>if</emphasis> deve ter o seu 
 			<emphasis>/if</emphasis>. <emphasis>else</emphasis> e
-			<emphasis>elseif</emphasis> tambÈm s„o permitidos. Todos os 
-			condicionais do PHP s„o reconhecidos, tais como ||, or, &amp;&amp;, and, etc.
+			<emphasis>elseif</emphasis> tamb√©m s√£o permitidos. Todos os 
+			condicionais do PHP s√£o reconhecidos, tais como ||, or, &amp;&amp;, and, etc.
 			</para>
 
 			<para>
-			 A seguir est· uma lsita dos qualificadores, que devem estar separados dos elementos 
-			 por espaÁo. Note que itens listado entre [conchetes] s„o opcionais. Os equivalentes 
-			 em PHP s„o mostrados quando aplic·veis.
+			 A seguir est√° uma lsita dos qualificadores, que devem estar separados dos elementos 
+			 por espa√ßo. Note que itens listado entre [conchetes] s√£o opcionais. Os equivalentes 
+			 em PHP s√£o mostrados quando aplic√°veis.
 			</para>
             <informaltable frame="all">
                 <tgroup cols="4">
@@ -45,7 +45,7 @@
                         <entry>!=</entry>
                         <entry>ne, neq</entry>
                         <entry>$a neq $b</entry>
-                        <entry>n„o iguais</entry>
+                        <entry>n√£o iguais</entry>
                         <entry>!=</entry>
                     </row>
                     <row>
@@ -66,35 +66,35 @@
                         <entry>&gt;=</entry>
                         <entry>gte, ge</entry>
                         <entry>$a ge $b</entry>
-                        <entry>maior ou igual ‡</entry>
+                        <entry>maior ou igual √†</entry>
                         <entry>&gt;=</entry>
                     </row>
                     <row>
                         <entry>&lt;=</entry>
                         <entry>lte, le</entry>
                         <entry>$a le $b</entry>
-                        <entry>menor ou igual ‡</entry>
+                        <entry>menor ou igual √†</entry>
                         <entry>&lt;=</entry>
                     </row>
                     <row>
                         <entry>!</entry>
                         <entry>not</entry>
                         <entry>not $a</entry>
-                        <entry>negaÁ„o (unary)</entry>
+                        <entry>nega√ß√£o (unary)</entry>
                         <entry>!</entry>
                     </row>
                     <row>
                         <entry>%</entry>
                         <entry>mod</entry>
                         <entry>$a mod $b</entry>
-                        <entry>mÛdulo</entry>
+                        <entry>m√≥dulo</entry>
                         <entry>%</entry>
                     </row>
                     <row>
                         <entry>is [not] div by</entry>
                         <entry></entry>
                         <entry>$a is not div by 4</entry>
-                        <entry>divisÌvel por</entry>
+                        <entry>divis√≠vel por</entry>
                         <entry>$a % $b == 0</entry>
                     </row>
                     <row>
@@ -150,24 +150,24 @@
 	...
 {/if}
 
-{* a seguinte sintaxe n„o ir· funcionar, qualificadores de condiÁ„o
-   devem estar separados dos elementos em torno por espaÁos *}
+{* a seguinte sintaxe n√£o ir√° funcionar, qualificadores de condi√ß√£o
+   devem estar separados dos elementos em torno por espa√ßos *}
 {if $name=="Fred" || $name=="Wilma"}
 	...
 {/if}
 
 
-{* parenteses s„o permitidos *}
+{* parenteses s√£o permitidos *}
 {if ( $amount < 0 or $amount > 1000 ) and $volume >= #minVolAmt#}
 	...
 {/if}
 
-{* vocÍ pode tambÈm colocar funÁıes php *}
+{* voc√™ pode tamb√©m colocar fun√ß√µes php *}
 {if count($var) gt 0}
 	...
 {/if}
 
-{* testa se o valor È par ou impar *}
+{* testa se o valor √© par ou impar *}
 {if $var is even}
 	...
 {/if}
@@ -178,7 +178,7 @@
 	...
 {/if}
 
-{* verifica se a vari·vel È divisÌvel por 4 *}
+{* verifica se a vari√°vel √© divis√≠vel por 4 *}
 {if $var is div by 4}
 	...
 {/if}

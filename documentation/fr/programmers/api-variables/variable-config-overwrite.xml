@@ -5,12 +5,12 @@
 <sect1 id="variable.config.overwrite">
  <title>$config_overwrite</title>
  <para>
-  Si cette variable est à &true; (par défaut), les variables lues dans les
+  Si cette variable est Ã  &true; (par dÃ©faut), les variables lues dans les
   <link linkend="config.files">fichiers de configuration</link>
-  peuvent s'écraser entre elles. Sinon les variables
-  seront mises dans un tableau. Très utile si vous voulez stocker
-  des tableaux de données dans des fichiers de configuration, listez
-  simplement chaque élément plusieurs fois.
+  peuvent s'Ã©craser entre elles. Sinon les variables
+  seront mises dans un tableau. TrÃ¨s utile si vous voulez stocker
+  des tableaux de donnÃ©es dans des fichiers de configuration, listez
+  simplement chaque Ã©lÃ©ment plusieurs fois.
  </para>
 
  <example>

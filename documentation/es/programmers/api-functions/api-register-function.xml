@@ -3,10 +3,10 @@
 <refentry id="api.register.function">
  <refnamediv>
   <refname>register_function()</refname>
-  <refpurpose>Registra dinamicamente un plugin de funci髇 para un template</refpurpose>
+  <refpurpose>Registra dinamicamente un plugin de funci贸n para un template</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripci髇</title>
+  <title>Descripci贸n</title>
   <methodsynopsis>
    <type>void</type><methodname>register_function</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
@@ -15,8 +15,8 @@
    <methodparam choice="opt"><type>mixed</type><parameter>cache_attrs</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Pase en el template el nombre de la funci髇, seguido 
-   por el nombre de la funci髇 PHP que implementa esto.
+   Pase en el template el nombre de la funci贸n, seguido 
+   por el nombre de la funci贸n PHP que implementa esto.
   </para>
   <para>
    La llamada a la funcion-php <parameter>impl</parameter> puede ser:
@@ -24,14 +24,14 @@
    <orderedlist numeration="loweralpha">
    <listitem>
      <para>
-        a una cadena conteniendo el nombre de la funci髇 o
+        a una cadena conteniendo el nombre de la funci贸n o
      </para>
    </listitem><listitem>
      <para>
        un arreglo con la forma  
      <literal>array(&amp;$object, $method)</literal> con
      <literal>&amp;$object</literal> siendo una referencia para un objeto y
-     <literal>$method</literal> siendo una cadena conteniendo el nombre del m閠odo 
+     <literal>$method</literal> siendo una cadena conteniendo el nombre del m茅todo 
      </para>
    </listitem><listitem>
     <para>
@@ -81,7 +81,7 @@ function print_current_date($params, &$smarty)
 </example>
 
 <para>
-Ver tambi閚 <link linkend="api.unregister.function">unregister_function()</link>
+Ver tambi茅n <link linkend="api.unregister.function">unregister_function()</link>
 y <link linkend="plugins.functions">Plugin functions</link>.
 </para>
 

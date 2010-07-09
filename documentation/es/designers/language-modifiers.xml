@@ -6,8 +6,8 @@
   Los modificadores de variables pueden ser aplicados a variables, 
   funciones habituales o cadenas. Para aplicar un modificador, especifique 
   el valor seguido por <literal>|</literal>(pipe) y el nombre del modificador.
-  Un modificador necesita par·metros adicionales que afetan en su funcionamento.
-  Estos par·metros siguen al nombre del modificador y son separados por
+  Un modificador necesita par√°metros adicionales que afetan en su funcionamento.
+  Estos par√°metros siguen al nombre del modificador y son separados por
   <literal>:</literal> (dos puntos).
  </para>
  <example>
@@ -40,26 +40,26 @@
   una variable, el modificador va a ser aplicado en cada uno de los 
   valores de la matriz.  Si usted realmente quisiera que el modificador 
   funcionara en una matriz entera, debe colocar el simbolo
-  <literal>@</literal> antes del nombre del modificador, asÌ como:
-  <literal>{$articleTitle|@count}</literal> (esto mostrara el n˙mero de 
+  <literal>@</literal> antes del nombre del modificador, as√≠ como:
+  <literal>{$articleTitle|@count}</literal> (esto mostrara el n√∫mero de 
   elementos de la matriz $articleTitle.)
  </para>
  <para>
-  Los modificadores pueden ser cargados autom·ticamente a partir de su
-  <link linkend="variable.plugins.dir">$plugins_dir</link> (vea tambiÈn:
+  Los modificadores pueden ser cargados autom√°ticamente a partir de su
+  <link linkend="variable.plugins.dir">$plugins_dir</link> (vea tambi√©n:
   <link linkend="plugins.naming.conventions">Naming Conventions</link>) 
   o pueden ser registrados explicitamente (vea: 
   <link linkend="api.register.modifier">register_modifier</link>). 
   Adicionalmente, todas las funciones de php pueden ser
   utilizadas como modificadores implicitamente. 
   (El ejemplo <literal>@count</literal> de arriba usa actualmente la
-  funciÛn count de php y no un modificador de Smarty).
-  Usar funciones de php como modificadores tiene dos pequeÒos problemas:
-  Primero, algunas veces al ordenar los par·metros de una funciÛn
+  funci√≥n count de php y no un modificador de Smarty).
+  Usar funciones de php como modificadores tiene dos peque√±os problemas:
+  Primero, algunas veces al ordenar los par√°metros de una funci√≥n
   esto no es aconsejable (<literal>{"%2.f"|sprintf:$float}</literal>
   actualmente funciona, pero existe algo mas intuitivo 
   Por ejemplo: <literal>{$float|string_format:"%2.f"}</literal>
-  que es proporcionado con la distribuciÛn de Smarty).
+  que es proporcionado con la distribuci√≥n de Smarty).
   Segundo: con <link linkend="variable.security">$security</link> activado, 
   todas las funciones de php que sean utilizadas como modificadores deben 
   ser declaradas como variables de una matriz 
@@ -67,7 +67,7 @@
   </link>.
  </para>
  <para>
-  Ver tambiÈn
+  Ver tambi√©n
   <link linkend="api.register.modifier">register_modifier()</link>,
   <link linkend="api.register.function">register_function()</link>,
   <link linkend="plugins">Extending Smarty with plugins</link>

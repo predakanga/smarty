@@ -11,18 +11,18 @@
        </funcprototype>
       </funcsynopsis>
       <para>
-	   Isso é usado para fixar valores para o template por referência ao invés de fazer uma cópia.
-	   Veja o manual do PHP na parte sobre referência de variáveis para uma explanação mais detalhada.
+	   Isso Ã© usado para fixar valores para o template por referÃªncia ao invÃ©s de fazer uma cÃ³pia.
+	   Veja o manual do PHP na parte sobre referÃªncia de variÃ¡veis para uma explanaÃ§Ã£o mais detalhada.
       </para>
 	  <note>
-	  <title>Notas Técnicas</title>
+	  <title>Notas TÃ©cnicas</title>
 	  <para>
-	   Isso é usado para fixar valores para o template por referência.
-	   Se você fixar uma variável por referência e então alterar o valor dela,
-	   o valor fixado enxergará o valor alterado também.
-	   Para objetos, assign_by_ref() também restringe uma cópia de objetos fixados
-	   em memória.
-	   Veja o manual do php em refereciando variáveis para uma melhor explanação.   
+	   Isso Ã© usado para fixar valores para o template por referÃªncia.
+	   Se vocÃª fixar uma variÃ¡vel por referÃªncia e entÃ£o alterar o valor dela,
+	   o valor fixado enxergarÃ¡ o valor alterado tambÃ©m.
+	   Para objetos, assign_by_ref() tambÃ©m restringe uma cÃ³pia de objetos fixados
+	   em memÃ³ria.
+	   Veja o manual do php em refereciando variÃ¡veis para uma melhor explanaÃ§Ã£o.   
 	  </para>
 	  </note>
       <example>

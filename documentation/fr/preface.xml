@@ -2,80 +2,80 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.3 Maintainer: gerald Status: ready -->
 <preface id="preface">
- <title>Préface</title>
+ <title>PrÃ©face</title>
  <para>
- "Comment rendre mes scripts PHP indépendants de la présentation ?".
-  Voici sans doute la question la plus posée sur la mailing list
-  PHP. Alors que PHP est étiqueté "langage de script
-  pour HTML", on se rend vite compte, après quelques projets qui mélangent
-  sans complexe HTML et PHP, que la séparation entre la forme et
+ "Comment rendre mes scripts PHP indÃ©pendants de la prÃ©sentation ?".
+  Voici sans doute la question la plus posÃ©e sur la mailing list
+  PHP. Alors que PHP est Ã©tiquetÃ© "langage de script
+  pour HTML", on se rend vite compte, aprÃ¨s quelques projets qui mÃ©langent
+  sans complexe HTML et PHP, que la sÃ©paration entre la forme et
   le contenu, c'est bien [TM]. De plus, dans de nombreuses entreprises
-  les rôles du designer et du programmeur sont distincts. La solution template
+  les rÃ´les du designer et du programmeur sont distincts. La solution template
   coule donc de source.
  </para>
  <para>
-  Dans notre entreprise par exemple, le développement d'une application
-  se fait de la manière suivante : une fois le cahier des charges écrit,
-  le designer réalise une maquette, et donne ses interfaces
-  au programmeur. Le programmeur implémente les fonctionnalités applicatives
+  Dans notre entreprise par exemple, le dÃ©veloppement d'une application
+  se fait de la maniÃ¨re suivante : une fois le cahier des charges Ã©crit,
+  le designer rÃ©alise une maquette, et donne ses interfaces
+  au programmeur. Le programmeur implÃ©mente les fonctionnalitÃ©s applicatives
   et utilise les maquettes pour faire des squelettes de templates. Le projet
-  est alors passé au designer HTML/responsable de la mise en page qui amène les
-  templates jusqu'au faîte de leur gloire. Il est possible que le projet fasse
-  une fois ou deux des allers/retours entre la programmation et la présentation.
-  En conséquence, il est important de disposer d'un bon système de template. Les
-  programmeurs ne veulent pas avoir à faire au HTML, et ne veulent pas non plus
+  est alors passÃ© au designer HTML/responsable de la mise en page qui amÃ¨ne les
+  templates jusqu'au faÃ®te de leur gloire. Il est possible que le projet fasse
+  une fois ou deux des allers/retours entre la programmation et la prÃ©sentation.
+  En consÃ©quence, il est important de disposer d'un bon systÃ¨me de template. Les
+  programmeurs ne veulent pas avoir Ã  faire au HTML, et ne veulent pas non plus
   que les designers HTML bidouillent le code PHP. Les designers ont besoin d'outils
   comme des fichiers de configuration, des blocs dynamiques et d'autres solutions
-  pour répondre à des problématiques d'interface, mais ne veulent pas
-  nécessairement avoir à faire à toutes les subtilités de la programmation PHP.
+  pour rÃ©pondre Ã  des problÃ©matiques d'interface, mais ne veulent pas
+  nÃ©cessairement avoir Ã  faire Ã  toutes les subtilitÃ©s de la programmation PHP.
  </para>
  <para>
   Un rapide tour d'horizon des solutions type template aujourd'hui et
-  l'on s'aperçoit que la plupart d'entre elles n'offrent que des moyens
+  l'on s'aperÃ§oit que la plupart d'entre elles n'offrent que des moyens
   rudimentaires pour substituer des variables dans des templates, ainsi que des
-  fonctionnalités limitées de blocs dynamiques. Cependant nous avons
+  fonctionnalitÃ©s limitÃ©es de blocs dynamiques. Cependant nous avons
   besoin d'un peu plus. Nous ne voulons pas que les programmeurs
-  s'occupent de la présentation HTML du TOUT, mais celà est pratiquement
-  inévitable. Par exemple, si un designer veut des couleurs d'arrière plan
-  différentes pour alterner entre différents blocs dynamiques, il est nécessaire
+  s'occupent de la prÃ©sentation HTML du TOUT, mais celÃ  est pratiquement
+  inÃ©vitable. Par exemple, si un designer veut des couleurs d'arriÃ¨re plan
+  diffÃ©rentes pour alterner entre diffÃ©rents blocs dynamiques, il est nÃ©cessaire
   que ce dernier travaille avec le programmeur. Nous avons aussi besoin que les
   designers soient capables de travailler avec leurs propres fichiers
-  de configuration pour y récupérer des variables, exploitables dans leurs
+  de configuration pour y rÃ©cupÃ©rer des variables, exploitables dans leurs
   templates. Et la liste est longue.
  </para>
  <para>
-  Fin 1999, nous avons commencé à écrire une spécification pour un moteur de
-  template. Une fois la spécification terminée,
-  nous avons commencé à travailler sur un moteur de template écrit
-  en C qui pourrait, avec un peu de chance, être inclus à PHP.
-  Non seulement nous avons rencontré des problèmes techniques complexes,
-  mais nous avons participés à de nombreux débats sur ce que devait
-  et ce que ne devait pas faire un moteur de template. De cette expérience nous avons
-  décidé qu'un moteur de template se devait d'être écrit sous la forme d'une
-  classe PHP, afin que quiconque puisse l'utiliser à sa convenance. Nous
-  avons donc réalisé un moteur de template qui se contentait de faire celà,
+  Fin 1999, nous avons commencÃ© Ã  Ã©crire une spÃ©cification pour un moteur de
+  template. Une fois la spÃ©cification terminÃ©e,
+  nous avons commencÃ© Ã  travailler sur un moteur de template Ã©crit
+  en C qui pourrait, avec un peu de chance, Ãªtre inclus Ã  PHP.
+  Non seulement nous avons rencontrÃ© des problÃ¨mes techniques complexes,
+  mais nous avons participÃ©s Ã  de nombreux dÃ©bats sur ce que devait
+  et ce que ne devait pas faire un moteur de template. De cette expÃ©rience nous avons
+  dÃ©cidÃ© qu'un moteur de template se devait d'Ãªtre Ã©crit sous la forme d'une
+  classe PHP, afin que quiconque puisse l'utiliser Ã  sa convenance. Nous
+  avons donc rÃ©alisÃ© un moteur de template qui se contentait de faire celÃ ,
   et <productname>SmartTemplate</productname> a vu le jour (note : cette
-  classe n'a jamais été soumise au public). C'était une classe qui
+  classe n'a jamais Ã©tÃ© soumise au public). C'Ã©tait une classe qui
   faisait pratiquement tout ce que nous voulions : substitution de variables,
-  inclusion d'autres templates, intégration avec des fichiers de configuration,
-  intégration de code PHP, instruction 'if' basique et une gestion plus robuste
-  des blocks dynamiques imbriqués. Elle faisait tout celà avec des expressions
-  rationnelles et le code se révéla, comment dire, impénétrable. De plus, elle était
-  relativement lente pour les grosses applications à cause de l'analyse
-  et du travail sur les expressions rationnelles qu'elle devait faire à chaque
-  exécution. Le plus gros problème du point de vue du programmeur était
-  tout le travail nécessaire en amont, dans le script PHP, pour configurer
-  et exécuter les templates, et les blocs dynamiques. Comment rendre tout ceci
+  inclusion d'autres templates, intÃ©gration avec des fichiers de configuration,
+  intÃ©gration de code PHP, instruction 'if' basique et une gestion plus robuste
+  des blocks dynamiques imbriquÃ©s. Elle faisait tout celÃ  avec des expressions
+  rationnelles et le code se rÃ©vÃ©la, comment dire, impÃ©nÃ©trable. De plus, elle Ã©tait
+  relativement lente pour les grosses applications Ã  cause de l'analyse
+  et du travail sur les expressions rationnelles qu'elle devait faire Ã  chaque
+  exÃ©cution. Le plus gros problÃ¨me du point de vue du programmeur Ã©tait
+  tout le travail nÃ©cessaire en amont, dans le script PHP, pour configurer
+  et exÃ©cuter les templates, et les blocs dynamiques. Comment rendre tout ceci
   plus simple ?
  </para>
  <para>
   Puis vint la vision de ce que devait devenir Smarty. Nous
-  savons combien le code PHP peut être rapide sans le coût
+  savons combien le code PHP peut Ãªtre rapide sans le coÃ»t
   d'analyse des templates. Nous savons aussi combien fastidieux
-  et décourageant peut paraître le langage  pour le designer moyen, et que
-  celà peut être remplacé par une syntaxe spécifique, beaucoup
+  et dÃ©courageant peut paraÃ®tre le langage  pour le designer moyen, et que
+  celÃ  peut Ãªtre remplacÃ© par une syntaxe spÃ©cifique, beaucoup
   plus simple. Et si nous combinions les deux forces ? Ainsi, Smarty
-  était né...:-)
+  Ã©tait nÃ©...:-)
  </para>
 </preface>
 <!-- Keep this comment at the end of the file

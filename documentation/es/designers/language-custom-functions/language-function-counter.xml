@@ -15,7 +15,7 @@
      <entry>Tipo</entry>
      <entry>Requerido</entry>
      <entry>Default</entry>
-     <entry>Descripci髇</entry>
+     <entry>Descripci贸n</entry>
     </row>
    </thead>
    <tbody>
@@ -31,7 +31,7 @@
      <entry>number</entry>
      <entry>No</entry>
      <entry><emphasis>1</emphasis></entry>
-     <entry>El n鷐ero inicial para contar a partir de</entry>
+     <entry>El n煤mero inicial para contar a partir de</entry>
     </row>
     <row>
      <entry>skip</entry>
@@ -45,7 +45,7 @@
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>up</emphasis></entry>
-     <entry>La direcci髇 para contar (up/down)</entry>
+     <entry>La direcci贸n para contar (up/down)</entry>
     </row>
     <row>
      <entry>print</entry>
@@ -66,14 +66,14 @@
  </informaltable>
  <para>
   {counter} es usada para mostrar un conteo. {counter} va a depender del 
-  conteo en cada iteraci髇. Usted puede ajustar el n鷐ero, el intervalo 
-  y la direcci髇 del conteo, asi como determinar cuando mostrar o no el 
+  conteo en cada iteraci贸n. Usted puede ajustar el n煤mero, el intervalo 
+  y la direcci贸n del conteo, asi como determinar cuando mostrar o no el 
   conteo. Usted puede tener varios contadores al mismo tiempo, dando un 
-  nombre 鷑ico para cada uno. Si usted no da un nombre, sera usado 
+  nombre 煤nico para cada uno. Si usted no da un nombre, sera usado 
   'default' como nombre.
  </para>
  <para>
-  Si usted indica el atributo especial "assign", la salida de la funci髇 
+  Si usted indica el atributo especial "assign", la salida de la funci贸n 
   counter se ira para esa variable del template en vez de ser mostrada en 
   el template.
  </para>

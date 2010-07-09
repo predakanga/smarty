@@ -21,19 +21,19 @@
           </funcprototype>
          </funcsynopsis>
          <para>
-		  Isso é usado para adicionar um elemento para um array fixado. Se você adicionar
-		  uma string como valor, isso irá converter-se para um valor de array e então adicioná-lo.
-		  Você pode explicitamente passar pares nomes/valores, ou arrays associativos
-		  contendo o par nome/valor. Se você passar o terceiro parâmetro opcional para true,
+		  Isso Ã© usado para adicionar um elemento para um array fixado. Se vocÃª adicionar
+		  uma string como valor, isso irÃ¡ converter-se para um valor de array e entÃ£o adicionÃ¡-lo.
+		  VocÃª pode explicitamente passar pares nomes/valores, ou arrays associativos
+		  contendo o par nome/valor. Se vocÃª passar o terceiro parÃ¢metro opcional para true,
 		  o valor unir-se ao array atual
-		  ao invés de ser adicionado.
+		  ao invÃ©s de ser adicionado.
          </para>
 		 <note>
-		 <title>Notas Técnicas</title>
+		 <title>Notas TÃ©cnicas</title>
 		 <para>
-		 O parâmetro de união respeita a chave do array, então se você
-		 mesclar dois índices númericos de um array, eles devem sobrescrever-se
-		 um ao outro ou em resultados não sequências de chave. Isso é diferente da função de PHP array_merge() 
+		 O parÃ¢metro de uniÃ£o respeita a chave do array, entÃ£o se vocÃª
+		 mesclar dois Ã­ndices nÃºmericos de um array, eles devem sobrescrever-se
+		 um ao outro ou em resultados nÃ£o sequÃªncias de chave. Isso Ã© diferente da funÃ§Ã£o de PHP array_merge() 
 		 que apaga as chaves e as renumera.
 		 </para>
 		 </note>

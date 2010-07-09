@@ -3,7 +3,7 @@
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->   
 <sect1 id="plugins.modifiers"><title>Modifiers</title>
     <para>
-     Modificadores s„o funÁıes que s„o aplicadas a uma vari·vel no template antes dela ser mostrada
+     Modificadores s√£o fun√ß√µes que s√£o aplicadas a uma vari√°vel no template antes dela ser mostrada
      ou usada em algum outro contexto. 
      Modificadores podem ser encadeados juntos.
     </para>
@@ -15,24 +15,24 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     O primeiro par‚metro para o plugin midificador È o valor em que o modificador È suposto
-     operar. O resto dos par‚metros podem ser opcionais,
-     dependendo de qual tipo de operaÁ„o È para
+     O primeiro par√¢metro para o plugin midificador √© o valor em que o modificador √© suposto
+     operar. O resto dos par√¢metros podem ser opcionais,
+     dependendo de qual tipo de opera√ß√£o √© para
      ser executada.
     </para>
     <para>
      O modificador deve retornar o resultado de seu processamento.
     </para>
     <para>
-     Veja tambÈm:
+     Veja tamb√©m:
      <link linkend="api.register.modifier">register_modifier()</link>,
      <link linkend="api.unregister.modifier">unregister_modifier()</link>.
     </para>
     <example>
      <title>Plugin modificador simples</title>
      <para>
-      Este plugin basiamente È um alias de uma 
-      funÁ„o do PHP. Ele n„o tem nenhum par‚metro adicional.
+      Este plugin basiamente √© um alias de uma 
+      fun√ß√£o do PHP. Ele n√£o tem nenhum par√¢metro adicional.
      </para>
      <programlisting>
 &lt;?php

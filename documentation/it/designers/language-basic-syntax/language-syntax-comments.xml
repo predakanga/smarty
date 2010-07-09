@@ -4,7 +4,7 @@
  <title>Commenti</title>
  <para>
   I commenti nei template sono preceduti e seguiti da asterischi, i quali
-  sono a loro volta compresi dai tag delimitatori: {* questo è un commento *}
+  sono a loro volta compresi dai tag delimitatori: {* questo Ã¨ un commento *}
   I commenti di Smarty non vengono visualizzati nell'output del template.
   Sono usati per note interne al template.
  </para>

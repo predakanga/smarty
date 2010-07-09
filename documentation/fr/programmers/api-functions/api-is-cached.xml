@@ -18,14 +18,14 @@
 
   <itemizedlist>
   <listitem><para>
-   Celà fonctionne seulement si <link linkend="variable.caching">
-   <parameter>$caching</parameter></link> est défini à &true;, voir aussi la
+   CelÃ  fonctionne seulement si <link linkend="variable.caching">
+   <parameter>$caching</parameter></link> est dÃ©fini Ã  &true;, voir aussi la
    <link linkend="caching">section sur le cache</link> pour plus d'informations.
   </para></listitem>
 
   <listitem><para>
-   Vous pouvez aussi passer en second paramètre un identifiant
-   de <parameter>$cache_id</parameter> au cas où vous voudriez
+   Vous pouvez aussi passer en second paramÃ¨tre un identifiant
+   de <parameter>$cache_id</parameter> au cas oÃ¹ vous voudriez
    <link linkend="caching.multiple.caches">plusieurs
    fichiers</link> de cache pour ce template.
   </para></listitem>
@@ -33,13 +33,13 @@
   <listitem><para>
    Vous pouvez donner un
    <link linkend="variable.compile.id"><parameter>$compile id</parameter></link>
-   en tant que troisième paramètre. Si vous ne spécifiez pas ce paramètre, le
+   en tant que troisiÃ¨me paramÃ¨tre. Si vous ne spÃ©cifiez pas ce paramÃ¨tre, le
    <link linkend="variable.compile.id">
-   <parameter>$compile_id</parameter></link> persistant sera utilisé.
+   <parameter>$compile_id</parameter></link> persistant sera utilisÃ©.
   </para></listitem>
 
   <listitem><para>
-   Si vous ne voulez pas passer un <parameter>$cache_id</parameter> mais plutôt un
+   Si vous ne voulez pas passer un <parameter>$cache_id</parameter> mais plutÃ´t un
    <link linkend="variable.compile.id">
    <parameter>$compile_id</parameter></link>, vous devez passer
    &null; en tant que <parameter>$cache_id</parameter>.
@@ -50,18 +50,18 @@
    <title>Note technique</title>
    <para>
     Si <varname>is_cached()</varname> retourne &true;, il charge en fait le cache existant et 
-    le stocke en interne. Tout appel supplémentaire à 
+    le stocke en interne. Tout appel supplÃ©mentaire Ã  
     <link linkend="api.display"><varname>display()</varname></link> ou
     <link linkend="api.fetch"><varname>fetch()</varname></link> retournera ce
-    contenu stocké en interne
-    sans tenter de recharger le fichier en cache. Celà évite des problématiques d'accès concurents, 
+    contenu stockÃ© en interne
+    sans tenter de recharger le fichier en cache. CelÃ  Ã©vite des problÃ©matiques d'accÃ¨s concurents, 
     lorsqu'un second processus efface le cache entre l'appel de
-    <varname>is_cached()</varname> et l'appel à
+    <varname>is_cached()</varname> et l'appel Ã 
     <link linkend="api.display"><varname>display()</varname></link>
-    comme dans l'un de nos exemples ci-dessus. Celà signifie également que les appels à 
+    comme dans l'un de nos exemples ci-dessus. CelÃ  signifie Ã©galement que les appels Ã  
     <link linkend="api.clear.cache"><varname>clear_cache()</varname></link>
-    et les changements de paramètres du cache peuvent n'avoir aucun effet alors que 
-    <varname>is_cached()</varname> a retourné &true;.
+    et les changements de paramÃ¨tres du cache peuvent n'avoir aucun effet alors que 
+    <varname>is_cached()</varname> a retournÃ© &true;.
    </para>
   </note>
 
@@ -73,7 +73,7 @@
 $smarty->caching = true;
 
 if(!$smarty->is_cached('index.tpl')) {
-//aucun appel à la base de donnée
+//aucun appel Ã  la base de donnÃ©e
 }
 
 $smarty->display('index.tpl');
@@ -89,7 +89,7 @@ $smarty->display('index.tpl');
 $smarty->caching = true;
 
 if(!$smarty->is_cached('index.tpl', 'FrontPage')) {
-  //appel de la base de données, assignation des variables
+  //appel de la base de donnÃ©es, assignation des variables
 }
 
 $smarty->display('index.tpl', 'FrontPage');

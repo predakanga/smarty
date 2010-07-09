@@ -4,8 +4,8 @@
 <sect1 id="variable.secure.dir">
       <title>$secure_dir</title>
       <para>
-       Isso È um array de todos os diretÛrios locais que s„o considerados
-       seguros. {include} e {fetch} usam estes (diretÛrios) quando security est· habilitado.
+       Isso √© um array de todos os diret√≥rios locais que s√£o considerados
+       seguros. {include} e {fetch} usam estes (diret√≥rios) quando security est√° habilitado.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

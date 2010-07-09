@@ -6,16 +6,16 @@
   <refpurpose>Carga un filtro de plugin</refpurpose>
  </refnamediv>
  <refsect1>
-  <title> Descripción</title>
+  <title> DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>load_filter</methodname>
    <methodparam><type>string</type><parameter>type</parameter></methodparam>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   El primer argumento especifíca el tipo de filtro a cargar y puede
+   El primer argumento especifÃ­ca el tipo de filtro a cargar y puede
    ser uno de los siguientes: 'pre', 'post', o 'output'. El segundo 
-   argumento especifíca el nombre del filtro del plugin, por ejemplo, 
+   argumento especifÃ­ca el nombre del filtro del plugin, por ejemplo, 
    'trim'.
   </para>
   <example>
@@ -31,7 +31,7 @@ $smarty->load_filter('output', 'compress'); // load output filter named 'compres
    </programlisting>
   </example>
   <para>
-  Ver también 
+  Ver tambiÃ©n 
   <link linkend="api.register.prefilter">register_prefilter()</link>,
   <link linkend="api.register.postfilter">register_postfilter()</link>,
   <link linkend="api.register.outputfilter">register_outputfilter()</link>,

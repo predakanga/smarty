@@ -19,10 +19,10 @@
   </methodsynopsis>
   <para>
    Si usa per aggiungere un elemento ad un array. Se aggiungete un valore
-   stringa, verr‡ convertito in un elemento di array e aggiunto. Potete 
+   stringa, verr√† convertito in un elemento di array e aggiunto. Potete 
    passare esplicitamente coppie nome/valore, oppure array associativi
    contenenti le coppie nome/valore. Se passate il terzo parametro opzionale
-   a true, il valore verr‡ fuso nell'array corrente invece che aggiunto.
+   a true, il valore verr√† fuso nell'array corrente invece che aggiunto.
   </para>
   &note.parameter.merge;
   <example>

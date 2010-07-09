@@ -16,7 +16,7 @@
        proporcionados.
       </para>
 	  <note>
-	  <title>Nota Técnica</title>
+	  <title>Nota TÃ©cnica</title>
 	  <para>
    Para un mejor funcionamiento, no configure su plugins_dir para que 
    use el include path PHP. Use un path absoluto, o un path relativo 

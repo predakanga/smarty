@@ -65,16 +65,16 @@
   </tgroup>
  </informaltable>
  <para>
-  counter si usa per stampare un conteggio. counter terr‡ il conto
+  counter si usa per stampare un conteggio. counter terr√† il conto
   del valore ad ogni iterazione. Potete impostare il valore di partenza,
-  l'intervallo e la direzione del conteggio, cosÏ come decidere se
-  stampare il valore oppure no. Potete utilizzare pi˘ contatori 
+  l'intervallo e la direzione del conteggio, cos√¨ come decidere se
+  stampare il valore oppure no. Potete utilizzare pi√π contatori 
   contemporaneamente indicando un nome diverso per ciascuno. Se non indicate
-  un nome, verr‡ usato il nome 'default'.
+  un nome, verr√† usato il nome 'default'.
  </para>
  <para>
   Se fornite lo speciale attributo "assign", l'output della funzione contatore 
-  verr‡ assegnato a questa variabile invece di essere stampata in output.
+  verr√† assegnato a questa variabile invece di essere stampata in output.
  </para>
  <example>
   <title>counter</title>
@@ -88,7 +88,7 @@
 ]]>
   </programlisting>
   <para>
-   questo stamper‡:
+   questo stamper√†:
   </para>
   <screen>
 <![CDATA[

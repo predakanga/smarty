@@ -5,10 +5,10 @@
 			<title>literal</title>
 			<para>
              Tags literal permitem que um bloco de dados seja tratado literalmente, ou seja, 
-			 não é interpretado pelo Smarty. Isto é tipicamente usado com blocos de código 
-			 javascript ou folhas de estilo (stylesheet), que às vezes contém chaves 
+			 nÃ£o Ã© interpretado pelo Smarty. Isto Ã© tipicamente usado com blocos de cÃ³digo 
+			 javascript ou folhas de estilo (stylesheet), que Ã s vezes contÃ©m chaves 
 			 que podem entrar em conflito com o delimitador de sintaxe. Qualquer coisa entre 
-			 {literal}{/literal} não é interpretado, mas é mostrado. Se você precisa que 
+			 {literal}{/literal} nÃ£o Ã© interpretado, mas Ã© mostrado. Se vocÃª precisa que 
 			 tags de templates sejam embutidas em um bloco literal, use {ldelim}{rdelim}.
 			</para>
 <example>

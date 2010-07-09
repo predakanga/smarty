@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -39,22 +39,22 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>El nombre de la variable que recibir· la
+                        <entry>El nombre de la variable que recibir√° la
                          salida del archivo php</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 	        <note>
-	        <title>Nota tÈcnica</title>
+	        <title>Nota t√©cnica</title>
             <para>
              {include_php} es muy desaprovechado desde Smarty, usted puede 
             lograr la misma funcionalidad por medio de las funciones de 
             costumbre del template.
-            La unica razÛn para usar {include_php} es si usted en realidad tiene
+            La unica raz√≥n para usar {include_php} es si usted en realidad tiene
             la necesidad de poner en cuarentena la funcion de php fuera del
             directorio de <link linkend="variable.plugins.dir">plugins</link> y 
-            su codigo de la aplicaciÛn. 
+            su codigo de la aplicaci√≥n. 
             Vea un <link linkend="tips.componentized.templates">ejemplo</link> 
             de templates componentizados para detalles.
             </para>
@@ -93,7 +93,7 @@
 <![CDATA[
 <?php
 
-// carga variables de una base de datos mysql y defÌne esta para el template
+// carga variables de una base de datos mysql y def√≠ne esta para el template
 require_once("MySQL.class.php");
 $sql = new MySQL;
 $sql->query("select * from site_nav_sections order by name",SQL_ALL);
@@ -117,7 +117,7 @@ $this->assign('sections',$sql->record);
   </programlisting>
 </example>
  <para>
-  Ver tambiÈn <link linkend="language.function.include">{include}</link>,
+  Ver tambi√©n <link linkend="language.function.include">{include}</link>,
   <link linkend="language.function.php">{php}</link>, <link
   linkend="language.function.capture">{capture}</link>, <link
   linkend="template.resources">Template Resources</link> y <link

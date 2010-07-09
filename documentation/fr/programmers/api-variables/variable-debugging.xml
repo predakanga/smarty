@@ -5,20 +5,20 @@
 <sect1 id="variable.debugging">
  <title>$debugging</title>
  <para>
-  Celà active la
-  <link linkend="chapter.debugging.console">console de débogage</link>.
-  La console est une fenêtre javascript qui vous informe des templates
+  CelÃ  active la
+  <link linkend="chapter.debugging.console">console de dÃ©bogage</link>.
+  La console est une fenÃªtre javascript qui vous informe des templates
   <link linkend="language.function.include">inclus</link> et des variables
-  <link linkend="api.assign">assignées</link> depuis PHP et des
+  <link linkend="api.assign">assignÃ©es</link> depuis PHP et des
   <link linkend="language.config.variables">variables des fichiers de configuration</link>
-  pour le script courant. Il ne montre pas les variables assignées
+  pour le script courant. Il ne montre pas les variables assignÃ©es
   dans un template avec
   <link linkend="language.function.assign"><varname>{assign}</varname></link>.
  </para>
  <para>
   Voir aussi
   <link linkend="variable.debugging.ctrl"><parameter>$debugging_ctrl</parameter></link>
-  sur la façon d'activer le débogage depuis l'url.
+  sur la faÃ§on d'activer le dÃ©bogage depuis l'url.
  </para>
  <para>
   Voir aussi

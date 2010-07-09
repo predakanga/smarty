@@ -5,8 +5,8 @@
 <sect1 id="language.modifier.default">
  <title>default</title>
  <para>
-  Utilisé pour définir une valeur par défaut à une variable.
-  Si la variable est vide ou indéfinie, la valeur donnée est affichée
+  UtilisÃ© pour dÃ©finir une valeur par dÃ©faut Ã  une variable.
+  Si la variable est vide ou indÃ©finie, la valeur donnÃ©e est affichÃ©e
   en lieu et place. <literal>default</literal> attends un seul argument.
  </para>
  <para>
@@ -14,8 +14,8 @@
    <para>
     Avec <ulink url="&url.php-manual;error_reporting">
        <varname>error_reporting(E_ALL)</varname></ulink>, les variables non
-    déclarées lanceront toujours une erreur dans le template. Cette fonction est
-    utile pour remplacer les chaînes vides ou de longueurs vides.
+    dÃ©clarÃ©es lanceront toujours une erreur dans le template. Cette fonction est
+    utile pour remplacer les chaÃ®nes vides ou de longueurs vides.
    </para>
   </note>
  </para>
@@ -28,7 +28,7 @@
    <colspec colname="desc" />
    <thead>
     <row>
-     <entry>Position du paramètre</entry>
+     <entry>Position du paramÃ¨tre</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
      <entry>Defaut</entry>
@@ -38,29 +38,29 @@
    <tbody>
     <row>
      <entry>1</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>La valeur par défaut de la sortie si la variable
-      d'entrée est vide.</entry>
+     <entry>La valeur par dÃ©faut de la sortie si la variable
+      d'entrÃ©e est vide.</entry>
     </row>
    </tbody>
   </tgroup>
  </informaltable>
  <example>
-  <title>Défaut</title>
+  <title>DÃ©faut</title>
   <programlisting role="php">
 <![CDATA[
 <?php
 
-$smarty->assign('TitreArticle', 'Les portes de la moria restent fermées.');
+$smarty->assign('TitreArticle', 'Les portes de la moria restent fermÃ©es.');
 $smarty->assign('email','');
 
 ?>
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -74,7 +74,7 @@ $smarty->assign('email','');
   </para>
   <screen>
 <![CDATA[
-Les portes de la moria restent fermées.
+Les portes de la moria restent fermÃ©es.
 Aucun titre
 Aucune adresse email disponible
 ]]>
@@ -82,7 +82,7 @@ Aucune adresse email disponible
  </example>
  <para>
   Voir aussi
-  la <link linkend="tips.default.var.handling">gestion des variables par défaut</link>
+  la <link linkend="tips.default.var.handling">gestion des variables par dÃ©faut</link>
   et la <link linkend="tips.blank.var.handling">gestion de l'effacement des variables</link>.
  </para>
 </sect1>

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
   <sect1 id="section.template.cache.handler.func">
-   <title>FunciÛn manipuladora de cache</title>
+   <title>Funci√≥n manipuladora de cache</title>
    <para>
     Como una alternativa al uso del mecanismo de caching por default basado 
-    en archivo, usted puede especificar una funciÛn habitual de manipulaciÛn 
-    de cache que ser· usada para leer, escribir y limpar archivos de cache.
+    en archivo, usted puede especificar una funci√≥n habitual de manipulaci√≥n 
+    de cache que ser√° usada para leer, escribir y limpar archivos de cache.
    </para>
    <para>
-    Cree una funciÛn en su aplicaciÛn para que Smarty la use como un
+    Cree una funci√≥n en su aplicaci√≥n para que Smarty la use como un
     manipulador de cache. Defina el nombre de la variable de clase en el
     <link linkend="variable.cache.handler.func">$cache_handler_func</link>.
     El Smarty ahora usara esta para manipular datos en el cache. El primer 
-    par·metro es la acciÛn, que puede ser uno de estos 'read', 'write' y 
-    'clear'. El segundo par·metro es el objeto de Smarty. El tercer par·metro 
+    par√°metro es la acci√≥n, que puede ser uno de estos 'read', 'write' y 
+    'clear'. El segundo par√°metro es el objeto de Smarty. El tercer par√°metro 
     es el contenido que esta en el cache.  Sobre 'write', el Smarty pasa el 
-    contenido en cache en estos par·metros.  sobre 'read', el Smarty espera 
-    que su funciÛn acepte este par·metro por referencia y poblar estos con los 
+    contenido en cache en estos par√°metros.  sobre 'read', el Smarty espera 
+    que su funci√≥n acepte este par√°metro por referencia y poblar estos con los 
     datos en cache.  Sobre 'clear', el Smarty pasa una variable en cero desde 
-    aquÌ que esta no es usada. El cuarto par·metro es el nombre del archivo de 
-    template(necesario para leer/escribir). El quinto par·metro es la cache_id 
-    (opcional). El sexto par·metro es la compile_id (opcional).
+    aqu√≠ que esta no es usada. El cuarto par√°metro es el nombre del archivo de 
+    template(necesario para leer/escribir). El quinto par√°metro es la cache_id 
+    (opcional). El sexto par√°metro es la compile_id (opcional).
    </para>
    <para>
-    NOTA: El ultimo par·metro ($exp_time) fue adicionado en el Smarty-2.6.0.
+    NOTA: El ultimo par√°metro ($exp_time) fue adicionado en el Smarty-2.6.0.
    </para>
    <example>
     <title> ejemplo usando MySQL como una fuente de cache</title>

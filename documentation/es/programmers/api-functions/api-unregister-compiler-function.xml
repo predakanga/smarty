@@ -3,19 +3,19 @@
 <refentry id="api.unregister.compiler.function">
  <refnamediv>
   <refname>unregister_compiler_function()</refname>
-  <refpurpose>des-registrar din醡icamente una funci髇 de compilaci髇</refpurpose>
+  <refpurpose>des-registrar din谩micamente una funci贸n de compilaci贸n</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripci髇 </title>
+  <title>Descripci贸n </title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_compiler_function</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Pase el <parameter>nombre</parameter> de la funci髇 compiladora.
+   Pase el <parameter>nombre</parameter> de la funci贸n compiladora.
   </para>
   <para>
-   Ver tambi閚  <link linkend="api.register.compiler.function">register_compiler_function() </link>
+   Ver tambi茅n  <link linkend="api.register.compiler.function">register_compiler_function() </link>
    y <link linkend="plugins.compiler.functions">Plugin Compiler Functions</link>.
   </para>
 

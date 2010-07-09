@@ -4,11 +4,11 @@
 <sect1 id="caching.multiple.caches">
     <title>Multiple Caches Per Page</title>
 	<para>
-	Você pode ter múltiplos arquivos de cache para uma simples chamada de display()
-	ou fetch(). Vamos dizer que uma chamada para display('index.tpl') deve ter vários
-	conteúdo de saída diferentes dependendo de alguma condição, e você quer separar
-	os caches para cada um. Você pode fazer isso passando um cache_id como um
-	segundo parâmetro para a chamada da função.
+	VocÃª pode ter mÃºltiplos arquivos de cache para uma simples chamada de display()
+	ou fetch(). Vamos dizer que uma chamada para display('index.tpl') deve ter vÃ¡rios
+	conteÃºdo de saÃ­da diferentes dependendo de alguma condiÃ§Ã£o, e vocÃª quer separar
+	os caches para cada um. VocÃª pode fazer isso passando um cache_id como um
+	segundo parÃ¢metro para a chamada da funÃ§Ã£o.
 	</para>
     <example>
      <title>Passando um cache_id para display()</title>
@@ -23,29 +23,29 @@ $my_cache_id = $_GET['article_id'];
 $smarty->display('index.tpl',$my_cache_id);</programlisting>
     </example>
 	<para>
-	Acima, nós estamos passando a variável $my_cache_id para display() com o
-	cache_id. Para cada valor único de $my_cache_id, um cache em separado irá ser
-	gerado para index.tpl. Nesse exemplo, "article_id" foi passado em URL e é usado
+	Acima, nÃ³s estamos passando a variÃ¡vel $my_cache_id para display() com o
+	cache_id. Para cada valor Ãºnico de $my_cache_id, um cache em separado irÃ¡ ser
+	gerado para index.tpl. Nesse exemplo, "article_id" foi passado em URL e Ã© usado
 	como o cache_id.
 	</para>
 	<note>
-	<title>Notas Técnicas</title>
+	<title>Notas TÃ©cnicas</title>
 	<para>
 	Tenha muito cuidado quando passar valores do cliente (web brownser) dentro
-	da Smarty (ou alguma aplicação PHP.) Embora o exemplo acima usando o article_id
-	vindo de uma URL pareça fácil, isso poderia ter consequências ruins. O
-	cache_id é usado para criar um diretório no sistema de arquivos, então se o usuário
+	da Smarty (ou alguma aplicaÃ§Ã£o PHP.) Embora o exemplo acima usando o article_id
+	vindo de uma URL pareÃ§a fÃ¡cil, isso poderia ter consequÃªncias ruins. O
+	cache_id Ã© usado para criar um diretÃ³rio no sistema de arquivos, entÃ£o se o usuÃ¡rio
 	decidir passar um valor extremamente largo para article_id, ou escrever um script
-	que envia article_ids randômicos em um ritmo rápido, isso poderia possivelmente causar
-	problemas em nível de servidor. Tenha certeza de limpar algum dado passado antes de usar isso. Nessa instãncia, talvez você
-	saiba que o article_id tem um comprimento de 10 caracteres e isso é constituído somente
-	de alfa-numéricos, e deve ser um
-	article_id válido no database. Verifique isso!
+	que envia article_ids randÃ´micos em um ritmo rÃ¡pido, isso poderia possivelmente causar
+	problemas em nÃ­vel de servidor. Tenha certeza de limpar algum dado passado antes de usar isso. Nessa instÃ£ncia, talvez vocÃª
+	saiba que o article_id tem um comprimento de 10 caracteres e isso Ã© constituÃ­do somente
+	de alfa-numÃ©ricos, e deve ser um
+	article_id vÃ¡lido no database. Verifique isso!
 	</para>
 	</note>
 	<para>
 	Tenha certeza de passar o mesmo cache_id como o segundo
-	parâmetro para <link linkend="api.is.cached">is_cached()</link> e
+	parÃ¢metro para <link linkend="api.is.cached">is_cached()</link> e
 	<link linkend="api.clear.cache">clear_cache()</link>.
 	</para>
 	<example>
@@ -67,8 +67,8 @@ if(!$smarty->is_cached('index.tpl',$my_cache_id)) {
 $smarty->display('index.tpl',$my_cache_id);</programlisting>
     </example>
 	<para>
-	Você pode limpar todos os caches para um cache_id em particular passando
-	o primeiro parâmetro null para clear_cache().
+	VocÃª pode limpar todos os caches para um cache_id em particular passando
+	o primeiro parÃ¢metro null para clear_cache().
 	</para>
 	<example>
      <title>Limpando todos os caches para um cache_id em particular</title>
@@ -84,7 +84,7 @@ $smarty->clear_cache(null,"sports");
 $smarty->display('index.tpl',"sports");</programlisting>
     </example>
 	<para>
-	Desta maneira, você pode "agrupar" seus 
+	Desta maneira, vocÃª pode "agrupar" seus 
 	caches juntos dando-lhes o mesmo cache_id.
 	</para>
 </sect1>

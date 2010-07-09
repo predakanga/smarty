@@ -5,7 +5,7 @@
 <refentry id="api.unregister.block">
  <refnamediv>
   <refname>unregister_block()</refname>
-  <refpurpose>Désalloue dynamiquement un plugin de fonction de blocs</refpurpose>
+  <refpurpose>DÃ©salloue dynamiquement un plugin de fonction de blocs</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,8 +14,8 @@
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour désallouer dynamiquement un <link linkend="plugins.block.functions">plugin de fonction
-   de blocs</link>. Passez en paramètre le nom <parameter>name</parameter> du bloc.
+   UtilisÃ©e pour dÃ©sallouer dynamiquement un <link linkend="plugins.block.functions">plugin de fonction
+   de blocs</link>. Passez en paramÃ¨tre le nom <parameter>name</parameter> du bloc.
   </para>
   <para>
    Voir aussi

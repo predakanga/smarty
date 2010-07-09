@@ -5,17 +5,17 @@
 <sect1 id="variable.config.dir">
  <title>$config_dir</title>
  <para>
-  Il s'agit du répertoire utilisé pour stocker les
+  Il s'agit du rÃ©pertoire utilisÃ© pour stocker les
   <link linkend="config.files">fichiers de configuration</link>
-  utilisés dans les templates.
-  La valeur par défaut est <filename class="directory">./configs</filename>,
-  ce qui signifie que Smarty va chercher ce répertoire
-  dans le même répertoire que le script PHP qui s'exécute.
+  utilisÃ©s dans les templates.
+  La valeur par dÃ©faut est <filename class="directory">./configs</filename>,
+  ce qui signifie que Smarty va chercher ce rÃ©pertoire
+  dans le mÃªme rÃ©pertoire que le script PHP qui s'exÃ©cute.
  </para>
  <note>
   <title>Note technique</title>
   <para>
-   Il n'est pas conseillé de mettre ce répertoire
+   Il n'est pas conseillÃ© de mettre ce rÃ©pertoire
    sous la racine de l'arborescence Web.
   </para>
  </note>

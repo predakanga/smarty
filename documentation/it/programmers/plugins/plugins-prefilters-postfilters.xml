@@ -16,10 +16,10 @@
     <para>
      I prefiltri si usano per processare il codice sorgente del template immediatamente
      prima della compilazione. Il primo parametro passato alla funzione
-     prefiltro è il sorgente del template, eventualmente modificato da qualche
+     prefiltro Ã¨ il sorgente del template, eventualmente modificato da qualche
      altro prefiltro. Ci si aspetta che il plugin restituisca il sorgente
      modificato. Notate che questo sorgente non viene salvato da nessuna
-     parte, è usato solo per la compilazione.
+     parte, Ã¨ usato solo per la compilazione.
     </para>
     <funcsynopsis>
      <funcprototype>
@@ -32,7 +32,7 @@
      I postfiltri si usanno per processare l'output compilato del template
      (il codice PHP) immediatamente dopo la compilazione stessa, ma prima
      che il template compilato venga salvato sul filesystem. Il primo
-     parametro passato alla funzione postfiltro è il codice compilato,
+     parametro passato alla funzione postfiltro Ã¨ il codice compilato,
      eventualmente modificato da altri postfiltri. Ci si aspetta che il
      plugin restituisca la versione modificata di questo codice.
     </para>

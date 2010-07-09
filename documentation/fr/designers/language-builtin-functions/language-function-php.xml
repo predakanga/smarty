@@ -6,16 +6,16 @@
  <title>{php}</title>
  <para>
   Les balises <varname>{php}</varname> permettent de rajouter du code PHP
-  directement dans le template. Ils ne seront pas ignorés, quelle que soit la valeur de <link
+  directement dans le template. Ils ne seront pas ignorÃ©s, quelle que soit la valeur de <link
   linkend="variable.php.handling"><parameter>$php_handling</parameter></link>. Pour les
-  utilisateurs avancés seulement, son utilisation n'est normalement pas
-  nécessaire et n'est pas recommandée.
+  utilisateurs avancÃ©s seulement, son utilisation n'est normalement pas
+  nÃ©cessaire et n'est pas recommandÃ©e.
  </para>
  <note>
   <title>Notes techniques</title>
   <para>
-   Pour accéder aux variables PHP dans les blocks <varname>{php}</varname>, vous devriez avoir besoin
-   d'utiliser le mot clé PHP <ulink url="&url.php-manual;global"><literal>global</literal></ulink>.
+   Pour accÃ©der aux variables PHP dans les blocks <varname>{php}</varname>, vous devriez avoir besoin
+   d'utiliser le mot clÃ© PHP <ulink url="&url.php-manual;global"><literal>global</literal></ulink>.
   </para>
  </note>
  <example>
@@ -31,19 +31,19 @@
  </example>
 
  <example>
-  <title>Balises {php} avec le mot clé global et assignement d'une variable</title>
+  <title>Balises {php} avec le mot clÃ© global et assignement d'une variable</title>
   <programlisting role="php">
 <![CDATA[
 {* ce template inclut un bloc {php} qui assigne la variable $varX *}
 {php}
    global $foo, $bar;
    if($foo == $bar){
-     echo 'Ceci apparaîtera dans le template';
+     echo 'Ceci apparaÃ®tera dans le template';
    }
 $this->assign('varX','Strawberry');
 {/php}
 {* affichage de la variable *}
-<strong>{$varX}</strong> est ma glâce favorite :-)
+<strong>{$varX}</strong> est ma glÃ¢ce favorite :-)
 ]]>
   </programlisting>
  </example>

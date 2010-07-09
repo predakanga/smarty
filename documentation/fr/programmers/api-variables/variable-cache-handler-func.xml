@@ -5,12 +5,12 @@
 <sect1 id="variable.cache.handler.func">
  <title>$cache_handler_func</title>
  <para>
-  Vous pouvez utiliser votre propre fonction de gestion du cache plutôt que
-  d'utiliser celle livrée avec Smarty
+  Vous pouvez utiliser votre propre fonction de gestion du cache plutÃ´t que
+  d'utiliser celle livrÃ©e avec Smarty
   (<link linkend="variable.cache.dir"><parameter>$cache_dir</parameter></link>).
-  Référez-vous à la section sur la
+  RÃ©fÃ©rez-vous Ã  la section sur la
   <link linkend="section.template.cache.handler.func">fonction de gestion de cache
-  personnalisée</link> pour plus de détails.
+  personnalisÃ©e</link> pour plus de dÃ©tails.
  </para>
 </sect1>
 

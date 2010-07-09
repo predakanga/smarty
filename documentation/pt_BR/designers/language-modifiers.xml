@@ -2,55 +2,55 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.3 Maintainer: thomasgm Status: ready -->
     <chapter id="language.modifiers">
-     <title>Modificadores de vari·veis</title>
+     <title>Modificadores de vari√°veis</title>
      <para>
-      Modificadores de vari·veis podem ser aplicados a vari·veis, funÁıes personalizadas 
+      Modificadores de vari√°veis podem ser aplicados a vari√°veis, fun√ß√µes personalizadas 
       ou strings. Para aplicar um modificador, especifique o valor seguido por
       <literal>|</literal>(pipe) e o nome do modificador. Um modificador aceita
-      par‚metros adicionais que afetam o seu comportamento. Estes par‚metros vem apÛs 
-      o nome do modificador e s„o separados por <literal>:</literal> (dois pontos).
+      par√¢metros adicionais que afetam o seu comportamento. Estes par√¢metros vem ap√≥s 
+      o nome do modificador e s√£o separados por <literal>:</literal> (dois pontos).
      </para>
      <example>
       <title>Exemplo de modificador</title>
       <programlisting>
 <![CDATA[
-{* Faz o tÌtulo ficar com letras mai˙sculas *}
+{* Faz o t√≠tulo ficar com letras mai√∫sculas *}
 <h2>{$titulo|upper}</h2>
 
 {* Faz com que $topico use somente 40 caracteres, e coloca ... no fim da frase *}
 
-TÛpico: {$topico|truncate:40:"..."}
+T√≥pico: {$topico|truncate:40:"..."}
 
-{* transforma a data em um formato legÌvel *}
+{* transforma a data em um formato leg√≠vel *}
 {"agora"|date_format:"%Y/%m/%d"}
 
-{* aplica um modificador ‡ uma funÁ„o personalizada *}
+{* aplica um modificador √† uma fun√ß√£o personalizada *}
 {mailto|upper address="eu@dominio.dom"}
 ]]>
 </programlisting>
      </example>
      <para>
-      Se vocÍ aplicar um modificador ‡ uma matriz ao invÈs de aplicar ao valor de uma vari·vel, 
-	  o modificador vai ser aplicado ‡ cada valor da matriz especificada. Se vocÍ quer que o modificador 
-	  use a matriz inteira como um valor, vocÍ deve colocar o sÌmbolo <literal>@</literal> antes do 
+      Se voc√™ aplicar um modificador √† uma matriz ao inv√©s de aplicar ao valor de uma vari√°vel, 
+	  o modificador vai ser aplicado √† cada valor da matriz especificada. Se voc√™ quer que o modificador 
+	  use a matriz inteira como um valor, voc√™ deve colocar o s√≠mbolo <literal>@</literal> antes do 
 	  nome do modificador, como a seguir: <literal>{$tituloArtigo|@count}</literal> 
-	  (isto ir· mostrar o n˙mero de elementos na matriz $tituloArtigo).
+	  (isto ir√° mostrar o n√∫mero de elementos na matriz $tituloArtigo).
      </para>
      <para>
-      Modificadores podem ser carregados automaticamente ‡ partir do seu <link
+      Modificadores podem ser carregados automaticamente √† partir do seu <link
       linkend="variable.plugins.dir">$plugins_dir</link> (veja: 
 	  <link linkend="plugins.naming.conventions">Nomes sugeridos</link>) ou podem ser 
 	  registrados explicitamente (veja: <link
       linkend="api.register.modifier">register_modifier</link>). Adicionalmente, 
-	  todas as funÁıes php podem ser utiliadas como modificadores implicitamente. (O 
-	  exemplo do <literal>@count</literal> acima usa a funÁ„o count do php e n„o 
-	  um modificador do Smarty). Usar funÁıes do php como modificadores tem dois 
-	  pequenos problemas: Primeiro: ‡s vezes a ordem dos par‚metros da funÁ„o 
-	  n„o È a desejada (<literal>{"%2.f"|sprintf:$float}</literal> atualmente funciona, 
+	  todas as fun√ß√µes php podem ser utiliadas como modificadores implicitamente. (O 
+	  exemplo do <literal>@count</literal> acima usa a fun√ß√£o count do php e n√£o 
+	  um modificador do Smarty). Usar fun√ß√µes do php como modificadores tem dois 
+	  pequenos problemas: Primeiro: √†s vezes a ordem dos par√¢metros da fun√ß√£o 
+	  n√£o √© a desejada (<literal>{"%2.f"|sprintf:$float}</literal> atualmente funciona, 
 	  mas o melhor seria algo mais intuitivo. Por exemplo: <literal>{$float|string_format:"%2.f"}</literal> 
-	  que È disponibilizado na distribuiÁ„o do Smarty). Segundo: com a vari·vel 
-	  <link linkend="variable.security">$security</link> ativada em todas as funÁıes do 
-	  php que s„o usadas como modificadores precisam ser declaradas como confi·veis (trusted) 
+	  que √© disponibilizado na distribui√ß√£o do Smarty). Segundo: com a vari√°vel 
+	  <link linkend="variable.security">$security</link> ativada em todas as fun√ß√µes do 
+	  php que s√£o usadas como modificadores precisam ser declaradas como confi√°veis (trusted) 
 	  na matriz <link linkend="variable.security.settings">$security_settings['MODIFIER_FUNCS']</link>.
      </para>
 

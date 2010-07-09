@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->   
-<sect1 id="plugins.outputfilters"><title>Filtros de saída</title>
+<sect1 id="plugins.outputfilters"><title>Filtros de saÃ­da</title>
     <para>
-     Filtros de saída operam na saída do template, depois que o template é lido e executado, mas
-     antes a saída é mostrada.
+     Filtros de saÃ­da operam na saÃ­da do template, depois que o template Ã© lido e executado, mas
+     antes a saÃ­da Ã© mostrada.
     </para>
     <funcsynopsis>
      <funcprototype>
@@ -14,8 +14,8 @@
      </funcprototype>
     </funcsynopsis>
     <para>
-     O primeiro parâmetro para a função do filtro de saída é a saída do template que precisa ser processada, e 
-     o segundo parâmetro é a instância da Smarty invocando o plugin.
+     O primeiro parÃ¢metro para a funÃ§Ã£o do filtro de saÃ­da Ã© a saÃ­da do template que precisa ser processada, e 
+     o segundo parÃ¢metro Ã© a instÃ¢ncia da Smarty invocando o plugin.
      O plugin deve fazer o precessamento e 
      retornar os resultados.
     </para>

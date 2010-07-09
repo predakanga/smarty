@@ -5,8 +5,8 @@
 <sect1 id="variable.request.use.auto.globals">
  <title>$request_use_auto_globals</title>
  <para>
-  Spécifie si Smarty doit utiliser les variables PHP <literal>$HTTP_*_VARS[]</literal>
-  ($request_use_auto_globals=&false; qui est la valeur par défaut) ou
+  SpÃ©cifie si Smarty doit utiliser les variables PHP <literal>$HTTP_*_VARS[]</literal>
+  ($request_use_auto_globals=&false; qui est la valeur par dÃ©faut) ou
   <literal>$_*[]</literal> ($request_use_auto_globals=&true;). Cela affecte les templates
   qui utilisent
   <link linkend="language.variables.smarty"><literal>{$smarty.request.*}, {$smarty.get.*}</literal></link> etc..
@@ -14,10 +14,10 @@
  <note>
   <title>Attention</title>
   <para>
-   Si vous configurez <literal>$request_use_auto_globals to true</literal> à &true;,
+   Si vous configurez <literal>$request_use_auto_globals to true</literal> Ã  &true;,
    <link linkend="variable.request.vars.order"><parameter>$request_vars_order</parameter></link>
    n'a plus d'effets et la valeur de la directive de configuration
-   <literal>gpc_order</literal> de PHP est utilisée.
+   <literal>gpc_order</literal> de PHP est utilisÃ©e.
   </para>
  </note>
 </sect1>

@@ -16,7 +16,7 @@
 <example>
 <title>unregister_modifier</title>
 <programlisting>
-// nós não queremos que designers de template usem strip tags para os elementos
+// nÃ³s nÃ£o queremos que designers de template usem strip tags para os elementos
 
 $smarty->unregister_modifier("strip_tags");</programlisting>
 </example>

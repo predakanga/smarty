@@ -11,10 +11,10 @@
           </funcprototype>
          </funcsynopsis>
          <para>
-	 Essa funÁ„o pode ser usada para saÌda de uma mensagem de erro usando Smarty.
-	 O par‚metro <parameter>level</parameter> pode ser um dos valores usados 
-	 para a funÁ„o de php trigger_error(), ex.: E_USER_NOTICE,
-          E_USER_WARNING, etc. Por padr„o È E_USER_WARNING.
+	 Essa fun√ß√£o pode ser usada para sa√≠da de uma mensagem de erro usando Smarty.
+	 O par√¢metro <parameter>level</parameter> pode ser um dos valores usados 
+	 para a fun√ß√£o de php trigger_error(), ex.: E_USER_NOTICE,
+          E_USER_WARNING, etc. Por padr√£o √© E_USER_WARNING.
          </para>
 </sect1>
 <!-- Keep this comment at the end of the file

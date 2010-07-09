@@ -6,9 +6,9 @@
       <para>
        Isso habilita o <link
         linkend="chapter.debugging.console">debugging console</link>.
-       O console é uma janela de javascript que informa à você
-       sobre os arquivos de template incluídos e variáveis
-       destinadas para a página de template atual.
+       O console Ã© uma janela de javascript que informa Ã  vocÃª
+       sobre os arquivos de template incluÃ­dos e variÃ¡veis
+       destinadas para a pÃ¡gina de template atual.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

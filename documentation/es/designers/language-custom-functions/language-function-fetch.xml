@@ -15,7 +15,7 @@
      <entry>Tipo</entry>
      <entry>Requerido</entry>
      <entry>Default</entry>
-     <entry>DescripciÛn</entry>
+     <entry>Descripci√≥n</entry>
     </row>
    </thead>
    <tbody>
@@ -39,25 +39,25 @@
  <para>
   {fetch} es usado para obtener archivos de sistema local, http o ftp, y 
   mostrar el contenido. Si el nombre del archivo comienza con "http://", 
-  la p·gina del web site sera traida y mostrada. Si el nombre del archivo 
-  comienza con "ftp://", el archivo ser· obtenido del servidor ftp y 
+  la p√°gina del web site sera traida y mostrada. Si el nombre del archivo 
+  comienza con "ftp://", el archivo ser√° obtenido del servidor ftp y 
   mostrado. Para archivos locales, debe ser dada la ruta completa del 
   sistema de archivos, o una ruta relativa de el script php a ejecutar.
  </para>
  <para>
-  Si usted indica el atributo especial "assign", la salida de la funciÛn
+  Si usted indica el atributo especial "assign", la salida de la funci√≥n
   {fetch} se ira a una variable de template en vez de ser mostrada en el
  template.  (nuevo en Smarty 1.5.0)
  </para>
  <note>
-  <title>Nota TÈcnica</title>
+  <title>Nota T√©cnica</title>
   <para>
    Esto no soporta redirecionamento http, tenga la certeza de incluirlo 
    en la barra el seguimiento para ir a buscar donde sea necesario.
   </para>
  </note>
  <note>
-  <title>Nota TÈcnica</title>
+  <title>Nota T√©cnica</title>
   <para>
    Si tiene activada la seguridad en su template y usted estuviera
    recibiendo un archivo del sistema de archivos local, esto permitira 
@@ -87,7 +87,7 @@
   </programlisting>
  </example>
  <para>
- Ver tambiÈn <link linkend="language.function.capture">{capture}</link>,
+ Ver tambi√©n <link linkend="language.function.capture">{capture}</link>,
  <link linkend="language.function.eval">{eval}</link>
  y <link linkend="api.fetch">fetch()</link>.
  </para>

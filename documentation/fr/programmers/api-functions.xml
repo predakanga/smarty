@@ -3,7 +3,7 @@
 <!-- EN-Revision: 1.10 Maintainer: yannick Status: ready -->
 
 <chapter id="api.functions">
- <title>Méthodes</title>
+ <title>MÃ©thodes</title>
  &programmers.api-functions.api-append;
  &programmers.api-functions.api-append-by-ref;
  &programmers.api-functions.api-assign;

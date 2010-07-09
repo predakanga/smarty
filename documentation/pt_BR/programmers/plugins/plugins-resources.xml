@@ -3,16 +3,16 @@
 <!-- EN-Revision: 1.1 Maintainer: nobody Status: ready -->   
 <sect1 id="plugins.resources"><title>Recursos (Resources)</title>
     <para>
-     Os plugins de Recursos são como uma forma genérica de fornecer códigos fontes de template
+     Os plugins de Recursos sÃ£o como uma forma genÃ©rica de fornecer cÃ³digos fontes de template
      ou componentes de script PHP para a Smarty. Alguns exemplos de recursos:
-     banco de dados, LDAP, memória compartilhada, sockets, e assim por diante.
+     banco de dados, LDAP, memÃ³ria compartilhada, sockets, e assim por diante.
     </para>
 
     <para>
-     Há um total de 4 funções que precisam estar registradas
-     para cada tipo de recurso. Cada função receberá
-     o recurso requisitado como o primeiro parâmetro e o objeto da Smarty como o último parâmetro. O resto
-     dos parâmetros dependem da função.
+     HÃ¡ um total de 4 funÃ§Ãµes que precisam estar registradas
+     para cada tipo de recurso. Cada funÃ§Ã£o receberÃ¡
+     o recurso requisitado como o primeiro parÃ¢metro e o objeto da Smarty como o Ãºltimo parÃ¢metro. O resto
+     dos parÃ¢metros dependem da funÃ§Ã£o.
     </para>
 
     <funcsynopsis>
@@ -41,40 +41,40 @@
     </funcsynopsis>
 
     <para>
-     A primeira função deve devolver o recurso. Seu segundo parâmetro é uma variável passada por
-     referência onde o resultado seria armazenado.
-     A função deve retornar <literal>true</literal> se
-     ela está apta a devolver com sucesso o recurso e
-     caso contrário retorna <literal>false</literal>.
+     A primeira funÃ§Ã£o deve devolver o recurso. Seu segundo parÃ¢metro Ã© uma variÃ¡vel passada por
+     referÃªncia onde o resultado seria armazenado.
+     A funÃ§Ã£o deve retornar <literal>true</literal> se
+     ela estÃ¡ apta a devolver com sucesso o recurso e
+     caso contrÃ¡rio retorna <literal>false</literal>.
     </para>
 
     <para>
-     A segunda função deve devolver a última modificação do
+     A segunda funÃ§Ã£o deve devolver a Ãºltima modificaÃ§Ã£o do
      recurso requisitado (como um timestamp Unix). 
-     O segundo parâmetro é uma variável passada por referência onde o timestamp seria armazenado.
-     A função deve retornar <literal>true</literal>
+     O segundo parÃ¢metro Ã© uma variÃ¡vel passada por referÃªncia onde o timestamp seria armazenado.
+     A funÃ§Ã£o deve retornar <literal>true</literal>
      se o timestamp poderia ser determinado com sucesso,
-      e caso contrário retornaria <literal>false</literal>.
+      e caso contrÃ¡rio retornaria <literal>false</literal>.
     </para>
 
     <para>
-     A terceira função deve retornar <literal>true</literal> ou
+     A terceira funÃ§Ã£o deve retornar <literal>true</literal> ou
      <literal>false</literal>, dependendo do recurso requisitado
-     está seguro ou não. Esta função é usada
+     estÃ¡ seguro ou nÃ£o. Esta funÃ§Ã£o Ã© usada
      apenas para recursos de template mas ainda assim seria definida.
     </para>
 
     <para>
-     A quarta função deve retornar <literal>true</literal>
+     A quarta funÃ§Ã£o deve retornar <literal>true</literal>
      ou <literal>false</literal>, dependendo
-     do recurso requisitado ser confiável ou não.
-     Esta função é usada apenas para componentes de 
+     do recurso requisitado ser confiÃ¡vel ou nÃ£o.
+     Esta funÃ§Ã£o Ã© usada apenas para componentes de 
      script PHP requisitados pelas tags <command>include_php</command> ou
      <command>insert</command> com o atributo <structfield>src</structfield>.
      Entretanto, ela ainda assim mesmo seria definida para os recursos de template.
     </para>
     <para>
-     Veja também:
+     Veja tambÃ©m:
      <link linkend="api.register.resource">register_resource()</link>,
      <link linkend="api.unregister.resource">unregister_resource()</link>.
     </para>
@@ -124,13 +124,13 @@ function smarty_resource_db_timestamp($tpl_name, &amp;$tpl_timestamp, &amp;$smar
 
 function smarty_resource_db_secure($tpl_name, &amp;$smarty)
 {
-    // assume que todos os templates são seguros
+    // assume que todos os templates sÃ£o seguros
     return true;
 }
 
 function smarty_resource_db_trusted($tpl_name, &amp;$smarty)
 {
-    // não usado para templates
+    // nÃ£o usado para templates
 }
 ?&gt;</programlisting>
     </example>

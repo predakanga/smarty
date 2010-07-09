@@ -3,9 +3,9 @@
      <sect1 id="variable.plugins.dir">
       <title>$plugins_dir</title>
       <para>
-           Queste sono le directory dove Smarty andr‡ a cercare i plugin di cui
-           ha bisogno. Il default Ë "plugins" sotto la SMARTY_DIR. Se fornite
-           un percorso relativo, Smarty cercher‡ prima di tutto sotto la
+           Queste sono le directory dove Smarty andr√† a cercare i plugin di cui
+           ha bisogno. Il default √® "plugins" sotto la SMARTY_DIR. Se fornite
+           un percorso relativo, Smarty cercher√† prima di tutto sotto la
            SMARTY_DIR, poi sotto la directory corrente, infine sotto ogni directory
            compresa nell'include_path di PHP.
       </para>

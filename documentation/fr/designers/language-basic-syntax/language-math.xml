@@ -3,20 +3,20 @@
 <!-- EN-Revision: 1.5 Maintainer: gerald Status: ready -->
 
 <sect1 id="language.math">
- <title>Opérations mathématiques</title>
+ <title>OpÃ©rations mathÃ©matiques</title>
  <para>
-  Les opérations mathématiques peuvent être directement appliquées aux
+  Les opÃ©rations mathÃ©matiques peuvent Ãªtre directement appliquÃ©es aux
   variables.
  </para>
  <example>
-  <title>Exemples d'opérations mathématiques</title>
+  <title>Exemples d'opÃ©rations mathÃ©matiques</title>
   <programlisting>
 <![CDATA[
 {$foo+1}
 
 {$foo*$bar}
 
-{* quelques exemples plus compliqués *}
+{* quelques exemples plus compliquÃ©s *}
 
 {$foo->bar-$bar[1]*$baz->foo->bar()-3*7}
 
@@ -32,7 +32,7 @@
  <para>
   Voir aussi la fonction
   <link linkend="language.function.math"><varname>{math}</varname></link>
-  pour les équations complexes et
+  pour les Ã©quations complexes et
   <link linkend="language.function.eval"><varname>{eval}</varname></link>.
  </para>
 </sect1>

@@ -11,11 +11,11 @@
     <colspec colname="desc" />
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>requerido</entry>
       <entry>Default</entry>
-      <entry>Descripción</entry>
+      <entry>DescripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -24,23 +24,23 @@
       <entry>integer</entry>
       <entry>No</entry>
       <entry>4</entry>
-      <entry>Este defíne con cuantos carácteres endentar.</entry>
+      <entry>Este defÃ­ne con cuantos carÃ¡cteres endentar.</entry>
       </row>
       <row>
        <entry>2</entry>
        <entry>string</entry>
        <entry>No</entry>
        <entry>(un espacio)</entry>
-       <entry>Este defíne cual carácter va a ser usado para endentar.</entry>
+       <entry>Este defÃ­ne cual carÃ¡cter va a ser usado para endentar.</entry>
       </row>
      </tbody>
     </tgroup>
   </informaltable>
   <para>
     Esta endenta una cadena en cada linea, el default es 4.
-    Como parámetro opcional, usted puede especificar el número de
-    carácteres para endentar. Como segundo parámetro opcional, 
-    usted puede especificar el carácter que desea usar para endentar. 
+    Como parÃ¡metro opcional, usted puede especificar el nÃºmero de
+    carÃ¡cteres para endentar. Como segundo parÃ¡metro opcional, 
+    usted puede especificar el carÃ¡cter que desea usar para endentar. 
     (Use "\t" para tabs.)
   </para>
   <example>
@@ -97,7 +97,7 @@ Statistics show that teen pregnancy drops off significantly after 25.
    </screen>
   </example>
   <para>
-   ver también <link linkend="language.modifier.strip">strip</link>
+   ver tambiÃ©n <link linkend="language.modifier.strip">strip</link>
    y <link linkend="language.modifier.spacify">spacify</link>.
   </para>
  </sect1>

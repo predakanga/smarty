@@ -6,7 +6,7 @@
       $security true/false, el default es false. Security es bueno 
       para situaciones cuando usted tiene partes inconfiables editando 
       el template (via ftp por ejemplo) y usetd quiere reducir los 
-      riesgos de comportamiento de seguridad del sistema a travÈs del 
+      riesgos de comportamiento de seguridad del sistema a trav√©s del 
       lenguaje del template. Al habilitar la seguridad forza las siguientes 
       reglas del lenguaje del template, a menos que especifique control con 
       <link linkend="variable.security.settings">$security_settings</link>:
@@ -14,7 +14,7 @@
       <itemizedlist>
          <listitem>
           <para>
-           Si <link linkend="variable.php.handling">$php_handling</link> est· 
+           Si <link linkend="variable.php.handling">$php_handling</link> est√° 
            asignado a SMARTY_PHP_ALLOW, este es implicitamente cambiado a 
            SMARTY_PHP_PASSTHRU
           </para>

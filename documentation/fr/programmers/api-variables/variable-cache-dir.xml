@@ -5,31 +5,31 @@
 <sect1 id="variable.cache.dir">
  <title>$cache_dir</title>
  <para>
-  Il s'agit du nom du répertoire où les caches des templates
-  sont stockés. Par défaut il s'agit de
+  Il s'agit du nom du rÃ©pertoire oÃ¹ les caches des templates
+  sont stockÃ©s. Par dÃ©faut il s'agit de
   <filename class="directory">./cache</filename>, ce qui signifie
-  que Smarty va chercher ce répertoire
-  dans le même répertoire que le script PHP en cours d'exécution.
-  <emphasis role="bold">Ce dossier doit être accessible en écriture par
+  que Smarty va chercher ce rÃ©pertoire
+  dans le mÃªme rÃ©pertoire que le script PHP en cours d'exÃ©cution.
+  <emphasis role="bold">Ce dossier doit Ãªtre accessible en Ã©criture par
    le serveur web</emphasis>
   (<link linkend="installing.smarty.basic">Voir l'installation</link> pour plus d'informations).
   Vous pouvez aussi utiliser votre propre fonction de
   <link linkend="section.template.cache.handler.func">gestion de cache
-  personnalisé</link> pour contrôler les fichiers de cache, qui ignorera
+  personnalisÃ©</link> pour contrÃ´ler les fichiers de cache, qui ignorera
   cette configuration.
   Voir aussi <link linkend="variable.use.sub.dirs"><parameter>$use_sub_dirs</parameter></link>.
  </para>
  <note>
   <title>Note technique</title>
   <para>
-   Ce réglage doit être soit un chemin absolu, soit un chemin
-   relatif. include_path n'a aucune influence lors de l'écriture des fichiers.
+   Ce rÃ©glage doit Ãªtre soit un chemin absolu, soit un chemin
+   relatif. include_path n'a aucune influence lors de l'Ã©criture des fichiers.
   </para>
  </note>
  <note>
   <title>Note technique</title>
   <para>
-   Il n'est pas conseillé de mettre ce répertoire
+   Il n'est pas conseillÃ© de mettre ce rÃ©pertoire
    dans l'arborescence Web.
   </para>
  </note>

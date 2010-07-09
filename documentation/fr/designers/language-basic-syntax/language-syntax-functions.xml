@@ -6,9 +6,9 @@
  <title>Fonctions</title>
  <para>
   Les balises Smarty affichent une <link linkend="language.variables">variable</link>
-  ou invoquent une fonction. Elles sont appelées
-  lorsqu'elles sont entourées, ainsi que leurs
-  <link linkend="language.syntax.attributes">paramètres</link>, des délimiteurs Smarty.
+  ou invoquent une fonction. Elles sont appelÃ©es
+  lorsqu'elles sont entourÃ©es, ainsi que leurs
+  <link linkend="language.syntax.attributes">paramÃ¨tres</link>, des dÃ©limiteurs Smarty.
   Par exemple : <literal>{nomfonction attr1='val' attr2='val'}</literal>.
  </para>
  <example>
@@ -33,7 +33,7 @@
  <listitem>
  <para>
   Les <link linkend="language.builtin.functions">fonctions natives</link> et les 
-  <link linkend="language.custom.functions">fonctions utilisateurs</link> ont toutes deux la même
+  <link linkend="language.custom.functions">fonctions utilisateurs</link> ont toutes deux la mÃªme
   syntaxe, dans les templates.
  </para></listitem>
 
@@ -44,15 +44,15 @@
   comme <link linkend="language.function.if"><varname>{if}</varname></link>,
   <link linkend="language.function.section"><varname>{section}</varname></link> et
   <link linkend="language.function.strip"><varname>{strip}</varname></link>.
-  Il n'y a aucune raison à ce qu'elles soient modifiées ou changées.
+  Il n'y a aucune raison Ã  ce qu'elles soient modifiÃ©es ou changÃ©es.
  </para></listitem>
 
 <listitem>
  <para>
   Les fonctions utilisateurs sont des fonctions <emphasis role="bold">additionnelles</emphasis>,
-  implémentées par l'intermédiaire de <link linkend="plugins">plugins</link>.
-  Elles peuvent être modifiées pour correspondre
-  à vos besoins, et vous pouvez en créer de nouvelles.
+  implÃ©mentÃ©es par l'intermÃ©diaire de <link linkend="plugins">plugins</link>.
+  Elles peuvent Ãªtre modifiÃ©es pour correspondre
+  Ã  vos besoins, et vous pouvez en crÃ©er de nouvelles.
   <link linkend="language.function.html.options"><varname>{html_options}</varname></link> et
   <link linkend="language.function.popup"><varname>{popup}</varname></link>
   sont deux exemples de fonctions utilisateurs.

@@ -7,7 +7,7 @@
    variable en el template. Por Ejemplo, cada variable HTML-escape por 
    default, usa el arreglo('escape:"htmlall"'); Para hacer que las variables 
    excenten los modificadores por default, pase el modificador especial 
-   "smarty" con un valor de par·metro "nodefaults" modificando esto, tal
+   "smarty" con un valor de par√°metro "nodefaults" modificando esto, tal
    como {$var|smarty:nodefaults}.
       </para>
 </sect1>

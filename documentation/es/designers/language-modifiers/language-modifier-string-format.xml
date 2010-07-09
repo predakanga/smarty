@@ -11,11 +11,11 @@
     <colspec colname="desc"/>
     <thead>
      <row>
-      <entry>Posición del Parametro</entry>
+      <entry>PosiciÃ³n del Parametro</entry>
       <entry>Tipo</entry>
       <entry>Requerido</entry>
       <entry>Default</entry>
-      <entry>Descripción</entry>
+      <entry>DescripciÃ³n</entry>
      </row>
     </thead>
     <tbody>
@@ -30,7 +30,7 @@
    </tgroup>
   </informaltable>
   <para>
-   Esta es una manera de formatear cadenas, como números decimales y otros.
+   Esta es una manera de formatear cadenas, como nÃºmeros decimales y otros.
    Use la sintaxis de <ulink url="&url.php-manual;sprintf">sprintf</ulink> para formatearlo.
   </para>
   <example>
@@ -66,7 +66,7 @@ $smarty->assign('number', 23.5787446);
    </screen>
   </example>
     <para>
-    Ver también <link linkend="language.modifier.date.format">date_format</link>.
+    Ver tambiÃ©n <link linkend="language.modifier.date.format">date_format</link>.
     </para>
 </sect1>
 <!-- Keep this comment at the end of the file

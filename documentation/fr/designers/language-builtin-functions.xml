@@ -6,16 +6,16 @@
  <title>Fonctions natives</title>
  <para>
   Smarty est fourni en standard avec plusieurs fonctions natives.
-  Ces fonctions natives sont partie intégrante du moteur de Smarty.
-  Vous ne pouvez pas créer de
+  Ces fonctions natives sont partie intÃ©grante du moteur de Smarty.
+  Vous ne pouvez pas crÃ©er de
   <link linkend="language.custom.functions">fonctions utilisateurs</link>
-  qui portent le même nom qu'une fonction native et vous ne pouvez pas non
+  qui portent le mÃªme nom qu'une fonction native et vous ne pouvez pas non
   plus en modifier le comportement.
  </para>
  <para>
   Quelques-unes de ces fonctions ont un attribut
-  <parameter>assign</parameter> qui récupère le résultat de la
-  fonction et la place dans une variable nommée dans le template plutôt que
+  <parameter>assign</parameter> qui rÃ©cupÃ¨re le rÃ©sultat de la
+  fonction et la place dans une variable nommÃ©e dans le template plutÃ´t que
   de l'afficher ; tout comme la fonction
   <link linkend="language.function.assign"><varname>{assign}</varname></link>.
  </para>

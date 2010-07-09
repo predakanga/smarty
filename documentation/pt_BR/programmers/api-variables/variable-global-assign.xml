@@ -4,22 +4,22 @@
 <sect1 id="variable.global.assign">
       <title>$global_assign</title>
       <para>
-       Essa È a lista de vari·veis que est„o sempre implicitamente fixadas
-       para o template engine. Isso est· acessÌvel para fazer vari·veis
-       globais ou vari·veis do servidor disponÌveis para todo o template
-       sem ter que fix·-las manualmente. Cada elemento em
-       $global_assign deve ser um nome de uma vari·vel global,
-       ou um par de chave/valor, onde a chave È o nome do array global
-       array e o valor È o array de vari·veis fixadas deste array global. $SCRIPT_NAME È 
-       globalmente fixado por padr„o
+       Essa √© a lista de vari√°veis que est√£o sempre implicitamente fixadas
+       para o template engine. Isso est√° acess√≠vel para fazer vari√°veis
+       globais ou vari√°veis do servidor dispon√≠veis para todo o template
+       sem ter que fix√°-las manualmente. Cada elemento em
+       $global_assign deve ser um nome de uma vari√°vel global,
+       ou um par de chave/valor, onde a chave √© o nome do array global
+       array e o valor √© o array de vari√°veis fixadas deste array global. $SCRIPT_NAME √© 
+       globalmente fixado por padr√£o
        para $HTTP_SERVER_VARS.
       </para>
 	 <note>
-	 <title>Notas TÈcnicas</title>
+	 <title>Notas T√©cnicas</title>
 	 <para>
-       Vari·veis de servidor podem ser acessadas atravÈs da vari·vel
-       $smarty, como {$smarty.server.SCRIPT_NAME}. Veja a seÁ„o
-       da vari·vel
+       Vari√°veis de servidor podem ser acessadas atrav√©s da vari√°vel
+       $smarty, como {$smarty.server.SCRIPT_NAME}. Veja a se√ß√£o
+       da vari√°vel
        <link linkend="language.variables.smarty">$smarty</link>.
       </para>
 	 </note>

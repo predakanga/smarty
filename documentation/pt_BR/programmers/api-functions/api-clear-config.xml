@@ -9,8 +9,8 @@
    </methodsynopsis>
 
 			<para>
-			Isso limpa todas as vari·veis de configuraÁ„o fixadas. Se um nome de vari·vel
-			È fornecido, somente esta vari·vel È apagada.
+			Isso limpa todas as vari√°veis de configura√ß√£o fixadas. Se um nome de vari√°vel
+			√© fornecido, somente esta vari√°vel √© apagada.
 			</para>
 <example>
 <title>clear_config</title>

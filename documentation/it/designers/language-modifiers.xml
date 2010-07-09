@@ -6,7 +6,7 @@
   I modificatori delle variabili si possono applicare alle variabili, alle
   funzioni utente o a stringhe. Per applicare un modificatore bisogna indicare
   il valore seguito da <literal>|</literal> (pipe) e dal nome del modificatore.
-  Un modificatore puÚ accettare parametri addizionali che modificano il suo
+  Un modificatore pu√≤ accettare parametri addizionali che modificano il suo
   comportamento. Questi parametri seguono il nome del modificatore e sono
   separati da <literal>:</literal> (due punti).
  </para>
@@ -30,10 +30,10 @@ Topic: {$topic|truncate:40:"..."}
  </example>
  <para>
   Se applicate un modificatore ad un array invece che ad un singolo valore,
-  il modificatore verr‡ applicato ad ogni valore dell'array. Se volete che
+  il modificatore verr√† applicato ad ogni valore dell'array. Se volete che
   il modificatore lavori sull'intero array considerandolo un valore unico,
   dovete premettere al nome del modificatore un simbolo <literal>@</literal>,
-  cosÏ: <literal>{$articleTitle|@count}</literal> (questo stampa il numero
+  cos√¨: <literal>{$articleTitle|@count}</literal> (questo stampa il numero
   di elementi nell'array $articleTitle).
  </para>
  <para>
@@ -43,13 +43,13 @@ Topic: {$topic|truncate:40:"..."}
   oppure possono essere registrati esplicitamente (vedere <link
   linkend="api.register.modifier">register_modifier</link>). Inoltre tutte
   le funzioni php possono essere usate implicitamente come modificatori.
-  (L'esempio <literal>@count</literal> visto sopra usa in realt‡ la funzione
+  (L'esempio <literal>@count</literal> visto sopra usa in realt√† la funzione
   php count e non un modificatore di Smarty). L'uso delle funzioni php
-  come modificatori porta con sÈ due piccoli trabocchetti: Primo: A volte
-  l'ordine dei parametri delle funzioni non Ë quello desiderato 
-  (<literal>{"%2.f"|sprintf:$float}</literal> funziona, ma non Ë molto
-  intuitivo. Pi˘ facile Ë <literal>{$float|string_format:"%2.f"}</literal>,
-  che Ë fornito da Smarty). Secondo: con <link linkend="variable.security">$security</link>
+  come modificatori porta con s√© due piccoli trabocchetti: Primo: A volte
+  l'ordine dei parametri delle funzioni non √® quello desiderato 
+  (<literal>{"%2.f"|sprintf:$float}</literal> funziona, ma non √® molto
+  intuitivo. Pi√π facile √® <literal>{$float|string_format:"%2.f"}</literal>,
+  che √® fornito da Smarty). Secondo: con <link linkend="variable.security">$security</link>
   attivato, tutte le funzioni php che si vogliono usare come modificatori
   devono essere dichiarate affidabili nell'array <link linkend="variable.security.settings">
   $security_settings['MODIFIER_FUNCS']</link>.

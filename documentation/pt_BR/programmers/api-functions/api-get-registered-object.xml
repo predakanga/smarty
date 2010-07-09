@@ -10,8 +10,8 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-				Isso retorna uma referência para um objeto registrado.
-				Isso é útil para dentro de uma função customizada quando você
+				Isso retorna uma referÃªncia para um objeto registrado.
+				Isso Ã© Ãºtil para dentro de uma funÃ§Ã£o customizada quando vocÃª
 				precisa acessar diretamente um objeto registrado.
 			</para>
 <example>

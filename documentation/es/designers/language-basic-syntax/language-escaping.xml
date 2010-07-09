@@ -7,12 +7,12 @@
   ingonar sections o algun otro tipo analisis de sintaxis. Un ejemplo clasico 
   es con el codigo JavaScript o CSS incrustado en el template. El problema se
   origina cuando aquellos lenguajes que utilizan los caracteres { y } los
-  cuales son también los <link
+  cuales son tambiÃ©n los <link
   linkend="language.function.ldelim">delimitadores</link> por default para Smarty.
  </para>
 
  <para>
-  Esta puede ser una simple situación separando enteramente su codigo JavaScript 
+  Esta puede ser una simple situaciÃ³n separando enteramente su codigo JavaScript 
   y CSS dentro de un archivo personal y utilizar el metodo standar del HTML para 
   el acceso.
  </para>
@@ -63,7 +63,7 @@ dosomething();
   </programlisting>
  </example>
   <para>
-     Ver También <link linkend="language.modifier.escape">escape modifier</link>
+     Ver TambiÃ©n <link linkend="language.modifier.escape">escape modifier</link>
   </para>
 </sect1>
 <!-- Keep this comment at the end of the file

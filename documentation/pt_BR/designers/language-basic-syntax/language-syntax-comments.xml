@@ -2,20 +2,20 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.2 Maintainer: thomasgm Status: ready -->
    <sect1 id="language.syntax.comments">
-    <title>Coment·rios</title>
+    <title>Coment√°rios</title>
     <para>
-     Os coment·rios do template ficam entre asteriscos dentro de delimitadores, 
-	 exemplo: {* este È um coment·rio *}. Coment·rios do Smarty n„o s„o 
-	 exibidos no resultado final do template. Eles s„o usados para fazer 
-	 anotaÁıes internas nos templates.
+     Os coment√°rios do template ficam entre asteriscos dentro de delimitadores, 
+	 exemplo: {* este √© um coment√°rio *}. Coment√°rios do Smarty n√£o s√£o 
+	 exibidos no resultado final do template. Eles s√£o usados para fazer 
+	 anota√ß√µes internas nos templates.
     </para>
     <example>
-     <title>Coment·rios</title>
+     <title>Coment√°rios</title>
      <programlisting>
 <![CDATA[
 {* Smarty *}
 
-{* inclua o arquivo de cabeÁalho aqui *}
+{* inclua o arquivo de cabe√ßalho aqui *}
 {include file="cabecalho.tpl"}
 
 {include file=$arquivoInclude}

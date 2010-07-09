@@ -12,7 +12,7 @@
    <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Restituisce il valore della variabile di configurazione data, se è stata
+   Restituisce il valore della variabile di configurazione data, se Ã¨ stata
    caricata. Se non viene passato un parametro viene restituito un array
    di tutte le variabili di configurazione caricate.
   </para>

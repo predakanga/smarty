@@ -3,15 +3,15 @@
    <sect1 id="plugins.resources"><title>Fuentes</title>
     <para>
      Las fuentes de los plugins son como una forma generica de suministrar
-     cÛdigo fuente de template o componentes de script PHP al Smarty. Algunos 
+     c√≥digo fuente de template o componentes de script PHP al Smarty. Algunos 
      ejemplos de fuentes: base de datos, LDAP, memoria compartida, sockets, etc.
     </para>
 
     <para>
      Existe un total de 4 funciones que necesitan estar registradas para 
-     cada tipo de fuente. Cada funciÛn recibir· el fuente requerido como 
-     primer par·metro y el objeto de Smarty como ultimo par·metro.
-     El resto de los par·metros dependen de la funciÛn.
+     cada tipo de fuente. Cada funci√≥n recibir√° el fuente requerido como 
+     primer par√°metro y el objeto de Smarty como ultimo par√°metro.
+     El resto de los par√°metros dependen de la funci√≥n.
     </para>
 
     <funcsynopsis>
@@ -40,40 +40,40 @@
     </funcsynopsis>
 
     <para>
-     La primera funciÛn debe devolver el recurso. Su segundo par·metro 
+     La primera funci√≥n debe devolver el recurso. Su segundo par√°metro 
      es una variable pasada por referencia donde el resultado debe ser 
-     almacenado. La funciÛn debe retornar <literal>true</literal> si 
+     almacenado. La funci√≥n debe retornar <literal>true</literal> si 
      esta pudo recuperar satisfactoriamente el recurso y en caso contrario
      retornara <literal>false</literal>.
     </para>
 
     <para>
-     La segunda funciÛn debe devolver la ultima modificaciÛn del
-     recurso requerido (como un timestamp Unix). El segundo par·metro 
+     La segunda funci√≥n debe devolver la ultima modificaci√≥n del
+     recurso requerido (como un timestamp Unix). El segundo par√°metro 
      es una variable pasada por referencia donde el timestamp sera
-     almacenado. La funciÛn debe retornar  <literal>true</literal>
+     almacenado. La funci√≥n debe retornar  <literal>true</literal>
      si el timestamp pudo ser determinado satisfactoriamente, y en 
      caso contrario retornara <literal>false</literal>.
     </para>
 
     <para>
-     La tercera funciÛn debe retornar <literal>true</literal> o
+     La tercera funci√≥n debe retornar <literal>true</literal> o
      <literal>false</literal>, dependiendo si el recurso requerido
-     es seguro o no. Esta funciÛn es usada solo para recursos de 
+     es seguro o no. Esta funci√≥n es usada solo para recursos de 
      template pero esta debe ser definida.
     </para>
 
     <para>
-     La cuarta funciÛn debe retornar <literal>true</literal> o
+     La cuarta funci√≥n debe retornar <literal>true</literal> o
      <literal>false</literal>, dependiendo si el recurso requerido 
-     es seguro o no. Esta funciÛn es usada solo para componetes de 
+     es seguro o no. Esta funci√≥n es usada solo para componetes de 
      script de PHP solicitado por las etiquetas 
      <command>include_php</command> o <command>insert</command>
      con el atributo <structfield>src</structfield>. Sin embargo, 
      este debe ser definido para los recurso del template.
     </para>
     <para>
-     Vea tambiÈn
+     Vea tambi√©n
      <link linkend="api.register.resource">register_resource()</link>,
      <link linkend="api.unregister.resource">unregister_resource()</link>.
     </para>

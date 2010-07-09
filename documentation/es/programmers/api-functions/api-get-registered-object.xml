@@ -6,17 +6,17 @@
   <refpurpose>Este retorna una referencia para un objeto registrado.</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>array</type><methodname>get_registered_object</methodname>
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Este es útil dentro de una función habitual cuando usted
+   Este es Ãºtil dentro de una funciÃ³n habitual cuando usted
    necesita acesar directamente a un 
    <link linkend="api.register.object">objeto registrado</link>.
    Ver <link linkend="advanced.features.objects">objects</link> para mas
-   información;
+   informaciÃ³n;
   </para>
   <example>
    <title>get_registered_object()</title>
@@ -36,7 +36,7 @@ function smarty_block_foo($params, &$smarty)
    </programlisting>
   </example>
     <para>
-     Ver también 
+     Ver tambiÃ©n 
      <link linkend="api.register.object">register_object()</link>,
      <link linkend="api.unregister.object">unregister_object()</link>
      y

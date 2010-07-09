@@ -3,10 +3,10 @@
 <refentry id="api.unregister.modifier">
  <refnamediv>
   <refname>unregister_modifier()</refname>
-  <refpurpose>des-registrar din·micamente un modificador de plugin</refpurpose>
+  <refpurpose>des-registrar din√°micamente un modificador de plugin</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>DescripciÛn </title>
+  <title>Descripci√≥n </title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_modifier</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
@@ -28,7 +28,7 @@ $smarty->unregister_modifier("strip_tags");
    </programlisting>
   </example>
    <para>
-    Ver tambiÈn <link linkend="api.register.modifier">register_modifier()</link>
+    Ver tambi√©n <link linkend="api.register.modifier">register_modifier()</link>
     y <link linkend="plugins.modifiers">Plugin modifiers</link>,
    </para>
 

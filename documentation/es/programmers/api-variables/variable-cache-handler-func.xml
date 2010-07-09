@@ -3,10 +3,10 @@
      <sect1 id="variable.cache.handler.func">
       <title>$cache_handler_func</title>
       <para>
-       Usted puede proporcionar una función por default para manipular
+       Usted puede proporcionar una funciÃ³n por default para manipular
        archivos de cache en vez de usar el metodo incrustado usando el 
        <link linkend="variable.cache.dir">$cache_dir</link>. 
-       Para mas detalles vea la sección
+       Para mas detalles vea la secciÃ³n
        <link linkend="section.template.cache.handler.func">
        cache handler function section</link>.
       </para>

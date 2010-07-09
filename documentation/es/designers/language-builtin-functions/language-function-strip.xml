@@ -3,7 +3,7 @@
 		<sect1 id="language.function.strip">
    <title>{strip}</title>
 			<para>
-   Muchas veces el diseñador de web tiene problemas con los espacios en
+   Muchas veces el diseÃ±ador de web tiene problemas con los espacios en
    blanco y retornos de carro que afectan la salida del HTML 
    (browser "features"), si usted tiene que colocar todas sus etiquetas 
    juntas para tener los resultados deseados. Esto normalmente termina 
@@ -17,17 +17,17 @@
    de que los espacios en blanco extras le causen problemas.
 			</para>
 			<note>
-			<title>Nota Técnica</title>
+			<title>Nota TÃ©cnica</title>
 			<para>
     {strip}{/strip} no afeta el contenido de las variables del template.
-    Vea la función <link linkend="language.modifier.strip">strip modifier</link>.
+    Vea la funciÃ³n <link linkend="language.modifier.strip">strip modifier</link>.
 			</para>
 			</note>
 <example>
  <title>{strip} tags</title>
   <programlisting>
 <![CDATA[
-{* El siguiente código se ejecutara todo junto en una sola linea de salida *}
+{* El siguiente cÃ³digo se ejecutara todo junto en una sola linea de salida *}
 {strip}
 <table border='0'>
  <tr>
@@ -58,7 +58,7 @@
   resultado deseado.
 		</para>
    <para>
-     Vea También <link linkend="language.modifier.strip">strip modifier</link>
+     Vea TambiÃ©n <link linkend="language.modifier.strip">strip modifier</link>
    </para>
 </sect1>
 

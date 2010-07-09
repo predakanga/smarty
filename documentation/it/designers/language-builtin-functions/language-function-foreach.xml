@@ -22,14 +22,14 @@
                     <row>
                         <entry>from</entry>
                         <entry>array</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Array sul quale viene eseguito il ciclo</entry>
                     </row>
                     <row>
                         <entry>item</entry>
                         <entry>stringa</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>Nome della variabile che rappresenta
                         	l'elemento attuale</entry>
@@ -46,7 +46,7 @@
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
-						<entry>Nome del ciclo foreach per l'accesso alle sue propriet‡</entry>
+						<entry>Nome del ciclo foreach per l'accesso alle sue propriet√†</entry>
                     </row>
                 </tbody>
                 </tgroup>
@@ -55,16 +55,16 @@
 			I cicli <emphasis>foreach</emphasis> sono un'alternativa ai cicli
 			<emphasis>section</emphasis>. <emphasis>foreach</emphasis> si usa
 			per ciclare su un singolo array associativo. La sintassi di
-			<emphasis>foreach</emphasis> Ë molto pi˘ semplice di
-			<emphasis>session</emphasis>, ma in compenso puÚ essere usata solo
+			<emphasis>foreach</emphasis> √® molto pi√π semplice di
+			<emphasis>session</emphasis>, ma in compenso pu√≤ essere usata solo
 			per un array singolo. I tag <emphasis>foreach</emphasis> devono
 			essere chiusi con <emphasis>/foreach</emphasis>. I parametri
 			obbligatori sono <emphasis>from</emphasis> e <emphasis>item</emphasis>.
-			Il nome del ciclo foreach puÚ essere quello che preferite, composto
+			Il nome del ciclo foreach pu√≤ essere quello che preferite, composto
 			di lettere, numeri e underscore. I cicli <emphasis>foreach</emphasis>
 			possono essere nidificati, ma i nomi dei cicli nidificati devono
 			essere diversi tra di loro. La variabile <emphasis>from</emphasis>
-			(di solito un array di valori) determina quante volte verr‡ eseguito
+			(di solito un array di valori) determina quante volte verr√† eseguito
 			il ciclo <emphasis>foreach</emphasis>.
 			<emphasis>foreachelse</emphasis> viene eseguito quando non ci sono
 			valori nella variabile <emphasis>from</emphasis>.
@@ -73,7 +73,7 @@
 <title>foreach</title>
 <programlisting>
 
-{* questo esempio stamper‡ tutti i valori dell'array $custid *}
+{* questo esempio stamper√† tutti i valori dell'array $custid *}
 {foreach from=$custid item=curr_id}
 	id: {$curr_id}&lt;br&gt;
 {/foreach}
@@ -90,7 +90,7 @@ id: 1002&lt;br&gt;</programlisting>
 <programlisting>
 {* key contiene la chiave per ogni valore del ciclo
 
-l'assegnazione puÚ essere qualcosa del genere:
+l'assegnazione pu√≤ essere qualcosa del genere:
 
 $smarty->assign("contacts", array(array("phone" =&gt; "1", "fax" =&gt; "2", "cell" =&gt; "3"),
       array("phone" =&gt; "555-4444", "fax" =&gt; "555-3333", "cell" =&gt; "760-1234")));
@@ -114,9 +114,9 @@ cell: 760-1234&lt;br&gt;</programlisting>
 </example>
 
 		<para>
-		I cicli foreach hanno anche le proprie variabili che gestiscono le propriet‡
-		del foreach. Queste vengono indicate cosÏ: {$smarty.foreach.foreachname.varname},
-		dove foreachname Ë il nome indicato come attributo <emphasis>name</emphasis>
+		I cicli foreach hanno anche le proprie variabili che gestiscono le propriet√†
+		del foreach. Queste vengono indicate cos√¨: {$smarty.foreach.foreachname.varname},
+		dove foreachname √® il nome indicato come attributo <emphasis>name</emphasis>
 		del foreach
 		</para>
 
@@ -127,7 +127,7 @@ cell: 760-1234&lt;br&gt;</programlisting>
         	iteration si usa per mostrare l'iterazione corrente del ciclo.
 			</para>
 			<para>
-			iteration comincia sempre per 1 ed Ë incrementata di uno
+			iteration comincia sempre per 1 ed √® incrementata di uno
 			ad ogni iterazione.
 			</para>
 			</sect2>
@@ -135,14 +135,14 @@ cell: 760-1234&lt;br&gt;</programlisting>
 			<sect2 id="foreach.property.first">
 			<title>first</title>
 			<para>
-        	<emphasis>first</emphasis> vale true quando l'iterazione attuale Ë la prima del ciclo.
+        	<emphasis>first</emphasis> vale true quando l'iterazione attuale √® la prima del ciclo.
 			</para>
 			</sect2>
 
 			<sect2 id="foreach.property.last">
 			<title>last</title>
 			<para>
-        	<emphasis>last</emphasis> vale true quando l'iterazione attuale Ë l'ultima del ciclo.
+        	<emphasis>last</emphasis> vale true quando l'iterazione attuale √® l'ultima del ciclo.
 			</para>
 			</sect2>
 
@@ -150,9 +150,9 @@ cell: 760-1234&lt;br&gt;</programlisting>
 			<title>show</title>
 			<para>
         	<emphasis>show</emphasis> si usa come parametro per il foreach.
-        	<emphasis>show</emphasis> Ë un valore booleano, true o false. Quando
-        	Ë false, il foreach non verr‡ visualizzato. Se Ë presente un
-        	foreachelse, verr‡ visualizzato al suo posto.
+        	<emphasis>show</emphasis> √® un valore booleano, true o false. Quando
+        	√® false, il foreach non verr√† visualizzato. Se √® presente un
+        	foreachelse, verr√† visualizzato al suo posto.
 			</para>
 
 			</sect2>
@@ -160,7 +160,7 @@ cell: 760-1234&lt;br&gt;</programlisting>
 			<title>total</title>
 			<para>
 			<emphasis>total</emphasis> si usa per visualizzare il numero di iterazioni che il
-			ciclo foreach effettuer‡. PuÚ essere usato all'interno o dopo il foreach.
+			ciclo foreach effettuer√†. Pu√≤ essere usato all'interno o dopo il foreach.
 			</para>
 			</sect2>
 

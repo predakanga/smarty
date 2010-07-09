@@ -5,33 +5,33 @@
 <sect1 id="variable.compile.id">
  <title>$compile_id</title>
  <para>
-  Identifiant persistant du compilateur. On peut passer le même
+  Identifiant persistant du compilateur. On peut passer le mÃªme
   <parameter>$compile_id</parameter> a chaque appel de fonction mais une
-  alternative consiste à régler ce
-  <parameter>$compile_id</parameter>, qui sera utilisé implicitement.
+  alternative consiste Ã  rÃ©gler ce
+  <parameter>$compile_id</parameter>, qui sera utilisÃ© implicitement.
  </para>
  <para>
   Avec un <parameter>$compile_id</parameter>, vous pouvez contourner la limitation qui fait
-  que vous ne pouvez pas utiliser le même
+  que vous ne pouvez pas utiliser le mÃªme
   <link linkend="variable.compile.dir"><parameter>$compile_dir</parameter></link> pour
-  différents <link linkend="variable.template.dir"><parameter>$template_dirs</parameter></link>.
-  Si vous définissez un <parameter>$compile_id</parameter> distinct pour
+  diffÃ©rents <link linkend="variable.template.dir"><parameter>$template_dirs</parameter></link>.
+  Si vous dÃ©finissez un <parameter>$compile_id</parameter> distinct pour
   chaque <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>,
-  alors Smarty indique aux templates compilés à part par leur
+  alors Smarty indique aux templates compilÃ©s Ã  part par leur
   <parameter>$compile_id</parameter>.
  </para>
  <para>
-  Si vous avez par exemple un <link linkend="plugins.prefilters.postfilters">pré-filtre</link>
+  Si vous avez par exemple un <link linkend="plugins.prefilters.postfilters">prÃ©-filtre</link>
   qui traduit vos templates au moment de la compilation, alors, vous devriez utiliser le langage
   courant comme <parameter>$compile_id</parameter> et vous devriez obtenir un jeu
-  de templates compilés pour chaque langage que vous utiliserez.
+  de templates compilÃ©s pour chaque langage que vous utiliserez.
  </para>
  <para>
-  Un autre exemple serait d'utiliser le même dossier de compilation
-  à travers de multiples domaines / vhosts.
+  Un autre exemple serait d'utiliser le mÃªme dossier de compilation
+  Ã  travers de multiples domaines / vhosts.
  </para>
  <example>
-  <title>$compile_id dans un environement d'hôte virtuel</title>
+  <title>$compile_id dans un environement d'hÃ´te virtuel</title>
   <programlisting role="php">
 <![CDATA[
 <?php

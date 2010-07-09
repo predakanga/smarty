@@ -6,7 +6,7 @@
   <refpurpose>Retorna la salida del template</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>string</type><methodname>fetch</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
@@ -18,10 +18,10 @@
    <link linkend="api.display">desplegarla</link>.
     Proporcionando un tipo y path valido 
     <link linkend="template.resources">template resource</link>.
-    Como un segundo parámetro opcional, usted puede pasar el
+    Como un segundo parÃ¡metro opcional, usted puede pasar el
     identificador de cache.
     vea el <link linkend="caching">caching section</link> para 
-    mayor información.
+    mayor informaciÃ³n.
   </para>
   &parameter.compileid;
 
@@ -102,7 +102,7 @@ numbered word you have read
 ]]>
     </programlisting>
     <para>
-     y el script de PHP usando la función 
+     y el script de PHP usando la funciÃ³n 
      <ulink url="&url.php-manual;function.mail">mail()</ulink> 
     </para>
     <programlisting role="php">
@@ -123,7 +123,7 @@ mail($contact['email'], 'Subject', $smarty->fetch('email_body.tpl'));
   </para>
 
   <para>
-   Ver también
+   Ver tambiÃ©n
    <link linkend="language.function.fetch">{fetch}</link>
    <link linkend="api.display">display()</link>,
    <link linkend="language.function.eval">{eval}</link>,

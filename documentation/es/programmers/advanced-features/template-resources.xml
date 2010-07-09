@@ -20,7 +20,7 @@
      <link linkend="variable.template.dir">$template_dir</link> no requieren 
      recursos del template, aunque usted puede usar el file: resource for 
      consistancy(recurso por consistencia). Justamente proporcionando 
-     la ruta(path) del template que usted quiere usar en relaciÛn al 
+     la ruta(path) del template que usted quiere usar en relaci√≥n al 
      directorio root <link linkend="variable.template.dir">$template_dir</link>.
     </para>
     <example>
@@ -112,7 +112,7 @@ $smarty->display("file:F:/path/to/my/templates/menu.tpl");
     </para>
 
     <para>
-     Vea la secciÛn <link linkend="plugins.resources">resource plugins</link>
+     Vea la secci√≥n <link linkend="plugins.resources">resource plugins</link>
      para mayor informacion sobre las funciones que puede utilizar.
     </para>
 
@@ -129,7 +129,7 @@ $smarty->display("file:F:/path/to/my/templates/menu.tpl");
      <programlisting role="php">
 <![CDATA[
 <?php
-// ponga estas funciones en algun lugar de su aplicaciÛn
+// ponga estas funciones en algun lugar de su aplicaci√≥n
 function db_get_template ($tpl_name, &$tpl_source, &$smarty_obj)
 {
     // llame su base de datos parta traer los datos al template,
@@ -196,16 +196,16 @@ $smarty->display("db:index.tpl");
    </sect2>
 
    <sect2 id="default.template.handler.function">
-    <title>FunciÛn manipuladora de Template por default</title>
+    <title>Funci√≥n manipuladora de Template por default</title>
     <para>
-     Usted puede especificar la funciÛn que ser· usada para devolver
+     Usted puede especificar la funci√≥n que ser√° usada para devolver
      el contenido del template dentro del evento del template no puede 
      ser retomado desde su recurso. Un uso distinto es para crear 
      templates que no existen "on-the-fly" (templates cuyo contenido 
      cambia mucho, bastante variable).
     </para>
     <example>
-     <title> usando la funciÛn manipuladora de template por default</title>
+     <title> usando la funci√≥n manipuladora de template por default</title>
      <programlisting role="php">
 <![CDATA[
 <?php

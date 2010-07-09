@@ -6,7 +6,7 @@
   <refpurpose>Verifica si el template especificado existe</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripción</title>
+  <title>DescripciÃ³n</title>
   <methodsynopsis>
    <type>bool</type><methodname>template_exists</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
@@ -60,7 +60,7 @@ $smarty->display('page_container.tpl');
   </programlisting>
   </example>
   <para>
-  Ver también 
+  Ver tambiÃ©n 
   <link linkend="api.display">display()</link>,
   <link linkend="api.fetch">fetch()</link>,
   <link linkend="language.function.include">{include}</link>

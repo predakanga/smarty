@@ -2,12 +2,12 @@
 <!-- $Revision: 2972 $ -->
 <!-- EN-Revision: 1.2 Maintainer: thomasgm Status: ready -->
    <sect1 id="language.syntax.quotes">
-    <title>Colocando Variáveis em Aspas Duplas</title>
+    <title>Colocando VariÃ¡veis em Aspas Duplas</title>
     <para>
-    Smarty irá reconhecer variáveis definidas entre asplas duplas enquanto 
-	as variáveis conterem apenas números, letras, sublinhados e conchetes []. 
-	Com qualquer outro caractere (pontos, referência à objetos, etc.) a variável 
-	deve estar entre apóstrofos.
+    Smarty irÃ¡ reconhecer variÃ¡veis definidas entre asplas duplas enquanto 
+	as variÃ¡veis conterem apenas nÃºmeros, letras, sublinhados e conchetes []. 
+	Com qualquer outro caractere (pontos, referÃªncia Ã  objetos, etc.) a variÃ¡vel 
+	deve estar entre apÃ³strofos.
     </para>
     <example>
      <title>Sintaxe entre aspas</title>
@@ -18,12 +18,12 @@ EXEMPLOS DE SINTAXE:
 {func var="teste $foo_bar teste"}   <-- mostra $foo_bar
 {func var="teste $foo[0] teste"}    <-- mostra $foo[0]
 {func var="teste $foo[bar] teste"}  <-- mostra $foo[bar]
-{func var="teste $foo.bar teste"}   <-- mostra $foo (e não $foo.bar)
+{func var="teste $foo.bar teste"}   <-- mostra $foo (e nÃ£o $foo.bar)
 {func var="teste `$foo.bar` teste"} <-- mostra $foo.bar
 
-EXEMPLOS PRÁTICOS:
+EXEMPLOS PRÃTICOS:
 {include file="subdir/$tpl_name.tpl"} <-- substitui $tpl_name pelo seu valor
-{cycle values="one,two,`$smarty.config.myval`"} <-- deve conter apóstrofos
+{cycle values="one,two,`$smarty.config.myval`"} <-- deve conter apÃ³strofos
 ]]>
 </programlisting>
 </example>

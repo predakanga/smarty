@@ -13,7 +13,7 @@
   <link linkend="language.syntax.functions">funciones</link> y  
   <link linkend="language.modifiers">modificadores</link>, dentro 
   de expresiones condicionales, etc. Para mostrar una variable, 
-  simplesmente coloque esta entre delimitadores siendo esta la única 
+  simplesmente coloque esta entre delimitadores siendo esta la Ãºnica 
   cosa entre ellos.  Ejemplos:
   <programlisting>
 <![CDATA[

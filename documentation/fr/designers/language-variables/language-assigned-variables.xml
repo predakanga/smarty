@@ -3,16 +3,16 @@
 <!-- EN-Revision: 1.8 Maintainer: yannick Status: ready -->
 
 <sect1 id="language.assigned.variables">
- <title>Variables assignées depuis PHP</title>
+ <title>Variables assignÃ©es depuis PHP</title>
  <para>
-  Pour utiliser une variables <link linkend="api.assign">assignées</link> depuis PHP, il
-  faut la préfixer par le symbole dollar <literal>$</literal>.
-  Les variables asignées depuis un template grâce à la fonction
+  Pour utiliser une variables <link linkend="api.assign">assignÃ©es</link> depuis PHP, il
+  faut la prÃ©fixer par le symbole dollar <literal>$</literal>.
+  Les variables asignÃ©es depuis un template grÃ¢ce Ã  la fonction
   <link linkend="language.function.assign"><varname>{assign}</varname></link> sont
-  manipulées de la même façon.
+  manipulÃ©es de la mÃªme faÃ§on.
  </para>
  <example>
-  <title>Variables assignées</title>
+  <title>Variables assignÃ©es</title>
    <para>Script PHP</para>
    <programlisting role="php">
 <![CDATA[
@@ -30,16 +30,16 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Où <filename>index.tpl</filename> est :
+    OÃ¹ <filename>index.tpl</filename> est :
    </para>
    <programlisting>
 <![CDATA[
-Bonjour {$firstname} {$lastname}, heureux de voir que tu es arrivé ici.
+Bonjour {$firstname} {$lastname}, heureux de voir que tu es arrivÃ© ici.
 <br />
-{* ceci ne fonctionnera pas car $vars est sensible à la casse *}
-Cette semaine, le meeting est à {$meetingplace}.
+{* ceci ne fonctionnera pas car $vars est sensible Ã  la casse *}
+Cette semaine, le meeting est Ã  {$meetingplace}.
 {* ceci fonctionnera *}
-Cette semaine, le meeting est à {$meetingPlace}.
+Cette semaine, le meeting est Ã  {$meetingPlace}.
 ]]>
    </programlisting>
    <para>
@@ -47,10 +47,10 @@ Cette semaine, le meeting est à {$meetingPlace}.
    </para>
   <screen>
 <![CDATA[
-Bienvenue Doug, heureux de voir que tu es arrivé ici.
+Bienvenue Doug, heureux de voir que tu es arrivÃ© ici.
 <br />
-Cette semaine, le meeting est à .
-Cette semaine, le meeting est à New York.
+Cette semaine, le meeting est Ã  .
+Cette semaine, le meeting est Ã  New York.
 ]]>
   </screen>
  </example>
@@ -58,12 +58,12 @@ Cette semaine, le meeting est à New York.
  <sect2 id="language.variables.assoc.arrays">
   <title>Tableaux associatifs</title>
   <para>
-   Vous pouvez également utiliser des variables sous forme de tableaux
-   associatifs assignées depuis PHP en en spécifiant la clef,
-   après le symbole '.' (point).
+   Vous pouvez Ã©galement utiliser des variables sous forme de tableaux
+   associatifs assignÃ©es depuis PHP en en spÃ©cifiant la clef,
+   aprÃ¨s le symbole '.' (point).
   </para>
   <example>
-   <title>Accéder aux variables de tableaux associatifs</title>
+   <title>AccÃ©der aux variables de tableaux associatifs</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -80,7 +80,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Où <filename>index.tpl</filename> est :
+    OÃ¹ <filename>index.tpl</filename> est :
    </para>
    <programlisting>
 <![CDATA[
@@ -106,13 +106,13 @@ zaphod@slartibartfast.example.com<br />
  </sect2>
 
  <sect2 id="language.variables.array.indexes">
-  <title>Tableaux indexés</title>
+  <title>Tableaux indexÃ©s</title>
   <para>
-   Vous pouvez utiliser des tableaux indexés de la même façon
+   Vous pouvez utiliser des tableaux indexÃ©s de la mÃªme faÃ§on
    que vous le faites en PHP.
   </para>
   <example>
-   <title>Accès aux tableaux grâce à l'index</title>
+   <title>AccÃ¨s aux tableaux grÃ¢ce Ã  l'index</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -127,13 +127,13 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Où <filename>index.tpl</filename> est :
+    OÃ¹ <filename>index.tpl</filename> est :
    </para>
    <programlisting>
 <![CDATA[
 {$Contacts[0]}<br />
 {$Contacts[1]}<br />
-{* Vous pouvez également afficher des tableaux *}
+{* Vous pouvez Ã©galement afficher des tableaux *}
 {$Contacts[2][0]}<br />
 {$Contacts[2][1]}<br />
 ]]>
@@ -155,11 +155,11 @@ zaphod@slartibartfast.example.com<br />
   <title>Objets</title>
   <para>
    Les attributs des <link linkend="advanced.features.objects">objets</link> 
-   assignés depuis PHP peuvent être utilisées en
-   en spécifiant le nom après le symbole <literal>-&gt;</literal>.
+   assignÃ©s depuis PHP peuvent Ãªtre utilisÃ©es en
+   en spÃ©cifiant le nom aprÃ¨s le symbole <literal>-&gt;</literal>.
   </para>
   <example>
-   <title>Accéder aux attributs des objets</title>
+   <title>AccÃ©der aux attributs des objets</title>
    <programlisting>
 <![CDATA[
 nom: {$person->name}<br />

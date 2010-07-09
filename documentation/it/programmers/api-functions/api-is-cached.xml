@@ -14,8 +14,8 @@
    <methodparam choice="opt"><type>string</type><parameter>compile_id</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Restituisce &true; se Ë presente una cache valida per questo template.
-   Funziona soltanto se <link linkend="variable.caching">caching</link> Ë
+   Restituisce &true; se √® presente una cache valida per questo template.
+   Funziona soltanto se <link linkend="variable.caching">caching</link> √®
    impostato a true.
   </para>
   <example>
@@ -69,11 +69,11 @@ $smarty->display("index.tpl", "FrontPage");
   <note>
   <title>Nota tecnica</title>
   <para>
-   Se <literal>is_cached</literal> restituisce true, in realt‡ carica
+   Se <literal>is_cached</literal> restituisce true, in realt√† carica
    l'output in cache e lo memorizza internamente. Ogni chiamata
    successiva a <link linkend="api.display">display()</link> o a 
-   <link linkend="api.fetch">fetch()</link> restituir‡ questo output
-   memorizzato internamente, e non cercher‡ di ricaricare il file
+   <link linkend="api.fetch">fetch()</link> restituir√† questo output
+   memorizzato internamente, e non cercher√† di ricaricare il file
    della cache. Questo evita una situazione che potrebbe verificarsi
    quando un secondo processo elimina la cache nell'intervallo fra
    la chiamata a is_cached e quella a display, nell'esempio visto

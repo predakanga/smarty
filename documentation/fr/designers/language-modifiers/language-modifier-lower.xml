@@ -5,7 +5,7 @@
 <sect1 id="language.modifier.lower">
  <title>lower</title>
  <para>
-  Met une variable en minuscules. C'est l'équivalent de la fonction PHP
+  Met une variable en minuscules. C'est l'Ã©quivalent de la fonction PHP
   <ulink url="&url.php-manual;strtolower"><varname>strtolower()</varname></ulink>.
  </para>
  <example>
@@ -13,12 +13,12 @@
   <programlisting role="php">
 <![CDATA[
 <?php
-$smarty->assign('TitreArticle', 'Deux Suspects Se Sont Sauvés.');
+$smarty->assign('TitreArticle', 'Deux Suspects Se Sont SauvÃ©s.');
 ?>
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -31,8 +31,8 @@ $smarty->assign('TitreArticle', 'Deux Suspects Se Sont Sauvés.');
   </para>
   <screen>
 <![CDATA[
-Deux Suspects Se Sont Sauvés.
-deux suspects se sont sauvés.
+Deux Suspects Se Sont SauvÃ©s.
+deux suspects se sont sauvÃ©s.
 ]]>
   </screen>
  </example>

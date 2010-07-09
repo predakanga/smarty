@@ -11,7 +11,7 @@
            habilitado este valor es ignorado y el error-level no es tocado.
       </para>
  <para>
-  Ver también 
+  Ver tambiÃ©n 
   <link linkend="api.trigger.error">trigger_error()</link>,
   <link linkend="chapter.debugging.console">debugging</link>
   y

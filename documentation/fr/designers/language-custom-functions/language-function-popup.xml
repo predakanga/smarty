@@ -5,9 +5,9 @@
 <sect1 id="language.function.popup">
  <title>{popup}</title>
  <para>
-  <varname>{popup}</varname> est utilisé pour créer une fenêtre popup javascript.
+  <varname>{popup}</varname> est utilisÃ© pour crÃ©er une fenÃªtre popup javascript.
   <link linkend="language.function.popup.init"><varname>{popup_init}</varname></link>
-  DOIT être appelé en premier pour que cela fonctionne.
+  DOIT Ãªtre appelÃ© en premier pour que cela fonctionne.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -28,108 +28,108 @@
    <tbody>
     <row>
      <entry>text</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le texte/code html à afficher dans la popup</entry>
+     <entry>Le texte/code html Ã  afficher dans la popup</entry>
     </row>
     <row>
      <entry>trigger</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>onMouseOver</emphasis></entry>
-     <entry>L'évènement utilisé pour rendre la popup active,
+     <entry>L'Ã©vÃ¨nement utilisÃ© pour rendre la popup active,
      onMouseOver ou onClick.</entry>
     </row>
     <row>
      <entry>sticky</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
      <entry>Rends la popup active jusqu'a ce qu'elle soit
-     explicitement fermée.</entry>
+     explicitement fermÃ©e.</entry>
     </row>
     <row>
      <entry>caption</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Défini le libellé du titre</entry>
+     <entry>DÃ©fini le libellÃ© du titre</entry>
     </row>
     <row>
      <entry>fgcolor</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Couleur interne de la popup</entry>
     </row>
     <row>
      <entry>bgcolor</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Couleur de la bordure de la popup</entry>
     </row>
     <row>
      <entry>textcolor</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Couleur du texte à l'intérieur de la
+     <entry>Couleur du texte Ã  l'intÃ©rieur de la
      popup</entry>
     </row>
     <row>
      <entry>capcolor</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Couleur du libellé de la popup</entry>
+     <entry>Couleur du libellÃ© de la popup</entry>
     </row>
     <row>
      <entry>closecolor</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Couleur du texte de fermeture</entry>
     </row>
     <row>
      <entry>textfont</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>La police à utiliser dans le texte principal</entry>
+     <entry>La police Ã  utiliser dans le texte principal</entry>
     </row>
     <row>
      <entry>captionfont</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>La police à utiliser dans le libellé</entry>
+     <entry>La police Ã  utiliser dans le libellÃ©</entry>
     </row>
     <row>
      <entry>closefont</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>La police pour le texte de fermeture</entry>
     </row>
     <row>
      <entry>textsize</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Taille de la police texte prinicpal</entry>
     </row>
     <row>
      <entry>captionsize</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Taille de la police du libellé</entry>
+     <entry>Taille de la police du libellÃ©</entry>
     </row>
     <row>
      <entry>closesize</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Taille de la police du bouton "fermer"</entry>
@@ -150,37 +150,37 @@
     </row>
     <row>
      <entry>left</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
-     <entry>La popup va à gauche de la souris</entry>
+     <entry>La popup va Ã  gauche de la souris</entry>
     </row>
     <row>
      <entry>right</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
-     <entry>La popup va à droite de la souris</entry>
+     <entry>La popup va Ã  droite de la souris</entry>
     </row>
     <row>
      <entry>center</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
-     <entry>La popup est centrée par rapport à la
+     <entry>La popup est centrÃ©e par rapport Ã  la
      position de la souris</entry>
     </row>
     <row>
      <entry>above</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
      <entry>la popup est au dessus de la souris. NOTE:
-     possible uniquement si la hauteur est définie</entry>
+     possible uniquement si la hauteur est dÃ©finie</entry>
     </row>
     <row>
      <entry>below</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>&false;</emphasis></entry>
      <entry>La popup apparait en dessous de la souris</entry>
@@ -190,7 +190,7 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Rends la bordure de la popup plus épaisse ou plus
+     <entry>Rends la bordure de la popup plus Ã©paisse ou plus
      fine</entry>
     </row>
     <row>
@@ -212,7 +212,7 @@
      <entry>url vers l'image</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Une image à utiliser à la place de la couleur de
+     <entry>Une image Ã  utiliser Ã  la place de la couleur de
      fonds dans la popup</entry>
     </row>
     <row>
@@ -220,51 +220,51 @@
      <entry>url vers l'image</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Image à utiliser à la place de la bordure de la
-      popup. NOTE: vous veillerez à définir bgcolor à "" ou la
-      couleur apparaitra de même. NOTE: Lorsque vous avez un
+     <entry>Image Ã  utiliser Ã  la place de la bordure de la
+      popup. NOTE: vous veillerez Ã  dÃ©finir bgcolor Ã  "" ou la
+      couleur apparaitra de mÃªme. NOTE: Lorsque vous avez un
       lien de fermeture, Netscape effectuera un nouveau rendu
-     des cellules du tableau, affichant mal les éléments</entry>
+     des cellules du tableau, affichant mal les Ã©lÃ©ments</entry>
     </row>
     <row>
      <entry>closetext</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Définit le texte de fermeture par autre chose
+     <entry>DÃ©finit le texte de fermeture par autre chose
      que "Close"</entry>
     </row>
     <row>
      <entry>noclose</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>N'affiche pas le bouton "Close" pour les fenêtres
+     <entry>N'affiche pas le bouton "Close" pour les fenÃªtres
       "collantes".
      </entry>
     </row>
     <row>
      <entry>status</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Défini le texte de la barre de statut
+     <entry>DÃ©fini le texte de la barre de statut
      du navigateur</entry>
     </row>
     <row>
      <entry>autostatus</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Défini le texte de la barre de statut au contenu
+     <entry>DÃ©fini le texte de la barre de statut au contenu
      de la popup. NOTE: Ecrase l'attribut status.</entry>
     </row>
     <row>
      <entry>autostatuscap</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Défini le texte de la barre de statut au libellé
+     <entry>DÃ©fini le texte de la barre de statut au libellÃ©
      de la popup. NOTE: Ecrase l'attribut status.</entry>
     </row>
     <row>
@@ -272,16 +272,16 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Indique à overLib de lire le texte à cet index dans le
-      tableau ol_text, situé dans overlib.js. Ce paramètre peut être
-     utilisé à la place de text.</entry>
+     <entry>Indique Ã  overLib de lire le texte Ã  cet index dans le
+      tableau ol_text, situÃ© dans overlib.js. Ce paramÃ¨tre peut Ãªtre
+     utilisÃ© Ã  la place de text.</entry>
     </row>
     <row>
      <entry>caparray</entry>
      <entry>entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Indique à overlib de lire le libellé depuis le
+     <entry>Indique Ã  overlib de lire le libellÃ© depuis le
      tableau ol_caps</entry>
     </row>
     <row>
@@ -289,7 +289,7 @@
      <entry>url</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Affiche l'image spécifiée avant le libellé de la
+     <entry>Affiche l'image spÃ©cifiÃ©e avant le libellÃ© de la
      popup</entry>
     </row>
     <row>
@@ -311,8 +311,8 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Vérrouille la popup à une position horizontale.
-      Note:	remplace les autres paramètres de position
+     <entry>VÃ©rrouille la popup Ã  une position horizontale.
+      Note:	remplace les autres paramÃ¨tres de position
      horizontale</entry>
     </row>
     <row>
@@ -320,8 +320,8 @@
      <entry>entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Vérouille la popup à une position verticale
-      Note: remplace les autres paramètres de position
+     <entry>VÃ©rouille la popup Ã  une position verticale
+      Note: remplace les autres paramÃ¨tres de position
      verticale</entry>
     </row>
     <row>
@@ -329,7 +329,7 @@
      <entry>url</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Défini l'image à utiliser plutôt que le tableau
+     <entry>DÃ©fini l'image Ã  utiliser plutÃ´t que le tableau
      de fond</entry>
     </row>
     <row>
@@ -337,44 +337,44 @@
      <entry>entier, entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Écarte l'image de fond du reste des éléments
+     <entry>Ã‰carte l'image de fond du reste des Ã©lÃ©ments
       avec un espace horizontal, pour le positionnement du texte.
-     Note: c'est un attribut à deux paramètres.</entry>
+     Note: c'est un attribut Ã  deux paramÃ¨tres.</entry>
     </row>
     <row>
      <entry>pady</entry>
      <entry>entier, entier</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Écarte l'image de fond du reste des éléments
+     <entry>Ã‰carte l'image de fond du reste des Ã©lÃ©ments
       avec un espace vertical, pour le positionnement du texte.
-     Note: c'est un attribut à deux paramètres.</entry>
+     Note: c'est un attribut Ã  deux paramÃ¨tres.</entry>
     </row>
     <row>
      <entry>fullhtml</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Vous autorise à placer du code html en tant que
+     <entry>Vous autorise Ã  placer du code html en tant que
       contenu de la popup. Le code html est attendu dans
      l'attribut text.</entry>
     </row>
     <row>
      <entry>frame</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Contrôle la popup dans un cadre différent.
-      Voir la documentation d'overlib pour plus de détails
+     <entry>ContrÃ´le la popup dans un cadre diffÃ©rent.
+      Voir la documentation d'overlib pour plus de dÃ©tails
      sur cette fonction.</entry>
     </row>
     <row>
      <entry>function</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Appelle la fonction javascript spécifiée et prends
-      sa valeur de retour comme texte devant être affiché
+     <entry>Appelle la fonction javascript spÃ©cifiÃ©e et prends
+      sa valeur de retour comme texte devant Ãªtre affichÃ©
      dans la popup.</entry>
     </row>
     <row>
@@ -383,23 +383,23 @@
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>La popup se comporte comme une infobulle.
-      Elle disparaitra au bout d'un certain délai, en
+      Elle disparaitra au bout d'un certain dÃ©lai, en
      millisecondes.</entry>
     </row>
     <row>
      <entry>hauto</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Détermine automatiquement si la popup doit être
-     à gauche ou à droite de la souris</entry>
+     <entry>DÃ©termine automatiquement si la popup doit Ãªtre
+     Ã  gauche ou Ã  droite de la souris</entry>
     </row>
     <row>
      <entry>vauto</entry>
-     <entry>booléen</entry>
+     <entry>boolÃ©en</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Détermine automatiquement si la popup doit être
+     <entry>DÃ©termine automatiquement si la popup doit Ãªtre
      au-dessus ou au-dessous de la souris</entry>
     </row>
    </tbody>
@@ -409,11 +409,11 @@
   <title>{popup}</title>
   <programlisting>
 <![CDATA[
-{* popup_init doit être appelé en haut de votre page *}
+{* popup_init doit Ãªtre appelÃ© en haut de votre page *}
 {popup_init src='/javascripts/overlib.js'}
 
-{* création d'un lien avec une popup qui apparait sur l'évènement onMouseOver *}
-<A href="mypage.html" {popup text='Ce lien vous amène sur ma page!'}>mypage</A>
+{* crÃ©ation d'un lien avec une popup qui apparait sur l'Ã©vÃ¨nement onMouseOver *}
+<A href="mypage.html" {popup text='Ce lien vous amÃ¨ne sur ma page!'}>mypage</A>
 
 {* vous pouvez utiliser du html, des liens, etc. dans vos popup *}
 <a href="mypage.html" {popup sticky=true caption='Contenu de la page'
@@ -421,12 +421,12 @@ text="<ul><li>links</li><li>pages</li><li>images</li></ul>"
 snapx=10 snapy=10 trigger='onClick'}>ma page</a>
 
 {* un popup via une cellule du tableau *}
-<tr><td {popup caption='Détails de cette partie' text=$part_long_description}>{$part_number}</td></tr>
+<tr><td {popup caption='DÃ©tails de cette partie' text=$part_long_description}>{$part_number}</td></tr>
 ]]>
   </programlisting>
  </example>
  <para>
-  Il y a également un autre bon exemple sur la page de la documentation de
+  Il y a Ã©galement un autre bon exemple sur la page de la documentation de
  <link linkend="language.function.capture">{capture}</link>.
  </para>
  <para>

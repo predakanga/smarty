@@ -6,14 +6,14 @@
  <title>{html_select_time}</title>
  <para>
   <varname>{html_select_time}</varname> est une
-  <link linkend="language.custom.functions">fonction personnalisée</link>
-  qui crée des listes déroulantes pour saisir une heure. Elle prends en charge l'heure,
-  les minutes, les secondes et le méridian.
+  <link linkend="language.custom.functions">fonction personnalisÃ©e</link>
+  qui crÃ©e des listes dÃ©roulantes pour saisir une heure. Elle prends en charge l'heure,
+  les minutes, les secondes et le mÃ©ridian.
  </para>
  <para>
-  L'attribut <parameter>time</parameter> accepte comme paramètre différents
-  formats. Ils peuvent être un timestamp unique, une chaîne respectant le format
-  <literal>YYYYMMDDHHMMSS</literal> ou une chaîne
+  L'attribut <parameter>time</parameter> accepte comme paramÃ¨tre diffÃ©rents
+  formats. Ils peuvent Ãªtre un timestamp unique, une chaÃ®ne respectant le format
+  <literal>YYYYMMDDHHMMSS</literal> ou une chaÃ®ne
   valide pour la fonction php
   <ulink url="&url.php-manual;strtotime"><varname>strtotime()</varname></ulink>.
  </para>
@@ -29,17 +29,17 @@
      <entry>Nom attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>prefix</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>Time_</entry>
-     <entry>Par quoi préfixer la variable.</entry>
+     <entry>Par quoi prÃ©fixer la variable.</entry>
     </row>
     <row>
      <entry>time</entry>
@@ -74,7 +74,7 @@
      <entry>boolean</entry>
      <entry>Non</entry>
      <entry>&true;</entry>
-     <entry>S'il faut afficher le méridian (am/pm)</entry>
+     <entry>S'il faut afficher le mÃ©ridian (am/pm)</entry>
     </row>
     <row>
      <entry>use_24_hours</entry>
@@ -89,7 +89,7 @@
      <entry>Non</entry>
      <entry>1</entry>
      <entry>Intervalle des minutes dans la liste
-     déroulante</entry>
+     dÃ©roulante</entry>
     </row>
     <row>
      <entry>second_interval</entry>
@@ -97,55 +97,55 @@
      <entry>Non</entry>
      <entry>1</entry>
      <entry>Intervalle des secondes dans la liste
-     déroulante</entry>
+     dÃ©roulante</entry>
     </row>
     <row>
      <entry>field_array</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>n/a</entry>
      <entry>Nom du tableau dans lequel les valeures
-     seront stockées.</entry>
+     seront stockÃ©es.</entry>
     </row>
     <row>
      <entry>all_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
      select / input.</entry>
     </row>
     <row>
      <entry>hour_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
      select / input de l'heure.</entry>
     </row>
     <row>
      <entry>minute_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
      select / input des minutes.</entry>
     </row>
     <row>
      <entry>second_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
      select / input des secondes.</entry>
     </row>
     <row>
      <entry>meridian_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
-     select / input du méridian.</entry>
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
+     select / input du mÃ©ridian.</entry>
     </row>
    </tbody>
   </tgroup>
@@ -158,40 +158,40 @@
 ]]>
   </programlisting>
   <para>
-   À 9:20 et 23 secondes du matin, le template ci-dessus affichera :
+   Ã€ 9:20 et 23 secondes du matin, le template ci-dessus affichera :
   </para>
   <screen>
 <![CDATA[
 <select name="Time_Hour">
 <option value="00">00</option>
 <option value="01">01</option>
-...coupé...
+...coupÃ©...
 <option value="08">08</option>
 <option value="09" selected>09</option>
 <option value="10">10</option>
-...coupé...
+...coupÃ©...
 <option value="22">22</option>
 <option value="23">23</option>
 </select>
 <select name="Time_Minute">
 <option value="00">00</option>
 <option value="01">01</option>
-...coupé...
+...coupÃ©...
 <option value="19">19</option>
 <option value="20" selected>20</option>
 <option value="21">21</option>
-...coupé...
+...coupÃ©...
 <option value="58">58</option>
 <option value="59">59</option>
 </select>
 <select name="Time_Second">
 <option value="00">00</option>
 <option value="01">01</option>
-...coupé...
+...coupÃ©...
 <option value="22">22</option>
 <option value="23" selected>23</option>
 <option value="24">24</option>
-...coupé...
+...coupÃ©...
 <option value="58">58</option>
 <option value="59">59</option>
 </select>

@@ -4,23 +4,23 @@
 <sect1 id="plugins.howto">
  <title>Comment fonctionnent les plugins</title>
  <para>
-  Les plugins sont toujours chargés à la demande. Seuls les modificateurs
-  de variables, les ressources, etc invoqués dans les scripts de templates
-  seront chargés. De plus, chaque plugin n'est chargé qu'une fois, et ce
-  même si vous avez plusieurs instances de Smarty qui tournent dans
-  la même requête.
+  Les plugins sont toujours chargÃ©s Ã  la demande. Seuls les modificateurs
+  de variables, les ressources, etc invoquÃ©s dans les scripts de templates
+  seront chargÃ©s. De plus, chaque plugin n'est chargÃ© qu'une fois, et ce
+  mÃªme si vous avez plusieurs instances de Smarty qui tournent dans
+  la mÃªme requÃªte.
  </para>
  <para>
-  Les filtres de post/pré-compilation et les filtres de sortie sont des cas
-  un peu spéciaux.
-  Comme ils ne sont pas mentionnés dans les templates, ils doivent être déclarés
-  ou chargés explicitement via les fonctions de l'API avant que le template
-  ne soit exécuté. L'ordre dans lequel les filtres multiples d'un même type
-  sont exécutés dépend de l'ordre dans lequel ils sont enregistrés ou chargés.
+  Les filtres de post/prÃ©-compilation et les filtres de sortie sont des cas
+  un peu spÃ©ciaux.
+  Comme ils ne sont pas mentionnÃ©s dans les templates, ils doivent Ãªtre dÃ©clarÃ©s
+  ou chargÃ©s explicitement via les fonctions de l'API avant que le template
+  ne soit exÃ©cutÃ©. L'ordre dans lequel les filtres multiples d'un mÃªme type
+  sont exÃ©cutÃ©s dÃ©pend de l'ordre dans lequel ils sont enregistrÃ©s ou chargÃ©s.
  </para>
  <para>
-  Le <link linkend="variable.plugins.dir">répertoire de plugin</link> peut
-  être une chaîne de caractères contenant un chemin ou un tableau contenant
+  Le <link linkend="variable.plugins.dir">rÃ©pertoire de plugin</link> peut
+  Ãªtre une chaÃ®ne de caractÃ¨res contenant un chemin ou un tableau contenant
   de multiples chemins. Pour installer un plugin, placez-le simplement
   dans un de ces dossiers et Smarty l'utilisera automatiquement.
  </para>

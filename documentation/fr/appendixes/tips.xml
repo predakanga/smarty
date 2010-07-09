@@ -6,23 +6,23 @@
  <title>Trucs et astuces</title>
  <para></para>
  <sect1 id="tips.blank.var.handling">
-  <title>Gestion des variables non-assignées</title>
+  <title>Gestion des variables non-assignÃ©es</title>
   <para>
-   Peut-être voudrez-vous des fois afficher une valeur par
-   défaut pour une variable qui n'a pas été assignée, comme
+   Peut-Ãªtre voudrez-vous des fois afficher une valeur par
+   dÃ©faut pour une variable qui n'a pas Ã©tÃ© assignÃ©e, comme
    pour afficher <literal>&amp;nbsp;</literal> afin que les couleurs
    de fond des tableaux fonctionnent. Beaucoup utiliseraient une
    instruction <link linkend="language.function.if"><varname>{if}</varname></link> 
-   pour gérer celà, mais il existe un moyen
+   pour gÃ©rer celÃ , mais il existe un moyen
    plus facile dans Smarty : l'utilisation du modificateur
    de variable
    <link linkend="language.modifier.default"><varname>default</varname></link>.
    <note>
-    <para>Les erreurs <quote>de variable indéfinie</quote> seront affichés si
+    <para>Les erreurs <quote>de variable indÃ©finie</quote> seront affichÃ©s si
      la fonction PHP
      <ulink url="&url.php-manual;error_reporting">
       <varname>error_reporting()</varname></ulink> vaut <constant>E_ALL</constant>
-     et qu'une variable n'a pas été assignée à Smarty.
+     et qu'une variable n'a pas Ã©tÃ© assignÃ©e Ã  Smarty.
     </para>
     </note>
   </para>
@@ -30,7 +30,7 @@
    <title>Afficher &amp;nbsp; quand une variable est vide</title>
    <programlisting>
 <![CDATA[
-{* la méthode pas adaptée *}
+{* la mÃ©thode pas adaptÃ©e *}
 {if $title eq ''}
    &nbsp;
 {else}
@@ -38,7 +38,7 @@
 {/if}
 
 
-{* la bonne méthode *}
+{* la bonne mÃ©thode *}
 {$title|default:'&nbsp;'}
 ]]>
    </programlisting>
@@ -46,22 +46,22 @@
   <para>
    Voir aussi
    <link linkend="language.modifier.default"><varname>default</varname></link> et
-   <link linkend="tips.default.var.handling">la gestion des variables par défaut</link>.
+   <link linkend="tips.default.var.handling">la gestion des variables par dÃ©faut</link>.
   </para>
  </sect1>
 
  <sect1 id="tips.default.var.handling">
-  <title>Gestion des variables par défaut</title>
+  <title>Gestion des variables par dÃ©faut</title>
   <para>
-   Si une variable est utilisée fréquemment dans vos templates,
+   Si une variable est utilisÃ©e frÃ©quemment dans vos templates,
    lui appliquer le modificateur
    <link linkend="language.modifier.default"><varname>default</varname></link>
-   peut être un peu fastidieux.
-   Vous pouvez remédier à celà en lui assignant une valeur par défaut
+   peut Ãªtre un peu fastidieux.
+   Vous pouvez remÃ©dier Ã  celÃ  en lui assignant une valeur par dÃ©faut
    avec la fonction <link linkend="language.function.assign"><varname>{assign}</varname></link>.
   </para>
   <example>
-   <title>Assigner une valeur par défaut à une variable de template</title>
+   <title>Assigner une valeur par dÃ©faut Ã  une variable de template</title>
 <programlisting>
 <![CDATA[
 {* faites cela quelque part en haut de votre template *}
@@ -75,27 +75,27 @@
   <para>
    Voir aussi
    <link linkend="language.modifier.default"><varname>default</varname></link> et
-   <link linkend="tips.blank.var.handling">la gestion des variables non-assignées</link>.
+   <link linkend="tips.blank.var.handling">la gestion des variables non-assignÃ©es</link>.
   </para>
  </sect1>
 
  <sect1 id="tips.passing.vars">
-  <title>Passage du titre à un template d'en-tête</title>
+  <title>Passage du titre Ã  un template d'en-tÃªte</title>
   <para>
-   Quand la majorité de vos templates utilisent les mêmes en-tête et pied-de-page,
+   Quand la majoritÃ© de vos templates utilisent les mÃªmes en-tÃªte et pied-de-page,
    il est d'usage de les mettre dans leurs propres templates et de les inclure
    (<link linkend="language.function.include"><varname>{include}</varname></link>).
-   Mais comment faire si l'en-tête doit avoir un titre différent, selon la page
-   d'où on vient ? Vous pouvez passer le titre à l'en-tête en tant qu'
+   Mais comment faire si l'en-tÃªte doit avoir un titre diffÃ©rent, selon la page
+   d'oÃ¹ on vient ? Vous pouvez passer le titre Ã  l'en-tÃªte en tant qu'
    <link linkend="language.syntax.attributes">attribut</link> quand il est inclus.
   </para>
 
   <example>
-   <title>Passer le titre au template d'en-tête</title>
+   <title>Passer le titre au template d'en-tÃªte</title>
 
    <para>
     <filename>mainpage.tpl</filename> - Lorsque la page principal est construite,
-    le titre <quote>Man Page</quote> est passé au <filename>header.tpl</filename> et sera utilisé
+    le titre <quote>Man Page</quote> est passÃ© au <filename>header.tpl</filename> et sera utilisÃ©
     en tant que titre.
    </para>
    <programlisting>
@@ -122,8 +122,8 @@
    </programlisting>
 
    <para>
-    <filename>header.tpl</filename> - Notez que <quote>Smarty News</quote> est affiché
-    si la variable <literal>$title</literal> n'est pas définie, en utilisant le modificateur de variable par
+    <filename>header.tpl</filename> - Notez que <quote>Smarty News</quote> est affichÃ©
+    si la variable <literal>$title</literal> n'est pas dÃ©finie, en utilisant le modificateur de variable par
     <link linkend="language.modifier.default"><varname>default</varname></link>.
    </para>
    <programlisting>
@@ -151,11 +151,11 @@
  <sect1 id="tips.dates">
   <title>Dates</title>
   <para>
-   De façon générale, essayez de toujours passer les dates à Smarty
+   De faÃ§on gÃ©nÃ©rale, essayez de toujours passer les dates Ã  Smarty
    sous forme de <ulink url="&url.php-manual;time">timestamp</ulink>.
    Cela permet aux designers de templates d'utiliser
    <link linkend="language.modifier.date.format"><varname>date_format</varname></link>
-    pour avoir un contrôle total sur le formatage des dates et de comparer
+    pour avoir un contrÃ´le total sur le formatage des dates et de comparer
     facilement les dates entre elles.
    </para>
    <example>
@@ -187,7 +187,7 @@ Jan 4, 2009
 ]]>
      </screen>
      <para>
-      Les dates peuvent être comparées dans le template en utilisant les timestamps, comme ceci :
+      Les dates peuvent Ãªtre comparÃ©es dans le template en utilisant les timestamps, comme ceci :
      </para>
      <programlisting>
 <![CDATA[
@@ -200,17 +200,17 @@ Jan 4, 2009
    <para>
     En utilisant la fonction
     <link linkend="language.function.html.select.date"><varname>{html_select_date}</varname></link> 
-    dans un template, le programmeur veut en général convertir le
-    résultat d'un formulaire en un timestamp.
-    Voici une fonction qui devrait vous être utile.
+    dans un template, le programmeur veut en gÃ©nÃ©ral convertir le
+    rÃ©sultat d'un formulaire en un timestamp.
+    Voici une fonction qui devrait vous Ãªtre utile.
    </para>
    <example>
-    <title>Conversion des éléments date d'un formulaire en timestamp</title>
+    <title>Conversion des Ã©lÃ©ments date d'un formulaire en timestamp</title>
     <programlisting role="php">
 <![CDATA[
 <?php
 
-// celà suppose que vos éléments de formulaire soient nommés
+// celÃ  suppose que vos Ã©lÃ©ments de formulaire soient nommÃ©s
 // startDate_Day, startDate_Month, startDate_Year
 
 $startDate = makeTimeStamp($startDate_Year, $startDate_Month, $startDate_Day);
@@ -246,25 +246,25 @@ function makeTimeStamp($year='', $month='', $day='')
   <sect1 id="tips.wap">
    <title>WAP/WML</title>
    <para>
-    Les templates WAP/WML nécessitent un en-tête
-    <ulink url="&url.php-manual;header">Content-Type</ulink> qui doit être
-    passé avec le template. Le moyen le plus facile de faire celà est d'écrire
-    une fonction utilisateur qui écrit l'en-tête. Si vous utilisez le 
+    Les templates WAP/WML nÃ©cessitent un en-tÃªte
+    <ulink url="&url.php-manual;header">Content-Type</ulink> qui doit Ãªtre
+    passÃ© avec le template. Le moyen le plus facile de faire celÃ  est d'Ã©crire
+    une fonction utilisateur qui Ã©crit l'en-tÃªte. Si vous utilisez le 
     <link linkend="caching">cache</link>,
-    celà ne fonctionnera pas. Nous utiliserons donc une balise d'insertion
+    celÃ  ne fonctionnera pas. Nous utiliserons donc une balise d'insertion
     (<link linkend="language.function.insert">{insert}</link>)
     (rappelez-vous que les balises d'insertion ne sont pas mises en cache !).
     Assurez-vous qu'aucune sortie
     rien n'est transmise au navigateur avant l'appel du template, sans quoi
-    la modification de l'en-tête échouera.
+    la modification de l'en-tÃªte Ã©chouera.
    </para>
    <example>
-    <title>Utilisation d'{insert} pour écrire un en-tête Content-Type WML</title>
+    <title>Utilisation d'{insert} pour Ã©crire un en-tÃªte Content-Type WML</title>
     <programlisting role="php">
 <![CDATA[
 <?php
 
-// assurez-vous que Apache est configuré pour les extensions .wml !
+// assurez-vous que Apache est configurÃ© pour les extensions .wml !
 // mettez cette fonction quelque part dans votre applications
 // ou dans Smarty.addons.php
 function insert_header() 
@@ -317,37 +317,37 @@ function insert_header()
    <title>Templates composants</title>
    <para>
     Traditionnellemnt, la programmation avec des templates dans les applications
-    se déroule de la façon suivante : d'abord vous récupérez vos variables
-    dans l'application PHP (peut-être avec des requêtes en base de données), puis
+    se dÃ©roule de la faÃ§on suivante : d'abord vous rÃ©cupÃ©rez vos variables
+    dans l'application PHP (peut-Ãªtre avec des requÃªtes en base de donnÃ©es), puis
     vous instanciez votre objet Smarty,
     <link linkend="api.assign"><varname>assign()</varname></link>
     les variables et <link linkend="api.display"><varname>display()</varname></link> le
-    template. Disons par exemple que nous avons un téléscripteur dans
-    notre template. Nous récupérerions les données dans notre application,
+    template. Disons par exemple que nous avons un tÃ©lÃ©scripteur dans
+    notre template. Nous rÃ©cupÃ©rerions les donnÃ©es dans notre application,
     puis les assignerions ensuite pour les afficher. Mais ne serait-ce pas
-    mieux de pouvoir ajouter ce téléscripteur à n'importe quelle application
-    en incluant directement le template sans avoir à se soucier de la récupération
-    des données ?
+    mieux de pouvoir ajouter ce tÃ©lÃ©scripteur Ã  n'importe quelle application
+    en incluant directement le template sans avoir Ã  se soucier de la rÃ©cupÃ©ration
+    des donnÃ©es ?
    </para>
    <para>
-    Vous pouvez réaliser celà en écrivant un plugin personnalisé pour récupérer le contenu
-    et l'assigner à une variable du template.
+    Vous pouvez rÃ©aliser celÃ  en Ã©crivant un plugin personnalisÃ© pour rÃ©cupÃ©rer le contenu
+    et l'assigner Ã  une variable du template.
    </para>
    <example>
     <title>Template composant</title>
     <para>
      <filename>function.load_ticker.php</filename> -
-     Efface le fichier du répertoire des
+     Efface le fichier du rÃ©pertoire des
      <link linkend="variable.plugins.dir"><parameter>$plugins</parameter></link>
     </para>
     <programlisting role="php">
 <![CDATA[
 <?php
 
-// notre fonction pour récupérer les données
+// notre fonction pour rÃ©cupÃ©rer les donnÃ©es
 function fetch_ticker($symbol,&amp;$ticker_name,&amp;$ticker_price) 
 {
-   // du traitement qui récupère $ticker_name
+   // du traitement qui rÃ©cupÃ¨re $ticker_name
    // depuis la ressource ticker
    return $ticker_info;
 }
@@ -384,19 +384,19 @@ Stock Name: {$ticker.name} Stock Price: {$ticker.price}
   <sect1 id="tips.obfuscating.email">
    <title>Dissimuler les adresses email</title>
    <para>
-    Vous-êtes vous déjà demandé pourquoi vos adresses emails sont sur autant
-    de listes de diffusion de spam ? Une façon pour les spammers de récupérer les
-    adresses est de parcourir les pages Web. Voici une façon de remédier
-    à ce problème : mettre votre adresse email dans du Javascript brouillé
-    au milieu de votre source HTML, sans que celà ne gêne l'affichage sur le
-    navigateur Web. Cela est fait grâce au plugin 
+    Vous-Ãªtes vous dÃ©jÃ  demandÃ© pourquoi vos adresses emails sont sur autant
+    de listes de diffusion de spam ? Une faÃ§on pour les spammers de rÃ©cupÃ©rer les
+    adresses est de parcourir les pages Web. Voici une faÃ§on de remÃ©dier
+    Ã  ce problÃ¨me : mettre votre adresse email dans du Javascript brouillÃ©
+    au milieu de votre source HTML, sans que celÃ  ne gÃªne l'affichage sur le
+    navigateur Web. Cela est fait grÃ¢ce au plugin 
     <link linkend="language.function.mailto"><varname>{mailto}</varname></link>.
    </para>
    <example>
     <title>Exemple de dissimulation d'une adresse email</title>
 <programlisting>
 <![CDATA[
-<div id="contact">Envoyer une demande à
+<div id="contact">Envoyer une demande Ã 
 {mailto address=$EmailAddress encode='javascript' subject='Bonjour'}
 ]]>
     </programlisting>
@@ -404,7 +404,7 @@ Stock Name: {$ticker.name} Stock Price: {$ticker.price}
    <note>
     <title>Note technique</title>
     <para>
-     Cette méthode n'est pas infaillible. Un spammer peut programmer son
+     Cette mÃ©thode n'est pas infaillible. Un spammer peut programmer son
      collecteur d'email pour passer outre cette astuce, mais c'est cependant
      peu probable.
     </para>

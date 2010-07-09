@@ -3,9 +3,9 @@
 <sect1 id="language.syntax.functions">
  <title>Funzioni</title>
  <para>
-  Ogni tag di Smarty può stampare una <link linkend="language.variables">variable</link>
+  Ogni tag di Smarty puÃ² stampare una <link linkend="language.variables">variable</link>
   o chiamare una qualche funzione. Le funzioni vengono richiamate richiudendo
-  la funzione e i suoi attributi fra i delimitatori, così: {nomefunzione
+  la funzione e i suoi attributi fra i delimitatori, cosÃ¬: {nomefunzione
   attr1="val" attr2="val"}.
  </para>
  <example>

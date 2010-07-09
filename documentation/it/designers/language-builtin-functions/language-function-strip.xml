@@ -11,10 +11,10 @@
 			ritrovarsi con un template illeggibile o ingestibile.
 			</para>
 			<para>
-			Tutto ciÚ che Ë compreso fra i tag {strip}{/strip} in Smarty viene
+			Tutto ci√≤ che √® compreso fra i tag {strip}{/strip} in Smarty viene
 			ripulito dagli spazi extra o dai caratteri di ritorno a capo all'inizio
 			e alla fine delle righe, prima di essere visualizzato. In
-			questo modo potete mantenere la leggibilit‡ dei vostri template senza
+			questo modo potete mantenere la leggibilit√† dei vostri template senza
 			preoccuparvi dei problemi causati dagli spazi.
 			</para>
 			<note>
@@ -28,7 +28,7 @@
 <title>tag strip</title>
 <programlisting>
 <![CDATA[
-{* il codice seguente uscir‡ in output su una riga unica *}
+{* il codice seguente uscir√† in output su una riga unica *}
 {strip}
 <table border=0>
 	<tr>
@@ -52,8 +52,8 @@ OUTPUT:
 		Notate che nell'esempio qui sopra tutte le righe iniziano e 
 		finiscono con tag HTML. Tenete presente che tutte le linee
 		vengono "attaccate", per cui se avete del testo all'inizio
-		o alla fine di qualche riga, questo verr‡ attaccato, e probabilmente
-		non Ë ciÚ che volete.
+		o alla fine di qualche riga, questo verr√† attaccato, e probabilmente
+		non √® ci√≤ che volete.
 		</para>
 </sect1>
 

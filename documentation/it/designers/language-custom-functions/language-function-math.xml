@@ -22,7 +22,7 @@
                     <row>
                         <entry>equation</entry>
                         <entry>stringa</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>l'equazione da eseguire</entry>
                     </row>
@@ -36,7 +36,7 @@
                     <row>
                         <entry>var</entry>
                         <entry>numerico</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>valore di una variabile dell'equazione</entry>
                     </row>
@@ -45,12 +45,12 @@
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
-                        <entry>variabile del template cui verr‡ assegnato il risultato</entry>
+                        <entry>variabile del template cui verr√† assegnato il risultato</entry>
                     </row>
                     <row>
                         <entry>[var ...]</entry>
                         <entry>numerico</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>valore di una variabile dell'equazione</entry>
                     </row>
@@ -60,7 +60,7 @@
 			<para>
 	    La funzione math permette al progettista di effettuare equazioni
 	    matematiche nel template. Qualsiasi variabile numerica del template
-	    puÚ essere utilizzata nell'equazione; il risultato verr‡ stampato
+	    pu√≤ essere utilizzata nell'equazione; il risultato verr√† stampato
 	    al posto del tag. Le variabili usate nell'equazione vengono passate
 	    come parametri, che possono essere variabili del template o valori
 	    statici. +, -, /, *, abs, ceil, cos, exp, floor, log, log10, max, 
@@ -70,15 +70,15 @@
 			</para>
 			<para>
 			Se fornite lo speciale attributo "assign", l'output della
-			funzione verr‡ assegnato a questa variabile del template, 
+			funzione verr√† assegnato a questa variabile del template, 
 			invece di essere stampato in output.
 			</para>
 			<note>
 				<title>Nota tecnica</title>
 				<para>
-				math Ë una funzione costosa in termini di prestazioni, a
+				math √® una funzione costosa in termini di prestazioni, a
 				causa dell'uso che fa della funzione php eval(). Fare i
-				calcoli matematici in PHP Ë molto pi˘ efficiente, quindi,
+				calcoli matematici in PHP √® molto pi√π efficiente, quindi,
 				quando possibile, fate i calcoli in PHP ed assegnate i
 				risultati al template. Evitate decisamente chiamate
 				ripetitive alla funzione math, ad esempio in cicli section.

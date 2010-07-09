@@ -22,29 +22,29 @@ $smarty->display('index.tpl');
     </programlisting>
    </example>
    <para>
-    Con el caching habilitado, la llamada a la funciÛn display('index.tpl') traera 
-    el template como siempre, pero tambiÈn salvara una copia en el archivo de salida 
+    Con el caching habilitado, la llamada a la funci√≥n display('index.tpl') traera 
+    el template como siempre, pero tambi√©n salvara una copia en el archivo de salida 
     (una copia de cache) en el <link linkend="variable.cache.dir">$cache_dir</link>.
     En la proxima llamada de display('index.tpl'), la copia en cache sera usada en 
     vez de traer nuevamente el template.
    </para>
    <note>
-    <title>Nota TÈcnica</title>
+    <title>Nota T√©cnica</title>
     <para>
      Los archivos en el <link linkend="variable.cache.dir">$cache_dir</link> son 
      nombrados similarmente al nombre del archivo de template.
-     Aunque ellos tengan una extensiÛn ".php", ellos no son realmente scripts 
+     Aunque ellos tengan una extensi√≥n ".php", ellos no son realmente scripts 
      ejecutables de php. No edite estos archivos!
     </para>
    </note>
    <para>
     Cada pagina en cache tiene un periodo de tiempo limitado determinado por
     <link linkend="variable.cache.lifetime">$cache_lifetime</link>.
-    El default del valor es 3600 segundos, o 1 hora. DespuÈs de este tiempo 
+    El default del valor es 3600 segundos, o 1 hora. Despu√©s de este tiempo 
     expira, el cache es regenerado. Es posible dar tiempos individuales para 
-    caches con su propio tiempo de expiraciÛn para configuraciÛn 
+    caches con su propio tiempo de expiraci√≥n para configuraci√≥n 
     <link linkend="variable.caching">$caching</link> = 2. 
-    Vea la documentaciÛn en 
+    Vea la documentaci√≥n en 
     <link linkend="variable.cache.lifetime">$cache_lifetime</link>
     para mas detalles.
    </para>
@@ -77,8 +77,8 @@ $smarty->display('home.tpl');
     </programlisting>
    </example>
    <para>
-    Si <link linkend="variable.compile.check">$compile_check</link> est· habilitado, 
-    cada archivo de template y archivo de configuraciÛn que est· involucrado con el 
+    Si <link linkend="variable.compile.check">$compile_check</link> est√° habilitado, 
+    cada archivo de template y archivo de configuraci√≥n que est√° involucrado con el 
     archivo en cache es checado por modificadores. Si alguno de estos archivos fue 
     modificado desde que el ultimo cache fue generado, el cache es regenerado 
     inmediatamente. Esto es una forma de optimizar ligeramente el rendimiento de las 
@@ -102,16 +102,16 @@ $smarty->display('index.tpl');
     </programlisting>
    </example>
    <para>
-    Si <link linkend="variable.force.compile">$force_compile</link> est· habilitado, 
+    Si <link linkend="variable.force.compile">$force_compile</link> est√° habilitado, 
     los archivos de cache siempre seran regenerados. Esto definitivamente desactiva 
     el caching. 
     <link linkend="variable.force.compile">$force_compile</link> generalmente 
     es usado para propositos de debug solamente, una forma mas eficiente 
     de desactivar el caching es asignando
-    <link linkend="variable.caching">$caching</link> = false (Û 0.)
+    <link linkend="variable.caching">$caching</link> = false (√≥ 0.)
    </para>
    <para>
-    La funciÛn <link linkend="api.is.cached">is_cached()</link> puede ser 
+    La funci√≥n <link linkend="api.is.cached">is_cached()</link> puede ser 
     usada para testar si un template tiene un cache valido o no. Si usted 
     tiene un template con cache que requiera alguna cosa como un retorno 
     de base de datos, usted puede usar esto para saltar este proceso.
@@ -138,19 +138,19 @@ $smarty->display('index.tpl');
     </programlisting>
    </example>
    <para>
-    Usted puede guardar partes de su pagina din·mica con la funciÛn
+    Usted puede guardar partes de su pagina din√°mica con la funci√≥n
     de template <link linkend="language.function.insert">{insert}</link>.
     Vamos a decir que su pagina entera puede tener cache excepto para un
     banner que es mostrado abajo del lado derecho de su pagina. Usando 
-    la funciÛn insert para el banner, usted puede guardar ese elemento 
-    din·mico dentro de un contenido de cache. Vea la documentaciÛn en 
+    la funci√≥n insert para el banner, usted puede guardar ese elemento 
+    din√°mico dentro de un contenido de cache. Vea la documentaci√≥n en 
     <link linkend="language.function.insert">{insert}</link> para detalles 
     y ejemplos.
    </para>
    <para>
-    Usted puede limpiar todos los archivos de cache con la funciÛn
+    Usted puede limpiar todos los archivos de cache con la funci√≥n
     <link linkend="api.clear.all.cache">clear_all_cache()</link>,
-    los archivos de cache individuales (o grupos) con la funciÛn 
+    los archivos de cache individuales (o grupos) con la funci√≥n 
     <link linkend="api.clear.cache">clear_cache()</link>.
    </para>
    <example>

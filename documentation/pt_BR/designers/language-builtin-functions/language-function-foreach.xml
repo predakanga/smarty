@@ -14,9 +14,9 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,27 +25,27 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome da matriz que vocÍ estar· pegando os elementos</entry>
+                        <entry>O nome da matriz que voc√™ estar√° pegando os elementos</entry>
                     </row>
                     <row>
                         <entry>item</entry>
                         <entry>string</entry>
                         <entry>Yes</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>O nome da vari·vel
-                        que È o elemento atual</entry>
+                        <entry>O nome da vari√°vel
+                        que √© o elemento atual</entry>
                     </row>
                     <row>
                         <entry>key</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
 						<entry><emphasis>n/d</emphasis></entry>
-						<entry>O nome da vari·vel que È a chave atual</entry>
+						<entry>O nome da vari√°vel que √© a chave atual</entry>
                     </row>
                     <row>
                         <entry>name</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
 						<entry>O nome do loop foreach para acessar as 
 						propriedades foreach</entry>
@@ -54,28 +54,28 @@
                 </tgroup>
             </informaltable>
 			<para>
-			Loops <emphasis>foreach</emphasis> s„o uma alternativa para loops
-			<emphasis>section</emphasis>. <emphasis>foreach</emphasis> È usado
+			Loops <emphasis>foreach</emphasis> s√£o uma alternativa para loops
+			<emphasis>section</emphasis>. <emphasis>foreach</emphasis> √© usado
 			para pegar cada elemento de uma matriz associativa simples. 
-			A sintaxe para <emphasis>foreach</emphasis> È muito mais simples do que
+			A sintaxe para <emphasis>foreach</emphasis> √© muito mais simples do que
 			<emphasis>section</emphasis>, mas tem a desvantagem de poder ser usada
-			apenas para uma ˙nica matriz. Tags <emphasis>foreach</emphasis> devem ter
-			seu par <emphasis>/foreach</emphasis>. Os par‚metros requeridos s„o
+			apenas para uma √∫nica matriz. Tags <emphasis>foreach</emphasis> devem ter
+			seu par <emphasis>/foreach</emphasis>. Os par√¢metros requeridos s√£o
 			<emphasis>from</emphasis> e <emphasis>item</emphasis>. O nome do loop
-			foreach pode ser qualquer coisa que vocÍ queira, feito de letras, n˙meros
+			foreach pode ser qualquer coisa que voc√™ queira, feito de letras, n√∫meros
 			e sublinhados. Loops <emphasis>foreach</emphasis>
 			podem ser aninhados, e o nome dos loops aninhados devem ser diferentes
-			um dos outros. A vari·vel <emphasis>from</emphasis> (normalmente uma
-			matriz de valores) determina o n˙mero de vezes do loop
+			um dos outros. A vari√°vel <emphasis>from</emphasis> (normalmente uma
+			matriz de valores) determina o n√∫mero de vezes do loop
 			<emphasis>foreach</emphasis>.
-			<emphasis>foreachelse</emphasis> È executado quando n„o houverem mais valores
-			na vari·vel <emphasis>from</emphasis>.
+			<emphasis>foreachelse</emphasis> √© executado quando n√£o houverem mais valores
+			na vari√°vel <emphasis>from</emphasis>.
 			</para>
 <example>
 <title>foreach</title>
 <programlisting>
 <![CDATA[
-{* este exemplo ir· mostrar todos os valores da matriz $custid *}
+{* este exemplo ir√° mostrar todos os valores da matriz $custid *}
 {foreach from=$custid item=curr_id}
 	id: {$curr_id}<br>
 {/foreach}
@@ -95,9 +95,9 @@ id: 1002<br>
 <title>foreach key</title>
 <programlisting>
 <![CDATA[
-{* A key contÈm a chave para cada valor do loop
+{* A key cont√©m a chave para cada valor do loop
 
-A definiÁ„o se parece com isso:
+A defini√ß√£o se parece com isso:
 
 $smarty->assign("contacts", array(array("phone" => "1", "fax" => "2", "cell" => "3"),
       array("phone" => "555-4444", "fax" => "555-3333", "cell" => "760-1234")));
@@ -125,8 +125,8 @@ cell: 760-1234<br>
 </example>
 
 		<para>
-		Loop foreach tambÈm tem as suas prÛprias vari·veis para manipilar as propriedades
-		foreach. Estas s„o indicadas assim: {$smarty.foreach.foreachname.varname} com
+		Loop foreach tamb√©m tem as suas pr√≥prias vari√°veis para manipilar as propriedades
+		foreach. Estas s√£o indicadas assim: {$smarty.foreach.foreachname.varname} com
 		foreachname sendo o nome especificado no atributo
 		<emphasis>name</emphasis> do foreach.
 		</para>
@@ -135,18 +135,18 @@ cell: 760-1234<br>
 			<sect2 id="foreach.property.iteration">
 			<title>iteration</title>
 			<para>
-        	iteration È usado para mostrar a interaÁ„o atual do loop.
+        	iteration √© usado para mostrar a intera√ß√£o atual do loop.
 			</para>
 			<para>
-			Iteration sempre comeÁa em 1 e
-			È incrementado um a um em cada interaÁ„o.
+			Iteration sempre come√ßa em 1 e
+			√© incrementado um a um em cada intera√ß√£o.
 			</para>
 			</sect2>
 
 			<sect2 id="foreach.property.first">
 			<title>first</title>
 			<para>
-        	<emphasis>first</emphasis> È definido como true se a interaÁ„o atual
+        	<emphasis>first</emphasis> √© definido como true se a intera√ß√£o atual
         	do foreach for a primeira.
 			</para>
 			</sect2>
@@ -154,25 +154,25 @@ cell: 760-1234<br>
 			<sect2 id="foreach.property.last">
 			<title>last</title>
 			<para>
-        	<emphasis>last</emphasis> È definido como true se a interaÁ„o atual
-        	do foreach for a ˙ltima.
+        	<emphasis>last</emphasis> √© definido como true se a intera√ß√£o atual
+        	do foreach for a √∫ltima.
 			</para>
 			</sect2>
 
 			<sect2 id="foreach.property.show">	
 			<title>show</title>
 			<para>
-        	<emphasis>show</emphasis> È usado como par‚metro para o foreach.
-        	<emphasis>show</emphasis> È um valor booleano, true ou false. Se
-        	false, o foreach n„o ser· mostrado. Se tiver um foreachelse
-        	presente, este ser· alternativamente mostrado.
+        	<emphasis>show</emphasis> √© usado como par√¢metro para o foreach.
+        	<emphasis>show</emphasis> √© um valor booleano, true ou false. Se
+        	false, o foreach n√£o ser√° mostrado. Se tiver um foreachelse
+        	presente, este ser√° alternativamente mostrado.
 			</para>
 
 			</sect2>
 			<sect2 id="foreach.property.total">	
 			<title>total</title>
 			<para>
-			<emphasis>total</emphasis> È usado para mostrar o n˙mero de interaÁıes do
+			<emphasis>total</emphasis> √© usado para mostrar o n√∫mero de intera√ß√µes do
 			foreach. Isto pode ser usado dentro ou depois do foreach.
 			</para>
 			</sect2>

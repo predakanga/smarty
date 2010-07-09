@@ -6,7 +6,7 @@
   <refpurpose>Esto limpia el cache de un template especifico</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>DescripciÛn</title>
+  <title>Descripci√≥n</title>
   <methodsynopsis>
    <type>void</type><methodname>clear_cache</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
@@ -17,12 +17,12 @@
   <para>
    Si usted tiene <link linkend="caching.multiple.caches">multiples</link> caches 
    en este archivo, usted puede limpiar un cache especifico proporcionando el 
-   <parameter>cache_id</parameter> como segundo par·metro Usted tambiÈn puede pasar 
+   <parameter>cache_id</parameter> como segundo par√°metro Usted tambi√©n puede pasar 
    el  <link linkend="variable.compile.id"><parameter>$compile_id</parameter></link> 
-   como un tercer par·metro. Usted puede <link linkend="caching.groups">"agrupar"</link> 
+   como un tercer par√°metro. Usted puede <link linkend="caching.groups">"agrupar"</link> 
    templates conjuntamente de esta manera estos pueden ser removidos como un grupo. 
-   Vea el <link linkend="caching">caching section</link> para mayor informaciÛn.
-   Como un cuarto par·metro opcional, usted puede proporcionar un periodo 
+   Vea el <link linkend="caching">caching section</link> para mayor informaci√≥n.
+   Como un cuarto par√°metro opcional, usted puede proporcionar un periodo 
    minimo en segundos que el archivo de cache debe tener antes de ser anulado.
   </para>
   <example>
@@ -40,7 +40,7 @@ $smarty->clear_cache('index.tpl', 'CACHEID');
    </programlisting>
   </example>
   <para>
-  Ver tambiÈn
+  Ver tambi√©n
   <link linkend="api.clear.all.cache">clear_all_cache()</link>
   y
   <link linkend="caching">caching</link>.

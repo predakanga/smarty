@@ -12,26 +12,26 @@
                 <colspec colname="desc" />
                 <thead>
                     <row>
-                        <entry>PosiÁ„o do Par‚metro</entry>
+                        <entry>Posi√ß√£o do Par√¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>cat</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>1</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
-                        <entry>Este È o valor para concatenar com a vari·vel dada.</entry>
+                        <entry>Este √© o valor para concatenar com a vari√°vel dada.</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 Este valor È concatenado com a vari·vel dada.
+			 Este valor √© concatenado com a vari√°vel dada.
 			</para>
 <example>
 <title>cat</title>

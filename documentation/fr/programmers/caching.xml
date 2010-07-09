@@ -5,25 +5,25 @@
 <chapter id="caching">
  <title>Cache</title>
  <para>
-  Le cache est utilisée pour accélérer l'appel de <link
+  Le cache est utilisÃ©e pour accÃ©lÃ©rer l'appel de <link
   linkend="api.display"><varname>display()</varname></link> ou de <link
-  linkend="api.fetch"><varname>fetch()</varname></link> en sauvegardant leur résultat
+  linkend="api.fetch"><varname>fetch()</varname></link> en sauvegardant leur rÃ©sultat
   dans un fichier. Si un fichier de cache est disponible lors d'un appel,
-  il sera affiché sans qu'il ne soit nécessaire de regénérer le résultat.
-  Le système de cache peut accélérer les traitements de façon impressionnante, 
-  en particulier les templates dont la compilation est très longue. Comme 
-  le résultat de <link linkend="api.display"><varname>display()</varname></link> ou de 
+  il sera affichÃ© sans qu'il ne soit nÃ©cessaire de regÃ©nÃ©rer le rÃ©sultat.
+  Le systÃ¨me de cache peut accÃ©lÃ©rer les traitements de faÃ§on impressionnante, 
+  en particulier les templates dont la compilation est trÃ¨s longue. Comme 
+  le rÃ©sultat de <link linkend="api.display"><varname>display()</varname></link> ou de 
   <link linkend="api.fetch"><varname>fetch()</varname></link>est dans le cache, un fichier de cache 
-  peut être composé de plusieurs fichiers de templates, plusieurs fichiers
+  peut Ãªtre composÃ© de plusieurs fichiers de templates, plusieurs fichiers
   de configuration, etc.
  </para>
  <para>
   Comme les templates sont dynamiques, il est important de faire attention
-  à la façon dont les fichiers de cache sont générés, et pour combien de temps.
+  Ã  la faÃ§on dont les fichiers de cache sont gÃ©nÃ©rÃ©s, et pour combien de temps.
   Si par exemple vous affichez la page d'accueil de votre site Web dont le
-  contenu ne change pas souvent, il peut être intéressant de mettre cette page
+  contenu ne change pas souvent, il peut Ãªtre intÃ©ressant de mettre cette page
   dans le cache pour une heure ou plus. A l'inverse, si vous affichez une page
-  de météo mise a jour toutes les minutes, mettre cette page en cache
+  de mÃ©tÃ©o mise a jour toutes les minutes, mettre cette page en cache
   n'a aucun sens.
  </para>
  &programmers.caching.caching-setting-up;

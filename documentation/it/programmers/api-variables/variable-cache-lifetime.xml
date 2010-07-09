@@ -3,16 +3,16 @@
    <sect1 id="variable.cache.lifetime">
     <title>$cache_lifetime</title>
     <para>
-     E' la durata in secondi della validità di un file di cache. Una volta che
-     questo tempo è scaduto, la cache verrà rigenerata. $caching deve essere
-     impostato a "true" perché $cache_lifetime abbia significato. Il valore
-     -1 forza la cache a non scadere mai. Il valore 0 farà sì che la cache
-     venga sempre rigenerata (è utile solo in fase di test, per disabilitare
-     il caching un metodo più efficiente è impostare <link
+     E' la durata in secondi della validitÃ  di un file di cache. Una volta che
+     questo tempo Ã¨ scaduto, la cache verrÃ  rigenerata. $caching deve essere
+     impostato a "true" perchÃ© $cache_lifetime abbia significato. Il valore
+     -1 forza la cache a non scadere mai. Il valore 0 farÃ  sÃ¬ che la cache
+     venga sempre rigenerata (Ã¨ utile solo in fase di test, per disabilitare
+     il caching un metodo piÃ¹ efficiente Ã¨ impostare <link
      linkend="variable.caching">$caching</link> a false.)
     </para>
     <para>
-     Se <link linkend="variable.force.compile">$force_compile</link> è
+     Se <link linkend="variable.force.compile">$force_compile</link> Ã¨
      abilitato, i file della cache verranno rigenerati ogni volta, disabilitando
      in effetti il caching. Potete eliminare tutti i file della cache
      con la funzione <link

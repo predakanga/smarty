@@ -32,7 +32,7 @@
  <para>
   {debug} produce un dump sulla pagina della console di debug. Funziona
   indipendentemente dall'impostazione <link linkend="chapter.debugging.console">debug</link>
-  di Smarty. Siccome viene eseguita a runtime, è in grado di 
+  di Smarty. Siccome viene eseguita a runtime, Ã¨ in grado di 
   mostrare soltanto le variabili, non i template che state utilizzando.
   Comunque vedrete tutte le variabili attualmente disponibili nello
   scope di questo template.

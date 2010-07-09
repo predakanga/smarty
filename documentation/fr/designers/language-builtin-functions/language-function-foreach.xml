@@ -5,14 +5,14 @@
 <sect1 id="language.function.foreach">
  <title>{foreach},{foreachelse}</title>
  <para>
-  <varname>{foreach}</varname> est utilisé pour parcourir un
+  <varname>{foreach}</varname> est utilisÃ© pour parcourir un
   <emphasis role="bold">simple tableau associatif</emphasis>,
-  contrairement à <link linkend="language.function.section"><varname>{section}</varname></link>
-  qui effectue une boucle sur les <emphasis role="bold">tableaux de données</emphasis>.
+  contrairement Ã  <link linkend="language.function.section"><varname>{section}</varname></link>
+  qui effectue une boucle sur les <emphasis role="bold">tableaux de donnÃ©es</emphasis>.
   La synthaxe pour
   <varname>{foreach}</varname> est plus simple que
   <link linkend="language.function.section"><varname>{section}</varname></link>,
-  mais <emphasis role="bold">ne peut être utilisé que pour des tableau simple</emphasis>.
+  mais <emphasis role="bold">ne peut Ãªtre utilisÃ© que pour des tableau simple</emphasis>.
   Chaque <varname>{foreach}</varname> doit aller de paire avec une balise fermante 
   <varname>{/foreach}</varname>.
  </para>
@@ -39,29 +39,29 @@
      <entry>tableau</entry>
      <entry>oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le tableau à parcourir</entry>
+     <entry>Le tableau Ã  parcourir</entry>
     </row>
     <row>
      <entry>item</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le nom de la variable "élément courant"</entry>
+     <entry>Le nom de la variable "Ã©lÃ©ment courant"</entry>
     </row>
     <row>
      <entry>key</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le nom de la variable représentant la clef courante.</entry>
+     <entry>Le nom de la variable reprÃ©sentant la clef courante.</entry>
     </row>
     <row>
      <entry>name</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Le nom de la boucle foreach, qui nous permettra
-      d'accéder à ses propriétés.</entry>
+      d'accÃ©der Ã  ses propriÃ©tÃ©s.</entry>
     </row>
    </tbody>
   </tgroup>
@@ -135,7 +135,7 @@ $smarty->assign('myArray', $arr);
 ]]>
   </programlisting>
   <para>
-   Template pour afficher <parameter>$myArray</parameter> dans une liste non-ordonnée.
+   Template pour afficher <parameter>$myArray</parameter> dans une liste non-ordonnÃ©e.
   </para>
   <programlisting>
 <![CDATA[
@@ -171,7 +171,7 @@ $smarty->assign('myArray', $arr);
 ]]>
   </programlisting>
   <para>
-   Le template affiche le tableau <parameter>$myArray</parameter> comme paire clé/valeur,
+   Le template affiche le tableau <parameter>$myArray</parameter> comme paire clÃ©/valeur,
    comme la fonction PHP
    <ulink url="&url.php-manual;foreach"><varname>foreach</varname></ulink>.
   </para>
@@ -238,7 +238,7 @@ $smarty->assign('items', $items_list);
 
  <example>
   <title>{foreach} avec <parameter>item</parameter> et <parameter>key</parameter></title>
-  <para>Assigne un tableau à Smarty, la clé contient la clé pour chaque valeur de la boucle.</para>
+  <para>Assigne un tableau Ã  Smarty, la clÃ© contient la clÃ© pour chaque valeur de la boucle.</para>
   <programlisting role="php">
 <![CDATA[
 <?php
@@ -282,9 +282,9 @@ cell: 760-1234<br />
  </example>
 
  <example>
-  <title>Exemple d'une base de données avec {foreachelse}</title>
-  <para>Exemple d'un script de recherche dans une base de données (e.g. PEAR ou ADODB),
-   le résultat de la requête est assigné à Smarty.</para>
+  <title>Exemple d'une base de donnÃ©es avec {foreachelse}</title>
+  <para>Exemple d'un script de recherche dans une base de donnÃ©es (e.g. PEAR ou ADODB),
+   le rÃ©sultat de la requÃªte est assignÃ© Ã  Smarty.</para>
   <programlisting role="php">
 <![CDATA[
 <?php
@@ -295,13 +295,13 @@ $smarty->assign('results', $db->getAssoc($sql) );
 ]]>
   </programlisting>
   <para>Le template qui affiche <quote>None found</quote>
-   si aucun résultat avec <varname>{foreachelse}</varname>.</para>
+   si aucun rÃ©sultat avec <varname>{foreachelse}</varname>.</para>
   <programlisting>
 <![CDATA[
 {foreach key=cid item=con from=$results}
 <a href="contact.php?contact_id={$cid}">{$con.name} - {$con.nick}</a><br />
 {foreachelse}
-Aucun élément n'a été trouvé dans la recherche
+Aucun Ã©lÃ©ment n'a Ã©tÃ© trouvÃ© dans la recherche
 {/foreach}
 ]]>
    </programlisting>
@@ -310,13 +310,13 @@ Aucun élément n'a été trouvé dans la recherche
   <sect2 id="foreach.property.index">
    <title>.index</title>
    <para>
-    <parameter>index</parameter> contient l'index courant du tableau, en commançant par zéro.
+    <parameter>index</parameter> contient l'index courant du tableau, en commanÃ§ant par zÃ©ro.
    </para>
    <example>
     <title>Exemple avec <parameter>index</parameter></title>
     <programlisting role="php">
  <![CDATA[
- {* L'en-tête du block est affiché toutes les 5 lignes *}
+ {* L'en-tÃªte du block est affichÃ© toutes les 5 lignes *}
 <table>
  {foreach from=$items key=myId item=i name=foo}
  {if $smarty.foreach.foo.index % 5 == 0}
@@ -333,10 +333,10 @@ Aucun élément n'a été trouvé dans la recherche
 <sect2 id="foreach.property.iteration">
  <title>.iteration</title>
  <para>
-  <parameter>iteration</parameter> contient l'itération courante de la boucle et commence
-  toujours à 1, contrairement à
+  <parameter>iteration</parameter> contient l'itÃ©ration courante de la boucle et commence
+  toujours Ã  1, contrairement Ã 
   <link linkend="foreach.property.index"><parameter>index</parameter></link>.
-  Il est incrémenté d'un, à chaque itération.
+  Il est incrÃ©mentÃ© d'un, Ã  chaque itÃ©ration.
  </para>
  <example>
   <title>Exemple avec <parameter>iteration</parameter> et <parameter>index</parameter></title>
@@ -353,14 +353,14 @@ Aucun élément n'a été trouvé dans la recherche
 <sect2 id="foreach.property.first">
   <title>.first</title>
   <para>
-   <parameter>first</parameter> vaut &true; si l'itération courante de
+   <parameter>first</parameter> vaut &true; si l'itÃ©ration courante de
    <varname>{foreach}</varname> est l'initial.
   </para>
   <example>
    <title>Exemple avec <parameter>first</parameter></title>
    <programlisting role="php">
 <![CDATA[
- {* affiche LATEST sur le premier élément, sinon, l'id *}
+ {* affiche LATEST sur le premier Ã©lÃ©ment, sinon, l'id *}
  <table>
   {foreach from=$items key=myId item=i name=foo}
   <tr>
@@ -376,14 +376,14 @@ Aucun élément n'a été trouvé dans la recherche
 <sect2 id="foreach.property.last">
  <title>.last</title>
  <para>
-  <parameter>last</parameter> est défini à &true; si l'itération courante de
-  <varname>{foreach}</varname> est la dernière.
+  <parameter>last</parameter> est dÃ©fini Ã  &true; si l'itÃ©ration courante de
+  <varname>{foreach}</varname> est la derniÃ¨re.
  </para>
  <example>
   <title>Exemple avec <parameter>last</parameter></title>
   <programlisting role="php">
 <![CDATA[
-{* Ajout une barre horizontale à la fin de la liste *}
+{* Ajout une barre horizontale Ã  la fin de la liste *}
 {foreach from=$items key=part_id item=prod name=products}
 <a href="#{$part_id}">{$prod}</a>{if $smarty.foreach.products.last}<hr>{else},{/if}
 {foreachelse}
@@ -396,25 +396,25 @@ Aucun élément n'a été trouvé dans la recherche
 <sect2 id="foreach.property.show">
  <title>.show</title>
  <para>
-  <parameter>show</parameter> est utilisé en tant que paramètre à <varname>{foreach}</varname>.
-  <parameter>show</parameter> est une valeur booléenne. S'il vaut
-  &false;, <varname>{foreach}</varname> ne sera pas affiché.
-  S'il y a un <varname>{foreachelse}</varname>, il sera affiché alternativement.
+  <parameter>show</parameter> est utilisÃ© en tant que paramÃ¨tre Ã  <varname>{foreach}</varname>.
+  <parameter>show</parameter> est une valeur boolÃ©enne. S'il vaut
+  &false;, <varname>{foreach}</varname> ne sera pas affichÃ©.
+  S'il y a un <varname>{foreachelse}</varname>, il sera affichÃ© alternativement.
  </para>
 </sect2>
 
 <sect2 id="foreach.property.total">
  <title>.total</title>
  <para>
-  <parameter>total</parameter> contient le nombre d'itérations que cette boucle
+  <parameter>total</parameter> contient le nombre d'itÃ©rations que cette boucle
   <varname>{foreach}</varname> effectuera.
-  Il peut être utilisé dans ou après un <varname>{foreach}</varname>.
+  Il peut Ãªtre utilisÃ© dans ou aprÃ¨s un <varname>{foreach}</varname>.
  </para>
  <example>
   <title>Exemple avec <parameter>total</parameter></title>
   <programlisting role="php">
 <![CDATA[
-{* affiche les lignes retournées à la fin *}
+{* affiche les lignes retournÃ©es Ã  la fin *}
 {foreach from=$items key=part_id item=prod name=foo}
 {$prod.name><hr/>
 {if $smarty.foreach.foo.last}

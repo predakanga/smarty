@@ -5,14 +5,14 @@
       <para>
        Questa variabile dice a Smarty come gestire il codice PHP
        incorporato nei template. Ci sono quattro possibili impostazioni:
-       il default Ë SMARTY_PHP_PASSTHRU. Notate che questa variabile
+       il default √® SMARTY_PHP_PASSTHRU. Notate che questa variabile
        NON ha effetto sul codice php che si trova fra i tag <link
        linkend="language.function.php">{php}{/php}</link>.
       </para>
       <itemizedlist>
        <listitem><para>SMARTY_PHP_PASSTHRU - Smarty stampa il contenuto
-         dei tag cosÏ com'Ë.</para></listitem>
-       <listitem><para>SMARTY_PHP_QUOTE - Smarty trasforma i tag in entit‡
+         dei tag cos√¨ com'√®.</para></listitem>
+       <listitem><para>SMARTY_PHP_QUOTE - Smarty trasforma i tag in entit√†
          html.</para></listitem>
        <listitem><para>SMARTY_PHP_REMOVE - Smarty rimuove i tag dal 
          template.</para></listitem>
@@ -20,7 +20,7 @@
       </itemizedlist>
       <note>
        <para>
-        Incorporare codice PHP nei template Ë altamente sconsigliato. Usate
+        Incorporare codice PHP nei template √® altamente sconsigliato. Usate
         invece le <link linkend="language.custom.functions">funzioni utente</link>
         o i <link linkend="language.modifiers">modificatori</link>.
        </para>

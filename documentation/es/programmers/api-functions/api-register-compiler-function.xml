@@ -6,7 +6,7 @@
   <refpurpose>Registra dinamicamente un plugin de una funcion compiladora</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripci髇 </title>
+  <title>Descripci贸n </title>
   <methodsynopsis>
    <type>bool</type><methodname>register_compiler_function</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
@@ -15,8 +15,8 @@
   </methodsynopsis>
   <para>
    Pase el nombre de la 
-   <link linkend="plugins.compiler.functions">funci髇 compiladora</link>, 
-   seguido por la funci髇 PHP que implemente esto.
+   <link linkend="plugins.compiler.functions">funci贸n compiladora</link>, 
+   seguido por la funci贸n PHP que implemente esto.
   </para>
   <para>
     La llamada a la funcion-php <parameter>impl</parameter> puede ser
@@ -24,28 +24,28 @@
    <orderedlist numeration="loweralpha">
    <listitem>
      <para>
-    a una cadena conteniendo el nombre de la funci髇
+    a una cadena conteniendo el nombre de la funci贸n
      </para>
    </listitem><listitem>
      <para>un arreglo con la forma <literal>array(&amp;$object, $method)</literal> con
      <literal>&amp;$object</literal> siendo una referencia para un objeto y 
-     <literal>$method</literal> siendo una cadena conteniendo el nombre del m閠odo 
+     <literal>$method</literal> siendo una cadena conteniendo el nombre del m茅todo 
      </para>
    </listitem><listitem>
      <para>un arreglo con la forma 
      <literal>array(&amp;$class, $method)</literal> con
      <literal>$class</literal> siendo el nombre de una clase y
-     <literal>$method</literal> siendo el m閠odo de esta clase.
+     <literal>$method</literal> siendo el m茅todo de esta clase.
      </para>
   </listitem>
   </orderedlist>
   <para>
    <parameter>cacheable</parameter> puede ser omitido en la mayoria de los casos.
    Vea <link linkend="caching.cacheable">Controlando modos de Salida de
-   Cache de los Plugins</link> para obtener mayor informaci髇.
+   Cache de los Plugins</link> para obtener mayor informaci贸n.
   </para>
 <para>
-Ver tambi閚  <link linkend="api.unregister.compiler.function">unregister_compiler_function() </link>
+Ver tambi茅n  <link linkend="api.unregister.compiler.function">unregister_compiler_function() </link>
 y <link linkend="plugins.compiler.functions">Plugin Compiler Functions</link>.
 </para>
 

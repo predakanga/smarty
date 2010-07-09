@@ -9,20 +9,20 @@
     <methodparam choice="opt"><type>string</type><parameter>section</parameter></methodparam>
    </methodsynopsis>
 			<para>
-			Isso carrega o arquivo de configuração de dados e fixa-o para o 
-			template. Isso funciona idêntico a função <link
+			Isso carrega o arquivo de configuraÃ§Ã£o de dados e fixa-o para o 
+			template. Isso funciona idÃªntico a funÃ§Ã£o <link
 			linkend="language.function.config.load">
 			config_load</link>.
 			</para>
 		  <note>
-		  <title>Notas Técnicas</title>
+		  <title>Notas TÃ©cnicas</title>
     	  <para>
-		   À partir da Smarty 2.4.0, variáveis de template fixadas são
-		   mantidas através de fetch() e display(). Variáveis de configuração carregadas
-		   de config_load() são sempre de escopo global. Arquivos de configuração
-		   também são compilados para execução rápida, e repeita o <link
+		   Ã€ partir da Smarty 2.4.0, variÃ¡veis de template fixadas sÃ£o
+		   mantidas atravÃ©s de fetch() e display(). VariÃ¡veis de configuraÃ§Ã£o carregadas
+		   de config_load() sÃ£o sempre de escopo global. Arquivos de configuraÃ§Ã£o
+		   tambÃ©m sÃ£o compilados para execuÃ§Ã£o rÃ¡pida, e repeita o <link
 		   linkend="variable.force.compile">force_compile</link> e <link
-		   linkend="variable.compile.check">compile_check</link> parâmetros de configuração.
+		   linkend="variable.compile.check">compile_check</link> parÃ¢metros de configuraÃ§Ã£o.
     	  </para>
 		  </note>
 <example>

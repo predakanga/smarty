@@ -29,14 +29,14 @@
     <row>
      <entry>values</entry>
      <entry>array</entry>
-     <entry>sì, a meno che si usi l'attributo options</entry>
+     <entry>sÃ¬, a meno che si usi l'attributo options</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>array di valori per le checkbox</entry>
     </row>
     <row>
      <entry>output</entry>
      <entry>array</entry>
-     <entry>sì, a meno che si usi l'attributo options</entry>
+     <entry>sÃ¬, a meno che si usi l'attributo options</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>array di output per le checkbox</entry>
     </row>
@@ -50,7 +50,7 @@
     <row>
      <entry>options</entry>
      <entry>array associativo</entry>
-     <entry>sì, a meno che si usino values e output</entry>
+     <entry>sÃ¬, a meno che si usino values e output</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>array associativo di valori e output</entry>
     </row>
@@ -72,11 +72,11 @@
   </tgroup>
  </informaltable>
  <para>
-  html_checkboxes è una funzione utente che usa i dati forniti per
+  html_checkboxes Ã¨ una funzione utente che usa i dati forniti per
   creare un gruppo di checkbox html. Si occupa anche di impostare
   la casella selezionata per default. Gli attributi obbligatori sono
   values e output, a meno che non usiate invece options. Tutto
-  l'output generato è compatibile XHTML.
+  l'output generato Ã¨ compatibile XHTML.
  </para>
  <para>
   Tutti i parametri non compresi nella lista qui sopra vengono
@@ -99,7 +99,7 @@ $smarty->display('index.tpl');
 ]]>
   </programlisting>
   <para>
-   dove index.tpl è:
+   dove index.tpl Ã¨:
   </para>
   <programlisting>
 <![CDATA[
@@ -123,7 +123,7 @@ $smarty->display('index.tpl');
 ]]>
   </programlisting>
   <para>
-   dove index.tpl è:
+   dove index.tpl Ã¨:
   </para>
   <programlisting>
 <![CDATA[

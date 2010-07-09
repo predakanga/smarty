@@ -5,7 +5,7 @@
 <refentry id="api.append">
  <refnamediv>
   <refname>append()</refname>
-  <refpurpose>Ajoute un élément à un tableau assigné</refpurpose>
+  <refpurpose>Ajoute un Ã©lÃ©ment Ã  un tableau assignÃ©</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -20,11 +20,11 @@
    <methodparam choice="opt"><type>bool</type><parameter>merge</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Si vous utilisez cette fonction avec une chaîne de caractères, elle est
-   convertie en tableau auquel on ajoute ensuite l'élément. Vous pouvez
-   explicitement passer des paires nom/valeur. Si vous passez le troisième
-   paramètre (optionel) à &true;, la valeur sera fusionnée
-   avec le tableau plutôt que d'être ajoutée.
+   Si vous utilisez cette fonction avec une chaÃ®ne de caractÃ¨res, elle est
+   convertie en tableau auquel on ajoute ensuite l'Ã©lÃ©ment. Vous pouvez
+   explicitement passer des paires nom/valeur. Si vous passez le troisiÃ¨me
+   paramÃ¨tre (optionel) Ã  &true;, la valeur sera fusionnÃ©e
+   avec le tableau plutÃ´t que d'Ãªtre ajoutÃ©e.
   </para>
   &note.parameter.merge;
   <example>
@@ -39,7 +39,7 @@ $smarty->append("Adresse",$address);
 $array = array(1 => 'un', 2 => 'deux');
 $smarty->append('X', $array);
 $array2 = array(3 => 'trois', 4 => 'quatre');
-// La ligne suivante ajoute un second élément au tableau X
+// La ligne suivante ajoute un second Ã©lÃ©ment au tableau X
 $smarty->append('X', $array2);
 
 // passe un tableau associatif

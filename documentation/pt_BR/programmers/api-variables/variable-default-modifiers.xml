@@ -4,10 +4,10 @@
 <sect1 id="variable.default.modifiers">
       <title>$default_modifiers</title>
       <para>
-	  Isso È um array de modificadores implicitamente aplicados par cada
-	  vari·vel no template. Por Exemplo, para cada vari·vel HTML-escape por padr„o,
-	  use o array('escape:"htmlall"'); Para fazer a vari·vel isenta para modificadores
-	  padr„o, passe o modificador especial "smarty" com um valor de par‚metro "nodefaults"
+	  Isso √© um array de modificadores implicitamente aplicados par cada
+	  vari√°vel no template. Por Exemplo, para cada vari√°vel HTML-escape por padr√£o,
+	  use o array('escape:"htmlall"'); Para fazer a vari√°vel isenta para modificadores
+	  padr√£o, passe o modificador especial "smarty" com um valor de par√¢metro "nodefaults"
 	  modificando isso, como
 	  {$var|smarty:nodefaults}.
       </para>

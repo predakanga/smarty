@@ -5,18 +5,18 @@
 <sect1 id="variable.template.dir">
  <title>$template_dir</title>
  <para>
-  C'est le nom par défaut du répertoire des templates.
-  Si vous ne spécifiez aucun chemin lors de l'utilisation de templates, Smarty
-  les cherchera à cet emplacement. Par défaut, il s'agit de
+  C'est le nom par dÃ©faut du rÃ©pertoire des templates.
+  Si vous ne spÃ©cifiez aucun chemin lors de l'utilisation de templates, Smarty
+  les cherchera Ã  cet emplacement. Par dÃ©faut, il s'agit de
   <filename class="directory">./templates</filename>, ce qui signifie
-  qu'il va chercher le répertoire <filename class="directory">templates/</filename>
-  dans le répertoire où se trouve le script PHP en cours d'exécution.
+  qu'il va chercher le rÃ©pertoire <filename class="directory">templates/</filename>
+  dans le rÃ©pertoire oÃ¹ se trouve le script PHP en cours d'exÃ©cution.
  </para>
 
  <note>
   <title>Note technique</title>
   <para>
-   Il n'est pas conseillé de mettre ce répertoire dans l'arborescence Web.
+   Il n'est pas conseillÃ© de mettre ce rÃ©pertoire dans l'arborescence Web.
   </para>
  </note>
 </sect1>

@@ -5,11 +5,11 @@
 <sect1 id="language.function.debug">
  <title>{debug}</title>
  <para>
-  <varname>{debug}</varname> amène la console de débogage sur la page.
-  Fonctionne quelle que soit la valeur du paramètre
+  <varname>{debug}</varname> amÃ¨ne la console de dÃ©bogage sur la page.
+  Fonctionne quelle que soit la valeur du paramÃ¨tre
   <link linkend="chapter.debugging.console">debug</link> de Smarty.
-  Comme ce dernier est appelé lors de l'exécution, il n'est capable
-  d'afficher que les variables <link linkend="api.assign">assignées</link>
+  Comme ce dernier est appelÃ© lors de l'exÃ©cution, il n'est capable
+  d'afficher que les variables <link linkend="api.assign">assignÃ©es</link>
   au template, et non les templates en cours d'utilisation. Toutefois, vous
   voyez toutes les variables disponibles pour le template courant.
  </para>
@@ -32,7 +32,7 @@
    <tbody>
     <row>
      <entry>output</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>javascript</emphasis></entry>
      <entry>Type de sortie, html ou javascript</entry>
@@ -42,7 +42,7 @@
  </informaltable>
  <para>
   Voir aussi
-  <link linkend="chapter.debugging.console">la console de débogage</link>.
+  <link linkend="chapter.debugging.console">la console de dÃ©bogage</link>.
  </para>
 </sect1>
 

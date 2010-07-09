@@ -5,7 +5,7 @@
 <refentry id="api.register.block">
  <refnamediv>
   <refname>register_block()</refname>
-  <refpurpose>Déclare dynamiquement des plugins de fonction de blocs</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement des plugins de fonction de blocs</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -17,16 +17,16 @@
    <methodparam><type>mixed</type><parameter>cache_attrs</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour déclarer dynamiquement des <link linkend="plugins.block.functions">plugins de fonction
-   de blocs</link>. Il faut passer en paramètre le nom de la fonction
-   de blocs, suivi du nom de la fonction PHP qui l'implémente.
+   UtilisÃ©e pour dÃ©clarer dynamiquement des <link linkend="plugins.block.functions">plugins de fonction
+   de blocs</link>. Il faut passer en paramÃ¨tre le nom de la fonction
+   de blocs, suivi du nom de la fonction PHP qui l'implÃ©mente.
   </para>
     &api.register.snippet;
   <para>
-   Les paramètre <parameter>cacheable</parameter> et
-   <parameter>cache_attrs</parameter> peuvent être omis dans la plupart
+   Les paramÃ¨tre <parameter>cacheable</parameter> et
+   <parameter>cache_attrs</parameter> peuvent Ãªtre omis dans la plupart
    des cas. Voir <link 
-   linkend="caching.cacheable">Contrôler la mise en cache des sorties des Plugins</link>
+   linkend="caching.cacheable">ContrÃ´ler la mise en cache des sorties des Plugins</link>
    pour plus d'informations concernant cette utilisation.
   </para>
   <example>
@@ -34,7 +34,7 @@
    <programlisting role="php">
 <![CDATA[
 <?php
-// Déclaration de la fonction
+// DÃ©claration de la fonction
 function do_translation ($params, $content, &$smarty, &$repeat) {
     if ($content) {
         $lang = $params['lang'];

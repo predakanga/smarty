@@ -3,8 +3,8 @@
 <chapter id="language.builtin.functions">
  <title>Funzioni incorporate</title>
  <para>
-  Smarty è dotato di numerose funzioni incorporate. Queste funzioni
-  sono integrate nel linguaggio del template: non è possibile creare funzioni
+  Smarty Ã¨ dotato di numerose funzioni incorporate. Queste funzioni
+  sono integrate nel linguaggio del template: non Ã¨ possibile creare funzioni
   utente con gli stessi nomi, e nemmeno modificare le funzioni
   incorporate.
  </para>

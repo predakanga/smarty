@@ -31,7 +31,7 @@
       <entry>stringa</entry>
       <entry>No</entry>
       <entry>...</entry>
-      <entry>Testo da aggiungere in fondo quando c'Ë troncamento.</entry>
+      <entry>Testo da aggiungere in fondo quando c'√® troncamento.</entry>
      </row>
      <row>
       <entry>3</entry>
@@ -47,9 +47,9 @@
   <para>
    Effettua il troncamento di una variabile ad un certo numero di caratteri,
    per default 80. Come secondo parametro opzionale potete specificare una
-   stringa di testo da mostrare alla fine se la variabile Ë stata troncata.
+   stringa di testo da mostrare alla fine se la variabile √® stata troncata.
    Questi caratteri non vengono conteggiati nella lunghezza della
-   stringa troncata. Per default, truncate cercher‡ di tagliare la stringa al
+   stringa troncata. Per default, truncate cercher√† di tagliare la stringa al
    termine di una parola. Se invece volete effettuare il troncamento alla
    lunghezza esatta in caratteri, passate il terzo parametro opzionale come true.
   </para>
@@ -67,7 +67,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -81,7 +81,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

@@ -15,7 +15,7 @@
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
                         <entry>Default</entry>
-                        <entry>DescripciÛn</entry>
+                        <entry>Descripci√≥n</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -31,7 +31,7 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>La variable del template que recibir· la salida</entry>
+                        <entry>La variable del template que recibir√° la salida</entry>
                     </row>
                 </tbody>
                 </tgroup>
@@ -40,15 +40,15 @@
     {eval} es usado para evaluar una variable como de template. Esto puede 
    ser usado para cosas como incrustar tags(etiquetas)/variables del 
    template dentro de las variables o tags(etiquetas)/variables dentro 
-   de las variables de un archivo de configuraciÛn.
+   de las variables de un archivo de configuraci√≥n.
 			</para>
 			<para>
     Si usted indica el atributo especial "assign", la salida de la 
-    funciÛn eval se ira para esta variable de template en vez de 
+    funci√≥n eval se ira para esta variable de template en vez de 
     aparecer en el template.
 			</para>
 			<note>
-			<title>Nota TÈcnica</title>
+			<title>Nota T√©cnica</title>
 			<para>
    Al evaluar las variables son tratas igual que el template.
    Ellas sigen el mismo funcionamiento para escape y seguridad tal 
@@ -56,9 +56,9 @@
 			</para>
 			</note>
 			<note>
-			<title>Nota TÈcnica</title>
+			<title>Nota T√©cnica</title>
 			<para>
-   Las variables evaluadas son compiladas en cada invocaciÛn, las
+   Las variables evaluadas son compiladas en cada invocaci√≥n, las
    vesiones compiladas no son salvas. Sin embargo, si usted tiene 
    activado el cache, la salida se va a fijar en la  
    <link linkend="caching">cache</link> junto con el resto del template.

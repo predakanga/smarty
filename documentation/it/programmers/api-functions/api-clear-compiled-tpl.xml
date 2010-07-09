@@ -18,9 +18,9 @@
    o tutti file di template compilati se non ne viene specificato uno.
    Se passate un compile_id solo il template compilato relativo a questo
    compile_id viene eliminato. Se passate un exp_time, solo i template
-   compilati con un'et‡ maggiore di exp_time (in secondi) vengono
+   compilati con un'et√† maggiore di exp_time (in secondi) vengono
    eliminati; per default tutti i template compilati vengono eliminati,
-   indipendentemente dalla loro et‡. Questa funzione Ë solo per uso
+   indipendentemente dalla loro et√†. Questa funzione √® solo per uso
    avanzato, normalmente non ne avrete bisogno.
   </para>
   <example>

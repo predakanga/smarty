@@ -15,7 +15,7 @@
      <entry>Tipo</entry>
      <entry>Requerido</entry>
      <entry>Default</entry>
-     <entry>Descripción</entry>
+     <entry>DescripciÃ³n</entry>
     </row>
    </thead>
    <tbody>
@@ -61,7 +61,7 @@
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>La variable del template que recibirá la salida</entry>
+     <entry>La variable del template que recibirÃ¡ la salida</entry>
     </row>
     <row>
      <entry>reset</entry>
@@ -74,9 +74,9 @@
   </tgroup>
  </informaltable>
  <para>
-  {Cycle} es usado para hacer un ciclo a través de un conjunto 
-  de valores. Esto hace mas fácil alternar entre dos o mas colores 
-  en una tabla, o ciclos a travéz de una matriz de valores.
+  {Cycle} es usado para hacer un ciclo a travÃ©s de un conjunto 
+  de valores. Esto hace mas fÃ¡cil alternar entre dos o mas colores 
+  en una tabla, o ciclos a travÃ©z de una matriz de valores.
  </para>
  <para>
   Usted puede usar el {cycle} en mas de un conjunto de valores en su 
@@ -85,16 +85,16 @@
  </para>
  <para>
   Usted puede forzar que el valor actual no sea mostrado definiendo 
-  el atributo print en false. Esto es útil para saltarse un valor.
+  el atributo print en false. Esto es Ãºtil para saltarse un valor.
  </para>
  <para>
   El atributo advance es usado para repetir un valor. cuando se 
-  definido en false, la próxima llamada para cycle mostrara el 
+  definido en false, la prÃ³xima llamada para cycle mostrara el 
   mismo valor.
  </para>
  <para>
   Si usted indica el atributo especial "assign", la saida de la 
-  función cycle ira a la variable del template en vez de ser mostrado 
+  funciÃ³n cycle ira a la variable del template en vez de ser mostrado 
   ditectamente en el template.
  </para>
  <example>

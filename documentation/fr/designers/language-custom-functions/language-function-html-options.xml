@@ -6,9 +6,9 @@
  <title>{html_options}</title>
  <para>
   <varname>{html_options}</varname> est une
-  <link linkend="language.custom.functions">fonction personnalisée</link>
-  qui crée un groupe d'options avec les données fournies. Elle prend en charge
-  les éléments sélectionnés par défaut.
+  <link linkend="language.custom.functions">fonction personnalisÃ©e</link>
+  qui crÃ©e un groupe d'options avec les donnÃ©es fournies. Elle prend en charge
+  les Ã©lÃ©ments sÃ©lectionnÃ©s par dÃ©faut.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -30,39 +30,39 @@
     <row>
      <entry>values</entry>
      <entry>array</entry>
-     <entry>Oui, à moins que vous n'utilisiez
+     <entry>Oui, Ã  moins que vous n'utilisiez
       l'attribut options</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Un tableau de valeurs pour les listes
-      déroulantes</entry>
+      dÃ©roulantes</entry>
     </row>
     <row>
      <entry>output</entry>
      <entry>array</entry>
-     <entry>Oui, à moins que vous n'utilisiez
+     <entry>Oui, Ã  moins que vous n'utilisiez
       l'attribut options</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Un tableau de libellés pour la liste
-      déroulante</entry>
+     <entry>Un tableau de libellÃ©s pour la liste
+      dÃ©roulante</entry>
     </row>
     <row>
      <entry>selected</entry>
-     <entry>chaîne de caractères/tableau</entry>
+     <entry>chaÃ®ne de caractÃ¨res/tableau</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
-     <entry>Les éléments sélectionnés</entry>
+     <entry>Les Ã©lÃ©ments sÃ©lectionnÃ©s</entry>
     </row>
     <row>
      <entry>options</entry>
      <entry>Tableau associatif</entry>
-     <entry>Oui, à moins que vous n'utilisiez option
+     <entry>Oui, Ã  moins que vous n'utilisiez option
       et values</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Un tableau associatif valeur / libellé</entry>
+     <entry>Un tableau associatif valeur / libellÃ©</entry>
     </row>
     <row>
      <entry>name</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>empty</emphasis></entry>
      <entry>Nom du goupe d'options</entry>
@@ -75,25 +75,25 @@
   <listitem><para>
     Les attributs requis sont
     <parameter>values</parameter> et <parameter>output</parameter>,
-    à moins que vous n'utilisiez <parameter>options</parameter> à la place.
+    Ã  moins que vous n'utilisiez <parameter>options</parameter> Ã  la place.
    </para></listitem>
 
   <listitem><para>
     Si l'attribut optionnel <parameter>name</parameter> est fourni, les balises
-    <literal>&lt;select&gt;&lt;/select&gt;</literal> seront créées,
-    sinon, UNIQUEMENT la liste <literal>&lt;option&gt;</literal> sera générée.
+    <literal>&lt;select&gt;&lt;/select&gt;</literal> seront crÃ©Ã©es,
+    sinon, UNIQUEMENT la liste <literal>&lt;option&gt;</literal> sera gÃ©nÃ©rÃ©e.
    </para></listitem>
 
   <listitem><para>
-    Si la valeur fournie est un tableau, il sera traité comme un
+    Si la valeur fournie est un tableau, il sera traitÃ© comme un
     <literal>&lt;optgroup&gt;</literal> HTML, et affichera les groupes.
-    La récursivité est supportée avec <literal>&lt;optgroup&gt;</literal>.
+    La rÃ©cursivitÃ© est supportÃ©e avec <literal>&lt;optgroup&gt;</literal>.
    </para></listitem>
 
   <listitem><para>
-    Tous les paramètres qui ne sont pas dans la liste ci-dessus sont affichés
+    Tous les paramÃ¨tres qui ne sont pas dans la liste ci-dessus sont affichÃ©s
     sous la forme de paire nom/valeur dans la balise
-    <literal>&lt;select&gt;</literal>. Ils seront ignorés si le paramètre optionnel
+    <literal>&lt;select&gt;</literal>. Ils seront ignorÃ©s si le paramÃ¨tre optionnel
     <parameter>name</parameter> n'est pas fourni.
    </para></listitem>
 
@@ -117,8 +117,8 @@ $smarty->assign('mySelect', 9904);
 ]]>
   </programlisting>
   <para>
-   Le template suivant génèrera une liste. Notez la présence
-   de l'attribut <parameter>name</parameter> qui crée les
+   Le template suivant gÃ©nÃ¨rera une liste. Notez la prÃ©sence
+   de l'attribut <parameter>name</parameter> qui crÃ©e les
    balises <literal>&lt;select&gt;</literal>.
   </para>
   <programlisting>
@@ -142,7 +142,7 @@ $smarty->assign('mySelect', 9904);
  </example>
 
  <example>
-  <title>Tableaux séparés pour <varname>values</varname> et
+  <title>Tableaux sÃ©parÃ©s pour <varname>values</varname> et
    <varname>ouptut</varname></title>
   <programlisting role="php">
 <![CDATA[
@@ -157,10 +157,10 @@ $smarty->assign('customer_id', 92);
 ]]>
   </programlisting>
   <para>
-   Les tableaux ci-dessus seront affichés avec le template suivant
+   Les tableaux ci-dessus seront affichÃ©s avec le template suivant
    (notez l'utilisation de la fonction PHP <ulink url="&url.php-manual;function.count">
     <varname>count()</varname></ulink> en tant que modificateur pour
-   définir la taille du select).
+   dÃ©finir la taille du select).
   </para>
   <programlisting>
 <![CDATA[
@@ -183,7 +183,7 @@ $smarty->assign('customer_id', 92);
   </screen>
  </example>
  <example>
-  <title>Exemple avec une base de données (e.g. ADODB ou PEAR)</title>
+  <title>Exemple avec une base de donnÃ©es (e.g. ADODB ou PEAR)</title>
   <programlisting role="php">
 <![CDATA[
 <?php
@@ -199,7 +199,7 @@ $smarty->assign('contact',$db->getRow($sql));
 ]]>
   </programlisting>
   <para>
-   Où le template pourrait être celui-ci. Notez l'utilisation du modificateur
+   OÃ¹ le template pourrait Ãªtre celui-ci. Notez l'utilisation du modificateur
    <link linkend="language.modifier.truncate"><varname>truncate</varname></link>.
   </para>
   <programlisting>

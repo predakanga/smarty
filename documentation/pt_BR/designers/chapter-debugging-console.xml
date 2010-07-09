@@ -4,35 +4,35 @@
   <chapter id="chapter.debugging.console">
    <title>Debugging Console</title>
    <para>
-    Há um console para debug incluso no Smarty. O console informa à você todos 
-	os templates incluídos, variáveis definidas e variáveis de arquivos de 
-	configuração do template atual. Um template chamado "debug.tpl" está 
-	incluso com a distribuição do Smarty o qual controla a formtação do console. 
-	Defina a variável $debugging para true no Smarty, e se necessário defina 
-	$debug_tpl com o caminho do diretório onde está o arquivo debug.tpl (o diretório padrão 
-	é o da constante SMARTY_DIR). Quando você carrega uma página, um javascript abre uma 
-	janela pop-up e fornece à você o nome de todos os templates incluídos e variáveis definidas 
-	ara a página atual. Para ver as variáveis disponíveis para um template específico, 
-	veja a função <link linkend="language.function.debug">{debug}</link>. Para desabilitar 
-	o console de debug, defina a variável $debugging para false. Você também pode ativar 
-	temporariamente o console de debug colocando na URL, caso você tenha ativado esta opção 
-	na variável <link linkend="variable.debugging.ctrl">$debugging_ctrl</link>.
+    HÃ¡ um console para debug incluso no Smarty. O console informa Ã  vocÃª todos 
+	os templates incluÃ­dos, variÃ¡veis definidas e variÃ¡veis de arquivos de 
+	configuraÃ§Ã£o do template atual. Um template chamado "debug.tpl" estÃ¡ 
+	incluso com a distribuiÃ§Ã£o do Smarty o qual controla a formtaÃ§Ã£o do console. 
+	Defina a variÃ¡vel $debugging para true no Smarty, e se necessÃ¡rio defina 
+	$debug_tpl com o caminho do diretÃ³rio onde estÃ¡ o arquivo debug.tpl (o diretÃ³rio padrÃ£o 
+	Ã© o da constante SMARTY_DIR). Quando vocÃª carrega uma pÃ¡gina, um javascript abre uma 
+	janela pop-up e fornece Ã  vocÃª o nome de todos os templates incluÃ­dos e variÃ¡veis definidas 
+	ara a pÃ¡gina atual. Para ver as variÃ¡veis disponÃ­veis para um template especÃ­fico, 
+	veja a funÃ§Ã£o <link linkend="language.function.debug">{debug}</link>. Para desabilitar 
+	o console de debug, defina a variÃ¡vel $debugging para false. VocÃª tambÃ©m pode ativar 
+	temporariamente o console de debug colocando na URL, caso vocÃª tenha ativado esta opÃ§Ã£o 
+	na variÃ¡vel <link linkend="variable.debugging.ctrl">$debugging_ctrl</link>.
    </para>
    <note>
-    <title>Nota Técnica</title>
+    <title>Nota TÃ©cnica</title>
     <para>
-     O console de debug não funciona quando você usa a API fetch(), 
-	 somente quando você estiver usando display(). Isto é um conjunto de comandos 
-	 em javascript adicionados ao final do template gerado. Se você não gosta de javascript, 
-	 você pode editar o template debug.tpl para exibir saída no formato que você quiser. 
-	 Dados do debug não são armazenados em cache e os dados do debug.tpl não são 
+     O console de debug nÃ£o funciona quando vocÃª usa a API fetch(), 
+	 somente quando vocÃª estiver usando display(). Isto Ã© um conjunto de comandos 
+	 em javascript adicionados ao final do template gerado. Se vocÃª nÃ£o gosta de javascript, 
+	 vocÃª pode editar o template debug.tpl para exibir saÃ­da no formato que vocÃª quiser. 
+	 Dados do debug nÃ£o sÃ£o armazenados em cache e os dados do debug.tpl nÃ£o sÃ£o 
 	 inclusos no console de debug.
     </para>
    </note>
    <note>
     <para>
-     O tempo de carregamento de cada template e arquivo de configuração são exibidos em 
-	 segundos, ou então frações de segundo.
+     O tempo de carregamento de cada template e arquivo de configuraÃ§Ã£o sÃ£o exibidos em 
+	 segundos, ou entÃ£o fraÃ§Ãµes de segundo.
     </para>
    </note>
 </chapter>

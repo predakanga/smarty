@@ -22,7 +22,7 @@
                     <row>
                         <entry>file</entry>
                         <entry>stringa</entry>
-                        <entry>sÏ</entry>
+                        <entry>s√¨</entry>
                         <entry><emphasis>nessuno</emphasis></entry>
                         <entry>nome/percorso dell'immagine</entry>
                     </row>
@@ -72,20 +72,20 @@
                 </tgroup>
             </informaltable>
 			<para>
-			html_image Ë una funzione utente che genera un tag HTML per una
+			html_image √® una funzione utente che genera un tag HTML per una
                         immagine. L'altezza e la larghezza, quando non indicate, vengono 
                         calcolate automaticamente dal file dell'immagine.
 			</para>
 			<para>
-			basedir Ë la directory di riferimento per percorsi relativi. Se non
+			basedir √® la directory di riferimento per percorsi relativi. Se non
 			viene indicata, viene usata come base la document root del web
-			server (variabile di ambiente DOCUMENT_ROOT). Se la security Ë
+			server (variabile di ambiente DOCUMENT_ROOT). Se la security √®
 			abilitata, il percorso dell'immagine deve trovarsi in una directory
 			considerata sicura.
 			</para>
 			<para>
-			<parameter>href</parameter> Ë l'indirizzo del link a cui collegare
-                        l'immagine. Se viene fornito, verr‡ creato un tag
+			<parameter>href</parameter> √® l'indirizzo del link a cui collegare
+                        l'immagine. Se viene fornito, verr√† creato un tag
 			&lt;a href="LINKVALUE"&gt;&lt;a&gt; attorno al tag image.
 			</para>
 			<para>
@@ -98,7 +98,7 @@
 				<para>
 				html_image richiede un accesso al disco per leggere il
 				file dell'immagine e calcolarne altezza e larghezza. Se non
-				usate il caching dei template, Ë generalmente consigliabile
+				usate il caching dei template, √® generalmente consigliabile
 				evitare html_image e lasciare i tag image statici per
 				ottenere prestazioni ottimali.
             	</para>
@@ -117,7 +117,7 @@ $smarty->display('index.tpl');
 ]]>
     </programlisting>
     <para>
-     dove index.tpl Ë:
+     dove index.tpl √®:
     </para>
     <programlisting>
 <![CDATA[

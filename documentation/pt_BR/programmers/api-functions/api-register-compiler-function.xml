@@ -12,26 +12,26 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-                Use isso para registrar dinamicamente uma função de plugin compilador.
-		Passe no nome da função compilador, seguido pela função 
+                Use isso para registrar dinamicamente uma funÃ§Ã£o de plugin compilador.
+		Passe no nome da funÃ§Ã£o compilador, seguido pela funÃ§Ã£o 
 		PHP que implemente isso.
 			</para>
 			<para>
-                A chamada para função-php <parameter>impl</parameter> 
-		pode ser uma string contendo o nome da função ou (b) um array
+                A chamada para funÃ§Ã£o-php <parameter>impl</parameter> 
+		pode ser uma string contendo o nome da funÃ§Ã£o ou (b) um array
 		no formato <literal>array(&amp;$object, $method)</literal> com
-		<literal>&amp;$object</literal> sendo uma referência para um
+		<literal>&amp;$object</literal> sendo uma referÃªncia para um
 		objeto e <literal>$method</literal> sendo uma string
-		contendo o nome do método ou (c) um array no formato
+		contendo o nome do mÃ©todo ou (c) um array no formato
 		<literal>array(&amp;$class, $method)</literal> com
 		<literal>$class</literal> sendo um nome de classe e 
-		<literal>$method</literal> sendo o método
+		<literal>$method</literal> sendo o mÃ©todo
 		desta classe.
 			</para>
 			<para>
                 <parameter>$cacheable</parameter> pode ser omitido na maioria
-                dos casos. Veja <link linkend="caching.cacheable">Controlando modos de Saída de Cache dos Plugins</link> 
-		para obter informações apropriadas.
+                dos casos. Veja <link linkend="caching.cacheable">Controlando modos de SaÃ­da de Cache dos Plugins</link> 
+		para obter informaÃ§Ãµes apropriadas.
 			</para>
 </sect1>
 <!-- Keep this comment at the end of the file

@@ -14,16 +14,16 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>ObrigatÛrio</entry>       
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Obrigat√≥rio</entry>       
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>name</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>checkbox</emphasis></entry>
                         <entry>O nome da lista checkbox</entry>
                     </row>
@@ -32,19 +32,19 @@
                         <entry>array</entry>
                         <entry>Sim, a menos que estaja usando o atributo options</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Uma matriz de valores para os botıes checkbox</entry>
+                        <entry>Uma matriz de valores para os bot√µes checkbox</entry>
                     </row>
                     <row>
                         <entry>output</entry>
                         <entry>array</entry>
                         <entry>Sim, a menos que estaja usando o atributo options</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>uma matriz de saÌda para os botıes checkbox</entry>
+                        <entry>uma matriz de sa√≠da para os bot√µes checkbox</entry>
                     </row>
                     <row>
                         <entry>selected</entry>
                         <entry>string/array</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
                         <entry>O(s) elemento(s) checkbox marcado(s)</entry>
                     </row>
@@ -53,34 +53,34 @@
                         <entry>matriz</entry>
                         <entry>Sim, a menos que esteja usando values e output</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Uma matriz associativa de valores e saÌda</entry>
+                        <entry>Uma matriz associativa de valores e sa√≠da</entry>
                     </row>
                     <row>
                         <entry>separator</entry>
                         <entry>string</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>empty</emphasis></entry>
                         <entry>string de texto para separar cada checkbox</entry>
                     </row>
                     <row>
                         <entry>labels</entry>
                         <entry>boolean</entry>
-                        <entry>N„o</entry>
+                        <entry>N√£o</entry>
                         <entry><emphasis>true</emphasis></entry>
-                        <entry>Adicionar tags &lt;label&gt; para na saÌda</entry>
+                        <entry>Adicionar tags &lt;label&gt; para na sa√≠da</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 html_checkboxes È uma funÁ„o personalizada que cria um grupo de
+			 html_checkboxes √© uma fun√ß√£o personalizada que cria um grupo de
 			 checkbox com os dados fornecidos. Ela cuida de qual(is) item(s)
-			 est„o selecionado(s) por padr„o. Os atributos obrigatÛrios s„o
-			 values e output, a menos que vocÍ use options.
-			 Toda a saÌda È compatÌvel com XHTML.
+			 est√£o selecionado(s) por padr√£o. Os atributos obrigat√≥rios s√£o
+			 values e output, a menos que voc√™ use options.
+			 Toda a sa√≠da √© compat√≠vel com XHTML.
 			</para>
 			<para>
-			 Todos os par‚metro que n„o estejam na lista acima s„o mostrados
+			 Todos os par√¢metro que n√£o estejam na lista acima s√£o mostrados
 			 como pares nome/valor dentro de cada tag &lt;input&gt; criada.
 			</para>
 <example>

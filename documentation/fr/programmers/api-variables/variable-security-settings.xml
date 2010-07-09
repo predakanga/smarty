@@ -5,51 +5,51 @@
 <sect1 id="variable.security.settings">
  <title>$security_settings</title>
  <para>
-  Ces réglages servent à écraser ou spécifier les paramètres de sécurité
-  quand <link linkend="variable.security">celle-ci </link>est activée.
-  Les réglages possibles sont les suivants :
+  Ces rÃ©glages servent Ã  Ã©craser ou spÃ©cifier les paramÃ¨tres de sÃ©curitÃ©
+  quand <link linkend="variable.security">celle-ci </link>est activÃ©e.
+  Les rÃ©glages possibles sont les suivants :
  </para>
  <itemizedlist>
   <listitem>
    <para>
-    <constant>PHP_HANDLING</constant> - booléen. Si &true;, le
-    réglage <link linkend="variable.php.handling"><parameter>$php_handling</parameter></link>
-    n'est pas vérifié.
+    <constant>PHP_HANDLING</constant> - boolÃ©en. Si &true;, le
+    rÃ©glage <link linkend="variable.php.handling"><parameter>$php_handling</parameter></link>
+    n'est pas vÃ©rifiÃ©.
    </para>
   </listitem>
   <listitem>
    <para>
     <constant>IF_FUNCS</constant> - Le tableau des noms de fonctions
-    PHP autorisées dans les intructions
+    PHP autorisÃ©es dans les intructions
     <link linkend="language.function.if"><varname>{if}</varname></link>.
    </para>
   </listitem>
   <listitem>
    <para>
-    <constant>INCLUDE_ANY</constant> - booléen. Si &true;,
-    les templates peuvent être inclus de n'importe où, quelque soit
+    <constant>INCLUDE_ANY</constant> - boolÃ©en. Si &true;,
+    les templates peuvent Ãªtre inclus de n'importe oÃ¹, quelque soit
     le contenu de <link linkend="variable.secure.dir"><parameter>$secure_dir</parameter></link>.
    </para>
   </listitem>
   <listitem>
    <para>
-    <constant>PHP_TAGS</constant> - booléen. Si &true;,
+    <constant>PHP_TAGS</constant> - boolÃ©en. Si &true;,
     les balises <link linkend="language.function.php"><varname>{php}{/php}</varname></link>
-    sont autorisées dans les templates.
+    sont autorisÃ©es dans les templates.
    </para>
   </listitem>
   <listitem>
    <para>
     <constant>MODIFIER_FUNCS</constant> - Le tableau des noms de fonctions
-    autorisées à être utilisées comme modificateurs de
+    autorisÃ©es Ã  Ãªtre utilisÃ©es comme modificateurs de
     variables.
    </para>
   </listitem>
   <listitem>
    <para>
-    <constant>ALLOW_CONSTANTS</constant> - booléen. Si l'accès aux constantes via
+    <constant>ALLOW_CONSTANTS</constant> - boolÃ©en. Si l'accÃ¨s aux constantes via
     la syntaxe <link linkend="language.variables.smarty.const">{$smarty.const.name}</link>
-    est autorisé ou non.
+    est autorisÃ© ou non.
    </para>
   </listitem>
  </itemizedlist>

@@ -5,7 +5,7 @@
 <refentry id="api.register.resource">
  <refnamediv>
   <refname>register_resource()</refname>
-  <refpurpose>Déclare dynamiquement une ressource plugin</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement une ressource plugin</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -15,18 +15,18 @@
    <methodparam><type>array</type><parameter>resource_funcs</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour déclarer dynamiquement une <link linkend="template.resources">ressource plugin</link>
-   dans Smarty. Il faut passer en paramètre le nom de la ressource
-   et le tableau des fonctions PHP qui l'implémentent. Reportez-vous
-   à la section <link linkend="template.resources">ressources templates</link>
-   pour avoir plus d'informations sur la façon de paramétrer une fonction
-   récupérant des templates.
+   UtilisÃ©e pour dÃ©clarer dynamiquement une <link linkend="template.resources">ressource plugin</link>
+   dans Smarty. Il faut passer en paramÃ¨tre le nom de la ressource
+   et le tableau des fonctions PHP qui l'implÃ©mentent. Reportez-vous
+   Ã  la section <link linkend="template.resources">ressources templates</link>
+   pour avoir plus d'informations sur la faÃ§on de paramÃ©trer une fonction
+   rÃ©cupÃ©rant des templates.
   <note>
    <title>Note technique</title>
    <para>
-    Un nom de ressource doit être composé d'au moins deux caractères.
-    Les noms de ressources d'un seul caractère seront ignorés et utilisés
-    comme étant une partie du chemin du fichier, comme avec 
+    Un nom de ressource doit Ãªtre composÃ© d'au moins deux caractÃ¨res.
+    Les noms de ressources d'un seul caractÃ¨re seront ignorÃ©s et utilisÃ©s
+    comme Ã©tant une partie du chemin du fichier, comme avec 
     $smarty->display('c:/path/to/index.tpl');
    </para>
   </note>
@@ -36,19 +36,19 @@
   <itemizedlist>
   <listitem><para>
    Le tableau de fonctions PHP <parameter>resource_funcs</parameter>
-   doit être composé de 4 ou 5 éléments.
+   doit Ãªtre composÃ© de 4 ou 5 Ã©lÃ©ments.
    </para></listitem>
    <listitem><para>
-   S'il est composé de 4 éléments,
-   les éléments seront les noms de fonctions pour, respectivement,
+   S'il est composÃ© de 4 Ã©lÃ©ments,
+   les Ã©lÃ©ments seront les noms de fonctions pour, respectivement,
    <literal>source</literal>, <literal>timestamp</literal>, <literal>secure</literal> et
    <literal>trusted</literal> de la ressource.
    </para></listitem>
    <listitem><para>
-   S'il est composé de 5 éléments, le premier élément devra être une
-   référence sur un objet ou le nom d'une classe de l'objet ou une classe
-   implémentant la ressource et les 4 éléments suivants doivent être
-   les noms des méthodes implémentant <literal>source</literal>,
+   S'il est composÃ© de 5 Ã©lÃ©ments, le premier Ã©lÃ©ment devra Ãªtre une
+   rÃ©fÃ©rence sur un objet ou le nom d'une classe de l'objet ou une classe
+   implÃ©mentant la ressource et les 4 Ã©lÃ©ments suivants doivent Ãªtre
+   les noms des mÃ©thodes implÃ©mentant <literal>source</literal>,
    <literal>timestamp</literal>, <literal>secure</literal>
    et <literal>trusted</literal>.
   </para></listitem>

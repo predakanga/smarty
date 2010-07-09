@@ -6,8 +6,8 @@
            Se impostato a true, le variabili dei file di configurazione con i valori
            on/true/yes e off/false/no verranno convertite automaticamente in valori
            booleani. In questo modo potete usare questi valori nei template in questo
-           modo: {if #foobar#} ... {/if}. Se foobar Ë on, true o yes, l'istruzione {if}
-           verr‡ eseguita. true per default.
+           modo: {if #foobar#} ... {/if}. Se foobar √® on, true o yes, l'istruzione {if}
+           verr√† eseguita. true per default.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

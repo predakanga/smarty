@@ -5,17 +5,17 @@
 <sect1 id="caching.groups">
  <title>Groupes de fichiers de cache</title>
  <para>
-  Vous pouvez faire des groupements plus élaborés en paramétrant les
-  groupes de <parameter>$cache_id</parameter>. Il suffit de séparer chaque sous-groupe
+  Vous pouvez faire des groupements plus Ã©laborÃ©s en paramÃ©trant les
+  groupes de <parameter>$cache_id</parameter>. Il suffit de sÃ©parer chaque sous-groupe
   avec une barre verticale <literal>|</literal> dans la valeur de <parameter>$cache_id</parameter>.
-  Vous pouvez faire autant de sous-groupes que vous le désirez.
+  Vous pouvez faire autant de sous-groupes que vous le dÃ©sirez.
  </para>
 
  <itemizedlist>
   <listitem><para>
-    Vous pouvez voir les groupes de cache comme une hiérarchie de dossiers.
-    Par exemple, un groupe de cache <literal>'a|b|c'</literal> peut être considéré comme
-    la hiérarchie de dossiers <literal>'/a/b/c/'</literal>.
+    Vous pouvez voir les groupes de cache comme une hiÃ©rarchie de dossiers.
+    Par exemple, un groupe de cache <literal>'a|b|c'</literal> peut Ãªtre considÃ©rÃ© comme
+    la hiÃ©rarchie de dossiers <literal>'/a/b/c/'</literal>.
    </para></listitem>
 
   <listitem><para>
@@ -26,34 +26,34 @@
    </para></listitem>
 
   <listitem><para>
-    Si vous spécifiez un
+    Si vous spÃ©cifiez un
     <link linkend="variable.compile.id"><parameter>$compile_id</parameter></link>
-    de cette façon <literal>clear_cache(null,'a|b','foo')</literal> il sera traité comme un groupe de
-    cache apposé <literal>'/a/b/c/foo/'</literal>.
+    de cette faÃ§on <literal>clear_cache(null,'a|b','foo')</literal> il sera traitÃ© comme un groupe de
+    cache apposÃ© <literal>'/a/b/c/foo/'</literal>.
    </para></listitem>
 
   <listitem><para>
-    Si vous spécifiez un nom de template de cette façon
+    Si vous spÃ©cifiez un nom de template de cette faÃ§on
     <literal>clear_cache('foo.tpl','a|b|c')</literal> alors Smarty tentera d'effacer
     <literal>'/a/b/c/foo.tpl'</literal>.
    </para></listitem>
 
   <listitem><para>
-    Vous ne POUVEZ PAS effacer un nom de template spécifié sous un groupe de
+    Vous ne POUVEZ PAS effacer un nom de template spÃ©cifiÃ© sous un groupe de
     cache multiple comme <literal>'/a/b/*/foo.tpl'</literal>, le groupement de cache fonctionne
-    UNIQUEMENT de gauche à droite. Vous pourriez vouloir grouper vos templates
-    sous un groupe de cache simple hiérarchisé pour être capable de les effacer
+    UNIQUEMENT de gauche Ã  droite. Vous pourriez vouloir grouper vos templates
+    sous un groupe de cache simple hiÃ©rarchisÃ© pour Ãªtre capable de les effacer
     comme un groupe.
    </para></listitem>
  </itemizedlist>
 
  <para>
-  Le groupement de cache ne devrait pas être confondu avec votre hiérarchie
+  Le groupement de cache ne devrait pas Ãªtre confondu avec votre hiÃ©rarchie
   de dossiers de templates, le groupement de cache n'a aucune connaissance
-  de la façon dont vos templates sont structurés. Donc, par exemple, si
+  de la faÃ§on dont vos templates sont structurÃ©s. Donc, par exemple, si
   vous avez une structure de template comme <filename>themes/blue/index.tpl</filename> et
-  que vous voulez être capable d'effacer tous les fichiers de cache pour le thème <quote>blue</quote>,
-  vous devriez créer une structure de groupe de cache qui reflète la structure
+  que vous voulez Ãªtre capable d'effacer tous les fichiers de cache pour le thÃ¨me <quote>blue</quote>,
+  vous devriez crÃ©er une structure de groupe de cache qui reflÃ¨te la structure
   de fichiers de vos templates, comme <literal>display('themes/blue/index.tpl','themes|blue')</literal>,
   et les effacer avec <literal>clear_cache(null,'themes|blue')</literal>.
  </para>

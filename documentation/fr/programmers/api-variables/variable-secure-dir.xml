@@ -5,11 +5,11 @@
 <sect1 id="variable.secure.dir">
  <title>$secure_dir</title>
  <para>
-  Il s'agit d'un tableau contenant tous les fichiers et répertoires locaux qui sont
-  considérés comme sécurisés.
+  Il s'agit d'un tableau contenant tous les fichiers et rÃ©pertoires locaux qui sont
+  considÃ©rÃ©s comme sÃ©curisÃ©s.
   <link linkend="language.function.include"><varname>{include}</varname></link> et
   <link linkend="language.function.fetch"><varname>{fetch}</varname></link> l'utilisent quand
-  la <link linkend="variable.security">sécurité</link> est activée.
+  la <link linkend="variable.security">sÃ©curitÃ©</link> est activÃ©e.
  </para>
  <example>
   <title>Exemple avec $secure_dir</title>
@@ -25,7 +25,7 @@ $smarty->secure_dir = $secure_dirs;
  </example>
  <para>
   Voir aussi
-  la <link linkend="variable.security.settings">configuration pour la sécurité</link>et
+  la <link linkend="variable.security.settings">configuration pour la sÃ©curitÃ©</link>et
   <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>.
 </para>
 </sect1>

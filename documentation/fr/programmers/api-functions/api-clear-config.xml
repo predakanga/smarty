@@ -5,7 +5,7 @@
 <refentry id="api.clear.config">
  <refnamediv>
   <refname>clear_config()</refname>
-  <refpurpose>Efface toutes les variables de configuration assignées</refpurpose>
+  <refpurpose>Efface toutes les variables de configuration assignÃ©es</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,16 +14,16 @@
    <methodparam choice="opt"><type>string</type><parameter>var</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utilisée pour effacer toutes les <link linkend="language.config.variables">variables
-   de configuration</link> assignées.
-   Si un nom de variable est spécifié, seule cette variable sera effacée.
+   UtilisÃ©e pour effacer toutes les <link linkend="language.config.variables">variables
+   de configuration</link> assignÃ©es.
+   Si un nom de variable est spÃ©cifiÃ©, seule cette variable sera effacÃ©e.
   </para>
   <example>
    <title>Exemple avec clear_config()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
-// efface toutes les variables de configuration assignées
+// efface toutes les variables de configuration assignÃ©es
 $smarty->clear_config();
 
 // efface une seule variable

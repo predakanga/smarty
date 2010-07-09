@@ -38,7 +38,7 @@
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry>anno corrente</entry>
-                        <entry>primo anno visualizzato: puÚ essere in valore assoluto
+                        <entry>primo anno visualizzato: pu√≤ essere in valore assoluto
                                      o relativo all'anno corrente(+/- N)</entry>
                     </row>
                     <row>
@@ -46,7 +46,7 @@
                         <entry>stringa</entry>
                         <entry>no</entry>
                         <entry>uguale a start_year</entry>
-                        <entry>ultimo anno visualizzato: puÚ essere in valore assoluto
+                        <entry>ultimo anno visualizzato: pu√≤ essere in valore assoluto
                                      o relativo all'anno corrente(+/- N)</entry>
                     </row>
                     <row>
@@ -192,8 +192,8 @@
                         <entry>no</entry>
                         <entry>null</entry>
                         <entry>Se presente, il primo elemento della casella select per gli anni
-                        conterr‡ questo valore come output e "" come valore. E' utile per mostrare,
-                        ad esempio, sul men˘ a discesa la frase "Selezionare l'anno".
+                        conterr√† questo valore come output e "" come valore. E' utile per mostrare,
+                        ad esempio, sul men√π a discesa la frase "Selezionare l'anno".
                         Notate che potete utilizzare valori del tipo "-MM-DD" nell'attributo time
                         per indicare che l'anno non deve essere preselezionato.</entry>
                     </row>
@@ -203,7 +203,7 @@
                         <entry>no</entry>
                         <entry>null</entry>
                         <entry>Se presente, il primo elemento della casella select per i mesi
-                        conterr‡ questo valore come output e "" come valore.
+                        conterr√† questo valore come output e "" come valore.
                         Notate che potete utilizzare valori del tipo "YYYY---DD" nell'attributo time
                         per indicare che il mese non deve essere preselezionato.</entry>
                     </row>
@@ -213,7 +213,7 @@
                         <entry>no</entry>
                         <entry>null</entry>
                         <entry>Se presente, il primo elemento della casella select per i giorni
-                        conterr‡ questo valore come output e "" come valore.
+                        conterr√† questo valore come output e "" come valore.
                         Notate che potete utilizzare valori del tipo "YYYY-MM-" nell'attributo time
                         per indicare che il giorno non deve essere preselezionato.</entry>
                     </row>
@@ -221,16 +221,16 @@
                 </tgroup>
             </informaltable>
 			<para>
-			html_select_date Ë una funzione utente che crea per voi men˘ a discesa
-			per le date. PuÚ mostrare anno, mese e giorno o solo qualcuno di questi
+			html_select_date √® una funzione utente che crea per voi men√π a discesa
+			per le date. Pu√≤ mostrare anno, mese e giorno o solo qualcuno di questi
 			valori.
 			</para>
  <para>
-  L'attributo time puÚ avere diversi formati: puÚ essere un timestamp UNIX
-  o una stringa di tipo Y-M-D (anno-mese-giorno). Il formato pi˘ comune
+  L'attributo time pu√≤ avere diversi formati: pu√≤ essere un timestamp UNIX
+  o una stringa di tipo Y-M-D (anno-mese-giorno). Il formato pi√π comune
   sarebbe YYYY-MM-DD, ma vengono riconosciuti anche mesi e giorni con meno
-  di due cifre. Se uno dei tre valori (Y,M,D) Ë una stringa vuota, il campo
-  select corrispondente non avr‡ nessuna preselezione. CiÚ Ë utile in
+  di due cifre. Se uno dei tre valori (Y,M,D) √® una stringa vuota, il campo
+  select corrispondente non avr√† nessuna preselezione. Ci√≤ √® utile in
   special modo con gli attributi year_empty, month_empty e day_empty.
  </para>
 <example>
@@ -241,7 +241,7 @@
 +]]>
 </programlisting>
 <para>
-Questo stamper‡:
+Questo stamper√†:
 </para>
 <screen>
 <![CDATA[
@@ -308,7 +308,7 @@ Questo stamper‡:
 +]]>
 </programlisting>
 <para>
-Questo stamper‡: (l'anno corrente Ë il 2000)
+Questo stamper√†: (l'anno corrente √® il 2000)
 </para>
 <screen>
 <![CDATA[

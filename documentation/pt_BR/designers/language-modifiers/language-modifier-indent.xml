@@ -12,18 +12,18 @@
                 <colspec colname="desc" />
                 <thead>
                     <row>
-                        <entry>Posição do Parâmetro</entry>
+                        <entry>PosiÃ§Ã£o do ParÃ¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>1</entry>
                         <entry>integer</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry>4</entry>
 						<entry>Isto define com quantos 
 						caracteres endentar.</entry>
@@ -31,17 +31,17 @@
                     <row>
                         <entry>2</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
-                        <entry>(um espaço)</entry>
+                        <entry>NÃ£o</entry>
+                        <entry>(um espaÃ§o)</entry>
                         <entry>Isto define qual caractere usado para endentar.</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			Isto endenta uma string em cada linha, o padrão é 4. Como
-			parâmetro opcional, você pode especificar o número de caracteres para
-			endentar. Como segundo parâmetro opcional, você pode especificar o caractere 
+			Isto endenta uma string em cada linha, o padrÃ£o Ã© 4. Como
+			parÃ¢metro opcional, vocÃª pode especificar o nÃºmero de caracteres para
+			endentar. Como segundo parÃ¢metro opcional, vocÃª pode especificar o caractere 
 			usado para endentar. (Use "\t" para tabs.)
 			</para>
 <example>

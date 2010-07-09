@@ -5,11 +5,11 @@
 <sect1 id="variable.default.modifiers">
  <title>$default_modifiers</title>
  <para>
-  Il s'agit d'un tableau de modificateurs utilisé pour assigner
-  une valeur par défaut a chaque variable dans un template.
-  Par exemple, pour par défaut échapper les caractéres HTML de chaque variable,
-  utilisez <literal>array('escape:"htmlall"')</literal>. Pour rendre une variable indépendante
-  des modificateurs par défaut, passez-lui en paramètre le modificateur
+  Il s'agit d'un tableau de modificateurs utilisÃ© pour assigner
+  une valeur par dÃ©faut a chaque variable dans un template.
+  Par exemple, pour par dÃ©faut Ã©chapper les caractÃ©res HTML de chaque variable,
+  utilisez <literal>array('escape:"htmlall"')</literal>. Pour rendre une variable indÃ©pendante
+  des modificateurs par dÃ©faut, passez-lui en paramÃ¨tre le modificateur
   <literal>nodefaults</literal> : <literal>{$var|smarty:nodefaults}</literal>.
  </para>
 </sect1>

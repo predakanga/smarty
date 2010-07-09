@@ -14,9 +14,9 @@
      di denominazione.
     </para>
     <para>
-     Se un plugin dipende da qualche funzionalit‡ fornita da un altro
+     Se un plugin dipende da qualche funzionalit√† fornita da un altro
      plugin (come nel caso di alcuni plugin incorporati in Smarty), il
-     modo corretto di caricare il plugin necessario Ë questo:
+     modo corretto di caricare il plugin necessario √® questo:
     </para>
     <programlisting role="php">
 <![CDATA[
@@ -30,7 +30,7 @@ require_once $smarty->_get_plugin_filepath('function', 'html_options');
      plugin come ultimo parametro (con due eccezioni: ai modificatori
      non viene passato l'oggetto Smarty, mentre ai blocchi viene passato
      <parameter>&amp;$repeat</parameter> dopo l'oggetto Smarty, per 
-     mantenere la compatibilit‡ retroattiva con le vecchie versioni
+     mantenere la compatibilit√† retroattiva con le vecchie versioni
      di Smarty).
     </para>
    </sect1>

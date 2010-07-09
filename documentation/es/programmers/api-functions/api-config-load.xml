@@ -3,32 +3,32 @@
 <refentry id="api.config.load">
  <refnamediv>
   <refname>config_load()</refname>
-  <refpurpose>Carga el archivo de configuraci髇 y lo asigna al template</refpurpose>
+  <refpurpose>Carga el archivo de configuraci贸n y lo asigna al template</refpurpose>
  </refnamediv>
  <refsect1>
-  <title>Descripci髇</title>
+  <title>Descripci贸n</title>
   <methodsynopsis>
    <type>void</type><methodname>config_load</methodname>
    <methodparam><type>string</type><parameter>file</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>section</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Esto carga el <link linkend="config.files">archivo de configuraci髇</link> de 
-   datos y lo asigna al template.  Esto funciona id閚tico a la funci髇
+   Esto carga el <link linkend="config.files">archivo de configuraci贸n</link> de 
+   datos y lo asigna al template.  Esto funciona id茅ntico a la funci贸n
    <link linkend="language.function.config.load">{config_load}</link>.
   </para>
   <note>
-   <title>Nota T閏nica</title>
+   <title>Nota T茅cnica</title>
    <para>
     A partir de Smarty 2.4.0, las variables de template asignadas son 
-    mantenidas a trav閟 de <link linkend="api.fetch">fetch()</link> y 
+    mantenidas a trav茅s de <link linkend="api.fetch">fetch()</link> y 
     <link linkend="api.display">display()</link>. Las variables de
-    configuraci髇 cargadas de config_load() son siempre de alcance global.
-    Los archivos de configuracion tambi閚 son compilados para
+    configuraci贸n cargadas de config_load() son siempre de alcance global.
+    Los archivos de configuracion tambi茅n son compilados para
     execuci&oacute;n rapida, y respetar el 
     <link linkend="variable.force.compile">force_compile</link> y 
     <link linkend="variable.compile.check">compile_check</link> de 
-    configuraci髇.
+    configuraci贸n.
    </para>
   </note>
   <example>
@@ -46,7 +46,7 @@ $smarty->config_load('my.conf', 'foobar');
    </programlisting>
   </example>
   <para>
-  Ver tambi閚
+  Ver tambi茅n
   <link linkend="language.function.config.load">{config_load}</link>,
   <link linkend="api.get.config.vars">get_config_vars()</link>,
   <link linkend="api.clear.config">clear_config()</link>,

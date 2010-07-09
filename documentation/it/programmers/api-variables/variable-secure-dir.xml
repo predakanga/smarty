@@ -4,7 +4,7 @@
       <title>$secure_dir</title>
       <para>
        E' un array contenente tutte le directory locali che sono considerate
-       sicure. {include} e {fetch} lo usano quando $security è abilitata.
+       sicure. {include} e {fetch} lo usano quando $security Ã¨ abilitata.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

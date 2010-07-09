@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
  <chapter id="troubleshooting">
-  <title>Localizaci髇 de Errores</title>
+  <title>Localizaci贸n de Errores</title>
   <para></para>
   <sect1 id="smarty.php.errors">
    <title>Errores Smarty/PHP</title>
@@ -23,8 +23,8 @@ Fatal error: Smarty: [in index.tpl line 28]: syntax error: missing section name
     </screen>
    </example>
    <para>
-    Smarty te mostra el nombre del template, el n鷐ero de la linea y
-    el error. Despu閟 de esto, el error consiste en el n鷐ero de la
+    Smarty te mostra el nombre del template, el n煤mero de la linea y
+    el error. Despu茅s de esto, el error consiste en el n煤mero de la
     linea de la clase Smarty donde ocurrio el error.
    </para>
       
@@ -45,15 +45,15 @@ Parse error: parse error in /path/to/smarty/templates_c/index.tpl.php on line 75
    </example>
       
    <para>
-    Cuando usted encuentra un error de analisis de PHP, el n鷐ero de la
+    Cuando usted encuentra un error de analisis de PHP, el n煤mero de la
     linea de error corresponde al script PHP compilado, no al template 
     en si. Normalmente usted puede en el template localizar el error de 
     sinxis. Algunas cosas que usted puede buscar: falta de cierre de 
     etiquetas para  <link linkend="language.function.if">{if}{/if}}</link> 
     o <link linkend="language.function.if">{section}{/section}</link>, o 
-    sintaxis de la l骻ica dentro de una etiqueta {if}. Si usted no encuentra 
+    sintaxis de la l贸gica dentro de una etiqueta {if}. Si usted no encuentra 
     el error, usted tendra que abrir el archivo PHP compilado y dirigirse al 
-    n鷐ero de linea mostrado, donde el correspondiente error esta en el template.
+    n煤mero de linea mostrado, donde el correspondiente error esta en el template.
    </para>
   <example>
     <title>Otros errores comunes</title>
@@ -79,7 +79,7 @@ Warning: Smarty error: unable to read resource: "site.conf" in...
     </listitem>
      <listitem>
         <para>
-        La funci髇 <link linkend="language.function.config.load">{config_load}</link>
+        La funci贸n <link linkend="language.function.config.load">{config_load}</link>
         esta dentro del template (o <link linkend="api.config.load">config_load()</link>
         habia sido llamado)  y cualquira de los dos
         <link linkend="variable.config.dir">$config_dir</link>
@@ -112,7 +112,7 @@ Fatal error: Smarty error: unable to write to $compile_dir '....
     <para>
     El <link linkend="variable.compile.dir">$compile_dir</link>
     no puede ser reescrito por el servidor web. Vea a fondo la pagina de permisos del
-    <link linkend="installing.smarty.basic">instalaci髇 de smarty</link>.
+    <link linkend="installing.smarty.basic">instalaci贸n de smarty</link>.
     </para>
 
   </listitem><listitem>
@@ -150,7 +150,7 @@ Fatal error: Smarty error: unable to write to $cache_dir '/...
  </example>
 
    <para>
-   Vea tambi閚
+   Vea tambi茅n
    <link linkend="chapter.debugging.console">debugging</link>,
    <link linkend="variable.error.reporting">$error_reporting</link>
    y <link linkend="api.trigger.error">trigger_error()</link>.

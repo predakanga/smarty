@@ -5,9 +5,9 @@
 <sect1 id="language.syntax.comments">
  <title>Commentaires</title>
  <para>
-  Les commentaires dans Smarty sont entourés d'asterisques,
-  et entourés par le <link linkend="variable.left.delimiter">délimiteurs</link>
-  de cette façon :
+  Les commentaires dans Smarty sont entourÃ©s d'asterisques,
+  et entourÃ©s par le <link linkend="variable.left.delimiter">dÃ©limiteurs</link>
+  de cette faÃ§on :
   </para>
     <informalexample>
    <programlisting>
@@ -17,15 +17,15 @@
    </programlisting>
   </informalexample>
   <para>
-  Les commentaires Smarty ne sont PAS affichés dans la sortie finale du
-  template, différemment des <literal>&lt;!-- commentaires HTML --&gt;</literal>.
-  Ils sont utilisés pour des notes internes, dans le template que personne ne verra ;)
+  Les commentaires Smarty ne sont PAS affichÃ©s dans la sortie finale du
+  template, diffÃ©remment des <literal>&lt;!-- commentaires HTML --&gt;</literal>.
+  Ils sont utilisÃ©s pour des notes internes, dans le template que personne ne verra ;)
  </para>
  <example>
   <title>Commentaires dans un template</title>
   <programlisting>
 <![CDATA[
-{* Je suis un commentaire Smarty, je n'existe pas dans la sortie compilée *}
+{* Je suis un commentaire Smarty, je n'existe pas dans la sortie compilÃ©e *}
 <html>
  <head>
   <title>{$title}</title>
@@ -33,24 +33,24 @@
  <body>
 
 {* un autre commentaire Smarty sur une seule ligne *}
-<!-- Un commentaire Html qui sera envoyé au navigateur -->
+<!-- Un commentaire Html qui sera envoyÃ© au navigateur -->
 
 {* ces multi-lignes sont des commentaires
-qui ne sont pas envoyées au navigateur
+qui ne sont pas envoyÃ©es au navigateur
 *}
 
 {*********************************************************
-Un bloc de commentaires multilignes contenant les crédits
+Un bloc de commentaires multilignes contenant les crÃ©dits
 @ author:         bg@example.com
 @ maintainer:     support@example.com
 @ para:           var that sets block style
 @ css:            the style output
 **********************************************************}
 
-{* Inclusion du fichier d'en-tête contenant le logo principal *}
+{* Inclusion du fichier d'en-tÃªte contenant le logo principal *}
 {include file='header.tpl'}
 
-{* Note aux développeurs :  $includeFile est assigné au script foo.php  *}
+{* Note aux dÃ©veloppeurs :  $includeFile est assignÃ© au script foo.php  *}
 <!-- Affichage du bloc principal -->
 {include file=$includeFile}
 
@@ -61,7 +61,7 @@ Un bloc de commentaires multilignes contenant les crédits
 </select>
 *}
 
-<!-- L'affichage de l'en-tête est désactivé -->
+<!-- L'affichage de l'en-tÃªte est dÃ©sactivÃ© -->
 {* $affiliate|upper *}
 
 {* Vous ne pouvez pas imbriquer des commentaires *}
@@ -72,7 +72,7 @@ Un bloc de commentaires multilignes contenant les crédits
 </select>
 *}
 
-{* Balise cvs pour un template, ci-dessous, le 36 DOIT ÊTRE une devise américaine sinon,
+{* Balise cvs pour un template, ci-dessous, le 36 DOIT ÃŠTRE une devise amÃ©ricaine sinon,
 il sera converti en cvs.. *}
 {* &#36;Id: Exp &#36; *}
 {* $Id: *}

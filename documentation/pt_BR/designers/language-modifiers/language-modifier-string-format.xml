@@ -12,11 +12,11 @@
                 <colspec colname="desc"/>
                 <thead>
                     <row>
-                        <entry>PosiÁ„o do par‚metro</entry>
+                        <entry>Posi√ß√£o do par√¢metro</entry>
                         <entry>Tipo</entry>
                         <entry>Requerido</entry>
-                        <entry>Padr„o</entry>
-                        <entry>DescriÁ„o</entry>
+                        <entry>Padr√£o</entry>
+                        <entry>Descri√ß√£o</entry>
                     </row>
                 </thead>
                 <tbody>
@@ -25,14 +25,14 @@
                         <entry>string</entry>
                         <entry>Sim</entry>
                         <entry><emphasis>n/a</emphasis></entry>
-                        <entry>Este È o formato para ser usado. (sprintf)</entry>
+                        <entry>Este √© o formato para ser usado. (sprintf)</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			 Este È um meio para formatar strings, como n˙meros decimais e outros.
-			 Use a sintaxe para sprintf para a formataÁ„o.
+			 Este √© um meio para formatar strings, como n√∫meros decimais e outros.
+			 Use a sintaxe para sprintf para a formata√ß√£o.
 			</para>
 <example>
 <title>string_format</title>

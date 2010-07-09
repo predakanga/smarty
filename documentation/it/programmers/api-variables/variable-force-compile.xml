@@ -5,9 +5,9 @@
       <para>
        Questo valore forza Smarty a (ri)compilare i template ad
        ogni chiamata. Questa impostazione prevale su $compile_check.
-       Per default è disabilitata. E' utile per lo sviluppo ed il 
+       Per default Ã¨ disabilitata. E' utile per lo sviluppo ed il 
        debug. Non dovrebbe essere mai usata in un ambiente di produzione.
-       Se il caching è abilitato, i file della cache verranno rigenerati
+       Se il caching Ã¨ abilitato, i file della cache verranno rigenerati
        ogni volta.
       </para>
 </sect1>

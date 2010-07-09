@@ -3,18 +3,18 @@
    <sect1 id="plugins.writing">
     <title>Escribiendo Plugins</title>
     <para>
-     Los Plugins pueden ser leidos por el Smarty autom醫icamente del 
+     Los Plugins pueden ser leidos por el Smarty autom谩ticamente del 
      sistema de archivos o pueden ser registrados en tiempo de 
-     ejecuci髇 por medio de una de las funciones de API register_* .
-     Estos tambi閚 pueden ser usados con la funci髇 API unregister_*.
+     ejecuci贸n por medio de una de las funciones de API register_* .
+     Estos tambi茅n pueden ser usados con la funci贸n API unregister_*.
     </para>
     <para>
-     Para los plugins que son registrados en tiempo de ejecuci髇, el
-     nombre de la(s) funci髇(es) de plugin no tiene que seguir la
-     convenci髇 de apariencia.
+     Para los plugins que son registrados en tiempo de ejecuci贸n, el
+     nombre de la(s) funci贸n(es) de plugin no tiene que seguir la
+     convenci贸n de apariencia.
     </para>
     <para>
-     Si un plugin depende de alguna funci髇 alimentada por otro plugin
+     Si un plugin depende de alguna funci贸n alimentada por otro plugin
      (como es el caso con algunos plugins incrustados con el Smarty), 
      entonces la forma apropiada para leer el plugin necesario es esta:
     </para>
@@ -27,10 +27,10 @@ require_once $smarty->_get_plugin_filepath('function', 'html_options');
     </programlisting>
     <para>
      Como regla general, el objeto Smarty siempre es pasado a los 
-     plugins como ultimo par醡etro (con dos excepciones: los 
+     plugins como ultimo par谩metro (con dos excepciones: los 
      modificadores no pasan el objeto de Smarty del todo y los 
      blocks obtenidos son pasados <parameter>&amp;$repeat</parameter> 
-     despu閟 el objeto de Smarty para manter compatibilidad con
+     despu茅s el objeto de Smarty para manter compatibilidad con
      antiguas versiones de Smarty).
     </para>
    </sect1>

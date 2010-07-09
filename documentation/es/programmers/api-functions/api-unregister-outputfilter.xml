@@ -3,19 +3,19 @@
 <refentry id="api.unregister.outputfilter">
  <refnamediv>
   <refname>unregister_outputfilter()</refname>
-  <refpurpose>des-registra dinámicamente un filtro de salida</refpurpose>
+  <refpurpose>des-registra dinÃ¡micamente un filtro de salida</refpurpose>
  </refnamediv>
  <refsect1>
-  <title> Descripción</title>
+  <title> DescripciÃ³n</title>
   <methodsynopsis>
    <type>void</type><methodname>unregister_outputfilter</methodname>
    <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
   </methodsynopsis>
   <para>
-  Use este para des-registrar dinámicamente un filtro de salida.
+  Use este para des-registrar dinÃ¡micamente un filtro de salida.
   </para>
   <para>
-   Ver también <link linkend="api.register.outputfilter">register_outputfilter()</link>
+   Ver tambiÃ©n <link linkend="api.register.outputfilter">register_outputfilter()</link>
    y <link linkend="advanced.features.outputfilters">template output filters</link>.
   </para>
 

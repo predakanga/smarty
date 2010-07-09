@@ -4,9 +4,9 @@
 <sect1 id="caching.groups">
     <title>Grupos de Cache</title>
 	<para>
-	Você pode fazer agrupamentos mais elaborados configurando grupos de cache_id. Isso é
-	realizado pela separação de cada sub-grupo com uma barra vertical "|" no valor do 
-	cache_id. Você pode ter muitos sub-grupos com você desejar.
+	VocÃª pode fazer agrupamentos mais elaborados configurando grupos de cache_id. Isso Ã©
+	realizado pela separaÃ§Ã£o de cada sub-grupo com uma barra vertical "|" no valor do 
+	cache_id. VocÃª pode ter muitos sub-grupos com vocÃª desejar.
 	</para>
 	<example>
      <title>Grupos de cache_id</title>
@@ -26,13 +26,13 @@ $smarty->clear_cache(null,"sports");
 $smarty->display('index.tpl',"sports|basketball");</programlisting>
     </example>
    <note>
-   <title>Notas Técnicas</title>
+   <title>Notas TÃ©cnicas</title>
    <para>
-   O agrupamento de cache id NÃO use o path do template como alguma parte do cache_id.
-   Por exemplo, se você tem display('themes/blue/index.tpl'), você não pode limpar o cache
-   para tudo que estiver sob o diretório "themes/blue". Se você quiser fazer isso, você deve
-   agrupá-los no cache_id, como display('themes/blue/index.tpl','themes|blue'); Então
-   você pode limpar os caches para o 
+   O agrupamento de cache id NÃƒO use o path do template como alguma parte do cache_id.
+   Por exemplo, se vocÃª tem display('themes/blue/index.tpl'), vocÃª nÃ£o pode limpar o cache
+   para tudo que estiver sob o diretÃ³rio "themes/blue". Se vocÃª quiser fazer isso, vocÃª deve
+   agrupÃ¡-los no cache_id, como display('themes/blue/index.tpl','themes|blue'); EntÃ£o
+   vocÃª pode limpar os caches para o 
    tema azul com with clear_cache(null,'themes|blue');
    </para>
    </note>

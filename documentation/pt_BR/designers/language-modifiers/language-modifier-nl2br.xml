@@ -4,8 +4,8 @@
 <sect1 id="language.modifier.nl2br">
 			<title>nl2br</title>
 			<para>
-			Todas as quebras de linha ser„o convertidas para &lt;br /&gt; na vari·vel
-			data. Isto È equivalente a funÁ„o nl2br() do PHP.
+			Todas as quebras de linha ser√£o convertidas para &lt;br /&gt; na vari√°vel
+			data. Isto √© equivalente a fun√ß√£o nl2br() do PHP.
 			</para>
 <example>
 <title>nl2br</title>

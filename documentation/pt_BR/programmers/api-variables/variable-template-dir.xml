@@ -4,16 +4,16 @@
 <sect1 id="variable.template.dir">
       <title>$template_dir</title>
       <para>
-       Este È o nome padr„o do diretÛrio de template. Se vocÍ n„o fornecer
-       um tipo de recurso quando incluir arquivos, ent„o ele ir· ser encontrado aqui. 
-       Por padr„o isso È "./templates", significando que isso ir·
-       olhar para o diretÛrio de templates no mesmo diretÛrio que est· executando 
+       Este √© o nome padr√£o do diret√≥rio de template. Se voc√™ n√£o fornecer
+       um tipo de recurso quando incluir arquivos, ent√£o ele ir√° ser encontrado aqui. 
+       Por padr√£o isso √© "./templates", significando que isso ir√°
+       olhar para o diret√≥rio de templates no mesmo diret√≥rio que est√° executando 
        o script PHP.
       </para>
 	   <note>
-		   <title>Notas TÈcnicas</title>
+		   <title>Notas T√©cnicas</title>
 		   <para>
-    	   N„o È recomendado colocar este diretÛrio sob um diretÛrio 
+    	   N√£o √© recomendado colocar este diret√≥rio sob um diret√≥rio 
 	   document root do seu webserver.
     	   </para>
 	  </note>

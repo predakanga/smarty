@@ -5,7 +5,7 @@
 <refentry id="api.register.modifier">
  <refnamediv>
   <refname>register_modifier()</refname>
-  <refpurpose>Déclare dynamiquement un plugin de modificateur</refpurpose>
+  <refpurpose>DÃ©clare dynamiquement un plugin de modificateur</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -15,8 +15,8 @@
    <methodparam><type>mixed</type><parameter>impl</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Il faut passer en paramètre le nom du modificateur de variables,
-   suivi de la fonction PHP qui l'implémente.
+   Il faut passer en paramÃ¨tre le nom du modificateur de variables,
+   suivi de la fonction PHP qui l'implÃ©mente.
   </para>
    &api.register.snippet;
   <example>
@@ -30,7 +30,7 @@ $smarty->register_modifier('ss', 'stripslashes');
 ]]>
    </programlisting>
    <para>
-    Où le template est :
+    OÃ¹ le template est :
    </para>
    <programlisting>
 <![CDATA[
@@ -47,7 +47,7 @@ $smarty->register_modifier('ss', 'stripslashes');
    <link linkend="api.register.function"><varname>register_function()</varname></link>,
    les <link linkend="language.modifiers">modifieurs</link>,
    l'<link linkend="plugins">extension de Smarty avec des plugins</link> et
-   la <link linkend="plugins.modifiers">création de plugins modifieurs</link>.
+   la <link linkend="plugins.modifiers">crÃ©ation de plugins modifieurs</link>.
  </para>
  </refsect1>
 </refentry>

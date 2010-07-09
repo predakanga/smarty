@@ -7,8 +7,8 @@
     <title>SMARTY_DIR</title>
     <para>
      Questo dovrebbe essere il percorso completo sul sistema dei file
-     di classe di Smarty. Se la costante non Ë definita, Smarty cercher‡
-     di determinare automaticamente il valore appropriato. Se Ë definita,
+     di classe di Smarty. Se la costante non √® definita, Smarty cercher√†
+     di determinare automaticamente il valore appropriato. Se √® definita,
      il percorso deve terminare con una barra.
     </para>
     <example>

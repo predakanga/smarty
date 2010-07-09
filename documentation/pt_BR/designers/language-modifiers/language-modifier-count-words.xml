@@ -4,7 +4,7 @@
 <sect1 id="language.modifier.count.words">
 			<title>count_words</title>
 			<para>
-			Isto é usado para contar o número de palavras em uma variável.
+			Isto Ã© usado para contar o nÃºmero de palavras em uma variÃ¡vel.
 			</para>
 <example>
 <title>count_words</title>

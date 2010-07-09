@@ -5,14 +5,14 @@
     <para>
      Este es el nombre por default del directorio del template. Si 
      usted no proporciona un tipo de recurso que incluya archivos, 
-     entonces estos se encontraran aquí. 
+     entonces estos se encontraran aquÃ­. 
      Por default <filename class="directory">"./templates"</filename>, 
      esto significa que lo buscara en el directorio del 
      <filename class="directory">templates</filename> en el mismo 
      directorio que esta ejecutando el script PHP.
     </para>
     <note>
-     <title>Nota Técnica</title>
+     <title>Nota TÃ©cnica</title>
      <para>
       No es recomendado colocar este directorio bajo el directorio 
       document root de su servidor web.

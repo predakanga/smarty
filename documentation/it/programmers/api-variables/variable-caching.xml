@@ -4,23 +4,23 @@
       <title>$caching</title>
       <para>
            Questa variabile dice a Smarty se mettere in cache oppure no l'output
-           dei template. Per default Ë impostata a 0, o disabilitata. Se i vostri
-           template generano contenuto ridondante, Ë consigliabile attivare il
+           dei template. Per default √® impostata a 0, o disabilitata. Se i vostri
+           template generano contenuto ridondante, √® consigliabile attivare il
            caching. Ne deriveranno significativi guadagni di prestazioni. Potete
-           anche avere pi˘ di una cache per lo stesso template. I valori 1 e 2 
+           anche avere pi√π di una cache per lo stesso template. I valori 1 e 2 
            abilitano il caching. 1 dice a Smarty di usare l'attuale variabile
-           $cache_lifetime per determinare se la cache Ë scaduta. Il valore 2 dice
+           $cache_lifetime per determinare se la cache √® scaduta. Il valore 2 dice
            a Smarty di usare il valore di cache_lifetime del momento in cui la 
-           cache Ë stata generata. In questo modo potete impostare il cache_lifeteime
+           cache √® stata generata. In questo modo potete impostare il cache_lifeteime
            subito prima di caricare il template per avere un controllo granulare
-           su quando quella particolare cache scadr‡. Consultate anche <link
+           su quando quella particolare cache scadr√†. Consultate anche <link
 	   linkend="api.is.cached">is_cached</link>.
       </para>
       <para>
-           Se $compile_check Ë abilitato, il contenuto in cache verr‡ rigenerato
+           Se $compile_check √® abilitato, il contenuto in cache verr√† rigenerato
            quando i file del template o di configurazione che fanno parte di questa
-           cache vengono modificati. Se Ë abilitato $force_compile, il contenuto
-           in cache verr‡ rigenerato ogni volta.
+           cache vengono modificati. Se √® abilitato $force_compile, il contenuto
+           in cache verr√† rigenerato ogni volta.
       </para>
 </sect1>
 <!-- Keep this comment at the end of the file

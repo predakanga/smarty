@@ -3,7 +3,7 @@
  <sect1 id="language.modifier.count.sentences">
   <title>count_sentences</title>
   <para>
-   Este es usado para contar el número de frases en la variable. 
+   Este es usado para contar el nÃºmero de frases en la variable. 
   </para>
   <example>
    <title>count_sentences</title>
@@ -39,7 +39,7 @@ Two Soviet Ships Collide - One Dies. Enraged Cow Injures Farmer with Axe.
    </screen>
   </example>
   <para>
-   ver también <link linkend="language.modifier.count.characters">count_characters</link>,
+   ver tambiÃ©n <link linkend="language.modifier.count.characters">count_characters</link>,
    <link linkend="language.modifier.count.paragraphs">count_paragraphs</link> y 
    <link linkend="language.modifier.count.words">count_words</link>.
   </para>

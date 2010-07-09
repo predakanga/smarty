@@ -5,23 +5,23 @@
 <sect1 id="variable.use.sub.dirs">
  <title>$use_sub_dirs</title>
  <para>
-  Smarty va créer des sous-dossiers dans les dossiers
+  Smarty va crÃ©er des sous-dossiers dans les dossiers
   <link linkend="variable.compile.dir">templates_c</link> et
   <link linkend="variable.cache.dir">cache</link>
-  si la variable <parameter>$use_sub_dirs</parameter> est défini à &true; (Par défaut, vaut &false;).
-  Dans un environnement où il peut y avoir potentiellement des centaines de milliers
-  de fichiers de créés, ceci peut rendre le système de fichiers plus rapide.
-  D'un autre côté, quelques environnements n'acceptent pas que les processus PHP
-  créent des dossiers, donc, cette variable doit être désactivée par défaut.
+  si la variable <parameter>$use_sub_dirs</parameter> est dÃ©fini Ã  &true; (Par dÃ©faut, vaut &false;).
+  Dans un environnement oÃ¹ il peut y avoir potentiellement des centaines de milliers
+  de fichiers de crÃ©Ã©s, ceci peut rendre le systÃ¨me de fichiers plus rapide.
+  D'un autre cÃ´tÃ©, quelques environnements n'acceptent pas que les processus PHP
+  crÃ©ent des dossiers, donc, cette variable doit Ãªtre dÃ©sactivÃ©e par dÃ©faut.
  </para>
  <para>
   Les sous-dossiers sont plus efficaces, utilisez-les
   donc si vous le pouvez.
-  Théoriquement, vous obtiendrez plus de performance sur un système de fichier
-  contenant 10 dossiers contenant chaque, 100 fichiers plutôt qu'un dossier
+  ThÃ©oriquement, vous obtiendrez plus de performance sur un systÃ¨me de fichier
+  contenant 10 dossiers contenant chaque, 100 fichiers plutÃ´t qu'un dossier
   contenant 1000 fichiers. C'est par exemple le cas avec Solaris 7 (UFS)...
-  avec les systèmes de fichiers récents comme ext3 ou reiserfs, la différence
-  est proche de zéro.
+  avec les systÃ¨mes de fichiers rÃ©cents comme ext3 ou reiserfs, la diffÃ©rence
+  est proche de zÃ©ro.
  </para>
  <note>
   <title>Note technique</title>
@@ -29,14 +29,14 @@
    <listitem>
     <para><literal>$use_sub_dirs=true</literal> ne fonctionne pas avec
      <ulink url="&url.php-manual;features.safe-mode">safe_mode=On</ulink>,
-     raison pour laquelle c'est paramétrable et que c'est désactivé par défaut.
+     raison pour laquelle c'est paramÃ©trable et que c'est dÃ©sactivÃ© par dÃ©faut.
     </para>
    </listitem>
    <listitem>
-    <para><literal>$use_sub_dirs=true</literal> sous Windows peut causer des problèmes.</para>
+    <para><literal>$use_sub_dirs=true</literal> sous Windows peut causer des problÃ¨mes.</para>
    </listitem>
    <listitem>
-    <para>Safe_mode est obsolète depuis PHP6.</para>
+    <para>Safe_mode est obsolÃ¨te depuis PHP6.</para>
    </listitem>
   </itemizedlist>
  </note>

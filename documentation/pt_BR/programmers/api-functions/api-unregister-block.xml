@@ -10,8 +10,8 @@
           </funcprototype>
          </funcsynopsis>
          <para>
-	 Use isso para desregistrar dinamicamente um bloco de funções de plugin.
-	 Passe no bloco o nome da função.
+	 Use isso para desregistrar dinamicamente um bloco de funÃ§Ãµes de plugin.
+	 Passe no bloco o nome da funÃ§Ã£o.
          </para>
 </sect1>
 <!-- Keep this comment at the end of the file

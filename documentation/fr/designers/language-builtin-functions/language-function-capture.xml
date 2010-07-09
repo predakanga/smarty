@@ -6,23 +6,23 @@
  <title>{capture}</title>
 
  <para>
-  <varname>{capture}</varname> est utilisé pour récupérer la sortie d'éléments dans
-  une variable au lieu de les afficher. Tout contenu situé entre
+  <varname>{capture}</varname> est utilisÃ© pour rÃ©cupÃ©rer la sortie d'Ã©lÃ©ments dans
+  une variable au lieu de les afficher. Tout contenu situÃ© entre
   <varname>{capture name='foo'}</varname> et <varname>{/capture}</varname>
-  est intercepté dans une variable dont le nom est spécifié dans l'attribut
+  est interceptÃ© dans une variable dont le nom est spÃ©cifiÃ© dans l'attribut
   <parameter>name</parameter>.
  </para>
  <para>
-  Le contenu capturé peut être utilisé dans
-  le template par l'intermédiaire de la variable spéciale
+  Le contenu capturÃ© peut Ãªtre utilisÃ© dans
+  le template par l'intermÃ©diaire de la variable spÃ©ciale
   <link linkend="language.variables.smarty.capture"><parameter>$smarty.capture.foo</parameter></link>
-  où <quote>foo</quote> est la valeur de l'attribut <parameter>name</parameter>.
-  Si vous ne donnez pas de valeur à l'attribut <parameter>name</parameter>, alors
-  <quote>default</quote> est utilisé en tant que nom, i.e.
+  oÃ¹ <quote>foo</quote> est la valeur de l'attribut <parameter>name</parameter>.
+  Si vous ne donnez pas de valeur Ã  l'attribut <parameter>name</parameter>, alors
+  <quote>default</quote> est utilisÃ© en tant que nom, i.e.
   <parameter>$smarty.capture.default</parameter>.
  </para>
  <para>
-  <varname>{capture}</varname> peut être imbriqué.
+  <varname>{capture}</varname> peut Ãªtre imbriquÃ©.
  </para>
 
  <informaltable frame="all">
@@ -47,14 +47,14 @@
      <entry>string</entry>
      <entry>non</entry>
      <entry><emphasis>default</emphasis></entry>
-     <entry>Le nom du bloc capturé</entry>
+     <entry>Le nom du bloc capturÃ©</entry>
     </row>
     <row>
      <entry>assign</entry>
      <entry>string</entry>
      <entry>non</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le nom de la variable à laquelle la sortie sera assignée</entry>
+     <entry>Le nom de la variable Ã  laquelle la sortie sera assignÃ©e</entry>
     </row>
    </tbody>
   </tgroup>
@@ -62,12 +62,12 @@
  <note>
  <title>Attention</title>
   <para>
-   Faîtes attention lorsque vous interceptez la sortie de commandes
+   FaÃ®tes attention lorsque vous interceptez la sortie de commandes
    <link linkend="language.function.insert"><varname>{insert}</varname></link>.
-   Si vous avez configuré le <link linkend="caching">cache</link> pour que ce
+   Si vous avez configurÃ© le <link linkend="caching">cache</link> pour que ce
    dernier soit actif, et que vous avez des commandes <link
    linkend="language.function.insert"><varname>{insert}</varname></link>
-   supposées s'exécuter dans un contenu en cache, ne tentez pas de capturer
+   supposÃ©es s'exÃ©cuter dans un contenu en cache, ne tentez pas de capturer
    ce contenu.
   </para>
 </note>
@@ -76,7 +76,7 @@
    <title>{capture} avec le nom de l'attribut</title>
    <programlisting>
 <![CDATA[
-{* nous ne voulons afficher une balise div que si le contenu est affiché. *}
+{* nous ne voulons afficher une balise div que si le contenu est affichÃ©. *}
 {capture name=banner}
   {include file='get_banner.tpl'}
 {/capture}
@@ -89,7 +89,7 @@
 
   <example>
    <title>{capture} dans une variable de template</title>
-   <para>Cet exemple démontre également la fonction
+   <para>Cet exemple dÃ©montre Ã©galement la fonction
     <link linkend="language.function.popup"><varname>{popup}</varname></link>
    </para>
    <programlisting>

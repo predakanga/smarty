@@ -4,15 +4,15 @@
       <title>$debugging_ctrl</title>
       <para>
        Esto permite rutas alternativas para habilitar el debug. 
-       NONE no significa que mÈtodos alternativos son permitidos. 
+       NONE no significa que m√©todos alternativos son permitidos. 
        URL significa cuando la palabra SMARTY_DEBUG fue encontrada 
-       en el QUERY_STRING, que el debug est· habilitado para la 
+       en el QUERY_STRING, que el debug est√° habilitado para la 
        llamada del script. Si  
        <link linkend="variable.debugging">$debugging</link> es true, 
        ese valor es ignorado.
       </para>
       <para>
-      Ver tambiÈn <link linkend="chapter.debugging.console">Debugging console</link>.
+      Ver tambi√©n <link linkend="chapter.debugging.console">Debugging console</link>.
       </para>
 
 </sect1>

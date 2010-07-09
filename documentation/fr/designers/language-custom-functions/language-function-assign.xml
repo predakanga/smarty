@@ -5,8 +5,8 @@
 <sect1 id="language.function.assign">
  <title>{assign}</title>
  <para>
-  <varname>{assign}</varname> est utilisé pour déclarer des variables de template
-  <emphasis role="bold">durant l'exécution du template</emphasis>.
+  <varname>{assign}</varname> est utilisÃ© pour dÃ©clarer des variables de template
+  <emphasis role="bold">durant l'exÃ©cution du template</emphasis>.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -27,17 +27,17 @@
    <tbody>
     <row>
      <entry>var</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Le nom de la variable assignée</entry>
+     <entry>Le nom de la variable assignÃ©e</entry>
     </row>
     <row>
      <entry>value</entry>
-     <entry>chaîne de caractère</entry>
+     <entry>chaÃ®ne de caractÃ¨re</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>La valeur assignée</entry>
+     <entry>La valeur assignÃ©e</entry>
     </row>
    </tbody>
   </tgroup>
@@ -62,7 +62,7 @@ La valeur de $name est Bob.
  </example>
 
  <example>
-  <title>{assign} avec quelques fonctions mathématiques</title>
+  <title>{assign} avec quelques fonctions mathÃ©matiques</title>
   <para>Cet exemple complexe doit avoir ces variables entre crochets.</para>
   <programlisting>
 <![CDATA[
@@ -72,11 +72,11 @@ La valeur de $name est Bob.
  </example>
 
  <example>
-  <title>Accès aux variables {assign} depuis un script PHP</title>
+  <title>AccÃ¨s aux variables {assign} depuis un script PHP</title>
   <para>
-   Pour accéder aux variables <varname>{assign}</varname> depuis le script PHP, utilisez
+   Pour accÃ©der aux variables <varname>{assign}</varname> depuis le script PHP, utilisez
    <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>.
-   Ci-dessous, le template qui crée la variable <parameter>$foo</parameter>.
+   Ci-dessous, le template qui crÃ©e la variable <parameter>$foo</parameter>.
   </para>
   <programlisting>
 <![CDATA[
@@ -84,20 +84,20 @@ La valeur de $name est Bob.
 ]]>
   </programlisting>
   <para>
-   Les variables de template ne sont disponibles que après/durant l'exécution du template,
+   Les variables de template ne sont disponibles que aprÃ¨s/durant l'exÃ©cution du template,
    comme dans le script ci-dessous.
   </para>
   <programlisting role="php">
 <![CDATA[
 <?php
 
-// ceci n'affichera rien car le template n'a pas encore été exécuté
+// ceci n'affichera rien car le template n'a pas encore Ã©tÃ© exÃ©cutÃ©
 echo $smarty->get_template_vars('foo');
 
-// Récupère le template dans une variable
+// RÃ©cupÃ¨re le template dans une variable
 $whole_page = $smarty->fetch('index.tpl');
 
-// Ceci affichera 'smarty' car le template a été exécuté
+// Ceci affichera 'smarty' car le template a Ã©tÃ© exÃ©cutÃ©
 echo $smarty->get_template_vars('foo');
 
 $smarty->assign('foo','Even smarter');

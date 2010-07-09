@@ -11,14 +11,14 @@
    <para>
      Los Prefilters pueden ser 
      <link linkend="api.register.prefilter">registrado</link>
-     o cargado del directorio de plugins usando la funci髇
+     o cargado del directorio de plugins usando la funci贸n
      <link linkend="api.load.filter">load_filter()</link> o por la
-     configuraci髇 de la variable
+     configuraci贸n de la variable
      <link linkend="variable.autoload.filters">$autoload_filters</link>.
    </para>
    <para>
-     El Smarty pasara el c骴igo fuente del template como el primer argumento, 
-     y espera que la funci髇 le retorne el c骴igo fuente del template 
+     El Smarty pasara el c贸digo fuente del template como el primer argumento, 
+     y espera que la funci贸n le retorne el c贸digo fuente del template 
      resultante.
     </para>
     <example>
@@ -26,7 +26,7 @@
 <programlisting role="php">
 <![CDATA[
 <?php
-// ponga esto en su aplicaci髇
+// ponga esto en su aplicaci贸n
 function remove_dw_comments($tpl_source, &$smarty)
 {
     return preg_replace("/<!--#.*-->/U","",$tpl_source);

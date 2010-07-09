@@ -5,7 +5,7 @@
 <refentry id="api.get.registered.object">
  <refnamediv>
   <refname>get_registered_object()</refname>
-  <refpurpose>Retourne la référence d'un objet enregistré</refpurpose>
+  <refpurpose>Retourne la rÃ©fÃ©rence d'un objet enregistrÃ©</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -14,8 +14,8 @@
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Utile quand vous voulez accéder directement à un
-   <link linkend="api.register.object">objet enregistré</link>
+   Utile quand vous voulez accÃ©der directement Ã  un
+   <link linkend="api.register.object">objet enregistrÃ©</link>
    avec une fonction utilisateur. Lisez la documentation sur les
    <link linkend="advanced.features.objects">objets</link> pour plus d'informations.
   </para>
@@ -27,9 +27,9 @@
 function smarty_block_foo($params, &$smarty)
 {
   if (isset[$params['object']]) {
-    // récupère la référence de l'objet enregistré
+    // rÃ©cupÃ¨re la rÃ©fÃ©rence de l'objet enregistrÃ©
     $obj_ref =&amp; $smarty->get_registered_object($params['object']);
-    // $obj_ref est maintenant une référence vers l'objet
+    // $obj_ref est maintenant une rÃ©fÃ©rence vers l'objet
   }
 }
 ?>

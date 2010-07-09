@@ -22,7 +22,7 @@
     <row>
      <entry>file</entry>
      <entry>stringa</entry>
-     <entry>sì</entry>
+     <entry>sÃ¬</entry>
      <entry><emphasis>nessuno</emphasis></entry>
      <entry>Nome del file di configurazione da importare</entry>
     </row>
@@ -40,7 +40,7 @@
      <entry><emphasis>local</emphasis></entry>
      <entry>
       Campo di applicazione delle variabili caricate,
-      che può essere local, parent o global. local significa
+      che puÃ² essere local, parent o global. local significa
       che le variabili vengono caricate nel contesto del
       template locale. parent significa che le variabili
       vengono caricate sia nel contesto locale che nel template
@@ -56,16 +56,16 @@
      <entry>
       Se le variabili sono visibili o meno al template
       genitore: equivale a scope=parent. NOTA: Questo attributo
-      è deprecato per via dell'esistenza dell'attributo scope,
-      ma è ancora supportato. Se è presente scope, questo valore
-      è ignorato.
+      Ã¨ deprecato per via dell'esistenza dell'attributo scope,
+      ma Ã¨ ancora supportato. Se Ã¨ presente scope, questo valore
+      Ã¨ ignorato.
      </entry>
     </row>
    </tbody>
   </tgroup>
  </informaltable>
  <para>
-  Questa funzione è usata per caricare variabili nel template da
+  Questa funzione Ã¨ usata per caricare variabili nel template da
   un file di configurazione.
   Vedere <link linkend="config.files">Config Files</link> per
   maggiori informazioni.

@@ -3,8 +3,8 @@
      <sect1 id="variable.compiler.class">
       <title>$compiler_class</title>
       <para>
-       Specifica il nome della classe del compilatore che Smarty user‡
-       per compilare i template. Il default Ë 'Smarty_Compiler'. Solo per
+       Specifica il nome della classe del compilatore che Smarty user√†
+       per compilare i template. Il default √® 'Smarty_Compiler'. Solo per
        utenti avanzati.
       </para>
 </sect1>

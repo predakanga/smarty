@@ -5,7 +5,7 @@
 <refentry id="api.clear.all.assign">
  <refnamediv>
   <refname>clear_all_assign()</refname>
-  <refpurpose>Efface les valeurs de toutes les variables assignées</refpurpose>
+  <refpurpose>Efface les valeurs de toutes les variables assignÃ©es</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -25,7 +25,7 @@ $smarty->assign('Address', $address);
 // affichera
 print_r( $smarty->get_template_vars() );
 
-// efface toutes les variables assignées
+// efface toutes les variables assignÃ©es
 $smarty->clear_all_assign();
 
 // n'affichera rien

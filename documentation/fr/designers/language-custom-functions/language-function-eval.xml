@@ -5,15 +5,15 @@
 <sect1 id="language.function.eval">
  <title>{eval}</title>
  <para>
-  <varname>{eval}</varname> évalue une variable comme si cette dernière
-  était un template.
-  Peut être utile pour embarquer des balises de templates ou des variables
+  <varname>{eval}</varname> Ã©value une variable comme si cette derniÃ¨re
+  Ã©tait un template.
+  Peut Ãªtre utile pour embarquer des balises de templates ou des variables
   de template dans des variables ou des balises/variables dans des
   variables de fichiers de configuration.
  </para>
  <para>
-  Si vous définissez l'attribut <parameter>assign</parameter>, la sortie sera assignée à la
-  variable de template désignée plutôt que d'être affichée dans le
+  Si vous dÃ©finissez l'attribut <parameter>assign</parameter>, la sortie sera assignÃ©e Ã  la
+  variable de template dÃ©signÃ©e plutÃ´t que d'Ãªtre affichÃ©e dans le
   template.
  </para>
  <informaltable frame="all">
@@ -38,15 +38,15 @@
      <entry>mixed</entry>
      <entry>Oui</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Variable (ou chaîne de caractères) à évaluer</entry>
+     <entry>Variable (ou chaÃ®ne de caractÃ¨res) Ã  Ã©valuer</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Le nom de la variable PHP dans laquelle la sortie
-     sera assignée</entry>
+     sera assignÃ©e</entry>
     </row>
    </tbody>
   </tgroup>
@@ -56,15 +56,15 @@
   <para>
    <itemizedlist>
   <listitem><para>
-   Les variables évaluées sont traitées de la même façon que les templates.
-   Elles suivent les mêmes règles de traitement et de sécurité, comme si
-   elles étaient réellement des templates.
+   Les variables Ã©valuÃ©es sont traitÃ©es de la mÃªme faÃ§on que les templates.
+   Elles suivent les mÃªmes rÃ¨gles de traitement et de sÃ©curitÃ©, comme si
+   elles Ã©taient rÃ©ellement des templates.
   </para></listitem>
 
   <listitem><para>
-   Les variables évaluées sont compilées à chaque invocation, et la version
-   compilée n'est pas sauvegardée ! Toutefois, si le 
-   <link linkend="caching">cache</link> est activé, la sortie sera placée en
+   Les variables Ã©valuÃ©es sont compilÃ©es Ã  chaque invocation, et la version
+   compilÃ©e n'est pas sauvegardÃ©e ! Toutefois, si le 
+   <link linkend="caching">cache</link> est activÃ©, la sortie sera placÃ©e en
    cache avec le reste du template.
   </para></listitem>
 </itemizedlist>
@@ -80,12 +80,12 @@
 emphstart = <strong>
 emphend = </strong>
 titre = Bienvenue sur la homepage de {$company} !
-ErrorVille = Vous devez spécifier un nom de {#emphstart#}ville{#emphend#}.
-ErrorDept = Vous devez spécifier un {#emphstart#}département{#emphend#}.
+ErrorVille = Vous devez spÃ©cifier un nom de {#emphstart#}ville{#emphend#}.
+ErrorDept = Vous devez spÃ©cifier un {#emphstart#}dÃ©partement{#emphend#}.
 ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[
@@ -105,8 +105,8 @@ ErrorDept = Vous devez spécifier un {#emphstart#}département{#emphend#}.
 <![CDATA[
 Ceci est le contenu de foo.
 Bienvenue sur la homepage de FictifLand.
-Vous devez spécifier un nom de <strong>ville</strong>.
-Vous devez spécifier un <strong>département</strong>.
+Vous devez spÃ©cifier un nom de <strong>ville</strong>.
+Vous devez spÃ©cifier un <strong>dÃ©partement</strong>.
 ]]>
   </screen>
  </example>
@@ -115,7 +115,7 @@ Vous devez spécifier un <strong>département</strong>.
   <title>un autre exemple avec {eval}</title>
   <para>
    Ceci va afficher le nom du serveur (en majuscule) et son IP.
-   La variable <parameter>$str</parameter> également venir d'une requête de base de données.
+   La variable <parameter>$str</parameter> Ã©galement venir d'une requÃªte de base de donnÃ©es.
   </para>
   <programlisting role="php">
 <![CDATA[
@@ -127,7 +127,7 @@ $smarty->assign('foo',$str);
    ]]>
   </programlisting>
   <para>
-   Où le template est :
+   OÃ¹ le template est :
   </para>
   <programlisting>
 <![CDATA[

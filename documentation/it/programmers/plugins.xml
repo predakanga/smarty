@@ -4,7 +4,7 @@
   <title>Estendere Smarty con i Plugin</title>
   <para>
    La versione 2.0 ha introdotto l'architettura dei plugin, che
-   viene usata per quasi tutte le funzionalit‡ personalizzabili
+   viene usata per quasi tutte le funzionalit√† personalizzabili
    di Smarty. Queste comprendono:
    <itemizedlist spacing="compact">
     <listitem><simpara>funzioni</simpara></listitem>
@@ -17,13 +17,13 @@
     <listitem><simpara>risorse</simpara></listitem>
     <listitem><simpara>insert</simpara></listitem>
    </itemizedlist>
-   Con l'eccezione delle risorse, viene preservata la compatibilit‡ 
+   Con l'eccezione delle risorse, viene preservata la compatibilit√† 
    retroattiva con il vecchio modo di registrare le funzioni di gestione
    attraverso l'API register_*. Se non usavate questa interfaccia, ma
    modificavate direttamente le variabili di classe <literal>$custom_funcs</literal>,
    <literal>$custom_mods</literal> e altre, ora dovrete modificare i
    vostri script per usare l'API oppure convertire in plugin le vostre
-   funzionalit‡ personalizzate.
+   funzionalit√† personalizzate.
   </para>
    
 &programmers.plugins.plugins-howto;

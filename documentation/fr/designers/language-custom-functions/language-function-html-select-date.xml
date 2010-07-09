@@ -6,12 +6,12 @@
  <title>{html_select_date}</title>
  <para>
   <varname>{html_select_date}</varname> est une
-  <link linkend="language.custom.functions">fonction personnalisée</link>
-  qui crée des listes déroulantes pour saisir la date. Elle peut afficher n'importe
-  quel jour, mois et année.
-  Tous les paramètres qui ne sont pas dans la liste ci-dessous sont
-  affichés sous la forme pair nom/valeur dans les balises
-  <literal>&lt;select&gt;</literal> des jours, mois et années.
+  <link linkend="language.custom.functions">fonction personnalisÃ©e</link>
+  qui crÃ©e des listes dÃ©roulantes pour saisir la date. Elle peut afficher n'importe
+  quel jour, mois et annÃ©e.
+  Tous les paramÃ¨tres qui ne sont pas dans la liste ci-dessous sont
+  affichÃ©s sous la forme pair nom/valeur dans les balises
+  <literal>&lt;select&gt;</literal> des jours, mois et annÃ©es.
  </para>
  <informaltable frame="all">
   <tgroup cols="5">
@@ -25,17 +25,17 @@
      <entry>Nom attribut</entry>
      <entry>Type</entry>
      <entry>Requis</entry>
-     <entry>Défaut</entry>
+     <entry>DÃ©faut</entry>
      <entry>Description</entry>
     </row>
    </thead>
    <tbody>
     <row>
      <entry>prefix</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>Date_</entry>
-     <entry>Avec quoi préfixer le nom de variable</entry>
+     <entry>Avec quoi prÃ©fixer le nom de variable</entry>
     </row>
     <row>
      <entry>time</entry>
@@ -43,24 +43,24 @@
      <entry>Non</entry>
      <entry>la date courante au format unix YYYY-MM-DD
      format</entry>
-     <entry>La date / heure à utiliser</entry>
+     <entry>La date / heure Ã  utiliser</entry>
     </row>
     <row>
      <entry>start_year</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>current year</entry>
-     <entry>La première année dans la liste déroulante, soit
-      le numéro de l'année, soit un nombre relatif à l'année
+     <entry>La premiÃ¨re annÃ©e dans la liste dÃ©roulante, soit
+      le numÃ©ro de l'annÃ©e, soit un nombre relatif Ã  l'annÃ©e
      courante (+/- N).</entry>
     </row>
     <row>
      <entry>end_year</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
-     <entry>même chose que start_year</entry>
-     <entry>La dernière année dans la liste déroulante, soit
-      le numéro de l'année, soit un nombre relatif à l'année
+     <entry>mÃªme chose que start_year</entry>
+     <entry>La derniÃ¨re annÃ©e dans la liste dÃ©roulante, soit
+      le numÃ©ro de l'annÃ©e, soit un nombre relatif Ã  l'annÃ©e
      courante (+/- N).</entry>
     </row>
     <row>
@@ -82,25 +82,25 @@
      <entry>boolean</entry>
      <entry>Non</entry>
      <entry>true</entry>
-     <entry>Si l'on souhaite afficher les années ou pas.</entry>
+     <entry>Si l'on souhaite afficher les annÃ©es ou pas.</entry>
     </row>
     <row>
      <entry>month_format</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>%B</entry>
      <entry>le format du mois (strftime)</entry>
     </row>
     <row>
      <entry>day_format</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>%02d</entry>
      <entry>Le format du jour (sprintf)</entry>
     </row>
     <row>
      <entry>day_value_format</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>%d</entry>
      <entry>Le format de la valeur du jour (sprintf)</entry>
@@ -110,137 +110,137 @@
      <entry>boolean</entry>
      <entry>Non</entry>
      <entry>false</entry>
-     <entry>S'il faut afficher l'année au format texte</entry>
+     <entry>S'il faut afficher l'annÃ©e au format texte</entry>
     </row>
     <row>
      <entry>reverse_years</entry>
      <entry>boolean</entry>
      <entry>Non</entry>
      <entry>false</entry>
-     <entry>Affiche les années dans l'ordre inverse</entry>
+     <entry>Affiche les annÃ©es dans l'ordre inverse</entry>
     </row>
     <row>
      <entry>field_array</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
      <entry>
-      Si un nom est donné, la liste déroulante sera affichée
-      de telle façon que les résultats seront retournés à PHP
-      sous la forme nom[Day] (jour), nom[Year] (année),
+      Si un nom est donnÃ©, la liste dÃ©roulante sera affichÃ©e
+      de telle faÃ§on que les rÃ©sultats seront retournÃ©s Ã  PHP
+      sous la forme nom[Day] (jour), nom[Year] (annÃ©e),
       nom[Month] (Mois).
      </entry>
     </row>
     <row>
      <entry>day_size</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute un attribut size à la liste
-     déroulante des jours.</entry>
+     <entry>Ajoute un attribut size Ã  la liste
+     dÃ©roulante des jours.</entry>
     </row>
     <row>
      <entry>month_size</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute un attribut size à la liste
-     déroulante des mois.</entry>
+     <entry>Ajoute un attribut size Ã  la liste
+     dÃ©roulante des mois.</entry>
     </row>
     <row>
      <entry>year_size</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute un attribut size à la liste
-     déroulante des années.</entry>
+     <entry>Ajoute un attribut size Ã  la liste
+     dÃ©roulante des annÃ©es.</entry>
     </row>
     <row>
      <entry>all_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires à
+     <entry>Ajoute des attributs supplÃ©mentaires Ã 
      toutes les balises select/input.</entry>
     </row>
     <row>
      <entry>day_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
      select/input du jour.</entry>
     </row>
     <row>
      <entry>month_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
      select/input du mois.</entry>
     </row>
     <row>
      <entry>year_extra</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>null</entry>
-     <entry>Ajoute des attributs supplémentaires aux balises
-     select/input de l'année.</entry>
+     <entry>Ajoute des attributs supplÃ©mentaires aux balises
+     select/input de l'annÃ©e.</entry>
     </row>
     <row>
      <entry>field_order</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>MDY</entry>
      <entry>L'ordre dans lequel afficher les
-     listes déroulantes.</entry>
+     listes dÃ©roulantes.</entry>
     </row>
     <row>
      <entry>field_separator</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>\n</entry>
-     <entry>la chaîne de caractères affichée entre les
-     différents champs.</entry>
+     <entry>la chaÃ®ne de caractÃ¨res affichÃ©e entre les
+     diffÃ©rents champs.</entry>
     </row>
     <row>
      <entry>month_value_format</entry>
-     <entry>chaîne de caractères</entry>
+     <entry>chaÃ®ne de caractÃ¨res</entry>
      <entry>Non</entry>
      <entry>%m</entry>
-     <entry>Le format strftime de la valeur des mois, par défaut %m
-     pour les numéros.</entry>
+     <entry>Le format strftime de la valeur des mois, par dÃ©faut %m
+     pour les numÃ©ros.</entry>
    </row>
    <row>
     <entry>year_empty</entry>
-    <entry>chaîne de caractères</entry>
+    <entry>chaÃ®ne de caractÃ¨res</entry>
     <entry>Non</entry>
     <entry>null</entry>
-    <entry>S'il est renseigné, alors le premier élément de la boite de sélection
-    affiche le texte donné en tant que libellé et dispose de la valeur <quote></quote>.
-    Utile par exemple lorsque vous souhaitez que la boite de sélection affiche
-    <quote>Sélectionnez une année</quote>.
-    A savoir que vous pouvez spécifier des valeurs de la forme <quote>-MM-DD</quote> pour
-    l'attribut time afin d'indiquer une année non sélectionnée.</entry>
+    <entry>S'il est renseignÃ©, alors le premier Ã©lÃ©ment de la boite de sÃ©lection
+    affiche le texte donnÃ© en tant que libellÃ© et dispose de la valeur <quote></quote>.
+    Utile par exemple lorsque vous souhaitez que la boite de sÃ©lection affiche
+    <quote>SÃ©lectionnez une annÃ©e</quote>.
+    A savoir que vous pouvez spÃ©cifier des valeurs de la forme <quote>-MM-DD</quote> pour
+    l'attribut time afin d'indiquer une annÃ©e non sÃ©lectionnÃ©e.</entry>
    </row>
    <row>
     <entry>month_empty</entry>
-    <entry>chaîne de caractères</entry>
+    <entry>chaÃ®ne de caractÃ¨res</entry>
     <entry>Non</entry>
     <entry>null</entry>
-    <entry>S'il est renseigné, le premier élément de la boite de sélection
-     affiche le texte donné en tant que libellé et dispose de la valeur <quote></quote>.
-     A savoir que vous pouvez spécifier des valeurs de la forme <quote>YYYY--DD</quote> pour
+    <entry>S'il est renseignÃ©, le premier Ã©lÃ©ment de la boite de sÃ©lection
+     affiche le texte donnÃ© en tant que libellÃ© et dispose de la valeur <quote></quote>.
+     A savoir que vous pouvez spÃ©cifier des valeurs de la forme <quote>YYYY--DD</quote> pour
      l'attribut time afin d'indiquer qu'il manque le moi.</entry>
    </row>
    <row>
     <entry>day_empty</entry>
-    <entry>chaîne de caractères</entry>
+    <entry>chaÃ®ne de caractÃ¨res</entry>
     <entry>Non</entry>
     <entry>null</entry>
-    <entry>S'il est renseigné, le premier élément de la boite de sélection
-     affiche le texte donné en tant que libellé et dispose de la valeur <quote></quote>.
-     A savoir que vous pouvez spécifier des valeurs de la forme <quote>YYYY-MM-</quote> pour
+    <entry>S'il est renseignÃ©, le premier Ã©lÃ©ment de la boite de sÃ©lection
+     affiche le texte donnÃ© en tant que libellÃ© et dispose de la valeur <quote></quote>.
+     A savoir que vous pouvez spÃ©cifier des valeurs de la forme <quote>YYYY-MM-</quote> pour
     l'attribut time afin d'indiquer qu'il manque le jour.
     </entry>
    </row>
@@ -273,7 +273,7 @@
   <option value="1">January</option>
   <option value="2">February</option>
   <option value="3">March</option>
-  ..... coupé .....
+  ..... coupÃ© .....
   <option value="10">October</option>
   <option value="11">November</option>
   <option value="12" selected="selected">December</option>
@@ -282,13 +282,13 @@
   <option value="1">01</option>
   <option value="2">02</option>
   <option value="3">03</option>
-  ..... coupé .....
+  ..... coupÃ© .....
   <option value="11">11</option>
   <option value="12">12</option>
   <option value="13" selected>13</option>
   <option value="14">14</option>
   <option value="15">15</option>
-  ..... coupé .....
+  ..... coupÃ© .....
   <option value="29">29</option>
   <option value="30">30</option>
   <option value="31">31</option>
@@ -301,29 +301,29 @@
   </screen>
  </example>
  <example>
-  <title>{html_select_date} : Deuxième exemple</title>
+  <title>{html_select_date} : DeuxiÃ¨me exemple</title>
   <programlisting>
 <![CDATA[
-{* le démarage et la fin de l'année peuvent être relatif à l'année courante *}
+{* le dÃ©marage et la fin de l'annÃ©e peuvent Ãªtre relatif Ã  l'annÃ©e courante *}
 {html_select_date prefix="StartDate" time=$time start_year="-5"
    end_year="+1" display_days=false}
 ]]>
   </programlisting>
   <para>
-   Ce qui donne en sortie: (L'année courante est 2000)
+   Ce qui donne en sortie: (L'annÃ©e courante est 2000)
   </para>
   <screen>
 <![CDATA[
 <select name="StartDateMonth">
   <option value="1">January</option>
   <option value="2">February</option>
-  ..... coupé .....
+  ..... coupÃ© .....
   <option value="11">November</option>
   <option value="12" selected="selected">December</option>
 </select>
 <select name="StartDateYear">
  <option value="1995">1995</option>
-  ..... coupé .....
+  ..... coupÃ© .....
   <option value="1999">1999</option>
   <option value="2000" selected="selected">2000</option>
   <option value="2001">2001</option>

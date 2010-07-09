@@ -14,51 +14,51 @@
                     <row>
                         <entry>Nome do Atributo</entry>
                         <entry>Tipo</entry>
-                        <entry>Obrigatório</entry>       
-                        <entry>Padrão</entry>
-                        <entry>Descrição</entry>
+                        <entry>ObrigatÃ³rio</entry>       
+                        <entry>PadrÃ£o</entry>
+                        <entry>DescriÃ§Ã£o</entry>
                     </row>
                 </thead>
                 <tbody>
                     <row>
                         <entry>style</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>estilo pré-definido</entry>
+                        <entry>estilo prÃ©-definido</entry>
                     </row>
                     <row>
                         <entry>indent</entry>
                         <entry>number</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>0</emphasis></entry>
-                        <entry>O número de caracteres para endentar cada linha.</entry>
+                        <entry>O nÃºmero de caracteres para endentar cada linha.</entry>
                     </row>
                     <row>
                         <entry>indent_first</entry>
                         <entry>number</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>0</emphasis></entry>
-                        <entry>O número de caracteres para endentar a primeira linha</entry>
+                        <entry>O nÃºmero de caracteres para endentar a primeira linha</entry>
                     </row>
                     <row>
                         <entry>indent_char</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>(single space)</emphasis></entry>
                         <entry>O caractere (ou string de caracteres) para indenta</entry>
                     </row>
                     <row>
                         <entry>wrap</entry>
                         <entry>number</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>80</emphasis></entry>
                         <entry>Quantidade de caracteres antes de quebrar cada linha</entry>
                     </row>
                     <row>
                         <entry>wrap_char</entry>
                         <entry>string</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>\n</emphasis></entry>
                         <entry>O caractere (ou string de caracteres) para usar
                         para quebrar cada linha</entry>
@@ -66,9 +66,9 @@
                     <row>
                         <entry>wrap_cut</entry>
                         <entry>boolean</entry>
-                        <entry>Não</entry>
+                        <entry>NÃ£o</entry>
                         <entry><emphasis>false</emphasis></entry>
-                        <entry>Se true, wrap irá quebrar a linha no caractere
+                        <entry>Se true, wrap irÃ¡ quebrar a linha no caractere
                         exato em vez de quebrar ao final da palavra</entry>
                     </row>
                     <row>
@@ -76,20 +76,20 @@
                         <entry>string</entry>
                         <entry>No</entry>
                         <entry><emphasis>n/d</emphasis></entry>
-                        <entry>A variável de template que irá
-                        receber a saída</entry>
+                        <entry>A variÃ¡vel de template que irÃ¡
+                        receber a saÃ­da</entry>
                     </row>
                 </tbody>
                 </tgroup>
             </informaltable>
 			<para>
-			textformat é uma função de bloco usada para formatar texto. Basicamente
-			ela remove espaços e caracteres especiais, e formata os parágrafos
+			textformat Ã© uma funÃ§Ã£o de bloco usada para formatar texto. Basicamente
+			ela remove espaÃ§os e caracteres especiais, e formata os parÃ¡grafos
 			quebrando o texto ao final de palavras e identando linhas.
 			</para>
 			<para>
-			Você pode definir os parâmetros explicitamente, ou usar um estilo pré-definido.
-			Atualmente o único estilo disponível é "email".
+			VocÃª pode definir os parÃ¢metros explicitamente, ou usar um estilo prÃ©-definido.
+			Atualmente o Ãºnico estilo disponÃ­vel Ã© "email".
 			</para>
 <example>
 <title>textformat</title>

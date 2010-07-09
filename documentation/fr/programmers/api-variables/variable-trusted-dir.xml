@@ -5,11 +5,11 @@
 <sect1 id="variable.trusted.dir">
  <title>$trusted_dir</title>
  <para>
-  <parameter>$trusted_dir</parameter> n'est utilisée lorsque
-  <link linkend="variable.security"><parameter>$security</parameter></link> est activée.
-  C'est un tableau de tous les répertoires qui peuvent être considérés comme svrs.
-  Les répertoires svrs sont ceux qui contiennent des scripts PHP qui
-  sont exécutés directement depuis les templates avec
+  <parameter>$trusted_dir</parameter> n'est utilisÃ©e lorsque
+  <link linkend="variable.security"><parameter>$security</parameter></link> est activÃ©e.
+  C'est un tableau de tous les rÃ©pertoires qui peuvent Ãªtre considÃ©rÃ©s comme svrs.
+  Les rÃ©pertoires svrs sont ceux qui contiennent des scripts PHP qui
+  sont exÃ©cutÃ©s directement depuis les templates avec
   <link linkend="language.function.include.php"><varname>{include_php}</varname></link>.
   </para>
  </sect1>

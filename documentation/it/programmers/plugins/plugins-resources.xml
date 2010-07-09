@@ -4,12 +4,12 @@
     <para>
      I plugin risorsa vanno considerati un modo generico di fornire sorgenti
      di template o script PHP a Smarty. Alcuni esempi di risorse:
-     database, directory LDAP, memorie condivisse, socket, e cosÏ via.
+     database, directory LDAP, memorie condivisse, socket, e cos√¨ via.
     </para>
 
     <para>
      Per ogni tipo di risorsa deve essere registrato un totale di 4 funzioni.
-     Ogni funzione ricever‡ la risorsa richiesta come primo parametro e l'oggetto
+     Ogni funzione ricever√† la risorsa richiesta come primo parametro e l'oggetto
      Smarty come ultimo parametro. Il resto dei parametri dipende dalla
      funzione.
     </para>
@@ -40,33 +40,33 @@
     </funcsynopsis>
 
     <para>
-     Lo scopo della prima funzione Ë di recuperare la risorsa. Il suo
-     secondo parametro Ë una variabile passata per riferimento nella
+     Lo scopo della prima funzione √® di recuperare la risorsa. Il suo
+     secondo parametro √® una variabile passata per riferimento nella
      quale memorizzare il risultato. Ci si aspetta che la funzione
-     restituisca <literal>true</literal> se Ë riuscita a recuperare
+     restituisca <literal>true</literal> se √® riuscita a recuperare
      la risorsa e <literal>false</literal> nel caso opposto.
     </para>
 
     <para>
-     Lo scopo della seconda funzione Ë di indicare il momento dell'ultima
+     Lo scopo della seconda funzione √® di indicare il momento dell'ultima
      modifica effettuata sulla risorsa richiesta (nel formato timestamp
-     UNIX). Il secondo parametro Ë una variabile passata per riferimento
+     UNIX). Il secondo parametro √® una variabile passata per riferimento
      nella quale memorizzare il timestamp. Ci si aspetta che la funzione
-     restituisca <literal>true</literal> se Ë riuscita a determinare il
+     restituisca <literal>true</literal> se √® riuscita a determinare il
      timestamp, e <literal>false</literal> nel caso opposto.
     </para>
 
     <para>
      La terza funzione deve restituire <literal>true</literal> o
      <literal>false</literal>, a seconda che la risorsa richiesta sia
-     sicura o no. Questa funzione Ë usata solo per risorse di template ma
+     sicura o no. Questa funzione √® usata solo per risorse di template ma
      deve ancora essere definita.
     </para>
 
     <para>
      La quarta funzione deve restituire <literal>true</literal> o
      <literal>false</literal>, a seconda che la risorsa richiesta sia
-     considerata affidabile o no. Questa funzione Ë usata solo per script
+     considerata affidabile o no. Questa funzione √® usata solo per script
      PHP richiesti con i tag <command>include_php</command> o
      <command>insert</command> con l'attributo <structfield>src</structfield>.
      Comunque, deve ancora essere definita per le risorse di template.

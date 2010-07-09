@@ -3,16 +3,16 @@
   <sect1 id="language.variables.smarty">
    <title>La variabile riservata {$smarty}</title>
    <para>
-    La variabile riservata {$smarty} può essere usate per accedere
+    La variabile riservata {$smarty} puÃ² essere usate per accedere
     a parecchie variabili speciali del template. Quella che segue
-    è la lista completa.
+    Ã¨ la lista completa.
    </para>
 
    <sect2 id="language.variables.smarty.request">
     <title>Variabili della richiesta HTTP</title>
      <para>
       Alle variabili get, post, cookies, server,
-      environment e session si può accedere come mostrato negli
+      environment e session si puÃ² accedere come mostrato negli
       esempi qui sotto:
      </para>
      <example>
@@ -44,7 +44,7 @@
      </example>
      <note>
       <para>
-	      Per motivi storici si può accedere direttamente a {$SCRIPT_NAME},
+	      Per motivi storici si puÃ² accedere direttamente a {$SCRIPT_NAME},
 	      sebbene {$smarty.server.SCRIPT_NAME} sia la maniera consigliata
 	      per ottenere questo valore.
       </para>
@@ -54,9 +54,9 @@
   <sect2 id="language.variables.smarty.now">
 			<title>{$smarty.now}</title>
 			<para>
-			 Si può accedere al timestamp corrente con {$smarty.now}. 
+			 Si puÃ² accedere al timestamp corrente con {$smarty.now}. 
 			 Questo numero rappresenta il numero di secondi passati dalla
-			 cosiddetta Epoch (1° gennaio 1970) e può essere passato
+			 cosiddetta Epoch (1Â° gennaio 1970) e puÃ² essere passato
 			 direttamente al modificatore date_format per la visualizzazione.
 			</para>
    <example>
@@ -72,7 +72,7 @@
   <sect2 id="language.variables.smarty.const">
 			<title>{$smarty.const}</title>
 			<para>
-			Può essere usato per accedere direttamente alle costanti PHP.
+			PuÃ² essere usato per accedere direttamente alle costanti PHP.
 			</para>
    <example>
     <title>uso di {$smarty.const}</title>
@@ -87,7 +87,7 @@
 		<sect2 id="language.variables.smarty.capture">
 			<title>{$smarty.capture}</title>
 			<para>
-			Si può accedere all'output catturato attraverso il costrutto 
+			Si puÃ² accedere all'output catturato attraverso il costrutto 
                         {capture}..{/capture} con la variabile {$smarty}. Consultare
                         la sezione <link linkend="language.function.capture">capture</link>
                         per avere un esempio.
@@ -97,9 +97,9 @@
 		<sect2 id="language.variables.smarty.config">
 			<title>{$smarty.config}</title>
 			<para>
-			 La variabile {$smarty} può essere usata per referenziare le 
+			 La variabile {$smarty} puÃ² essere usata per referenziare le 
 			 variabili di configurazione caricate. {$smarty.config.foo}
-                         è sinonimo di {#foo#}. Consultare la sezione
+                         Ã¨ sinonimo di {#foo#}. Consultare la sezione
 			 <link linkend="language.function.config.load">config_load</link>
                          per avere un esempio.
 			</para>
@@ -108,8 +108,8 @@
   <sect2 id="language.variables.smarty.loops">
 			<title>{$smarty.section}, {$smarty.foreach}</title>
 			<para>
-			La variabile {$smarty} può essere usata per referenziare
-			le proprietà dei loop 'section' e 'foreach'. Vedere la documentazione
+			La variabile {$smarty} puÃ² essere usata per referenziare
+			le proprietÃ  dei loop 'section' e 'foreach'. Vedere la documentazione
 			di <link linkend="language.function.section">section</link> e
 			 <link linkend="language.function.foreach">foreach</link>.
 			</para>
@@ -124,22 +124,22 @@
 		<sect2 id="language.variables.smarty.version">
 			<title>{$smarty.version}</title>
 			<para>
-    Questa variabile contiene la versione di Smarty con cui il template è stato compilato.
+    Questa variabile contiene la versione di Smarty con cui il template Ã¨ stato compilato.
 			</para>
 		</sect2>
 		<sect2 id="language.variables.smarty.ldelim">
 			<title>{$smarty.ldelim}</title>
 			<para>
-    Questa variabile è usata per stampare il delimitatore sinistro di Smarty in modo
-    letterale, cioè senza che venga interpretato come tale. Vedere anche
+    Questa variabile Ã¨ usata per stampare il delimitatore sinistro di Smarty in modo
+    letterale, cioÃ¨ senza che venga interpretato come tale. Vedere anche
     <link linkend="language.function.ldelim">{ldelim},{rdelim}</link>.
 			</para>
 		</sect2>
 		<sect2 id="language.variables.smarty.rdelim">
 			<title>{$smarty.rdelim}</title>
 			<para>
-    Questa variabile è usata per stampare il delimitatore destro di Smarty in modo
-    letterale, cioè senza che venga interpretato come tale. Vedere anche
+    Questa variabile Ã¨ usata per stampare il delimitatore destro di Smarty in modo
+    letterale, cioÃ¨ senza che venga interpretato come tale. Vedere anche
     <link linkend="language.function.ldelim">{ldelim},{rdelim}</link>.
 			</para>
 		</sect2>

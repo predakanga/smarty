@@ -10,7 +10,7 @@
 			</funcprototype>
 			</funcsynopsis>
 			<para>
-				Isso limpa o valor de todas as vari·veis fixadas.
+				Isso limpa o valor de todas as vari√°veis fixadas.
 			</para>
 <example>
 <title>clear_all_assign</title>

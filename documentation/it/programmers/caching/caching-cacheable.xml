@@ -3,8 +3,8 @@
  <sect1 id="caching.cacheable">
   <title>Mettere in Cache l'output dei Plugin</title>
   <para> 
-   A partire dai plugin di Smarty-2.6.0 la possibilit‡ di mettere in
-   cache il loro output puÚ essere dichiarata nel momento in cui li si
+   A partire dai plugin di Smarty-2.6.0 la possibilit√† di mettere in
+   cache il loro output pu√≤ essere dichiarata nel momento in cui li si
    registrano. Il terzo parametro da passare a register_block,
    register_compiler_function e register_function si chiama
    <parameter>$cacheable</parameter> e per default vale true, il che
@@ -16,18 +16,18 @@
    Quando si registra un plugin con $cacheable=false il plugin viene
    chiamato tutte le volte che la pagina viene visualizzata, anche se
    la pagina stessa arriva dalla cache. La funzione del plugin funziona
-   cosÏ un poco come una funzione <link linkend="plugins.inserts">insert</link>.
+   cos√¨ un poco come una funzione <link linkend="plugins.inserts">insert</link>.
   </para>
 
   <para>
-   Al contrario di ciÚ che avviene in <link 
+   Al contrario di ci√≤ che avviene in <link 
    linkend="language.function.insert">{insert}</link>, gli attributi passati
-   al plugin non vengono, per default, messi in cache. E' possibile perÚ
+   al plugin non vengono, per default, messi in cache. E' possibile per√≤
    dichiarare che devono essere messi in cache con il quarto parametro
    <parameter>$cache_attrs</parameter>. <parameter>$cache_attrs</parameter>
-   Ë un array di nomi di attributi che devono essere messi in cache, in
+   √® un array di nomi di attributi che devono essere messi in cache, in
    modo che la funzione del plugin ottenga il valore dell'attributo qual
-   era al momento in cui la pagina Ë stata salvata sulla cache ogni volta
+   era al momento in cui la pagina √® stata salvata sulla cache ogni volta
    che la cache stessa viene riletta.
   </para>
 
@@ -60,7 +60,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    dove index.tpl Ë:
+    dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -69,8 +69,8 @@ Time Remaining: {remain endtime=$obj->endtime}
    </programlisting>
    <para>
     Il numero di secondi che mancano alla scadenza di $obj cambia ad
-    ogni visualizzazione della pagina, anche se questa Ë in cache.
-    Siccome l'attributo endtime Ë in cache, l'oggetto deve essere
+    ogni visualizzazione della pagina, anche se questa √® in cache.
+    Siccome l'attributo endtime √® in cache, l'oggetto deve essere
     letto dal database solo quando la pagina viene scritta sulla cache,
     ma non nelle richieste successive.
    </para>
@@ -97,7 +97,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    dove index.tpl Ë:
+    dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -116,8 +116,8 @@ Now is: {"0"|date_format:"%D %H:%M:%S"}
   
   <para>
    Quando ricaricate lapagina vedrete che le due date sono diverse. Una
-   Ë "dinamica", l'altra Ë "statica". Potete mettere qualsiasi cosa fra
-   {dynamic} e {/dynamic}, sicuri che non verr‡ messa in cache col resto
+   √® "dinamica", l'altra √® "statica". Potete mettere qualsiasi cosa fra
+   {dynamic} e {/dynamic}, sicuri che non verr√† messa in cache col resto
    della pagina.
   </para>
 

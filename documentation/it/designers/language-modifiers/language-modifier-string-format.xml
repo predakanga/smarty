@@ -22,7 +22,7 @@
      <row>
       <entry>1</entry>
       <entry>stringa</entry>
-      <entry>SÏ</entry>
+      <entry>S√¨</entry>
       <entry><emphasis>nessuno</emphasis></entry>
       <entry>E' il formato da usare. (sprintf)</entry>
      </row>
@@ -30,7 +30,7 @@
    </tgroup>
   </informaltable>
   <para>
-   Questo Ë un modo di formattare stringhe, ad esempio per i numeri
+   Questo √® un modo di formattare stringhe, ad esempio per i numeri
    decimali e altro. Utilizzare la sintassi della funzione PHP sprintf().
   </para>
   <example>
@@ -47,7 +47,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Dove index.tpl Ë:
+    Dove index.tpl √®:
    </para>
    <programlisting>
 <![CDATA[
@@ -57,7 +57,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    Questo stamper‡:
+    Questo stamper√†:
    </para>
    <screen>
 <![CDATA[

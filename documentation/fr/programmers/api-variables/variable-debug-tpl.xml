@@ -5,14 +5,14 @@
 <sect1 id="variable.debug.tpl">
  <title>$debug_tpl</title>
  <para>
-  C'est le nom du fichier template utilisé pour la
-  console de débogage. Par défaut <filename>debug.tpl</filename>,
+  C'est le nom du fichier template utilisÃ© pour la
+  console de dÃ©bogage. Par dÃ©faut <filename>debug.tpl</filename>,
   il se situe dans <link linkend="constant.smarty.dir"><constant>SMARTY_DIR</constant></link>.
  </para>
  <para>
   Voir aussi
   <link linkend="variable.debugging"><parameter>$debugging</parameter></link> et
-  la <link linkend="chapter.debugging.console">console de débogage</link>.
+  la <link linkend="chapter.debugging.console">console de dÃ©bogage</link>.
  </para>
 </sect1>
 

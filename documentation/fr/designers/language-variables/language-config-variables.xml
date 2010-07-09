@@ -3,13 +3,13 @@
 <!-- EN-Revision: 1.6 Maintainer: yannick Status: ready -->
 
 <sect1 id="language.config.variables">
- <title>Variables chargées depuis des fichiers de configuration</title>
+ <title>Variables chargÃ©es depuis des fichiers de configuration</title>
  <para>
-  Les variables récupérées depuis un 
-  <link linkend="config.files">fichier de configuration</link> sont utilisées
-  entourées du symbole dièse (#), ou via la variable spéciale smarty
+  Les variables rÃ©cupÃ©rÃ©es depuis un 
+  <link linkend="config.files">fichier de configuration</link> sont utilisÃ©es
+  entourÃ©es du symbole diÃ¨se (#), ou via la variable spÃ©ciale smarty
   <link linkend="language.variables.smarty.config"><parameter>$smarty.config</parameter></link>.
-  La dernière synthaxe est utile pour mettre entre guillemets les valeurs des attributs.
+  La derniÃ¨re synthaxe est utile pour mettre entre guillemets les valeurs des attributs.
  </para>
  <example>
   <title>variables de fichiers de configuration</title>
@@ -46,7 +46,7 @@ rowBgColor = '#cccccc'
 ]]>
   </programlisting>
   <para>
-   Un template démontrant la méthode
+   Un template dÃ©montrant la mÃ©thode
    <link linkend="language.variables.smarty.config">
      <parameter>$smarty.config</parameter></link> :
   </para>
@@ -88,15 +88,15 @@ rowBgColor = '#cccccc'
   </screen>
  </example>
  <para>
-  Les variables de fichier de configuration ne peuvent être utilisés tant
-  qu'elles n'ont pas été chargées. Cette procédure est expliquée
+  Les variables de fichier de configuration ne peuvent Ãªtre utilisÃ©s tant
+  qu'elles n'ont pas Ã©tÃ© chargÃ©es. Cette procÃ©dure est expliquÃ©e
   plus loin dans le document, voir <link
   linkend="api.config.load"><varname>{config_load}</varname></link>.
  </para>
  <para>
   Voir aussi
   les <link linkend="language.syntax.variables">variables</link> et
-  les <link linkend="language.variables.smarty">variables réservées $smarty</link>.
+  les <link linkend="language.variables.smarty">variables rÃ©servÃ©es $smarty</link>.
 </para>
 </sect1>
 

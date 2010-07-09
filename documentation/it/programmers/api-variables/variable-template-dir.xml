@@ -3,10 +3,10 @@
    <sect1 id="variable.template.dir">
     <title>$template_dir</title>
     <para>
-     Questo Ë il nome della directory di default dei template. Se
+     Questo √® il nome della directory di default dei template. Se
      non ne indicate una quando includete i file, verranno cercati
-     qui. Per default Ë "./templates", che significa che Smarty
-     cercher‡ la directory dei template nella stessa directory dello
+     qui. Per default √® "./templates", che significa che Smarty
+     cercher√† la directory dei template nella stessa directory dello
      script php in esecuzione.
     </para>
     <note>

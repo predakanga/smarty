@@ -5,16 +5,16 @@
 <sect1 id="caching.multiple.caches">
  <title>Caches multiples pour une seule page</title>
  <para>
-  Vous pouvez avoir plusieurs fichiers de caches pour un même appel
+  Vous pouvez avoir plusieurs fichiers de caches pour un mÃªme appel
   aux fonctions <link linkend="api.display"><varname>display()</varname></link> ou
   <link linkend="api.fetch"><varname>fetch()</varname></link>. Imaginons qu'un appel a
-  display('index.tpl') puisse avoir plusieurs résultats, en fonction de
-  certaines conditions, et que vous vouliez des fichiers de cache séparés
-  pour chacun d'eux. Vous pouvez faire celà en passant un identifiant de
-  cache (<parameter>$cache_id</parameter>) en deuxiéme paramètre à l'appel de fonction.
+  display('index.tpl') puisse avoir plusieurs rÃ©sultats, en fonction de
+  certaines conditions, et que vous vouliez des fichiers de cache sÃ©parÃ©s
+  pour chacun d'eux. Vous pouvez faire celÃ  en passant un identifiant de
+  cache (<parameter>$cache_id</parameter>) en deuxiÃ©me paramÃ¨tre Ã  l'appel de fonction.
  </para>
  <example>
-  <title>Passage d'un $cache_id à display()</title>
+  <title>Passage d'un $cache_id Ã  display()</title>
   <programlisting>
 <![CDATA[
 <?php
@@ -31,11 +31,11 @@ $smarty->display('index.tpl',$my_cache_id);
   </programlisting>
  </example>
  <para>
-  Nous passons ci-dessus la variable <literal>$my_cache_id</literal> à
+  Nous passons ci-dessus la variable <literal>$my_cache_id</literal> Ã 
   <link linkend="api.display"><varname>display()</varname></link> comme
   identifiant de cache. Pour chaque valeur distincte de <literal>$my_cache_id</literal>,
-  un fichier de cache distinct va être créé. Dans cet exemple,
-  <literal>article_id</literal> a été passé dans l'URL et est utilisé en tant qu'identifiant
+  un fichier de cache distinct va Ãªtre crÃ©Ã©. Dans cet exemple,
+  <literal>article_id</literal> a Ã©tÃ© passÃ© dans l'URL et est utilisÃ© en tant qu'identifiant
   de cache.
  </para>
  <note>
@@ -43,20 +43,20 @@ $smarty->display('index.tpl',$my_cache_id);
   <para>
    Soyez prudent en passant des valeurs depuis un client (navigateur Web)
    vers Smarty (ou vers n'importe quelle application PHP). Bien que l'exemple
-   ci-dessus consistant à utiliser article_id depuis l'URL puisse paraetre
-   commode, le résultat peut s'avérer mauvais. L'identifiant
-   de cache est utilisé pour créer un répertoire sur le système de fichiers,
-   donc si l'utilisateur décide de donner une trés grande valeur à article_id
-   ou d'écrire un script qui envoie des article_id de façon aléatoire,
-   celà pourra causer des problémes coté serveur. Assurez-vous de bien
-   tester toute donnée passée en paramètre avant de l'utiliser. Dans cet
-   exemple, peut-être savez-vous que article_id a une longueur de 10
-   caractéres, est exclusivement composé de caractéres alph-numériques et
-   doit avoir une valeur contenue dans la base de données. Vérifiez-le bien !
+   ci-dessus consistant Ã  utiliser article_id depuis l'URL puisse paraetre
+   commode, le rÃ©sultat peut s'avÃ©rer mauvais. L'identifiant
+   de cache est utilisÃ© pour crÃ©er un rÃ©pertoire sur le systÃ¨me de fichiers,
+   donc si l'utilisateur dÃ©cide de donner une trÃ©s grande valeur Ã  article_id
+   ou d'Ã©crire un script qui envoie des article_id de faÃ§on alÃ©atoire,
+   celÃ  pourra causer des problÃ©mes cotÃ© serveur. Assurez-vous de bien
+   tester toute donnÃ©e passÃ©e en paramÃ¨tre avant de l'utiliser. Dans cet
+   exemple, peut-Ãªtre savez-vous que article_id a une longueur de 10
+   caractÃ©res, est exclusivement composÃ© de caractÃ©res alph-numÃ©riques et
+   doit avoir une valeur contenue dans la base de donnÃ©es. VÃ©rifiez-le bien !
   </para>
  </note>
  <para>
-  Assurez-vous de bien passer le même identifiant aux fonctions
+  Assurez-vous de bien passer le mÃªme identifiant aux fonctions
   <link linkend="api.is.cached"><varname>is_cached()</varname></link> et
   <link linkend="api.clear.cache"><varname>clear_cache()</varname></link>.
  </para>
@@ -85,8 +85,8 @@ $smarty->display('index.tpl',$my_cache_id);
  </example>
  <para>
   Vous pouvez effacer tous les fichiers de cache pour un identifiant
-  de cache particulier en passant &null; en tant que premier paramètre
-  à <link linkend="api.clear.cache"><varname>clear_cache()</varname></link>.
+  de cache particulier en passant &null; en tant que premier paramÃ¨tre
+  Ã  <link linkend="api.clear.cache"><varname>clear_cache()</varname></link>.
  </para>
  <example>
   <title>Effacement de tous les fichiers de cache pour un identifiant de cache particulier</title>
@@ -107,8 +107,8 @@ $smarty->display('index.tpl','sports');
   </programlisting>
  </example>
  <para>
-  De cette manière, vous pouvez "grouper" vos fichiers de cache en leur
-  donnant le même identifiant.
+  De cette maniÃ¨re, vous pouvez "grouper" vos fichiers de cache en leur
+  donnant le mÃªme identifiant.
  </para>
 </sect1>
 

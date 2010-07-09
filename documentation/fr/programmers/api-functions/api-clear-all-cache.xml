@@ -14,8 +14,8 @@
    <methodparam choice="opt"><type>int</type><parameter>expire_time</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Vous pouvez passer un paramètre optionnel afin d'indiquer l'âge minimun
-   que doivent avoir les fichiers de cache pour qu'ils soient effacés.
+   Vous pouvez passer un paramÃ¨tre optionnel afin d'indiquer l'Ã¢ge minimun
+   que doivent avoir les fichiers de cache pour qu'ils soient effacÃ©s.
   </para>
   <example>
    <title>Exemple avec clear_all_cache</title>

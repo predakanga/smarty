@@ -6,23 +6,23 @@
  <title>$compile_check</title>
  <para>
   A chaque invocation de l'application PHP, Smarty fait
-  un test pour voir si le template courant a été modifié
-  (date de dernière modification différente) depuis sa
-  dernière compilation. S'il a changé, le template est recompilé.
-  Si le template n'a pas encore été compilé, il le sera
-  quelque soit la valeur de ce réglage.
-  Par défaut cette valeur est à &true;.
+  un test pour voir si le template courant a Ã©tÃ© modifiÃ©
+  (date de derniÃ¨re modification diffÃ©rente) depuis sa
+  derniÃ¨re compilation. S'il a changÃ©, le template est recompilÃ©.
+  Si le template n'a pas encore Ã©tÃ© compilÃ©, il le sera
+  quelque soit la valeur de ce rÃ©glage.
+  Par dÃ©faut cette valeur est Ã  &true;.
  </para>
  <para>
  Quand une application est mise en production (les templates
-  ne changent plus), cette vérification n'est pas nécessaire.
-  Assurez-vous de mettre <parameter>$compile_check</parameter> à &false;
-  pour des performances maximales. Notez que si vous mettez ce paramètre à &false; et qu'un
-  template est modifié, vous ne verrez *pas* le changement
-  car le template ne sera *pas* recompilé. Si le processus de cache
-  est activé et que <parameter>$compile_check</parameter> l'est aussi, alors les fichiers
-  du cache seront regénérés si un template concerné ou un fichier de
-  configuration concerné est modifié. Voir aussi <link
+  ne changent plus), cette vÃ©rification n'est pas nÃ©cessaire.
+  Assurez-vous de mettre <parameter>$compile_check</parameter> Ã  &false;
+  pour des performances maximales. Notez que si vous mettez ce paramÃ¨tre Ã  &false; et qu'un
+  template est modifiÃ©, vous ne verrez *pas* le changement
+  car le template ne sera *pas* recompilÃ©. Si le processus de cache
+  est activÃ© et que <parameter>$compile_check</parameter> l'est aussi, alors les fichiers
+  du cache seront regÃ©nÃ©rÃ©s si un template concernÃ© ou un fichier de
+  configuration concernÃ© est modifiÃ©. Voir aussi <link
   linkend="variable.force.compile"><parameter>$force_compile</parameter></link> ou <link
   linkend="api.clear.compiled.tpl"><varname>clear_compiled_tpl()</varname></link>.
  </para>

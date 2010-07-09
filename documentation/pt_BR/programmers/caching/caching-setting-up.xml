@@ -4,7 +4,7 @@
    <sect1 id="caching.setting.up">
    <title>Configurando Caching</title>
    <para>
-   A primeira coisa a fazer é habilitar o caching. Isso é feito pela configuração <link
+   A primeira coisa a fazer Ã© habilitar o caching. Isso Ã© feito pela configuraÃ§Ã£o <link
    linkend="variable.caching">$caching</link> = true (or 1.)     
    </para>
     <example>
@@ -18,26 +18,26 @@ $smarty->caching = true;
 $smarty->display('index.tpl');</programlisting>
     </example>
 	<para>
-	Com caching habilitado, a chamada para a função display('index.tpl') irá trazer
-	o template como usual, mas também
-	salva uma cópia disso para o arquivo de saída (uma cópia de cache) in the <link linkend="variable.cache.dir">$cache_dir</link>.
-	Na próxima chamada de display('index.tpl'), a cópia em cache será usada
-	ao invés de trazer novamente o template.
+	Com caching habilitado, a chamada para a funÃ§Ã£o display('index.tpl') irÃ¡ trazer
+	o template como usual, mas tambÃ©m
+	salva uma cÃ³pia disso para o arquivo de saÃ­da (uma cÃ³pia de cache) in the <link linkend="variable.cache.dir">$cache_dir</link>.
+	Na prÃ³xima chamada de display('index.tpl'), a cÃ³pia em cache serÃ¡ usada
+	ao invÃ©s de trazer novamente o template.
 	</para>
 	<note>
-	<title>Notas Técnicas</title>
+	<title>Notas TÃ©cnicas</title>
 	<para>
-	Os arquivos no $cache_dir são nomeados com similaridade ao nome do arquivo de template.
-	Embora eles terminem com a extensão ".php", eles não são realmente scripts executáveis de php.
-	Não edite estes arquivos!
+	Os arquivos no $cache_dir sÃ£o nomeados com similaridade ao nome do arquivo de template.
+	Embora eles terminem com a extensÃ£o ".php", eles nÃ£o sÃ£o realmente scripts executÃ¡veis de php.
+	NÃ£o edite estes arquivos!
 	</para>
 	</note>
 	<para>
-	Cada página em cache tem um período de tempo limitado determinado por <link
-	linkend="variable.cache.lifetime">$cache_lifetime</link>. O padrão do valor é
-        3600 segundos, ou 1 hora. Após o tempo expirar, o cache é regerado.
-	É possível dar tempos individuais para caches com seu próprio tempo
-	de expiração pela configuração $caching = 2. Veja a documentação em <link
+	Cada pÃ¡gina em cache tem um perÃ­odo de tempo limitado determinado por <link
+	linkend="variable.cache.lifetime">$cache_lifetime</link>. O padrÃ£o do valor Ã©
+        3600 segundos, ou 1 hora. ApÃ³s o tempo expirar, o cache Ã© regerado.
+	Ã‰ possÃ­vel dar tempos individuais para caches com seu prÃ³prio tempo
+	de expiraÃ§Ã£o pela configuraÃ§Ã£o $caching = 2. Veja a documentaÃ§Ã£o em <link
 	linkend="variable.cache.lifetime">$cache_lifetime</link> para detalhes.
 	</para>
     <example>
@@ -64,11 +64,11 @@ $smarty->cache_lifetime = 30; // 30 seconds
 $smarty->display('home.tpl');</programlisting>
     </example>
 	<para>
-	Se <link linkend="variable.compile.check">$compile_check</link> está habilitado,
-	cada arquivo de template e arquivo de configuração que está envolvido com o arquivo em cache
-	é checado por modificações. Se algum destes arquivos foi modificado desde que o último cache
-	foi gerado, o cache é imediatamente regerado. 
-	Isso é ligeiramente uma forma de optimização de performance de overhead, deixe $compile_check setado para false.
+	Se <link linkend="variable.compile.check">$compile_check</link> estÃ¡ habilitado,
+	cada arquivo de template e arquivo de configuraÃ§Ã£o que estÃ¡ envolvido com o arquivo em cache
+	Ã© checado por modificaÃ§Ãµes. Se algum destes arquivos foi modificado desde que o Ãºltimo cache
+	foi gerado, o cache Ã© imediatamente regerado. 
+	Isso Ã© ligeiramente uma forma de optimizaÃ§Ã£o de performance de overhead, deixe $compile_check setado para false.
 	</para>
     <example>
      <title>Habilitando $compile_check</title>
@@ -82,17 +82,17 @@ $smarty->compile_check = true;
 $smarty->display('index.tpl');</programlisting>
 	</example>
 	<para>
-	Se <link linkend="variable.force.compile">$force_compile</link> está habilitado,
-	os arquivos de cache irão sempre ser regerados. Isso é efetivamente desativar caching.
-        $force_compile é usualmente para propósitos de debug somente, um caminho mais
-	eficiente de desativar caching é setar o <link
+	Se <link linkend="variable.force.compile">$force_compile</link> estÃ¡ habilitado,
+	os arquivos de cache irÃ£o sempre ser regerados. Isso Ã© efetivamente desativar caching.
+        $force_compile Ã© usualmente para propÃ³sitos de debug somente, um caminho mais
+	eficiente de desativar caching Ã© setar o <link
 	linkend="variable.caching">$caching</link> = false (ou 0.)
 	</para>
 	<para>
-	A função <link linkend="api.is.cached">is_cached()</link> 
-	pode ser usada para testar se um template tem um cache válido ou não.
-	Se você tem um template com cache que requer alguma coisa como um retorno do banco de dados,
-	você pode usar isso para pular este processo.
+	A funÃ§Ã£o <link linkend="api.is.cached">is_cached()</link> 
+	pode ser usada para testar se um template tem um cache vÃ¡lido ou nÃ£o.
+	Se vocÃª tem um template com cache que requer alguma coisa como um retorno do banco de dados,
+	vocÃª pode usar isso para pular este processo.
 	</para>
     <example>
      <title>Usando is_cached()</title>
@@ -111,18 +111,18 @@ if(!$smarty->is_cached('index.tpl')) {
 $smarty->display('index.tpl');</programlisting>
     </example>
 	<para>
-	Você pode deixar partes da sua página dinâmica com a função de template <link
+	VocÃª pode deixar partes da sua pÃ¡gina dinÃ¢mica com a funÃ§Ã£o de template <link
 	linkend="language.function.insert">insert</link>.
-	Vamos dizer que sua página inteira pode ter cache exceto para um banner que é
-	mostrado abaixo do lado direito da sua página. Usando uma função insert para o banner,
-	você pode deixar esse elemento dinâmico dentro do conteúdo de cache. Veja a documentação
+	Vamos dizer que sua pÃ¡gina inteira pode ter cache exceto para um banner que Ã©
+	mostrado abaixo do lado direito da sua pÃ¡gina. Usando uma funÃ§Ã£o insert para o banner,
+	vocÃª pode deixar esse elemento dinÃ¢mico dentro do conteÃºdo de cache. Veja a documentaÃ§Ã£o
 	em <link linkend="language.function.insert">insert</link> para 
 	detalhes e exemplos.
 	</para>
 	<para>
-	Você pode limpar todos os arquivos de cache com a função <link
+	VocÃª pode limpar todos os arquivos de cache com a funÃ§Ã£o <link
 	linkend="api.clear.all.cache">clear_all_cache()</link>, ou
-	arquivos de cache individuais (ou grupos) com a função <link
+	arquivos de cache individuais (ou grupos) com a funÃ§Ã£o <link
 	linkend="api.clear.cache">clear_cache()</link>.	
 	</para>
     <example>
