@@ -36,6 +36,7 @@
 				$this->block_nesting_level = 0;
 				$this->is_xml = false;
 				$this->asp_tags = (ini_get('asp_tags') != '0');
+				$this->current_buffer = $this->root_buffer = new _smarty_template_buffer($this);
     }
     public static function &instance($new_instance = null)
     {
@@ -89,28 +90,16 @@
 //
 // complete template
 //
-start(res)       ::= template(t). { res = t; }
+start(res)       ::= template. { res = $this->root_buffer->to_smarty_php(); }
 
 //
 // loop over template elements
 //
 											// single template element
-template(res)       ::= template_element(e). {if ($this->template->extract_code == false) {
-                                                  res = e;
-                                               } else {
-                                                 // store code in extract buffer
-                                                  $this->template->extracted_compiled_code .= e;
-                                               } 
-                                             }
+template       ::= template_element(e). { $this->current_buffer->append_subtree(e); }
+
 											// loop of elements
-template(res)       ::= template(t) template_element(e). {if ($this->template->extract_code == false) {
-                                                             res = t.e;
-                                                           } else {
-                                                             // store code in extract buffer
-                                                             $this->template->extracted_compiled_code .= e;
-                                                             res = t;
-                                                           } 
-                                                          }
+template       ::= template template_element(e). { $this->current_buffer->append_subtree(e); }
 
 //
 // template elements
@@ -119,65 +108,65 @@ template(res)       ::= template(t) template_element(e). {if ($this->template->e
 template_element(res)::= smartytag(st). {
                                           if ($this->compiler->has_code) {
                                             $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
-                                            res = $this->compiler->processNocacheCode($tmp.st,true);
+                                            res = new _smarty_tag($this, $this->compiler->processNocacheCode($tmp.st,true));
                                          } else { 
-                                           res = st;
+                                           res = new _smarty_tag($this, st);
                                          }  
                                          $this->compiler->has_variable_string = false;
                                          $this->block_nesting_level = count($this->compiler->_tag_stack);
                                         }	
 
 											// comments
-template_element(res)::= COMMENT. { res = '';}
+template_element(res)::= COMMENT. { res = new _smarty_tag($this, '');}
 
 											// Literal
-template_element(res) ::= literal(l). { res = l; }
+template_element(res) ::= literal(l). { res = new _smarty_text($this, l); }
 
 											// '<?php' tag
 template_element(res)::= PHPSTARTTAG(st). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = self::escape_start_tag(st);
+					                             res = new _smarty_text($this, self::escape_start_tag(st));
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = htmlspecialchars(st, ENT_QUOTES);
+                                       res = new _smarty_text($this, htmlspecialchars(st, ENT_QUOTES));
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
-                                       res = $this->compiler->processNocacheCode('<?php', true);
+                                       res = new _smarty_text($this, $this->compiler->processNocacheCode('<?php', true));
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
-                                       res = '';
+                                       res = new _smarty_text($this, '');
                                       }
                                      }
 											// '?>' tag
 template_element(res)::= PHPENDTAG. {if ($this->is_xml) {
                                        $this->compiler->tag_nocache = true; 
                                        $this->is_xml = true; 
-                                       res = $this->compiler->processNocacheCode("<?php echo '?>';?>", $this->compiler, true);
+                                       res = new _smarty_text($this, $this->compiler->processNocacheCode("<?php echo '?>';?>", $this->compiler, true));
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = '?<?php ?>>';
+					                             res = new _smarty_text($this, '?<?php ?>>');
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = htmlspecialchars('?>', ENT_QUOTES);
+                                       res = new _smarty_text($this, htmlspecialchars('?>', ENT_QUOTES));
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
-                                       res = $this->compiler->processNocacheCode('?>', true);
+                                       res = new _smarty_text($this, $this->compiler->processNocacheCode('?>', true));
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
-                                       res = '';
+                                       res = new _smarty_text($this, '');
                                       }
                                      }
 
 											// '<%' tag
 template_element(res)::= ASPSTARTTAG(st). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = '<<?php ?>%';
+					                             res = new _smarty_text($this, '<<?php ?>%');
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = htmlspecialchars(st, ENT_QUOTES);
+                                       res = new _smarty_text($this, htmlspecialchars(st, ENT_QUOTES));
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
                                         if ($this->asp_tags) {
-                                          res = $this->compiler->processNocacheCode('<%', true);
+                                          res = new _smarty_text($this, $this->compiler->processNocacheCode('<%', true));
                                         } else {
-                                         res = '<<?php ?>%';
+                                         res = new _smarty_text($this, '<<?php ?>%');
                                         }
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
                                         if ($this->asp_tags) {
-                                         res = '';
+                                         res = new _smarty_text($this, '');
                                         } else {
-                                         res = '<<?php ?>%';
+                                         res = new _smarty_text($this, '<<?php ?>%');
                                         }
                                       }
                                     }
@@ -185,41 +174,44 @@ template_element(res)::= ASPSTARTTAG(st). {
 											// '%>' tag
 template_element(res)::= ASPENDTAG(et). {
                                       if ($this->sec_obj->php_handling == SMARTY_PHP_PASSTHRU) {
-					                             res = '%<?php ?>>';
+					                             res = new _smarty_text($this, '%<?php ?>>');
                                       } elseif ($this->sec_obj->php_handling == SMARTY_PHP_QUOTE) {
-                                       res = htmlspecialchars('%>', ENT_QUOTES);
+                                       res = new _smarty_text($this, htmlspecialchars('%>', ENT_QUOTES));
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_ALLOW) {
                                         if ($this->asp_tags) {
-                                          res = $this->compiler->processNocacheCode('%>', true);
+                                          res = new _smarty_text($this, $this->compiler->processNocacheCode('%>', true));
                                         } else {
-                                         res = '%<?php ?>>';
+                                         res = new _smarty_text($this, '%<?php ?>>');
                                         }
                                       }elseif ($this->sec_obj->php_handling == SMARTY_PHP_REMOVE) {
                                         if ($this->asp_tags) {
-                                         res = '';
+                                         res = new _smarty_text($this, '');
                                         } else {
-                                         res = '%<?php ?>>';
+                                         res = new _smarty_text($this, '%<?php ?>>');
                                         }
                                       }
                                     }
 
 template_element(res)::= FAKEPHPSTARTTAG(t). {if ($this->lex->strip) {
-                                       res = preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(t));	
+                                       res = new _smarty_text($this, preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(t)));	
                                      } else {
-                                       res = self::escape_start_tag(t);	
+                                       res = new _smarty_text($this, self::escape_start_tag(t));	
                                      }
                                     }
 
 											// XML tag
-template_element(res)::= XMLTAG. { $this->compiler->tag_nocache = true; $this->is_xml = true; res = $this->compiler->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true);}	
+template_element(res)::= XMLTAG. { $this->compiler->tag_nocache = true; $this->is_xml = true; res = new _smarty_text($this, $this->compiler->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true));}	
 
 											// Other template text
 template_element(res)::= OTHER(o). {if ($this->lex->strip) {
-                                       res = preg_replace('![\t ]*[\r\n]+[\t ]*!', '', o);	
+                                       res = new _smarty_text($this, preg_replace('![\t ]*[\r\n]+[\t ]*!', '', o));	
                                      } else {
-                                       res = o;	
+                                       res = new _smarty_text($this, o);	
                                      }
                                     }
+template_element(res)::= LINEBREAK(o). {
+                                     res = new _smarty_linebreak($this, o);
+                                   }	
 
 
 literal(res) ::= LITERALSTART LITERALEND. { res = ''; }
