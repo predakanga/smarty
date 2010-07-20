@@ -155,10 +155,12 @@ qmark = /\s*\?\s*/
 constant = /([_]+[A-Z0-9][0-9A-Z_]*|[A-Z][0-9A-Z_]*)(?![0-9A-Z_]*[a-z])/
 id = /[0-9]*[a-zA-Z_]\w*/
 literaltexttoend = '([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel/?literalSMARTYrdel|<\?|<%))'
-literalstart = 'SMARTYldelliteralSMARTYrdel'
-literalend = 'SMARTYldel/literalSMARTYrdel'
+literalstart = 'SMARTYldel\s*literal\s*SMARTYrdel'
+literalend = 'SMARTYldel\s*/literal\s*SMARTYrdel'
 stripstart = 'SMARTYldelstripSMARTYrdel'
 stripend = 'SMARTYldel/stripSMARTYrdel'
+stripspacestart = 'SMARTYldel\s{1,}strip\s{1,}SMARTYrdel'
+stripspaceend = 'SMARTYldel\s{1,}/strip\s{1,}SMARTYrdel'
 equals = /\s*==\s*|\s+(EQ|eq)\s+/
 notequals = /\s*!=\s*|\s*<>\s*|\s+(NE|NEQ|ne|neq)\s+/
 greaterthan = /\s*>\s*|\s+(GT|gt)\s+/
@@ -233,9 +235,25 @@ stripstart {
   $this->strip = true;
   return false;
 }
+stripspacestart {
+  if ($this->smarty->auto_literal) {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+    $this->strip = true;
+    return false;
+  }
+}
 stripend {
   $this->strip = false;
   return false;
+}
+stripspaceend {
+  if ($this->smarty->auto_literal) {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+    $this->strip = false;
+    return false;
+  }
 }
 literalstart {
    $this->token = Smarty_Internal_Templateparser::TP_LITERALSTART;
