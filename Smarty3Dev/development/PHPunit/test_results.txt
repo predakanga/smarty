@@ -1,0 +1,223 @@
+PHPUnit 3.3.15 by Sebastian Bergmann.
+
+Test Suite
+ DoubleQuotedStringTests
+ ..................
+
+ CoreTests
+ ....
+
+ ClearCompiledTests
+ .....
+
+ ClearCacheTests
+ ...
+
+ StringResourceTests
+ ...................
+
+ FileResourceTests
+ ..................................
+
+ CompileAssignTests
+ .....................
+
+ AppendByRefTests
+ ...
+
+ AppendTests
+ ......
+
+ ArrayTests
+ ...............
+
+ AssignByRefTests
+ .
+
+ AssignGlobalTests
+ ....
+
+ AssignTests
+ ..
+
+ CacheResourceFileTests
+ ..................
+
+ ClearAllAssignTests
+ ....
+
+ ClearAssignTests
+ ...
+
+ CommentsTests
+ ....
+
+ CompileBlockExtendsTests
+ .......
+
+ CompileBlockPluginTests
+ .......
+
+ CompileCaptureTests
+ .....
+
+ CompileCompilerPluginTests
+ ..
+
+ CompileDebugTests
+ ..
+
+ CompileDelimiterTests
+ ..
+
+ CompileErrorTests
+ .....
+
+ CompileEvalTests
+ ...
+
+ CompileForeachTests
+ ..............
+
+ CompileForTests
+ ..............
+
+ CompileFunctionPluginTests
+ ...
+
+ CompileFunctionTests
+ ...........
+
+ CompileIfTests
+ ........................................................... 59 / 67
+ ........
+
+ CompileIncludePHPTests
+ ..
+
+ CompileIncludeTests
+ ........
+
+ CompileInsertTests
+ ........
+
+ CompileNocacheTests
+ ...
+
+ CompilePhpTests
+ ..................
+
+ CompileRegisteredObjectFunctionTests
+ ...
+
+ CompilerPluginTests
+ .
+
+ CompileSectionTests
+ ......
+
+ CompileStripTests
+ .
+
+ CompileWhileTests
+ ..
+
+ ConfigVarTests
+ ...................................
+
+ ConstantsTests
+ .
+
+ DefaultTemplateHandlerTests
+ ....
+
+ DelimiterTests
+ ....
+
+ ExtendsResourceTests
+ .....
+
+ FilterTests
+ ........
+
+ FunctionTests
+ .
+
+ GetTemplateVarsTests
+ ......
+
+ LoadFilterTests
+ .
+
+ ModifierTests
+ ................
+
+ ObjectVariableTests
+ ...
+
+ PhpResourceTests
+ .........................
+
+ PrintNocacheTests
+ ....
+
+ RegisterBlockTests
+ .........
+
+ RegisterCompilerFunctionTests
+ ....
+
+ RegisteredResourceTests
+ ..
+
+ RegisterFilterTests
+ .............
+
+ RegisterFunctionTests
+ ..........
+
+ RegisterModifierTests
+ ....
+
+ ResourcePluginTests
+ ..
+
+ SecurityTests
+ ..................
+
+ SingleQuotedStringTests
+ ......
+
+ SpacingTests
+ ............
+
+ StaticClassAccessTests
+ .....
+
+ StreamResourceTests
+ ......................
+
+ StreamVariableTests
+ .
+
+ TemplateExistsTests
+ ..
+
+ TernaryTests
+ .................
+
+ TriggerErrorTests
+ .
+
+ VariableScopeTests
+ ................
+
+ VariableVariableTests
+ ....
+
+ XmlTests
+ ......
+
+Time: 57 seconds
+
+OK (625 tests, 852 assertions)
