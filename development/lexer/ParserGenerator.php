@@ -186,7 +186,7 @@ class PHP_ParserGenerator
         $lv = 0;
         $dv = 0.0;
         $sv = $end = $cp = '';
-        $j; // int
+        $j = 0; // int
         $errcnt = 0;
         $cp = strstr($argv[$i],'=');
         if (!$cp) {

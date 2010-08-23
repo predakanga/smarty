@@ -441,7 +441,8 @@ class PHP_ParserGenerator_Config {
      */
     static function Configlist_eat($cfp)
     {
-        for(; $cfp; $cfp = $nextcfp){
+    $nextcfp = null;
+    for(; $cfp; $cfp = $nextcfp){
             $nextcfp = $cfp->next;
             if ($cfp->fplp !=0) {
                 throw new Exception('fplp of configuration non-zero?');

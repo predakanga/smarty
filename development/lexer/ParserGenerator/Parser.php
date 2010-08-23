@@ -190,7 +190,8 @@ class PHP_ParserGenerator_Parser
      */
     private function preprocess_input(&$z)
     {
-        $lineno = $exclude = 0;
+    $start = 0;
+    $lineno = $exclude = 0;
         for ($i=0; $i < strlen($z); $i++) {
             if ($z[$i] == "\n") {
                 $lineno++;
