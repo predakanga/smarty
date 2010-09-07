@@ -101,6 +101,9 @@ template       ::= template_element(e). { $this->current_buffer->append_subtree(
 											// loop of elements
 template       ::= template template_element(e). { $this->current_buffer->append_subtree(e); }
 
+											// empty template
+template       ::= . 
+
 //
 // template elements
 //
