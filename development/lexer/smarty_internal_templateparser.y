@@ -228,6 +228,8 @@ literal_element(res) ::= LITERAL(l). { res = l; }
 literal_element(res) ::= PHPSTARTTAG(st). { res = self::escape_start_tag(st); }
 literal_element(res) ::= FAKEPHPSTARTTAG(st). { res = self::escape_start_tag(st); }
 literal_element(res) ::= PHPENDTAG(et). { res = self::escape_end_tag(et); }
+literal_element(res) ::= ASPSTARTTAG(st). { res = '<<?php ?>%'; }
+literal_element(res) ::= ASPENDTAG(et). { res = '%<?php ?>>'; }
 
 
 //

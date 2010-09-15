@@ -205,25 +205,6 @@ emptyjava {
 comment {
   $this->token = Smarty_Internal_Templateparser::TP_COMMENT;
 }
-phpstarttag {
-  if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
-    $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;
-  } elseif ($this->value == '<?xml') {
-      $this->token = Smarty_Internal_Templateparser::TP_XMLTAG;
-  } else {
-    $this->token = Smarty_Internal_Templateparser::TP_FAKEPHPSTARTTAG;
-    $this->value = substr($this->value, 0, 2);
-  }
- }
-phpendtag {
-  $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
-}
-aspstarttag {
-  $this->token = Smarty_Internal_Templateparser::TP_ASPSTARTTAG;
-}
-aspendtag {
-  $this->token = Smarty_Internal_Templateparser::TP_ASPENDTAG;
-}
 linebreak {
   if ($this->strip) {
      return false;
@@ -313,6 +294,25 @@ ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
      $this->taglineno = $this->line;
+}
+phpstarttag {
+  if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
+    $this->token = Smarty_Internal_Templateparser::TP_PHPSTARTTAG;
+  } elseif ($this->value == '<?xml') {
+      $this->token = Smarty_Internal_Templateparser::TP_XMLTAG;
+  } else {
+    $this->token = Smarty_Internal_Templateparser::TP_FAKEPHPSTARTTAG;
+    $this->value = substr($this->value, 0, 2);
+  }
+ }
+phpendtag {
+  $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
+}
+aspstarttag {
+  $this->token = Smarty_Internal_Templateparser::TP_ASPSTARTTAG;
+}
+aspendtag {
+  $this->token = Smarty_Internal_Templateparser::TP_ASPENDTAG;
 }
 textsmarty {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
@@ -595,7 +595,7 @@ phpstarttag {
    }
 }
 phpendtag {
-  $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
+  $this->token = Smarty_Internal_Templateparser::TP_PHPENDTAG;
 }
 aspstarttag {
   $this->token = Smarty_Internal_Templateparser::TP_ASPSTARTTAG;
