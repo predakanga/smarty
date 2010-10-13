@@ -380,6 +380,7 @@ expr(res)        ::= value(v1) INSTANCEOF(i) value(v2). {$this->prefix_number++;
 //
 // ternary
 //
+ternary(res)				::= OPENP expr(v) CLOSEP  QMARK DOLLAR ID(e1) COLON  expr(e2). { res = v.' ? $_smarty_tpl->getVariable(\''. e1 .'\')->value : '.e2;  $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('e1', null, true, false)->nocache;}
 ternary(res)				::= OPENP expr(v) CLOSEP  QMARK  expr(e1) COLON  expr(e2). { res = v.' ? '.e1.' : '.e2;}
 
 								 // value
