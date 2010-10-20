@@ -440,10 +440,14 @@ value(res)	     ::= smartytag(st). { $this->prefix_number++; $this->compiler->pr
 variable(res)    ::= varindexed(vi). {if (vi['var'] == '\'smarty\'') { res =  $this->compiler->compileTag('private_special_variable',vi['smarty_internal_index']);
                                       } else {
                                       if (isset($this->compiler->local_var[vi['var']])) {
-                                          res = '$_smarty_tpl->tpl_vars['. vi['var'] .']->value'.vi['smarty_internal_index'];
+                                          res = '(isset($_smarty_tpl->tpl_vars['. vi['var'] .']->value'.vi['smarty_internal_index'].') ? $_smarty_tpl->tpl_vars['. vi['var'] .']->value'.vi['smarty_internal_index'].' : null)';
+                                       } else {
+                                         if (isset(vi['smarty_internal_index'])) {
+                                            res = '(isset($_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].') ? $_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'].' : null)';
                                          } else {
-                                          res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'];
+                                            res = '$_smarty_tpl->getVariable('. vi['var'] .')->value'.vi['smarty_internal_index'];
                                          }
+                                       }
                                        $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(vi['var'],"'"), null, true, false)->nocache;}}
 									// variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). {if (isset($this->compiler->local_var[v])) {
@@ -519,7 +523,13 @@ objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 //
 function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->security || $this->smarty->security_handler->isTrustedPhpFunction(f, $this->compiler)) {
 																					            if (f == 'isset' || f == 'empty' || f == 'array' || is_callable(f)) {
-																					                res = f . "(". p .")";
+																					                if (f == 'isset') {
+																					                  res = '('. p .' !== null)';
+																					                } elseif (f == 'empty'){
+																					                  res = 'in_array('. p .',array("",null,false,0,"0",array()))';
+																					                } else {
+																					                  res = f . "(". p .")";
+																					                }
 																					            } else {
                                                        $this->compiler->trigger_template_error ("unknown function \"" . f . "\"");
                                                       }
