@@ -295,8 +295,8 @@ smartytag(res)   ::= LDELFOREACH SPACE array(a) AS DOLLAR varvar(v1) APTR DOLLAR
 									// end of block tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) RDEL. { res = $this->compiler->compileTag(i.'close',array());}
 smartytag(res)   ::= LDELSLASH ID(i) attributes(a) RDEL. { res = $this->compiler->compileTag(i.'close',a);}
-smartytag(res)   ::= LDELSLASH ID(i) modifier(m) modparameters(p) attributes(a) RDEL. {  res = '<?php ob_start();?>'.$this->compiler->compileTag(i.'close',a).'<?php echo ';
-                                                                                         res .= $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>'ob_get_clean()'.p)).'?>';
+smartytag(res)   ::= LDELSLASH ID(i) modifierlist(l) modparameters(p) attributes(a) RDEL. {  res = '<?php ob_start();?>'.$this->compiler->compileTag(i.'close',a).'<?php echo ';
+                                                                                         res .= $this->compiler->compileTag('private_modifier',array('modifierlist'=>l,'params'=>'ob_get_clean()'.p)).'?>';
                                                                                       }
 									// end of block object tag  {/....}									
 smartytag(res)   ::= LDELSLASH ID(i) PTR ID(m) RDEL. {  res = $this->compiler->compileTag(i.'close',array('object_methode'=>m));}
@@ -353,9 +353,7 @@ expr(res)        ::= expr(e) ANDSYM(m) value(v). { res = e . trim(m) . v; }
 expr(res)				::= array(a).	{res = a;}
 
                   // modifier
-//expr(res)        ::= expr(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('modifier'=>m,'params'=>e.p)); }
 expr(res)        ::= expr(e) modifierlist(l). {  res = $this->compiler->compileTag('private_modifier',array('value'=>e,'modifierlist'=>l)); }
-//expr(res)        ::= expr(e) modifier(m) modparameters(p). {  res = $this->compiler->compileTag('private_modifier',array('value'=>e,'modifierlist'=>array(m.p))); }
 
 // if expression
 										// simple expression
@@ -552,21 +550,21 @@ params            ::= . { return;}
 //
 // modifier
 // 
-modifierlist(res) ::= modifierlist(l) modifier(m) modparameters(p). {res = array_merge(l,array(m.p));}
-modifierlist(res) ::= modifier(m) modparameters(p). {res = array(m.p);}
+modifierlist(res) ::= modifierlist(l) modifier(m) modparameters(p). {res = array_merge(l,array(array_merge(m,p)));}
+modifierlist(res) ::= modifier(m) modparameters(p). {res = array(array_merge(m,p));}
  
-modifier(res)    ::= VERT AT ID(m). { res = m;}
-modifier(res)    ::= VERT ID(m). { res =  m;}
+modifier(res)    ::= VERT AT ID(m). { res = array(m);}
+modifier(res)    ::= VERT ID(m). { res =  array(m);}
 //
 // modifier parameter
 //
 										// multiple parameter
-modparameters(res) ::= modparameters(mps) modparameter(mp). { res = mps.mp;}
+modparameters(res) ::= modparameters(mps) modparameter(mp). { res = array_merge(mps,mp);}
 										// no parameter
-modparameters(res)      ::= . {res = '';}
+modparameters(res)      ::= . {res = array();}
 										// parameter expression
-modparameter(res) ::= COLON value(mp). {res = ':'.mp;}
-modparameter(res) ::= COLON array(mp). {res = ':'.mp;}
+modparameter(res) ::= COLON value(mp). {res = array(mp);}
+modparameter(res) ::= COLON array(mp). {res = array(mp);}
 
 									// static class methode call
 static_class_access(res)	     ::= method(m). { res = m; }
