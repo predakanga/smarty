@@ -13,11 +13,17 @@
    but as a tradeoff it <emphasis role="bold">can only be used
    for a single array</emphasis>. Every <varname>{foreach}</varname> tag must be
    paired with a closing <varname>{/foreach}</varname> tag.
-   </para>
+  </para>
+ 
+ <para>
+  Smarty3 introduced also an alternative new syntax for the <varname>{foreach}</varname> tags.
+  See <link linkend="language.function.foreach_new"><varname>{foreach} - new style</varname></link>.
+ </para>
 
  <informaltable frame="all">
-  <tgroup cols="5">
+  <tgroup cols="6">
    <colspec colname="param" align="center" />
+   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -25,6 +31,7 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
+     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -34,6 +41,7 @@
    <tbody>
     <row>
      <entry>from</entry>
+     <entry>1</entry>
      <entry>array</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -41,6 +49,7 @@
     </row>
     <row>
      <entry>item</entry>
+     <entry>2</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -49,6 +58,7 @@
     </row>
     <row>
      <entry>key</entry>
+     <entry>3</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -56,6 +66,7 @@
     </row>
     <row>
      <entry>name</entry>
+     <entry>4</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -66,11 +77,39 @@
   </tgroup>
  </informaltable>
 
-
+ <para><emphasis role="bold">Option Flags:</emphasis></para>
+ <informaltable frame="all">
+  <tgroup cols="2">
+   <colspec colname="param" align="center" />
+   <colspec colname="desc" />
+   <thead>
+    <row>
+     <entry>Name</entry>
+     <entry>Description</entry>
+    </row>
+   </thead>
+   <tbody>
+    <row>
+     <entry>nocache</entry>
+     <entry>Disables caching of the <varname>{foreach}</varname> loop</entry>
+    </row>
+   </tbody>
+  </tgroup>
+ </informaltable>
+ 
+ 
    <itemizedlist>
-   <listitem><para>
+   <listitem>
+   <para>
    Required attributes are <parameter>from</parameter> and <parameter>item</parameter>.
-   </para></listitem>
+   </para>
+    <note>
+     <title>Note</title>
+     <para>The variable specified by the <parameter>item</parameter> attribute must have
+      a different name as the variable specified bay the <parameter>from</parameter> attribute.
+     </para>
+    </note>
+   </listitem>
 
    <listitem><para>
    The <parameter>name</parameter> of the <varname>{foreach}</varname> loop can be anything
@@ -120,9 +159,21 @@
     <link linkend="foreach.property.last"><parameter>last</parameter></link>,
     <link linkend="foreach.property.show"><parameter>show</parameter></link>,
     <link linkend="foreach.property.total"><parameter>total</parameter></link>.
-    </para></listitem>
-
-  </itemizedlist>
+  </para></listitem>
+    
+    <listitem><para>
+     Smarty3 does introduce a new alternative way to access <varname>{foreach}</varname> properties.
+     The properties are also attached to the <parameter>item</parameter> variable. The syntax is
+     <parameter>{$item@property}</parameter> (see examples below). If you use this syntax to access the properties it's no longer required to
+     name the <varname>{foreach}</varname> loop with the <parameter>item</parameter> attribute.     
+    </para></listitem>    
+    
+    <listitem><para>
+     Instead of specifying the <parameter>key</parameter> attribute you can access the current key of the
+     loop item by <parameter>{$item@key}</parameter> (see examples below).
+    </para></listitem>    
+    
+   </itemizedlist>
 
  <example>
   <title>The <parameter>item</parameter> attribute</title>
@@ -309,12 +360,28 @@ $smarty->assign('items', $items_list);
   <example>
   <title><parameter>index</parameter> example</title>
 
-<programlisting role="php">
+   <programlisting>
 <![CDATA[
 {* The header block is output every five rows *}
 <table>
-{foreach from=$items key=myId item=i name=foo}
+{foreach from=$items item=i name=foo}
   {if $smarty.foreach.foo.index % 5 == 0}
+     <tr><th>Title</th></tr>
+  {/if}
+  <tr><td>{$i.label}</td></tr>
+{/foreach}
+</table>
+]]>
+  </programlisting>
+<para>
+ Same as above but property <parameter>index</parameter> attached to item variable.
+</para>
+   <programlisting>
+<![CDATA[
+{* The header block is output every five rows *}
+<table>
+{foreach from=$items item=i}
+  {if $i@index % 5 == 0}
      <tr><th>Title</th></tr>
   {/if}
   <tr><td>{$i.label}</td></tr>
@@ -334,14 +401,26 @@ $smarty->assign('items', $items_list);
   </para>
  <example>
   <title><parameter>iteration</parameter> and <parameter>index</parameter> example</title>
-<programlisting role="php">
+<programlisting>
 <![CDATA[
 {* this will output 0|1, 1|2, 2|3, ... etc *}
 {foreach from=$myArray item=i name=foo}
 {$smarty.foreach.foo.index}|{$smarty.foreach.foo.iteration},
 {/foreach}
 ]]>
-  </programlisting>
+</programlisting>
+  <para>
+   Same as above but property <parameter>iteration</parameter> and <parameter>index</parameter>index attached to item variable.
+  </para>
+  <programlisting>
+<![CDATA[
+{* this will output 0|1, 1|2, 2|3, ... etc *}
+{foreach from=$myArray item=i}
+{$i@index}|{$i@iteration},
+{/foreach}
+]]>
+</programlisting>
+  
   </example>
 
  </sect2>
@@ -354,13 +433,29 @@ $smarty->assign('items', $items_list);
   </para>
   <example>
   <title><parameter>first</parameter> property example</title>
-<programlisting role="php">
+<programlisting>
 <![CDATA[
 {* show LATEST on the first item, otherwise the id *}
 <table>
 {foreach from=$items key=myId item=i name=foo}
 <tr>
   <td>{if $smarty.foreach.foo.first}LATEST{else}{$myId}{/if}</td>
+  <td>{$i.label}</td>
+</tr>
+{/foreach}
+</table>
+]]>
+  </programlisting>
+   <para>
+    Same as above but <parameter>key</parameter> and property <parameter>first</parameter> attached to item variable.
+   </para>
+   <programlisting>
+<![CDATA[
+{* show LATEST on the first item, otherwise the id *}
+<table>
+{foreach from=$items item=i}
+<tr>
+  <td>{if $i@first}LATEST{else}{$i@key}{/if}</td>
   <td>{$i.label}</td>
 </tr>
 {/foreach}
@@ -378,7 +473,7 @@ $smarty->assign('items', $items_list);
   </para>
    <example>
   <title><parameter>last</parameter> property example</title>
-<programlisting role="php">
+<programlisting>
 <![CDATA[
 {* Add horizontal rule at end of list *}
 {foreach from=$items key=part_id item=prod name=products}
@@ -388,19 +483,57 @@ $smarty->assign('items', $items_list);
 {/foreach}
 ]]>
   </programlisting>
-  </example>
+    <para>
+     Same as above but property <parameter>last</parameter> attached to item variable.
+    </para>
+    <programlisting>
+<![CDATA[
+{* Add horizontal rule at end of list *}
+{foreach from=$items key=part_id item=prod}
+  <a href="#{$part_id}">{$prod}</a>{if $prod@last}<hr>{else},{/if}
+{foreachelse}
+  ... content ...
+{/foreach}
+]]>
+  </programlisting>
+   </example>
  </sect2>
 
  <sect2 id="foreach.property.show">
   <title>.show</title>
   <para>
-   <parameter>show</parameter> is used as a parameter to <varname>{foreach}</varname>.
-   <parameter>show</parameter> is a boolean value. If
-   &false;, the <varname>{foreach}</varname> will not be displayed.
-   If there is a <varname>{foreachelse}</varname> present, that will be alternately displayed.
+   The show <parameter>show</parameter> property can be used after the excution of the
+   <varname>{foreach}</varname> to detect if data has been display or not.
+   <parameter>show</parameter> is a boolean value.
   </para>
-
+   <programlisting>
+<![CDATA[
+<ul>
+{foreach from=$myArray item=foo name=bar}
+    <li>{$foo}</li>
+{/foreach}
+</ul>
+{if $smarty.foreach.bar.show} do something if the array did contain data {/if}
+]]>
+  </programlisting>
+  <para>
+   Same as above but property <parameter>show</parameter> attached to item variable.
+  </para>
+  <example>
+   <title><parameter>show</parameter> property example</title>
+   <programlisting>
+<![CDATA[
+<ul>
+{foreach from=$myArray item=foo name=bar}
+    <li>{$foo}</li>
+{/foreach}
+</ul>
+{if $foo@show} do something if the array did contain data {/if}
+]]>
+</programlisting>
+</example>  
  </sect2>
+
  <sect2 id="foreach.property.total">
   <title>.total</title>
   <para>
@@ -410,7 +543,7 @@ $smarty->assign('items', $items_list);
   </para>
      <example>
   <title><parameter>total</parameter> property example</title>
-<programlisting role="php">
+<programlisting>
 <![CDATA[
 {* show rows returned at end *}
 {foreach from=$items key=part_id item=prod name=foo}
@@ -422,14 +555,31 @@ $smarty->assign('items', $items_list);
  ... something else ...
 {/foreach}
 ]]>
-  </programlisting>
-  </example>
-
+</programlisting>
+      <para>
+       Same as above but property <parameter>last</parameter> and <parameter>total</parameter> attached to item variable.
+      </para>
+      <programlisting>
+<![CDATA[
+{* show rows returned at end *}
+{foreach from=$items key=part_id item=prod}
+{$prod.name}<hr/>
+{if $prod@last}
+  <div id="total">{$prod@total} items</div>
+{/if}
+{foreachelse}
+ ... something else ...
+{/foreach}
+]]>
+</programlisting>
+</example>
+ </sect2>
+ 
   <para>
-   See also <link linkend="language.function.section"><varname>{section}</varname></link>
+   See also <link linkend="language.function.foreach_new"><varname>{foreach} - new style</varname></link>,
+   <link linkend="language.function.section"><varname>{section}</varname></link>
    and  <link linkend="language.variables.smarty.loops"><parameter>$smarty.foreach</parameter></link>.
   </para>
- </sect2>
 </sect1>
 
 <!-- Keep this comment at the end of the file

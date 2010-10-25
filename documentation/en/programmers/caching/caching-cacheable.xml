@@ -36,7 +36,7 @@
 <?php
 $smarty->caching = true;
 
-function remaining_seconds($params, &$smarty) {
+function remaining_seconds($params, $smarty) {
     $remain = $params['endtime'] - time();
     if($remain >= 0){
         return $remain . ' second(s)';
@@ -82,7 +82,7 @@ index.php:
 <?php
 $smarty->caching = 1;
 
-function smarty_block_dynamic($param, $content, &$smarty) {
+function smarty_block_dynamic($param, $content, $smarty) {
     return $content;
 }
 $smarty->register_block('dynamic', 'smarty_block_dynamic', false);

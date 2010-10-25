@@ -11,24 +11,44 @@
  </para>
 
  <para>
-  The simplest thing is to avoid the situation altogether by separating your Javascript
+  One method to avoid the situation altogether is by separating your Javascript
   and CSS code into their own files and then using standard HTML methods to access them.
  </para>
 
  <para>
-  Including literal content is possible using <link
-  linkend="language.function.literal">
+  With Smarty 3 the { and } braces will be by default ignored so long as they are surrounded by white space.
+  This behaviour can be disabled by the Smarty Class variable <link linkend="variable.auto.literal"><parameter>$auto_literal</parameter></link> 
+
+ </para>
+ 
+ <example>
+  <title>using the auto literal feature</title>
+  <programlisting>
+<![CDATA[
+<script>
+   // the following braces are ignored by Smarty
+   // since they are surrounded by whitespace
+   function foobar {
+	alert('foobar!');
+   }
+   // this one will need literal escapement
+   {literal}
+	function bazzy {alert('foobar!');}
+   {/literal}
+</script>
+]]>  
+ </programlisting>
+ </example>
+ 
+ <para>
+  Including literal content is also possible using <link linkend="language.function.literal">
   <varname>{literal}..{/literal}</varname></link> blocks.
-  Similar to HTML entity usage, you can use <link
-  linkend="language.function.ldelim"><varname>{ldelim}</varname></link>,<link
-  linkend="language.function.ldelim"><varname>{rdelim}</varname></link> or <link
-  linkend="language.variables.smarty.ldelim">
+  Similar to HTML entity usage, you can use <link linkend="language.function.ldelim"><varname>{ldelim}</varname></link>,<link linkend="language.function.ldelim"><varname>{rdelim}</varname></link> or <link linkend="language.variables.smarty.ldelim">
   <varname>{$smarty.ldelim}</varname></link> to display the current delimiters.
  </para>
 
  <para>
-  It is often convenient to simply change Smarty's <link
-  linkend="variable.left.delimiter">
+  It is often convenient to simply change Smarty's <link linkend="variable.left.delimiter">
   <parameter>$left_delimiter</parameter></link> and
   <link linkend="variable.right.delimiter">
   <parameter>$right_delimiter</parameter></link>.

@@ -8,9 +8,11 @@
    from a <link linkend="config.files">configuration file</link> into the template.
  </para>
 
+ <para><emphasis role="bold">Attributes:</emphasis></para>
  <informaltable frame="all">
-  <tgroup cols="5">
+  <tgroup cols="6">
    <colspec colname="param" align="center" />
+   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -18,6 +20,7 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
+     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -27,6 +30,7 @@
    <tbody>
     <row>
      <entry>file</entry>
+     <entry>1</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -34,6 +38,7 @@
     </row>
     <row>
      <entry>section</entry>
+     <entry>2</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -41,6 +46,7 @@
     </row>
     <row>
      <entry>scope</entry>
+     <entry>n/a</entry>
      <entry>string</entry>
      <entry>no</entry>
      <entry><emphasis>local</emphasis></entry>
@@ -52,18 +58,6 @@
       the local context and the parent template that called
       it. global means variables are available to all
       templates.
-     </entry>
-    </row>
-    <row>
-     <entry>global</entry>
-     <entry>boolean</entry>
-     <entry>No</entry>
-     <entry><emphasis>No</emphasis></entry>
-     <entry>
-      Whether or not variables are visible to the parent
-      template, same as scope=parent. NOTE: This attribute is
-      deprecated by the scope attribute, but still supported.
-      If scope is supplied, this value is ignored.
      </entry>
     </row>
    </tbody>

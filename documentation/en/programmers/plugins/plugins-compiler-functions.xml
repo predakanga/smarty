@@ -37,7 +37,7 @@
  *           the time it was compiled.
  * -------------------------------------------------------------
  */
-function smarty_compiler_tplheader($tag_arg, &$smarty)
+function smarty_compiler_tplheader($tag_arg, $smarty)
 {
     return "\necho '" . $smarty->_current_file . " compiled at " . date('Y-m-d H:M'). "';";
 }

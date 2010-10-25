@@ -7,16 +7,14 @@
   take attributes that specify or modify
   their behavior. Attributes to Smarty functions are much like HTML
   attributes. Static values don't have to be enclosed in quotes, but it
-  is recommended for literal strings. Variables may also be used, and
-  should not be in quotes.
+  is required for literal strings. Variables with or without modifers may also be used, and
+  should not be in quotes. You can even use PHP function results, plugin results and complex expressions.
  </para>
  <para>
   Some attributes require boolean values (&true; or &false;). These
   can be specified
-  as either unquoted <literal>true</literal>,
-  <literal>on</literal>, and <literal>yes</literal>, or
-  <literal>false</literal>, <literal>off</literal>, and
-  <literal>no</literal>.
+  as <literal>true</literal> and <literal>false</literal>. If an attribute has no value assigned
+  it gets the default boolean value of true.
  </para>
  <example>
   <title>function attribute syntax</title>
@@ -24,13 +22,23 @@
 <![CDATA[
 {include file='header.tpl'}
 
+{include file='header.tpl' nocache}  <--- is equivalent to {include file='header.tpl' nocache=true}
+
 {include file='header.tpl' attrib_name='attrib value'}
 
 {include file=$includeFile}
 
 {include file=#includeFile# title='Smarty is cool'}
 
-{html_select_date display_days=yes}
+{assign var=foo value={counter}}  <--- plugin result
+
+{assign var=foo value=substr($bar,2,5)}  <--- PHP function result
+
+{assign var=foo value=$bar|strlen}  <--- using modifer
+
+{assign var=foo value=$buh+$bar|strlen}  <--- more complex expresiion
+
+{html_select_date display_days=true}
 
 {mailto address='smarty@example.com'}
 

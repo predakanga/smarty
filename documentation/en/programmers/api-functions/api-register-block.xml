@@ -35,7 +35,7 @@
 <![CDATA[
 <?php
 // function declaration
-function do_translation ($params, $content, &$smarty, &$repeat)
+function do_translation ($params, $content, $smarty, &$repeat, $template)
 {
   if (isset($content)) {
     $lang = $params['lang'];

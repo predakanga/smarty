@@ -43,7 +43,7 @@
  * Purpose:  outputs a random magic answer
  * -------------------------------------------------------------
  */
-function smarty_function_eightball($params, &$smarty)
+function smarty_function_eightball($params, $smarty)
 {
     $answers = array('Yes',
                      'No',
@@ -82,7 +82,7 @@ Answer: {eightball}.
  * Purpose:  assign a value to a template variable
  * -------------------------------------------------------------
  */
-function smarty_function_assign($params, &$smarty)
+function smarty_function_assign($params, $smarty)
 {
     if (empty($params['var'])) {
         $smarty->trigger_error("assign: missing 'var' parameter");

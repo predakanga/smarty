@@ -84,7 +84,7 @@ CacheContents MEDIUMTEXT NOT NULL
 
 **************************************************/
 
-function mysql_cache_handler($action, &$smarty_obj, &$cache_content, $tpl_file=null, $cache_id=null, $compile_id=null, $exp_time=null)
+function mysql_cache_handler($action, $smarty_obj, &$cache_content, $tpl_file=null, $cache_id=null, $compile_id=null, $exp_time=null)
 {
 	// set db host, user and pass here
 	$db_host = 'localhost';

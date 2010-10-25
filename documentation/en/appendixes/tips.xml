@@ -358,7 +358,7 @@ function fetch_ticker($symbol)
    return $ticker_info;
 }
 
-function smarty_function_load_ticker($params, &$smarty)
+function smarty_function_load_ticker($params, $smarty)
 {
    // call the function
    $ticker_info = fetch_ticker($params['symbol']);

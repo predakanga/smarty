@@ -22,11 +22,11 @@
    <programlisting role="php">
 <![CDATA[
 <?php
-function smarty_block_foo($params, &$smarty)
+function smarty_block_foo($params, $smarty)
 {
   if (isset($params['object'])) {
     // get reference to registered object
-    $obj_ref = &$smarty->get_registered_object($params['object']);
+    $obj_ref = $smarty->get_registered_object($params['object']);
     // use $obj_ref is now a reference to the object
   }
 }

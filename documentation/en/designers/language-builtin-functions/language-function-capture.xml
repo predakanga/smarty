@@ -20,9 +20,11 @@
    </para>
 
 
+ <para><emphasis role="bold">Attributes:</emphasis></para>
  <informaltable frame="all">
-  <tgroup cols="5">
+  <tgroup cols="6">
    <colspec colname="param" align="center" />
+   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -30,6 +32,7 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
+     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -39,23 +42,52 @@
    <tbody>
     <row>
      <entry>name</entry>
+     <entry>1</entry>
      <entry>string</entry>
-     <entry>no</entry>
-     <entry><emphasis>default</emphasis></entry>
+     <entry>Yes</entry>
+     <entry><emphasis>n/a</emphasis></entry>
      <entry>The name of the captured block</entry>
     </row>
     <row>
      <entry>assign</entry>
+     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>The variable name where to assign the captured output to</entry>
     </row>
+    <row>
+     <entry>append</entry>
+     <entry>n/a</entry>
+     <entry>string</entry>
+     <entry>No</entry>
+     <entry><emphasis>n/a</emphasis></entry>
+     <entry>The name of an array variable where to append the captured output to</entry>
+    </row>
    </tbody>
   </tgroup>
  </informaltable>
-
-
+ 
+ <para><emphasis role="bold">Option Flags:</emphasis></para>
+ <informaltable frame="all">
+  <tgroup cols="2">
+   <colspec colname="param" align="center" />
+   <colspec colname="desc" />
+   <thead>
+    <row>
+     <entry>Name</entry>
+     <entry>Description</entry>
+    </row>
+   </thead>
+   <tbody>
+    <row>
+     <entry>nocache</entry>
+     <entry>Disables caching of this captured block</entry>
+    </row>
+   </tbody>
+  </tgroup>
+ </informaltable>
+ 
  <note>
  <title>Caution</title>
   <para>
@@ -87,23 +119,43 @@
    </programlisting>
   </example>
 
-    <example>
-     <title>{capture} into a template variable</title>
-     <para>This example also demonstrates the
-     <link linkend="language.modifier.upper"><varname>upper</varname></link>
-     modifier</para>
-     <programlisting>
+  <example>
+   <title>{capture} into a template variable</title>
+   <para>This example also demonstrates the
+    <link linkend="language.function.popup"><varname>{popup}</varname></link>
+    function</para>
+   <programlisting>
 <![CDATA[
-{capture name=some_content assign=addrText}
+{capture name=some_content assign=popText}
 The server is {$smarty.server.SERVER_NAME|upper} at {$smarty.server.SERVER_ADDR}<br>
 Your ip is {$smarty.server.REMOTE_ADDR}.
 {/capture}
-{$addrText}
+<a href="#" {popup caption='Server Info' text=$popText}>help</a>
 ]]>
      </programlisting>
   </example>
-
-
+  
+  <example>
+   <title>{capture} into a template array variable</title>
+   <para>
+    This example also demonstrates how multiple calls of capture can be used to create an array with captured content.
+   </para>
+   <programlisting>
+<![CDATA[
+{capture append=foo}hello{/capture}I say just {capture append=foo}world{/capture}
+{foreach from=$foo item=text}{$text} {/foreach}
+]]>
+     </programlisting>
+   <para>
+    The above example will output:
+   </para>
+   <screen>
+<![CDATA[
+I say just hello world
+]]>
+  </screen>  </example>
+  
+  
  </para>
  <para>
   See also

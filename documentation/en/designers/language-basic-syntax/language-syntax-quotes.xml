@@ -10,7 +10,7 @@
   linkend="api.assign">assigned</link>
   <link   linkend="language.syntax.variables">variables</link>
   embedded in "double quotes" so long as the variable name contains only numbers,
-  letters, under_scores and brackets[].
+  letters and under_scores.
   See <ulink url="&url.php-manual;language.variables">naming</ulink>
   for more detail.
   </para></listitem>
@@ -21,10 +21,10 @@
   surrounded by  <literal>`backticks`</literal>.
   </para></listitem>
 
-  <listitem><para>You cannot embed
-  <link linkend="language.modifiers">modifiers</link>, they must always
-  be applied outside of quotes.
- </para></listitem>
+  <listitem><para>
+  In addition Smarty3 does allow embedded Smarty tags in double quoted strings.
+  This is usefull if you want to include variables with modifers, plugin or PHP function results.
+  </para></listitem>
  </itemizedlist>
 
  <example>
@@ -33,11 +33,15 @@
 <![CDATA[
 {func var="test $foo test"}       <-- sees $foo
 {func var="test $foo_bar test"}   <-- sees $foo_bar
-{func var="test $foo[0] test"}    <-- sees $foo[0]
-{func var="test $foo[bar] test"}  <-- sees $foo[bar]
+{func var="test `$foo[0]` test"}    <-- sees $foo[0]
+{func var="test `$foo[bar]` test"}  <-- sees $foo[bar]
 {func var="test $foo.bar test"}   <-- sees $foo (not $foo.bar)
 {func var="test `$foo.bar` test"} <-- sees $foo.bar
 {func var="test `$foo.bar` test"|escape} <-- modifiers outside quotes!
+{func var="test {$foo|escape} test"} <-- modifiers inside quotes!
+{func var="test {time()} test"} <-- PHP function result
+{func var="test {counter} test"} <-- plugin result
+{func var="variable foo is {if !$foo}not {/if} defined"} <-- Smarty block function
 ]]>
   </programlisting>
 </example>

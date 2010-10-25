@@ -1,24 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
- <bookinfo id="bookinfo">
-  <title>Smarty - the compiling PHP template engine</title>
+<bookinfo id="bookinfo">
+  <title>Smarty3 - the compiling PHP template engine</title>
   <authorgroup id="authors">
    <author>
     <firstname>Monte</firstname>
     <surname>Ohrt &lt;monte at ohrt dot com&gt;</surname>
    </author>
    <author>
-    <firstname>Andrei</firstname>
-    <surname>Zmievski &lt;andrei@php.net&gt;</surname>
+    <firstname>Uwe</firstname>
+    <surname>Tews &lt;uwe dot tews at googlemail dot com&gt;</surname>
    </author>
   </authorgroup>
   <pubdate>&build-date;</pubdate>
   <copyright>
-   <year>2001-2005</year>
+   <year>2001-2010</year>
    <holder>New Digital Group, Inc.</holder>
   </copyright>
  </bookinfo>
-
 <!-- Keep this comment at the end of the file
 Local variables:
 mode: sgml

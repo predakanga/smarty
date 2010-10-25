@@ -102,6 +102,74 @@ $smarty->display('file:F:/path/to/my/templates/menu.tpl');
     </sect3>
    </sect2>
 
+   <sect2 id="templates.from.string">
+    <title>Templates from strings</title>
+    <para>
+     Smarty can render templates from a string by using the <literal>string:</literal> or <literal>eval:</literal> resource. 
+    </para>
+    
+    <itemizedlist>
+     <listitem><para>
+      The <literal>string:</literal> resource does compile the template source from string and stores the compiled template code for later reuse 
+      in the <link linkend="variable.compile.dir"><parameter>$compile_dir</parameter></link> folder. Each unique template string will create create 
+      a new compiled template file. Note that Smarty can not automatically detect outdated compiled code for string templates. If you have frequently 
+      changing template string the <link linkend="variable.compile.dir"><parameter>$compile_dir</parameter></link> folder could be filled up quickly.
+      For these cases the <literal>eval:</literal> resource could be the better choice.
+     </para></listitem>
+     
+     <listitem><para>
+      The <literal>eval:</literal> resource does evaluate (compile) the template source each time when a page is rendered. This slows down 
+      the processing time to display the page as no compiled template code is saved. On the other hand if you have frequently changing 
+      template source in your strings it may be the better choice compared to the <literal>string:</literal> resource as the 
+      <link linkend="variable.compile.dir"><parameter>$compile_dir</parameter></link> folder will not get filled with likely outdated compiled template code.
+     </para></listitem>
+    </itemizedlist>
+    
+    <example>
+     <title>Using templates from strings</title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+$smarty->assign('foo','value');
+$template_string = 'display {$foo} here';
+$smarty->display('string:'.$template_string); // will output 'display value here'
+$smarty->display('eval:'.$template_string); // same as above, but the compiled code will not be saved for later reuse
+?>
+]]>
+</programlisting>
+     <para>From within a Smarty template</para>
+     <programlisting>
+<![CDATA[
+{* include template from Smarty variable $template_string *}
+{include file="string:$template_string"}
+{* below is same as above without saving compiled code *}
+{include file="eval:$template_string"}
+
+]]>
+</programlisting>
+    </example>
+   </sect2>
+   
+   <sect2 id="extends.resource">
+    <title>Template inheritance defined by PHP script</title>
+    <para>
+     The <literal>extends:</literal> resource is used to define child/parent relationships of the template inheritance functionallity from the PHP script.
+     For details see section of <link linkend="advanced.features.template.inheritance">Template Interitance</link>.
+    </para>
+    
+    
+    <example>
+     <title>Using template inheritance from the PHP script</title>
+     <programlisting role="php">
+<![CDATA[
+<?php
+$smarty->display('extends:parent.tpl|child.tpl|grandchild.tpl'); 
+?>
+]]>
+     </programlisting>
+    </example>
+   </sect2>
+   
    <sect2 id="templates.from.elsewhere">
     <title>Templates from other sources</title>
     <para>
@@ -131,7 +199,7 @@ $smarty->display('file:F:/path/to/my/templates/menu.tpl');
 <![CDATA[
 <?php
 // put these function somewhere in your application
-function db_get_template ($tpl_name, &$tpl_source, &$smarty_obj)
+function db_get_template ($tpl_name, &$tpl_source, $smarty_obj)
 {
     // do database call here to fetch your template,
     // populating $tpl_source with actual template contents
@@ -140,7 +208,7 @@ function db_get_template ($tpl_name, &$tpl_source, &$smarty_obj)
     return true;
 }
 
-function db_get_timestamp($tpl_name, &$tpl_timestamp, &$smarty_obj)
+function db_get_timestamp($tpl_name, &$tpl_timestamp, $smarty_obj)
 {
     // do database call here to populate $tpl_timestamp
     // with unix epoch time value of last template modification.
@@ -150,13 +218,13 @@ function db_get_timestamp($tpl_name, &$tpl_timestamp, &$smarty_obj)
     return true;
 }
 
-function db_get_secure($tpl_name, &$smarty_obj)
+function db_get_secure($tpl_name, $smarty_obj)
 {
     // assume all templates are secure
     return true;
 }
 
-function db_get_trusted($tpl_name, &$smarty_obj)
+function db_get_trusted($tpl_name, $smarty_obj)
 {
     // not used for templates
 }
@@ -199,7 +267,7 @@ $smarty->display("db:index.tpl");
 // put this function somewhere in your application
 
 function make_template ($resource_type, $resource_name, &$template_source, &$template_timestamp,
-&$smarty_obj)
+$smarty_obj)
 {
 	if( $resource_type == 'file' ) {
 		if ( ! is_readable ( $resource_name )) {

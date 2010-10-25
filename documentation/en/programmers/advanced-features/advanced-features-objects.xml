@@ -75,7 +75,7 @@
 // the object
 
 class My_Object {
-	function meth1($params, &$smarty_obj) {
+	function meth1($params, $smarty_obj) {
 		return 'this is my meth1';
 	}
 }
