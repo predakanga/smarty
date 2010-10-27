@@ -1,144 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
 <sect1 id="language.function.nocache">
- <title>{call}</title>
- <para>
-  <varname>{call}</varname> is used to call a template function defined by the
-  <link linkend="language.function.function"><varname>{function}</varname></link>
-  tag just like a plugin function. 
+ <title>{nocache}</title>
+
+  <para>
+   <varname>{nocache}</varname> is used to disable caching of a template section. 
+   Every <varname>{nocache}</varname> must be paired with a matching
+   <varname>{/nocache}</varname>.
   </para>
 
-  <itemizedlist>
-  <listitem><para>
-  The <varname>{call}</varname> tag must have the  <parameter>name</parameter> attribute
-  which contains the the name of the template function.
-  </para></listitem>
-
- <listitem><para>
-  Values for variables can be passed to the template function as
-  <link linkend="language.syntax.attributes">attributes</link>.
- </para></listitem>
- </itemizedlist>
-    
-   <para><emphasis role="bold">Attributes:</emphasis></para>
-   <informaltable frame="all">
-    <tgroup cols="6">
-     <colspec colname="param" align="center" />
-     <colspec colname="position" align="center" />
-     <colspec colname="type" align="center" />
-     <colspec colname="required" align="center" />
-     <colspec colname="default" align="center" />
-     <colspec colname="desc" />
-     <thead>
-      <row>
-       <entry>Attribute Name</entry>
-       <entry>Shorthand</entry>
-       <entry>Type</entry>
-       <entry>Required</entry>
-       <entry>Default</entry>
-       <entry>Description</entry>
-      </row>
-     </thead>
-     <tbody>
-      <row>
-       <entry>name</entry>
-       <entry>1</entry>
-       <entry>string</entry>
-       <entry>Yes</entry>
-       <entry><emphasis>n/a</emphasis></entry>
-       <entry>The name of the template function</entry>
-      </row>
-      <row>
-       <entry>assign</entry>
-       <entry>n/a</entry>
-       <entry>string</entry>
-       <entry>No</entry>
-       <entry><emphasis>n/a</emphasis></entry>
-       <entry>The name of the variable that the output of
-        called template function will be assigned to</entry>
-      </row>
-      <row>
-       <entry>[var ...]</entry>
-       <entry>n/a</entry>
-       <entry>[var type]</entry>
-       <entry>No</entry>
-       <entry><emphasis>n/a</emphasis></entry>
-       <entry>variable to pass local to template function</entry>
-      </row>
-     </tbody>
-    </tgroup>
-   </informaltable>
-   
-
- <example>
-  <title>Calling a recursive menu example</title>
-  <programlisting>
-<![CDATA[
-{* define the function *}
-{function name=menu level=0}
-  <ul class="level{$level}">
-  {foreach $data as $entry}
-    {if is_array($entry)}
-      <li>{$entry@key}</li>
-      {call name=menu data=$entry level=$level+1}
-    {else}
-      <li>{$entry}</li>
-    {/if}
-  {/foreach}
-  </ul>
-{/function}
-
-{* create an array to demonstrate *}
-{$menu = ['item1','item2','item3' => ['item3-1','item3-2','item3-3' =>
-['item3-3-1','item3-3-2']],'item4']}
-
-{* run the array through the function *}
-{call name=menu data=$menu}
-]]>
-  </programlisting>
- <para>
-  Will generate the following output
- </para> 
-  <programlisting>
-<![CDATA[
-* item1
-* item2
-* item3
-      o item3-1
-      o item3-2
-      o item3-3
-            + item3-3-1
-            + item3-3-2
-* item4
-]]>
-  </programlisting>
- </example>
-
-
-  <example>
-    <title>Using shorthands for template function names</title>
-   <para>
-    This is the skeleton of the example above using shorthands for the template function name.
-   </para> 
-   
-    <programlisting>
-<![CDATA[
-{function menu level=0}
-     ......
-      {call menu data=$entry level=$level+1}
-     ......
-{/function}
-
-{call menu data=$menu}
-]]>
-  </programlisting>
-  </example>
-   
+ <note>
+  <title>Caution</title>
   <para>
-  See also
-  <link linkend="language.function.function"><varname>{function}</varname></link>
+   You must make sure that any variable used within a not cached section gets 
+   also assigned when the page is loaded from cache.
+  </para>
+ </note>
+ 
+ <para>
+  <example>
+   <title>Preventing a template section from being cached</title>
+   <programlisting>
+<![CDATA[
+
+Today's date is
+{nocache}
+{$smarty.now|date_format}
+{/nocache}
+]]>
+   </programlisting>
+    The above code will output the current date on a cached page.
+  </example>
+ </para>
+ 
+ <para>
+  See also the
+  <link linkend="caching">caching section</link>.
  </para>
 </sect1>
+
 <!-- Keep this comment at the end of the file
 Local variables:
 mode: sgml
@@ -159,4 +59,3 @@ vim600: syn=xml fen fdm=syntax fdl=2 si
 vim: et tw=78 syn=sgml
 vi: ts=1 sw=1
 -->
-

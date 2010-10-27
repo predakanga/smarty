@@ -19,7 +19,7 @@
   </listitem>
   <listitem>
    <para>
-    <varname>{for $foo=1; $foo &lt; $bar; $foo++}</varname> PHP style for loop
+    <varname>{for $foo=1; $foo lt $bar; $foo++}</varname> PHP style for loop
    </para>
   </listitem>
   </itemizedlist>
@@ -47,22 +47,13 @@
  
  
  <example>
-  <title>A simple <varname>{foreach}</varname> loop</title>
+  <title>A simple <varname>{for}</varname> loop</title>
   <programlisting role="php">
 <![CDATA[
-<?php
-$arr = array(1000, 1001, 1002);
-$smarty->assign('myArray', $arr);
-?>
-]]>
-  </programlisting>
-   <para>Template to output <parameter>$myArray</parameter> in an un-ordered list</para>
-  <programlisting>
-<![CDATA[
 <ul>
-{foreach $myArray as $foo}
+{for $foo=1 to 3}
     <li>{$foo}</li>
-{/foreach}
+{/for}
 </ul>
 ]]>
   </programlisting>
@@ -72,126 +63,18 @@ $smarty->assign('myArray', $arr);
   <screen>
 <![CDATA[
 <ul>
-    <li>1000</li>
-    <li>1001</li>
-    <li>1002</li>
+    <li>1</li>
+    <li>2</li>
+    <li>3</li>
 </ul>
 ]]>
   </screen>
  </example>
-
-<example>
-  <title>Demonstrates the an additional <parameter>key</parameter> variable</title>
-  <programlisting role="php">
-<![CDATA[
-<?php
-$arr = array(9 => 'Tennis', 3 => 'Swimming', 8 => 'Coding');
-$smarty->assign('myArray', $arr);
-?>
-]]>
-  </programlisting>
-   <para>Template to output <parameter>$myArray</parameter> as key/val pair,
-   like PHP's <ulink url="&url.php-manual;foreach"><varname>foreach</varname></ulink>.</para>
-  <programlisting>
-<![CDATA[
-<ul>
-{foreach $myArray as $k => $v}
-   <li>{$k}: {$v}</li>
-{/foreach}
-</ul>
-]]>
-  </programlisting>
-  <para>
-   The above example will output:
-  </para>
-  <screen>
-<![CDATA[
-<ul>
-    <li>9: Tennis</li>
-    <li>3: Swimming</li>
-    <li>8: Coding</li>
-</ul>
-]]>
-  </screen>
- </example>
-
-
-
- <example>
-  <title>{foreach} with nested <parameter>item</parameter> and <parameter>key</parameter></title>
-  <para>Assign an array to Smarty, the key contains the key for each looped value.</para>
-  <programlisting role="php">
-<![CDATA[
-<?php
- $smarty->assign('contacts', array(
-                             array('phone' => '1',
-                                   'fax' => '2',
-                                   'cell' => '3'),
-                             array('phone' => '555-4444',
-                                   'fax' => '555-3333',
-                                   'cell' => '760-1234')
-                             ));
-?>
-]]>
-  </programlisting>
-  <para>The template to output <parameter>$contact</parameter>.</para>
-  <programlisting>
-<![CDATA[
-{foreach $contacts as $contact}
-  <hr />
-  {foreach from=$contact as $key => $item }
-    {$key}: {$item}<br />
-  {/foreach}
-{/foreach}
-]]>
-  </programlisting>
-  <para>
-   The above example will output:
-  </para>
-  <screen>
-<![CDATA[
-<hr />
-  phone: 1<br />
-  fax: 2<br />
-  cell: 3<br />
-<hr />
-  phone: 555-4444<br />
-  fax: 555-3333<br />
-  cell: 760-1234<br />
-]]>
-  </screen>
- </example>
-
- <example>
-  <title>Database example with {foreachelse}</title>
-  <para>A database (eg PEAR or ADODB) example of a search script, the query results assigned to Smarty</para>
-<programlisting role="php">
-<![CDATA[
-<?php
-  $search_condition = "where name like '$foo%' ";
-  $sql = 'select contact_id, name, nick from contacts '.$search_condition.' order by name';
-  $smarty->assign('results', $db->getAssoc($sql) );
-?>
-]]>
-  </programlisting>
-  <para>The template which display <quote>None found</quote>
-  if no results with <varname>{foreachelse}</varname>.</para>
-  <programlisting>
-<![CDATA[
-{foreach $results as $cid => $con}
-    <a href="contact.php?contact_id={$cid}">{$con.name} - {$con.nick}</a><br />
-{foreachelse}
-    No items were found in the search
-{/foreach}
-]]>
-  </programlisting>
- </example>
-
 
  
   <para>
    See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link>,
-   <link linkend="language.function.foreach_new"><varname>{foreach} - new stylw</varname></link> and
+   <link linkend="language.function.foreach_new"><varname>{foreach} - new style</varname></link> and
    <link linkend="language.function.section"><varname>{section}</varname></link>
   </para>
 </sect1>
