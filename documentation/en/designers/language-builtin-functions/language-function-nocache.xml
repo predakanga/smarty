@@ -17,7 +17,6 @@
   </para>
  </note>
  
- <para>
   <example>
    <title>Preventing a template section from being cached</title>
    <programlisting>
@@ -29,9 +28,10 @@ Today's date is
 {/nocache}
 ]]>
    </programlisting>
+   <para>
     The above code will output the current date on a cached page.
+   </para>
   </example>
- </para>
  
  <para>
   See also the
