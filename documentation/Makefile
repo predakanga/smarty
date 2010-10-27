@@ -16,7 +16,6 @@ html: set-current-lang-symlink set-date
 	$(XMLTO) html \
            -o manual-$(LANG) \
            --stringparam use.id.as.filename=1 \
-           --stringparam html.ext='.tpl' \
            --stringparam chunker.output.encoding='UTF-8' \
            --stringparam chunker.output.indent='yes' \
            -x $(STYLESHEETS_DIR)/html/chunk.xsl \
