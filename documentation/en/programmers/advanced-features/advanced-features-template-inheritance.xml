@@ -35,11 +35,11 @@
       or <link linkend="api.display"><varname>display()</varname></link> with the <literal>extends:</literal> template resource type. The later provides even more flexibillity.
     </para></listitem>
   </itemizedlist>
-  <note>
+  <note><para>
     If you have a subtemplate which is included with <link linkend="language.function.include"><varname>{include}</varname></link> and it does contain 
     <link linkend="language.function.block"><varname>{block}</varname></link> areas it does work only if the <link linkend="language.function.include"><varname>{include}</varname></link>
     itself is called from within a surrounding  <link linkend="language.function.block"><varname>{block}</varname></link>. In the final parent template you may need a dummy <link linkend="language.function.block"><varname>{block}</varname></link> for it.
-  </note>
+  </para></note>
   
  <example>
   <title>Template inheritance example</title>

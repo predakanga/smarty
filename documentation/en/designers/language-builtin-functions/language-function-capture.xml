@@ -121,16 +121,14 @@
 
   <example>
    <title>{capture} into a template variable</title>
-   <para>This example also demonstrates the
-    <link linkend="language.function.popup"><varname>{popup}</varname></link>
-    function</para>
+   <para>This example demonstrates the capture function.</para>
    <programlisting>
 <![CDATA[
 {capture name=some_content assign=popText}
 The server is {$smarty.server.SERVER_NAME|upper} at {$smarty.server.SERVER_ADDR}<br>
 Your ip is {$smarty.server.REMOTE_ADDR}.
 {/capture}
-<a href="#" {popup caption='Server Info' text=$popText}>help</a>
+<a href="#">{$popText}</a>
 ]]>
      </programlisting>
   </example>

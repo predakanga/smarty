@@ -20,8 +20,6 @@
  &designers.language-custom-functions.language-function-html-table;
  &designers.language-custom-functions.language-function-mailto;
  &designers.language-custom-functions.language-function-math;
- &designers.language-custom-functions.language-function-popup;
- &designers.language-custom-functions.language-function-popup-init;
  &designers.language-custom-functions.language-function-textformat;
 
 </chapter>

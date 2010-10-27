@@ -19,10 +19,10 @@
   </listitem>
   <listitem>
    <para>
-    <varname>{for $foo=1; $foo < $bar; $foo++}</varname> PHP style for loop
+    <varname>{for $foo=1; $foo &lt; $bar; $foo++}</varname> PHP style for loop
    </para>
   </listitem>
-  <itemizedlist>
+  </itemizedlist>
  
  
  <para><emphasis role="bold">Option Flags:</emphasis></para>

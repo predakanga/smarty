@@ -573,13 +573,13 @@ $smarty->assign('items', $items_list);
 ]]>
 </programlisting>
 </example>
- </sect2>
- 
   <para>
    See also <link linkend="language.function.foreach_new"><varname>{foreach} - new style</varname></link>,
    <link linkend="language.function.section"><varname>{section}</varname></link>
    and  <link linkend="language.variables.smarty.loops"><parameter>$smarty.foreach</parameter></link>.
   </para>
+ </sect2>
+ 
 </sect1>
 
 <!-- Keep this comment at the end of the file

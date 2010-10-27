@@ -187,6 +187,28 @@ banner.tpl
 ]]>
 </programlisting>
  </sect2>
+ <sect2 id="language.variables.smarty.child">
+  <title>{$smarty.child}</title>
+  <para>
+   Returns the version of Smarty the template was compiled with.
+  </para>
+<programlisting>
+<![CDATA[
+<div id="footer">Powered by Smarty {$smarty.version}</div>
+]]>
+</programlisting>
+ </sect2>
+ <sect2 id="language.variables.smarty.parent">
+  <title>{$smarty.parent}</title>
+  <para>
+   Returns the version of Smarty the template was compiled with.
+  </para>
+<programlisting>
+<![CDATA[
+<div id="footer">Powered by Smarty {$smarty.version}</div>
+]]>
+</programlisting>
+ </sect2>
 
  <sect2 id="language.variables.smarty.ldelim">
   <title>{$smarty.ldelim}, {$smarty.rdelim}</title>

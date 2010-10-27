@@ -354,11 +354,13 @@ $smarty->assign('myArray', $arr);
 ]]>
 </programlisting>
 </example>
- </sect2>
- 
+
   <para>
    See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link>.
   </para>
+
+ </sect2>
+ 
 </sect1>
 
 <!-- Keep this comment at the end of the file
