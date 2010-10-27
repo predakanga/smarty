@@ -25,6 +25,7 @@ foreach (new RecursiveIteratorIterator($dhandle) as $fpath) {
 	preg_match('!<body[^>]*>(.*?)</body>!s',$content,$match);
 	$body = $match[1];
         $body = str_replace(array('{','}','@@LDELIM@@','@@RDELIM@@'),array('@@LDELIM@@','@@RDELIM@@','{ldelim}','{rdelim}'),$body);
+        $title = str_replace(array('{','}','@@LDELIM@@','@@RDELIM@@'),array('@@LDELIM@@','@@RDELIM@@','{ldelim}','{rdelim}'),$title);
         $template = "{extends file='layout.tpl'}\n{block name=title}@TITLE@{/block}{block name=main_content}@BODY@{/block}";
         $template = str_replace(array('@TITLE@','@BODY@'),array($title,$body),$template);
 	if(!is_dir($webdir))
