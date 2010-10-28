@@ -2,72 +2,141 @@
 <!-- $Revision: 2972 $ -->
  <preface id="preface">
   <title>Preface</title>
+  
   <para>
-   It is undoubtedly one of the most asked questions on the PHP mailing
-   lists: how do I make my PHP scripts independent of the layout? While
-   PHP is billed as "HTML embedded scripting language", after writing a
-   couple of projects that mixed PHP and HTML freely one comes up with the
-   idea that separation of form and content is a Good Thing [TM]. In
-   addition, in many companies the roles of layout designer and programmer
-   are separate. Consequently, the search for a templating solution
-   ensues.
+   <emphasis role="bold">The Philosophy</emphasis>
+  </para>  
+  
+  <para>
+    The Smarty design was largely driven by these goals:
+  </para>
+
+  <itemizedlist>
+    <listitem><para>clean separation of presentation from application code</para></listitem>
+    <listitem><para>PHP backend, Smarty template frontend</para></listitem>
+    <listitem><para>compliment PHP, not replace it</para></listitem>
+    <listitem><para>fast development/deployment for programmers and designers</para></listitem>
+    <listitem><para>quick and easy to maintain</para></listitem>
+    <listitem><para>syntax easy to understand</para></listitem>
+    <listitem><para>flexibility for custom development</para></listitem>
+  </itemizedlist>
+
+  <para>
+   <emphasis role="bold">What is Smarty?</emphasis>
+  </para>  
+
+  <para>
+   Smarty is PHP a framework for separating presentation (HTML/CSS) from application logic (PHP). This implies that PHP code is application logic, and is separated from the presentation.
+  </para>
+  
+  <para>
+   <emphasis role="bold">Why is separating PHP from templates important?</emphasis>
+  </para>  
+  
+  <para>
+    It goes without saying that HTML mixed with programming code is messy and difficult to maintain. It is better to use a template engine that separates HTML and uses a special syntax to indicate where application data is revealed. Specific reasons for separating PHP:
   </para>
   <para>
-   In our company for example, the development of an application goes on
-   as follows: After the requirements docs are done, the interface
-   designer makes mockups of the interface and gives them to the
-   programmer. The programmer implements business logic in PHP and uses
-   interface mockups to create skeleton templates. The project is then
-   handed off to the HTML designer/web page layout person who brings the
-   templates up to their full glory. The project may go back and forth
-   between programming/HTML a couple of times. Thus, it's important to
-   have good template support because programmers don't want anything to
-   do with HTML and don't want HTML designers mucking around with PHP
-   code. Designers need support for config files, dynamic blocks and
-   other interface issues, but they don't want to have to deal with
-   intricacies of the PHP programming language.
+    First reason: syntax. Templates typically consist of semantic markup such as HTML. PHP syntax works well for application code, but quickly degenerates when mixed with HTML. Smarty's simple {tag} syntax is designed specifically to express presentation. Smarty focuses your templates on presentation and less on "code". This lends to quicker template deployment and easier maintenance.
   </para>
   <para>
-   Looking at many templating solutions available for PHP today, most of
-   them provide a rudimentary way of substituting variables into templates
-   and do a limited form of dynamic block functionality. But our needs
-   required a bit more than that. We didn't want programmers to be dealing
-   with HTML layout at ALL, but this was almost inevitable. For instance,
-   if a designer wanted background colors to alternate on dynamic blocks,
-   this had to be worked out with the programmer in advance. We also
-   needed designers to be able to use their own configuration files, and
-   pull variables from them into the templates. The list goes on.
+    Second reason: insulation. With PHP based templates, there are no restrictions on what type of logic can be injected into a template. Smarty insulates the templates from PHP, creating a controlled separation of presentation from business logic. Smarty also has security features that can further enforce restrictions on templates.
   </para>
+  
   <para>
-   We started out writing out a spec for a template engine back in late
-   1999.  After finishing the spec, we began to work on a template engine
-   written in C that would hopefully be accepted for inclusion with PHP.
-   Not only did we run into many complicated technical barriers, but there
-   was also much heated debate about exactly what a template engine should
-   and should not do. From this experience, we decided that the template
-   engine should be written in PHP as a class, for anyone to use as they
-   see fit. So we wrote an engine that did just that and
-   <productname>SmartTemplate</productname> came into existence (note: this
-   class was never submitted to the public). It was a class that did
-   almost everything we wanted: regular variable substitution, supported
-   including other templates, integration with config files, embedding PHP
-   code, limited 'if' statement functionality and much more robust dynamic
-   blocks which could be multiply nested. It did all this with regular
-   expressions and the code turned out to be rather, shall we say,
-   impenetrable. It was also noticably slow in large applications from all
-   the parsing and regular expression work it had to do on each
-   invocation. The biggest problem from a programmer's point of view was
-   all the necessary work in the PHP script to setup and process templates
-   and dynamic blocks. How do we make this easier?
-  </para>
+   <emphasis role="bold">Do it Right</emphasis>
+  </para>  
+    
   <para>
-   Then came the vision of what ultimately became Smarty. We know how fast
-   PHP code is without the overhead of template parsing. We also know how
-   meticulous and overbearing the PHP language may look to the average
-   designer, and this could be masked with a much simpler templating
-   syntax. So what if we combined the two strengths? Thus, Smarty was
-   born... :-)
+    A common problem with Smarty development is poor implementation. If you abuse Smarty fundamentals or come across an application that does (i.e. injecting PHP in templates), you may end up with something worse than what Smarty was intended to resolve. See the Best Practices section on the Smarty website for examples of what to look out for.
   </para>
+  
+  <para>
+   <emphasis role="bold">How does it work?</emphasis>
+  </para>  
+    
+  <para>
+    Under the hood, Smarty "compiles" (basically copies and converts) the templates into PHP scripts. This happens once when each template is first invoked, and then the compiled versions are used from that point forward. Smarty takes care of this for you, so the template designer just edits the Smarty templates and never has to manage the compiled versions. This approach keeps the templates easy to maintain, and yet keeps execution times extremely fast since the compiled code is just PHP. And of course, all PHP scripts take advantage of PHP op-code caches such as APC.
+  </para>
+  
+  <para>
+   <emphasis role="bold">Template Inheritance</emphasis>
+  </para>  
+    
+  <para>
+    Template inheritance is new to Smarty 3, and it's one of many great new features. Before template inheritance, we managed our templates in pieces such as header and footer templates. This organization can lend itself to some perplexing problems, such as managing content within the header/footer on a per-page basis. With template inheritance, instead of including other templates we maintain our templates as single pages. We can then manipulate blocks of content within by inheriting them. This makes templates intuitive, efficient and easy to manage. See the Template Inheritance section of th Smarty website for more info.
+  </para>
+
+  <para>
+   <emphasis role="bold">Why not use XML/XSLT syntax?</emphasis>
+  </para>  
+    
+  <para>
+    There are a couple of good reasons. First, Smarty can be used for more than just XML/HTML based templates, such as generating emails, javascript, CSV, and PDF documents. Second, XML/XSLT syntax is even more verbose and fragile than PHP code! It is perfect for computers, but horrible for humans. Smarty is about being easy to read, understand and maintain.
+  </para>
+
+  <para>
+   <emphasis role="bold">Template Security</emphasis>
+  </para>  
+    
+  <para>
+    Although Smarty insulates you from PHP, you still have the option to use it in certain ways if you wish. Template security forces the restriction of PHP (and select Smarty functions.) This is useful if you have third parties editing templates, and you don't want to unleash the full power of PHP or Smarty to them.
+  </para>
+
+  <para>
+   <emphasis role="bold">Integration</emphasis>
+  </para>  
+    
+  <para>
+    Sometimes Smarty gets compared to Model-View-Controller (MVC) frameworks. Smarty is not an MVC, it is just the presentation layer, much like the View (V) part of an MVC. As a matter of fact, Smarty can easily be integrated as the view layer of an MVC. Many of the more popular ones have integration instructions for Smarty, or you may find some help here in the forums and documentation.
+  </para>
+
+  <para>
+   <emphasis role="bold">Other Template Engines</emphasis>
+  </para>  
+    
+  <para>
+    Smarty is not the only engine following the "Separate Programming Code from Presentation" philosophy. For instance, some Python developers decided that mixing Python with HTML/CSS wasn't such a great idea, and built some template engines around the same principles such as Django Templates and CheetahTemplate.
+  </para>
+
+  <para>
+   <emphasis role="bold">What Smarty is Not</emphasis>
+  </para>  
+    
+  <para>
+    Smarty is not meant to be a stand-alone tool for developing websites from scratch. Smarty is a tool to facilitate the presentation layer of your application. You may decide to use an existing framework with Smarty, or you might build your own codebase and use Smarty for the frontend. Either way, Smarty is a great way to decouple presentation from your application code.
+  </para>
+
+  <para>
+   <emphasis role="bold">Summary</emphasis>
+  </para>  
+    
+  <para>
+    Whether you are using Smarty for a small website or massive enterprise solution, it can accommodate your needs. There are numerous features that make Smarty a great choice:
+  </para>
+
+  <itemizedlist>
+    <listitem><para>separation of PHP from HTML/CSS just makes sense</para></listitem>
+    <listitem><para>readability for organization and management</para></listitem>
+    <listitem><para>security for 3rd party template access</para></listitem>
+    <listitem><para>feature completeness, and easily extendable to your own needs</para></listitem>
+    <listitem><para>massive user base, Smarty is here to stay</para></listitem>
+    <listitem><para>LGPL license for commercial use</para></listitem>
+    <listitem><para>100% free to use, open source project</para></listitem>
+  </itemizedlist>
+  
+  <para>
+   <emphasis role="bold">Should I use Smarty?</emphasis>
+  </para>  
+    
+  <para>
+    Smarty's long track record has indicated that it significantly improves the speed of deployment and maintenance of templates. More code never makes an application run faster, but the time (i.e. money) saved in development easily outweighs this negligible difference. If maintenance is crucial to your application (or business), Smarty is certainly a good fit.
+  </para>
+  
+  <para>
+    However, Smarty is not a magic bullet. It is a tool for managing presentation. Using Smarty, another template engine, or plain PHP is largely going to be determined by your own requirements and tastes. It is certainly possible to maintain a separation of business logic from presentation with pure PHP if you are happy with that. You may not have a need for Smarty if you don't need cleaner template syntax, template inheritance, caching, plugins, security (i.e. insulation from PHP), quicker presentational deployment and easier maintenance. You may not have a need for templates at all if you have an overly simplistic site, or your developer is the designer and does not desire a separation of PHP from HTML. Ask questions on the forums and other sites, and make an informed decision for your project.
+  </para>
+  
  </preface>
 
 <!-- Keep this comment at the end of the file
