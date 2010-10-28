@@ -187,10 +187,12 @@ banner.tpl
 ]]>
 </programlisting>
  </sect2>
- <sect2 id="language.variables.smarty.child">
-  <title>{$smarty.child}</title>
+
+ <sect2 id="language.variables.smarty.block.child">
+  <title>{$smarty.block.child}</title>
   <para>
-   Returns the version of Smarty the template was compiled with.
+   Returns block text from child template.
+   See <link linkend="advanced.features.template.inheritance">Template interitance</link>.
   </para>
 <programlisting>
 <![CDATA[
@@ -198,10 +200,12 @@ banner.tpl
 ]]>
 </programlisting>
  </sect2>
- <sect2 id="language.variables.smarty.parent">
-  <title>{$smarty.parent}</title>
+
+ <sect2 id="language.variables.smarty.block.parent">
+  <title>{$smarty.block.parent}</title>
   <para>
-   Returns the version of Smarty the template was compiled with.
+   Returns block text from parent template.
+   See <link linkend="advanced.features.template.inheritance">Template interitance</link>
   </para>
 <programlisting>
 <![CDATA[

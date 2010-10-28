@@ -245,8 +245,8 @@ You will see now - {$smarty.block.parent} - here
  <para>
   See also
   <link linkend="advanced.features.template.inheritance">Template interitance</link>,
-  <link linkend="language.variables.smarty.parent"><parameter>$smarty.block.parent</parameter></link>,
-  <link linkend="language.variables.smarty.child"><parameter>$smarty.block.child</parameter></link>,
+  <link linkend="language.variables.smarty.block.parent"><parameter>$smarty.block.parent</parameter></link>,
+  <link linkend="language.variables.smarty.block.child"><parameter>$smarty.block.child</parameter></link>,
   and <link linkend="language.function.extends"><varname>{extends}</varname></link>
  </para>
 </sect1>

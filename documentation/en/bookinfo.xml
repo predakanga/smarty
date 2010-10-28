@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
 <bookinfo id="bookinfo">
-  <title>Smarty3 - the compiling PHP template engine</title>
+  <title>Smarty - the compiling PHP template engine</title>
   <authorgroup id="authors">
    <author>
     <firstname>Monte</firstname>
