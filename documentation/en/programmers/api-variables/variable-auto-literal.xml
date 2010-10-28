@@ -3,8 +3,8 @@
      <sect1 id="variable.auto.literal">
       <title>$auto_literal</title>
       <para>
-       With Smarty 3 the { and } braces will be by default ignored so long as they are surrounded by white space.
-       This behaviour can be disabled by setting auto_literal to false.
+       The Smarty delimiter tags { and } will be ignored so long as they are surrounded by white space.
+       This behavior can be disabled by setting auto_literal to false.
         <informalexample>
         <programlisting role="php">
 <![CDATA[
