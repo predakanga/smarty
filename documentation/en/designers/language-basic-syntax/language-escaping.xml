@@ -16,9 +16,8 @@
  </para>
 
  <para>
-  With Smarty 3 the { and } braces will be by default ignored so long as they are surrounded by white space.
-  This behaviour can be disabled by the Smarty Class variable <link linkend="variable.auto.literal"><parameter>$auto_literal</parameter></link> 
-
+  With Smarty the { and } braces will be ignored so long as they are surrounded by white space.
+  This behavior can be disabled by the Smarty Class variable <link linkend="variable.auto.literal"><parameter>$auto_literal</parameter></link>
  </para>
  
  <example>
@@ -48,10 +47,17 @@
  </para>
 
  <para>
-  It is often convenient to simply change Smarty's <link linkend="variable.left.delimiter">
+  Smarty's default delimiters { and } cleanly represent presentational content. However if another set of delimiters suit your
+  needs better, you can change them with Smarty's <link linkend="variable.left.delimiter">
   <parameter>$left_delimiter</parameter></link> and
   <link linkend="variable.right.delimiter">
-  <parameter>$right_delimiter</parameter></link>.
+  <parameter>$right_delimiter</parameter></link> values.
+  <note>
+    <para>
+      Changing delimiters affects ALL template syntax and escapement. Be sure to clear out cache and compiled files
+      if you decide to change them.
+    </para>
+  </note>
  </para>
  <example>
   <title>changing delimiters example</title>
