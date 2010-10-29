@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.block">
  <refnamediv>
-  <refname>register_block()</refname>
+  <refname>register-&gt;block()</refname>
   <refpurpose>dynamically register block functions plugins</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register_block</methodname>
+   <type>void</type><methodname>register-&gt;block</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
    <methodparam><type>mixed</type><parameter>impl</parameter></methodparam>
    <methodparam><type>bool</type><parameter>cacheable</parameter></methodparam>
@@ -45,7 +45,7 @@ function do_translation ($params, $content, $smarty, &$repeat, $template)
 }
 
 // register with smarty
-$smarty->register_block('translate', 'do_translation');
+$smarty->register->block('translate', 'do_translation');
 ?>
 ]]>
    </programlisting>
@@ -61,7 +61,7 @@ $smarty->register_block('translate', 'do_translation');
 
     <para>
     See also
-    <link linkend="api.unregister.block"><varname>unregister_block()</varname></link>
+    <link linkend="api.unregister.block"><varname>unregister-&gt;block()</varname></link>
     and the
     <link linkend="plugins.block.functions">plugin block functions</link> page.
   </para>

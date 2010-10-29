@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.compiler.function">
  <refnamediv>
-  <refname>unregister_compiler_function()</refname>
+  <refname>unregister-&gt;compilerFunction()</refname>
   <refpurpose>dynamically unregister a compiler function</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_compiler_function</methodname>
+   <type>void</type><methodname>unregister-&gt;compilerFunction</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -19,7 +19,7 @@
   <para>
   See also
   <link linkend="api.register.compiler.function">
-  <varname>register_compiler_function()</varname></link>
+  <varname>register-&gt;compilerFunction()</varname></link>
   and
   <link linkend="plugins.compiler.functions">plugin compiler functions</link>.
 </para>

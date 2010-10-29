@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.template.exists">
  <refnamediv>
-  <refname>template_exists()</refname>
+  <refname>templateExists()</refname>
   <refpurpose>checks whether the specified template exists</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>bool</type><methodname>template_exists</methodname>
+   <type>bool</type><methodname>templateExists</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -17,7 +17,7 @@
   </para>
 
   <example>
-  <title>template_exists()</title>
+  <title>templateExists()</title>
     <para>
     This example uses <literal>$_GET['page']</literal> to
     <link linkend="language.function.include"><varname>{include}</varname></link>
@@ -48,7 +48,7 @@
 // set the filename eg index.inc.tpl
 $mid_template = $_GET['page'].'.inc.tpl';
 
-if( !$smarty->template_exists($mid_template) ){
+if( !$smarty->templateExists($mid_template) ){
     $mid_template = 'page_not_found.tpl';
 }
 $smarty->assign('content_template', $mid_template);

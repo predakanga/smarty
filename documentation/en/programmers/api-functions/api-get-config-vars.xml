@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.get.config.vars">
  <refnamediv>
-  <refname>get_config_vars()</refname>
+  <refname>getConfigVars()</refname>
   <refpurpose>returns the given loaded config variable value</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>array</type><methodname>get_config_vars</methodname>
+   <type>array</type><methodname>getConfigVars</methodname>
    <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -17,16 +17,16 @@
    is returned.
   </para>
   <example>
-   <title>get_config_vars()</title>
+   <title>getConfigVars()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
 // get loaded config template var #foo#
-$myVar = $smarty->get_config_vars('foo');
+$myVar = $smarty->getConfigVars('foo');
 
 // get all loaded config template vars
-$all_config_vars = $smarty->get_config_vars();
+$all_config_vars = $smarty->getConfigVars();
 
 // take a look at them
 print_r($all_config_vars);
@@ -36,11 +36,11 @@ print_r($all_config_vars);
   </example>
   <para>
    See also
-  <link linkend="api.clear.config"><varname>clear_config()</varname></link>,
+  <link linkend="api.clear.config"><varname>clearConfig()</varname></link>,
    <link linkend="language.function.config.load"><varname>{config_load}</varname></link>,
-  <link linkend="api.config.load"><varname>config_load()</varname></link>
+  <link linkend="api.config.load"><varname>configLoad()</varname></link>
    and
-  <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>.
+  <link linkend="api.get.template.vars"><varname>getTemplateVars()</varname></link>.
   </para>
  </refsect1>
 </refentry>

@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.load.filter">
  <refnamediv>
-  <refname>load_filter()</refname>
+  <refname>loadFilter()</refname>
   <refpurpose>load a filter plugin</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>load_filter</methodname>
+   <type>void</type><methodname>loadFilter</methodname>
    <methodparam><type>string</type><parameter>type</parameter></methodparam>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
@@ -26,13 +26,13 @@
 <?php
 
 // load prefilter named 'trim'
-$smarty->load_filter('pre', 'trim');
+$smarty->loadFilter('pre', 'trim');
 
 // load another prefilter named 'datefooter'
-$smarty->load_filter('pre', 'datefooter');
+$smarty->loadFilter('pre', 'datefooter');
 
 // load output filter named 'compress'
-$smarty->load_filter('output', 'compress');
+$smarty->loadFilter('output', 'compress');
 
 ?>
 ]]>
@@ -40,9 +40,9 @@ $smarty->load_filter('output', 'compress');
   </example>
   <para>
   See also
-  <link linkend="api.register.prefilter"><varname>register_prefilter()</varname></link>,
-  <link linkend="api.register.postfilter"><varname>register_postfilter()</varname></link>,
-  <link linkend="api.register.outputfilter"><varname>register_outputfilter()</varname></link>,
+  <link linkend="api.register.prefilter"><varname>register-&gt;preFilter()</varname></link>,
+  <link linkend="api.register.postfilter"><varname>register-&gt;postFilter()</varname></link>,
+  <link linkend="api.register.outputfilter"><varname>register-&gt;outpuFilter()</varname></link>,
   <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>
   and
   <link linkend="advanced.features">advanced features</link>.

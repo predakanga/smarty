@@ -49,10 +49,10 @@ $smarty->append(array('city' => 'Lincoln', 'state' => 'Nebraska'));
    </programlisting>
   </example>
   <para>See also
-  <link linkend="api.append.by.ref"><varname>append_by_ref()</varname></link>,
+  <link linkend="api.append.by.ref"><varname>appendByRef()</varname></link>,
   <link linkend="api.assign"><varname>assign()</varname></link>
   and
-  <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>
+  <link linkend="api.get.template.vars"><varname>getTemplateVars()</varname></link>
   </para>
  </refsect1>
 </refentry>

@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.clear.config">
  <refnamediv>
-  <refname>clear_config()</refname>
+  <refname>clearConfig()</refname>
   <refpurpose>clears assigned config variables</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>clear_config</methodname>
+   <type>void</type><methodname>clearConfig</methodname>
    <methodparam choice="opt"><type>string</type><parameter>var</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -18,28 +18,28 @@
    supplied, only that variable is cleared.
   </para>
   <example>
-   <title>clear_config()</title>
+   <title>clearConfig()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 // clear all assigned config variables.
-$smarty->clear_config();
+$smarty->clearConfig();
 
 // clear one variable
-$smarty->clear_config('foobar');
+$smarty->clearConfig('foobar');
 ?>
 ]]>
    </programlisting>
   </example>
   <para>
   See also
-  <link linkend="api.get.config.vars"><varname>get_config_vars()</varname></link>,
+  <link linkend="api.get.config.vars"><varname>getConfigVars()</varname></link>,
   <link linkend="language.config.variables"><varname>config variables</varname></link>,
   <link linkend="config.files"><varname>config files</varname></link>,
   <link linkend="language.function.config.load"><varname>{config_load}</varname></link>,
-  <link linkend="api.config.load"><varname>config_load()</varname></link>
+  <link linkend="api.config.load"><varname>configLoad()</varname></link>
   and
-  <link linkend="api.clear.assign"><varname>clear_assign()</varname></link>.
+  <link linkend="api.clear.assign"><varname>clearAssign()</varname></link>.
   </para>
  </refsect1>
 </refentry>

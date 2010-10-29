@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.clear.cache">
  <refnamediv>
-  <refname>clear_cache()</refname>
+  <refname>cache-&gt;clear()</refname>
   <refpurpose>clears the cache for a specific template</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>clear_cache</methodname>
+   <type>void</type><methodname>cache-&gt;clear</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>cache_id</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>compile_id</parameter>
@@ -40,22 +40,22 @@
   </itemizedlist>
 
   <example>
-   <title>clear_cache()</title>
+   <title>cache-&gt;clear()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 // clear the cache for a template
-$smarty->clear_cache('index.tpl');
+$smarty->cache->clear('index.tpl');
 
 // clear the cache for a particular cache id in an multiple-cache template
-$smarty->clear_cache('index.tpl', 'MY_CACHE_ID');
+$smarty->cache->clear('index.tpl', 'MY_CACHE_ID');
 ?>
 ]]>
    </programlisting>
   </example>
   <para>
   See also
-  <link linkend="api.clear.all.cache"><varname>clear_all_cache()</varname></link>
+  <link linkend="api.clear.all.cache"><varname>cache-&gt;clearAll()</varname></link>
   and
   <link linkend="caching"><varname>caching</varname></link> section.
   </para>

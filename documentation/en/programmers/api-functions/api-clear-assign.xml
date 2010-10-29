@@ -2,37 +2,37 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.clear.assign">
  <refnamediv>
-  <refname>clear_assign()</refname>
+  <refname>clearAssign()</refname>
   <refpurpose>clears the value of an assigned variable</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>clear_assign</methodname>
+   <type>void</type><methodname>clearAssign</methodname>
    <methodparam><type>mixed</type><parameter>var</parameter></methodparam>
   </methodsynopsis>
   <para>
 This  can be a single value, or an array of values.
   </para>
   <example>
-   <title>clear_assign()</title>
+   <title>clearAssign()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 // clear a single variable
-$smarty->clear_assign('Name');
+$smarty->clearAssign('Name');
 
 // clears multiple variables
-$smarty->clear_assign(array('Name', 'Address', 'Zip'));
+$smarty->clearAssign(array('Name', 'Address', 'Zip'));
 ?>
 ]]>
    </programlisting>
   </example>
   <para>
     See also
-    <link linkend="api.clear.all.assign"><varname>clear_all_assign()</varname></link>,
-    <link linkend="api.clear.config"><varname>clear_config()</varname></link>,
-    <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>,
+    <link linkend="api.clear.all.assign"><varname>clearAllAssign()</varname></link>,
+    <link linkend="api.clear.config"><varname>clearConfig()</varname></link>,
+    <link linkend="api.get.template.vars"><varname>getTemplateVars()</varname></link>,
     <link linkend="api.assign"><varname>assign()</varname></link>
     and <link linkend="api.append"><varname>append()</varname></link>
   </para>

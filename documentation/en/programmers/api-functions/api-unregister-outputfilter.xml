@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.outputfilter">
  <refnamediv>
-  <refname>unregister_outputfilter()</refname>
+  <refname>unregister-&gt;outputFilter()</refname>
   <refpurpose>dynamically unregister an output filter</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_outputfilter</methodname>
+   <type>void</type><methodname>unregister-&gt;outputFilter</methodname>
    <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -18,7 +18,7 @@
 <para>
   See also
   <link linkend="api.register.outputfilter">
-  <varname>register_outputfilter()</varname></link>
+  <varname>register-&gt;outputFilter()</varname></link>
   and
   <link linkend="advanced.features.outputfilters">template output filters</link>.
 </para>

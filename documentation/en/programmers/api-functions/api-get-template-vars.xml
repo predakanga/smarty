@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.get.template.vars">
  <refnamediv>
-  <refname>get_template_vars()</refname>
+  <refname>getTemplateVars()</refname>
   <refpurpose>returns  assigned variable value(s)</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>array</type><methodname>get_template_vars</methodname>
+   <type>array</type><methodname>getTemplateVars</methodname>
    <methodparam choice="opt"><type>string</type><parameter>varname</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -17,15 +17,15 @@
    variables are returned.
   </para>
   <example>
-   <title>get_template_vars</title>
+   <title>getTemplateVars</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 // get assigned template var 'foo'
-$myVar = $smarty->get_template_vars('foo');
+$myVar = $smarty->getTemplateVars('foo');
 
 // get all assigned template vars
-$all_tpl_vars = $smarty->get_template_vars();
+$all_tpl_vars = $smarty->getTemplateVars();
 
 // take a look at them
 print_r($all_tpl_vars);
@@ -37,10 +37,10 @@ print_r($all_tpl_vars);
   See also <link linkend="api.assign"><varname>assign()</varname></link>,
   <link linkend="language.function.assign"><varname>{assign}</varname></link>,
   <link linkend="api.append"><varname>append()</varname></link>,
-  <link linkend="api.clear.assign"><varname>clear_assign()</varname></link>,
-  <link linkend="api.clear.all.assign"><varname>clear_all_assign()</varname></link>
+  <link linkend="api.clear.assign"><varname>clearAssign()</varname></link>,
+  <link linkend="api.clear.all.assign"><varname>clearAllAssign()</varname></link>
   and
-  <link linkend="api.get.config.vars"><varname>get_config_vars()</varname></link>
+  <link linkend="api.get.config.vars"><varname>getConfigVars()</varname></link>
   </para>
 
  </refsect1>

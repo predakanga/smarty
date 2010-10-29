@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.compiler.function">
  <refnamediv>
-  <refname>register_compiler_function()</refname>
+  <refname>register-&gt;compilerFunction()</refname>
   <refpurpose>dynamically register a compiler function plugin</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>bool</type><methodname>register_compiler_function</methodname>
+   <type>bool</type><methodname>register-&gt;compilerFunction</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
    <methodparam><type>mixed</type><parameter>impl</parameter></methodparam>
    <methodparam><type>bool</type><parameter>cacheable</parameter></methodparam>
@@ -29,7 +29,7 @@
 <para>
 See also
 <link linkend="api.unregister.compiler.function">
-<varname>unregister_compiler_function()</varname></link>
+<varname>unregister-&gt;compilerFunction()</varname></link>
 and the
 <link linkend="plugins.compiler.functions">plugin compiler functions</link> section.
 </para>

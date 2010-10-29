@@ -67,9 +67,9 @@ $smarty->assign('contact', $db->getRow($sql));
 
   <para>
  See also
- <link linkend="api.assign.by.ref"><varname>assign_by_ref()</varname></link>,
- <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>,
- <link linkend="api.clear.assign"><varname>clear_assign()</varname></link>,
+ <link linkend="api.assign.by.ref"><varname>assignByRef()</varname></link>,
+ <link linkend="api.get.template.vars"><varname>getTemplateVars()</varname></link>,
+ <link linkend="api.clear.assign"><varname>clearAssign()</varname></link>,
  <link linkend="api.append"><varname>append()</varname></link>
  and
  <link linkend="language.function.assign"><varname>{assign}</varname></link>

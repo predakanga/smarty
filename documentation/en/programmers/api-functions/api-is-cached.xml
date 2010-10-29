@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.is.cached">
  <refnamediv>
-  <refname>is_cached()</refname>
+  <refname>isCached()</refname>
   <refpurpose>returns true if there is a valid cache for this template</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>bool</type><methodname>is_cached</methodname>
+   <type>bool</type><methodname>isCached</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>cache_id</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>compile_id</parameter>
@@ -48,24 +48,24 @@
   <note>
   <title>Technical Note</title>
   <para>
-   If <varname>is_cached()</varname> returns &true; it actually loads the
+   If <varname>isCached()</varname> returns &true; it actually loads the
    cached output and stores it internally. Any subsequent call to
    <link linkend="api.display"><varname>display()</varname></link> or
    <link linkend="api.fetch"><varname>fetch()</varname></link>
    will return this internally stored output and does not try to reload
    the cache file. This prevents a race condition that may occur when a
    second process clears the cache between the calls to
-   <varname>is_cached()</varname> and to
+   <varname>isCached()</varname> and to
    <link linkend="api.display"><varname>display()</varname></link>
    in the example above. This also means calls to
-   <link linkend="api.clear.cache"><varname>clear_cache()</varname></link>
+   <link linkend="api.clear.cache"><varname>cache-&gt;clear()</varname></link>
    and other changes of the cache-settings may have no effect after
-   <varname>is_cached()</varname> returned &true;.
+   <varname>isCached()</varname> returned &true;.
   </para>
   </note>
 
   <example>
-   <title>is_cached()</title>
+   <title>isCached()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -82,7 +82,7 @@ $smarty->display('index.tpl');
   </example>
 
   <example>
-   <title>is_cached() with multiple-cache template</title>
+   <title>isCached() with multiple-cache template</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -101,8 +101,8 @@ $smarty->display('index.tpl', 'FrontPage');
 
     <para>
     See also
-    <link linkend="api.clear.cache"><varname>clear_cache()</varname></link>,
-    <link linkend="api.clear.all.cache"><varname>clear_all_cache()</varname></link>,
+    <link linkend="api.clear.cache"><varname>cache-&gt;clear()</varname></link>,
+    <link linkend="api.clear.all.cache"><varname>cache-&gt;clearAll()</varname></link>,
     and
     <link linkend="caching">caching section</link>.
   </para>

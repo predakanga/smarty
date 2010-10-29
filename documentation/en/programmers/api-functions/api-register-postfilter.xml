@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.postfilter">
  <refnamediv>
-  <refname>register_postfilter()</refname>
+  <refname>register-&gt;postFilter()</refname>
   <refpurpose>dynamically register postfilters</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register_postfilter</methodname>
+   <type>void</type><methodname>register-&gt;postFilter</methodname>
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -23,10 +23,10 @@
   <para>
   See also
   <link linkend="api.unregister.postfilter">
-  <varname>unregister_postfilter()</varname></link>,
+  <varname>unregister-&gt;postFilter()</varname></link>,
   <link linkend="api.register.prefilter">
-  <varname>register_prefilter()</varname></link>,
-  <link linkend="api.load.filter"><varname>load_filter()</varname></link>,
+  <varname>register-&gt;preFilter()</varname></link>,
+  <link linkend="api.load.filter"><varname>loadFilter()</varname></link>,
   <link linkend="variable.autoload.filters">
   <parameter>$autoload_filters</parameter></link>
   and the

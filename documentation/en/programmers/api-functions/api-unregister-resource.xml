@@ -2,20 +2,20 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.resource">
  <refnamediv>
-  <refname>unregister_resource()</refname>
+  <refname>unregister-&gt;resource()</refname>
   <refpurpose>dynamically unregister a resource plugin</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_resource</methodname>
+   <type>void</type><methodname>unregister-&gt;resource</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
    Pass in the <parameter>name</parameter> of the resource.
   </para>
   <example>
-   <title>unregister_resource()</title>
+   <title>unregister-&gt;resource()</title>
 <programlisting role="php">
 <![CDATA[
 <?php
@@ -30,7 +30,7 @@ $smarty->unregister_resource('db');
  <para>
  See also
  <link linkend="api.register.resource">
- <varname>register_resource()</varname></link>
+ <varname>register-&gt;resource()</varname></link>
  and
  <link linkend="template.resources">template resources</link>
 </para>

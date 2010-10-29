@@ -2,26 +2,26 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.modifier">
  <refnamediv>
-  <refname>unregister_modifier()</refname>
+  <refname>unregister-&gt;modifier()</refname>
   <refpurpose>dynamically unregister modifier plugin</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_modifier</methodname>
+   <type>void</type><methodname>unregister-&gt;modifier</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
    Pass in the template modifier <parameter>name</parameter>.
   </para>
   <example>
-   <title>unregister_modifier()</title>
+   <title>unregister-&gt;modifier()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
 // we don't want template designers to strip tags from elements
-$smarty->unregister_modifier('strip_tags');
+$smarty->unregister->modifier('strip_tags');
 
 ?>
 ]]>
@@ -29,7 +29,7 @@ $smarty->unregister_modifier('strip_tags');
   </example>
  <para>
   See also
-  <link linkend="api.register.modifier"><varname>register_modifier()</varname></link>
+  <link linkend="api.register.modifier"><varname>register-&gt;modifier()</varname></link>
   and
   <link linkend="plugins.modifiers">plugin modifiers</link>,
  </para>

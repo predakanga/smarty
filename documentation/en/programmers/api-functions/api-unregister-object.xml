@@ -2,19 +2,19 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.object">
  <refnamediv>
-  <refname>unregister_object()</refname>
+  <refname>unregister-&gt;templateObject()</refname>
   <refpurpose>dynamically unregister an object</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_object</methodname>
+   <type>void</type><methodname>unregister-&gt;templateObject</methodname>
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
   </methodsynopsis>
 
  <para>
  See also
- <link linkend="api.register.object"><varname>register_object()</varname></link>
+ <link linkend="api.register.object"><varname>register-&gt;Object()</varname></link>
  and
  <link linkend="advanced.features.objects">objects section</link>
  </para>

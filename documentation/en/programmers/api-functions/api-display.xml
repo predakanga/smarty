@@ -31,10 +31,10 @@
 <?php
 include(SMARTY_DIR.'Smarty.class.php');
 $smarty = new Smarty();
-$smarty->caching = true;
+$smarty->setCaching(true);
 
 // only do db calls if cache doesn't exist
-if(!$smarty->is_cached('index.tpl')) {
+if(!$smarty->isCached('index.tpl')) {
 
   // dummy up some data
   $address = '245 N 50th';
@@ -86,7 +86,7 @@ $smarty->display('db:header.tpl');
   </example>
   <para>
    See also <link linkend="api.fetch"><varname>fetch()</varname></link> and
-   <link linkend="api.template.exists"><varname>template_exists()</varname></link>.
+   <link linkend="api.template.exists"><varname>templateExists()</varname></link>.
   </para>
  </refsect1>
 </refentry>

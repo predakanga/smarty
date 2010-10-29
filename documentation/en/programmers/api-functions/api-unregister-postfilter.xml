@@ -2,20 +2,20 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.postfilter">
  <refnamediv>
-  <refname>unregister_postfilter()</refname>
+  <refname>unregister-&gt;postFilter()</refname>
   <refpurpose>dynamically unregister a postfilter</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_postfilter</methodname>
+   <type>void</type><methodname>unregister-&gt;postFilter</methodname>
    <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
   </methodsynopsis>
 
     <para>
     See also
     <link linkend="api.unregister.postfilter">
-    <varname>register_postfilter()</varname></link>
+    <varname>register-&gt;postFilter()</varname></link>
     and
     <link linkend="plugins.prefilters.postfilters">template post filters</link>.
 </para>

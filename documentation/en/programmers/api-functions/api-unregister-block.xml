@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.block">
  <refnamediv>
-  <refname>unregister_block()</refname>
+  <refname>unregister-&gt;block()</refname>
   <refpurpose>dynamically unregister block function plugins</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_block</methodname>
+   <type>void</type><methodname>unregister-&gt;block</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -19,7 +19,7 @@
 
       <para>
       See also
-      <link linkend="api.register.block"><varname>register_block()</varname></link>
+      <link linkend="api.register.block"><varname>register-&gt;block()</varname></link>
       and
       <link linkend="plugins.block.functions">block functions plugins</link>.
   </para>

@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.modifier">
  <refnamediv>
-  <refname>register_modifier()</refname>
+  <refname>register-&gt;modifier()</refname>
   <refpurpose>dynamically register modifier plugin</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register_modifier</methodname>
+   <type>void</type><methodname>register-&gt;modifier</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
    <methodparam><type>mixed</type><parameter>impl</parameter></methodparam>
   </methodsynopsis>
@@ -20,13 +20,13 @@
 
 
   <example>
-   <title>register_modifier()</title>
+   <title>register-&gt;modifier()</title>
 <programlisting role="php">
 <![CDATA[
 <?php
 
 // let's map PHP's stripslashes function to a Smarty modifier.
-$smarty->register_modifier('ss', 'stripslashes');
+$smarty->register->modifier('ss', 'stripslashes');
 
 ?>
 ]]>
@@ -43,8 +43,8 @@ $smarty->register_modifier('ss', 'stripslashes');
   </example>
    <para>
     See also
-    <link linkend="api.unregister.modifier"><varname>unregister_modifier()</varname></link>,
-    <link linkend="api.register.function"><varname>register_function()</varname></link>,
+    <link linkend="api.unregister.modifier"><varname>unregister-&gt;modifier()</varname></link>,
+    <link linkend="api.register.function"><varname>register-&gt;templateFunction()</varname></link>,
     <link linkend="language.modifiers">modifiers</link> section,
     <link linkend="plugins">extending Smarty with plugins</link>
     and

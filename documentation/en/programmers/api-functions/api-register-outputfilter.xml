@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.outputfilter">
  <refnamediv>
-  <refname>register_outputfilter()</refname>
+  <refname>register-&gt;outputFilter()</refname>
   <refpurpose>dynamically register outputfilters</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register_outputfilter</methodname>
+   <type>void</type><methodname>register-&gt;outputFilter</methodname>
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -24,9 +24,9 @@
    &note.parameter.function;
 <para>
 See also
-<link linkend="api.unregister.outputfilter"><varname>unregister_outputfilter()</varname></link>,
+<link linkend="api.unregister.outputfilter"><varname>unregister-&gt;outputFilter()</varname></link>,
 
-<link linkend="api.load.filter"><varname>load_filter()</varname></link>,
+<link linkend="api.load.filter"><varname>loadFilter()</varname></link>,
 <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>
 and the
 <link linkend="advanced.features.outputfilters">template output filters</link>

@@ -2,26 +2,26 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.function">
  <refnamediv>
-  <refname>unregister_function</refname>
+  <refname>unregister-&gt;templateFunction</refname>
   <refpurpose>dynamically unregister template function plugin</refpurpose>
  </refnamediv>
  <refsect1>
    <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_function</methodname>
+   <type>void</type><methodname>unregister-&gt;templateFunction</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
    Pass in the template function <parameter>name</parameter>.
   </para>
   <example>
-   <title>unregister_function</title>
+   <title>unregister-&gt;templateFunction</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
 // we don't want template designers to have access to system files
-$smarty->unregister_function('fetch');
+$smarty->unregister->templateFunction('fetch');
 
 ?>
 ]]>
@@ -30,7 +30,7 @@ $smarty->unregister_function('fetch');
 
   <para>
   See also <link linkend="api.register.function">
-  <varname>register_function()</varname></link>.
+  <varname>register-&gt;templateFunction()</varname></link>.
 </para>
 
  </refsect1>

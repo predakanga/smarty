@@ -2,20 +2,20 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.unregister.prefilter">
  <refnamediv>
-  <refname>unregister_prefilter()</refname>
+  <refname>unregister-&gt;preFilter()</refname>
   <refpurpose>dynamically unregister a prefilter</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister_prefilter</methodname>
+   <type>void</type><methodname>unregister-&gt;preFilter</methodname>
    <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
   </methodsynopsis>
 
 <para>
       See also
       <link linkend="api.register.prefilter">
-      <varname>register_prefilter()</varname></link>
+      <varname>register-&gt;preFilter()</varname></link>
       and
       <link linkend="plugins.prefilters.postfilters">pre filters</link>.
 </para>

@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.get.registered.object">
  <refnamediv>
-  <refname>get_registered_object()</refname>
+  <refname>getRegisteredObject()</refname>
   <refpurpose>returns a reference to a registered object</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>array</type><methodname>get_registered_object</methodname>
+   <type>array</type><methodname>getRegisteredObject</methodname>
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -18,7 +18,7 @@
    <link linkend="advanced.features.objects">objects</link> page for more info.
   </para>
   <example>
-   <title>get_registered_object()</title>
+   <title>getRegisteredObject()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -26,7 +26,7 @@ function smarty_block_foo($params, $smarty)
 {
   if (isset($params['object'])) {
     // get reference to registered object
-    $obj_ref = $smarty->get_registered_object($params['object']);
+    $obj_ref = $smarty->getRegisteredObject($params['object']);
     // use $obj_ref is now a reference to the object
   }
 }
@@ -36,8 +36,8 @@ function smarty_block_foo($params, $smarty)
   </example>
   <para>
   See also
-  <link linkend="api.register.object"><varname>register_object()</varname></link>,
-  <link linkend="api.unregister.object"><varname>unregister_object()</varname></link>
+  <link linkend="api.register.object"><varname>register-&gt;templateObject()</varname></link>,
+  <link linkend="api.unregister.object"><varname>unregister-&gt;templateObject()</varname></link>
   and
   <link linkend="advanced.features.objects">objects page</link>
   </para>

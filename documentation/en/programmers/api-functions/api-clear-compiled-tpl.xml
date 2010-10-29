@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.clear.compiled.tpl">
  <refnamediv>
-  <refname>clear_compiled_tpl()</refname>
+  <refname>clearCompiledTemplate()</refname>
   <refpurpose>clears the compiled version of the specified template resource</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>clear_compiled_tpl</methodname>
+   <type>void</type><methodname>clearCompiledTemplate</methodname>
    <methodparam choice="opt"><type>string</type><parameter>tpl_file</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>compile_id</parameter>
    </methodparam>
@@ -27,21 +27,21 @@
    This function is for advanced use only, not normally needed.
   </para>
   <example>
-   <title>clear_compiled_tpl()</title>
+   <title>clearCompiledTemplate()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 // clear a specific template resource
-$smarty->clear_compiled_tpl('index.tpl');
+$smarty->clearCompiledTemplate('index.tpl');
 
 // clear entire compile directory
-$smarty->clear_compiled_tpl();
+$smarty->clearCompiledTemplate();
 ?>
 ]]>
    </programlisting>
   </example>
   <para>See also
-  <link linkend="api.clear.cache"><varname>clear_cache()</varname></link>.
+  <link linkend="api.clear.cache"><varname>cache-&gt;clear()</varname></link>.
   </para>
  </refsect1>
 </refentry>

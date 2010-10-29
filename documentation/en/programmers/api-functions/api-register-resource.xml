@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.resource">
  <refnamediv>
-  <refname>register_resource()</refname>
+  <refname>register-&gt;resource()</refname>
   <refpurpose>dynamically register resources</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register_resource</methodname>
+   <type>void</type><methodname>register-&gt;resource</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
    <methodparam><type>array</type><parameter>resource_funcs</parameter></methodparam>
   </methodsynopsis>
@@ -52,11 +52,11 @@
   </para></listitem>
   </itemizedlist>
   <example>
-   <title>register_resource()</title>
+   <title>register-&gt;resource()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
-$smarty->register_resource('db', array(
+$smarty->register->resource('db', array(
                                 'db_get_template',
                                 'db_get_timestamp',
                                 'db_get_secure',
@@ -69,7 +69,7 @@ $smarty->register_resource('db', array(
 
 <para>
   See also
-  <link linkend="api.unregister.resource"><varname>unregister_resource()</varname></link>
+  <link linkend="api.unregister.resource"><varname>unregister-&gt;resource()</varname></link>
   and the
   <link linkend="template.resources">template resources</link> section.
 </para>

@@ -34,10 +34,10 @@
 include('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = true;
+$smarty->setCaching(true);
 
 // only do db calls if cache doesn't exist
-if(!$smarty->is_cached('index.tpl')) {
+if(!$smarty->isCached('index.tpl')) {
 
   // dummy up some data
   $address = '245 N 50th';
@@ -130,7 +130,7 @@ mail($contact['email'], 'Subject', $smarty->fetch('email_body.tpl'));
    <link linkend="api.display"><varname>display()</varname></link>,
    <link linkend="language.function.eval"><varname>{eval}</varname></link>,
    and
-   <link linkend="api.template.exists"><varname>template_exists()</varname></link>.
+   <link linkend="api.template.exists"><varname>templateExists()</varname></link>.
   </para>
  </refsect1>
 </refentry>

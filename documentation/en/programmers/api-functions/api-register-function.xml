@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.function">
  <refnamediv>
-  <refname>register_function()</refname>
+  <refname>register-&gt;templateFunction()</refname>
   <refpurpose>dynamically register template function plugins</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register_function</methodname>
+   <type>void</type><methodname>register-&gt;templateFunction</methodname>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
    <methodparam><type>mixed</type><parameter>impl</parameter></methodparam>
    <methodparam choice="opt"><type>bool</type><parameter>cacheable</parameter></methodparam>
@@ -33,7 +33,7 @@
    <programlisting role="php">
 <![CDATA[
 <?php
-$smarty->register_function('date_now', 'print_current_date');
+$smarty->register->templateFunction('date_now', 'print_current_date');
 
 function print_current_date($params, $smarty)
 {
@@ -62,7 +62,7 @@ function print_current_date($params, $smarty)
 
 <para>
 See also
-<link linkend="api.unregister.function"><varname>unregister_function()</varname></link>
+<link linkend="api.unregister.function"><varname>unregister-&gt;templateFunction()</varname></link>
 and the
 <link linkend="plugins.functions">plugin functions</link> section.
 </para>

@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.prefilter">
  <refnamediv>
-  <refname>register_prefilter()</refname>
+  <refname>register-&gt;preFilter()</refname>
   <refpurpose>dynamically register prefilters</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register_prefilter</methodname>
+   <type>void</type><methodname>register-&gt;preFilter</methodname>
    <methodparam><type>mixed</type><parameter>function</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -24,10 +24,10 @@
 
     <para>
     See also
-    <link linkend="api.unregister.prefilter"><varname>unregister_prefilter()</varname></link>,
-    <link linkend="api.register.postfilter"><varname>register_postfilter()</varname></link>,
-    <link linkend="api.register.outputfilter"><varname>register_ouputfilter()</varname></link>,
-    <link linkend="api.load.filter"><varname>load_filter()</varname></link>,
+    <link linkend="api.unregister.prefilter"><varname>unregister-&gt;preFilter()</varname></link>,
+    <link linkend="api.register.postfilter"><varname>register-&gt;postFilter()</varname></link>,
+    <link linkend="api.register.outputfilter"><varname>register-&gt;ouputFilter()</varname></link>,
+    <link linkend="api.load.filter"><varname>loadFilter()</varname></link>,
     <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>
     and
     <link linkend="advanced.features.outputfilters">template output filters</link>

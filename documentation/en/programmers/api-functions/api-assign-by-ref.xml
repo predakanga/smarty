@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.assign.by.ref">
  <refnamediv>
-  <refname>assign_by_ref()</refname>
+  <refname>assignByRef()</refname>
   <refpurpose>assign values by reference</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>assign_by_ref</methodname>
+   <type>void</type><methodname>assignByRef</methodname>
    <methodparam><type>string</type><parameter>varname</parameter></methodparam>
    <methodparam><type>mixed</type><parameter>var</parameter></methodparam>
   </methodsynopsis>
@@ -24,20 +24,20 @@
     If you assign a variable by reference then change its
     value, the assigned value sees the change as well. For
     <link linkend="advanced.features.objects">objects</link>,
-    <varname>assign_by_ref()</varname> also avoids an in-memory copy of the
+    <varname>assignByRef()</varname> also avoids an in-memory copy of the
     assigned object.
     See the PHP manual on variable referencing for an in-depth
     explanation.
    </para>
   </note>
   <example>
-   <title>assign_by_ref()</title>
+   <title>assignByRef()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 // passing name/value pairs
-$smarty->assign_by_ref('Name', $myname);
-$smarty->assign_by_ref('Address', $address);
+$smarty->assignByRef('Name', $myname);
+$smarty->assignByRef('Address', $address);
 ?>
 ]]>
    </programlisting>
@@ -45,11 +45,11 @@ $smarty->assign_by_ref('Address', $address);
    <para>
    See also
    <link linkend="api.assign"><varname>assign()</varname></link>,
-   <link linkend="api.clear.all.assign"><varname>clear_all_assign()</varname></link>,
+   <link linkend="api.clear.all.assign"><varname>clearAllAssign()</varname></link>,
    <link linkend="api.append"><varname>append()</varname></link>,
    <link linkend="language.function.assign"><varname>{assign}</varname></link>
    and
-    <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>.
+    <link linkend="api.get.template.vars"><varname>getTemplateVars()</varname></link>.
    </para>
 
  </refsect1>
