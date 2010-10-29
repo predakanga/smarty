@@ -3,6 +3,18 @@
   <chapter id="api.variables">
    <title>Smarty Class Variables</title>
 
+   <para>
+      These are all of the available Smarty class variables. You can access them directly,
+      or use the corresponding setter/getter methods.
+   </para>
+
+<note><para>
+  All class variables have magic setter/getter methods available. setter/getter methods
+  are camelCaseFormat, unlike the variable itself. So for example, you can set and get the
+  $smarty-&gt;template_dir variable
+  with $smarty-&gt;setTemplateDir($dir) and $dir = $smarty-&gt;getTemplateDir() respectively.
+</para></note>
+
 &programmers.api-variables.variable-template-dir;
 &programmers.api-variables.variable-compile-dir;
 &programmers.api-variables.variable-config-dir;
