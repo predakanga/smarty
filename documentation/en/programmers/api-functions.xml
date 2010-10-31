@@ -13,6 +13,8 @@
 &programmers.api-functions.api-clear-compiled-tpl;
 &programmers.api-functions.api-clear-config;
 &programmers.api-functions.api-config-load;
+&programmers.api-functions.api-create-data;
+&programmers.api-functions.api-create-template;
 &programmers.api-functions.api-display;
 &programmers.api-functions.api-fetch;
 &programmers.api-functions.api-get-config-vars;
