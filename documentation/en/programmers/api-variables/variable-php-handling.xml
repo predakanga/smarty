@@ -5,7 +5,7 @@
       <para>
        This tells Smarty how to handle PHP code embedded in the
        templates. There are four possible settings, the default being
-       <constant>SMARTY_PHP_PASSTHRU</constant>. Note that this does NOT affect
+       <constant>Smarty::PHP_PASSTHRU</constant>. Note that this does NOT affect
        php code within <link linkend="language.function.php">
        <varname>{php}{/php}</varname></link> tags in the template.
       </para>
@@ -13,20 +13,20 @@
 
       <itemizedlist>
        <listitem><para>
-       <constant>SMARTY_PHP_PASSTHRU</constant> - Smarty echos tags as-is.
+       <constant>Smarty::PHP_PASSTHRU</constant> - Smarty echos tags as-is.
        </para></listitem>
 
        <listitem><para>
-       <constant>SMARTY_PHP_QUOTE</constant> - Smarty quotes the tags as
+       <constant>Smarty::PHP_QUOTE</constant> - Smarty quotes the tags as
          html entities.
          </para></listitem>
 
        <listitem><para>
-       <constant>SMARTY_PHP_REMOVE</constant> - Smarty removes the tags from
+       <constant>Smarty::PHP_REMOVE</constant> - Smarty removes the tags from
          the templates.</para></listitem>
 
        <listitem><para>
-       <constant>SMARTY_PHP_ALLOW</constant> - Smarty will execute the tags
+       <constant>Smarty::PHP_ALLOW</constant> - Smarty will execute the tags
          as PHP code.</para></listitem>
       </itemizedlist>
 
