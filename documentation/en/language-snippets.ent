@@ -23,6 +23,43 @@
  </para>
 </note>'>
 
+<!ENTITY parameter.cacheid '<listitem>
+<para>
+<parameter>cache_id</parameter> is an optional parameter. You can
+ also set the <link linkend="variable.cache.id">
+ <parameter>$cache_id</parameter></link> variable once instead of passing
+  this to each call to this function. It is used in the event that you want to 
+  cache different content of the same template, such as pages for displaying different products. See also the <link linkend="caching">caching
+   section</link> for more information.
+</para>
+</listitem>'>
+
+<!ENTITY parameter.compileid2 '<listitem>
+<para>
+<parameter>compile_id</parameter> is an optional parameter. You can
+ also set the <link linkend="variable.compile.id">
+ <parameter>$compile_id</parameter></link> variable once instead of passing
+  this to each call to this function. It is used in the event that you want to compile different versions of
+ the same template, such as having separate templates compiled
+ for different languages.
+</para>
+</listitem>'>
+
+<!ENTITY parameter.parent '<listitem>
+<para>
+<parameter>parent</parameter> is an optional parameter. It is an uplink to the main Smarty object, 
+a user-created data object or to another user-created template object. These objects can be chained.
+The template can access only variables assigned to any of the objects in the parent chain.
+</para>
+</listitem>'>
+
+<!ENTITY parameter.data '<listitem>
+<para>
+<parameter>data</parameter> is an optional parameter. It is an associative array
+   containing the name/value pairs of variables which get assigned to the object.
+</para>
+</listitem>'>
+
 <!ENTITY parameter.compileid '<para>
  As an optional third parameter, you can pass a
  <parameter>$compile_id</parameter>.
