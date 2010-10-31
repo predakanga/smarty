@@ -27,6 +27,7 @@
 &programmers.api-variables.variable-compile-check;
 &programmers.api-variables.variable-force-compile;
 &programmers.api-variables.variable-caching;
+&programmers.api-variables.variable-cache-id;
 &programmers.api-variables.variable-cache-dir;
 &programmers.api-variables.variable-cache-lifetime;
 &programmers.api-variables.variable-cache-handler-func;
