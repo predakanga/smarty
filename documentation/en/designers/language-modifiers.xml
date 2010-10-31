@@ -94,8 +94,8 @@
    the Smarty distribution.
   </para></listitem>
    <listitem><para>
-   Secondly - if <link linkend="variable.security">
-   <parameter>$security</parameter></link> is enabled, all php-functions that
+   Secondly - if
+   <parameter>$security</parameter> is enabled, all php-functions that
    are to be used as modifiers have to be declared trusted in the
    <literal>MODIFIER_FUNCS</literal> element of the
    <link linkend="variable.security.settings">
