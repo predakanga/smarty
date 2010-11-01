@@ -4,7 +4,7 @@
  <title>{$smarty} reserved variable</title>
  <para>
   The PHP reserved <parameter>{$smarty}</parameter> variable can be used to
-  access several enviroment and request variables.
+  access several environment and request variables.
   The full list of them follows.
  </para>
 

@@ -31,7 +31,7 @@
   multiple domains / multiple virtual hosts.
  </para>
  <example>
-  <title>$compile_id in a virtual host enviroment</title>
+  <title>$compile_id in a virtual host environment</title>
   <programlisting role="php">
 <![CDATA[
 <?php
