@@ -520,11 +520,12 @@ objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 // function
 //
 function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->security || $this->smarty->security_handler->isTrustedPhpFunction(f, $this->compiler)) {
-																					            if (f == 'isset' || f == 'empty' || f == 'array' || is_callable(f)) {
-																					                if (f == 'isset') {
+																					            if (strcasecmp(f,'isset') === 0 || strcasecmp(f,'empty') === 0 || strcasecmp(f,'array') === 0 || is_callable(f)) {
+																					                if (strcasecmp(f,'isset') === 0) {
 																					                  res = '('. p .' !== null)';
-																					                } elseif (f == 'empty'){
-																					                  res = 'in_array('. p .',array("",null,false,0,"0",array()))';
+																					                } elseif (strcasecmp(f,'empty') === 0){
+																					                   $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.p.';?>';
+																					                  res = 'empty($_tmp'.$this->prefix_number.')';
 																					                } else {
 																					                  res = f . "(". p .")";
 																					                }
