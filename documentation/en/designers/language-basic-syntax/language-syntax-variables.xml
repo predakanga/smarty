@@ -104,6 +104,13 @@ Direct PHP function access:
   </programlisting>
  </example>
 
+ <note><para>
+    Although Smarty can handle some very complex expressions and syntax, it is a good rule of
+    thumb to keep the template syntax minimal and focused on presentation. If you find your
+    template syntax getting too complex, it may be a good idea to move the bits that do not
+    deal explicitly with presentation to PHP by way of plugins or modifiers.
+ </para></note>
+
  <para>Request variables such as <literal>$_GET</literal>,
  <literal>$_SESSION</literal>, etc are available via the
  reserved <link linkend="language.variables.smarty">

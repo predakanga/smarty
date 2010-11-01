@@ -22,7 +22,7 @@
       <para>
       See also
       <link linkend="language.function.debug"><varname>{debug}</varname></link>,
-      <link linkend="variable.debug.tpl"><parameter>$debug_tpl</parameter></link>,
+      <link linkend="variable.debug_template"><parameter>$debug_tpl</parameter></link>,
       and <link linkend="variable.debugging.ctrl"><parameter>$debugging_ctrl</parameter></link>.
       </para>
 </sect1>

@@ -20,7 +20,7 @@
 &programmers.api-variables.variable-config-dir;
 &programmers.api-variables.variable-plugins-dir;
 &programmers.api-variables.variable-debugging;
-&programmers.api-variables.variable-debug-tpl;
+&programmers.api-variables.variable-debug-template;
 &programmers.api-variables.variable-debugging-ctrl;
 &programmers.api-variables.variable-auto-literal;
 &programmers.api-variables.variable-autoload-filters;

@@ -14,7 +14,7 @@
   </para>
   <para>
   Set  <link linkend="variable.debugging"><parameter>$debugging</parameter></link>
-  to &true; in Smarty, and if needed set <link linkend="variable.debug.tpl">
+  to &true; in Smarty, and if needed set <link linkend="variable.debug_template">
   <parameter>$debug_tpl</parameter></link> to the template resource path to
   <literal>debug.tpl</literal> (this is in <link linkend="constant.smarty.dir">
   <constant>SMARTY_DIR</constant></link> by default).

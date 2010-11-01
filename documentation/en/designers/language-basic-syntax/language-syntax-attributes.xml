@@ -20,34 +20,42 @@
   <title>function attribute syntax</title>
   <programlisting>
 <![CDATA[
-{include file='header.tpl'}
+{include file="header.tpl"}
 
-{include file='header.tpl' nocache}  <--- is equivalent to {include file='header.tpl' nocache=true}
+{include file="header.tpl" nocache}  // is equivalent to nocache=true
 
-{include file='header.tpl' attrib_name='attrib value'}
+{include file="header.tpl" attrib_name="attrib value"}
 
 {include file=$includeFile}
 
-{include file=#includeFile# title='Smarty is cool'}
+{include file=#includeFile# title="My Title"}
 
-{assign var=foo value={counter}}  <--- plugin result
+{assign var=foo value={counter}}  // plugin result
 
-{assign var=foo value=substr($bar,2,5)}  <--- PHP function result
+{assign var=foo value=substr($bar,2,5)}  // PHP function result
 
-{assign var=foo value=$bar|strlen}  <--- using modifer
+{assign var=foo value=$bar|strlen}  // using modifer
 
-{assign var=foo value=$buh+$bar|strlen}  <--- more complex expresiion
+{assign var=foo value=$buh+$bar|strlen}  // more complex expresiion
 
 {html_select_date display_days=true}
 
-{mailto address='smarty@example.com'}
+{mailto address="smarty@example.com"}
 
-<select name='company_id'>
+<select name="company_id">
   {html_options options=$companies selected=$company_id}
 </select>
 ]]>
   </programlisting>
  </example>
+ 
+ <note><para>
+    Although Smarty can handle some very complex expressions and syntax, it is a good rule of
+    thumb to keep the template syntax minimal and focused on presentation. If you find your
+    template syntax getting too complex, it may be a good idea to move the bits that do not
+    deal explicitly with presentation to PHP by way of plugins or modifiers.
+ </para></note>
+ 
 </sect1>
 <!-- Keep this comment at the end of the file
 Local variables:

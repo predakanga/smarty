@@ -3,16 +3,12 @@
 <sect1 id="language.function.shortform.assign">
  <title>{$var=...}</title>
  <para>
-  Smarty3 does introduce a new PHP like sytax for assigning template variables
-  <emphasis role="bold">during the execution  of a template</emphasis>.
+  This is a short-hand version of the {assign} function. You can
+  assign values directly to the template, or assign values to array elements too.
  </para>
 
  <para>
-  It offers also the possibility to assign values to array elements.
- </para>
- 
- <para>
-  The follwoing attributes can be added to the tag:
+  The following attributes can be added to the tag:
  </para>
  
  <para><emphasis role="bold">Attributes:</emphasis></para>
@@ -87,7 +83,7 @@ The value of $name is Bob.
  </example>
 
  <example>
-  <title>Assignment with some maths</title>
+  <title>Assignment with math</title>
   <programlisting>
 <![CDATA[
 {$running_total=$running_total+$some_array[row].some_value}
@@ -99,7 +95,7 @@ The value of $name is Bob.
   <title>Assignment of an array element</title>
   <programlisting>
 <![CDATA[
-{$user['name']='Bob'}
+{$user.name="Bob"}
 ]]>
   </programlisting>
  </example>
@@ -108,7 +104,7 @@ The value of $name is Bob.
   <title>Assignment of an multidimensional array element</title>
   <programlisting>
 <![CDATA[
-{$user['name']['first']='Bob'}
+{$user.name.first="Bob"}
 ]]>
   </programlisting>
  </example>
@@ -117,7 +113,7 @@ The value of $name is Bob.
   <title>Appending an array</title>
   <programlisting>
 <![CDATA[
-{$users[]='Bob'}
+{$users[]="Bob"}
 ]]>
   </programlisting>
  </example>
@@ -127,7 +123,7 @@ The value of $name is Bob.
   <para>Variables assigned in the included template will be seen in the including template.</para>
   <programlisting>
 <![CDATA[
-{include file='sub_template.tpl'}
+{include file="sub_template.tpl"}
 ...
 {* display variable assigned in sub_template *}
 {$foo}<br>
@@ -139,9 +135,9 @@ The value of $name is Bob.
 <![CDATA[
 ...
 {* foo will be known also in the including template *}
-{$foo='something' scope=parent}
+{$foo="something" scope=parent}
 {* bar is assigned only local in the including template *}
-{$bar='value'}
+{$bar="value"}
 ...
 ]]>
 </programlisting>

@@ -7,6 +7,11 @@
    <emphasis role="bold">during the execution  of a template</emphasis>.
  </para>
 
+ <note><para>
+    See also the <link linkend="language.function.shortform.assign"><varname>short-form</varname></link> 
+    method of assigning template vars.
+ </para></note>
+
  <para><emphasis role="bold">Attributes:</emphasis></para>
  <informaltable frame="all">
   <tgroup cols="6">
@@ -79,26 +84,8 @@
   <title>{assign}</title>
   <programlisting>
 <![CDATA[
-{assign var='name' value='Bob'}
-
-The value of $name is {$name}.
-]]>
-  </programlisting>
-  <para>
-   The above example will output:
-  </para>
-  <screen>
-<![CDATA[
-The value of $name is Bob.
-]]>
-  </screen>
- </example>
-
- <example>
-  <title>{assign} shortform</title>
-  <programlisting>
-<![CDATA[
-{assign 'name' 'Bob'}
+{assign var="name" value="Bob"}
+{assign "name" "Bob"} {* short-hand *}
 
 The value of $name is {$name}.
 ]]>
@@ -117,7 +104,8 @@ The value of $name is Bob.
   <title>{assign} as a nocache variable</title>
   <programlisting>
 <![CDATA[
-{assign 'name' 'Bob' nocache}
+{assign var="name" value="Bob" nocache}
+{assign "name" "Bob" nocache} {* short-hand *}
 
 The value of $name is {$name}.
 ]]>
@@ -136,7 +124,7 @@ The value of $name is Bob.
   <title>{assign} with some maths</title>
   <programlisting>
 <![CDATA[
-{assign var=running_total value=$running_total+$some_array[row].some_value}
+{assign var=running_total value=$running_total+$some_array[$row].some_value}
 ]]>
   </programlisting>
 
@@ -147,7 +135,7 @@ The value of $name is Bob.
   <para>Variables assigned in the included template will be seen in the including template.</para>
   <programlisting>
 <![CDATA[
-{include file='sub_template.tpl'}
+{include file="sub_template.tpl"}
 ...
 {* display variable assigned in sub_template *}
 {$foo}<br>
@@ -159,9 +147,9 @@ The value of $name is Bob.
 <![CDATA[
 ...
 {* foo will be known also in the including template *}
-{assign 'foo' 'something' scope=parent}
+{assign var="foo" value="something" scope=parent}
 {* bar is assigned only local in the including template *}
-{assign 'bar' 'value'}
+{assign var="bar" value="value"}
 ...
 ]]>
 </programlisting>
@@ -172,7 +160,7 @@ The value of $name is Bob.
   <para>You can assign a variable to root of the current root tree. The variable is seen by all templates using the same root tree.</para>
   <programlisting>
 <![CDATA[
-{assign var=foo value='bar' scope='root'}
+{assign var=foo value="bar" scope="root"}
 ]]>
   </programlisting>
   
@@ -183,7 +171,7 @@ The value of $name is Bob.
   <para>A glkobal variable is seen by all templates.</para>
   <programlisting>
 <![CDATA[
-{assign var=foo value='bar' scope='global'}
+{assign var=foo value="bar" scope="global"}
 ]]>
   </programlisting>
   
@@ -199,7 +187,7 @@ The value of $name is Bob.
   </para>
 <programlisting>
 <![CDATA[
-{assign var='foo' value='Smarty'}
+{assign var="foo" value="Smarty"}
 ]]>
 </programlisting>
 <para>The template variables are only available after/during template
@@ -210,18 +198,18 @@ execution as in the following script.
 <?php
 
 // this will output nothing as the template has not been executed
-echo $smarty->get_template_vars('foo');
+echo $smarty->getTemplateVars('foo');
 
 // fetch the template to a variable
 $whole_page = $smarty->fetch('index.tpl');
 
 // this will output 'smarty' as the template has been executed
-echo $smarty->get_template_vars('foo');
+echo $smarty->getTemplateVars('foo');
 
 $smarty->assign('foo','Even smarter');
 
 // this will output 'Even smarter'
-echo $smarty->get_template_vars('foo');
+echo $smarty->getTemplateVars('foo');
 
 ?>
 ]]>
@@ -248,7 +236,9 @@ echo $smarty->get_template_vars('foo');
  </para>
 
  <para>
- See also <link linkend="api.assign"><varname>assign()</varname></link>
+ See also
+  <link linkend="language.function.shortform.assign"><varname>{$var=...}</varname></link>,
+ <link linkend="api.assign"><varname>assign()</varname></link>
    and
   <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>.
  </para>

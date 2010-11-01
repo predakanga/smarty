@@ -51,8 +51,8 @@
   <note>
    <para>
     For historical reasons <parameter>{$SCRIPT_NAME}</parameter> can be accessed
-    directly, although <parameter>{$smarty.server.SCRIPT_NAME}</parameter> is the
-    proposed way to access this value.
+    directly, although <parameter>{$smarty.server.SCRIPT_NAME}</parameter> works
+    as well.
    </para>
 <programlisting>
 <![CDATA[
@@ -61,6 +61,12 @@
 ]]>
 </programlisting>
   </note>
+  <note><para>
+    Although Smarty provides direct access to PHP super globals for convenience,
+    it should be used with caution. Specifically, GET and POST and REQUEST are commonly used
+    for presentation purposes, but direct access to SERVER, ENV, COOKIE and SESSION vars is
+    typically avoided, as this is mixing underlying application code structure into the templates.
+  </para></note>
  </sect2>
 
  <sect2 id="language.variables.smarty.now">
@@ -104,6 +110,7 @@ define('MY_CONST_VAL','CHERRIES');
 ]]>
 </programlisting>
 </informalexample>
+
 <para>Output the constant in a template with</para>
 <informalexample>
 <programlisting>
@@ -112,6 +119,13 @@ define('MY_CONST_VAL','CHERRIES');
 ]]>
 </programlisting>
 </informalexample>
+
+<note><para>
+  Although Smarty provides direct access to PHP constants for convenience,
+  it should be used with caution as this is mixing underlying application
+  code structure into the templates.
+</para></note>
+
  </sect2>
 
  <sect2 id="language.variables.smarty.capture">
@@ -154,27 +168,16 @@ define('MY_CONST_VAL','CHERRIES');
  <sect2 id="language.variables.smarty.template">
   <title>{$smarty.template}</title>
   <para>
-   Returns the name of the current template being  processed.
-   The following example shows the <filename>container.tpl</filename> and the
-   included <filename>banner.tpl</filename> with
-   <parameter>{$smarty.template}</parameter> within both.
+   Returns the name of the current template being  processed (without the directory.)
   </para>
-<programlisting>
-<![CDATA[
-<b>Main container is {$smarty.template}</b>
-{include file='banner.tpl'}
-]]>
-</programlisting>
-    <para>
-    will output
-    </para>
-<programlisting>
-<![CDATA[
-<b>Main page is container.tpl</b>
-banner.tpl
-]]>
-</programlisting>
  </sect2>
+
+  <sect2 id="language.variables.smarty.current_dir">
+   <title>{$smarty.current_dir}</title>
+   <para>
+    Returns the name of the directory for the current template being processed.
+   </para>
+  </sect2>
 
  <sect2 id="language.variables.smarty.version">
   <title>{$smarty.version}</title>
@@ -194,11 +197,6 @@ banner.tpl
    Returns block text from child template.
    See <link linkend="advanced.features.template.inheritance">Template interitance</link>.
   </para>
-<programlisting>
-<![CDATA[
-<div id="footer">Powered by Smarty {$smarty.version}</div>
-]]>
-</programlisting>
  </sect2>
 
  <sect2 id="language.variables.smarty.block.parent">
@@ -207,11 +205,6 @@ banner.tpl
    Returns block text from parent template.
    See <link linkend="advanced.features.template.inheritance">Template interitance</link>
   </para>
-<programlisting>
-<![CDATA[
-<div id="footer">Powered by Smarty {$smarty.version}</div>
-]]>
-</programlisting>
  </sect2>
 
  <sect2 id="language.variables.smarty.ldelim">

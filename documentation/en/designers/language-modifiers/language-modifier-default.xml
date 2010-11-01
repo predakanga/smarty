@@ -7,16 +7,6 @@
      is unset or an empty string, the given default value is printed instead.
      Default takes the one argument.
   </para>
-     <para>
-     <note>
-      <para>
-       With <ulink url="&url.php-manual;error_reporting">
-       <varname>error_reporting(E_ALL)</varname></ulink>,
-       undeclared variables will always throw an error within the template.
-       This function is useful for replacing null or zero length strings.
-    </para>
-    </note>
-    </para>
 
   <informaltable frame="all">
    <tgroup cols="5">

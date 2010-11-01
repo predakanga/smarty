@@ -6,8 +6,8 @@
     You have the choice to assign variables to the scope of the main Smarty object, 
     data objects created with <link linkend="api.create.data"><varname>createData()</varname></link>,
     and template objects created with <link linkend="api.create.template"><varname>createTemplate()</varname></link>. 
-    These objects can be chained. A template does see all the variables of it's own object and all variables assigned 
-    to the objects in its chain of parent object. 
+    These objects can be chained. A template sees all the variables of its own object and all variables assigned 
+    to the objects in its chain of parent objects. 
    </para>
    <para>
     By default templates which are rendered by <link linkend="api.display"><varname>$smarty->display(...)</varname></link>
@@ -44,13 +44,13 @@ $tpl->assign('bar','bar-template');
 $tpl2 = $smarty->createTemplate('index.tpl',$smarty);
 $tpl2->assign('bar','bar-template2');
 
-// This display() does see $foo='smarty' form the $smarty object
+// This display() does see $foo='smarty' from the $smarty object
 $smarty->display('index.tpl');
 
-// This display() does see $foo='data' and $bar='bar-data' form the data object $data
+// This display() does see $foo='data' and $bar='bar-data' from the data object $data
 $smarty->display('index.tpl',$data);
 
-// This display() does see $foo='data' from  the data object $data 
+// This display() does see $foo='data' from the data object $data 
 // and $bar='bar-data2' from the data object $data2
 $smarty->display('index.tpl',$data2);
 

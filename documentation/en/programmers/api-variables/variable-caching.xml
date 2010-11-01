@@ -6,9 +6,9 @@
 	   This tells Smarty whether or not to cache the output of the templates
 	   to the <link linkend="variable.cache.dir">
        <parameter>$cache_dir</parameter></link>.
-	   By default this is set to 0 ie disabled. If your templates generate
-	   redundant content, it is advisable to turn on
-       <parameter>$caching</parameter>, as this  will result in significant
+	   By default this is set to the constant SMARTY_CACHING_OFF. If your templates consistently generate
+	   the same content, it is advisable to turn on
+       <parameter>$caching</parameter>, as this may result in significant
        performance gains.
 	   </para>
 
@@ -20,21 +20,21 @@
 
 	   <itemizedlist>
 	   <listitem><para>
-	   A value of 1 or 2 enables caching.
-       </para></listitem>
+	   A constant value of SMARTY_CACHING_LIFETIME_CURRENT or SMARTY_CACHING_LIFETIME_SAVED enables caching.
+     </para></listitem>
 
        <listitem><para>
-       A value of 1 tells  Smarty to use the current
+       A value of SMARTY_CACHING_LIFETIME_CURRENT tells  Smarty to use the current
 	   <link linkend="variable.cache.lifetime"><parameter>$cache_lifetime</parameter></link>
 	   variable to determine if the  cache has expired.
        </para></listitem>
-   		<listitem><para>A value of 2 tells Smarty to use the
+   		<listitem><para>A value of SMARTY_CACHING_LIFETIME_SAVED tells Smarty to use the
        <link linkend="variable.cache.lifetime"><parameter>$cache_lifetime</parameter></link>
 	   value at the time the cache was generated.  This way you can set the
       <link linkend="variable.cache.lifetime"> <parameter>$cache_lifetime</parameter></link>
    just before <link linkend="api.fetch">fetching</link>
    the template to have granular control over when that particular cache expires.
-	   See also <link linkend="api.is.cached"><varname>is_cached()</varname></link>.
+	   See also <link linkend="api.is.cached"><varname>isCached()</varname></link>.
            </para></listitem>
 
       <listitem><para>

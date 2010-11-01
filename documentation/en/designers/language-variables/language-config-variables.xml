@@ -5,11 +5,12 @@
   <para>
  Variables that are loaded from the
  <link linkend="config.files">config files</link>
- are referenced by enclosing them within <literal>#hash marks#</literal>,
+ are referenced by enclosing them within <literal>#hash_marks#</literal>,
  or with the smarty variable
  <link linkend="language.variables.smarty.config">
  <parameter>$smarty.config</parameter></link>.
-  The later syntax is useful for embedding into quoted attribute values.
+  The later syntax is useful for embedding into quoted attribute values, or
+  accessing variable values such as $smarty.config.$foo.
   </para>
    <example>
     <title>config variables</title>

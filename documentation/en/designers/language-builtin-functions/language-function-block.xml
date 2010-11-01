@@ -13,7 +13,7 @@
    <para>
     Optionally <varname>{block}</varname> areas of child and parent templates can be merged into each other. You can append or prepend the parent <varname>{block}</varname>
      content by using the <literal>append</literal> or <literal>prepend</literal> option flag with the childs <varname>{block}</varname> definition. With the {$smarty.block.parent} the <varname>{block}</varname> content 
-    of the parent template can be inserted at any location of the child <varname>{block}</varname> content. {$smarty.block.child} does insert the <varname>{block}</varname> content of 
+    of the parent template can be inserted at any location of the child <varname>{block}</varname> content. {$smarty.block.child} inserts the <varname>{block}</varname> content of 
     the child template at any location of the parent <varname>{block}</varname>.
    </para>
    <para><varname>{blocks}'s</varname> can be nested.
@@ -85,7 +85,7 @@
 <![CDATA[
 <html>
   <head>
-    <title>{block name='title'}Default Title{/block}</title>
+    <title>{block name="title"}Default Title{/block}</title>
   </head>
 </html>
 ]]>
@@ -93,8 +93,8 @@
   <para>child.tpl</para>
   <programlisting>
 <![CDATA[
-{extends file='parent.tpl'} 
-{block name='title'}
+{extends file="parent.tpl"} 
+{block name="title"}
 Page Title
 {/block}
 ]]>
@@ -118,7 +118,7 @@ Page Title
 <![CDATA[
 <html>
   <head>
-    <title>{block name='title'}Title - {/block}</title>
+    <title>{block name="title"}Title - {/block}</title>
   </head>
 </html>
 ]]>
@@ -126,8 +126,8 @@ Page Title
   <para>child.tpl</para>
   <programlisting>
 <![CDATA[
-{extends file='parent.tpl'} 
-{block name='title' prepend}
+{extends file="parent.tpl"} 
+{block name="title" prepend}
 Page Title
 {/block}
 ]]>
@@ -151,7 +151,7 @@ Page Title
 <![CDATA[
 <html>
   <head>
-    <title>{block name='title'} is my titel{/block}</title>
+    <title>{block name="title"} is my titel{/block}</title>
   </head>
 </html>
 ]]>
@@ -159,8 +159,8 @@ Page Title
   <para>child.tpl</para>
   <programlisting>
 <![CDATA[
-{extends file='parent.tpl'} 
-{block name='title' append}
+{extends file="parent.tpl"} 
+{block name="title" append}
 Page Title
 {/block}
 ]]>
@@ -184,7 +184,7 @@ Page Title
 <![CDATA[
 <html>
   <head>
-    <title>{block name='title'}The {$smarty.block.child} was inserted here{/block}</title>
+    <title>{block name="title"}The {$smarty.block.child} was inserted here{/block}</title>
   </head>
 </html>
 ]]>
@@ -192,8 +192,8 @@ Page Title
   <para>child.tpl</para>
   <programlisting>
 <![CDATA[
-{extends file='parent.tpl'} 
-{block name='title' append}
+{extends file="parent.tpl"} 
+{block name="title" append}
 Child Title
 {/block}
 ]]>
@@ -216,7 +216,7 @@ Child Title
 <![CDATA[
 <html>
   <head>
-    <title>{block name='title'}Parent Title{/block}</title>
+    <title>{block name="title"}Parent Title{/block}</title>
   </head>
 </html>
 ]]>
@@ -224,8 +224,8 @@ Child Title
   <para>child.tpl</para>
   <programlisting>
 <![CDATA[
-{extends file='parent.tpl'} 
-{block name='title' append}
+{extends file="parent.tpl"} 
+{block name="title" append}
 You will see now - {$smarty.block.parent} - here
 {/block}
 ]]>

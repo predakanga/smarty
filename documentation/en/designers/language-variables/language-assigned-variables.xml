@@ -3,17 +3,13 @@
 <sect1 id="language.assigned.variables">
  <title>Variables assigned from PHP</title>
  <para>
-  Variables that are
-  <link linkend="api.assign">assigned</link> from PHP are referenced by
-  preceding them with a dollar sign <literal>$</literal> (like php).
-  Variables assigned from within a  template with the
-  <link linkend="language.function.assign"><varname>{assign}</varname></link>
-  function are also displayed this way.
+  Assigned variables that are referenced by
+  preceding them with a dollar (<literal>$</literal>) sign.
  </para>
 
  <example>
   <title>Assigned variables</title>
-   <para> php script</para>
+   <para>PHP code</para>
 <programlisting role="php">
 <![CDATA[
 <?php
@@ -30,7 +26,7 @@ $smarty->display('index.tpl');
 ]]>
 </programlisting>
      <para>
-      where the content of <filename>index.tpl</filename> is:
+      <filename>index.tpl</filename> source:
      </para>
 <programlisting>
 <![CDATA[
@@ -60,8 +56,7 @@ This weeks meeting is in New York.
  <sect2 id="language.variables.assoc.arrays">
   <title>Associative arrays</title>
   <para>
-   You can also reference associative array variables that are
-   assigned from PHP by specifying the key after the '.' (period)
+   You can also reference associative array variables by specifying the key after a dot "."
    symbol.
   </para>
   <example>
@@ -81,7 +76,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    where the content of <filename>index.tpl</filename> is:
+    <filename>index.tpl</filename> source:
    </para>
    <programlisting>
 <![CDATA[
@@ -128,7 +123,7 @@ $smarty->display('index.tpl');
 ]]>
    </programlisting>
    <para>
-    where <filename>index.tpl</filename> is:
+    <filename>index.tpl</filename> source:
    </para>
    <programlisting>
 <![CDATA[

@@ -29,8 +29,8 @@
   </programlisting>
 </example>
 <note>
-<title>Top Tip</title>
-<para>An easy way to examine Smarty variables is with the
+<title>Note</title>
+<para>An easy way to examine assigned Smarty variables is with the
 <link linkend="chapter.debugging.console">debugging console</link>.
 </para>
 </note>

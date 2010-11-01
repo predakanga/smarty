@@ -3,7 +3,7 @@
 <sect1 id="variable.cache.id">
  <title>$cache_id</title>
  <para>
-  Persistant cache_id identifier. As an alternative to passing the same
+  Persistent cache_id identifier. As an alternative to passing the same
   <parameter>$cache_id</parameter> to each and every function call, you can set this
   <parameter>$cache_id</parameter> and it will be used implicitly thereafter.
  </para>

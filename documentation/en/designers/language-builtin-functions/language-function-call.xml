@@ -116,9 +116,9 @@
 
 
   <example>
-    <title>Using shorthands for template function names</title>
+    <title>Using short-hand syntax for template function names</title>
    <para>
-    This is the skeleton of the example above using shorthands for the template function name.
+    This is the skeleton of the example above using short-hand syntax for the template function names.
    </para> 
    
     <programlisting>

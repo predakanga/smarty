@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
-     <sect1 id="variable.debug.tpl">
+     <sect1 id="variable.debug_template">
       <title>$debug_tpl</title>
       <para>
 	   This is the name of the template file used for the debugging console. By

@@ -8,6 +8,14 @@
      <varname>preg_replace()</varname></ulink> syntax from the PHP manual.
   </para>
 
+  <note><para>
+    Although Smarty supplies this regex convenience modifier, it is usually better to apply
+    regular expressions in PHP, either via custom functions or modifiers. Regular expressions
+    are considered application code and are not part of presentation logic.
+  </para></note>
+
+  <para>Parameters</para>
+
   <informaltable frame="all">
    <tgroup cols="5">
     <colspec colname="param" align="center" />
@@ -76,6 +84,7 @@ Infertility unlikely to be passed on, experts say.
 ]]>
    </screen>
   </example>
+  
   <para>
    See also <link linkend="language.modifier.replace">
    <varname>replace</varname></link>

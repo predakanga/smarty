@@ -10,18 +10,20 @@
   <link linkend="language.function.ldelim">delimiters</link> for Smarty.
  </para>
 
- <para>
-  One method to avoid the situation altogether is by separating your Javascript
-  and CSS code into their own files and then using standard HTML methods to access them.
- </para>
+ <note><para>
+  A good practice for avoiding escapement altogether is by separating your Javascript/CSS
+  into their own files and use standard HTML methods to access them. This will also take
+  advantage of browser script caching. When you need to embed Smarty variables/functions
+  into your Javascript/CSS, then the following applies.
+ </para></note>
 
  <para>
-  With Smarty the { and } braces will be ignored so long as they are surrounded by white space.
-  This behavior can be disabled by the Smarty Class variable <link linkend="variable.auto.literal"><parameter>$auto_literal</parameter></link>
+  In Smarty templates, the { and } braces will be ignored so long as they are surrounded by white space.
+  This behavior can be disabled by setting the Smarty class variable <link linkend="variable.auto.literal"><parameter>$auto_literal</parameter></link> to false.
  </para>
  
  <example>
-  <title>using the auto literal feature</title>
+  <title>Using the auto-literal feature</title>
   <programlisting>
 <![CDATA[
 <script>
@@ -40,10 +42,10 @@
  </example>
  
  <para>
-  Including literal content is also possible using <link linkend="language.function.literal">
-  <varname>{literal}..{/literal}</varname></link> blocks.
-  Similar to HTML entity usage, you can use <link linkend="language.function.ldelim"><varname>{ldelim}</varname></link>,<link linkend="language.function.ldelim"><varname>{rdelim}</varname></link> or <link linkend="language.variables.smarty.ldelim">
-  <varname>{$smarty.ldelim}</varname></link> to display the current delimiters.
+  <link linkend="language.function.literal">
+  <varname>{literal}..{/literal}</varname></link> blocks are used for escaping blocks of template logic.
+  You can also escape the braces individually with <link linkend="language.function.ldelim"><varname>{ldelim}</varname></link>,<link linkend="language.function.ldelim"><varname>{rdelim}</varname></link> tags or <link linkend="language.variables.smarty.ldelim">
+  <varname>{$smarty.ldelim}</varname>,<varname>{$smarty.rdelim}</varname></link> variables.
  </para>
 
  <para>
