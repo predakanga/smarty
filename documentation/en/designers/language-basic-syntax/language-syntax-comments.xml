@@ -73,11 +73,6 @@ Multi line comment block with credits block
 </select>
 *}
 
-
-{* cvs tag for a template, below the 36 SHOULD be an american currency
-. however its converted in cvs.. *}
-{* &#36;Id: Exp &#36; *}
-{* $Id: *}
 </body>
 </html>
 ]]>

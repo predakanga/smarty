@@ -139,15 +139,6 @@
    </listitem>
    <listitem>
     <para>
-     It is possible to
-     <link linkend="language.function.php">embed PHP code</link>
-     right in your template files, although
-     this may not be needed (nor recommended) since the engine is so
-     <link linkend="plugins">customizable</link>.
-    </para>
-   </listitem>
-   <listitem>
-    <para>
      Built-in <link linkend="caching">caching</link> support
     </para>
    </listitem>
@@ -161,6 +152,12 @@
      Custom <link
      linkend="section.template.cache.handler.func">cache handling</link>
      functions
+    </para>
+   </listitem>
+   <listitem>
+    <para>
+    <link linkend="advanced.features.template.inheritance">Template Inheritance</link>
+     for easy management of template content.
     </para>
    </listitem>
    <listitem>
@@ -213,11 +210,9 @@
 Smarty-v.e.r/
    libs/
       Smarty.class.php
-      Smarty_Compiler.class.php
-      Config_File.class.php
       debug.tpl
-      internals/*.php  (all of them)
-      plugins/*.php    (all of them)
+      sysplugins/* (everything)
+      plugins/*    (everything)
 ]]>
     </screen>
    </example>
@@ -381,21 +376,19 @@ ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.'c:/webroot/lib/S
 <![CDATA[
 /usr/local/lib/Smarty-v.e.r/libs/
         Smarty.class.php
-        Smarty_Compiler.class.php
-        Config_File.class.php
         debug.tpl
-        internals/*.php
-        plugins/*.php
+        sysplugins/*
+        plugins/*
 
 /web/www.example.com/
         guestbook/
-                templates/
-                    index.tpl
-                templates_c/
-                configs/
-                cache/
-                htdocs/
-                    index.php
+        templates/
+            index.tpl
+        templates_c/
+        configs/
+        cache/
+        htdocs/
+            index.php
 ]]>
     </screen>
    </example>
@@ -540,7 +533,7 @@ $smarty->display('index.tpl');
    </note>
 
    <para>
-    Now naviagate to the <filename>index.php</filename> file with the web browser.
+    Now navigate to the <filename>index.php</filename> file with the web browser.
     You should see <emphasis>"Hello Ned, welcome to Smarty!"</emphasis>
    </para>
    <para>
@@ -597,7 +590,7 @@ class Smarty_GuestBook extends Smarty {
         // Class Constructor.
         // These automatically get set with each new instance.
 
-        $this->Smarty();
+        parent::__construct();
 
         $this->template_dir = '/web/www.example.com/guestbook/templates/';
         $this->compile_dir  = '/web/www.example.com/guestbook/templates_c/';

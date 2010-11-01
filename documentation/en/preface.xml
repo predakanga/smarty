@@ -36,13 +36,20 @@
   <para>
     It goes without saying that HTML mixed with programming code is messy and difficult to maintain. It is better to use a template engine that separates HTML and uses a special syntax to indicate where application data is revealed. Specific reasons for separating PHP:
   </para>
-  <para>
-    First reason: syntax. Templates typically consist of semantic markup such as HTML. PHP syntax works well for application code, but quickly degenerates when mixed with HTML. Smarty's simple {tag} syntax is designed specifically to express presentation. Smarty focuses your templates on presentation and less on "code". This lends to quicker template deployment and easier maintenance.
-  </para>
-  <para>
-    Second reason: insulation. With PHP based templates, there are no restrictions on what type of logic can be injected into a template. Smarty insulates the templates from PHP, creating a controlled separation of presentation from business logic. Smarty also has security features that can further enforce restrictions on templates.
-  </para>
   
+  <itemizedlist>
+    <listitem>  
+      <para>
+        SYNTAX. Templates typically consist of semantic markup such as HTML. PHP syntax works well for application code, but quickly degenerates when mixed with HTML. Smarty's simple {tag} syntax is designed specifically to express presentation. Smarty focuses your templates on presentation and less on "code". This lends to quicker template deployment and easier maintenance.
+      </para>
+    </listitem>
+    <listitem>
+      <para>
+        INSULATION. With PHP based templates, there are no restrictions on what type of logic can be injected into a template. Smarty insulates the templates from PHP, creating a controlled separation of presentation from business logic. Smarty also has security features that can further enforce restrictions on templates.
+      </para>
+    </listitem>
+  </itemizedlist>
+
   <para>
    <emphasis role="bold">Do it Right</emphasis>
   </para>  
@@ -130,11 +137,11 @@
   </para>  
     
   <para>
-    Smarty's long track record has indicated that it significantly improves the speed of deployment and maintenance of templates. More code never makes an application run faster, but the time (i.e. money) saved in development easily outweighs this negligible difference. If maintenance is crucial to your application (or business), Smarty is certainly a good fit.
+    Smarty's long track record has indicated that it significantly improves the speed of deployment and maintenance of templates. If maintenance is crucial to your application (or business), Smarty is certainly a good fit.
   </para>
   
   <para>
-    However, Smarty is not a magic bullet. It is a tool for managing presentation. Using Smarty, another template engine, or plain PHP is largely going to be determined by your own requirements and tastes. It is certainly possible to maintain a separation of business logic from presentation with pure PHP if you are happy with that. You may not have a need for Smarty if you don't need cleaner template syntax, template inheritance, caching, plugins, security (i.e. insulation from PHP), quicker presentational deployment and easier maintenance. You may not have a need for templates at all if you have an overly simplistic site, or your developer is the designer and does not desire a separation of PHP from HTML. Ask questions on the forums and other sites, and make an informed decision for your project.
+    However, Smarty is not a magic bullet. It is a tool for managing presentation. Using Smarty, another template engine, or plain PHP is largely going to be determined by your own requirements and tastes. It is certainly possible to maintain presentation mixed with PHP if you are happy with that. You may not have a need for Smarty if you don't need cleaner template syntax, template inheritance, caching, plugins, security (i.e. insulation from PHP), quicker presentational deployment and easier maintenance. The best approach is to ask lots of questions, install and test Smarty for yourself and make an informed decision for your project.
   </para>
   
  </preface>
