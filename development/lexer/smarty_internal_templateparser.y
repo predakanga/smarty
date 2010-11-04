@@ -508,10 +508,26 @@ objectchain(res) ::= objectelement(oe). {res  = oe; }
 										// chain of elements 
 objectchain(res) ::= objectchain(oc) objectelement(oe). {res  = oc.oe; }
 										// variable
-objectelement(res)::= PTR ID(i) arrayindex(a).	    { res = '->'.i.a;}
-objectelement(res)::= PTR DOLLAR varvar(v) arrayindex(a).	    { res = '->{$_smarty_tpl->getVariable('. v .')->value'.a.'}'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;}
-objectelement(res)::= PTR LDEL expr(e) RDEL arrayindex(a).	    { res = '->{'.e.a.'}';}
-objectelement(res)::= PTR ID(ii) LDEL expr(e) RDEL arrayindex(a).	    { res = '->{\''.ii.'\'.'.e.a.'}';}
+objectelement(res)::= PTR ID(i) arrayindex(a).	    {if ($this->template->security && substr(i,0,1) == '_') {
+                                                      $this->compiler->trigger_template_error ("Security error: Call to private object member not allowed");
+																									   }
+                                                     res = '->'.i.a;
+                                                     }
+objectelement(res)::= PTR DOLLAR varvar(v) arrayindex(a).	    {if ($this->template->security) {
+                                                                 $this->compiler->trigger_template_error ("Security error: Call to dynamic object member not allowed");
+																															 }
+                                                               res = '->{$_smarty_tpl->getVariable('. v .')->value'.a.'}'; $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable(trim(v,"'"), null, true, false)->nocache;
+                                                               }
+objectelement(res)::= PTR LDEL expr(e) RDEL arrayindex(a).	    {if ($this->template->security) {
+                                                                 $this->compiler->trigger_template_error ("Security error: Call to dynamic object member not allowed");
+																															   }
+                     																						 res = '->{'.e.a.'}';
+                     																						}
+objectelement(res)::= PTR ID(ii) LDEL expr(e) RDEL arrayindex(a).	    {if ($this->template->security) {
+                                                                         $this->compiler->trigger_template_error ("Security error: Call to dynamic object member not allowed");
+																															         }
+                                                                       res = '->{\''.ii.'\'.'.e.a.'}';
+                                                                      }
 										// method
 objectelement(res)::= PTR method(f).	{ res = '->'.f;}
 
@@ -537,8 +553,16 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if (!$this->template->secur
 //
 // method
 //
-method(res)     ::= ID(f) OPENP params(p) CLOSEP.	{ res = f . "(". p .")";}
-method(res)     ::= DOLLAR ID(f) OPENP params(p) CLOSEP.	{ $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')';}
+method(res)     ::= ID(f) OPENP params(p) CLOSEP.	{if ($this->template->security && substr(f,0,1) == '_') {
+                                                      $this->compiler->trigger_template_error ("Security error: Call to private object member not allowed");
+																									 }
+                                                   res = f . "(". p .")";
+                                                  }
+method(res)     ::= DOLLAR ID(f) OPENP params(p) CLOSEP.	{if ($this->template->security) {
+                                                              $this->compiler->trigger_template_error ("Security error: Call to dynamic object member not allowed");
+																													 }
+                                                           $this->prefix_number++; $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'=$_smarty_tpl->getVariable(\''. f .'\')->value;?>'; res = '$_tmp'.$this->prefix_number.'('. p .')';
+                                                          }
 
 // function/method parameter
 										// multiple parameters
