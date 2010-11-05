@@ -84,14 +84,10 @@
     </example>
         <para>
      See also
-     <link linkend="api.register.prefilter">
-     <varname>register_prefilter()</varname></link>,
-     <link linkend="api.unregister.prefilter">
-     <varname>unregister_prefilter()</varname></link>
-        <link linkend="api.register.postfilter">
-     <varname>register_postfilter()</varname></link>,
-     <link linkend="api.unregister.postfilter">
-     <varname>unregister_postfilter()</varname></link>.
+     <link linkend="api.register.filter">
+     <varname>registerFilter()</varname></link> and
+     <link linkend="api.unregister.filter">
+     <varname>unregisterFilter()</varname></link>.
     </para>
    </sect1>
 

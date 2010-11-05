@@ -16,12 +16,12 @@
 
    <para>
     Output filters can be either
-    <link linkend="api.register.outputfilter">registered</link> or loaded
+    <link linkend="api.register.filter">registered</link> or loaded
     from the
     <link linkend="variable.plugins.dir">plugins directory</link> by using the
-    <link linkend="api.load.filter"><varname>load_filter()</varname></link>
+    <link linkend="api.load.filter"><varname>loadFilter()</varname></link>
     method or by setting the  <link linkend="variable.autoload.filters">
-    <parameter>$autoload_filters</parameter></link> variable.
+    <parameter>$autoloadFilters</parameter></link> variable.
     Smarty will pass the template output as the first argument,
     and expect the function to return the result of the processing.
    </para>
@@ -40,8 +40,8 @@ function protect_email($tpl_output, $smarty)
 }
 
 // register the outputfilter
-$smarty->register_outputfilter('protect_email');
-$smarty->display('index.tpl');
+$smarty->registerFilter("output","protect_email");
+$smarty->display("index.tpl');
 
 // now any occurrence of an email address in the template output will have
 // a simple protection against spambots
@@ -51,9 +51,9 @@ $smarty->display('index.tpl');
    </example>
    <para>
    See also
-   <link linkend="api.register.outputfilter"><varname>register_outputfilter()</varname></link>,
-   <link linkend="api.load.filter"><varname>load_filter()</varname></link>,
-   <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>,
+   <link linkend="api.register.filter"><varname>registerFilter()</varname></link>,
+   <link linkend="api.load.filter"><varname>loadFilter()</varname></link>,
+   <link linkend="variable.autoload.filters"><parameter>$autoloadFilters</parameter></link>,
    <link linkend="advanced.features.postfilters">postfilters</link> and
    <link linkend="variable.plugins.dir"><parameter>$plugins_dir</parameter></link>.
    </para>

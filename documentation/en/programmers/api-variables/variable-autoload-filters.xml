@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
      <sect1 id="variable.autoload.filters">
-      <title>$autoload_filters</title>
+      <title>$autoloadFilters</title>
       <para>
        If there are some filters that you wish to load on every template
        invocation, you can specify them using this variable and Smarty will
@@ -12,7 +12,7 @@
         <programlisting role="php">
 <![CDATA[
 <?php
-$smarty->autoload_filters = array('pre' => array('trim', 'stamp'),
+$smarty->autoloadFilters = array('pre' => array('trim', 'stamp'),
                                   'output' => array('convert'));
 ?>
 ]]>
@@ -22,11 +22,9 @@ $smarty->autoload_filters = array('pre' => array('trim', 'stamp'),
 
       <para>
       See also
-      <link linkend="api.register.outputfilter"><varname>register_outputfilter()</varname></link>,
-      <link linkend="api.register.prefilter"><varname>register_prefilter()</varname></link>,
-      <link linkend="api.register.postfilter"><varname>register_postfilter()</varname></link>
+      <link linkend="api.register.filter"><varname>registerFilter()</varname></link>
       and
-   <link linkend="api.load.filter"><varname>load_filter()</varname></link>
+   <link linkend="api.load.filter"><varname>loadFilter()</varname></link>
       </para>
      </sect1>
 

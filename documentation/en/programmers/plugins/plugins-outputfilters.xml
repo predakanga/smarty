@@ -44,10 +44,10 @@
     </example>
             <para>
      See also
-     <link linkend="api.register.outputfilter">
-     <varname>register_outputfilter()</varname></link>,
-     <link linkend="api.unregister.outputfilter">
-     <varname>unregister_outputfilter()</varname></link>.
+     <link linkend="api.register.filter">
+     <varname>registerFilter()</varname></link>,
+     <link linkend="api.unregister.filter">
+     <varname>unregisterFilter()</varname></link>.
      </para>
    </sect1>
 

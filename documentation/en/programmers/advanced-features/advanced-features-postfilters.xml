@@ -5,12 +5,12 @@
  <para>
   Template postfilters are PHP functions that your templates are ran through
   <emphasis>after they are compiled</emphasis>. Postfilters can be either
-  <link linkend="api.register.postfilter">registered</link> or loaded
+  <link linkend="api.register.filter">registered</link> or loaded
   from the <link linkend="variable.plugins.dir">plugins directory</link>
   by using the
-  <link linkend="api.load.filter"><varname>load_filter()</varname></link>
+  <link linkend="api.load.filter"><varname>loadFilter()</varname></link>
    function or by setting the <link linkend="variable.autoload.filters">
-   <parameter>$autoload_filters</parameter></link> variable.
+   <parameter>$autoloadFilters</parameter></link> variable.
    Smarty will pass the compiled template code as the first
   argument, and expect the function to return the result of the
   processing.
@@ -27,7 +27,7 @@ function add_header_comment($tpl_source, $smarty)
 }
 
 // register the postfilter
-$smarty->register_postfilter('add_header_comment');
+$smarty->registerFilter('post','add_header_comment');
 $smarty->display('index.tpl');
 ?>
 ]]>
@@ -45,11 +45,11 @@ $smarty->display('index.tpl');
  </example>
  <para>
  See also
- <link linkend="api.register.postfilter"><varname>register_postfilter()</varname></link>,
+ <link linkend="api.register.filter"><varname>registerFilter()</varname></link>,
  <link linkend="advanced.features.prefilters">prefilters</link>,
  <link linkend="advanced.features.outputfilters">outputfilters</link>,
  and
- <link linkend="api.load.filter"><varname>load_filter()</varname></link>.
+ <link linkend="api.load.filter"><varname>loadFilter()</varname></link>.
  </para>
 </sect1>
 <!-- Keep this comment at the end of the file

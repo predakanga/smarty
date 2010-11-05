@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
-<refentry id="api.unregister.postfilter">
+<refentry id="api.unregister.filter">
  <refnamediv>
-  <refname>unregister-&gt;postFilter()</refname>
-  <refpurpose>dynamically unregister a postfilter</refpurpose>
+  <refname>unregisterFilter()</refname>
+  <refpurpose>dynamically unregister a filter</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister-&gt;postFilter</methodname>
-   <methodparam><type>string</type><parameter>function_name</parameter></methodparam>
+   <type>void</type><methodname>unregisterFilter</methodname>
+   <methodparam><type>string</type><parameter>type</parameter></methodparam>
+   <methodparam><type>mixed</type><parameter>callback</parameter></methodparam>
   </methodsynopsis>
-
+  <para>
+   Use this to dynamically unregister filters.
+   It uses the following parameters:
+   <itemizedlist>
+    &parameter.filtertype;
+    &parameter.callback;
+   </itemizedlist>   
+  </para>
+  
     <para>
     See also
-    <link linkend="api.unregister.postfilter">
-    <varname>register-&gt;postFilter()</varname></link>
-    and
-    <link linkend="plugins.prefilters.postfilters">template post filters</link>.
+    <link linkend="api.register.filter"><varname>registerFilter()</varname></link>.
 </para>
 
  </refsect1>
