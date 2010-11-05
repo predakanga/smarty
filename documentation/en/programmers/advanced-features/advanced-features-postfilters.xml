@@ -10,7 +10,7 @@
   by using the
   <link linkend="api.load.filter"><varname>loadFilter()</varname></link>
    function or by setting the <link linkend="variable.autoload.filters">
-   <parameter>$autoloadFilters</parameter></link> variable.
+   <parameter>$autoload_filters</parameter></link> variable.
    Smarty will pass the compiled template code as the first
   argument, and expect the function to return the result of the
   processing.

@@ -48,7 +48,7 @@
 See also
 <link linkend="api.unregister.filter"><varname>unregisterFilter()</varname></link>,
 <link linkend="api.load.filter"><varname>loadFilter()</varname></link>,
-<link linkend="variable.autoload.filters"><parameter>$autoloadFilters</parameter></link>,
+<link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>,
  <link linkend="advanced.features.prefilters">template pre filters</link>
  <link linkend="advanced.features.postfilters">template post filters</link>
  <link linkend="advanced.features.outputfilters">template output filters</link>

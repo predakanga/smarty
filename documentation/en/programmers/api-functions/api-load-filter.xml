@@ -41,7 +41,7 @@ $smarty->loadFilter('output', 'compress');
   <para>
   See also
   <link linkend="api.register.filter"><varname>registerFilter()</varname></link>,
-  <link linkend="variable.autoload.filters"><parameter>$autoloadFilters</parameter></link>
+  <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>
   and
   <link linkend="advanced.features">advanced features</link>.
   </para>

@@ -21,7 +21,7 @@
     <link linkend="variable.plugins.dir">plugins directory</link> by using the
     <link linkend="api.load.filter"><varname>loadFilter()</varname></link>
     method or by setting the  <link linkend="variable.autoload.filters">
-    <parameter>$autoloadFilters</parameter></link> variable.
+    <parameter>$autoload_filters</parameter></link> variable.
     Smarty will pass the template output as the first argument,
     and expect the function to return the result of the processing.
    </para>
@@ -53,7 +53,7 @@ $smarty->display("index.tpl');
    See also
    <link linkend="api.register.filter"><varname>registerFilter()</varname></link>,
    <link linkend="api.load.filter"><varname>loadFilter()</varname></link>,
-   <link linkend="variable.autoload.filters"><parameter>$autoloadFilters</parameter></link>,
+   <link linkend="variable.autoload.filters"><parameter>$autoload_filters</parameter></link>,
    <link linkend="advanced.features.postfilters">postfilters</link> and
    <link linkend="variable.plugins.dir"><parameter>$plugins_dir</parameter></link>.
    </para>
