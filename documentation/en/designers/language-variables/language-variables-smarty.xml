@@ -50,9 +50,8 @@
   </example>
   <note>
    <para>
-    For historical reasons <parameter>{$SCRIPT_NAME}</parameter> can be accessed
-    directly, although <parameter>{$smarty.server.SCRIPT_NAME}</parameter> works
-    as well.
+    For historical reasons <parameter>{$SCRIPT_NAME}</parameter> is
+    short-hand for <parameter>{$smarty.server.SCRIPT_NAME}</parameter>.
    </para>
 <programlisting>
 <![CDATA[
@@ -64,8 +63,9 @@
   <note><para>
     Although Smarty provides direct access to PHP super globals for convenience,
     it should be used with caution. Specifically, GET and POST and REQUEST are commonly used
-    for presentation purposes, but direct access to SERVER, ENV, COOKIE and SESSION vars is
+    for presentation purposes, but directly accessing SERVER, ENV, COOKIE and SESSION vars is
     typically avoided, as this is mixing underlying application code structure into the templates.
+    A good practice is to assign specific needed values to template vars.
   </para></note>
  </sect2>
 
@@ -122,8 +122,9 @@ define('MY_CONST_VAL','CHERRIES');
 
 <note><para>
   Although Smarty provides direct access to PHP constants for convenience,
-  it should be used with caution as this is mixing underlying application
+  it is typically avoided as this is mixing underlying application
   code structure into the templates.
+  A good practice is to assign specific needed values to template vars.  
 </para></note>
 
  </sect2>

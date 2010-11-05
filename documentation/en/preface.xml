@@ -34,24 +34,28 @@
   </para>  
   
   <para>
-    It goes without saying that HTML mixed with programming code is messy and difficult to maintain. It is better to use a template engine that separates HTML and uses a special syntax to indicate where application data is revealed. Specific reasons for separating PHP:
-  </para>
+  How often do you hear "PHP is a template language"? When PHP first came to the masses, it was billed as a Hypertext-embedded scripting language. That ideology has changed significantly as the language has matured. PHP is a programming language. Although you can use PHP for presentation, this has become more of a curse than a virtue for the language. HTML mixed with programming code is generally messy and difficult to maintain.
+</para>
+
+  <para>
+  As with many templating solutions in other programming languages (eg. Java,Python,Perl), Smarty templates are kept language-agnostic. They contain simple tags that indicate where application content is revealed. The idea is to keep the templates focused squarely on presentation, not application code. Benefits of this approach:
+</para>
   
   <itemizedlist>
     <listitem>  
       <para>
-        SYNTAX. Templates typically consist of semantic markup such as HTML. PHP syntax works well for application code, but quickly degenerates when mixed with HTML. Smarty's simple {tag} syntax is designed specifically to express presentation. Smarty focuses your templates on presentation and less on "code". This lends to quicker template deployment and easier maintenance.
+        SYNTAX: Templates typically consist of semantic markup such as HTML. PHP syntax works well for application code, but quickly degenerates when mixed with HTML. Smarty's simple {tag} syntax is designed specifically to express presentation. Smarty focuses your templates on presentation and less on "code". This lends to quicker template deployment and easier maintenance.
       </para>
     </listitem>
     <listitem>
       <para>
-        INSULATION. With PHP based templates, there are no restrictions on what type of logic can be injected into a template. Smarty insulates the templates from PHP, creating a controlled separation of presentation from business logic. Smarty also has security features that can further enforce restrictions on templates.
+        INSULATION: With PHP based templates, there are no restrictions on what type of logic can be injected into a template. Smarty insulates the templates from PHP, creating a controlled separation of presentation from business logic. Smarty also has security features that can further enforce restrictions on templates.  
       </para>
     </listitem>
   </itemizedlist>
 
   <para>
-   <emphasis role="bold">Do it Right</emphasis>
+   <emphasis role="bold">Implementation is Important</emphasis>
   </para>  
     
   <para>
