@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.clear.all.cache">
  <refnamediv>
-  <refname>cache-&gt;clearAll()</refname>
+  <refname>clearAllCache()</refname>
   <refpurpose>clears the entire template cache</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>cache-&gt;clearAll</methodname>
+   <type>void</type><methodname>clearAllCache</methodname>
    <methodparam choice="opt"><type>int</type><parameter>expire_time</parameter></methodparam>
   </methodsynopsis>
   <para>
@@ -17,7 +17,7 @@
    files must be before they will get cleared.
   </para>
   <example>
-   <title>cache-&gt;clearAll</title>
+   <title>clearAllCache</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -32,7 +32,7 @@ $smarty->cache->clearAll(3600);
   </example>
   <para>
   See also
-  <link linkend="api.clear.cache"><varname>cache-&gt;clear()</varname></link>,
+  <link linkend="api.clear.cache"><varname>clearCache()</varname></link>,
   <link linkend="api.is.cached"><varname>isCached()</varname></link>
   and the
   <link linkend="caching">caching</link> page.

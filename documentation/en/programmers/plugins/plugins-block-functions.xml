@@ -101,8 +101,8 @@ function smarty_block_translate($params, $content, $smarty, &$repeat)
 
 <para>
  See also:
- <link linkend="api.register.block"><varname>register_block()</varname></link>,
- <link linkend="api.unregister.block"><varname>unregister_block()</varname></link>.
+ <link linkend="api.register.plugin"><varname>registerPlugin()</varname></link>,
+ <link linkend="api.unregister.plugin"><varname>unregisterPlugin()</varname></link>.
 </para>
 
    </sect1>

@@ -57,7 +57,7 @@
 </itemizedlist>
 
  <para>
- See also <link linkend="api.register.function"><varname>register_function()</varname></link>
+ See also <link linkend="api.register.plugin"><varname>registerPlugin()</varname></link>
  </para>
 </sect1>
 

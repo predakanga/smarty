@@ -41,7 +41,7 @@ $smarty->clearCompiledTemplate();
    </programlisting>
   </example>
   <para>See also
-  <link linkend="api.clear.cache"><varname>cache-&gt;clear()</varname></link>.
+  <link linkend="api.clear.cache"><varname>clearCache()</varname></link>.
   </para>
  </refsect1>
 </refentry>

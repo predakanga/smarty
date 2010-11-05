@@ -58,7 +58,7 @@
    <varname>isCached()</varname> and to
    <link linkend="api.display"><varname>display()</varname></link>
    in the example above. This also means calls to
-   <link linkend="api.clear.cache"><varname>cache-&gt;clear()</varname></link>
+   <link linkend="api.clear.cache"><varname>clearCache()</varname></link>
    and other changes of the cache-settings may have no effect after
    <varname>isCached()</varname> returned &true;.
   </para>
@@ -101,8 +101,8 @@ $smarty->display('index.tpl', 'FrontPage');
 
     <para>
     See also
-    <link linkend="api.clear.cache"><varname>cache-&gt;clear()</varname></link>,
-    <link linkend="api.clear.all.cache"><varname>cache-&gt;clearAll()</varname></link>,
+    <link linkend="api.clear.cache"><varname>clearCache()</varname></link>,
+    <link linkend="api.clear.all.cache"><varname>clearAllCache()</varname></link>,
     and
     <link linkend="caching">caching section</link>.
   </para>

@@ -103,8 +103,8 @@ function smarty_function_assign($params, $smarty)
     </para>
         <para>
      See also:
-     <link linkend="api.register.function"><varname>register_function()</varname></link>,
-     <link linkend="api.unregister.function"><varname>unregister_function()</varname></link>.
+     <link linkend="api.register.plugin"><varname>registerPlugin()</varname></link>,
+     <link linkend="api.unregister.plugin"><varname>unregisterPlugin()</varname></link>.
     </para>
   </sect1>
 

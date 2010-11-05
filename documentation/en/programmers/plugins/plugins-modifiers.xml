@@ -89,8 +89,8 @@ function smarty_modifier_truncate($string, $length = 80, $etc = '...',
     </example>
      <para>
      See also
-     <link linkend="api.register.modifier"><varname>register_modifier()</varname></link>,
-     <link linkend="api.unregister.modifier"><varname>unregister_modifier()</varname></link>.
+     <link linkend="api.register.plugin"><varname>registerPlugin()</varname></link>,
+     <link linkend="api.unregister.plugin"><varname>unregisterPlugin()</varname></link>.
     </para>
    </sect1>
 

@@ -67,10 +67,8 @@ echo 'index.tpl compiled at 2002-02-20 20:02';
 
     <para>
      See also
-     <link linkend="api.register.compiler.function">
-     <varname>register_compiler_function()</varname></link>,
-     <link linkend="api.unregister.compiler.function">
-     <varname>unregister_compiler_function()</varname></link>.
+     <link linkend="api.register.plugin"><varname>registerPlugin()</varname></link>,
+     <link linkend="api.unregister.plugin"><varname>unregisterPlugin()</varname></link>.
     </para>
 
    </sect1>

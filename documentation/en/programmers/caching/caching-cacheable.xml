@@ -3,14 +3,10 @@
  <sect1 id="caching.cacheable">
   <title>Controlling Cacheability of Plugins' Output</title>
   <para>
-   Since Smarty-2.6.0 plugins the cacheability of plugins can be
+   The cacheability of plugins can be
    declared when registering them. The third parameter to
-   <link linkend="api.register.block"><varname>register_block()</varname></link>,
-   <link linkend="api.register.compiler.function">
-   <varname>register_compiler_function()</varname></link> and <link
-   linkend="api.register.function"><varname>register_function()</varname></link>
-    is called <parameter>$cacheable</parameter> and defaults to &true; which
-   is also the behaviour of plugins in Smarty versions before 2.6.0
+   <link linkend="api.register.plugin"><varname>registerPlugin()</varname></link>
+    is called <parameter>$cacheable</parameter> and defaults to &true;.
   </para>
   <para>
    When registering a plugin with <literal>$cacheable=false</literal> the plugin
@@ -45,11 +41,11 @@ function remaining_seconds($params, $smarty) {
     }
 }
 
-$smarty->register_function('remaining', 'remaining_seconds', false, array('endtime'));
+$smarty->registerPlugin('function','remaining', 'remaining_seconds', false, array('endtime'));
 
-if (!$smarty->is_cached('index.tpl')) {
+if (!$smarty->isCached('index.tpl')) {
     // fetch $obj from db and assign...
-    $smarty->assign_by_ref('obj', $obj);
+    $smarty->assignByRef('obj', $obj);
 }
 
 $smarty->display('index.tpl');
@@ -85,7 +81,7 @@ $smarty->caching = 1;
 function smarty_block_dynamic($param, $content, $smarty) {
     return $content;
 }
-$smarty->register_block('dynamic', 'smarty_block_dynamic', false);
+$smarty->registerPlugin('block','dynamic', 'smarty_block_dynamic', false);
 
 $smarty->display('index.tpl');
 ?>

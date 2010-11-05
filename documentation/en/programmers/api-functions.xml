@@ -22,10 +22,7 @@
 &programmers.api-functions.api-get-template-vars;
 &programmers.api-functions.api-is-cached;
 &programmers.api-functions.api-load-filter;
-&programmers.api-functions.api-register-block;
-&programmers.api-functions.api-register-compiler-function;
-&programmers.api-functions.api-register-function;
-&programmers.api-functions.api-register-modifier;
+&programmers.api-functions.api-register-plugin;
 &programmers.api-functions.api-register-object;
 &programmers.api-functions.api-register-outputfilter;
 &programmers.api-functions.api-register-postfilter;
@@ -34,10 +31,7 @@
 &programmers.api-functions.api-trigger-error;
 
 &programmers.api-functions.api-template-exists;
-&programmers.api-functions.api-unregister-block;
-&programmers.api-functions.api-unregister-compiler-function;
-&programmers.api-functions.api-unregister-function;
-&programmers.api-functions.api-unregister-modifier;
+&programmers.api-functions.api-unregister-plugin;
 &programmers.api-functions.api-unregister-object;
 &programmers.api-functions.api-unregister-outputfilter;
 &programmers.api-functions.api-unregister-postfilter;

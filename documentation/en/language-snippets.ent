@@ -100,3 +100,41 @@ The template can access only variables assigned to any of the objects in the par
        </para></listitem>
    </itemizedlist>
   </para>'>
+
+<!ENTITY parameter.plugintype '<listitem>
+<para>
+<parameter>type</parameter> defines the type of the plugin. Valid values are "function", "block", "compiler" and "modifier".
+</para>
+</listitem>'>
+
+<!ENTITY parameter.pluginname '<listitem>
+<para>
+<parameter>name</parameter> defines the name of the plugin.
+</para>
+</listitem>'>
+
+<!ENTITY parameter.callback '<listitem>
+<para>
+<parameter>callback</parameter> defines the PHP callback. it can be either:
+   <itemizedlist>
+       <listitem><para>
+       A string containing the function <parameter>name</parameter>
+       </para></listitem>
+
+       <listitem><para>
+       An array of the form <literal>array(&amp;$object, $method)</literal> with
+       <literal>&amp;$object</literal> being a reference to an
+       object and <literal>$method</literal> being a string
+       containing the method-name
+       </para></listitem>
+
+       <listitem><para>
+       An array of the form
+       <literal>array($class, $method)</literal> with
+       <literal>$class</literal> being the class name and
+       <literal>$method</literal> being a method of the class.
+       </para></listitem>
+   </itemizedlist>
+   </para>
+</listitem>'>
+

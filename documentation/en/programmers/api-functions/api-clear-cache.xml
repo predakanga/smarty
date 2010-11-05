@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.clear.cache">
  <refnamediv>
-  <refname>cache-&gt;clear()</refname>
+  <refname>clearCache()</refname>
   <refpurpose>clears the cache for a specific template</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>cache-&gt;clear</methodname>
+   <type>void</type><methodname>clearCache</methodname>
    <methodparam><type>string</type><parameter>template</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>cache_id</parameter></methodparam>
    <methodparam choice="opt"><type>string</type><parameter>compile_id</parameter>
@@ -40,7 +40,7 @@
   </itemizedlist>
 
   <example>
-   <title>cache-&gt;clear()</title>
+   <title>clearCache()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
@@ -55,7 +55,7 @@ $smarty->cache->clear('index.tpl', 'MY_CACHE_ID');
   </example>
   <para>
   See also
-  <link linkend="api.clear.all.cache"><varname>cache-&gt;clearAll()</varname></link>
+  <link linkend="api.clear.all.cache"><varname>clearAllCache()</varname></link>
   and
   <link linkend="caching"><varname>caching</varname></link> section.
   </para>

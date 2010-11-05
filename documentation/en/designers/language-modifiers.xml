@@ -74,7 +74,7 @@
   Modifiers are autoloaded from the <link
   linkend="variable.plugins.dir"><parameter>$plugins_dir</parameter></link>
   or can be registered explicitly with the <link
-  linkend="api.register.modifier"><varname>register_modifier()</varname></link>
+  linkend="api.register.plugin"><varname>registerPlugin()</varname></link>
   function. The later is useful for sharing a function between
    php scripts and smarty templates.
   </para></listitem>
@@ -105,7 +105,7 @@
 
  <para>
   See also
-  <link linkend="api.register.modifier"><varname>register_modifier()</varname></link>,
+  <link linkend="api.register.plugin"><varname>registerPlugin()</varname></link>,
   <link linkend="language.combining.modifiers">combining modifiers</link>.
   and
   <link linkend="plugins">extending smarty with plugins</link>

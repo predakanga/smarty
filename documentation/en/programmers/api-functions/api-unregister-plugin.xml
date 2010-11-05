@@ -1,27 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
-<refentry id="api.unregister.function">
+<refentry id="api.unregister.plugin">
  <refnamediv>
-  <refname>unregister-&gt;templateFunction</refname>
-  <refpurpose>dynamically unregister template function plugin</refpurpose>
+  <refname>unregisterPlugin</refname>
+  <refpurpose>dynamically unregister plugins</refpurpose>
  </refnamediv>
  <refsect1>
    <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>unregister-&gt;templateFunction</methodname>
+   <type>void</type><methodname>unregisterPlugin</methodname>
+   <methodparam><type>string</type><parameter>type</parameter></methodparam>
    <methodparam><type>string</type><parameter>name</parameter></methodparam>
   </methodsynopsis>
   <para>
-   Pass in the template function <parameter>name</parameter>.
+   This method unregisters plugins which previously have been registered by <link linkend="api.register.plugin">registerPlugin()</link>,
+   
+   It uses the following parameters:
+   <itemizedlist>
+    &parameter.plugintype;
+    &parameter.pluginname;
+  </itemizedlist>
   </para>
+
   <example>
-   <title>unregister-&gt;templateFunction</title>
+   <title>unregister function plugin</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 
-// we don't want template designers to have access to system files
-$smarty->unregister->templateFunction('fetch');
+// we don't want template designers to have access to function plugin "date_now" 
+$smarty->unregisterPlugin("function","date_now");
 
 ?>
 ]]>
@@ -29,8 +37,8 @@ $smarty->unregister->templateFunction('fetch');
   </example>
 
   <para>
-  See also <link linkend="api.register.function">
-  <varname>register-&gt;templateFunction()</varname></link>.
+  See also <link linkend="api.register.plugin">
+  <varname>registerPlugin()</varname></link>.
 </para>
 
  </refsect1>
