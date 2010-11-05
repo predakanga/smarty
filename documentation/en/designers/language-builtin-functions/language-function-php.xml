@@ -2,20 +2,20 @@
 <!-- $Revision: 2972 $ -->
 <sect1 id="language.function.php">
  <title>{php}</title>
+ 
+ <note>
+   <title>IMPORTANT NOTICE</title>
+   <para>
+      <varname>{php}</varname> tags are deprecated from Smarty, and should not be used. Put your
+      PHP logic in PHP scripts or plugin functions instead.
+   </para>
+ </note>
+ 
  <para>
   The <varname>{php}</varname> tags allow PHP code to be embedded directly into the template. They
   will not be escaped, regardless of the <link
-  linkend="variable.php.handling"><parameter>$php_handling</parameter></link> setting. This
-  is for advanced users only, not normally needed and not recommended.
+  linkend="variable.php.handling"><parameter>$php_handling</parameter></link> setting.
  </para>
- <note>
-<title>Technical Note</title>
-<para>
-   To access PHP variables in <varname>{php}</varname> blocks you will need to use the PHP
-   <ulink url="&url.php-manual;global"><literal>global</literal></ulink>
-   keyword.
-</para>
-</note>
 
  <example>
   <title>php code within {php} tags</title>

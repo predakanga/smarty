@@ -7,6 +7,12 @@
   assign values directly to the template, or assign values to array elements too.
  </para>
 
+ <note><para>
+   Assignment of variables in-template is effectively placing application
+   logic into the templates that may be better handled in PHP. There are 
+   also circumstances where this is beneficial, so use at your own discretion.
+ </para></note>
+
  <para>
   The following attributes can be added to the tag:
  </para>

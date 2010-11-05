@@ -10,10 +10,10 @@
   </para>
 
  <note>
-  <title>Caution</title>
+  <title>Note</title>
   <para>
-   You must make sure that any variable used within a not cached section gets 
-   also assigned when the page is loaded from cache.
+   Be sure any variables used within a non-cached section are 
+   also assigned from PHP when the page is loaded from the cache.
   </para>
  </note>
  

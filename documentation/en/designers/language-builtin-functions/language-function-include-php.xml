@@ -3,17 +3,10 @@
 <sect1 id="language.function.include.php">
  <title>{include_php}</title>
   <note>
-   <title>Technical Note</title>
+   <title>IMPORTANT NOTICE</title>
    <para>
-    <varname>{include_php}</varname> is pretty much deprecated from Smarty, you can
+    <varname>{include_php}</varname> is deprecated from Smarty, you can
     accomplish the same functionality via a custom template function.
-    The only reason to use <varname>{include_php}</varname> is if you really have a need to
-    quarantine the php function away from the
-    <link linkend="variable.plugins.dir"><filename>plugins/</filename></link>
-    directory or your
-    application code. See the <link
-    linkend="tips.componentized.templates">componentized template
-    example</link> for details.
    </para>
  </note>
 

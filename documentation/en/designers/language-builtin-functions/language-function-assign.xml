@@ -8,6 +8,12 @@
  </para>
 
  <note><para>
+   Assignment of variables in-template is effectively placing application
+   logic into the templates that may be better handled in PHP. There are 
+   also circumstances where this is beneficial, so use at your own discretion.
+ </para></note>
+
+ <note><para>
     See also the <link linkend="language.function.shortform.assign"><varname>short-form</varname></link> 
     method of assigning template vars.
  </para></note>
