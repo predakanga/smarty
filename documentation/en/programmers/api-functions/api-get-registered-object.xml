@@ -36,8 +36,8 @@ function smarty_block_foo($params, $smarty)
   </example>
   <para>
   See also
-  <link linkend="api.register.object"><varname>register-&gt;templateObject()</varname></link>,
-  <link linkend="api.unregister.object"><varname>unregister-&gt;templateObject()</varname></link>
+  <link linkend="api.register.object"><varname>registerObject()</varname></link>,
+  <link linkend="api.unregister.object"><varname>unregisterObject()</varname></link>
   and
   <link linkend="advanced.features.objects">objects page</link>
   </para>

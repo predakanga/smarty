@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.trigger.error">
  <refnamediv>
-  <refname>trigger_error()</refname>
+  <refname>triggerError()</refname>
   <refpurpose>output an error message</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>trigger_error</methodname>
+   <type>void</type><methodname>triggerError</methodname>
    <methodparam><type>string</type><parameter>error_msg</parameter></methodparam>
    <methodparam choice="opt"><type>int</type><parameter>level</parameter></methodparam>
   </methodsynopsis>
@@ -16,7 +16,7 @@
    This function can be used to output an error message using Smarty.
    <parameter>level</parameter> parameter can be one of the values
    used for the PHP <ulink url="&url.php-manual;trigger_error">
-   <varname>trigger_error()</varname></ulink> function, eg:
+   <varname>triggerError()</varname></ulink> function, eg:
    <literal>E_USER_NOTICE</literal>, <literal>E_USER_WARNING</literal>, etc.
    By default it's <literal>E_USER_WARNING</literal>.
   </para>

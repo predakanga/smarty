@@ -12,7 +12,7 @@
  </para>
  <para>
   See also
-  <link linkend="api.trigger.error"><varname>trigger_error()</varname></link>,
+  <link linkend="api.trigger.error"><varname>triggerError()</varname></link>,
   <link linkend="chapter.debugging.console">debugging</link>
   and
   <link linkend="troubleshooting">troubleshooting</link>.

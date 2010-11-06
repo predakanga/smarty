@@ -57,7 +57,7 @@
     <link linkend="variable.error.reporting">
     <parameter>$error_reporting</parameter></link>
     and
-    <link linkend="api.trigger.error"><varname>trigger_error()</varname></link>.
+    <link linkend="api.trigger.error"><varname>triggerError()</varname></link>.
    </para>
 </chapter>
 

@@ -2,13 +2,13 @@
 <!-- $Revision: 2972 $ -->
 <refentry id="api.register.object">
  <refnamediv>
-  <refname>register-&gt;templateObject()</refname>
+  <refname>registerObject()</refname>
   <refpurpose>register an object for use in the templates</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>register-&gt;templateObject</methodname>
+   <type>void</type><methodname>registerObject</methodname>
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
    <methodparam><type>object</type><parameter>object</parameter></methodparam>
    <methodparam><type>array</type><parameter>allowed_methods_properties</parameter>
@@ -25,7 +25,7 @@
    See also
    <link linkend="api.get.registered.object"><varname>getRegisteredObject()</varname></link>,
    and
-   <link linkend="api.unregister.object"><varname>unregister-&gt;templateObject()</varname></link>.
+   <link linkend="api.unregister.object"><varname>unregisterObject()</varname></link>.
   </para>
  </refsect1>
 </refentry>
