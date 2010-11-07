@@ -56,13 +56,11 @@
 
  <para>
   <varname>{include_php}</varname> tags are used to include a php script in your template.
-  If <link linkend="variable.security"><parameter>$security</parameter></link> is enabled,
-  then the php script must be located in the <link
-  linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link> path.
+  If security is enabled, then the php script must be located in the <parameter>$trusted_dir</parameter> path of the securty policy.
+  See the <link linkend="advanced.features.security">Security</link> section for details.
   The <varname>{include_php}</varname> tag must have the attribute
   <parameter>file</parameter>, which contains the path to the included php file, either
-  relative to  <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>,
-  or an absolute path.
+  relative to <parameter>$trusted_dir</parameter>, or an absolute path.
  </para>
  <para>
   By default, php files are only included once even if called
@@ -113,7 +111,6 @@ $this->assign('navigation', $db->getRows());
  </example>
  <para>
   See also <link linkend="language.function.include"><varname>{include}</varname></link>,
-  <link linkend="variable.security"><parameter>$security</parameter></link>,
 <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>,
   <link linkend="language.function.php"><varname>{php}</varname></link>, <link
   linkend="language.function.capture"><varname>{capture}</varname></link>, <link

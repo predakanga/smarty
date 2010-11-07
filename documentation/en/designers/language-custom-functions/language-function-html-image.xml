@@ -85,9 +85,8 @@
   <parameter>basedir</parameter> is the base directory that relative image
   paths are based from. If not given, the web server's document root
   <varname>$_ENV['DOCUMENT_ROOT']</varname> is used as the base.
-  If <link linkend="variable.security"><parameter>$security</parameter></link>
-  is enabled, the path to the image must be within a
-  <link linkend="variable.secure.dir">secure directory</link>.
+ If security is enabled, then the image must be located in the <parameter>$secure_dir</parameter> path of the securty policy.
+ See the <link linkend="advanced.features.security">Security</link> section for details.
  </para></listitem>
 
  <listitem><para>

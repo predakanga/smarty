@@ -66,7 +66,7 @@
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = true;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 
 // clear all caches with 'sports|basketball' as the first two cache_id groups
 $smarty->clear_cache(null,'sports|basketball');

@@ -20,7 +20,7 @@
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 1;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 
 $my_cache_id = $_GET['article_id'];
 
@@ -68,7 +68,7 @@ $smarty->display('index.tpl', $my_cache_id);
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 1;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 
 $my_cache_id = $_GET['article_id'];
 
@@ -97,7 +97,7 @@ $smarty->display('index.tpl',$my_cache_id);
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 1;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 
 // clear all caches with "sports" as the $cache_id
 $smarty->clear_cache(null,'sports');

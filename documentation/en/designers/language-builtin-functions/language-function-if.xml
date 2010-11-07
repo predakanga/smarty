@@ -15,10 +15,8 @@
   <emphasis>is_array()</emphasis>, etc.
  </para>
  <para>
-  If <link linkend="variable.security"><parameter>$security</parameter></link> is enabled,
-  only PHP functions from the <emphasis>IF_FUNCS</emphasis> array from <link
-  linkend="variable.security.settings"><parameter>$security_settings</parameter></link>
-  are allowed.
+  If securty is enabled, only PHP functions from <parameter>$php_functions</parameter> property of the securty policy are allowed. 
+  See the <link linkend="advanced.features.security">Security</link> section for details.
  </para>
  <para>
   The following is a list of recognized qualifiers, which must be

@@ -117,9 +117,9 @@
    <para>
    The path can be
    either absolute, or relative to
-   <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>. When <link
-   linkend="variable.security"><parameter>$security</parameter></link> is enabled, the script
-   must reside in <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>.
+    <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>. If security is enabled, then the 
+    script must be located in the <parameter>$trusted_dir</parameter> path of the securty policy.
+    See the <link linkend="advanced.features.security">Security</link> section for details.
   </para></listitem>
   </itemizedlist>
   <para>

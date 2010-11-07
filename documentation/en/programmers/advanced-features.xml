@@ -2,6 +2,7 @@
 <!-- $Revision: 2972 $ -->
   <chapter id="advanced.features">
    <title>Advanced Features</title>
+&programmers.advanced-features.advanced-features-security;
 &programmers.advanced-features.advanced-features-template-inheritance;
 &programmers.advanced-features.advanced-features-streams;
 &programmers.advanced-features.advanced-features-objects;

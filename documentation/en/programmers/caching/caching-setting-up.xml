@@ -15,7 +15,7 @@
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 1;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 
 $smarty->display('index.tpl');
 ?>
@@ -60,7 +60,7 @@ $smarty->display('index.tpl');
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 2; // lifetime is per cache
+$smarty->caching = Smarty::CACHING_LIFETIME_SAVED; // lifetime is per cache
 
 // set the cache_lifetime for index.tpl to 5 minutes
 $smarty->cache_lifetime = 300;
@@ -98,7 +98,7 @@ $smarty->display('home.tpl');
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 1;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 $smarty->compile_check = true;
 
 $smarty->display('index.tpl');
@@ -133,7 +133,7 @@ $smarty->display('index.tpl');
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 1;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 
 if(!$smarty->is_cached('index.tpl')) {
     // No cache available, do variable assignments here.
@@ -176,7 +176,7 @@ $smarty->display('index.tpl');
 require('Smarty.class.php');
 $smarty = new Smarty;
 
-$smarty->caching = 1;
+$smarty->caching = Smarty::CACHING_LIFETIME_CURRENT;
 
 // clear only cache for index.tpl
 $smarty->clear_cache('index.tpl');

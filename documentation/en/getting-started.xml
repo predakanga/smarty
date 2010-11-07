@@ -597,7 +597,7 @@ class Smarty_GuestBook extends Smarty {
         $this->config_dir   = '/web/www.example.com/guestbook/configs/';
         $this->cache_dir    = '/web/www.example.com/guestbook/cache/';
 
-        $this->caching = true;
+        $this->caching = Smarty::CACHING_LIFETIME_CURRENT;
         $this->assign('app_name', 'Guest Book');
    }
 

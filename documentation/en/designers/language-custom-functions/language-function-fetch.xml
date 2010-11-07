@@ -28,13 +28,9 @@
    For local files, either a full system file path
     must be given, or a path relative to the executed php script.
 	 <note>
-	  <para>
-	   If template <link linkend="variable.security">
-       <parameter>$security</parameter></link>
-	   is enabled and you are
-	   fetching a file from the local file system, <varname>{fetch}</varname>
-       will only allow  files from within one of the defined
-	   <link linkend="variable.secure.dir">secure directories</link>.
+	  <para>If security is enabled and you are fetching a file from the local file system, <varname>{fetch}</varname>
+	   will only allow files from within the <parameter>$secure_dir</parameter> path of the securty policy.
+	   See the <link linkend="advanced.features.security">Security</link> section for details.
 	  </para>
 	 </note>
   </para></listitem>

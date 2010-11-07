@@ -31,8 +31,7 @@
 	 keep template syntax to a minimum.
  </para>
 	<para>
-  If <link linkend="variable.security"><parameter>$security</parameter></link>
-  is enabled,  no private methods or functions can be accessed
+  If security is enabled, no private methods or functions can be accessed
  	(begininning with '_'). If a method and property of the same name exist,
  	the method will be used.
 	</para>

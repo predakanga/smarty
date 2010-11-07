@@ -38,9 +38,6 @@
 &programmers.api-variables.variable-config-fix-newlines;
 &programmers.api-variables.variable-default-template-handler-func;
 &programmers.api-variables.variable-php-handling;
-&programmers.api-variables.variable-security;
-&programmers.api-variables.variable-secure-dir;
-&programmers.api-variables.variable-security-settings;
 &programmers.api-variables.variable-trusted-dir;
 &programmers.api-variables.variable-left-delimiter;
 &programmers.api-variables.variable-right-delimiter;

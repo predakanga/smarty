@@ -108,11 +108,7 @@ smarty [AT] example [DOT] com
 
    <example>
    <title>Other examples</title>
-   <para>PHP functions can be used as modifiers,
-   <link linkend="variable.security">
-   <varname>$security</varname></link> permitting.
-    </para>
-   <screen>
+    <screen>
 <![CDATA[
 {* the "rewind" paramater registers the current location *}
 <a href="$my_path?page=foo&rewind=$my_uri|urlencode}">click here</a>

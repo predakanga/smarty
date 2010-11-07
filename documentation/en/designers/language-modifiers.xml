@@ -92,12 +92,8 @@
    the Smarty distribution.
   </para></listitem>
    <listitem><para>
-   Secondly - if
-   <parameter>$security</parameter> is enabled, all php-functions that
-   are to be used as modifiers have to be declared trusted in the
-   <literal>MODIFIER_FUNCS</literal> element of the
-   <link linkend="variable.security.settings">
-   <parameter>$security_settings</parameter></link> array.
+   Secondly - if security is enabled, all php-functions that are to be used as modifiers have to be declared trusted in the
+    <parameter>$modifiers</parameter> property of the securty policy. See the <link linkend="advanced.features.security">Security</link> section for details.
   </para></listitem>
    </itemizedlist>
  </para></listitem>
