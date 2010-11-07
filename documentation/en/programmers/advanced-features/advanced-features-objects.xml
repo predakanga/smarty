@@ -32,7 +32,7 @@
  </para>
 	<para>
   If security is enabled, no private methods or functions can be accessed
- 	(begininning with '_'). If a method and property of the same name exist,
+ 	(beginningwith '_'). If a method and property of the same name exist,
  	the method will be used.
 	</para>
 	<para>

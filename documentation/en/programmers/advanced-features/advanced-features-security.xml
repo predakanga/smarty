@@ -100,7 +100,7 @@ These are the possible settings:
   </listitem>
   <listitem>
     <para>
-      <parameter>$allow_php_tag</parameter> is a boolean flag which controls if {php} and {inlude_php}
+      <parameter>$allow_php_tag</parameter> is a boolean flag which controls if {php} and {include_php}
       tags can be used by the template. The default is "false".
     </para>
   </listitem>
@@ -108,7 +108,7 @@ These are the possible settings:
  </para>
   <para>
     If security is enabled, no private methods, functions or properties of static classes or assigned objects can be accessed
-    (begininning with '_') by the template. 
+    (beginningwith '_') by the template. 
   </para>
   <para>
     To customize the security policy settings you can extend the Smarty_Security class or create an instance of it.
