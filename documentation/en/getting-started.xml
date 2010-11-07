@@ -354,11 +354,15 @@ ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.'c:/webroot/lib/S
     <varname>$cache_dir</varname></link> respectively
     </para></listitem>
 
-    <listitem><para>
-    It is highly recommended
-    that you setup a separate set of these directories for each application
-    that will use Smarty
-   </para></listitem>
+     <listitem><para>
+      It is highly recommended
+      that you setup a separate set of these directories for each application
+      that will use Smarty
+     </para></listitem>
+     <listitem><para>
+      You can verify if your system has the correct access rights for these directories with 
+      <link linkend="api.utility.test.install"><varname>utilityTestInstall()</varname></link>.
+     </para></listitem>
     </itemizedlist>
 
     <para>
