@@ -20,6 +20,7 @@
 <!ENTITY programmers.advanced-features.section-template-cache-handler-func SYSTEM '../current_lang/programmers/advanced-features/section-template-cache-handler-func.xml'>
 <!ENTITY programmers.advanced-features.advanced-features-prefilters SYSTEM '../current_lang/programmers/advanced-features/advanced-features-prefilters.xml'>
 <!ENTITY programmers.advanced-features.advanced-features-template-inheritance SYSTEM '../current_lang/programmers/advanced-features/advanced-features-template-inheritance.xml'>
+<!ENTITY programmers.advanced-features.advanced-features-template-settings SYSTEM '../current_lang/programmers/advanced-features/advanced-features-template-settings.xml'>
 <!ENTITY programmers.advanced-features.advanced-features-streams SYSTEM '../current_lang/programmers/advanced-features/advanced-features-streams.xml'>
 <!ENTITY programmers.advanced-features.advanced-features-security SYSTEM '../current_lang/programmers/advanced-features/advanced-features-security.xml'>
 <!ENTITY programmers.advanced-features.advanced-features-objects SYSTEM '../current_lang/programmers/advanced-features/advanced-features-objects.xml'>

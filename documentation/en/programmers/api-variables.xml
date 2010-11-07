@@ -14,6 +14,10 @@
   $smarty-&gt;template_dir variable
   with $smarty-&gt;setTemplateDir($dir) and $dir = $smarty-&gt;getTemplateDir() respectively.
 </para></note>
+ <note><para>
+    See <link linkend="advanced.features.template.settings"><varname>Changing settings by template</varname></link> section 
+    for how to change Smarty class variables for individual templates.
+ </para></note>
 
 &programmers.api-variables.variable-template-dir;
 &programmers.api-variables.variable-compile-dir;

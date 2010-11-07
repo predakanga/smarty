@@ -2,6 +2,10 @@
 <!-- $Revision: 2972 $ -->
    <chapter id="api.functions">
      <title>Smarty Class Methods()</title>
+ <note><para>
+    See <link linkend="advanced.features.template.settings"><varname>Changing settings by template</varname></link> section 
+    for how to use the functions for individual templates.
+ </para></note>
 &programmers.api-functions.api-append;
 &programmers.api-functions.api-append-by-ref;
 &programmers.api-functions.api-assign;
