@@ -18,8 +18,7 @@
  </note>
    <itemizedlist>
    <listitem><para>
-   <varname>{foreach}</varname> loops can be nested, and the nested
-   <varname>{foreach}</varname> names must be unique from each other.
+   <varname>{foreach}</varname> loops can be nested.
    </para></listitem>
 
    <listitem><para>

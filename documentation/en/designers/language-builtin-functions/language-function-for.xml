@@ -8,22 +8,49 @@
  <itemizedlist>
   <listitem>
    <para>
-    <varname>{for $var=1 to $end}</varname> simple loop with step size of 1 or -1 when $end is less then
-    the starting value.
+    <varname>{for $var=$start to $end}</varname> simple loop with step size of 1.
    </para>
   </listitem>
   <listitem>
    <para>
-    <varname>{for $var=1 to $end step 2}</varname> loop with individual step size.
+    <varname>{for $var=$start to $end step $step}</varname> loop with individual step size.
    </para>
   </listitem>
-  <listitem>
-   <para>
-    <varname>{for $foo=1; $foo lt $bar; $foo++}</varname> PHP style for loop
-   </para>
-  </listitem>
-  </itemizedlist>
+ </itemizedlist>
  
+ <para>
+  <varname>{forelse}</varname> is executed when the loop is not iterated.
+ </para>
+ 
+ <para><emphasis role="bold">Attributes:</emphasis></para>
+ <informaltable frame="all">
+  <tgroup cols="6">
+   <colspec colname="param" align="center" />
+   <colspec colname="position" align="center" />
+   <colspec colname="type" align="center" />
+   <colspec colname="required" align="center" />
+   <colspec colname="default" align="center" />
+   <colspec colname="desc" />
+   <thead>
+    <row>
+     <entry>Attribute Name</entry>
+     <entry>Shorthand</entry>
+     <entry>Type</entry>
+     <entry>Required</entry>
+     <entry>Default</entry>
+     <entry>Description</entry>
+    </row>
+   </thead>
+    <row>
+     <entry>max</entry>
+     <entry>n/a</entry>
+     <entry>integer</entry>
+     <entry>No</entry>
+     <entry><emphasis>n/a</emphasis></entry>
+     <entry>Limit the number of iterations</entry> 
+    </row>
+  </tgroup>
+ </informaltable>
  
  <para><emphasis role="bold">Option Flags:</emphasis></para>
  <informaltable frame="all">
@@ -70,7 +97,65 @@
 ]]>
   </screen>
  </example>
-
+ 
+ <example>
+  <title>Using the <varname>max</varname> attribute</title>
+  <programlisting role="php">
+<![CDATA[
+$smarty->assign('to',10);
+]]>
+  </programlisting>
+  <programlisting role="php">
+<![CDATA[
+<ul>
+{for $foo=3 to $to max=3}
+    <li>{$foo}</li>
+{/for}
+</ul>
+]]>
+  </programlisting>
+  <para>
+   The above example will output:
+  </para>
+  <screen>
+<![CDATA[
+<ul>
+    <li>3</li>
+    <li>4</li>
+    <li>5</li>
+</ul>
+]]>
+  </screen>
+ </example>
+ 
+ <example>
+  <title>Excution of <varname>{forelse}</varname></title>
+  <programlisting role="php">
+<![CDATA[
+$smarty->assign('start',10);
+$smarty->assign('to',5);
+]]>
+  </programlisting>
+  <programlisting role="php">
+<![CDATA[
+<ul>
+{for $foo=$start to $to}
+    <li>{$foo}</li>
+{forelse}
+  no iteration
+{/for}
+</ul>
+]]>
+  </programlisting>
+  <para>
+   The above example will output:
+  </para>
+  <screen>
+<![CDATA[
+  no iteration
+]]>
+  </screen>
+ </example>
  
   <para>
    See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link> and
