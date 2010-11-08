@@ -41,6 +41,7 @@
      <entry>Description</entry>
     </row>
    </thead>
+   <tbody>
     <row>
      <entry>max</entry>
      <entry>n/a</entry>
@@ -49,6 +50,7 @@
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Limit the number of iterations</entry> 
     </row>
+   </tbody>
   </tgroup>
  </informaltable>
  
