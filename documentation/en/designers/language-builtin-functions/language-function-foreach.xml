@@ -16,8 +16,6 @@
   This foreach syntax does not accept any named attributes. This syntax is new to Smarty 3, however the Smarty 2.x syntax <literal>{foreach from=$myarray key="mykey" item="myitem"}</literal> is still supported.
  </para>
  </note>
- 
- 
    <itemizedlist>
    <listitem><para>
    <varname>{foreach}</varname> loops can be nested, and the nested
@@ -26,7 +24,7 @@
 
    <listitem><para>
    The <parameter>array</parameter> variable, usually an array of values,
-   determines the number of times <varname>{foreach}</varname> will loop.
+   determines the number of times <varname>{foreach}</varname> will loop. You can also pass an integer for arbitrary loops.
    </para></listitem>
 
    <listitem><para>
@@ -36,12 +34,12 @@
     
   <listitem><para>
     <varname>{foreach}</varname> properties are
-    <link linkend="foreach.property.index"><parameter>index</parameter></link>,
-    <link linkend="foreach.property.iteration"><parameter>iteration</parameter></link>,
-    <link linkend="foreach.property.first"><parameter>first</parameter></link>,
-    <link linkend="foreach.property.last"><parameter>last</parameter></link>,
-    <link linkend="foreach.property.show"><parameter>show</parameter></link>,
-    <link linkend="foreach.property.total"><parameter>total</parameter></link>.
+    <link linkend="foreach.property.index"><parameter>@index</parameter></link>,
+    <link linkend="foreach.property.iteration"><parameter>@iteration</parameter></link>,
+    <link linkend="foreach.property.first"><parameter>@first</parameter></link>,
+    <link linkend="foreach.property.last"><parameter>@last</parameter></link>,
+    <link linkend="foreach.property.show"><parameter>@show</parameter></link>,
+    <link linkend="foreach.property.total"><parameter>@total</parameter></link>.
   </para>
     
   </listitem>
@@ -58,6 +56,11 @@
     The <literal>$var@property</literal> syntax is new to Smarty 3, however the Smarty 2 syntax <literal>$smarty.foreach.name.property</literal> is still supported.
    </para>
    </note>  
+   <note>
+   <para>
+    Although you can retrieve the array key with the syntax <literal>{foreach $myArray as $myKey => $myValue}</literal>, the key is always available as <varname>$myValue@key</varname> within the foreach loop.
+   </para>
+   </note>
  
  
  <para><emphasis role="bold">Option Flags:</emphasis></para>
@@ -129,8 +132,8 @@ $smarty->assign('myPeople', $people);
   <programlisting>
 <![CDATA[
 <ul>
-{foreach $myPeople as $key => $value}
-   <li>{$key}: {$value}</li>
+{foreach $myPeople as $value}
+   <li>{$value@key}: {$value}</li>
 {/foreach}
 </ul>
 ]]>
@@ -171,6 +174,14 @@ $smarty->assign('myPeople', $people);
   <para>The template to output <parameter>$contact</parameter>.</para>
   <programlisting>
 <![CDATA[
+{* key always available as a property *}
+{foreach $contacts as $contact}
+  {foreach $contact as $value}
+    {$value@key}: {$value}
+  {/foreach}
+{/foreach}
+
+{* accessing key the PHP syntax alternate *}
 {foreach $contacts as $contact}
   {foreach $contact as $key => $value}
     {$key}: {$value}
@@ -179,7 +190,7 @@ $smarty->assign('myPeople', $people);
 ]]>
   </programlisting>
   <para>
-   The above example will output:
+   Either of the above examples will output:
   </para>
   <screen>
 <![CDATA[
@@ -224,7 +235,7 @@ $smarty->assign('myPeople', $people);
 
 
  <sect2 id="foreach.property.index">
-  <title>index</title>
+  <title>@index</title>
   <para>
    <parameter>index</parameter> contains the current array index, starting with zero.
   </para>
@@ -249,7 +260,7 @@ $smarty->assign('myPeople', $people);
   </sect2>
 
  <sect2 id="foreach.property.iteration">
-  <title>iteration</title>
+  <title>@iteration</title>
   <para>
    <parameter>iteration</parameter> contains the current loop iteration and always
    starts at one, unlike <link linkend="foreach.property.index"><parameter>index</parameter></link>.
@@ -258,7 +269,7 @@ $smarty->assign('myPeople', $people);
  <example>
   <title><parameter>iteration</parameter> example: is div by</title>
   <para>
-    The <emphasis>"is div by"</emphasis> operator can be used to detect every Nth row. Here we bold-face the name every 4th iteration.
+    The <emphasis>"is div by"</emphasis> operator can be used to detect a specific iteration. Here we bold-face the name every 4th iteration.
   </para>
   <programlisting>
 <![CDATA[
@@ -274,7 +285,7 @@ $smarty->assign('myPeople', $people);
   <example>
    <title><parameter>iteration</parameter> example: is even/odd by</title>
    <para>
-     The <emphasis>"is even by"</emphasis> and <emphasis>"is odd by"</emphasis> operators can be used to alternate something every Nth row. Choosing between even or odd rotates which one starts. Here we switch the font color every 3rd iteration.
+     The <emphasis>"is even by"</emphasis> and <emphasis>"is odd by"</emphasis> operators can be used to alternate something every so many iterations. Choosing between even or odd rotates which one starts. Here we switch the font color every 3rd iteration.
    </para>
    <programlisting>
  <![CDATA[
@@ -287,11 +298,33 @@ $smarty->assign('myPeople', $people);
  {/foreach}
  ]]>
  </programlisting> 
+ 
+   <para>
+    This will output something similar to this:
+   </para>
+   <screen>
+<![CDATA[
+    <span style="color: #000">...</span>
+    <span style="color: #000">...</span>
+    <span style="color: #000">...</span>
+    <span style="color: #eee">...</span>
+    <span style="color: #eee">...</span>
+    <span style="color: #eee">...</span>
+    <span style="color: #000">...</span>
+    <span style="color: #000">...</span>
+    <span style="color: #000">...</span>
+    <span style="color: #eee">...</span>
+    <span style="color: #eee">...</span>
+    <span style="color: #eee">...</span>
+    ...
+]]>
+   </screen>
+ 
   </example>
  </sect2>
 
  <sect2 id="foreach.property.first">
-  <title>first</title>
+  <title>@first</title>
   <para>
    <parameter>first</parameter> is &true; if the current <varname>{foreach}</varname>
    iteration is the initial one. Here we display a table header row on the first iteration.
@@ -306,12 +339,12 @@ $smarty->assign('myPeople', $people);
   {if $i@first}
     <tr>
       <th>key</td>
-      <th>label</td>
+      <th>name</td>
     </tr>
   {/if}
   <tr>
     <td>{$i@key}</td>
-    <td>{$i@label}</td>
+    <td>{$i.name}</td>
   </tr>
 {/foreach}
 </table>
@@ -321,7 +354,7 @@ $smarty->assign('myPeople', $people);
  </sect2>
 
  <sect2 id="foreach.property.last">
-  <title>last</title>
+  <title>@last</title>
   <para>
    <parameter>last</parameter> is set to &true; if the current
    <varname>{foreach}</varname> iteration is the final one. Here we display a horizontal rule on the last iteration.
@@ -342,7 +375,7 @@ $smarty->assign('myPeople', $people);
  </sect2>
 
  <sect2 id="foreach.property.show">
-  <title>show</title>
+  <title>@show</title>
   <para>
    The show <parameter>show</parameter> property can be used after the execution of a
    <varname>{foreach}</varname> loop to detect if data has been displayed or not.
@@ -364,7 +397,7 @@ $smarty->assign('myPeople', $people);
  </sect2>
 
  <sect2 id="foreach.property.total">
-  <title>total</title>
+  <title>@total</title>
   <para>
    <parameter>total</parameter> contains the number of iterations that this
    <varname>{foreach}</varname>  will loop.
@@ -374,12 +407,12 @@ $smarty->assign('myPeople', $people);
   <title><parameter>total</parameter> property example</title>
 <programlisting>
 <![CDATA[
-{* show rows returned at end *}
+{* show number of rows at end *}
 {foreach $items as $item}
-{$item.name}<hr/>
-{if $prod@last}
-  <div id="total">{$prod@total} items</div>
-{/if}
+  {$item.name}<hr/>
+  {if $prod@last}
+    <div id="total">{$prod@total} items</div>
+  {/if}
 {foreachelse}
  ... no items to loop ...
 {/foreach}
