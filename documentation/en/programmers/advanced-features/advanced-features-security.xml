@@ -68,14 +68,16 @@ These are the possible settings:
   <listitem>
     <para>
       <parameter>$php_functions</parameter> is an array of PHP functions that are considered trusted and 
-      can be used from within template. To disable access to all PHP functions set $php_functions = null,
+      can be used from within template. To disable access to all PHP functions set $php_functions = null.
+      An empty array ( $php_functions = array() ) will allow all PHP functions.
       The default is array('isset', 'empty', 'count', 'sizeof', 'in_array', 'is_array','time','nl2br').
     </para>
   </listitem>
   <listitem>
     <para>
-      <parameter>$modifiers</parameter> is an array of modifiers that are considered trusted and 
-      can be used from within template. To disable access to all modifer set $modifer = null.
+      <parameter>$php_modifiers</parameter> is an array of PHP functions that are considered trusted and 
+      can be used from within template as modifier. To disable access to all PHP modifier set $php_modifier = null.
+      An empty array ( $php_modifier = array() ) will allow all PHP functions.
       The default is array('escape','count').
     </para>
   </listitem>
@@ -83,6 +85,7 @@ These are the possible settings:
     <para>
       <parameter>$streams</parameter> is an array of streams that are considered trusted and 
       can be used from within template. To disable access to all streams set $streams = null.
+      An empty array ( $streams = array() ) will allow all streams.
       The default is array('file').
     </para>
   </listitem>
