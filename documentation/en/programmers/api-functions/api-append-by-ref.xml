@@ -17,15 +17,16 @@
    This is used to
    <link linkend="api.append"><varname>append()</varname></link> values
    to the templates by reference.
-   If you append a variable by reference then change its
-   value, the appended value sees the change as well. For
-   <link linkend="advanced.features.objects">objects</link>,
-   <varname>appendByRef()</varname> also avoids an in-memory copy of the
-   appended object.
-   See the PHP manual on variable referencing for an in-depth
-   explanation. If you pass the optional third parameter of &true;,
-   the value will be merged with the current array instead of appended.
   </para>
+  <note>
+   <title>Technical Note</title>
+   <para>
+     With the introduction of PHP5, <varname>appendByRef()</varname> is not necessary for most
+     intents and purposes. <varname>appendByRef()</varname> is useful if you want a PHP array index value
+     to be affected by its reassignment from a template. Assigned object properties behave
+     this way by default.
+   </para>
+  </note> 
   &note.parameter.merge;
   <example>
    <title>appendByRef</title>

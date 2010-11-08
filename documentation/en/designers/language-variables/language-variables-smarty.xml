@@ -154,16 +154,17 @@ define('MY_CONST_VAL','CHERRIES');
  </sect2>
 
  <sect2 id="language.variables.smarty.loops">
-  <title>{$smarty.section}, {$smarty.foreach}</title>
+  <title>{$smarty.section}</title>
   <para>
-   The <parameter>{$smarty.section}</parameter> and
-   <parameter>{$smarty.foreach}</parameter> variables can be used to refer to
+   The <parameter>{$smarty.section}</parameter> variables can be used to refer to
    <link linkend="language.function.section"><varname>{section}</varname></link>
-   and
-   <link linkend="language.function.foreach"><varname>{foreach}</varname></link>
-   loop properties respectfully. These have some very useful values such as
+   loop properties. These have some very useful values such as
    <varname>.first</varname>, <varname>.index</varname>, etc.
   </para>
+  <note><para>
+    The <varname>{$smarty.foreach}</varname> variable is no longer used with the new <link linkend="language.function.foreach"><varname>{foreach}</varname></link> syntax,
+    but is still supported with Smarty 2.x style foreach syntax.
+  </para></note>
  </sect2>
 
  <sect2 id="language.variables.smarty.template">

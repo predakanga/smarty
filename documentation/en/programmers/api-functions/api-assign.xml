@@ -3,7 +3,7 @@
 <refentry id="api.assign">
  <refnamediv>
   <refname>assign()</refname>
-  <refpurpose>assign values to the templates</refpurpose>
+  <refpurpose>assign variables/objects to the templates</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
@@ -20,7 +20,12 @@
    You can  explicitly pass name/value pairs, or associative arrays
    containing the name/value pairs.
   </para>
-  <example>
+  
+  <note><para>
+    When you assign/register objects to templates, be sure that all properties and methods accessed from the template are for presentation purposes only. It is very easy to inject application logic through objects, and this leads to poor designs that are difficult to manage. See the Best Practices section of the Smarty website.
+  </para></note>    
+  
+  <example>    
    <title>assign()</title>
 <programlisting role="php">
 <![CDATA[

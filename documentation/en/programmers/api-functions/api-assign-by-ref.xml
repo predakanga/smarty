@@ -14,20 +14,15 @@
   </methodsynopsis>
   <para>
    This is used to <link linkend="api.assign"><varname>assign()</varname></link>
-   values to the templates by reference instead of
-   making a copy. See the PHP manual on variable referencing for an explanation.
+   values to the templates by reference.
   </para>
   <note>
    <title>Technical Note</title>
    <para>
-    This is used to assign values to the templates by reference.
-    If you assign a variable by reference then change its
-    value, the assigned value sees the change as well. For
-    <link linkend="advanced.features.objects">objects</link>,
-    <varname>assignByRef()</varname> also avoids an in-memory copy of the
-    assigned object.
-    See the PHP manual on variable referencing for an in-depth
-    explanation.
+     With the introduction of PHP5, <varname>assignByRef()</varname> is not necessary for most
+     intents and purposes. <varname>assignByRef()</varname> is useful if you want a PHP array index value
+     to be affected by its reassignment from a template. Assigned object properties behave
+     this way by default.
    </para>
   </note>
   <example>

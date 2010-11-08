@@ -53,7 +53,7 @@
  
    <note>
    <para>
-    The <literal>$var@property</literal> syntax is new to Smarty 3, however the Smarty 2 syntax <literal>$smarty.foreach.name.property</literal> is still supported.
+    The <literal>$var@property</literal> syntax is new to Smarty 3, however when using the Smarty 2 <literal>{foreach from=$myarray key="mykey" item="myitem"}</literal> style syntax, the <literal>$smarty.foreach.name.property</literal> syntax is still supported.
    </para>
    </note>  
    <note>

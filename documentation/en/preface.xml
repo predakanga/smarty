@@ -17,8 +17,10 @@
     <listitem><para>compliment PHP, not replace it</para></listitem>
     <listitem><para>fast development/deployment for programmers and designers</para></listitem>
     <listitem><para>quick and easy to maintain</para></listitem>
-    <listitem><para>syntax easy to understand</para></listitem>
+    <listitem><para>syntax easy to understand, no PHP knowledge necessary</para></listitem>
     <listitem><para>flexibility for custom development</para></listitem>
+    <listitem><para>security: insulation from PHP</para></listitem>
+    <listitem><para>free, open source</para></listitem>
   </itemizedlist>
 
   <para>
@@ -30,21 +32,29 @@
   </para>
   
   <para>
+    <emphasis role="bold">Two camps of thought</emphasis>
+  </para>
+
+  <para>
+    When it comes to templating in PHP, there are basically two camps of thought. The first camp exclaims that "PHP is a template engine" simply because it <emphasis>can</emphasis> mix with presentation, and therefore this is the way to go. This approach is the most efficient from a pure script-execution point of view, but it has drawbacks. PHP syntax works well for programming, but its verboseness quickly gets messy when mixed with presentation.
+  </para>
+
+  <para>
+    The second camp exclaims that presentation should be void of all programming code, and instead use simple tags to indicate where application content is revealed. This approach is common with other development languages, and is also the approach that Smarty takes for PHP. The idea is to keep the templates focused squarely on presentation, not application code.
+  </para>
+
+  <para>
    <emphasis role="bold">Why is separating PHP from templates important?</emphasis>
   </para>  
   
   <para>
-  How often do you hear "PHP is a template language"? When PHP first came to the masses, it was billed as a Hypertext-embedded scripting language. That ideology has changed significantly as the language has matured. PHP is a programming language. Although you can use PHP for presentation, this has become more of a curse than a virtue for the language. HTML mixed with programming code is generally messy and difficult to maintain.
-</para>
-
-  <para>
-  As with many templating solutions in other programming languages (eg. Java,Python,Perl), Smarty templates are kept language-agnostic. They contain simple tags that indicate where application content is revealed. The idea is to keep the templates focused squarely on presentation, not application code. Benefits of this approach:
-</para>
+    Two major benefits:
+  </para>
   
   <itemizedlist>
     <listitem>  
       <para>
-        SYNTAX: Templates typically consist of semantic markup such as HTML. PHP syntax works well for application code, but quickly degenerates when mixed with HTML. Smarty's simple {tag} syntax is designed specifically to express presentation. Smarty focuses your templates on presentation and less on "code". This lends to quicker template deployment and easier maintenance.
+        SYNTAX: Templates typically consist of semantic markup such as HTML. PHP syntax works well for application code, but quickly degenerates when mixed with HTML. Smarty's simple {tag} syntax is designed specifically to express presentation. Smarty focuses your templates on presentation and less on "code". This lends to quicker template deployment and easier maintenance. Smarty syntax requires no working knowledge of PHP, and is intuitive for programmers and non-programmers alike.
       </para>
     </listitem>
     <listitem>

@@ -5,8 +5,15 @@
  <para>
   Smarty allows access to PHP
   <ulink url="&url.php-manual;object">objects</ulink> through the templates.
+</para>
+
+<note><para>
+  When you assign/register objects to templates, be sure that all properties and methods accessed from the template are for presentation purposes only. It is very easy to inject application logic through objects, and this leads to poor designs that are difficult to manage. See the Best Practices section of the Smarty website.
+</para></note>
+
+<para>
   There are two ways to access them.
-  </para>
+</para>
 
  <itemizedlist spacing="compact">
  <listitem><para>
