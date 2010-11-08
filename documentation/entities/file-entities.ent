@@ -128,7 +128,6 @@
 <!ENTITY designers.language-builtin-functions.language-function-ldelim SYSTEM '../current_lang/designers/language-builtin-functions/language-function-ldelim.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-foreach SYSTEM '../current_lang/designers/language-builtin-functions/language-function-foreach.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-for SYSTEM '../current_lang/designers/language-builtin-functions/language-function-for.xml'>
-<!ENTITY designers.language-builtin-functions.language-function-foreach_new SYSTEM '../current_lang/designers/language-builtin-functions/language-function-foreach_new.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-insert SYSTEM '../current_lang/designers/language-builtin-functions/language-function-insert.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-section SYSTEM '../current_lang/designers/language-builtin-functions/language-function-section.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-config-load SYSTEM '../current_lang/designers/language-builtin-functions/language-function-config-load.xml'>

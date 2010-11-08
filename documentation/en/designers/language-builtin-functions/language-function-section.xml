@@ -12,6 +12,13 @@
    a closing <varname>{/section}</varname> tag.
    </para>
 
+ <note><para>
+   The <link linkend="language.function.foreach"><varname>{foreach}</varname></link> loop can do everything a {section} loop can do, and has a simpler and easier syntax. It is usually preferred over the {section} loop.
+ </para></note>
+ <note><para>
+   {section} loops cannot loop over associative arrays, they must be numerically indexed, and sequential (0,1,2,...). For associative arrays, use the <link linkend="language.function.foreach"><varname>{foreach}</varname></link> loop.
+ </para></note>
+
  <informaltable frame="all">
   <tgroup cols="5">
    <colspec colname="param" align="center" />
@@ -311,8 +318,12 @@ $smarty->assign('address',$addr);
 ?>
 ]]>
 </programlisting>
-<para>The <parameter>loop</parameter> variable only determines the number of times to loop.
-  You can access ANY variable from the template within the <varname>{section}</varname></para>
+  <para>
+  The <parameter>loop</parameter> variable only determines the number of times to loop.
+  You can access ANY variable from the template within the <varname>{section}</varname>.
+  This is useful for looping multiple arrays. You can pass an array which will determine
+  the loop count by the array size, or you can pass an integer to specify the number of loops.
+  </para>
   <programlisting>
 <![CDATA[
 {section name=customer loop=$custid}
@@ -472,7 +483,7 @@ $smarty->assign('contacts', $db->getAll($sql));
    the <parameter>step</parameter> attribute if given.
   </para>
   <note>
-   <title>Technical Note</title>
+   <title>Note</title>
    <para>
     If the <parameter>step</parameter> and <parameter>start</parameter>
      properties are not
@@ -484,7 +495,7 @@ $smarty->assign('contacts', $db->getAll($sql));
   <example>
 <title>{section} <varname>index</varname> property</title>
 <para>
-<note><title>FYI</title>
+<note><title>Note</title>
 <para><literal>$custid[customer.index]</literal> and
 <literal>$custid[customer]</literal> are identical.</para>
 </note>
@@ -628,14 +639,12 @@ iteration=6 index=15 id=3015<br />
   <para>
    Another example that uses the <parameter>iteration</parameter> property to
    output a table header block every five rows.
-   Uses the <link linkend="language.function.if"><varname>{if}</varname></link>
-   function with the mod operator.
   </para>
    <programlisting>
 <![CDATA[
 <table>
 {section name=co loop=$contacts}
-  {if $smarty.section.co.iteration % 5 == 1}
+  {if $smarty.section.co.iteration is div by 5}
     <tr><th>&nbsp;</th><th>Name></th><th>Home</th><th>Cell</th><th>Email</th></tr>
   {/if}
   <tr>
@@ -648,8 +657,35 @@ iteration=6 index=15 id=3015<br />
 {/section}
 </table>
 ]]>
-  </programlisting>
+  </programlisting>  
+    <para>
+     An that uses the <parameter>iteration</parameter> property to
+     alternate a text color every third row.
+    </para>
+     <programlisting>
+  <![CDATA[
+  <table>
+  {section name=co loop=$contacts}
+    {if $smarty.section.co.iteration is even by 3}
+      <span style="color: #ffffff">{$contacts[co].name}</span>
+    {else}
+      <span style="color: #dddddd">{$contacts[co].name}</span>
+    {/if}
+  {/section}
+  </table>
+  ]]>
+    </programlisting>
 </example>
+
+
+<note><para>
+  The <emphasis>"is div by"</emphasis> syntax is a simpler alternative to the PHP mod operator syntax. The mod operator is allowed: <literal>{if $smarty.section.co.iteration % 5 == 1}</literal> will work just the same.
+</para></note>
+
+<note><para>
+  You can also use <emphasis>"is odd by"</emphasis> to reverse the alternating.
+</para></note>
+
  </sect2>
 
 
@@ -800,7 +836,8 @@ the section was shown.
   </programlisting>
   </example>
   <para>
-   See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link>
+   See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link>,
+   <link linkend="language.function.for"><varname>{for}</varname></link>
    and
    <link linkend="language.variables.smarty.loops"><parameter>$smarty.section</parameter></link>.
   </para>

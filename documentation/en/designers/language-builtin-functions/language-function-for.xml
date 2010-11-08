@@ -73,8 +73,7 @@
 
  
   <para>
-   See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link>,
-   <link linkend="language.function.foreach_new"><varname>{foreach} - new style</varname></link> and
+   See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link> and
    <link linkend="language.function.section"><varname>{section}</varname></link>
   </para>
 </sect1>

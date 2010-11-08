@@ -33,7 +33,6 @@
  &designers.language-builtin-functions.language-function-extends;
  &designers.language-builtin-functions.language-function-for;
  &designers.language-builtin-functions.language-function-foreach;
- &designers.language-builtin-functions.language-function-foreach_new;
  &designers.language-builtin-functions.language-function-function;
  &designers.language-builtin-functions.language-function-if;
  &designers.language-builtin-functions.language-function-include;
