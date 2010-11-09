@@ -205,33 +205,54 @@ $smarty->assign('myPeople', $people);
 
  <example>
   <title>Database example with {foreachelse}</title>
-  <para>A database (PDO) example of a search script, the query results assigned to Smarty</para>
+  <para>A database (PDO) example of looping over search results. This example is looping over a PHP iterator instead of an array().</para>
 <programlisting role="php">
 <![CDATA[
 <?php 
-  try {
-        foreach($this->pdo->query(
-          "select * from GUESTBOOK order by EntryDate DESC") as $row)
-        $rows[] = $row;
-      } catch (PDOException $e) {
-        print "Error!: " . $e->getMessage();
-        return false;
-      }
-  $smarty->assign('rows', $rows);
+  include('Smarty.class.php'); 
+
+  $smarty = new Smarty; 
+
+  $dsn = 'mysql:host=localhost;dbname=test'; 
+  $login = 'test'; 
+  $passwd = 'test'; 
+
+  // setting PDO to use buffered queries in mysql is 
+  // important if you plan on using multiple result cursors 
+  // in the template. 
+
+  $db = new PDO($dsn, $login, $passwd, array( 
+     PDO::MYSQL_ATTR_USE_BUFFERED_QUERY => true)); 
+
+  $res = $db->prepare("select * from users"); 
+  $res->execute(); 
+  $res->setFetchMode(PDO::FETCH_LAZY); 
+
+  // assign to smarty 
+  $smarty->assign('res',$res); 
+
+  $smarty->display('index.tpl');?>
 ?>
 ]]>
   </programlisting>
   <programlisting>
 <![CDATA[
-{foreach $rows as $row}
-    <a href="contact.php?contact_id={$row.id}">{$row.name} - {$row.email}</a>
+{foreach $res as $r} 
+  {$r.id} 
+  {$r.name}
 {foreachelse}
-    No items were found in the search
+  .. no results .. 
 {/foreach}
 ]]>
   </programlisting>
  </example>
 
+ <para>
+   The above is assuming the results contain the columns named <literal>id</literal> and <literal>name</literal>.
+ </para>
+ <para>
+   What is the advantage of an iterator vs. looping over a plain old array? With an array, all the results are accumulated into memory before being looped. With an iterator, each result is loaded/released within the loop. This saves processing time and memory, especially for very large result sets.
+ </para>
 
  <sect2 id="foreach.property.index">
   <title>@index</title>
