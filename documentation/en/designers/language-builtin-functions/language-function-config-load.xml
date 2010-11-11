@@ -10,17 +10,15 @@
 
  <para><emphasis role="bold">Attributes:</emphasis></para>
  <informaltable frame="all">
-  <tgroup cols="6">
+  <tgroup cols="5">
    <colspec colname="param" align="center" />
-   <colspec colname="position" align="center" />
-   <colspec colname="type" align="center" />
+  <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
    <colspec colname="desc" />
    <thead>
     <row>
      <entry>Attribute Name</entry>
-     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -30,7 +28,6 @@
    <tbody>
     <row>
      <entry>file</entry>
-     <entry>1</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -38,15 +35,13 @@
     </row>
     <row>
      <entry>section</entry>
-     <entry>2</entry>
-     <entry>string</entry>
+    <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>The name of the section to load</entry>
     </row>
     <row>
      <entry>scope</entry>
-     <entry>n/a</entry>
      <entry>string</entry>
      <entry>no</entry>
      <entry><emphasis>local</emphasis></entry>
@@ -88,6 +83,7 @@ pageTitle = "Customer Info"
   <programlisting>
 <![CDATA[
 {config_load file="example.conf"}
+{config_load "example.conf"}  {* short-hand *}
 
 <html>
 <title>{#pageTitle#|default:"No title"}</title>
@@ -126,6 +122,7 @@ pageTitle = "Customer Info"
   <programlisting>
 <![CDATA[
 {config_load file='example.conf' section='Customer'}
+{config_load 'example.conf' 'Customer'} {* short-hand *}
 
 <html>
 <title>{#pageTitle#}</title>

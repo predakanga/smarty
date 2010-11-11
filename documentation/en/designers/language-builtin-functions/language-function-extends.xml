@@ -26,9 +26,8 @@
 
 <para><emphasis role="bold">Attributes:</emphasis></para>
  <informaltable frame="all">
-  <tgroup cols="6">
+  <tgroup cols="5">
    <colspec colname="param" align="center" />
-   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -36,7 +35,6 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
-     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -46,7 +44,6 @@
    <tbody>
     <row>
      <entry>file</entry>
-     <entry>1</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -62,28 +59,11 @@
   <programlisting>
 <![CDATA[
 {extends file='parent.tpl'}
+{extends 'parent.tpl'}  {* short-hand *}
 ]]>
   </programlisting>
  </example>
  
- <example>
-  <title>{extends} using shorttags</title>
-  <programlisting>
-<![CDATA[
-{extends 'parent.tpl'}
-]]>
-  </programlisting>
- </example>
- 
- <example>
-  <title>{include} passing variables</title>
-  <programlisting>
-<![CDATA[
-{extends file='parent.tpl' title='Newest links' links=$link_array}
-]]>
-  </programlisting>
- </example>
-
  <para>
   See also
   <link linkend="advanced.features.template.inheritance">Template Interitance</link>

@@ -22,9 +22,8 @@
 
  <para><emphasis role="bold">Attributes:</emphasis></para>
  <informaltable frame="all">
-  <tgroup cols="6">
+  <tgroup cols="5">
    <colspec colname="param" align="center" />
-   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -32,7 +31,6 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
-     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -42,15 +40,13 @@
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>1</entry>
-     <entry>string</entry>
+    <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>The name of the captured block</entry>
     </row>
     <row>
      <entry>assign</entry>
-     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -58,8 +54,7 @@
     </row>
     <row>
      <entry>append</entry>
-     <entry>n/a</entry>
-     <entry>string</entry>
+    <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>The name of an array variable where to append the captured output to</entry>
@@ -109,6 +104,7 @@
 <![CDATA[
 {* we don't want to print a div tag unless content is displayed *}
 {capture name="banner"}
+{capture "banner"} {* short-hand *}
   {include file="get_banner.tpl"}
 {/capture}
 
@@ -125,6 +121,7 @@
    <programlisting>
 <![CDATA[
 {capture name=some_content assign=popText}
+{capture some_content assign=popText} {* short-hand *}
 The server is {$my_server_name|upper} at {$my_server_addr}<br>
 Your ip is {$my_ip}.
 {/capture}
@@ -141,7 +138,7 @@ Your ip is {$my_ip}.
    <programlisting>
 <![CDATA[
 {capture append="foo"}hello{/capture}I say just {capture append="foo"}world{/capture}
-{foreach from=$foo item="text"}{$text} {/foreach}
+{foreach $foo as $text}{$text} {/foreach}
 ]]>
      </programlisting>
    <para>

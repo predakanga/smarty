@@ -22,17 +22,15 @@
     
    <para><emphasis role="bold">Attributes:</emphasis></para>
    <informaltable frame="all">
-    <tgroup cols="6">
+    <tgroup cols="5">
      <colspec colname="param" align="center" />
-     <colspec colname="position" align="center" />
-     <colspec colname="type" align="center" />
+    <colspec colname="type" align="center" />
      <colspec colname="required" align="center" />
      <colspec colname="default" align="center" />
      <colspec colname="desc" />
      <thead>
       <row>
        <entry>Attribute Name</entry>
-       <entry>Shorthand</entry>
        <entry>Type</entry>
        <entry>Required</entry>
        <entry>Default</entry>
@@ -42,7 +40,6 @@
      <tbody>
       <row>
        <entry>name</entry>
-       <entry>1</entry>
        <entry>string</entry>
        <entry>Yes</entry>
        <entry><emphasis>n/a</emphasis></entry>
@@ -50,7 +47,6 @@
       </row>
       <row>
        <entry>assign</entry>
-       <entry>n/a</entry>
        <entry>string</entry>
        <entry>No</entry>
        <entry><emphasis>n/a</emphasis></entry>
@@ -59,7 +55,6 @@
       </row>
       <row>
        <entry>[var ...]</entry>
-       <entry>n/a</entry>
        <entry>[var type]</entry>
        <entry>No</entry>
        <entry><emphasis>n/a</emphasis></entry>
@@ -114,6 +109,7 @@
 
 {* run the array through the function *}
 {call name=menu data=$menu}
+{call menu data=$menu} {* short-hand *}
 ]]>
   </programlisting>
  <para>
@@ -134,25 +130,6 @@
   </programlisting>
  </example>
 
-
-  <example>
-    <title>Using short-hand syntax for template function names</title>
-   <para>
-    This is the skeleton of the example above using short-hand syntax for the template function names.
-   </para> 
-   
-    <programlisting>
-<![CDATA[
-{function menu level=0}
-     ......
-      {call menu data=$entry level=$level+1}
-     ......
-{/function}
-
-{call menu data=$menu}
-]]>
-  </programlisting>
-  </example>
    
   <para>
   See also

@@ -20,9 +20,8 @@
  </para></note>
 
  <informaltable frame="all">
-  <tgroup cols="6">
+  <tgroup cols="5">
    <colspec colname="param" align="center" />
-   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -30,7 +29,6 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
-     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -40,23 +38,20 @@
    <tbody>
     <row>
      <entry>name</entry>
-      <entry>1</entry>
-      <entry>string</entry>
+     <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>The name of the section</entry>
     </row>
     <row>
      <entry>loop</entry>
-     <entry>2</entry>
-     <entry>mixed</entry>
+    <entry>mixed</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>Value to determine the number of loop iterations</entry>
     </row>
     <row>
      <entry>start</entry>
-     <entry>n/a</entry>
      <entry>integer</entry>
      <entry>No</entry>
      <entry><emphasis>0</emphasis></entry> <entry>The index
@@ -70,7 +65,6 @@
     </row>
     <row>
      <entry>step</entry>
-     <entry>n/a</entry>
      <entry>integer</entry>
      <entry>No</entry>
      <entry><emphasis>1</emphasis></entry>
@@ -81,7 +75,6 @@
     </row>
     <row>
      <entry>max</entry>
-     <entry>n/a</entry>
      <entry>integer</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -90,7 +83,6 @@
     </row>
     <row>
      <entry>show</entry>
-     <entry>n/a</entry>
      <entry>boolean</entry>
      <entry>No</entry>
      <entry><emphasis>&true;</emphasis></entry>
@@ -195,11 +187,13 @@ $smarty->assign('custid',$data);
 <![CDATA[
 {* this example will print out all the values of the $custid array *}
 {section name=customer loop=$custid}
+{section customer $custid} {* short-hand *}
   id: {$custid[customer]}<br />
 {/section}
 <hr />
 {*  print out all the values of the $custid array reversed *}
 {section name=foo loop=$custid step=-1}
+{section foo $custid step=-1} {* short-hand *}
   {$custid[foo]}<br />
 {/section}
 ]]>

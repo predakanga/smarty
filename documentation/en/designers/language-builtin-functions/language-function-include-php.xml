@@ -11,9 +11,8 @@
  </note>
 
  <informaltable frame="all">
-  <tgroup cols="6">
+  <tgroup cols="5">
    <colspec colname="param" align="center" />
-   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -21,7 +20,6 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
-     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -31,7 +29,6 @@
    <tbody>
     <row>
      <entry>file</entry>
-     <entry>1</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -39,8 +36,7 @@
     </row>
     <row>
      <entry>once</entry>
-     <entry>n/a</entry>
-     <entry>boolean</entry>
+    <entry>boolean</entry>
      <entry>No</entry>
      <entry><emphasis>&true;</emphasis></entry>
      <entry>whether or not to include the php file more than
@@ -48,7 +44,6 @@
     </row>
     <row>
      <entry>assign</entry>
-     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -127,6 +122,7 @@ $this->assign('navigation', $db->getRows());
 <![CDATA[
 {* absolute path, or relative to $trusted_dir *}
 {include_php file='/path/to/load_nav.php'}
+{include_php '/path/to/load_nav.php'}             {* short-hand *}
 
 {foreach item='nav' from=$navigation}
   <a href="{$nav.url}">{$nav.name}</a><br />

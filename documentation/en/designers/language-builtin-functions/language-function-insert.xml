@@ -11,9 +11,8 @@
  </para>
 
   <informaltable frame="all">
-   <tgroup cols="6">
+   <tgroup cols="5">
     <colspec colname="param" align="center" />
-    <colspec colname="position" align="center" />
     <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -21,7 +20,6 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
-     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -31,7 +29,6 @@
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>1</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -39,7 +36,6 @@
     </row>
     <row>
      <entry>assign</entry>
-     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -48,7 +44,6 @@
     </row>
     <row>
      <entry>script</entry>
-     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -57,8 +52,7 @@
     </row>
     <row>
      <entry>[var ...]</entry>
-     <entry>n/a</entry>
-     <entry>[var type]</entry>
+    <entry>[var type]</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>variable to pass to insert function</entry>
@@ -83,6 +77,7 @@
 <programlisting>
 {* example of fetching a banner *}
 {insert name="getBanner" lid=#banner_location_id# sid=#site_id#}
+{insert "getBanner" lid=#banner_location_id# sid=#site_id#} {* short-hand *}
 </programlisting>
  </example>
  <para>
