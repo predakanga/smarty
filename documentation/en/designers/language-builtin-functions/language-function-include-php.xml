@@ -11,8 +11,9 @@
  </note>
 
  <informaltable frame="all">
-  <tgroup cols="5">
+  <tgroup cols="6">
    <colspec colname="param" align="center" />
+   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -20,6 +21,7 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
+     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -29,13 +31,15 @@
    <tbody>
     <row>
      <entry>file</entry>
+     <entry>1</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>The name of the php file to include</entry>
+     <entry>The name of the php file to include as absolute path</entry>
     </row>
     <row>
      <entry>once</entry>
+     <entry>n/a</entry>
      <entry>boolean</entry>
      <entry>No</entry>
      <entry><emphasis>&true;</emphasis></entry>
@@ -44,6 +48,7 @@
     </row>
     <row>
      <entry>assign</entry>
+     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -54,13 +59,33 @@
   </tgroup>
  </informaltable>
 
+ <para><emphasis role="bold">Option Flags:</emphasis></para>
+ <informaltable frame="all">
+  <tgroup cols="2">
+   <colspec colname="param" align="center" />
+   <colspec colname="desc" />
+   <thead>
+    <row>
+     <entry>Name</entry>
+     <entry>Description</entry>
+    </row>
+   </thead>
+   <tbody>
+    <row>
+     <entry>nocache</entry>
+     <entry>Disables caching of inluded PHP script</entry>
+    </row>    
+   </tbody>
+  </tgroup>
+ </informaltable>
+ 
  <para>
   <varname>{include_php}</varname> tags are used to include a php script in your template.
-  If security is enabled, then the php script must be located in the <parameter>$trusted_dir</parameter> path of the securty policy.
-  See the <link linkend="advanced.features.security">Security</link> section for details.
-  The <varname>{include_php}</varname> tag must have the attribute
-  <parameter>file</parameter>, which contains the path to the included php file, either
-  relative to <parameter>$trusted_dir</parameter>, or an absolute path.
+  The path of the attribute <parameter>file</parameter> can be
+   either absolute, or relative to
+   <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>. If security is enabled, then the 
+   script must be located in the <parameter>$trusted_dir</parameter> path of the securty policy.
+   See the <link linkend="advanced.features.security">Security</link> section for details.
  </para>
  <para>
   By default, php files are only included once even if called
@@ -76,7 +101,7 @@
   displayed.
  </para>
  <para>
-  The smarty object is available as <parameter>$this</parameter> within
+  The smarty object is available as <parameter>$_smarty_tpl->smarty</parameter> within
   the PHP script that you include.
  </para>
  <example>

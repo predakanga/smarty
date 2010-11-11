@@ -10,16 +10,18 @@
    will be executed on every invocation of the template.
  </para>
 
- <informaltable frame="all">
-  <tgroup cols="5">
-   <colspec colname="param" align="center" />
-   <colspec colname="type" align="center" />
+  <informaltable frame="all">
+   <tgroup cols="6">
+    <colspec colname="param" align="center" />
+    <colspec colname="position" align="center" />
+    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
    <colspec colname="desc" />
    <thead>
     <row>
      <entry>Attribute Name</entry>
+     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -29,13 +31,15 @@
    <tbody>
     <row>
      <entry>name</entry>
+     <entry>1</entry>
      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>The name of the insert function (insert_name)</entry>
+     <entry>The name of the insert function (insert_<parameter>name</parameter>) or insert plugin</entry>
     </row>
     <row>
      <entry>assign</entry>
+     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -44,6 +48,7 @@
     </row>
     <row>
      <entry>script</entry>
+     <entry>n/a</entry>
      <entry>string</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -52,6 +57,7 @@
     </row>
     <row>
      <entry>[var ...]</entry>
+     <entry>n/a</entry>
      <entry>[var type]</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -120,12 +126,16 @@
     <link linkend="variable.trusted.dir"><parameter>$trusted_dir</parameter></link>. If security is enabled, then the 
     script must be located in the <parameter>$trusted_dir</parameter> path of the securty policy.
     See the <link linkend="advanced.features.security">Security</link> section for details.
-  </para></listitem>
+   </para>
+  </listitem>
   </itemizedlist>
   <para>
    The Smarty object is passed as the second argument. This way you
    can reference and modify information in the Smarty object from
    within the <varname>{insert}</varname> function.
+  </para>
+  <para>
+   If no PHP script can be found Smarty is looking for a corresponding insert plugin.
   </para>
   <note>
    <title>Technical Note</title>

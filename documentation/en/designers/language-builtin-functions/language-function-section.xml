@@ -20,8 +20,9 @@
  </para></note>
 
  <informaltable frame="all">
-  <tgroup cols="5">
+  <tgroup cols="6">
    <colspec colname="param" align="center" />
+   <colspec colname="position" align="center" />
    <colspec colname="type" align="center" />
    <colspec colname="required" align="center" />
    <colspec colname="default" align="center" />
@@ -29,6 +30,7 @@
    <thead>
     <row>
      <entry>Attribute Name</entry>
+     <entry>Shorthand</entry>
      <entry>Type</entry>
      <entry>Required</entry>
      <entry>Default</entry>
@@ -38,13 +40,15 @@
    <tbody>
     <row>
      <entry>name</entry>
-     <entry>string</entry>
+      <entry>1</entry>
+      <entry>string</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
      <entry>The name of the section</entry>
     </row>
     <row>
      <entry>loop</entry>
+     <entry>2</entry>
      <entry>mixed</entry>
      <entry>Yes</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -52,6 +56,7 @@
     </row>
     <row>
      <entry>start</entry>
+     <entry>n/a</entry>
      <entry>integer</entry>
      <entry>No</entry>
      <entry><emphasis>0</emphasis></entry> <entry>The index
@@ -65,6 +70,7 @@
     </row>
     <row>
      <entry>step</entry>
+     <entry>n/a</entry>
      <entry>integer</entry>
      <entry>No</entry>
      <entry><emphasis>1</emphasis></entry>
@@ -75,6 +81,7 @@
     </row>
     <row>
      <entry>max</entry>
+     <entry>n/a</entry>
      <entry>integer</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
@@ -83,6 +90,7 @@
     </row>
     <row>
      <entry>show</entry>
+     <entry>n/a</entry>
      <entry>boolean</entry>
      <entry>No</entry>
      <entry><emphasis>&true;</emphasis></entry>
@@ -92,7 +100,28 @@
   </tgroup>
  </informaltable>
 
- <itemizedlist>
+
+  <para><emphasis role="bold">Option Flags:</emphasis></para>
+  <informaltable frame="all">
+    <tgroup cols="2">
+      <colspec colname="param" align="center" />
+      <colspec colname="desc" />
+      <thead>
+        <row>
+          <entry>Name</entry>
+          <entry>Description</entry>
+        </row>
+      </thead>
+      <tbody>
+        <row>
+          <entry>nocache</entry>
+          <entry>Disables caching of the <varname>{section}</varname> loop</entry>
+        </row>
+      </tbody>
+    </tgroup>
+  </informaltable>
+  
+  <itemizedlist>
    <listitem><para>
    Required attributes are <parameter>name</parameter> and <parameter>loop</parameter>.
    </para></listitem>

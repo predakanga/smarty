@@ -53,11 +53,7 @@
  </note>
     <para>
     See also
-    <link linkend="troubleshooting">troubleshooting</link>,
-    <link linkend="variable.error.reporting">
-    <parameter>$error_reporting</parameter></link>
-    and
-    <link linkend="api.trigger.error"><varname>triggerError()</varname></link>.
+    <link linkend="troubleshooting">troubleshooting</link>.
    </para>
 </chapter>
 

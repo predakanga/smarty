@@ -94,7 +94,23 @@
      <entry>integer</entry>
      <entry>No</entry>
      <entry><emphasis>n/a</emphasis></entry>
-     <entry>Enable caching of this subtemplate with an individual cahe lifetime</entry>
+     <entry>Enable caching of this subtemplate with an individual cache lifetime</entry>
+    </row>
+    <row>
+     <entry>compile_id</entry>
+     <entry>n/a</entry>
+     <entry>string/integer</entry>
+     <entry>No</entry>
+     <entry><emphasis>n/a</emphasis></entry>
+     <entry>Compile this subtemplate with an individual compile_id</entry>
+    </row>
+    <row>
+     <entry>cache_id</entry>
+     <entry>n/a</entry>
+     <entry>string/integer</entry>
+     <entry>No</entry>
+     <entry><emphasis>n/a</emphasis></entry>
+     <entry>Enable caching of this subtemplate with an individual cache_id</entry>
     </row>
     <row>
      <entry>scope</entry>

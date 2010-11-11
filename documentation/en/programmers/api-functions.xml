@@ -32,7 +32,6 @@
 &programmers.api-functions.api-register-plugin;
 &programmers.api-functions.api-register-object;
 &programmers.api-functions.api-register-resource;
-&programmers.api-functions.api-trigger-error;
 
 &programmers.api-functions.api-template-exists;
 &programmers.api-functions.api-unregister-filter;

@@ -17,8 +17,7 @@
     </link> variable modifier.
     <note>
     <para><quote>Undefined variable</quote> errors will show if PHP
-    <ulink url="&url.php-manual;error_reporting">
-    <varname>error_reporting()</varname></ulink> is <constant>E_ALL</constant>
+   xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      and a variable had not been assigned to Smarty.
     </para>
     </note>

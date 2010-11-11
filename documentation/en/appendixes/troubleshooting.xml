@@ -173,11 +173,7 @@ Fatal error: Smarty error: unable to write to $cache_dir '/...
 
    <para>
    See also
-   <link linkend="chapter.debugging.console">debugging</link>,
-   <link linkend="variable.error.reporting">
-   <parameter>$error_reporting</parameter></link>
-   and
-   <link linkend="api.trigger.error"><varname>triggerError()</varname></link>.
+   <link linkend="chapter.debugging.console">debugging</link>.
    </para>
   </sect1>
 </chapter>

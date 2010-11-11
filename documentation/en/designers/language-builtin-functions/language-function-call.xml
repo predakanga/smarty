@@ -68,7 +68,27 @@
      </tbody>
     </tgroup>
    </informaltable>
-   
+ 
+ <para><emphasis role="bold">Option Flags:</emphasis></para>
+ <informaltable frame="all">
+  <tgroup cols="2">
+   <colspec colname="param" align="center" />
+   <colspec colname="desc" />
+   <thead>
+    <row>
+     <entry>Name</entry>
+     <entry>Description</entry>
+    </row>
+   </thead>
+   <tbody>
+    <row>
+     <entry>nocache</entry>
+     <entry>Cakk the template function in nocache mode</entry>
+    </row>
+   </tbody>
+  </tgroup>
+ </informaltable>
+ 
 
  <example>
   <title>Calling a recursive menu example</title>
