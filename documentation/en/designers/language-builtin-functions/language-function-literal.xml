@@ -5,73 +5,36 @@
  <para>
   <varname>{literal}</varname> tags allow a block of data to be taken literally. This is typically
   used around Javascript or stylesheet blocks where {curly braces} would
-  interfere with the template
-  <link linkend="variable.left.delimiter">delimiter</link>
-  syntax. Anything within
+  interfere with the template <link linkend="variable.left.delimiter">delimiter</link> syntax. Anything within
   <varname>{literal}{/literal}</varname> tags is not interpreted, but displayed as-is.
   If you  need template tags embedded in a <varname>{literal}</varname> block, consider using
   <link linkend="language.function.ldelim"><varname>{ldelim}{rdelim}</varname></link> to escape the
   individual delimiters instead.
  </para>
 
+ <note><para>
+   <varname>{literal}{/literal}</varname> tags are normally not necessary, as Smarty ignores delimiters that are surrounded by whitespace.
+   Be sure your javascript and CSS curly braces are surrounded by whitespace. This is new behavior to Smarty 3.
+ </para></note>
+
  <example>
   <title>{literal} tags</title>
   <programlisting>
 <![CDATA[
-{literal}
-<script type="text/javascript">
-<!--
-  function isblank(field) {
-    if (field.value == '')
-      { return false; }
-    else
-      {
-      document.loginform.submit();
-      return true;
-    }
-  }
-// -->
+<script>
+   // the following braces are ignored by Smarty
+   // since they are surrounded by whitespace
+   function myFoo {
+     alert('Foo!');
+   }
+   // this one will need literal escapement
+   {literal}
+     function myBar {alert('Bar!');}
+   {/literal}
 </script>
-{/literal}
 ]]>
   </programlisting>
  </example>
-
- <example>
-   <title>Javascript function example</title>
-   <programlisting>
-<![CDATA[
-<script language="JavaScript" type="text/javascript">
-{literal}
-function myJsFunction(name, ip){
-   alert("The server name\n" + name + "\n" + ip);
-}
-{/literal}
-</script>
-<a href="javascript:myJsFunction('{$smarty.server.SERVER_NAME}','{$smarty.server.SERVER_ADDR}')">Click here for the Server Info</a>
- ]]>
-   </programlisting>
- </example>
-
- <example>
-  <title>Some css style in a template</title>
-  <programlisting>
-<![CDATA[
-{* included this style .. as an experiment *}
-<style type="text/css">
-{literal}
-/* this is an intersting idea for this section */
-.madIdea{
-    border: 3px outset #ffffff;
-    margin: 2 3 4 5px;
-    background-color: #001122;
-}
-{/literal}
-</style>
-<div class="madIdea">With smarty you can embed CSS in the template</div>
-]]>
-</programlisting>
-</example>
 
  <para>
   See also

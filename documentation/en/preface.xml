@@ -36,11 +36,11 @@
   </para>
 
   <para>
-    When it comes to templating in PHP, there are basically two camps of thought. The first camp exclaims that "PHP is a template engine" simply because it <emphasis>can</emphasis> mix with presentation, and therefore this is the way to go. This approach is the most efficient from a pure script-execution point of view, but it has drawbacks. PHP syntax works well for programming, but its verboseness quickly gets messy when mixed with presentation.
+    When it comes to templating in PHP, there are basically two camps of thought. The first camp exclaims that "PHP is a template engine". Simply because PHP <emphasis>can</emphasis> mix with presentation doesn't mean it's a preferable choice. The only virtue to this approach is speed from a pure script-execution point of view. However, the PHP syntax is quite ugly and doesn't mix well with tagged markup such as HTML.
   </para>
 
   <para>
-    The second camp exclaims that presentation should be void of all programming code, and instead use simple tags to indicate where application content is revealed. This approach is common with other development languages, and is also the approach that Smarty takes for PHP. The idea is to keep the templates focused squarely on presentation, not application code, and with as little overhead as possible.
+    The second camp exclaims that presentation should be void of all programming code, and instead use simple tags to indicate where application content is revealed. This approach is common with other development languages, and is also the approach that Smarty takes. The idea is to keep the templates focused squarely on presentation, not application code, and with as little overhead as possible.
   </para>
 
   <para>
@@ -59,10 +59,18 @@
     </listitem>
     <listitem>
       <para>
-        INSULATION: With PHP based templates, there are no restrictions on what type of logic can be injected into a template. Smarty insulates the templates from PHP, creating a controlled separation of presentation from business logic. Smarty also has security features that can further enforce restrictions on templates.  
+        INSULATION: When PHP is mixed with templates, there are no restrictions on what type of logic can be injected into a template. Smarty insulates the templates from PHP, creating a controlled separation of presentation from business logic. Smarty also has security features that can further enforce restrictions on templates.  
       </para>
     </listitem>
   </itemizedlist>
+
+  <para>
+   <emphasis role="bold">Web designers and PHP</emphasis>
+  </para>  
+    
+  <para>
+   A common question: "Web designers have to learn a syntax anyways, why not PHP?". Of course web designers can learn PHP, but this isn't about their ability to learn it. They learn PHP, then start stuffing things into templates that don't belong there (you just handed them a swiss-army knife when they just needed a knife.) You can teach them the rules of application development, but then you may as well call them developers. Smarty gives web designers exactly the tools they need, and gives developers fine-grained control over those tools.
+  </para>
 
   <para>
    <emphasis role="bold">Implementation is Important</emphasis>
@@ -85,7 +93,7 @@
   </para>  
     
   <para>
-    Template inheritance is new to Smarty 3, and it's one of many great new features. Before template inheritance, we managed our templates in pieces such as header and footer templates. This organization can lend itself to some perplexing problems, such as managing content within the header/footer on a per-page basis. With template inheritance, instead of including other templates we maintain our templates as single pages. We can then manipulate blocks of content within by inheriting them. This makes templates intuitive, efficient and easy to manage. See the Template Inheritance section of th Smarty website for more info.
+    Template inheritance is new to Smarty 3, and it's one of many great new features. Before template inheritance, we managed our templates in pieces such as header and footer templates. This organization lends itself to many problems that require some hoop-jumping, such as managing content within the header/footer on a per-page basis. With template inheritance, instead of including other templates we maintain our templates as single pages. We can then manipulate blocks of content within by inheriting them. This makes templates intuitive, efficient and easy to manage. See the Template Inheritance section of th Smarty website for more info.
   </para>
 
   <para>

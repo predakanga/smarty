@@ -16,6 +16,11 @@
    <methodparam><type>boolean</type><parameter>format</parameter></methodparam>
    <methodparam><type>array</type><parameter>block_methods</parameter></methodparam>
   </methodsynopsis>
+
+  <note><para>
+    When you register/assign objects to templates, be sure that all properties and methods accessed from the template are for presentation purposes only. It is very easy to inject application logic through objects, and this leads to poor designs that are difficult to manage. See the Best Practices section of the Smarty website.
+  </para></note>  
+  
   <para>
    See the
    <link linkend="advanced.features.objects">objects section</link>

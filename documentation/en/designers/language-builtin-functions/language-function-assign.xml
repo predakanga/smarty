@@ -8,9 +8,7 @@
  </para>
 
  <note><para>
-   Assignment of variables in-template is effectively placing application
-   logic into the templates that may be better handled in PHP. There are 
-   also circumstances where this is beneficial, so use at your own discretion.
+   Assignment of variables in-template is essentially placing application logic into the presentation that may be better handled in PHP. Use at your own discretion.
  </para></note>
 
  <note><para>
@@ -184,7 +182,7 @@ The value of $name is Bob.
   <para>
   To access <varname>{assign}</varname> variables from a php script use
     <link linkend="api.get.template.vars">
-    <varname>get_template_vars()</varname></link>.
+    <varname>getTemplateVars()</varname></link>.
     Here's the template that creates the variable <parameter>$foo</parameter>.
   </para>
 <programlisting>
@@ -242,7 +240,7 @@ echo $smarty->getTemplateVars('foo');
   <link linkend="language.function.shortform.assign"><varname>{$var=...}</varname></link>,
  <link linkend="api.assign"><varname>assign()</varname></link>
    and
-  <link linkend="api.get.template.vars"><varname>get_template_vars()</varname></link>.
+  <link linkend="api.get.template.vars"><varname>getTemplateVars()</varname></link>.
  </para>
 </sect1>
 <!-- Keep this comment at the end of the file

@@ -75,7 +75,7 @@
  */
  function smarty_postfilter_post01($compiled, $smarty)
  {
-     $compiled = "<pre>\n<?php print_r(\$this->get_template_vars()); ?>\n</pre>" . $compiled;
+     $compiled = "<pre>\n<?php print_r(\$this->getTemplateVars()); ?>\n</pre>" . $compiled;
      return $compiled;
  }
 ?>

@@ -3,8 +3,13 @@
 <sect1 id="advanced.features.static.classes">
  <title>Static Classes</title>
  <para>
-  With Smarty3 you can diectly access static classes. The syntax is the same as in PHP.
+  You can directly access static classes. The syntax is the same as in PHP.
  </para>
+
+ <note><para>
+   Direct access to PHP classes is not recommended. This ties the underlying application code structure directly to the presentation, and also complicates template syntax. It is recommended to register plugins which insulate templates from PHP classes/objects. Use at your own discretion. See the Best Practices section of the Smarty website.
+ </para></note>    
+
 
  <example>
   <title>static class access syntax </title>

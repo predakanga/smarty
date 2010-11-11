@@ -8,6 +8,13 @@
   tag just like a plugin function. 
   </para>
 
+  <note><para>
+   Template functions are defined global. Since the Smarty compiler is a single-pass compiler,
+   The <link linkend="language.function.call"><varname>{call}</varname></link>
+   tag must be used to call a template function defined externally from the given template. 
+   Otherwise you can directly use the function as <literal>{funcname ...}</literal> in the template.
+  </para></note>
+
   <itemizedlist>
   <listitem><para>
   The <varname>{call}</varname> tag must have the  <parameter>name</parameter> attribute

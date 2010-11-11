@@ -5,8 +5,7 @@
   <note>
    <title>IMPORTANT NOTICE</title>
    <para>
-    <varname>{include_php}</varname> is deprecated from Smarty, you can
-    accomplish the same functionality via a custom template function.
+    <varname>{include_php}</varname> is deprecated from Smarty, use registered plugins to properly insulate presentation from the application code.
    </para>
  </note>
 

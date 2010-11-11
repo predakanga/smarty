@@ -9,6 +9,13 @@
   manageable choice. It also simplifies data traversal, such as deeply nested menus. 
   </para>
 
+  <note><para>
+   Template functions are defined global. Since the Smarty compiler is a single-pass compiler,
+   The <link linkend="language.function.call"><varname>{call}</varname></link>
+   tag must be used to call a template function defined externally from the given template. 
+   Otherwise you can directly use the function as <literal>{funcname ...}</literal> in the template.
+  </para></note>
+
   <itemizedlist>
    <listitem><para>
     The <varname>{function}</varname> tag must have
@@ -16,12 +23,7 @@
     which contains the the name of the template function.
     A tag with this name can be used to call the template function.
    </para></listitem>
-   
-   <listitem><para>
-    Template functions are defined global. The <link linkend="language.function.call"><varname>{call}</varname></link>
-    tag must be used to call a template function defined external in a sub- or parenttemplate. 
-   </para></listitem>
-   
+      
    <listitem><para>
   Default values for variables can be passed to the template function as
   <link linkend="language.syntax.attributes">attributes</link>.
