@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
-<refentry id="api.utility.test.install">
+<refentry id="api.test.install">
  <refnamediv>
-  <refname>utilityTestInstall()</refname>
+  <refname>testInstall()</refname>
   <refpurpose>checks Smarty installation</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>void</type><methodname>utilityTestInstall</methodname>
+   <type>void</type><methodname>testInstall</methodname>
    <void />
   </methodsynopsis>
   <para>
@@ -16,12 +16,12 @@
    It does output a corresponding protocoll.
   </para>
   <example>
-   <title>utilityTestInstall()</title>
+   <title>testInstall()</title>
    <programlisting role="php">
 <![CDATA[
 <?php
 require_once('Smarty.class.php');
-$smarty->utilityTestInstall();
+$smarty->testInstall();
 ?>
 ]]>
    </programlisting>

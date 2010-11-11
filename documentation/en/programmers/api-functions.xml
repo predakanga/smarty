@@ -16,6 +16,8 @@
 &programmers.api-functions.api-clear-cache;
 &programmers.api-functions.api-clear-compiled-tpl;
 &programmers.api-functions.api-clear-config;
+&programmers.api-functions.api-compile-all-config;
+&programmers.api-functions.api-compile-all-templates;
 &programmers.api-functions.api-config-load;
 &programmers.api-functions.api-create-data;
 &programmers.api-functions.api-create-template;
@@ -25,6 +27,7 @@
 &programmers.api-functions.api-fetch;
 &programmers.api-functions.api-get-config-vars;
 &programmers.api-functions.api-get-registered-object;
+&programmers.api-functions.api-get-tags;
 &programmers.api-functions.api-get-template-vars;
 &programmers.api-functions.api-is-cached;
 &programmers.api-functions.api-load-filter;
@@ -38,10 +41,7 @@
 &programmers.api-functions.api-unregister-plugin;
 &programmers.api-functions.api-unregister-object;
 &programmers.api-functions.api-unregister-resource;
-&programmers.api-functions.api-utility-compile-all-config;
-&programmers.api-functions.api-utility-compile-all-templates;
-&programmers.api-functions.api-utility-get-tags;
-&programmers.api-functions.api-utility-test-install;
+&programmers.api-functions.api-test-install;
 
 </chapter>
 <!-- Keep this comment at the end of the file

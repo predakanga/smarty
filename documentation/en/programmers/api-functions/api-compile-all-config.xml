@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
-<refentry id="api.utility.compile.all.config">
+<refentry id="api.compile.all.config">
  <refnamediv>
-  <refname>utilityCompileAllConfig()</refname>
+  <refname>compileAllConfig()</refname>
   <refpurpose>compiles all known config files</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>string</type><methodname>utilityCompileAllConfig</methodname>
+   <type>string</type><methodname>compileAllConfig</methodname>
    <methodparam choice="opt"><type>string</type><parameter>extension</parameter></methodparam>
    <methodparam choice="opt"><type>boolean</type><parameter>force</parameter></methodparam>
    <methodparam choice="opt"><type>integer</type><parameter>timelimit</parameter></methodparam>
@@ -50,7 +50,7 @@
  
   <para>
    <example>
-    <title>utilityCompileAllTemplates()</title>
+    <title>compileAllTemplates()</title>
     <programlisting role="php">
 <![CDATA[
 <?php
@@ -58,7 +58,7 @@ include('Smarty.class.php');
 $smarty = new Smarty;
 
 // force compilation of all config files
-$smarty->utilityCompileAllConfig('.config',true);
+$smarty->compileAllConfig('.config',true);
 
 ?>
 ]]>

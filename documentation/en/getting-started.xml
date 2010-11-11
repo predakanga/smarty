@@ -361,7 +361,7 @@ ini_set('include_path', ini_get('include_path').PATH_SEPARATOR.'c:/webroot/lib/S
      </para></listitem>
      <listitem><para>
       You can verify if your system has the correct access rights for these directories with 
-      <link linkend="api.utility.test.install"><varname>utilityTestInstall()</varname></link>.
+      <link linkend="api.test.install"><varname>testInstall()</varname></link>.
      </para></listitem>
     </itemizedlist>
 

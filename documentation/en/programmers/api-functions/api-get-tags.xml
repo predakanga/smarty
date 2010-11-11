@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 2972 $ -->
-<refentry id="api.utility.get.tags">
+<refentry id="api.get.tags">
  <refnamediv>
-  <refname>utilityGetTags()</refname>
+  <refname>getTags()</refname>
   <refpurpose>return tags used by template</refpurpose>
  </refnamediv>
  <refsect1>
   <title>Description</title>
   <methodsynopsis>
-   <type>string</type><methodname>utilityGetTags</methodname>
+   <type>string</type><methodname>getTags</methodname>
    <methodparam><type>object</type><parameter>template</parameter></methodparam>
   </methodsynopsis>
    <para>
@@ -27,7 +27,7 @@
   </para></note>
   <para>
    <example>
-    <title>utilityGetTags()</title>
+    <title>getTags()</title>
     <programlisting role="php">
 <![CDATA[
 <?php
@@ -38,7 +38,7 @@ $smarty = new Smarty;
 $tpl = $smarty->createTemplate('index.tpl');
 
 // get tags
-$tags = $smarty->utilityGetTags($tpl);
+$tags = $smarty->getTags($tpl);
 
 print_r($tags);
 
