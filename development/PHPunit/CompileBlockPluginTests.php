@@ -28,7 +28,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testBlockPluginNoAssign()
     {
-        $tpl = $this->smarty->createTemplate("string:{textformat}hello world{/textformat}");
+        $tpl = $this->smarty->createTemplate("eval:{textformat}hello world{/textformat}");
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
     /**
@@ -36,7 +36,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testBlockPluginAssign()
     {
-        $tpl = $this->smarty->createTemplate("string:{textformat assign=foo}hello world{/textformat}{\$foo}");
+        $tpl = $this->smarty->createTemplate("eval:{textformat assign=foo}hello world{/textformat}{\$foo}");
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
     /**
@@ -72,8 +72,8 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     */
     public function testBlockPluginRegisteredFunction()
     {
-        $this->smarty->register->block('blockplugintest', 'myblockplugintest');
-        $tpl = $this->smarty->createTemplate('string:{blockplugintest}hello world{/blockplugintest}');
+        $this->smarty->registerPlugin(Smarty::PLUGIN_BLOCK,'blockplugintest', 'myblockplugintest');
+        $tpl = $this->smarty->createTemplate('eval:{blockplugintest}hello world{/blockplugintest}');
         $this->assertEquals('block test', $this->smarty->fetch($tpl));
     } 
     /**
@@ -82,7 +82,7 @@ class CompileBlockPluginTests extends PHPUnit_Framework_TestCase {
     public function testBlockPluginRepeat()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $this->assertEquals('12345', $this->smarty->fetch('string:{testblock}{/testblock}'));
+        $this->assertEquals('12345', $this->smarty->fetch('eval:{testblock}{/testblock}'));
     } 
 } 
 function myblockplugintest($params, $content, &$smarty_tpl, &$repeat)

@@ -5,4 +5,4 @@
 {block name=blockassigned}--block assigned false--{/block}<br>
 {block name='parentbase'}--base--{/block}<br>
 {block name='parentsection'}--parent from section false--{/block}<br>
-{include file='test_block_include.tpl'}
+{block name='include_dummy'}{include file='test_block_include.tpl'}{/block}

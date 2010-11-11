@@ -14,7 +14,6 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
-        $this->smarty->disableSecurity();
     } 
 
     public static function isRunnable()
@@ -27,14 +26,14 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testPHPFunctionModifier()
     {
-        $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|strlen}');
+        $this->smarty->security_policy->php_modifiers = array('strlen');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|strlen}');
         $this->assertEquals("11", $this->smarty->fetch($tpl));
     } 
     public function testPHPFunctionModifier2()
     {
-        $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate('string:{assign var=foo value="hello world"}{$foo|strlen}');
+        $this->smarty->security_policy->php_modifiers = array('strlen');
+        $tpl = $this->smarty->createTemplate('eval:{assign var=foo value="hello world"}{$foo|strlen}');
         $this->assertEquals("11", $this->smarty->fetch($tpl));
     } 
     /**
@@ -42,7 +41,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testPluginModifier()
     {
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:6}');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|truncate:6}');
         $this->assertEquals("hel...", $this->smarty->fetch($tpl));
     } 
     /**
@@ -50,19 +49,19 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testPluginModifierVar()
     {
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:$foo}');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|truncate:$foo}');
         $tpl->assign('foo', 6);
         $this->assertEquals("hel...", $this->smarty->fetch($tpl));
     } 
     public function testPluginModifierVar2()
     {
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:$foo:"   "}');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|truncate:$foo:"   "}');
         $tpl->assign('foo', 6);
         $this->assertEquals("hel   ", $this->smarty->fetch($tpl));
     } 
     public function testPluginModifierVar3()
     {
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:$foo:$bar}');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|truncate:$foo:$bar}');
         $tpl->assign('foo', 6);
         $tpl->assign('bar', '   ');
         $this->assertEquals("hel   ", $this->smarty->fetch($tpl));
@@ -72,8 +71,8 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierChaining()
     {
-        $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:6|strlen}');
+        $this->smarty->security_policy->php_modifiers = array('strlen');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|truncate:6|strlen}');
         $this->assertEquals("6", $this->smarty->fetch($tpl));
     } 
    /**
@@ -81,8 +80,8 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierInsideIf()
     {
-        $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate('string:{if "hello world"|truncate:6|strlen == 6}okay{/if}');
+        $this->smarty->security_policy->php_modifiers = array('strlen');
+        $tpl = $this->smarty->createTemplate('eval:{if "hello world"|truncate:6|strlen == 6}okay{/if}');
         $this->assertEquals("okay", $this->smarty->fetch($tpl));
     } 
    /**
@@ -90,14 +89,14 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierInsideExpression()
     {
-        $this->smarty->security_policy->modifiers = array('strlen');
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|truncate:6|strlen + ("hello world"|truncate:8|strlen)}');
+        $this->smarty->security_policy->php_modifiers = array('strlen');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|truncate:6|strlen + ("hello world"|truncate:8|strlen)}');
         $this->assertEquals("14", $this->smarty->fetch($tpl));
     } 
     public function testModifierInsideExpression2()
     {
-        $this->smarty->security_policy->modifiers = array('round');
-        $tpl = $this->smarty->createTemplate('string:{1.1*7.1|round}');
+        $this->smarty->security_policy->php_modifiers = array('round');
+        $tpl = $this->smarty->createTemplate('eval:{1.1*7.1|round}');
         $this->assertEquals("8", $this->smarty->fetch($tpl));
     } 
     /**
@@ -105,7 +104,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierAtPluginResult()
     {
-        $tpl = $this->smarty->createTemplate('string:{counter|truncate:5 start=100000}');
+        $tpl = $this->smarty->createTemplate('eval:{counter|truncate:5 start=100000}');
         $this->assertEquals("10...", $this->smarty->fetch($tpl));
     } 
     /**
@@ -113,7 +112,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierUnqoutedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{"hello world"|replace:hello:xxxxx}');
+        $tpl = $this->smarty->createTemplate('eval:{"hello world"|replace:hello:xxxxx}');
         $this->assertEquals("xxxxx world", $this->smarty->fetch($tpl));
     } 
     /**
@@ -121,8 +120,8 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierRegisteredFunction()
     {
-        $this->smarty->register->modifier('testmodifier','testmodifier');
-        $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
+        $this->smarty->registerPlugin(Smarty::PLUGIN_MODIFIER,'testmodifier','testmodifier');
+        $tpl = $this->smarty->createTemplate('eval:{$foo|testmodifier}');
         $tpl->assign('foo',2);
         $this->assertEquals("mymodifier function 2", $this->smarty->fetch($tpl));
     } 
@@ -131,8 +130,8 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     */
     public function testModifierRegisteredStaticClass()
     {
-        $this->smarty->register->modifier('testmodifier',array('testmodifierclass','staticcall'));
-        $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
+        $this->smarty->registerPlugin(Smarty::PLUGIN_MODIFIER,'testmodifier',array('testmodifierclass','staticcall'));
+        $tpl = $this->smarty->createTemplate('eval:{$foo|testmodifier}');
         $tpl->assign('foo',1);
         $this->assertEquals("mymodifier static 1", $this->smarty->fetch($tpl));
     } 
@@ -142,8 +141,8 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     public function testModifierRegisteredMethodCall()
     {
         $obj= new testmodifierclass();
-        $this->smarty->register->modifier('testmodifier',array($obj,'method'));
-        $tpl = $this->smarty->createTemplate('string:{$foo|testmodifier}');
+        $this->smarty->registerPlugin(Smarty::PLUGIN_MODIFIER,'testmodifier',array($obj,'method'));
+        $tpl = $this->smarty->createTemplate('eval:{$foo|testmodifier}');
         $tpl->assign('foo',3);
         $this->assertEquals("mymodifier method 3", $this->smarty->fetch($tpl));
     } 
@@ -153,7 +152,7 @@ class ModifierTests extends PHPUnit_Framework_TestCase {
     public function testUnknownModifier()
     {
         try {
-            $this->smarty->fetch('string:{"hello world"|unknown}');
+            $this->smarty->fetch('eval:{"hello world"|unknown}');
         } 
         catch (Exception $e) {
             $this->assertContains('unknown modifier "unknown"', $e->getMessage());

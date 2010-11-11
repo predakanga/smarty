@@ -26,7 +26,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testSimpleDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo="Hello World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -34,7 +34,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testTagsInDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {1+2} World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo="Hello {1+2} World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello 3 World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -42,12 +42,12 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testVarsInDoubleQuotedString1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$foo="Hello $bar World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$bar=\'blah\'}{$foo="Hello $bar World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blah World', $this->smarty->fetch($tpl));
     } 
     public function testVarsInDoubleQuotedString2()
     {
-        $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$buh=\'buh\'}{$foo="Hello $bar$buh World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$bar=\'blah\'}{$buh=\'buh\'}{$foo="Hello $bar$buh World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blahbuh World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -55,12 +55,12 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testVarsBacktickInDoubleQuotedString1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$foo="Hello `$bar`.test World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$bar=\'blah\'}{$foo="Hello `$bar`.test World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
     } 
     public function testVarsBacktickInDoubleQuotedString2()
     {
-        $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$buh=\'buh\'}{$foo="Hello `$bar``$buh`.test World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$bar=\'blah\'}{$buh=\'buh\'}{$foo="Hello `$bar``$buh`.test World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blahbuh.test World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -68,7 +68,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testVariableVarsBacktickInDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$barbuh=\'blah\'}{$buh=\'buh\'}{$foo="Hello `$bar{$buh}`.test World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$barbuh=\'blah\'}{$buh=\'buh\'}{$foo="Hello `$bar{$buh}`.test World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -76,12 +76,12 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testArrayVarsBacktickInDoubleQuotedString1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$bar[1][2]=\'blah\'}{$foo="Hello `$bar.1.2`.test World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$bar[1][2]=\'blah\'}{$foo="Hello `$bar.1.2`.test World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
     } 
     public function testArrayVarsBacktickInDoubleQuotedString2()
     {
-        $tpl = $this->smarty->createTemplate('string:{$bar[1][2]=\'blah\'}{$foo="Hello `$bar[1][2]`.test World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$bar[1][2]=\'blah\'}{$foo="Hello `$bar[1][2]`.test World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -89,7 +89,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testExpressionBacktickInDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$a=1}{"`$a+1`"}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$a=1}{"`$a+1`"}', null, null, $this->smarty);
         $this->assertEquals('2', $this->smarty->fetch($tpl));
     } 
     /**
@@ -97,12 +97,12 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testSmartytagInDoubleQuotedString1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter start=1} World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo="Hello {counter start=1} World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello 1 World', $this->smarty->fetch($tpl));
     } 
     public function testSmartytagInDoubleQuotedString2()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {counter start=1}{counter} World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo="Hello {counter start=1}{counter} World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello 12 World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -113,14 +113,14 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('x', 1);
         $this->smarty->assign('y', 1);
         $this->smarty->assign('z', true);
-        $this->assertEquals('Hello 1 World', $this->smarty->fetch('string:{"Hello{if $z} {$x} {else}{$y}{/if}World"}'));
+        $this->assertEquals('Hello 1 World', $this->smarty->fetch('eval:{"Hello{if $z} {$x} {else}{$y}{/if}World"}'));
     } 
     /**
      * test vars in delimiter in double quoted strings
      */
     public function testVarsDelimiterInDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$bar=\'blah\'}{$foo="Hello {$bar}.test World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$bar=\'blah\'}{$foo="Hello {$bar}.test World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello blah.test World', $this->smarty->fetch($tpl));
     } 
     /**
@@ -128,7 +128,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testEscapedQuotesInDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello \" World"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo="Hello \" World"}{$foo}', null, null, $this->smarty);
         $this->assertEquals('Hello " World', $this->smarty->fetch($tpl));
     } 
 
@@ -137,7 +137,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testSingleQuotesInDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello \'World\'"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo="Hello \'World\'"}{$foo}', null, null, $this->smarty);
         $this->assertEquals("Hello 'World'", $this->smarty->fetch($tpl));
     } 
     /**
@@ -145,7 +145,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testSingleQuoteTagsInDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo="Hello {\'World\'} Test"}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo="Hello {\'World\'} Test"}{$foo}', null, null, $this->smarty);
         $this->assertEquals("Hello World Test", $this->smarty->fetch($tpl));
     } 
     /**
@@ -153,7 +153,7 @@ class DoubleQuotedStringTests extends PHPUnit_Framework_TestCase {
      */
     public function testEmptyDoubleQuotedString()
     {
-        $tpl = $this->smarty->createTemplate('string:{$foo=""}{$foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$foo=""}{$foo}', null, null, $this->smarty);
         $this->assertEquals("", $this->smarty->fetch($tpl));
     } 
 } 

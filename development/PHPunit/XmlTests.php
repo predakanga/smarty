@@ -31,20 +31,20 @@ class XmlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch($tpl));
     } 
     /**
-     * test standard xml SMARTY_PHP_QUOTE
+     * test standard xml Smarty::PHP_QUOTE
      */
     public function testXmlPhpQuote()
     {
-        $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
+        $this->smarty->security_policy->php_handling = Smarty::PHP_QUOTE;
         $tpl = $this->smarty->createTemplate('xml.tpl');
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch($tpl));
     } 
     /**
-     * test standard xml SMARTY_PHP_ALLOW
+     * test standard xml Smarty::PHP_ALLOW
      */
     public function testXmlPhpAllow()
     {
-        $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
+        $this->smarty->security_policy->php_handling = Smarty::PHP_ALLOW;
         $tpl = $this->smarty->createTemplate('xml.tpl');
         $this->assertEquals('<?xml version="1.0" encoding="UTF-8"?>', $this->smarty->fetch($tpl));
     } 
@@ -53,7 +53,7 @@ class XmlTests extends PHPUnit_Framework_TestCase {
      */
     public function testXmlCaching()
     {
-        $this->smarty->security_policy->php_handling = SMARTY_PHP_PASSTHRU;
+        $this->smarty->security_policy->php_handling = Smarty::PHP_PASSTHRU;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $content = $this->smarty->fetch('xml.tpl');
@@ -64,7 +64,7 @@ class XmlTests extends PHPUnit_Framework_TestCase {
     */
     public function testXmlCachingPhpQuote()
     {
-        $this->smarty->security_policy->php_handling = SMARTY_PHP_QUOTE;
+        $this->smarty->security_policy->php_handling = Smarty::PHP_QUOTE;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $content = $this->smarty->fetch('xml.tpl');
@@ -76,7 +76,7 @@ class XmlTests extends PHPUnit_Framework_TestCase {
     */
     public function testXmlCachingPhpAllow()
     {
-        $this->smarty->security_policy->php_handling = SMARTY_PHP_ALLOW;
+        $this->smarty->security_policy->php_handling = Smarty::PHP_ALLOW;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $content = $this->smarty->fetch('xml.tpl');

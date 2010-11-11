@@ -28,7 +28,7 @@ class AssignTests extends PHPUnit_Framework_TestCase {
     public function testSimpleAssign()
     {
             $this->smarty->assign('foo','bar');
-		$this->assertEquals('bar', $this->smarty->fetch('string:{$foo}'));
+		$this->assertEquals('bar', $this->smarty->fetch('eval:{$foo}'));
     } 
     /**
     * test assign array of variables
@@ -36,7 +36,7 @@ class AssignTests extends PHPUnit_Framework_TestCase {
     public function testArrayAssign()
     {
             $this->smarty->assign(array('foo'=>'bar','foo2'=>'bar2'));
-		$this->assertEquals('bar bar2', $this->smarty->fetch('string:{$foo} {$foo2}'));
+		$this->assertEquals('bar bar2', $this->smarty->fetch('eval:{$foo} {$foo2}'));
     } 
 } 
 ?>

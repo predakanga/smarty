@@ -28,7 +28,7 @@ class CompilerPluginTests extends PHPUnit_Framework_TestCase {
     public function testCompilerPlugin()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-		$this->assertEquals('test output', $this->smarty->fetch('string:{test data="test output"}{/test}'));
+		$this->assertEquals('test output', $this->smarty->fetch('eval:{test data="test output"}{/test}'));
     } 
 
 } 

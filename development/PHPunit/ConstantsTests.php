@@ -28,18 +28,18 @@ class ConstantsTests extends PHPUnit_Framework_TestCase {
     public function testConstants()
     {
         define('MYCONSTANTS','hello world');
-        $tpl = $this->smarty->createTemplate('string:{$smarty.const.MYCONSTANTS}');
+        $tpl = $this->smarty->createTemplate('eval:{$smarty.const.MYCONSTANTS}');
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     }
 /** 
     public function testConstants2()
     {
-        $tpl = $this->smarty->createTemplate('string:{MYCONSTANTS}');
+        $tpl = $this->smarty->createTemplate('eval:{MYCONSTANTS}');
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
     public function testConstants3()
     {
-        $tpl = $this->smarty->createTemplate('string:{$x=MYCONSTANTS}{$x}');
+        $tpl = $this->smarty->createTemplate('eval:{$x=MYCONSTANTS}{$x}');
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     }
 */ 

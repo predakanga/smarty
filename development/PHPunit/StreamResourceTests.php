@@ -197,12 +197,12 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->caching_lifetime = 20;
-        $this->smarty->utility->clearCompiledTemplate();
-        $this->smarty->cache->clearAll();
+        $this->smarty->clearCompiledTemplate();
+        $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('global:mytest', null, null, $this->smarty);
         $this->assertEquals('hello world bar', $this->smarty->fetch($tpl));
-        $this->assertEquals(0, $this->smarty->cache->clearAll());
-        $this->assertEquals(0, $this->smarty->utility->clearCompiledTemplate());
+        $this->assertEquals(0, $this->smarty->clearAllCache());
+        $this->assertEquals(0, $this->smarty->clearCompiledTemplate());
     } 
 
     /**

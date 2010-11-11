@@ -28,17 +28,17 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableSpacing1()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo}", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:{\$foo}", null, null, $this->smarty);
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
     } 
     public function testVariableSpacing2()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo}{\$foo}", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:{\$foo}{\$foo}", null, null, $this->smarty);
         $this->assertEquals("barbar", $this->smarty->fetch($tpl));
     } 
     public function testVariableSpacing3()
     {
-        $tpl = $this->smarty->createTemplate("string:{\$foo} {\$foo}", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:{\$foo} {\$foo}", null, null, $this->smarty);
         $this->assertEquals("bar bar", $this->smarty->fetch($tpl));
     } 
 
@@ -47,27 +47,27 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     */
     public function testVariableText1()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo}B", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:A{\$foo}B", null, null, $this->smarty);
         $this->assertEquals("AbarB", $this->smarty->fetch($tpl));
     } 
     public function testVariableText2()
     {
-        $tpl = $this->smarty->createTemplate("string:A {\$foo}B", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:A {\$foo}B", null, null, $this->smarty);
         $this->assertEquals("A barB", $this->smarty->fetch($tpl));
     } 
     public function testVariableText3()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo} B", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:A{\$foo} B", null, null, $this->smarty);
         $this->assertEquals("Abar B", $this->smarty->fetch($tpl));
     } 
     public function testVariableText4()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo}\nB", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:A{\$foo}\nB", null, null, $this->smarty);
         $this->assertEquals("Abar\nB", $this->smarty->fetch($tpl));
     } 
     public function testVariableText5()
     {
-        $tpl = $this->smarty->createTemplate("string:A{\$foo}B\nC", null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate("eval:A{\$foo}B\nC", null, null, $this->smarty);
         $this->assertEquals("AbarB\nC", $this->smarty->fetch($tpl));
     } 
 
@@ -76,22 +76,22 @@ class SpacingTests extends PHPUnit_Framework_TestCase {
     */
     public function testTagText1()
     {
-        $tpl = $this->smarty->createTemplate("string:A{assign var=zoo value='blah'}B");
+        $tpl = $this->smarty->createTemplate("eval:A{assign var=zoo value='blah'}B");
         $this->assertEquals("AB", $this->smarty->fetch($tpl));
     } 
     public function testTagText2()
     {
-        $tpl = $this->smarty->createTemplate("string:A\n{assign var=zoo value='blah'}\nB");
+        $tpl = $this->smarty->createTemplate("eval:A\n{assign var=zoo value='blah'}\nB");
         $this->assertEquals("A\nB", $this->smarty->fetch($tpl));
     } 
     public function testTagText3()
     {
-        $tpl = $this->smarty->createTemplate("string:E{assign var=zoo value='blah'}\nF");
+        $tpl = $this->smarty->createTemplate("eval:E{assign var=zoo value='blah'}\nF");
         $this->assertEquals("EF", $this->smarty->fetch($tpl));
     } 
     public function testTagText4()
     {
-        $tpl = $this->smarty->createTemplate("string:G\n{assign var=zoo value='blah'}H");
+        $tpl = $this->smarty->createTemplate("eval:G\n{assign var=zoo value='blah'}H");
         $this->assertEquals("G\nH", $this->smarty->fetch($tpl));
     } 
 

@@ -26,7 +26,7 @@ class CompileWhileTests extends PHPUnit_Framework_TestCase {
     */
     public function testWhileCondition()
     {
-        $tpl = $this->smarty->createTemplate('string:{$X=0}{while $x<10}{$x}{$x=$x+1}{/while}');
+        $tpl = $this->smarty->createTemplate('eval:{$X=0}{while $x<10}{$x}{$x=$x+1}{/while}');
         $this->assertEquals("0123456789", $this->smarty->fetch($tpl));
     } 
 
@@ -35,7 +35,7 @@ class CompileWhileTests extends PHPUnit_Framework_TestCase {
     */
     public function testWhileStatement()
     {
-        $tpl = $this->smarty->createTemplate('string:{$y=5}{while $y=$y-1}{$y}{/while}');
+        $tpl = $this->smarty->createTemplate('eval:{$y=5}{while $y=$y-1}{$y}{/while}');
         $this->assertEquals("4321", $this->smarty->fetch($tpl));
     } 
 } 

@@ -37,19 +37,19 @@ class StreamVariableTests extends PHPUnit_Framework_TestCase {
     */
     public function testStreamVariable1()
     {
-        $tpl = $this->smarty->createTemplate('string:{$var:foo}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{$var:foo}', null, null, $this->smarty);
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
 /*
     public function testStreamVariable2()
     {
-        $tpl = $this->smarty->createTemplate('string:{var:\'foo\'}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{var:\'foo\'}', null, null, $this->smarty);
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
 
     public function testStreamVariable3()
     {
-        $tpl = $this->smarty->createTemplate('string:{var:"foo"}', null, null, $this->smarty);
+        $tpl = $this->smarty->createTemplate('eval:{var:"foo"}', null, null, $this->smarty);
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
 */
@@ -58,7 +58,7 @@ class StreamVariableTests extends PHPUnit_Framework_TestCase {
     */
 //    public function testStreamVariable2()
 //    {
-//        $tpl = $this->smarty->createTemplate('string:{$var:bar}', null, null, $this->smarty);
+//        $tpl = $this->smarty->createTemplate('eval:{$var:bar}', null, null, $this->smarty);
 //        $this->assertEquals('', $this->smarty->fetch($tpl));
 //    } 
 } 

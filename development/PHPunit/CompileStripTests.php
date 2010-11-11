@@ -26,7 +26,7 @@ class CompileStripTests extends PHPUnit_Framework_TestCase {
     */
     public function testStrip()
     {
-        $tpl = $this->smarty->createTemplate("string:{strip}<table>\n </table>{/strip}");
+        $tpl = $this->smarty->createTemplate("eval:{strip}<table>\n </table>{/strip}");
         $this->assertEquals('<table></table>', $this->smarty->fetch($tpl));
     } 
 } 

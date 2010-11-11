@@ -15,6 +15,7 @@ class CompileIncludePHPTests extends PHPUnit_Framework_TestCase {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->force_compile = true;
+        $this->smarty->allow_php_tag = true;
     } 
 
     public static function isRunnable()
@@ -28,7 +29,7 @@ class CompileIncludePHPTests extends PHPUnit_Framework_TestCase {
     public function testIncludePhpStringFileName()
     {
         $this->smarty->disableSecurity();
-        $tpl = $this->smarty->createTemplate("string:start {include_php file='scripts/test_include_php.php'} end");
+        $tpl = $this->smarty->createTemplate("eval:start {include_php file='scripts/test_include_php.php'} end");
         $result= $this->smarty->fetch($tpl);
         $this->assertContains("test include php", $result);
     } 
@@ -38,7 +39,15 @@ class CompileIncludePHPTests extends PHPUnit_Framework_TestCase {
     public function testIncludePhpVariableFileName()
     {
         $this->smarty->disableSecurity();
-         $tpl = $this->smarty->createTemplate('string:start {include_php file="$filename" once=false} end');
+         $tpl = $this->smarty->createTemplate('eval:start {include_php file=$filename once=false} end');
+        $tpl->assign('filename','scripts/test_include_php.php');
+        $result= $this->smarty->fetch($tpl);
+        $this->assertContains("test include php", $result);
+    } 
+    public function testIncludePhpVariableFileNameShortag()
+    {
+        $this->smarty->disableSecurity();
+         $tpl = $this->smarty->createTemplate('eval:start {include_php $filename once=false} end');
         $tpl->assign('filename','scripts/test_include_php.php');
         $result= $this->smarty->fetch($tpl);
         $this->assertContains("test include php", $result);

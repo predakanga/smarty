@@ -40,7 +40,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals('string', $tpl->getTemplateFilepath());
+        $this->assertEquals('string:', $tpl->getTemplateFilepath());
     } 
     /**
     * test getTemplateTimestamp
@@ -48,7 +48,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateTimestamp()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertFalse($tpl->getTemplateTimestamp());
+        $this->assertEquals(0,$tpl->getTemplateTimestamp());
     } 
     /**
     * test getTemplateSource
@@ -72,7 +72,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsEvaluated()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertTrue($tpl->resource_object->isEvaluated);
+        $this->assertFalse($tpl->resource_object->isEvaluated);
     } 
     /**
     * test mustCompile
@@ -88,7 +88,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertFalse($tpl->getCompiledFilepath());
+        $this->assertEquals('.\templates_c\2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php',$tpl->getCompiledFilepath());
     } 
     /**
     * test getCompiledTimestamp
@@ -157,20 +157,6 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->getRenderedTemplate());
     } 
     /**
-    * test that no complied template and cache file was produced
-    */
-    public function testNoFiles()
-    {
-        $this->smarty->caching = true;
-        $this->smarty->cache_lifetime = 20;
-        $this->smarty->utility->clearCompiledTemplate();
-        $this->smarty->cache->clearAll();
-        $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals('hello world', $this->smarty->fetch($tpl));
-        $this->assertEquals(0, $this->smarty->cache->clearAll());
-        $this->assertEquals(0, $this->smarty->utility->clearCompiledTemplate());
-    } 
-    /**
     * test $smarty->is_cached
     */
     public function testSmartyIsCached()
@@ -179,7 +165,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 20;
         $tpl = $this->smarty->createTemplate('string:hello world');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
-        $this->assertFalse($this->smarty->isCached($tpl));
+        $this->assertTrue($this->smarty->isCached($tpl));
     } 
 } 
 

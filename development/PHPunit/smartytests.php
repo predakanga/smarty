@@ -1,10 +1,10 @@
 <?php
 /**
-* Smarty PHPunit test suite
-* 
-* @package PHPunit
-* @author Uwe Tews 
-*/
+ * Smarty PHPunit test suite
+ * 
+ * @package PHPunit
+ * @author Uwe Tews 
+ */
 require_once 'PHPUnit/Framework.php';
 
 define ('SMARTY_DIR', '../../distribution/libs/');
@@ -12,8 +12,8 @@ define ('SMARTY_DIR', '../../distribution/libs/');
 require_once SMARTY_DIR . 'Smarty.class.php';
 
 /**
-* class for running test suite
-*/
+ * class for running test suite
+ */
 class SmartyTests extends PHPUnit_Framework_TestSuite {
     static $smarty = null ;
 
@@ -26,13 +26,14 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     {
         error_reporting(E_ALL + E_STRICT);
         $smarty = SmartyTests::$smarty;
-        $smarty->error_reporting = E_ALL + E_STRICT;
         $smarty->template_objects = null;
+        $smarty->cache_resource_objects = array();
         $smarty->config_vars = array();
-        $smarty->global_tpl_vars = array();
+        Smarty::$global_tpl_vars = array();
         $smarty->template_functions = array();
         $smarty->tpl_vars = array();
         $smarty->force_compile = false;
+        $smarty->force_cache = false;
         $smarty->auto_literal = true;
         $smarty->caching = false;
         $smarty->_smarty_vars = array();
@@ -49,25 +50,26 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->security_policy = null;
         $smarty->left_delimiter = '{';
         $smarty->right_delimiter = '}';
-        $smarty->php_handling = SMARTY_PHP_PASSTHRU;
+        $smarty->php_handling = Smarty::PHP_PASSTHRU;
         $smarty->allow_php_tag = false;
         $smarty->allow_php_templates = false;
         $smarty->block_data = null;
+        $smarty->deprecation_notices = true;
         $smarty->enableSecurity();
     } 
     /**
-    * look for test units and run them
-    */
+     * look for test units and run them
+     */
     public static function suite()
     {
-        $testorder = array('DoubleQuotedStringTests', 'CoreTests', 'ClearCompiledTests', 'ClearCacheTests', 'StringResourceTests', 'FileResourceTests' , 'CompileAssignTests');
+        $testorder = array('CoreTests', 'ClearCompiledTests', 'ClearCacheTests', 'StringResourceTests', 'FileResourceTests' ,'DoubleQuotedStringTests',  'CompileAssignTests', 'AttributeTests');
         $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
         if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {
             // Older versions of PHPUnit did not have this function,
             // which is used when determining which PHP files are
             // included in the PHPUnit code coverage result.
-            PHPUnit_Util_Filter::addDirectoryToWhitelist($smarty_libs_dir); 
-            PHPUnit_Util_Filter::removeDirectoryFromWhitelist('../');
+            PHPUnit_Util_Filter::addDirectoryToWhitelist($smarty_libs_dir);
+            PHPUnit_Util_Filter::removeDirectoryFromWhitelist('./'); 
             // PHPUnit_Util_Filter::addDirectoryToWhitelist('../libs/plugins');
         } 
         $suite = new self('Smarty 3 - Unit Tests Report'); 

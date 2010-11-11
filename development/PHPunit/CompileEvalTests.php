@@ -27,17 +27,17 @@ class CompileEvalTests extends PHPUnit_Framework_TestCase {
     */
     public function testEval1()
     {
-        $tpl = $this->smarty->createTemplate("string:{eval var='hello world'}");
+        $tpl = $this->smarty->createTemplate("eval:{eval var='hello world'}");
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
     public function testEval2()
     {
-        $tpl = $this->smarty->createTemplate("string:{eval var='hello world' assign=foo}{\$foo}");
+        $tpl = $this->smarty->createTemplate("eval:{eval var='hello world' assign=foo}{\$foo}");
         $this->assertEquals("hello world", $this->smarty->fetch($tpl));
     } 
     public function testEval3()
     {
-        $tpl = $this->smarty->createTemplate("string:{eval var='hello world' assign=foo}");
+        $tpl = $this->smarty->createTemplate("eval:{eval var='hello world' assign=foo}");
         $this->assertEquals("", $this->smarty->fetch($tpl));
     } 
 } 

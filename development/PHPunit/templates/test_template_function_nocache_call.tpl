@@ -1,1 +1,1 @@
-{include file='template_function_lib.tpl'}{nocache}{call name=template_func1}{/nocache}
+{include file='template_function_lib.tpl'}{call 'template_func1' nocache}

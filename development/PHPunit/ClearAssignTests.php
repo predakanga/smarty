@@ -14,6 +14,7 @@ class ClearAssignTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
+        $this->smarty->deprecation_notices = false;
         $this->smarty->assign('foo','foo');
         $this->smarty->assign('bar','bar');
         $this->smarty->assign('blar','blar');
@@ -30,7 +31,7 @@ class ClearAssignTests extends PHPUnit_Framework_TestCase {
     */
     public function testAllVariablesAccessable()
     {
-		$this->assertEquals('foobarblar', $this->smarty->fetch('string:{$foo}{$bar}{$blar}'));
+		$this->assertEquals('foobarblar', $this->smarty->fetch('eval:{$foo}{$bar}{$blar}'));
     } 
 
     /**
@@ -39,7 +40,12 @@ class ClearAssignTests extends PHPUnit_Framework_TestCase {
     public function testClearAssign()
     {
             $this->smarty->clearAssign('blar');
-		$this->assertEquals('foobar', $this->smarty->fetch('string:{$foo}{$bar}{$blar}'));
+		$this->assertEquals('foobar', $this->smarty->fetch('eval:{$foo}{$bar}{$blar}'));
+    } 
+    public function testSmarty2ClearAssign()
+    {
+            $this->smarty->clear_assign('blar');
+		$this->assertEquals('foobar', $this->smarty->fetch('eval:{$foo}{$bar}{$blar}'));
     } 
     /**
     * test clear assign array of variables
@@ -47,7 +53,12 @@ class ClearAssignTests extends PHPUnit_Framework_TestCase {
     public function testArrayClearAssign()
     {
             $this->smarty->clearAssign(array('blar','foo'));
-		$this->assertEquals('bar', $this->smarty->fetch('string:{$foo}{$bar}{$blar}'));
+		$this->assertEquals('bar', $this->smarty->fetch('eval:{$foo}{$bar}{$blar}'));
+    } 
+    public function testSmarty2ArrayClearAssign()
+    {
+            $this->smarty->clear_assign(array('blar','foo'));
+		$this->assertEquals('bar', $this->smarty->fetch('eval:{$foo}{$bar}{$blar}'));
     } 
 } 
 ?>

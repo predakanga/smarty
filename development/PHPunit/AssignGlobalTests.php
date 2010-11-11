@@ -47,9 +47,9 @@ class AssignGlobalTests extends PHPUnit_Framework_TestCase {
     public function testAssignGlobalTag()
     {
         $this->smarty->assignGlobal('foo', 'bar');
-        $this->assertEquals('bar', $this->smarty->fetch('string:{$foo}'));
-        $this->assertEquals('buh', $this->smarty->fetch('string:{assign var=foo value=buh scope=global}{$foo}'));
-        $this->assertEquals('buh', $this->smarty->fetch('string:{$foo}'));
+        $this->assertEquals('bar', $this->smarty->fetch('eval:{$foo}'));
+        $this->assertEquals('buh', $this->smarty->fetch('eval:{assign var=foo value=buh scope=global}{$foo}'));
+        $this->assertEquals('buh', $this->smarty->fetch('eval:{$foo}'));
         $this->assertEquals('buh', $this->smarty->getGlobal('foo'));
     } 
     /**
@@ -58,8 +58,8 @@ class AssignGlobalTests extends PHPUnit_Framework_TestCase {
     public function testGlobalVarArrayTag()
     {
         $this->smarty->assignGlobal('foo', array('foo' => 'bar', 'foo2' => 'bar2'));
-        $this->assertEquals('bar2', $this->smarty->fetch('string:{$foo.foo2}'));
-        $this->assertEquals('bar', $this->smarty->fetch('string:{$foo.foo}'));
+        $this->assertEquals('bar2', $this->smarty->fetch('eval:{$foo.foo2}'));
+        $this->assertEquals('bar', $this->smarty->fetch('eval:{$foo.foo}'));
     } 
 } 
 

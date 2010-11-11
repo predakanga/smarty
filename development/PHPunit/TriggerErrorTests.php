@@ -19,7 +19,8 @@ class TriggerErrorTests extends PHPUnit_Framework_TestCase {
 
     public static function isRunnable()
     {
-        return true;
+// needs modification
+        return false;
     } 
 
     /**
@@ -28,7 +29,7 @@ class TriggerErrorTests extends PHPUnit_Framework_TestCase {
     public function testTriggerError()
     {
         try {
-            $this->smarty->trigger_error('Test error');
+            $this->smarty->triggerError('Test error');
         } 
         catch (Exception $e) {
             $this->assertContains('Test error', $e->getMessage());

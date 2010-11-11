@@ -14,6 +14,7 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
+        $this->smarty->deprecation_notices = false;
     } 
 
     public static function isRunnable()
@@ -32,7 +33,17 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $this->smarty->appendByRef('foo', $bar2);
         $bar = 'newbar';
         $bar2 = 'newbar2';
-        $this->assertEquals('newbar newbar2', $this->smarty->fetch('string:{$foo[0]} {$foo[1]}'));
+        $this->assertEquals('newbar newbar2', $this->smarty->fetch('eval:{$foo[0]} {$foo[1]}'));
+    } 
+    public function testSmarty2AppendByRef()
+    {
+        $bar = 'bar';
+        $bar2 = 'bar2';
+        $this->smarty->append_by_ref('foo', $bar);
+        $this->smarty->append_by_ref('foo', $bar2);
+        $bar = 'newbar';
+        $bar2 = 'newbar2';
+        $this->assertEquals('newbar newbar2', $this->smarty->fetch('eval:{$foo[0]} {$foo[1]}'));
     } 
     /**
     * test appendByRef to unassigned variable
@@ -42,7 +53,14 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $bar2 = 'bar2';
         $this->smarty->appendByRef('foo', $bar2);
         $bar2 = 'newbar2';
-        $this->assertEquals('newbar2', $this->smarty->fetch('string:{$foo[0]}'));
+        $this->assertEquals('newbar2', $this->smarty->fetch('eval:{$foo[0]}'));
+    } 
+     public function testSmarty2AppendByRefUnassigned()
+    {
+        $bar2 = 'bar2';
+        $this->smarty->append_by_ref('foo', $bar2);
+        $bar2 = 'newbar2';
+        $this->assertEquals('newbar2', $this->smarty->fetch('eval:{$foo[0]}'));
     } 
     /**
     * test appendByRef merge
@@ -55,9 +73,9 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $bar = array('b' => 'd');
         $this->smarty->assign('foo', array('a' => 'a', 'b' => 'b', 'c' => 'c'));
         $this->smarty->appendByRef('foo', $bar, true);
-        $this->assertEquals('a d c', $this->smarty->fetch('string:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
+        $this->assertEquals('a d c', $this->smarty->fetch('eval:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
         $bar = array('b' => 'newd');
-        $this->assertEquals('a newd c', $this->smarty->fetch('string:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
+        $this->assertEquals('a newd c', $this->smarty->fetch('eval:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
 */
     } 
 } 

@@ -17,7 +17,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->force_compile = true;
         $this->smarty->disableSecurity();
         $this->object = new RegObject;
-        $this->smarty->register->templateObject('objecttest', $this->object, 'myhello', true, 'myblock');
+        $this->smarty->registerObject('objecttest', $this->object, 'myhello', true, 'myblock');
     } 
 
     public static function isRunnable()
@@ -30,7 +30,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredObjectFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{objecttest->myhello}');
+        $tpl = $this->smarty->createTemplate('eval:{objecttest->myhello}');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
     } 
     /**
@@ -38,7 +38,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredObjectFunctionModifier()
     {
-        $tpl = $this->smarty->createTemplate('string:{objecttest->myhello|truncate:6}');
+        $tpl = $this->smarty->createTemplate('eval:{objecttest->myhello|truncate:6}');
         $this->assertEquals('hel...', $this->smarty->fetch($tpl));
     } 
 
@@ -47,7 +47,7 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredObjectBlockFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{objecttest->myblock}hello world{/objecttest->myblock}');
+        $tpl = $this->smarty->createTemplate('eval:{objecttest->myblock}hello world{/objecttest->myblock}');
         $this->assertEquals('block test', $this->smarty->fetch($tpl));
     } 
 } 

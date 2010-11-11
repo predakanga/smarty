@@ -147,7 +147,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         touch($tpl->getTemplateFilepath());
         $this->assertTrue($tpl->mustCompile()); 
         // clean up for next tests
-        $this->smarty->utility->clearCompiledTemplate();
+        $this->smarty->clearCompiledTemplate();
     } 
     /**
     * test getCompiledTemplate
@@ -234,8 +234,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         // clean up for next tests
-        $this->smarty->utility->clearCompiledTemplate();
-	  $this->smarty->cache->clearAll();
+        $this->smarty->clearCompiledTemplate();
+	  $this->smarty->clearAllCache();
         // compile and cache
 	  $this->smarty->fetch($tpl);
     } 
@@ -248,7 +248,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertTrue($tpl->isCached());
-        $this->assertContains('hello world', $tpl->rendered_content);
+        $this->assertEquals(null, $tpl->rendered_content);
     } 
     /**
     * test isCached on touched source
@@ -288,7 +288,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-	  $this->smarty->cache->clearAll();
+	  $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->smarty->fetch($tpl);
         $this->assertTrue(file_exists($tpl->getCachedFilepath()));
@@ -310,8 +310,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         // clean up for next tests
-        $this->smarty->utility->clearCompiledTemplate();
-	  $this->smarty->cache->clearAll();
+        $this->smarty->clearCompiledTemplate();
+	  $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->smarty->fetch($tpl);
     } 
@@ -321,7 +321,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertTrue($this->smarty->isCached($tpl));
-        $this->assertContains('hello world', $tpl->rendered_content);
+        $this->assertEquals(null, $tpl->rendered_content);
     } 
     /**
     * test $smarty->is_cached  caching disabled
@@ -336,8 +336,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testFinalCleanup()
     {
-        $this->smarty->utility->clearCompiledTemplate();
-	  $this->smarty->cache->clearAll();
+        $this->smarty->clearCompiledTemplate();
+	  $this->smarty->clearAllCache();
     } 
 } 
 

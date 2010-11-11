@@ -14,7 +14,7 @@ class RegisteredResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
-        $this->smarty->register->resource("rr", array("rr_get_template",
+        $this->smarty->registerResource("rr", array("rr_get_template",
                 "rr_get_timestamp",
                 "rr_get_secure",
                 "rr_get_trusted"));

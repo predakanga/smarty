@@ -74,7 +74,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testExternalDefinedFunction()
     {
-        $tpl = $this->smarty->createTemplate('string:{include file=\'template_function_lib.tpl\'}{call name=template_func1}');
+        $tpl = $this->smarty->createTemplate('eval:{include file=\'template_function_lib.tpl\'}{call name=template_func1}');
         $tpl->assign('foo', 'foo');
         $this->assertContains('foo foo', $this->smarty->fetch($tpl));
     } 
@@ -85,7 +85,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->cache->clearAll();
+        $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('test_template_function.tpl');
         $tpl->assign('foo', 'foo');
         $this->assertContains('foo foo', $this->smarty->fetch($tpl));
@@ -98,6 +98,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('test_template_function.tpl');
+        $this->assertTrue($this->smarty->isCached($tpl));
         $tpl->assign('foo', 'bar');
         $this->assertContains('foo bar', $this->smarty->fetch($tpl));
     } 
@@ -108,7 +109,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 1000;
-        $this->smarty->cache->clearAll();
+        $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('test_template_function_nocache_call.tpl');
         $tpl->assign('foo', 'foo');
         $this->assertContains('foo foo', $this->smarty->fetch($tpl));
@@ -121,6 +122,7 @@ class CompileFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('test_template_function_nocache_call.tpl');
+        $this->assertTrue($this->smarty->isCached($tpl));
         $tpl->assign('foo', 'bar');
         $this->assertContains('bar bar', $this->smarty->fetch($tpl));
     } 

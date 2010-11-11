@@ -15,10 +15,11 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
+        $this->smarty->deprecation_notices = false;
         $this->smarty->assign('foo','foo');
         $this->smarty->data = new Smarty_Data($this->smarty);
         $this->smarty->data->assign('bar','bar');
-        $this->smarty->tpl = $this->smarty->createTemplate('string:{$foo}{$bar}{$blar}', null, null, $this->smarty->data);
+        $this->smarty->tpl = $this->smarty->createTemplate('eval:{$foo}{$bar}{$blar}', null, null, $this->smarty->data);
         $this->smarty->tpl->assign('blar','blar');
     } 
 
@@ -57,6 +58,11 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
     public function testClearAllAssignInSmarty()
     {
             $this->smarty->clearAllAssign();
+		$this->assertEquals('barblar', $this->smarty->fetch($this->smarty->tpl));
+    } 
+    public function testSmarty2ClearAllAssignInSmarty()
+    {
+            $this->smarty->clear_all_assign();
 		$this->assertEquals('barblar', $this->smarty->fetch($this->smarty->tpl));
     } 
 } 

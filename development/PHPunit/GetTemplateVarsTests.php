@@ -1,6 +1,6 @@
 <?php
 /**
-* Smarty PHPunit tests utility->getTemplateVars method
+* Smarty PHPunit tests getTemplateVars method
 * 
 * @package PHPunit
 * @author Uwe Tews 
@@ -8,7 +8,7 @@
 
 
 /**
-* class for utility->getTemplateVars method test
+* class for getTemplateVars method test
 */
 class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
     public function setUp()
@@ -23,7 +23,7 @@ class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
     } 
 
     /**
-    * test root utility->getTemplateVars single value
+    * test root getTemplateVars single value
     */
     public function testGetSingleTemplateVarScopeRoot()
     {
@@ -32,7 +32,7 @@ class GetTemplateVarsTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals("bar", $this->smarty->getTemplateVars('foo'));
     } 
     /**
-    * test root utility->getTemplateVars all values
+    * test root getTemplateVars all values
     */
     public function testGetAllTemplateVarsScopeRoot()
     {

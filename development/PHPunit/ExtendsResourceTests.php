@@ -22,6 +22,14 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
         return true;
     } 
 
+    /**
+    * clear folders
+    */
+    public function clear()
+    {
+        $this->smarty->clearAllCache();
+        $this->smarty->clearCompiledTemplate();
+   } 
     /* Test compilation */
         public function testExtendsResourceBlockBase()
     {
@@ -63,6 +71,77 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertContains('--parent from --base-- block--', $result);
         $this->assertContains('--block include ok--', $result);
     } 
+    /**
+    * test  grandchild/child/parent dependency test1
+    */
+    public function testCompileBlockGrandChildMustCompile1()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertFalse($tpl->isCached());
+        $result = $this->smarty->fetch($tpl);
+        $this->assertContains('Grandchild Page Title', $result);
+        $this->smarty->template_objects = null;
+        $tpl2 = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertTrue($tpl2->isCached());
+        $result = $this->smarty->fetch($tpl2);
+        $this->assertContains('Grandchild Page Title', $result);
+    } 
+    /**
+    * test  grandchild/child/parent dependency test2
+    */
+    public function testCompileBlockGrandChildMustCompile2()
+    {
+        touch($this->smarty->template_dir[0].'test_block_grandchild_resource.tpl');
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertFalse($tpl->isCached());
+        $result = $this->smarty->fetch($tpl);
+        $this->assertContains('Grandchild Page Title', $result);
+        $this->smarty->template_objects = null;
+        $tpl2 = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertTrue($tpl2->isCached());
+        $result = $this->smarty->fetch($tpl2);
+        $this->assertContains('Grandchild Page Title', $result);
+     } 
+    /**
+    * test  grandchild/child/parent dependency test3
+    */
+    public function testCompileBlockGrandChildMustCompile3()
+    {
+        touch($this->smarty->template_dir[0].'test_block_child_resource.tpl');
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertFalse($tpl->isCached());
+        $result = $this->smarty->fetch($tpl);
+        $this->assertContains('Grandchild Page Title', $result);
+        $this->smarty->template_objects = null;
+        $tpl2 = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertTrue($tpl2->isCached());
+        $result = $this->smarty->fetch($tpl2);
+        $this->assertContains('Grandchild Page Title', $result);
+     } 
+    /**
+    * test  grandchild/child/parent dependency test4
+    */
+    public function testCompileBlockGrandChildMustCompile4()
+    {
+        touch($this->smarty->template_dir[0].'test_block_parent.tpl');
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertFalse($tpl->isCached());
+        $result = $this->smarty->fetch($tpl);
+        $this->assertContains('Grandchild Page Title', $result);
+        $this->smarty->template_objects = null;
+        $tpl2 = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
+        $this->assertTrue($tpl2->isCached());
+        $result = $this->smarty->fetch($tpl2);
+        $this->assertContains('Grandchild Page Title', $result);
+     } 
 
     /* Test create cache file */
     public function testExtendResource1()
