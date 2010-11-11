@@ -150,6 +150,11 @@
  </para>
  </example>
 
+ <para>
+  See also <link linkend="language.function.foreach"><varname>{foreach}</varname></link> and
+  <link linkend="language.function.for"><varname>{for}</varname></link>.
+ </para>
+
 </sect1>
 <!-- Keep this comment at the end of the file
      Local variables:
