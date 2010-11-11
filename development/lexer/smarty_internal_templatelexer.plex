@@ -124,11 +124,12 @@ ldelslash = /SMARTYldel\//
 ldelspaceslash = /SMARTYldel\s{1,}\//
 ldel = /SMARTYldel/
 rdel = /SMARTYrdel/
+smartyblockchild = /SMARTYldel[\$]smarty\.block\.childSMARTYrdel/
 integer = /\d+/
 hex =  /0[xX][0-9a-fA-F]+/
 math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
-incdec = /(\+\+|\-\-)\s*/
+incdec = /\+\+|\-\-/
 unimath = /\s*(\+|\-)\s*/
 openP = /\(\s*/
 closeP = /\s*\)/
@@ -199,6 +200,9 @@ single_quote = /'/
 */
 /*!lex2php
 %statename TEXT
+smartyblockchild {
+  $this->token = Smarty_Internal_Templateparser::TP_SMARTYBLOCKCHILD;
+}
 emptyjava {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;
 }
