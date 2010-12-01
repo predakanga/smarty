@@ -1,3 +1,25 @@
+===== SVN trunk  =====
+27/11/2010
+-change run output filter before cache file is written. (same as in Smarty2)
+
+24/11/2011
+-bugfix on parser at  !$foo|modifier
+-change parser logic when assignments used as condition in {if] and {while} to allow assign to array element
+
+23/11/2011
+-bugfix allow integer as attribute name in plugin calls
+-change  trimm whitespace from error message, removed long list of expected tokens
+
+22/11/2010
+- bugfix on template inheritance when an {extends} tag was inserted by a prefilter
+- added error message for illegal variable file attributes at {extends...} tags
+
+===== Smarty 3.0.5  =====
+
+
+19/11/2010
+- bugfix on block plugins with modifiers
+
 18/11/2010
 - change on handling of unassigned template variable -- default will drop E_NOTICE
 - bugfix on Smarty2 wrapper load_filter() did not work
@@ -18,6 +40,8 @@
 - bugfix scoping problem on $smarty object passed to filters
 - bugfix captured content could not be accessed globally
 - bugfix Smarty2 wrapper functions could not be call from within plugins
+
+===== Smarty 3.0.4  =====
 
 14/11/2010
 - bugfix isset() did not allow multiple parameter

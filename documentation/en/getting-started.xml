@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Revision: 2972 $ -->
+<!-- $Revision$ -->
 <part id="getting.started">
  <title>Getting Started</title>
 
@@ -178,7 +178,7 @@
   <sect1 id="installation.requirements">
    <title>Requirements</title>
    <para>
-    Smarty requires a web server running PHP 4.0.6 or greater.
+    Smarty requires a web server running PHP 5.2 or greater.
    </para>
   </sect1>
 

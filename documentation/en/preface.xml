@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Revision: 2972 $ -->
+<!-- $Revision$ -->
  <preface id="preface">
   <title>Preface</title>
   
@@ -28,7 +28,7 @@
   </para>  
 
   <para>
-   Smarty is PHP a framework for separating presentation (HTML/CSS) from application logic (PHP). This implies that PHP code is application logic, and is separated from the presentation.
+    Smarty is a template engine for PHP, facilitating the separation of presentation (HTML/CSS) from application logic. This implies that <emphasis>PHP code is application logic</emphasis>, and is separated from the presentation.
   </para>
   
   <para>
@@ -36,11 +36,11 @@
   </para>
 
   <para>
-    When it comes to templating in PHP, there are basically two camps of thought. The first camp exclaims that "PHP is a template engine". Simply because PHP <emphasis>can</emphasis> mix with presentation doesn't mean it's a preferable choice. The only virtue to this approach is speed from a pure script-execution point of view. However, the PHP syntax is quite ugly and doesn't mix well with tagged markup such as HTML.
+    When it comes to templating in PHP, there are basically two camps of thought. The first camp exclaims that "PHP is a template engine". This approach simply mixes PHP code with HTML. Although this approach is fastest from a pure script-execution point of view, many would argue that the PHP syntax is messy and complicated when mixed with tagged markup such as HTML.
   </para>
 
   <para>
-    The second camp exclaims that presentation should be void of all programming code, and instead use simple tags to indicate where application content is revealed. This approach is common with other development languages, and is also the approach that Smarty takes. The idea is to keep the templates focused squarely on presentation, not application code, and with as little overhead as possible.
+    The second camp exclaims that presentation should be void of all programming code, and instead use simple tags to indicate where application content is revealed. This approach is common with other template engines (even in other programming languages), and is also the approach that Smarty takes. The idea is to keep the templates focused squarely on presentation, void of application code, and with as little overhead as possible.
   </para>
 
   <para>

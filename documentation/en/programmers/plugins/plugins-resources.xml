@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Revision: 3006 $ -->
+<!-- $Revision$ -->
    <sect1 id="plugins.resources"><title>Resources</title>
     <para>
      Resource plugins are meant as a generic way of providing template
@@ -19,23 +19,23 @@
       <funcdef>bool <function>smarty_resource_<replaceable>name</replaceable>_source</function></funcdef>
       <paramdef>string <parameter>$rsrc_name</parameter></paramdef>
       <paramdef>string <parameter>&amp;$source</parameter></paramdef>
-      <paramdef>object <parameter>&amp;$smarty</parameter></paramdef>
+      <paramdef>object <parameter>$smarty</parameter></paramdef>
      </funcprototype>
      <funcprototype>
       <funcdef>bool <function>smarty_resource_<replaceable>name</replaceable>_timestamp</function></funcdef>
       <paramdef>string <parameter>$rsrc_name</parameter></paramdef>
       <paramdef>int <parameter>&amp;$timestamp</parameter></paramdef>
-      <paramdef>object <parameter>&amp;$smarty</parameter></paramdef>
+      <paramdef>object <parameter>$smarty</parameter></paramdef>
      </funcprototype>
      <funcprototype>
       <funcdef>bool <function>smarty_resource_<replaceable>name</replaceable>_secure</function></funcdef>
       <paramdef>string <parameter>$rsrc_name</parameter></paramdef>
-      <paramdef>object <parameter>&amp;$smarty</parameter></paramdef>
+      <paramdef>object <parameter>$smarty</parameter></paramdef>
      </funcprototype>
      <funcprototype>
       <funcdef>bool <function>smarty_resource_<replaceable>name</replaceable>_trusted</function></funcdef>
       <paramdef>string <parameter>$rsrc_name</parameter></paramdef>
-      <paramdef>object <parameter>&amp;$smarty</parameter></paramdef>
+      <paramdef>object <parameter>$smarty</parameter></paramdef>
      </funcprototype>
     </funcsynopsis>
 
@@ -127,8 +127,8 @@ function smarty_resource_db_trusted($tpl_name, $smarty)
 
  <para>
  See also
- <link linkend="api.register.resource"><varname>register_resource()</varname></link>,
- <link linkend="api.unregister.resource"><varname>unregister_resource()</varname></link>.
+ <link linkend="api.register.resource"><varname>registerResource()</varname></link>,
+ <link linkend="api.unregister.resource"><varname>unregisterResource()</varname></link>.
 </para>
 
    </sect1>

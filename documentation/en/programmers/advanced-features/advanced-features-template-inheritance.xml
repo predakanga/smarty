@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- $Revision: 2972 $ -->
+<!-- $Revision$ -->
 <sect1 id="advanced.features.template.inheritance">
  <title>Template Inheritance</title>
  <para>
@@ -60,7 +60,7 @@
    <para>myproject.tpl (child)</para>
    <programlisting>
 <![CDATA[
-{extends file=layout.tpl}
+{extends file='layout.tpl'}
 {block name=head}
   <link href="/css/mypage.css" rel="stylesheet" type="text/css"/>
   <script src="/js/mypage.js"></script>
@@ -71,7 +71,7 @@
    <para>myproject.tpl (grandchild)</para>
    <programlisting>
 <![CDATA[
-{extends file=project.tpl}
+{extends file='project.tpl'}
 {block name=title}My Page Title{/block}
 {block name=head}
   <link href="/css/mypage.css" rel="stylesheet" type="text/css"/>
