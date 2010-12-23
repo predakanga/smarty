@@ -1,4 +1,4 @@
-PHPUnit 3.3.15 by Sebastian Bergmann.
+PHPUnit 3.4.1 by Sebastian Bergmann.
 
 Test Suite
  CoreTests
@@ -11,7 +11,7 @@ Test Suite
  .....
 
  StringResourceTests
- ..................
+ ........F.........
 
  FileResourceTests
  ..................................
@@ -95,7 +95,7 @@ Test Suite
  ...........
 
  CompileIfTests
- ........................................................... 59 / 67
+ ...........................................................
  ........
 
  CompileIncludePHPTests
@@ -135,7 +135,7 @@ Test Suite
  .
 
  DefaultTemplateHandlerTests
- ....
+ ..E.
 
  DelimiterTests
  ....
@@ -174,10 +174,10 @@ Test Suite
  ...................
 
  RegisterCompilerFunctionTests
- ......
+ .E....
 
  RegisteredResourceTests
- ..
+ EE
 
  RegisterFilterTests
  .............
@@ -189,10 +189,10 @@ Test Suite
  ......
 
  ResourcePluginTests
- ..
+ EE
 
  SecurityTests
- ......................
+ ..............F.......
 
  SingleQuotedStringTests
  ......
@@ -224,6 +224,98 @@ Test Suite
  XmlTests
  ......
 
-Time: 56 seconds
+Time: 26 seconds
 
-OK (763 tests, 1064 assertions)
+There were 6 errors:
+
+1) DefaultTemplateHandlerTests::testDefaultTemplateHandlerReplacementByTemplateFile
+Parameter 5 to my_template_handler_file() expected to be a reference, value given
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:623
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_resource_file.php:51
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:115
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_resource_file.php:36
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:160
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:541
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:337
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/DefaultTemplateHandlerTests.php:68
+
+2) RegisterCompilerFunctionTests::testRegisterCompilerFunctionClass
+Parameter 2 to mycompilerfunctionclass::execute() expected to be a reference, value given
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:185
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2330
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2823
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2923
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_smartytemplatecompiler.php:59
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:82
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:260
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:413
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:558
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:337
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/RegisterCompilerFunctionTests.php:39
+
+3) RegisteredResourceTests::testResourcePlugin
+Parameter 3 to rr_get_timestamp() expected to be a reference, value given
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_resource_registered.php:73
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:129
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_resource_registered.php:43
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:160
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:541
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:337
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/RegisteredResourceTests.php:33
+
+4) RegisteredResourceTests::testResourcePluginTimestamp
+Parameter 3 to rr_get_timestamp() expected to be a reference, value given
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_resource_registered.php:73
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:129
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/RegisteredResourceTests.php:41
+
+5) ResourcePluginTests::testResourcePlugin
+SmartyException: Unkown resource type 'db'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:748
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:580
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:935
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:537
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:337
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/ResourcePluginTests.php:29
+
+6) ResourcePluginTests::testResourcePluginTimestamp
+SmartyException: Unkown resource type 'db'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:748
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:580
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:935
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:129
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/ResourcePluginTests.php:37
+
+--
+
+
+There were 2 failures:
+
+1) StringResourceTests::testGetCompiledFilepath
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-.\templates_c\2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php
++./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/StringResourceTests.php:91
+
+2) SecurityTests::testSmartyPhpAllowAsp
+Failed asserting that two strings are equal.
+--- Expected
++++ Actual
+@@ @@
+-hello world
++<% echo "hello world"; %>
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:166
+
+FAILURES!
+Tests: 763, Assertions: 1061, Failures: 2, Errors: 6.
