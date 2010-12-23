@@ -194,6 +194,9 @@ Test Suite
  SecurityTests
  ..............F.......
 
+ SharedFunctionsTests
+ .
+
  SingleQuotedStringTests
  ......
 
@@ -318,4 +321,4 @@ Failed asserting that two strings are equal.
 /Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:166
 
 FAILURES!
-Tests: 763, Assertions: 1061, Failures: 2, Errors: 6.
+Tests: 764, Assertions: 1063, Failures: 2, Errors: 6.
