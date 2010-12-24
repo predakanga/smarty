@@ -26,6 +26,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePlugin()
     {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $this->assertEquals('hello world', $this->smarty->fetch('db:test'));
     } 
     /**
@@ -33,6 +34,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginTimestamp()
     {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $tpl = $this->smarty->createTemplate('db:test');
         $this->assertTrue(is_integer($tpl->getTemplateTimestamp()));
         $this->assertEquals(10, strlen($tpl->getTemplateTimestamp()));

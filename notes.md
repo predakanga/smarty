@@ -8,7 +8,6 @@ blah
 
 ## UnitTesting ##
 
-* ResourcePluginTests is using the resource 'db' which does not exist - WTF?
 * ResourcePluginTests add test for registerResource( 'foobar', new Smarty_Resource_Foobar() )
 * ResourcePluginTests add test for Smarty_Resource_Foobar from plugin_dir 
 
