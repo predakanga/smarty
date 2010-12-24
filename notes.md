@@ -1,4 +1,10 @@
-# Notes
+# Notes #
+
+
+## UnitTesting ##
+
+* ResourcePluginTests is using the resource 'db' which does not exist
+* 
 
 ## registerResource() API ##
 

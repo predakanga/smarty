@@ -88,7 +88,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals('.\templates_c\2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php',$tpl->getCompiledFilepath());
+        $this->assertEquals('./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php',$tpl->getCompiledFilepath());
     } 
     /**
     * test getCompiledTimestamp
