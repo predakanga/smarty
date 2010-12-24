@@ -1,15 +1,17 @@
 # Notes #
 
+* what is isEvaluated really doing?
+* Smarty_Resource::$isEvaluated and Smarty_Resource::$usesCompiler are flags that are never changed.
+* replace isEvaluted and usesCompiler by appropriate Interfaces
+
 
 
 ## Questions ##
 
 blah
 
-## UnitTesting ##
 
-* ResourcePluginTests add test for registerResource( 'foobar', new Smarty_Resource_Foobar() )
-* ResourcePluginTests add test for Smarty_Resource_Foobar from plugin_dir 
+## UnitTesting ##
 
 
 
@@ -17,13 +19,6 @@ blah
 
 Loading of plugins depends on a Smarty instance (for plugin_dir). But if a Plugin is successfully loaded in Smarty-Instance-1 (knowing the plugin_dir) and then used in Smarty-Instance-2 (NOT knowing the plugin_dir) the Plugin is still executed properly. I wouldn't call this a bug, but it certainly is odd behaviour.
 
-
-
-## left to do ##
-
-* what is isEvaluated really doing?
-* Smarty_Resource::$isEvaluated and Smarty_Resource::$usesCompiler are flags that are never changed.
-* replace isEvaluted and usesCompiler by appropriate Interfaces
 
 
 ## Clean this up ##
