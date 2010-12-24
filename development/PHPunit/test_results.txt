@@ -192,7 +192,7 @@ Test Suite
  EE
 
  SecurityTests
- ..............F.......
+ ......................
 
  SharedFunctionsTests
  .
@@ -250,20 +250,5 @@ SmartyException: Unkown resource type 'db'
 /Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:129
 /Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/ResourcePluginTests.php:37
 
---
-
-
-There was 1 failure:
-
-1) SecurityTests::testSmartyPhpAllowAsp
-Failed asserting that two strings are equal.
---- Expected
-+++ Actual
-@@ @@
--hello world
-+<% echo "hello world"; %>
-
-/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:166
-
 FAILURES!
-Tests: 764, Assertions: 1068, Failures: 1, Errors: 2.
+Tests: 764, Assertions: 1068, Errors: 2.

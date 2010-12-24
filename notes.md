@@ -3,8 +3,8 @@
 
 ## UnitTesting ##
 
-* ResourcePluginTests is using the resource 'db' which does not exist
-* 
+* ResourcePluginTests is using the resource 'db' which does not exist - WTF?
+
 
 ## registerResource() API ##
 
