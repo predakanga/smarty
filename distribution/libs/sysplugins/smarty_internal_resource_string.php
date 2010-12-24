@@ -1,37 +1,27 @@
 <?php
 
+// TODO: (rodneyrehm) extend autoloader to load this
+require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
+
 /**
  * Smarty Internal Plugin Resource String
  * 
  * Implements the strings as resource for Smarty template
  * 
+ * @note unlike eval-resources the compiled state of string-resources is saved for subsequent access
  * @package Smarty
  * @subpackage TemplateResources
  * @author Uwe Tews 
  */
- 
-/**
- * Smarty Internal Plugin Resource String
- */
-class Smarty_Internal_Resource_String {
-    public function __construct($smarty)
-    {
-        $this->smarty = $smarty;
-    } 
-    // classes used for compiling Smarty templates from file resource
-    public $compiler_class = 'Smarty_Internal_SmartyTemplateCompiler';
-    public $template_lexer_class = 'Smarty_Internal_Templatelexer';
-    public $template_parser_class = 'Smarty_Internal_Templateparser';
-    // properties
-    public $usesCompiler = true;
-    public $isEvaluated = false;
+class Smarty_Internal_Resource_String extends Smarty_Resource {
 
     /**
-     * Return flag if template source is existing
+     * Test if the template source exists
      * 
-     * @return boolean true
+     * @param Smarty_Internal_Template $_template template object
+     * @return boolean always true as template source is not a file
      */
-    public function isExisting($template)
+    public function isExisting(Smarty_Internal_Template $template)
     {
         return true;
     } 
@@ -39,10 +29,10 @@ class Smarty_Internal_Resource_String {
     /**
      * Get filepath to template source
      * 
-     * @param object $_template template object
-     * @return string return 'string' as template source is not a file
+     * @param Smarty_Internal_Template $_template template object
+     * @return string always 'string:' as template source is not a file
      */
-    public function getTemplateFilepath($_template)
+    public function getTemplateFilepath(Smarty_Internal_Template $_template)
     { 
         $_template->templateUid = sha1($_template->resource_name);
         // no filepath for strings
@@ -51,12 +41,12 @@ class Smarty_Internal_Resource_String {
     } 
 
     /**
-     * Get timestamp to template source
+     * Get timestamp (epoch) the template source was modified
      * 
-     * @param object $_template template object
-     * @return boolean false as string resources have no timestamp
+     * @param Smarty_Internal_Template $_template template object
+     * @return integer|boolean 0 if the template has been evaluated, false otherwise
      */
-    public function getTemplateTimestamp($_template)
+    public function getTemplateTimestamp(Smarty_Internal_Template $_template)
     { 
         if ($this->isEvaluated) {
         	//must always be compiled and have no timestamp
@@ -74,18 +64,19 @@ class Smarty_Internal_Resource_String {
      */
     public function getTemplateTimestampTypeName($_resource_type, $_resource_name)
     { 
+        // TODO: (rodneyrehm) getTemplateTimestampTypeName() needs an interface or something
         // return timestamp 0
         return 0;
     } 
 
-
     /**
-     * Retuen template source from resource name
+     * Load template's source from $resource_name into current template object
      * 
-     * @param object $_template template object
-     * @return string content of template source
+     * @note: The loaded source is assigned to $_template->template_source directly.
+     * @param Smarty_Internal_Template $_template current template
+     * @return boolean success: true for success, false for failure
      */
-    public function getTemplateSource($_template)
+    public function getTemplateSource(Smarty_Internal_Template $_template)
     { 
         // return template string
         $_template->template_source = $_template->resource_name;
@@ -95,38 +86,12 @@ class Smarty_Internal_Resource_String {
     /**
      * Get filepath to compiled template
      * 
-     * @param object $_template template object
-     * @return boolean return false as compiled template is not stored
+     * @param Smarty_Internal_Template $_template template object
+     * @return string path to compiled template
      */
-    public function getCompiledFilepath($_template)
+    public function getCompiledFilepath(Smarty_Internal_Template $_template)
     {
-        $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
-        // calculate Uid if not already done
-        if ($_template->templateUid == '') {
-            $_template->getTemplateFilepath();
-        } 
-        $_filepath = $_template->templateUid; 
-        // if use_sub_dirs, break file into directories
-        if ($_template->smarty->use_sub_dirs) {
-            $_filepath = substr($_filepath, 0, 2) . DS
-             . substr($_filepath, 2, 2) . DS
-             . substr($_filepath, 4, 2) . DS
-             . $_filepath;
-        } 
-        $_compile_dir_sep = $_template->smarty->use_sub_dirs ? DS : '^';
-        if (isset($_compile_id)) {
-            $_filepath = $_compile_id . $_compile_dir_sep . $_filepath;
-        } 
-        if ($_template->caching) {
-            $_cache = '.cache';
-        } else {
-            $_cache = '';
-        } 
-        $_compile_dir = $_template->smarty->compile_dir;
-        if (strpos('/\\', substr($_compile_dir, -1)) === false) {
-            $_compile_dir .= DS;
-        } 
-        return $_compile_dir . $_filepath . '.' . $_template->resource_type . $_cache . '.php';
+        return $this->buildCompiledFilepath($_template, '');
     } 
 } 
 

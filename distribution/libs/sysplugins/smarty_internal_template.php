@@ -428,6 +428,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
                         $resource_type = null;
                         $resource_name = null;
                         foreach ($this->properties['file_dependency'] as $_file_to_check) {
+                            // TODO: (rodneyrehm) Smarty_Internal_Template should neither know of nor do mtime checks for resources
                             If ($_file_to_check[2] == 'file' || $_file_to_check[2] == 'extends' || $_file_to_check[2] == 'php') {
                                 $mtime = filemtime($_file_to_check[0]);
                             } else {

@@ -1,37 +1,32 @@
 <?php
 
+// TODO: (rodneyrehm) extend autoloader to load this
+require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
+
 /**
  * Smarty Internal Plugin Resource Eval
  * 
  * Implements the strings as resource for Smarty template
  * 
+ * @note unlike string-resources the compiled state of eval-resources is NOT saved for subsequent access
  * @package Smarty
  * @subpackage TemplateResources
  * @author Uwe Tews 
  */
- 
-/**
- * Smarty Internal Plugin Resource Eval
- */
-class Smarty_Internal_Resource_Eval {
-    public function __construct($smarty)
-    {
-        $this->smarty = $smarty;
-    } 
-    // classes used for compiling Smarty templates from file resource
-    public $compiler_class = 'Smarty_Internal_SmartyTemplateCompiler';
-    public $template_lexer_class = 'Smarty_Internal_Templatelexer';
-    public $template_parser_class = 'Smarty_Internal_Templateparser';
-    // properties
-    public $usesCompiler = true;
+class Smarty_Internal_Resource_Eval extends Smarty_Resource {
+    /**
+	 * eval-resources are evaluated by default in a sense that their compiled state cannot be read from disk
+	 * @var boolean
+	 */
     public $isEvaluated = true;
 
     /**
-     * Return flag if template source is existing
+     * Test if the template source exists
      * 
-     * @return boolean true
+     * @param Smarty_Internal_Template $_template template object
+     * @return boolean always true as template source is not a file
      */
-    public function isExisting($template)
+    public function isExisting(Smarty_Internal_Template $template)
     {
         return true;
     } 
@@ -39,10 +34,10 @@ class Smarty_Internal_Resource_Eval {
     /**
      * Get filepath to template source
      * 
-     * @param object $_template template object
-     * @return string return 'string' as template source is not a file
+     * @param Smarty_Internal_Template $_template template object
+     * @return string always 'eval:' as template source is not a file
      */
-    public function getTemplateFilepath($_template)
+    public function getTemplateFilepath(Smarty_Internal_Template $_template)
     { 
         // no filepath for evaluated strings
         // return "string" for compiler error messages
@@ -50,40 +45,30 @@ class Smarty_Internal_Resource_Eval {
     } 
 
     /**
-     * Get timestamp to template source
+     * Get timestamp (epoch) the template source was modified
      * 
-     * @param object $_template template object
+     * @param Smarty_Internal_Template $_template template object
      * @return boolean false as string resources have no timestamp
      */
-    public function getTemplateTimestamp($_template)
+    public function getTemplateTimestamp(Smarty_Internal_Template $_template)
     { 
         // evaluated strings must always be compiled and have no timestamp
         return false;
     } 
 
     /**
-     * Retuen template source from resource name
+     * Load template's source from $resource_name into current template object
      * 
-     * @param object $_template template object
-     * @return string content of template source
+     * @note: The loaded source is assigned to $_template->template_source directly.
+     * @param Smarty_Internal_Template $_template current template
+     * @return boolean success: true for success, false for failure
      */
-    public function getTemplateSource($_template)
+    public function getTemplateSource(Smarty_Internal_Template $_template)
     { 
         // return template string
         $_template->template_source = $_template->resource_name;
         return true;
     } 
 
-    /**
-     * Get filepath to compiled template
-     * 
-     * @param object $_template template object
-     * @return boolean return false as compiled template is not stored
-     */
-    public function getCompiledFilepath($_template)
-    { 
-        // no filepath for strings
-        return false;
-    } 
 } 
 ?>

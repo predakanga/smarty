@@ -17,7 +17,9 @@ Since Smarty_Resource can now be extended by users, it makes sense to overload S
 ### left to do ###
 
 * what is isEvaluated really doing?
-
+* getTemplateTimestampTypeName() abstraction
+* resolve Smarty_Internal_Resource_Registered::__construct() issue
+* Smarty_Internal_Template cleanup for new Resource API
 
 
 
