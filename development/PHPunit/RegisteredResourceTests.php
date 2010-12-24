@@ -46,27 +46,27 @@ class RegisteredResourceTests extends PHPUnit_Framework_TestCase {
 /**
  * resource functions
  */
-function rr_get_template ($tpl_name, &$tpl_source, &$smarty_obj)
+function rr_get_template ($tpl_name, &$tpl_source, $smarty_obj)
 { 
     // populating $tpl_source
     $tpl_source = '{$x="hello world"}{$x}';
     return true;
 } 
 
-function rr_get_timestamp($tpl_name, &$tpl_timestamp, &$smarty_obj)
+function rr_get_timestamp($tpl_name, &$tpl_timestamp, $smarty_obj)
 { 
     // $tpl_timestamp.
     $tpl_timestamp = (int)floor(time() / 100) * 100;
     return true;
 } 
 
-function rr_get_secure($tpl_name, &$smarty_obj)
+function rr_get_secure($tpl_name, $smarty_obj)
 { 
     // assume all templates are secure
     return true;
 } 
 
-function rr_get_trusted($tpl_name, &$smarty_obj)
+function rr_get_trusted($tpl_name, $smarty_obj)
 { 
     // not used for templates
 } 
