@@ -56,11 +56,11 @@ class Smarty_Internal_Register {
      * Registers a resource to fetch a template
      * 
      * @param string $type name of resource type
-     * @param array $callback array of callbacks to handle resource
+     * @param Smarty_Resource|array $callback or instance of Smarty_Resource, or array of callbacks to handle resource (deprecated)
      */
  	public function registerResource($type, $callback)
 	{
-       	$this->smarty->registered_resources[$type] = array($callback, false);
+       	$this->smarty->registered_resources[$type] = $callback instanceof Smarty_Resource ? $callback : array($callback, false);
     }
 
     /**

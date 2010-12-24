@@ -1,8 +1,5 @@
 <?php
 
-// TODO: (rodneyrehm) extend autoloader to load this
-require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
-
 /**
  * Smarty Internal Plugin Resource String
  * 
@@ -44,29 +41,17 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
      * Get timestamp (epoch) the template source was modified
      * 
      * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
      * @return integer|boolean 0 if the template has been evaluated, false otherwise
      */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template)
+    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
     { 
-        if ($this->isEvaluated) {
+        if ($this->isEvaluated && $_resource_name !== null) {
         	//must always be compiled and have no timestamp
         	return false;
         } else {
         	return 0;
         }
-    } 
-
-    /**
-     * Get timestamp of template source by type and name
-     * 
-     * @param object $_template template object
-     * @return int  timestamp (always 0)
-     */
-    public function getTemplateTimestampTypeName($_resource_type, $_resource_name)
-    { 
-        // TODO: (rodneyrehm) getTemplateTimestampTypeName() needs an interface or something
-        // return timestamp 0
-        return 0;
     } 
 
     /**

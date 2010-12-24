@@ -1,30 +1,30 @@
 # Notes #
 
 
+
 ## Questions ##
 
-* Why is smarty_internal_resource_extends.php::getTemplateSource() using $this->_rdl AND $this->smarty->left_delimiter?
-* 
-
+blah
 
 ## UnitTesting ##
 
 * ResourcePluginTests is using the resource 'db' which does not exist - WTF?
-
-
-## registerResource() API ##
-
-Since Smarty_Resource can now be extended by users, it makes sense to overload Smarty::registerResource() to accept an object of the type Smarty_Resource. An array of functions can still be passed and processed by Smarty_Internal_Resource_Registered to stay BC - it should be deprecated, though.
+* ResourcePluginTests add test for registerResource( 'foobar', new Smarty_Resource_Foobar() )
+* ResourcePluginTests add test for Smarty_Resource_Foobar from plugin_dir 
 
 
 
-### left to do ###
+## Things I noticed ##
+
+Loading of plugins depends on a Smarty instance (for plugin_dir). But if a Plugin is successfully loaded in Smarty-Instance-1 (knowing the plugin_dir) and then used in Smarty-Instance-2 (NOT knowing the plugin_dir) the Plugin is still executed properly. I wouldn't call this a bug, but it certainly is odd behaviour.
+
+
+
+## left to do ##
 
 * what is isEvaluated really doing?
-* getTemplateTimestampTypeName() abstraction
-* resolve Smarty_Internal_Resource_Registered::__construct() issue
-* Smarty_Internal_Template cleanup for new Resource API
 * Smarty_Resource::$isEvaluated and Smarty_Resource::$usesCompiler are flags that are never changed.
+* replace isEvaluted and usesCompiler by appropriate Interfaces
 
 
 ## Clean this up ##

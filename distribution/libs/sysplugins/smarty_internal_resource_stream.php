@@ -1,8 +1,5 @@
 <?php
 
-// TODO: (rodneyrehm) extend autoloader to load this
-require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
-
 /**
  * Smarty Internal Plugin Resource Stream
  * 
@@ -52,9 +49,10 @@ class Smarty_Internal_Resource_Stream extends Smarty_Resource {
      * Get timestamp to template source
      * 
      * @param object $_template template object
-     * @return boolean false as string resources have no timestamp
+     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
+     * @return boolean false as stream resources have no timestamp
      */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template)
+    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
     { 
         // strings must always be compiled and have no timestamp
         return false;

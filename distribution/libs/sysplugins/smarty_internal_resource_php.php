@@ -1,8 +1,5 @@
 <?php
 
-// TODO: (rodneyrehm) extend autoloader to load this
-require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource_uncompiled.php';
-
 /**
  * Smarty Internal Plugin Resource PHP
  * 
@@ -22,11 +19,9 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
     /**
      * Create a new PHP Resource
      *
-     * @param Smarty $smarty current Smarty instance
      */
-    public function __construct(Smarty $smarty)
+    public function __construct()
     {
-        $this->smarty = $smarty;
         $this->short_open_tag = ini_get( 'short_open_tag' );
     } 
     
@@ -49,9 +44,10 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
      * Get timestamp (epoch) the template source was modified
      * 
      * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
      * @return boolean false as php resources have no timestamp
      */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template)
+    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
     {
         return filemtime($_template->getTemplateFilepath());
     } 
@@ -84,7 +80,7 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
     public function renderUncompiled(Smarty_Internal_Template $_template)
     {
         $_smarty_template = $_template;
-        if (!$this->smarty->allow_php_templates) {
+        if (!$_template->smarty->allow_php_templates) {
             throw new SmartyException("PHP templates are disabled");
         } 
         if ($this->getTemplateFilepath($_smarty_template) === false) {

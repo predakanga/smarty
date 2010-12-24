@@ -1,8 +1,5 @@
 <?php
 
-// TODO: (rodneyrehm) extend autoloader to load this
-require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
-
 /**
  * Smarty Internal Plugin Resource File
  * 
@@ -32,9 +29,10 @@ class Smarty_Internal_Resource_File extends Smarty_Resource {
      * Get timestamp (epoch) the template source was modified
      * 
      * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
      * @return integer timestamp (epoch) the template was modified
      */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template)
+    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
     {
         return filemtime($_template->getTemplateFilepath());
     } 

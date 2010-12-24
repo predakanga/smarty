@@ -794,7 +794,10 @@ class Smarty extends Smarty_Internal_Data {
 function smartyAutoload($class)
 {
     $_class = strtolower($class);
-    if (substr($_class, 0, 16) === 'smarty_internal_' || $_class == 'smarty_security') {
+    if (substr($_class, 0, 16) === 'smarty_internal_' 
+        || $_class == 'smarty_security' 
+        || $_class == 'smarty_resource' 
+        || $_class == 'smarty_resource_uncompiled') {
         include SMARTY_SYSPLUGINS_DIR . $_class . '.php';
     } 
 } 

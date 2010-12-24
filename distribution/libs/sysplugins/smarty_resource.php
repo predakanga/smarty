@@ -10,6 +10,8 @@
  * @author Rodney Rehm
  */
 abstract class Smarty_Resource {
+    protected static $resources = array();
+    
 	/**
 	 * Name of the Class to compile this resource's contents with
 	 * @var string
@@ -41,15 +43,14 @@ abstract class Smarty_Resource {
     public $isEvaluated = false;
     
     /**
-     * Create a new Resource
+     * Create new Resource Plugin
      *
-     * @param Smarty $smarty current Smarty instance
      */
-    public function __construct($smarty)
+    public function __construct()
     {
-        $this->smarty = $smarty;
+        
     }
-    
+
     /**
      * Test if the template source exists
      * 
@@ -81,9 +82,11 @@ abstract class Smarty_Resource {
      * Get timestamp (epoch) the template source was modified
      * 
      * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_type type of the resource to get modification time of. 
+     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
      * @return integer|boolean timestamp (epoch) the template was modified, false if resources has no timestamp
      */
-    public abstract function getTemplateTimestamp(Smarty_Internal_Template $_template);
+    public abstract function getTemplateTimestamp(Smarty_Internal_Template $_template, $resource_name=null);
     
     /**
      * Load template's source into current template object
@@ -146,6 +149,113 @@ abstract class Smarty_Resource {
             $_basename = '.' . $_basename;
         }
         return $_compile_dir . $_filepath . '.' . $_template->resource_type . $_basename . $_cache . '.php';
+    }
+    
+    /**
+     * Test if the resource has been modified since a given timestamp
+     *
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_type resource type
+     * @param string $filepath path to the resource
+     * @param integer $since timestamp (epoch) to compare against
+     * @return boolean true if modified, false else
+     */
+    public static function isModifiedSince(Smarty_Internal_Template $_template, $resource_type, $filepath, $since)
+    {
+        if ($resource_type == 'file' || $resource_type == 'extends' || $resource_type == 'php') {
+            $mtime = filemtime($filepath);
+        } else {
+            self::parse($_template, $filepath, $resource_type, $resource_name);
+            $resource_handler = self::load($_template, $resource_type);
+            $mtime = $resource_handler->getTemplateTimestamp($_template, $resource_name);
+        }
+        return $mtime > $since;
+    }
+    
+    /**
+     * Split a template resource into its name and type
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $template_resource template resource specification
+     * @param string $resource_type resource type
+     * @param string $resource_name resource name
+     * @return void
+     */
+    public static function parse(Smarty_Internal_Template $_template, $template_resource, &$resource_type, &$resource_name)
+    {
+        if (($pos = strpos($template_resource, ':')) === false) {
+            // no resource given, use default
+            $resource_type = $_template->smarty->default_resource_type;
+            $resource_name = $template_resource;
+        } else {
+            // get type and name from path
+            $resource_type = substr( $template_resource, 0, $pos );
+            $resource_name = substr( $template_resource, $pos +1 );
+            if (strlen($resource_type) == 1) {
+                // 1 char is not resource type, but part of filepath
+                $resource_type = 'file';
+                $resource_name = $template_resource;
+            }
+        }
+    }
+    
+    /**
+     * Load Resource Handler
+     *
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_type name of the resource
+     * @return Smarty_Resource Resource Handler
+     */
+    public static function load(Smarty_Internal_Template $_template, $resource_type)
+    {
+        // try the instance cache
+        if (isset(self::$resources[$resource_type])) {
+            return self::$resources[$resource_type];
+        }
+        // try registered resource
+        if (isset($_template->smarty->registered_resources[$resource_type])) {
+            if ($_template->smarty->registered_resources[$resource_type] instanceof Smarty_Resource) {
+                return self::$resources[$resource_type] = $_template->smarty->registered_resources[$resource_type];
+            }
+            if (!isset(self::$resources['registered'])) {
+                self::$resources['registered'] = new Smarty_Internal_Resource_Registered();
+            }
+            return self::$resources['registered'];
+        } 
+        // try sysplugins dir
+        if (in_array($resource_type, array('file', 'string', 'extends', 'php', 'stream', 'eval'))) {
+            $_resource_class = 'Smarty_Internal_Resource_' . ucfirst($resource_type);
+            return self::$resources[$resource_type] = new $_resource_class();
+        } 
+        // try plugins dir
+        $_resource_class = 'Smarty_Resource_' . ucfirst($resource_type);
+        if ($_template->smarty->loadPlugin($_resource_class)) {
+            if (class_exists($_resource_class, false)) {
+                return self::$resources[$resource_type] = new $_resource_class();
+            } else {
+            	$_template->smarty->registerResource($resource_type,
+            		array("smarty_resource_{$resource_type}_source",
+                		"smarty_resource_{$resource_type}_timestamp",
+                    	"smarty_resource_{$resource_type}_secure",
+                    	"smarty_resource_{$resource_type}_trusted"));
+                // give it another try, now that the resource is registered properly
+                return self::load($_template, $resource_type);
+            } 
+        }
+        // try streams
+        $_known_stream = stream_get_wrappers();
+        if (in_array($resource_type, $_known_stream)) {
+            // is known stream
+            if (is_object($_template->smarty->security_policy)) {
+                $_template->smarty->security_policy->isTrustedStream($resource_type);
+            }
+            if (!isset(self::$resources['stream'])) {
+                self::$resources['stream'] = new Smarty_Internal_Resource_Stream();
+            }
+            return self::$resources['stream'];
+        }
+        // give up
+        throw new SmartyException('Unkown resource type \'' . $resource_type . '\'');
     }
 }
 

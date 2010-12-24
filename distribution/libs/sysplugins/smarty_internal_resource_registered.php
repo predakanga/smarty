@@ -1,8 +1,5 @@
 <?php
 
-// TODO: (rodneyrehm) extend autoloader to load this
-require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
-
 /**
  * Smarty Internal Plugin Resource Registered
  * 
@@ -11,26 +8,13 @@ require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
  * @package Smarty
  * @subpackage TemplateResources
  * @author Uwe Tews 
+ * @deprecated
  */
  
 /**
  * Smarty Internal Plugin Resource Registered
  */
 class Smarty_Internal_Resource_Registered extends Smarty_Resource {
-    
-    // FIXME: (rodneyrehm) waaaah why am I getting a template instead of smarty here?
-    public function __construct(Smarty_Internal_Template $template, $resource_type = null)
-    {
-        $this->smarty = $template->smarty;
-        if (isset($resource_type)) {
-        	$template->smarty->registerResource($resource_type,
-        		array("smarty_resource_{$resource_type}_source",
-            		"smarty_resource_{$resource_type}_timestamp",
-                	"smarty_resource_{$resource_type}_secure",
-                	"smarty_resource_{$resource_type}_trusted"));
-        }
-    } 
-
     /**
      * Test if the template source exists
      * 
@@ -64,32 +48,17 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
      * Get timestamp (epoch) the template source was modified
      * 
      * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
      * @return integer|boolean timestamp (epoch) the template was modified, false if resources has no timestamp
      */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template)
+    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
     { 
         // return timestamp
         $time_stamp = false;
-        call_user_func_array($this->smarty->registered_resources[$_template->resource_type][0][1],
-            array($_template->resource_name, &$time_stamp, $this->smarty));
+        call_user_func_array($_template->smarty->registered_resources[$_template->resource_type][0][1],
+            array($_resource_name !== null ? $_resource_name : $_template->resource_name, &$time_stamp, $_template->smarty));
         return is_numeric($time_stamp) ? (int)$time_stamp : $time_stamp;
     }
-     
-    /**
-     * Get timestamp of template source by type and name
-     * 
-     * @param object $_template template object
-     * @return int  timestamp
-     */
-    public function getTemplateTimestampTypeName($_resource_type, $_resource_name)
-    { 
-        // TODO: (rodneyrehm) getTemplateTimestampTypeName() needs an interface or something
-        // return timestamp
-        $time_stamp = false;
-        call_user_func_array($this->smarty->registered_resources[$_resource_type][0][1],
-            array($_resource_name, &$time_stamp, $this->smarty));
-        return is_numeric($time_stamp) ? (int)$time_stamp : $time_stamp;
-    } 
 
     /**
      * Load template's source by invoking the registered callback into current template object
@@ -101,8 +70,8 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
     public function getTemplateSource(Smarty_Internal_Template $_template)
     { 
         // return template string
-        return call_user_func_array($this->smarty->registered_resources[$_template->resource_type][0][0],
-            array($_template->resource_name, &$_template->template_source, $this->smarty));
+        return call_user_func_array($_template->smarty->registered_resources[$_template->resource_type][0][0],
+            array($_template->resource_name, &$_template->template_source, $_template->smarty));
     } 
 
     /**
