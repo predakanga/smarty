@@ -797,7 +797,8 @@ function smartyAutoload($class)
     if (substr($_class, 0, 16) === 'smarty_internal_' 
         || $_class == 'smarty_security' 
         || $_class == 'smarty_resource' 
-        || $_class == 'smarty_resource_uncompiled') {
+        || $_class == 'smarty_resource_uncompiled'
+        || $_class == 'smarty_resource_recompiled') {
         include SMARTY_SYSPLUGINS_DIR . $_class . '.php';
     } 
 } 

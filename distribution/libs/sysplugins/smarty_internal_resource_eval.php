@@ -10,13 +10,7 @@
  * @subpackage TemplateResources
  * @author Uwe Tews 
  */
-class Smarty_Internal_Resource_Eval extends Smarty_Resource {
-    /**
-	 * eval-resources are evaluated by default in a sense that their compiled state cannot be read from disk
-	 * @var boolean
-	 */
-    public $isEvaluated = true;
-
+class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
     /**
      * Test if the template source exists
      * 

@@ -269,7 +269,10 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         // compiling succeded
         if (!$this->resource_object->isEvaluated && $this->write_compiled_code) {
             // write compiled template
-            Smarty_Internal_Write_File::writeFile($this->getCompiledFilepath(), $this->compiled_template, $this->smarty);
+            $_filepath = $this->getCompiledFilepath();
+            if($_filepath === false)
+                throw new SmartyException( 'getCompiledFilepath() did not return a destination to save the compiled template to' );
+            Smarty_Internal_Write_File::writeFile($_filepath, $this->compiled_template, $this->smarty);
         } 
         if ($this->smarty->debugging) {
             Smarty_Internal_Debug::end_compile($this);

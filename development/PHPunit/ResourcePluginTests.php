@@ -44,8 +44,21 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $this->smarty->loadPlugin('Smarty_Resource_Db2');
-        $this->smarty->registerResource( 'db3', new Smarty_Resource_Db2() );
-        $this->assertEquals('hello world', $this->smarty->fetch('db3:test'));
+        $this->smarty->registerResource( 'db2a', new Smarty_Resource_Db2() );
+        $this->assertEquals('hello world', $this->smarty->fetch('db2a:test'));
+    }
+    public function testResourcePluginRecompiled()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->loadPlugin('Smarty_Resource_Db3');
+        $this->smarty->registerResource( 'db2a', new Smarty_Resource_Db2() );
+        try {
+            $this->assertEquals('hello world', $this->smarty->fetch('db3:test'));
+        } catch (Exception $e) {
+            $this->assertContains('not return a destination', $e->getMessage());
+            return;
+        }
+        $this->fail('Exception for empty filepath has not been thrown.');
     }
     /**
      * test resource plugin timesatmp

@@ -2,13 +2,13 @@
 /*
  * Smarty plugin
  * -------------------------------------------------------------
- * File:     resource.db2.php
+ * File:     resource.db3.php
  * Type:     resource
  * Name:     db
  * Purpose:  Fetches templates from a database
  * -------------------------------------------------------------
  */
-class Smarty_Resource_Db2 extends Smarty_Resource_Recompiled {
+class Smarty_Resource_Db3 extends Smarty_Resource {
     public function isExisting(Smarty_Internal_Template $template)
     {
         return true;
@@ -16,7 +16,7 @@ class Smarty_Resource_Db2 extends Smarty_Resource_Recompiled {
     
     public function getTemplateFilepath(Smarty_Internal_Template $_template)
     {
-        return 'db2:';
+        return 'db3:';
     }
     
     public function getTemplateTimestamp(Smarty_Internal_Template $_template, $resource_name=null)

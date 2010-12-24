@@ -13,7 +13,7 @@
  */
 class Smarty_Internal_Write_File {
     /**
-     * Writes file in a save way to disk
+     * Writes file in a safe way to disk
      * 
      * @param string $_filepath complete filepath
      * @param string $_contents file content
