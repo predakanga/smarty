@@ -14,6 +14,19 @@ require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
  */
 class Smarty_Internal_Resource_Extends extends Smarty_Resource {
     /**
+     * Right Delimiter
+     * @var string
+     */
+    protected $_rdl;
+    
+    /**
+     * Left Delimiter
+     * @var string
+     */
+     
+    protected $_ldl;
+
+    /**
      * Create a new {extend} Resource handler
      *
      * @param Smarty $smarty current Smarty instance

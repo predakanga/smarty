@@ -1,14 +1,18 @@
 # Notes #
 
 
+## Questions ##
+
+* Why is smarty_internal_resource_extends.php::getTemplateSource() using $this->_rdl AND $this->smarty->left_delimiter?
+* 
+
+
 ## UnitTesting ##
 
 * ResourcePluginTests is using the resource 'db' which does not exist - WTF?
 
 
 ## registerResource() API ##
-
-
 
 Since Smarty_Resource can now be extended by users, it makes sense to overload Smarty::registerResource() to accept an object of the type Smarty_Resource. An array of functions can still be passed and processed by Smarty_Internal_Resource_Registered to stay BC - it should be deprecated, though.
 
@@ -20,7 +24,7 @@ Since Smarty_Resource can now be extended by users, it makes sense to overload S
 * getTemplateTimestampTypeName() abstraction
 * resolve Smarty_Internal_Resource_Registered::__construct() issue
 * Smarty_Internal_Template cleanup for new Resource API
-
+* Smarty_Resource::$isEvaluated and Smarty_Resource::$usesCompiler are flags that are never changed.
 
 
 ## Clean this up ##
