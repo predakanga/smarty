@@ -27,7 +27,7 @@ class SharedFunctionsTests extends PHPUnit_Framework_TestCase {
     */
     public function testEscapeSpecialChars()
     {
-		require_once SMARTY_DIR . 'plugins/shared.escape_special_chars.php';
+		require_once SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php';
 		
 		$this->assertEquals('hello&lt;world &copy;', smarty_function_escape_special_chars('hello<world &copy;'));
 		$this->assertEquals('ö€', smarty_function_escape_special_chars('ö€'));
