@@ -14,12 +14,6 @@ require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
  */
 abstract class Smarty_Resource_Recompiled extends Smarty_Resource {
     /**
-	 * Recompiled will not use the compile cache
-	 * @var boolean
-	 */
-    public $isEvaluated = true;
-    
-    /**
      * Get filepath to compiled template
      * 
      * @param Smarty_Internal_Template $_template template object

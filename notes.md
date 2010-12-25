@@ -1,8 +1,5 @@
 # Notes #
 
-* what is isEvaluated really doing?
-* Smarty_Resource::$isEvaluated and Smarty_Resource::$usesCompiler are flags that are never changed.
-* replace isEvaluted and usesCompiler by appropriate Interfaces
 
 
 -----

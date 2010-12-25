@@ -31,18 +31,6 @@ abstract class Smarty_Resource {
     public $template_parser_class = 'Smarty_Internal_Templateparser';
 
     /**
-	 * Flag stating if this resource's contents have to be compiled or not
-	 * @var boolean
-	 */
-    public $usesCompiler = true;
-    
-    /**
-	 * Flag stating if this resource's contents have already been evaluated
-	 * @var boolean
-	 */
-    public $isEvaluated = false;
-    
-    /**
      * Create new Resource Plugin
      *
      */

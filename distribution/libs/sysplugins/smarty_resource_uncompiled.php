@@ -14,12 +14,6 @@ require_once SMARTY_SYSPLUGINS_DIR . 'smarty_resource.php';
  */
 abstract class Smarty_Resource_Uncompiled extends Smarty_Resource {
     /**
-	 * Uncompiled Resources cannot use the compiler
-	 * @var boolean
-	 */
-    public $usesCompiler = false;
-
-    /**
      * Render and output the template (without using the compiler)
      *
      * @param Smarty_Internal_Template $_template template object

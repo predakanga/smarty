@@ -96,7 +96,7 @@ class Smarty_Internal_CacheResource_File {
      */
     public function writeCachedContent($_template, $content)
     {
-        if (!$_template->resource_object->isEvaluated) {
+        if (!($_template->resource_object instanceof Smarty_Resource_Recompiled)) {
             if (Smarty_Internal_Write_File::writeFile($_template->getCachedFilepath(), $content, $this->smarty) === true) {
                 $_template->cached_timestamp = filemtime($_template->getCachedFilepath());
                 return true;

@@ -46,7 +46,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
      */
     public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
     { 
-        if ($this->isEvaluated && $_resource_name !== null) {
+        if ($_resource_name !== null) {
         	//must always be compiled and have no timestamp
         	return false;
         } else {
