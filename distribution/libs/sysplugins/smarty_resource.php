@@ -105,7 +105,7 @@ abstract class Smarty_Resource {
      */
     public function getCompiledFilepath(Smarty_Internal_Template $_template)
     {
-        return false;
+        return $this->buildCompiledFilepath($_template);
     }
     
     /**
@@ -115,7 +115,7 @@ abstract class Smarty_Resource {
      * @param string $_basename basename of the template to inject into the filepath
      * @return string path to compiled template
      */
-    protected function buildCompiledFilepath(Smarty_Internal_Template $_template, $_basename)
+    protected function buildCompiledFilepath(Smarty_Internal_Template $_template, $_basename=null)
     {
         $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
         // calculate Uid if not already done
@@ -144,6 +144,10 @@ abstract class Smarty_Resource {
         if (strpos('/\\', substr($_compile_dir, -1)) === false) {
             $_compile_dir .= DS;
         }
+        // set basename if not specified
+        if ($_basename === null) {
+           $_basename = basename( preg_replace('![^\w\/]+!', '_', $_template->resource_name) );
+        }
         // separate (optional) basename by dot
         if ($_basename) {
             $_basename = '.' . $_basename;
@@ -163,6 +167,7 @@ abstract class Smarty_Resource {
     public static function isModifiedSince(Smarty_Internal_Template $_template, $resource_type, $filepath, $since)
     {
         if ($resource_type == 'file' || $resource_type == 'extends' || $resource_type == 'php') {
+            // file, extends and php types can be checked without loading the respective resource handlers
             $mtime = filemtime($filepath);
         } else {
             self::parse($_template, $filepath, $resource_type, $resource_name);

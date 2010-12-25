@@ -40,7 +40,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     /**
      * test resource plugin rendering
      */
-    public function testResourcePluginRegistered()
+    public function testResourcePluginRegisteredInstance()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $this->smarty->loadPlugin('Smarty_Resource_Db2');
@@ -59,6 +59,13 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
             return;
         }
         $this->fail('Exception for empty filepath has not been thrown.');
+    }
+    public function testResourcePluginCompiledFilepath()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $tpl = $this->smarty->createTemplate('db4:test.tpl');
+        $expected = './templates_c/'.sha1($this->smarty->template_dir[0].'test.tpl').'.db4.test.tpl.php';
+        $this->assertEquals(realpath($expected), realpath($tpl->getCompiledFilepath()));
     }
     /**
      * test resource plugin timesatmp

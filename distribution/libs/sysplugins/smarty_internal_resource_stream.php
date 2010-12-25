@@ -10,13 +10,7 @@
  * @subpackage TemplateResources
  * @author Uwe Tews 
  */
-class Smarty_Internal_Resource_Stream extends Smarty_Resource {
-    /**
-	 * stream-resources are evaluated by default
-	 * @var boolean
-	 */
-    public $isEvaluated = true;
-
+class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
     /**
      * Test if the template source exists
      * 

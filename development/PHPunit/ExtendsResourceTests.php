@@ -29,9 +29,9 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->clearAllCache();
         $this->smarty->clearCompiledTemplate();
-   } 
+    } 
     /* Test compilation */
-        public function testExtendsResourceBlockBase()
+    public function testExtendsResourceBlockBase()
     {
         $this->smarty->force_compile=true;
         $result = $this->smarty->fetch('extends:test_block_base.tpl');

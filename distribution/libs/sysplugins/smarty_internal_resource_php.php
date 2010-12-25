@@ -87,16 +87,7 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
             throw new SmartyException("Unable to load template \"{$_smarty_template->resource_type} : {$_smarty_template->resource_name}\"");
         } 
         // prepare variables
-        $_smarty_ptr = $_smarty_template;
-        do {
-            foreach ($_smarty_ptr->tpl_vars as $_smarty_var => $_smarty_var_object) {
-                if (isset($_smarty_var_object->value)) {
-                    $$_smarty_var = $_smarty_var_object->value;
-                } 
-            } 
-            $_smarty_ptr = $_smarty_ptr->parent;
-        } while ($_smarty_ptr != null);
-        unset ($_smarty_var, $_smarty_var_object, $_smarty_ptr); 
+        extract($_template->getTemplateVars());
         // include PHP template with short open tags enabled
         ini_set( 'short_open_tag', '1' );
         include($this->getTemplateFilepath($_smarty_template));
