@@ -189,7 +189,7 @@ Test Suite
  ......
 
  ResourcePluginTests
- ..........
+ ...........
 
  SecurityTests
  ......................
@@ -229,4 +229,4 @@ Test Suite
 
 Time: 27 seconds
 
-OK (772 tests, 1079 assertions)
+OK (773 tests, 1083 assertions)

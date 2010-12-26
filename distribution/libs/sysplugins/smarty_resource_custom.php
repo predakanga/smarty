@@ -77,7 +77,7 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
     public function getTemplateFilepath(Smarty_Internal_Template $_template)
     {
         $_template->templateUid = sha1($_template->resource_type . ':' . $_template->resource_name);
-        return strtolower($_template->resource_type) .':';
+        return strtolower($_template->resource_type . ':' . $_template->resource_name);
     }
     
     /**

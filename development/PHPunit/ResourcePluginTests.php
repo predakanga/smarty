@@ -20,7 +20,6 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     {
         return true;
     } 
-    /*
     /**
      * test resource plugin rendering
      */
@@ -53,8 +52,6 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     public function testResourcePluginRecompiled()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $this->smarty->loadPlugin('Smarty_Resource_Db3');
-        $this->smarty->registerResource( 'db2a', new Smarty_Resource_Db2() );
         try {
             $this->assertEquals('hello world', $this->smarty->fetch('db3:test'));
         } catch (Exception $e) {
@@ -62,6 +59,17 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
             return;
         }
         $this->fail('Exception for empty filepath has not been thrown.');
+    }
+    /**
+     * test resource plugin non-existent compiled cache of a recompiling resource
+     */
+    public function testResourcePluginRecompiledCompiledFilepath()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $tpl = $this->smarty->createTemplate('db2:test.tpl');
+        $expected = realpath('./templates_c/'.sha1('db2:test.tpl').'.db2.test.tpl.php');
+        $this->assertFalse(!!$expected);
+        $this->assertFalse($tpl->getCompiledFilepath());
     }
     /**
      * test resource plugin rendering of a custom resource
@@ -96,18 +104,22 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $tpl = $this->smarty->createTemplate('mysql:test.tpl');
-        $expected = './templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.php';
-        $this->assertEquals(realpath($expected), realpath($tpl->getCompiledFilepath()));
+        $expected = realpath('./templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.php');
+        $this->assertTrue(!!$expected);
+        $this->assertEquals($expected, realpath($tpl->getCompiledFilepath()));
     }
-    /**
-     * test resource plugin timestamp of a resource
-     */
-    public function testResourcePluginCompiledFilepath()
+    public function testResourcePluginMysqlCompiledFilepathCache()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $tpl = $this->smarty->createTemplate('db4:test.tpl');
-        $expected = './templates_c/'.sha1($this->smarty->template_dir[0].'test.tpl').'.db4.test.tpl.php';
-        $this->assertEquals(realpath($expected), realpath($tpl->getCompiledFilepath()));
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $this->smarty->force_compile = true;
+        $this->smarty->fetch('mysql:test.tpl');
+        $tpl = $this->smarty->createTemplate('mysql:test.tpl');
+        $expected = realpath('./templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.cache.php');
+        $this->assertTrue(!!$expected);
+        $this->assertEquals($expected, realpath($tpl->getCompiledFilepath()));
+        $this->smarty->caching = false;
     }
     /**
      * test resource plugin timesatmp
