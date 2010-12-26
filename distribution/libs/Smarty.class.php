@@ -439,17 +439,22 @@ class Smarty extends Smarty_Internal_Data {
             // we got a template resource
             // already in template cache?
             $_templateId =  sha1($template . $cache_id . $compile_id);
-            if (isset($this->template_objects[$_templateId]) && $this->caching) {
-                // return cached template object
-                $tpl = $this->template_objects[$_templateId];
-            } else {
-                // create new template object
-                if ($do_clone) {
-                	$tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id);
+            if ($do_clone) {
+                if (isset($this->template_objects[$_templateId])) {
+                    // return cached template object
+                    $tpl = $this->template_objects[$_templateId];
+                    $tpl->smarty = clone $this;
                 } else {
-                	$tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);
+                	$tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id);
+            	}
+            } else {
+                if (isset($this->template_objects[$_templateId])) {
+                    // return cached template object
+                    $tpl = $this->template_objects[$_templateId];
+                } else {
+            	    $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);
                 }
-            } 
+            }
         } else {
             // just return a copy of template class
             $tpl = $template;
