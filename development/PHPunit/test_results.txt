@@ -189,7 +189,7 @@ Test Suite
  ......
 
  ResourcePluginTests
- ......
+ ..........
 
  SecurityTests
  ......................
@@ -227,6 +227,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 28 seconds
+Time: 27 seconds
 
-OK (768 tests, 1075 assertions)
+OK (772 tests, 1079 assertions)

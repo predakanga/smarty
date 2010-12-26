@@ -20,7 +20,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     {
         return true;
     } 
-
+    /*
     /**
      * test resource plugin rendering
      */
@@ -38,7 +38,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $this->smarty->fetch('db2:test'));
     }
     /**
-     * test resource plugin rendering
+     * test resource plugin rendering of a registered object
      */
     public function testResourcePluginRegisteredInstance()
     {
@@ -47,6 +47,9 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $this->smarty->registerResource( 'db2a', new Smarty_Resource_Db2() );
         $this->assertEquals('hello world', $this->smarty->fetch('db2a:test'));
     }
+    /**
+     * test resource plugin rendering of a recompiling resource
+     */
     public function testResourcePluginRecompiled()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
@@ -60,6 +63,45 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         }
         $this->fail('Exception for empty filepath has not been thrown.');
     }
+    /**
+     * test resource plugin rendering of a custom resource
+     */
+    public function testResourcePluginMysql()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->assertEquals('hello world', $this->smarty->fetch('mysql:test.tpl'));
+    }
+    /**
+     * test resource plugin timestamp of a custom resource
+     */
+    public function testResourcePluginMysqlTimestamp()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $tpl = $this->smarty->createTemplate('mysql:test.tpl');
+        $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->getTemplateTimestamp());
+    }
+    /**
+     * test resource plugin timestamp of a custom resource with only fetch() implemented
+     */
+    public function testResourcePluginMysqlTimestampWithoutFetchTimestamp()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $tpl = $this->smarty->createTemplate('mysqls:test.tpl');
+        $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->getTemplateTimestamp());
+    }
+    /**
+     * test resource plugin compiledFilepath of a custom resource
+     */
+    public function testResourcePluginMysqlCompiledFilepath()
+    {
+        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $tpl = $this->smarty->createTemplate('mysql:test.tpl');
+        $expected = './templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.php';
+        $this->assertEquals(realpath($expected), realpath($tpl->getCompiledFilepath()));
+    }
+    /**
+     * test resource plugin timestamp of a resource
+     */
     public function testResourcePluginCompiledFilepath()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
@@ -77,6 +119,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_integer($tpl->getTemplateTimestamp()));
         $this->assertEquals(10, strlen($tpl->getTemplateTimestamp()));
     } 
+
 } 
 
 ?>
