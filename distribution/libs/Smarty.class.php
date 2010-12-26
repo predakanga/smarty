@@ -442,7 +442,7 @@ class Smarty extends Smarty_Internal_Data {
             if ($do_clone) {
                 if (isset($this->template_objects[$_templateId])) {
                     // return cached template object
-                    $tpl = $this->template_objects[$_templateId];
+                    $tpl = clone $this->template_objects[$_templateId];
                     $tpl->smarty = clone $this;
                 } else {
                 	$tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id);
