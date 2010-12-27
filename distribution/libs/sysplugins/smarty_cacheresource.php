@@ -8,6 +8,12 @@
  * @author Rodney Rehm
  */
 abstract class Smarty_CacheResource {
+    /**
+     * cache for Smarty_CacheResource instances
+     * @var array
+     */
+    protected static $resources = array();
+    
 	/**
 	 * Determine the filepath (or some unique cache id) of the cached template output
 	 * 
@@ -61,4 +67,29 @@ abstract class Smarty_CacheResource {
 	 * @return integer number of cache files deleted
 	*/
 	public abstract function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);
+	
+	
+	
+	public static function load(Smarty $smarty, $type = null)
+	{
+	    if (!isset($type)) {
+            $type = $smarty->caching_type;
+        }
+        // try the instance cache
+        if (isset(self::$resources[$type])) {
+            return self::$resources[$type];
+        }
+        // try sysplugins dir
+        if (in_array($type, $smarty->cache_resource_types)) {
+            $cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($type);
+            return self::$resources[$type] = new $cache_resource_class();
+        } 
+        // try plugins dir
+        $cache_resource_class = 'Smarty_CacheResource_' . ucfirst($type);
+        if ($smarty->loadPlugin($cache_resource_class)) {
+            return self::$resources[$type] = new $cache_resource_class();
+        } 
+        // give up
+        throw new SmartyException("Unable to load cache resource '{$type}'");
+	}
 }

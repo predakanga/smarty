@@ -10,6 +10,10 @@
  * @author Rodney Rehm
  */
 abstract class Smarty_Resource {
+    /**
+     * cache for Smarty_Resource instances
+     * @var array
+     */
     protected static $resources = array();
     
 	/**
