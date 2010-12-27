@@ -43,6 +43,9 @@ Test Suite
  AssignTests
  ..
 
+ CacheResourceCustomMysqlTests
+ .................
+
  CacheResourceFileTests
  ....................
 
@@ -227,6 +230,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 28 seconds
+Time: 33 seconds
 
-OK (773 tests, 1083 assertions)
+OK (790 tests, 1170 assertions)

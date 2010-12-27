@@ -522,7 +522,7 @@ class Smarty extends Smarty_Internal_Data {
     function clearAllCache($exp_time = null, $type = null)
     { 
        // load cache resource and call clearAll
-        return $this->loadCacheResource($type)->clearAll($exp_time);
+        return $this->loadCacheResource($type)->clearAll($this, $exp_time);
     }        
 
     /**
@@ -538,7 +538,7 @@ class Smarty extends Smarty_Internal_Data {
     function clearCache($template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null)
     { 
        // load cache resource and call clear
-        return $this->loadCacheResource($type)->clear($template_name, $cache_id, $compile_id, $exp_time);
+        return $this->loadCacheResource($type)->clear($this, $template_name, $cache_id, $compile_id, $exp_time);
     }
 
     /**
@@ -801,6 +801,8 @@ function smartyAutoload($class)
     $_class = strtolower($class);
     if (substr($_class, 0, 16) === 'smarty_internal_' 
         || $_class == 'smarty_security' 
+        || $_class == 'smarty_cacheresource' 
+        || $_class == 'smarty_cacheresource_custom' 
         || $_class == 'smarty_resource' 
         || $_class == 'smarty_resource_custom'
         || $_class == 'smarty_resource_uncompiled'

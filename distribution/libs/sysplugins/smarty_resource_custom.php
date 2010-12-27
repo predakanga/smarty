@@ -59,7 +59,7 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
     /**
      * Fetch template's modification timestamp from data source
      *
-     * @note implementing this method is optional. Only implement it if modification times can be accessed faster than loading the comple template source.
+     * @note implementing this method is optional. Only implement it if modification times can be accessed faster than loading the complete template source.
      * @param string $name template name
      * @return integer|boolean timestamp (epoch) the template was modified, or false if not found
      */

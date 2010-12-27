@@ -31,13 +31,13 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
-	$expected = sprintf('./cache/%s/%s/%s/%s.helloworld.tpl.php',
-			    substr($sha1, 0, 2),
-			    substr($sha1, 2, 2),
-			    substr($sha1, 4, 2),
-			    $sha1
-			    );
+	    $sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+	    $expected = sprintf('./cache/%s/%s/%s/%s.helloworld.tpl.php',
+		    substr($sha1, 0, 2),
+		    substr($sha1, 2, 2),
+		    substr($sha1, 4, 2),
+		    $sha1
+		);
         $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
@@ -49,13 +49,13 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar');
-	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
-	$expected = sprintf('./cache/foo/bar/%s/%s/%s/%s.helloworld.tpl.php',
-			    substr($sha1, 0, 2),
-			    substr($sha1, 2, 2),
-			    substr($sha1, 4, 2),
-			    $sha1
-			    );
+	    $sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+	    $expected = sprintf('./cache/foo/bar/%s/%s/%s/%s.helloworld.tpl.php',
+		    substr($sha1, 0, 2),
+		    substr($sha1, 2, 2),
+		    substr($sha1, 4, 2),
+		    $sha1
+		);
         $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
@@ -67,13 +67,13 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'blar');
-	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
-	$expected = sprintf('./cache/blar/%s/%s/%s/%s.helloworld.tpl.php',
-			    substr($sha1, 0, 2),
-			    substr($sha1, 2, 2),
-			    substr($sha1, 4, 2),
-			    $sha1
-			    );
+	    $sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+	    $expected = sprintf('./cache/blar/%s/%s/%s/%s.helloworld.tpl.php',
+		    substr($sha1, 0, 2),
+		    substr($sha1, 2, 2),
+		    substr($sha1, 4, 2),
+		    $sha1
+		);
         $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
@@ -85,13 +85,13 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->use_sub_dirs = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
-	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
-	$expected = sprintf('./cache/foo/bar/blar/%s/%s/%s/%s.helloworld.tpl.php',
-			    substr($sha1, 0, 2),
-			    substr($sha1, 2, 2),
-			    substr($sha1, 4, 2),
-			    $sha1
-			    );
+    	$sha1 = sha1($this->smarty->template_dir[0].'helloworld.tpl');
+    	$expected = sprintf('./cache/foo/bar/blar/%s/%s/%s/%s.helloworld.tpl.php',
+		    substr($sha1, 0, 2),
+		    substr($sha1, 2, 2),
+		    substr($sha1, 4, 2),
+		    $sha1
+		);
         $this->assertEquals(realpath($expected), realpath($tpl->getCachedFilepath()));
     } 
     /**
@@ -130,7 +130,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertFalse(file_exists($tpl3->getCachedFilepath()));
-   } 
+    } 
     public function testSmarty2ClearCacheCacheIdCompileId()
     {
         $this->smarty->caching = true;
@@ -150,7 +150,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->getCachedFilepath()));
         $this->assertTrue(file_exists($tpl2->getCachedFilepath()));
         $this->assertFalse(file_exists($tpl3->getCachedFilepath()));
-   } 
+    } 
 
     public function testSmarty2ClearCacheCacheIdCompileIdSub()
     {
