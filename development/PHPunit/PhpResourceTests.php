@@ -40,7 +40,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     } 
     /**
     * test getTemplateSource
-    */
+    *-/
     public function testGetTemplateSource()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');

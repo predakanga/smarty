@@ -63,8 +63,8 @@ class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
     { 
         // return template string
         $_template->template_source = '';
+        // the availability of the stream has already been checked in Smarty_Resource::fetch()
         $fp = fopen(str_replace(':', '://', $_template->template_resource),'r+');
-        // TODO: (rodneyrehm) stream may not be openable, handle errors
         while (!feof($fp)) {
             $_template->template_source .= fgets($fp);
         } 
