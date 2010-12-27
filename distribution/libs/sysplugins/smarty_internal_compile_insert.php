@@ -63,9 +63,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase {
                 } 
                 if (!empty($_dir)) {
                     foreach((array)$_dir as $_script_dir) {
-                        if (strpos('/\\', substr($_script_dir, -1)) === false) {
-                            $_script_dir .= DS;
-                        } 
+                        $_script_dir = rtrim($_script_dir, '/\\') . DS;
                         if (file_exists($_script_dir . $_script)) {
                             $_filepath = $_script_dir . $_script;
                             break;

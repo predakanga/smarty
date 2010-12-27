@@ -75,10 +75,7 @@ class Smarty_Internal_Config {
     public function buildConfigFilepath ()
     {
         foreach((array)$this->smarty->config_dir as $_config_dir) {
-            if (strpos('/\\', substr($_config_dir, -1)) === false) {
-                $_config_dir .= DS;
-            } 
-
+            $_config_dir = rtrim($_config_dir, '/\\') . DS;
             $_filepath = $_config_dir . $this->config_resource_name;
             if (file_exists($_filepath))
                 return $_filepath;

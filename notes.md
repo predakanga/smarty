@@ -2,7 +2,7 @@
 
 
 
-regarind file cache
+regarding file cache
 
 * <code>if (strpos($_file, '.svn') !== false) continue;</code> should be configurable?
 * may an exec('rm -rf '. escapeshellarg($directory)); speed things up?
@@ -29,16 +29,6 @@ Loading of plugins depends on a Smarty instance (for plugin_dir). But if a Plugi
 -----
 ## Clean this up ##
 
-### addTrailingDS() ###
-
-replace 
-<code>if (strpos('/\\', substr($_plugin_dir, -1)) === false) {
-    $_plugin_dir .= DS;
-}</code>
-by
-<code>$_dir = rtrim($this->smarty->cache_dir, '/\\') . DS;</code>
-
-
 ### getFilepathDirectory() ###
 
 $_template->smarty->use_sub_dirs thingie with DS and ^ should be a central function
@@ -50,6 +40,10 @@ $_template->smarty->use_sub_dirs thingie with DS and ^ should be a central funct
 
 -----
 ## Notes For Documentation ##
+
+### CacheResource API ###
+
+
 
 ### Resource API ###
 

@@ -60,9 +60,7 @@ class Smarty_Internal_Utility {
         $_error_count = 0; 
         // loop over array of template directories
         foreach((array)$this->smarty->template_dir as $_dir) {
-            if (strpos('/\\', substr($_dir, -1)) === false) {
-                $_dir .= DS;
-            } 
+            $_dir = rtrim($_dir, '/\\') . DS;
             $_compileDirs = new RecursiveDirectoryIterator($_dir);
             $_compile = new RecursiveIteratorIterator($_compileDirs);
             foreach ($_compile as $_fileinfo) {
@@ -121,9 +119,7 @@ class Smarty_Internal_Utility {
         $_error_count = 0; 
         // loop over array of template directories
         foreach((array)$this->smarty->config_dir as $_dir) {
-            if (strpos('/\\', substr($_dir, -1)) === false) {
-                $_dir .= DS;
-            } 
+            $_dir = rtrim($_dir, '/\\') . DS;
             $_compileDirs = new RecursiveDirectoryIterator($_dir);
             $_compile = new RecursiveIteratorIterator($_compileDirs);
             foreach ($_compile as $_fileinfo) {

@@ -690,9 +690,7 @@ class Smarty extends Smarty_Internal_Data {
         $_plugin_filename = "{$_name_parts[1]}.{$_name_parts[2]}.php"; 
         // loop through plugin dirs and find the plugin
         foreach((array)$this->plugins_dir as $_plugin_dir) {
-            if (strpos('/\\', substr($_plugin_dir, -1)) === false) {
-                $_plugin_dir .= DS;
-            } 
+            $_plugin_dir = rtrim($_plugin_dir, '/\\') . DS;
             $file = $_plugin_dir . $_plugin_filename;
             if (file_exists($file)) {
                 require_once($file);

@@ -45,10 +45,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         } else {
             $_compile_id = '';
         } 
-        $_cache_dir = $_template->smarty->cache_dir;
-        if (strpos('/\\', substr($_cache_dir, -1)) === false) {
-            $_cache_dir .= DS;
-        } 
+        $_cache_dir = rtrim($_template->smarty->cache_dir, '/\\') . DS;
         return $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
     } 
 

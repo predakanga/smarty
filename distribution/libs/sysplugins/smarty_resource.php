@@ -132,10 +132,7 @@ abstract class Smarty_Resource {
         } else {
             $_cache = '';
         }
-        $_compile_dir = $_template->smarty->compile_dir;
-        if (strpos('/\\', substr($_compile_dir, -1)) === false) {
-            $_compile_dir .= DS;
-        }
+        $_compile_dir = rtrim($_template->smarty->compile_dir, '/\\') . DS;
         // set basename if not specified
         if ($_basename === null) {
            $_basename = basename( preg_replace('![^\w\/]+!', '_', $_template->resource_name) );

@@ -585,9 +585,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         // relative file name? 
         if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
 	        foreach((array)$this->smarty->template_dir as $_template_dir) {
-           		if (strpos('/\\', substr($_template_dir, -1)) === false) {
-                	$_template_dir .= DS;
-            	} 
+                $_template_dir = rtrim($_template_dir, '/\\') . DS;
             	$_filepath = $_template_dir . $file;
             	if (file_exists($_filepath)) {
                 	return $_filepath;
