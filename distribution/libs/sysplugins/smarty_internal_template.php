@@ -54,9 +54,9 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
 //    private $cache_resource_object = null;
     private $cacheFileChecked = false; 
     // template variables
-    public $tpl_vars = array();
-    public $parent = null;
-    public $config_vars = array(); 
+//    public $tpl_vars = array();
+//    public $parent = null;
+//    public $config_vars = array(); 
     // storage for plugin
     public $plugin_data = array(); 
     // special properties

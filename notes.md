@@ -25,6 +25,10 @@ blah
 
 Loading of plugins depends on a Smarty instance (for plugin_dir). But if a Plugin is successfully loaded in Smarty-Instance-1 (knowing the plugin_dir) and then used in Smarty-Instance-2 (NOT knowing the plugin_dir) the Plugin is still executed properly. I wouldn't call this a bug, but it certainly is odd behaviour.
 
+getTemplateVars() assigns global variables last. which means you can never overwrite a global var by a local var. this feels wrong.
+
+registerPlugin() allows you to define functions and blocks non-caching. This should also be possible for plugins loaded from plugin_dir
+
 
 -----
 ## Clean this up ##

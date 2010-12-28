@@ -16,6 +16,24 @@
 class Smarty_Internal_Data {
     // class used for templates
     public $template_class = 'Smarty_Internal_Template';
+    // template variables
+    public $tpl_vars = array();
+    public $parent = null;
+    public $config_vars = array();
+    
+    /**
+    * clean up properties on cloned object
+     */
+    public function __clone()
+    {
+    	// clear config vars
+    	$this->config_vars = array(); 
+    	// clear assigned tpl vars
+    	$this->tpl_vars = array();
+    	// clear objects for external methods
+    	unset($this->register);  
+    	unset($this->filter);  
+	}
 
     /**
      * assigns a Smarty variable

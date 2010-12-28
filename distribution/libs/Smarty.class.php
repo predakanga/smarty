@@ -183,11 +183,11 @@ class Smarty extends Smarty_Internal_Data {
     public $config_booleanize = true; //Controls whether config values of on/true/yes and off/false/no get converted to boolean
     public $config_read_hidden = true; //Controls whether hidden config sections/vars are read from the file.                                                      
     // config vars
-    public $config_vars = array(); 
+//    public $config_vars = array(); 
     // assigned tpl vars
-    public $tpl_vars = array(); 
+//    public $tpl_vars = array(); 
     // dummy parent object
-    public $parent = null; 
+//    public $parent = null; 
     // global template functions
     public $template_functions = array(); 
     // resource type used if none given
@@ -700,21 +700,6 @@ class Smarty extends Smarty_Internal_Data {
         // no plugin loaded
         return false;
     } 
-
-    /**
-    * clean up properties on cloned object
-     */
-    public function __clone()
-    {
-    	// clear config vars
-    	$this->config_vars = array(); 
-    	// clear assigned tpl vars
-    	$this->tpl_vars = array();
-    	// clear objects for external methods
-    	unset($this->register);  
-    	unset($this->filter);  
-	}
-
 
     /**
      * Handle unknown class methods
