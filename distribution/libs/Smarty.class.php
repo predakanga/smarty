@@ -773,6 +773,7 @@ function smartyAutoload($class)
         || $_class == 'smarty_security' 
         || $_class == 'smarty_cacheresource' 
         || $_class == 'smarty_cacheresource_custom' 
+        || $_class == 'smarty_cacheresource_keyvaluestore' 
         || $_class == 'smarty_resource' 
         || $_class == 'smarty_resource_custom'
         || $_class == 'smarty_resource_uncompiled'

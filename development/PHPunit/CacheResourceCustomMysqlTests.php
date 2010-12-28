@@ -22,6 +22,11 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
     {
         return true;
     } 
+    
+    protected function doClearCacheAssertion($a, $b)
+    {
+        $this->assertEquals($a, $b);
+    }
 
     /**
     * test getCachedFilepath with use_sub_dirs enabled
@@ -65,7 +70,8 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $sha1 = sha1('helloworld.tpl' . 'foo|bar' . 'blar');
-        $this->assertEquals($sha1, $tpl->getCachedFilepath());    } 
+        $this->assertEquals($sha1, $tpl->getCachedFilepath());
+    } 
     /**
     * test cache->clear_all with cache_id and compile_id
     */
@@ -100,7 +106,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(2, $this->smarty->clearCache(null, 'foo|bar'));
+        $this->doClearCacheAssertion(2, $this->smarty->clearCache(null, 'foo|bar'));
         // test that caches are deleted properly
         $this->assertNull($tpl->cache_resource_object->get($tpl));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
@@ -124,7 +130,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(2, $this->smarty->clearCache('helloworld.tpl'));
+        $this->doClearCacheAssertion(2, $this->smarty->clearCache('helloworld.tpl'));
         // test that caches are deleted properly
         $this->assertNull($tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));
@@ -148,7 +154,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(2, $this->smarty->clearCache('helloworld.tpl'));
+        $this->doClearCacheAssertion(2, $this->smarty->clearCache('helloworld.tpl'));
         // test that caches are deleted properly
         $this->assertNull($tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));
@@ -171,7 +177,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
+        $this->doClearCacheAssertion(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
         // test that caches are deleted properly
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));
@@ -194,7 +200,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
+        $this->doClearCacheAssertion(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
         // test that caches are deleted properly
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));
@@ -217,7 +223,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
+        $this->doClearCacheAssertion(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
         // test that caches are deleted properly
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));
@@ -240,7 +246,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
+        $this->doClearCacheAssertion(1, $this->smarty->clearCache('helloworld.tpl', null, 'blar2'));
         // test that caches are deleted properly
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));
@@ -263,7 +269,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(2, $this->smarty->clearCache(null, null, 'blar'));
+        $this->doClearCacheAssertion(2, $this->smarty->clearCache(null, null, 'blar'));
         // test that caches are deleted properly
         $this->assertNull($tpl->cache_resource_object->get($tpl));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
@@ -286,7 +292,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         // test number of deleted caches
-        $this->assertEquals(2, $this->smarty->clearCache(null, null, 'blar'));
+        $this->doClearCacheAssertion(2, $this->smarty->clearCache(null, null, 'blar'));
         // test that caches are deleted properly
         $this->assertNull($tpl->cache_resource_object->get($tpl));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl2));
@@ -312,7 +318,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl4));
         // test number of deleted caches
-        $this->assertEquals(3, $this->smarty->clearCache('helloworld.tpl'));
+        $this->doClearCacheAssertion(3, $this->smarty->clearCache('helloworld.tpl'));
         // test that caches are deleted properly
         $this->assertNull($tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));
@@ -339,7 +345,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl3));
         $this->assertEquals('hello world', $tpl->cache_resource_object->get($tpl4));
         // test number of deleted caches
-        $this->assertEquals(3, $this->smarty->clearCache('helloworld.tpl'));
+        $this->doClearCacheAssertion(3, $this->smarty->clearCache('helloworld.tpl'));
         // test that caches are deleted properly
         $this->assertNull($tpl->cache_resource_object->get($tpl));
         $this->assertNull($tpl->cache_resource_object->get($tpl2));

@@ -159,6 +159,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 	/**
 	 * Empty cache
 	 * 
+     * @param Smarty $smarty Smarty object
 	 * @param integer $exp_time expiration time (number of seconds, not timestamp)
 	 * @return integer number of cache files deleted
 	 */
@@ -171,6 +172,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
     /**
 	 * Empty cache for a specific template
 	 * 
+     * @param Smarty $smarty Smarty object
 	 * @param string $resource_name template name
 	 * @param string $cache_id cache id
 	 * @param string $compile_id compile id
@@ -182,37 +184,6 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
         $this->cache = array();
 	    return $this->delete( $resource_name, $cache_id, $compile_id, $exp_time );
     }
-    
-	/**
-	 * Decode and remove Smarty cache headers
-	 *
-	 * @param Smarty_Internal_Template $_template template object
-	 * @param string $content cached content
-	 * @param boolean $no_render true to echo content immediately, false to return content as string
-	 * @return string cached content without headers
-	 */
-	protected function decodeCache(Smarty_Internal_Template $_template, $content, $no_render=false)
-	{
-		// variables required by the eval()ed header
-		$_smarty_tpl = $_template;
-		unset($_template);
-		if (!$no_render) {
-        	ob_start();
-        }
-        eval("?>" . $content);
-		return !$no_render ? ob_get_clean() : null;
-	}
-	
-	/**
-	 * Determine the lifetime of the cache
-	 *
-	 * @param Smarty_Internal_Template $_template current template
-	 * @return integer number of seconds to keep the content cached
-	 */
-	protected function getCacheLifetime(Smarty_Internal_Template $_template)
-	{
-		return $_template->properties['cache_lifetime'];
-	}
 	
 	/**
 	 * Build filepath to cache
