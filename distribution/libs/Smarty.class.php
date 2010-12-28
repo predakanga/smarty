@@ -215,7 +215,9 @@ class Smarty extends Smarty_Internal_Data {
     // registered filters
     public $registered_filters = array(); 
     // registered resources
-    public $registered_resources = array(); 
+    public $registered_resources = array();
+    // registered cache resources
+    public $registered_cache_resources = array(); 
     // autoload filter
     public $autoload_filters = array(); 
     // status of filter on variable output

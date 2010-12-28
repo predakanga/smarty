@@ -69,7 +69,13 @@ abstract class Smarty_CacheResource {
 	public abstract function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);
 	
 	
-	
+	/**
+     * Load Cache Resource Handler
+     *
+     * @param Smarty $smarty Smarty object
+     * @param string $type name of the cache resource
+     * @return Smarty_CacheResource Cache Resource Handler
+     */
 	public static function load(Smarty $smarty, $type = null)
 	{
 	    if (!isset($type)) {
@@ -78,6 +84,11 @@ abstract class Smarty_CacheResource {
         // try the instance cache
         if (isset(self::$resources[$type])) {
             return self::$resources[$type];
+        }
+        // try registered resource
+        if (isset($smarty->registered_cache_resources[$type])) {
+            // do not cache these instances as they may vary from instance to instance
+            return $smarty->registered_cache_resources[$type];
         }
         // try sysplugins dir
         if (in_array($type, $smarty->cache_resource_types)) {

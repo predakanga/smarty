@@ -68,13 +68,38 @@ class Smarty_Internal_Register {
      * 
      * @param string $type name of resource type
      */
-   function unregisterResource($type)
+    function unregisterResource($type)
     {
         if (isset($this->smarty->registered_resources[$type])) {
             unset($this->smarty->registered_resources[$type]);
         } 
     } 
+    
+    /**
+     * Registers a cache resource to cache a template's output
+     * 
+     * @param string $type name of cache resource type
+     * @param Smarty_CacheResource $callback instance of Smarty_CacheResource to handle output caching
+     */
+ 	public function registerCacheResource($type, $callback)
+	{
+	    if (!($callback instanceof Smarty_CacheResource)) {
+	        throw new SmartyException("CacheResource handlers must implement Smarty_CacheResource");
+	    }
+       	$this->smarty->registered_cache_resources[$type] = $callback;
+    }
 
+    /**
+     * Unregisters a cache resource 
+     * 
+     * @param string $type name of cache resource type
+     */
+    function unregisterCacheResource($type)
+    {
+        if (isset($this->smarty->registered_cache_resources[$type])) {
+            unset($this->smarty->registered_cache_resources[$type]);
+        } 
+    }
 
     /**
      * Registers object to be used in templates
