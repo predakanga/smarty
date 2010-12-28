@@ -225,7 +225,10 @@ class Smarty_Internal_Data {
             } 
             if ($search_parents && isset(Smarty::$global_tpl_vars)) {
                 foreach (Smarty::$global_tpl_vars AS $key => $var) {
-                    $_result[$key] = $var->value;
+                    // isset() returns false on null, which may be the desired value, though
+                    if (!array_key_exists($key, $_result)) {
+                        $_result[$key] = $var->value;
+                    }
                 } 
             } 
             return $_result;
