@@ -2,16 +2,12 @@
 
 
 
-regarding file cache
-
-* <code>if (strpos($_file, '.svn') !== false) continue;</code> should be configurable?
-* may an exec('rm -rf '. escapeshellarg($directory)); speed things up?
 
 
 -----
 ## Questions ##
 
-blah
+* may an exec('rm -rf '. escapeshellarg($directory)); speed up clearing the file cacheResource?
 
 
 -----
@@ -25,21 +21,42 @@ blah
 
 Loading of plugins depends on a Smarty instance (for plugin_dir). But if a Plugin is successfully loaded in Smarty-Instance-1 (knowing the plugin_dir) and then used in Smarty-Instance-2 (NOT knowing the plugin_dir) the Plugin is still executed properly. I wouldn't call this a bug, but it certainly is odd behaviour.
 
-getTemplateVars() assigns global variables last. which means you can never overwrite a global var by a local var. this feels wrong.
+Function detection for MBString varies accross different files: <code>is_callable('mb_strlen')</code>, <code>function_exists('mb_substr')</code>.
 
-registerPlugin() allows you to define functions and blocks non-caching. This should also be possible for plugins loaded from plugin_dir
+Wouldn't life of plugin-authoring be much simpler if alle these UTF-8 recognition and mb_* detections were only done once? <code>mb_str_replace</code> is (fallback-)defined in <code>modifier.escape.php</code> and <code>modifier.replace.php</code>. Feels wrong. All plugins should adhere to <code>SMARTY_RESOURCE_CHAR_SET</code>. Supply the implementor with <code>|convert:"UTF-8"</code> to get his encodings right.
+
+Defining functions outside of smarty's "namespace" can cause trouble. The application using smarty may have already implemented <code>mb_str_replace()</code> but made it do something different. From my POV this is a bad design decision.
 
 
 -----
 ## Clean this up ##
 
-### getFilepathDirectory() ###
+### getFilepathDirectory() (duplicate code reduction) ###
 
 $_template->smarty->use_sub_dirs thingie with DS and ^ should be a central function
 
-### sanitizeCompileId() ###
+### sanitizeCompileId() (duplicate code reduction) ###
 
 <code>$_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;</code>
+
+### function.fetch.php (enhancement) ###
+
+rewrite to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
+
+### modifier.capitalize.php (bug) ###
+
+rewrite using something like http://de2.php.net/manual/en/function.ucwords.php#87052 for UTF-8 support. currently »ä ölakas asd üüs« will turn into jibberish: 
+
+<code>$string = 'ä ölakas asd üüs';
+echo ucwords( $string ), "\n";
+echo mb_convert_case( $string, MB_CASE_TITLE, 'UTF-8' ), "\n";</code>
+
+
+-----
+## Wishlist ##
+
+1. Plugins lazyloaded from plugin_dir should be able to control their cachability. Something along the lines of <code>Smarty::setPluginMeta($pluginName, $cacheable, $cache_attrs);</code>
+2. Move options like $use_sub_dirs to a new SmartySettings facility. Cleans up the Smarty Object, makes Settings reusable, allows settings for plugins like <code>$smartySettings->set("cache.file.exclude", "/.svn/Si")</code>
 
 
 -----
@@ -47,7 +64,18 @@ $_template->smarty->use_sub_dirs thingie with DS and ^ should be a central funct
 
 ### CacheResource API ###
 
+<code>CacheResource</code>s have to extend <code>Smarty_CacheResource</code>. For a simple integration <code>Smarty_CacheResource_Custom</code> reduces the API to mere read and write calls to the data store. See the example given in <code>development/PHPUnit/PHPUnitplugins/cacheresource.mysql.php</code>.
 
+If data stores such as memcache are to be implemented, <code>Smarty_CacheResource_KeyValueStore</code> is there to help. It manages everything around deep cache-groups on a level suitable for most key/value stores. See the example given in <code>development/PHPUnit/PHPUnitplugins/cacheresource.memcache.php</code>.
+
+#### Registering Custom CacheResource Handler Instances ####
+
+Since *Smarty Version XYZ* Cache Resource Handler objects can be registerted with a Smarty instance:
+<code>$smarty->registerCacheResource( 'resName', new CustomCacheResource() )</code>.
+
+#### Autoloaded Custom Resource Handler Plugins ####
+
+A <code>CustomCacheResource</code> can be lazyloaded by naming the class <code>Smarty_CacheResource_Foobar</code> in a file called <code>cacheresource.foobar.php</code> in the <code>plugin_dir</code>. 
 
 ### Resource API ###
 
