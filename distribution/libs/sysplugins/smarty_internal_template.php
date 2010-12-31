@@ -35,7 +35,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
     // Template source
     public $template_filepath = null;
     public $template_source = null;
-    private $template_timestamp = null; 
+    public $template_timestamp = null; 
     // Compiled template
     private $compiled_filepath = null;
     public $compiled_template = null;
@@ -572,49 +572,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
             $this->smarty->template_objects[sha1($this->template_resource . $this->cache_id . $this->compile_id)] = $this;
         }
         return $this->resource_object;
-    } 
-    
-    /**
-     * get system filepath to template
-     */
-    public function buildTemplateFilepath ($file = null)
-    {
-        if ($file == null) {
-            $file = $this->resource_name;
-        }
-        // relative file name? 
-        if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
-	        foreach((array)$this->smarty->template_dir as $_template_dir) {
-                $_template_dir = rtrim($_template_dir, '/\\') . DS;
-            	$_filepath = $_template_dir . $file;
-            	if (file_exists($_filepath)) {
-                	return $_filepath;
-            	}
-        		if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir)) {
-        			// try PHP include_path
-        			if (($_filepath = Smarty_Internal_Get_Include_Path::getIncludePath($_filepath)) !== false) {
-        				return $_filepath;
-        			}
-        		}
-       		}
-       	}
-        // try absolute filepath
-        if (file_exists($file)) return $file;
-        // no tpl file found
-        if (!empty($this->smarty->default_template_handler_func)) {
-            if (!is_callable($this->smarty->default_template_handler_func)) {
-                throw new SmartyException("Default template handler not callable");
-            } else {
-                $_return = call_user_func_array($this->smarty->default_template_handler_func,
-                    array($this->resource_type, $this->resource_name, &$this->template_source, &$this->template_timestamp, $this));
-                if (is_string($_return)) {
-                    return $_return;
-                } elseif ($_return === true) {
-                    return $file;
-                } 
-            } 
-        } 
-        return false;
     } 
 
     /**

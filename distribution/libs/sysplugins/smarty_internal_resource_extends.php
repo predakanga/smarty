@@ -48,7 +48,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
         $sha1String = '';
         $_files = explode('|', $_template->resource_name);
         foreach ($_files as $_file) {
-            $_filepath = $_template->buildTemplateFilepath($_file);
+            $_filepath = $this->buildTemplateFilepath($_template, $_file);
             if ($_filepath !== false) {
                 if (is_object($_template->smarty->security_policy)) {
                     $_template->smarty->security_policy->isTrustedResourceDir($_filepath);

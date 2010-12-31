@@ -27,6 +27,8 @@ Wouldn't life of plugin-authoring be much simpler if alle these UTF-8 recognitio
 
 Defining functions outside of smarty's "namespace" can cause trouble. The application using smarty may have already implemented <code>mb_str_replace()</code> but made it do something different. From my POV this is a bad design decision.
 
+<code>$default_template_handler_func</code> is executed after the FS is searched for files. Thus it triggers only after a minimum of 2 failed <code>file_exist()</code>s. If the default handler were to be used as an expander for "virtual" directories, this would yield performance issues. "virtual" directories could be something like <code>ModuleXY/foo.tpl</code> expanded to <code>/some/path/modules/xy/templates/foo.tpl</code>. Which is in fact a feature I would like to employ. Seeing that this applies to <code>file</code> and <code>extend</code> resources, it does not make sense to extend these classes seperately. I would stick to the callback, but not use it as a fallback handler, rather as something to prepare any given filepath.
+
 
 -----
 ## Clean this up ##
@@ -55,8 +57,10 @@ echo mb_convert_case( $string, MB_CASE_TITLE, 'UTF-8' ), "\n";</code>
 -----
 ## Wishlist ##
 
-1. Plugins lazyloaded from plugin_dir should be able to control their cachability. Something along the lines of <code>Smarty::setPluginMeta($pluginName, $cacheable, $cache_attrs);</code>
-2. Move options like $use_sub_dirs to a new SmartySettings facility. Cleans up the Smarty Object, makes Settings reusable, allows settings for plugins like <code>$smartySettings->set("cache.file.exclude", "/.svn/Si")</code>
+1. Plugins lazyloaded from plugin_dir should be able to control their cachability. Something along the lines of <code>Smarty::setPluginMeta($pluginName, $cacheable, $cache_attrs);</code>.
+2. Move options like $use_sub_dirs to a new SmartySettings facility. Cleans up the Smarty Object, makes Settings reusable, allows settings for plugins like <code>$smartySettings->set("cache.file.exclude", "/.svn/Si")</code>. This should not apply to $caching and other Smarty instance oriented settings.
+3. Sane support for namespaces introduced in PHP 5.3 <code>registerClass('Foo','\some\name\spaced\Foo');</code> is a first step, <code>{\some\name\spaced\Foo::helloWorld()}</code> another. <code>registerNamespace('\foo\bar\bla', 'fbb')</code> may even be translated to <code>use \foo\bar\bla as fbb;</code>. <code>{use "/foo/bar" as "fb"} {fn\ClassName::helloWorld()}</code> may be nice as well. Where namespaces are in play, people usually know how to use spl_autoload properly.
+4. <code>{if $foobar}</code> should translate to <code>{if isset($foobar) && $foobar}</code> to simplify template syntax while keeping the code clean.
 
 
 -----

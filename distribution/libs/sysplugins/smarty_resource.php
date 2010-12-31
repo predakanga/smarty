@@ -59,7 +59,7 @@ abstract class Smarty_Resource {
     */
     public function getTemplateFilepath(Smarty_Internal_Template $_template)
     {
-        $_filepath = $_template->buildTemplateFilepath();
+        $_filepath = $this->buildTemplateFilepath($_template);
 
         if ($_filepath !== false) {
             if (is_object($_template->smarty->security_policy)) {
@@ -68,6 +68,54 @@ abstract class Smarty_Resource {
         } 
         $_template->templateUid = sha1($_filepath);
         return $_filepath;
+    }
+    
+    /**
+     * Expand file to fully qualified filepath.
+     *
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $file filepath
+     * @return string|bollean absolute filepath or false if not found
+     */
+    protected function buildTemplateFilepath(Smarty_Internal_Template $_template, $file = null)
+    {
+        if ($file === null) {
+            $file = $_template->resource_name;
+        }
+        // relative file name? 
+        if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
+	        foreach((array)$_template->smarty->template_dir as $_template_dir) {
+                $_template_dir = rtrim($_template_dir, '/\\') . DS;
+            	$_filepath = $_template_dir . $file;
+            	if (file_exists($_filepath)) {
+                	return $_filepath;
+            	}
+        		if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir)) {
+        			// try PHP include_path
+        			if (($_filepath = Smarty_Internal_Get_Include_Path::getIncludePath($_filepath)) !== false) {
+        				return $_filepath;
+        			}
+        		}
+       		}
+       	}
+        // try absolute filepath
+        if (file_exists($file)) return $file;
+        // no tpl file found
+        // FIXME: this will fail for {extend} resources, as they supply the $file argument which is not passed on here
+        if (!empty($_template->smarty->default_template_handler_func)) {
+            if (!is_callable($_template->smarty->default_template_handler_func)) {
+                throw new SmartyException("Default template handler not callable");
+            } else {
+                $_return = call_user_func_array($_template->smarty->default_template_handler_func,
+                    array($_template->resource_type, $_template->resource_name, &$_template->template_source, &$_template->template_timestamp, $_template));
+                if (is_string($_return)) {
+                    return $_return;
+                } elseif ($_return === true) {
+                    return $file;
+                } 
+            } 
+        } 
+        return false;
     }
     
     /**
