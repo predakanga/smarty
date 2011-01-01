@@ -61,21 +61,24 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = SMARTY_
         case 'hex': 
             // escape every character into hex
             $return = '';
-            for ($x = 0; $x < strlen($string); $x++) {
+            $_length = strlen($string);
+            for ($x = 0; $x < $_length; $x++) {
                 $return .= '%' . bin2hex($string[$x]);
             } 
             return $return;
 
         case 'hexentity':
             $return = '';
-            for ($x = 0; $x < strlen($string); $x++) {
+            $_length = strlen($string);
+            for ($x = 0; $x < $_length; $x++) {
                 $return .= '&#x' . bin2hex($string[$x]) . ';';
             } 
             return $return;
 
         case 'decentity':
             $return = '';
-            for ($x = 0; $x < strlen($string); $x++) {
+            $_length = strlen($string);
+            for ($x = 0; $x < $_length; $x++) {
                 $return .= '&#' . ord($string[$x]) . ';';
             } 
             return $return;
@@ -95,7 +98,8 @@ function smarty_modifier_escape($string, $esc_type = 'html', $char_set = SMARTY_
         case 'nonstd': 
             // escape non-standard chars, such as ms document quotes
             $_res = '';
-            for($_i = 0, $_len = strlen($string); $_i < $_len; $_i++) {
+            $_length = strlen($string);
+            for($_i = 0; $_i < $_length; $_i++) {
                 $_ord = ord(substr($string, $_i, 1)); 
                 // non-standard char, escape it
                 if ($_ord >= 126) {
