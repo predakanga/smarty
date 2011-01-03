@@ -48,12 +48,22 @@ class Smarty_Internal_Data {
         if (is_array($tpl_var)) {
             foreach ($tpl_var as $_key => $_val) {
                 if ($_key != '') {
-                    $this->tpl_vars[$_key] = new Smarty_variable($_val, $nocache);
+                    if (isset($this->tpl_vars[$_key])) {
+                        $this->tpl_vars[$_key]->value = $_val;
+                        $this->tpl_vars[$_key]->nocache = $nocache;
+                    } else {
+                        $this->tpl_vars[$_key] = new Smarty_variable($_val, $nocache);
+                    }
                 } 
             } 
         } else {
             if ($tpl_var != '') {
-                $this->tpl_vars[$tpl_var] = new Smarty_variable($value, $nocache);
+                if (isset($this->tpl_vars[$tpl_var])) {
+                    $this->tpl_vars[$tpl_var]->value = $value;
+                    $this->tpl_vars[$tpl_var]->nocache = $nocache;
+                } else {
+                    $this->tpl_vars[$tpl_var] = new Smarty_variable($value, $nocache);
+                }
             } 
         } 
     } 
