@@ -439,7 +439,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
                 } 
             } 
         } else {
-            if (is_callable(array($this->resource_object, 'renderUncompiled'))) {
+            if ($this->resource_object instanceof Smarty_Resource_Uncompiled) {
                 if ($this->smarty->debugging) {
                     Smarty_Internal_Debug::start_render($this);
                 } 
