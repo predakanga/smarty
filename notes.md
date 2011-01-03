@@ -1,7 +1,18 @@
 # Notes #
 
+next up: *make modifiers UTF-8 safe and sane*
 
+Wouldn't life of plugin-authoring be much simpler if alle these UTF-8 recognition and mb_* detections were only done once? <code>mb_str_replace</code> is (fallback-)defined in <code>modifier.escape.php</code> and <code>modifier.replace.php</code>. Feels wrong. All plugins should adhere to <code>SMARTY_RESOURCE_CHAR_SET</code>. Supply the implementor with <code>|convert:"UTF-8"</code> to get his encodings right.
 
+Defining functions outside of smarty's "namespace" can cause trouble. The application using smarty may have already implemented <code>mb_str_replace()</code> but made it do something different. From my POV this is a bad design decision.
+
+### modifier.capitalize.php (bug) ###
+
+rewrite using something like http://de2.php.net/manual/en/function.ucwords.php#87052 for UTF-8 support. currently »ä ölakas asd üüs« will turn into jibberish: 
+
+<code>$string = 'ä ölakas asd üüs';
+echo ucwords( $string ), "\n";
+echo mb_convert_case( $string, MB_CASE_TITLE, 'UTF-8' ), "\n";</code>
 
 
 -----
@@ -23,10 +34,6 @@ Loading of plugins depends on a Smarty instance (for plugin_dir). But if a Plugi
 
 Function detection for MBString varies accross different files: <code>is_callable('mb_strlen')</code>, <code>function_exists('mb_substr')</code>.
 
-Wouldn't life of plugin-authoring be much simpler if alle these UTF-8 recognition and mb_* detections were only done once? <code>mb_str_replace</code> is (fallback-)defined in <code>modifier.escape.php</code> and <code>modifier.replace.php</code>. Feels wrong. All plugins should adhere to <code>SMARTY_RESOURCE_CHAR_SET</code>. Supply the implementor with <code>|convert:"UTF-8"</code> to get his encodings right.
-
-Defining functions outside of smarty's "namespace" can cause trouble. The application using smarty may have already implemented <code>mb_str_replace()</code> but made it do something different. From my POV this is a bad design decision.
-
 <code>$default_template_handler_func</code> is executed after the FS is searched for files. Thus it triggers only after a minimum of 2 failed <code>file_exist()</code>s. If the default handler were to be used as an expander for "virtual" directories, this would yield performance issues. "virtual" directories could be something like <code>ModuleXY/foo.tpl</code> expanded to <code>/some/path/modules/xy/templates/foo.tpl</code>. Which is in fact a feature I would like to employ. Seeing that this applies to <code>file</code> and <code>extend</code> resources, it does not make sense to extend these classes seperately. I would stick to the callback, but not use it as a fallback handler, rather as something to prepare any given filepath.
 
 
@@ -44,14 +51,6 @@ $_template->smarty->use_sub_dirs thingie with DS and ^ should be a central funct
 ### function.fetch.php (enhancement) ###
 
 rewrite to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
-
-### modifier.capitalize.php (bug) ###
-
-rewrite using something like http://de2.php.net/manual/en/function.ucwords.php#87052 for UTF-8 support. currently »ä ölakas asd üüs« will turn into jibberish: 
-
-<code>$string = 'ä ölakas asd üüs';
-echo ucwords( $string ), "\n";
-echo mb_convert_case( $string, MB_CASE_TITLE, 'UTF-8' ), "\n";</code>
 
 
 -----

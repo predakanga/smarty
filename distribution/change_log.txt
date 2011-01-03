@@ -1,3 +1,25 @@
+===== SVN branch rodneyrehm  =====
+
+01/01/2011
+- optimize smarty_modified_escape for hex, hexentity, decentity.
+
+28/12/2010
+- changed $tpl_vars, $config_vars and $parent to belong to Smarty_Internal_Data
+- added Smarty::registerCacheResource() for dynamic cache resource object registration
+
+27/12/2010
+- added Smarty_CacheResource API and refactored existing cache resources accordingly
+- added Smarty_CacheResource_Custom and Smarty_CacheResource_Mysql
+
+26/12/2010
+- added Smarty_Resource API and refactored existing resources accordingly
+- added Smarty_Resource_Custom and Smarty_Resource_Mysql
+- bugfix Smarty::createTemplate() to return properly cloned template instances
+
+24/12/2010
+- optimize smarty_function_escape_special_chars() for PHP >= 5.2.3
+
+
 ===== SVN trunk  =====
 - bugfix mb_str_replace in replace and escape modifiers work with utf8
 
