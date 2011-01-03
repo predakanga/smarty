@@ -43,7 +43,7 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
         foreach ($_attr as $_key => $_value) {
             if (is_int($_key)) {
                 $_paramsArray[] = "$_key=>$_value";
-            } elseif ($this->compiler->template->caching && in_array($_key,$compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag][2])) {
+            } elseif ($this->compiler->template->caching && $this->compiler->tag_nocache && in_array($_key,$compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag][2])) {
 				$_value = str_replace("'","^#^",$_value);
                 $_paramsArray[] = "'$_key'=>^#^.var_export($_value,true).^#^";
             } else {
@@ -54,6 +54,11 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
         $function = $compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag][0]; 
         // compile code
         if (!is_array($function)) {
+            // is plugin a class?
+            $this->compiler->smarty->loadPlugin($function);
+            if (class_exists($function,false)){
+                $function .= '::run';
+            }
             $output = "<?php echo {$function}({$_params},\$_smarty_tpl);?>\n";
         } else if (is_object($function[0])) {
             $output = "<?php echo \$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['{$tag}'][0][0]->{$function[1]}({$_params},\$_smarty_tpl);?>\n";

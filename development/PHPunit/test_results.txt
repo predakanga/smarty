@@ -101,7 +101,7 @@ Test Suite
  ...
 
  CompileFunctionTests
- ...........
+ ......EEFEF
 
  CompileIfTests
  ...........................................................
@@ -236,6 +236,81 @@ Test Suite
  XmlTests
  ......
 
-Time: 30 seconds
+Time: 29 seconds
 
-OK (823 tests, 1343 assertions)
+There were 3 errors:
+
+1) CompileFunctionTests::testExternalDefinedFunction
+Undefined variable: function
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_compile_function.php:94
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:279
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:123
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2393
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2823
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2923
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_smartytemplatecompiler.php:51
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:82
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:260
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:408
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:545
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:416
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:545
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/CompileFunctionTests.php:79
+
+2) CompileFunctionTests::testExternalDefinedFunctionCached1
+Undefined variable: function
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_compile_function.php:94
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:279
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:123
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2393
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2823
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2923
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_smartytemplatecompiler.php:51
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:82
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:260
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:408
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:545
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:418
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:545
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/CompileFunctionTests.php:91
+
+3) CompileFunctionTests::testExternalDefinedFunctionNocachedCall1
+Undefined variable: function
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_compile_function.php:94
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:279
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:123
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2393
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2823
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templateparser.php:2923
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_smartytemplatecompiler.php:51
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_templatecompilerbase.php:82
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:260
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:408
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:545
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:418
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:545
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/CompileFunctionTests.php:115
+
+--
+
+
+There were 2 failures:
+
+1) CompileFunctionTests::testExternalDefinedFunctionCached2
+Failed asserting that <boolean:false> is true.
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/CompileFunctionTests.php:101
+
+2) CompileFunctionTests::testExternalDefinedFunctionNocachedCall2
+Failed asserting that <boolean:false> is true.
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/CompileFunctionTests.php:125
+
+FAILURES!
+Tests: 823, Assertions: 1338, Failures: 2, Errors: 3.

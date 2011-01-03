@@ -439,7 +439,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
                 } 
             } 
         } else {
-            if (is_callable(array($this->resource_object, 'renderUncompiled'))) {
+            if ($this->resource_object instanceof Smarty_Resource_Uncompiled) {
                 if ($this->smarty->debugging) {
                     Smarty_Internal_Debug::start_render($this);
                 } 
@@ -641,7 +641,9 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
                 $plugins_string = '<?php ';
                 foreach($this->required_plugins['compiled'] as $tmp) {
                     foreach($tmp as $data) {
-                        $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$data['file']}';\n";
+                        $this->smarty->loadPlugin($data['function']);
+                        $_function = class_exists($data['function'],false) ? "array('{$data['function']}','run')" : "'{$data['function']}'";
+                        $plugins_string .= "if (!is_callable({$_function})) include '{$data['file']}';\n";
                     } 
                 } 
                 $plugins_string .= '?>';
@@ -651,7 +653,9 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
                 $plugins_string .= "<?php echo '/*%%SmartyNocache:{$this->properties['nocache_hash']}%%*/<?php ";
                 foreach($this->required_plugins['nocache'] as $tmp) {
                     foreach($tmp as $data) {
-                        $plugins_string .= "if (!is_callable(\'{$data['function']}\')) include \'{$data['file']}\';\n";
+                        $this->smarty->loadPlugin($data['function']);
+                        $_function = class_exists($data['function'],false) ? "array(\'{$data['function']}\',\'run\')" : "\'{$data['function']}\'";
+                        $plugins_string .= "if (!is_callable({$_function})) include \'{$data['file']}\';\n";
                     } 
                 } 
                 $plugins_string .= "?>/*/%%SmartyNocache:{$this->properties['nocache_hash']}%%*/';?>\n";

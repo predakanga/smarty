@@ -32,7 +32,7 @@ class Smarty_Internal_Register {
 	{
 		if (isset($this->smarty->registered_plugins[$type][$tag])) {
         	throw new Exception("Plugin tag \"{$tag}\" already registered");
-    	} elseif (!is_callable($callback)) {
+    	} elseif (!is_callable($callback) && (!is_string($callback) || !class_exists($callback))) {
         	throw new Exception("Plugin \"{$tag}\" not callable");
     	} else {
        		$this->smarty->registered_plugins[$type][$tag] = array($callback, (bool) $cacheable, (array) $cache_attr);

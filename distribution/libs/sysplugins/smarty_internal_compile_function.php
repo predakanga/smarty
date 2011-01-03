@@ -91,7 +91,9 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
             $plugins_string = '<?php ';
             foreach($compiler->template->required_plugins['compiled'] as $tmp) {
                 foreach($tmp as $data) {
-                    $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$data['file']}';\n";
+                    $this->compiler->smarty->loadPlugin($function);
+                    $_function = class_exists($data['function'],false) ? "array('{$data['function']}','run')" : "'{$data['function']}'";
+                    $plugins_string .= "if (!is_callable({$_function})) include '{$data['file']}';\n";
                 } 
             } 
             $plugins_string .= '?>';
@@ -100,7 +102,9 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
             $plugins_string .= "<?php echo '/*%%SmartyNocache:{$compiler->template->properties['nocache_hash']}%%*/<?php ";
             foreach($compiler->template->required_plugins['nocache'] as $tmp) {
                 foreach($tmp as $data) {
-                    $plugins_string .= "if (!is_callable(\'{$data['function']}\')) include \'{$data['file']}\';\n";
+                    $this->compiler->smarty->loadPlugin($function);
+                    $_function = class_exists($data['function'],false) ? "array(\'{$data['function']}\',\'run\')" : "\'{$data['function']}\'";
+                    $plugins_string .= "if (!is_callable({$_function})) include \'{$data['file']}\';\n";
                 } 
             } 
             $plugins_string .= "?>/*/%%SmartyNocache:{$compiler->template->properties['nocache_hash']}%%*/';?>\n";
