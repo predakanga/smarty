@@ -1,4 +1,14 @@
 ===== SVN trunk  =====
+- bugfix mb_str_replace in replace and escape modifiers work with utf8
+
+31/12/2010
+- bugfix dynamic configuration of $debugging_crtl did not work
+- bugfix default value of $config_read_hidden changed to false
+- bugfix format of attribute array on compiler plugins
+- bugfix getTemplateVars() could return value from wrong scope
+
+28/12/2010
+- bugfix multiple {append} tags failed to compile.
 
 22/12/2010
 - update do not clone the Smarty object an internal createTemplate() calls to increase performance
