@@ -30,7 +30,7 @@ function smarty_modifier_truncate($string, $length = 80, $etc = '...',
     if ($length == 0)
         return '';
 
-    if (is_callable('mb_strlen')) {
+    if (SMARTY_MBSTRING) {
         if (mb_detect_encoding($string, 'UTF-8, ISO-8859-1') === 'UTF-8') {
             // $string has utf-8 encoding
             if (mb_strlen($string) > $length) {

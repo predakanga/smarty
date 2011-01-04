@@ -272,6 +272,8 @@ function smarty_function_html_select_date($params, $template)
             } 
             $year_result .= ' />';
         } else {
+            // FIXME: (rodneyrehm) no need to sort results of range()
+            // TODO: (rodneyrehm) optimize foreach( range() ) to for(…)
             $years = range((int)$start_year, (int)$end_year);
             if ($reverse_years) {
                 rsort($years, SORT_NUMERIC);
@@ -304,6 +306,7 @@ function smarty_function_html_select_date($params, $template)
     } 
     // Loop thru the field_order field
     for ($i = 0; $i <= 2; $i++) {
+        // TODO: (rodneyrehm) string-arrayaccess to avoid substr()
         $c = substr($field_order, $i, 1);
         switch ($c) {
             case 'D':

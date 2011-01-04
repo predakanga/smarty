@@ -21,7 +21,7 @@
 function smarty_modifiercompiler_count_characters($params, $compiler)
 {
     // mb_ functions available?
-    if (function_exists('mb_strlen')) {
+    if (SMARTY_MBSTRING) {
         // count also spaces?
         if (isset($params[1]) && $params[1] == 'true') {
             return '((mb_detect_encoding(' . $params[0] . ', \'UTF-8, ISO-8859-1\') === \'UTF-8\') ? mb_strlen(' . $params[0] . ', SMARTY_RESOURCE_CHAR_SET) : strlen(' . $params[0] . '))';

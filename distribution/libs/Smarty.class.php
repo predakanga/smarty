@@ -56,8 +56,12 @@ if (!defined('SMARTY_SYSPLUGINS_DIR')) {
 if (!defined('SMARTY_PLUGINS_DIR')) {
     define('SMARTY_PLUGINS_DIR', SMARTY_DIR . 'plugins' . DS);
 } 
+if (!defined('SMARTY_MBSTRING')) {
+    define('SMARTY_MBSTRING', function_exists('mb_strlen'));
+}
 if (!defined('SMARTY_RESOURCE_CHAR_SET')) {
-    define('SMARTY_RESOURCE_CHAR_SET', 'UTF-8');
+    // UTF-8 can only be done properly when mbstring is available!
+    define('SMARTY_RESOURCE_CHAR_SET', SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1');
 } 
 if (!defined('SMARTY_RESOURCE_DATE_FORMAT')) {
     define('SMARTY_RESOURCE_DATE_FORMAT', '%b %e, %Y');

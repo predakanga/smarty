@@ -21,7 +21,7 @@
 function smarty_modifier_spacify($string, $spacify_char = ' ')
 { 
     // mb_ functions available?
-    if (function_exists('mb_strlen') && mb_detect_encoding($string, 'UTF-8, ISO-8859-1') === 'UTF-8') {
+    if (SMARTY_MBSTRING && mb_detect_encoding($string, 'UTF-8, ISO-8859-1') === 'UTF-8') {
         $strlen = mb_strlen($string);
         while ($strlen) {
             $array[] = mb_substr($string, 0, 1, "UTF-8");

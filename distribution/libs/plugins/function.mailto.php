@@ -99,7 +99,7 @@ function smarty_function_mailto($params, $template)
         trigger_error("mailto: 'encode' parameter must be none, javascript or hex",E_USER_WARNING);
         return;
     } 
-
+    // FIXME: (rodneyrehm) document.write() excues me what? 1998 has passed!
     if ($encode == 'javascript') {
         $string = 'document.write(\'<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>\');';
 

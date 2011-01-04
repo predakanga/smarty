@@ -1,10 +1,12 @@
 # Notes #
 
+## changes ##
+
+* added SMARTY_MBSTRING to generalize MBString detection
+
 next up: *make modifiers UTF-8 safe and sane*
 
 Wouldn't life of plugin-authoring be much simpler if alle these UTF-8 recognition and mb_* detections were only done once? <code>mb_str_replace</code> is (fallback-)defined in <code>modifier.escape.php</code> and <code>modifier.replace.php</code>. Feels wrong. All plugins should adhere to <code>SMARTY_RESOURCE_CHAR_SET</code>. Supply the implementor with <code>|convert:"UTF-8"</code> to get his encodings right.
-
-Defining functions outside of smarty's "namespace" can cause trouble. The application using smarty may have already implemented <code>mb_str_replace()</code> but made it do something different. From my POV this is a bad design decision.
 
 ### modifier.capitalize.php (bug) ###
 
@@ -13,6 +15,41 @@ rewrite using something like http://de2.php.net/manual/en/function.ucwords.php#8
 <code>$string = 'ä ölakas asd üüs';
 echo ucwords( $string ), "\n";
 echo mb_convert_case( $string, MB_CASE_TITLE, 'UTF-8' ), "\n";</code>
+
+[double_encode for escape modifier](http://www.smarty.net/forums/viewtopic.php?t=18635&highlight=)
+http://www.php.net/manual/en/function.htmlentities.php#92105
+http://www.php.net/manual/en/function.htmlentities.php#100186
+
+### UTF-8 incompatible ###
+
+* block.textformat.php: wordwrap
+* function.mailto.php: str_replace, strlen
+* modifier.capitalize.php: ucwords, substr_replace
+* modifier.debug_print_var.php: strlen, substr
+* modifier.escape.php: (not sure for hex, hexentity, decentity, nonstd)
+* modifier.regex_replace.php: preg_replace, substr
+* modifiercompiler.count_sentences.php: (afair UTF-8 has "special" spaces not within \s and \w fails too)
+* modifiercompiler.strip.php: (afair UTF-8 has "special" spaces not within \s)
+* modifiercompiler.wordwrap.php: wordwrap
+
+### UTF-8 insanity ###
+
+* modifier.spacify.php
+* modifier.truncate.php
+* modifiercompiler.count_characters.php
+* modifiercompiler.count_words.php
+* modifiercompiler.lower.php
+* modifiercompiler.upper.php
+
+recheck all preg_* functions using \s. They will fail unicode spaces like U+2004 (THREE-PER-EM SPACE) - unless the /u modifier is in place!
+
+
+-----
+## ToDo ##
+
+* make <code>modifier.escape.php</code> a compilerfunction to speed um the numerous escape:"html" calls
+* rewrite <code>function.html_select_date.php</code> and <code>function.html_select_time.php</code> for speed and clarity
+* rewrite function.fetch.php to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
 
 
 -----
@@ -32,10 +69,11 @@ blah
 
 Loading of plugins depends on a Smarty instance (for plugin_dir). But if a Plugin is successfully loaded in Smarty-Instance-1 (knowing the plugin_dir) and then used in Smarty-Instance-2 (NOT knowing the plugin_dir) the Plugin is still executed properly. I wouldn't call this a bug, but it certainly is odd behaviour.
 
-Function detection for MBString varies accross different files: <code>is_callable('mb_strlen')</code>, <code>function_exists('mb_substr')</code>.
-
 <code>$default_template_handler_func</code> is executed after the FS is searched for files. Thus it triggers only after a minimum of 2 failed <code>file_exist()</code>s. If the default handler were to be used as an expander for "virtual" directories, this would yield performance issues. "virtual" directories could be something like <code>ModuleXY/foo.tpl</code> expanded to <code>/some/path/modules/xy/templates/foo.tpl</code>. Which is in fact a feature I would like to employ. Seeing that this applies to <code>file</code> and <code>extend</code> resources, it does not make sense to extend these classes seperately. I would stick to the callback, but not use it as a fallback handler, rather as something to prepare any given filepath.
 
+Plugins make use of <code>trigger_error()</code>. Deliberately or some Smarty2 relict? looks wrong somehow. Smarty must assist in debugging, but not force people to simply switch off error_reporting.
+
+compiled templates show an awful number of @ (silencers). This may cost performance as error suppression doesn't come cheap
 
 -----
 ## Clean this up ##
@@ -48,16 +86,13 @@ $_template->smarty->use_sub_dirs thingie with DS and ^ should be a central funct
 
 <code>$_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;</code>
 
-### function.fetch.php (enhancement) ###
-
-rewrite to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
-
 
 -----
 ## Wishlist ##
 
 1. Plugins lazyloaded from plugin_dir should be able to control their cachability. Something along the lines of <code>Smarty::setPluginMeta($pluginName, $cacheable, $cache_attrs);</code>.
 2. Move options like $use_sub_dirs to a new SmartySettings facility. Cleans up the Smarty Object, makes Settings reusable, allows settings for plugins like <code>$smartySettings->set("cache.file.exclude", "/.svn/Si")</code>. This should not apply to $caching and other Smarty instance oriented settings.
+	* $basedir in function.html_image.php
 3. Sane support for namespaces introduced in PHP 5.3 <code>registerClass('Foo','\some\name\spaced\Foo');</code> is a first step, <code>{\some\name\spaced\Foo::helloWorld()}</code> another. <code>registerNamespace('\foo\bar\bla', 'fbb')</code> may even be translated to <code>use \foo\bar\bla as fbb;</code>. <code>{use "/foo/bar" as "fb"} {fn\ClassName::helloWorld()}</code> may be nice as well. Where namespaces are in play, people usually know how to use spl_autoload properly.
 4. <code>{if $foobar}</code> should translate to <code>{if isset($foobar) && $foobar}</code> to simplify template syntax while keeping the code clean.
 
