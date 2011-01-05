@@ -176,6 +176,9 @@ Test Suite
  PhpResourceTests
  ........................
 
+ PluginModifierCapitalizeTests
+ ......
+
  PrintNocacheTests
  ....
 
@@ -236,6 +239,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 30 seconds
+Time: 32 seconds
 
-OK (823 tests, 1343 assertions)
+OK (829 tests, 1349 assertions)

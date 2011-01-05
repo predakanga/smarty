@@ -3,18 +3,13 @@
 ## changes ##
 
 * added SMARTY_MBSTRING to generalize MBString detection
+* added argument $lc_rest to modifier.capitalize to lower-case anything but the first character of a word
 
 next up: *make modifiers UTF-8 safe and sane*
 
 Wouldn't life of plugin-authoring be much simpler if alle these UTF-8 recognition and mb_* detections were only done once? <code>mb_str_replace</code> is (fallback-)defined in <code>modifier.escape.php</code> and <code>modifier.replace.php</code>. Feels wrong. All plugins should adhere to <code>SMARTY_RESOURCE_CHAR_SET</code>. Supply the implementor with <code>|convert:"UTF-8"</code> to get his encodings right.
 
-### modifier.capitalize.php (bug) ###
-
-rewrite using something like http://de2.php.net/manual/en/function.ucwords.php#87052 for UTF-8 support. currently »ä ölakas asd üüs« will turn into jibberish: 
-
-<code>$string = 'ä ölakas asd üüs';
-echo ucwords( $string ), "\n";
-echo mb_convert_case( $string, MB_CASE_TITLE, 'UTF-8' ), "\n";</code>
+### modifier.escape.php ###
 
 [double_encode for escape modifier](http://www.smarty.net/forums/viewtopic.php?t=18635&highlight=)
 http://www.php.net/manual/en/function.htmlentities.php#92105
