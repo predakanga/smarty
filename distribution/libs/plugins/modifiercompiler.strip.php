@@ -26,9 +26,8 @@ function smarty_modifiercompiler_strip($params, $compiler)
 {
     if (!isset($params[1])) {
         $params[1] = "' '";
-    } 
-    // FIXME: (rodneyrehm) |strip should remove line breaks too
-    return "preg_replace('!\s+!', {$params[1]},{$params[0]})";
+    }
+    return "preg_replace('!\s+!u', {$params[1]},{$params[0]})";
 } 
 
 ?>
