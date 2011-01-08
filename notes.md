@@ -5,6 +5,7 @@
 * added SMARTY_MBSTRING to generalize MBString detection
 * added argument $lc_rest to modifier.capitalize to lower-case anything but the first character of a word
 * changed strip modifier to consider unicode white-space, too
+* changed wordwrap modifier to accept UTF-8 strings
 
 next up: *make modifiers UTF-8 safe and sane*
 
@@ -24,7 +25,6 @@ http://www.php.net/manual/en/function.htmlentities.php#100186
 * modifier.escape.php: (not sure for hex, hexentity, decentity, nonstd)
 * modifier.regex_replace.php: preg_replace, substr
 * modifiercompiler.count_sentences.php: (afair UTF-8 has "special" spaces not within \s and \w fails too)
-* modifiercompiler.wordwrap.php: wordwrap
 
 ### UTF-8 insanity ###
 
