@@ -812,7 +812,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         }
         if ($property_name == 'cache_resource_object') { 
         	// load cache resource
-            $this->cache_resource_object = $this->loadCacheResource();
+            $this->cache_resource_object = Smarty_CacheResource::load($this->smarty);
             return $this->cache_resource_object;
     	}
     	if (property_exists($this->smarty, $property_name)) {

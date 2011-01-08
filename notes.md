@@ -4,6 +4,7 @@
 
 * added SMARTY_MBSTRING to generalize MBString detection
 * added argument $lc_rest to modifier.capitalize to lower-case anything but the first character of a word
+* changed strip modifier to consider unicode white-space, too
 
 next up: *make modifiers UTF-8 safe and sane*
 
@@ -19,12 +20,10 @@ http://www.php.net/manual/en/function.htmlentities.php#100186
 
 * block.textformat.php: wordwrap
 * function.mailto.php: str_replace, strlen
-* modifier.capitalize.php: ucwords, substr_replace
 * modifier.debug_print_var.php: strlen, substr
 * modifier.escape.php: (not sure for hex, hexentity, decentity, nonstd)
 * modifier.regex_replace.php: preg_replace, substr
 * modifiercompiler.count_sentences.php: (afair UTF-8 has "special" spaces not within \s and \w fails too)
-* modifiercompiler.strip.php: (afair UTF-8 has "special" spaces not within \s)
 * modifiercompiler.wordwrap.php: wordwrap
 
 ### UTF-8 insanity ###
@@ -45,6 +44,7 @@ recheck all preg_* functions using \s. They will fail unicode spaces like U+2004
 * make <code>modifier.escape.php</code> a compilerfunction to speed um the numerous escape:"html" calls
 * rewrite <code>function.html_select_date.php</code> and <code>function.html_select_time.php</code> for speed and clarity
 * rewrite function.fetch.php to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
+* [template_dir selection](http://groups.google.com/group/smarty-developers/browse_thread/thread/e3cdb246ddb7fda2) could be done with <code>$smarty->template_dir['foo'] = "/some/path/to/templates";</code><code>"file:[foo]bar.tpl"</code>
 
 
 -----

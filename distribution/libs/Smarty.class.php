@@ -528,8 +528,9 @@ class Smarty extends Smarty_Internal_Data {
     */
     function clearAllCache($exp_time = null, $type = null)
     { 
-       // load cache resource and call clearAll
-        return $this->loadCacheResource($type)->clearAll($this, $exp_time);
+        // load cache resource and call clearAll
+        $_cache_resource = Smarty_CacheResource::load($this, $type);
+        return $_cache_resource->clearAll($this, $exp_time);
     }        
 
     /**
@@ -544,8 +545,9 @@ class Smarty extends Smarty_Internal_Data {
     */
     function clearCache($template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null)
     { 
-       // load cache resource and call clear
-        return $this->loadCacheResource($type)->clear($this, $template_name, $cache_id, $compile_id, $exp_time);
+        // load cache resource and call clear
+        $_cache_resource = Smarty_CacheResource::load($this, $type);
+        return $_cache_resource->clear($this, $template_name, $cache_id, $compile_id, $exp_time);
     }
 
     /**
@@ -574,18 +576,6 @@ class Smarty extends Smarty_Internal_Data {
     {
        $this->security_policy = null;
     } 
-
-    /**
-    * Loads cache resource.
-    * 
-    * @param string $type cache resource type
-    * @return object of cache resource
-    */
-    public function loadCacheResource($type = null) {
-        // TODO: (rodneyrehm) remove this unnecessary wrapper
-        return Smarty_CacheResource::load($this, $type);
-    } 
-
 
     /**
      * Set template directory
