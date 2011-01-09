@@ -12,19 +12,11 @@
 
 next up: *make modifiers UTF-8 safe and sane*
 
-Wouldn't life of plugin-authoring be much simpler if alle these UTF-8 recognition and mb_* detections were only done once? <code>mb_str_replace</code> is (fallback-)defined in <code>modifier.escape.php</code> and <code>modifier.replace.php</code>. Feels wrong. All plugins should adhere to <code>SMARTY_RESOURCE_CHAR_SET</code>. Supply the implementor with <code>|convert:"UTF-8"</code> to get his encodings right.
-
-### modifier.escape.php ###
-
-[double_encode for escape modifier](http://www.smarty.net/forums/viewtopic.php?t=18635&highlight=)
-http://www.php.net/manual/en/function.htmlentities.php#92105
-http://www.php.net/manual/en/function.htmlentities.php#100186
 
 ### UTF-8 incompatible ###
 
 * block.textformat.php: wordwrap
 * function.mailto.php: str_replace, strlen
-* modifier.debug_print_var.php: strlen, substr
 
 ### UTF-8 insanity ###
 
@@ -35,13 +27,16 @@ http://www.php.net/manual/en/function.htmlentities.php#100186
 * modifiercompiler.lower.php
 * modifiercompiler.upper.php
 
-recheck all preg_* functions using \s. They will fail unicode spaces like U+2004 (THREE-PER-EM SPACE) - unless the /u modifier is in place!
+### Afterwards ###
+
+* add convert modifier smarty_modifier_convert($string, $from_encoding="ISO-8859-1")
+* recheck all preg_* functions using \s. They will fail unicode spaces like U+2004 (THREE-PER-EM SPACE) - unless the /u modifier is in place!
 
 
 -----
 ## ToDo ##
 
-* make <code>modifier.escape.php</code> a compilerfunction to speed um the numerous escape:"html" calls
+* make <code>modifier.escape.php</code> a compilerfunction to speed up the numerous escape:"html" calls
 * rewrite <code>function.html_select_date.php</code> and <code>function.html_select_time.php</code> for speed and clarity
 * rewrite function.fetch.php to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
 * [template_dir selection](http://groups.google.com/group/smarty-developers/browse_thread/thread/e3cdb246ddb7fda2) could be done with <code>$smarty->template_dir['foo'] = "/some/path/to/templates";</code><code>"file:[foo]bar.tpl"</code>

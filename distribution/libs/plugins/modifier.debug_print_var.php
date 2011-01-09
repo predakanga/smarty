@@ -37,6 +37,7 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
                 $depth--;
             } 
             break;
+            
         case 'object' :
             $object_vars = get_object_vars($var);
             $results = '<b>' . get_class($var) . ' Object (' . count($object_vars) . ')</b>';
@@ -47,6 +48,7 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
                 $depth--;
             } 
             break;
+            
         case 'boolean' :
         case 'NULL' :
         case 'resource' :
@@ -61,23 +63,40 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
             } 
             $results = '<i>' . $results . '</i>';
             break;
+            
         case 'integer' :
         case 'float' :
             $results = htmlspecialchars((string) $var);
             break;
+            
         case 'string' :
             $results = strtr($var, $_replace);
-            if (strlen($var) > $length) {
-                $results = substr($var, 0, $length - 3) . '...';
-            } 
+            if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
+                if (mb_strlen($var, SMARTY_RESOURCE_CHAR_SET) > $length) {
+                    $results = mb_substr($var, 0, $length - 3, SMARTY_RESOURCE_CHAR_SET) . '...';
+                }
+            } else {
+                if (strlen($var) > $length) {
+                    $results = substr($var, 0, $length - 3) . '...';
+                }
+            }
+
             $results = htmlspecialchars('"' . $results . '"');
             break;
+            
         case 'unknown type' :
         default :
             $results = strtr((string) $var, $_replace);
-            if (strlen($results) > $length) {
-                $results = substr($results, 0, $length - 3) . '...';
-            } 
+            if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
+                if (mb_strlen($results, SMARTY_RESOURCE_CHAR_SET) > $length) {
+                    $results = mb_substr($results, 0, $length - 3, SMARTY_RESOURCE_CHAR_SET) . '...';
+                }
+            } else {
+                if (strlen($results) > $length) {
+                    $results = substr($results, 0, $length - 3) . '...';
+                }
+            }
+             
             $results = htmlspecialchars($results);
     } 
 
