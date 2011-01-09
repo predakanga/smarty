@@ -24,7 +24,6 @@ http://www.php.net/manual/en/function.htmlentities.php#100186
 * function.mailto.php: str_replace, strlen
 * modifier.debug_print_var.php: strlen, substr
 * modifier.escape.php: (not sure for hex, hexentity, decentity, nonstd)
-* modifier.regex_replace.php: preg_replace, substr
 
 ### UTF-8 insanity ###
 
