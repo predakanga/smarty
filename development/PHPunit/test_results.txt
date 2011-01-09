@@ -182,6 +182,9 @@ Test Suite
  PluginModifierCountSentencesTests
  ...
 
+ PluginModifierEscapeTests
+ ........................
+
  PluginModifierRegexReplaceTests
  ...
 
@@ -251,6 +254,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 36 seconds
+Time: 33 seconds
 
-OK (855 tests, 1384 assertions)
+OK (879 tests, 1414 assertions)

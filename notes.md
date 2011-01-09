@@ -7,6 +7,8 @@
 * changed strip modifier to consider unicode white-space, too
 * changed wordwrap modifier to accept UTF-8 strings
 * changed count_sentences modifier to consider unicode characters and treat sequences delimited by ? and ! as sentences, too
+* added argument $double_encode to modifier.escape (applies to html and htmlall only)
+* changed escape modifier to be UTF-8 compliant
 
 next up: *make modifiers UTF-8 safe and sane*
 
@@ -23,7 +25,6 @@ http://www.php.net/manual/en/function.htmlentities.php#100186
 * block.textformat.php: wordwrap
 * function.mailto.php: str_replace, strlen
 * modifier.debug_print_var.php: strlen, substr
-* modifier.escape.php: (not sure for hex, hexentity, decentity, nonstd)
 
 ### UTF-8 insanity ###
 
