@@ -11,13 +11,13 @@
 * changed escape modifier to be UTF-8 compliant
 * changed textformat block to be UTF-8 compliant
 * optimized performance of mailto function
-* fixed modifier.spacify so characters are not prepended and appended, made it unicode compatible
+* fixed spacify modifier so characters are not prepended and appended, made it unicode compatible
+* fixed truncate modifier to properly use mb_string if possible
 
 next up: *make modifiers UTF-8 safe and sane*
 
 ### UTF-8 insanity ###
 
-* modifier.truncate.php
 * modifiercompiler.count_characters.php
 * modifiercompiler.count_words.php
 * modifiercompiler.lower.php
