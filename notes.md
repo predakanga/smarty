@@ -36,6 +36,7 @@ next up: *make modifiers UTF-8 safe and sane*
 -----
 ## ToDo ##
 
+* add <code>modifier.unescape.php</code> to transform entities to characters http://www.smarty.net/forums/viewtopic.php?p=69382#69382
 * make <code>modifier.escape.php</code> a compilerfunction to speed up the numerous escape:"html" calls
 * rewrite <code>function.html_select_date.php</code> and <code>function.html_select_time.php</code> for speed and clarity
 * rewrite function.fetch.php to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.

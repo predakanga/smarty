@@ -9,7 +9,7 @@
  * @author Uwe Tews 
  * @package SmartyTestScripts
  */
-
+header( 'Content-Type: text/html; charset=UTF-8' );
 function _get_time()
 {
     $_mtime = microtime();
@@ -44,7 +44,7 @@ $smarty2->php_handling = Smarty::PHP_ALLOW;
 // $smarty2->php_handling = Smarty::PHP_PASSTHRU;
 // $smarty2->php_handling = Smarty::PHP_QUOTE;
 $smarty2->allow_php_tag = true;
-$smarty2->debugging = true;
+$smarty2->debugging = !empty($_POST['debug']);
 // $smarty2->auto_literal = false;
 // $smarty2->loadFilter('variable','htmlspecialchars');
 // $smarty2->default_modifiers = array('escape:"htmlall"','strlen');
