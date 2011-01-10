@@ -19,19 +19,9 @@
  * @return string 
  */
 function smarty_modifier_spacify($string, $spacify_char = ' ')
-{ 
-    // mb_ functions available?
-    if (SMARTY_MBSTRING && mb_detect_encoding($string, 'UTF-8, ISO-8859-1') === 'UTF-8') {
-        $strlen = mb_strlen($string);
-        while ($strlen) {
-            $array[] = mb_substr($string, 0, 1, "UTF-8");
-            $string = mb_substr($string, 1, $strlen, "UTF-8");
-            $strlen = mb_strlen($string);
-        } 
-        return implode($spacify_char, $array);
-    } else {
-        return implode($spacify_char, preg_split('//', $string, -1));
-    } 
+{
+    // well… what about charsets besides latin and UTF-8?
+    return implode($spacify_char, preg_split('//u', $string, -1, PREG_SPLIT_NO_EMPTY));
 } 
 
 ?>

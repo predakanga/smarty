@@ -11,12 +11,12 @@
 * changed escape modifier to be UTF-8 compliant
 * changed textformat block to be UTF-8 compliant
 * optimized performance of mailto function
+* fixed modifier.spacify so characters are not prepended and appended, made it unicode compatible
 
 next up: *make modifiers UTF-8 safe and sane*
 
 ### UTF-8 insanity ###
 
-* modifier.spacify.php
 * modifier.truncate.php
 * modifiercompiler.count_characters.php
 * modifiercompiler.count_words.php
@@ -25,7 +25,7 @@ next up: *make modifiers UTF-8 safe and sane*
 
 ### Afterwards ###
 
-* add convert modifier smarty_modifier_convert($string, $from_encoding="ISO-8859-1")
+* add convert modifier smarty_modifier_convert($string, $from_encoding="ISO-8859-1", $to=SMARTY_RESOURCE_CHAR_SET)
 * recheck all preg_* functions using \s. They will fail unicode spaces like U+2004 (THREE-PER-EM SPACE) - unless the /u modifier is in place!
 
 
