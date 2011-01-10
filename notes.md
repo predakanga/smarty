@@ -9,14 +9,10 @@
 * changed count_sentences modifier to consider unicode characters and treat sequences delimited by ? and ! as sentences, too
 * added argument $double_encode to modifier.escape (applies to html and htmlall only)
 * changed escape modifier to be UTF-8 compliant
-* changed textformat function to be UTF-8 compliant
+* changed textformat block to be UTF-8 compliant
+* optimized performance of mailto function
 
 next up: *make modifiers UTF-8 safe and sane*
-
-
-### UTF-8 incompatible ###
-
-* function.mailto.php: str_replace, strlen
 
 ### UTF-8 insanity ###
 

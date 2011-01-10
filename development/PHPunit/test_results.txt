@@ -176,6 +176,12 @@ Test Suite
  PhpResourceTests
  ........................
 
+ PluginBlockTextformatTests
+ ..............
+
+ PluginFunctionMailtoTests
+ ..................
+
  PluginModifierCapitalizeTests
  ......
 
@@ -254,6 +260,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 33 seconds
+Time: 36 seconds
 
-OK (879 tests, 1414 assertions)
+OK (911 tests, 1446 assertions)

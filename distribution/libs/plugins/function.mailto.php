@@ -88,7 +88,7 @@ function smarty_function_mailto($params, $template)
     } 
 
     $mail_parm_vals = '';
-    for ($i = 0; $i < count($mail_parms); $i++) {
+    for ($i = 0, $_length = count($mail_parms); $i < $_length; $i++) {
         $mail_parm_vals .= (0 == $i) ? '?' : '&';
         $mail_parm_vals .= $mail_parms[$i];
     } 
@@ -96,7 +96,7 @@ function smarty_function_mailto($params, $template)
 
     $encode = (empty($params['encode'])) ? 'none' : $params['encode'];
     if (!in_array($encode, array('javascript', 'javascript_charcode', 'hex', 'none'))) {
-        trigger_error("mailto: 'encode' parameter must be none, javascript or hex",E_USER_WARNING);
+        trigger_error("mailto: 'encode' parameter must be none, javascript, javascript_charcode or hex", E_USER_WARNING);
         return;
     } 
     // FIXME: (rodneyrehm) document.write() excues me what? 1998 has passed!
@@ -104,7 +104,7 @@ function smarty_function_mailto($params, $template)
         $string = 'document.write(\'<a href="mailto:' . $address . '" ' . $extra . '>' . $text . '</a>\');';
 
         $js_encode = '';
-        for ($x = 0; $x < strlen($string); $x++) {
+        for ($x = 0, $_length = strlen($string); $x < $_length; $x++) {
             $js_encode .= '%' . bin2hex($string[$x]);
         } 
 
@@ -133,15 +133,15 @@ function smarty_function_mailto($params, $template)
             return;
         } 
         $address_encode = '';
-        for ($x = 0; $x < strlen($address); $x++) {
-            if (preg_match('!\w!', $address[$x])) {
+        for ($x = 0, $_length = strlen($address); $x < $_length; $x++) {
+            if (preg_match('!\w!u', $address[$x])) {
                 $address_encode .= '%' . bin2hex($address[$x]);
             } else {
                 $address_encode .= $address[$x];
             } 
         } 
         $text_encode = '';
-        for ($x = 0; $x < strlen($text); $x++) {
+        for ($x = 0, $_length = strlen($text); $x < $_length; $x++) {
             $text_encode .= '&#x' . bin2hex($text[$x]) . ';';
         } 
 
