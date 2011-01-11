@@ -13,12 +13,12 @@
 * optimized performance of mailto function
 * fixed spacify modifier so characters are not prepended and appended, made it unicode compatible
 * fixed truncate modifier to properly use mb_string if possible
+* removed UTF-8 frenzy from count_characters modifier
 
 next up: *make modifiers UTF-8 safe and sane*
 
 ### UTF-8 insanity ###
 
-* modifiercompiler.count_characters.php
 * modifiercompiler.count_words.php
 * modifiercompiler.lower.php
 * modifiercompiler.upper.php
