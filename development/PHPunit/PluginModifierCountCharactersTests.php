@@ -84,7 +84,7 @@ class PluginModifierCountCharactersTests extends PHPUnit_Framework_TestCase {
         $_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'] = true;
         $result = "33";
         $tpl = $this->smarty->createTemplate('eval:{"Cold Wäve Linked tö Temperatures."|count_characters:true}');
-        $this->assertNotEquals($result, $this->smarty->fetch($tpl));
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
         unset($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING']);
     }
 } 
