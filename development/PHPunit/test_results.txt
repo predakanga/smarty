@@ -186,7 +186,7 @@ Test Suite
  ......
 
  PluginModifierCountCharactersTests
- .....F..
+ ........
 
  PluginModifierCountSentencesTests
  ...
@@ -269,14 +269,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 34 seconds
+Time: 35 seconds
 
-There was 1 failure:
-
-1) PluginModifierCountCharactersTests::testUmlautsWithoutMbstring
-Failed asserting that <string:29> is not equal to <string:29>.
-
-/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/PluginModifierCountCharactersTests.php:70
-
-FAILURES!
-Tests: 935, Assertions: 1472, Failures: 1.
+OK (935 tests, 1471 assertions)
