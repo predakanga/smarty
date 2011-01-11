@@ -31,8 +31,13 @@ function smarty_modifiercompiler_wordwrap($params, $compiler)
     } 
     $function = 'wordwrap';
     if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
-        $compiler->template->required_plugins['compiled']['wordwrap']['modifier']['file'] = dirname(__FILE__) .'/shared.mb_wordwrap.php';
-        $compiler->template->required_plugins['compiled']['wordwrap']['modifier']['function'] = 'smarty_mb_wordwrap';
+    	if ($compiler->tag_nocache | $compiler->nocache) {
+        	$compiler->template->required_plugins['nocache']['wordwrap']['modifier']['file'] = dirname(__FILE__) .'/shared.mb_wordwrap.php';
+        	$compiler->template->required_plugins['nocache']['wordwrap']['modifier']['function'] = 'smarty_mb_wordwrap';
+        } else {
+        	$compiler->template->required_plugins['compiled']['wordwrap']['modifier']['file'] = dirname(__FILE__) .'/shared.mb_wordwrap.php';
+        	$compiler->template->required_plugins['compiled']['wordwrap']['modifier']['function'] = 'smarty_mb_wordwrap';
+        }
         $function = 'smarty_mb_wordwrap';
     }
     return $function . '(' . $params[0] . ',' . $params[1] . ',' . $params[2] . ',' . $params[3] . ')';
