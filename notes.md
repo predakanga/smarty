@@ -18,11 +18,11 @@
 * removed UTF-8 frenzy from upper modifier
 * removed UTF-8 frenzy from lower modifier
 * added unescape modifier
+* added to_charset and from_charset modifier
 
 
 ### Afterwards ###
 
-* add convert modifier smarty_modifier_convert($string, $from_encoding="ISO-8859-1", $to=SMARTY_RESOURCE_CHAR_SET)
 * recheck all preg_* functions using \s. They will fail unicode spaces like U+2004 (THREE-PER-EM SPACE) - unless the /u modifier is in place!
 * is it wise to use PCRE with /u everywhere? What if the user requires some obscure charset like KOI8-R or EUC-JP - these patterns will fail. use the mb_ereg functions instead? 
 	* http://www.devcomments.com/ode-to-mb-ereg-functions-i5786.htm

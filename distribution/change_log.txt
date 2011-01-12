@@ -1,5 +1,12 @@
 ===== SVN branch rodneyrehm  =====
 
+12/01/2011
+- added unencode modifier to revert results of encode modifier
+- added to_charset and from_charset modifier for character encoding
+
+11/01/2011
+- … yeah, lot's of plugins touched for adding UTF-8 compatibility
+
 01/01/2011
 - optimize smarty_modified_escape for hex, hexentity, decentity.
 
@@ -526,7 +533,7 @@ request_use_auto_globals
 - added $smarty->_tag_stack for tracing block tag hierarchy
 
 08/02/2010
-- bugfix  use template fullpath at �smarty->cache->clear(...), $smarty->clear_cache(....)
+- bugfix  use template fullpath at §smarty->cache->clear(...), $smarty->clear_cache(....)
 - bugfix of cache filename on extended templates when force_compile=true
 
 07/02/2010

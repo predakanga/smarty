@@ -185,6 +185,9 @@ Test Suite
  PluginModifierCapitalizeTests
  ......
 
+ PluginModifierCharsetTests
+ ........
+
  PluginModifierCountCharactersTests
  ........
 
@@ -211,6 +214,9 @@ Test Suite
 
  PluginModifierTruncateTests
  ..............
+
+ PluginModifierUnescapeTests
+ ....
 
  PluginModifierUpperTests
  ....
@@ -278,6 +284,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 35 seconds
+Time: 38 seconds
 
-OK (949 tests, 1488 assertions)
+OK (961 tests, 1500 assertions)
