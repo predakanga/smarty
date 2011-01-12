@@ -209,6 +209,9 @@ Test Suite
  PluginModifierTruncateTests
  ..............
 
+ PluginModifierUpperTests
+ ....
+
  PluginModifierWordwrapTests
  .................
 
@@ -272,6 +275,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 36 seconds
+Time: 34 seconds
 
-OK (941 tests, 1478 assertions)
+OK (945 tests, 1483 assertions)

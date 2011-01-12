@@ -15,13 +15,13 @@
 * fixed truncate modifier to properly use mb_string if possible
 * removed UTF-8 frenzy from count_characters modifier
 * fixed count_words modifier to treat "hello-world" as a single word like str_count_words() does
+* removed UTF-8 frenzy from upper modifier
 
 next up: *make modifiers UTF-8 safe and sane*
 
 ### UTF-8 insanity ###
 
 * modifiercompiler.lower.php
-* modifiercompiler.upper.php
 
 ### Afterwards ###
 
