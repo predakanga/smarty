@@ -14,12 +14,12 @@
 * fixed spacify modifier so characters are not prepended and appended, made it unicode compatible
 * fixed truncate modifier to properly use mb_string if possible
 * removed UTF-8 frenzy from count_characters modifier
+* fixed count_words modifier to treat "hello-world" as a single word like str_count_words() does
 
 next up: *make modifiers UTF-8 safe and sane*
 
 ### UTF-8 insanity ###
 
-* modifiercompiler.count_words.php
 * modifiercompiler.lower.php
 * modifiercompiler.upper.php
 
@@ -27,6 +27,8 @@ next up: *make modifiers UTF-8 safe and sane*
 
 * add convert modifier smarty_modifier_convert($string, $from_encoding="ISO-8859-1", $to=SMARTY_RESOURCE_CHAR_SET)
 * recheck all preg_* functions using \s. They will fail unicode spaces like U+2004 (THREE-PER-EM SPACE) - unless the /u modifier is in place!
+* is it wise to use PCRE with /u everywhere? What if the user requires some obscure charset like KOI8-R or EUC-JP - these patterns will fail. use the mb_ereg functions instead? 
+	* http://www.devcomments.com/ode-to-mb-ereg-functions-i5786.htm
 
 
 -----

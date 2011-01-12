@@ -20,12 +20,13 @@
 */
 function smarty_modifiercompiler_count_words($params, $compiler)
 { 
-    // mb_ functions available?
-    if (SMARTY_MBSTRING) {
-        return '((mb_detect_encoding(' . $params[0] . ', \'UTF-8, ISO-8859-1\') === \'UTF-8\') ? preg_match_all(\'#[\w\pL]+#u\', ' . $params[0] . ', $tmp) : preg_match_all(\'#\w+#\',' . $params[0] . ', $tmp))';
-    } else {
-        return 'str_word_count(' . $params[0] . ')';
-    } 
+    if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
+        // return 'preg_match_all(\'#[\w\pL]+#u\', ' . $params[0] . ', $tmp)';
+        // expression taken from http://de.php.net/manual/en/function.str-word-count.php#85592
+        return 'preg_match_all(\'/\p{L}[\p{L}\p{Mn}\p{Pd}\\\'\x{2019}]*/u\', ' . $params[0] . ', $tmp)';
+    }
+    // no MBString fallback
+    return 'str_word_count(' . $params[0] . ')'; 
 } 
 
 ?>
