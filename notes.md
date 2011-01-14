@@ -2,37 +2,10 @@
 
 ## changes ##
 
-* added SMARTY_MBSTRING to generalize MBString detection
-* added argument $lc_rest to modifier.capitalize to lower-case anything but the first character of a word
-* changed strip modifier to consider unicode white-space, too
-* changed wordwrap modifier to accept UTF-8 strings
-* changed count_sentences modifier to consider unicode characters and treat sequences delimited by ? and ! as sentences, too
-* added argument $double_encode to modifier.escape (applies to html and htmlall only)
-* changed escape modifier to be UTF-8 compliant
-* changed textformat block to be UTF-8 compliant
-* optimized performance of mailto function
-* fixed spacify modifier so characters are not prepended and appended, made it unicode compatible
-* fixed truncate modifier to properly use mb_string if possible
-* removed UTF-8 frenzy from count_characters modifier
-* fixed count_words modifier to treat "hello-world" as a single word like str_count_words() does
-* removed UTF-8 frenzy from upper modifier
-* removed UTF-8 frenzy from lower modifier
-* added unescape modifier
-* added to_charset and from_charset modifier
-
-
-### Afterwards ###
-
-* recheck all preg_* functions using \s. They will fail unicode spaces like U+2004 (THREE-PER-EM SPACE) - unless the /u modifier is in place!
-* is it wise to use PCRE with /u everywhere? What if the user requires some obscure charset like KOI8-R or EUC-JP - these patterns will fail. use the mb_ereg functions instead? 
-	* http://www.devcomments.com/ode-to-mb-ereg-functions-i5786.htm
-
 
 -----
 ## ToDo ##
 
-* add <code>modifier.unescape.php</code> to transform entities to characters http://www.smarty.net/forums/viewtopic.php?p=69382#69382
-* make <code>modifier.escape.php</code> a compilerfunction to speed up the numerous escape:"html" calls
 * rewrite <code>function.html_select_date.php</code> and <code>function.html_select_time.php</code> for speed and clarity
 * rewrite function.fetch.php to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
 * [template_dir selection](http://groups.google.com/group/smarty-developers/browse_thread/thread/e3cdb246ddb7fda2) could be done with <code>$smarty->template_dir['foo'] = "/some/path/to/templates";</code><code>"file:[foo]bar.tpl"</code>

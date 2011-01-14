@@ -1,11 +1,28 @@
 ===== SVN branch rodneyrehm  =====
 
+14/01/2011
+- added modifiercompiler escape to improve performance of escaping html, htmlall, url, urlpathinfo, quotes, javascript
+
 12/01/2011
 - added unencode modifier to revert results of encode modifier
 - added to_charset and from_charset modifier for character encoding
 
 11/01/2011
-- … yeah, lot's of plugins touched for adding UTF-8 compatibility
+- added SMARTY_MBSTRING to generalize MBString detection
+- added argument $lc_rest to modifier.capitalize to lower-case anything but the first character of a word
+- changed strip modifier to consider unicode white-space, too
+- changed wordwrap modifier to accept UTF-8 strings
+- changed count_sentences modifier to consider unicode characters and treat sequences delimited by ? and ! as sentences, too
+- added argument $double_encode to modifier.escape (applies to html and htmlall only)
+- changed escape modifier to be UTF-8 compliant
+- changed textformat block to be UTF-8 compliant
+- optimized performance of mailto function
+- fixed spacify modifier so characters are not prepended and appended, made it unicode compatible
+- fixed truncate modifier to properly use mb_string if possible
+- removed UTF-8 frenzy from count_characters modifier
+- fixed count_words modifier to treat "hello-world" as a single word like str_count_words() does
+- removed UTF-8 frenzy from upper modifier
+- removed UTF-8 frenzy from lower modifier
 
 01/01/2011
 - optimize smarty_modified_escape for hex, hexentity, decentity.
