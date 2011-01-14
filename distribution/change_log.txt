@@ -2,6 +2,7 @@
 
 14/01/2011
 - added modifiercompiler escape to improve performance of escaping html, htmlall, url, urlpathinfo, quotes, javascript
+- added support to choose template_dir to load from: [index]filename.tpl
 
 12/01/2011
 - added unencode modifier to revert results of encode modifier

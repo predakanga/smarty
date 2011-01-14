@@ -63,7 +63,11 @@ class Smarty_Internal_Resource_File extends Smarty_Resource {
      */
     public function getCompiledFilepath(Smarty_Internal_Template $_template)
     {
-        return $this->buildCompiledFilepath($_template, basename($_template->resource_name));
+        $_file = $_template->resource_name;
+        if (($_pos = strpos($_file, ']')) !== false) {
+            $_file = substr($_file, $_pos + 1);
+        }
+        return $this->buildCompiledFilepath($_template, basename($_file));
     } 
 } 
 

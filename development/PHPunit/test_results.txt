@@ -164,6 +164,9 @@ Test Suite
  GetTemplateVarsTests
  ......
 
+ IndexedFileResourceTests
+ ............
+
  LoadFilterTests
  .
 
@@ -284,6 +287,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 36 seconds
+Time: 37 seconds
 
-OK (961 tests, 1500 assertions)
+OK (973 tests, 1511 assertions)

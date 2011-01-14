@@ -2,6 +2,10 @@
 
 ## changes ##
 
+## needs fixing ##
+
+* default_template_handler_func - not executed for fetch('extend:…')
+
 
 -----
 ## ToDo ##

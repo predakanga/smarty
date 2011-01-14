@@ -82,6 +82,33 @@ abstract class Smarty_Resource {
         if ($file === null) {
             $file = $_template->resource_name;
         }
+        // template_dir index?
+        if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match) && is_array($_template->smarty->template_dir)) {
+            $_template_dir = null;
+            // try string indexes
+            if (isset($_template->smarty->template_dir[$match['key']])) {
+                $_template_dir = $_template->smarty->template_dir[$match['key']];
+            } else if (is_numeric($match['key'])) {
+                // try numeric index
+                $match['key'] = (int) $match['key'];
+                if (isset($_template->smarty->template_dir[$match['key']])) {
+                    $_template_dir = $_template->smarty->template_dir[$match['key']];
+                } else {
+                    // try at location index
+                    $keys = array_keys($_template->smarty->template_dir);
+                    $_template_dir = $_template->smarty->template_dir[$keys[$match['key']]];
+                }
+            }
+
+            if ($_template_dir) {
+                $_file = substr($file,strpos($file, ']') + 1);
+                $_template_dir = rtrim($_template_dir, '/\\') . DS;
+                $_filepath = $_template_dir . $_file;
+                if (file_exists($_filepath)) {
+                    return $_filepath;
+                }
+            }
+        }
         // relative file name? 
         if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
 	        foreach((array)$_template->smarty->template_dir as $_template_dir) {
