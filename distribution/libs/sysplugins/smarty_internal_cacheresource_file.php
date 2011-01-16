@@ -9,21 +9,23 @@
  * @package Smarty
  * @subpackage Cacher
  * @author Uwe Tews 
+ * @author Rodney Rehm
  */
 
 /**
  * This class does contain all necessary methods for the HTML cache on file system
  */
 class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
-	/**
-	 * Determine the filepath (or some unique cache id) of the cached template output
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @return string the cache filepath
-	 */
-    public function getCachedFilepath(Smarty_Internal_Template $_template)
+    /**
+     * populate Cached Object with meta data from Resource
+     *
+     * @param Smarty_Template_Cached $cached cached object
+     * @param Smarty_Internal_Template $_template template object
+     * @return void
+     */
+    public function populate(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template)
     {
-        $_source_file_path = str_replace(':', '.', $_template->getTemplateFilepath());
+        $_source_file_path = str_replace(':', '.', $_template->source->filepath);
         $_cache_id = isset($_template->cache_id) ? preg_replace('![^\w\|]+!', '_', $_template->cache_id) : null;
         $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
         $_filepath = $_template->source->uid; 
@@ -46,20 +48,24 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
             $_compile_id = '';
         } 
         $_cache_dir = rtrim($_template->smarty->cache_dir, '/\\') . DS;
-        return $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
-    } 
-
-	/**
-	 * Determine the timpestamp (epoch) of the cached template output
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @return integer|booelan the template timestamp (epoch), or false if the file does not exist
-	 */
-    public function getCachedTimestamp(Smarty_Internal_Template $_template)
-    { 
-        // return @filemtime ($_template->getCachedFilepath());
-        return ($_template->getCachedFilepath() && file_exists($_template->getCachedFilepath())) ? filemtime($_template->getCachedFilepath()) : false ;
-    } 
+        $cached->filepath = $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
+        if ($_template->smarty->compile_check) {
+            $cached->timestamp = @filemtime($cached->filepath);
+            $cached->exists = !!$cached->timestamp;
+        }
+    }
+    
+    /**
+     * populate Cached Object with timestamp and exists from Resource
+     *
+     * @param Smarty_Template_Cached $source cached object
+     * @return void
+     */
+    public function populateTimestamp(Smarty_Template_Cached $cached)
+    {
+        $cached->timestamp = @filemtime($cached->filepath);
+        $cached->exists = !!$cached->timestamp;
+    }
 
 	/**
 	 * Get the cached template output
@@ -74,7 +80,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         	ob_start();
     	}
         $_smarty_tpl = $_template;
-        include $_template->getCachedFilepath();
+        include $_template->cached->filepath;
         if ($no_render) {
         	return null;
         } else {
@@ -87,15 +93,14 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
 	 * 
 	 * @param Smarty_Internal_Template $_template template object
 	 * @param string $content content to cache
-	 * @return boolean status
+	 * @return boolean success
 	 */
     public function writeCachedContent(Smarty_Internal_Template $_template, $content)
     {
-        if (!$_template->source->recompiled) {
-            if (Smarty_Internal_Write_File::writeFile($_template->getCachedFilepath(), $content, $_template->smarty) === true) {
-                $_template->cached_timestamp = filemtime($_template->getCachedFilepath());
-                return true;
-            } 
+        if (Smarty_Internal_Write_File::writeFile($_template->cached->filepath, $content, $_template->smarty) === true) {
+            $_template->cached->timestamp = filemtime($_template->cached->filepath);
+            $_template->cached->exists = !!$_template->cached->timestamp;
+            return true;
         } 
         return false;
     } 

@@ -14,23 +14,23 @@ abstract class Smarty_CacheResource {
      */
     protected static $resources = array();
     
-	/**
-	 * Determine the filepath (or some unique cache id) of the cached template output
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @return string the cache filepath
-	 */
-	public abstract function getCachedFilepath(Smarty_Internal_Template $_template);
-	
-	/**
-	 * Determine the timpestamp (epoch) of the cached template output
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @return integer|booelan the template timestamp (epoch), or false if the file does not exist
-	 */
-	public abstract function getCachedTimestamp(Smarty_Internal_Template $_template);
-	
-	
+    /**
+     * populate Cached Object with meta data from Resource
+     *
+     * @param Smarty_Template_Cached $cached cached object
+     * @param Smarty_Internal_Template $_template template object
+     * @return void
+     */
+    public abstract function populate(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template);
+    
+    /**
+     * populate Cached Object with timestamp and exists from Resource
+     *
+     * @param Smarty_Template_Cached $source cached object
+     * @return void
+     */
+	public abstract function populateTimestamp(Smarty_Template_Cached $cached);
+
 	/**
 	 * Get the cached template output
 	 * 
@@ -45,7 +45,7 @@ abstract class Smarty_CacheResource {
 	 * 
 	 * @param Smarty_Internal_Template $_template template object
 	 * @param string $content content to cache
-	 * @return boolean status
+	 * @return boolean success
 	 */
 	public abstract function writeCachedContent(Smarty_Internal_Template $_template, $content);
 	
@@ -91,17 +91,6 @@ abstract class Smarty_CacheResource {
 	}
 	
 	/**
-	 * Determine the lifetime of the cache
-	 *
-	 * @param Smarty_Internal_Template $_template current template
-	 * @return integer number of seconds to keep the content cached
-	 */
-	protected function getCacheLifetime(Smarty_Internal_Template $_template)
-	{
-		return $_template->properties['cache_lifetime'];
-	}
-	
-	/**
      * Load Cache Resource Handler
      *
      * @param Smarty $smarty Smarty object
@@ -135,4 +124,18 @@ abstract class Smarty_CacheResource {
         // give up
         throw new SmartyException("Unable to load cache resource '{$type}'");
 	}
+
+    /**
+     * initialize Cached Object for given Template
+     *
+     * @param Smarty_Internal_Template $_template template object
+     * @return Smarty_Template_Cached Cached Object
+     */
+    public static function cached(Smarty_Internal_Template $_template)
+    {
+        $handler = self::load($_template->smarty);
+        $cached = new Smarty_Template_Cached($handler, $_template);
+        $handler->populate($cached, $_template);
+        return $cached;
+    }
 }

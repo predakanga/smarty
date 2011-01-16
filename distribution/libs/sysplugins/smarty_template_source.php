@@ -35,7 +35,7 @@ class Smarty_Template_Source {
     public $uid = null;
     
     /**
-	 * Template Resource (Smarty_Internal_Template::template_resource)
+	 * Template Resource (Smarty_Internal_Template::$template_resource)
 	 * @var string
 	 */
     public $resource = null;

@@ -39,33 +39,37 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     protected $timestamps = array();
 
     /**
-     * Determine the filepath (or some unique cache id) of the cached template output
-     * 
+     * populate Cached Object with meta data from Resource
+     *
+     * @param Smarty_Template_Cached $cached cached object
      * @param Smarty_Internal_Template $_template template object
-     * @return string the cache filepath
+     * @return void
      */
-    public function getCachedFilepath(Smarty_Internal_Template $_template)
+    public function populate(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template)
     {
-        return $this->buildCachedFilepath(
-            $_template->source->name, 
-            $_template->cache_id, 
-            $_template->compile_id
-        );
-    } 
- 
+        $cached->filepath = $this->sanitize($cached->source->name) 
+            . '#'. $this->sanitize($cached->cache_id) 
+            . '#' . $this->sanitize($cached->compile_id);
+            
+        if ($_template->smarty->compile_check) {
+            $this->populateTimestamp($cached);
+        }
+    }
+    
     /**
-     * Determine the timpestamp (epoch) of the cached template output
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return integer|booelan the template timestamp (epoch), or false if the file does not exist
+     * populate Cached Object with timestamp and exists from Resource
+     *
+     * @param Smarty_Template_Cached $source cached object
+     * @return void
      */
-    public function getCachedTimestamp(Smarty_Internal_Template $_template)
+    public function populateTimestamp(Smarty_Template_Cached $cached)
     {
-        $cid = $_template->getCachedFilepath();
-        if (empty($this->timestamps[$cid]) && !$this->fetch($cid, $_template->source->name, $_template->cache_id, $_template->compile_id)) {
+        if (empty($this->timestamps[$cached->filepath]) 
+            && !$this->fetch($cached->filepath, $cached->source->name, $cached->cache_id, $cached->compile_id)) {
             return false;
         }
-        return (int) $this->timestamps[ $cid ];
+        $cached->timestamp = (int) $this->timestamps[ $cached->filepath ];
+        $cached->exists = $cached->timestamp;
     } 
  
     /**
@@ -77,11 +81,11 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      */
 	public function getCachedContents(Smarty_Internal_Template $_template, $no_render = false)
     {
-        $cid = $_template->getCachedFilepath(); 
-        if (empty($this->contents[$cid]) && !$this->fetch($cid, $_template->source->name, $_template->cache_id, $_template->compile_id)) {
+        if (empty($this->contents[$_template->cached->filepath]) 
+            && !$this->fetch($_template->cached->filepath, $_template->source->name, $_template->cache_id, $_template->compile_id)) {
             return false;
         }
-        return $this->decodeCache($_template, $this->contents[$cid], $no_render);
+        return $this->decodeCache($_template, $this->contents[$_template->cached->filepath], $no_render);
     }
     
     /**
@@ -89,13 +93,12 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * 
 	 * @param Smarty_Internal_Template $_template template object
 	 * @param string $content content to cache
-     * @return boolean status
+     * @return boolean success
      */
 	public function writeCachedContent(Smarty_Internal_Template $_template, $content)
     {
-        $cid = $_template->getCachedFilepath();
         $this->addMetaTimestamp($content);
-        return $this->write(array($cid => $content), $this->getCacheLifetime($_template));
+        return $this->write(array($_template->cached->filepath => $content), $_template->properties['cache_lifetime']);
     } 
  
     /**

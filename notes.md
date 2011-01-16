@@ -1,19 +1,16 @@
 # Notes #
 
-Next Up: Performance tuning of Smart_Resource and Smarty_CacheResource APIs
+
 
 ## changes ##
 
 ## needs fixing ##
 
-* default_template_handler_func - not executed for fetch('extend:…')
-
 
 -----
 ## ToDo ##
 
-* move "extend:" functionality to Smarty_Resource, remove "extend:" resource type, identify the extend by a|b|c instead
-* rewrite <code>function.html_select_date.php</code> and <code>function.html_select_time.php</code> for speed and clarity
+
 * rewrite function.fetch.php to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
 * Load Config via Smarty_Resource? [requested](http://groups.google.com/group/smarty-developers/browse_thread/thread/d59c17fac4921b9f)
 
