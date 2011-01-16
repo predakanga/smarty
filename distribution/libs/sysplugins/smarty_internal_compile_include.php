@@ -54,7 +54,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
                         // make sure whole chain gest compiled
                         $tpl->mustCompile = true;
 //                    } 
-                    if (!($tpl->resource_object instanceof Smarty_Resource_Uncompiled) && $tpl->isExisting()) {
+                    if (!($tpl->source->uncompiled) && $tpl->isExisting()) {
                         // get compiled code
                         $compiled_tpl = $tpl->getCompiledTemplate(); 
                         // merge compiled code for {function} tags

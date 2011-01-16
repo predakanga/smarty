@@ -63,7 +63,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testUsesCompiler()
     {
         $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertFalse($tpl->resource_object instanceof Smarty_Resource_Uncompiled);
+        $this->assertFalse($tpl->source->uncompiled);
     } 
     /**
     * test isEvaluated
@@ -71,7 +71,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsEvaluated()
     {
         $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertTrue($tpl->resource_object instanceof Smarty_Resource_Recompiled);
+        $this->assertTrue($tpl->source->recompiled);
     } 
     /**
     * test mustCompile

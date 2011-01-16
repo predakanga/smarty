@@ -9,24 +9,17 @@
  * -------------------------------------------------------------
  */
 class Smarty_Resource_Db3 extends Smarty_Resource {
-    public function isExisting(Smarty_Internal_Template $template)
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
-        return true;
+        $source->filepath = 'db3:';
+        $source->uid = sha1($source->resource);
+    	$source->timestamp = 0;
+    	$source->exists = true;
     }
     
-    public function getTemplateFilepath(Smarty_Internal_Template $_template)
+    public function getTemplateSource(Smarty_Template_Source $source)
     {
-        return 'db3:';
-    }
-    
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $resource_name=null)
-    {
-        return 0;
-    }
-    
-    public function getTemplateSource(Smarty_Internal_Template $_template)
-    {
-        return $_template->template_source = '{$x="hello world"}{$x}';
+        return '{$x="hello world"}{$x}';
     }
     
     public function getCompiledFilepath(Smarty_Internal_Template $_template)

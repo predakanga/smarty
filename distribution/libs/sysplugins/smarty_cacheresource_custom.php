@@ -96,7 +96,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 	 */
 	public function getCachedFilepath(Smarty_Internal_Template $_template)
     {
-        return $this->buildCachedFilepath($_template->resource_name, $_template->cache_id, $_template->compile_id);
+        return $this->buildCachedFilepath($_template->source->name, $_template->cache_id, $_template->compile_id);
     }
     
     /**
@@ -107,12 +107,12 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 	 */
 	public function getCachedTimestamp(Smarty_Internal_Template $_template)
 	{
-	    $id = $this->buildCachedFilepath($_template->resource_name, $_template->cache_id, $_template->compile_id);
-        $mtime = $this->fetchTimestamp($id, $_template->resource_name, $_template->cache_id, $_template->compile_id);
+	    $id = $this->buildCachedFilepath($_template->source->name, $_template->cache_id, $_template->compile_id);
+        $mtime = $this->fetchTimestamp($id, $_template->source->name, $_template->cache_id, $_template->compile_id);
         if ($mtime !== null) {
             return $mtime;
         }
-        $t = $this->cache($id, $_template->resource_name, $_template->cache_id, $_template->compile_id);
+        $t = $this->cache($id, $_template->source->name, $_template->cache_id, $_template->compile_id);
         return isset($t['mtime']) ? $t['mtime'] : false;
 	}
 	
@@ -126,8 +126,8 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 	public function getCachedContents(Smarty_Internal_Template $_template, $no_render = false)
 	{
         $t = $this->cache(
-	        $this->buildCachedFilepath($_template->resource_name, $_template->cache_id, $_template->compile_id),
-            $_template->resource_name, 
+	        $this->buildCachedFilepath($_template->source->name, $_template->cache_id, $_template->compile_id),
+            $_template->source->name, 
             $_template->cache_id, 
             $_template->compile_id
         );
@@ -147,8 +147,8 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 	public function writeCachedContent(Smarty_Internal_Template $_template, $content)
 	{
 	    return $this->save(
-	        $this->buildCachedFilepath($_template->resource_name, $_template->cache_id, $_template->compile_id),
-	        $_template->resource_name, 
+	        $this->buildCachedFilepath($_template->source->name, $_template->cache_id, $_template->compile_id),
+	        $_template->source->name, 
 	        $_template->cache_id, 
 	        $_template->compile_id, 
 	        $this->getCacheLifetime($_template),

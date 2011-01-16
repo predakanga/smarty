@@ -365,7 +365,7 @@ class Smarty_Internal_TemplateCompilerBase {
         // If the template is not evaluated and we have a nocache section and or a nocache tag
         if ($is_code && !empty($content)) {
             // generate replacement code
-            if ((!($this->template->resource_object instanceof Smarty_Resource_Recompiled) || $this->template->forceNocache) && $this->template->caching && !$this->suppressNocacheProcessing &&
+            if ((!($this->template->source->recompiled) || $this->template->forceNocache) && $this->template->caching && !$this->suppressNocacheProcessing &&
                     ($this->nocache || $this->tag_nocache || $this->template->forceNocache == 2)) {
                 $this->template->has_nocache_code = true;
                 $_output = str_replace("'", "\'", $content);

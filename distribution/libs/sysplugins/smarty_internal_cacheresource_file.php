@@ -26,7 +26,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         $_source_file_path = str_replace(':', '.', $_template->getTemplateFilepath());
         $_cache_id = isset($_template->cache_id) ? preg_replace('![^\w\|]+!', '_', $_template->cache_id) : null;
         $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
-        $_filepath = $_template->templateUid; 
+        $_filepath = $_template->source->uid; 
         // if use_sub_dirs, break file into directories
         if ($_template->smarty->use_sub_dirs) {
             $_filepath = substr($_filepath, 0, 2) . DS
@@ -91,7 +91,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
 	 */
     public function writeCachedContent(Smarty_Internal_Template $_template, $content)
     {
-        if (!($_template->resource_object instanceof Smarty_Resource_Recompiled)) {
+        if (!$_template->source->recompiled) {
             if (Smarty_Internal_Write_File::writeFile($_template->getCachedFilepath(), $content, $_template->smarty) === true) {
                 $_template->cached_timestamp = filemtime($_template->getCachedFilepath());
                 return true;

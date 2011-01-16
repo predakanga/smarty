@@ -47,7 +47,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     public function getCachedFilepath(Smarty_Internal_Template $_template)
     {
         return $this->buildCachedFilepath(
-            $_template->resource_name, 
+            $_template->source->name, 
             $_template->cache_id, 
             $_template->compile_id
         );
@@ -62,7 +62,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     public function getCachedTimestamp(Smarty_Internal_Template $_template)
     {
         $cid = $_template->getCachedFilepath();
-        if (empty($this->timestamps[$cid]) && !$this->fetch($cid, $_template->resource_name, $_template->cache_id, $_template->compile_id)) {
+        if (empty($this->timestamps[$cid]) && !$this->fetch($cid, $_template->source->name, $_template->cache_id, $_template->compile_id)) {
             return false;
         }
         return (int) $this->timestamps[ $cid ];
@@ -78,7 +78,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	public function getCachedContents(Smarty_Internal_Template $_template, $no_render = false)
     {
         $cid = $_template->getCachedFilepath(); 
-        if (empty($this->contents[$cid]) && !$this->fetch($cid, $_template->resource_name, $_template->cache_id, $_template->compile_id)) {
+        if (empty($this->contents[$cid]) && !$this->fetch($cid, $_template->source->name, $_template->cache_id, $_template->compile_id)) {
             return false;
         }
         return $this->decodeCache($_template, $this->contents[$cid], $no_render);

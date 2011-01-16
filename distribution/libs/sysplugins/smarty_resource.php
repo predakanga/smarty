@@ -44,152 +44,46 @@ abstract class Smarty_Resource {
     }
 
     /**
-     * Test if the template source exists
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return boolean true if exists, false else
-     */
-    public abstract function isExisting(Smarty_Internal_Template $template);
-    
-    /**
-    * Get filepath to template source
-    * 
-    * @param Smarty_Internal_Template $_template template object
-    * @return string filepath to template source file
-    */
-    public function getTemplateFilepath(Smarty_Internal_Template $_template)
-    {
-        $_filepath = $this->buildTemplateFilepath($_template);
-
-        if ($_filepath !== false) {
-            if (is_object($_template->smarty->security_policy)) {
-                $_template->smarty->security_policy->isTrustedResourceDir($_filepath);
-            } 
-        } 
-        $_template->templateUid = sha1($_filepath);
-        return $_filepath;
-    }
-    
-    /**
-     * Expand file to fully qualified filepath.
-     *
-     * @param Smarty_Internal_Template $_template template object
-     * @param string $file filepath
-     * @return string|bollean absolute filepath or false if not found
-     */
-    protected function buildTemplateFilepath(Smarty_Internal_Template $_template, $file = null)
-    {
-        if ($file === null) {
-            $file = $_template->resource_name;
-        }
-        // template_dir index?
-        if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match) && is_array($_template->smarty->template_dir)) {
-            $_template_dir = null;
-            // try string indexes
-            if (isset($_template->smarty->template_dir[$match['key']])) {
-                $_template_dir = $_template->smarty->template_dir[$match['key']];
-            } else if (is_numeric($match['key'])) {
-                // try numeric index
-                $match['key'] = (int) $match['key'];
-                if (isset($_template->smarty->template_dir[$match['key']])) {
-                    $_template_dir = $_template->smarty->template_dir[$match['key']];
-                } else {
-                    // try at location index
-                    $keys = array_keys($_template->smarty->template_dir);
-                    $_template_dir = $_template->smarty->template_dir[$keys[$match['key']]];
-                }
-            }
-
-            if ($_template_dir) {
-                $_file = substr($file,strpos($file, ']') + 1);
-                $_template_dir = rtrim($_template_dir, '/\\') . DS;
-                $_filepath = $_template_dir . $_file;
-                if (file_exists($_filepath)) {
-                    return $_filepath;
-                }
-            }
-        }
-        // relative file name? 
-        if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
-	        foreach((array)$_template->smarty->template_dir as $_template_dir) {
-                $_template_dir = rtrim($_template_dir, '/\\') . DS;
-            	$_filepath = $_template_dir . $file;
-            	if (file_exists($_filepath)) {
-                	return $_filepath;
-            	}
-        		if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir)) {
-        			// try PHP include_path
-        			if (($_filepath = Smarty_Internal_Get_Include_Path::getIncludePath($_filepath)) !== false) {
-        				return $_filepath;
-        			}
-        		}
-       		}
-       	}
-        // try absolute filepath
-        if (file_exists($file)) return $file;
-        // no tpl file found
-        // FIXME: this will fail for {extend} resources, as they supply the $file argument which is not passed on here
-        if (!empty($_template->smarty->default_template_handler_func)) {
-            if (!is_callable($_template->smarty->default_template_handler_func)) {
-                throw new SmartyException("Default template handler not callable");
-            } else {
-                $_return = call_user_func_array($_template->smarty->default_template_handler_func,
-                    array($_template->resource_type, $_template->resource_name, &$_template->template_source, &$_template->template_timestamp, $_template));
-                if (is_string($_return)) {
-                    return $_return;
-                } elseif ($_return === true) {
-                    return $file;
-                } 
-            } 
-        } 
-        return false;
-    }
-    
-    /**
-     * Get timestamp (epoch) the template source was modified
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @param string $resource_type type of the resource to get modification time of. 
-     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
-     * @return integer|boolean timestamp (epoch) the template was modified, false if resources has no timestamp
-     */
-    public abstract function getTemplateTimestamp(Smarty_Internal_Template $_template, $resource_name=null);
-    
-    /**
      * Load template's source into current template object
      * 
      * @note: The loaded source is assigned to $_template->template_source directly.
-     * @param Smarty_Internal_Template $_template current template
-     * @return boolean success: true for success, false for failure
+     * @param Smarty_Template_Source $source source object
+     * @return string template source
+     * @throws SmartyException if source cannot be loaded
      */
-    public abstract function getTemplateSource(Smarty_Internal_Template $_template);
+    public abstract function getTemplateSource(Smarty_Template_Source $source);
     
     /**
-     * Get filepath to compiled template
-     * 
+     * populate Source Object with meta data from Resource
+     *
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
-     * @return string|boolean path to compiled template or false if not applicable
+     * @return void
      */
-    public function getCompiledFilepath(Smarty_Internal_Template $_template)
+    public abstract function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null);
+
+    /**
+     * populate Source Object with timestamp and exists from Resource
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return void
+     */
+    public function populateTimestamp(Smarty_Template_Source $source)
     {
-        return $this->buildCompiledFilepath($_template);
+        
     }
     
     /**
-     * Build filepath to compiled template
+     * populate Compiled Object with compiled filepath
      *
+     * @param Smarty_Template_Compiled $compiled compiled object
      * @param Smarty_Internal_Template $_template template object
-     * @param string $_basename basename of the template to inject into the filepath
-     * @return string path to compiled template
+     * @return void
      */
-    protected function buildCompiledFilepath(Smarty_Internal_Template $_template, $_basename=null)
+    public function populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
     {
         $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
-        // calculate Uid if not already done
-        if ($_template->templateUid == '') {
-            $_template->getTemplateFilepath();
-        } 
-        $_filepath = $_template->templateUid; 
+        $_filepath = $compiled->source->uid; 
         // if use_sub_dirs, break file into directories
         if ($_template->smarty->use_sub_dirs) {
             $_filepath = substr($_filepath, 0, 2) . DS
@@ -209,15 +103,111 @@ abstract class Smarty_Resource {
         }
         $_compile_dir = rtrim($_template->smarty->compile_dir, '/\\') . DS;
         // set basename if not specified
+        $_basename = $this->getBasename($compiled->source);
         if ($_basename === null) {
-           $_basename = basename( preg_replace('![^\w\/]+!', '_', $_template->resource_name) );
+            $_basename = basename( preg_replace('![^\w\/]+!', '_', $compiled->source->name) );
         }
         // separate (optional) basename by dot
         if ($_basename) {
             $_basename = '.' . $_basename;
         }
-        return $_compile_dir . $_filepath . '.' . $_template->resource_type . $_basename . $_cache . '.php';
+
+        $compiled->filepath = $_compile_dir . $_filepath . '.' . $compiled->source->type . $_basename . $_cache . '.php';
     }
+    
+    /**
+     * build template filepath by traversing the template_dir array
+     *
+     * @param Smarty_Template_Source $source source object
+     * @param Smarty_Internal_Template $_template template object
+     * @return string fully qualified filepath
+     * @throws SmartyException if default template handler is registered but not callable
+     */
+    protected function buildFilepath(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
+    {
+        $file = $source->name;
+        
+        // template_dir index?
+        if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match) && is_array($source->smarty->template_dir)) {
+            $_template_dir = null;
+            // try string indexes
+            if (isset($source->smarty->template_dir[$match['key']])) {
+                $_template_dir = $source->smarty->template_dir[$match['key']];
+            } else if (is_numeric($match['key'])) {
+                // try numeric index
+                $match['key'] = (int) $match['key'];
+                if (isset($source->smarty->template_dir[$match['key']])) {
+                    $_template_dir = $source->smarty->template_dir[$match['key']];
+                } else {
+                    // try at location index
+                    $keys = array_keys($source->smarty->template_dir);
+                    $_template_dir = $source->smarty->template_dir[$keys[$match['key']]];
+                }
+            }
+
+            if ($_template_dir) {
+                $_file = substr($file,strpos($file, ']') + 1);
+                $_template_dir = rtrim($_template_dir, '/\\') . DS;
+                $_filepath = $_template_dir . $_file;
+                if (file_exists($_filepath)) {
+                    return $_filepath;
+                }
+            }
+        }
+        
+        // relative file name? 
+        if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
+	        foreach((array)$source->smarty->template_dir as $_template_dir) {
+                $_template_dir = rtrim($_template_dir, '/\\') . DS;
+            	$_filepath = $_template_dir . $file;
+            	if (file_exists($_filepath)) {
+                	return $_filepath;
+            	}
+        		if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir)) {
+        			// try PHP include_path
+        			if (($_filepath = Smarty_Internal_Get_Include_Path::getIncludePath($_filepath)) !== false) {
+        				return $_filepath;
+        			}
+        		}
+       		}
+       	}
+
+        // try absolute filepath
+        if (file_exists($file)) {
+            return $file;
+        }
+
+        // no tpl file found
+        if (!empty($source->smarty->default_template_handler_func)) {
+            if (!is_callable($source->smarty->default_template_handler_func)) {
+                throw new SmartyException("Default template handler not callable");
+            }
+            $_return = call_user_func_array($source->smarty->default_template_handler_func,
+                array($source->type, $source->name, &$_content, &$_timestamp, $source->smarty));
+            if (is_string($_return)) {
+                return $_return;
+            } elseif ($_return === true) {
+                $source->content = $_content;
+                $source->timestamp = $_timestamp;
+                return $_filepath;
+            } 
+        } 
+        
+        // give up
+        return false;
+    }
+
+    /**
+     * Determine basename for compiled filename
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return string resource's basename
+     */
+    protected function getBasename(Smarty_Template_Source $source)
+    {
+        return null;
+    }
+    
     
     /**
      * Test if the resource has been modified since a given timestamp
@@ -230,102 +220,118 @@ abstract class Smarty_Resource {
      */
     public static function isModifiedSince(Smarty_Internal_Template $_template, $resource_type, $filepath, $since)
     {
-        if ($resource_type == 'file' || $resource_type == 'extends' || $resource_type == 'php') {
-            // file, extends and php types can be checked without loading the respective resource handlers
+        if ($resource_type == 'file' || $resource_type == 'php') {
+            // file and php types can be checked without loading the respective resource handlers
             $mtime = filemtime($filepath);
         } else {
-            self::parse($_template, $filepath, $resource_type, $resource_name);
-            $resource_handler = self::load($_template, $resource_type);
-            $mtime = $resource_handler->getTemplateTimestamp($_template, $resource_name);
+            $source = self::source($_template);
+            $mtime = $source->timestamp;
         }
         return $mtime > $since;
     }
     
     /**
-     * Split a template resource into its name and type
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @param string $template_resource template resource specification
-     * @param string $resource_type resource type
-     * @param string $resource_name resource name
-     * @return void
-     */
-    public static function parse(Smarty_Internal_Template $_template, $template_resource, &$resource_type, &$resource_name)
-    {
-        if (($pos = strpos($template_resource, ':')) === false) {
-            // no resource given, use default
-            $resource_type = $_template->smarty->default_resource_type;
-            $resource_name = $template_resource;
-        } else {
-            // get type and name from path
-            $resource_type = substr( $template_resource, 0, $pos );
-            $resource_name = substr( $template_resource, $pos +1 );
-            if (strlen($resource_type) == 1) {
-                // 1 char is not resource type, but part of filepath
-                $resource_type = 'file';
-                $resource_name = $template_resource;
-            }
-        }
-    }
-    
-    /**
      * Load Resource Handler
      *
-     * @param Smarty_Internal_Template $_template template object
+     * @param Smarty $smarty smarty object
      * @param string $resource_type name of the resource
      * @return Smarty_Resource Resource Handler
      */
-    public static function load(Smarty_Internal_Template $_template, $resource_type)
+    public static function load(Smarty $smarty, $resource_type)
     {
         // try the instance cache
         if (isset(self::$resources[$resource_type])) {
             return self::$resources[$resource_type];
         }
+        
         // try registered resource
-        if (isset($_template->smarty->registered_resources[$resource_type])) {
-            if ($_template->smarty->registered_resources[$resource_type] instanceof Smarty_Resource) {
-                return self::$resources[$resource_type] = $_template->smarty->registered_resources[$resource_type];
+        if (isset($smarty->registered_resources[$resource_type])) {
+            if ($smarty->registered_resources[$resource_type] instanceof Smarty_Resource) {
+                return self::$resources[$resource_type] = $smarty->registered_resources[$resource_type];
             }
             if (!isset(self::$resources['registered'])) {
                 self::$resources['registered'] = new Smarty_Internal_Resource_Registered();
             }
             return self::$resources['registered'];
         } 
+        
         // try sysplugins dir
         if (in_array($resource_type, array('file', 'string', 'extends', 'php', 'stream', 'eval'))) {
             $_resource_class = 'Smarty_Internal_Resource_' . ucfirst($resource_type);
             return self::$resources[$resource_type] = new $_resource_class();
         } 
+        
         // try plugins dir
         $_resource_class = 'Smarty_Resource_' . ucfirst($resource_type);
-        if ($_template->smarty->loadPlugin($_resource_class)) {
+        if ($smarty->loadPlugin($_resource_class)) {
             if (class_exists($_resource_class, false)) {
                 return self::$resources[$resource_type] = new $_resource_class();
             } else {
-            	$_template->smarty->registerResource($resource_type,
+            	$smarty->registerResource($resource_type,
             		array("smarty_resource_{$resource_type}_source",
                 		"smarty_resource_{$resource_type}_timestamp",
                     	"smarty_resource_{$resource_type}_secure",
                     	"smarty_resource_{$resource_type}_trusted"));
                 // give it another try, now that the resource is registered properly
-                return self::load($_template, $resource_type);
+                return self::load($smarty, $resource_type);
             } 
         }
+        
         // try streams
         $_known_stream = stream_get_wrappers();
         if (in_array($resource_type, $_known_stream)) {
             // is known stream
-            if (is_object($_template->smarty->security_policy)) {
-                $_template->smarty->security_policy->isTrustedStream($resource_type);
+            if (is_object($smarty->security_policy)) {
+                $smarty->security_policy->isTrustedStream($resource_type);
             }
             if (!isset(self::$resources['stream'])) {
                 self::$resources['stream'] = new Smarty_Internal_Resource_Stream();
             }
             return self::$resources['stream'];
         }
+        
         // give up
         throw new SmartyException('Unkown resource type \'' . $resource_type . '\'');
     }
+    
+    /**
+     * initialize Source Object for given resource
+     *
+     * Either [$_template] or [$smarty, $template_resource] must be specified
+     * @param Smarty_Internal_Template $_template template object
+     * @param Smarty $smarty smarty object
+     * @param string $template_resource resource identifier
+     * @return Smarty_Template_Source Source Object
+     */
+    public static function source(Smarty_Internal_Template $_template=null, Smarty $smarty=null, $template_resource=null)
+    {
+        if ($_template) {
+            $smarty = $_template->smarty;
+            $template_resource = $_template->template_resource;
+        }
+        
+        if (($pos = strpos($template_resource, ':')) === false) {
+            // no resource given, use default
+            $resource_type = $smarty->default_resource_type;
+            $resource_name = $template_resource;
+        } else {
+            // get type and name from path
+            $resource_type = substr($template_resource, 0, $pos);
+            $resource_name = substr($template_resource, $pos +1);
+            if (strlen($resource_type) == 1) {
+                // 1 char is not resource type, but part of filepath
+                $resource_type = 'file';
+                $resource_name = $template_resource;
+            }
+        }
+        
+        $resource = Smarty_Resource::load($smarty, $resource_type); 
+        $source = new Smarty_Template_Source($resource, $smarty, $template_resource, $resource_type, $resource_name);
+        $resource->populate($source, $_template);
+
+        return $source;
+    }
+
 }
 
 ?>

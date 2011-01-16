@@ -8,67 +8,75 @@
  * @package Smarty
  * @subpackage TemplateResources
  * @author Uwe Tews 
+ * @author Rodney Rehm
  */
 class Smarty_Internal_Resource_File extends Smarty_Resource {
+    
     /**
-     * Test if the template source exists
-     * 
+     * populate Source Object with meta data from Resource
+     *
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
-     * @return boolean true if exists, false else
+     * @return void
      */
-    public function isExisting(Smarty_Internal_Template $template)
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
-        if ($template->getTemplateFilepath() === false) {
-            return false;
-        } else {
-            return true;
-        } 
-    } 
+        $source->filepath = $this->buildFilepath($source, $_template);
 
+        if ($source->filepath !== false) {
+            if (is_object($source->smarty->security_policy)) {
+                $source->smarty->security_policy->isTrustedResourceDir($source->filepath);
+            }
+            
+            $source->uid = sha1($source->filepath);
+            if ($source->smarty->compile_check) {
+                $source->timestamp = @filemtime($source->filepath);
+                $source->exists = !!$source->timestamp;
+            }
+        }
+    }
+    
     /**
-     * Get timestamp (epoch) the template source was modified
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
-     * @return integer timestamp (epoch) the template was modified
+     * populate Source Object with timestamp and exists from Resource
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return void
      */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
+    public function populateTimestamp(Smarty_Template_Source $source)
     {
-        return filemtime($_template->getTemplateFilepath());
-    } 
+        $source->timestamp = @filemtime($source->filepath);
+        $source->exists = !!$source->timestamp;
+    }
 
     /**
      * Load template's source from file into current template object
      * 
-     * @note: The loaded source is assigned to $_template->template_source directly.
-     * @param Smarty_Internal_Template $_template current template
-     * @return boolean success: true for success, false for failure
+     * @param Smarty_Template_Source $source source object
+     * @return string template source
+     * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Internal_Template $_template)
-    { 
-        // read template file
-        if (file_exists($_tfp = $_template->getTemplateFilepath())) {
-            $_template->template_source = file_get_contents($_tfp);
-            return true;
-        } else {
-            return false;
-        } 
-    } 
-
-    /**
-     * Get filepath to compiled template
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return string path to compiled template
-     */
-    public function getCompiledFilepath(Smarty_Internal_Template $_template)
+    public function getTemplateSource(Smarty_Template_Source $source)
     {
-        $_file = $_template->resource_name;
+        if ($source->timestamp) {
+            return file_get_contents($source->filepath);
+        }
+        throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
+    } 
+    
+    /**
+     * Determine basename for compiled filename
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return string resource's basename
+     */
+    public function getBasename(Smarty_Template_Source $source)
+    {
+        $_file = $source->name;
         if (($_pos = strpos($_file, ']')) !== false) {
             $_file = substr($_file, $_pos + 1);
         }
-        return $this->buildCompiledFilepath($_template, basename($_file));
-    } 
+        return basename($_file);
+    }
 } 
 
 ?>

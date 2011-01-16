@@ -88,7 +88,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testUsesCompiler()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertFalse($tpl->resource_object instanceof Smarty_Resource_Uncompiled);
+        $this->assertFalse($tpl->source->uncompiled);
     } 
     /**
     * test isEvaluated
@@ -96,7 +96,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsEvaluated()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertFalse($tpl->resource_object instanceof Smarty_Resource_Recompiled);
+        $this->assertFalse($tpl->source->recompiled);
     } 
     /**
     * test getCompiledFilepath
@@ -145,6 +145,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->force_compile = false;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         touch($tpl->getTemplateFilepath());
+        // reset cache for this test to work
+        unset($tpl->source->timestamp);
         $this->assertTrue($tpl->mustCompile()); 
         // clean up for next tests
         $this->smarty->clearCompiledTemplate();

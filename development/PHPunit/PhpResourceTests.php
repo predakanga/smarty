@@ -52,7 +52,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testUsesCompiler()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertTrue($tpl->resource_object instanceof Smarty_Resource_Uncompiled);
+        $this->assertTrue($tpl->source->uncompiled);
     } 
     /**
     * test isEvaluated
@@ -60,7 +60,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testIsEvaluated()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertFalse($tpl->resource_object instanceof Smarty_Resource_Recompiled);
+        $this->assertFalse($tpl->source->recompiled);
     } 
     /**
     * test getCompiledFilepath
@@ -68,7 +68,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertFalse($tpl->getCompiledFilepath());
+        $this->assertNull($tpl->getCompiledFilepath());
     } 
     /**
     * test getCompiledTimestamp

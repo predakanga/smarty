@@ -8,105 +8,91 @@
  * @package Smarty
  * @subpackage TemplateResources
  * @author Uwe Tews 
+ * @author Rodney Rehm
  */
 class Smarty_Internal_Resource_Extends extends Smarty_Resource {
+    
     /**
-     * Container for indivual templates being extended
-     * @var array
-     */
-    protected $allFilepaths = array();
-
-    /**
-     * Test if the template source exists
-     * 
+     * populate Source Object with meta data from Resource
+     *
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
-     * @return boolean true if exists, false else
-     * @uses $allFilepaths to verify each individual file
+     * @return void
      */
-    public function isExisting(Smarty_Internal_Template $_template)
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
-        $_template->getTemplateFilepath();
-        $allFilepaths = !empty($this->allFilepaths[$_template->templateUid]) ? $this->allFilepaths[$_template->templateUid] : array();
-        foreach ($allFilepaths as $_filepath) {
-            if ($_filepath === false) {
-                return false;
+        $uid = '';
+        $sources = array();
+        $components = explode('|', $source->name);
+        $exists = true;
+        foreach ($components as $component) {
+            $s = Smarty_Resource::source(null, $source->smarty, $component);
+            $sources[$s->uid] = $s;
+            $uid .= $source->filepath;
+            if ($_template && $_template->compile_check) {
+                $exists == $exists && $s->exists;
             }
         }
-        return true;
-    } 
-
-    /**
-     * Get filepath to template source
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return string filepath to template source file
-     * @uses $allFilepaths to register each individual file
-     */
-    public function getTemplateFilepath(Smarty_Internal_Template $_template)
-    {
-        $allFilepaths = array();
-        $sha1String = '';
-        $_files = explode('|', $_template->resource_name);
-        foreach ($_files as $_file) {
-            $_filepath = $this->buildTemplateFilepath($_template, $_file);
-            if ($_filepath !== false) {
-                if (is_object($_template->smarty->security_policy)) {
-                    $_template->smarty->security_policy->isTrustedResourceDir($_filepath);
-                } 
-            } 
-            $sha1String .= $_filepath;
-            $allFilepaths[$_file] = $_filepath;
-        } 
-        $_template->templateUid = sha1($sha1String);
-        $this->allFilepaths[$_template->templateUid] = $allFilepaths;
-        return $_filepath;
-    } 
-
-    /**
-     * Get timestamp (epoch) the template source was modified
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
-     * @return integer timestamp (epoch) the template was modified
-     */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
-    {
-        if ($_resource_name !== null) {
-            throw new SmartyException("Cannot use \$_resource_name on extends-resources");
+        $source->components = $sources;
+        $source->filepath = $s->filepath;
+        $source->uid = sha1($uid);
+        if ($_template && $_template->compile_check) {
+            $source->timestamp = $s->timestamp;
+            $source->exists = $exists;
         }
-        return filemtime($_template->getTemplateFilepath());
-    } 
-
+        // need the template at getTemplateSource()
+        $source->template = $_template;
+    }
+    
+    /**
+     * populate Source Object with timestamp and exists from Resource
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return void
+     */
+    public function populateTimestamp(Smarty_Template_Source $source)
+    {
+        $source->exists = true;
+        foreach ($source->components as $s) {
+            $source->exists == $source->exists && $s->exists;
+        }
+        $source->timestamp = $s->timestamp;
+    }
+    
     /**
      * Load template's source from files into current template object
      * 
-     * @note: The loaded source is assigned to $_template->template_source directly.
-     * @param Smarty_Internal_Template $_template current template
-     * @return boolean success: true for success, false for failure
-     * @throws SmartyException if unable to load a file
+     * @param Smarty_Template_Source $source source object
+     * @return string template source
+     * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Internal_Template $_template)
+    public function getTemplateSource(Smarty_Template_Source $source)
     {
-        $_rdl = preg_quote($_template->smarty->right_delimiter);
-        $_ldl = preg_quote($_template->smarty->left_delimiter);
-        $allFilepaths = !empty($this->allFilepaths[$_template->templateUid]) ? $this->allFilepaths[$_template->templateUid] : array();
-        $_files = array_reverse($allFilepaths);
-        $_first = reset($_files);
-        $_last = end($_files);
-        foreach ($_files as $_file => $_filepath) {
-            if ($_filepath === false) {
-                throw new SmartyException("Unable to load template 'file : {$_file}'");
-            }
-            // read template file
-            if ($_filepath != $_first) {
-                $_template->properties['file_dependency'][sha1($_filepath)] = array($_filepath, filemtime($_filepath),'file');
+        if (!$source->exists) {
+            throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
+        }
+        
+        $_rdl = preg_quote($source->smarty->right_delimiter);
+        $_ldl = preg_quote($source->smarty->left_delimiter);
+        $_components = array_reverse($source->components);
+        $_first = reset($_components);
+        $_last = end($_components);
+
+        foreach ($_components as $_component) {
+            // register dependency
+            if ($_component != $_first) {
+                $source->template->properties['file_dependency'][$_component->uid] = array($_component->filepath, $_component->timestamp, $_component->type);
             } 
-            $_template->template_filepath = $_filepath;
-            $_content = file_get_contents($_filepath);
-            if ($_filepath != $_last) {
+            
+            // read content
+            $source->filepath = $_component->filepath;
+            $_content = $_component->content;
+            
+            // extend sources
+            if ($_component != $_last) {
                 if (preg_match_all("!({$_ldl}block\s(.+?){$_rdl})!", $_content, $_open) !=
                         preg_match_all("!({$_ldl}/block{$_rdl})!", $_content, $_close)) {
-                    $_template->smarty->triggerError("unmatched {block} {/block} pairs in file '$_filepath'");
+                    $source->smarty->triggerError("unmatched {block} {/block} pairs in template {$_component->type} '{$_component->name}'");
                 } 
                 preg_match_all("!{$_ldl}block\s(.+?){$_rdl}|{$_ldl}/block{$_rdl}!", $_content, $_result, PREG_OFFSET_CAPTURE);
                 $_result_count = count($_result[0]);
@@ -122,30 +108,27 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
                             $_level--;
                         } 
                     } 
-                    $_block_content = str_replace($_template->smarty->left_delimiter . '$smarty.block.parent' . $_template->smarty->right_delimiter, '%%%%SMARTY_PARENT%%%%',
+                    $_block_content = str_replace($source->smarty->left_delimiter . '$smarty.block.parent' . $source->smarty->right_delimiter, '%%%%SMARTY_PARENT%%%%',
                         substr($_content, $_result[0][$_start][1] + strlen($_result[0][$_start][0]), $_result[0][$_start + $_end][1] - $_result[0][$_start][1] - + strlen($_result[0][$_start][0])));
-                    Smarty_Internal_Compile_Block::saveBlockData($_block_content, $_result[0][$_start][0], $_template, $_filepath);
+                    Smarty_Internal_Compile_Block::saveBlockData($_block_content, $_result[0][$_start][0], $source->template, $_component->filepath);
                     $_start = $_start + $_end + 1;
                 } 
             } else {
-                $_template->template_source = $_content;
-                return true;
+                return $_content;
             } 
         } 
     }
-    
+
     /**
-     * Get filepath to compiled template
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return string path to compiled template
+     * Determine basename for compiled filename
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return string resource's basename
      */
-    public function getCompiledFilepath(Smarty_Internal_Template $_template)
+    public function getBasename(Smarty_Template_Source $source)
     {
-        $p = strrpos($_template->resource_name, '|');
-        $_basename = basename($p !== false ? substr($_template->resource_name, $p +1 ) : $_template->resource_name);
-        return $this->buildCompiledFilepath($_template, $_basename);
-    } 
+        return basename($source->filepath);
+    }
 } 
 
 ?>

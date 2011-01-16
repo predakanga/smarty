@@ -9,68 +9,44 @@
  * @package Smarty
  * @subpackage TemplateResources
  * @author Uwe Tews 
+ * @author Rodney Rehm
  */
 class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
+    
     /**
-     * Test if the template source exists
-     * 
+     * populate Source Object with meta data from Resource
+     *
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
-     * @return boolean true if exists, false else
+     * @return void
      */
-    public function isExisting(Smarty_Internal_Template $template)
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
-        if ($template->getTemplateSource() == '') {
-            return false;
-        } else {
-            return true;
-        } 
-    } 
-
-    /**
-     * Get filepath to template source
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return string filepath (stream URI) to template source file
-     */
-    public function getTemplateFilepath(Smarty_Internal_Template $_template)
-    { 
-        // no filepath for strings
-        // return resource name for compiler error messages
-        return str_replace(':', '://', $_template->template_resource);
-    } 
-
-    /**
-     * Get timestamp to template source
-     * 
-     * @param object $_template template object
-     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
-     * @return boolean false as stream resources have no timestamp
-     */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $_resource_name=null)
-    { 
-        // strings must always be compiled and have no timestamp
-        return false;
-    } 
+        $source->filepath = str_replace(':', '://', $source->resource);
+    	$source->uid = false;
+        $source->content = $this->getTemplateSource($source);
+    	$source->timestamp = false;
+    	$source->exists = !!$source->content;
+    }
 
     /**
      * Load template's source from stream into current template object
      * 
-     * @note: The loaded source is assigned to $_template->template_source directly.
-     * @param Smarty_Internal_Template $_template current template
-     * @return boolean success: true for success, false for failure
+     * @param Smarty_Template_Source $source source object
+     * @return string template source
+     * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Internal_Template $_template)
-    { 
-        // return template string
-        $_template->template_source = '';
+    public function getTemplateSource(Smarty_Template_Source $source)
+    {
+        $t = '';
         // the availability of the stream has already been checked in Smarty_Resource::fetch()
-        $fp = fopen(str_replace(':', '://', $_template->template_resource),'r+');
+        $fp = fopen($source->filepath, 'r+');
         while (!feof($fp)) {
-            $_template->template_source .= fgets($fp);
+            $t .= fgets($fp);
         } 
         fclose($fp);
 
-        return true;
+        return $t;
     } 
 } 
 

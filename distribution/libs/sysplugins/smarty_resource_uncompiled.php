@@ -13,21 +13,25 @@ abstract class Smarty_Resource_Uncompiled extends Smarty_Resource {
     /**
      * Render and output the template (without using the compiler)
      *
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
      * @return void
-     * @throws SmartyException 
+     * @throws SmartyException on failure
      */
-    public abstract function renderUncompiled(Smarty_Internal_Template $_template);
+    public abstract function renderUncompiled(Smarty_Template_Source $source, Smarty_Internal_Template $_template);
     
     /**
-     * Get filepath to compiled template
-     * 
+     * populate Compiled Object with compiled filepath
+     *
+     * @param Smarty_Template_Compiled $compiled compiled object
      * @param Smarty_Internal_Template $_template template object
-     * @return boolean always false as uncompiled resources are not saved to compile cache
+     * @return void
      */
-    public function getCompiledFilepath(Smarty_Internal_Template $_template)
+    public function populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
     {
-        return false;
+        $compiled->filepath = null;
+        $compiled->timestamp = false;
+        $compiled->exists = false;
     }
 }
 

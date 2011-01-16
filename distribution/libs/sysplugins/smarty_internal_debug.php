@@ -97,7 +97,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 		$_template->cache_id = null;
 		$_template->compile_id = null;
 		if ($obj instanceof Smarty_Internal_Template) {
-			$_template->assign('template_name',$obj->resource_type.':'.$obj->resource_name);
+			$_template->assign('template_name',$obj->source->type.':'.$obj->source->name);
 		}
 		if ($obj instanceof Smarty) {
 			$_template->assign('template_data', self::$template_data);
@@ -121,7 +121,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 		foreach ($obj->tpl_vars as $key => $var) {
 			$tpl_vars[$key] = clone $var;
 			if ($obj instanceof Smarty_Internal_Template) {
-				$tpl_vars[$key]->scope = $obj->resource_type.':'.$obj->resource_name;
+				$tpl_vars[$key]->scope = $obj->source->type.':'.$obj->source->name;
 			} elseif ($obj instanceof Smarty_Data) {
 				$tpl_vars[$key]->scope = 'Data object';
 			} else {
@@ -151,10 +151,10 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	static function get_key($template)
 	{
 		// calculate Uid if not already done
-		if ($template->templateUid == '') {
+		if ($template->source->uid == '') {
 			$template->getTemplateFilepath();
 		}
-		$key = $template->templateUid;
+		$key = $template->source->uid;
 		if (isset(self::$template_data[$key])) {
 			return $key;
 		} else {

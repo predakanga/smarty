@@ -289,4 +289,4 @@ Test Suite
 
 Time: 37 seconds
 
-OK (973 tests, 1511 assertions)
+OK (973 tests, 1510 assertions)

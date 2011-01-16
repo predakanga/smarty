@@ -338,7 +338,7 @@ class Smarty extends Smarty_Internal_Data {
             } 
         } 
         // return rendered template
-        if ((!$this->caching || $_template->resource_object instanceof Smarty_Resource_Recompiled) && (isset($this->autoload_filters['output']) || isset($this->registered_filters['output']))) {
+        if ((!$this->caching || $_template->source->recompiled) && (isset($this->autoload_filters['output']) || isset($this->registered_filters['output']))) {
             $_output = Smarty_Internal_Filter_Handler::runFilter('output', $_template->getRenderedTemplate(), $_template);
         } else {
             $_output = $_template->getRenderedTemplate();
@@ -764,7 +764,7 @@ class Smarty extends Smarty_Internal_Data {
 function smartyAutoload($class)
 {
     $_class = strtolower($class);
-    if (substr($_class, 0, 16) === 'smarty_internal_' 
+    if (in_array( substr($_class, 0, 16), array('smarty_internal_', 'smarty_template_') ) 
         || $_class == 'smarty_security' 
         || $_class == 'smarty_cacheresource' 
         || $_class == 'smarty_cacheresource_custom' 

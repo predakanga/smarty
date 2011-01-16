@@ -17,18 +17,6 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
     protected $cache = array();
     
     /**
-     * Test if the template source exists
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return boolean true if exists, false else
-     */
-    public function isExisting(Smarty_Internal_Template $template)
-    {
-        $t = $this->cache($template->resource_name);
-        return !empty($t);
-    }
-    
-    /**
      * fetch and cache template source and mtime
      *
      * @param string $name template name
@@ -69,61 +57,55 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
     }
     
     /**
-    * Get filepath to template source
-    * 
-    * @param Smarty_Internal_Template $_template template object
-    * @return string the current resource type name
-    */
-    public function getTemplateFilepath(Smarty_Internal_Template $_template)
-    {
-        $_template->templateUid = sha1($_template->resource_type . ':' . $_template->resource_name);
-        return strtolower($_template->resource_type . ':' . $_template->resource_name);
-    }
-    
-    /**
-     * Get timestamp (epoch) the template source was modified
-     * 
+     * populate Source Object with meta data from Resource
+     *
+     * @param Smarty_Template_Source $source source object
      * @param Smarty_Internal_Template $_template template object
-     * @param string $resource_type type of the resource to get modification time of. 
-     * @param string $resource_name name of the resource to get modification time of, if null, $_template->resource_name is used
-     * @return integer|boolean timestamp (epoch) the template was modified, false if resources has no timestamp
+     * @return void
      */
-    public function getTemplateTimestamp(Smarty_Internal_Template $_template, $resource_name=null)
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
-        $name = $resource_name ? $resource_name : $_template->resource_name;
-        $mtime = $this->fetchTimestamp($name);
-        if ($mtime !== null)
-            return $mtime;
-        $t = $this->cache($name);
-        return isset($t['mtime']) ? $t['mtime'] : false;
+        $source->filepath = strtolower($source->type . ':' . $source->name);
+        $source->uid = sha1($source->type . ':' . $source->name);
+
+        $mtime = $this->fetchTimestamp($source->name);
+        if ($mtime !== null) {
+            $source->timestamp = $mtime;
+        } else {
+            $t = $this->cache($source->name);
+            $source->timestamp = isset($t['mtime']) ? $t['mtime'] : false;
+            if( isset($t['source']) )
+                $source->content = $t['source'];
+        }
+        $source->exists = !!$source->timestamp;
     }
     
     /**
      * Load template's source into current template object
      * 
-     * @note: The loaded source is assigned to $_template->template_source directly.
-     * @param Smarty_Internal_Template $_template current template
-     * @return boolean success: true for success, false for failure
+     * @param Smarty_Template_Source $source source object
+     * @return string template source
+     * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Internal_Template $_template)
+    public function getTemplateSource(Smarty_Template_Source $source)
     {
-        $t = $this->cache($_template->resource_name);
+        $t = $this->cache($source->name);
         if (isset($t['source'])) {
-            $_template->template_source = $t['source'];
-            return true;
+            return $t['source'];
         }
-        return false;
+        
+        throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");
     }
     
     /**
-     * Get filepath to compiled template
-     * 
-     * @param Smarty_Internal_Template $_template template object
-     * @return string|boolean path to compiled template or false if not applicable
+     * Determine basename for compiled filename
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return string resource's basename
      */
-    public function getCompiledFilepath(Smarty_Internal_Template $_template)
+    protected function getBasename(Smarty_Template_Source $source)
     {
-        return $this->buildCompiledFilepath($_template, basename($_template->resource_name));
+        return basename($source->name);
     }
 }
 
