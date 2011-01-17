@@ -68,8 +68,8 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertNull($tpl->getCompiledFilepath());
-    } 
+        $this->assertFalse($tpl->compiled->filepath);
+    }
     /**
     * test getCompiledTimestamp
     */

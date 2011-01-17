@@ -11,14 +11,17 @@
  */
 abstract class Smarty_Resource_Recompiled extends Smarty_Resource {
     /**
-     * Get filepath to compiled template
-     * 
+     * populate Compiled Object with compiled filepath
+     *
+     * @param Smarty_Template_Compiled $compiled compiled object
      * @param Smarty_Internal_Template $_template template object
-     * @return boolean always false as recompiling resources are not saved to compile cache
+     * @return void
      */
-    public function getCompiledFilepath(Smarty_Internal_Template $_template)
+    public function populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
     {
-        return false;
+        $compiled->filepath = false;
+        $compiled->timestamp = false;
+        $compiled->exists = false;
     }
 }
 
