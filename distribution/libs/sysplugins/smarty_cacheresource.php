@@ -135,6 +135,12 @@ abstract class Smarty_CacheResource {
     {
         $handler = self::load($_template->smarty);
         $cached = new Smarty_Template_Cached($handler, $_template);
+        if (!$_template->caching) {
+            $cached->filepath = false;
+            $cached->timestamp = false;
+            $cached->exists = false;
+            return $cached;
+        }
         $handler->populate($cached, $_template);
         return $cached;
     }
