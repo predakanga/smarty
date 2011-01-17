@@ -328,15 +328,6 @@ class Smarty extends Smarty_Internal_Data {
                 } 
             } 
         } 
-        // obtain data for cache modified check
-        if ($this->cache_modified_check && $this->caching && $display) {
-            $_isCached = $_template->isCached() && !$_template->has_nocache_code;
-            if ($_isCached) {
-                $_gmt_mtime = gmdate('D, d M Y H:i:s', $_template->getCachedTimestamp()) . ' GMT';
-            } else {
-                $_gmt_mtime = '';
-            } 
-        } 
         // return rendered template
         if ((!$this->caching || $_template->source->recompiled) && (isset($this->autoload_filters['output']) || isset($this->registered_filters['output']))) {
             $_output = Smarty_Internal_Filter_Handler::runFilter('output', $_template->getRenderedTemplate(), $_template);
@@ -350,14 +341,38 @@ class Smarty extends Smarty_Internal_Data {
         // display or fetch
         if ($display) {
             if ($this->caching && $this->cache_modified_check) {
+                $_isCached = $_template->isCached() && !$_template->has_nocache_code;
                 $_last_modified_date = @substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 0, strpos($_SERVER['HTTP_IF_MODIFIED_SINCE'], 'GMT') + 3);
-                if ($_isCached && $_gmt_mtime == $_last_modified_date) {
-                    if (php_sapi_name() == 'cgi')
-                        header('Status: 304 Not Modified');
-                    else
-                        header('HTTP/1.1 304 Not Modified');
+                if ($_isCached && $_template->getCachedTimestamp() <= strtotime($_last_modified_date)) {
+                    switch (PHP_SAPI) {
+                        case 'cgi':         // php-cgi < 5.3 
+                        case 'cgi-fcgi':    // php-cgi >= 5.3
+                        case 'fpm-fcgi':    // php-fpm >= 5.3.3 
+                            header('Status: 304 Not Modified');
+                            break;
+
+                        case 'cli':
+                            if (/* ^phpunit */!empty($_SERVER['SMARTY_PHPUNIT_DISABLE_HEADERS'])/* phpunit$ */) {
+                                $_SERVER['SMARTY_PHPUNIT_HEADERS'][] = '304 Not Modified';
+                            }
+                            break;
+                            
+                        default:
+                            header('HTTP/1.1 304 Not Modified');
+                            break;
+                    }
                 } else {
-                    header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->getCachedTimestamp()) . ' GMT');
+                    switch (PHP_SAPI) {
+                        case 'cli':
+                            if (/* ^phpunit */!empty($_SERVER['SMARTY_PHPUNIT_DISABLE_HEADERS'])/* phpunit$ */) {
+                                $_SERVER['SMARTY_PHPUNIT_HEADERS'][] = 'Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->getCachedTimestamp()) . ' GMT';
+                            }
+                            break;
+                        
+                        default:
+                            header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->getCachedTimestamp()) . ' GMT');
+                            break;
+                    }
                     echo $_output;
                 } 
             } else {

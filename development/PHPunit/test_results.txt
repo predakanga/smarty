@@ -164,6 +164,9 @@ Test Suite
  GetTemplateVarsTests
  ......
 
+ HttpModifiedSinceTests
+ ...
+
  IndexedFileResourceTests
  ............
 
@@ -287,6 +290,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 36 seconds
+Time: 42 seconds
 
-OK (973 tests, 1510 assertions)
+OK (976 tests, 1520 assertions)

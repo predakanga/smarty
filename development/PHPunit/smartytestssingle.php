@@ -62,7 +62,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public static function suite()
     {
         $testorder = array(
-            'StringResourceTests',
+            'HTTPModifiedSinceTests',
             // 'ClearCacheTests',
             // 'CacheResourceFileTests',
             // 'CacheResourceCustomRegisteredTests',
