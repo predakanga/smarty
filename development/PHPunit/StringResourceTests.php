@@ -30,7 +30,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testTemplateStringExists1()
     {
         $tpl = $this->smarty->createTemplate('string:{$foo}');
-        $this->assertTrue($tpl->isExisting());
+        $this->assertTrue($tpl->source->exists);
     } 
     public function testTemplateStringExists2()
     {
@@ -42,7 +42,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals('string:', $tpl->getTemplateFilepath());
+        $this->assertEquals('string:', $tpl->source->filepath);
     } 
     /**
     * test getTemplateTimestamp
@@ -50,7 +50,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateTimestamp()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals(0,$tpl->getTemplateTimestamp());
+        $this->assertEquals(0,$tpl->source->timestamp);
     } 
     /**
     * test getTemplateSource
@@ -58,7 +58,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateSource()
     {
         $tpl = $this->smarty->createTemplate('string:hello world{$foo}');
-        $this->assertEquals('hello world{$foo}', $tpl->getTemplateSource());
+        $this->assertEquals('hello world{$foo}', $tpl->source->content);
     } 
     /**
     * test usesCompiler
@@ -90,7 +90,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals('./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php',$tpl->getCompiledFilepath());
+        $this->assertEquals('./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php',$tpl->compiled->filepath);
     } 
     /**
     * test getCompiledTimestamp
@@ -98,7 +98,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledTimestamp()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertFalse($tpl->getCompiledTimestamp());
+        $this->assertFalse($tpl->compiled->timestamp);
     } 
     /**
     * test getCompiledTemplate
@@ -116,7 +116,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertFalse($tpl->getCachedFilepath());
+        $this->assertFalse($tpl->cached->filepath);
     } 
     /**
     * test getCachedTimestamp
@@ -124,7 +124,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedTimestamp()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertFalse($tpl->getCachedTimestamp());
+        $this->assertFalse($tpl->cached->timestamp);
     } 
     /**
     * test getCachedContent

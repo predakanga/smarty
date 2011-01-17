@@ -290,6 +290,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 39 seconds
+Time: 35 seconds
 
 OK (976 tests, 1520 assertions)

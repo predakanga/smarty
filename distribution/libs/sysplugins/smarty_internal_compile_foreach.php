@@ -61,12 +61,12 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
         $ItemVarName = '$' . trim($item, '\'"') . '@'; 
         // evaluates which Smarty variables and properties have to be computed
         if ($has_name) {
-            $usesSmartyFirst = strpos($tpl->template_source, $SmartyVarName . 'first') !== false;
-            $usesSmartyLast = strpos($tpl->template_source, $SmartyVarName . 'last') !== false;
-            $usesSmartyIndex = strpos($tpl->template_source, $SmartyVarName . 'index') !== false;
-            $usesSmartyIteration = strpos($tpl->template_source, $SmartyVarName . 'iteration') !== false;
-            $usesSmartyShow = strpos($tpl->template_source, $SmartyVarName . 'show') !== false;
-            $usesSmartyTotal = strpos($tpl->template_source, $SmartyVarName . 'total') !== false;
+            $usesSmartyFirst = strpos($tpl->source->content, $SmartyVarName . 'first') !== false;
+            $usesSmartyLast = strpos($tpl->source->content, $SmartyVarName . 'last') !== false;
+            $usesSmartyIndex = strpos($tpl->source->content, $SmartyVarName . 'index') !== false;
+            $usesSmartyIteration = strpos($tpl->source->content, $SmartyVarName . 'iteration') !== false;
+            $usesSmartyShow = strpos($tpl->source->content, $SmartyVarName . 'show') !== false;
+            $usesSmartyTotal = strpos($tpl->source->content, $SmartyVarName . 'total') !== false;
         } else {
             $usesSmartyFirst = false;
             $usesSmartyLast = false;
@@ -74,12 +74,12 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
             $usesSmartyShow = false;
         } 
 
-        $usesPropFirst = $usesSmartyFirst || strpos($tpl->template_source, $ItemVarName . 'first') !== false;
-        $usesPropLast = $usesSmartyLast || strpos($tpl->template_source, $ItemVarName . 'last') !== false;
-        $usesPropIndex = $usesPropFirst || strpos($tpl->template_source, $ItemVarName . 'index') !== false;
-        $usesPropIteration = $usesPropLast || strpos($tpl->template_source, $ItemVarName . 'iteration') !== false;
-        $usesPropShow = strpos($tpl->template_source, $ItemVarName . 'show') !== false;
-        $usesPropTotal = $usesSmartyTotal || $usesSmartyShow || $usesPropShow || $usesPropLast || strpos($tpl->template_source, $ItemVarName . 'total') !== false; 
+        $usesPropFirst = $usesSmartyFirst || strpos($tpl->source->content, $ItemVarName . 'first') !== false;
+        $usesPropLast = $usesSmartyLast || strpos($tpl->source->content, $ItemVarName . 'last') !== false;
+        $usesPropIndex = $usesPropFirst || strpos($tpl->source->content, $ItemVarName . 'index') !== false;
+        $usesPropIteration = $usesPropLast || strpos($tpl->source->content, $ItemVarName . 'iteration') !== false;
+        $usesPropShow = strpos($tpl->source->content, $ItemVarName . 'show') !== false;
+        $usesPropTotal = $usesSmartyTotal || $usesSmartyShow || $usesPropShow || $usesPropLast || strpos($tpl->source->content, $ItemVarName . 'total') !== false; 
         // generate output code
         $output = "<?php ";
         $output .= " \$_smarty_tpl->tpl_vars[$item] = new Smarty_Variable;\n";

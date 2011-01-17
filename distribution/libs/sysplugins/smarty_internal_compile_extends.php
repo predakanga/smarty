@@ -31,7 +31,7 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
         $this->smarty = $compiler->smarty;
         $this->_rdl = preg_quote($this->smarty->right_delimiter);
         $this->_ldl = preg_quote($this->smarty->left_delimiter);
-        $filepath = $compiler->template->getTemplateFilepath();
+        $filepath = $compiler->template->source->filepath;
         // check and get attributes
         $_attr = $this->_get_attributes($args);
         if ($_attr['nocache'] === true) {
@@ -50,13 +50,13 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
         if (in_array($_template->source->type,array('eval','string'))) {
         	$template_sha1 = sha1($include_file);
     	} else {
-        	$template_sha1 = sha1($_template->getTemplateFilepath());
+        	$template_sha1 = sha1($_template->source->filepath);
     	}
         if (isset($compiler->template->properties['file_dependency'][$template_sha1])) {
             $this->compiler->trigger_template_error("illegal recursive call of \"{$include_file}\"",$compiler->lex->line-1);
         } 
-        $compiler->template->properties['file_dependency'][$template_sha1] = array($_template->getTemplateFilepath(), $_template->getTemplateTimestamp(),$_template->source->type);
-        $_content = substr($compiler->template->template_source,$compiler->lex->counter-1);
+        $compiler->template->properties['file_dependency'][$template_sha1] = array($_template->source->filepath, $_template->source->timestamp,$_template->source->type);
+        $_content = substr($compiler->template->source->content,$compiler->lex->counter-1);
         if (preg_match_all("!({$this->_ldl}block\s(.+?){$this->_rdl})!", $_content, $s) !=
                 preg_match_all("!({$this->_ldl}/block{$this->_rdl})!", $_content, $c)) {
             $this->compiler->trigger_template_error('unmatched {block} {/block} pairs');
@@ -80,8 +80,9 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
             Smarty_Internal_Compile_Block::saveBlockData($_block_content, $_result[0][$_start][0], $compiler->template, $filepath);
             $_start = $_start + $_end + 1;
         } 
-        $compiler->template->template_source = $_template->getTemplateSource();
-        $compiler->template->template_filepath = $_template->getTemplateFilepath();
+        // TODO: (utews) can this be optimized?
+        $compiler->template->source->content = $_template->source->content;
+        $compiler->template->source->filepath = $_template->source->filepath;
         $compiler->abort_and_recompile = true;
         return '';
     } 

@@ -54,7 +54,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
                         // make sure whole chain gest compiled
                         $tpl->mustCompile = true;
 //                    } 
-                    if (!($tpl->source->uncompiled) && $tpl->isExisting()) {
+                    if (!($tpl->source->uncompiled) && $tpl->source->exists) {
                         // get compiled code
                         $compiled_tpl = $tpl->getCompiledTemplate(); 
                         // merge compiled code for {function} tags
@@ -159,7 +159,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
                 $_output .= "\$_tpl_stack[] = \$_smarty_tpl; \$_smarty_tpl = \$_template;?>\n";
                 $_output .= $compiled_tpl;
                 $_output .= "<?php \$_smarty_tpl->updateParentVariables($_parent_scope);?>\n";
-                $_output .= "<?php /*  End of included template \"" . $tpl->getTemplateFilepath() . "\" */ ?>\n";
+                $_output .= "<?php /*  End of included template \"" . $tpl->source->filepath . "\" */ ?>\n";
                 $_output .= "<?php \$_smarty_tpl = array_pop(\$_tpl_stack);?>";
             } else {
                 $_output .= " echo \$_template->getRenderedTemplate();?>";

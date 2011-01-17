@@ -37,7 +37,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
 	    $sha1 = sha1('helloworld.tpl');
-        $this->assertEquals($sha1, $tpl->getCachedFilepath());
+        $this->assertEquals($sha1, $tpl->cached->filepath);
     } 
     /**
     * test getCachedFilepath with cache_id
@@ -48,7 +48,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar');
         $sha1 = sha1('helloworld.tpl' . 'foo|bar' . null);
-        $this->assertEquals($sha1, $tpl->getCachedFilepath());
+        $this->assertEquals($sha1, $tpl->cached->filepath);
     } 
     /**
     * test getCachedFilepath with compile_id
@@ -59,7 +59,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', null, 'blar');
         $sha1 = sha1('helloworld.tpl' . null . 'blar');
-        $this->assertEquals($sha1, $tpl->getCachedFilepath());
+        $this->assertEquals($sha1, $tpl->cached->filepath);
     } 
     /**
     * test getCachedFilepath with cache_id and compile_id
@@ -70,7 +70,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl', 'foo|bar', 'blar');
         $sha1 = sha1('helloworld.tpl' . 'foo|bar' . 'blar');
-        $this->assertEquals($sha1, $tpl->getCachedFilepath());
+        $this->assertEquals($sha1, $tpl->cached->filepath);
     } 
     /**
     * test cache->clear_all with cache_id and compile_id

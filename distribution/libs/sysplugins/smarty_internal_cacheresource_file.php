@@ -151,8 +151,8 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
             // remove from template cache
             unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
             $smarty->caching = $_save_stat;
-            if ($tpl->isExisting()) {
-                $_resourcename_parts = basename(str_replace('^', '/', $tpl->getCachedFilepath()));
+            if ($tpl->source->exists) {
+                $_resourcename_parts = basename(str_replace('^', '/', $tpl->cached->filepath));
             } else {
                 return 0;
             } 

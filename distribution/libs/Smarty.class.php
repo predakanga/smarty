@@ -343,7 +343,7 @@ class Smarty extends Smarty_Internal_Data {
             if ($this->caching && $this->cache_modified_check) {
                 $_isCached = $_template->isCached() && !$_template->has_nocache_code;
                 $_last_modified_date = @substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 0, strpos($_SERVER['HTTP_IF_MODIFIED_SINCE'], 'GMT') + 3);
-                if ($_isCached && $_template->getCachedTimestamp() <= strtotime($_last_modified_date)) {
+                if ($_isCached && $_template->cached->timestamp <= strtotime($_last_modified_date)) {
                     switch (PHP_SAPI) {
                         case 'cgi':         // php-cgi < 5.3 
                         case 'cgi-fcgi':    // php-cgi >= 5.3
@@ -365,12 +365,12 @@ class Smarty extends Smarty_Internal_Data {
                     switch (PHP_SAPI) {
                         case 'cli':
                             if (/* ^phpunit */!empty($_SERVER['SMARTY_PHPUNIT_DISABLE_HEADERS'])/* phpunit$ */) {
-                                $_SERVER['SMARTY_PHPUNIT_HEADERS'][] = 'Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->getCachedTimestamp()) . ' GMT';
+                                $_SERVER['SMARTY_PHPUNIT_HEADERS'][] = 'Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->cached->timestamp) . ' GMT';
                             }
                             break;
                         
                         default:
-                            header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->getCachedTimestamp()) . ' GMT');
+                            header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->cached->timestamp) . ' GMT');
                             break;
                     }
                     echo $_output;
@@ -505,7 +505,7 @@ class Smarty extends Smarty_Internal_Data {
         $save = $this->template_objects;
         $tpl = new $this->template_class($resource_name, $this); 
         // check if it does exists
-        $result = $tpl->isExisting();
+        $result = $tpl->source->exists;
         $this->template_objects = $save;
         return $result;
     } 

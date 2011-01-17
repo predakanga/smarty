@@ -70,7 +70,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('db2:test.tpl');
         $expected = realpath('./templates_c/'.sha1('db2:test.tpl').'.db2.test.tpl.php');
         $this->assertFalse(!!$expected);
-        $this->assertFalse($tpl->getCompiledFilepath());
+        $this->assertFalse($tpl->compiled->filepath);
     }
     /**
      * test resource plugin rendering of a custom resource
@@ -87,7 +87,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $tpl = $this->smarty->createTemplate('mysql:test.tpl');
-        $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->getTemplateTimestamp());
+        $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->source->timestamp);
     }
     /**
      * test resource plugin timestamp of a custom resource with only fetch() implemented
@@ -96,7 +96,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $tpl = $this->smarty->createTemplate('mysqls:test.tpl');
-        $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->getTemplateTimestamp());
+        $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->source->timestamp);
     }
     /**
      * test resource plugin compiledFilepath of a custom resource
@@ -107,7 +107,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('mysql:test.tpl');
         $expected = realpath('./templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.php');
         $this->assertTrue(!!$expected);
-        $this->assertEquals($expected, realpath($tpl->getCompiledFilepath()));
+        $this->assertEquals($expected, realpath($tpl->compiled->filepath));
     }
     public function testResourcePluginMysqlCompiledFilepathCache()
     {
@@ -119,7 +119,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('mysql:test.tpl');
         $expected = realpath('./templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.cache.php');
         $this->assertTrue(!!$expected);
-        $this->assertEquals($expected, realpath($tpl->getCompiledFilepath()));
+        $this->assertEquals($expected, realpath($tpl->compiled->filepath));
         $this->smarty->caching = false;
     }
     /**
@@ -129,8 +129,8 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
         $tpl = $this->smarty->createTemplate('db:test');
-        $this->assertTrue(is_integer($tpl->getTemplateTimestamp()));
-        $this->assertEquals(10, strlen($tpl->getTemplateTimestamp()));
+        $this->assertTrue(is_integer($tpl->source->timestamp));
+        $this->assertEquals(10, strlen($tpl->source->timestamp));
     } 
 
 } 

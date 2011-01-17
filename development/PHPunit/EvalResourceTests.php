@@ -28,7 +28,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testTemplateEvalExists1()
     {
         $tpl = $this->smarty->createTemplate('eval:{$foo}');
-        $this->assertTrue($tpl->isExisting());
+        $this->assertTrue($tpl->source->exists);
     } 
     public function testTemplateEvalExists2()
     {
@@ -40,7 +40,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateFilepath()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertEquals('eval:', $tpl->getTemplateFilepath());
+        $this->assertEquals('eval:', $tpl->source->filepath);
     } 
     /**
     * test getTemplateTimestamp
@@ -48,7 +48,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateTimestamp()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertFalse($tpl->getTemplateTimestamp());
+        $this->assertFalse($tpl->source->timestamp);
     } 
     /**
     * test getTemplateSource
@@ -56,7 +56,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateSource()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world{$foo}');
-        $this->assertEquals('hello world{$foo}', $tpl->getTemplateSource());
+        $this->assertEquals('hello world{$foo}', $tpl->source->content);
     } 
     /**
     * test usesCompiler
@@ -88,7 +88,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertFalse($tpl->getCompiledFilepath());
+        $this->assertFalse($tpl->compiled->filepath);
     } 
     /**
     * test getCompiledTimestamp
@@ -96,7 +96,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledTimestamp()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertFalse($tpl->getCompiledTimestamp());
+        $this->assertFalse($tpl->compiled->timestamp);
     } 
     /**
     * test getCompiledTemplate
@@ -114,7 +114,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedFilepath()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertFalse($tpl->getCachedFilepath());
+        $this->assertFalse($tpl->cached->filepath);
     } 
     /**
     * test getCachedTimestamp
@@ -122,7 +122,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedTimestamp()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertFalse($tpl->getCachedTimestamp());
+        $this->assertFalse($tpl->cached->timestamp);
     } 
     /**
     * test getCachedContent

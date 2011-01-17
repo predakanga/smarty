@@ -30,16 +30,11 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
     //public $source = null; // magic loaded
     //public $compiled = null; // magic loaded
     //public $cached = null; // magic loaded
-    private $isExisting = null;
-    // Template source
-    public $template_filepath = null;
-    public $template_source = null;
-    public $template_timestamp = null; 
+
     // Compiled template
-    private $compiled_filepath = null;
     public $compiled_template = null;
-    private $compiled_timestamp = null;
     public $mustCompile = null;
+    
     public $suppressHeader = false;
     public $suppressFileDependency = false;
     public $has_nocache_code = false; 
@@ -47,8 +42,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
     // Rendered content
     public $rendered_content = null; 
     // Cache file
-    private $cached_filepath = null;
-    public $cached_timestamp = null;
     private $isCached = null;
     private $cacheFileChecked = false; 
     // template variables
@@ -97,82 +90,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         if ($this->parent instanceof Smarty_Internal_Template) {
         	$this->block_data = $this->parent->block_data;
         }
- 
-    } 
-    
-    /**
-            T E M P L A T E   O B J E C T                                                 -->
-    */
-
-    /**
-     * Returns the template filepath
-     * 
-     * The template filepath is determined by the actual resource handler
-     * 
-     * @return string the template filepath
-     */
-    public function getTemplateFilepath ()
-    {
-        return $this->template_filepath === null ?
-        $this->template_filepath = $this->source->filepath :
-        $this->template_filepath;
     } 
 
-    /**
-     * Returns the timpestamp of the template source
-     * 
-     * The template timestamp is determined by the actual resource handler
-     * 
-     * @return integer the template timestamp
-     */
-    public function getTemplateTimestamp ()
-    {
-        return $this->template_timestamp === null ?
-        $this->template_timestamp = $this->source->timestamp :
-        $this->template_timestamp;
-    } 
-
-    /**
-     * Returns the template source code
-     * 
-     * The template source is being read by the actual resource handler
-     * 
-     * @return string the template source
-     */
-    public function getTemplateSource ()
-    {
-        if ($this->template_source === null) {
-            $this->template_source = $this->source->content;
-        } 
-        return $this->template_source;
-    } 
-
-    /**
-     * Returns if the  template is existing
-     * 
-     * The status is determined by the actual resource handler
-     * 
-     * @return boolean true if the template exists
-     */
-    public function isExisting ($error = false)
-    {
-        if ($this->isExisting === null) {
-            $this->isExisting = $this->source->exists;
-        } 
-        if (!$this->isExisting && $error) {
-            throw new SmartyException("Unable to load template {$this->source->type} '{$this->source->name}'");
-        } 
-        return $this->isExisting;
-    } 
-    
-    /**
-            T E M P L A T E   O B J E C T                                                 <--
-    */
-
-    /**
-            C O M P I L E   O B J E C T                                                 -->
-    */
-    
     /**
      * Returns if the current template must be compiled by the Smarty compiler
      * 
@@ -182,36 +101,14 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
      */
     public function mustCompile ()
     {
-        $this->isExisting(true);
+        if (!$this->source->exists) {
+            throw new SmartyException("Unable to load template {$this->source->type} '{$this->source->name}'");
+        }
         if ($this->mustCompile === null) {
-            $this->mustCompile = (!$this->source->uncompiled && ($this->smarty->force_compile || $this->source->recompiled || $this->getCompiledTimestamp () === false || 
-                    ($this->smarty->compile_check && $this->getCompiledTimestamp () < $this->getTemplateTimestamp ())));
+            $this->mustCompile = (!$this->source->uncompiled && ($this->smarty->force_compile || $this->source->recompiled || $this->compiled->timestamp === false || 
+                    ($this->smarty->compile_check && $this->compiled->timestamp < $this->source->timestamp)));
         } 
         return $this->mustCompile;
-    } 
-
-    /**
-     * Returns the compiled template filepath
-     * 
-     * @return string the template filepath
-     */
-    public function getCompiledFilepath ()
-    {
-        return $this->compiled_filepath === null ?
-        ($this->compiled_filepath = !$this->source->recompiled ? $this->compiled->filepath : false) :
-        $this->compiled_filepath;
-    } 
-
-    /**
-     * Returns the timpestamp of the compiled template
-     * 
-     * @return integer the template timestamp
-     */
-    public function getCompiledTimestamp ()
-    {
-        return $this->compiled_timestamp === null ?
-        ($this->compiled_timestamp = (!$this->source->recompiled && $this->compiled->exists) ? $this->compiled->timestamp : false) :
-        $this->compiled_timestamp;
     } 
 
     /**
@@ -235,10 +132,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         } 
         return $this->compiled_template;
     } 
-    
-    /**
-            C O M P I L E   O B J E C T                                                 <--
-    */
 
     /**
      * Compiles the template
@@ -249,7 +142,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
     {
         if (!$this->source->recompiled) {
             $this->properties['file_dependency'] = array();
-            $this->properties['file_dependency'][$this->source->uid] = array($this->getTemplateFilepath(), $this->getTemplateTimestamp(),$this->source->type);
+            $this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp,$this->source->type);
         } 
         if ($this->smarty->debugging) {
             Smarty_Internal_Debug::start_compile($this);
@@ -262,8 +155,8 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         } 
         // compile locking
         if ($this->smarty->compile_locking && !$this->source->recompiled) {
-            if ($saved_timestamp = $this->getCompiledTimestamp()) {
-                touch($this->getCompiledFilepath());
+            if ($saved_timestamp = $this->compiled->timestamp) {
+                touch($this->compiled->filepath);
             } 
         } 
         // call compiler
@@ -273,14 +166,14 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         catch (Exception $e) {
             // restore old timestamp in case of error
             if ($this->smarty->compile_locking && !$this->source->recompiled && $saved_timestamp) {
-                touch($this->getCompiledFilepath(), $saved_timestamp);
+                touch($this->compiled->filepath, $saved_timestamp);
             } 
             throw $e;
         } 
         // compiling succeded
         if (!$this->source->recompiled && $this->write_compiled_code) {
             // write compiled template
-            $_filepath = $this->getCompiledFilepath();
+            $_filepath = $this->compiled->filepath;
             if($_filepath === false)
                 throw new SmartyException( 'getCompiledFilepath() did not return a destination to save the compiled template to' );
             Smarty_Internal_Write_File::writeFile($_filepath, $this->compiled_template, $this->smarty);
@@ -288,38 +181,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         if ($this->smarty->debugging) {
             Smarty_Internal_Debug::end_compile($this);
         } 
-    } 
-
-    /**
-            C A C H E   O B J E C T                                                 -->
-    */
-    
-    /**
-     * Returns the filepath of the cached template output
-     * 
-     * The filepath is determined by the actual cache resource
-     * 
-     * @return string the cache filepath
-     */
-    public function getCachedFilepath ()
-    {
-        return $this->cached_filepath === null ?
-        $this->cached_filepath = ($this->source->recompiled || !($this->caching == Smarty::CACHING_LIFETIME_CURRENT || $this->caching == Smarty::CACHING_LIFETIME_SAVED)) ? false : $this->cached->filepath :
-        $this->cached_filepath;
-    } 
-
-    /**
-     * Returns the timpestamp of the cached template output
-     * 
-     * The timestamp is determined by the actual cache resource
-     * 
-     * @return integer the template timestamp
-     */
-    public function getCachedTimestamp ()
-    {
-        return $this->cached_timestamp === null ?
-        $this->cached_timestamp = ($this->source->recompiled || !($this->caching == Smarty::CACHING_LIFETIME_CURRENT || $this->caching == Smarty::CACHING_LIFETIME_SAVED)) ? false : $this->cached->timestamp :
-        $this->cached_timestamp;
     } 
 
     /**
@@ -346,10 +207,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         $this->properties['cache_lifetime'] = $this->cache_lifetime;
         return $this->cached->write($this, $this->createPropertyHeader(true) .$content);
     } 
-
-    /**
-            C A C H E   O B J E C T                                                 <--
-    */
 
     /**
      * Checks of a valid version redered HTML output is in the cache
@@ -390,7 +247,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
                         return $this->isCached;
                     } 
                     $this->cacheFileChecked = true;
-                    if ($this->caching === Smarty::CACHING_LIFETIME_SAVED && $this->properties['cache_lifetime'] >= 0 && (time() > ($this->getCachedTimestamp() + $this->properties['cache_lifetime']))) {
+                    if ($this->caching === Smarty::CACHING_LIFETIME_SAVED && $this->properties['cache_lifetime'] >= 0 && (time() > ($this->cached->timestamp + $this->properties['cache_lifetime']))) {
                         $this->tpl_vars = array();
                         $this->rendered_content = null;
                         return $this->isCached;
@@ -434,7 +291,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
             if ($this->source->recompiled) {
                 eval("?>" . $this->compiled_template);
             } else {
-                include($this->getCompiledFilepath ()); 
+                include($this->compiled->filepath); 
                 // check file dependencies at compiled code
                 if ($this->smarty->compile_check) {
                     if (!empty($this->properties['file_dependency'])) {
@@ -452,7 +309,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
                             ob_get_clean();
                             $this->compileTemplateSource();
                             ob_start();
-                            include($this->getCompiledFilepath ());
+                            include($this->compiled->filepath);
                         } 
                     } 
                 } 
@@ -470,7 +327,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         } 
         $this->rendered_content = ob_get_clean();
         if (!$this->source->recompiled && empty($this->properties['file_dependency'][$this->source->uid])) {
-            $this->properties['file_dependency'][$this->source->uid] = array($this->getTemplateFilepath(), $this->getTemplateTimestamp(),$this->source->type);
+            $this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp,$this->source->type);
         } 
         if ($this->parent instanceof Smarty_Internal_Template) {
             $this->parent->properties['file_dependency'] = array_merge($this->parent->properties['file_dependency'], $this->properties['file_dependency']);
@@ -544,7 +401,9 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
             $this->caching = false;
         } 
         // checks if template exists
-        $this->isExisting(true); 
+        if (!$this->source->exists) {
+            throw new SmartyException("Unable to load template {$this->source->type} '{$this->source->name}'");
+        }
         // read from cache or render
         if ($this->rendered_content === null) {
         	if ($this->isCached) {

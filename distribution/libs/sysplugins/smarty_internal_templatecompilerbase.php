@@ -52,22 +52,22 @@ class Smarty_Internal_TemplateCompilerBase {
         $this->tag_nocache = false; 
         // save template object in compiler class
         $this->template = $template;
-        $this->smarty->_current_file = $this->template->getTemplateFilepath(); 
+        $this->smarty->_current_file = $this->template->source->filepath; 
         // template header code
         $template_header = '';
         if (!$template->suppressHeader) {
             $template_header .= "<?php /* Smarty version " . Smarty::SMARTY_VERSION . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
-            $template_header .= "         compiled from \"" . $this->template->getTemplateFilepath() . "\" */ ?>\n";
+            $template_header .= "         compiled from \"" . $this->template->source->filepath . "\" */ ?>\n";
         } 
 
         do {
             // flag for aborting current and start recompile
             $this->abort_and_recompile = false; 
             // get template source
-            $_content = $template->getTemplateSource(); 
+            $_content = $template->source->content; 
             // run prefilter if required
             if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre'])) {
-                $template->template_source = $_content = Smarty_Internal_Filter_Handler::runFilter('pre', $_content, $template);
+                $template->source->content = $_content = Smarty_Internal_Filter_Handler::runFilter('pre', $_content, $template);
             } 
             // on empty template just return header
             if ($_content == '') {
@@ -407,7 +407,7 @@ class Smarty_Internal_TemplateCompilerBase {
             $line = $this->lex->line;
         } 
         $match = preg_split("/\n/", $this->lex->data);
-        $error_text = 'Syntax Error in template "' . $this->template->getTemplateFilepath() . '"  on line ' . $line . ' "' . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$match[$line-1]))) . '" ';
+        $error_text = 'Syntax Error in template "' . $this->template->source->filepath . '"  on line ' . $line . ' "' . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$match[$line-1]))) . '" ';
         if (isset($args)) {
             // individual error message
             $error_text .= $args;

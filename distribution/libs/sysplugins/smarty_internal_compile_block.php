@@ -50,7 +50,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
         $_ldl = preg_quote($template->smarty->left_delimiter);
 
         if (0 == preg_match("!({$_ldl}block\s+)(name=)?(\w+|'.*'|\".*\")(\s*?)?((append|prepend|nocache)(=true)?)?(\s*{$_rdl})!", $block_tag, $_match)) {
-            $error_text = 'Syntax Error in template "' . $template->getTemplateFilepath() . '"   "' . htmlspecialchars($block_tag) . '" illegal options';
+            $error_text = 'Syntax Error in template "' . $template->source->filepath . '"   "' . htmlspecialchars($block_tag) . '" illegal options';
             throw new SmartyCompilerException($error_text);
         } else {
             $_name = trim($_match[3], '\'"'); 
@@ -113,7 +113,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 		$_tpl = new Smarty_Internal_template ('eval:' . $compiler->template->block_data[$_name]['source'], $compiler->smarty, $compiler->template, $compiler->template->cache_id, 
 		               $compiler->template->compile_id = null, $compiler->template->caching, $compiler->template->cache_lifetime);
 		$_tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
-		$_tpl->template_filepath = $compiler->template->block_data[$_name]['file'];
+		$_tpl->source->filepath = $compiler->template->block_data[$_name]['file'];
 		if ($compiler->nocache) {
 			$_tpl->forceNocache = 2;
 		} else {

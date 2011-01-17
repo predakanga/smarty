@@ -56,11 +56,11 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                 break;
 
             case 'template':
-                $_template_name = basename($compiler->template->getTemplateFilepath());
+                $_template_name = basename($compiler->template->source->filepath);
                 return "'$_template_name'";
 
             case 'current_dir':
-                $_template_dir_name = dirname($compiler->template->getTemplateFilepath());
+                $_template_dir_name = dirname($compiler->template->source->filepath);
                 return "'$_template_dir_name'";
 
             case 'version':

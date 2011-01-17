@@ -152,13 +152,13 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 	{
 		// calculate Uid if not already done
 		if ($template->source->uid == '') {
-			$template->getTemplateFilepath();
+			$template->source->filepath;
 		}
 		$key = $template->source->uid;
 		if (isset(self::$template_data[$key])) {
 			return $key;
 		} else {
-			self::$template_data[$key]['name'] = $template->getTemplateFilepath();
+			self::$template_data[$key]['name'] = $template->source->filepath;
 			self::$template_data[$key]['compile_time'] = 0;
 			self::$template_data[$key]['render_time'] = 0;
 			self::$template_data[$key]['cache_time'] = 0;
