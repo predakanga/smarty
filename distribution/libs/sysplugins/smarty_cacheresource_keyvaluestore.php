@@ -64,11 +64,11 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      */
     public function populateTimestamp(Smarty_Template_Cached $cached)
     {
-        if (empty($this->timestamps[$cached->filepath]) 
-            && !$this->fetch($cached->filepath, $cached->source->name, $cached->cache_id, $cached->compile_id)) {
-            return false;
+        if(!$this->fetch($cached->filepath, $cached->source->name, $cached->cache_id, $cached->compile_id, $content, $timestamp)) {
+            return;
         }
-        $cached->timestamp = (int) $this->timestamps[ $cached->filepath ];
+        $cached->content = $content;
+        $cached->timestamp = (int) $timestamp;
         $cached->exists = $cached->timestamp;
     } 
  
@@ -81,11 +81,10 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      */
 	public function getCachedContents(Smarty_Internal_Template $_template, $no_render = false)
     {
-        if (empty($this->contents[$_template->cached->filepath]) 
-            && !$this->fetch($_template->cached->filepath, $_template->source->name, $_template->cache_id, $_template->compile_id)) {
+        if(!$this->fetch($_template->cached->filepath, $_template->cached->source->name, $_template->cached->cache_id, $_template->cached->compile_id, $content, $timestamp)) {
             return false;
         }
-        return $this->decodeCache($_template, $this->contents[$_template->cached->filepath], $no_render);
+        return $this->decodeCache($_template, $content, $no_render);
     }
     
     /**
@@ -178,23 +177,24 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * @param string $resource_name template name
      * @param string $cache_id cache id
      * @param string $compile_id compile id
+     * @param string $content cached content
+     * @param integer $content cached timestamp (epoch)
      * @return boolean success
      */
-    protected function fetch($cid, $resource_name = null, $cache_id = null, $compile_id = null)
+    protected function fetch($cid, $resource_name = null, $cache_id = null, $compile_id = null, &$content = null, &$timestamp = null)
     {
         $t = $this->read(array($cid));
         $content = !empty($t[$cid]) ? $t[$cid] : null;
-        $cached = null;
+        $timestamp = null;
         
-        if ($content && ($cached = $this->getMetaTimestamp( $content ))) {
+        if ($content && ($timestamp = $this->getMetaTimestamp( $content ))) {
             $invalidated = $this->getLatestInvalidationTimestamp($cid, $resource_name, $cache_id, $compile_id);
-            if ($invalidated > $cached) {
-                $cached = null;
+            if ($invalidated > $timestamp) {
+                $timestamp = null;
                 $content = null;
             }
         }
-        $this->timestamps[$cid] = $cached;
-        $this->contents[$cid] = $content;
+
         return !!$content;
     }
 

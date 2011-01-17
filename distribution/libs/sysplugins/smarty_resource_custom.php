@@ -10,30 +10,7 @@
  * @author Rodney Rehm
  */
 abstract class Smarty_Resource_Custom extends Smarty_Resource {
-    /**
-     * cache results of fetch() calls
-     * @var array
-     */
-    protected $cache = array();
     
-    /**
-     * fetch and cache template source and mtime
-     *
-     * @param string $name template name
-     * @return array template data array('mtime' => …, 'source' => …)
-     */
-    protected function cache($name)
-    {
-        if (!isset($this->cache[$name])){
-            $this->fetch($name, $source, $mtime);
-            $this->cache[$name] = array(
-                'mtime' => $mtime,
-                'source' => $source,
-            );
-        }
-        return $this->cache[$name];
-    }
-
     /**
      * fetch template and its modification time from data source
      *
@@ -72,10 +49,10 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
         if ($mtime !== null) {
             $source->timestamp = $mtime;
         } else {
-            $t = $this->cache($source->name);
-            $source->timestamp = isset($t['mtime']) ? $t['mtime'] : false;
-            if( isset($t['source']) )
-                $source->content = $t['source'];
+            $this->fetch($source->name, $content, $timestamp);
+            $source->timestamp = isset($timestamp) ? $timestamp : false;
+            if( isset($content) )
+                $source->content = $content;
         }
         $source->exists = !!$source->timestamp;
     }
@@ -89,9 +66,9 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
      */
     public function getTemplateSource(Smarty_Template_Source $source)
     {
-        $t = $this->cache($source->name);
-        if (isset($t['source'])) {
-            return $t['source'];
+        $this->fetch($source->name, $content, $timestamp);
+        if (isset($content)) {
+            return $content;
         }
         
         throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");

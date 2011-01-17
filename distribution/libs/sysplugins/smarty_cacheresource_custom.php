@@ -8,32 +8,6 @@
  * @author Rodney Rehm
  */
 abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
-    /**
-     * cache results of fetch() calls
-     * @var array
-     */
-    protected $cache = array();
-    
-    /**
-     * fetch and cache template source and mtime
-     *
-     * @param string $id unique cache content identifier
-     * @param string $name template name
-     * @param string $cache_id cache id
-     * @param string $compile_id compile id
-     * @return array template data array('mtime' => …, 'source' => …)
-     */
-    protected function cache($id, $name, $cache_id, $compile_id)
-    {
-        if (!isset($this->cache[$id])){
-            $this->fetch($id, $cache_id, $compile_id, $content, $mtime);
-            $this->cache[$name] = array(
-                'mtime' => $mtime,
-                'content' => $content,
-            );
-        }
-        return $this->cache[$id];
-    }
     
     /**
      * fetch cached content and its modification time from data source
@@ -120,8 +94,9 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
             return;
         }
         
-        $t = $this->cache($id, $cached->source->name, $cached->cache_id, $cached->compile_id);
-        $cached->timestamp = isset($t['mtime']) ? $t['mtime'] : false;
+        $this->fetch($cached->filepath, $cache_id, $compile_id, $content, $timestamp);
+        $cached->timestamp = isset($timestamp) ? $timestamp : false;
+        $cached->content = $content;
         $cached->exists = !!$cached->timestamp;
     }
  
@@ -134,14 +109,9 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 	 */
 	public function getCachedContents(Smarty_Internal_Template $_template, $no_render = false)
 	{
-        $t = $this->cache(
-            $_template->cached->filepath,
-            $_template->source->name, 
-            $_template->cache_id, 
-            $_template->compile_id
-        );
-        if( isset($t['content']) ) {
-            return $this->decodeCache($_template, $t['content'], $no_render);
+        $this->fetch($cached->filepath, $cache_id, $compile_id, $content, $timestamp);
+        if( isset($content) ) {
+            return $this->decodeCache($_template, $content, $no_render);
         }
         return false;
 	}
