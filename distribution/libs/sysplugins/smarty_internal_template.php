@@ -180,7 +180,16 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
         } 
         if ($this->smarty->debugging) {
             Smarty_Internal_Debug::end_compile($this);
-        } 
+        }
+        // release objects to free memory
+		Smarty_Internal_TemplateCompilerBase::$_tag_objects = array();	
+        unset($this->compiler_object->parser->root_buffer,
+        	$this->compiler_object->parser->current_buffer,
+        	$this->compiler_object->parser,
+        	$this->compiler_object->lex,
+        	$this->compiler_object->template,
+        	$this->compiler_object
+        	); 
     } 
 
     /**
@@ -583,14 +592,10 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
     {
         if (is_array($value) === true || $value instanceof Countable) {
             return count($value);
-        } elseif ($value instanceof ArrayAccess) {
-            if ($value->offsetExists(0)) {
-                return 1;
-            }
         } elseif ($value instanceof Iterator) {
             $value->rewind();
             if ($value->valid()) {
-                return 1;
+                return iterator_count($value);
             }
         } elseif ($value instanceof PDOStatement) {
             return $value->rowCount();

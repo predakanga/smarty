@@ -46,6 +46,20 @@
 
 
 ===== SVN trunk  =====
+16/01/2011
+-bugfix of ArrayAccess object handling in internal _count() method
+-bugfix of Iterator object handling in internal _count() method
+
+14/01/2011
+-bugfix removed memory leak while processing compileAllTemplates
+
+12/01/2011
+- bugfix in {if} and {while} tag compiler when using assignments as condition and nocache mode
+
+10/01/2011
+- bugfix when using {$smarty.block.child} and name of {block} was in double quoted string
+- bugfix updateParentVariables() was called twice when leaving {include} processing
+
 - bugfix mb_str_replace in replace and escape modifiers work with utf8
 
 31/12/2010
