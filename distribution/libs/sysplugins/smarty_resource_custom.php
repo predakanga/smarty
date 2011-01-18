@@ -64,7 +64,7 @@ abstract class Smarty_Resource_Custom extends Smarty_Resource {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Template_Source $source)
+    public function getContent(Smarty_Template_Source $source)
     {
         $this->fetch($source->name, $content, $timestamp);
         if (isset($content)) {

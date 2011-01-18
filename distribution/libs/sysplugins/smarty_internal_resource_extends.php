@@ -40,7 +40,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
             $source->timestamp = $s->timestamp;
             $source->exists = $exists;
         }
-        // need the template at getTemplateSource()
+        // need the template at getContent()
         $source->template = $_template;
     }
     
@@ -66,7 +66,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Template_Source $source)
+    public function getContent(Smarty_Template_Source $source)
     {
         if (!$source->exists) {
             throw new SmartyException("Unable to read template {$source->type} '{$source->name}'");

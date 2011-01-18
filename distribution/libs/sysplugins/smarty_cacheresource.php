@@ -38,7 +38,7 @@ abstract class Smarty_CacheResource {
 	 * @param boolean $no_render true to echo content immediately, false to return content as string
 	 * @return string|booelan the template content, or false if the file does not exist
 	 */
-	public abstract function getCachedContents(Smarty_Internal_Template $_template, $no_render = false);
+	public abstract function getContent(Smarty_Internal_Template $_template, $no_render = false);
 	
 	/**
 	 * Write the rendered template output to cache

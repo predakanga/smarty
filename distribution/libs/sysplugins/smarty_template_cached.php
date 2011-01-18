@@ -85,7 +85,7 @@ class Smarty_Template_Cached {
 	 */
 	public function read(Smarty_Internal_Template $_template, $no_render = false)
 	{
-	    return $this->handler->getCachedContents($_template, $no_render);
+	    return $this->handler->getContent($_template, $no_render);
 	}
 	
 	/**

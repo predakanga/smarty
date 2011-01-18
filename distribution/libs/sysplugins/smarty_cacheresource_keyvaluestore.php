@@ -79,7 +79,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
 	 * @param boolean $no_render true to echo content immediately, false to return content as string
      * @return string|booelan the template content, or false if the file does not exist
      */
-	public function getCachedContents(Smarty_Internal_Template $_template, $no_render = false)
+	public function getContent(Smarty_Internal_Template $_template, $no_render = false)
     {
         if(!$this->fetch($_template->cached->filepath, $_template->cached->source->name, $_template->cached->cache_id, $_template->cached->compile_id, $content, $timestamp)) {
             return false;

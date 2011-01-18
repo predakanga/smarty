@@ -51,7 +51,7 @@ abstract class Smarty_Resource {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public abstract function getTemplateSource(Smarty_Template_Source $source);
+    public abstract function getContent(Smarty_Template_Source $source);
     
     /**
      * populate Source Object with meta data from Resource

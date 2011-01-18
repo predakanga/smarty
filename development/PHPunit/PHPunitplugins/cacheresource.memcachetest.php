@@ -7,7 +7,7 @@ class Smarty_CacheResource_Memcachetest extends Smarty_CacheResource_Memcache {
     {
         $this->contents = array();
         $this->timestamps = array();
-        $t = $this->getCachedContents($_template);
+        $t = $this->getContent($_template);
         return $t ? $t : null;
     }
     

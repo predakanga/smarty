@@ -55,7 +55,7 @@ class Smarty_Internal_Resource_File extends Smarty_Resource {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Template_Source $source)
+    public function getContent(Smarty_Template_Source $source)
     {
         if ($source->timestamp) {
             return file_get_contents($source->filepath);

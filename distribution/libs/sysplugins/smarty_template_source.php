@@ -180,7 +180,7 @@ class Smarty_Template_Source {
                 return $this->$property_name;
                 
             case 'content':
-                return $this->content = $this->handler->getTemplateSource($this);
+                return $this->content = $this->handler->getContent($this);
 
             default:
                 throw new SmartyException("source property '$property_name' does not exist.");

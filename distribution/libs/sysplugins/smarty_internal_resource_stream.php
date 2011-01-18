@@ -24,7 +24,7 @@ class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
     {
         $source->filepath = str_replace(':', '://', $source->resource);
     	$source->uid = false;
-        $source->content = $this->getTemplateSource($source);
+        $source->content = $this->getContent($source);
     	$source->timestamp = false;
     	$source->exists = !!$source->content;
     }
@@ -36,7 +36,7 @@ class Smarty_Internal_Resource_Stream extends Smarty_Resource_Recompiled {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Template_Source $source)
+    public function getContent(Smarty_Template_Source $source)
     {
         $t = '';
         // the availability of the stream has already been checked in Smarty_Resource::fetch()

@@ -68,7 +68,7 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Template_Source $source)
+    public function getContent(Smarty_Template_Source $source)
     { 
         // return template string
         $t = call_user_func_array($source->smarty->registered_resources[$source->type][0][0],

@@ -35,7 +35,7 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public function getTemplateSource(Smarty_Template_Source $source)
+    public function getContent(Smarty_Template_Source $source)
     { 
         // return template string
         return $source->name;

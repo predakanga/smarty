@@ -17,7 +17,7 @@ class Smarty_Resource_Db3 extends Smarty_Resource {
     	$source->exists = true;
     }
     
-    public function getTemplateSource(Smarty_Template_Source $source)
+    public function getContent(Smarty_Template_Source $source)
     {
         return '{$x="hello world"}{$x}';
     }
