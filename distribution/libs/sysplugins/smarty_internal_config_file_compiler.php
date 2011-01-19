@@ -41,7 +41,7 @@ class Smarty_Internal_Config_File_Compiler {
        then written to compiled files. */
         $this->config = $config; 
         // get config file source
-        $_content = $config->getConfigSource() . "\n"; 
+        $_content = $config->source->content . "\n"; 
         // on empty template just return
         if ($_content == '') {
             return true;
@@ -80,7 +80,7 @@ class Smarty_Internal_Config_File_Compiler {
             // $line--;
         } 
         $match = preg_split("/\n/", $this->lex->data);
-        $error_text = "Syntax error in config file '{$this->config->getConfigFilepath()}' on line {$line} '{$match[$line-1]}' ";
+        $error_text = "Syntax error in config file '{$this->config->source->filepath}' on line {$line} '{$match[$line-1]}' ";
         if (isset($args)) {
             // individual error message
             $error_text .= $args;

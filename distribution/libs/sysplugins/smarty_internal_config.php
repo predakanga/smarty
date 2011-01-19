@@ -11,112 +11,25 @@
  */
 class Smarty_Internal_Config {
     static $config_objects = array();
+    
+    public $smarty = null;
+    public $data = null;
+    public $config_resource = null;
+    //public $source = null; // magic loaded
+    //public $compiled = null; // magic loaded
+    
+    public $config_source = null;
+    public $compiled_config = null;
+    public $compiled_filepath = null;
+    public $compiled_timestamp = null;
+    public $mustCompile = null;
+    public $compiler_object = null;
 
     public function __construct($config_resource, $smarty, $data = null)
     {
         $this->data = $data;
         $this->smarty = $smarty;
         $this->config_resource = $config_resource;
-        $this->config_resource_type = null;
-        $this->config_resource_name = null;
-        $this->config_filepath = null;
-        $this->config_timestamp = null;
-        $this->config_source = null;
-        $this->compiled_config = null;
-        $this->compiled_filepath = null;
-        $this->compiled_timestamp = null;
-        $this->mustCompile = null;
-        $this->compiler_object = null; 
-        // parse config resource name
-        if (!$this->parseConfigResourceName ($config_resource)) {
-            throw new SmartyException ("Unable to parse config resource '{$config_resource}'");
-        } 
-    } 
-
-    public function getConfigFilepath ()
-    {
-        return $this->config_filepath === null ?
-        $this->config_filepath = $this->buildConfigFilepath() :
-        $this->config_filepath;
-    } 
-
-    public function getTimestamp ()
-    {
-        return $this->config_timestamp === null ?
-        $this->config_timestamp = filemtime($this->getConfigFilepath()) :
-        $this->config_timestamp;
-    } 
-
-    private function parseConfigResourceName($config_resource)
-    {
-        if (empty($config_resource))
-            return false;
-        if (strpos($config_resource, ':') === false) {
-            // no resource given, use default
-            $this->config_resource_type = $this->smarty->default_config_type;
-            $this->config_resource_name = $config_resource;
-        } else {
-            // get type and name from path
-            list($this->config_resource_type, $this->config_resource_name) = explode(':', $config_resource, 2);
-            if (strlen($this->config_resource_type) == 1) {
-                // 1 char is not resource type, but part of filepath
-                $this->config_resource_type = $this->smarty->default_config_type;
-                $this->config_resource_name = $config_resource;
-            } else {
-                $this->config_resource_type = strtolower($this->config_resource_type);
-            } 
-        } 
-        return true;
-    } 
-
-    /*
-     * get system filepath to config
-     */
-    public function buildConfigFilepath ()
-    {
-        foreach((array)$this->smarty->config_dir as $_config_dir) {
-            $_config_dir = rtrim($_config_dir, '/\\') . DS;
-            $_filepath = $_config_dir . $this->config_resource_name;
-            if (file_exists($_filepath))
-                return $_filepath;
-        } 
-        // check for absolute path
-        if (file_exists($this->config_resource_name))
-            return $this->config_resource_name; 
-        // no tpl file found
-        throw new SmartyException("Unable to load config file \"{$this->config_resource_name}\"");
-        return false;
-    } 
-    /**
-     * Read config file source
-     * 
-     * @return string content of source file
-     */
-    /**
-     * Returns the template source code
-     * 
-     * The template source is being read by the actual resource handler
-     * 
-     * @return string the template source
-     */
-    public function getConfigSource ()
-    {
-        if ($this->config_source === null) {
-            if ($this->readConfigSource($this) === false) {
-                throw new SmartyException("Unable to load config file \"{$this->config_resource_name}\"");
-            } 
-        } 
-        return $this->config_source;
-    } 
-    public function readConfigSource()
-    { 
-        // read source file
-        if (file_exists($this->getConfigFilepath())) {
-            $this->config_source = file_get_contents($this->getConfigFilepath());
-            return true;
-        } else {
-            return false;
-        } 
     } 
 
     /**
@@ -135,7 +48,7 @@ class Smarty_Internal_Config {
         $_compile_id = isset($this->smarty->compile_id) ? preg_replace('![^\w\|]+!', '_', $this->smarty->compile_id) : null;
         $_flag = (int)$this->smarty->config_read_hidden + (int)$this->smarty->config_booleanize * 2 +
         (int)$this->smarty->config_overwrite * 4;
-        $_filepath = sha1($this->config_resource_name . $_flag); 
+        $_filepath = sha1($this->source->name . $_flag); 
         // if use_sub_dirs, break file into directories
         if ($this->smarty->use_sub_dirs) {
             $_filepath = substr($_filepath, 0, 2) . DS
@@ -151,7 +64,7 @@ class Smarty_Internal_Config {
         if (substr($_compile_dir, -1) != DS) {
             $_compile_dir .= DS;
         } 
-        return $_compile_dir . $_filepath . '.' . basename($this->config_resource_name) . '.config' . '.php';
+        return $_compile_dir . $_filepath . '.' . basename($this->source->name) . '.config' . '.php';
     } 
     /**
      * Returns the timpestamp of the compiled file
@@ -164,6 +77,7 @@ class Smarty_Internal_Config {
         ($this->compiled_timestamp = (file_exists($this->getCompiledFilepath())) ? filemtime($this->getCompiledFilepath()) : false) :
         $this->compiled_timestamp;
     } 
+    
     /**
      * Returns if the current config file must be compiled 
      * 
@@ -174,9 +88,10 @@ class Smarty_Internal_Config {
     public function mustCompile ()
     {
         return $this->mustCompile === null ?
-        $this->mustCompile = ($this->smarty->force_compile || $this->getCompiledTimestamp () === false || $this->smarty->compile_check && $this->getCompiledTimestamp () < $this->getTimestamp ()):
+        $this->mustCompile = ($this->smarty->force_compile || $this->getCompiledTimestamp () === false || $this->smarty->compile_check && $this->getCompiledTimestamp () < $this->source->timestamp):
         $this->mustCompile;
     } 
+    
     /**
      * Returns the compiled config file 
      * 
@@ -238,7 +153,7 @@ class Smarty_Internal_Config {
     public function loadConfigVars ($sections = null, $scope = 'local')
     {
         if ($this->data instanceof Smarty_Internal_Template) {
-            $this->data->properties['file_dependency'][sha1($this->getConfigFilepath())] = array($this->getConfigFilepath(), $this->getTimestamp(),'file');
+            $this->data->properties['file_dependency'][sha1($this->source->filepath)] = array($this->source->filepath, $this->source->timestamp,'file');
         } 
         if ($this->mustCompile()) {
             $this->compileConfigSource();
@@ -281,5 +196,35 @@ class Smarty_Internal_Config {
             } 
         }
     } 
+    
+    public function __set($property_name, $value)
+    {
+        switch ($property_name) {
+            case 'source':
+            case 'compiled':
+                $this->$property_name = $value;
+                return;
+        }
+        
+        throw new SmartyException("invalid config property '$property_name'.");
+    }
+    
+    public function __get($property_name)
+    {
+        switch ($property_name) {
+            case 'source':
+                if (empty($this->config_resource)) {
+                    throw new SmartyException ("Unable to parse resource name \"{$this->config_resource}\"");
+                }
+                $this->source = Smarty_Resource::config($this);
+                return $this->source;
+                
+            case 'compiled':
+                $this->compiled = $this->source->getCompiled($this);
+                return $this->compiled;
+        }
+        
+        throw new SmartyException("config attribute '$property_name' does not exist.");
+    }
 } 
 ?>

@@ -143,6 +143,9 @@ Test Suite
  ConstantsTests
  .
 
+ DefaultConfigHandlerTests
+ ......
+
  DefaultTemplateHandlerTests
  ....
 
@@ -290,6 +293,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 36 seconds
+Time: 39 seconds
 
-OK (976 tests, 1520 assertions)
+OK (982 tests, 1526 assertions)

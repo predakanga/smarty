@@ -176,6 +176,19 @@ class Smarty_Internal_Register {
             throw new SmartyException("Default template handler '$callback' not callable");
         } 
     } 
-
+    
+    /**
+     * Registers a default template handler
+     * 
+     * @param  $callback mixed string | array class/method name
+     */
+    function registerDefaultConfigHandler($callback)
+    {
+        if (is_callable($callback)) {
+            $this->smarty->default_config_handler_func = $callback;
+        } else {
+            throw new SmartyException("Default config handler '$callback' not callable");
+        } 
+    }
 }
 ?>

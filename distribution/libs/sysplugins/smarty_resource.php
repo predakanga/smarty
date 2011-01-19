@@ -126,29 +126,36 @@ abstract class Smarty_Resource {
     protected function buildFilepath(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
         $file = $source->name;
-        
+        if ($source instanceof Smarty_Config_Source) {
+            $_directories = (array) $source->smarty->config_dir;
+            $_default_handler = $source->smarty->default_config_handler_func;
+        } else {
+            $_directories = (array) $source->smarty->template_dir;
+            $_default_handler = $source->smarty->default_template_handler_func;
+        }
+
         // template_dir index?
-        if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match) && is_array($source->smarty->template_dir)) {
-            $_template_dir = null;
+        if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match)) {
+            $_directory = null;
             // try string indexes
-            if (isset($source->smarty->template_dir[$match['key']])) {
-                $_template_dir = $source->smarty->template_dir[$match['key']];
+            if (isset($_directories[$match['key']])) {
+                $_directory = $_directories[$match['key']];
             } else if (is_numeric($match['key'])) {
                 // try numeric index
                 $match['key'] = (int) $match['key'];
-                if (isset($source->smarty->template_dir[$match['key']])) {
-                    $_template_dir = $source->smarty->template_dir[$match['key']];
+                if (isset($_directories[$match['key']])) {
+                    $_directory = $_directories[$match['key']];
                 } else {
                     // try at location index
-                    $keys = array_keys($source->smarty->template_dir);
-                    $_template_dir = $source->smarty->template_dir[$keys[$match['key']]];
+                    $keys = array_keys($_directories);
+                    $_directory = $_directories[$keys[$match['key']]];
                 }
             }
 
-            if ($_template_dir) {
+            if ($_directory) {
                 $_file = substr($file,strpos($file, ']') + 1);
-                $_template_dir = rtrim($_template_dir, '/\\') . DS;
-                $_filepath = $_template_dir . $_file;
+                $_directory = rtrim($_directory, '/\\') . DS;
+                $_filepath = $_directory . $_file;
                 if (file_exists($_filepath)) {
                     return $_filepath;
                 }
@@ -157,13 +164,13 @@ abstract class Smarty_Resource {
         
         // relative file name? 
         if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
-	        foreach((array)$source->smarty->template_dir as $_template_dir) {
-                $_template_dir = rtrim($_template_dir, '/\\') . DS;
-            	$_filepath = $_template_dir . $file;
+	        foreach ($_directories as $_directory) {
+                $_directory = rtrim($_directory, '/\\') . DS;
+            	$_filepath = $_directory . $file;
             	if (file_exists($_filepath)) {
                 	return $_filepath;
             	}
-        		if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir)) {
+        		if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_directory)) {
         			// try PHP include_path
         			if (($_filepath = Smarty_Internal_Get_Include_Path::getIncludePath($_filepath)) !== false) {
         				return $_filepath;
@@ -178,11 +185,15 @@ abstract class Smarty_Resource {
         }
 
         // no tpl file found
-        if (!empty($source->smarty->default_template_handler_func)) {
-            if (!is_callable($source->smarty->default_template_handler_func)) {
-                throw new SmartyException("Default template handler not callable");
+        if ($_default_handler) {
+            if (!is_callable($_default_handler)) {
+                if ($source instanceof Smarty_Config_Source) {
+                    throw new SmartyException("Default config handler not callable");
+                } else {
+                    throw new SmartyException("Default template handler not callable");
+                }
             }
-            $_return = call_user_func_array($source->smarty->default_template_handler_func,
+            $_return = call_user_func_array($_default_handler,
                 array($source->type, $source->name, &$_content, &$_timestamp, $source->smarty));
             if (is_string($_return)) {
                 return $_return;
@@ -328,7 +339,42 @@ abstract class Smarty_Resource {
         $resource = Smarty_Resource::load($smarty, $resource_type); 
         $source = new Smarty_Template_Source($resource, $smarty, $template_resource, $resource_type, $resource_name);
         $resource->populate($source, $_template);
+        return $source;
+    }
 
+    /**
+     * initialize Config Source Object for given resource
+     *
+     * @param Smarty_Internal_Config $_config config object
+     * @return Smarty_Config_Source Source Object
+     */
+    public static function config(Smarty_Internal_Config $_config)
+    {
+        $config_resource = $_config->config_resource;
+        $smarty = $_config->smarty;
+
+        if (($pos = strpos($config_resource, ':')) === false) {
+            // no resource given, use default
+            $resource_type = $smarty->default_config_type;
+            $resource_name = $config_resource;
+        } else {
+            // get type and name from path
+            $resource_type = substr($config_resource, 0, $pos);
+            $resource_name = substr($config_resource, $pos +1);
+            if (strlen($resource_type) == 1) {
+                // 1 char is not resource type, but part of filepath
+                $resource_type = 'file';
+                $resource_name = $config_resource;
+            }
+        }
+        
+        if (in_array($resource_type, array('eval', 'string', 'extends', 'php'))) {
+            throw new SmartyException ("Unable to use resource '{$resource_type}' for config");
+        }
+        
+        $resource = Smarty_Resource::load($smarty, $resource_type); 
+        $source = new Smarty_Config_Source($resource, $smarty, $config_resource, $resource_type, $resource_name);
+        $resource->populate($source, null);
         return $source;
     }
 

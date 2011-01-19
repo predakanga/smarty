@@ -172,6 +172,8 @@ class Smarty_Security {
     function isTrustedResourceDir($filepath)
     {
         $_rp = realpath($filepath);
+        
+        // check template directories
         if (isset($this->smarty->template_dir)) {
             foreach ((array)$this->smarty->template_dir as $curr_dir) {
                 if (($_cd = realpath($curr_dir)) !== false &&
@@ -181,6 +183,19 @@ class Smarty_Security {
                 } 
             } 
         } 
+        
+        // check config directories
+        if (isset($this->smarty->config_dir)) {
+            foreach ((array)$this->smarty->config_dir as $curr_dir) {
+                if (($_cd = realpath($curr_dir)) !== false &&
+                        strncmp($_rp, $_cd, strlen($_cd)) == 0 &&
+                        (strlen($_rp) == strlen($_cd) || substr($_rp, strlen($_cd), 1) == DS)) {
+                    return true;
+                } 
+            } 
+        }
+        
+        // check security policy
         if (!empty($this->smarty->security_policy->secure_dir)) {
             foreach ((array)$this->smarty->security_policy->secure_dir as $curr_dir) {
                 if (($_cd = realpath($curr_dir)) !== false) {

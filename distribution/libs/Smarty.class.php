@@ -134,6 +134,8 @@ class Smarty extends Smarty_Internal_Data {
     public $template_dir = null; 
     // default template handler
     public $default_template_handler_func = null; 
+    // default config handler
+    public $default_config_handler_func = null;
     // compile directory
     public $compile_dir = null; 
     // plugins directory
@@ -780,14 +782,18 @@ function smartyAutoload($class)
 {
     $_class = strtolower($class);
     if (in_array( substr($_class, 0, 16), array('smarty_internal_', 'smarty_template_') ) 
-        || $_class == 'smarty_security' 
-        || $_class == 'smarty_cacheresource' 
-        || $_class == 'smarty_cacheresource_custom' 
-        || $_class == 'smarty_cacheresource_keyvaluestore' 
-        || $_class == 'smarty_resource' 
-        || $_class == 'smarty_resource_custom'
-        || $_class == 'smarty_resource_uncompiled'
-        || $_class == 'smarty_resource_recompiled') {
+        || in_array( $_class, array(
+            'smarty_config_source',
+            'smarty_config_compiled',
+            'smarty_security',
+            'smarty_cacheresource',
+            'smarty_cacheresource_custom',
+            'smarty_cacheresource_keyvaluestore',
+            'smarty_resource',
+            'smarty_resource_custom',
+            'smarty_resource_uncompiled',
+            'smarty_resource_recompiled',
+        ))) {
         include SMARTY_SYSPLUGINS_DIR . $_class . '.php';
     } 
 } 
