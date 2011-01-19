@@ -182,6 +182,9 @@ Test Suite
  ObjectVariableTests
  ...
 
+ OutputFilterTrimWhitespaceTests
+ .
+
  PhpResourceTests
  ..........................
 
@@ -293,6 +296,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 41 seconds
+Time: 42 seconds
 
-OK (986 tests, 1532 assertions)
+OK (987 tests, 1533 assertions)

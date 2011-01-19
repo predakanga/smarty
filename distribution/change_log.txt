@@ -1,5 +1,8 @@
 ===== SVN branch rodneyrehm  =====
 
+19/01/2011
+- optimized outputfilter trimwhitespace
+
 18/01/2011
 - bugfix Config to use Smarty_Resource to fetch sources
 - optimized Smarty_Security's isTrustedDir() and isTrustedPHPDir()
