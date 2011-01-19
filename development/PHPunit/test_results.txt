@@ -183,7 +183,7 @@ Test Suite
  ...
 
  PhpResourceTests
- ........................
+ ..........................
 
  PluginBlockTextformatTests
  ..............
@@ -258,7 +258,7 @@ Test Suite
  ...........
 
  SecurityTests
- ......................
+ ........................
 
  SharedFunctionsTests
  .
@@ -293,6 +293,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 39 seconds
+Time: 41 seconds
 
-OK (982 tests, 1526 assertions)
+OK (986 tests, 1532 assertions)

@@ -63,7 +63,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     {
         $testorder = array(
             //'ConfigVarTests',
-            'DefaultConfigHandlerTests',
+            'PhpResourceTests',
             // 'ClearCacheTests',
             // 'CacheResourceFileTests',
             // 'CacheResourceCustomRegisteredTests',

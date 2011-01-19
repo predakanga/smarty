@@ -13,9 +13,11 @@
 class SecurityTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-         $this->smarty = SmartyTests::$smarty;
-       SmartyTests::init();
+        $this->smarty = SmartyTests::$smarty;
+        SmartyTests::init();
         $this->smarty->force_compile = true;
+        $this->smarty->clearCompiledTemplate();
+        $this->smarty->clearAllCache();
     } 
 
     public static function isRunnable()
@@ -242,8 +244,42 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         } 
         $this->fail('Exception for not trusted static class has not been raised.');
     } 
-
     
+    
+    
+    public function testChangedTrustedDirectory()
+    {
+        $this->smarty->security_policy->secure_dir = array(
+            '.' . DS . 'templates_2' . DS,
+        );
+        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
+
+        $this->smarty->security_policy->secure_dir = array(
+            '.' . DS . 'templates_2' . DS,
+            '.' . DS . 'templates_3' . DS,
+        );
+        $this->assertEquals("templates_3", $this->smarty->fetch('eval:{include file="./templates_3/dirname.tpl"}'));
+    } 
+
+    public function testChangedNotTrustedDirectory()
+    {
+        $this->smarty->security_policy->secure_dir = array(
+            '.' . DS . 'templates_2' . DS,
+        );
+        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
+
+        try {
+            $this->smarty->security_policy->secure_dir = array(
+                '.' . DS . 'templates_3' . DS,
+            );
+            $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
+        } 
+        catch (Exception $e) {
+            $this->assertContains("/PHPunit/templates_2/hello.tpl' not allowed by security setting", str_replace('\\','/',$e->getMessage()));
+            return;
+        } 
+        $this->fail('Exception for not trusted directory has not been raised.');
+    }
 } 
 class mysecuritystaticclass {
     const STATIC_CONSTANT_VALUE = 3;

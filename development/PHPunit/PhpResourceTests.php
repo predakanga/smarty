@@ -256,6 +256,24 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($this->smarty->isCached($tpl));
     } 
+
+    public function testGetTemplateFilepathName()
+    {
+        $this->smarty->template_dir['foo'] = './templates_2';
+        $tpl = $this->smarty->createTemplate('php:[foo]helloworld.php');
+        $this->assertEquals('./templates_2/helloworld.php', $tpl->source->filepath);
+    }
+    
+    public function testGetCachedFilepathName()
+    {
+        $this->smarty->template_dir['foo'] = './templates_2';
+        $this->smarty->caching = true;
+        $this->smarty->cache_lifetime = 1000;
+        $tpl = $this->smarty->createTemplate('php:[foo]helloworld.php');
+	    $expected = './cache/'.sha1($this->smarty->template_dir['foo'].DS.'helloworld.php').'.helloworld.php.php';
+        $this->assertEquals($expected, $tpl->cached->filepath);
+    }
+    
     /**
     * final cleanup
     */

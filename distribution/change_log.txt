@@ -1,5 +1,15 @@
 ===== SVN branch rodneyrehm  =====
 
+18/01/2011
+- bugfix Config to use Smarty_Resource to fetch sources
+- optimized Smarty_Security's isTrustedDir() and isTrustedPHPDir()
+
+17/01/2011
+- bugfix HTTP headers for CGI SAPIs
+
+16/01/2011
+- optimized internals of Smarty_Resource and Smarty_CacheResource
+
 14/01/2011
 - added modifiercompiler escape to improve performance of escaping html, htmlall, url, urlpathinfo, quotes, javascript
 - added support to choose template_dir to load from: [index]filename.tpl

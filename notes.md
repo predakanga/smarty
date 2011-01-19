@@ -11,10 +11,6 @@
 ## ToDo ##
 
 
-* rewrite function.fetch.php to use [file_get_contents](http://php.net/file_get_contents) and [context](http://php.net/manual/en/function.stream-context-create.php) for HTTP/FTP access.
-* Load Config via Smarty_Resource? [requested](http://groups.google.com/group/smarty-developers/browse_thread/thread/d59c17fac4921b9f)
-
-
 -----
 ## Questions ##
 
