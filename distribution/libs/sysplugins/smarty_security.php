@@ -109,6 +109,8 @@ class Smarty_Security {
 	protected $_template_dir = null;
 	protected $_config_dir = null;
 	protected $_secure_dir = null;
+	protected $_php_resource_dir = null;
+	protected $_trusted_dir = null;
 	
     /**
      * Check if PHP function is trusted.
@@ -266,21 +268,42 @@ class Smarty_Security {
      */
     function isTrustedPHPDir($filepath)
     {
-        $_rp = realpath($filepath);
-        if (!empty($this->trusted_dir)) {
-            foreach ((array)$this->trusted_dir as $curr_dir) {
-                if (($_cd = realpath($curr_dir)) !== false) {
-                    if ($_cd == $_rp) {
-                        return true;
-                    } elseif (strncmp($_rp, $_cd, strlen($_cd)) == 0 &&
-                            substr($_rp, strlen($_cd), 1) == DS) {
-                        return true;
-                    } 
-                } 
-            } 
-        } 
+        if (empty($this->trusted_dir)) {
+            throw new SmartyException ("directory '{$filepath}' not allowed by security setting (no trusted_dir specified)");
+        }
+        
+        // check if index is outdated
+        if (!$this->_trusted_dir || $this->_trusted_dir !== $this->trusted_dir) {
+            $this->_php_resource_dir = array();
 
-        throw new SmartyException ("directory '{$_rp}' not allowed by security setting");
+            $this->_trusted_dir = $this->trusted_dir;
+            foreach ((array)$this->smarty->trusted_dir as $directory) {
+                $directory = realpath($directory);
+                $this->_php_resource_dir[$directory] = true;
+            }
+        }
+        
+        $_filepath = realpath($filepath);
+        $directory = dirname($_filepath);
+        $_directory = array();
+        while (true) {
+            // remember the directory to add it to _resource_dir in case we're successful
+            $_directory[] = $directory;
+            // test if the directory is trusted
+            if (isset($this->_php_resource_dir[$directory])) {
+                // merge sub directories of current $directory into _resource_dir to speed up subsequent lookups
+                $this->_php_resource_dir = array_merge($this->_php_resource_dir, $_directory);
+                return true;
+            }
+            // abort if we've reached root
+            if (($pos = strrpos($directory, DS)) === false || strlen($directory) < 2) {
+                break;
+            }
+            // bubble up one level
+            $directory = substr($directory, 0, $pos);
+        }
+
+        throw new SmartyException ("directory '{$_filepath}' not allowed by security setting");
     } 
 } 
 
