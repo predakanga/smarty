@@ -256,7 +256,6 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' all_extra="data-foo=\"xy\""}');
         $this->assertEquals($result, $this->smarty->fetch($tpl));
         
-        $n = "\n";
         $result = '<select name="Date_Month" data-foo="month">'.$n. $this->months['default'] .$n.'</select>'
             .$n.'<select name="Date_Day" data-foo="day">'.$n. $this->days['default'] .$n.'</select>'
             .$n.'<select name="Date_Year" data-foo="year">'.$n. $this->years['default'] .$n.'</select>';
@@ -300,13 +299,24 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
     public function testEmpty()
     {
         $n = "\n";
+        $result = '<select name="Date_Month">'.$n.'<option value=""></option>'.$n. $this->months['default'] .$n.'</select>'
+            .$n.'<select name="Date_Day">'.$n.'<option value=""></option>'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="Date_Year">'.$n.'<option value=""></option>'.$n. $this->years['default'] .$n.'</select>';
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' all_empty=""}');
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+        
+        $result = '<select name="Date_Month">'.$n.'<option value="">all</option>'.$n. $this->months['default'] .$n.'</select>'
+            .$n.'<select name="Date_Day">'.$n.'<option value="">all</option>'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="Date_Year">'.$n.'<option value="">all</option>'.$n. $this->years['default'] .$n.'</select>';
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' all_empty="all"}');
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+        
         $result = '<select name="Date_Month">'.$n. $this->months['default'] .$n.'</select>'
             .$n.'<select name="Date_Day">'.$n. $this->days['default'] .$n.'</select>'
             .$n.'<select name="Date_Year">'.$n.'<option value=""></option>'.$n. $this->years['default'] .$n.'</select>';
         $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' year_empty=""}');
         $this->assertEquals($result, $this->smarty->fetch($tpl));
         
-        $n = "\n";
         $result = '<select name="Date_Month">'.$n.'<option value="">month</option>'.$n. $this->months['default'] .$n.'</select>'
             .$n.'<select name="Date_Day">'.$n.'<option value="">day</option>'.$n. $this->days['default'] .$n.'</select>'
             .$n.'<select name="Date_Year">'.$n.'<option value="">year</option>'.$n. $this->years['default'] .$n.'</select>';
