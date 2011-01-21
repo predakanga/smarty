@@ -104,6 +104,18 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
 <option value="Oct">October</option>
 <option value="Nov">November</option>
 <option value="Dec">December</option>',
+        'names' => '<option value="01">alpha</option>
+<option value="02" selected="selected">bravo</option>
+<option value="03">charlie</option>
+<option value="04">delta</option>
+<option value="05">echo</option>
+<option value="06">foxtrot</option>
+<option value="07">golf</option>
+<option value="08">hotel</option>
+<option value="09">india</option>
+<option value="10">juliet</option>
+<option value="11">kilo</option>
+<option value="12">lima</option>',
     );
     
     protected $days = array(
@@ -261,6 +273,12 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
             .$n.'<select name="Date_Year" data-foo="year">'.$n. $this->years['default'] .$n.'</select>';
         $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' day_extra="data-foo=\"day\"" month_extra="data-foo=\"month\"" year_extra="data-foo=\"year\""}');
         $this->assertEquals($result, $this->smarty->fetch($tpl));
+        
+        $result = '<select name="Date_Month" data_foo="foo">'.$n. $this->months['default'] .$n.'</select>'
+            .$n.'<select name="Date_Day" data_foo="foo">'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="Date_Year" data_foo="foo">'.$n. $this->years['default'] .$n.'</select>';
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' data_foo="foo"}');
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
     }
     
     public function testFieldOrder()
@@ -321,6 +339,28 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
             .$n.'<select name="Date_Day">'.$n.'<option value="">day</option>'.$n. $this->days['default'] .$n.'</select>'
             .$n.'<select name="Date_Year">'.$n.'<option value="">year</option>'.$n. $this->years['default'] .$n.'</select>';
         $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' year_empty="year" month_empty="month" day_empty="day"}');
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+    }
+    
+    public function testId()
+    {
+        $n = "\n";
+        $result = '<select name="Date_Month" id="Date_Month">'.$n. $this->months['default'] .$n.'</select>'
+            .$n.'<select name="Date_Day" id="Date_Day">'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="Date_Year" id="Date_Year">'.$n. $this->years['default'] .$n.'</select>';
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' all_id=""}');
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+        
+        $result = '<select name="Date_Month" id="all-Date_Month">'.$n. $this->months['default'] .$n.'</select>'
+            .$n.'<select name="Date_Day" id="all-Date_Day">'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="Date_Year" id="all-Date_Year">'.$n. $this->years['default'] .$n.'</select>';
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' all_id="all-"}');
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+        
+        $result = '<select name="Date_Month" id="month">'.$n. $this->months['default'] .$n.'</select>'
+            .$n.'<select name="Date_Day" id="day">'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="Date_Year" id="year">'.$n. $this->years['default'] .$n.'</select>';
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' year_id="year" month_id="month" day_id="day"}');
         $this->assertEquals($result, $this->smarty->fetch($tpl));
     }
     
@@ -397,11 +437,8 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals($result, $this->smarty->fetch($tpl));
         
         $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' display_months=false}');
-        $result = $n. '<select name="Date_Day">'.$n. $this->days['default'] .$n.'</select>'
-           .'<select name="Date_Year">'.$n. $this->years['default'] .$n.'</select>';
-       //FIXME: "$day \n $year" instead of "\n $day $year"
-       //$result = '<select name="Date_Day">'.$n. $this->days['default'] .$n.'</select>'
-       //    .$n.'<select name="Date_Year">'.$n. $this->years['default'] .$n.'</select>';
+        $result = '<select name="Date_Day">'.$n. $this->days['default'] .$n.'</select>'
+           .$n.'<select name="Date_Year">'.$n. $this->years['default'] .$n.'</select>';
         $this->assertEquals($result, $this->smarty->fetch($tpl));                   
         
         $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' display_years=false}');
@@ -463,6 +500,16 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals($result, $this->smarty->fetch($tpl));
     }
     
+    public function testMonthNames()
+    {
+        $n = "\n";
+        $result = '<select name="Date_Month">'.$n. $this->months['names'] .$n.'</select>'
+            .$n.'<select name="Date_Day">'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="Date_Year">'.$n. $this->years['default'] .$n.'</select>';
+        $tpl = $this->smarty->createTemplate('eval:{$names = [1 => "alpha","bravo","charlie","delta","echo","foxtrot","golf","hotel","india","juliet","kilo","lima"]}{html_select_date time='. $this->now .' month_names=$names}');
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+    }
+    
     
     public function testDayFormat()
     {
@@ -483,7 +530,7 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('eval:{html_select_date time='. $this->now .' day_value_format="%03d"}');
         $this->assertEquals($result, $this->smarty->fetch($tpl));
     }
-
+    
 } 
 
 ?>
