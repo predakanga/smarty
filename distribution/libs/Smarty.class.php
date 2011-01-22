@@ -130,6 +130,8 @@ class Smarty extends Smarty_Internal_Data {
     public $auto_literal = true; 
     // display error on not assigned variables
     public $error_unassigned = false; 
+    // look up relative filepaths in include_path
+    public $use_include_path = false;
     // template directory
     public $template_dir = null; 
     // default template handler
