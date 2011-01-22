@@ -191,6 +191,9 @@ Test Suite
  PluginBlockTextformatTests
  ..............
 
+ PluginFunctionHtmlSelectDateTests
+ ......................
+
  PluginFunctionMailtoTests
  ..................
 
@@ -296,6 +299,6 @@ Test Suite
  XmlTests
  ......
 
-Time: 42 seconds
+Time: 01:03
 
-OK (987 tests, 1533 assertions)
+OK (1009 tests, 1569 assertions)
