@@ -80,7 +80,7 @@ Test Suite
  ..
 
  CompileDebugTests
- ..
+ Ehello worldE
 
  CompileDelimiterTests
  ..
@@ -264,7 +264,7 @@ Test Suite
  ...........
 
  SecurityTests
- ........................
+ .................EFE..EE
 
  SharedFunctionsTests
  .
@@ -299,6 +299,74 @@ Test Suite
  XmlTests
  ......
 
-Time: 01:03
+Time: 33 seconds
 
-OK (1009 tests, 1569 assertions)
+There were 6 errors:
+
+1) CompileDebugTests::testDebugTag
+SmartyException: Unable to load template file '../../distribution/libs/debug.tpl'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:414
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_debug.php:110
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:301
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:432
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/CompileDebugTests.php:32
+
+2) CompileDebugTests::testDebugProperty
+SmartyException: Unable to load template file '../../distribution/libs/debug.tpl'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:414
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_debug.php:110
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:387
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:407
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/CompileDebugTests.php:43
+
+3) SecurityTests::testTrustedDirectory
+SmartyException: Unable to load template file './templates_2/hello.tpl'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:414
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:301
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:432
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:195
+
+4) SecurityTests::testDisabledTrustedDirectory
+SmartyException: Unable to load template file './templates_2/hello.tpl'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:414
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:301
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:432
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:219
+
+5) SecurityTests::testChangedTrustedDirectory
+SmartyException: Unable to load template file './templates_2/hello.tpl'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:414
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:301
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:432
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:255
+
+6) SecurityTests::testChangedNotTrustedDirectory
+SmartyException: Unable to load template file './templates_2/hello.tpl'
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:414
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:301
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/sysplugins/smarty_internal_template.php:432
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/distribution/libs/Smarty.class.php:339
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:269
+
+--
+
+
+There was 1 failure:
+
+1) SecurityTests::testNotTrustedDirectory
+Failed asserting that <string:Unable to load template file './templates_2/hello.tpl'> contains "/PHPunit/templates_2/hello.tpl' not allowed by security setting".
+
+/Users/rrehm/Projekte/test.dev/htdocs/smarty/playground/development/PHPunit/SecurityTests.php:207
+
+FAILURES!
+Tests: 1009, Assertions: 1561, Failures: 1, Errors: 6.
