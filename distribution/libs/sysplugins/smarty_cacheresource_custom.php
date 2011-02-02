@@ -73,7 +73,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
         $_cache_id = isset($cached->cache_id) ? preg_replace('![^\w\|]+!', '_', $cached->cache_id) : null;
         $_compile_id = isset($cached->compile_id) ? preg_replace('![^\w\|]+!', '_', $cached->compile_id) : null;
 
-        $cached->filepath = sha1($cached->source->name . $_cache_id . $_compile_id);
+        $cached->filepath = sha1($cached->source->filepath . $_cache_id . $_compile_id);
         if ($_template->smarty->compile_check) {
             $this->populateTimestamp($cached);
         }
@@ -93,25 +93,23 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
             $cached->exists = !!$cached->timestamp;
             return;
         }
-        
-        $this->fetch($cached->filepath, $cache_id, $compile_id, $content, $timestamp);
-        $cached->timestamp = isset($timestamp) ? $timestamp : false;
-        $cached->content = $content;
-        $cached->exists = !!$cached->timestamp;
     }
  
 	/**
-	 * Get the cached template output
+	 * Read the cached template and process the header
 	 * 
 	 * @param Smarty_Internal_Template $_template template object
-	 * @param boolean $no_render true to echo content immediately, false to return content as string
-	 * @return string|booelan the template content, or false if the file does not exist
+	 * @return booelan true or false if the cached content does not exist
 	 */
-	public function getContent(Smarty_Internal_Template $_template, $no_render = false)
+	public function process(Smarty_Internal_Template $_template)
 	{
-        $this->fetch($cached->filepath, $cache_id, $compile_id, $content, $timestamp);
+		$content = '';
+		$timestamp = null;
+        $this->fetch($_template->cached->filepath, $_template->source->name, $_template->cache_id, $_template->compile_id, $content, $timestamp);
         if( isset($content) ) {
-            return $this->decodeCache($_template, $content, $no_render);
+			$_smarty_tpl = $_template;
+        	eval("?>" . $content);
+            return true;
         }
         return false;
 	}

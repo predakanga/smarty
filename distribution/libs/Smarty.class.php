@@ -242,8 +242,6 @@ class Smarty extends Smarty_Internal_Data {
     public $_dir_perms = 0771; 
     // block tag hierarchy
     public $_tag_stack = array(); 
-    // flag if {block} tag is compiled for template inheritance
-    public $inheritance = false;
     // generate deprecated function call notices?
     public $deprecation_notices = true;
     // Smarty 2 BC

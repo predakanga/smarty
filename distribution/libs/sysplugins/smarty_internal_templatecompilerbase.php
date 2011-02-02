@@ -25,6 +25,12 @@ class Smarty_Internal_TemplateCompilerBase {
     public $template = null;
     // optional log of tag/attributes
     public $used_tags = array();
+    // merged templates
+    public $merged_templates = array();
+    // flag while compiling {block} tags
+    static $inheritance = false;
+    // {block} data in template inheritance
+    public $block_data = array();
 
     /**
      * Initialize compiler
@@ -74,7 +80,7 @@ class Smarty_Internal_TemplateCompilerBase {
                 if ($template->suppressFileDependency) {
                     $template->compiled_template = '';
                 } else {
-                    $template->compiled_template = $template_header . $template->createPropertyHeader();
+                    $template->compiled_template = $template_header . $template->createWriteContent();
                 } 
                 return true;
             } 
@@ -82,10 +88,14 @@ class Smarty_Internal_TemplateCompilerBase {
             $_compiled_code = $this->doCompile($_content);
         } while ($this->abort_and_recompile); 
         // return compiled code to template object
+        $merged_code = '';
+        foreach ($this->merged_templates as $code) {
+        	$merged_code .= $code;
+        }
         if ($template->suppressFileDependency) {
-            $template->compiled_template = $_compiled_code;
+            $template->compiled_template = $_compiled_code . $merged_code;
         } else {
-            $template->compiled_template = $template_header . $template->createPropertyHeader() . $_compiled_code;
+            $template->compiled_template = $template_header . $template->createWriteContent($_compiled_code) . $merged_code;
         } 
         // run postfilter if required
         if (isset($this->smarty->autoload_filters['post']) || isset($this->smarty->registered_filters['post'])) {

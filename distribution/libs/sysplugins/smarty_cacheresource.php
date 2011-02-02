@@ -32,13 +32,11 @@ abstract class Smarty_CacheResource {
 	public abstract function populateTimestamp(Smarty_Template_Cached $cached);
 
 	/**
-	 * Get the cached template output
+	 * Read the cached template and process header
 	 * 
 	 * @param Smarty_Internal_Template $_template template object
-	 * @param boolean $no_render true to echo content immediately, false to return content as string
-	 * @return string|booelan the template content, or false if the file does not exist
 	 */
-	public abstract function getContent(Smarty_Internal_Template $_template, $no_render = false);
+	public abstract function process(Smarty_Internal_Template $_template);
 	
 	/**
 	 * Write the rendered template output to cache
@@ -48,6 +46,22 @@ abstract class Smarty_CacheResource {
 	 * @return boolean success
 	 */
 	public abstract function writeCachedContent(Smarty_Internal_Template $_template, $content);
+
+	/**
+	 * Return cached content
+	 * 
+	 * @param Smarty_Internal_Template $_template template object
+	 * @param string $content content of cache
+	 */
+	public function getCachedContent(Smarty_Internal_Template $_template)
+	{
+		if ($_template->cached->handler->process($_template)) {
+			ob_start();
+			$_template->properties['unifunc']($_template);
+        	return ob_get_clean();
+        }
+        return null;
+	}
 	
 	/**
 	 * Empty cache
@@ -70,25 +84,6 @@ abstract class Smarty_CacheResource {
 	*/
 	public abstract function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);
 	
-	/**
-	 * Decode and remove Smarty cache headers
-	 *
-	 * @param Smarty_Internal_Template $_template template object
-	 * @param string $content cached content
-	 * @param boolean $no_render true to echo content immediately, false to return content as string
-	 * @return string cached content without headers
-	 */
-	protected function decodeCache(Smarty_Internal_Template $_template, $content, $no_render=false)
-	{
-		// variables required by the eval()ed header
-		$_smarty_tpl = $_template;
-		unset($_template);
-		if (!$no_render) {
-        	ob_start();
-        }
-        eval("?>" . $content);
-		return !$no_render ? ob_get_clean() : null;
-	}
 	
 	/**
      * Load Cache Resource Handler
@@ -145,3 +140,100 @@ abstract class Smarty_CacheResource {
         return $cached;
     }
 }
+/**
+ * Smarty Resource Data Object
+ * 
+ * Cache Data Container for Template Files
+ * 
+ * @package Smarty
+ * @subpackage TemplateResources
+ * @author Rodney Rehm
+ */
+class Smarty_Template_Cached {
+    /**
+	 * Source Filepath
+	 * @var string
+	 */
+    public $filepath = null;
+    
+    /**
+	 * Source Timestamp
+	 * @var integer
+	 * @property $timestamp
+	 */
+	public $timestamp = null;
+	
+	/**
+	 * Source Existance
+	 * @var boolean
+	 * @property $exists
+	 */
+	public $exists = false; 
+	
+	/**
+	 * Cache Is Valid
+	 * @var boolean
+	 * @property $exists
+	 */
+	public $valid = null; 
+		
+	/**
+	 * CacheResource Handler
+	 * @var Smarty_CacheResource
+	 */
+	public $handler = null;
+    
+    /**
+     * Template Compile Id (Smarty_Internal_Template::$compile_id)
+     * @var string
+     */
+	public $compile_id = null;
+
+	/**
+     * Template Cache Id (Smarty_Internal_Template::$cache_id)
+     * @var string
+     */
+	public $cache_id = null;
+	
+    /**
+	 * Source Object
+	 * @var Smarty_Template_Source
+	 */
+	public $source = null;
+
+    /**
+	 * create Cached Object container
+	 *
+	 * @param Smarty_CacheResource $handler CacheResource Handler this source object communicates with
+	 * @param Smarty_Internal_Template $_template template object
+	 */
+	public function __construct(Smarty_CacheResource $handler, Smarty_Internal_Template $_template)
+	{
+	    $this->handler = $handler; // Note: prone to circular references
+
+	    $this->compile_id = $_template->compile_id;
+	    $this->cache_id = $_template->cache_id;
+	    $this->source = $_template->source;
+	}
+	
+	/**
+	 * Write this cache object to handler
+	 *
+	 * @param Smarty_Internal_Template $_template template object
+	 * @param string $content content to cache
+     * @return boolean success
+	 */
+	public function write(Smarty_Internal_Template $_template, $content)
+	{
+        if (!$_template->source->recompiled) {
+	        if ($this->handler->writeCachedContent($_template, $content)) {
+    	    	$this->timestamp = time();
+    	    	$this->exists = true;
+    	    return true;
+    		}
+        }
+	    return false;
+	}
+
+}
+?>

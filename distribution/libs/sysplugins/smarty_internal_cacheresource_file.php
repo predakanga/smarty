@@ -31,10 +31,18 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         $_filepath = $_template->source->uid; 
         // if use_sub_dirs, break file into directories
         if ($_template->smarty->use_sub_dirs) {
-            $_filepath = substr($_filepath, 0, 2) . DS
-             . substr($_filepath, 2, 2) . DS
-             . substr($_filepath, 4, 2) . DS
-             . $_filepath;
+        	if (isset($_cache_id)) {
+        		$_cache_md5 = md5($_cache_id);
+            	$_filepath = substr($_cache_md5, 0, 2) . DS
+            	. substr($_cache_md5, 2, 2) . DS
+            	. substr($_cache_md5, 4, 2) . DS
+            	. $_filepath;
+        	} else {
+            	$_filepath = substr($_filepath, 0, 2) . DS
+            	. substr($_filepath, 2, 2) . DS
+            	. substr($_filepath, 4, 2) . DS
+            	. $_filepath;
+            }
         } 
         $_compile_dir_sep = $_template->smarty->use_sub_dirs ? DS : '^';
         if (isset($_cache_id)) {
@@ -68,24 +76,14 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
     }
 
 	/**
-	 * Get the cached template output
+	 * Read the cached template and process its header
 	 * 
 	 * @param Smarty_Internal_Template $_template template object
-	 * @param boolean $no_render true to echo content immediately, false to return content as string
-	 * @return string|booelan the template content, or false if the file does not exist
 	 */
-    public function getContent(Smarty_Internal_Template $_template, $no_render = false)
+    public function process(Smarty_Internal_Template $_template)
     {
-    	if (!$no_render) {
-        	ob_start();
-    	}
         $_smarty_tpl = $_template;
         include $_template->cached->filepath;
-        if ($no_render) {
-        	return null;
-        } else {
-          return ob_get_clean();
-        }
     } 
 
 	/**
