@@ -110,12 +110,16 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     /**
     * test getCompiledTimestamp
     */
-    public function testGetCompiledTimestamp()
+    public function testGetCompiledTimestampPrepare()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl'); 
         // create dummy compiled file
         file_put_contents($tpl->compiled->filepath, 'test');
         touch($tpl->compiled->filepath, $tpl->source->timestamp);
+    } 
+    public function testGetCompiledTimestamp()
+    {
+        $tpl = $this->smarty->createTemplate('helloworld.tpl'); 
         $this->assertTrue(is_integer($tpl->compiled->timestamp));
         $this->assertEquals(10, strlen($tpl->compiled->timestamp));
         $this->assertEquals($tpl->compiled->timestamp, $tpl->source->timestamp);
@@ -208,24 +212,6 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertTrue(is_integer($tpl->cached->timestamp));
         $this->assertEquals(10, strlen($tpl->cached->timestamp));
-    } 
-    /**
-    * test getCachedContent caching disabled
-    */
-    public function testGetCachedContentCachingDisabled()
-    {
-        $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertFalse($tpl->getCachedContent());
-    } 
-    /**
-    * test getCachedContent 
-    */
-    public function testGetCachedContent()
-    {
-        $this->smarty->caching = true;
-        $this->smarty->cache_lifetime = 1000;
-        $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('test', $tpl->getCachedContent());
     } 
     /**
     * test prepare files for isCached test

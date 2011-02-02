@@ -22,7 +22,7 @@ class CacheResourceCustomMemcacheTests extends CacheResourceCustomMysqlTests {
 
     public static function isRunnable()
     {
-        return true;
+        return false;
     } 
     
     protected function doClearCacheAssertion($a, $b)

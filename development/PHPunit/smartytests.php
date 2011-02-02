@@ -57,6 +57,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->deprecation_notices = true;
         $smarty->enableSecurity();
         $smarty->error_reporting = null;
+        $smarty->caching_type = 'file';
     } 
     /**
      * look for test units and run them

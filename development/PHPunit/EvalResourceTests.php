@@ -125,14 +125,6 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse($tpl->cached->timestamp);
     } 
     /**
-    * test getCachedContent
-    */
-    public function testGetCachedContent()
-    {
-        $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertFalse($tpl->getCachedContent());
-    } 
-    /**
     * test writeCachedContent
     */
     public function testWriteCachedContent()

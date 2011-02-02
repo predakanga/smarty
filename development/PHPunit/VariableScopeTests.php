@@ -79,8 +79,6 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
         // must see the new value
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl));
         $tpl->parent = $this->smarty;
-        // rerender
-        $tpl->renderTemplate();
         // must see the old value at root
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
     } 
@@ -93,8 +91,6 @@ class VariableScopeTests extends PHPUnit_Framework_TestCase {
         // must see the new value
         $this->assertEquals("newvalue", $this->smarty->fetch($tpl));
         $tpl->parent = $this->smarty;
-        // rerender
-        $tpl->renderTemplate();
         // must see the old value at root
         $this->assertEquals("bar", $this->smarty->fetch($tpl));
     } 

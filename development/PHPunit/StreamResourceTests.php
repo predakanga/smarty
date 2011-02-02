@@ -159,14 +159,6 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
         $this->fail('Exception for not existing template is missing');
     } 
     /**
-    * test getCachedContent
-    */
-    public function testGetCachedContent()
-    {
-        $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertFalse($tpl->getCachedContent());
-    } 
-    /**
     * test writeCachedContent
     */
     public function testWriteCachedContent()
