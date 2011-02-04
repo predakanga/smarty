@@ -142,7 +142,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 		// create template object
 		$_output = "<?php \$_template = \$_smarty_tpl->smarty->createTemplate ($include_file, \$_smarty_tpl, $_cache_id, $_compile_id,false); \$_template->caching = $_caching;";
 		if ($_cache_lifetime != 'null') {
-			$_output .= " \$_template = $_cache_lifetime;";
+			$_output .= " \$_template->cache_lifetime = $_cache_lifetime;";
 		}
 		$_output .= "\n";
 		// delete {include} standard attributes

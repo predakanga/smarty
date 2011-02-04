@@ -57,10 +57,8 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         } 
         $_cache_dir = rtrim($_template->smarty->cache_dir, '/\\') . DS;
         $cached->filepath = $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
-        if ($_template->smarty->compile_check) {
-            $cached->timestamp = @filemtime($cached->filepath);
-            $cached->exists = !!$cached->timestamp;
-        }
+        $cached->timestamp = @filemtime($cached->filepath);
+        $cached->exists = !!$cached->timestamp;
     }
     
     /**

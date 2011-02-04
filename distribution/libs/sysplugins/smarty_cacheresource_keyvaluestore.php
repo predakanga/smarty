@@ -51,9 +51,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
             . '#'. $this->sanitize($cached->cache_id) 
             . '#' . $this->sanitize($cached->compile_id);
             
-        if ($_template->smarty->compile_check) {
-            $this->populateTimestamp($cached);
-        }
+        $this->populateTimestamp($cached);
     }
     
     /**

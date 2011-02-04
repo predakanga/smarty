@@ -443,14 +443,14 @@ class Smarty_Template_Source {
 	 * @var integer
 	 * @property $timestamp
 	 */
-	public $timestamp = null; // magic loaded
+//	public $timestamp = null; // magic loaded
 	
 	/**
 	 * Source Existance
 	 * @var boolean
 	 * @property $exists
 	 */
-	public $exists = false; // magic loaded
+//	public $exists = false; // magic loaded
 
     /**
 	 * Source is bypassing compiler

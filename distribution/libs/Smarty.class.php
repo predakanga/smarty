@@ -423,7 +423,7 @@ class Smarty extends Smarty_Internal_Data {
             $template = $this->createTemplate ($template, $cache_id, $compile_id, $parent, false);
         } 
         // return cache status of template
-        return $template->isCached();
+        return $template->cached->valid;
     } 
 
     /**

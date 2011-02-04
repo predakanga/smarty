@@ -1,6 +1,9 @@
 ===== SVN branch rodneyrehm  =====
 04/02/2011
 - change in Smarty_CacheResource_Custom
+- bugfix cache_lifetime did not compile correctly at {include} after last update
+- moved isCached processing into CacheResource class
+- bugfix new CacheResource API did not work with disabled compile_check
 
 03/02/2011
 - handle template content as function to improve speed on multiple calls of same subtemplate and isCached()/display() calls

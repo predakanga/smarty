@@ -41,9 +41,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
 	public $write_compiled_code = true;
 	// Rendered content
 	public $rendered_content = null;
-	// Cache file
-	private $isCached = null;
-	private $cacheFileChecked = false;
 	// template variables
 	//    public $tpl_vars = array();
 	//    public $parent = null;
@@ -206,68 +203,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
 	}
 
 	/**
-	* Checks of a valid version redered HTML output is in the cache
-	*
-	* If the cache is valid the contents is stored in the template object
-	*
-	* @return boolean true if cache is valid
-	*/
-	public function isCached ($template = null, $cache_id = null, $compile_id = null, $parent = null)
-	{
-		if ($template === null) {
-			$no_render = true;
-		} elseif ($template === false) {
-			$no_render = false;
-		} else {
-			if ($parent === null) {
-				$parent = $this;
-			}
-			$this->smarty->isCached ($template, $cache_id, $compile_id, $parent);
-		}
-		if ($this->isCached === null) {
-			$this->isCached = false;
-			if (($this->caching == Smarty::CACHING_LIFETIME_CURRENT || $this->caching == Smarty::CACHING_LIFETIME_SAVED) && !$this->source->recompiled) {
-				$cachedTimestamp = $this->cached->timestamp;
-				if ($cachedTimestamp === false || $this->smarty->force_compile || $this->smarty->force_cache) {
-					return $this->isCached;
-				}
-				if ($this->caching === Smarty::CACHING_LIFETIME_SAVED || ($this->caching == Smarty::CACHING_LIFETIME_CURRENT && (time() <= ($cachedTimestamp + $this->cache_lifetime) || $this->cache_lifetime < 0))) {
-					if ($this->smarty->debugging) {
-						Smarty_Internal_Debug::start_cache($this);
-					}
-					$this->cached->handler->process($this);
-					if ($this->smarty->debugging) {
-						Smarty_Internal_Debug::end_cache($this);
-					}
-					if ($this->cacheFileChecked) {
-						$this->isCached = true;
-						return $this->isCached;
-					}
-					$this->cacheFileChecked = true;
-					if ($this->caching === Smarty::CACHING_LIFETIME_SAVED && $this->properties['cache_lifetime'] >= 0 && (time() > ($this->cached->timestamp + $this->properties['cache_lifetime']))) {
-						$this->tpl_vars = array();
-						$this->rendered_content = null;
-						return $this->isCached;
-					}
-					if (!empty($this->properties['file_dependency']) && $this->smarty->compile_check) {
-						$resource_type = null;
-						$resource_name = null;
-						foreach ($this->properties['file_dependency'] as $_file_to_check) {
-							if (Smarty_Resource::isModifiedSince($this, $_file_to_check[2], $_file_to_check[0], $_file_to_check[1])) {
-								$this->tpl_vars = array();
-								$this->rendered_content = null;
-								return $this->isCached;
-							}
-						}
-					}
-					$this->isCached = true;
-				}
-			}
-		}
-		return $this->isCached;
-	}
-
-	/**
 	* Returns the rendered HTML output
 	*
 	* If the cache is valid the cached content is used, otherwise
@@ -287,10 +222,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
 		}
 		// read from cache or render
 		if ($this->rendered_content === null) {
-			if ($this->isCached === null) {
-				$this->isCached(false);
-			}
-			if (!$this->isCached) {
+			if (!$this->caching || !$this->cached->valid) {
 				// render template (not loaded and not in cache)
 				if (!$this->source->uncompiled) {
 					$_smarty_tpl = $this;
@@ -410,7 +342,6 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
 			}
 		}
 		$this->updateParentVariables();
-		$this->isCached = null;
 		return $this->rendered_content;
 	}
 
@@ -606,6 +537,20 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
 	}
 
 	/**
+	* wrapper for isCached
+	*/
+	public function isCached ($template = null, $cache_id = null, $compile_id = null, $parent = null)
+	{
+		if ($template === null) {
+			return $this->cached->valid;
+		}
+		if ($parent === null) {
+			$parent = $this;
+		}
+		return $this->smarty->isCached ($template, $cache_id, $compile_id, $parent);
+	}
+
+	/**
 	* wrapper for fetch
 	*/
 	public function fetch ($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false)
@@ -686,7 +631,7 @@ class Smarty_Internal_Template extends Smarty_Internal_Data {
 			return $this->compiled;
 
 			case 'cached':
-			$this->cached = Smarty_CacheResource::cached($this);
+				Smarty_CacheResource::cached($this);
 			return $this->cached;
 
 			default:

@@ -74,9 +74,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
         $_compile_id = isset($cached->compile_id) ? preg_replace('![^\w\|]+!', '_', $cached->compile_id) : null;
 
         $cached->filepath = sha1($cached->source->filepath . $_cache_id . $_compile_id);
-        if ($_template->smarty->compile_check) {
-            $this->populateTimestamp($cached);
-        }
+        $this->populateTimestamp($cached);
     }
     
     /**
