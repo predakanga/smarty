@@ -7,6 +7,15 @@
 - bugfixes and improvents in the new resource API
 - optimizations of template class code
 
+25/01/2011
+- optimized function html_select_time
+
+22/01/2011
+- added Smarty::$use_include_path configuration directive for Resource API
+
+21/01/2011
+- optimized function html_select_date
+
 19/01/2011
 - optimized outputfilter trimwhitespace
 
