@@ -1,4 +1,11 @@
 ===== SVN branch rodneyrehm  =====
+04/02/2011
+- change in Smarty_CacheResource_Custom
+
+03/02/2011
+- handle template content as function to improve speed on multiple calls of same subtemplate and isCached()/display() calls
+- bugfixes and improvents in the new resource API
+- optimizations of template class code
 
 19/01/2011
 - optimized outputfilter trimwhitespace
@@ -59,6 +66,13 @@
 
 
 ===== SVN trunk  =====
+
+01/02/2011
+- removed assert() from config and template parser
+
+31/01/2011
+- bugfix the lexer/parser did fail on special characters like VT
+
 16/01/2011
 -bugfix of ArrayAccess object handling in internal _count() method
 -bugfix of Iterator object handling in internal _count() method
