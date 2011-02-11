@@ -146,7 +146,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetRenderedTemplate()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertEquals('hello world', $tpl->getRenderedTemplate());
+        $this->assertEquals('hello world', $tpl->fetch());
     } 
     /**
     * test that no complied template and cache file was produced

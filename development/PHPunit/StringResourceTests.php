@@ -148,7 +148,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetRenderedTemplate()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals('hello world', $tpl->getRenderedTemplate());
+        $this->assertEquals('hello world', $tpl->fetch());
     } 
     /**
     * test $smarty->is_cached

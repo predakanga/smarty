@@ -236,7 +236,6 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertTrue($tpl->isCached());
-        $this->assertEquals(null, $tpl->rendered_content);
     } 
     /**
     * test isCached on touched source
@@ -287,7 +286,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetRenderedTemplate()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertEquals('hello world', $tpl->getRenderedTemplate());
+        $this->assertEquals('hello world', $tpl->fetch());
     } 
     /**
     * test $smarty->is_cached
@@ -309,7 +308,6 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertTrue($this->smarty->isCached($tpl));
-        $this->assertEquals(null, $tpl->rendered_content);
     } 
     /**
     * test $smarty->is_cached  caching disabled

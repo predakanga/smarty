@@ -180,7 +180,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetRenderedTemplate()
     {
         $tpl = $this->smarty->createTemplate('global:mytest' , null, null, $this->smarty);
-        $this->assertEquals('hello world bar', $tpl->getRenderedTemplate());
+        $this->assertEquals('hello world bar', $tpl->fetch());
     } 
     /**
     * test that no complied template and cache file was produced
