@@ -139,44 +139,45 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 			$this->compiler->tag_nocache = true;
 			$_caching = Smarty::CACHING_OFF;
 		}
-		// create template object
-		$_output = "<?php \$_template = \$_smarty_tpl->smarty->createTemplate ($include_file, \$_smarty_tpl, $_cache_id, $_compile_id,false); \$_template->caching = $_caching;";
-		if ($_cache_lifetime != 'null') {
-			$_output .= " \$_template->cache_lifetime = $_cache_lifetime;";
-		}
-		$_output .= "\n";
+
 		// delete {include} standard attributes
 		unset($_attr['file'], $_attr['assign'], $_attr['cache_id'], $_attr['compile_id'], $_attr['cache_lifetime'], $_attr['nocache'], $_attr['caching'], $_attr['scope'], $_attr['inline']);
 		// remaining attributes must be assigned as smarty variable
 		if (!empty($_attr)) {
 			if ($_parent_scope == Smarty::SCOPE_LOCAL) {
 				// create variables
-				foreach ($_attr as $_key => $_value) {
-					$_output .= "\$_template->assign('$_key',$_value);";
+				foreach ($_attr as $key => $value) {
+					$_pairs[] = "'$key'=>$value";
 				}
+				$_vars = 'array('.join(',',$_pairs).')';
+				$_has_vars = true;
 			} else {
 				$this->compiler->trigger_template_error('variable passing not allowed in parent/global scope', $this->compiler->lex->taglineno);
 			}
+		} else {
+			$_vars = 'array()';
+			$_has_vars = false;
 		}
+		if ($has_compiled_template && !($compiler->template->caching && ($this->compiler->tag_nocache || $this->compiler->nocache))) {
+			$_output = "<?php \$_template = \$_smarty_tpl->smarty->createTemplate ($include_file, \$_smarty_tpl, $_cache_id, $_compile_id,false); \$_template->caching = $_caching;";
+			$_output .= "\$_template->properties['nocache_hash']  = '{$compiler->template->properties['nocache_hash']}';\n";
+			if ($_has_vars) {
+				$_output .= "\$_template->assign($_vars);\n";
+			}
+			$_output .= "\$_tpl_stack[] = \$_smarty_tpl; \$_smarty_tpl = \$_template;\n";
+			$_output .= $compiled_tpl;
+			$_output .= "\$_smarty_tpl->updateParentVariables($_parent_scope);\n";
+			$_output .= "/*  End of included template \"" . $tpl->source->filepath . "\" */ \n";
+			$_output .= "\$_smarty_tpl = array_pop(\$_tpl_stack);?>";
+			return $_output;
+		}
+
 		// was there an assign attribute
 		if (isset($_assign)) {
-			$_output .= "\$_smarty_tpl->assign($_assign,\$_template->getRenderedTemplate());";
+			$_output = "<?php \$_smarty_tpl->assign($_assign,\$_smarty_tpl->getSubTemplate ($include_file, $_cache_id, $_compile_id, $_caching, $_cache_lifetime, $_vars, \$_smarty_tpl, $_parent_scope));?>\n";;
 		} else {
-			if ($has_compiled_template && !($compiler->template->caching && ($this->compiler->tag_nocache || $this->compiler->nocache))) {
-				$_output .= "\$_template->properties['nocache_hash']  = '{$compiler->template->properties['nocache_hash']}';\n";
-				$_output .= "\$_tpl_stack[] = \$_smarty_tpl; \$_smarty_tpl = \$_template;\n";
-				$_output .= $compiled_tpl;
-				$_output .= "\$_smarty_tpl->updateParentVariables($_parent_scope);\n";
-				$_output .= "/*  End of included template \"" . $tpl->source->filepath . "\" */ \n";
-				$_output .= "\$_smarty_tpl = array_pop(\$_tpl_stack);";
-			} else {
-				$_output .= " echo \$_template->getRenderedTemplate();";
-				if ($_parent_scope != Smarty::SCOPE_LOCAL) {
-					$_output .= "\$_template->updateParentVariables($_parent_scope);";
-				}
-			}
+			$_output = "<?php echo \$_smarty_tpl->getSubTemplate ($include_file, $_cache_id, $_compile_id, $_caching, $_cache_lifetime, $_vars, \$_smarty_tpl, $_parent_scope);?>\n";
 		}
-		$_output .= "\$_template->rendered_content = null; unset(\$_template);?>";
 		return $_output;
 	}
 }

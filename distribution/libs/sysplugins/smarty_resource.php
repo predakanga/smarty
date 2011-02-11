@@ -581,27 +581,34 @@ class Smarty_Template_Source {
  */
 class Smarty_Template_Compiled {
 	/**
-	 * Source Filepath
+	 * Compiled Filepath
 	 * @var string
 	 */
     public $filepath = null;
     
     /**
-	 * Source Timestamp
+	 * Compiled Timestamp
 	 * @var integer
 	 * @property $timestamp
 	 */
 	public $timestamp = null; // magic loaded
 	
 	/**
-	 * Source Existance
+	 * Compiled Existance
 	 * @var boolean
 	 * @property $exists
 	 */
 	public $exists = false; // magic loaded
 	
 	/**
-	 * Source Content
+	 * Compiled Content Loaded
+	 * @var boolean
+	 * @property $loaded
+	 */
+	public $loaded = false; 
+	
+	/**
+	 * Compiled Content
 	 * @var string
 	 * @property $content
 	 */

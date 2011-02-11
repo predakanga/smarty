@@ -107,7 +107,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 		$_template->assign('assigned_vars', $_assigned_vars);
 		$_template->assign('config_vars', $_config_vars);
 		$_template->assign('execution_time', microtime(true) - $smarty->start_time);
-		echo $_template->getRenderedTemplate();
+		echo $_template->fetch();
 		$smarty->left_delimiter = $ldelim;
 		$smarty->right_delimiter = $rdelim;
 	}
