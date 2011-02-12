@@ -605,7 +605,14 @@ class Smarty_Template_Compiled {
 	 * @var boolean
 	 * @property $loaded
 	 */
+
 	public $loaded = false; 
+	/**
+	 * Template was compiled
+	 * @var boolean
+	 * @property $isCompiled
+	 */
+	public $isCompiled = false; 
 	
 	/**
 	 * Compiled Content

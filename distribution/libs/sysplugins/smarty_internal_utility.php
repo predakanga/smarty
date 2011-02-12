@@ -224,7 +224,7 @@ class Smarty_Internal_Utility {
 	{
 		$template->smarty->get_used_tags = true;
 		$template->compileTemplateSource();
-		return $template->compiler_object->used_tags;
+		return $template->compiler->used_tags;
 	}	
 	
     function testInstall()

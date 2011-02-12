@@ -122,13 +122,13 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 		$_tpl->suppressHeader = true;
 		$_tpl->suppressFileDependency = true;
 		if (strpos($compiler->template->block_data[$_name]['source'], '%%%%SMARTY_PARENT%%%%') !== false) {
-			$_output = str_replace('%%%%SMARTY_PARENT%%%%', $compiler->parser->current_buffer->to_smarty_php(), $_tpl->getCompiledTemplate());
+			$_output = str_replace('%%%%SMARTY_PARENT%%%%', $compiler->parser->current_buffer->to_smarty_php(), $_tpl->compiler->compileTemplate($_tpl));
 		} elseif ($compiler->template->block_data[$_name]['mode'] == 'prepend') {
-			$_output = $_tpl->getCompiledTemplate() . $compiler->parser->current_buffer->to_smarty_php();
+			$_output = $_tpl->compiler->compileTemplate($_tpl) . $compiler->parser->current_buffer->to_smarty_php();
 		} elseif ($compiler->template->block_data[$_name]['mode'] == 'append') {
-			$_output = $compiler->parser->current_buffer->to_smarty_php() . $_tpl->getCompiledTemplate();
+			$_output = $compiler->parser->current_buffer->to_smarty_php() . $_tpl->compiler->compileTemplate($_tpl);
 		} elseif (!empty($compiler->template->block_data[$_name])) {
-			$_output = $_tpl->getCompiledTemplate();
+			$_output = $_tpl->compiler->compileTemplate($_tpl);
 		}
 		$compiler->template->properties['file_dependency'] = array_merge($compiler->template->properties['file_dependency'], $_tpl->properties['file_dependency']);
 		$compiler->template->properties['function'] = array_merge($compiler->template->properties['function'], $_tpl->properties['function']);

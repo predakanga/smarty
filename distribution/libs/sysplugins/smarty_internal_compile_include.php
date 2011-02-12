@@ -58,7 +58,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 					$tpl->mustCompile = true;
 					if (!($tpl->source->uncompiled) && $tpl->source->exists) {
 						// get compiled code
-						$compiled_tpl = $tpl->getCompiledTemplate();
+						$compiled_tpl = $tpl->compiler->compileTemplate($tpl);
 						// merge compiled code for {function} tags
 						$compiler->template->properties['function'] = array_merge($compiler->template->properties['function'], $tpl->properties['function']);
 						// merge filedependency by evaluating header code

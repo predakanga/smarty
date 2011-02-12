@@ -88,8 +88,10 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 		ksort($_config_vars);
 		$ldelim = $smarty->left_delimiter;
 		$rdelim = $smarty->right_delimiter;
+		$debugging = $smarty->debugging;
 		$smarty->left_delimiter = '{';
 		$smarty->right_delimiter = '}';
+		$smarty->debugging = false;
 		$_template = new Smarty_Internal_Template ($smarty->debug_tpl, $smarty);
 		$_template->caching = false;
 		$_template->force_compile = false;
@@ -110,6 +112,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 		echo $_template->fetch();
 		$smarty->left_delimiter = $ldelim;
 		$smarty->right_delimiter = $rdelim;
+		$smarty->debugging = $debugging;
 	}
 	/*
 	* Recursively gets variables from all template/data scopes

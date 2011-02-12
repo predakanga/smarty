@@ -78,11 +78,11 @@ class Smarty_Internal_TemplateCompilerBase {
 			// on empty template just return header
 			if ($_content == '') {
 				if ($template->suppressFileDependency) {
-					$template->compiled_template = '';
+					$code = '';
 				} else {
-					$template->compiled_template = $template_header . $template->createWriteContent();
+					$code = $template_header . $template->createWriteContent();
 				}
-				return true;
+				return '';
 			}
 			// call compiler
 			$_compiled_code = $this->doCompile($_content);
@@ -93,14 +93,15 @@ class Smarty_Internal_TemplateCompilerBase {
 			$merged_code .= $code;
 		}
 		if ($template->suppressFileDependency) {
-			$template->compiled_template = $_compiled_code . $merged_code;
+			$code = $_compiled_code . $merged_code;
 		} else {
-			$template->compiled_template = $template_header . $template->createWriteContent($_compiled_code) . $merged_code;
+			$code = $template_header . $template->createWriteContent($_compiled_code) . $merged_code;
 		}
 		// run postfilter if required
 		if (isset($this->smarty->autoload_filters['post']) || isset($this->smarty->registered_filters['post'])) {
-			$template->compiled_template = Smarty_Internal_Filter_Handler::runFilter('post', $template->compiled_template, $template);
+			$code = Smarty_Internal_Filter_Handler::runFilter('post', $code, $template);
 		}
+		return $code;
 	}
 
 	/**

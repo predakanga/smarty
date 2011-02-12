@@ -1,9 +1,11 @@
 ===== SVN branch rodneyrehm  =====
+
 12/02/2011
 - new class Smarty_Internal_TemplateBase with shared methods of Smarty and Template objects
 - optimizations of template processing
 - made register... methods permanet
 - code for default_plugin_handler
+- add automatic recompilation at version change
 
 04/02/2011
 - change in Smarty_CacheResource_Custom

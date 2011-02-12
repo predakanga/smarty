@@ -13,10 +13,7 @@
 /**
 * Main class with template data structures and methods
 */
-class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
-	// object cache
-	public $compiler_object = null;
-	
+class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {	
 	// Smarty parameter
 	public $cache_id = null;
 	public $compile_id = null;
@@ -115,17 +112,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	*/
 	public function getCompiledTemplate ()
 	{
-		if ($this->compiled_template === null) {
-			// see if template needs compiling.
-			if ($this->mustCompile()) {
-				$this->compileTemplateSource();
-			} else {
-				if ($this->compiled_template === null) {
-					$this->compiled_template = !$this->source->recompiled && !$this->source->uncompiled ? $this->compiled->content : false;
-				}
-			}
+		// see if template needs compiling.
+		if ($this->mustCompile()) {
+			$this->compileTemplateSource();
 		}
-		return $this->compiled_template;
+		return !$this->source->recompiled && !$this->source->uncompiled ? $this->compiled->content : false;
 	}
 
 	/**
@@ -142,12 +133,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		if ($this->smarty->debugging) {
 			Smarty_Internal_Debug::start_compile($this);
 		}
-		// compile template
-		if (!is_object($this->compiler_object)) {
-			// load compiler
-			$this->smarty->loadPlugin($this->source->compiler_class);
-			$this->compiler_object = new $this->source->compiler_class($this->source->template_lexer_class, $this->source->template_parser_class, $this->smarty);
-		}
 		// compile locking
 		if ($this->smarty->compile_locking && !$this->source->recompiled) {
 			if ($saved_timestamp = $this->compiled->timestamp) {
@@ -156,7 +141,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		}
 		// call compiler
 		try {
-			$this->compiler_object->compileTemplate($this);
+			$code = $this->compiler->compileTemplate($this);
 		}
 		catch (Exception $e) {
 			// restore old timestamp in case of error
@@ -171,19 +156,21 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			$_filepath = $this->compiled->filepath;
 			if($_filepath === false)
 			throw new SmartyException( 'getCompiledFilepath() did not return a destination to save the compiled template to' );
-			Smarty_Internal_Write_File::writeFile($_filepath, $this->compiled_template, $this->smarty);
+			Smarty_Internal_Write_File::writeFile($_filepath, $code, $this->smarty);
+			$this->compiled->exists = true;
+			$this->compiled->isCompiled = true;
 		}
 		if ($this->smarty->debugging) {
 			Smarty_Internal_Debug::end_compile($this);
 		}
 		// release objects to free memory
 		Smarty_Internal_TemplateCompilerBase::$_tag_objects = array();
-		unset($this->compiler_object->parser->root_buffer,
-		$this->compiler_object->parser->current_buffer,
-		$this->compiler_object->parser,
-		$this->compiler_object->lex,
-		$this->compiler_object->template,
-		$this->compiler_object
+		unset($this->compiler->parser->root_buffer,
+		$this->compiler->parser->current_buffer,
+		$this->compiler->parser,
+		$this->compiler->lex,
+		$this->compiler->template,
+		$this->compiler
 		);
 	}
 
@@ -355,10 +342,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		$this->properties['version'] = $this->smarty->_version;
 		$this->properties['unifunc'] = 'content_'.uniqid();
 		if (!$this->source->recompiled) {
-			$output .= "\$_smarty_tpl->decodeProperties(" . var_export($this->properties, true) . "); /*/%%SmartyHeaderCode%%*/?>\n";
+			$output .= "\$_valid = \$_smarty_tpl->decodeProperties(" . var_export($this->properties, true) . ',' . ($cache ? 'true' : 'false') . "); /*/%%SmartyHeaderCode%%*/?>\n";
 		}
 		if (!$this->source->recompiled) {
-			$output .= '<?php if (!is_callable(\''.$this->properties['unifunc'].'\')) {function '.$this->properties['unifunc'].'($_smarty_tpl) {?>';
+			$output .= '<?php if ($_valid && !is_callable(\''.$this->properties['unifunc'].'\')) {function '.$this->properties['unifunc'].'($_smarty_tpl) {?>';
 		}
 		$output .= $plugins_string;
 		$output .= $content;
@@ -371,7 +358,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	/**
 	* Decode saved properties from compiled template and cache files
 	*/
-	public function decodeProperties ($properties)
+	public function decodeProperties ($properties, $cache = false)
 	{
 		$this->has_nocache_code = $properties['has_nocache_code'];
 		$this->properties['nocache_hash'] = $properties['nocache_hash'];
@@ -387,6 +374,26 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		}
 		$this->properties['version'] = $properties['version'];
 		$this->properties['unifunc'] = $properties['unifunc'];
+		// check file dependencies at compiled code
+		$is_valid = true;
+		if ($this->properties['version'] != $this->smarty->_version) {
+			$is_valid = false;
+		} else if ($this->smarty->compile_check && !empty($this->properties['file_dependency'])) {
+			$resource_type = null;
+			$resource_name = null;
+			foreach ($this->properties['file_dependency'] as $_file_to_check) {
+				if (Smarty_Resource::isModifiedSince($this, $_file_to_check[2], $_file_to_check[0], $_file_to_check[1])) {
+					$is_valid = false;
+					break;
+				}
+			}
+		}
+		if ($cache) {
+			$this->cached->valid = $is_valid;
+		} else {
+			$this->mustCompile = !$is_valid;
+		}
+		return $is_valid;
 	}
 
 	/**
@@ -449,6 +456,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			case 'source':
 			case 'compiled':
 			case 'cached':
+			case 'compiler':
 			$this->$property_name = $value;
 			return;
 
@@ -489,6 +497,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			case 'cached':
 			Smarty_CacheResource::cached($this);
 			return $this->cached;
+
+			case 'compiler':
+			$this->smarty->loadPlugin($this->source->compiler_class);
+			$this->compiler = new $this->source->compiler_class($this->source->template_lexer_class, $this->source->template_parser_class, $this->smarty);
+			return $this->compiler;
 
 			default:
 			if (property_exists($this->smarty, $property_name)) {

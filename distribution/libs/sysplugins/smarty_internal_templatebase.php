@@ -87,36 +87,25 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 			// render template (not loaded and not in cache)
 			if (!$_template->source->uncompiled) {
 				$_smarty_tpl = $_template;
-				if ($_template->mustCompile() && $_template->compiled_template === null) {
-					$_template->compileTemplateSource();
-				}
-				if ($this->smarty->debugging) {
-					Smarty_Internal_Debug::start_render($_template);
-				}
 				if ($_template->source->recompiled) {
+					if ($this->smarty->debugging) {
+						Smarty_Internal_Debug::start_render($_template);
+					}
 					ob_start();
-					eval("?>" . $_template->compiled_template);
+					eval("?>" . $_template->compiler->compileTemplate($_template));
 				} else {
+					if (!$_template->compiled->exists || ($_template->smarty->force_compile && !$_template->compiled->isCompiled)) {
+						$_template->compileTemplateSource();
+					}
+					if ($this->smarty->debugging) {
+						Smarty_Internal_Debug::start_render($_template);
+					}
 					if (!$_template->compiled->loaded) {
 						include($_template->compiled->filepath);
-						// check file dependencies at compiled code
-						if ($this->smarty->compile_check) {
-							if (!empty($_template->properties['file_dependency'])) {
-								$_template->mustCompile = false;
-								$resource_type = null;
-								$resource_name = null;
-								foreach ($_template->properties['file_dependency'] as $_file_to_check) {
-									if (Smarty_Resource::isModifiedSince($_template, $_file_to_check[2], $_file_to_check[0], $_file_to_check[1])) {
-										$_template->mustCompile = true;
-										break;
-									}
-								}
-								if ($_template->mustCompile) {
-									// recompile and render again
-									$_template->compileTemplateSource();
-									include($_template->compiled->filepath);
-								}
-							}
+						if ($_template->mustCompile) {
+							// recompile and load again
+							$_template->compileTemplateSource();
+							include($_template->compiled->filepath);
 						}
 						$_template->compiled->loaded = true;
 					}
@@ -205,7 +194,7 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 			}
 		}
 		$_template->updateParentVariables();
-		if ((!$this->caching || $_template->source->recompiled) && (isset($this->autoload_filters['output']) || isset($this->registered_filters['output']))) {
+		if ((!$this->caching || $_template->source->recompiled) && (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))) {
 			$_output = Smarty_Internal_Filter_Handler::runFilter('output', $_output, $_template);
 		}
 		if (isset($this->error_reporting)) {

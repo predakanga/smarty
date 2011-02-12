@@ -156,15 +156,6 @@ abstract class Smarty_CacheResource {
 		if ($cached->valid && $_template->caching === Smarty::CACHING_LIFETIME_SAVED && $_template->properties['cache_lifetime'] >= 0 && (time() > ($_template->cached->timestamp + $_template->properties['cache_lifetime']))) {
 			$cached->valid = false;
 		}
-		if ($cached->valid && !empty($_template->properties['file_dependency']) && $_template->smarty->compile_check) {
-			$resource_type = null;
-			$resource_name = null;
-			foreach ($_template->properties['file_dependency'] as $_file_to_check) {
-				if (Smarty_Resource::isModifiedSince($_template, $_file_to_check[2], $_file_to_check[0], $_file_to_check[1])) {
-					$cached->valid = false;
-				}
-			}
-		}
 	}
 }
 /**
