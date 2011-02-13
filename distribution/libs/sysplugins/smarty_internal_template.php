@@ -6,7 +6,7 @@
 * This file contains the Smarty template engine
 *
 * @package Smarty
-* @subpackage Templates
+* @subpackage Template
 * @author Uwe Tews
 */
 
@@ -164,7 +164,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			Smarty_Internal_Debug::end_compile($this);
 		}
 		// release objects to free memory
-		Smarty_Internal_TemplateCompilerBase::$_tag_objects = array();
 		unset($this->compiler->parser->root_buffer,
 		$this->compiler->parser->current_buffer,
 		$this->compiler->parser,
@@ -197,26 +196,21 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	* @param integer $caching cache mode
 	* @param integer $cache_lifetime life time of cache data
 	* @param array $vars optional variables to assign
-	* @param object $parent next higher level of Smarty variables
 	* @param int $parent_scope scope in which {include} should execute
 	* @returns string template content
 	*/
-	public function getSubTemplate($template, $cache_id, $compile_id, $caching, $cache_lifetime, $data, $parent, $parent_scope)
+	public function getSubTemplate($template, $cache_id, $compile_id, $caching, $cache_lifetime, $data, $parent_scope)
 	{
 		// already in template cache?
 		$_templateId =  sha1($template . $cache_id . $compile_id);
-		if (isset($parent->smarty->template_objects[$_templateId])) {
-			// return cached template object
-			$known = true;
-			$tpl = $parent->smarty->template_objects[$_templateId];
-			$save = array($tpl->parent, $tpl->tpl_vars, $tpl->caching, $tpl->cache_lifetime);
-			$tpl->parent = $parent;
-			$tpl->tpl_vars = array('smarty' => new Smarty_variable());
+		if (isset($this->smarty->template_objects[$_templateId])) {
+			// clone cached template object because of possible recursive call
+			$tpl = clone $this->smarty->template_objects[$_templateId];
+			$tpl->parent = $this;
 			$tpl->caching = $caching;
 			$tpl->cache_lifetime = $cache_lifetime;
 		} else {
-			$known = false;
-			$tpl = new $parent->smarty->template_class($template, $parent->smarty, $parent, $cache_id, $compile_id, $caching, $cache_lifetime);
+			$tpl = new $this->smarty->template_class($template, $this->smarty, $this, $cache_id, $compile_id, $caching, $cache_lifetime);
 		}
 		if (!empty($data)) {
 			// set up variable values
@@ -227,9 +221,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		$output = $tpl->fetch();
 		if ($parent_scope != Smarty::SCOPE_LOCAL) {
 			$tpl->updateParentVariables($parent_scope);
-		}
-		if ($known) {
-			list($tpl->parent, $tpl->tpl_vars, $tpl->caching, $tpl->cache_lifetime) = $save;
 		}
 		return $output;
 	}
@@ -487,7 +478,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			if ($this->source->type != 'eval') {
 				$this->smarty->template_objects[sha1($this->template_resource . $this->cache_id . $this->compile_id)] = $this;
 			}
-
 			return $this->source;
 
 			case 'compiled':

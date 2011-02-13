@@ -1,4 +1,7 @@
 ===== SVN branch rodneyrehm  =====
+13/02/2011
+- update handling of recursive subtemplate calls
+- removed obsolete {popup_init..} from demo templates
 
 12/02/2011
 - new class Smarty_Internal_TemplateBase with shared methods of Smarty and Template objects

@@ -6,7 +6,7 @@
  * This file contains the basic classes and methodes for template and variable creation
  * 
  * @package Smarty
- * @subpackage Templates
+ * @subpackage Template
  * @author Uwe Tews 
  */
 
@@ -29,10 +29,7 @@ class Smarty_Internal_Data {
     	// clear config vars
     	$this->config_vars = array(); 
     	// clear assigned tpl vars
-    	$this->tpl_vars = array();
-    	// clear objects for external methods
-    	unset($this->register);  
-    	unset($this->filter);  
+    	$this->tpl_vars = array('smarty' => new Smarty_variable());
 	}
 
     /**
@@ -430,12 +427,6 @@ class Smarty_Internal_Data {
  * @param object $parent tpl_vars next higher level of Smarty variables
  */
 class Smarty_Data extends Smarty_Internal_Data {
-    // array of variable objects
-    public $tpl_vars = array(); 
-    // back pointer to parent object
-    public $parent = null; 
-    // config vars
-    public $config_vars = array(); 
     // Smarty object
     public $smarty = null;
     /**
