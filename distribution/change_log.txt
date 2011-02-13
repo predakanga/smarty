@@ -1,7 +1,7 @@
 ===== SVN branch rodneyrehm  =====
 13/02/2011
 - update handling of recursive subtemplate calls
-- removed obsolete {popup_init..} from demo templates
+- bugfix replace $smarty->triggerError() by exception in smarty_internal_resource_extends.php
 
 12/02/2011
 - new class Smarty_Internal_TemplateBase with shared methods of Smarty and Template objects
@@ -87,6 +87,11 @@
 24/12/2010
 - optimize smarty_function_escape_special_chars() for PHP >= 5.2.3
 
+===== SVN 3.0 trunk  =====
+13/02/2011
+- bufix replace $smarty->triggerError() by exception
+- removed obsolete {popup_init..} plugin from demo templates
+- bugfix replace $smarty->triggerError() by exception in smarty_internal_resource_extends.php
 
 ===== Smarty 3.0.7  =====
 09/02/2011

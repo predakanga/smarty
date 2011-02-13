@@ -92,7 +92,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
             if ($_component != $_last) {
                 if (preg_match_all("!({$_ldl}block\s(.+?){$_rdl})!", $_content, $_open) !=
                         preg_match_all("!({$_ldl}/block{$_rdl})!", $_content, $_close)) {
-                    $source->smarty->triggerError("unmatched {block} {/block} pairs in template {$_component->type} '{$_component->name}'");
+                    throw new SmartyException("unmatched {block} {/block} pairs in template {$_component->type} '{$_component->name}'");
                 } 
                 preg_match_all("!{$_ldl}block\s(.+?){$_rdl}|{$_ldl}/block{$_rdl}!", $_content, $_result, PREG_OFFSET_CAPTURE);
                 $_result_count = count($_result[0]);
