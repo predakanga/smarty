@@ -99,16 +99,6 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse($tpl->compiled->timestamp);
     } 
     /**
-    * test getCompiledTemplate
-    */
-    public function testGetCompiledTemplate()
-    {
-        $tpl = $this->smarty->createTemplate('eval:hello world');
-        $result = $tpl->getCompiledTemplate();
-        $this->assertContains('hello world', $result);
-        $this->assertContains('<?php /* Smarty version ', $result);
-    } 
-    /**
     * test getCachedFilepath
     */
     public function testGetCachedFilepath()

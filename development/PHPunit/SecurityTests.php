@@ -200,6 +200,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testNotTrustedDirectory()
     {
+        $this->smarty->security_policy->secure_dir = array('.' . DIRECTORY_SEPARATOR . 'templates_3' . DIRECTORY_SEPARATOR);
         try {
             $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}');
         } 
@@ -261,25 +262,6 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals("templates_3", $this->smarty->fetch('eval:{include file="./templates_3/dirname.tpl"}'));
     } 
 
-    public function testChangedNotTrustedDirectory()
-    {
-        $this->smarty->security_policy->secure_dir = array(
-            '.' . DS . 'templates_2' . DS,
-        );
-        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
-
-        try {
-            $this->smarty->security_policy->secure_dir = array(
-                '.' . DS . 'templates_3' . DS,
-            );
-            $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
-        } 
-        catch (Exception $e) {
-            $this->assertContains("/PHPunit/templates_2/hello.tpl' not allowed by security setting", str_replace('\\','/',$e->getMessage()));
-            return;
-        } 
-        $this->fail('Exception for not trusted directory has not been raised.');
-    }
 } 
 class mysecuritystaticclass {
     const STATIC_CONSTANT_VALUE = 3;
