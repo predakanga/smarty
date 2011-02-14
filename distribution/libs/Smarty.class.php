@@ -99,7 +99,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	* constant definitions
 	*/
 	// smarty version
-	const SMARTY_VERSION = 'Smarty3-SVN$Rev: 3286 $';
+	const SMARTY_VERSION = 'Smarty 3.1-SVN$Rev: 3286 $';
 	//define variable scopes
 	const SCOPE_LOCAL = 0;
 	const SCOPE_PARENT = 1;
