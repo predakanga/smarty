@@ -3,6 +3,11 @@
 these changes must reflect on the documentation at some point…
 
 
+## Syntax ##
+
+* {block ... hide} option to supress block if no child is defined
+
+
 ## Functions ##
 
 * added attributes [month_names, all_id, year_id, month_id, day_id] to function.html_select_date
