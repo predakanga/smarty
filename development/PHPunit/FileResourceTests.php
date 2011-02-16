@@ -189,7 +189,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-	$expected = './cache/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.helloworld.tpl.php';
+        $expected = './cache/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.helloworld.tpl.php';
         $this->assertEquals(realpath($expected), realpath($tpl->cached->filepath));
     } 
     /**
@@ -223,9 +223,9 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         // clean up for next tests
         $this->smarty->clearCompiledTemplate();
-	  $this->smarty->clearAllCache();
+        $this->smarty->clearAllCache();
         // compile and cache
-	  $this->smarty->fetch($tpl);
+        $this->smarty->fetch($tpl);
     } 
     /**
     * test isCached
@@ -275,7 +275,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
-	  $this->smarty->clearAllCache();
+        $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->smarty->fetch($tpl);
         $this->assertTrue(file_exists($tpl->cached->filepath));
@@ -298,7 +298,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         // clean up for next tests
         $this->smarty->clearCompiledTemplate();
-	  $this->smarty->clearAllCache();
+        $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->smarty->fetch($tpl);
     } 
@@ -323,7 +323,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testFinalCleanup()
     {
         $this->smarty->clearCompiledTemplate();
-	  $this->smarty->clearAllCache();
+        $this->smarty->clearAllCache();
     } 
 } 
 

@@ -218,30 +218,30 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 						case 'cgi':         // php-cgi < 5.3
 						case 'cgi-fcgi':    // php-cgi >= 5.3
 						case 'fpm-fcgi':    // php-fpm >= 5.3.3
-						header('Status: 304 Not Modified');
-						break;
+						    header('Status: 304 Not Modified');
+						    break;
 
 						case 'cli':
-						if (/* ^phpunit */!empty($_SERVER['SMARTY_PHPUNIT_DISABLE_HEADERS'])/* phpunit$ */) {
-							$_SERVER['SMARTY_PHPUNIT_HEADERS'][] = '304 Not Modified';
-						}
-						break;
+					    	if (/* ^phpunit */!empty($_SERVER['SMARTY_PHPUNIT_DISABLE_HEADERS'])/* phpunit$ */) {
+    							$_SERVER['SMARTY_PHPUNIT_HEADERS'][] = '304 Not Modified';
+    						}
+    						break;
 
 						default:
-						header('HTTP/1.1 304 Not Modified');
-						break;
+						    header('HTTP/1.1 304 Not Modified');
+						    break;
 					}
 				} else {
 					switch (PHP_SAPI) {
 						case 'cli':
-						if (/* ^phpunit */!empty($_SERVER['SMARTY_PHPUNIT_DISABLE_HEADERS'])/* phpunit$ */) {
-							$_SERVER['SMARTY_PHPUNIT_HEADERS'][] = 'Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->cached->timestamp) . ' GMT';
-						}
-						break;
+					    	if (/* ^phpunit */!empty($_SERVER['SMARTY_PHPUNIT_DISABLE_HEADERS'])/* phpunit$ */) {
+    							$_SERVER['SMARTY_PHPUNIT_HEADERS'][] = 'Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->cached->timestamp) . ' GMT';
+    						}
+    						break;
 
 						default:
-						header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->cached->timestamp) . ' GMT');
-						break;
+					    	header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->cached->timestamp) . ' GMT');
+    						break;
 					}
 					echo $_output;
 				}
