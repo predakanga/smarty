@@ -317,6 +317,68 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertFalse($this->smarty->isCached($tpl));
     } 
+
+    public function testRelativeDot()
+    {
+        try {
+            $this->smarty->fetch('./helloworld.tpl');
+        } 
+        catch (Exception $e) {
+            $this->assertContains("may not start with ../ or ./", $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for relative filepath has not been raised.');
+    }
+    
+    public function testRelativeDotDot()
+    {
+        try {
+            $this->smarty->fetch('../helloworld.tpl');
+        } 
+        catch (Exception $e) {
+            $this->assertContains("may not start with ../ or ./", $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for relative filepath has not been raised.');
+    }
+    
+    public function testRelativeInclude()
+    {
+        $result = $this->smarty->fetch('relative.tpl');
+        $this->assertContains('hello world', $result);
+    }
+    
+    public function testRelativeIncludeSub()
+    {
+        $result = $this->smarty->fetch('sub/relative.tpl');
+        $this->assertContains('hello world', $result);
+    }
+    
+    public function testRelativeIncludeFail()
+    {
+        try {
+            $this->smarty->fetch('relative_sub.tpl');
+        } 
+        catch (Exception $e) {
+            $this->assertContains("Unable to load template", $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for unknown relative filepath has not been raised.');
+    }
+    
+    public function testRelativeIncludeFailOtherDir()
+    {
+        $smarty->template_dir[] = './templates_2';
+        try {
+            $this->smarty->fetch('relative_notexist.tpl');
+        } 
+        catch (Exception $e) {
+            $this->assertContains("Unable to load template", $e->getMessage());
+            return;
+        } 
+        $this->fail('Exception for unknown relative filepath has not been raised.');
+    }
+    
     /**
     * final cleanup
     */

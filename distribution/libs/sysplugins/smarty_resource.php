@@ -133,9 +133,68 @@ abstract class Smarty_Resource {
             $_directories = (array) $source->smarty->template_dir;
             $_default_handler = $source->smarty->default_template_handler_func;
         }
+        
+        // go relative to a given template?
+        $_file_is_dotted = $file[0] == '.' && ($file[1] == '.' || $file[1] == '/' || $file[1] == "\\");
+        if ($_template && $_template->parent instanceof Smarty_Internal_Template && $_file_is_dotted) {
+            if ($_template->parent->source->type != 'file' && $_template->parent->source->type != 'extends') {
+                throw new SmartyException("Template '{$file}' cannot be relative to template of resource type '{$_template->parent->source->type}'");
+            }
+            $file = dirname($_template->parent->source->filepath) . DS . $file;
+            $_file_exact_match = true;
+        } elseif ($_file_is_dotted) {
+            throw new SmartyException("Template '{$file}' may not start with ../ or ./'");
+        }
 
+		// resolve relative path
+        if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
+            $_path = DS . trim($file, '/\\');
+            $_was_relative = true;
+        } else {
+            $_path = $file;
+        }
+        // don't we all just love windows?
+        $_path = str_replace( '\\', '/', $_path );
+        // resolve simples
+        $_path = preg_replace('#(/\./(\./)*)|/{2,}#', '/', $_path);
+        // resolve parents
+        while (true) {
+            $_parent = strpos($_path, '/../');
+            if ($_parent === false) {
+                break;
+            } else if ($_parent === 0) {
+                $_path = substr($_path, 3);
+                break;
+            }
+            $_pos = strrpos($_path, '/', $_parent - strlen($_path) -1);
+            if ($_pos === false) {
+                // don't we all just love windows?
+                $_pos = $_parent;
+            }
+            $_path = substr_replace($_path, '', $_pos, $_parent + 3 - $_pos);
+        }
+        if (DS != '/') {
+            // don't we all just love windows?
+            $_path = str_replace( '/', '\\', $_path );
+        }
+        // revert to relative
+        if (isset($_was_relative)) {
+            $_path = substr($_path, 1);
+        }
+        // this is only required for directories
+        $file = rtrim($_path, '/\\');
+        
+        // files relative to a template only get one shot
+        if (isset($_file_exact_match)) {
+            return file_exists($file) ? $file : false;
+        }
+        
         // template_dir index?
         if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match)) {
+            if ($match['file'][0] == '.' && ($match['file'][1] == '.' || $match['file'][1] == '/' || $match['file'][1] == "\\")) {
+                throw new SmartyException("Template '{$match['file']}' may not start with ../ or ./'");
+            }
+            
             $_directory = null;
             // try string indexes
             if (isset($_directories[$match['key']])) {

@@ -192,7 +192,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testTrustedDirectory()
     {
         $this->smarty->security_policy->secure_dir = array('.' . DIRECTORY_SEPARATOR . 'templates_2' . DIRECTORY_SEPARATOR);
-        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
+        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="templates_2/hello.tpl"}'));
     } 
 
     /**
@@ -202,7 +202,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->security_policy->secure_dir = array('.' . DIRECTORY_SEPARATOR . 'templates_3' . DIRECTORY_SEPARATOR);
         try {
-            $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}');
+            $this->smarty->fetch('eval:{include file="templates_2/hello.tpl"}');
         } 
         catch (Exception $e) {
             $this->assertContains("/PHPunit/templates_2/hello.tpl' not allowed by security setting", str_replace('\\','/',$e->getMessage()));
@@ -217,7 +217,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     public function testDisabledTrustedDirectory()
     {
         $this->smarty->disableSecurity();
-        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
+        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="templates_2/hello.tpl"}'));
     } 
 
         /**
@@ -253,13 +253,13 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
         $this->smarty->security_policy->secure_dir = array(
             '.' . DS . 'templates_2' . DS,
         );
-        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="./templates_2/hello.tpl"}'));
+        $this->assertEquals("hello world", $this->smarty->fetch('eval:{include file="templates_2/hello.tpl"}'));
 
         $this->smarty->security_policy->secure_dir = array(
             '.' . DS . 'templates_2' . DS,
             '.' . DS . 'templates_3' . DS,
         );
-        $this->assertEquals("templates_3", $this->smarty->fetch('eval:{include file="./templates_3/dirname.tpl"}'));
+        $this->assertEquals("templates_3", $this->smarty->fetch('eval:{include file="templates_3/dirname.tpl"}'));
     } 
 
 } 
