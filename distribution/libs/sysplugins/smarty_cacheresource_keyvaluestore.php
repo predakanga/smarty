@@ -68,23 +68,29 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
         $cached->content = $content;
         $cached->timestamp = (int) $timestamp;
         $cached->exists = $cached->timestamp;
-    } 
- 
-    /**
-     * Get the cached template output
-     * 
-     * @param Smarty_Internal_Template $_template template object
-	 * @param boolean $no_render true to echo content immediately, false to return content as string
-     * @return string|booelan the template content, or false if the file does not exist
-     */
-	public function getContent(Smarty_Internal_Template $_template, $no_render = false)
-    {
-        if(!$this->fetch($_template->cached->filepath, $_template->cached->source->name, $_template->cached->cache_id, $_template->cached->compile_id, $content, $timestamp)) {
-            return false;
-        }
-        return $this->decodeCache($_template, $content, $no_render);
     }
     
+    /**
+	 * Read the cached template and process the header
+	 * 
+	 * @param Smarty_Internal_Template $_template template object
+	 * @return booelan true or false if the cached content does not exist
+	 */
+	public function process(Smarty_Internal_Template $_template)
+	{
+		$content = '';
+		$timestamp = null;
+        if(!$this->fetch($_template->cached->filepath, $_template->source->name, $_template->cache_id, $_template->compile_id, $content, $timestamp)) {
+            return false;
+        }
+        if( isset($content) ) {
+			$_smarty_tpl = $_template;
+        	eval("?>" . $content);
+            return true;
+        }
+        return false;
+	}
+
     /**
      * Write the rendered template output to cache
      * 
