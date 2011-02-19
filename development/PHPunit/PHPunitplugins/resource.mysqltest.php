@@ -1,8 +1,8 @@
 <?php
 
-require_once SMARTY_DIR . '../demo/plugins/cacheresource.mysql.php';
+require_once SMARTY_DIR . '../demo/plugins/resource.mysql.php';
 
-class Smarty_CacheResource_Mysqltest extends Smarty_CacheResource_Mysql {   
+class Smarty_Resource_Mysqltest extends Smarty_Resource_Mysql {
     public function __sleep()
     {
         return array();

@@ -1,23 +1,29 @@
 <?php
 
-/*
-    -- considering the following mysql schema
-    CREATE TABLE IF NOT EXISTS `output_cache` (
-      `id` CHAR(40) NOT NULL COMMENT 'sha1 hash',
-      `name` VARCHAR(250) NOT NULL,
-      `cache_id` VARCHAR(250) NULL DEFAULT NULL,
-      `compile_id` VARCHAR(250) NULL DEFAULT NULL,
-      `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-      `content` LONGTEXT NOT NULL,
-      PRIMARY KEY (`id`),
-      INDEX(`name`),
-      INDEX(`cache_id`),
-      INDEX(`compile_id`),
-      INDEX(`modified`)
-    ) ENGINE = InnoDB;
-*/
-
-
+/**
+ * MySQL CacheResource
+ *
+ * CacheResource Implementation based on the Custom API to use
+ * MySQL as the storage resource for Smarty's output caching.
+ *
+ * Table definition:
+ * <pre>CREATE TABLE IF NOT EXISTS `output_cache` (
+ *   `id` CHAR(40) NOT NULL COMMENT 'sha1 hash',
+ *   `name` VARCHAR(250) NOT NULL,
+ *   `cache_id` VARCHAR(250) NULL DEFAULT NULL,
+ *   `compile_id` VARCHAR(250) NULL DEFAULT NULL,
+ *   `modified` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+ *   `content` LONGTEXT NOT NULL,
+ *   PRIMARY KEY (`id`),
+ *   INDEX(`name`),
+ *   INDEX(`cache_id`),
+ *   INDEX(`compile_id`),
+ *   INDEX(`modified`)
+ * ) ENGINE = InnoDB;</pre>
+ *
+ * @package CacheResource-examples
+ * @author Rodney Rehm
+ */
 class Smarty_CacheResource_Mysql extends Smarty_CacheResource_Custom {
     // PDO instance
     protected $db;

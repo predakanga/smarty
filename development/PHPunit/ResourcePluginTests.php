@@ -78,7 +78,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     public function testResourcePluginMysql()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $this->assertEquals('hello world', $this->smarty->fetch('mysql:test.tpl'));
+        $this->assertEquals('hello world', $this->smarty->fetch('mysqltest:test.tpl'));
     }
     /**
      * test resource plugin timestamp of a custom resource
@@ -86,7 +86,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     public function testResourcePluginMysqlTimestamp()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $tpl = $this->smarty->createTemplate('mysql:test.tpl');
+        $tpl = $this->smarty->createTemplate('mysqltest:test.tpl');
         $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->source->timestamp);
     }
     /**
@@ -95,7 +95,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     public function testResourcePluginMysqlTimestampWithoutFetchTimestamp()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $tpl = $this->smarty->createTemplate('mysqls:test.tpl');
+        $tpl = $this->smarty->createTemplate('mysqlstest:test.tpl');
         $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->source->timestamp);
     }
     /**
@@ -104,8 +104,8 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     public function testResourcePluginMysqlCompiledFilepath()
     {
         $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
-        $tpl = $this->smarty->createTemplate('mysql:test.tpl');
-        $expected = realpath('./templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.php');
+        $tpl = $this->smarty->createTemplate('mysqltest:test.tpl');
+        $expected = realpath('./templates_c/'.sha1('mysqltest:test.tpl').'.mysqltest.test.tpl.php');
         $this->assertTrue(!!$expected);
         $this->assertEquals($expected, realpath($tpl->compiled->filepath));
     }
@@ -115,9 +115,9 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->force_compile = true;
-        $this->smarty->fetch('mysql:test.tpl');
-        $tpl = $this->smarty->createTemplate('mysql:test.tpl');
-        $expected = realpath('./templates_c/'.sha1('mysql:test.tpl').'.mysql.test.tpl.cache.php');
+        $this->smarty->fetch('mysqltest:test.tpl');
+        $tpl = $this->smarty->createTemplate('mysqltest:test.tpl');
+        $expected = realpath('./templates_c/'.sha1('mysqltest:test.tpl').'.mysqltest.test.tpl.cache.php');
         $this->assertTrue(!!$expected);
         $this->assertEquals($expected, realpath($tpl->compiled->filepath));
         $this->smarty->caching = false;

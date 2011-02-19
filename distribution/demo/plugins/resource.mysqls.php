@@ -1,16 +1,28 @@
 <?php
 
-/*
-    -- considering the following mysql schema
-    CREATE TABLE IF NOT EXISTS `templates` (
-      `name` varchar(100) NOT NULL,
-      `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-      `source` text,
-      PRIMARY KEY (`name`)
-    ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-    INSERT INTO `templates` (`name`, `modified`, `source`) VALUES ('test.tpl', "2010-12-25 22:00:00", '{$x="hello world"}{$x}');
-*/
-
+/**
+ * MySQL Resource
+ *
+ * Resource Implementation based on the Custom API to use
+ * MySQL as the storage resource for Smarty's templates and configs.
+ *
+ * Note that this MySQL implementation fetches the source and timestamps in
+ * a single database query, instead of two seperate like resource.mysql.php does.
+ *
+ * Table definition:
+ * <pre>CREATE TABLE IF NOT EXISTS `templates` (
+ *   `name` varchar(100) NOT NULL,
+ *   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ *   `source` text,
+ *   PRIMARY KEY (`name`)
+ * ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</pre>
+ *
+ * Demo data:
+ * <pre>INSERT INTO `templates` (`name`, `modified`, `source`) VALUES ('test.tpl', "2010-12-25 22:00:00", '{$x="hello world"}{$x}');</pre>
+ *
+ * @package Resource-examples
+ * @author Rodney Rehm
+ */
 class Smarty_Resource_Mysqls extends Smarty_Resource_Custom {
     // PDO instance
     protected $db;
@@ -46,17 +58,5 @@ class Smarty_Resource_Mysqls extends Smarty_Resource_Custom {
             $source = null;
             $mtime = null;
         }
-    }
-  
-    // NOTE: this is required for PHPUnit, it seems to serialize things for some reason    
-    public function __sleep()
-    {
-        return array();
-    }
-    
-    // NOTE: this is required for PHPUnit, it seems to serialize things for some reason
-    public function __wakeup()
-    {
-        $this->__construct();
     }
 }

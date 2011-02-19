@@ -1,6 +1,6 @@
 <?php
 
-require_once dirname(__FILE__) . '/cacheresource.memcache.php';
+require_once SMARTY_DIR . '../demo/plugins/cacheresource.memcache.php';
 
 class Smarty_CacheResource_Memcachetest extends Smarty_CacheResource_Memcache {
     public function get(Smarty_Internal_Template $_template)
