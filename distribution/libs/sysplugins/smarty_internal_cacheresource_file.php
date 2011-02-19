@@ -31,18 +31,10 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         $_filepath = $_template->source->uid; 
         // if use_sub_dirs, break file into directories
         if ($_template->smarty->use_sub_dirs) {
-        	if (isset($_cache_id)) {
-        		$_cache_md5 = md5($_cache_id);
-            	$_filepath = substr($_cache_md5, 0, 2) . DS
-            	. substr($_cache_md5, 2, 2) . DS
-            	. substr($_cache_md5, 4, 2) . DS
-            	. $_filepath;
-        	} else {
-            	$_filepath = substr($_filepath, 0, 2) . DS
-            	. substr($_filepath, 2, 2) . DS
+        	$_filepath = substr($_filepath, 0, 2) . DS
+				. substr($_filepath, 2, 2) . DS
             	. substr($_filepath, 4, 2) . DS
             	. $_filepath;
-            }
         } 
         $_compile_dir_sep = $_template->smarty->use_sub_dirs ? DS : '^';
         if (isset($_cache_id)) {
@@ -159,7 +151,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
             $_cacheDirs = new RecursiveDirectoryIterator($_dir);
             $_cache = new RecursiveIteratorIterator($_cacheDirs, RecursiveIteratorIterator::CHILD_FIRST);
             foreach ($_cache as $_file) {
-                if (strpos($_file, '.svn') !== false) continue; 
+                if (substr($_file->getBasename(),0,1) == '.') continue; 
                 // directory ?
                 if ($_file->isDir()) {
                     if (!$_cache->isDot()) {

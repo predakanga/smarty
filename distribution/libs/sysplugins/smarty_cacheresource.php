@@ -149,6 +149,7 @@ abstract class Smarty_CacheResource {
 				Smarty_Internal_Debug::start_cache($_template);
 			}
 			$cached->handler->process($_template);
+			$cached->processed = true;
 			if ($_template->smarty->debugging) {
 				Smarty_Internal_Debug::end_cache($_template);
 			}
@@ -191,9 +192,16 @@ class Smarty_Template_Cached {
 	/**
 	* Cache Is Valid
 	* @var boolean
-	* @property $exists
+	* @property $valid
 	*/
 	public $valid = false;
+
+	/**
+	* Cache was processed
+	* @var boolean
+	* @property $processed
+	*/
+	public $processed = false;
 
 	/**
 	* CacheResource Handler

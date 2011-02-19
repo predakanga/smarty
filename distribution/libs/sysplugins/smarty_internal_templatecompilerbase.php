@@ -27,6 +27,7 @@ class Smarty_Internal_TemplateCompilerBase {
 	public $used_tags = array();
 	// merged templates
 	public $merged_templates = array();
+	public $merged_templates_func = array();
 	// flag while compiling {block} tags
 	static $inheritance = false;
 	// {block} data in template inheritance
@@ -342,7 +343,7 @@ class Smarty_Internal_TemplateCompilerBase {
 		} else {
 			if (isset($this->template->required_plugins['compiled'][$plugin_name][$type])) {
 				$function = $this->template->required_plugins['compiled'][$plugin_name][$type]['function'];
-			} else if (isset($this->template->required_plugins['compiled'][$plugin_name][$type])) {
+			} else if (isset($this->template->required_plugins['nocache'][$plugin_name][$type])) {
 				$this->template->required_plugins['compiled'][$plugin_name][$type] = $this->template->required_plugins['nocache'][$plugin_name][$type];
 				$function = $this->template->required_plugins['compiled'][$plugin_name][$type]['function'];
 			}
@@ -355,9 +356,9 @@ class Smarty_Internal_TemplateCompilerBase {
 		}
 		// loop through plugin dirs and find the plugin
 		$function = 'smarty_' . $type . '_' . $plugin_name;
-		$file     = $this->smarty->loadPlugin($function);
+		$file = $this->smarty->loadPlugin($function, false);
 
-		if ($file) {
+		if (is_string($file)) {
 			if ($this->template->caching && ($this->nocache || $this->tag_nocache)) {
 				$this->template->required_plugins['nocache'][$plugin_name][$type]['file'] = $file;
 				$this->template->required_plugins['nocache'][$plugin_name][$type]['function'] = $function;
