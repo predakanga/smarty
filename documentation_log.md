@@ -40,8 +40,8 @@ these changes must reflect on the documentation at some point…
 * Smarty_CacheResource_Custom
 * Smarty_CacheResource_KeyValueStore
 * Smarty::registerCacheResource()
-* example development/PHPUnit/PHPunitplugins/cacheresource.mysql.php
-* example development/PHPUnit/PHPunitplugins/cacheresource.memcache.php
+* example distribution/demo/plugins/cacheresource.mysql.php
+* example distribution/demo/plugins/cacheresource.memcache.php
 
 
 ## Smarty_Resource ##
@@ -49,6 +49,6 @@ these changes must reflect on the documentation at some point…
 * see notes.md for infos
 * callback-functions deprecated
 * Smarty_Resource_Custom
-* example development/PHPUnit/PHPunitplugins/resource.mysql.php
-* example development/PHPUnit/PHPunitplugins/resource.mysqls.php
+* example distribution/demo/plugins/resource.mysql.php
+* example distribution/demo/plugins/resource.mysqls.php
 
