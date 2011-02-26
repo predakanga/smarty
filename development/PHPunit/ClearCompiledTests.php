@@ -41,7 +41,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smarty->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
-        $this->smarty->clear_compiled_template();
+        $this->smarty->clear_compiled_tpl();
         $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
         $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy2.php'));
     } 
@@ -62,7 +62,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smarty->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
-        $this->smarty->clear_compiled_template('dummy');
+        $this->smarty->clear_compiled_tpl('dummy');
         $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
         $this->assertTrue(file_exists($this->smarty->compile_dir . 'dummy2.php'));
     } 
@@ -82,7 +82,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smarty->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
-        $this->smarty->clear_compiled_template(null, null, 2000);
+        $this->smarty->clear_compiled_tpl(null, null, 2000);
         $this->assertTrue(file_exists($this->smarty->compile_dir . 'dummy.php'));
     } 
     /**
@@ -101,7 +101,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smarty->clearCompiledTemplate();
         file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
         touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
-       $this->smarty->clear_compiled_template(null, null, 500);
+       $this->smarty->clear_compiled_tpl(null, null, 500);
         $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
     } 
     /**
@@ -136,7 +136,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($tpl->compiled->filepath));
         $this->assertTrue(file_exists($tpl2->compiled->filepath));
         $this->assertTrue(file_exists($tpl3->compiled->filepath));
-        $this->smarty->clear_compiled_template(null, 'blar');
+        $this->smarty->clear_compiled_tpl(null, 'blar');
         $this->assertFalse(file_exists($tpl->compiled->filepath));
         $this->assertTrue(file_exists($tpl2->compiled->filepath));
         $this->assertFalse(file_exists($tpl3->compiled->filepath));

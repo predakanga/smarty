@@ -20,7 +20,7 @@ class HttpModifiedSinceTests extends PHPUnit_Framework_TestCase {
 
     public static function isRunnable()
     {
-        return false;
+        return true;
     } 
 
     public function testDisabled()

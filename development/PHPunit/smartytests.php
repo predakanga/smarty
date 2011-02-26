@@ -9,7 +9,7 @@ require_once 'PHPUnit/Framework.php';
 
 define ('SMARTY_DIR', '../../distribution/libs/');
 
-require_once SMARTY_DIR . 'Smarty.class.php';
+require_once SMARTY_DIR . 'SmartyBC.class.php';
 
 /**
  * class for running test suite
@@ -19,7 +19,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
 
     public function __construct()
     {
-        SmartyTests::$smarty = new Smarty();
+        SmartyTests::$smarty = new SmartyBC();
     } 
 
     public static function init()
@@ -58,6 +58,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->deprecation_notices = true;
         $smarty->enableSecurity();
         $smarty->error_reporting = null;
+        $smarty->error_unassigned = true;
         $smarty->caching_type = 'file';
     } 
     /**
