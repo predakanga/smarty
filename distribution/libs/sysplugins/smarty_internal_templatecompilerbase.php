@@ -28,8 +28,6 @@ class Smarty_Internal_TemplateCompilerBase {
 	// merged templates
 	public $merged_templates = array();
 	public $merged_templates_func = array();
-	// flag while compiling {block} tags
-	static $inheritance = false;
 	// {block} data in template inheritance
 	public $block_data = array();
 
@@ -81,13 +79,16 @@ class Smarty_Internal_TemplateCompilerBase {
 				if ($template->suppressFileDependency) {
 					$code = '';
 				} else {
-					$code = $template_header . $template->createWriteContent();
+					$code = $template_header . $template->createTemplatePropertyHeader();
 				}
 				return '';
 			}
 			// call compiler
 			$_compiled_code = $this->doCompile($_content);
 		} while ($this->abort_and_recompile);
+		// free memory
+		unset($this->parser->root_buffer, $this->parser->current_buffer, $this->parser, $this->lex, $this->template);
+		self::$_tag_objects = array();
 		// return compiled code to template object
 		$merged_code = '';
 		foreach ($this->merged_templates as $code) {
@@ -96,7 +97,7 @@ class Smarty_Internal_TemplateCompilerBase {
 		if ($template->suppressFileDependency) {
 			$code = $_compiled_code . $merged_code;
 		} else {
-			$code = $template_header . $template->createWriteContent($_compiled_code) . $merged_code;
+			$code = $template_header . $template->createTemplatePropertyHeader($_compiled_code) . $merged_code;
 		}
 		// run postfilter if required
 		if (isset($this->smarty->autoload_filters['post']) || isset($this->smarty->registered_filters['post'])) {
@@ -205,7 +206,7 @@ class Smarty_Internal_TemplateCompilerBase {
 					} elseif (is_callable($this->smarty->default_plugin_handler_func)) {
 						$path = call_user_func($this->smarty->default_plugin_handler_func, $tag, $type, $this->smarty);
 
-						if ($path !== FALSE) {
+						if ($path !== false) {
 							if (isset($this->template->parent->registered_plugins[$type][$tag][0])) {
 								$this->smarty->registered_plugins[$type][$tag] = $this->template->parent->registered_plugins[$type][$tag];
 								$function = $this->smarty->registered_plugins[$type][$tag][0];

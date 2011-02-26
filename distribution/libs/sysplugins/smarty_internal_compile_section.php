@@ -27,13 +27,12 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler;
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
-        $this->_open_tag('section', array('section',$this->compiler->nocache));
+        $this->_open_tag($compiler, 'section', array('section',$compiler->nocache));
         // maybe nocache because of nocache variables
-        $this->compiler->nocache = $this->compiler->nocache | $this->compiler->tag_nocache;
+        $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
 
         $output = "<?php ";
 
@@ -128,12 +127,11 @@ class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
-        list($_open_tag, $nocache) = $this->_close_tag(array('section'));
-        $this->_open_tag('sectionelse',array('sectionelse', $nocache));
+        list($_open_tag, $nocache) = $this->_close_tag($compiler, array('section'));
+        $this->_open_tag($compiler, 'sectionelse',array('sectionelse', $nocache));
 
         return "<?php endfor; else: ?>";
     } 
@@ -152,16 +150,15 @@ class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
         // must endblock be nocache?
-        if ($this->compiler->nocache) {
-                 $this->compiler->tag_nocache = true;
+        if ($compiler->nocache) {
+                 $compiler->tag_nocache = true;
         }
 
-        list($_open_tag, $this->compiler->nocache) = $this->_close_tag(array('section', 'sectionelse'));
+        list($_open_tag, $compiler->nocache) = $this->_close_tag($compiler, array('section', 'sectionelse'));
 
         if ($_open_tag == 'sectionelse')
             return "<?php endif; ?>";

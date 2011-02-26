@@ -23,15 +23,14 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
         if ($_attr['nocache'] === true) {
-        	$this->compiler->trigger_template_error('nocache option not allowed', $this->compiler->lex->taglineno);
+        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
         // enter nocache mode
-        $this->compiler->nocache = true;
+        $compiler->nocache = true;
         // this tag does not return compiled code
-        $this->compiler->has_code = false;
+        $compiler->has_code = false;
         return true;
     } 
 } 
@@ -50,12 +49,11 @@ class Smarty_Internal_Compile_Nocacheclose extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
         // leave nocache mode
-        $this->compiler->nocache = false;
+        $compiler->nocache = false;
         // this tag does not return compiled code
-        $this->compiler->has_code = false;
+        $compiler->has_code = false;
         return true;
     } 
 } 

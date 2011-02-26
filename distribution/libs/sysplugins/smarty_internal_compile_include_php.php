@@ -31,22 +31,21 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
     	if (!$compiler->smarty->allow_php_tag) {
         	throw new SmartyException("{include_php} is deprecated, set allow_php_tag = true to enable");
     	} 
-        $this->compiler = $compiler;
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
         $_output = '<?php '; 
 
         $_smarty_tpl = $compiler->template; 
         $_filepath = false;
         eval('$_file = ' . $_attr['file'] . ';'); 
-        if (!isset($this->compiler->smarty->security_policy) && file_exists($_file)) {
+        if (!isset($compiler->smarty->security_policy) && file_exists($_file)) {
         	$_filepath = $_file;
         } else {
-            if (isset($this->compiler->smarty->security_policy)) {
-                $_dir = $this->compiler->smarty->security_policy->trusted_dir;
+            if (isset($compiler->smarty->security_policy)) {
+                $_dir = $compiler->smarty->security_policy->trusted_dir;
             } else {
-                $_dir = $this->compiler->smarty->trusted_dir;
+                $_dir = $compiler->smarty->trusted_dir;
             } 
             if (!empty($_dir)) {
                 foreach((array)$_dir as $_script_dir) {
@@ -59,11 +58,11 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
             } 
         } 
         if ($_filepath == false) {
-            $this->compiler->trigger_template_error("{include_php} file '{$_file}' is not readable", $this->compiler->lex->taglineno);
+            $compiler->trigger_template_error("{include_php} file '{$_file}' is not readable", $compiler->lex->taglineno);
         } 
 
-        if (isset($this->compiler->smarty->security_policy)) {
-            $this->compiler->smarty->security_policy->isTrustedPHPDir($_filepath);
+        if (isset($compiler->smarty->security_policy)) {
+            $compiler->smarty->security_policy->isTrustedPHPDir($_filepath);
         } 
 
         if (isset($_attr['assign'])) {

@@ -136,12 +136,14 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
             $_save_stat = $smarty->caching;
             $smarty->caching = true;
             $tpl = new $smarty->template_class($resource_name, $smarty); 
-            // remove from template cache
-            unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
             $smarty->caching = $_save_stat;
             if ($tpl->source->exists) {
                 $_resourcename_parts = basename(str_replace('^', '/', $tpl->cached->filepath));
+            	// remove from template cache
+            	unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
             } else {
+            	// remove from template cache
+            	unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
                 return 0;
             } 
         } 

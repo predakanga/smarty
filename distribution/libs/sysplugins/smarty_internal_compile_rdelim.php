@@ -23,14 +23,13 @@ class Smarty_Internal_Compile_Rdelim extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
         if ($_attr['nocache'] === true) {
-        	$this->compiler->trigger_template_error('nocache option not allowed', $this->compiler->lex->taglineno);
+        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
         // this tag does not return compiled code
-        $this->compiler->has_code = true;
-        return $this->compiler->smarty->right_delimiter;
+        $compiler->has_code = true;
+        return $compiler->smarty->right_delimiter;
     } 
 }
 

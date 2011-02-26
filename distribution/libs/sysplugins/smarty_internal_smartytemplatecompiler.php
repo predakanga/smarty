@@ -10,7 +10,7 @@
  * @author Uwe Tews 
  */
 
-require_once("smarty_internal_parsetree.php");
+include ("smarty_internal_parsetree.php");
 
 /**
  * Class SmartyTemplateCompiler

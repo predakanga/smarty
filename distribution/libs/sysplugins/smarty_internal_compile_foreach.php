@@ -28,16 +28,15 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler;
         $tpl = $compiler->template; 
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
         $from = $_attr['from'];
         $item = $_attr['item'];
 
         if (substr_compare("\$_smarty_tpl->getVariable($item)", $from,0, strlen("\$_smarty_tpl->getVariable($item)")) == 0) {
-            $this->compiler->trigger_template_error("item variable {$item} may not be the same variable as at 'from'", $this->compiler->lex->taglineno);
+            $compiler->trigger_template_error("item variable {$item} may not be the same variable as at 'from'", $compiler->lex->taglineno);
         } 
 
         if (isset($_attr['key'])) {
@@ -46,9 +45,9 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
             $key = null;
         } 
 
-        $this->_open_tag('foreach', array('foreach', $this->compiler->nocache, $item, $key)); 
+        $this->_open_tag($compiler, 'foreach', array('foreach', $compiler->nocache, $item, $key)); 
         // maybe nocache because of nocache variables
-        $this->compiler->nocache = $this->compiler->nocache | $this->compiler->tag_nocache;
+        $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
 
         if (isset($_attr['name'])) {
             $name = $_attr['name'];
@@ -170,12 +169,11 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler; 
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
-        list($_open_tag, $nocache, $item, $key) = $this->_close_tag(array('foreach'));
-        $this->_open_tag('foreachelse', array('foreachelse', $nocache, $item, $key));
+        list($_open_tag, $nocache, $item, $key) = $this->_close_tag($compiler, array('foreach'));
+        $this->_open_tag($compiler, 'foreachelse', array('foreachelse', $nocache, $item, $key));
 
         return "<?php }} else { ?>";
     } 
@@ -195,15 +193,14 @@ class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler; 
         // check and get attributes
-        $_attr = $this->_get_attributes($args); 
+        $_attr = $this->_get_attributes($compiler, $args); 
         // must endblock be nocache?
-        if ($this->compiler->nocache) {
-            $this->compiler->tag_nocache = true;
+        if ($compiler->nocache) {
+            $compiler->tag_nocache = true;
         } 
 
-        list($_open_tag, $this->compiler->nocache, $item, $key) = $this->_close_tag(array('foreach', 'foreachelse'));
+        list($_open_tag, $compiler->nocache, $item, $key) = $this->_close_tag($compiler, array('foreach', 'foreachelse'));
         unset($compiler->local_var[$item]);
         if ($key != null) {
             unset($compiler->local_var[$key]);

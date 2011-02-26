@@ -24,7 +24,6 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler;
         // the following must be assigned at runtime because it will be overwritten in Smarty_Internal_Compile_Append
         $this->required_attributes = array('var', 'value');
         $this->shorttag_order = array('var', 'value');
@@ -32,9 +31,9 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         $_nocache = 'null';
         $_scope = 'null'; 
         // check and get attributes
-        $_attr = $this->_get_attributes($args); 
+        $_attr = $this->_get_attributes($compiler, $args); 
 		// nocache ?
-        if ($this->compiler->tag_nocache || $this->compiler->nocache) {
+        if ($compiler->tag_nocache || $compiler->nocache) {
             $_nocache = 'true'; 
             // create nocache var to make it know for further compiling
             $compiler->template->tpl_vars[trim($_attr['var'], "'")] = new Smarty_variable(null, true);
@@ -49,7 +48,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
             } elseif ($_attr['scope'] == 'global') {
                 $_scope = Smarty::SCOPE_GLOBAL;
             } else {
-                $this->compiler->trigger_template_error('illegal value for "scope" attribute', $this->compiler->lex->taglineno);
+                $compiler->trigger_template_error('illegal value for "scope" attribute', $compiler->lex->taglineno);
             } 
         } 
         // compiled output
@@ -60,5 +59,4 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         } 
     } 
 } 
-
 ?>

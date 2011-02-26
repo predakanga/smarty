@@ -15,10 +15,6 @@
 */
 class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 
-	// lazy loaded objects
-	public $wrapper = null;
-	public $utility = null;
-
 	/**
 	* fetches a rendered Smarty template
 	*
@@ -291,12 +287,12 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 	public function isCached($template = null, $cache_id = null, $compile_id = null, $parent = null)
 	{
 		if ($template === null && $this instanceof $this->template_class) {
-			$template = $this;
-		}
-		if ($parent === null) {
-			$parent = $this;
+			return $this->cached->valid;
 		}
 		if (!($template instanceof $this->template_class)) {
+			if ($parent === null) {
+				$parent = $this;
+			}
 			$template = $this->createTemplate ($template, $cache_id, $compile_id, $parent, false);
 		}
 		// return cache status of template
@@ -312,62 +308,6 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 	public function createData($parent = null)
 	{
 		return new Smarty_Data($parent, $this);
-	}
-
-	/**
-	* creates a template object
-	*
-	* @param string $template the resource handle of the template file
-	* @param mixed $cache_id cache id to be used with this template
-	* @param mixed $compile_id compile id to be used with this template
-	* @param object $parent next higher level of Smarty variables
-	* @param boolean $do_clone flag is Smarty object shall be cloned
-	* @returns object template object
-	*/
-	public function createTemplate($template, $cache_id = null, $compile_id = null, $parent = null, $do_clone = true)
-	{
-		if (!empty($cache_id) && (is_object($cache_id) || is_array($cache_id))) {
-			$parent = $cache_id;
-			$cache_id = null;
-		}
-		if (!empty($parent) && is_array($parent)) {
-			$data = $parent;
-			$parent = null;
-		} else {
-			$data = null;
-		}
-		if (!is_object($template)) {
-			// we got a template resource
-			// already in template cache?
-			$_templateId =  sha1($template . $cache_id . $compile_id);
-			if ($do_clone) {
-				if (isset($this->template_objects[$_templateId])) {
-					// return cached template object
-					$tpl = clone $this->template_objects[$_templateId];
-					$tpl->parent = $parent;
-				} else {
-					$tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);
-				}
-			} else {
-				if (isset($this->template_objects[$_templateId])) {
-					// return cached template object
-					$tpl = $this->template_objects[$_templateId];
-				} else {
-					$tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);
-				}
-			}
-		} else {
-			// just return a copy of template class
-			$tpl = $template;
-		}
-		// fill data if present
-		if (!empty($data) && is_array($data)) {
-			// set up variable values
-			foreach ($data as $_key => $_val) {
-				$tpl->tpl_vars[$_key] = new Smarty_variable($_val);
-			}
-		}
-		return $tpl;
 	}
 
 	/**
@@ -637,26 +577,8 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 			else
 			return $this->$property_name = $args[0];
 		}
-		// Smarty Backward Compatible wrapper
-		if (strpos($name,'_') !== false) {
-			if (!isset($this->wrapper)) {
-				$this->wrapper = new Smarty_Internal_Wrapper($this);
-			}
-			return $this->wrapper->convert($name, $args);
-		}
-		if (in_array($name,array('clearCompiledTemplate','compileAllTemplates','compileAllConfig','testInstall','getTags'))) {
-			if (!isset($this->utility)) {
-				$this->utility = new Smarty_Internal_Utility($this);
-			}
-			return call_user_func_array(array($this->utility,$name), $args);
-		}
-		// PHP4 call to constructor?
-		if (strtolower($name) == 'smarty') {
-			throw new SmartyException('Please use parent::__construct() to call parent constuctor');
-			return false;
-		}
         // pass call to Smarty object
-        if (is_callable(array($this->smarty,$name))) {
+        if (method_exists($this->smarty,$name)) {
         	return call_user_func_array(array($this->smarty,$name),$args);
         } else {
 			throw new SmartyException("Call of unknown function '$name'.");

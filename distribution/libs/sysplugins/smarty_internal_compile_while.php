@@ -23,21 +23,20 @@ class Smarty_Internal_Compile_While extends Smarty_Internal_CompileBase {
     */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler;
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
-        $this->_open_tag('while', $this->compiler->nocache);
+        $_attr = $this->_get_attributes($compiler, $args);
+        $this->_open_tag($compiler, 'while', $compiler->nocache);
 
         // maybe nocache because of nocache variables
-        $this->compiler->nocache = $this->compiler->nocache | $this->compiler->tag_nocache;
+        $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
         if (is_array($parameter['if condition'])) {
-        	if ($this->compiler->nocache) {
+        	if ($compiler->nocache) {
         		$_nocache = ',true';
             	// create nocache var to make it know for further compiling
             	if (is_array($parameter['if condition']['var'])) {
-            		$this->compiler->template->tpl_vars[trim($parameter['if condition']['var']['var'], "'")] = new Smarty_variable(null, true);
+            		$compiler->template->tpl_vars[trim($parameter['if condition']['var']['var'], "'")] = new Smarty_variable(null, true);
             	} else {
-            		$this->compiler->template->tpl_vars[trim($parameter['if condition']['var'], "'")] = new Smarty_variable(null, true);
+            		$compiler->template->tpl_vars[trim($parameter['if condition']['var'], "'")] = new Smarty_variable(null, true);
             	}
         	} else {
         		$_nocache = '';
@@ -69,12 +68,11 @@ class Smarty_Internal_Compile_Whileclose extends Smarty_Internal_CompileBase {
     */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
         // must endblock be nocache?
-        if ($this->compiler->nocache) {
-                 $this->compiler->tag_nocache = true;
+        if ($compiler->nocache) {
+                 $compiler->tag_nocache = true;
         }
-        $this->compiler->nocache = $this->_close_tag(array('while'));
+        $compiler->nocache = $this->_close_tag($compiler, array('while'));
         return "<?php }?>";
     } 
 } 

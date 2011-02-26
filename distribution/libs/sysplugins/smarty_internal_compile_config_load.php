@@ -28,12 +28,11 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler;
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
         
         if ($_attr['nocache'] === true) {
-        	$this->compiler->trigger_template_error('nocache option not allowed', $this->compiler->lex->taglineno);
+        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
 
          
@@ -51,7 +50,7 @@ class Smarty_Internal_Compile_Config_Load extends Smarty_Internal_CompileBase {
             if (in_array($_attr['scope'],array('local','parent','root','global'))) {
                 $scope = $_attr['scope'];
            } else {
-                $this->compiler->trigger_template_error('illegal value for "scope" attribute', $this->compiler->lex->taglineno);
+                $compiler->trigger_template_error('illegal value for "scope" attribute', $compiler->lex->taglineno);
            } 
         } 
         // create config object

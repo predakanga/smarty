@@ -119,46 +119,8 @@ abstract class Smarty_CacheResource {
 		// give up
 		throw new SmartyException("Unable to load cache resource '{$type}'");
 	}
-
-	/**
-	* initialize Cached Object for given Template
-	*
-	* @param Smarty_Internal_Template $_template template object
-	* @return Smarty_Template_Cached Cached Object
-	*/
-	public static function cached(Smarty_Internal_Template $_template)
-	{
-		$handler = self::load($_template->smarty);
-		$_template->cached = $cached = new Smarty_Template_Cached($handler, $_template);
-		if (!($_template->caching == Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == Smarty::CACHING_LIFETIME_SAVED) || $_template->source->recompiled) {
-			return;
-		}
-		$handler->populate($cached, $_template);
-		if ($cached->timestamp === false || $_template->smarty->force_compile || $_template->smarty->force_cache) {
-			$cached->valid = false;
-		} else {
-			$cached->valid = true;
-		}
-		if ($cached->valid && $_template->caching == Smarty::CACHING_LIFETIME_CURRENT && $_template->cache_lifetime >= 0 && time() > ($cached->timestamp + $_template->cache_lifetime)) {
-			// lifetime expired
-			$cached->valid = false;
-		}
-		if ($cached->valid) {
-			// load cache file for the following checks
-			if ($_template->smarty->debugging) {
-				Smarty_Internal_Debug::start_cache($_template);
-			}
-			$cached->handler->process($_template);
-			$cached->processed = true;
-			if ($_template->smarty->debugging) {
-				Smarty_Internal_Debug::end_cache($_template);
-			}
-		}
-		if ($cached->valid && $_template->caching === Smarty::CACHING_LIFETIME_SAVED && $_template->properties['cache_lifetime'] >= 0 && (time() > ($_template->cached->timestamp + $_template->properties['cache_lifetime']))) {
-			$cached->valid = false;
-		}
-	}
 }
+
 /**
 * Smarty Resource Data Object
 *
@@ -230,16 +192,51 @@ class Smarty_Template_Cached {
 	/**
 	* create Cached Object container
 	*
-	* @param Smarty_CacheResource $handler CacheResource Handler this source object communicates with
 	* @param Smarty_Internal_Template $_template template object
 	*/
-	public function __construct(Smarty_CacheResource $handler, Smarty_Internal_Template $_template)
+	public function __construct(Smarty_Internal_Template $_template)
 	{
-		$this->handler = $handler; // Note: prone to circular references
-
 		$this->compile_id = $_template->compile_id;
 		$this->cache_id = $_template->cache_id;
 		$this->source = $_template->source;
+		$_template->cached = $this;
+		$smarty = $_template->smarty;
+
+		//
+		// load resource handler
+		//
+		$this->handler = $handler = Smarty_CacheResource::load($smarty); // Note: prone to circular references
+
+		//
+		//	check if cache is valid
+		//
+		if (!($_template->caching == Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == Smarty::CACHING_LIFETIME_SAVED) || $_template->source->recompiled) {
+			return;
+		}
+		$handler->populate($this, $_template);
+		if ($this->timestamp === false || $smarty->force_compile || $smarty->force_cache) {
+			$this->valid = false;
+		} else {
+			$this->valid = true;
+		}
+		if ($this->valid && $_template->caching == Smarty::CACHING_LIFETIME_CURRENT && $_template->cache_lifetime >= 0 && time() > ($this->timestamp + $_template->cache_lifetime)) {
+			// lifetime expired
+			$this->valid = false;
+		}
+		if ($this->valid) {
+			// load cache file for the following checks
+			if ($smarty->debugging) {
+				Smarty_Internal_Debug::start_cache($_template);
+			}
+			$handler->process($_template);
+			$this->processed = true;
+			if ($smarty->debugging) {
+				Smarty_Internal_Debug::end_cache($_template);
+			}
+		}
+		if ($this->valid && $_template->caching === Smarty::CACHING_LIFETIME_SAVED && $_template->properties['cache_lifetime'] >= 0 && (time() > ($_template->cached->timestamp + $_template->properties['cache_lifetime']))) {
+			$this->valid = false;
+		}
 	}
 
 	/**

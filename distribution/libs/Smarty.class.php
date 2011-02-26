@@ -109,6 +109,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	const CACHING_OFF = 0;
 	const CACHING_LIFETIME_CURRENT = 1;
 	const CACHING_LIFETIME_SAVED = 2;
+	// define compile check modes
+	const COMPILECHECK_OFF = 0;
+	const COMPILECHECK_ON = 1;
+	const COMPILECHECK_CACHEMISS = 2;
 	/** modes for handling of "<?php ... ?>" tags in templates. **/
 	const PHP_PASSTHRU = 0; //-> print tags as plain text
 	const PHP_QUOTE = 1; //-> escape tags as entities
@@ -290,6 +294,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 	}
 
+    /**
+    *  set selfpointer on cloned object
+    */
+    public function __clone()
+    {
+    	$this->smarty = $this; 
+	}
 
 	/**
 	* Check if a template resource exists
@@ -466,6 +477,57 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
+	* creates a template object
+	*
+	* @param string $template the resource handle of the template file
+	* @param mixed $cache_id cache id to be used with this template
+	* @param mixed $compile_id compile id to be used with this template
+	* @param object $parent next higher level of Smarty variables
+	* @param boolean $do_clone flag is Smarty object shall be cloned
+	* @returns object template object
+	*/
+	public function createTemplate($template, $cache_id = null, $compile_id = null, $parent = null, $do_clone = true)
+	{
+		if (!empty($cache_id) && (is_object($cache_id) || is_array($cache_id))) {
+			$parent = $cache_id;
+			$cache_id = null;
+		}
+		if (!empty($parent) && is_array($parent)) {
+			$data = $parent;
+			$parent = null;
+		} else {
+			$data = null;
+		}
+		// already in template cache?
+		$_templateId =  sha1($template . $cache_id . $compile_id);
+		if ($do_clone) {
+			if (isset($this->template_objects[$_templateId])) {
+				// return cached template object
+				$tpl = clone $this->template_objects[$_templateId];
+				$tpl->smarty = clone $tpl->smarty;
+				$tpl->parent = $parent;
+			} else {
+				$tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id);
+			}
+		} else {
+			if (isset($this->template_objects[$_templateId])) {
+				// return cached template object
+				$tpl = $this->template_objects[$_templateId];
+			} else {
+				$tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);
+			}
+		}
+		// fill data if present
+		if (!empty($data) && is_array($data)) {
+			// set up variable values
+			foreach ($data as $_key => $_val) {
+				$tpl->tpl_vars[$_key] = new Smarty_variable($_val);
+			}
+		}
+		return $tpl;
+	}
+
+	/**
 	* Takes unknown classes and loads plugin files for them
 	* class name format: Smarty_PluginType_PluginName
 	* plugin filename format: plugintype.pluginname.php
@@ -510,6 +572,68 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		// no plugin loaded
 		return false;
 	}
+
+    /**
+     * Compile all template files
+     * 
+     * @param string $extension file extension
+     * @param bool $force_compile force all to recompile
+     * @param int $time_limit 
+     * @param int $max_errors 
+     * @return integer number of template files recompiled
+     */
+    function compileAllTemplates($extention = '.tpl', $force_compile = false, $time_limit = 0, $max_errors = null)
+	{
+		return Smarty_Internal_Utility::compileAllTemplates($extention, $force_compile, $time_limit, $max_errors, $this);
+	}
+
+
+    /**
+     * Compile all config files
+     * 
+     * @param string $extension file extension
+     * @param bool $force_compile force all to recompile
+     * @param int $time_limit 
+     * @param int $max_errors 
+     * @return integer number of template files recompiled
+     */
+    function compileAllConfig($extention = '.conf', $force_compile = false, $time_limit = 0, $max_errors = null)
+    {
+    	return Smarty_Internal_Utility::compileAllConfig($extention, $force_compile, $time_limit, $max_errors, $this);
+    }
+
+    /**
+     * Delete compiled template file
+     * 
+     * @param string $resource_name template name
+     * @param string $compile_id compile id
+     * @param integer $exp_time expiration time
+     * @return integer number of template files deleted
+     */
+    function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
+    {
+    	    	return Smarty_Internal_Utility::clearCompiledTemplate($resource_name, $compile_id, $exp_time, $this);
+    }
+
+
+    /**
+     * Return array of tag/attributes of all tags used by an template
+     * 
+     * @param object $templae template object
+     * @return array of tag/attributes
+     */
+	function getTags(Smarty_Internal_Template $template) 
+	{
+		return Smarty_Internal_Utility::getTags($template);
+	}	
+
+	/**
+	* Run installation test
+	*/
+    function testInstall()
+    {
+		return Smarty_Internal_Utility::testInstall($this);
+    }
 
 }
 

@@ -28,18 +28,16 @@ class Smarty_Internal_Compile_Break extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {    
-        $this->compiler = $compiler;
-        $this->smarty = $compiler->smarty;
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
         if ($_attr['nocache'] === true) {
-        	$this->compiler->trigger_template_error('nocache option not allowed', $this->compiler->lex->taglineno);
+        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
 
         if (isset($_attr['levels'])) {
             if (!is_numeric($_attr['levels'])) {
-                $this->compiler->trigger_template_error('level attribute must be a numeric constant', $this->compiler->lex->taglineno);
+                $compiler->trigger_template_error('level attribute must be a numeric constant', $compiler->lex->taglineno);
             } 
             $_levels = $_attr['levels'];
         } else {
@@ -54,10 +52,9 @@ class Smarty_Internal_Compile_Break extends Smarty_Internal_CompileBase {
             $stack_count--;
         } 
         if ($level_count != 0) {
-            $this->compiler->trigger_template_error("cannot break {$_levels} level(s)", $this->compiler->lex->taglineno);
+            $compiler->trigger_template_error("cannot break {$_levels} level(s)", $compiler->lex->taglineno);
         } 
-        // this tag does not return compiled code
-        $this->compiler->has_code = true;
+        $compiler->has_code = true;
         return "<?php break {$_levels}?>";
     } 
 } 

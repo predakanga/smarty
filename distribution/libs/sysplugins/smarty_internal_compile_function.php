@@ -28,17 +28,16 @@ class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler;
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
         if ($_attr['nocache'] === true) {
-        	$this->compiler->trigger_template_error('nocache option not allowed', $this->compiler->lex->taglineno);
+        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
 		unset($_attr['nocache']);
         $save = array($_attr, $compiler->parser->current_buffer,
             $compiler->template->has_nocache_code, $compiler->template->required_plugins);
-        $this->_open_tag('function', $save);
+        $this->_open_tag($compiler, 'function', $save);
         $_name = trim($_attr['name'], "'\"");
         unset($_attr['name']);
         $compiler->template->properties['function'][$_name]['parameter'] = array();
@@ -82,9 +81,8 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler;
-        $_attr = $this->_get_attributes($args);
-        $saved_data = $this->_close_tag(array('function'));
+        $_attr = $this->_get_attributes($compiler, $args);
+        $saved_data = $this->_close_tag($compiler, array('function'));
         $_name = trim($saved_data[0]['name'], "'\""); 
         // build plugin include code
         $plugins_string = '';

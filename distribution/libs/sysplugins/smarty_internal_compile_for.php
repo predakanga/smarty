@@ -34,7 +34,6 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler; 
         if ($parameter == 0) {
         	$this->required_attributes = array('start','to');
         	$this->optional_attributes = array('max','step');
@@ -43,7 +42,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
         	$this->optional_attributes = array();
         }
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
         $local_vars = array();
 
@@ -78,9 +77,9 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
         } 
         $output .= "?>";
 
-        $this->_open_tag('for', array('for', $this->compiler->nocache, $local_vars)); 
+        $this->_open_tag($compiler, 'for', array('for', $compiler->nocache, $local_vars)); 
         // maybe nocache because of nocache variables
-        $this->compiler->nocache = $this->compiler->nocache | $this->compiler->tag_nocache; 
+        $compiler->nocache = $compiler->nocache | $compiler->tag_nocache; 
         // return compiled code
         return $output;
     } 
@@ -100,12 +99,11 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler; 
         // check and get attributes
-        $_attr  = $this->_get_attributes($args);
+        $_attr  = $this->_get_attributes($compiler, $args);
 
-        list($_open_tag, $nocache, $local_vars) = $this->_close_tag(array('for'));
-        $this->_open_tag('forelse', array('forelse', $nocache, $local_vars));
+        list($_open_tag, $nocache, $local_vars) = $this->_close_tag($compiler, array('for'));
+        $this->_open_tag($compiler, 'forelse', array('forelse', $nocache, $local_vars));
         return "<?php }} else { ?>";
     } 
 } 
@@ -124,15 +122,14 @@ class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler; 
         // check and get attributes
-        $_attr  = $this->_get_attributes($args); 
+        $_attr  = $this->_get_attributes($compiler, $args); 
         // must endblock be nocache?
-        if ($this->compiler->nocache) {
-            $this->compiler->tag_nocache = true;
+        if ($compiler->nocache) {
+            $compiler->tag_nocache = true;
         } 
 
-        list($_open_tag, $this->compiler->nocache, $local_vars) = $this->_close_tag(array('for', 'forelse'));
+        list($_open_tag, $compiler->nocache, $local_vars) = $this->_close_tag($compiler, array('for', 'forelse'));
 
         foreach ($local_vars as $var) {
             unset($compiler->local_var[$var]);

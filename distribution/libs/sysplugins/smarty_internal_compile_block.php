@@ -26,18 +26,15 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 	*/
 	public function compile($args, $compiler)
 	{
-		$this->compiler = $compiler;
 		// check and get attributes
-		$_attr = $this->_get_attributes($args);
-		$save = array($_attr, $compiler->parser->current_buffer, $this->compiler->nocache, $this->compiler->smarty->merge_compiled_includes, Smarty_Internal_TemplateCompilerBase::$inheritance);
-		$this->_open_tag('block', $save);
+		$_attr = $this->_get_attributes($compiler, $args);
+		$save = array($_attr, $compiler->parser->current_buffer, $compiler->nocache, $compiler->smarty->merge_compiled_includes);
+		$this->_open_tag($compiler, 'block', $save);
 		if ($_attr['nocache'] == true) {
 			$compiler->nocache = true;
 		}
-		// set flag for {block} tag
-		Smarty_Internal_TemplateCompilerBase::$inheritance = true;
 		// must merge includes
-		$this->compiler->smarty->merge_compiled_includes = true;
+		$compiler->smarty->merge_compiled_includes = true;
 
 		$compiler->parser->current_buffer = new _smarty_template_buffer($compiler->parser);
 		$compiler->has_code = false;
@@ -106,7 +103,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 			$compiler->template->block_data[$_name]['compiled'] = true;
 		}
 		if ($_name == null) {
-			$compiler->trigger_template_error('{$smarty.block.child} used out of context', $this->compiler->lex->taglineno);
+			$compiler->trigger_template_error('{$smarty.block.child} used out of context', $compiler->lex->taglineno);
 		}
 		// undefined child?
 		if (!isset($compiler->template->block_data[$_name])) {
@@ -163,12 +160,10 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
 	*/
 	public function compile($args, $compiler)
 	{
-		$this->compiler = $compiler;
-		$this->smarty = $compiler->smarty;
-		$this->compiler->has_code = true;
+		$compiler->has_code = true;
 		// check and get attributes
-		$_attr = $this->_get_attributes($args);
-		$saved_data = $this->_close_tag(array('block'));
+		$_attr = $this->_get_attributes($compiler, $args);
+		$saved_data = $this->_close_tag($compiler, array('block'));
 		$_name = trim($saved_data[0]['name'], "\"'");
 		if (isset($compiler->template->block_data[$_name]) && !isset($compiler->template->block_data[$_name]['compiled'])) {
 			$_output = Smarty_Internal_Compile_Block::compileChildBlock($compiler, $_name);
@@ -181,7 +176,6 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
 		$compiler->parser->current_buffer = $saved_data[1];
 		$compiler->nocache = $saved_data[2];
 		$compiler->smarty->merge_compiled_includes = $saved_data[3];
-		Smarty_Internal_TemplateCompilerBase::$inheritance = $saved_data[4];
 		// $_output content has already nocache code processed
 		$compiler->suppressNocacheProcessing = true;
 		return $_output;

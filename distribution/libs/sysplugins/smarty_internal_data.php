@@ -22,17 +22,6 @@ class Smarty_Internal_Data {
     public $config_vars = array();
     
     /**
-    * clean up properties on cloned object
-     */
-    public function __clone()
-    {
-    	// clear config vars
-    	$this->config_vars = array(); 
-    	// clear assigned tpl vars
-    	$this->tpl_vars = array('smarty' => new Smarty_variable());
-	}
-
-    /**
      * assigns a Smarty variable
      * 
      * @param array $ |string $tpl_var the template variable name(s)
@@ -92,18 +81,6 @@ class Smarty_Internal_Data {
         } 
     } 
 
-    /**
-     * wrapper function for Smarty 2 BC
-     * 
-     * @param string $tpl_var the template variable name
-     * @param mixed $ &$value the referenced value to assign
-     */
-    public function assign_by_ref($tpl_var, &$value)
-    {
-       	if($this->smarty->deprecation_notices)
-        	trigger_error("function call 'assign_by_ref' is unknown or deprecated, use 'assignByRef'", E_USER_NOTICE);
-        $this->assignByRef($tpl_var, $value);
-    } 
     /**
      * appends values to template variables
      * 
@@ -187,19 +164,7 @@ class Smarty_Internal_Data {
             } 
         } 
     } 
- 
-     /**
-     * 
-     * @param string $tpl_var the template variable name
-     * @param mixed $ &$value the referenced value to append
-     * @param boolean $merge flag if array elements shall be merged
-     */
-    public function append_by_ref($tpl_var, &$value, $merge = false)
-    {
-       	if($this->smarty->deprecation_notices)
-        	trigger_error("function call 'append_by_ref' is unknown or deprecated, use 'appendByRef'", E_USER_NOTICE);
-        $this->appendByRef($tpl_var, $value, $merge);
-    } 
+
     /**
      * Returns a single or all template variables
      * 
@@ -309,14 +274,10 @@ class Smarty_Internal_Data {
             return Smarty::$global_tpl_vars[$_variable];
         } 
         if ($this->smarty->error_unassigned && $error_enable) {
-            throw new SmartyException('Undefined Smarty variable "' . $_variable . '"');
-        } else {
-        	if ($error_enable) {
-				// force a notice
-				$x = $$_variable;
-        	}
-            return new Undefined_Smarty_Variable;
-        } 
+			// force a notice
+			$x = $$_variable;
+        }
+		return new Undefined_Smarty_Variable;
     } 
     /**
      * gets  a config variable
@@ -336,12 +297,10 @@ class Smarty_Internal_Data {
             $_ptr = $_ptr->parent;
         } 
         if ($this->smarty->error_unassigned) {
-            throw new SmartyException('Undefined config variable "' . $_variable . '"');
-        } else {
 			// force a notice
 			$x = $$_variable;
-            return null;
-        } 
+		}
+		return null;
     } 
 
     /**

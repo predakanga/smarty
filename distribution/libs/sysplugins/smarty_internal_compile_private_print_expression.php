@@ -27,12 +27,11 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
      */
     public function compile($args, $compiler, $parameter)
     {
-        $this->compiler = $compiler;
         // check and get attributes
-        $_attr = $this->_get_attributes($args); 
+        $_attr = $this->_get_attributes($compiler, $args); 
         // nocache option
         if ($_attr['nocache'] === true) {
-            $this->compiler->tag_nocache = true;
+            $compiler->tag_nocache = true;
         } 
         // filter handling
         if ($_attr['nofilter'] === true) {
@@ -47,14 +46,14 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
             $output = "<?php \$_smarty_tpl->assign({$_attr['assign']},{$parameter['value']});?>";
         } else {
             // display value
-            if (!$_attr['nofilter'] && isset($this->compiler->smarty->registered_filters['variable'])) {
+            if (!$_attr['nofilter'] && isset($compiler->smarty->registered_filters['variable'])) {
                 $output = "Smarty_Internal_Filter_Handler::runFilter('variable', {$parameter['value']}, \$_smarty_tpl, {$_filter})";
             } else {
                 $output = $parameter['value'];
             } 
-            if (!$_attr['nofilter'] && !empty($this->compiler->smarty->default_modifiers)) {
+            if (!$_attr['nofilter'] && !empty($compiler->smarty->default_modifiers)) {
                 $modifierlist = array();
-                foreach ($this->compiler->smarty->default_modifiers as $key => $single_default_modifier) {
+                foreach ($compiler->smarty->default_modifiers as $key => $single_default_modifier) {
                     preg_match_all('/(\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'|"[^"\\\\]*(?:\\\\.[^"\\\\]*)*"|:|[^:]+)/', $single_default_modifier, $mod_array);
                     for ($i = 0, $count = count($mod_array[0]);$i < $count;$i++) {
                         if ($mod_array[0][$i] != ':') {
@@ -62,12 +61,12 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
                         } 
                     } 
                 } 
-                $output = $this->compiler->compileTag('private_modifier', array(), array('modifierlist' => $modifierlist, 'value' => $output));
+                $output = $compiler->compileTag('private_modifier', array(), array('modifierlist' => $modifierlist, 'value' => $output));
             } 
             if (!empty($parameter['modifierlist'])) {
-                $output = $this->compiler->compileTag('private_modifier', array(), array('modifierlist' => $parameter['modifierlist'], 'value' => $output));
+                $output = $compiler->compileTag('private_modifier', array(), array('modifierlist' => $parameter['modifierlist'], 'value' => $output));
             } 
-            $this->compiler->has_output = true;
+            $compiler->has_output = true;
             $output = "<?php echo {$output};?>";
         } 
         return $output;

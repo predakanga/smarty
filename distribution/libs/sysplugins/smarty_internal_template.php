@@ -83,6 +83,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			$this->block_data = $this->parent->block_data;
 		}
 	}
+	
+	function __destruct() {
+//		echo 'exit tpl '.$this->template_resource.'<br>';
+	}
 
 	/**
 	* Returns if the current template must be compiled by the Smarty compiler
@@ -163,14 +167,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		if ($this->smarty->debugging) {
 			Smarty_Internal_Debug::end_compile($this);
 		}
-		// release objects to free memory
-		unset($this->compiler->parser->root_buffer,
-		$this->compiler->parser->current_buffer,
-		$this->compiler->parser,
-		$this->compiler->lex,
-		$this->compiler->template,
-		$this->compiler
-		);
+		// release compiler object to free memory
+		unset($this->compiler);
 	}
 
 	/**
@@ -183,7 +181,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			return false;
 		}
 		$this->properties['cache_lifetime'] = $this->cache_lifetime;
-		return $this->cached->write($this, $this->createWriteContent($content,true));
+		return $this->cached->write($this, $this->createTemplatePropertyHeader($content,true));
 	}
 
 
@@ -283,7 +281,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	/**
 	* Create property header
 	*/
-	public function createWriteContent ($content = '', $cache = false)
+	public function createTemplatePropertyHeader ($content = '', $cache = false)
 	{
 		$plugins_string = '';
 		// include code for plugins
@@ -369,9 +367,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		$is_valid = true;
 		if ($this->properties['version'] != $this->smarty->_version) {
 			$is_valid = false;
-		} else if ($this->smarty->compile_check && !empty($this->properties['file_dependency'])) {
-			$resource_type = null;
-			$resource_name = null;
+		} else if (((!$cache && $this->smarty->compile_check) || $this->smarty->compile_check === true || $this->smarty->compile_check === Smarty::COMPILECHECK_ON) && !empty($this->properties['file_dependency'])) {
 			foreach ($this->properties['file_dependency'] as $_file_to_check) {
 				if (Smarty_Resource::isModifiedSince($this, $_file_to_check[2], $_file_to_check[0], $_file_to_check[1])) {
 					$is_valid = false;
@@ -436,6 +432,17 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		return 0;
 	}
 
+    /**
+    * clear all variable off cloned template
+    */
+    public function __clone()
+    {
+    	// clear config vars
+    	$this->config_vars = array(); 
+    	// clear assigned tpl vars
+    	$this->tpl_vars = array('smarty' => new Smarty_variable());
+	}
+
 	/**
 	* set Smarty property in template context
 	* @param string $property_name property name
@@ -485,7 +492,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			return $this->compiled;
 
 			case 'cached':
-			Smarty_CacheResource::cached($this);
+			if (!class_exists('Smarty_Template_Cached')) {
+				include SMARTY_SYSPLUGINS_DIR . 'smarty_cacheresource.php';
+			}
+			$this->cached = new Smarty_Template_Cached($this);
 			return $this->cached;
 
 			case 'compiler':

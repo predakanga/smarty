@@ -29,10 +29,8 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler;
-        $this->smarty = $compiler->smarty;
         // check and get attributes
-        $_attr = $this->_get_attributes($args); 
+        $_attr = $this->_get_attributes($compiler, $args); 
         // save possible attributes
         if (isset($_attr['assign'])) {
             // output will be stored in a smarty variable instead of beind displayed
@@ -64,8 +62,8 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
                     } 
                 } 
             } 
-        } elseif (isset($this->smarty->template_functions[$_name]['parameter'])) {
-           foreach ($this->smarty->template_functions[$_name]['parameter'] as $_key => $_value) {
+        } elseif (isset($compiler->smarty->template_functions[$_name]['parameter'])) {
+           foreach ($compiler->smarty->template_functions[$_name]['parameter'] as $_key => $_value) {
                 if (!isset($_attr[$_key])) {
                     if (is_int($_key)) {
                         $_paramsArray[] = "$_key=>$_value";

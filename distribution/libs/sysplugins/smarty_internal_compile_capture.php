@@ -26,17 +26,16 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler;
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
         $buffer = isset($_attr['name']) ? $_attr['name'] : "'default'";
         $assign = isset($_attr['assign']) ? $_attr['assign'] : null;
         $append = isset($_attr['append']) ? $_attr['append'] : null;
 
-        $this->compiler->_capture_stack[] = array($buffer, $assign, $append, $this->compiler->nocache);
+        $compiler->_capture_stack[] = array($buffer, $assign, $append, $compiler->nocache);
         // maybe nocache because of nocache variables
-        $this->compiler->nocache = $this->compiler->nocache | $this->compiler->tag_nocache; 
+        $compiler->nocache = $compiler->nocache | $compiler->tag_nocache; 
         $_output = "<?php ob_start(); ?>";
 
         return $_output;
@@ -56,15 +55,14 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-        $this->compiler = $compiler; 
         // check and get attributes
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
         // must endblock be nocache?
-        if ($this->compiler->nocache) {
-            $this->compiler->tag_nocache = true;
+        if ($compiler->nocache) {
+            $compiler->tag_nocache = true;
         } 
 
-        list($buffer, $assign, $append, $this->compiler->nocache) = array_pop($this->compiler->_capture_stack);
+        list($buffer, $assign, $append, $compiler->nocache) = array_pop($compiler->_capture_stack);
 
         $_output = "<?php ";
         if (isset($assign)) {
