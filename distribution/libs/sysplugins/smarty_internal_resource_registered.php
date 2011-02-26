@@ -87,7 +87,7 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
      */
     protected function getBasename(Smarty_Template_Source $source)
     {
-        basename($source->name);
+        return basename($source->name);
     }
 } 
 

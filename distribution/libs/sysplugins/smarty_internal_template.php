@@ -84,10 +84,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		}
 	}
 	
-	function __destruct() {
-//		echo 'exit tpl '.$this->template_resource.'<br>';
-	}
-
 	/**
 	* Returns if the current template must be compiled by the Smarty compiler
 	*
@@ -132,7 +128,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	{
 		if (!$this->source->recompiled) {
 			$this->properties['file_dependency'] = array();
-			$this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp,$this->source->type);
+			if ($this->source->type ==  'extends') {
+				// uses real resource for file dependency
+				$source = end($this->source->components);
+				$this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp, $source->type);
+			} else {
+				$this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp, $this->source->type);
+			}
 		}
 		if ($this->smarty->debugging) {
 			Smarty_Internal_Debug::start_compile($this);
@@ -369,7 +371,14 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			$is_valid = false;
 		} else if (((!$cache && $this->smarty->compile_check) || $this->smarty->compile_check === true || $this->smarty->compile_check === Smarty::COMPILECHECK_ON) && !empty($this->properties['file_dependency'])) {
 			foreach ($this->properties['file_dependency'] as $_file_to_check) {
-				if (Smarty_Resource::isModifiedSince($this, $_file_to_check[2], $_file_to_check[0], $_file_to_check[1])) {
+		        if ($_file_to_check[2] == 'file' || $_file_to_check[2] == 'php') {
+            		// file and php types can be checked without loading the respective resource handlers
+            		$mtime = filemtime($_file_to_check[0]);
+        		} else {
+            		$source = Smarty_Resource::source(null, $this->smarty, $_file_to_check[0]);
+            		$mtime = $source->timestamp;
+        		}
+        		if ($mtime > $_file_to_check[1]) {
 					$is_valid = false;
 					break;
 				}

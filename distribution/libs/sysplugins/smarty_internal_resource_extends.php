@@ -28,15 +28,15 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
         foreach ($components as $component) {
             $s = Smarty_Resource::source(null, $source->smarty, $component);
             $sources[$s->uid] = $s;
-            $uid .= $source->filepath;
-            if ($_template && $_template->compile_check) {
+            $uid .= $s->filepath;
+            if ($_template && $_template->smarty->compile_check) {
                 $exists == $exists && $s->exists;
             }
         }
         $source->components = $sources;
         $source->filepath = $s->filepath;
         $source->uid = sha1($uid);
-        if ($_template && $_template->compile_check) {
+        if ($_template && $_template->smarty->compile_check) {
             $source->timestamp = $s->timestamp;
             $source->exists = $exists;
         }
@@ -127,7 +127,7 @@ class Smarty_Internal_Resource_Extends extends Smarty_Resource {
      */
     public function getBasename(Smarty_Template_Source $source)
     {
-        return basename($source->filepath);
+        return str_replace(':','.',basename($source->filepath));
     }
 } 
 

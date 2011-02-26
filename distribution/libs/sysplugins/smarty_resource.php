@@ -277,29 +277,7 @@ abstract class Smarty_Resource {
     {
         return null;
     }
-    
-    
-    /**
-     * Test if the resource has been modified since a given timestamp
-     *
-     * @param Smarty_Internal_Template $_template template object
-     * @param string $resource_type resource type
-     * @param string $filepath path to the resource
-     * @param integer $since timestamp (epoch) to compare against
-     * @return boolean true if modified, false else
-     */
-    public static function isModifiedSince(Smarty_Internal_Template $_template, $resource_type, $filepath, $since)
-    {
-        if ($resource_type == 'file' || $resource_type == 'php') {
-            // file and php types can be checked without loading the respective resource handlers
-            $mtime = filemtime($filepath);
-        } else {
-            $source = self::source($_template);
-            $mtime = $source->timestamp;
-        }
-        return $mtime > $since;
-    }
-    
+        
     /**
      * Load Resource Handler
      *
@@ -597,13 +575,13 @@ class Smarty_Template_Source {
     public function __set($property_name, $value)
     {
         switch ($property_name) {
+            // regular attributes
+            case 'timestamp':
+            case 'exists':
+            case 'content':
             // required for extends: only
             case 'template':
             case 'components':
-            // regular attributes
-            case 'content':
-            case 'timestamp':
-            case 'exists':
                 $this->$property_name = $value;
                 break;
                 
@@ -700,9 +678,9 @@ class Smarty_Template_Compiled {
     public function __set($property_name, $value)
     {
         switch ($property_name) {
-            case 'content':
             case 'timestamp':
             case 'exists':
+            case 'content':
                 $this->$property_name = $value;
                 break;
                 

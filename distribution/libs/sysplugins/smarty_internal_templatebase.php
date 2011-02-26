@@ -251,7 +251,7 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 				echo $_output;
 			}
 			// debug output
-			if ($this->debugging) {
+			if ($this->smarty->debugging) {
 				Smarty_Internal_Debug::display_debug($this);
 			}
 			return;

@@ -2,6 +2,8 @@
 26/02/2011
 - replaced smarty_internal_wrapper by SmartyBC class
 - load utility functions as static methods instead through __call()
+- bugfix in extends resource when subresources are used
+- optimization of modify checks
 
 25/02/2011
 - use $smarty->error_unassigned to control NOTICE handling on unassigned variables
