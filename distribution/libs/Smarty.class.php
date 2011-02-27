@@ -303,11 +303,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Check if a template resource exists
-	*
-	* @param string $resource_name template name
-	* @return boolean status
-	*/
+	 * Check if a template resource exists
+	 *
+	 * @param string $resource_name template name
+	 * @return boolean status
+	 */
 	function templateExists($resource_name)
 	{
 		// create template object
@@ -320,12 +320,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Returns a single or all global  variables
-	*
-	* @param object $smarty
-	* @param string $varname variable name or null
-	* @return string variable value or or array of variables
-	*/
+	 * Returns a single or all global  variables
+	 *
+	 * @param object $smarty
+	 * @param string $varname variable name or null
+	 * @return string variable value or or array of variables
+	 */
 	function getGlobal($varname = null)
 	{
 		if (isset($varname)) {
@@ -344,12 +344,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Empty cache folder
-	*
-	* @param integer $exp_time expiration time
-	* @param string $type resource type
-	* @return integer number of cache files deleted
-	*/
+	 * Empty cache folder
+	 *
+	 * @param integer $exp_time expiration time
+	 * @param string $type resource type
+	 * @return integer number of cache files deleted
+	 */
 	function clearAllCache($exp_time = null, $type = null)
 	{
 		// load cache resource and call clearAll
@@ -358,15 +358,15 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Empty cache for a specific template
-	*
-	* @param string $template_name template name
-	* @param string $cache_id cache id
-	* @param string $compile_id compile id
-	* @param integer $exp_time expiration time
-	* @param string $type resource type
-	* @return integer number of cache files deleted
-	*/
+	 * Empty cache for a specific template
+	 *
+	 * @param string $template_name template name
+	 * @param string $cache_id cache id
+	 * @param string $compile_id compile id
+	 * @param integer $exp_time expiration time
+	 * @param string $type resource type
+	 * @return integer number of cache files deleted
+	 */
 	function clearCache($template_name, $cache_id = null, $compile_id = null, $exp_time = null, $type = null)
 	{
 		// load cache resource and call clear
@@ -375,8 +375,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Loads security class and enables security
-	*/
+	 * Loads security class and enables security
+	 * @return Smarty current Smarty instance for chaining
+	 */
 	public function enableSecurity($security_class = null)
 	{
 		if ($security_class instanceof Smarty_Security) {
@@ -391,20 +392,25 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		} else {
 			throw new SmartyException("Security class '$security_class' is not defined");
 		}
+		
+		return $this;
 	}
 
 	/**
-	* Disable security
-	*/
+	 * Disable security
+	 * @return Smarty current Smarty instance for chaining
+	 */
 	public function disableSecurity()
 	{
 		$this->security_policy = null;
+		
+		return $this;
 	}
 
 	/**
 	 * Set template directory
 	 *
-	 * @param string|array $template_dir directory(s) of template sorces
+	 * @param string|array $template_dir directory(s) of template sources
 	 * @return Smarty current Smarty instance for chaining
 	 */
 	public function setTemplateDir($template_dir)
@@ -452,7 +458,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 	
 	/**
-	 * Get template directory(s)
+	 * Get template directories
 	 *
 	 * @return array list of template directories
 	 */
@@ -460,27 +466,76 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 		return $this->template_dir;
 	}
-
+	
 	/**
-	* Adds directory of plugin files
-	*
-	* @param object $smarty
-	* @param string $ |array $ plugins folder
-	* @return
-	*/
-	function addPluginsDir($plugins_dir)
+	 * Set config directory
+	 *
+	 * @param string|array $template_dir directory(s) of configuration sources
+	 * @return Smarty current Smarty instance for chaining
+	 */
+	public function setConfigDir($config_dir)
 	{
-		$this->plugins_dir = array_unique(array_merge((array)$this->plugins_dir, (array)$plugins_dir));
-		return;
+	    $this->config_dir = rtrim($config_dir, '/\\') . DS;
+		return $this;
+	}
+	
+	/**
+	 * Get config directory
+	 *
+	 * @return string configuration directory
+	 */
+	public function getConfigDir()
+	{
+		return $this->config_dir;
 	}
 
+	/**
+	 * Adds directory of plugin files
+	 *
+	 * @param object $smarty
+	 * @param string $ |array $ plugins folder
+	 * @return Smarty current Smarty instance for chaining
+	 */
+	function addPluginsDir($plugins_dir)
+	{
+	    // make sure we're dealing with an array
+	    $this->plugins_dir = (array) $this->plugins_dir;
+	    
+	    if (is_array($plugins_dir)) {
+	        foreach ($plugins_dir as $k => $v) {
+                if (is_int($k)) {
+                    // indexes are not merged but appended
+    		        $this->plugins_dir[] = rtrim($v, '/\\') . DS;
+                } else {
+                    // string indexes are overridden
+    		        $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
+                }
+    		}
+	    } else {
+	        // append new directory
+		    $this->plugins_dir[] = rtrim($plugins_dir, '/\\') . DS;
+	    }
+
+		$this->plugins_dir = array_unique($this->plugins_dir);
+		return $this;
+	}
+    
+    /**
+	 * Get plugin directories
+	 *
+	 * @return array list of plugin directories
+	 */
+	public function getPluginsDir()
+	{
+		return $this->plugins_dir;
+	}
 
 	/**
-	* return a reference to a registered object
-	*
-	* @param string $name object name
-	* @return object
-	*/
+	 * return a reference to a registered object
+	 *
+	 * @param string $name object name
+	 * @return object
+	 */
 	function getRegisteredObject($name)
 	{
 		if (!isset($this->registered_objects[$name]))
@@ -494,36 +549,42 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
 
 	/**
-	* return name of debugging template
-	*
-	* @return string
-	*/
+	 * return name of debugging template
+	 *
+	 * @return string
+	 */
 	function getDebugTemplate()
 	{
 		return $this->debug_tpl;
 	}
 
 	/**
-	* set the debug template
-	*
-	* @param string $tpl_name
-	* @return bool
-	*/
+	 * set the debug template
+	 *
+	 * @param string $tpl_name
+	 * @return Smarty current Smarty instance for chaining
+	 * @throws SmartyException if file is not readable
+	 */
 	function setDebugTemplate($tpl_name)
 	{
-		return $this->debug_tpl = $tpl_name;
+	    if (!is_readable($tpl_name)) {
+	        throw new SmartyException( "Unknown file '{$tpl_name}'" );
+	    }
+		$this->debug_tpl = $tpl_name;
+
+		return $this;
 	}
 
 	/**
-	* creates a template object
-	*
-	* @param string $template the resource handle of the template file
-	* @param mixed $cache_id cache id to be used with this template
-	* @param mixed $compile_id compile id to be used with this template
-	* @param object $parent next higher level of Smarty variables
-	* @param boolean $do_clone flag is Smarty object shall be cloned
-	* @returns object template object
-	*/
+	 * creates a template object
+	 *
+	 * @param string $template the resource handle of the template file
+	 * @param mixed $cache_id cache id to be used with this template
+	 * @param mixed $compile_id compile id to be used with this template
+	 * @param object $parent next higher level of Smarty variables
+	 * @param boolean $do_clone flag is Smarty object shall be cloned
+	 * @return object template object
+	 */
 	public function createTemplate($template, $cache_id = null, $compile_id = null, $parent = null, $do_clone = true)
 	{
 		if (!empty($cache_id) && (is_object($cache_id) || is_array($cache_id))) {
@@ -566,13 +627,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Takes unknown classes and loads plugin files for them
-	* class name format: Smarty_PluginType_PluginName
-	* plugin filename format: plugintype.pluginname.php
-	*
-	* @param string $plugin_name class plugin name to load
-	* @return string |boolean filepath of loaded file or false
-	*/
+	 * Takes unknown classes and loads plugin files for them
+	 * class name format: Smarty_PluginType_PluginName
+	 * plugin filename format: plugintype.pluginname.php
+	 *
+	 * @param string $plugin_name class plugin name to load
+	 * @return string |boolean filepath of loaded file or false
+	 */
 	public function loadPlugin($plugin_name, $check = true)
 	{
 		// if function or class exists, exit silently (already loaded)
@@ -666,8 +727,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}	
 
 	/**
-	* Run installation test
-	*/
+	 * Run installation test
+	 */
     function testInstall()
     {
 		return Smarty_Internal_Utility::testInstall($this);

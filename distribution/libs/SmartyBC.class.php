@@ -40,7 +40,7 @@ class SmartyBC extends Smarty {
 	
 	
 	/**
-	 * Get template directory(s)
+	 * Get template directories
 	 *
 	 * @note this wrapper ensures data integrity that's non-BC done by setters
 	 * @return array list of template directories
@@ -55,6 +55,35 @@ class SmartyBC extends Smarty {
 	    }
 	    
 		return $this->template_dir;
+	}
+	
+	/**
+	 * Get config directory
+	 *
+	 * @note this wrapper ensures data integrity that's non-BC done by setters
+	 * @return string configuration directory
+	 */
+	public function getConfigDir()
+	{
+		return rtrim($this->config_dir, '/\\') . DS;
+	}
+	
+	/**
+	 * Get plugin directories
+	 *
+	 * @note this wrapper ensures data integrity that's non-BC done by setters
+	 * @return array list of plugin directories
+	 */
+	public function getPluginDir()
+	{
+	    // make sure we're dealing with an array
+	    $this->plugins_dir = (array) $this->plugins_dir;
+	    // make sure directories end with a DS
+	    foreach ($this->plugins_dir as $k => $v) {
+            $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
+	    }
+	    
+		return $this->plugins_dir;
 	}
 	
 	
