@@ -4,12 +4,11 @@ class smarty_compiler_test extends Smarty_Internal_CompileBase
 {
     public function compile($args, $compiler)
     {
-        $this->compiler=$compiler;
         $this->required_attributes = array('data');
 
-        $_attr = $this->_get_attributes($args);
+        $_attr = $this->_get_attributes($compiler, $args);
 
-        $this->_open_tag('test');
+        $this->_open_tag($compiler, 'test');
 
         return "<?php echo 'test output'; ?>";
     }
@@ -21,9 +20,8 @@ class smarty_compiler_testclose extends Smarty_Internal_CompileBase
 {
     public function compile($args, $compiler)
     {
-        $this->compiler=$compiler;
 
-        $this->_close_tag('test');
+        $this->_close_tag($compiler, 'test');
 
         return '';
     }
