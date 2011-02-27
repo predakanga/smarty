@@ -33,6 +33,7 @@ these changes must reflect on the documentation at some point…
 * template_dir identification: {include file="[foo]bar.tpl"} see http://code.google.com/p/smarty-php/source/detail?r=3947
 * config uses same Smarty_Resource instances as template
 * ./ and ../ behaviour in {include} and {extend} as well as $smarty->fetch()
+* Smarty::fetch("extends:db:foo.tpl|file:bar.tpl") Smarty_Resources with {extend}
 
 
 ## Smarty_CacheResource ##
