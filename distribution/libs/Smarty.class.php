@@ -711,7 +711,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
      */
     function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
     {
-    	    	return Smarty_Internal_Utility::clearCompiledTemplate($resource_name, $compile_id, $exp_time, $this);
+    	return Smarty_Internal_Utility::clearCompiledTemplate($resource_name, $compile_id, $exp_time, $this);
     }
 
 
