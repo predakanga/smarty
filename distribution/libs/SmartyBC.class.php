@@ -26,6 +26,7 @@
  * @copyright 2008 New Digital Group, Inc.
  * @author Monte Ohrt <monte at ohrt dot com> 
  * @author Uwe Tews 
+ * @author Rodney Rehm
  * @package Smarty
  */
 
@@ -37,7 +38,27 @@ require(dirname(__FILE__) . '/Smarty.class.php');
 
 class SmartyBC extends Smarty {
 	
-	 /**
+	
+	/**
+	 * Get template directory(s)
+	 *
+	 * @note this wrapper ensures data integrity that's non-BC done by setters
+	 * @return array list of template directories
+	 */
+	public function getTemplateDir()
+	{
+	    // make sure we're dealing with an array
+	    $this->template_dir = (array) $this->template_dir;
+	    // make sure directories end with a DS
+	    foreach ($this->template_dir as $k => $v) {
+            $this->template_dir[$k] = rtrim($v, '/\\') . DS;
+	    }
+	    
+		return $this->template_dir;
+	}
+	
+	
+	/**
 	 * wrapper for assign_by_ref
 	 *
      * @param string $tpl_var the template variable name
@@ -48,7 +69,7 @@ class SmartyBC extends Smarty {
         $this->assignByRef($tpl_var, $value);
     } 
  
-     /**
+    /**
 	 * wrapper for append_by_ref
      * 
      * @param string $tpl_var the template variable name
@@ -70,7 +91,7 @@ class SmartyBC extends Smarty {
          $this->clearAssign($tpl_var);
     }
  
-     /**
+    /**
      * Registers custom function to be used in templates
      *
      * @param string $function the name of the template function

@@ -402,25 +402,63 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Set template directory
-	*
-	* @param string $ |array $template_dir folder(s) of template sorces
-	*/
+	 * Set template directory
+	 *
+	 * @param string|array $template_dir directory(s) of template sorces
+	 * @return Smarty current Smarty instance for chaining
+	 */
 	public function setTemplateDir($template_dir)
 	{
-		$this->template_dir = (array)$template_dir;
-		return;
+		$this->template_dir = array();
+		foreach ((array)$template_dir as $k => $v) {
+		    $this->template_dir[$k] = rtrim($v, '/\\') . DS;
+		}
+		
+		return $this;
 	}
 
 	/**
-	* Adds template directory(s) to existing ones
-	*
-	* @param string $ |array $template_dir folder(s) of template sources
-	*/
-	public function addTemplateDir($template_dir)
+	 * Add template directory(s)
+	 *
+	 * @param string|array $template_dir directory(s) of template sources
+	 * @param string key of the array element to assign the template dir to
+	 * @return Smarty current Smarty instance for chaining
+	 */
+	public function addTemplateDir($template_dir, $key=null)
 	{
-		$this->template_dir = array_unique(array_merge((array)$this->template_dir, (array)$template_dir));
-		return;
+	    // make sure we're dealing with an array
+	    $this->template_dir = (array) $this->template_dir;
+	    
+	    if (is_array($template_dir)) {
+	        foreach ($template_dir as $k => $v) {
+                if (is_int($k)) {
+                    // indexes are not merged but appended
+    		        $this->template_dir[] = rtrim($v, '/\\') . DS;
+                } else {
+                    // string indexes are overridden
+    		        $this->template_dir[$k] = rtrim($v, '/\\') . DS;
+                }
+    		}
+	    } elseif( $key !== null ) {
+	        // override directory at specified index
+		    $this->template_dir[$key] = rtrim($template_dir, '/\\') . DS;
+	    } else {
+	        // append new directory
+		    $this->template_dir[] = rtrim($template_dir, '/\\') . DS;
+	    }
+
+		$this->template_dir = array_unique($this->template_dir);
+		return $this;
+	}
+	
+	/**
+	 * Get template directory(s)
+	 *
+	 * @return array list of template directories
+	 */
+	public function getTemplateDir()
+	{
+		return $this->template_dir;
 	}
 
 	/**
