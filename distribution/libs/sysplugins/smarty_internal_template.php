@@ -374,6 +374,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		        if ($_file_to_check[2] == 'file' || $_file_to_check[2] == 'php') {
             		// file and php types can be checked without loading the respective resource handlers
             		$mtime = filemtime($_file_to_check[0]);
+        		} elseif ($_file_to_check[2] == 'string') {
+        			continue;
         		} else {
             		$source = Smarty_Resource::source(null, $this->smarty, $_file_to_check[0]);
             		$mtime = $source->timestamp;

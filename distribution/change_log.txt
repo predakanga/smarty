@@ -1,4 +1,8 @@
 ===== SVN branch rodneyrehm  =====
+27/02/2011
+- ignore .svn folders when clearing cache and compiled files
+- string resources do not need a modify check
+
 26/02/2011
 - replaced smarty_internal_wrapper by SmartyBC class
 - load utility functions as static methods instead through __call()
