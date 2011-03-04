@@ -1,4 +1,7 @@
-===== SVN branch rodneyrehm  =====
+﻿===== SVN branch rodneyrehm  =====
+04/03/2011
+- upgrade to new PHP_LexerGenerator version 0.4.0 for better performance
+
 27/02/2011
 - ignore .svn folders when clearing cache and compiled files
 - string resources do not need a modify check
@@ -117,6 +120,18 @@
 - optimize smarty_function_escape_special_chars() for PHP >= 5.2.3
 
 ===== SVN 3.0 trunk  =====
+03/03/2011
+- bugfix "smarty" template variable was not recreated when cached templated had expired
+- bugfix internal rendered_content must be cleared after subtemplate was included
+
+01/03/2011
+- bugfix replace modifier did not work in 3.0.7 on systems without multibyte support
+- bugfix {$smarty.template} could return in 3.0.7 parent template name instead of 
+         child name when it needed to compile
+
+25/02/2011
+- bugfix for Smarty2 style compiler plugins on unnamed attribute passing like {tag $foo $bar}
+
 24/02/2011
 - bugfix $smarty->clearCache('some.tpl') did by mistake cache the template object
 

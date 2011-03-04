@@ -57,7 +57,7 @@ class Smarty_Internal_TemplateCompilerBase {
 		$this->tag_nocache = false;
 		// save template object in compiler class
 		$this->template = $template;
-		$this->smarty->_current_file = $this->template->source->filepath;
+		$this->smarty->_current_file = $saved_filepath = $this->template->source->filepath;
 		// template header code
 		$template_header = '';
 		if (!$template->suppressHeader) {
@@ -86,6 +86,7 @@ class Smarty_Internal_TemplateCompilerBase {
 			// call compiler
 			$_compiled_code = $this->doCompile($_content);
 		} while ($this->abort_and_recompile);
+		$this->template->source->filepath = $saved_filepath;
 		// free memory
 		unset($this->parser->root_buffer, $this->parser->current_buffer, $this->parser, $this->lex, $this->template);
 		self::$_tag_objects = array();
