@@ -149,15 +149,15 @@ class Smarty_Internal_Templatelexer
         if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
-        $yy_global_pattern = "/^(".$this->ldel."[$]smarty\\.block\\.child".$this->rdel.")|^(\\{\\})|^(".$this->ldel."\\*([\S\s]*?)\\*".$this->rdel.")|^([\t ]*[\r\n]+[\t ]*)|^(".$this->ldel."strip".$this->rdel.")|^(".$this->ldel."\\s{1,}strip\\s{1,}".$this->rdel.")|^(".$this->ldel."\/strip".$this->rdel.")|^(".$this->ldel."\\s{1,}\/strip\\s{1,}".$this->rdel.")|^(".$this->ldel."\\s*literal\\s*".$this->rdel.")|^(".$this->ldel."\\s{1,}\/)|^(".$this->ldel."\\s*(if|elseif|else if|while)(?![^\s]))|^(".$this->ldel."\\s*for(?![^\s]))|^(".$this->ldel."\\s*foreach(?![^\s]))|^(".$this->ldel."\\s{1,})|^(".$this->ldel."\/)|^(".$this->ldel.")|^(<\\?(?:php\\w+|=|[a-zA-Z]+)?)|^(\\?>)|^(<%)|^(%>)|^(([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|".$this->ldel."|<\\?|\\?>|<%|%>)))|^([\S\s]+)|^(.)/iS";
+        $yy_global_pattern = "/\G(".$this->ldel."[$]smarty\\.block\\.child".$this->rdel.")|\G(\\{\\})|\G(".$this->ldel."\\*([\S\s]*?)\\*".$this->rdel.")|\G([\t ]*[\r\n]+[\t ]*)|\G(".$this->ldel."strip".$this->rdel.")|\G(".$this->ldel."\\s{1,}strip\\s{1,}".$this->rdel.")|\G(".$this->ldel."\/strip".$this->rdel.")|\G(".$this->ldel."\\s{1,}\/strip\\s{1,}".$this->rdel.")|\G(".$this->ldel."\\s*literal\\s*".$this->rdel.")|\G(".$this->ldel."\\s{1,}\/)|\G(".$this->ldel."\\s*(if|elseif|else if|while)(?![^\s]))|\G(".$this->ldel."\\s*for(?![^\s]))|\G(".$this->ldel."\\s*foreach(?![^\s]))|\G(".$this->ldel."\\s{1,})|\G(".$this->ldel."\/)|\G(".$this->ldel.")|\G(<\\?(?:php\\w+|=|[a-zA-Z]+)?)|\G(\\?>)|\G(<%)|\G(%>)|\G(([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|".$this->ldel."|<\\?|\\?>|<%|%>)))|\G([\S\s]+)|\G(.)/iS";
 
         do {
-            if (preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches)) {
+            if (preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' .
-                        'an empty string.  Input "' . substr($this->data,
+                        ' an empty string.  Input "' . substr($this->data,
                         $this->counter, 5) . '... state TEXT');
                 }
                 next($yymatches); // skip global match
@@ -448,15 +448,15 @@ class Smarty_Internal_Templatelexer
         if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
-        $yy_global_pattern = "/^('[^'\\\\]*(?:\\\\.[^'\\\\]*)*')|^(".$this->ldel."\\s{1,}\/)|^(".$this->ldel."\\s*(if|elseif|else if|while)(?![^\s]))|^(".$this->ldel."\\s*for(?![^\s]))|^(".$this->ldel."\\s*foreach(?![^\s]))|^(".$this->ldel."\\s{1,})|^(\\s{1,}".$this->rdel.")|^(".$this->ldel."\/)|^(".$this->ldel.")|^(".$this->rdel.")|^(\\s+is\\s+in\\s+)|^(\\s+as\\s+)|^(\\s+to\\s+)|^(\\s+step\\s+)|^(\\s+instanceof\\s+)|^(\\s*===\\s*)|^(\\s*!==\\s*)|^(\\s*==\\s*|\\s+eq\\s+)|^(\\s*!=\\s*|\\s*<>\\s*|\\s+(ne|neq)\\s+)|^(\\s*>=\\s*|\\s+(ge|gte)\\s+)|^(\\s*<=\\s*|\\s+(le|lte)\\s+)|^(\\s*>\\s*|\\s+gt\\s+)|^(\\s*<\\s*|\\s+lt\\s+)|^(\\s+mod\\s+)|^(!\\s*|not\\s+)|^(\\s*&&\\s*|\\s*and\\s+)|^(\\s*\\|\\|\\s*|\\s*or\\s+)|^(\\s*xor\\s+)|^(\\s+is\\s+odd\\s+by\\s+)|^(\\s+is\\s+not\\s+odd\\s+by\\s+)|^(\\s+is\\s+odd)|^(\\s+is\\s+not\\s+odd)|^(\\s+is\\s+even\\s+by\\s+)|^(\\s+is\\s+not\\s+even\\s+by\\s+)|^(\\s+is\\s+even)|^(\\s+is\\s+not\\s+even)|^(\\s+is\\s+div\\s+by\\s+)|^(\\s+is\\s+not\\s+div\\s+by\\s+)|^(\\((int(eger)?|bool(ean)?|float|double|real|string|binary|array|object)\\)\\s*)|^(\\(\\s*)|^(\\s*\\))|^(\\[\\s*)|^(\\s*\\])|^(\\s*->\\s*)|^(\\s*=>\\s*)|^(\\s*=\\s*)|^(\\+\\+|--)|^(\\s*(\\+|-)\\s*)|^(\\s*(\\*|\/|%)\\s*)|^(\\$)|^(\\s*;)|^(::)|^(\\s*:\\s*)|^(@)|^(#)|^(\")|^(`)|^(\\|)|^(\\.)|^(\\s*,\\s*)|^(\\s*&\\s*)|^(\\s*\\?\\s*)|^(0[xX][0-9a-fA-F]+)|^([0-9]*[a-zA-Z_]\\w*)|^(\\d+)|^(\\s+)|^(.)/iS";
+        $yy_global_pattern = "/\G('[^'\\\\]*(?:\\\\.[^'\\\\]*)*')|\G(".$this->ldel."\\s{1,}\/)|\G(".$this->ldel."\\s*(if|elseif|else if|while)(?![^\s]))|\G(".$this->ldel."\\s*for(?![^\s]))|\G(".$this->ldel."\\s*foreach(?![^\s]))|\G(".$this->ldel."\\s{1,})|\G(\\s{1,}".$this->rdel.")|\G(".$this->ldel."\/)|\G(".$this->ldel.")|\G(".$this->rdel.")|\G(\\s+is\\s+in\\s+)|\G(\\s+as\\s+)|\G(\\s+to\\s+)|\G(\\s+step\\s+)|\G(\\s+instanceof\\s+)|\G(\\s*===\\s*)|\G(\\s*!==\\s*)|\G(\\s*==\\s*|\\s+eq\\s+)|\G(\\s*!=\\s*|\\s*<>\\s*|\\s+(ne|neq)\\s+)|\G(\\s*>=\\s*|\\s+(ge|gte)\\s+)|\G(\\s*<=\\s*|\\s+(le|lte)\\s+)|\G(\\s*>\\s*|\\s+gt\\s+)|\G(\\s*<\\s*|\\s+lt\\s+)|\G(\\s+mod\\s+)|\G(!\\s*|not\\s+)|\G(\\s*&&\\s*|\\s*and\\s+)|\G(\\s*\\|\\|\\s*|\\s*or\\s+)|\G(\\s*xor\\s+)|\G(\\s+is\\s+odd\\s+by\\s+)|\G(\\s+is\\s+not\\s+odd\\s+by\\s+)|\G(\\s+is\\s+odd)|\G(\\s+is\\s+not\\s+odd)|\G(\\s+is\\s+even\\s+by\\s+)|\G(\\s+is\\s+not\\s+even\\s+by\\s+)|\G(\\s+is\\s+even)|\G(\\s+is\\s+not\\s+even)|\G(\\s+is\\s+div\\s+by\\s+)|\G(\\s+is\\s+not\\s+div\\s+by\\s+)|\G(\\((int(eger)?|bool(ean)?|float|double|real|string|binary|array|object)\\)\\s*)|\G(\\(\\s*)|\G(\\s*\\))|\G(\\[\\s*)|\G(\\s*\\])|\G(\\s*->\\s*)|\G(\\s*=>\\s*)|\G(\\s*=\\s*)|\G(\\+\\+|--)|\G(\\s*(\\+|-)\\s*)|\G(\\s*(\\*|\/|%)\\s*)|\G(\\$)|\G(\\s*;)|\G(::)|\G(\\s*:\\s*)|\G(@)|\G(#)|\G(\")|\G(`)|\G(\\|)|\G(\\.)|\G(\\s*,\\s*)|\G(\\s*&\\s*)|\G(\\s*\\?\\s*)|\G(0[xX][0-9a-fA-F]+)|\G([0-9]*[a-zA-Z_]\\w*)|\G(\\d+)|\G(\\s+)|\G(.)/iS";
 
         do {
-            if (preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches)) {
+            if (preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' .
-                        'an empty string.  Input "' . substr($this->data,
+                        ' an empty string.  Input "' . substr($this->data,
                         $this->counter, 5) . '... state SMARTY');
                 }
                 next($yymatches); // skip global match
@@ -890,15 +890,15 @@ class Smarty_Internal_Templatelexer
         if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
-        $yy_global_pattern = "/^(".$this->ldel."\\s*literal\\s*".$this->rdel.")|^(".$this->ldel."\\s*\/literal\\s*".$this->rdel.")|^([\t ]*[\r\n]+[\t ]*)|^(<\\?(?:php\\w+|=|[a-zA-Z]+)?)|^(\\?>)|^(<%)|^(%>)|^(([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|".$this->ldel."\/?literal".$this->rdel."|<\\?|<%)))|^(.)/iS";
+        $yy_global_pattern = "/\G(".$this->ldel."\\s*literal\\s*".$this->rdel.")|\G(".$this->ldel."\\s*\/literal\\s*".$this->rdel.")|\G([\t ]*[\r\n]+[\t ]*)|\G(<\\?(?:php\\w+|=|[a-zA-Z]+)?)|\G(\\?>)|\G(<%)|\G(%>)|\G(([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|".$this->ldel."\/?literal".$this->rdel."|<\\?|<%)))|\G(.)/iS";
 
         do {
-            if (preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches)) {
+            if (preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' .
-                        'an empty string.  Input "' . substr($this->data,
+                        ' an empty string.  Input "' . substr($this->data,
                         $this->counter, 5) . '... state LITERAL');
                 }
                 next($yymatches); // skip global match
@@ -1015,15 +1015,15 @@ class Smarty_Internal_Templatelexer
         if ($this->counter >= strlen($this->data)) {
             return false; // end of input
         }
-        $yy_global_pattern = "/^(".$this->ldel."\\s{1,}\/)|^(".$this->ldel."\\s*(if|elseif|else if|while)(?![^\s]))|^(".$this->ldel."\\s*for(?![^\s]))|^(".$this->ldel."\\s*foreach(?![^\s]))|^(".$this->ldel."\\s{1,})|^(".$this->ldel."\/)|^(".$this->ldel.")|^(\")|^(`\\$)|^(\\$[0-9]*[a-zA-Z_]\\w*)|^(\\$)|^(([^\"\\\\]*?)((?:\\\\.[^\"\\\\]*?)*?)(?=(".$this->ldel."|\\$|`\\$|\")))|^([\S\s]+)|^(.)/iS";
+        $yy_global_pattern = "/\G(".$this->ldel."\\s{1,}\/)|\G(".$this->ldel."\\s*(if|elseif|else if|while)(?![^\s]))|\G(".$this->ldel."\\s*for(?![^\s]))|\G(".$this->ldel."\\s*foreach(?![^\s]))|\G(".$this->ldel."\\s{1,})|\G(".$this->ldel."\/)|\G(".$this->ldel.")|\G(\")|\G(`\\$)|\G(\\$[0-9]*[a-zA-Z_]\\w*)|\G(\\$)|\G(([^\"\\\\]*?)((?:\\\\.[^\"\\\\]*?)*?)(?=(".$this->ldel."|\\$|`\\$|\")))|\G([\S\s]+)|\G(.)/iS";
 
         do {
-            if (preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches)) {
+            if (preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
                     throw new Exception('Error: lexing failed because a rule matched' .
-                        'an empty string.  Input "' . substr($this->data,
+                        ' an empty string.  Input "' . substr($this->data,
                         $this->counter, 5) . '... state DOUBLEQUOTEDSTRING');
                 }
                 next($yymatches); // skip global match
