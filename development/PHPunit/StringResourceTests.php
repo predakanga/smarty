@@ -23,6 +23,15 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     {
         return true;
     } 
+    
+    protected function relative($path)
+    {
+        $path = str_replace( dirname(__FILE__), '.', $path );
+        if (DS == "\\") {
+            $path = str_replace( "\\", "/", $path );
+        }
+        return $path;
+    }
 
     /**
     * test template string exits
@@ -90,7 +99,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals(realpath('./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php'),realpath($tpl->compiled->filepath));
+        $this->assertEquals('./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php', $this->relative($tpl->compiled->filepath));
     } 
     /**
     * test getCompiledTimestamp

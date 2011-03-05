@@ -21,6 +21,15 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     {
         return true;
     } 
+    
+    protected function relative($path)
+    {
+        $path = str_replace( dirname(__FILE__), '.', $path );
+        if (DS == "\\") {
+            $path = str_replace( "\\", "/", $path );
+        }
+        return $path;
+    }
 
     /**
     * test getTemplateFilepath
@@ -104,8 +113,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $expected = './templates_c/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.file.helloworld.tpl.php';
-        $this->assertEquals(realpath($expected), realpath($tpl->compiled->filepath));
+        $expected = './templates_c/'.sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.php';
+        $this->assertEquals($expected, $this->relative($tpl->compiled->filepath));
     } 
     /**
     * test getCompiledTimestamp
@@ -189,8 +198,8 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $expected = './cache/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.helloworld.tpl.php';
-        $this->assertEquals(realpath($expected), realpath($tpl->cached->filepath));
+        $expected = './cache/'.sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.helloworld.tpl.php';
+        $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
     } 
     /**
     * test getCachedTimestamp caching disabled
@@ -198,7 +207,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCachedTimestampCachingDisabled()
     {
         // create dummy cache file for the following test
-        file_put_contents('./cache/'.sha1($this->smarty->template_dir[0].'helloworld.tpl').'.helloworld.tpl.php', 'test');
+        file_put_contents('./cache/'.sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.helloworld.tpl.php', 'test');
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
         $this->assertFalse($tpl->cached->timestamp);
     } 
@@ -368,7 +377,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     
     public function testRelativeIncludeFailOtherDir()
     {
-        $smarty->template_dir[] = './templates_2';
+        $this->smarty->addTemplateDir('./templates_2');
         try {
             $this->smarty->fetch('relative_notexist.tpl');
         } 

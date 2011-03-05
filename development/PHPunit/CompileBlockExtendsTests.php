@@ -199,7 +199,7 @@ class CompileBlockExtendsTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompileBlockGrandChildMustCompile2()
     {
-        touch($this->smarty->template_dir[0].'test_block_grandchild.tpl');
+        touch($this->smarty->getTemplateDir(0) . 'test_block_grandchild.tpl');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('test_block_grandchild.tpl');
@@ -217,7 +217,7 @@ class CompileBlockExtendsTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompileBlockGrandChildMustCompile3()
     {
-        touch($this->smarty->template_dir[0].'test_block_child.tpl');
+        touch($this->smarty->getTemplateDir(0) . 'test_block_child.tpl');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('test_block_grandchild.tpl');
@@ -235,7 +235,7 @@ class CompileBlockExtendsTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompileBlockGrandChildMustCompile4()
     {
-        touch($this->smarty->template_dir[0].'test_block_parent.tpl');
+        touch($this->smarty->getTemplateDir(0) . 'test_block_parent.tpl');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('test_block_grandchild.tpl');

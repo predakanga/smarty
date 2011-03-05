@@ -93,7 +93,7 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompileBlockGrandChildMustCompile2()
     {
-        touch($this->smarty->template_dir[0].'test_block_grandchild_resource.tpl');
+        touch($this->smarty->getTemplateDir(0) . 'test_block_grandchild_resource.tpl');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
@@ -111,7 +111,7 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompileBlockGrandChildMustCompile3()
     {
-        touch($this->smarty->template_dir[0].'test_block_child_resource.tpl');
+        touch($this->smarty->getTemplateDir(0) . 'test_block_child_resource.tpl');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
@@ -129,7 +129,7 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompileBlockGrandChildMustCompile4()
     {
-        touch($this->smarty->template_dir[0].'test_block_parent.tpl');
+        touch($this->smarty->getTemplateDir(0) . 'test_block_parent.tpl');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');

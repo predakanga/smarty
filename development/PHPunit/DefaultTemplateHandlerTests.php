@@ -94,7 +94,7 @@ function my_template_handler ($resource_type, $resource_name, &$template_source,
 } 
 function my_template_handler_file ($resource_type, $resource_name, &$template_source, &$template_timestamp, Smarty $smarty)
 {
-    return $smarty->template_dir[0].'helloworld.tpl';
+    return $smarty->getTemplateDir(0) . 'helloworld.tpl';
 } 
 function my_false ($resource_type, $resource_name, &$template_source, &$template_timestamp, Smarty $smarty)
 {

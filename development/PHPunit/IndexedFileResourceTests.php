@@ -11,10 +11,10 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = SmartyTests::$smarty;
-        $this->smarty->template_dir[] = dirname(__FILE__) .'/templates_2';
+        $this->smarty->addTemplateDir(dirname(__FILE__) .'/templates_2');
         // note that 10 is a string!
-        $this->smarty->template_dir['10'] = dirname(__FILE__) .'/templates_3';
-        $this->smarty->template_dir['foo'] = dirname(__FILE__) .'/templates_4';
+        $this->smarty->addTemplateDir(dirname(__FILE__) .'/templates_3', '10');
+        $this->smarty->addTemplateDir(dirname(__FILE__) .'/templates_4', 'foo');
         SmartyTests::init();
     } 
 
@@ -25,28 +25,32 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     
     protected function relative($path)
     {
-        return str_replace( dirname(__FILE__), '.', $path );
+        $path = str_replace( dirname(__FILE__), '.', $path );
+        if (DS == "\\") {
+            $path = str_replace( "\\", "/", $path );
+        }
+        return $path;
     }
 
     public function testGetTemplateFilepath()
     {
         $tpl = $this->smarty->createTemplate('dirname.tpl');
-        $this->assertEquals(realpath('./templates/dirname.tpl'), realpath($this->relative($tpl->source->filepath)));
+        $this->assertEquals('./templates/dirname.tpl', $this->relative($tpl->source->filepath));
     } 
     public function testGetTemplateFilepathNumber()
     {
         $tpl = $this->smarty->createTemplate('[1]dirname.tpl');
-        $this->assertEquals(realpath('./templates_2/dirname.tpl'), realpath($this->relative($tpl->source->filepath)));
+        $this->assertEquals('./templates_2/dirname.tpl', $this->relative($tpl->source->filepath));
     }
     public function testGetTemplateFilepathNumeric()
     {
         $tpl = $this->smarty->createTemplate('[10]dirname.tpl');
-        $this->assertEquals(realpath('./templates_3/dirname.tpl'), realpath($this->relative($tpl->source->filepath)));
+        $this->assertEquals('./templates_3/dirname.tpl', $this->relative($tpl->source->filepath));
     }
     public function testGetTemplateFilepathName()
     {
         $tpl = $this->smarty->createTemplate('[foo]dirname.tpl');
-        $this->assertEquals(realpath('./templates_4/dirname.tpl'), realpath($this->relative($tpl->source->filepath)));
+        $this->assertEquals('./templates_4/dirname.tpl', $this->relative($tpl->source->filepath));
     }
     
     
@@ -75,8 +79,8 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('[foo]dirname.tpl');
-        $expected = './templates_c/'.sha1($this->smarty->template_dir['foo'].DS.'dirname.tpl').'.file.dirname.tpl.php';
-        $this->assertEquals(realpath($expected), realpath($this->relative($tpl->compiled->filepath)));
+        $expected = './templates_c/'.sha1($this->smarty->getTemplateDir('foo').'dirname.tpl').'.file.dirname.tpl.php';
+        $this->assertEquals($expected, $this->relative($tpl->compiled->filepath));
     }
 
 
@@ -92,8 +96,8 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('[foo]dirname.tpl');
-	    $expected = './cache/'.sha1($this->smarty->template_dir['foo'].DS.'dirname.tpl').'.dirname.tpl.php';
-        $this->assertEquals(realpath($expected), realpath($this->relative($tpl->cached->filepath)));
+	    $expected = './cache/'.sha1($this->smarty->getTemplateDir('foo').'dirname.tpl').'.dirname.tpl.php';
+        $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
     }
 
     public function testRelativeFail()

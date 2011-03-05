@@ -20,6 +20,15 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         return true;
     } 
+    
+    protected function relative($path)
+    {
+        $path = str_replace( dirname(__FILE__), '.', $path );
+        if (DS == "\\") {
+            $path = str_replace( "\\", "/", $path );
+        }
+        return $path;
+    }
 
     /**
     * test getTemplateFilepath
@@ -113,7 +122,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $expected = './cache/' . sha1('./templates/phphelloworld.php') . '.phphelloworld.php.php';
-        $this->assertEquals(realpath($expected), realpath($tpl->cached->filepath));
+        $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
     } 
     /**
     * test create cache file used by the following tests
@@ -237,19 +246,19 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
 
     public function testGetTemplateFilepathName()
     {
-        $this->smarty->template_dir['foo'] = './templates_2';
+        $this->smarty->addTemplateDir('./templates_2', 'foo');
         $tpl = $this->smarty->createTemplate('php:[foo]helloworld.php');
-        $this->assertEquals(realpath('./templates_2/helloworld.php'), realpath($tpl->source->filepath));
+        $this->assertEquals('./templates_2/helloworld.php', $this->relative($tpl->source->filepath));
     }
     
     public function testGetCachedFilepathName()
     {
-        $this->smarty->template_dir['foo'] = './templates_2';
+        $this->smarty->addTemplateDir('./templates_2', 'foo');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:[foo]helloworld.php');
-	    $expected = './cache/'.sha1($this->smarty->template_dir['foo'].DS.'helloworld.php').'.helloworld.php.php';
-        $this->assertEquals(realpath($expected), realpath($tpl->cached->filepath));
+	    $expected = './cache/'.sha1($this->smarty->getTemplateDir('foo') .'helloworld.php').'.helloworld.php.php';
+        $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
     }
     
     /**

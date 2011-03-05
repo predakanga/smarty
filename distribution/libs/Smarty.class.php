@@ -460,10 +460,15 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	/**
 	 * Get template directories
 	 *
-	 * @return array list of template directories
+	 * @param mixed index of directory to get, null to get all
+	 * @return array|string list of template directories, or directory of $index
 	 */
-	public function getTemplateDir()
+	public function getTemplateDir($index=null)
 	{
+	    if ($index !== null) {
+	        return isset($this->template_dir[$index]) ? $this->template_dir[$index] : null;
+	    }
+	    
 		return $this->template_dir;
 	}
 	

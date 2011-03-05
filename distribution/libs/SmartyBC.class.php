@@ -43,15 +43,20 @@ class SmartyBC extends Smarty {
 	 * Get template directories
 	 *
 	 * @note this wrapper ensures data integrity that's non-BC done by setters
-	 * @return array list of template directories
+	 * @param mixed index of directory to get, null to get all
+	 * @return array|string list of template directories, or directory of $index
 	 */
-	public function getTemplateDir()
+	public function getTemplateDir($index=null)
 	{
 	    // make sure we're dealing with an array
 	    $this->template_dir = (array) $this->template_dir;
 	    // make sure directories end with a DS
 	    foreach ($this->template_dir as $k => $v) {
             $this->template_dir[$k] = rtrim($v, '/\\') . DS;
+	    }
+	    
+	    if ($index !== null) {
+	        return isset($this->template_dir[$index]) ? $this->template_dir[$index] : null;
 	    }
 	    
 		return $this->template_dir;
