@@ -94,7 +94,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 		$smarty->debugging = false;
 		$_template = new Smarty_Internal_Template ($smarty->debug_tpl, $smarty);
 		$_template->caching = false;
-		$_template->force_compile = false;
+		$_template->smarty->force_compile = false;
 		$_template->disableSecurity();
 		$_template->cache_id = null;
 		$_template->compile_id = null;

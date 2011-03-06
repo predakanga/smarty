@@ -72,7 +72,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		$this->compile_id = $_compile_id === null ? $this->smarty->compile_id : $_compile_id;
 		$this->caching = $_caching === null ? $this->smarty->caching : $_caching;
 		if ($this->caching === true) $this->caching =  Smarty::CACHING_LIFETIME_CURRENT;
-		$this->cache_lifetime = $_cache_lifetime === null ?$this->smarty->cache_lifetime : $_cache_lifetime;
+		$this->cache_lifetime = $_cache_lifetime === null ? $this->smarty->cache_lifetime : $_cache_lifetime;
 		$this->parent = $_parent;
 		// dummy local smarty variable
 		$this->tpl_vars['smarty'] = new Smarty_Variable;
@@ -466,14 +466,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			case 'compiled':
 			case 'cached':
 			case 'compiler':
-			$this->$property_name = $value;
-			return;
-
-			default:
-			if (property_exists($this->smarty, $property_name)) {
-				$this->smarty->$property_name = $value;
-				return;
-			}
+    			$this->$property_name = $value;
+    			return;
 		}
 
 		throw new SmartyException("invalid template property '$property_name'.");
@@ -487,37 +481,36 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	{
 		switch ($property_name) {
 			case 'source':
-			if (empty($this->template_resource)) {
-				throw new SmartyException ("Unable to parse resource name \"{$this->template_resource}\"");
-			}
-			$this->source = Smarty_Resource::source($this);
-			// cache template object under a unique ID
-			// do not cache eval resources
-			if ($this->source->type != 'eval') {
-				$this->smarty->template_objects[sha1($this->template_resource . $this->cache_id . $this->compile_id)] = $this;
-			}
-			return $this->source;
+    			if (empty($this->template_resource)) {
+    				throw new SmartyException ("Unable to parse resource name \"{$this->template_resource}\"");
+    			}
+    			$this->source = Smarty_Resource::source($this);
+    			// cache template object under a unique ID
+    			// do not cache eval resources
+    			if ($this->source->type != 'eval') {
+    				$this->smarty->template_objects[sha1($this->template_resource . $this->cache_id . $this->compile_id)] = $this;
+    			}
+    			return $this->source;
 
 			case 'compiled':
-			$this->compiled = $this->source->getCompiled($this);
-			return $this->compiled;
+    			$this->compiled = $this->source->getCompiled($this);
+    			return $this->compiled;
 
 			case 'cached':
-			if (!class_exists('Smarty_Template_Cached')) {
-				include SMARTY_SYSPLUGINS_DIR . 'smarty_cacheresource.php';
-			}
-			$this->cached = new Smarty_Template_Cached($this);
-			return $this->cached;
+    			if (!class_exists('Smarty_Template_Cached')) {
+    				include SMARTY_SYSPLUGINS_DIR . 'smarty_cacheresource.php';
+    			}
+    			$this->cached = new Smarty_Template_Cached($this);
+    			return $this->cached;
 
 			case 'compiler':
-			$this->smarty->loadPlugin($this->source->compiler_class);
-			$this->compiler = new $this->source->compiler_class($this->source->template_lexer_class, $this->source->template_parser_class, $this->smarty);
-			return $this->compiler;
+    			$this->smarty->loadPlugin($this->source->compiler_class);
+    			$this->compiler = new $this->source->compiler_class($this->source->template_lexer_class, $this->source->template_parser_class, $this->smarty);
+    			return $this->compiler;
 
-			default:
-			if (property_exists($this->smarty, $property_name)) {
+            // TODO: uwe.tews: why is this a property of smarty and not the template itself?
+            case 'template_functions':
 				return $this->smarty->$property_name;
-			}
 		}
 
 		throw new SmartyException("template property '$property_name' does not exist.");
