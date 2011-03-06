@@ -468,6 +468,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 			case 'compiler':
     			$this->$property_name = $value;
     			return;
+    		
+    		// FIXME: routing of template -> smarty attributes
+		    default:
+            	if (property_exists($this->smarty, $property_name)) {
+            		$this->smarty->$property_name = $value;
+            		return;
+            	}
 		}
 
 		throw new SmartyException("invalid template property '$property_name'.");
@@ -508,9 +515,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     			$this->compiler = new $this->source->compiler_class($this->source->template_lexer_class, $this->source->template_parser_class, $this->smarty);
     			return $this->compiler;
 
-            // TODO: uwe.tews: why is this a property of smarty and not the template itself?
-            case 'template_functions':
-				return $this->smarty->$property_name;
+          	// FIXME: routing of template -> smarty attributes
+		    default:
+            	if (property_exists($this->smarty, $property_name)) {
+            		return $this->smarty->$property_name;
+            	}
 		}
 
 		throw new SmartyException("template property '$property_name' does not exist.");
