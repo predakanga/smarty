@@ -354,7 +354,7 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigAbsolutePath()
     {
-        $file = realpath($this->smarty->config_dir . 'test.conf');
+        $file = realpath($this->smarty->getConfigDir(0) . 'test.conf');
         $this->smarty->configLoad($file);
         $this->assertEquals("123.4", $this->smarty->fetch('eval:{#Number#}'));
     } 

@@ -66,11 +66,23 @@ class SmartyBC extends Smarty {
 	 * Get config directory
 	 *
 	 * @note this wrapper ensures data integrity that's non-BC done by setters
-	 * @return string configuration directory
+	 * @param mixed index of directory to get, null to get all
+	 * @return array|string list of config directories, or directory of $index
 	 */
-	public function getConfigDir()
+	public function getConfigDir($index=null)
 	{
-		return rtrim($this->config_dir, '/\\') . DS;
+	    // make sure we're dealing with an array
+	    $this->config_dir = (array) $this->config_dir;
+	    // make sure directories end with a DS
+	    foreach ($this->config_dir as $k => $v) {
+            $this->config_dir[$k] = rtrim($v, '/\\') . DS;
+	    }
+	    
+	    if ($index !== null) {
+	        return isset($this->config_dir[$index]) ? $this->config_dir[$index] : null;
+	    }
+	    
+		return $this->config_dir;
 	}
 	
 	/**

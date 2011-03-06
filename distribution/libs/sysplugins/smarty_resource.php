@@ -127,10 +127,10 @@ abstract class Smarty_Resource {
     {
         $file = $source->name;
         if ($source instanceof Smarty_Config_Source) {
-            $_directories = (array) $source->smarty->config_dir;
+            $_directories = $source->smarty->getConfigDir();
             $_default_handler = $source->smarty->default_config_handler_func;
         } else {
-            $_directories = (array) $source->smarty->template_dir;
+            $_directories = $source->smarty->getTemplateDir();
             $_default_handler = $source->smarty->default_template_handler_func;
         }
         
@@ -213,7 +213,6 @@ abstract class Smarty_Resource {
 
             if ($_directory) {
                 $_file = substr($file,strpos($file, ']') + 1);
-                $_directory = rtrim($_directory, '/\\') . DS;
                 $_filepath = $_directory . $_file;
                 if (file_exists($_filepath)) {
                     return $_filepath;
@@ -224,7 +223,6 @@ abstract class Smarty_Resource {
         // relative file name? 
         if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
 	        foreach ($_directories as $_directory) {
-                $_directory = rtrim($_directory, '/\\') . DS;
             	$_filepath = $_directory . $file;
             	if (file_exists($_filepath)) {
                 	return $_filepath;

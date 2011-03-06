@@ -53,8 +53,7 @@ class Smarty_Internal_Utility {
         $_count = 0;
         $_error_count = 0; 
         // loop over array of template directories
-        foreach((array)$smarty->template_dir as $_dir) {
-            $_dir = rtrim($_dir, '/\\') . DS;
+        foreach($smarty->getTemplateDir() as $_dir) {
             $_compileDirs = new RecursiveDirectoryIterator($_dir);
             $_compile = new RecursiveIteratorIterator($_compileDirs);
             foreach ($_compile as $_fileinfo) {
@@ -116,8 +115,7 @@ class Smarty_Internal_Utility {
         $_count = 0;
         $_error_count = 0; 
         // loop over array of template directories
-        foreach((array)$smarty->config_dir as $_dir) {
-            $_dir = rtrim($_dir, '/\\') . DS;
+        foreach($smarty->getConfigDir() as $_dir) {
             $_compileDirs = new RecursiveDirectoryIterator($_dir);
             $_compile = new RecursiveIteratorIterator($_compileDirs);
             foreach ($_compile as $_fileinfo) {
@@ -229,7 +227,7 @@ class Smarty_Internal_Utility {
 
         echo "Testing template directory...\n";
 
-        foreach((array)$smarty->template_dir as $template_dir) {
+        foreach($smarty->getTemplateDir() as $template_dir) {
             if (!is_dir($template_dir))
                 echo "FAILED: $template_dir is not a directory.\n";
             elseif (!is_readable($template_dir))
@@ -273,12 +271,14 @@ class Smarty_Internal_Utility {
 
         echo "Testing configs directory...\n";
 
-        if (!is_dir($smarty->config_dir))
-            echo "FAILED: {$smarty->config_dir} is not a directory.\n";
-        elseif (!is_readable($smarty->config_dir))
-            echo "FAILED: {$smarty->config_dir} is not readable.\n";
-        else
-            echo "{$smarty->config_dir} is OK.\n";
+        foreach($smarty->getConfigDir() as $config_dir) {
+            if (!is_dir($config_dir))
+                echo "FAILED: $config_dir is not a directory.\n";
+            elseif (!is_readable($config_dir))
+                echo "FAILED: $config_dir is not readable.\n";
+            else
+                echo "$config_dir is OK.\n";
+        }
 
         echo "Tests complete.\n";
 

@@ -97,7 +97,7 @@ function my_config_handler ($resource_type, $resource_name, &$config_source, &$c
 } 
 function my_config_handler_file ($resource_type, $resource_name, &$config_source, &$config_timestamp, Smarty $smarty)
 {
-    return (is_array($smarty->config_dir) ? $smarty->config_dir[0] : $smarty->config_dir) . 'test.conf';
+    return $smarty->getConfigDir(0) . 'test.conf';
 } 
 function my_config_false ($resource_type, $resource_name, &$config_source, &$config_timestamp, Smarty $smarty)
 {

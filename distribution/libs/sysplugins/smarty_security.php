@@ -196,9 +196,12 @@ class Smarty_Security {
         $_config = false;
         $_secure = false;
         
+        $_template_dir = $this->smarty->getTemplateDir();
+        $_config_dir = $this->smarty->getConfigDir();
+        
         // check if index is outdated
-        if ((!$this->_template_dir || $this->_template_dir !== $this->smarty->template_dir)
-            || (!$this->_config_dir || $this->_config_dir !== $this->smarty->config_dir)
+        if ((!$this->_template_dir || $this->_template_dir !== $_template_dir)
+            || (!$this->_config_dir || $this->_config_dir !== $_config_dir)
             || (!empty($this->secure_dir) && (!$this->_secure_dir || $this->_secure_dir !== $this->secure_dir))
         ) {
             $this->_resource_dir = array();
@@ -209,8 +212,8 @@ class Smarty_Security {
         
         // rebuild template dir index
         if ($_template) {
-            $this->_template_dir = $this->smarty->template_dir;
-            foreach ((array)$this->smarty->template_dir as $directory) {
+            $this->_template_dir = $_template_dir;
+            foreach ($_template_dir as $directory) {
                 $directory = realpath($directory);
                 $this->_resource_dir[$directory] = true;
             }
@@ -218,8 +221,8 @@ class Smarty_Security {
         
         // rebuild config dir index
         if ($_config) {
-            $this->_config_dir = $this->smarty->config_dir;
-            foreach ((array)$this->smarty->config_dir as $directory) {
+            $this->_config_dir = $_config_dir;
+            foreach ($_config_dir as $directory) {
                 $directory = realpath($directory);
                 $this->_resource_dir[$directory] = true;
             }

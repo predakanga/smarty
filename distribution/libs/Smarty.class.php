@@ -146,7 +146,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	// look up relative filepaths in include_path
 	public $use_include_path = false;
 	// template directory
-	public $template_dir = null;
+	protected $template_dir = null;
 	// default template handler
 	public $default_template_handler_func = null;
 	// default config handler
@@ -160,7 +160,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	// cache directory
 	public $cache_dir = null;
 	// config directory
-	public $config_dir = null;
+	protected $config_dir = null;
 	// force template compiling?
 	public $force_compile = false;
 	// check template for modifications?
@@ -280,7 +280,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		$this->compile_dir = '.' . DS . 'templates_c' . DS;
 		$this->plugins_dir = array(SMARTY_PLUGINS_DIR);
 		$this->cache_dir = '.' . DS . 'cache' . DS;
-		$this->config_dir = '.' . DS . 'configs' . DS;
+		$this->config_dir = array('.' . DS . 'configs' . DS);
 		$this->debug_tpl = 'file:' . dirname(__FILE__) . '/debug.tpl';
 		if (isset($_SERVER['SCRIPT_NAME'])) {
 			$this->assignGlobal('SCRIPT_NAME', $_SERVER['SCRIPT_NAME']);
@@ -407,6 +407,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		return $this;
 	}
 
+
 	/**
 	 * Set template directory
 	 *
@@ -417,6 +418,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 		$this->template_dir = array();
 		foreach ((array)$template_dir as $k => $v) {
+		    if (!is_dir($v)) {
+		        throw new SmartyException("{$v} is not a directory");
+		    } elseif (!is_dir($v)) {
+		        throw new SmartyException("{$v} is not readable");
+		    }
+		    
 		    $this->template_dir[$k] = rtrim($v, '/\\') . DS;
 		}
 		
@@ -437,6 +444,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    
 	    if (is_array($template_dir)) {
 	        foreach ($template_dir as $k => $v) {
+	            if (!is_dir($v)) {
+    		        throw new SmartyException("{$v} is not a directory");
+    		    } elseif (!is_dir($v)) {
+    		        throw new SmartyException("{$v} is not readable");
+    		    }
+    		    
                 if (is_int($k)) {
                     // indexes are not merged but appended
     		        $this->template_dir[] = rtrim($v, '/\\') . DS;
@@ -446,9 +459,21 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
     		}
 	    } elseif( $key !== null ) {
+	        if (!is_dir($template_dir)) {
+		        throw new SmartyException("{$template_dir} is not a directory");
+		    } elseif (!is_dir($template_dir)) {
+		        throw new SmartyException("{$template_dir} is not readable");
+		    }
+		    
 	        // override directory at specified index
 		    $this->template_dir[$key] = rtrim($template_dir, '/\\') . DS;
 	    } else {
+	        if (!is_dir($template_dir)) {
+		        throw new SmartyException("{$template_dir} is not a directory");
+		    } elseif (!is_dir($template_dir)) {
+		        throw new SmartyException("{$template_dir} is not readable");
+		    }
+		    
 	        // append new directory
 		    $this->template_dir[] = rtrim($template_dir, '/\\') . DS;
 	    }
@@ -472,6 +497,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		return $this->template_dir;
 	}
 	
+	
 	/**
 	 * Set config directory
 	 *
@@ -480,19 +506,87 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	 */
 	public function setConfigDir($config_dir)
 	{
-	    $this->config_dir = rtrim($config_dir, '/\\') . DS;
+		$this->config_dir = array();
+		foreach ((array)$config_dir as $k => $v) {
+		    if (!is_dir($v)) {
+		        throw new SmartyException("{$v} is not a directory");
+		    } elseif (!is_dir($v)) {
+		        throw new SmartyException("{$v} is not readable");
+		    }
+		    
+		    $this->config_dir[$k] = rtrim($v, '/\\') . DS;
+		}
+		
+		return $this;
+	}
+	
+	/**
+	 * Add config directory(s)
+	 *
+	 * @param string|array $config_dir directory(s) of config sources
+	 * @param string key of the array element to assign the config dir to
+	 * @return Smarty current Smarty instance for chaining
+	 */
+	public function addConfigDir($config_dir, $key=null)
+	{
+	    // make sure we're dealing with an array
+	    $this->config_dir = (array) $this->config_dir;
+	    
+	    if (is_array($config_dir)) {
+	        foreach ($config_dir as $k => $v) {
+	            if (!is_dir($v)) {
+    		        throw new SmartyException("{$v} is not a directory");
+    		    } elseif (!is_dir($v)) {
+    		        throw new SmartyException("{$v} is not readable");
+    		    }
+    		    
+                if (is_int($k)) {
+                    // indexes are not merged but appended
+    		        $this->config_dir[] = rtrim($v, '/\\') . DS;
+                } else {
+                    // string indexes are overridden
+    		        $this->config_dir[$k] = rtrim($v, '/\\') . DS;
+                }
+    		}
+	    } elseif( $key !== null ) {
+	        if (!is_dir($config_dir)) {
+		        throw new SmartyException("{$config_dir} is not a directory");
+		    } elseif (!is_dir($config_dir)) {
+		        throw new SmartyException("{$config_dir} is not readable");
+		    }
+		    
+	        // override directory at specified index
+		    $this->config_dir[$key] = rtrim($config_dir, '/\\') . DS;
+	    } else {
+	        if (!is_dir($config_dir)) {
+		        throw new SmartyException("{$config_dir} is not a directory");
+		    } elseif (!is_dir($config_dir)) {
+		        throw new SmartyException("{$config_dir} is not readable");
+		    }
+		    
+	        // append new directory
+		    $this->config_dir[] = rtrim($config_dir, '/\\') . DS;
+	    }
+
+		$this->config_dir = array_unique($this->config_dir);
 		return $this;
 	}
 	
 	/**
 	 * Get config directory
 	 *
+	 * @param mixed index of directory to get, null to get all
 	 * @return string configuration directory
 	 */
-	public function getConfigDir()
+	public function getConfigDir($index=null)
 	{
+	    if ($index !== null) {
+	        return isset($this->config_dir[$index]) ? $this->config_dir[$index] : null;
+	    }
+	    
 		return $this->config_dir;
 	}
+
 
 	/**
 	 * Adds directory of plugin files
