@@ -154,11 +154,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	// default plugin handler
 	public $default_plugin_handler_func = null;
 	// compile directory
-	public $compile_dir = null;
+	protected $compile_dir = null;
 	// plugins directory
-	public $plugins_dir = null;
+	protected $plugins_dir = null;
 	// cache directory
-	public $cache_dir = null;
+	protected $cache_dir = null;
 	// config directory
 	protected $config_dir = null;
 	// force template compiling?
@@ -343,6 +343,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		}
 	}
 
+
 	/**
 	 * Empty cache folder
 	 *
@@ -373,6 +374,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		$_cache_resource = Smarty_CacheResource::load($this, $type);
 		return $_cache_resource->clear($this, $template_name, $cache_id, $compile_id, $exp_time);
 	}
+
 
 	/**
 	 * Loads security class and enables security
@@ -586,7 +588,29 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    
 		return $this->config_dir;
 	}
-
+    
+    
+    /**
+	 * Set plugins directory
+	 *
+	 * @param string|array $plugins_dir directory(s) of plugins
+	 * @return Smarty current Smarty instance for chaining
+	 */
+	public function setPluginsDir($plugins_dir)
+	{
+		$this->plugins_dir = array();
+		foreach ((array)$plugins_dir as $k => $v) {
+		    if (!is_dir($v)) {
+		        throw new SmartyException("{$v} is not a directory");
+		    } elseif (!is_dir($v)) {
+		        throw new SmartyException("{$v} is not readable");
+		    }
+		    
+		    $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
+		}
+		
+		return $this;
+	}
 
 	/**
 	 * Adds directory of plugin files
@@ -628,6 +652,67 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 		return $this->plugins_dir;
 	}
+
+    
+    /**
+	 * Set compile directory
+	 *
+	 * @param string $compile_dir directory to store compiled templates in
+	 * @return Smarty current Smarty instance for chaining
+	 */
+	public function setCompileDir($compile_dir)
+	{
+	    if (!is_dir($compile_dir)) {
+	        throw new SmartyException("{$compile_dir} is not a directory");
+	    } elseif (!is_dir($compile_dir)) {
+	        throw new SmartyException("{$compile_dir} is not readable");
+	    }
+	    
+	    $this->compile_dir = rtrim($compile_dir, '/\\') . DS;
+		return $this;
+	}
+	
+    /**
+	 * Get compiled directory
+	 *
+	 * @return string path to compiled templates
+	 */
+	public function getCompileDir()
+	{
+		return $this->compile_dir;
+	}
+
+    
+    /**
+	 * Set cache directory
+	 *
+	 * @param string $cache_dir directory to store cached templates in
+	 * @return Smarty current Smarty instance for chaining
+	 */
+	public function setCacheDir($cache_dir)
+	{
+	    if (!is_dir($cache_dir)) {
+	        throw new SmartyException("{$cache_dir} is not a directory");
+	    } elseif (!is_dir($cache_dir)) {
+	        throw new SmartyException("{$cache_dir} is not readable");
+	    }
+	    
+	    $this->cache_dir = rtrim($cache_dir, '/\\') . DS;
+		return $this;
+	}
+	
+    /**
+	 * Get cache directory
+	 *
+	 * @return string path of cache directory
+	 */
+	public function getCacheDir()
+	{
+		return $this->cache_dir;
+	}
+    
+
+
 
 	/**
 	 * return a reference to a registered object
@@ -759,8 +844,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		// plugin filename is expected to be: [type].[name].php
 		$_plugin_filename = "{$_name_parts[1]}.{$_name_parts[2]}.php";
 		// loop through plugin dirs and find the plugin
-		foreach((array)$this->plugins_dir as $_plugin_dir) {
-			$_plugin_dir = rtrim($_plugin_dir, '/\\') . DS;
+		foreach($this->getPluginsDir() as $_plugin_dir) {
 			$file = $_plugin_dir . $_plugin_filename;
 			if (file_exists($file)) {
 				require_once($file);

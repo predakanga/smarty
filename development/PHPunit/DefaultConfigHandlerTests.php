@@ -81,7 +81,7 @@ class DefaultConfigHandlerTests extends PHPUnit_Framework_TestCase {
     
     public function testConfigResourceDb4()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__) .'/PHPunitplugins/';
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $this->smarty->configLoad('db4:foo.conf');
         $this->assertEquals("bar", $this->smarty->fetch('eval:{#foo#}'));
     }

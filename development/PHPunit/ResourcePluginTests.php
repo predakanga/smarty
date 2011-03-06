@@ -25,7 +25,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePlugin()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $this->assertEquals('hello world', $this->smarty->fetch('db:test'));
     } 
     /**
@@ -33,7 +33,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginObject()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $this->assertEquals('hello world', $this->smarty->fetch('db2:test'));
     }
     /**
@@ -41,7 +41,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginRegisteredInstance()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $this->smarty->loadPlugin('Smarty_Resource_Db2');
         $this->smarty->registerResource( 'db2a', new Smarty_Resource_Db2() );
         $this->assertEquals('hello world', $this->smarty->fetch('db2a:test'));
@@ -52,7 +52,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     public function testResourcePluginRecompiled()
     {
         return;
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         try {
             $this->assertEquals('hello world', $this->smarty->fetch('db3:test'));
         } catch (Exception $e) {
@@ -66,7 +66,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginRecompiledCompiledFilepath()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $tpl = $this->smarty->createTemplate('db2:test.tpl');
         $expected = realpath('./templates_c/'.sha1('db2:test.tpl').'.db2.test.tpl.php');
         $this->assertFalse(!!$expected);
@@ -77,7 +77,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginMysql()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $this->assertEquals('hello world', $this->smarty->fetch('mysqltest:test.tpl'));
     }
     /**
@@ -85,7 +85,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginMysqlTimestamp()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $tpl = $this->smarty->createTemplate('mysqltest:test.tpl');
         $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->source->timestamp);
     }
@@ -94,7 +94,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginMysqlTimestampWithoutFetchTimestamp()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $tpl = $this->smarty->createTemplate('mysqlstest:test.tpl');
         $this->assertEquals(strtotime("2010-12-25 22:00:00"), $tpl->source->timestamp);
     }
@@ -103,7 +103,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginMysqlCompiledFilepath()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $tpl = $this->smarty->createTemplate('mysqltest:test.tpl');
         $expected = realpath('./templates_c/'.sha1('mysqltest:test.tpl').'.mysqltest.test.tpl.php');
         $this->assertTrue(!!$expected);
@@ -111,7 +111,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
     }
     public function testResourcePluginMysqlCompiledFilepathCache()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $this->smarty->force_compile = true;
@@ -127,7 +127,7 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
      */
     public function testResourcePluginTimestamp()
     {
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $tpl = $this->smarty->createTemplate('db:test');
         $this->assertTrue(is_integer($tpl->source->timestamp));
         $this->assertEquals(10, strlen($tpl->source->timestamp));

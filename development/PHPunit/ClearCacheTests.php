@@ -29,7 +29,7 @@ class ClearCacheTests extends PHPUnit_Framework_TestCase {
     public function testClearCacheAll()
     {
         $this->smarty->clearAllCache();
-        file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
+        file_put_contents($this->smarty->getCacheDir() . 'dummy.php', 'test');
         $this->assertEquals(1, $this->smarty->clearAllCache());
     } 
     /**
@@ -37,14 +37,14 @@ class ClearCacheTests extends PHPUnit_Framework_TestCase {
     */
     public function testClearCacheAllNotExpired()
     {
-        file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
-        touch($this->smarty->cache_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCacheDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCacheDir() . 'dummy.php', time()-1000);
         $this->assertEquals(0, $this->smarty->clearAllCache(2000));
     } 
     public function testSmarty2ClearCacheAllNotExpired()
     {
-        file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
-        touch($this->smarty->cache_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCacheDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCacheDir() . 'dummy.php', time()-1000);
         $this->smarty->clear_all_cache(2000);
         $this->assertEquals(1, $this->smarty->clearAllCache());
     } 
@@ -53,14 +53,14 @@ class ClearCacheTests extends PHPUnit_Framework_TestCase {
     */
     public function testClearCacheAllExpired()
     {
-        file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
-        touch($this->smarty->cache_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCacheDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCacheDir() . 'dummy.php', time()-1000);
         $this->assertEquals(1, $this->smarty->clearAllCache(500));
     } 
     public function testSmarty2ClearCacheAllExpired()
     {
-        file_put_contents($this->smarty->cache_dir . 'dummy.php', 'test');
-        touch($this->smarty->cache_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCacheDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCacheDir() . 'dummy.php', time()-1000);
         $this->smarty->clear_all_cache(500);
         $this->assertEquals(0, $this->smarty->clearAllCache());
     } 

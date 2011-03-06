@@ -60,10 +60,7 @@ class Smarty_Internal_Config {
         if (isset($_compile_id)) {
             $_filepath = $_compile_id . $_compile_dir_sep . $_filepath;
         } 
-        $_compile_dir = $this->smarty->compile_dir;
-        if (substr($_compile_dir, -1) != DS) {
-            $_compile_dir .= DS;
-        } 
+        $_compile_dir = $this->smarty->getCompileDir();
         return $_compile_dir . $_filepath . '.' . basename($this->source->name) . '.config' . '.php';
     } 
     /**

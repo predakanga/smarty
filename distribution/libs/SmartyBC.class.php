@@ -89,9 +89,10 @@ class SmartyBC extends Smarty {
 	 * Get plugin directories
 	 *
 	 * @note this wrapper ensures data integrity that's non-BC done by setters
+	 * @param mixed index of directory to get, null to get all
 	 * @return array list of plugin directories
 	 */
-	public function getPluginDir()
+	public function getPluginsDir($index=null)
 	{
 	    // make sure we're dealing with an array
 	    $this->plugins_dir = (array) $this->plugins_dir;
@@ -100,7 +101,31 @@ class SmartyBC extends Smarty {
             $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
 	    }
 	    
+	    if ($index !== null) {
+	        return isset($this->plugins_dir[$index]) ? $this->plugins_dir[$index] : null;
+	    }
+	    
 		return $this->plugins_dir;
+	}
+	
+	/**
+	 * Get compiled directory
+	 *
+	 * @return string path to compiled templates
+	 */
+	public function getCompileDir()
+	{
+		return rtrim($this->smarty->compile_dir, '/\\') . DS;
+	}
+	
+	/**
+	 * Get cache directory
+	 *
+	 * @return string path of cache directory
+	 */
+	public function getCacheDir()
+	{
+		return rtrim($this->smarty->cache_dir, '/\\') . DS;
 	}
 	
 	

@@ -30,20 +30,20 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     public function testClearCompiledAll()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy2.php', 'test');
         $this->assertEquals(2, $this->smarty->clearCompiledTemplate());
-       	$this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
-        $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy2.php'));
+       	$this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy2.php'));
     } 
     public function testSmarty2ClearCompiledAll()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy2.php', 'test');
         $this->smarty->clear_compiled_tpl();
-        $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
-        $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy2.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy2.php'));
     } 
     /**
     * test clearCompiledTemplate method for a specific resource
@@ -51,20 +51,20 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     public function testClearCompiledResource()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy2.php', 'test');
         $this->assertEquals(1, $this->smarty->clearCompiledTemplate('dummy'));
-        $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
-        $this->assertTrue(file_exists($this->smarty->compile_dir . 'dummy2.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
+        $this->assertTrue(file_exists($this->smarty->getCompileDir() . 'dummy2.php'));
     } 
     public function testSmarty2ClearCompiledResource()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        file_put_contents($this->smarty->compile_dir . 'dummy2.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . 'dummy2.php', 'test');
         $this->smarty->clear_compiled_tpl('dummy');
-        $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
-        $this->assertTrue(file_exists($this->smarty->compile_dir . 'dummy2.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
+        $this->assertTrue(file_exists($this->smarty->getCompileDir() . 'dummy2.php'));
     } 
     /**
     * test clearCompiledTemplate method not expired
@@ -72,18 +72,18 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     public function testClearCompiledNotExpired()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCompileDir() . 'dummy.php', time()-1000);
         $this->assertEquals(0, $this->smarty->clearCompiledTemplate(null, null, 2000));
-        $this->assertTrue(file_exists($this->smarty->compile_dir . 'dummy.php'));
+        $this->assertTrue(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
     } 
     public function testSnarty2ClearCompiledNotExpired()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCompileDir() . 'dummy.php', time()-1000);
         $this->smarty->clear_compiled_tpl(null, null, 2000);
-        $this->assertTrue(file_exists($this->smarty->compile_dir . 'dummy.php'));
+        $this->assertTrue(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
     } 
     /**
     * test clearCompiledTemplate method expired
@@ -91,18 +91,18 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     public function testClearCompiledExpired()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCompileDir() . 'dummy.php', time()-1000);
         $this->assertEquals(1, $this->smarty->clearCompiledTemplate(null, null, 500));
-        $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
     } 
     public function testSmarty2ClearCompiledExpired()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->compile_dir . 'dummy.php', 'test');
-        touch($this->smarty->compile_dir . 'dummy.php', time()-1000);
+        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        touch($this->smarty->getCompileDir() . 'dummy.php', time()-1000);
        $this->smarty->clear_compiled_tpl(null, null, 500);
-        $this->assertFalse(file_exists($this->smarty->compile_dir . 'dummy.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
     } 
     /**
     * test clearCompiledTemplate with compile_id

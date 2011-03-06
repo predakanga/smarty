@@ -15,7 +15,7 @@ class CacheResourceCustomMysqlTests extends PHPUnit_Framework_TestCase {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
         $this->smarty->caching_type = 'mysqltest';
-        $this->smarty->plugins_dir[] = dirname(__FILE__)."/PHPunitplugins/";
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
     } 
 
     public static function isRunnable()

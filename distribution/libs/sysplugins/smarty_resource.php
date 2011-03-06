@@ -101,7 +101,7 @@ abstract class Smarty_Resource {
         } else {
             $_cache = '';
         }
-        $_compile_dir = rtrim($_template->smarty->compile_dir, '/\\') . DS;
+        $_compile_dir = $_template->smarty->getCompileDir();
         // set basename if not specified
         $_basename = $this->getBasename($compiled->source);
         if ($_basename === null) {

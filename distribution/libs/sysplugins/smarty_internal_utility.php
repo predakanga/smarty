@@ -164,6 +164,7 @@ class Smarty_Internal_Utility {
      */
     static function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null, $smarty)
     {
+        $_compile_dir = $smarty->getCompileDir();
         $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
         $_dir_sep = $smarty->use_sub_dirs ? DS : '^';
         if (isset($resource_name)) {
@@ -172,12 +173,12 @@ class Smarty_Internal_Utility {
         } else {
             $_resource_part = '';
         } 
-        $_dir = $smarty->compile_dir;
+        $_dir = $_compile_dir;
         if ($smarty->use_sub_dirs && isset($_compile_id)) {
             $_dir .= $_compile_id . $_dir_sep;
         } 
         if (isset($_compile_id)) {
-            $_compile_id_part = $smarty->compile_dir . $_compile_id . $_dir_sep;
+            $_compile_id_part = $_compile_dir . $_compile_id . $_dir_sep;
         } 
         $_count = 0;
         $_compileDirs = new RecursiveDirectoryIterator($_dir);
@@ -238,18 +239,19 @@ class Smarty_Internal_Utility {
 
         echo "Testing compile directory...\n";
 
-        if (!is_dir($smarty->compile_dir))
-            echo "FAILED: {$smarty->compile_dir} is not a directory.\n";
-        elseif (!is_readable($smarty->compile_dir))
-            echo "FAILED: {$smarty->compile_dir} is not readable.\n";
-        elseif (!is_writable($smarty->compile_dir))
-            echo "FAILED: {$smarty->compile_dir} is not writable.\n";
+        $_compile_dir = $smarty->getCompileDir();
+        if (!is_dir($_compile_dir))
+            echo "FAILED: {$_compile_dir} is not a directory.\n";
+        elseif (!is_readable($_compile_dir))
+            echo "FAILED: {$_compile_dir} is not readable.\n";
+        elseif (!is_writable($_compile_dir))
+            echo "FAILED: {$_compile_dir} is not writable.\n";
         else
-            echo "{$smarty->compile_dir} is OK.\n";
+            echo "{$_compile_dir} is OK.\n";
 
         echo "Testing plugins directory...\n";
 
-        foreach((array)$smarty->plugins_dir as $plugin_dir) {
+        foreach($smarty->getPluginsDir() as $plugin_dir) {
             if (!is_dir($plugin_dir))
                 echo "FAILED: $plugin_dir is not a directory.\n";
             elseif (!is_readable($plugin_dir))
@@ -260,14 +262,15 @@ class Smarty_Internal_Utility {
 
         echo "Testing cache directory...\n";
 
-        if (!is_dir($smarty->cache_dir))
-            echo "FAILED: {$smarty->cache_dir} is not a directory.\n";
-        elseif (!is_readable($smarty->cache_dir))
-            echo "FAILED: {$smarty->cache_dir} is not readable.\n";
-        elseif (!is_writable($smarty->cache_dir))
-            echo "FAILED: {$smarty->cache_dir} is not writable.\n";
+        $_cache_dir = $smarty->getCacheDir();
+        if (!is_dir($_cache_dir))
+            echo "FAILED: {$_cache_dir} is not a directory.\n";
+        elseif (!is_readable($_cache_dir))
+            echo "FAILED: {$_cache_dir} is not readable.\n";
+        elseif (!is_writable($_cache_dir))
+            echo "FAILED: {$_cache_dir} is not writable.\n";
         else
-            echo "{$smarty->cache_dir} is OK.\n";
+            echo "{$_cache_dir} is OK.\n";
 
         echo "Testing configs directory...\n";
 

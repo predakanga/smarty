@@ -47,7 +47,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         } else {
             $_compile_id = '';
         } 
-        $_cache_dir = rtrim($_template->smarty->cache_dir, '/\\') . DS;
+        $_cache_dir = $_template->smarty->getCacheDir();
         $cached->filepath = $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
         $cached->timestamp = @filemtime($cached->filepath);
         $cached->exists = !!$cached->timestamp;
@@ -121,7 +121,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
         $_dir_sep = $smarty->use_sub_dirs ? '/' : '^';
         $_compile_id_offset = $smarty->use_sub_dirs ? 3 : 0;
-        $_dir = rtrim($smarty->cache_dir, '/\\') . DS;
+        $_dir = $smarty->getCacheDir();
         $_dir_length = strlen($_dir);
         if (isset($_cache_id)) {
             $_cache_id_parts = explode('|', $_cache_id);
