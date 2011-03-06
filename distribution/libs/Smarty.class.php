@@ -264,10 +264,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	// self pointer to Smarty object
 	public $smarty;
 
+
 	/**
-	* Class constructor, initializes basic smarty properties
-	*/
-	public function __construct()
+	 * Initialize new Smarty object
+	 *
+	 * @param array $options options to set during initialization, e.g. array( 'forceCompile' => false )
+	 */
+	public function __construct(array $options=array())
 	{
 		// selfpointer need by some other class methods
 		$this->smarty = $this;
@@ -284,6 +287,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		$this->debug_tpl = 'file:' . dirname(__FILE__) . '/debug.tpl';
 		if (isset($_SERVER['SCRIPT_NAME'])) {
 			$this->assignGlobal('SCRIPT_NAME', $_SERVER['SCRIPT_NAME']);
+		}
+		// set specified properties
+		foreach ($options as $k => $v) {
+		    $method = 'set' . ucfirst($k);
+		    if (!is_callable($this, $method)) {
+		        throw new SmartyException("Unknown property '{$k}'");
+		    }
+		    $this->$method($v);
 		}
 	}
 

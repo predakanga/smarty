@@ -2,6 +2,10 @@
 
 these changes must reflect on the documentation at some point…
 
+## General ##
+
+* Use of getters/setters in favor of direct property access
+* new Smarty( array( 'forceCompile' => false ) );
 
 ## Syntax ##
 
