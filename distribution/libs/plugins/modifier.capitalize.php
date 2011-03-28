@@ -29,7 +29,7 @@ function smarty_modifier_capitalize($string, $uc_digits = false, $lc_rest = fals
             $upper_string = mb_convert_case( $string, MB_CASE_TITLE, SMARTY_RESOURCE_CHAR_SET );
         } else {
             // uppercase word breaks
-            $upper_string = preg_replace("!(^|[^\p{L}'])([\p{Ll}])!ueS", "'\\1'.mb_convert_case('\\2',MB_CASE_UPPER, SMARTY_RESOURCE_CHAR_SET)", $string);
+            $upper_string = preg_replace("!(^|[^\p{L}'])([\p{Ll}])!ueS", "stripslashes('\\1').mb_convert_case(stripslashes('\\2'),MB_CASE_UPPER, SMARTY_RESOURCE_CHAR_SET)", $string);
         }
         // check uc_digits case
         if (!$uc_digits) {
@@ -47,7 +47,7 @@ function smarty_modifier_capitalize($string, $uc_digits = false, $lc_rest = fals
         $string = strtolower($string);
     }
     // uppercase (including hyphenated words)
-    $upper_string = preg_replace("!(^|[^\p{L}'])([\p{Ll}])!ueS", "'\\1'.ucfirst('\\2')", $string); 
+    $upper_string = preg_replace("!(^|[^\p{L}'])([\p{Ll}])!ueS", "stripslashes('\\1').ucfirst(stripslashes('\\2'))", $string); 
     // check uc_digits case
     if (!$uc_digits) {
         if (preg_match_all("!\b([\p{L}]*[\p{N}]+[\p{L}]*)\b!u", $string, $matches, PREG_OFFSET_CAPTURE)) {

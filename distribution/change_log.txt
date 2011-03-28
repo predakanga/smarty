@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+28/03/2011
+- bugfix stripslashes() requried when using PCRE e-modifier
+
 04/03/2011
 - upgrade to new PHP_LexerGenerator version 0.4.0 for better performance
 
