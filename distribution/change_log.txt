@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+01/04/2011
+- bugfix quote handling in capitalize modifier
+
 28/03/2011
 - bugfix stripslashes() requried when using PCRE e-modifier
 

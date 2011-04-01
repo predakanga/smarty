@@ -118,6 +118,24 @@ class PluginModifierCapitalizeTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals("Next X-Men Film, X3, 'Delayed. Umlauts' Foo.", $this->smarty->fetch($tpl));
         unset($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING']);
     }
+    
+    public function testQuotesBeginning()
+    {
+        $tpl = $this->smarty->createTemplate('eval:{"\"delayed. umlauts\" foo."|capitalize}');
+        $this->assertEquals("\"Delayed. Umlauts\" Foo.", $this->smarty->fetch($tpl));
+        $tpl = $this->smarty->createTemplate('eval:{"\'delayed. umlauts\' foo."|capitalize}');
+        $this->assertEquals("'Delayed. Umlauts' Foo.", $this->smarty->fetch($tpl));
+    }
+    
+    public function testQuotesBeginningWithoutMbstring()
+    {
+        $_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'] = true;
+        $tpl = $this->smarty->createTemplate('eval:{"\"delayed. umlauts\" foo."|capitalize}');
+        $this->assertEquals("\"Delayed. Umlauts\" Foo.", $this->smarty->fetch($tpl));
+        $tpl = $this->smarty->createTemplate('eval:{"\'delayed. umlauts\' foo."|capitalize}');
+        $this->assertEquals("'Delayed. Umlauts' Foo.", $this->smarty->fetch($tpl));
+        unset($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING']);
+    }
 } 
 
 ?>
