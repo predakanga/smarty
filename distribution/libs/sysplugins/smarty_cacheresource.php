@@ -13,6 +13,14 @@ abstract class Smarty_CacheResource {
 	* @var array
 	*/
 	protected static $resources = array();
+	
+	/**
+     * resource types provided by the core
+     * @var array
+     */
+    protected static $sysplugins = array(
+        'file' => true, 
+    );
 
 	/**
 	* populate Cached Object with meta data from Resource
@@ -107,7 +115,7 @@ abstract class Smarty_CacheResource {
 			return $smarty->registered_cache_resources[$type];
 		}
 		// try sysplugins dir
-		if (in_array($type, $smarty->cache_resource_types)) {
+        if (isset(self::$sysplugins[$type])) {
 			$cache_resource_class = 'Smarty_Internal_CacheResource_' . ucfirst($type);
 			return self::$resources[$type] = new $cache_resource_class();
 		}

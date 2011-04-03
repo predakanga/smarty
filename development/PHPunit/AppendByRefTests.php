@@ -13,8 +13,10 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = SmartyTests::$smarty;
+        $this->smartyBC = SmartyTests::$smartyBC;
         SmartyTests::init();
         $this->smarty->deprecation_notices = false;
+        $this->smartyBC->deprecation_notices = false;
     } 
 
     public static function isRunnable()
@@ -39,11 +41,11 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
     {
         $bar = 'bar';
         $bar2 = 'bar2';
-        $this->smarty->append_by_ref('foo', $bar);
-        $this->smarty->append_by_ref('foo', $bar2);
+        $this->smartyBC->append_by_ref('foo', $bar);
+        $this->smartyBC->append_by_ref('foo', $bar2);
         $bar = 'newbar';
         $bar2 = 'newbar2';
-        $this->assertEquals('newbar newbar2', $this->smarty->fetch('eval:{$foo[0]} {$foo[1]}'));
+        $this->assertEquals('newbar newbar2', $this->smartyBC->fetch('eval:{$foo[0]} {$foo[1]}'));
     } 
     /**
     * test appendByRef to unassigned variable
@@ -58,9 +60,9 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
      public function testSmarty2AppendByRefUnassigned()
     {
         $bar2 = 'bar2';
-        $this->smarty->append_by_ref('foo', $bar2);
+        $this->smartyBC->append_by_ref('foo', $bar2);
         $bar2 = 'newbar2';
-        $this->assertEquals('newbar2', $this->smarty->fetch('eval:{$foo[0]}'));
+        $this->assertEquals('newbar2', $this->smartyBC->fetch('eval:{$foo[0]}'));
     } 
     /**
     * test appendByRef merge

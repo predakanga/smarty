@@ -16,18 +16,17 @@ require_once SMARTY_DIR . 'SmartyBC.class.php';
  */
 class SmartyTests extends PHPUnit_Framework_TestSuite {
     static $smarty = null ;
+    static $smartyBC = null ;
 
     public function __construct()
     {
-        SmartyTests::$smarty = new SmartyBC();
-    } 
-
-    public static function init()
+        SmartyTests::$smarty = new Smarty();
+        SmartyTests::$smartyBC = new SmartyBC();
+    }
+    
+    protected static function _init($smarty)
     {
-        error_reporting(E_ALL | E_STRICT);
-        $smarty = SmartyTests::$smarty;
         $smarty->template_objects = null;
-        $smarty->cache_resource_objects = array();
         $smarty->config_vars = array();
         Smarty::$global_tpl_vars = array();
         $smarty->template_functions = array();
@@ -54,12 +53,19 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->php_handling = Smarty::PHP_PASSTHRU;
         $smarty->allow_php_tag = false;
         $smarty->allow_php_templates = false;
-        $smarty->block_data = null;
+        //$smarty->block_data = null;
         $smarty->deprecation_notices = true;
         $smarty->enableSecurity();
         $smarty->error_reporting = null;
         $smarty->error_unassigned = true;
         $smarty->caching_type = 'file';
+    }
+
+    public static function init()
+    {
+        error_reporting(E_ALL | E_STRICT);
+        self::_init(SmartyTests::$smarty);
+        self::_init(SmartyTests::$smartyBC);
     } 
     /**
      * look for test units and run them

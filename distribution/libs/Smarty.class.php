@@ -193,7 +193,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public $allow_php_tag = false;
 	public $allow_php_templates = false;
 	public $direct_access_security = true;
-	public $trusted_dir = array();
 	// debug mode
 	public $debugging = false;
 	public $debugging_ctrl = 'NONE';
@@ -217,8 +216,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public $default_resource_type = 'file';
 	// caching type
 	public $caching_type = 'file';
-	// internal cache resource types
-	public $cache_resource_types = array('file');
 	// internal config properties
 	public $properties = array();
 	// config type
@@ -259,11 +256,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public $_tag_stack = array();
 	// generate deprecated function call notices?
 	public $deprecation_notices = true;
-	// Smarty 2 BC
-	public $_version = self::SMARTY_VERSION;
 	// self pointer to Smarty object
 	public $smarty;
-
+    
+    // required by the compiler for BC
+	public $_current_file = null;
 
 	/**
 	 * Initialize new Smarty object
@@ -721,27 +718,109 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 		return $this->cache_dir;
 	}
+
     
-
-
-
-	/**
-	 * return a reference to a registered object
-	 *
-	 * @param string $name object name
-	 * @return object
-	 */
-	function getRegisteredObject($name)
-	{
-		if (!isset($this->registered_objects[$name]))
-		throw new SmartyException("'$name' is not a registered object");
-
-		if (!is_object($this->registered_objects[$name][0]))
-		throw new SmartyException("registered '$name' is not an object");
-
-		return $this->registered_objects[$name][0];
-	}
-
+    /**
+     * Set default modifiers
+     *
+     * @param array|string $modifiers modifier or list of modifiers to set
+     * @return Smarty current Smarty instance for chaining
+     */
+    public function setDefaultModifiers($modifiers)
+    {
+        $this->default_modifiers = (array) $modifiers;
+        return $this;
+    }
+    
+    /**
+     * Add default modifiers
+     *
+     * @param array|string $modifiers modifier or list of modifiers to add
+     * @return Smarty current Smarty instance for chaining
+     */
+    public function addDefaultModifiers($modifiers)
+    {
+        if (is_array($modifiers)) {
+            $this->default_modifiers = array_merge($this->default_modifiers, $modifiers);
+        } else {
+            $this->default_modifiers[] = $modifiers;
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Get default modifiers
+     *
+     * @return array list of default modifiers
+     */
+    public function getDefaultModifiers()
+    {
+        return $this->default_modifiers;
+    }
+    
+    
+    /**
+     * Set autoload filters
+     *
+     * @param array $filters filters to load automatically
+     * @param string $type "pre", "output", … specify the filter type to set. Defaults to none treating $filters' keys as the appropriate types
+     * @return Smarty current Smarty instance for chaining
+     */
+    public function setAutoloadFilters($filters, $type=null)
+    {
+        if ($type !== null) {
+            $this->autoload_filters[$type] = (array) $filters;
+        } else {
+            $this->autoload_filters = (array) $filters;
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Add autoload filters
+     *
+     * @param array $filters filters to load automatically
+     * @param string $type "pre", "output", … specify the filter type to set. Defaults to none treating $filters' keys as the appropriate types
+     * @return Smarty current Smarty instance for chaining
+     */
+    public function addAutoloadFilters($filters, $type=null)
+    {
+        if ($type !== null) {
+            if (!empty($this->autoload_filters[$type])) {
+                $this->autoload_filters[$type] = array_merge($this->autoload_filters[$type], (array) $filters);
+            } else {
+                $this->autoload_filters[$type] = (array) $filters;
+            }
+        } else {
+            foreach ((array) $filters as $key => $value) {
+                if (!empty($this->autoload_filters[$key])) {
+                    $this->autoload_filters[$key] = array_merge($this->autoload_filters[$key], (array) $value);
+                } else {
+                    $this->autoload_filters[$key] = (array) $value;
+                }
+            }
+        }
+        
+        return $this;
+    }
+    
+    /**
+     * Get autoload filters
+     *
+     * @param string $type type of filter to get autoloads for. Defaults to all autoload filters
+     * @return array array( 'type1' => array( 'filter1', 'filter2', … ) ) or array( 'filter1', 'filter2', …) if $type was specified
+     */
+    public function getAutoloadFilters($type=null)
+    {
+        if ($type !== null) {
+            return isset($this->autoload_filters[$type]) ? $this->autoload_filters[$type] : array();
+        }
+        
+        return $this->autoload_filters;
+    }
+    
 
 	/**
 	 * return name of debugging template
@@ -928,6 +1007,354 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		return Smarty_Internal_Utility::testInstall($this);
     }
 
+
+    /*
+        these attributes are not accessible via setOption() at the moment:
+
+        ## per template ##
+            // cache_id
+            public $cache_id = null;
+            // compile_id
+            public $compile_id = null;
+
+
+        ## internal stuff ##
+            public $template_functions = array();
+            // internal config properties
+            public $properties = array();
+            // cached template objects
+            public $template_objects = null;
+            // registered plugins
+            public $registered_plugins = array();
+            // registered objects
+            public $registered_objects = array();
+            // registered classes
+            public $registered_classes = array();
+            // registered filters
+            public $registered_filters = array();
+            // registered resources
+            public $registered_resources = array();
+            // registered cache resources
+            public $registered_cache_resources = array();
+            // start time for execution time calculation
+            public $start_time = 0;
+
+            // global internal smarty  vars
+            static $_smarty_vars = array();
+            // start time for execution time calculation
+            public $start_time = 0;
+            // block tag hierarchy
+            public $_tag_stack = array();
+            
+            // compiler BC
+            public $_current_file = null;
+    */
+
+    /**
+     * Set configuration option
+     *
+     * @param string|array $name option's name to set, or list of options as array( 'name' => 'value' )
+     * @param mixed $value option's new value
+     * @return Smarty current Smarty instance for chaining
+     * @throws SmartyException if option is unknown or the specified value could not be accepted
+     */
+    public function setOption($name, $value=null)
+    {
+        if (!is_array($name)) {
+            $name = array($name => $value);
+        }
+
+        foreach ($name as $k => $v) {
+            switch ($k) {
+                // template directory
+                case 'template_dir':
+                    $this->setTemplateDir($v);
+                    break;
+
+                // compile directory
+                case 'compile_dir':
+                    $this->setCompileDir($v);
+                    break;
+
+                // plugins directory
+                case 'plugins_dir':
+                    $this->setPluginsDir($v);
+                    break;
+
+                // cache directory
+                case 'cache_dir':
+                    $this->setCacheDir($v);
+                    break;
+
+                // config directory
+                case 'config_dir':
+                    $this->setConfigDir($v);
+                    break;
+
+                // default modifiers
+                case 'default_modifiers':
+                    $this->setDefaultModifiers($v);
+                    break;
+
+                // autoload filters
+                case 'autoload_filters':
+                    $this->setAutoloadFilters($v);
+                    break;
+
+
+                // security
+                case 'security_profile':
+                    if ($v === false) {
+                        $this->disableSecurity();
+                    } else {
+                        $this->enableSecurity($v);
+                    }
+                    break;
+
+
+                // security
+                case 'php_handling':
+                    $v = (int) $v;
+                    if ($v < 0 || $v > 3) {
+                        throw new SmartyException("{$k} must be one of [PHP_PASSTRHU, PHP_QUOTE, PHP_REMOVE, PHP_ALLOW]");
+                    }
+
+                    $this->$k = $v;
+                    break;
+
+
+                // auto literal on delimiters with whitspace
+                case 'auto_literal':
+                // display error on not assigned variables
+                case 'error_unassigned':
+                // look up relative filepaths in include_path
+                case 'use_include_path':
+                // force template compiling?
+                case 'force_compile':
+                // check template for modifications?
+                case 'compile_check':
+                // locking concurrent compiles
+                case 'compile_locking':
+                // use sub dirs for compiled/cached files?
+                case 'use_sub_dirs':
+                // compile_error?
+                case 'compile_error':
+                // caching enabled
+                case 'caching':
+                // merge compiled includes
+                case 'merge_compiled_includes':
+                // force cache file creation
+                case 'force_cache':
+                // security
+                case 'allow_php_tag':
+                case 'allow_php_templates':
+                case 'direct_access_security':
+                // debug mode
+                case 'debugging':
+                // config var settings
+                case 'config_overwrite':
+                case 'config_booleanize':
+                case 'config_read_hidden':
+                // check If-Modified-Since headers
+                case 'cache_modified_check':
+                case 'variable_filter':
+                case 'deprecation_notices':
+                    $this->$k = (bool) $v;
+                    break;
+
+
+                // cache lifetime
+                case 'cache_lifetime':
+                // default file permissions
+                case '_file_perms':
+                // default dir permissions
+                case '_dir_perms':
+                    $this->$k = (int) $v;
+                    break;
+
+
+                case 'plugin_search_order':
+                    $this->$k = (array) $v;
+                    break;
+
+
+                case 'error_reporting':
+                    $this->$k = $v === null ? null : (int) $v;
+                    break;
+
+
+                // template delimiters
+                case 'left_delimiter':
+                case 'right_delimiter':
+                // debug mode
+                case 'debugging_ctrl':
+                case 'smarty_debug_id':
+                case 'debug_tpl':
+                // resource type used if none given
+                case 'default_resource_type':
+                // caching type
+                case 'caching_type':
+                // config type
+                case 'default_config_type':
+                // security
+                case 'security_class':
+                    $this->$k = (string) $v;
+                    break;
+
+
+                // default template handler
+                case 'default_template_handler_func':
+                // default config handler
+                case 'default_config_handler_func':
+                // default plugin handler
+                case 'default_plugin_handler_func':
+                    if (!is_callable($v)) {
+                        throw new SmartyException("{$k} is not callable");
+                    }
+
+                    $this->$k = (bool) $v;
+                    break;
+
+                default:
+                    throw new SmartyException("Unknown Option '{$k}'");
+            }
+        }
+        
+        return $this;
+    }
+
+    /**
+     * Get configuration option
+     *
+     * @param string|array $name option's name to get
+     * @return mixed value if $name was a single option, array of values if $name was a list of options
+     * @throws SmartyException if option is unknown
+     */
+    public function getOption($name)
+    {
+        $t = array();
+
+        foreach ((array) $name as $k) {
+            switch ($k) {
+                // template directory
+                case 'template_dir':
+                    $v = $this->getTemplateDir();
+                    break;
+
+                // compile directory
+                case 'compile_dir':
+                    $v = $this->getCompileDir();
+                    break;
+
+                // plugins directory
+                case 'plugins_dir':
+                    $v = $this->getPluginsDir();
+                    break;
+
+                // cache directory
+                case 'cache_dir':
+                    $v = $this->getCacheDir();
+                    break;
+
+                // config directory
+                case 'config_dir':
+                    $v = $this->getConfigDir();
+                    break;
+
+                // default modifiers
+                case 'default_modifiers':
+                    $v = $this->getDefaultModifiers();
+                    break;
+
+                // autoload filters
+                case 'autoload_filters':
+                    $v = $this->getAutoloadFilters();
+                    break;
+
+
+                // security
+                case 'security_profile':
+                case 'php_handling':
+                // auto literal on delimiters with whitspace
+                case 'auto_literal':
+                // display error on not assigned variables
+                case 'error_unassigned':
+                // look up relative filepaths in include_path
+                case 'use_include_path':
+                // force template compiling?
+                case 'force_compile':
+                // check template for modifications?
+                case 'compile_check':
+                // locking concurrent compiles
+                case 'compile_locking':
+                // use sub dirs for compiled/cached files?
+                case 'use_sub_dirs':
+                // compile_error?
+                case 'compile_error':
+                // caching enabled
+                case 'caching':
+                // merge compiled includes
+                case 'merge_compiled_includes':
+                // force cache file creation
+                case 'force_cache':
+                // security
+                case 'allow_php_tag':
+                case 'allow_php_templates':
+                case 'direct_access_security':
+                // debug mode
+                case 'debugging':
+                // config var settings
+                case 'config_overwrite':
+                case 'config_booleanize':
+                case 'config_read_hidden':
+                // check If-Modified-Since headers
+                case 'cache_modified_check':
+                case 'variable_filter':
+                case 'deprecation_notices':
+                // cache lifetime
+                case 'cache_lifetime':
+                // default file permissions
+                case '_file_perms':
+                // default dir permissions
+                case '_dir_perms':
+                case 'plugin_search_order':
+                case 'error_reporting':
+                // template delimiters
+                case 'left_delimiter':
+                case 'right_delimiter':
+                // debug mode
+                case 'debugging_ctrl':
+                case 'smarty_debug_id':
+                case 'debug_tpl':
+                // resource type used if none given
+                case 'default_resource_type':
+                // caching type
+                case 'caching_type':
+                // config type
+                case 'default_config_type':
+                // security
+                case 'security_class':
+                // default template handler
+                case 'default_template_handler_func':
+                // default config handler
+                case 'default_config_handler_func':
+                // default plugin handler
+                case 'default_plugin_handler_func':
+                    $v = $this->$k;
+                    break;
+
+                default:
+                    throw new SmartyException("Unknown Option '{$k}'");
+            }
+            if (!is_array($name)) {
+                return $v;
+            } else {
+                $t[$k] = $v;
+            }
+        }
+
+        return $t;
+    }
 }
 
 /**

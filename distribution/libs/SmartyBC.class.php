@@ -37,8 +37,9 @@ require(dirname(__FILE__) . '/Smarty.class.php');
  */
 
 class SmartyBC extends Smarty {
-	
-	
+	// Smarty 2 BC
+	public $_version = self::SMARTY_VERSION;
+
 	/**
 	 * Get template directories
 	 *
@@ -508,6 +509,29 @@ class SmartyBC extends Smarty {
     function trigger_error($error_msg, $error_type = E_USER_WARNING)
     {
         trigger_error("Smarty error: $error_msg", $error_type);
+    }
+    
+    /**
+     * magic getter to allow transparent access through getOption
+     *
+     * @param string $name name of option to get
+     * @return mixed option's value
+     */
+    public function __get($name)
+    {
+        return $this->getOption($name);
+    }
+    
+    /**
+     * magic setter to allow transparent access through setOption
+     *
+     * @param string $name name of option to set
+     * @param string $value new value to set 
+     * @return void
+     */
+    public function __set($name, $value)
+    {
+        $this->setOption($name, $value);
     }
 }
 ?>

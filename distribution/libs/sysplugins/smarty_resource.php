@@ -16,6 +16,19 @@ abstract class Smarty_Resource {
      */
     protected static $resources = array();
     
+    /**
+     * resource types provided by the core
+     * @var array
+     */
+    protected static $sysplugins = array(
+        'file' => true, 
+        'string' => true, 
+        'extends' => true, 
+        'php' => true, 
+        'stream' => true, 
+        'eval' => true
+    );
+    
 	/**
 	 * Name of the Class to compile this resource's contents with
 	 * @var string
@@ -302,7 +315,7 @@ abstract class Smarty_Resource {
         } 
         
         // try sysplugins dir
-        if (in_array($resource_type, array('file', 'string', 'extends', 'php', 'stream', 'eval'))) {
+        if (isset(self::$sysplugins[$resource_type])) {
             $_resource_class = 'Smarty_Internal_Resource_' . ucfirst($resource_type);
             return self::$resources[$resource_type] = new $_resource_class();
         } 

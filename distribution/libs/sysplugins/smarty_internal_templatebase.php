@@ -424,7 +424,24 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 		$this->smarty->registered_objects[$object_name] =
 		array($object_impl, (array)$allowed, (boolean)$smarty_args, (array)$block_methods);
 	}
-
+    
+    /**
+	 * return a reference to a registered object
+	 *
+	 * @param string $name object name
+	 * @return object
+	 */
+	function getRegisteredObject($name)
+	{
+		if (!isset($this->smarty->registered_objects[$name])) {
+	    	throw new SmartyException("'$name' is not a registered object");
+        }
+		if (!is_object($this->smarty->registered_objects[$name][0])) {
+		    throw new SmartyException("registered '$name' is not an object");
+        }
+		return $this->smarty->registered_objects[$name][0];
+	}
+    
 	/**
 	* Registers static classes to be used in templates
 	*

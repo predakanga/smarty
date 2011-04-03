@@ -27,7 +27,6 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         error_reporting(E_ALL + E_STRICT);
         $smarty = SmartyTests::$smarty;
         $smarty->template_objects = null;
-        $smarty->cache_resource_objects = array();
         $smarty->config_vars = array();
         Smarty::$global_tpl_vars = array();
         $smarty->template_functions = array();
@@ -52,7 +51,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->php_handling = Smarty::PHP_PASSTHRU;
         $smarty->allow_php_tag = false;
         $smarty->allow_php_templates = false;
-        $smarty->block_data = null;
+        //$smarty->block_data = null;
         $smarty->enableSecurity();
         $smarty->error_reporting = null;
         $smarty->error_unassigned = true;
@@ -64,7 +63,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public static function suite()
     {
         $testorder = array(
-            'IndexedFileResourceTests',
+            'PluginModifierCapitalizeTests',
         );
         $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
         if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {

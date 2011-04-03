@@ -330,7 +330,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 				}
 			}
 		}
-		$this->properties['version'] = $this->smarty->_version;
+		$this->properties['version'] = Smarty::SMARTY_VERSION;
 		$this->properties['unifunc'] = 'content_'.uniqid();
 		if (!$this->source->recompiled) {
 			$output .= "\$_valid = \$_smarty_tpl->decodeProperties(" . var_export($this->properties, true) . ',' . ($cache ? 'true' : 'false') . "); /*/%%SmartyHeaderCode%%*/?>\n";
@@ -367,7 +367,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 		$this->properties['unifunc'] = $properties['unifunc'];
 		// check file dependencies at compiled code
 		$is_valid = true;
-		if ($this->properties['version'] != $this->smarty->_version) {
+		if ($this->properties['version'] != Smarty::SMARTY_VERSION) {
 			$is_valid = false;
 		} else if (((!$cache && $this->smarty->compile_check) || $this->smarty->compile_check === true || $this->smarty->compile_check === Smarty::COMPILECHECK_ON) && !empty($this->properties['file_dependency'])) {
 			foreach ($this->properties['file_dependency'] as $_file_to_check) {
