@@ -31,12 +31,14 @@
 &programmers.api-functions.api-get-template-vars;
 &programmers.api-functions.api-is-cached;
 &programmers.api-functions.api-load-filter;
+&programmers.api-functions.api-register-cacheresource;
 &programmers.api-functions.api-register-filter;
 &programmers.api-functions.api-register-plugin;
 &programmers.api-functions.api-register-object;
 &programmers.api-functions.api-register-resource;
 
 &programmers.api-functions.api-template-exists;
+&programmers.api-functions.api-unregister-cacheresource;
 &programmers.api-functions.api-unregister-filter;
 &programmers.api-functions.api-unregister-plugin;
 &programmers.api-functions.api-unregister-object;

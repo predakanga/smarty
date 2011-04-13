@@ -149,13 +149,6 @@
    </listitem>
    <listitem>
     <para>
-     Custom <link
-     linkend="section.template.cache.handler.func">cache handling</link>
-     functions
-    </para>
-   </listitem>
-   <listitem>
-    <para>
     <link linkend="advanced.features.template.inheritance">Template Inheritance</link>
      for easy management of template content.
     </para>

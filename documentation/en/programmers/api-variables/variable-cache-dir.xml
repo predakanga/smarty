@@ -14,9 +14,9 @@
      </para>
      <para>
      You can also use your own
-       <link linkend="section.template.cache.handler.func">
-       custom cache handler</link>
-       function to control cache files, which will ignore this
+       <!-- FIXME: this link breaks compilation <link linkend="caching.custom">
+       custom cache implementation</link> -->
+       to control cache files, which will ignore this
        setting.
        See also
        <link linkend="variable.use.sub.dirs"><parameter>$use_sub_dirs</parameter></link>.
@@ -41,7 +41,6 @@
   <link linkend="variable.caching"><parameter>$caching</parameter></link>,
   <link linkend="variable.use.sub.dirs"><parameter>$use_sub_dirs</parameter></link>,
   <link linkend="variable.cache.lifetime"><parameter>$cache_lifetime</parameter></link>,
-  <link linkend="variable.cache.handler.func"><parameter>$cache_handler_func</parameter></link>,
   <link linkend="variable.cache.modified.check"><parameter>$cache_modified_check</parameter></link>
   and the
   <link linkend="caching">caching section</link>.

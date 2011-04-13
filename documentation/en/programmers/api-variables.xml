@@ -22,11 +22,11 @@
 &programmers.api-variables.variable-auto-literal;
 &programmers.api-variables.variable-autoload-filters;
 &programmers.api-variables.variable-cache-dir;
-&programmers.api-variables.variable-cache-handler-func;
 &programmers.api-variables.variable-cache-id;
 &programmers.api-variables.variable-cache-lifetime;
 &programmers.api-variables.variable-cache-modified-check;
 &programmers.api-variables.variable-caching;
+&programmers.api-variables.variable-caching-type;
 &programmers.api-variables.variable-compile-check;
 &programmers.api-variables.variable-compile-dir;
 &programmers.api-variables.variable-compile-id;

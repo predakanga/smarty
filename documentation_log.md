@@ -45,6 +45,7 @@ these changes must reflect on the documentation at some point…
 * Smarty_CacheResource_Custom
 * Smarty_CacheResource_KeyValueStore
 * Smarty::registerCacheResource()
+* Smarty::unregisterCacheResource()
 * example distribution/demo/plugins/cacheresource.mysql.php
 * example distribution/demo/plugins/cacheresource.memcache.php
 
