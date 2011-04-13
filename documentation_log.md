@@ -42,19 +42,19 @@ these changes must reflect on the documentation at some point…
 
 ## Smarty_CacheResource ##
 
-* Smarty_CacheResource_Custom
-* Smarty_CacheResource_KeyValueStore
-* Smarty::registerCacheResource()
-* Smarty::unregisterCacheResource()
-* example distribution/demo/plugins/cacheresource.mysql.php
-* example distribution/demo/plugins/cacheresource.memcache.php
+* - Smarty_CacheResource_Custom
+* - Smarty_CacheResource_KeyValueStore
+* - Smarty::registerCacheResource()
+* - Smarty::unregisterCacheResource()
+* - example distribution/demo/plugins/cacheresource.mysql.php
+* - example distribution/demo/plugins/cacheresource.memcache.php
 
 
 ## Smarty_Resource ##
 
-* see notes.md for infos
-* callback-functions deprecated
-* Smarty_Resource_Custom
-* example distribution/demo/plugins/resource.mysql.php
-* example distribution/demo/plugins/resource.mysqls.php
+* - see notes.md for infos
+* - callback-functions deprecated
+* - Smarty_Resource_Custom
+* - example distribution/demo/plugins/resource.mysql.php
+* - example distribution/demo/plugins/resource.mysqls.php
 

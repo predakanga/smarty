@@ -15,7 +15,7 @@
    Pass in the <parameter>name</parameter> of the CacheResource.
   </para>
   <example>
-   <title>unregisterResource()</title>
+   <title>unregisterCacheResource()</title>
 <programlisting role="php">
 <![CDATA[
 <?php

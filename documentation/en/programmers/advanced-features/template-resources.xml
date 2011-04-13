@@ -203,45 +203,89 @@ $smarty->display('extends:parent.tpl|child.tpl|grandchild.tpl');
      <programlisting role="php">
 <![CDATA[
 <?php
-// put these function somewhere in your application
-function db_get_template ($tpl_name, &$tpl_source, $smarty_obj)
-{
-    // do database call here to fetch your template,
-    // populating $tpl_source with actual template contents
-    $tpl_source = "This is the template text";
-    // return true on success, false to generate failure notification
-    return true;
+
+/**
+ * MySQL Resource
+ *
+ * Resource Implementation based on the Custom API to use
+ * MySQL as the storage resource for Smarty's templates and configs.
+ *
+ * Table definition:
+ * <pre>CREATE TABLE IF NOT EXISTS `templates` (
+ *   `name` varchar(100) NOT NULL,
+ *   `modified` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+ *   `source` text,
+ *   PRIMARY KEY (`name`)
+ * ) ENGINE=InnoDB DEFAULT CHARSET=utf8;</pre>
+ *
+ * Demo data:
+ * <pre>INSERT INTO `templates` (`name`, `modified`, `source`) VALUES ('test.tpl', "2010-12-25 22:00:00", '{$x="hello world"}{$x}');</pre>
+ *
+ * @package Resource-examples
+ * @author Rodney Rehm
+ */
+class Smarty_Resource_Mysql extends Smarty_Resource_Custom {
+    // PDO instance
+    protected $db;
+    // prepared fetch() statement
+    protected $fetch;
+    // prepared fetchTimestamp() statement
+    protected $mtime;
+
+    public function __construct() {
+        try {
+            $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "smarty", "smarty");
+        } catch (PDOException $e) {
+            throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
+        }
+        $this->fetch = $this->db->prepare('SELECT modified, source FROM templates WHERE name = :name');
+        $this->mtime = $this->db->prepare('SELECT modified FROM templates WHERE name = :name');
+    }
+    
+    /**
+     * Fetch a template and its modification time from database
+     *
+     * @param string $name template name
+     * @param string $source template source
+     * @param integer $mtime template modification timestamp (epoch)
+     * @return void
+     */
+    protected function fetch($name, &$source, &$mtime)
+    {
+        $this->fetch->execute(array('name' => $name));
+        $row = $this->fetch->fetch();
+        $this->fetch->closeCursor();
+        if ($row) {
+            $source = $row['source'];
+            $mtime = strtotime($row['modified']);
+        } else {
+            $source = null;
+            $mtime = null;
+        }
+    }
+    
+    /**
+     * Fetch a template's modification time from database
+     *
+     * @note implementing this method is optional. Only implement it if modification times can be accessed faster than loading the comple template source.
+     * @param string $name template name
+     * @return integer timestamp (epoch) the template was modified
+     */
+    protected function fetchTimestamp($name) {
+        $this->mtime->execute(array('name' => $name));
+        $mtime = $this->mtime->fetchColumn();
+        $this->mtime->closeCursor();
+        return strtotime($mtime);
+    }
 }
 
-function db_get_timestamp($tpl_name, &$tpl_timestamp, $smarty_obj)
-{
-    // do database call here to populate $tpl_timestamp
-    // with unix epoch time value of last template modification.
-    // This is used to determine if recompile is necessary.
-    $tpl_timestamp = time(); // this example will always recompile!
-    // return true on success, false to generate failure notification
-    return true;
-}
 
-function db_get_secure($tpl_name, $smarty_obj)
-{
-    // assume all templates are secure
-    return true;
-}
-
-function db_get_trusted($tpl_name, $smarty_obj)
-{
-    // not used for templates
-}
-
-// register the resource name "db"
-$smarty->registerResource("db", array("db_get_template",
-                                       "db_get_timestamp",
-                                       "db_get_secure",
-                                       "db_get_trusted"));
+require_once 'libs/Smarty.class.php';
+$smarty = new Smarty();
+$smarty->registerResource('mysql', new Smarty_Resource_Mysql());
 
 // using resource from php script
-$smarty->display("db:index.tpl");
+$smarty->display("mysql:index.tpl");
 ?>
 ]]>
      </programlisting>
@@ -250,7 +294,7 @@ $smarty->display("db:index.tpl");
      </para>
      <programlisting>
 <![CDATA[
-{include file='db:/extras/navigation.tpl'}
+{include file='mysql:extras/navigation.tpl'}
 ]]>
      </programlisting>
     </example>
