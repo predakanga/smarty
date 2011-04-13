@@ -20,7 +20,7 @@
 function smarty_modifiercompiler_unescape($params, $compiler)
 {
     if (!isset($params[1])) {
-        $params[1] = '';
+        $params[1] = 'html';
     }
     if (!isset($params[2])) {
         $params[2] = "SMARTY_RESOURCE_CHAR_SET";

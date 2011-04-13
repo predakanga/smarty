@@ -52,6 +52,7 @@
   <title>&SMARTYProgrammers;</title>
 
   &programmers.smarty-constants;
+  <!-- &programmers.charset; -->
   &programmers.api-variables;
   &programmers.api-functions;
   &programmers.caching;
