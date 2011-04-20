@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+20/04/2011
+- added extendsall resource example
+
 01/04/2011
 - bugfix quote handling in capitalize modifier
 
