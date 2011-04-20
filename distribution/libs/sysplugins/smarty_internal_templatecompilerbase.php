@@ -27,9 +27,10 @@ class Smarty_Internal_TemplateCompilerBase {
 	public $used_tags = array();
 	// merged templates
 	public $merged_templates = array();
-	public $merged_templates_func = array();
 	// {block} data in template inheritance
 	public $block_data = array();
+	// flag when compiling {block}
+	public $inheritance = false;
 
 	/**
 	* Initialize compiler

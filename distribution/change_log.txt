@@ -1,6 +1,9 @@
 ﻿===== SVN branch rodneyrehm  =====
 20/04/2011
 - added extendsall resource example
+- optimization of template variable access
+- optimization of subtemplate handling {include}
+- optimization of template class
 
 01/04/2011
 - bugfix quote handling in capitalize modifier
@@ -129,6 +132,12 @@
 - optimize smarty_function_escape_special_chars() for PHP >= 5.2.3
 
 ===== SVN 3.0 trunk  =====
+09/03/2011
+-bugfix a variable filter should run before modifers on an output tag (see change of 23/07/2010)
+
+08/03/2011
+- bugfix loading config file without section should load only defaults
+
 03/03/2011
 - bugfix "smarty" template variable was not recreated when cached templated had expired
 - bugfix internal rendered_content must be cleared after subtemplate was included

@@ -33,6 +33,8 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 		if ($_attr['nocache'] == true) {
 			$compiler->nocache = true;
 		}
+        // set flag for {block} tag
+        $compiler->inheritance = true;
 		// must merge includes
 		$compiler->smarty->merge_compiled_includes = true;
 
@@ -176,6 +178,8 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
 		$compiler->parser->current_buffer = $saved_data[1];
 		$compiler->nocache = $saved_data[2];
 		$compiler->smarty->merge_compiled_includes = $saved_data[3];
+        // reset flag for {block} tag
+        $compiler->inheritance = false;
 		// $_output content has already nocache code processed
 		$compiler->suppressNocacheProcessing = true;
 		return $_output;
