@@ -132,7 +132,35 @@ class ResourcePluginTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(is_integer($tpl->source->timestamp));
         $this->assertEquals(10, strlen($tpl->source->timestamp));
     } 
-
+    
+    
+    public function testResourcePluginExtendsall()
+    {
+        $this->smarty->addPluginsDir( dirname(__FILE__)."/../../distribution/demo/plugins/");
+        $this->smarty->setTemplateDir( array(
+            'root' => './templates',
+            './templates_2',
+            './templates_3',
+            './templates_4',
+        ));
+        
+        $expected = "templates\n\ntemplates_3\ntemplates\n\ntemplates_4";
+        $this->assertEquals($expected, $this->smarty->fetch('extendsall:extendsall.tpl'));
+    }
+    
+    public function testResourcePluginExtendsallOne()
+    {
+        $this->smarty->addPluginsDir( dirname(__FILE__)."/../../distribution/demo/plugins/");
+        $this->smarty->setTemplateDir( array(
+            'root' => './templates',
+            './templates_2',
+            './templates_3',
+            './templates_4',
+        ));
+        
+        $expected = "templates\ntemplates";
+        $this->assertEquals($expected, $this->smarty->fetch('extendsall:extendsall2.tpl'));
+    }
 } 
 
 ?>
