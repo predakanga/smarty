@@ -1,9 +1,9 @@
 <?php
 /**
 * Smarty PHPunit tests for PHP resources
-* 
+*
 * @package PHPunit
-* @author Uwe Tews 
+* @author Uwe Tews
 */
 
 /**
@@ -14,13 +14,13 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
-    } 
+    }
 
     public static function isRunnable()
     {
         return true;
-    } 
-    
+    }
+
     protected function relative($path)
     {
         $path = str_replace( dirname(__FILE__), '.', $path );
@@ -37,7 +37,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertEquals('./templates/phphelloworld.php', str_replace('\\', '/', $tpl->source->filepath));
-    } 
+    }
     /**
     * test getTemplateTimestamp
     */
@@ -46,7 +46,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue(is_integer($tpl->source->timestamp));
         $this->assertEquals(10, strlen($tpl->source->timestamp));
-    } 
+    }
     /**
     * test getTemplateSource
     *-/
@@ -54,7 +54,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertContains('php hello world', $tpl->source->content);
-    } 
+    }
     /**
     * test usesCompiler
     */
@@ -62,7 +62,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($tpl->source->uncompiled);
-    } 
+    }
     /**
     * test isEvaluated
     */
@@ -70,7 +70,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->source->recompiled);
-    } 
+    }
     /**
     * test getCompiledFilepath
     */
@@ -78,7 +78,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->compiled->filepath);
-    } 
+    }
     /**
     * test getCompiledTimestamp
     */
@@ -86,7 +86,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->compiled->timestamp);
-    } 
+    }
     /**
     * test mustCompile
     */
@@ -94,7 +94,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->mustCompile());
-    } 
+    }
     /**
     * test getCompiledTemplate
     */
@@ -102,7 +102,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->getCompiledTemplate());
-    } 
+    }
     /**
     * test getCachedFilepath if caching disabled
     */
@@ -111,7 +111,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->allow_php_templates = true;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->cached->filepath);
-    } 
+    }
     /**
     * test getCachedFilepath
     */
@@ -121,21 +121,21 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $expected = './cache/' . sha1('./templates/phphelloworld.php') . '.phphelloworld.php.php';
+        $expected = './cache/'.sha1($this->smarty->getTemplateDir(0) . 'phphelloworld.php').'.phphelloworld.php.php';
         $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
-    } 
+    }
     /**
     * test create cache file used by the following tests
     */
     public function testCreateCacheFile()
-    { 
+    {
         // create dummy cache file
         $this->smarty->allow_php_templates = true;
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertContains('php hello world', $this->smarty->fetch($tpl));
-    } 
+    }
     /**
     * test getCachedTimestamp caching disabled
     */
@@ -144,7 +144,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->caching = false;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->cached->timestamp);
-    } 
+    }
     /**
     * test getCachedTimestamp caching enabled
     */
@@ -156,7 +156,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue(is_integer($tpl->cached->timestamp));
         $this->assertEquals(10, strlen($tpl->cached->timestamp));
-    } 
+    }
     /**
     * test isCached
     */
@@ -167,7 +167,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($tpl->isCached());
-    } 
+    }
     /**
     * test isCached caching disabled
     */
@@ -176,7 +176,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->allow_php_templates = true;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($tpl->isCached());
-    } 
+    }
     /**
     * test isCached on touched source
     */
@@ -189,7 +189,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         sleep(1);
         touch ($tpl->source->filepath);
         $this->assertFalse($tpl->isCached());
-    } 
+    }
     /**
     * test is cache file is written
     */
@@ -202,7 +202,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->smarty->fetch($tpl);
         $this->assertTrue(file_exists($tpl->cached->filepath));
-    } 
+    }
     /**
     * test getRenderedTemplate
     */
@@ -211,21 +211,21 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->allow_php_templates = true;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertContains('php hello world', $tpl->fetch());
-    } 
+    }
     /**
     * test $smarty->is_cached
     */
     public function testSmartyIsCachedPrepare()
     {
-        $this->smarty->allow_php_templates = true; 
+        $this->smarty->allow_php_templates = true;
         // prepare files for next test
         $this->smarty->caching = true;
-        $this->smarty->cache_lifetime = 1000; 
+        $this->smarty->cache_lifetime = 1000;
         // clean up for next tests
         $this->smarty->clearAllCache();
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->smarty->fetch($tpl);
-    } 
+    }
     public function testSmartyIsCached()
     {
         $this->smarty->allow_php_templates = true;
@@ -233,7 +233,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertTrue($this->smarty->isCached($tpl));
-    } 
+    }
     /**
     * test $smarty->is_cached  caching disabled
     */
@@ -242,7 +242,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->allow_php_templates = true;
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
         $this->assertFalse($this->smarty->isCached($tpl));
-    } 
+    }
 
     public function testGetTemplateFilepathName()
     {
@@ -250,7 +250,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('php:[foo]helloworld.php');
         $this->assertEquals('./templates_2/helloworld.php', $this->relative($tpl->source->filepath));
     }
-    
+
     public function testGetCachedFilepathName()
     {
         $this->smarty->addTemplateDir('./templates_2', 'foo');
@@ -260,14 +260,14 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
 	    $expected = './cache/'.sha1($this->smarty->getTemplateDir('foo') .'helloworld.php').'.helloworld.php.php';
         $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
     }
-    
+
     /**
     * final cleanup
     */
     public function testFinalCleanup()
     {
         $this->smarty->clearAllCache();
-    } 
-} 
+    }
+}
 
 ?>
