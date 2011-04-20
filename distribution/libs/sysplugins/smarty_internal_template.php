@@ -128,7 +128,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 	{
 		if (!$this->source->recompiled) {
 			$this->properties['file_dependency'] = array();
-			if ($this->source->type ==  'extends') {
+			if ($this->source->components) {
 				// uses real resource for file dependency
 				$source = end($this->source->components);
 				$this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp, $source->type);

@@ -513,6 +513,19 @@ class Smarty_Template_Source {
 	public $recompiled = null;
 	
 	/**
+	 * The Components an extended template is made of
+	 * @var array
+	 */
+	public $components = null;
+
+	/**
+	 * Extended Template reference
+	 * @var boolean
+	 * @property $template
+	 */
+//	public $template = null; // magic loaded
+	
+	/**
 	 * Resource Handler
 	 * @var Smarty_Resource
 	 */
@@ -592,7 +605,6 @@ class Smarty_Template_Source {
             case 'content':
             // required for extends: only
             case 'template':
-            case 'components':
                 $this->$property_name = $value;
                 break;
                 
