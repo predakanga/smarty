@@ -2,9 +2,9 @@
 
 /**
  * Smarty Resource Plugin
- * 
+ *
  * Base implementation for resource plugins
- * 
+ *
  * @package Smarty
  * @subpackage TemplateResources
  * @author Rodney Rehm
@@ -15,20 +15,19 @@ abstract class Smarty_Resource {
      * @var array
      */
     protected static $resources = array();
-    
+
     /**
      * resource types provided by the core
      * @var array
      */
     protected static $sysplugins = array(
-        'file' => true, 
-        'string' => true, 
-        'extends' => true, 
-        'php' => true, 
-        'stream' => true, 
+        'file' => true,
+        'string' => true,
+        'extends' => true,
+        'stream' => true,
         'eval' => true
     );
-    
+
 	/**
 	 * Name of the Class to compile this resource's contents with
 	 * @var string
@@ -53,19 +52,19 @@ abstract class Smarty_Resource {
      */
     public function __construct()
     {
-        
+
     }
 
     /**
      * Load template's source into current template object
-     * 
+     *
      * @note: The loaded source is assigned to $_template->source->content directly.
      * @param Smarty_Template_Source $source source object
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
     public abstract function getContent(Smarty_Template_Source $source);
-    
+
     /**
      * populate Source Object with meta data from Resource
      *
@@ -83,9 +82,9 @@ abstract class Smarty_Resource {
      */
     public function populateTimestamp(Smarty_Template_Source $source)
     {
-        
+
     }
-    
+
     /**
      * populate Compiled Object with compiled filepath
      *
@@ -96,18 +95,18 @@ abstract class Smarty_Resource {
     public function populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
     {
         $_compile_id = isset($_template->compile_id) ? preg_replace('![^\w\|]+!', '_', $_template->compile_id) : null;
-        $_filepath = $compiled->source->uid; 
+        $_filepath = $compiled->source->uid;
         // if use_sub_dirs, break file into directories
         if ($_template->smarty->use_sub_dirs) {
             $_filepath = substr($_filepath, 0, 2) . DS
              . substr($_filepath, 2, 2) . DS
              . substr($_filepath, 4, 2) . DS
              . $_filepath;
-        } 
+        }
         $_compile_dir_sep = $_template->smarty->use_sub_dirs ? DS : '^';
         if (isset($_compile_id)) {
             $_filepath = $_compile_id . $_compile_dir_sep . $_filepath;
-        } 
+        }
         // caching token
         if ($_template->caching) {
             $_cache = '.cache';
@@ -127,7 +126,7 @@ abstract class Smarty_Resource {
 
         $compiled->filepath = $_compile_dir . $_filepath . '.' . $compiled->source->type . $_basename . $_cache . '.php';
     }
-    
+
     /**
      * build template filepath by traversing the template_dir array
      *
@@ -146,7 +145,7 @@ abstract class Smarty_Resource {
             $_directories = $source->smarty->getTemplateDir();
             $_default_handler = $source->smarty->default_template_handler_func;
         }
-        
+
         // go relative to a given template?
         $_file_is_dotted = $file[0] == '.' && ($file[1] == '.' || $file[1] == '/' || $file[1] == "\\");
         if ($_template && $_template->parent instanceof Smarty_Internal_Template && $_file_is_dotted) {
@@ -196,18 +195,18 @@ abstract class Smarty_Resource {
         }
         // this is only required for directories
         $file = rtrim($_path, '/\\');
-        
+
         // files relative to a template only get one shot
         if (isset($_file_exact_match)) {
             return file_exists($file) ? $file : false;
         }
-        
+
         // template_dir index?
         if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match)) {
             if ($match['file'][0] == '.' && ($match['file'][1] == '.' || $match['file'][1] == '/' || $match['file'][1] == "\\")) {
                 throw new SmartyException("Template '{$match['file']}' may not start with ../ or ./'");
             }
-            
+
             $_directory = null;
             // try string indexes
             if (isset($_directories[$match['key']])) {
@@ -232,8 +231,8 @@ abstract class Smarty_Resource {
                 }
             }
         }
-        
-        // relative file name? 
+
+        // relative file name?
         if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
 	        foreach ($_directories as $_directory) {
             	$_filepath = $_directory . $file;
@@ -271,9 +270,9 @@ abstract class Smarty_Resource {
                 $source->content = $_content;
                 $source->timestamp = $_timestamp;
                 return $_filepath;
-            } 
-        } 
-        
+            }
+        }
+
         // give up
         return false;
     }
@@ -288,7 +287,7 @@ abstract class Smarty_Resource {
     {
         return null;
     }
-        
+
     /**
      * Load Resource Handler
      *
@@ -302,7 +301,7 @@ abstract class Smarty_Resource {
         if (isset(self::$resources[$resource_type])) {
             return self::$resources[$resource_type];
         }
-        
+
         // try registered resource
         if (isset($smarty->registered_resources[$resource_type])) {
             if ($smarty->registered_resources[$resource_type] instanceof Smarty_Resource) {
@@ -312,14 +311,14 @@ abstract class Smarty_Resource {
                 self::$resources['registered'] = new Smarty_Internal_Resource_Registered();
             }
             return self::$resources['registered'];
-        } 
-        
+        }
+
         // try sysplugins dir
         if (isset(self::$sysplugins[$resource_type])) {
             $_resource_class = 'Smarty_Internal_Resource_' . ucfirst($resource_type);
             return self::$resources[$resource_type] = new $_resource_class();
-        } 
-        
+        }
+
         // try plugins dir
         $_resource_class = 'Smarty_Resource_' . ucfirst($resource_type);
         if ($smarty->loadPlugin($_resource_class)) {
@@ -333,9 +332,9 @@ abstract class Smarty_Resource {
                     	"smarty_resource_{$resource_type}_trusted"));
                 // give it another try, now that the resource is registered properly
                 return self::load($smarty, $resource_type);
-            } 
+            }
         }
-        
+
         // try streams
         $_known_stream = stream_get_wrappers();
         if (in_array($resource_type, $_known_stream)) {
@@ -348,11 +347,11 @@ abstract class Smarty_Resource {
             }
             return self::$resources['stream'];
         }
-        
+
         // give up
         throw new SmartyException('Unkown resource type \'' . $resource_type . '\'');
     }
-    
+
     /**
      * initialize Source Object for given resource
      *
@@ -368,7 +367,7 @@ abstract class Smarty_Resource {
             $smarty = $_template->smarty;
             $template_resource = $_template->template_resource;
         }
-        
+
         if (($pos = strpos($template_resource, ':')) === false) {
             // no resource given, use default
             $resource_type = $smarty->default_resource_type;
@@ -383,8 +382,8 @@ abstract class Smarty_Resource {
                 $resource_name = $template_resource;
             }
         }
-        
-        $resource = Smarty_Resource::load($smarty, $resource_type); 
+
+        $resource = Smarty_Resource::load($smarty, $resource_type);
         $source = new Smarty_Template_Source($resource, $smarty, $template_resource, $resource_type, $resource_name);
         $resource->populate($source, $_template);
         return $source;
@@ -415,12 +414,12 @@ abstract class Smarty_Resource {
                 $resource_name = $config_resource;
             }
         }
-        
-        if (in_array($resource_type, array('eval', 'string', 'extends', 'php'))) {
+
+        if (in_array($resource_type, array('eval', 'string', 'extends'))) {
             throw new SmartyException ("Unable to use resource '{$resource_type}' for config");
         }
-        
-        $resource = Smarty_Resource::load($smarty, $resource_type); 
+
+        $resource = Smarty_Resource::load($smarty, $resource_type);
         $source = new Smarty_Config_Source($resource, $smarty, $config_resource, $resource_type, $resource_name);
         $resource->populate($source, null);
         return $source;
@@ -430,9 +429,9 @@ abstract class Smarty_Resource {
 
 /**
  * Smarty Resource Data Object
- * 
+ *
  * Meta Data Container for Template Files
- * 
+ *
  * @package Smarty
  * @subpackage TemplateResources
  * @author Rodney Rehm
@@ -455,44 +454,44 @@ class Smarty_Template_Source {
 	 * @var string
 	 */
     public $template_parser_class = null;
-    
+
     /**
 	 * Unique Template ID
 	 * @var string
 	 */
     public $uid = null;
-    
+
     /**
 	 * Template Resource (Smarty_Internal_Template::$template_resource)
 	 * @var string
 	 */
     public $resource = null;
-    
+
     /**
 	 * Resource Type
 	 * @var string
 	 */
     public $type = null;
-    
+
     /**
 	 * Resource Name
 	 * @var string
 	 */
     public $name = null;
-    
+
     /**
 	 * Source Filepath
 	 * @var string
 	 */
     public $filepath = null;
-    
+
     /**
 	 * Source Timestamp
 	 * @var integer
 	 * @property $timestamp
 	 */
 //	public $timestamp = null; // magic loaded
-	
+
 	/**
 	 * Source Existance
 	 * @var boolean
@@ -505,13 +504,13 @@ class Smarty_Template_Source {
 	 * @var boolean
 	 */
 	public $uncompiled = null;
-	
+
 	/**
 	 * Source must be recompiled on every occasion
 	 * @var boolean
 	 */
 	public $recompiled = null;
-	
+
 	/**
 	 * The Components an extended template is made of
 	 * @var array
@@ -524,26 +523,26 @@ class Smarty_Template_Source {
 	 * @property $template
 	 */
 //	public $template = null; // magic loaded
-	
+
 	/**
 	 * Resource Handler
 	 * @var Smarty_Resource
 	 */
 	public $handler = null;
-	
+
 	/**
 	 * Smarty instance
 	 * @var Smarty
 	 */
 	public $smarty = null;
-	
+
 	/**
 	 * Source Content
 	 * @var string
 	 * @property $content
 	 */
 	//public $content = null; // magic loaded
-	
+
 	/**
 	 * create Source Object container
 	 *
@@ -562,13 +561,13 @@ class Smarty_Template_Source {
         $this->template_parser_class = $handler->template_parser_class;
         $this->uncompiled = $this->handler instanceof Smarty_Resource_Uncompiled;
         $this->recompiled = $this->handler instanceof Smarty_Resource_Recompiled;
-        
+
         $this->smarty = $smarty;
         $this->resource = $resource;
         $this->type = $type;
         $this->name = $name;
 	}
-	
+
 	/**
 	 * get a Compiled Object of this source
 	 *
@@ -583,7 +582,7 @@ class Smarty_Template_Source {
         $compiled->exists = !!$compiled->timestamp;
         return $compiled;
 	}
-	
+
 	/**
 	 * render the uncompiled source
 	 *
@@ -594,7 +593,7 @@ class Smarty_Template_Source {
     {
         return $this->handler->renderUncompiled($this, $_template);
     }
-    
+
 
     public function __set($property_name, $value)
     {
@@ -607,12 +606,12 @@ class Smarty_Template_Source {
             case 'template':
                 $this->$property_name = $value;
                 break;
-                
+
             default:
                 throw new SmartyException("invalid source property '$property_name'.");
         }
     }
-    
+
     public function __get($property_name)
     {
         switch ($property_name) {
@@ -620,7 +619,7 @@ class Smarty_Template_Source {
             case 'exists':
                 $this->handler->populateTimestamp($this);
                 return $this->$property_name;
-                
+
             case 'content':
                 return $this->content = $this->handler->getContent($this);
 
@@ -632,9 +631,9 @@ class Smarty_Template_Source {
 
 /**
  * Smarty Resource Data Object
- * 
+ *
  * Meta Data Container for Template Files
- * 
+ *
  * @package Smarty
  * @subpackage TemplateResources
  * @author Rodney Rehm
@@ -645,48 +644,48 @@ class Smarty_Template_Compiled {
 	 * @var string
 	 */
     public $filepath = null;
-    
+
     /**
 	 * Compiled Timestamp
 	 * @var integer
 	 * @property $timestamp
 	 */
 	public $timestamp = null; // magic loaded
-	
+
 	/**
 	 * Compiled Existance
 	 * @var boolean
 	 * @property $exists
 	 */
 	public $exists = false; // magic loaded
-	
+
 	/**
 	 * Compiled Content Loaded
 	 * @var boolean
 	 * @property $loaded
 	 */
 
-	public $loaded = false; 
+	public $loaded = false;
 	/**
 	 * Template was compiled
 	 * @var boolean
 	 * @property $isCompiled
 	 */
-	public $isCompiled = false; 
-	
+	public $isCompiled = false;
+
 	/**
 	 * Compiled Content
 	 * @var string
 	 * @property $content
 	 */
 	//public $content = null; // magic loaded
-    
+
     /**
 	 * Source Object
 	 * @var Smarty_Template_Source
 	 */
 	public $source = null;
-    
+
     /**
      * create Compiled Object container
      *
@@ -696,8 +695,8 @@ class Smarty_Template_Compiled {
 	{
 	    $this->source = $source;
 	}
-	
-	
+
+
     public function __set($property_name, $value)
     {
         switch ($property_name) {
@@ -706,12 +705,12 @@ class Smarty_Template_Compiled {
             case 'content':
                 $this->$property_name = $value;
                 break;
-                
+
             default:
                 throw new SmartyException("invalid compiled property '$property_name'.");
         }
     }
-    
+
     public function __get($property_name)
     {
         switch ($property_name) {
@@ -720,10 +719,10 @@ class Smarty_Template_Compiled {
                 $this->timestamp = @filemtime($this->filepath);
                 $this->exists = !!$this->timestamp;
                 return $this->$property_name;
-                
+
             case 'content':
                 return $this->content = file_get_contents($this->filepath);
-                
+
             default:
                 throw new SmartyException("compiled property '$property_name' does not exist.");
         }

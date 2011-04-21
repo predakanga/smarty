@@ -1,0 +1,23 @@
+== Smarty2 backward compatibility ==
+All Smarty2 specific API functions and deprecated functionallity has been moved
+to the SmartyBC class.
+
+== {php} Tag ==
+The {php} tag is no longer available in the standard Smarty calls. 
+The use of {php} tags is deprecated and only available in the SmartyBC class. 
+
+But if you scatter PHP code which belongs together into several
+{php} tags it may not work any longer.
+
+== {include_php} Tag ==
+The {include_php} tag is no longer available in the standard Smarty calls. 
+The use of {include_php} tags is deprecated and only available in the SmartyBC class. 
+
+== php template resource ==
+The support of the php template resource is removed.
+
+== obsolete Smarty class properties ==
+The following no longer used properties are removed:
+$allow_php_tag
+$allow_php_template
+$deprecation_notices

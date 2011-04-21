@@ -190,8 +190,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public $security_class = 'Smarty_Security';
 	public $security_policy = null;
 	public $php_handling = self::PHP_PASSTHRU;
-	public $allow_php_tag = false;
-	public $allow_php_templates = false;
 	public $direct_access_security = true;
 	// debug mode
 	public $debugging = false;
@@ -254,11 +252,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public $_dir_perms = 0771;
 	// block tag hierarchy
 	public $_tag_stack = array();
-	// generate deprecated function call notices?
-	public $deprecation_notices = true;
 	// self pointer to Smarty object
 	public $smarty;
-    
+
     // required by the compiler for BC
 	public $_current_file = null;
 
@@ -307,7 +303,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function __clone()
     {
-    	$this->smarty = $this; 
+    	$this->smarty = $this;
 	}
 
 	/**
@@ -402,7 +398,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		} else {
 			throw new SmartyException("Security class '$security_class' is not defined");
 		}
-		
+
 		return $this;
 	}
 
@@ -413,7 +409,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public function disableSecurity()
 	{
 		$this->security_policy = null;
-		
+
 		return $this;
 	}
 
@@ -433,10 +429,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		    } elseif (!is_dir($v)) {
 		        throw new SmartyException("{$v} is not readable");
 		    }
-		    
+
 		    $this->template_dir[$k] = rtrim($v, '/\\') . DS;
 		}
-		
+
 		return $this;
 	}
 
@@ -451,7 +447,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 	    // make sure we're dealing with an array
 	    $this->template_dir = (array) $this->template_dir;
-	    
+
 	    if (is_array($template_dir)) {
 	        foreach ($template_dir as $k => $v) {
 	            if (!is_dir($v)) {
@@ -459,7 +455,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     		    } elseif (!is_dir($v)) {
     		        throw new SmartyException("{$v} is not readable");
     		    }
-    		    
+
                 if (is_int($k)) {
                     // indexes are not merged but appended
     		        $this->template_dir[] = rtrim($v, '/\\') . DS;
@@ -474,7 +470,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		    } elseif (!is_dir($template_dir)) {
 		        throw new SmartyException("{$template_dir} is not readable");
 		    }
-		    
+
 	        // override directory at specified index
 		    $this->template_dir[$key] = rtrim($template_dir, '/\\') . DS;
 	    } else {
@@ -483,7 +479,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		    } elseif (!is_dir($template_dir)) {
 		        throw new SmartyException("{$template_dir} is not readable");
 		    }
-		    
+
 	        // append new directory
 		    $this->template_dir[] = rtrim($template_dir, '/\\') . DS;
 	    }
@@ -491,7 +487,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		$this->template_dir = array_unique($this->template_dir);
 		return $this;
 	}
-	
+
 	/**
 	 * Get template directories
 	 *
@@ -503,11 +499,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    if ($index !== null) {
 	        return isset($this->template_dir[$index]) ? $this->template_dir[$index] : null;
 	    }
-	    
+
 		return $this->template_dir;
 	}
-	
-	
+
+
 	/**
 	 * Set config directory
 	 *
@@ -523,13 +519,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		    } elseif (!is_dir($v)) {
 		        throw new SmartyException("{$v} is not readable");
 		    }
-		    
+
 		    $this->config_dir[$k] = rtrim($v, '/\\') . DS;
 		}
-		
+
 		return $this;
 	}
-	
+
 	/**
 	 * Add config directory(s)
 	 *
@@ -541,7 +537,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 	    // make sure we're dealing with an array
 	    $this->config_dir = (array) $this->config_dir;
-	    
+
 	    if (is_array($config_dir)) {
 	        foreach ($config_dir as $k => $v) {
 	            if (!is_dir($v)) {
@@ -549,7 +545,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     		    } elseif (!is_dir($v)) {
     		        throw new SmartyException("{$v} is not readable");
     		    }
-    		    
+
                 if (is_int($k)) {
                     // indexes are not merged but appended
     		        $this->config_dir[] = rtrim($v, '/\\') . DS;
@@ -564,7 +560,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		    } elseif (!is_dir($config_dir)) {
 		        throw new SmartyException("{$config_dir} is not readable");
 		    }
-		    
+
 	        // override directory at specified index
 		    $this->config_dir[$key] = rtrim($config_dir, '/\\') . DS;
 	    } else {
@@ -573,7 +569,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		    } elseif (!is_dir($config_dir)) {
 		        throw new SmartyException("{$config_dir} is not readable");
 		    }
-		    
+
 	        // append new directory
 		    $this->config_dir[] = rtrim($config_dir, '/\\') . DS;
 	    }
@@ -581,7 +577,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		$this->config_dir = array_unique($this->config_dir);
 		return $this;
 	}
-	
+
 	/**
 	 * Get config directory
 	 *
@@ -593,11 +589,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    if ($index !== null) {
 	        return isset($this->config_dir[$index]) ? $this->config_dir[$index] : null;
 	    }
-	    
+
 		return $this->config_dir;
 	}
-    
-    
+
+
     /**
 	 * Set plugins directory
 	 *
@@ -613,10 +609,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		    } elseif (!is_dir($v)) {
 		        throw new SmartyException("{$v} is not readable");
 		    }
-		    
+
 		    $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
 		}
-		
+
 		return $this;
 	}
 
@@ -631,7 +627,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	{
 	    // make sure we're dealing with an array
 	    $this->plugins_dir = (array) $this->plugins_dir;
-	    
+
 	    if (is_array($plugins_dir)) {
 	        foreach ($plugins_dir as $k => $v) {
                 if (is_int($k)) {
@@ -650,7 +646,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		$this->plugins_dir = array_unique($this->plugins_dir);
 		return $this;
 	}
-    
+
     /**
 	 * Get plugin directories
 	 *
@@ -661,7 +657,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		return $this->plugins_dir;
 	}
 
-    
+
     /**
 	 * Set compile directory
 	 *
@@ -675,11 +671,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    } elseif (!is_dir($compile_dir)) {
 	        throw new SmartyException("{$compile_dir} is not readable");
 	    }
-	    
+
 	    $this->compile_dir = rtrim($compile_dir, '/\\') . DS;
 		return $this;
 	}
-	
+
     /**
 	 * Get compiled directory
 	 *
@@ -690,7 +686,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		return $this->compile_dir;
 	}
 
-    
+
     /**
 	 * Set cache directory
 	 *
@@ -704,11 +700,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    } elseif (!is_dir($cache_dir)) {
 	        throw new SmartyException("{$cache_dir} is not readable");
 	    }
-	    
+
 	    $this->cache_dir = rtrim($cache_dir, '/\\') . DS;
 		return $this;
 	}
-	
+
     /**
 	 * Get cache directory
 	 *
@@ -719,7 +715,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		return $this->cache_dir;
 	}
 
-    
+
     /**
      * Set default modifiers
      *
@@ -731,7 +727,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $this->default_modifiers = (array) $modifiers;
         return $this;
     }
-    
+
     /**
      * Add default modifiers
      *
@@ -745,10 +741,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
         } else {
             $this->default_modifiers[] = $modifiers;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Get default modifiers
      *
@@ -758,8 +754,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         return $this->default_modifiers;
     }
-    
-    
+
+
     /**
      * Set autoload filters
      *
@@ -774,10 +770,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
         } else {
             $this->autoload_filters = (array) $filters;
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Add autoload filters
      *
@@ -802,10 +798,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
             }
         }
-        
+
         return $this;
     }
-    
+
     /**
      * Get autoload filters
      *
@@ -817,10 +813,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if ($type !== null) {
             return isset($this->autoload_filters[$type]) ? $this->autoload_filters[$type] : array();
         }
-        
+
         return $this->autoload_filters;
     }
-    
+
 
 	/**
 	 * return name of debugging template
@@ -947,11 +943,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
     /**
      * Compile all template files
-     * 
+     *
      * @param string $extension file extension
      * @param bool $force_compile force all to recompile
-     * @param int $time_limit 
-     * @param int $max_errors 
+     * @param int $time_limit
+     * @param int $max_errors
      * @return integer number of template files recompiled
      */
     function compileAllTemplates($extention = '.tpl', $force_compile = false, $time_limit = 0, $max_errors = null)
@@ -962,11 +958,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
     /**
      * Compile all config files
-     * 
+     *
      * @param string $extension file extension
      * @param bool $force_compile force all to recompile
-     * @param int $time_limit 
-     * @param int $max_errors 
+     * @param int $time_limit
+     * @param int $max_errors
      * @return integer number of template files recompiled
      */
     function compileAllConfig($extention = '.conf', $force_compile = false, $time_limit = 0, $max_errors = null)
@@ -976,7 +972,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
     /**
      * Delete compiled template file
-     * 
+     *
      * @param string $resource_name template name
      * @param string $compile_id compile id
      * @param integer $exp_time expiration time
@@ -990,14 +986,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
     /**
      * Return array of tag/attributes of all tags used by an template
-     * 
+     *
      * @param object $templae template object
      * @return array of tag/attributes
      */
-	function getTags(Smarty_Internal_Template $template) 
+	function getTags(Smarty_Internal_Template $template)
 	{
 		return Smarty_Internal_Utility::getTags($template);
-	}	
+	}
 
 	/**
 	 * Run installation test
@@ -1045,7 +1041,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             public $start_time = 0;
             // block tag hierarchy
             public $_tag_stack = array();
-            
+
             // compiler BC
             public $_current_file = null;
     */
@@ -1146,8 +1142,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 // force cache file creation
                 case 'force_cache':
                 // security
-                case 'allow_php_tag':
-                case 'allow_php_templates':
                 case 'direct_access_security':
                 // debug mode
                 case 'debugging':
@@ -1158,7 +1152,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 // check If-Modified-Since headers
                 case 'cache_modified_check':
                 case 'variable_filter':
-                case 'deprecation_notices':
                     $this->$k = (bool) $v;
                     break;
 
@@ -1219,7 +1212,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
                     throw new SmartyException("Unknown Option '{$k}'");
             }
         }
-        
+
         return $this;
     }
 
@@ -1298,8 +1291,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 // force cache file creation
                 case 'force_cache':
                 // security
-                case 'allow_php_tag':
-                case 'allow_php_templates':
                 case 'direct_access_security':
                 // debug mode
                 case 'debugging':
@@ -1310,7 +1301,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 // check If-Modified-Since headers
                 case 'cache_modified_check':
                 case 'variable_filter':
-                case 'deprecation_notices':
                 // cache lifetime
                 case 'cache_lifetime':
                 // default file permissions

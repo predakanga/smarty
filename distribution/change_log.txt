@@ -1,5 +1,9 @@
 ﻿===== SVN branch rodneyrehm  =====
 20/04/2011
+- allow {php} {include_php} tags and PHP_ALLOW handling only with the SmartyBC class
+- removed support of php template resource
+
+20/04/2011
 - added extendsall resource example
 - optimization of template variable access
 - optimization of subtemplate handling {include}

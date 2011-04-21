@@ -3,29 +3,29 @@
  * Project:     Smarty: the PHP compiling template engine
  * File:        SmartyBC.class.php
  * SVN:         $Id: $
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
  * version 2.1 of the License, or (at your option) any later version.
- * 
+ *
  * This library is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
  * Lesser General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU Lesser General Public
  * License along with this library; if not, write to the Free Software
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
- * 
+ *
  * For questions, help, comments, discussion, etc., please join the
  * Smarty mailing list. Send a blank e-mail to
  * smarty-discussion-subscribe@googlegroups.com
- * 
+ *
  * @link http://www.smarty.net/
  * @copyright 2008 New Digital Group, Inc.
- * @author Monte Ohrt <monte at ohrt dot com> 
- * @author Uwe Tews 
+ * @author Monte Ohrt <monte at ohrt dot com>
+ * @author Uwe Tews
  * @author Rodney Rehm
  * @package Smarty
  */
@@ -39,6 +39,20 @@ require(dirname(__FILE__) . '/Smarty.class.php');
 class SmartyBC extends Smarty {
 	// Smarty 2 BC
 	public $_version = self::SMARTY_VERSION;
+
+
+	/**
+	 * Initialize new SmartyBC object
+	 *
+	 * @param array $options options to set during initialization, e.g. array( 'forceCompile' => false )
+	 */
+	public function __construct(array $options=array())
+	{
+	    parent::__construct($options);
+	    // register {php} tag
+	    $this->registerPlugin('block','php','smarty_php_tag');
+	}
+
 
 	/**
 	 * Get template directories
@@ -55,14 +69,14 @@ class SmartyBC extends Smarty {
 	    foreach ($this->template_dir as $k => $v) {
             $this->template_dir[$k] = rtrim($v, '/\\') . DS;
 	    }
-	    
+
 	    if ($index !== null) {
 	        return isset($this->template_dir[$index]) ? $this->template_dir[$index] : null;
 	    }
-	    
+
 		return $this->template_dir;
 	}
-	
+
 	/**
 	 * Get config directory
 	 *
@@ -78,14 +92,14 @@ class SmartyBC extends Smarty {
 	    foreach ($this->config_dir as $k => $v) {
             $this->config_dir[$k] = rtrim($v, '/\\') . DS;
 	    }
-	    
+
 	    if ($index !== null) {
 	        return isset($this->config_dir[$index]) ? $this->config_dir[$index] : null;
 	    }
-	    
+
 		return $this->config_dir;
 	}
-	
+
 	/**
 	 * Get plugin directories
 	 *
@@ -101,14 +115,14 @@ class SmartyBC extends Smarty {
 	    foreach ($this->plugins_dir as $k => $v) {
             $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
 	    }
-	    
+
 	    if ($index !== null) {
 	        return isset($this->plugins_dir[$index]) ? $this->plugins_dir[$index] : null;
 	    }
-	    
+
 		return $this->plugins_dir;
 	}
-	
+
 	/**
 	 * Get compiled directory
 	 *
@@ -118,7 +132,7 @@ class SmartyBC extends Smarty {
 	{
 		return rtrim($this->smarty->compile_dir, '/\\') . DS;
 	}
-	
+
 	/**
 	 * Get cache directory
 	 *
@@ -128,8 +142,8 @@ class SmartyBC extends Smarty {
 	{
 		return rtrim($this->smarty->cache_dir, '/\\') . DS;
 	}
-	
-	
+
+
 	/**
 	 * wrapper for assign_by_ref
 	 *
@@ -139,11 +153,11 @@ class SmartyBC extends Smarty {
     public function assign_by_ref($tpl_var, &$value)
     {
         $this->assignByRef($tpl_var, $value);
-    } 
- 
+    }
+
     /**
 	 * wrapper for append_by_ref
-     * 
+     *
      * @param string $tpl_var the template variable name
      * @param mixed $ &$value the referenced value to append
      * @param boolean $merge flag if array elements shall be merged
@@ -151,7 +165,7 @@ class SmartyBC extends Smarty {
     public function append_by_ref($tpl_var, &$value, $merge = false)
     {
          $this->appendByRef($tpl_var, $value, $merge);
-    } 
+    }
 
     /**
      * clear the given assigned template variable.
@@ -162,7 +176,7 @@ class SmartyBC extends Smarty {
     {
          $this->clearAssign($tpl_var);
     }
- 
+
     /**
      * Registers custom function to be used in templates
      *
@@ -231,7 +245,7 @@ class SmartyBC extends Smarty {
     {
          $this->unregisterPlugin('block',$block);
     }
-  
+
     /**
      * Registers compiler function
      *
@@ -477,14 +491,14 @@ class SmartyBC extends Smarty {
     {
         $this->ConfigLoad($file, $section, $scope);
     }
-    
+
     /**
      * return a reference to a registered object
      *
      * @param string $name
      * @return object
      */
-    function get_registered_object($name) 
+    function get_registered_object($name)
     {
         return $this->getRegisteredObject($name);
     }
@@ -510,7 +524,7 @@ class SmartyBC extends Smarty {
     {
         trigger_error("Smarty error: $error_msg", $error_type);
     }
-    
+
     /**
      * magic getter to allow transparent access through getOption
      *
@@ -521,17 +535,31 @@ class SmartyBC extends Smarty {
     {
         return $this->getOption($name);
     }
-    
+
     /**
      * magic setter to allow transparent access through setOption
      *
      * @param string $name name of option to set
-     * @param string $value new value to set 
+     * @param string $value new value to set
      * @return void
      */
     public function __set($name, $value)
     {
         $this->setOption($name, $value);
     }
+}
+
+/**
+ * Smarty {php}{/php} block function
+ *
+ * @param string $content contents of the block
+ * @param object $template template object
+ * @param boolean $ &$repeat repeat flag
+ * @return string content re-formatted
+ */
+function smarty_php_tag($params, $content, $template, &$repeat)
+{
+    eval($content);
+    return '';
 }
 ?>

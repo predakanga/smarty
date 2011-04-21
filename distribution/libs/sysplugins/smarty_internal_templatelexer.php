@@ -2,10 +2,10 @@
 /**
 * Smarty Internal Plugin Templatelexer
 *
-* This is the lexer to break the template source into tokens 
+* This is the lexer to break the template source into tokens
 * @package Smarty
 * @subpackage Compiler
-* @author Uwe Tews 
+* @author Uwe Tews
 */
 /**
 * Smarty Internal Plugin Templatelexer
@@ -71,12 +71,11 @@ class Smarty_Internal_Templatelexer
  						'LITERALEND'    => 'Literal end',
     				'LDELSLASH' => 'closing tag',
     				'COMMENT' => 'comment',
-     				'LITERALEND' => 'literal close',
     				'AS' => 'as',
     				'TO' => 'to',
     				);
-    				
-    				
+
+
     function __construct($data,$compiler)
     {
 //        $this->data = preg_replace("/(\r\n|\r|\n)/", "\n", $data);
@@ -85,8 +84,8 @@ class Smarty_Internal_Templatelexer
         $this->line = 1;
         $this->smarty = $compiler->smarty;
         $this->compiler = $compiler;
-        $this->ldel = preg_quote($this->smarty->left_delimiter,'/'); 
-        $this->ldel_length = strlen($this->smarty->left_delimiter); 
+        $this->ldel = preg_quote($this->smarty->left_delimiter,'/');
+        $this->ldel_length = strlen($this->smarty->left_delimiter);
         $this->rdel = preg_quote($this->smarty->right_delimiter,'/');
         $this->smarty_token_names['LDEL'] =	$this->smarty->left_delimiter;
         $this->smarty_token_names['RDEL'] =	$this->smarty->right_delimiter;
@@ -752,7 +751,7 @@ class Smarty_Internal_Templatelexer
     function yy_r2_51($yy_subpatterns)
     {
 
-  $this->token = Smarty_Internal_Templateparser::TP_PTR; 
+  $this->token = Smarty_Internal_Templateparser::TP_PTR;
     }
     function yy_r2_52($yy_subpatterns)
     {
