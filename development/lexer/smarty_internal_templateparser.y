@@ -14,6 +14,7 @@
 {
 	  const Err1 = "Security error: Call to private object member not allowed";
 	  const Err2 = "Security error: Call to dynamic object member not allowed";
+	  const Err3 = "PHP in template not allowed. Use SmartyBC to enable it";
     // states whether the parse was successful or not
     public $successful = true;
     public $retvalue = 0;
@@ -132,6 +133,9 @@ template_element(res)::= PHPSTARTTAG(st). {
                                       } elseif ($this->php_handling == Smarty::PHP_QUOTE) {
                                        res = new _smarty_text($this, htmlspecialchars(st, ENT_QUOTES));
                                       }elseif ($this->php_handling == Smarty::PHP_ALLOW) {
+                                       if (!($this->smarty instanceof SmartyBC)) {
+                                         $this->compiler->trigger_template_error (self::Err3);
+																			 }
                                        res = new _smarty_text($this, $this->compiler->processNocacheCode('<?php', true));
                                       }elseif ($this->php_handling == Smarty::PHP_REMOVE) {
                                        res = new _smarty_text($this, '');
@@ -161,6 +165,9 @@ template_element(res)::= ASPSTARTTAG(st). {
                                        res = new _smarty_text($this, htmlspecialchars(st, ENT_QUOTES));
                                       }elseif ($this->php_handling == Smarty::PHP_ALLOW) {
                                         if ($this->asp_tags) {
+                                          if (!($this->smarty instanceof SmartyBC)) {
+                                            $this->compiler->trigger_template_error (self::Err3);
+																			    }
                                           res = new _smarty_text($this, $this->compiler->processNocacheCode('<%', true));
                                         } else {
                                          res = new _smarty_text($this, '<<?php ?>%');

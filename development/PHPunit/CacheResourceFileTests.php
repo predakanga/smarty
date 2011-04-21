@@ -1,9 +1,9 @@
 <?php
 /**
 * Smarty PHPunit tests for cache resource file
-* 
+*
 * @package PHPunit
-* @author Uwe Tews 
+* @author Uwe Tews
 */
 
 /**
@@ -15,15 +15,13 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->smarty = SmartyTests::$smarty;
         $this->smartyBC = SmartyTests::$smartyBC;
         SmartyTests::init();
-        $this->smarty->deprecation_notices = false;
-        $this->smartyBC->deprecation_notices = false;
-    } 
+    }
 
     public static function isRunnable()
     {
         return true;
-    } 
-    
+    }
+
     protected function relative($path)
     {
         $path = str_replace( dirname(__FILE__), '.', $path );
@@ -50,7 +48,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
 		    $sha1
 		);
         $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
-    } 
+    }
     /**
     * test getCachedFilepath with cache_id
     */
@@ -68,7 +66,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
 		    $sha1
 		);
         $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
-    } 
+    }
     /**
     * test getCachedFilepath with compile_id
     */
@@ -86,7 +84,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
 		    $sha1
 		);
         $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
-    } 
+    }
     /**
     * test getCachedFilepath with cache_id and compile_id
     */
@@ -104,7 +102,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
 		    $sha1
 		);
         $this->assertEquals($expected, $this->relative($tpl->cached->filepath));
-    } 
+    }
     /**
     * test cache->clear_all with cache_id and compile_id
     */
@@ -118,7 +116,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $tpl->writeCachedContent('hello world');
         $this->assertTrue(file_exists($tpl->cached->filepath));
         $this->assertEquals(1, $this->smarty->clearAllCache());
-    } 
+    }
     /**
     * test cache->clear with cache_id and compile_id
     */
@@ -141,7 +139,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertTrue(file_exists($tpl2->cached->filepath));
         $this->assertFalse(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testSmarty2ClearCacheCacheIdCompileId()
     {
         $this->smartyBC->caching = true;
@@ -161,7 +159,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertTrue(file_exists($tpl2->cached->filepath));
         $this->assertFalse(file_exists($tpl3->cached->filepath));
-    } 
+    }
 
     public function testSmarty2ClearCacheCacheIdCompileIdSub()
     {
@@ -182,7 +180,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertTrue(file_exists($tpl2->cached->filepath));
         $this->assertFalse(file_exists($tpl3->cached->filepath));
-    } 
+    }
 
     public function testClearCacheCacheIdCompileId2()
     {
@@ -203,7 +201,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertTrue(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testSmarty2ClearCacheCacheIdCompileId2()
     {
         $this->smartyBC->caching = true;
@@ -223,7 +221,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertTrue(file_exists($tpl3->cached->filepath));
-    } 
+    }
 
     public function testClearCacheCacheIdCompileId2Sub()
     {
@@ -244,7 +242,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertTrue(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheIdCompileId3()
     {
         $this->smarty->caching = true;
@@ -264,7 +262,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($tpl->cached->filepath));
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertTrue(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheIdCompileId3Sub()
     {
         $this->smarty->caching = true;
@@ -284,7 +282,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($tpl->cached->filepath));
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertTrue(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheIdCompileId4()
     {
         $this->smarty->caching = true;
@@ -304,7 +302,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($tpl->cached->filepath));
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertTrue(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheIdCompileId4Sub()
     {
         $this->smarty->caching = true;
@@ -324,7 +322,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue(file_exists($tpl->cached->filepath));
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertTrue(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheIdCompileId5()
     {
         $this->smarty->caching = true;
@@ -344,7 +342,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertTrue(file_exists($tpl2->cached->filepath));
         $this->assertFalse(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheIdCompileId5Sub()
     {
         $this->smarty->caching = true;
@@ -364,7 +362,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->cached->filepath));
         $this->assertTrue(file_exists($tpl2->cached->filepath));
         $this->assertFalse(file_exists($tpl3->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheFile()
     {
         $this->smarty->caching = true;
@@ -388,7 +386,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertFalse(file_exists($tpl3->cached->filepath));
         $this->assertTrue(file_exists($tpl4->cached->filepath));
-    } 
+    }
     public function testClearCacheCacheFileSub()
     {
         $this->smarty->caching = true;
@@ -412,7 +410,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl2->cached->filepath));
         $this->assertFalse(file_exists($tpl3->cached->filepath));
         $this->assertTrue(file_exists($tpl4->cached->filepath));
-    } 
+    }
     /**
     * final cleanup
     */
@@ -420,7 +418,7 @@ class CacheResourceFileTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->clearCompiledTemplate();
         $this->smarty->clearAllCache();
-    } 
-} 
+    }
+}
 
 ?>

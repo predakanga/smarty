@@ -71,7 +71,6 @@ class Smarty_Internal_Templatelexer
  						'LITERALEND'    => 'Literal end',
     				'LDELSLASH' => 'closing tag',
     				'COMMENT' => 'comment',
-     				'LITERALEND' => 'literal close',
     				'AS' => 'as',
     				'TO' => 'to',
     				);

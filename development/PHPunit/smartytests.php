@@ -23,7 +23,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         SmartyTests::$smarty = new Smarty();
         SmartyTests::$smartyBC = new SmartyBC();
     }
-    
+
     protected static function _init($smarty)
     {
         $smarty->template_objects = null;
@@ -51,10 +51,6 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->left_delimiter = '{';
         $smarty->right_delimiter = '}';
         $smarty->php_handling = Smarty::PHP_PASSTHRU;
-        $smarty->allow_php_tag = false;
-        $smarty->allow_php_templates = false;
-        //$smarty->block_data = null;
-        $smarty->deprecation_notices = true;
         $smarty->enableSecurity();
         $smarty->error_reporting = null;
         $smarty->error_unassigned = true;
@@ -66,7 +62,8 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         error_reporting(E_ALL | E_STRICT);
         self::_init(SmartyTests::$smarty);
         self::_init(SmartyTests::$smartyBC);
-    } 
+        SmartyTests::$smartyBC->registerPlugin('block','php','smarty_php_tag');
+    }
     /**
      * look for test units and run them
      */

@@ -16,24 +16,26 @@ require_once SMARTY_DIR . 'SmartyBC.class.php';
  */
 class SmartyTests extends PHPUnit_Framework_TestSuite {
     static $smarty = null ;
+    static $smartyBC = null ;
 
     public function __construct()
     {
-        SmartyTests::$smarty = new SmartyBC();
+        SmartyTests::$smarty = new Smarty();
+        SmartyTests::$smartyBC = new SmartyBC();
     }
 
-    public static function init()
+    protected static function _init($smarty)
     {
-        error_reporting(E_ALL + E_STRICT);
-        $smarty = SmartyTests::$smarty;
         $smarty->template_objects = null;
         $smarty->config_vars = array();
         Smarty::$global_tpl_vars = array();
         $smarty->template_functions = array();
         $smarty->tpl_vars = array();
         $smarty->force_compile = false;
+        $smarty->force_cache = false;
         $smarty->auto_literal = true;
         $smarty->caching = false;
+        $smarty->debugging = false;
         Smarty::$_smarty_vars = array();
         $smarty->registered_plugins = array();
         $smarty->default_plugin_handler_func = null;
@@ -49,13 +51,18 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->left_delimiter = '{';
         $smarty->right_delimiter = '}';
         $smarty->php_handling = Smarty::PHP_PASSTHRU;
-        $smarty->allow_php_tag = false;
-        $smarty->allow_php_templates = false;
-        //$smarty->block_data = null;
         $smarty->enableSecurity();
         $smarty->error_reporting = null;
         $smarty->error_unassigned = true;
         $smarty->caching_type = 'file';
+    }
+
+    public static function init()
+    {
+        error_reporting(E_ALL | E_STRICT);
+        self::_init(SmartyTests::$smarty);
+        self::_init(SmartyTests::$smartyBC);
+        SmartyTests::$smartyBC->registerPlugin('block','php','smarty_php_tag');
     }
     /**
      * look for test units and run them

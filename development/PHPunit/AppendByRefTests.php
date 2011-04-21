@@ -1,9 +1,9 @@
 <?php
 /**
 * Smarty PHPunit tests appendByRef methode
-* 
+*
 * @package PHPunit
-* @author Uwe Tews 
+* @author Uwe Tews
 */
 
 /**
@@ -15,14 +15,12 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $this->smarty = SmartyTests::$smarty;
         $this->smartyBC = SmartyTests::$smartyBC;
         SmartyTests::init();
-        $this->smarty->deprecation_notices = false;
-        $this->smartyBC->deprecation_notices = false;
-    } 
+    }
 
     public static function isRunnable()
     {
         return true;
-    } 
+    }
 
     /**
     * test appendByRef
@@ -36,7 +34,7 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $bar = 'newbar';
         $bar2 = 'newbar2';
         $this->assertEquals('newbar newbar2', $this->smarty->fetch('eval:{$foo[0]} {$foo[1]}'));
-    } 
+    }
     public function testSmarty2AppendByRef()
     {
         $bar = 'bar';
@@ -46,7 +44,7 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $bar = 'newbar';
         $bar2 = 'newbar2';
         $this->assertEquals('newbar newbar2', $this->smartyBC->fetch('eval:{$foo[0]} {$foo[1]}'));
-    } 
+    }
     /**
     * test appendByRef to unassigned variable
     */
@@ -56,17 +54,17 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $this->smarty->appendByRef('foo', $bar2);
         $bar2 = 'newbar2';
         $this->assertEquals('newbar2', $this->smarty->fetch('eval:{$foo[0]}'));
-    } 
+    }
      public function testSmarty2AppendByRefUnassigned()
     {
         $bar2 = 'bar2';
         $this->smartyBC->append_by_ref('foo', $bar2);
         $bar2 = 'newbar2';
         $this->assertEquals('newbar2', $this->smartyBC->fetch('eval:{$foo[0]}'));
-    } 
+    }
     /**
     * test appendByRef merge
-    * 
+    *
     * @todo fix testAppendByRefMerge
     */
     public function testAppendByRefMerge()
@@ -79,7 +77,7 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
         $bar = array('b' => 'newd');
         $this->assertEquals('a newd c', $this->smarty->fetch('eval:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
 */
-    } 
-} 
+    }
+}
 
 ?>

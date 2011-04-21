@@ -1,9 +1,9 @@
 <?php
 /**
 * Smarty PHPunit tests for deleting compiled templates
-* 
+*
 * @package PHPunit
-* @author Uwe Tews 
+* @author Uwe Tews
 */
 
 
@@ -17,14 +17,12 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smarty = SmartyTests::$smarty;
         $this->smartyBC = SmartyTests::$smartyBC;
         SmartyTests::init();
-        $this->smarty->deprecation_notices = false;
-        $this->smartyBC->deprecation_notices = false;
-    } 
+    }
 
     public static function isRunnable()
     {
         return true;
-    } 
+    }
 
     /**
     * test clearCompiledTemplate method for all files
@@ -37,7 +35,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals(2, $this->smarty->clearCompiledTemplate());
        	$this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
         $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy2.php'));
-    } 
+    }
     public function testSmarty2ClearCompiledAll()
     {
         $this->smartyBC->clearCompiledTemplate();
@@ -46,7 +44,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smartyBC->clear_compiled_tpl();
         $this->assertFalse(file_exists($this->smartyBC->getCompileDir() . 'dummy.php'));
         $this->assertFalse(file_exists($this->smartyBC->getCompileDir() . 'dummy2.php'));
-    } 
+    }
     /**
     * test clearCompiledTemplate method for a specific resource
     */
@@ -58,7 +56,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals(1, $this->smarty->clearCompiledTemplate('dummy'));
         $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
         $this->assertTrue(file_exists($this->smarty->getCompileDir() . 'dummy2.php'));
-    } 
+    }
     public function testSmarty2ClearCompiledResource()
     {
         $this->smartyBC->clearCompiledTemplate();
@@ -67,7 +65,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->smartyBC->clear_compiled_tpl('dummy');
         $this->assertFalse(file_exists($this->smartyBC->getCompileDir() . 'dummy.php'));
         $this->assertTrue(file_exists($this->smartyBC->getCompileDir() . 'dummy2.php'));
-    } 
+    }
     /**
     * test clearCompiledTemplate method not expired
     */
@@ -78,7 +76,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         touch($this->smarty->getCompileDir() . 'dummy.php', time()-1000);
         $this->assertEquals(0, $this->smarty->clearCompiledTemplate(null, null, 2000));
         $this->assertTrue(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
-    } 
+    }
     public function testSnarty2ClearCompiledNotExpired()
     {
         $this->smartyBC->clearCompiledTemplate();
@@ -86,7 +84,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         touch($this->smartyBC->getCompileDir() . 'dummy.php', time()-1000);
         $this->smartyBC->clear_compiled_tpl(null, null, 2000);
         $this->assertTrue(file_exists($this->smartyBC->getCompileDir() . 'dummy.php'));
-    } 
+    }
     /**
     * test clearCompiledTemplate method expired
     */
@@ -97,7 +95,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         touch($this->smarty->getCompileDir() . 'dummy.php', time()-1000);
         $this->assertEquals(1, $this->smarty->clearCompiledTemplate(null, null, 500));
         $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
-    } 
+    }
     public function testSmarty2ClearCompiledExpired()
     {
         $this->smartyBC->clearCompiledTemplate();
@@ -105,7 +103,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         touch($this->smartyBC->getCompileDir() . 'dummy.php', time()-1000);
         $this->smartyBC->clear_compiled_tpl(null, null, 500);
         $this->assertFalse(file_exists($this->smartyBC->getCompileDir() . 'dummy.php'));
-    } 
+    }
     /**
     * test clearCompiledTemplate with compile_id
     */
@@ -125,7 +123,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->compiled->filepath));
         $this->assertTrue(file_exists($tpl2->compiled->filepath));
         $this->assertFalse(file_exists($tpl3->compiled->filepath));
-    } 
+    }
     public function testSmarty2ClearCompiledCompileId()
     {
         $this->smartyBC->use_sub_dirs = true;
@@ -142,7 +140,7 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
         $this->assertFalse(file_exists($tpl->compiled->filepath));
         $this->assertTrue(file_exists($tpl2->compiled->filepath));
         $this->assertFalse(file_exists($tpl3->compiled->filepath));
-    } 
-} 
+    }
+}
 
 ?>
