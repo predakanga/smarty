@@ -47,13 +47,9 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																																																<div class="var-title">
+																																																																																																																																								<div class="var-title">
 					<span class="var-type">mixed</span>
 					<a href="#$allow_constants" title="details" class="var-name">$allow_constants</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$allow_php_tag" title="details" class="var-name">$allow_php_tag</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">mixed</span>
@@ -86,6 +82,30 @@
 																<div class="var-title">
 					<span class="var-type">array</span>
 					<a href="#$trusted_dir" title="details" class="var-name">$trusted_dir</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_config_dir" title="details" class="var-name">$_config_dir</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_php_resource_dir" title="details" class="var-name">$_php_resource_dir</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_resource_dir" title="details" class="var-name">$_resource_dir</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_secure_dir" title="details" class="var-name">$_secure_dir</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_template_dir" title="details" class="var-name">$_template_dir</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">mixed</span>
+					<a href="#$_trusted_dir" title="details" class="var-name">$_trusted_dir</a>
 				</div>
 											</div>
 		</div>
@@ -157,40 +177,18 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$allow_constants" id="$allow_constants"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$allow_constants</span>
-			 = <span class="var-default"> true</span>			(line <span class="line-number">85</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">+ flag if constants can be accessed from template</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-		
-		
-
-</div>
-<a name="var$allow_php_tag" id="$allow_php_tag"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">mixed</span>
-			<span class="var-name">$allow_php_tag</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">93</span>)
+			<span class="var-name">$allow_constants</span>
+			 = <span class="var-default"> true</span>			(line <span class="line-number">93</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">+ flag if the {php} and {include_php} tag can be executed</p>
+<p class="short-description">+ flag if constants can be accessed from template</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -207,7 +205,7 @@
 		<span class="var-title">
 			<span class="var-type">mixed</span>
 			<span class="var-name">$allow_super_globals</span>
-			 = <span class="var-default"> true</span>			(line <span class="line-number">89</span>)
+			 = <span class="var-default"> true</span>			(line <span class="line-number">97</span>)
 		</span>
 	</div>
 
@@ -229,7 +227,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$php_functions</span>
-			 = <span class="var-default">array('isset', 'empty',<br />            'count', 'sizeof','in_array', 'is_array','time','nl2br')</span>			(line <span class="line-number">62</span>)
+			 = <span class="var-default">array(<br />        'isset', 'empty',<br />        'count', 'sizeof',<br />        'in_array', 'is_array',<br />        'time',<br />        'nl2br',<br />    )</span>			(line <span class="line-number">62</span>)
 		</span>
 	</div>
 
@@ -275,7 +273,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$php_modifiers</span>
-			 = <span class="var-default">array('escape','count')</span>			(line <span class="line-number">72</span>)
+			 = <span class="var-default">array(<br />        'escape',<br />        'count'<br />    )</span>			(line <span class="line-number">77</span>)
 		</span>
 	</div>
 
@@ -344,7 +342,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$streams</span>
-			 = <span class="var-default">array('file')</span>			(line <span class="line-number">81</span>)
+			 = <span class="var-default">array('file')</span>			(line <span class="line-number">89</span>)
 		</span>
 	</div>
 
@@ -383,6 +381,132 @@
 		
 
 </div>
+<a name="var$_config_dir" id="$_config_dir"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_config_dir</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">106</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_php_resource_dir" id="$_php_resource_dir"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_php_resource_dir</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">108</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_resource_dir" id="$_resource_dir"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_resource_dir</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">104</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_secure_dir" id="$_secure_dir"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_secure_dir</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">107</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_template_dir" id="$_template_dir"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_template_dir</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">105</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$_trusted_dir" id="$_trusted_dir"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">mixed</span>
+			<span class="var-name">$_trusted_dir</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">109</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+	<ul class="tags">
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
 						
 		</div>
 	</div>
@@ -403,7 +527,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">95</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">99</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -431,13 +555,14 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">isTrustedModifier</span> (line <span class="line-number">139</span>)
+		<span class="method-title">isTrustedModifier</span> (line <span class="line-number">155</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Check if modifier is trusted.</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> true if modifier is trusted</li>
+				<li><span class="field">throws:</span> SmartyCompilerException if modifier is not trusted</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -463,13 +588,14 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">isTrustedPHPDir</span> (line <span class="line-number">208</span>)
+		<span class="method-title">isTrustedPHPDir</span> (line <span class="line-number">268</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Check if directory of file resource is trusted.</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> true if directory is trusted</li>
+				<li><span class="field">throws:</span> SmartyException if PHP directory is not trusted</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -495,13 +621,14 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">isTrustedPhpFunction</span> (line <span class="line-number">106</span>)
+		<span class="method-title">isTrustedPhpFunction</span> (line <span class="line-number">119</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Check if PHP function is trusted.</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> true if function is trusted</li>
+				<li><span class="field">throws:</span> SmartyCompilerException if php function is not trusted</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -527,7 +654,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">isTrustedResourceDir</span> (line <span class="line-number">172</span>)
+		<span class="method-title">isTrustedResourceDir</span> (line <span class="line-number">189</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -559,13 +686,14 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">isTrustedStaticClass</span> (line <span class="line-number">123</span>)
+		<span class="method-title">isTrustedStaticClass</span> (line <span class="line-number">137</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Check if static class is trusted.</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> true if class is trusted</li>
+				<li><span class="field">throws:</span> SmartyCompilerException if static class is not trusted</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -591,13 +719,14 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">isTrustedStream</span> (line <span class="line-number">155</span>)
+		<span class="method-title">isTrustedStream</span> (line <span class="line-number">173</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Check if stream is trusted.</p>
 	<ul class="tags">
 				<li><span class="field">return:</span> true if stream is trusted</li>
+				<li><span class="field">throws:</span> SmartyException if stream is not trusted</li>
 			</ul>
 	
 	<div class="method-signature">
@@ -625,7 +754,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 13 Nov 2010 00:58:55 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Fri, 22 Apr 2011 00:11:58 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
