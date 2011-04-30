@@ -124,7 +124,7 @@ function smarty_function_html_options_optoutput($key, $value, $selected, $id, $c
         $idx++;
     } else {
         $_idx = 0;
-        $_html_result = smarty_function_html_options_optgroup($key, $value, $selected, $id.'-'.$idx, $class, $_idx);
+        $_html_result = smarty_function_html_options_optgroup($key, $value, $selected, !empty($id) ? ($id.'-'.$idx) : null, $class, $_idx);
         $idx++;
     }
     return $_html_result;
