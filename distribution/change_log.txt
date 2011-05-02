@@ -1,5 +1,6 @@
 ﻿===== SVN branch rodneyrehm  =====
 02/05/2011
+- removed experimental setOption() getOption() methods
 - output returned content also on opening tag calls of block plugins
 - rewrite of default plugin handler
 - compile code of variable filters for better performance 
