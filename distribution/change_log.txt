@@ -1,4 +1,9 @@
 ﻿===== SVN branch rodneyrehm  =====
+02/05/2011
+- output returned content also on opening tag calls of block plugins
+- rewrite of default plugin handler
+- compile code of variable filters for better performance 
+
 20/04/2011
 - allow {php} {include_php} tags and PHP_ALLOW handling only with the SmartyBC class
 - removed support of php template resource
@@ -136,6 +141,22 @@
 - optimize smarty_function_escape_special_chars() for PHP >= 5.2.3
 
 ===== SVN 3.0 trunk  =====
+22/04/2011
+- bugfix allow only fixed string as file attribute at {extends} tag
+
+01/04/2011
+- bugfix do not run filters and default modifier when displaying the debug template
+- bugfix of embedded double quotes within multi line strings (""")
+
+29/03/2011
+- bugfix on error message in smarty_internal_compile_block.php
+- bugfix mb handling in strip modifier
+- bugfix for Smarty2 style registered compiler function on unnamed attribute passing like {tag $foo $bar}
+
+17/03/2011
+- bugfix on default {function} parameters when {function} was used in nocache sections
+- bugfix on compiler object destruction. compiler_object property was by mistake unset.
+
 09/03/2011
 -bugfix a variable filter should run before modifers on an output tag (see change of 23/07/2010)
 

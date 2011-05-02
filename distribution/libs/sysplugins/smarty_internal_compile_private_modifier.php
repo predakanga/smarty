@@ -31,25 +31,6 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
 			$modifier = $single_modifier[0];
 			$single_modifier[0] = $output;
 			$params = implode(',', $single_modifier);
-			if (!isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier])) {
-				// try registering modifier on-the-fly
-				if (is_callable($compiler->smarty->default_plugin_handler_func)) {
-					if ($path=call_user_func($compiler->smarty->default_plugin_handler_func, $modifier, Smarty::PLUGIN_MODIFIER, $this->smarty)) {
-						if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier])) {
-							if (is_string($path) && is_file($path)) {
-								$function = $compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier][0];
-								if ($compiler->template->caching && ($this->nocache || $this->tag_nocache)) {
-									$compiler->template->required_plugins['nocache'][$modifier][Smarty::PLUGIN_MODIFIER]['file'] = $path;
-									$compiler->template->required_plugins['nocache'][$modifier][Smarty::PLUGIN_MODIFIER]['function'] = $function;
-								} else {
-									$compiler->template->required_plugins['compiled'][$modifier][Smarty::PLUGIN_MODIFIER]['file'] = $path;
-									$compiler->template->required_plugins['compiled'][$modifier][Smarty::PLUGIN_MODIFIER]['function'] = $function;
-								}
-							}
-						}
-					}
-				}
-			}
 			// check for registered modifier
 			if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier])) {
 				$function = $compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier][0];
@@ -62,10 +43,6 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
 						$output = $function[0] . '::' . $function[1] . '(' . $params . ')';
 					}
 				}
-//			} else if (!isset($this->smarty->registered_plugins[Smarty::PLUGIN_MODIFIERCOMPILER][$modifier][0])) {
-//				if (is_callable($this->smarty->default_plugin_handler_func)) {
-//					call_user_func($this->smarty->default_plugin_handler_func, $modifier, Smarty::PLUGIN_MODIFIERCOMPILER, $this->smarty);
-//				}
 			} else if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIERCOMPILER][$modifier][0])) {
 				$output = call_user_func($compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIERCOMPILER][$modifier][0], $single_modifier, $compiler->smarty);
 				// check for plugin modifiercompiler
