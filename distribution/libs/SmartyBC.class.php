@@ -525,28 +525,6 @@ class SmartyBC extends Smarty {
         trigger_error("Smarty error: $error_msg", $error_type);
     }
 
-    /**
-     * magic getter to allow transparent access through getOption
-     *
-     * @param string $name name of option to get
-     * @return mixed option's value
-     */
-    public function __get($name)
-    {
-        return $this->getOption($name);
-    }
-
-    /**
-     * magic setter to allow transparent access through setOption
-     *
-     * @param string $name name of option to set
-     * @param string $value new value to set
-     * @return void
-     */
-    public function __set($name, $value)
-    {
-        $this->setOption($name, $value);
-    }
 }
 
 /**

@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+13/05/2011
+- remove setOption / getOption calls from SamrtyBC class
+
 02/05/2011
 - removed experimental setOption() getOption() methods
 - output returned content also on opening tag calls of block plugins
