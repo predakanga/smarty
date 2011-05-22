@@ -531,6 +531,29 @@ class PluginFunctionHtmlSelectDateTests extends PHPUnit_Framework_TestCase {
         $this->assertEquals($result, $this->smarty->fetch($tpl));
     }
     
+    public function testTimeArray()
+    {
+        $n = "\n";
+        $result = '<select name="namorized[foobar_Month]">'.$n. $this->months['default'] .$n.'</select>'
+            .$n.'<select name="namorized[foobar_Day]">'.$n. $this->days['default'] .$n.'</select>'
+            .$n.'<select name="namorized[foobar_Year]">'.$n. $this->years['default'] .$n.'</select>';
+            
+        $date_array = array(
+            'namorized' => array(
+                'foobar_Month' => '02',
+                'foobar_Day' => '20',
+                'foobar_Year' => '2011',
+            ),
+        );
+
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time=$date_array.namorized field_array="namorized" prefix="foobar_"}');
+        $tpl->assign('date_array', $date_array);
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+        
+        $tpl = $this->smarty->createTemplate('eval:{html_select_date time=$date_array field_array="namorized" prefix="foobar_"}');
+        $tpl->assign('date_array', $date_array);
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+    }
 } 
 
 ?>

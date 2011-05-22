@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+22/05/2011
+- made time-attribute of {html_select_date} and {html_select_time} accept arrays as defined by attributes prefix and field_array
+
 13/05/2011
 - remove setOption / getOption calls from SamrtyBC class
 

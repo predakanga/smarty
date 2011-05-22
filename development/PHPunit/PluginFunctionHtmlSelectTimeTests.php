@@ -865,7 +865,52 @@ class PluginFunctionHtmlSelectTimeTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('eval:{html_select_time time='. $this->now .' second_value_format="%03d"}');
         $this->assertEquals($result, $this->smarty->fetch($tpl));
     }
-
+    
+    public function testTimeArray()
+    {
+        $n = "\n";
+        $result = '<select name="namorized[foobar_Hour]">'.$n. $this->hours['default'] .$n.'</select>'
+            .$n.'<select name="namorized[foobar_Minute]">'.$n. $this->minutes['default'] .$n.'</select>'
+            .$n.'<select name="namorized[foobar_Second]">'.$n. $this->seconds['default'] .$n.'</select>';
+        
+        $time_array = array(
+            'namorized' => array(
+                'foobar_Hour' => '16',
+                'foobar_Minute' => '15',
+                'foobar_Second' => '11',
+            ),
+        );
+        
+        $tpl = $this->smarty->createTemplate('eval:{html_select_time time=$time_array.namorized field_array="namorized" prefix="foobar_"}');
+        $tpl->assign('time_array', $time_array);
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+        
+        $tpl = $this->smarty->createTemplate('eval:{html_select_time time=$time_array field_array="namorized" prefix="foobar_"}');
+        $tpl->assign('time_array', $time_array);
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+    }
+    
+    public function testTimeArrayMerdidian()
+    {
+        $n = "\n";
+        $result = '<select name="namorized[foobar_Hour]">'.$n. $this->hours['12h'] .$n.'</select>'
+            .$n.'<select name="namorized[foobar_Minute]">'.$n. $this->minutes['default'] .$n.'</select>'
+            .$n.'<select name="namorized[foobar_Second]">'.$n. $this->seconds['default'] .$n.'</select>'
+            .$n.'<select name="namorized[foobar_Meridian]">'.$n. $this->meridians['default'] .$n.'</select>';
+        
+        $time_array = array(
+            'namorized' => array(
+                'foobar_Hour' => '04',
+                'foobar_Minute' => '15',
+                'foobar_Second' => '11',
+                'foobar_Meridian' => 'pm',
+            ),
+        );
+        
+        $tpl = $this->smarty->createTemplate('eval:{html_select_time time=$time_array use_24_hours=false field_array="namorized" prefix="foobar_"}');
+        $tpl->assign('time_array', $time_array);
+        $this->assertEquals($result, $this->smarty->fetch($tpl));
+    }
 } 
 
 ?>

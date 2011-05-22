@@ -112,7 +112,9 @@ function smarty_function_html_select_date($params, $template)
     foreach ($params as $_key => $_value) {
         switch ($_key) {
             case 'time':
-                $time = smarty_make_timestamp($_value);
+                if (!is_array($_value)) {
+                    $time = smarty_make_timestamp($_value);
+                }
                 break;
                 
             case 'month_names':
@@ -172,7 +174,30 @@ function smarty_function_html_select_date($params, $template)
     
     // Note: date() is faster than strftime()
     // Note: explode(date()) is faster than date() date() date()
-    if ($time === null) {
+    if (isset($params['time']) && is_array($params['time'])) {
+        if (isset($params['time'][$prefix . 'Year'])) {
+            // $_REQUEST[$field_array] given
+            foreach (array('Y' => 'Year',  'm' => 'Month', 'd' => 'Day') as $_elementKey => $_elementName) {
+                $_variableName = '_' . strtolower($_elementName);
+                $$_variableName = isset($params['time'][$prefix . $_elementName])
+                    ? $params['time'][$prefix . $_elementName]
+                    : date($_elementKey);
+            }
+            $time = mktime(0, 0, 0, $_month, $_day, $_year);
+        } elseif (isset($params['time'][$field_array][$prefix . 'Year'])) {
+            // $_REQUEST given
+            foreach (array('Y' => 'Year',  'm' => 'Month', 'd' => 'Day') as $_elementKey => $_elementName) {
+                $_variableName = '_' . strtolower($_elementName);
+                $$_variableName = isset($params['time'][$field_array][$prefix . $_elementName])
+                    ? $params['time'][$field_array][$prefix . $_elementName]
+                    : date($_elementKey);
+            }
+            $time = mktime(0, 0, 0, $_month, $_day, $_year);
+        } else {
+            // no date found, use NOW
+            list($_year, $_month, $_day) = $time = explode('-', date('Y-m-d'));
+        }
+    } elseif ($time === null) {
         list($_year, $_month, $_day) = $time = explode('-', date('Y-m-d'));
     } else {
         list($_year, $_month, $_day) = $time = explode('-', date('Y-m-d', $time));
