@@ -17,7 +17,7 @@ these changes must reflect on the documentation at some point…
 * - added attributes [month_names, all_id, year_id, month_id, day_id] to function.html_select_date
 * - missing attribute all_empty of function.html_select_date
 * - added attributes [field_separator, option_separator, all_id, hour_id, minute_id, second_id, meridian_id, all_empty, hour_empty, minute_empty, second_empty, meridian_empty, hour_format, hour_value_format, minute_format, minute_value_format, second_format, second_value_format] to function.html_select_time
-* made time-attribute of {html_select_date} and {html_select_time} accept arrays as defined by attributes prefix and field_array
+* - made time-attribute of {html_select_date} and {html_select_time} accept arrays as defined by attributes prefix and field_array
 
 
 ## Modifiers ##

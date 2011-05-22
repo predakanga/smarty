@@ -41,10 +41,19 @@
     </row>
     <row>
      <entry>time</entry>
-     <entry>timestamp</entry>
+     <entry>
+      <ulink url="&url.php-manual;function.time">timestamp</ulink>, 
+      <ulink url="&url.php-manual;class.DateTime">DateTime</ulink>, 
+      mysql timestamp or any string parsable by 
+      <ulink url="&url.php-manual;strtotime"><varname>strtotime()</varname></ulink>, 
+      arrays as produced by this function if field_array is set.
+     </entry>
      <entry>No</entry>
-     <entry>current time</entry>
-     <entry>What date/time to use</entry>
+     <entry>current <ulink url="&url.php-manual;function.time">timestamp</ulink></entry>
+     <entry>
+      What date/time to pre-select. If an array is given, the attributes field_array and prefix 
+      are used to identify the array elements to extract hour, minute, second and meridian from.
+     </entry>
     </row>
     <row>
      <entry>display_hours</entry>
