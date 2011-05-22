@@ -21,7 +21,7 @@ require('../distribution/libs/Smarty.class.php');
 ini_set('pcre.backtrack_limit', -1); 
 // ini_set('asp_tags','1');
 $smarty = new Smarty;
-$smarty->plugins_dir[] = './plugins';
+$smarty->addPluginsDir('./plugins');
 $smarty2 = new Smarty();
 $smarty->caching = true;
 $smarty->cache_lifetime = 100000;
@@ -37,7 +37,7 @@ if (isset($_POST['debug']) && $_POST['debug'][0] == 1) {
 $smarty->assign('template', $template, true);
 $smarty->display('test_parser.tpl');
 
-$smarty2->plugins_dir[] = './plugins';
+$smarty2->addPluginsDir('./plugins');
 //$smarty2->error_reporting = E_ALL | E_STRICT;
 $smarty2->php_handling = Smarty::PHP_ALLOW;
 //$smarty2->php_handling = Smarty::PHP_REMOVE;
