@@ -4,8 +4,6 @@ these changes must reflect on the documentation at some point…
 
 ## General ##
 
-* Use of getters/setters in favor of direct property access
-* new Smarty( array( 'forceCompile' => false ) );
 
 ## Syntax ##
 
@@ -34,7 +32,7 @@ these changes must reflect on the documentation at some point…
 
 http://www.smarty.net/docs/en/template.resources.tpl
 
-* Smarty:: set/get/addTemplateDir()
+* - Smarty:: set/get/addTemplateDir()
 * Smarty::registerDefaultTemplateHandler()
 * Smarty::registerDefaultConfigHandler()
 * Smarty::$use_include_path
