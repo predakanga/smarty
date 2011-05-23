@@ -39,8 +39,9 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * - template_dir identification: {include file="[foo]bar.tpl"} see http://code.google.com/p/smarty-php/source/detail?r=3947
 * config uses same Smarty_Resource instances as template
 * - ./ and ../ behaviour in {include} and {extend} as well as $smarty->fetch()
-* Smarty::fetch("extends:db:foo.tpl|file:bar.tpl") Smarty_Resources with {extend}
-
+* - Smarty::fetch("extends:db:foo.tpl|file:bar.tpl") Smarty_Resources with {extend}
+* - eval: and string: resources in conjunction with extend:
+* need for proper compile_id when using dynamic inheritance {extends file="{$parent}"}
 
 
 ## Smarty_CacheResource ##
