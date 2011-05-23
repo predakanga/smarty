@@ -35,10 +35,10 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * - Smarty:: set/get/addTemplateDir()
 * Smarty::registerDefaultTemplateHandler()
 * Smarty::registerDefaultConfigHandler()
-* Smarty::$use_include_path
-* template_dir identification: {include file="[foo]bar.tpl"} see http://code.google.com/p/smarty-php/source/detail?r=3947
+* - Smarty::$use_include_path
+* - template_dir identification: {include file="[foo]bar.tpl"} see http://code.google.com/p/smarty-php/source/detail?r=3947
 * config uses same Smarty_Resource instances as template
-* ./ and ../ behaviour in {include} and {extend} as well as $smarty->fetch()
+* - ./ and ../ behaviour in {include} and {extend} as well as $smarty->fetch()
 * Smarty::fetch("extends:db:foo.tpl|file:bar.tpl") Smarty_Resources with {extend}
 
 

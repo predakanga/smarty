@@ -49,6 +49,7 @@
 &programmers.api-variables.variable-right-delimiter;
 &programmers.api-variables.variable-template-dir;
 &programmers.api-variables.variable-trusted-dir;
+&programmers.api-variables.variable-use-include-path;
 &programmers.api-variables.variable-use-sub-dirs;
 </chapter>
 <!-- Keep this comment at the end of the file

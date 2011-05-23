@@ -22,6 +22,17 @@
      </para>
     </note>
     <note>
+     <title>Technical Note</title>
+     <para>
+      If the directories known to <parameter>$template_dir</parameter> 
+      are relative to directories known to the
+      <ulink url="&url.php-manual;ini.core.php#ini.include-path">include_path</ulink>
+      you need to activate the 
+      <link linkend="variable.use.include.path"><parameter>$use_include_path</parameter></link> 
+      option.
+     </para>
+    </note>
+    <note>
      <title>Note</title>
      <para>
       As of Smarty 3.1 the attribute $template_dir is no longer accessible directly. Use 
@@ -32,6 +43,8 @@
     </note>
     <para>
      See also 
+     <link linkend="template.resources"><varname>Template Resources</varname></link>, 
+     <link linkend="variable.use.include.path"><parameter>$use_include_path</parameter></link>, 
      <link linkend="api.get.template.dir"><varname>getTemplateDir()</varname></link>, 
      <link linkend="api.set.template.dir"><varname>setTemplateDir()</varname></link> and
      <link linkend="api.add.template.dir"><varname>addTemplateDir()</varname></link>.
