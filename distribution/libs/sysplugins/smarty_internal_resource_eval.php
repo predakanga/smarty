@@ -22,8 +22,7 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
      */
     public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
     {
-        $source->filepath = 'eval:';
-        $source->uid = false;
+        $source->uid = $source->filepath = sha1($source->name);
     	$source->timestamp = false;
     	$source->exists = true;
     }
@@ -40,6 +39,16 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
         // return template string
         return $source->name;
     } 
-
+    
+    /**
+     * Determine basename for compiled filename
+     *
+     * @param Smarty_Template_Source $source source object
+     * @return string resource's basename
+     */
+    protected function getBasename(Smarty_Template_Source $source)
+    {
+        return '';
+    }
 } 
 ?>

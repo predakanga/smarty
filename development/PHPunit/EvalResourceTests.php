@@ -40,7 +40,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetTemplateFilepath()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertEquals('eval:', $tpl->source->filepath);
+        $this->assertEquals('2aae6c35c94fcfb415dbe95f408b9ce91ee846ed', $tpl->source->filepath);
     } 
     /**
     * test getTemplateTimestamp
