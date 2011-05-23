@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+23/05/2011
+- added base64: and urlencode: arguments to eval and string resource types
+
 22/05/2011
 - made time-attribute of {html_select_date} and {html_select_time} accept arrays as defined by attributes prefix and field_array
 

@@ -169,7 +169,19 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('string:hello world');
         $this->assertEquals('hello world', $this->smarty->fetch($tpl));
         $this->assertTrue($this->smarty->isCached($tpl));
-    } 
+    }
+    
+    public function testUrlencodeTemplate()
+    {
+        $tpl = $this->smarty->createTemplate('string:urlencode:%7B%22foobar%22%7Cescape%7D');
+        $this->assertEquals('foobar', $tpl->fetch());
+    }
+    
+    public function testBase64Template()
+    {
+        $tpl = $this->smarty->createTemplate('string:base64:eyJmb29iYXIifGVzY2FwZX0=');
+        $this->assertEquals('foobar', $tpl->fetch());
+    }
 } 
 
 ?>
