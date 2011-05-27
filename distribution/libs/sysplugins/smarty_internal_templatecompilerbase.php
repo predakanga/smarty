@@ -213,7 +213,7 @@ class Smarty_Internal_TemplateCompilerBase {
                 }
                 // check plugins from plugins folder
                 foreach ($this->smarty->plugin_search_order as $plugin_type) {
-                    if ($plugin_type == Smarty::PLUGIN_BLOCK && $this->smarty->loadPlugin('smarty_compiler_' . $tag)) {
+                    if ($plugin_type == Smarty::PLUGIN_BLOCK && $this->smarty->loadPlugin('smarty_compiler_' . $tag) && (!isset($this->smarty->security_policy) || $this->smarty->security_policy->isTrustedTag($tag, $this))) {
                         $plugin = 'smarty_compiler_' . $tag;
                         if (is_callable($plugin)) {
                             // convert arguments format for old compiler plugins
@@ -232,7 +232,9 @@ class Smarty_Internal_TemplateCompilerBase {
                         throw new SmartyException("Plugin \"{$tag}\" not callable");
                     } else {
                         if ($function = $this->getPlugin($tag, $plugin_type)) {
-                            return $this->callTagCompiler('private_' . $plugin_type . '_plugin', $args, $parameter, $tag, $function);
+                            if(!isset($this->smarty->security_policy) || $this->smarty->security_policy->isTrustedTag($tag, $this)) {
+                                return $this->callTagCompiler('private_' . $plugin_type . '_plugin', $args, $parameter, $tag, $function);
+                            }
                         }
                     }
                 }
@@ -336,10 +338,13 @@ class Smarty_Internal_TemplateCompilerBase {
         // lazy load internal compiler plugin
         $class_name = 'Smarty_Internal_Compile_' . $tag;
         if ($this->smarty->loadPlugin($class_name)) {
+            // check if tag allowed by security
+            if (!isset($this->smarty->security_policy) || $this->smarty->security_policy->isTrustedTag($tag, $this)) {
             // use plugin if found
             self::$_tag_objects[$tag] = new $class_name;
             // compile this tag
             return self::$_tag_objects[$tag]->compile($args, $this, $param1, $param2, $param3);
+            }
         }
         // no internal compile plugin for this tag
         return false;

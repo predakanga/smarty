@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+27/05/2011
+- added allowed/disabled tags and modifiers in security for sandboxing
+
 23/05/2011
 - added base64: and urlencode: arguments to eval and string resource types
 
