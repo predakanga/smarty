@@ -105,6 +105,93 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     }
 
     /**
+    * test allowed tags
+    */
+    public function testAllowedTags1()
+    {
+        $this->smarty->security_policy->allowed_tags = array('counter');
+        $this->assertEquals("1", $this->smarty->fetch('eval:{counter start=1}'));
+    }
+
+    /**
+    * test not allowed tag
+    */
+    public function testNotAllowedTags2()
+    {
+        $this->smarty->security_policy->allowed_tags = array('counter');
+        try {
+            $this->smarty->fetch('eval:{counter}{cycle values="1,2"}');
+        }
+        catch (Exception $e) {
+            $this->assertContains("tag 'cycle' not allowed by security setting", $e->getMessage());
+            return;
+        }
+        $this->fail('Exception for not allowed tag has not been raised.');
+    }
+
+    /**
+    * test disabled tag
+    */
+    public function testDisabledTags()
+    {
+        $this->smarty->security_policy->disabled_tags = array('cycle');
+        try {
+            $this->smarty->fetch('eval:{counter}{cycle values="1,2"}');
+        }
+        catch (Exception $e) {
+            $this->assertContains("tag 'cycle' disabled by security setting", $e->getMessage());
+            return;
+        }
+        $this->fail('Exception for disabled tag has not been raised.');
+    }
+
+    /**
+    * test allowed modifier
+    */
+    public function testAllowedModifier1()
+    {
+        $this->smarty->security_policy->allowed_modifier = array('capitalize');
+        $this->assertEquals("Hello World", $this->smarty->fetch('eval:{"hello world"|capitalize}'));
+    }
+    public function testAllowedModifier2()
+    {
+        $this->smarty->security_policy->allowed_modifier = array('upper');
+        $this->assertEquals("HELLO WORLD", $this->smarty->fetch('eval:{"hello world"|upper}'));
+    }
+
+    /**
+    * test not allowed modifier
+    */
+    public function testNotAllowedModifier()
+    {
+        $this->smarty->security_policy->allowed_modifier = array('upper');
+        try {
+            $this->smarty->fetch('eval:{"hello"|upper}{"world"|lower}');
+        }
+        catch (Exception $e) {
+            $this->assertContains("modifier 'lower' not allowed by security setting", $e->getMessage());
+            return;
+        }
+        $this->fail('Exception for not allowed tag has not been raised.');
+    }
+
+    /**
+    * test disabled modifier
+    */
+    public function testDisabledModifier()
+    {
+        $this->smarty->security_policy->disabled_modifier = array('lower');
+        try {
+            $this->smarty->fetch('eval:{"hello"|upper}{"world"|lower}');
+        }
+        catch (Exception $e) {
+            $this->assertContains("modifier 'lower' disabled by security setting", $e->getMessage());
+            return;
+        }
+        $this->fail('Exception for disabled tag has not been raised.');
+    }
+
+    /**
     * test Smarty::PHP_QUOTE
     */
     public function testSmartyPhpQuote()
