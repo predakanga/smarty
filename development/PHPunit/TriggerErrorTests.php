@@ -19,7 +19,7 @@ class TriggerErrorTests extends PHPUnit_Framework_TestCase {
 
     public static function isRunnable()
     {
-// needs modification
+        // TODO: needs modification
         return false;
     } 
 

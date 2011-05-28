@@ -78,7 +78,7 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
             Smarty_Internal_Compile_Block::saveBlockData($_block_content, $_result[0][$_start][0], $compiler->template, $filepath);
             $_start = $_start + $_end + 1;
         } 
-        // TODO: (utews) can this be optimized?
+
         $compiler->template->source->content = $_template->source->content;
         $compiler->template->source->filepath = $_template->source->filepath;
         $compiler->abort_and_recompile = true;
