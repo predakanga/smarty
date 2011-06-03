@@ -8,6 +8,7 @@ these changes must reflect on the documentation at some point…
 ## Syntax ##
 
 * {block ... hide} option to supress block if no child is defined
+* {setfilter} tag 
 
 
 ## Functions ##
@@ -49,6 +50,7 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * {php} and {include_php} with SmartyBC only
 * add example for php template resource, since it's been removed from source
 * $smarty->compile_check = Smarty:.COMPILECHECK_CACHEMISS
+* Smarty::$escape_html 
 
 
 ## Smarty_CacheResource ##
