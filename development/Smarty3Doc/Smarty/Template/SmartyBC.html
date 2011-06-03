@@ -79,7 +79,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																																																																																																																																																																																																																																																																																																																																																				
+																																																																																																																																																																																																																																																																																																																																				
 												<div class="method-definition">
 											<span class="method-result">SmartyBC</span>
 										<a href="#__construct" title="details" class="method-name">__construct</a>
@@ -280,16 +280,6 @@
 										<a href="#unregister_resource" title="details" class="method-name">unregister_resource</a>
 											(<span class="var-type">string</span>&nbsp;<span class="var-name">$type</span>)
 									</div>
-																<div class="method-definition">
-											<span class="method-result">mixed</span>
-										<a href="#__get" title="details" class="method-name">__get</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
-									</div>
-																<div class="method-definition">
-											<span class="method-result">void</span>
-										<a href="#__set" title="details" class="method-name">__set</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
-									</div>
 								</div>
 		</div>
 	</div>		
@@ -422,6 +412,9 @@
 								<span class="var-name"><a href="../../Smarty/Template/Smarty.html#var$error_unassigned">Smarty::$error_unassigned</a></span><br>
 							</span>
 													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Template/Smarty.html#var$escape_html">Smarty::$escape_html</a></span><br>
+							</span>
+													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Template/Smarty.html#var$force_cache">Smarty::$force_cache</a></span><br>
 							</span>
 													<span class="var-title">
@@ -498,9 +491,6 @@
 							</span>
 													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Template/Smarty.html#var$use_sub_dirs">Smarty::$use_sub_dirs</a></span><br>
-							</span>
-													<span class="var-title">
-								<span class="var-name"><a href="../../Smarty/Template/Smarty.html#var$variable_filter">Smarty::$variable_filter</a></span><br>
 							</span>
 													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Template/Smarty.html#var$_current_file">Smarty::$_current_file</a></span><br>
@@ -1738,68 +1728,6 @@
 		
 			
 	</div>
-<a name="method__get" id="__get"><!-- --></a>
-<div class="oddrow">
-	
-	<div class="method-header">
-		<span class="method-title">__get</span> (line <span class="line-number">534</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">magic getter to allow transparent access through getOption</p>
-	<ul class="tags">
-				<li><span class="field">return:</span> option's value</li>
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">mixed</span>
-		<span class="method-name">
-			__get
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$name</span><span class="var-description">: name of option to get</span>			</li>
-				</ul>
-		
-			
-	</div>
-<a name="method__set" id="__set"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">__set</span> (line <span class="line-number">546</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">magic setter to allow transparent access through setOption</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">void</span>
-		<span class="method-name">
-			__set
-		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$value</span>)
-			</div>
-	
-			<ul class="parameters">
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$name</span><span class="var-description">: name of option to set</span>			</li>
-					<li>
-				<span class="var-type">string</span>
-				<span class="var-name">$value</span><span class="var-description">: new value to set</span>			</li>
-				</ul>
-		
-			
-	</div>
 							<h4>Inherited Methods</h4>
 				<a name='inherited_methods'><!-- --></a>	
 									<!-- =========== Summary =========== -->
@@ -1826,7 +1754,6 @@
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodgetDebugTemplate">Smarty::getDebugTemplate()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodgetDefaultModifiers">Smarty::getDefaultModifiers()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodgetGlobal">Smarty::getGlobal()</a></span><br>
-													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodgetOption">Smarty::getOption()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodgetPluginsDir">Smarty::getPluginsDir()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodgetTags">Smarty::getTags()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodgetTemplateDir">Smarty::getTemplateDir()</a></span><br>
@@ -1837,7 +1764,6 @@
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodsetConfigDir">Smarty::setConfigDir()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodsetDebugTemplate">Smarty::setDebugTemplate()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodsetDefaultModifiers">Smarty::setDefaultModifiers()</a></span><br>
-													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodsetOption">Smarty::setOption()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodsetPluginsDir">Smarty::setPluginsDir()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodsetTemplateDir">Smarty::setTemplateDir()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Template/Smarty.html#methodtemplateExists">Smarty::templateExists()</a></span><br>
@@ -2012,7 +1938,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Fri, 22 Apr 2011 00:11:13 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sat, 04 Jun 2011 01:33:40 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
