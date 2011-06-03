@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+04/06/2011
+- allow extends resource in file attribute of {extends} tag
+
 03/06/2011
 - added {setfilter} tag to set filters for variable output
 - added escape_html property to control autoescaping of variable output

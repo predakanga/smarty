@@ -76,6 +76,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 					}
 				} else {
 					$template->block_data[$_name]['source'] = $block_content;
+				    $template->block_data[$_name]['file'] = $filepath;
 				}
 				if ($_match[6] == 'append') {
 					$template->block_data[$_name]['mode'] = 'append';
@@ -84,7 +85,6 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 				} else {
 					$template->block_data[$_name]['mode'] = 'replace';
 				}
-				$template->block_data[$_name]['file'] = $filepath;
 			}
 		}
 	}
