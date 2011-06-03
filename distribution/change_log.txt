@@ -1,4 +1,8 @@
 ﻿===== SVN branch rodneyrehm  =====
+03/06/2011
+- added {setfilter} tag to set filters for variable output
+- added escape_html property to control autoescaping of variable output
+
 27/05/2011
 - added allowed/disabled tags and modifiers in security for sandboxing
 

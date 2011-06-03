@@ -52,6 +52,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $smarty = null;
     // blocks for template inheritance
     public $block_data = array();
+    // variable filters
+    public $variable_filters = array();
 
     /**
     * Create template data object

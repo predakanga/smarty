@@ -113,6 +113,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 		}
 		$_tpl = new Smarty_Internal_template ('eval:' . $compiler->template->block_data[$_name]['source'], $compiler->smarty, $compiler->template, $compiler->template->cache_id,
 		$compiler->template->compile_id = null, $compiler->template->caching, $compiler->template->cache_lifetime);
+        $_tpl->variable_filters = $compiler->template->variable_filters;
 		$_tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
 		$_tpl->source->filepath = $compiler->template->block_data[$_name]['file'];
 		if ($compiler->nocache) {
@@ -133,6 +134,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 		}
 		$compiler->template->properties['file_dependency'] = array_merge($compiler->template->properties['file_dependency'], $_tpl->properties['file_dependency']);
 		$compiler->template->properties['function'] = array_merge($compiler->template->properties['function'], $_tpl->properties['function']);
+        $compiler->template->variable_filters = $_tpl->variable_filters;
 		if ($_tpl->has_nocache_code) {
 			$compiler->template->has_nocache_code = true;
 		}

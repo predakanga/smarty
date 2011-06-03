@@ -202,12 +202,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public $config_overwrite = true; //Controls whether variables with the same name overwrite each other.
 	public $config_booleanize = true; //Controls whether config values of on/true/yes and off/false/no get converted to boolean
 	public $config_read_hidden = false; //Controls whether hidden config sections/vars are read from the file.
-	// config vars
-	//    public $config_vars = array();
-	// assigned tpl vars
-	//    public $tpl_vars = array();
-	// dummy parent object
-	//    public $parent = null;
 	// global template functions
 	public $template_functions = array();
 	// resource type used if none given
@@ -238,10 +232,10 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public $registered_cache_resources = array();
 	// autoload filter
 	public $autoload_filters = array();
-	// status of filter on variable output
-	public $variable_filter = true;
 	// default modifier
 	public $default_modifiers = array();
+	// autoescape variable output
+	public $escape_html = false;
 	// global internal smarty  vars
 	static $_smarty_vars = array();
 	// start time for execution time calculation
