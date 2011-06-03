@@ -42,7 +42,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->registered_objects = array();
         $smarty->registered_filters = array();
         $smarty->autoload_filters = array();
-        $smarty->variable_filter = true;
+        $smarty->escape_html = false;
         $smarty->use_sub_dirs = false;
         $smarty->config_overwrite = true;
         $smarty->config_booleanize = true;
