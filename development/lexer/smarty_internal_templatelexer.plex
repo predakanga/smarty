@@ -177,6 +177,7 @@ step = /\s+step\s+/
 ldelif = /SMARTYldel\s*(if|elseif|else if|while)\s+/
 ldelfor = /SMARTYldel\s*for\s+/
 ldelforeach = /SMARTYldel\s*foreach(?![^\s])/
+ldelsetfilter = /SMARTYldel\s*setfilter\s+/
 instanceof = /\s+instanceof\s+/
 not = /!\s*|not\s+/
 land = /\s*\&\&\s*|\s*and\s+/
@@ -265,6 +266,15 @@ ldelforeach {
      $this->token = Smarty_Internal_Templateparser::TP_OTHER;
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOREACH;
+     $this->yypushstate(self::SMARTY);
+     $this->taglineno = $this->line;
+  }
+}
+ldelsetfilter {
+  if ($this->smarty->auto_literal && trim(substr($this->value,$this->ldel_length,1)) == '') {
+     $this->token = Smarty_Internal_Templateparser::TP_OTHER;
+  } else {
+     $this->token = Smarty_Internal_Templateparser::TP_LDELSETFILTER;
      $this->yypushstate(self::SMARTY);
      $this->taglineno = $this->line;
   }
