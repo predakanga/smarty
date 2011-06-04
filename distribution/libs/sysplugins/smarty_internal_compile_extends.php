@@ -6,7 +6,7 @@
  * Compiles the {extends} tag
  *
  * @package Smarty
- * @subpackage compiler
+ * @subpackage Compiler
  * @author Uwe Tews
  */
 
