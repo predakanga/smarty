@@ -54,6 +54,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $block_data = array();
     // variable filters
     public $variable_filters = array();
+    // optional log of tag/attributes
+    public $used_tags = array();
 
     /**
     * Create template data object
