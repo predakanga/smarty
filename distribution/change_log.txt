@@ -1,4 +1,7 @@
-﻿===== SVN branch rodneyrehm  =====
+﻿===== Smarty 3.1-DEV  =====
+05/06/2011
+- update of SMARTY_VERSION
+
 04/06/2011
 - allow extends resource in file attribute of {extends} tag
 
