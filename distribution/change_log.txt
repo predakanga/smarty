@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+09/06/2011
+- fix smarty security_policy issue in plugins {html_image} and {fetch}
+
 05/06/2011
 - update of SMARTY_VERSION
 - bugfix made getTags() working again
