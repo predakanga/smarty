@@ -1,4 +1,7 @@
 ﻿===== SVN branch rodneyrehm  =====
+09/06/2011
+- fix smarty security_policy issue in plugins {html_image} and {fetch}
+
 04/06/2011
 - allow extends resource in file attribute of {extends} tag
 
