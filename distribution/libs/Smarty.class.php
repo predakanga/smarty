@@ -27,6 +27,7 @@
 * @copyright 2008 New Digital Group, Inc.
 * @author Monte Ohrt <monte at ohrt dot com>
 * @author Uwe Tews
+* @author Rodney Rehm
 * @package Smarty
 * @version 3.1-DEV
 */
@@ -277,18 +278,49 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 
 	/**
-	* Class destructor
-	*/
+	 * Class destructor
+	 */
 	public function __destruct()
 	{
+	    
 	}
 
     /**
-    *  set selfpointer on cloned object
-    */
+     *  set selfpointer on cloned object
+     */
     public function __clone()
     {
     	$this->smarty = $this;
+	}
+	
+	public function __get($name)
+	{
+	    $allowed = array(
+	        'template_dir' => 'getTemplateDir',
+	        'config_dir' => 'getConfigDir',
+	        'plugins_dir' => 'getPluginsDir',
+	        'compile_dir' => 'getCompileDir',
+	        'cache_dir' => 'getCacheDir',
+	    );
+	    
+	    if (isset($allowed[$name])) {
+	        return $this->{$allowed[$name]}();
+	    }
+	}
+	
+	public function __set($name, $value)
+	{
+	    $allowed = array(
+	        'template_dir' => 'setTemplateDir',
+	        'config_dir' => 'setConfigDir',
+	        'plugins_dir' => 'setPluginsDir',
+	        'compile_dir' => 'setCompileDir',
+	        'cache_dir' => 'setCacheDir',
+	    );
+	    
+	    if (isset($allowed[$name])) {
+	        $this->{$allowed[$name]}($value);
+	    }
 	}
 
 	/**

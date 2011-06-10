@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+10/06/2011
+- made protected properties $template_dir, $plugins_dir, $cache_dir, $compile_dir, $config_dir accessible via magic methods
+
 09/06/2011
 - fix smarty security_policy issue in plugins {html_image} and {fetch}
 
