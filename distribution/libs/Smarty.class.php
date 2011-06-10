@@ -305,6 +305,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    
 	    if (isset($allowed[$name])) {
 	        return $this->{$allowed[$name]}();
+	    } else {
+	        trigger_error('Undefined property: '. get_class($this) .'::$'. $name, E_USER_NOTICE);
 	    }
 	}
 	
@@ -320,6 +322,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	    
 	    if (isset($allowed[$name])) {
 	        $this->{$allowed[$name]}($value);
+	    } else {
+	        trigger_error('Undefined property: '. get_class($this) .'::$'. $name, E_USER_NOTICE);
 	    }
 	}
 
