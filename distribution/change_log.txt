@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+12/10/2011
+- bugfix removed unneeded merging of template variable when fetching includled subtemplates
+
 10/06/2011
 - made protected properties $template_dir, $plugins_dir, $cache_dir, $compile_dir, $config_dir accessible via magic methods
 
