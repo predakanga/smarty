@@ -1,17 +1,23 @@
 <?php
+/**
+ * Smarty Internal Plugin Config
+ *
+ * @package Smarty
+ * @subpackage Config
+ * @author Uwe Tews
+ */
 
 /**
  * Smarty Internal Plugin Config
  *
  * Main class for config variables
  *
- * @ignore
  * @package Smarty
  * @subpackage Config
- * @author Uwe Tews
  *
  * @property mixed $source
  * @property mixed $compiled
+ * @ignore
  */
 class Smarty_Internal_Config {
 
