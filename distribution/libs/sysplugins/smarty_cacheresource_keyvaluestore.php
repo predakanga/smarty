@@ -71,34 +71,34 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     }
     
     /**
-	 * Read the cached template and process the header
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @return booelan true or false if the cached content does not exist
-	 */
-	public function process(Smarty_Internal_Template $_template)
-	{
-		$content = '';
-		$timestamp = null;
+     * Read the cached template and process the header
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     * @return booelan true or false if the cached content does not exist
+     */
+    public function process(Smarty_Internal_Template $_template)
+    {
+        $content = '';
+        $timestamp = null;
         if(!$this->fetch($_template->cached->filepath, $_template->source->name, $_template->cache_id, $_template->compile_id, $content, $timestamp)) {
             return false;
         }
         if( isset($content) ) {
-			$_smarty_tpl = $_template;
-        	eval("?>" . $content);
+            $_smarty_tpl = $_template;
+            eval("?>" . $content);
             return true;
         }
         return false;
-	}
+    }
 
     /**
      * Write the rendered template output to cache
      * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @param string $content content to cache
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $content content to cache
      * @return boolean success
      */
-	public function writeCachedContent(Smarty_Internal_Template $_template, $content)
+    public function writeCachedContent(Smarty_Internal_Template $_template, $content)
     {
         $this->addMetaTimestamp($content);
         return $this->write(array($_template->cached->filepath => $content), $_template->properties['cache_lifetime']);
@@ -114,7 +114,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      * @uses purge() to clear the whole store
      * @uses invalidate() to mark everything outdated if purge() is inapplicable 
      */
-	public function clearAll(Smarty $smarty, $exp_time=null)
+    public function clearAll(Smarty $smarty, $exp_time=null)
     {
         if (!$this->purge()) {
             $this->invalidate(null);

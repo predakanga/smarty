@@ -25,7 +25,7 @@ class Smarty_Internal_Compile_Nocache extends Smarty_Internal_CompileBase {
     {
         $_attr = $this->_get_attributes($compiler, $args);
         if ($_attr['nocache'] === true) {
-        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
+            $compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
         // enter nocache mode
         $compiler->nocache = true;

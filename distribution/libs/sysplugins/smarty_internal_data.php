@@ -274,10 +274,10 @@ class Smarty_Internal_Data {
             return Smarty::$global_tpl_vars[$_variable];
         }
         if ($this->smarty->error_unassigned && $error_enable) {
-			// force a notice
-			$x = $$_variable;
+            // force a notice
+            $x = $$_variable;
         }
-		return new Undefined_Smarty_Variable;
+        return new Undefined_Smarty_Variable;
     }
     /**
      * gets  a config variable
@@ -297,10 +297,10 @@ class Smarty_Internal_Data {
             $_ptr = $_ptr->parent;
         }
         if ($this->smarty->error_unassigned) {
-			// force a notice
-			$x = $$_variable;
-		}
-		return null;
+            // force a notice
+            $x = $$_variable;
+        }
+        return null;
     }
 
     /**
@@ -335,26 +335,26 @@ class Smarty_Internal_Data {
      */
     function getConfigVars($varname = null, $search_parents = true)
     {
- //   	var_dump($this);
+ //       var_dump($this);
         $_ptr = $this;
         $var_array = array();
         while ($_ptr !== null) {
-        	if (isset($varname)) {
-            	if (isset($_ptr->config_vars[$varname])) {
-                	return $_ptr->config_vars[$varname];
+            if (isset($varname)) {
+                if (isset($_ptr->config_vars[$varname])) {
+                    return $_ptr->config_vars[$varname];
                 }
             } else {
-            	$var_array = array_merge($_ptr->config_vars, $var_array);
-        	}
+                $var_array = array_merge($_ptr->config_vars, $var_array);
+            }
              // not found, try at parent
             if ($search_parents) {
                 $_ptr = $_ptr->parent;
             } else {
                 $_ptr = null;
             }
-    	}
+        }
         if (isset($varname)) {
-    		return '';
+            return '';
         } else {
             return $var_array;
         }

@@ -35,11 +35,11 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler, $parameter)
     {
         if ($parameter == 0) {
-        	$this->required_attributes = array('start','to');
-        	$this->optional_attributes = array('max','step');
+            $this->required_attributes = array('start','to');
+            $this->optional_attributes = array('max','step');
         } else {
-        	$this->required_attributes = array('start','ifexp','var','step');
-        	$this->optional_attributes = array();
+            $this->required_attributes = array('start','ifexp','var','step');
+            $this->optional_attributes = array();
         }
         // check and get attributes
         $_attr = $this->_get_attributes($compiler, $args);

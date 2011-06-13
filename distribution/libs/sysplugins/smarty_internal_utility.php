@@ -83,7 +83,7 @@ class Smarty_Internal_Utility {
                     echo 'Error: ', $e->getMessage(), "<br><br>";
                     $_error_count++;
                 }
-				// free memory
+                // free memory
                 $smarty->template_objects = array();
                 $_tpl->smarty->template_objects = array();
                 $_tpl = null;
@@ -119,7 +119,7 @@ class Smarty_Internal_Utility {
             $_compileDirs = new RecursiveDirectoryIterator($_dir);
             $_compile = new RecursiveIteratorIterator($_compileDirs);
             foreach ($_compile as $_fileinfo) {
-            	if (substr($_fileinfo->getBasename(),0,1) == '.' || strpos($_fileinfo, '.svn') !== false) continue;
+                if (substr($_fileinfo->getBasename(),0,1) == '.' || strpos($_fileinfo, '.svn') !== false) continue;
                 $_file = $_fileinfo->getFilename();
                 if (!substr_compare($_file, $extention, - strlen($extention)) == 0) continue;
                 if ($_fileinfo->getPath() == substr($_dir, 0, -1)) {
@@ -213,12 +213,12 @@ class Smarty_Internal_Utility {
      * @param object $templae template object
      * @return array of tag/attributes
      */
-	static function getTags(Smarty_Internal_Template $template)
-	{
-		$template->smarty->get_used_tags = true;
-		$template->compileTemplateSource();
-		return $template->used_tags;
-	}
+    static function getTags(Smarty_Internal_Template $template)
+    {
+        $template->smarty->get_used_tags = true;
+        $template->compileTemplateSource();
+        return $template->used_tags;
+    }
 
     static function testInstall($smarty)
     {

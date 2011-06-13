@@ -31,10 +31,10 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         $_filepath = $_template->source->uid; 
         // if use_sub_dirs, break file into directories
         if ($_template->smarty->use_sub_dirs) {
-        	$_filepath = substr($_filepath, 0, 2) . DS
-				. substr($_filepath, 2, 2) . DS
-            	. substr($_filepath, 4, 2) . DS
-            	. $_filepath;
+            $_filepath = substr($_filepath, 0, 2) . DS
+                . substr($_filepath, 2, 2) . DS
+                . substr($_filepath, 4, 2) . DS
+                . $_filepath;
         } 
         $_compile_dir_sep = $_template->smarty->use_sub_dirs ? DS : '^';
         if (isset($_cache_id)) {
@@ -65,24 +65,24 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         $cached->exists = !!$cached->timestamp;
     }
 
-	/**
-	 * Read the cached template and process its header
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 */
+    /**
+     * Read the cached template and process its header
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     */
     public function process(Smarty_Internal_Template $_template)
     {
         $_smarty_tpl = $_template;
         include $_template->cached->filepath;
     } 
 
-	/**
-	 * Write the rendered template output to cache
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @param string $content content to cache
-	 * @return boolean success
-	 */
+    /**
+     * Write the rendered template output to cache
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $content content to cache
+     * @return boolean success
+     */
     public function writeCachedContent(Smarty_Internal_Template $_template, $content)
     {
         if (Smarty_Internal_Write_File::writeFile($_template->cached->filepath, $content, $_template->smarty) === true) {
@@ -93,28 +93,28 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         return false;
     } 
 
-	/**
-	 * Empty cache
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @param integer $exp_time expiration time (number of seconds, not timestamp)
-	 * @return integer number of cache files deleted
-	 */
+    /**
+     * Empty cache
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     * @return integer number of cache files deleted
+     */
     public function clearAll(Smarty $smarty, $exp_time = null)
     {
         return $this->clear($smarty, null, null, null, $exp_time);
     } 
 
-	/**
-	 * Empty cache for a specific template
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @param string $resource_name template name
-	 * @param string $cache_id cache id
-	 * @param string $compile_id compile id
-	 * @param integer $exp_time expiration time (number of seconds, not timestamp)
-	 * @return integer number of cache files deleted
-	*/
+    /**
+     * Empty cache for a specific template
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $resource_name template name
+     * @param string $cache_id cache id
+     * @param string $compile_id compile id
+     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     * @return integer number of cache files deleted
+    */
     public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time)
     {
         $_cache_id = isset($cache_id) ? preg_replace('![^\w\|]+!', '_', $cache_id) : null;
@@ -139,11 +139,11 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
             $smarty->caching = $_save_stat;
             if ($tpl->source->exists) {
                 $_resourcename_parts = basename(str_replace('^', '/', $tpl->cached->filepath));
-            	// remove from template cache
-            	unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
+                // remove from template cache
+                unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
             } else {
-            	// remove from template cache
-            	unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
+                // remove from template cache
+                unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
                 return 0;
             } 
         } 

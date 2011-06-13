@@ -91,76 +91,76 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
             $cached->exists = !!$cached->timestamp;
             return;
         }
-		$timestamp = null;
+        $timestamp = null;
         $this->fetch($cached->filepath, $cached->cache_id, $cached->compile_id, $cached->content, $timestamp);
         $cached->timestamp = isset($timestamp) ? $timestamp : false;
         $cached->exists = !!$cached->timestamp;
     }
  
-	/**
-	 * Read the cached template and process the header
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @return booelan true or false if the cached content does not exist
-	 */
-	public function process(Smarty_Internal_Template $_template)
-	{
-		$content = '';
-		$timestamp = null;
+    /**
+     * Read the cached template and process the header
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     * @return booelan true or false if the cached content does not exist
+     */
+    public function process(Smarty_Internal_Template $_template)
+    {
+        $content = '';
+        $timestamp = null;
         $this->fetch($_template->cached->filepath, $_template->source->name, $_template->cache_id, $_template->compile_id, $content, $timestamp);
         if( isset($content) ) {
-			$_smarty_tpl = $_template;
-        	eval("?>" . $content);
+            $_smarty_tpl = $_template;
+            eval("?>" . $content);
             return true;
         }
         return false;
-	}
-	
-	/**
-	 * Write the rendered template output to cache
-	 * 
-	 * @param Smarty_Internal_Template $_template template object
-	 * @param string $content content to cache
-	 * @return boolean success
-	 */
-	public function writeCachedContent(Smarty_Internal_Template $_template, $content)
-	{
-	    return $this->save(
-	        $_template->cached->filepath,
-	        $_template->source->name, 
-	        $_template->cache_id, 
-	        $_template->compile_id, 
-	        $_template->properties['cache_lifetime'],
-	        $content
-	    );
-	}
-	
-	/**
-	 * Empty cache
-	 * 
-     * @param Smarty $smarty Smarty object
-	 * @param integer $exp_time expiration time (number of seconds, not timestamp)
-	 * @return integer number of cache files deleted
-	 */
-	public function clearAll(Smarty $smarty, $exp_time=null)
-	{
-        $this->cache = array();
-	    return $this->delete( null, null, null, $exp_time );
-	}
+    }
     
     /**
-	 * Empty cache for a specific template
-	 * 
+     * Write the rendered template output to cache
+     * 
+     * @param Smarty_Internal_Template $_template template object
+     * @param string $content content to cache
+     * @return boolean success
+     */
+    public function writeCachedContent(Smarty_Internal_Template $_template, $content)
+    {
+        return $this->save(
+            $_template->cached->filepath,
+            $_template->source->name, 
+            $_template->cache_id, 
+            $_template->compile_id, 
+            $_template->properties['cache_lifetime'],
+            $content
+        );
+    }
+    
+    /**
+     * Empty cache
+     * 
      * @param Smarty $smarty Smarty object
-	 * @param string $resource_name template name
-	 * @param string $cache_id cache id
-	 * @param string $compile_id compile id
-	 * @param integer $exp_time expiration time (number of seconds, not timestamp)
-	 * @return integer number of cache files deleted
-	*/
-	public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time)
+     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     * @return integer number of cache files deleted
+     */
+    public function clearAll(Smarty $smarty, $exp_time=null)
     {
         $this->cache = array();
-	    return $this->delete( $resource_name, $cache_id, $compile_id, $exp_time );
+        return $this->delete( null, null, null, $exp_time );
+    }
+    
+    /**
+     * Empty cache for a specific template
+     * 
+     * @param Smarty $smarty Smarty object
+     * @param string $resource_name template name
+     * @param string $cache_id cache id
+     * @param string $compile_id compile id
+     * @param integer $exp_time expiration time (number of seconds, not timestamp)
+     * @return integer number of cache files deleted
+    */
+    public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time)
+    {
+        $this->cache = array();
+        return $this->delete( $resource_name, $cache_id, $compile_id, $exp_time );
     }
 }

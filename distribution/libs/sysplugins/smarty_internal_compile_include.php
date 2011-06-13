@@ -47,7 +47,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
                     // save unique function name
                     self::$merged_templates_func[$tpl_name]['func'] = $tpl->properties['unifunc'] = 'content_'.uniqid();
                     // use current nocache hash for inlined code
-			        self::$merged_templates_func[$tpl_name]['nocache_hash'] = $tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
+                    self::$merged_templates_func[$tpl_name]['nocache_hash'] = $tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
                     // suppress writing of compiled file
                     $tpl->write_compiled_code = false;
                     if ($compiler->template->caching) {
@@ -159,7 +159,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         if ($has_compiled_template && !($compiler->template->caching && ($compiler->tag_nocache || $compiler->nocache))) {
             $_output = "<?php /*  Call merged included template \"" . $tpl_name . "\" */\n";
             $_output .= "\$_template = new {$compiler->smarty->template_class}($include_file, \$_smarty_tpl->smarty, \$_smarty_tpl, $_cache_id, $_compile_id, $_caching, $_cache_lifetime);\n";
-            //			$_output .= "\$_template = \$_smarty_tpl->smarty->createTemplate ($include_file, \$_smarty_tpl, $_cache_id, $_compile_id,false); \$_template->caching = $_caching;";
+            //            $_output .= "\$_template = \$_smarty_tpl->smarty->createTemplate ($include_file, \$_smarty_tpl, $_cache_id, $_compile_id,false); \$_template->caching = $_caching;";
             $hash = self::$merged_templates_func[$tpl_name]['nocache_hash'];
             $_output .= "\$_template->properties['nocache_hash']  = '{$hash}';\n";
             if ($_has_vars) {

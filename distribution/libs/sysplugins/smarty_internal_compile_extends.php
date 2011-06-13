@@ -14,7 +14,7 @@
  * Smarty Internal Plugin Compile extend Class
  */
 class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
-	// attribute definitions
+    // attribute definitions
     public $required_attributes = array('file');
     public $shorttag_order = array('file');
 
@@ -33,23 +33,23 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
         // check and get attributes
         $_attr = $this->_get_attributes($compiler, $args);
         if ($_attr['nocache'] === true) {
-        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
+            $compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
 
         $_smarty_tpl = $compiler->template;
         $include_file = null;
         if (strpos($_attr['file'],'$_tmp') !== false) {
-        	$compiler->trigger_template_error('illegal value for file attribute', $compiler->lex->taglineno);
+            $compiler->trigger_template_error('illegal value for file attribute', $compiler->lex->taglineno);
         }
         eval('$include_file = ' . $_attr['file'] . ';');
         // create template object
         $_template = new $compiler->smarty->template_class($include_file, $compiler->smarty, $compiler->template);
         // save file dependency
         if (in_array($_template->source->type,array('eval','string'))) {
-        	$template_sha1 = sha1($include_file);
-    	} else {
-        	$template_sha1 = sha1($_template->source->filepath);
-    	}
+            $template_sha1 = sha1($include_file);
+        } else {
+            $template_sha1 = sha1($_template->source->filepath);
+        }
         if (isset($compiler->template->properties['file_dependency'][$template_sha1])) {
             $compiler->trigger_template_error("illegal recursive call of \"{$include_file}\"",$compiler->lex->line-1);
         }

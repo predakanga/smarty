@@ -13,7 +13,7 @@
  * Smarty Internal Plugin Compile Break Class
  */
 class Smarty_Internal_Compile_Break extends Smarty_Internal_CompileBase {
-	// attribute definitions
+    // attribute definitions
     public $optional_attributes = array('levels'); 
     public $shorttag_order = array('levels');
 
@@ -32,7 +32,7 @@ class Smarty_Internal_Compile_Break extends Smarty_Internal_CompileBase {
         $_attr = $this->_get_attributes($compiler, $args);
 
         if ($_attr['nocache'] === true) {
-        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
+            $compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
 
         if (isset($_attr['levels'])) {

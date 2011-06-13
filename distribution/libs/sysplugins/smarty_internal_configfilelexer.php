@@ -1,15 +1,21 @@
 <?php
 /**
-* Smarty Internal Plugin Configfilelexer
-*
-* This is the lexer to break the config file source into tokens
-* @package Smarty
-* @subpackage Config
-* @author Uwe Tews
-*/
+ * Smarty Internal Plugin Configfilelexer
+ *
+ *
+ * @package Smarty
+ * @subpackage Config
+ * @author Uwe Tews
+ */
+
 /**
-* Smarty Internal Plugin Configfilelexer
-*/
+ * Smarty Internal Plugin Configfilelexer
+ *
+ * This is the lexer to break the config file source into tokens.
+ *
+ * @package Smarty
+ * @subpackage Config
+ */
 class Smarty_Internal_Configfilelexer
 {
 
@@ -20,11 +26,14 @@ class Smarty_Internal_Configfilelexer
     public $node;
     public $line;
     private $state = 1;
-    public $smarty_token_names = array (		// Text for parser error messages
-   				);
+    /**
+     * List of texts for parser error messages
+     *
+     * @var array
+     */
+    public $smarty_token_names = array ();
 
-
-    function __construct($data, $smarty)
+    public function __construct($data, $smarty)
     {
         // set instance object
         self::instance($this);
@@ -66,9 +75,6 @@ class Smarty_Internal_Configfilelexer
     {
         $this->_yy_state = $state;
     }
-
-
-
 
     function yylex1()
     {
@@ -132,48 +138,45 @@ class Smarty_Internal_Configfilelexer
 
     } // end function
 
-
     const START = 1;
+
     function yy_r1_1($yy_subpatterns)
     {
-
-    $this->token = Smarty_Internal_Configfileparser::TPC_COMMENTSTART;
-    $this->yypushstate(self::COMMENT);
+        $this->token = Smarty_Internal_Configfileparser::TPC_COMMENTSTART;
+        $this->yypushstate(self::COMMENT);
     }
+
     function yy_r1_2($yy_subpatterns)
     {
-
-    $this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
-    $this->yypushstate(self::SECTION);
+        $this->token = Smarty_Internal_Configfileparser::TPC_OPENB;
+        $this->yypushstate(self::SECTION);
     }
+
     function yy_r1_3($yy_subpatterns)
     {
-
-    $this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
+        $this->token = Smarty_Internal_Configfileparser::TPC_CLOSEB;
     }
+
     function yy_r1_4($yy_subpatterns)
     {
-
-    $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
-    $this->yypushstate(self::VALUE);
+        $this->token = Smarty_Internal_Configfileparser::TPC_EQUAL;
+        $this->yypushstate(self::VALUE);
     }
+
     function yy_r1_5($yy_subpatterns)
     {
-
-    return false;
+        return false;
     }
+
     function yy_r1_6($yy_subpatterns)
     {
-
-    $this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
+        $this->token = Smarty_Internal_Configfileparser::TPC_NEWLINE;
     }
+
     function yy_r1_7($yy_subpatterns)
     {
-
-    $this->token = Smarty_Internal_Configfileparser::TPC_ID;
+        $this->token = Smarty_Internal_Configfileparser::TPC_ID;
     }
-
-
 
     function yylex2()
     {

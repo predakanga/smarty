@@ -130,7 +130,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     {
         if (!$this->source->recompiled) {
             $this->properties['file_dependency'] = array();
-			if ($this->source->components) {
+            if ($this->source->components) {
                 // uses real resource for file dependency
                 $source = end($this->source->components);
                 $this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp, $source->type);
@@ -452,7 +452,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->$property_name = $value;
             return;
 
-    		// FIXME: routing of template -> smarty attributes
+            // FIXME: routing of template -> smarty attributes
             default:
             if (property_exists($this->smarty, $property_name)) {
                 $this->smarty->$property_name = $value;
@@ -498,7 +498,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->compiler = new $this->source->compiler_class($this->source->template_lexer_class, $this->source->template_parser_class, $this->smarty);
             return $this->compiler;
 
-    		// FIXME: routing of template -> smarty attributes
+            // FIXME: routing of template -> smarty attributes
             default:
             if (property_exists($this->smarty, $property_name)) {
                 return $this->smarty->$property_name;

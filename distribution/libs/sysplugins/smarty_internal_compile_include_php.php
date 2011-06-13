@@ -14,9 +14,9 @@
  * Smarty Internal Plugin Compile Insert Class
  */
 class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
-	// attribute definitions
+    // attribute definitions
     public $required_attributes = array('file');
-   	public $shorttag_order = array('file');
+       public $shorttag_order = array('file');
     public $optional_attributes = array('once', 'assign');
 
     /**
@@ -28,9 +28,9 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
      */
     public function compile($args, $compiler)
     {
-    	if (!($compiler->smarty instanceof SmartyBC)) {
-        	throw new SmartyException("{include_php} is deprecated, use SmartyBC class to enable");
-    	}
+        if (!($compiler->smarty instanceof SmartyBC)) {
+            throw new SmartyException("{include_php} is deprecated, use SmartyBC class to enable");
+        }
         // check and get attributes
         $_attr = $this->_get_attributes($compiler, $args);
 
@@ -40,7 +40,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
         $_filepath = false;
         eval('$_file = ' . $_attr['file'] . ';');
         if (!isset($compiler->smarty->security_policy) && file_exists($_file)) {
-        	$_filepath = $_file;
+            $_filepath = $_file;
         } else {
             if (isset($compiler->smarty->security_policy)) {
                 $_dir = $compiler->smarty->security_policy->trusted_dir;
