@@ -37,26 +37,26 @@ require(dirname(__FILE__) . '/Smarty.class.php');
  */
 
 class SmartyBC extends Smarty {
-	// Smarty 2 BC
-	public $_version = self::SMARTY_VERSION;
+    // Smarty 2 BC
+    public $_version = self::SMARTY_VERSION;
 
 
-	/**
-	 * Initialize new SmartyBC object
-	 *
-	 * @param array $options options to set during initialization, e.g. array( 'forceCompile' => false )
-	 */
-	public function __construct(array $options=array())
-	{
-	    parent::__construct($options);
-	    // register {php} tag
-	    $this->registerPlugin('block','php','smarty_php_tag');
-	}
+    /**
+     * Initialize new SmartyBC object
+     *
+     * @param array $options options to set during initialization, e.g. array( 'forceCompile' => false )
+     */
+    public function __construct(array $options=array())
+    {
+        parent::__construct($options);
+        // register {php} tag
+        $this->registerPlugin('block','php','smarty_php_tag');
+    }
 
 
-	/**
-	 * wrapper for assign_by_ref
-	 *
+    /**
+     * wrapper for assign_by_ref
+     *
      * @param string $tpl_var the template variable name
      * @param mixed $ &$value the referenced value to assign
      */
@@ -66,7 +66,7 @@ class SmartyBC extends Smarty {
     }
 
     /**
-	 * wrapper for append_by_ref
+     * wrapper for append_by_ref
      *
      * @param string $tpl_var the template variable name
      * @param mixed $ &$value the referenced value to append
@@ -421,7 +421,7 @@ class SmartyBC extends Smarty {
      */
     function clear_config($var = null)
     {
-    	$this->clearConfig($var);
+        $this->clearConfig($var);
     }
 
     /**
