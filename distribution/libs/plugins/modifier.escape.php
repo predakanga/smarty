@@ -15,10 +15,10 @@
  * 
  * @link http://smarty.php.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com> 
- * @param string $string input string
- * @param string $esc_type escape type
- * @param string $char_set character set
- * @param boolean $double_encode encode already encoded entitites again
+ * @param string  $string        input string
+ * @param string  $esc_type      escape type
+ * @param string  $char_set      character set, used for htmlspecialchars() or htmlentities()
+ * @param boolean $double_encode encode already encoded entitites again, used for htmlspecialchars() or htmlentities()
  * @return string escaped input string
  */
 function smarty_modifier_escape($string, $esc_type = 'html', $char_set = null, $double_encode = true)
