@@ -188,19 +188,16 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
      * default template handler
      * @var callable
-     * @todo type correct?
      */
     public $default_template_handler_func = null;
     /**
      * default config handler
      * @var callable
-     * @todo type correct?
      */
     public $default_config_handler_func = null;
     /**
      * default plugin handler
      * @var callable
-     * @todo type correct?
      */
     public $default_plugin_handler_func = null;
     /**
@@ -309,8 +306,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
      * implementation of security class
      *
      * @var Smarty_Security
-     * @todo Note that the setter-function enableSecurity() does not enforce this to be a sub-class of Smarty_Security.
-     *       You may want to reconsider this issue.
      */
     public $security_policy = null;
     /**
@@ -690,15 +685,17 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         if ($security_class instanceof Smarty_Security) {
             $this->security_policy = $security_class;
-            return;
+            return $this;
         }
         if ($security_class == null) {
             $security_class = $this->security_class;
         }
-        if (class_exists($security_class)) {
-            $this->security_policy = new $security_class($this);
-        } else {
+        if (!class_exists($security_class)) {
             throw new SmartyException("Security class '$security_class' is not defined");
+        } elseif ($security_class !== 'Smarty_Security' && !is_subclass_of($security_class, 'Smarty_Security')) {
+            throw new SmartyException("Class '$security_class' must extend Smarty_Security.");
+        } else {
+            $this->security_policy = new $security_class($this);
         }
 
         return $this;
