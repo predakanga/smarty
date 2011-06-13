@@ -9,9 +9,21 @@
 
 /**
  * This class does call function defined with the {function} tag
+ *
+ * @package Smarty
+ * @subpackage PluginsInternal
  */
 class Smarty_Internal_Function_Call_Handler extends Smarty_Internal_Template {
-    static function call ($_name, $_template, $_params, $_hash, $_nocache)
+
+    /**
+     * @param string                   $_name
+     * @param Smarty_Internal_Template $_template
+     * @param array                    $_params
+     * @param string                   $_hash
+     * @param bool                     $_nocache
+     * @todo  Missing documentation
+     */
+    public static function call($_name, $_template, $_params, $_hash, $_nocache)
     {
         if ($_nocache) {
             $_function = "smarty_template_function_{$_name}_nocache";
@@ -35,6 +47,7 @@ class Smarty_Internal_Function_Call_Handler extends Smarty_Internal_Template {
         }
         $_function($_template, $_params);
     }
+
 }
 
 ?>

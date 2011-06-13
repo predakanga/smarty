@@ -1,20 +1,23 @@
 <?php
-
 /**
  * Smarty read include path plugin
- * 
+ *
  * @package Smarty
  * @subpackage PluginsInternal
- * @author Monte Ohrt 
+ * @author Monte Ohrt
  */
 
 /**
  * Smarty Internal Read Include Path Class
+ *
+ * @package Smarty
+ * @subpackage PluginsInternal
  */
 class Smarty_Internal_Get_Include_Path {
+
     /**
      * Return full file path from PHP include_path
-     * 
+     *
      * @param string $filepath filepath
      * @return mixed full filepath or false
      */
@@ -32,7 +35,8 @@ class Smarty_Internal_Get_Include_Path {
             }
         }
         return false;
-    } 
-} 
+    }
+
+}
 
 ?>
