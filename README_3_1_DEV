@@ -70,7 +70,7 @@ functions. This speeds up repeated templates tremendously, as each one
 calls an (in-memory) PHP function instead of performing another file
 include/scan.
 
-New Feaures
+New Features
 
   Template syntax
 
@@ -80,10 +80,10 @@ The {block} tag has a new hide option flag. It does suppress the block
 content if no corresponding child block exists.
 EXAMPLE:
 parent.tpl
-{block name=`body' hide} child content &quot;{$smarty.block.child}&quot; was
+{block name=body hide} child content &quot;{$smarty.block.child}&quot; was
 inserted {block}
 In the above example the whole block will be suppressed if no child
-block `body' is existing.
+block "body" is existing.
 
  {setfilter}..{/setfilter}
 
@@ -94,17 +94,17 @@ SYNTAX:
 Smarty3 will lookup up matching filters in the following search order:
 1. varibale filter plugin in plugins_dir.
 2. a valid modifier. A modifier specification will also accept
-additional parameter like filter2:`foo'
+additional parameter like filter2:'foo'
 3. a PHP function
 {/setfilter} will turn previous filter setting off again.
 {setfilter} tags can be nested.
 EXAMPLE:
 {setfilter filter1}
-{$foo}
-{setfilter filter2}
-{$bar}
-{\setfilter}
-{$buh}
+  {$foo}
+  {setfilter filter2}
+    {$bar}
+  {/setfilter}
+  {$buh}
 {/setfilter}
 {$blar}
 In the above example filter1 will run on the output of $foo, filter2
@@ -112,7 +112,7 @@ on $bar, filter1 again on $buh and no filter on $blar.
 NOTES:
 - {$foo nofilter} will suppress the filters
 - These filters will run in addition to filters defined by
-registerFilter(`variable',...), autoLoadFilter(`variable',...) and
+registerFilter('variable',...), autoLoadFilter('variable',...) and
 defined default modifier.
 - {setfilter} will effect only the current template, not included
 subtemplates.
@@ -157,15 +157,15 @@ properly, it has been dropped from 3.1 completely.
 As of Smarty 3.1 {include file=&quot;../foo.tpl&quot;} and {include
 file=&quot;./foo.tpl&quot;} will resolve relative to the template they're in.
 Relative paths are available with {include file=&quot;…&quot;} and
-{extends file=&quot;…&quot;}. As $smarty-&gt;fetch(`../foo.tpl') and
-$smarty-&gt;fetch(`./foo.tpl') cannot be relative to a template, an
+{extends file=&quot;…&quot;}. As $smarty-&gt;fetch('../foo.tpl') and
+$smarty-&gt;fetch('./foo.tpl') cannot be relative to a template, an
 exception is thrown.
 
   Adressing a specific $template_dir
 
 Smarty 3.1 introduces the $template_dir index notation.
-$smarty-&gt;fetch(`[foo]bar.tpl') and {include file=&quot;[foo]bar.tpl&quot;}
-require the template bar.tpl to be loaded from $template_dir[`foo'];
+$smarty-&gt;fetch('[foo]bar.tpl') and {include file=&quot;[foo]bar.tpl&quot;}
+require the template bar.tpl to be loaded from $template_dir['foo'];
 Smarty::setTemplateDir() and Smarty::addTemplateDir() offer ways to
 define indexes along with the actual directories.
 
