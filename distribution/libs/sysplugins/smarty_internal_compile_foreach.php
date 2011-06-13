@@ -11,19 +11,39 @@
 
 /**
  * Smarty Internal Plugin Compile Foreach Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
-    // attribute definitions
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $required_attributes = array('from', 'item');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $optional_attributes = array('name', 'key');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $shorttag_order = array('from','item','key','name');
 
     /**
      * Compiles code for the {foreach} tag
      *
-     * @param array $args array with attributes from parser
-     * @param object $compiler compiler object
-     * @param array $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
     public function compile($args, $compiler, $parameter)
@@ -154,14 +174,18 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
 /**
  * Smarty Internal Plugin Compile Foreachelse Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
+
     /**
      * Compiles code for the {foreachelse} tag
      *
-     * @param array $args array with attributes from parser
+     * @param array  $args array with attributes from parser
      * @param object $compiler compiler object
-     * @param array $parameter array with compilation parameter
+     * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
     public function compile($args, $compiler, $parameter)
@@ -174,18 +198,23 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
 
         return "<?php }} else { ?>";
     }
+
 }
 
 /**
  * Smarty Internal Plugin Compile Foreachclose Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase {
+
     /**
      * Compiles code for the {/foreach} tag
      *
-     * @param array $args array with attributes from parser
-     * @param object $compiler compiler object
-     * @param array $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
     public function compile($args, $compiler, $parameter)
@@ -199,11 +228,13 @@ class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase {
 
         list($_open_tag, $compiler->nocache, $item, $key) = $this->_close_tag($compiler, array('foreach', 'foreachelse'));
 
-        if ($_open_tag == 'foreachelse')
+        if ($_open_tag == 'foreachelse') {
             return "<?php } ?>";
-        else
+        } else {
             return "<?php }} ?>";
+        }
     }
+
 }
 
 ?>

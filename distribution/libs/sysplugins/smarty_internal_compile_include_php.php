@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Smarty Internal Plugin Compile Include PHP
  *
@@ -12,17 +11,38 @@
 
 /**
  * Smarty Internal Plugin Compile Insert Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
-    // attribute definitions
+
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $required_attributes = array('file');
-       public $shorttag_order = array('file');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
+    public $shorttag_order = array('file');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $optional_attributes = array('once', 'assign');
 
     /**
      * Compiles code for the {include_php} tag
      *
-     * @param array $args array with attributes from parser
+     * @param array  $args     array with attributes from parser
      * @param object $compiler compiler object
      * @return string compiled code
      */
@@ -82,6 +102,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
             return "<?php include{$_once} ('{$_filepath}');?>\n";
         }
     }
+
 }
 
 ?>

@@ -1,35 +1,67 @@
 <?php
+/**
+ * Smarty Internal Plugin Compile Include
+ *
+ * Compiles the {include} tag
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ * @author Uwe Tews
+ */
 
 /**
-* Smarty Internal Plugin Compile Include
-*
-* Compiles the {include} tag
-*
-* @package Smarty
-* @subpackage Compiler
-* @author Uwe Tews
-*/
-
-/**
-* Smarty Internal Plugin Compile Include Class
-*/
+ * Smarty Internal Plugin Compile Include Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ */
 class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
-    // caching mode to create nocache code but no cache file
-    const CACHING_NOCACHE_CODE = 9999;
-    // attribute definitions
-    public $required_attributes = array('file');
-    public $shorttag_order = array('file');
-    public $option_flags = array('nocache','inline','caching');
-    public $optional_attributes = array('_any');
-    static $merged_templates_func = array();
 
     /**
-    * Compiles code for the {include} tag
-    *
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @return string compiled code
-    */
+     * caching mode to create nocache code but no cache file
+     */
+    const CACHING_NOCACHE_CODE = 9999;
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
+    public $required_attributes = array('file');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
+    public $shorttag_order = array('file');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
+    public $option_flags = array('nocache', 'inline', 'caching');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
+    public $optional_attributes = array('_any');
+    /**
+     * @var array
+     * @todo This is never used anywhere else - consider making it private.
+     */
+    public static $merged_templates_func = array();
+
+    /**
+     * Compiles code for the {include} tag
+     *
+     * @param array  $args     array with attributes from parser
+     * @param object $compiler compiler object
+     * @return string compiled code
+     */
     public function compile($args, $compiler)
     {
         // check and get attributes
@@ -186,5 +218,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         }
         return $_output;
     }
+
 }
+
 ?>

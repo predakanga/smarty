@@ -1,30 +1,45 @@
 <?php
 /**
-* Smarty Internal Plugin Compile Print Expression
-*
-* Compiles any tag which will output an expression or variable
-*
-* @package Smarty
-* @subpackage Compiler
-* @author Uwe Tews
-*/
+ * Smarty Internal Plugin Compile Print Expression
+ *
+ * Compiles any tag which will output an expression or variable
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ * @author Uwe Tews
+ */
 
 /**
-* Smarty Internal Plugin Compile Print Expression Class
-*/
+ * Smarty Internal Plugin Compile Print Expression Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ */
 class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_CompileBase {
-    // attribute definitions
+
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $optional_attributes = array('assign');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $option_flags = array('nocache', 'nofilter');
 
     /**
-    * Compiles code for gererting output from any expression
-    *
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @param array $parameter array with compilation parameter
-    * @return string compiled code
-    */
+     * Compiles code for gererting output from any expression
+     *
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
+     * @return string compiled code
+     */
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
@@ -111,10 +126,17 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
         return $output;
     }
 
+    /**
+     * @param object $compiler compiler object
+     * @param string $name     name of variable filter
+     * @param type   $output   embedded output
+     * @return string
+     */
     private function compile_output_filter($compiler, $name, $output)
     {
         $plugin_name = "smarty_variablefilter_{$name}";
-        if ($path = $compiler->smarty->loadPlugin($plugin_name, false)) {
+        $path = $compiler->smarty->loadPlugin($plugin_name, false);
+        if ($path) {
             if ($compiler->template->caching) {
                 $compiler->template->required_plugins['nocache'][$name][Smarty::FILTER_VARIABLE]['file'] = $path;
                 $compiler->template->required_plugins['nocache'][$name][Smarty::FILTER_VARIABLE]['function'] = $plugin_name;
@@ -128,5 +150,7 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
         }
         return "{$plugin_name}({$output},\$_smarty_tpl)";
     }
+
 }
+
 ?>
