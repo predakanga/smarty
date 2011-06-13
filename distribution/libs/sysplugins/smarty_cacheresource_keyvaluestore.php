@@ -132,7 +132,8 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     /**
      * Empty cache for a specific template
      *
-     * @note the $exp_time argument is ignored altogether
+     * {@internal the $exp_time argument is ignored altogether}}
+     *
      * @param Smarty  $smarty        Smarty object
      * @param string  $resource_name template name
      * @param string  $cache_id      cache id
@@ -357,7 +358,6 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      *
      * @param array $keys list of keys to fetch
      * @return array list of values with the given keys used as indexes
-     * @return boolean true on success, false on failure
      */
     protected abstract function read(array $keys);
 
