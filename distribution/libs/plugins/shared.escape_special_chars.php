@@ -18,15 +18,15 @@
  */
 function smarty_function_escape_special_chars($string)
 {
-	// TODO: (rodneyrehm) optimization through conditinal function definition possible
+    // TODO: (rodneyrehm) optimization through conditinal function definition possible
     if(!is_array($string)) {
-		if (version_compare( PHP_VERSION, '5.2.3', '>=')) {
-			$string = htmlspecialchars( $string, ENT_COMPAT, SMARTY_RESOURCE_CHAR_SET, false );
-		} else {
-	        $string = preg_replace('!&(#?\w+);!', '%%%SMARTY_START%%%\\1%%%SMARTY_END%%%', $string);
-	        $string = htmlspecialchars($string);
-	        $string = str_replace(array('%%%SMARTY_START%%%','%%%SMARTY_END%%%'), array('&',';'), $string);
-		}
+        if (version_compare( PHP_VERSION, '5.2.3', '>=')) {
+            $string = htmlspecialchars( $string, ENT_COMPAT, SMARTY_RESOURCE_CHAR_SET, false );
+        } else {
+            $string = preg_replace('!&(#?\w+);!', '%%%SMARTY_START%%%\\1%%%SMARTY_END%%%', $string);
+            $string = htmlspecialchars($string);
+            $string = str_replace(array('%%%SMARTY_START%%%','%%%SMARTY_END%%%'), array('&',';'), $string);
+        }
     }
     return $string;
 }

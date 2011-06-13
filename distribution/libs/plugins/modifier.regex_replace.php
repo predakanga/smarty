@@ -12,12 +12,13 @@
  * Type:     modifier<br>
  * Name:     regex_replace<br>
  * Purpose:  regular expression search/replace
+ *
  * @link http://smarty.php.net/manual/en/language.modifier.regex.replace.php
  *          regex_replace (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
- * @param string
- * @param string|array
- * @param string|array
+ * @param string       $string   input string
+ * @param string|array $search   regular expression(s) to search for
+ * @param string|array $replace  string(s) that should be replaced
  * @return string
  */
 function smarty_modifier_regex_replace($string, $search, $replace)
@@ -32,6 +33,13 @@ function smarty_modifier_regex_replace($string, $search, $replace)
     return preg_replace($search, $replace, $string);
 }
 
+/**
+ * @param  string $search string(s) that should be replaced
+ * @return string
+ * @ignore
+ * @todo   Security issue: The NULL-byte detection does only detect the 1st occurence of a NULL-literal.
+ *         Fix this with high priority!
+ */
 function _smarty_regex_replace_check($search)
 {
     // null-byte injection detection

@@ -15,7 +15,7 @@ require_once( SMARTY_PLUGINS_DIR .'shared.literal_compiler_param.php' );
  * Name:     escape<br>
  * Purpose:  escape string for output
  *
- * @link http://smarty.php.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
+ * @link http://www.smarty.net/docsv2/en/language.modifier.escape count_characters (Smarty online manual)
  * @author Rodney Rehm
  * @param array $params parameters
  * @return string with compiled code
@@ -30,27 +30,27 @@ function smarty_modifiercompiler_escape($params, $compiler)
         if (!$char_set) {
             $char_set = SMARTY_RESOURCE_CHAR_SET;
         }
-        
+
         switch ($esc_type) {
             case 'html':
-                return 'htmlspecialchars(' 
-                    . $params[0] .', ENT_QUOTES, ' 
+                return 'htmlspecialchars('
+                    . $params[0] .', ENT_QUOTES, '
                     . var_export($char_set, true) . ', '
                     . var_export($double_encode, true) . ')';
-            
+
             case 'htmlall':
                 if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
                     return 'mb_convert_encoding(htmlspecialchars('
-                        . $params[0] .', ENT_QUOTES, ' 
+                        . $params[0] .', ENT_QUOTES, '
                         . var_export($char_set, true) . ', '
-                        . var_export($double_encode, true) 
-                        . '), "HTML-ENTITIES", ' 
+                        . var_export($double_encode, true)
+                        . '), "HTML-ENTITIES", '
                         . var_export($char_set, true) . ')';
                 }
-            
+
                 // no MBString fallback
-                return 'htmlentities(' 
-                    . $params[0] .', ENT_QUOTES, ' 
+                return 'htmlentities('
+                    . $params[0] .', ENT_QUOTES, '
                     . var_export($char_set, true) . ', '
                     . var_export($double_encode, true) . ')';
 
@@ -60,19 +60,19 @@ function smarty_modifiercompiler_escape($params, $compiler)
             case 'urlpathinfo':
                 return 'str_replace("%2F", "/", rawurlencode(' . $params[0] . '))';
 
-            case 'quotes': 
+            case 'quotes':
                 // escape unescaped single quotes
                 return 'preg_replace("%(?<!\\\\\\\\)\'%", "\\\'",' . $params[0] . ')';
-            
-            case 'javascript': 
+
+            case 'javascript':
                 // escape quotes and backslashes, newlines, etc.
                 return 'strtr(' . $params[0] . ', array("\\\\" => "\\\\\\\\", "\'" => "\\\\\'", "\"" => "\\\\\"", "\\r" => "\\\\r", "\\n" => "\\\n", "</" => "<\/" ))';
-        
+
         }
     } catch(SmartyException $e) {
         // pass through to regular plugin fallback
     }
-    
+
     // could not optimize |escape call, so fallback to regular plugin
     if ($compiler->tag_nocache | $compiler->nocache) {
         $compiler->template->required_plugins['nocache']['escape']['modifier']['file'] = SMARTY_PLUGINS_DIR .'modifier.escape.php';
