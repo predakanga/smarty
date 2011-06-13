@@ -6,7 +6,13 @@
  * @subpackage PluginsFunction
  */
 
+/**
+ * @ignore
+ */
 require_once(SMARTY_PLUGINS_DIR . 'shared.escape_special_chars.php');
+/**
+ * @ignore
+ */
 require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
 
 /**
@@ -16,7 +22,8 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  * Name:     html_select_date<br>
  * Purpose:  Prints the dropdowns for date selection.
  * 
- * ChangeLog:<br>
+ * ChangeLog:
+ * <pre>
  *            - 1.0 initial release
  *            - 1.1 added support for +/- N syntax for begin
  *              and end year values. (Monte)
@@ -32,15 +39,16 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  *              of 0000-00-00 dates (cybot, boots)
  *            - 2.0 complete rewrite for performance,  
  *              added attributes month_names, *_id
+ * </pre>
  * 
- * @link http://smarty.php.net/manual/en/language.function.html.select.date.php {html_select_date}
+ * @link http://www.smarty.net/manual/en/language.function.html.select.date.php {html_select_date}
  *      (Smarty online manual)
  * @version 2.0
  * @author Andrei Zmievski 
  * @author Monte Ohrt <monte at ohrt dot com> 
  * @author Rodney Rehm
- * @param array $params parameters
- * @param object $template template object
+ * @param array                    $params   parameters
+ * @param Smarty_Internal_Template $template template object
  * @return string 
  */
 function smarty_function_html_select_date($params, $template)
