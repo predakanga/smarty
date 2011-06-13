@@ -1,24 +1,34 @@
 <?php
+/**
+ * Smarty Internal Plugin
+ *
+ * @package Smarty
+ * @subpackage TemplateResources
+ */
 
 /**
  * Smarty Resource Data Object
- * 
+ *
  * Meta Data Container for Config Files
- * 
+ *
  * @package Smarty
  * @subpackage TemplateResources
  * @author Rodney Rehm
+ *
+ * @property string $content
+ * @property int    $timestamp
+ * @property bool   $exists
  */
 class Smarty_Config_Source extends Smarty_Template_Source {
 
     /**
      * create Config Object container
      *
-     * @param Smarty_Resource $handler Resource Handler this source object communicates with
-     * @param Smarty $smarty Smarty instance this source object belongs to
-     * @param string $resource full config_resource
-     * @param string $type type of resource
-     * @param string $name resource name
+     * @param Smarty_Resource $handler  Resource Handler this source object communicates with
+     * @param Smarty          $smarty   Smarty instance this source object belongs to
+     * @param string          $resource full config_resource
+     * @param string          $type     type of resource
+     * @param string          $name     resource name
      */
     public function __construct(Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name)
     {
@@ -34,7 +44,7 @@ class Smarty_Config_Source extends Smarty_Template_Source {
         $this->type = $type;
         $this->name = $name;
     }
-    
+
     /**
      * get a Compiled Object of this source
      *
@@ -48,38 +58,50 @@ class Smarty_Config_Source extends Smarty_Template_Source {
         return $compiled;
     }
     */
-    
-    
-    public function __set($property_name, $value)
+
+    /**
+     * <<magic>> Generic setter.
+     *
+     * @param string $propertyName valid: content, timestamp, exists
+     * @param mixed  $value        newly assigned value (not check for correct type)
+     * @throws SmartyException when the given property name is not valid
+     */
+    public function __set($propertyName, $value)
     {
-        switch ($property_name) {
+        switch ($propertyName) {
             case 'content':
             case 'timestamp':
             case 'exists':
                 $this->$property_name = $value;
                 break;
-                
+
             default:
-                throw new SmartyException("invalid config property '$property_name'.");
+                throw new SmartyException("invalid config property '$propertyName'.");
         }
     }
-    
-    public function __get($property_name)
+
+    /**
+     * <<magic>> Generic getter.
+     *
+     * @param string $propertyName valid: content, timestamp, exists
+     * @throws SmartyException when the given property name is not valid
+     */
+    public function __get($propertyName)
     {
-        switch ($property_name) {
+        switch ($propertyName) {
             case 'timestamp':
             case 'exists':
                 $this->handler->populateTimestamp($this);
                 return $this->$property_name;
-                
+
             case 'content':
                 return $this->content = $this->handler->getContent($this);
 
             default:
-                throw new SmartyException("config property '$property_name' does not exist.");
+                throw new SmartyException("config property '$propertyName' does not exist.");
         }
     }
-}
 
+}
 
 ?>
