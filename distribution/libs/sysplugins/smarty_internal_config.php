@@ -10,14 +10,13 @@
 * @author Uwe Tews
 */
 class Smarty_Internal_Config {
-    static $config_objects = array();
 
+    public static $config_objects = array();
     public $smarty = null;
     public $data = null;
     public $config_resource = null;
     //public $source = null; // magic loaded
     //public $compiled = null; // magic loaded
-
     public $config_source = null;
     public $compiled_config = null;
     public $compiled_filepath = null;
@@ -33,21 +32,22 @@ class Smarty_Internal_Config {
     }
 
     /**
-    * Returns the compiled  filepath
-    *
-    * @return string the compiled filepath
-    */
-    public function getCompiledFilepath ()
+     * Returns the compiled  filepath
+     *
+     * @return string the compiled filepath
+     */
+    public function getCompiledFilepath()
     {
         return $this->compiled_filepath === null ?
-        ($this->compiled_filepath = $this->buildCompiledFilepath()) :
-        $this->compiled_filepath;
+                ($this->compiled_filepath = $this->buildCompiledFilepath()) :
+                $this->compiled_filepath;
     }
+
     public function buildCompiledFilepath()
     {
         $_compile_id = isset($this->smarty->compile_id) ? preg_replace('![^\w\|]+!', '_', $this->smarty->compile_id) : null;
-        $_flag = (int)$this->smarty->config_read_hidden + (int)$this->smarty->config_booleanize * 2 +
-        (int)$this->smarty->config_overwrite * 4;
+        $_flag = (int) $this->smarty->config_read_hidden + (int) $this->smarty->config_booleanize * 2 +
+            (int) $this->smarty->config_overwrite * 4;
         $_filepath = sha1($this->source->name . $_flag);
         // if use_sub_dirs, break file into directories
         if ($this->smarty->use_sub_dirs) {
@@ -63,25 +63,26 @@ class Smarty_Internal_Config {
         $_compile_dir = $this->smarty->getCompileDir();
         return $_compile_dir . $_filepath . '.' . basename($this->source->name) . '.config' . '.php';
     }
+
     /**
-    * Returns the timpestamp of the compiled file
-    *
-    * @return integer the file timestamp
-    */
-    public function getCompiledTimestamp ()
+     * Returns the timpestamp of the compiled file
+     *
+     * @return integer the file timestamp
+     */
+    public function getCompiledTimestamp()
     {
         return $this->compiled_timestamp === null ?
-        ($this->compiled_timestamp = (file_exists($this->getCompiledFilepath())) ? filemtime($this->getCompiledFilepath()) : false) :
-        $this->compiled_timestamp;
+                ($this->compiled_timestamp = (file_exists($this->getCompiledFilepath())) ? filemtime($this->getCompiledFilepath()) : false) :
+                $this->compiled_timestamp;
     }
 
     /**
-    * Returns if the current config file must be compiled
-    *
-    * It does compare the timestamps of config source and the compiled config and checks the force compile configuration
-    *
-    * @return boolean true if the file must be compiled
-    */
+     * Returns if the current config file must be compiled
+     *
+     * It does compare the timestamps of config source and the compiled config and checks the force compile configuration
+     *
+     * @return boolean true if the file must be compiled
+     */
     public function mustCompile ()
     {
         return $this->mustCompile === null ?
@@ -90,13 +91,13 @@ class Smarty_Internal_Config {
     }
 
     /**
-    * Returns the compiled config file
-    *
-    * It checks if the config file must be compiled or just read the compiled version
-    *
-    * @return string the compiled config file
-    */
-    public function getCompiledConfig ()
+     * Returns the compiled config file
+     *
+     * It checks if the config file must be compiled or just read the compiled version
+     *
+     * @return string the compiled config file
+     */
+    public function getCompiledConfig()
     {
         if ($this->compiled_config === null) {
             // see if template needs compiling.
@@ -110,9 +111,9 @@ class Smarty_Internal_Config {
     }
 
     /**
-    * Compiles the config files
-    */
-    public function compileConfigSource ()
+     * Compiles the config files
+     */
+    public function compileConfigSource()
     {
         // compile template
         if (!is_object($this->compiler_object)) {
@@ -141,16 +142,16 @@ class Smarty_Internal_Config {
         Smarty_Internal_Write_File::writeFile($this->getCompiledFilepath(), $this->getCompiledConfig(), $this->smarty);
     }
 
-    /*
-    * load config variables
-    *
-    * @param mixed $sections array of section names, single section or null
-    * @param object $scope global,parent or local
-    */
-    public function loadConfigVars ($sections = null, $scope = 'local')
+    /**
+     * load config variables
+     *
+     * @param mixed $sections array of section names, single section or null
+     * @param object $scope global,parent or local
+     */
+    public function loadConfigVars($sections = null, $scope = 'local')
     {
         if ($this->data instanceof Smarty_Internal_Template) {
-            $this->data->properties['file_dependency'][sha1($this->source->filepath)] = array($this->source->filepath, $this->source->timestamp,'file');
+            $this->data->properties['file_dependency'][sha1($this->source->filepath)] = array($this->source->filepath, $this->source->timestamp, 'file');
         }
         if ($this->mustCompile()) {
             $this->compileConfigSource();
@@ -212,18 +213,20 @@ class Smarty_Internal_Config {
     {
         switch ($property_name) {
             case 'source':
-            if (empty($this->config_resource)) {
-                throw new SmartyException ("Unable to parse resource name \"{$this->config_resource}\"");
-            }
-            $this->source = Smarty_Resource::config($this);
-            return $this->source;
+                if (empty($this->config_resource)) {
+                    throw new SmartyException ("Unable to parse resource name \"{$this->config_resource}\"");
+                }
+                $this->source = Smarty_Resource::config($this);
+                return $this->source;
 
             case 'compiled':
-            $this->compiled = $this->source->getCompiled($this);
-            return $this->compiled;
+                $this->compiled = $this->source->getCompiled($this);
+                return $this->compiled;
         }
 
         throw new SmartyException("config attribute '$property_name' does not exist.");
     }
+
 }
+
 ?>

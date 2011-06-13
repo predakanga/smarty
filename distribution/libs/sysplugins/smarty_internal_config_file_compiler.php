@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Smarty Internal Plugin Config File Compiler
  * 
@@ -10,13 +9,24 @@
  * @subpackage Config
  * @author Uwe Tews 
  */
- 
+
 /**
  * Main config file compiler class
+ * 
+ * @package Smarty
+ * @subpackage Config
+ * @todo This class is missing all member definitions.
+ *       Please review and add definitions for $smarty, $config, $lex, $config_data,
+ *       $parser
+ * @todo The file looks like a work-in-progress. Please verify before the next release.
  */
 class Smarty_Internal_Config_File_Compiler {
+
     /**
      * Initialize compiler
+     *
+     * @param Smarty $smarty base instance
+     * @todo  Check if the given input type is correct.
      */
     public function __construct($smarty)
     {
@@ -29,19 +39,20 @@ class Smarty_Internal_Config_File_Compiler {
     } 
 
     /**
-     * Methode to compile a Smarty template
+     * Method to compile a Smarty template.
      * 
-     * @param  $template template object to compile
+     * @param  object $config
      * @return bool true if compiling succeeded, false if it failed
+     * @todo  Params are missing documentation
      */
     public function compileSource($config)
     {
         /* here is where the compiling takes place. Smarty
-       tags in the templates are replaces with PHP code,
-       then written to compiled files. */
-        $this->config = $config; 
+          tags in the templates are replaces with PHP code,
+          then written to compiled files. */
+        $this->config = $config;
         // get config file source
-        $_content = $config->source->content . "\n"; 
+        $_content = $config->source->content . "\n";
         // on empty template just return
         if ($_content == '') {
             return true;
@@ -58,7 +69,8 @@ class Smarty_Internal_Config_File_Compiler {
         // finish parsing process
         $parser->doParse(0, 0);
         $config->compiled_config = '<?php $_config_vars = ' . var_export($this->config_data, true) . '; ?>';
-    } 
+    }
+
     /**
      * display compiler error messages without dying
      * 
@@ -68,7 +80,7 @@ class Smarty_Internal_Config_File_Compiler {
      * If parameter $args contains a string this is used as error message
      * 
      * @todo output exact position of parse error in source line
-     * @param  $args string individual error message or null
+     * @param string $args individual error message or null
      */
     public function trigger_config_file_error($args = null)
     {
@@ -100,7 +112,8 @@ class Smarty_Internal_Config_File_Compiler {
             $error_text .= ' - Unexpected "' . $this->lex->value . '", expected one of: ' . implode(' , ', $expect);
         } 
         throw new SmartyCompilerException($error_text);
-    } 
-} 
+    }
+
+}
 
 ?>
