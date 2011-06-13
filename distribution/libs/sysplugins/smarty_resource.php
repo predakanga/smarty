@@ -1,4 +1,11 @@
 <?php
+/**
+ * Smarty Resource Plugin
+ *
+ * @package Smarty
+ * @subpackage TemplateResources
+ * @author Rodney Rehm
+ */
 
 /**
  * Smarty Resource Plugin
@@ -7,15 +14,14 @@
  *
  * @package Smarty
  * @subpackage TemplateResources
- * @author Rodney Rehm
  */
 abstract class Smarty_Resource {
+
     /**
      * cache for Smarty_Resource instances
      * @var array
      */
     protected static $resources = array();
-
     /**
      * resource types provided by the core
      * @var array
@@ -47,18 +53,10 @@ abstract class Smarty_Resource {
     public $template_parser_class = 'Smarty_Internal_Templateparser';
 
     /**
-     * Create new Resource Plugin
-     *
-     */
-    public function __construct()
-    {
-
-    }
-
-    /**
      * Load template's source into current template object
      *
-     * @note: The loaded source is assigned to $_template->source->content directly.
+     * {@internal The loaded source is assigned to $_template->source->content directly.}}
+     *
      * @param Smarty_Template_Source $source source object
      * @return string template source
      * @throws SmartyException if source cannot be loaded
@@ -68,9 +66,8 @@ abstract class Smarty_Resource {
     /**
      * populate Source Object with meta data from Resource
      *
-     * @param Smarty_Template_Source $source source object
-     * @param Smarty_Internal_Template $_template template object
-     * @return void
+     * @param Smarty_Template_Source   $source source object
+     * @param Smarty_Internal_Template $_template     template object
      */
     public abstract function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null);
 
@@ -78,19 +75,17 @@ abstract class Smarty_Resource {
      * populate Source Object with timestamp and exists from Resource
      *
      * @param Smarty_Template_Source $source source object
-     * @return void
      */
     public function populateTimestamp(Smarty_Template_Source $source)
     {
-
+        // intentionally left blank
     }
 
     /**
      * populate Compiled Object with compiled filepath
      *
-     * @param Smarty_Template_Compiled $compiled compiled object
+     * @param Smarty_Template_Compiled $compiled  compiled object
      * @param Smarty_Internal_Template $_template template object
-     * @return void
      */
     public function populateCompiledFilepath(Smarty_Template_Compiled $compiled, Smarty_Internal_Template $_template)
     {
@@ -130,7 +125,7 @@ abstract class Smarty_Resource {
     /**
      * build template filepath by traversing the template_dir array
      *
-     * @param Smarty_Template_Source $source source object
+     * @param Smarty_Template_Source   $source    source object
      * @param Smarty_Internal_Template $_template template object
      * @return string fully qualified filepath
      * @throws SmartyException if default template handler is registered but not callable
@@ -166,7 +161,7 @@ abstract class Smarty_Resource {
             $_path = $file;
         }
         // don't we all just love windows?
-        $_path = str_replace( '\\', '/', $_path );
+        $_path = str_replace('\\', '/', $_path);
         // resolve simples
         $_path = preg_replace('#(/\./(\./)*)|/{2,}#', '/', $_path);
         // resolve parents
@@ -178,7 +173,7 @@ abstract class Smarty_Resource {
                 $_path = substr($_path, 3);
                 break;
             }
-            $_pos = strrpos($_path, '/', $_parent - strlen($_path) -1);
+            $_pos = strrpos($_path, '/', $_parent - strlen($_path) - 1);
             if ($_pos === false) {
                 // don't we all just love windows?
                 $_pos = $_parent;
@@ -187,7 +182,7 @@ abstract class Smarty_Resource {
         }
         if (DS != '/') {
             // don't we all just love windows?
-            $_path = str_replace( '/', '\\', $_path );
+            $_path = str_replace('/', '\\', $_path);
         }
         // revert to relative
         if (isset($_was_relative)) {
@@ -224,7 +219,7 @@ abstract class Smarty_Resource {
             }
 
             if ($_directory) {
-                $_file = substr($file,strpos($file, ']') + 1);
+                $_file = substr($file, strpos($file, ']') + 1);
                 $_filepath = $_directory . $_file;
                 if (file_exists($_filepath)) {
                     return $_filepath;
@@ -245,8 +240,8 @@ abstract class Smarty_Resource {
                         return $_filepath;
                     }
                 }
-               }
-           }
+            }
+        }
 
         // try absolute filepath
         if (file_exists($file)) {
@@ -291,7 +286,7 @@ abstract class Smarty_Resource {
     /**
      * Load Resource Handler
      *
-     * @param Smarty $smarty smarty object
+     * @param Smarty $smarty        smarty object
      * @param string $resource_type name of the resource
      * @return Smarty_Resource Resource Handler
      */
@@ -356,9 +351,10 @@ abstract class Smarty_Resource {
      * initialize Source Object for given resource
      *
      * Either [$_template] or [$smarty, $template_resource] must be specified
-     * @param Smarty_Internal_Template $_template template object
-     * @param Smarty $smarty smarty object
-     * @param string $template_resource resource identifier
+     *
+     * @param Smarty_Internal_Template $_template         template object
+     * @param Smarty                   $smarty            smarty object
+     * @param string                   $template_resource resource identifier
      * @return Smarty_Template_Source Source Object
      */
     public static function source(Smarty_Internal_Template $_template=null, Smarty $smarty=null, $template_resource=null)
@@ -435,8 +431,14 @@ abstract class Smarty_Resource {
  * @package Smarty
  * @subpackage TemplateResources
  * @author Rodney Rehm
+ *
+ * @property integer $timestamp Source Timestamp
+ * @property boolean $exists    Source Existance
+ * @property boolean $template  Extended Template reference
+ * @property string  $content   Source Content
  */
 class Smarty_Template_Source {
+
     /**
      * Name of the Class to compile this resource's contents with
      * @var string
@@ -486,20 +488,6 @@ class Smarty_Template_Source {
     public $filepath = null;
 
     /**
-     * Source Timestamp
-     * @var integer
-     * @property $timestamp
-     */
-//    public $timestamp = null; // magic loaded
-
-    /**
-     * Source Existance
-     * @var boolean
-     * @property $exists
-     */
-//    public $exists = false; // magic loaded
-
-    /**
      * Source is bypassing compiler
      * @var boolean
      */
@@ -518,13 +506,6 @@ class Smarty_Template_Source {
     public $components = null;
 
     /**
-     * Extended Template reference
-     * @var boolean
-     * @property $template
-     */
-//    public $template = null; // magic loaded
-
-    /**
      * Resource Handler
      * @var Smarty_Resource
      */
@@ -537,20 +518,13 @@ class Smarty_Template_Source {
     public $smarty = null;
 
     /**
-     * Source Content
-     * @var string
-     * @property $content
-     */
-    //public $content = null; // magic loaded
-
-    /**
      * create Source Object container
      *
-     * @param Smarty_Resource $handler Resource Handler this source object communicates with
-     * @param Smarty $smarty Smarty instance this source object belongs to
-     * @param string $resource full template_resource
-     * @param string $type type of resource
-     * @param string $name resource name
+     * @param Smarty_Resource $handler  Resource Handler this source object communicates with
+     * @param Smarty          $smarty   Smarty instance this source object belongs to
+     * @param string          $resource full template_resource
+     * @param string          $type     type of resource
+     * @param string          $name     resource name
      */
     public function __construct(Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name)
     {
@@ -587,14 +561,19 @@ class Smarty_Template_Source {
      * render the uncompiled source
      *
      * @param Smarty_Internal_Template $_template template object
-     * @return void
      */
     public function renderUncompiled(Smarty_Internal_Template $_template)
     {
         return $this->handler->renderUncompiled($this, $_template);
     }
 
-
+    /**
+     * <<magic>> Generic Setter.
+     *
+     * @param string $property_name valid: timestamp, exists, content, template
+     * @param mixed  $value        new value (is not checked)
+     * @throws SmartyException if $property_name is not valid
+     */
     public function __set($property_name, $value)
     {
         switch ($property_name) {
@@ -612,6 +591,13 @@ class Smarty_Template_Source {
         }
     }
 
+    /**
+     * <<magic>> Generic getter.
+     *
+     * @param string $property_name valid: timestamp, exists, content
+     * @return mixed
+     * @throws SmartyException if $property_name is not valid
+     */
     public function __get($property_name)
     {
         switch ($property_name) {
@@ -627,6 +613,7 @@ class Smarty_Template_Source {
                 throw new SmartyException("source property '$property_name' does not exist.");
         }
     }
+
 }
 
 /**
@@ -637,8 +624,13 @@ class Smarty_Template_Source {
  * @package Smarty
  * @subpackage TemplateResources
  * @author Rodney Rehm
+ *
+ * @property string $content compiled content
+ *
+ * @todo Something is odd with the magic functions here. Please review and clean-up.
  */
 class Smarty_Template_Compiled {
+
     /**
      * Compiled Filepath
      * @var string
@@ -648,37 +640,28 @@ class Smarty_Template_Compiled {
     /**
      * Compiled Timestamp
      * @var integer
-     * @property $timestamp
+     * @todo Check if this should be "magic" or not.
      */
     public $timestamp = null; // magic loaded
 
     /**
      * Compiled Existance
      * @var boolean
-     * @property $exists
+     * @todo Check if this should be "magic" or not.
      */
     public $exists = false; // magic loaded
 
     /**
      * Compiled Content Loaded
      * @var boolean
-     * @property $loaded
      */
 
     public $loaded = false;
     /**
      * Template was compiled
      * @var boolean
-     * @property $isCompiled
      */
     public $isCompiled = false;
-
-    /**
-     * Compiled Content
-     * @var string
-     * @property $content
-     */
-    //public $content = null; // magic loaded
 
     /**
      * Source Object
@@ -696,7 +679,14 @@ class Smarty_Template_Compiled {
         $this->source = $source;
     }
 
-
+    /**
+     * <<magic>> Generic Setter.
+     *
+     * @param string $property_name valid: timestamp, exists, content, template
+     * @param mixed  $value        new value (is not checked)
+     * @throws SmartyException if $property_name is not valid
+     * @todo   Review this function. It seems pointless.
+     */
     public function __set($property_name, $value)
     {
         switch ($property_name) {
@@ -711,9 +701,18 @@ class Smarty_Template_Compiled {
         }
     }
 
+    /**
+     * <<magic>> Generic getter.
+     *
+     * @param string $property_name valid: timestamp, exists, content
+     * @return mixed
+     * @throws SmartyException if $property_name is not valid
+     * @todo   Check if the dead code is really needed
+     */
     public function __get($property_name)
     {
         switch ($property_name) {
+            // @todo This section is dead code!
             case 'timestamp':
             case 'exists':
                 $this->timestamp = @filemtime($this->filepath);
@@ -727,6 +726,7 @@ class Smarty_Template_Compiled {
                 throw new SmartyException("compiled property '$property_name' does not exist.");
         }
     }
+
 }
 
 ?>

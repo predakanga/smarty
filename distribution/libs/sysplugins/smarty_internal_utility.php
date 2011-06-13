@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Project:     Smarty: the PHP compiling template engine
  * File:        smarty_internal_utility.php
@@ -32,18 +31,36 @@
  * @version 3-SVN$Rev: 3286 $
  */
 
+
+/**
+ * Utility class
+ *
+ * @package Smarty
+ * @subpackage Security
+ */
 class Smarty_Internal_Utility {
+
+    /**
+     * private constructor to prevent calls creation of new instances
+     */
+    private final function __construct()
+    {
+        // intentionally left blank
+    }
 
     /**
      * Compile all template files
      *
-     * @param string $extension file extension
-     * @param bool $force_compile force all to recompile
-     * @param int $time_limit
-     * @param int $max_errors
+     * @param string $extension     file extension
+     * @param bool   $force_compile force all to recompile
+     * @param int    $time_limit
+     * @param int    $max_errors
+     * @param Smarty $smarty
      * @return integer number of template files recompiled
+     * @todo  Missing parameter documentation
+     * @todo  The parameter list was invalid. Check if this change is correct.
      */
-    static function compileAllTemplates($extention = '.tpl', $force_compile = false, $time_limit = 0, $max_errors = null, $smarty)
+    public static function compileAllTemplates($extention, $force_compile, $time_limit, $max_errors, $smarty)
     {
         // switch off time limit
         if (function_exists('set_time_limit')) {
@@ -99,13 +116,16 @@ class Smarty_Internal_Utility {
     /**
      * Compile all config files
      *
-     * @param string $extension file extension
-     * @param bool $force_compile force all to recompile
-     * @param int $time_limit
-     * @param int $max_errors
+     * @param string $extension     file extension
+     * @param bool   $force_compile force all to recompile
+     * @param int    $time_limit
+     * @param int    $max_errors
+     * @param Smarty $smarty
      * @return integer number of template files recompiled
+     * @todo  Missing parameter documentation
+     * @todo  The parameter list was invalid. Check if this change is correct.
      */
-    static function compileAllConfig($extention = '.conf', $force_compile = false, $time_limit = 0, $max_errors = null, $smarty)
+    public static function compileAllConfig($extention, $force_compile, $time_limit, $max_errors, $smarty)
     {
         // switch off time limit
         if (function_exists('set_time_limit')) {
@@ -157,12 +177,14 @@ class Smarty_Internal_Utility {
     /**
      * Delete compiled template file
      *
-     * @param string $resource_name template name
-     * @param string $compile_id compile id
-     * @param integer $exp_time expiration time
+     * @param string  $resource_name template name
+     * @param string  $compile_id    compile id
+     * @param integer $exp_time      expiration time
+     * @param Smarty  $smarty        Smarty instance
      * @return integer number of template files deleted
+     * @todo  The parameter list was invalid. Check if this change is correct.
      */
-    static function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null, $smarty)
+    public static function clearCompiledTemplate($resource_name, $compile_id, $exp_time, $smarty)
     {
         $_compile_dir = $smarty->getCompileDir();
         $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
@@ -184,22 +206,23 @@ class Smarty_Internal_Utility {
         $_compileDirs = new RecursiveDirectoryIterator($_dir);
         $_compile = new RecursiveIteratorIterator($_compileDirs, RecursiveIteratorIterator::CHILD_FIRST);
         foreach ($_compile as $_file) {
-            if (substr($_file->getBasename(),0,1) == '.' || strpos($_file, '.svn') !== false) continue;
+            if (substr($_file->getBasename(), 0, 1) == '.' || strpos($_file, '.svn') !== false)
+                continue;
             if ($_file->isDir()) {
                 if (!$_compile->isDot()) {
                     // delete folder if empty
                     @rmdir($_file->getPathname());
                 }
             } else {
-                if ((!isset($_compile_id) || (strlen((string)$_file) > strlen($_compile_id_part) && substr_compare((string)$_file, $_compile_id_part, 0, strlen($_compile_id_part)) == 0)) &&
-                        (!isset($resource_name) || (strlen((string)$_file) > strlen($_resource_part_1) && substr_compare((string)$_file, $_resource_part_1, - strlen($_resource_part_1), strlen($_resource_part_1)) == 0) ||
-                            (strlen((string)$_file) > strlen($_resource_part_2) && substr_compare((string)$_file, $_resource_part_2, - strlen($_resource_part_2), strlen($_resource_part_2)) == 0))) {
+                if ((!isset($_compile_id) || (strlen((string) $_file) > strlen($_compile_id_part) && substr_compare((string) $_file, $_compile_id_part, 0, strlen($_compile_id_part)) == 0)) &&
+                        (!isset($resource_name) || (strlen((string) $_file) > strlen($_resource_part_1) && substr_compare((string) $_file, $_resource_part_1, - strlen($_resource_part_1), strlen($_resource_part_1)) == 0) ||
+                        (strlen((string) $_file) > strlen($_resource_part_2) && substr_compare((string) $_file, $_resource_part_2, - strlen($_resource_part_2), strlen($_resource_part_2)) == 0))) {
                     if (isset($exp_time)) {
                         if (time() - @filemtime($_file) >= $exp_time) {
-                            $_count += @unlink((string) $_file) ? 1 : 0;
+                            $_count += @ unlink((string) $_file) ? 1 : 0;
                         }
                     } else {
-                        $_count += @unlink((string) $_file) ? 1 : 0;
+                        $_count += @ unlink((string) $_file) ? 1 : 0;
                     }
                 }
             }
@@ -210,17 +233,24 @@ class Smarty_Internal_Utility {
     /**
      * Return array of tag/attributes of all tags used by an template
      *
-     * @param object $templae template object
+     * @param Smarty_Internal_Template $templae template object
      * @return array of tag/attributes
      */
-    static function getTags(Smarty_Internal_Template $template)
+    public static function getTags(Smarty_Internal_Template $template)
     {
         $template->smarty->get_used_tags = true;
         $template->compileTemplateSource();
         return $template->used_tags;
     }
 
-    static function testInstall($smarty)
+    /**
+     * Prints a self-diagnostic report.
+     *
+     * @param Smarty $smarty
+     * @return bool
+     * @todo   Consider making this function return a string instead of using echo.
+     */
+    public static function testInstall($smarty)
     {
         echo "<PRE>\n";
 
@@ -289,5 +319,7 @@ class Smarty_Internal_Utility {
 
         return true;
     }
+
 }
+
 ?>
