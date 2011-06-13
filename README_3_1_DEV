@@ -80,7 +80,7 @@ The {block} tag has a new hide option flag. It does suppress the block
 content if no corresponding child block exists.
 EXAMPLE:
 parent.tpl
-{block name=body hide} child content &quot;{$smarty.block.child}&quot; was
+{block name=body hide} child content "{$smarty.block.child}" was
 inserted {block}
 In the above example the whole block will be suppressed if no child
 block "body" is existing.
@@ -154,17 +154,17 @@ properly, it has been dropped from 3.1 completely.
 
   Relative Paths in Templates (File-Resource)
 
-As of Smarty 3.1 {include file=&quot;../foo.tpl&quot;} and {include
-file=&quot;./foo.tpl&quot;} will resolve relative to the template they're in.
-Relative paths are available with {include file=&quot;…&quot;} and
-{extends file=&quot;…&quot;}. As $smarty-&gt;fetch('../foo.tpl') and
-$smarty-&gt;fetch('./foo.tpl') cannot be relative to a template, an
+As of Smarty 3.1 {include file="../foo.tpl"} and {include
+file="./foo.tpl"} will resolve relative to the template they're in.
+Relative paths are available with {include file="..."} and
+{extends file="..."}. As $smarty->fetch('../foo.tpl') and
+$smarty->fetch('./foo.tpl') cannot be relative to a template, an
 exception is thrown.
 
   Adressing a specific $template_dir
 
 Smarty 3.1 introduces the $template_dir index notation.
-$smarty-&gt;fetch('[foo]bar.tpl') and {include file=&quot;[foo]bar.tpl&quot;}
+$smarty->fetch('[foo]bar.tpl') and {include file="[foo]bar.tpl"}
 require the template bar.tpl to be loaded from $template_dir['foo'];
 Smarty::setTemplateDir() and Smarty::addTemplateDir() offer ways to
 define indexes along with the actual directories.
@@ -173,7 +173,7 @@ define indexes along with the actual directories.
 
 Taking the php extends: template resource one step further, it is now
 possible to mix resources within an extends: call like
-$smarty-&gt;fetch(&quot;extends:file:foo.tpl|db:bar.tpl&quot;);
+$smarty->fetch("extends:file:foo.tpl|db:bar.tpl");
 
 To make eval: and string: resources available to the inheritance
 chain, eval:base64:TPL_STRING and eval:urlencode:TPL_STRING have been
@@ -183,11 +183,11 @@ decoding the TPL_STRING in with either base64_decode() or urldecode().
   extends-Resource in template inheritance
 
 Template based inheritance may now inherit from php's extends:
-resource like {extends file=&quot;extends:foo.tpl|db:bar.tpl&quot;}.
+resource like {extends file="extends:foo.tpl|db:bar.tpl"}.
 
   New Smarty property escape_html
 
-$smarty-&gt;escape_html = true will autoescape all template variable
+$smarty->escape_html = true will autoescape all template variable
 output by calling htmlspecialchars({$output}, ENT_QUOTES,
 SMARTY_RESOURCE_CHAR_SET).
 NOTE:
@@ -198,11 +198,11 @@ sure that the templates get recompiled.
 
 The automatic recompilation of modified templates can now be
 controlled by the following settings:
-$smarty-&gt;compile_check = COMPILECHECK_OFF (false) - template files
+$smarty->compile_check = COMPILECHECK_OFF (false) - template files
 will not be checked
-$smarty-&gt;compile_check = COMPILECHECK_ON (true) - template files will
+$smarty->compile_check = COMPILECHECK_ON (true) - template files will
 always be checked
-$smarty-&gt;compile_check = COMPILECHECK_CACHEMISS - template files will
+$smarty->compile_check = COMPILECHECK_CACHEMISS - template files will
 be checked if caching is enabled and there is no existing cache file
 or it has expired
 
@@ -231,36 +231,36 @@ transparently routed through the setters/getters, and consequently a
 bit slower.
 
 array|string getTemplateDir( [string $index] )
-replaces $smarty-&gt;template_dir; and $smarty-&gt;template_dir[$index];
+replaces $smarty->template_dir; and $smarty->template_dir[$index];
 Smarty setTemplateDir( array|string $path )
-replaces $smarty-&gt;template_dir = &quot;foo&quot;; and $smarty-&gt;template_dir =
-array(&quot;foo&quot;, &quot;bar&quot;);
+replaces $smarty->template_dir = "foo"; and $smarty->template_dir =
+array("foo", "bar");
 Smarty addTemplateDir( array|string $path, [string $index])
-replaces $smarty-&gt;template_dir[] = &quot;bar&quot;; and
-$smarty-&gt;template_dir[$index] = &quot;bar&quot;;
+replaces $smarty->template_dir[] = "bar"; and
+$smarty->template_dir[$index] = "bar";
 
 array|string getConfigDir( [string $index] )
-replaces $smarty-&gt;config_dir; and $smarty-&gt;config_dir[$index];
+replaces $smarty->config_dir; and $smarty->config_dir[$index];
 Smarty setConfigDir( array|string $path )
-replaces $smarty-&gt;config_dir = &quot;foo&quot;; and $smarty-&gt;config_dir =
-array(&quot;foo&quot;, &quot;bar&quot;);
+replaces $smarty->config_dir = "foo"; and $smarty->config_dir =
+array("foo", "bar");
 Smarty addConfigDir( array|string $path, [string $index])
-replaces $smarty-&gt;config_dir[] = &quot;bar&quot;; and
-$smarty-&gt;config_dir[$index] = &quot;bar&quot;;
+replaces $smarty->config_dir[] = "bar"; and
+$smarty->config_dir[$index] = "bar";
 
 array getPluginsDir()
-replaces $smarty-&gt;plugins_dir;
+replaces $smarty->plugins_dir;
 Smarty setPluginsDir( array|string $path )
-replaces $smarty-&gt;plugins_dir = &quot;foo&quot;;
+replaces $smarty->plugins_dir = "foo";
 Smarty addPluginsDir( array|string $path )
-replaces $smarty-&gt;plugins_dir[] = &quot;bar&quot;;
+replaces $smarty->plugins_dir[] = "bar";
 
 string getCompileDir()
-replaces $smarty-&gt;compile_dir;
+replaces $smarty->compile_dir;
 Smarty setCompileDir( string $path )
-replaces $smarty-&gt;compile_dir = &quot;foo&quot;;
+replaces $smarty->compile_dir = "foo";
 
 string getCacheDir()
-replaces $smarty-&gt;cache_dir;
+replaces $smarty->cache_dir;
 Smarty setCacheDir( string $path )
-replaces $smarty-&gt;cache_dir;
+replaces $smarty->cache_dir;
