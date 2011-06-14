@@ -12,8 +12,8 @@
  * Trim unnecessary whitespace from HTML markup.
  *
  * @author   Rodney Rehm
- * @param string $source input string
- * @param Smarty $smarty Smarty object
+ * @param string                   $source input string
+ * @param Smarty_Internal_Template $smarty Smarty object
  * @return string filtered output
  */
 function smarty_outputfilter_trimwhitespace($source, $smarty)
