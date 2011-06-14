@@ -207,7 +207,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
             }
         }
 
-        return!!$content;
+        return !!$content;
     }
 
     /**
