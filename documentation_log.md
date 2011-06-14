@@ -9,6 +9,7 @@ these changes must reflect on the documentation at some point…
 
 * {block ... hide} option to supress block if no child is defined
 * {setfilter} tag 
+* {break} {continue} are present but currently not documented
 
 
 ## Functions ##
