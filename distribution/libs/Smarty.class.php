@@ -686,6 +686,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if ($security_class instanceof Smarty_Security) {
             $this->security_policy = $security_class;
             return $this;
+        } elseif (is_object($security_class)) {
+            throw new SmartyException("Class '" . get_class($security_class) . "' must extend Smarty_Security.");
         }
         if ($security_class == null) {
             $security_class = $this->security_class;
