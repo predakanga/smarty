@@ -24,8 +24,6 @@ class Smarty_Internal_Compile_Append extends Smarty_Internal_Compile_Assign {
      * @param object $compiler compiler object
      * @param array $parameter array with compilation parameter
      * @return string compiled code
-     * @todo  Review this section! The argument $parameter is never used.
-     *        But the array $_params is never initialized. Did you mean $_params instead of $parameter?
      */
     public function compile($args, $compiler, $parameter)
     {
