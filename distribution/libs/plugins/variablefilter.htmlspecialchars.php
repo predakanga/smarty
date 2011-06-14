@@ -9,8 +9,8 @@
 /**
  * Smarty htmlspecialchars variablefilter plugin
  *
- * @param string $source input string
- * @param Smarty $smarty Smarty object
+ * @param string                   $source input string
+ * @param Smarty_Internal_Template $smarty Smarty object
  * @return string filtered output
  */
 function smarty_variablefilter_htmlspecialchars($source, $smarty)
