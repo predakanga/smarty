@@ -9,7 +9,7 @@
 /**
  * evaluate compiler parameter
  *
- * @param string  $params  paramter array as given to the compiler function
+ * @param array   $params  paramter array as given to the compiler function
  * @param integer $index   array index of the paramter to convert
  * @param mixed   $default value to be returned if the paramter is not present
  * @return mixed evaluated value of paramter or $default
