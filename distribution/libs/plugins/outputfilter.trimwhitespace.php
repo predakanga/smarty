@@ -16,7 +16,7 @@
  * @param Smarty_Internal_Template $smarty Smarty object
  * @return string filtered output
  */
-function smarty_outputfilter_trimwhitespace($source, $smarty)
+function smarty_outputfilter_trimwhitespace($source, Smarty_Internal_Template $smarty)
 {
     $store = array();
     $_store = 0;
