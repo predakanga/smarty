@@ -17,11 +17,11 @@
  */
 function smarty_mb_to_unicode($string, $encoding=null) {
     if ($encoding) {
-        $expanded = mb_convert_encoding($string, "UTF-32LE", $encoding);
+        $expanded = mb_convert_encoding($string, "UTF-32BE", $encoding);
     } else {
-        $expanded = mb_convert_encoding($string, "UTF-32LE");
+        $expanded = mb_convert_encoding($string, "UTF-32BE");
     }
-    return unpack("L*", $expanded);
+    return unpack("N*", $expanded);
 }
 
 /**
@@ -38,9 +38,9 @@ function smarty_mb_from_unicode($unicode, $encoding=null) {
     if (!$encoding) {
         $encoding = mb_internal_encoding();
     }
-    foreach((array) $unicode as $utf32le) {
-        $character = pack("L", $utf32le);
-        $t .= mb_convert_encoding($character, $encoding, "UTF-32LE");
+    foreach((array) $unicode as $utf32be) {
+        $character = pack("N", $utf32be);
+        $t .= mb_convert_encoding($character, $encoding, "UTF-32BE");
     }
     return $t;
 }
