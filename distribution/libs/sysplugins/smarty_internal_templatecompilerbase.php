@@ -26,7 +26,7 @@ class Smarty_Internal_TemplateCompilerBase {
     /**
      * suppress generation of nocache code
      *
-     * @var bool 
+     * @var bool
      */
     public $suppressNocacheProcessing = false;
     /**
@@ -55,12 +55,6 @@ class Smarty_Internal_TemplateCompilerBase {
      */
     public $merged_templates = array();
     /**
-     * {block} data in template inheritance
-     *
-     * @var array
-     */
-    public $block_data = array();
-    /**
      * flag when compiling {block}
      *
      * @var bool
@@ -78,6 +72,31 @@ class Smarty_Internal_TemplateCompilerBase {
      * @var mixed
      */
     public $default_modifier_list = null;
+    /**
+     * force compilation of complete template as nocache
+     * @var boolean
+     */
+    public $forceNocache = false;
+    /**
+     * suppress Smarty header code in compiled template
+     * @var bool
+     */
+    public $suppressHeader = false;
+    /**
+     * suppress template property header code in compiled template
+     * @var bool
+     */
+    public $suppressTemplatePropertyHeader = false;
+    /**
+     * flag if compiled template file shall we written
+     * @var bool
+     */
+    public $write_compiled_code = true;
+    /**
+     * flags for used modifier plugins
+     * @var array
+     */
+    public $modifier_plugins = array();
 
     /**
      * Initialize compiler
@@ -109,7 +128,7 @@ class Smarty_Internal_TemplateCompilerBase {
         $this->smarty->_current_file = $saved_filepath = $this->template->source->filepath;
         // template header code
         $template_header = '';
-        if (!$template->suppressHeader) {
+        if (!$this->suppressHeader) {
             $template_header .= "<?php /* Smarty version " . Smarty::SMARTY_VERSION . ", created on " . strftime("%Y-%m-%d %H:%M:%S") . "\n";
             $template_header .= "         compiled from \"" . $this->template->source->filepath . "\" */ ?>\n";
         }
@@ -125,10 +144,10 @@ class Smarty_Internal_TemplateCompilerBase {
             }
             // on empty template just return header
             if ($_content == '') {
-                if ($template->suppressFileDependency) {
+                if ($this->suppressTemplatePropertyHeader) {
                     $code = '';
                 } else {
-                    $code = $template_header . $template->createTemplatePropertyHeader();
+                    $code = $template_header . $template->createTemplateCodeFrame();
                 }
                 return '';
             }
@@ -144,10 +163,10 @@ class Smarty_Internal_TemplateCompilerBase {
         foreach ($this->merged_templates as $code) {
             $merged_code .= $code;
         }
-        if ($template->suppressFileDependency) {
+        if ($this->suppressTemplatePropertyHeader) {
             $code = $_compiled_code . $merged_code;
         } else {
-            $code = $template_header . $template->createTemplatePropertyHeader($_compiled_code) . $merged_code;
+            $code = $template_header . $template->createTemplateCodeFrame($_compiled_code) . $merged_code;
         }
         // run postfilter if required
         if (isset($this->smarty->autoload_filters['post']) || isset($this->smarty->registered_filters['post'])) {
@@ -421,7 +440,7 @@ class Smarty_Internal_TemplateCompilerBase {
         }
         if (isset($function)) {
             if ($plugin_type == 'modifier') {
-                $this->template->saved_modifier[$plugin_name] = true;
+                $this->modifier_plugins[$plugin_name] = true;
             }
             return $function;
         }
@@ -438,7 +457,7 @@ class Smarty_Internal_TemplateCompilerBase {
                 $this->template->required_plugins['compiled'][$plugin_name][$plugin_type]['function'] = $function;
             }
             if ($plugin_type == 'modifier') {
-                $this->template->saved_modifier[$plugin_name] = true;
+                $this->modifier_plugins[$plugin_name] = true;
             }
             return $function;
         }
@@ -501,20 +520,17 @@ class Smarty_Internal_TemplateCompilerBase {
         // If the template is not evaluated and we have a nocache section and or a nocache tag
         if ($is_code && !empty($content)) {
             // generate replacement code
-            if ((!($this->template->source->recompiled) || $this->template->forceNocache) && $this->template->caching && !$this->suppressNocacheProcessing &&
-            ($this->nocache || $this->tag_nocache || $this->template->forceNocache == 2)) {
+            if ((!($this->template->source->recompiled) || $this->forceNocache) && $this->template->caching && !$this->suppressNocacheProcessing &&
+            ($this->nocache || $this->tag_nocache || $this->forceNocache == 2)) {
                 $this->template->has_nocache_code = true;
                 $_output = str_replace("'", "\'", $content);
                 $_output = str_replace("^#^", "'", $_output);
                 $_output = "<?php echo '/*%%SmartyNocache:{$this->nocache_hash}%%*/" . $_output . "/*/%%SmartyNocache:{$this->nocache_hash}%%*/';?>";
                 // make sure we include modifer plugins for nocache code
-                if (isset($this->template->saved_modifier)) {
-                    foreach ($this->template->saved_modifier as $plugin_name => $dummy) {
-                        if (isset($this->template->required_plugins['compiled'][$plugin_name]['modifier'])) {
-                            $this->template->required_plugins['nocache'][$plugin_name]['modifier'] = $this->template->required_plugins['compiled'][$plugin_name]['modifier'];
-                        }
+                foreach ($this->modifier_plugins as $plugin_name => $dummy) {
+                    if (isset($this->template->required_plugins['compiled'][$plugin_name]['modifier'])) {
+                        $this->template->required_plugins['nocache'][$plugin_name]['modifier'] = $this->template->required_plugins['compiled'][$plugin_name]['modifier'];
                     }
-                    $this->template->saved_modifier = null;
                 }
             } else {
                 $_output = $content;

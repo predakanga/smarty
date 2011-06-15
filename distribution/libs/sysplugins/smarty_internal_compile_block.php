@@ -121,7 +121,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
     /**
      * @param object $compiler
      * @param string $_name
-     * @return string 
+     * @return string
      *
      * @todo  Missing documentation!
      */
@@ -153,12 +153,12 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
         $_tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
         $_tpl->source->filepath = $compiler->template->block_data[$_name]['file'];
         if ($compiler->nocache) {
-            $_tpl->forceNocache = 2;
+            $_tpl->compiler->forceNocache = 2;
         } else {
-            $_tpl->forceNocache = 1;
+            $_tpl->compiler->forceNocache = 1;
         }
-        $_tpl->suppressHeader = true;
-        $_tpl->suppressFileDependency = true;
+        $_tpl->compiler->suppressHeader = true;
+        $_tpl->compiler->suppressTemplatePropertyHeader = true;
         if (strpos($compiler->template->block_data[$_name]['source'], '%%%%SMARTY_PARENT%%%%') !== false) {
             $_output = str_replace('%%%%SMARTY_PARENT%%%%', $compiler->parser->current_buffer->to_smarty_php(), $_tpl->compiler->compileTemplate($_tpl));
         } elseif ($compiler->template->block_data[$_name]['mode'] == 'prepend') {

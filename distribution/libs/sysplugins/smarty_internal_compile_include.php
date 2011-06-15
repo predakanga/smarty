@@ -81,7 +81,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
                     // use current nocache hash for inlined code
                     self::$merged_templates_func[$tpl_name]['nocache_hash'] = $tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
                     // suppress writing of compiled file
-                    $tpl->write_compiled_code = false;
+                    $tpl->compiler->write_compiled_code = false;
                     if ($compiler->template->caching) {
                         // needs code for cached page but no cache file
                         $tpl->caching = self::CACHING_NOCACHE_CODE;
