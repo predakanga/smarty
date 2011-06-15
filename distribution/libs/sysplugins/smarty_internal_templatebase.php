@@ -25,9 +25,11 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      * @param mixed  $compile_id compile id to be used with this template
      * @param object $parent     next higher level of Smarty variables
      * @param bool   $display    true: display, false: fetch
+    * @param boolean $display if true template content is display otherwise return
+    * @param boolean $merge_tpl_vars if true parten template variables merged in to local scope
      * @return string rendered template output
      */
-    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false)
+    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true)
     {
         if ($template === null && $this instanceof $this->template_class) {
             $template = $this;
@@ -43,7 +45,7 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         // create template object if necessary
         $_template = ($template instanceof $this->template_class) ? $template :
             $this->createTemplate($template, $cache_id, $compile_id, $parent, false);
-        if (!($parent instanceof $this->template_class)) {
+        if ($merge_tpl_vars) {
             $ptr_array = array($_template);
             $ptr = $_template;
             while (isset($ptr->parent)) {

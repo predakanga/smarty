@@ -167,7 +167,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if ($this->mustCompile()) {
             $this->compileTemplateSource();
         }
-        return!$this->source->recompiled && !$this->source->uncompiled ? $this->compiled->content : false;
+        return !$this->source->recompiled && !$this->source->uncompiled ? $this->compiled->content : false;
     }
 
     /**
@@ -283,8 +283,48 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 $tpl->tpl_vars[$_key] = new Smarty_variable($_val);
             }
         }
-        return $tpl->fetch();
+        return $tpl->fetch(null, null, null, null, false, false);
     }
+
+    /**
+     * Template code runtime function to set up an inline subtemplate
+     *
+     * @param string  $template       the resource handle of the template file
+     * @param mixed   $cache_id       cache id to be used with this template
+     * @param mixed   $compile_id     compile id to be used with this template
+     * @param integer $caching        cache mode
+     * @param integer $cache_lifetime life time of cache data
+     * @param array   $vars optional  variables to assign
+     * @param int     $parent_scope   scope in which {include} should execute
+     * @param string  $hash           nocache hash code
+     * @returns string template content
+     */
+    public function setupInlineSubTemplate($template, $cache_id, $compile_id, $caching, $cache_lifetime, $data, $parent_scope, $hash)
+    {
+        $tpl = new $this->smarty->template_class($template, $this->smarty, $this, $cache_id, $compile_id, $caching, $cache_lifetime);
+        $tpl->properties['nocache_hash']  = $hash;
+        // get variables from calling scope
+        if ($parent_scope == Smarty::SCOPE_LOCAL ) {
+            $tpl->tpl_vars = $this->tpl_vars;
+        } elseif ($parent_scope == Smarty::SCOPE_PARENT) {
+            $tpl->tpl_vars = &$this->tpl_vars;
+        } elseif ($parent_scope == Smarty::SCOPE_GLOBAL) {
+            $tpl->tpl_vars = &Smarty::$global_tpl_vars;
+        } elseif (($scope_ptr = $this->getScopePointer($parent_scope)) == null) {
+            $tpl->tpl_vars = &$this->tpl_vars;
+        } else {
+            $tpl->tpl_vars = &$scope_ptr->tpl_vars;
+        }
+        $tpl->config_vars = $this->config_vars;
+        if (!empty($data)) {
+            // set up variable values
+            foreach ($data as $_key => $_val) {
+                $tpl->tpl_vars[$_key] = new Smarty_variable($_val);
+            }
+        }
+        return $tpl;
+    }
+
 
     /**
      * Create code frame for compiled and cached templates
