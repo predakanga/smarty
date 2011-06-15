@@ -253,7 +253,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function setupInlineSubTemplate($template, $cache_id, $compile_id, $caching, $cache_lifetime, $data, $parent_scope, $hash)
     {
         $tpl = new $this->smarty->template_class($template, $this->smarty, $this, $cache_id, $compile_id, $caching, $cache_lifetime);
-        $template->properties['nocache_hash']  = $hash;
+        $tpl->properties['nocache_hash']  = $hash;
         // get variables from calling scope
         if ($parent_scope == Smarty::SCOPE_LOCAL ) {
             $tpl->tpl_vars = $this->tpl_vars;
