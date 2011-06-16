@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+16/06/2011
+- bugfix do not overwrite '$smarty' template variable when {include ... scope=parent} is called
+
 15/06/2011
 - bugfix template variables where not accessable within inline subtemplates
 
