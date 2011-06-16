@@ -84,7 +84,7 @@ class Smarty_Internal_TemplateCompilerBase {
                 } else {
                     $code = $template_header . $template->createTemplatePropertyHeader();
                 }
-                return '';
+                return $code;
             }
             // call compiler
             $_compiled_code = $this->doCompile($_content);
