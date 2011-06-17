@@ -282,7 +282,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	 */
 	public function __destruct()
 	{
-	    
+
 	}
 
     /**
@@ -292,7 +292,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
     	$this->smarty = $this;
 	}
-	
+
 	public function __get($name)
 	{
 	    $allowed = array(
@@ -302,14 +302,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	        'compile_dir' => 'getCompileDir',
 	        'cache_dir' => 'getCacheDir',
 	    );
-	    
+
 	    if (isset($allowed[$name])) {
 	        return $this->{$allowed[$name]}();
 	    } else {
 	        trigger_error('Undefined property: '. get_class($this) .'::$'. $name, E_USER_NOTICE);
 	    }
 	}
-	
+
 	public function __set($name, $value)
 	{
 	    $allowed = array(
@@ -319,7 +319,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	        'compile_dir' => 'setCompileDir',
 	        'cache_dir' => 'setCacheDir',
 	    );
-	    
+
 	    if (isset($allowed[$name])) {
 	        $this->{$allowed[$name]}($value);
 	    } else {
@@ -954,6 +954,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		foreach($this->getPluginsDir() as $_plugin_dir) {
 			$file = $_plugin_dir . $_plugin_filename;
 			if (file_exists($file)) {
+			    $_smarty = $this;
 				require_once($file);
 				return $file;
 			}

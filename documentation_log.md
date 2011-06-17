@@ -12,6 +12,10 @@ these changes must reflect on the documentation at some point…
 * {break} {continue} are present but currently not documented
 
 
+## Plugins ##
+
+* update documentation to load nested plugins by $_smarty->loadPlugin()
+
 ## Functions ##
 
 * - added attributes [month_names, all_id, year_id, month_id, day_id] to function.html_select_date

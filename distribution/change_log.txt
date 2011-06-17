@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+17/06/2011
+- bugfix/change use $_smarty->loadPlugin() when loading nested depending plugins via loadPlugin
+
 16/06/2011
 - bugfix do not overwrite '$smarty' template variable when {include ... scope=parent} is called
 - bugfix complete empty inline subtemplates did fail
