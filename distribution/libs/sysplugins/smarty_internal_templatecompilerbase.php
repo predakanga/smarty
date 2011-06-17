@@ -17,6 +17,12 @@ class Smarty_Internal_TemplateCompilerBase {
     private $nocache_hash = null;
     // suppress generation of nocache code
     public $suppressNocacheProcessing = false;
+    /**
+     * suppress generation of merged template code
+     *
+     * @var bool
+     */
+    public $suppressMergedTemplates = false;
     // compile tag objects
     static $_tag_objects = array();
     // tag stack
@@ -95,8 +101,10 @@ class Smarty_Internal_TemplateCompilerBase {
         self::$_tag_objects = array();
         // return compiled code to template object
         $merged_code = '';
-        foreach ($this->merged_templates as $code) {
-            $merged_code .= $code;
+        if (!$this->suppressMergedTemplates) {
+            foreach ($this->merged_templates as $code) {
+                $merged_code .= $code;
+            }
         }
         if ($template->suppressFileDependency) {
             $code = $_compiled_code . $merged_code;
