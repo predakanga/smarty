@@ -1,4 +1,8 @@
 ﻿===== Smarty 3.1-DEV  =====
+19/06/2011
+- added $errors argument to testInstall() functions to suppress output.
+- added plugin-file checks to testInstall()
+
 15/06/2011
 - bugfix template variables where not accessable within inline subtemplates
 

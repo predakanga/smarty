@@ -1299,6 +1299,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
      * Run installation test
      *
+     * @param array $errors Array to write errors into, rather than outputting them
+     * @return boolean true if setup is fine, false if something is wrong
      * @todo I already got a reporting engine based for this task. You may want to copy it to save time.
      *       It is based on SimpleXML, uses XML/XSLT and is easy to use.
      *       @link https://yana.svn.codeplex.com/svn/trunk/libs/yana/isreportable.class.php
@@ -1330,9 +1332,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
      * This might be more convenient, already allows sub-reporting and command-line use
      * by exchanging the XSL templates.
      */
-    public function testInstall()
+    public function testInstall(&$errors=null)
     {
-        return Smarty_Internal_Utility::testInstall($this);
+        return Smarty_Internal_Utility::testInstall($this, $errors);
     }
 
 }
