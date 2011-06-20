@@ -15,9 +15,9 @@
  * @package Smarty
  * @subpackage Template
  *
- * @property mixed $source
- * @property mixed $compiled
- * @property mixed $cached
+ * @property Smarty_Template_Source   $source
+ * @property Smarty_Template_Compiled $compiled
+ * @property Smarty_Template_Cached   $cached
  */
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 

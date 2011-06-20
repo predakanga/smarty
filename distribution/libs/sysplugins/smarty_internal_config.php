@@ -15,8 +15,8 @@
  * @package Smarty
  * @subpackage Config
  *
- * @property mixed $source
- * @property mixed $compiled
+ * @property Smarty_Config_Source   $source
+ * @property Smarty_Config_Compiled $compiled
  * @ignore
  */
 class Smarty_Internal_Config {
