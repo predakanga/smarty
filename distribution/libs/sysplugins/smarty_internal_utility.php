@@ -58,7 +58,7 @@ class Smarty_Internal_Utility {
      * @param Smarty $smarty        Smarty instance
      * @return integer number of template files compiled
      */
-    public static function compileAllTemplates($extention, $force_compile, $time_limit, $max_errors, $smarty)
+    public static function compileAllTemplates($extention, $force_compile, $time_limit, $max_errors, Smarty $smarty)
     {
         // switch off time limit
         if (function_exists('set_time_limit')) {
@@ -121,7 +121,7 @@ class Smarty_Internal_Utility {
      * @param Smarty $smarty        Smarty instance
      * @return integer number of config files compiled
      */
-    public static function compileAllConfig($extention, $force_compile, $time_limit, $max_errors, $smarty)
+    public static function compileAllConfig($extention, $force_compile, $time_limit, $max_errors, Smarty $smarty)
     {
         // switch off time limit
         if (function_exists('set_time_limit')) {
@@ -179,7 +179,7 @@ class Smarty_Internal_Utility {
      * @param Smarty  $smarty        Smarty instance
      * @return integer number of template files deleted
      */
-    public static function clearCompiledTemplate($resource_name, $compile_id, $exp_time, $smarty)
+    public static function clearCompiledTemplate($resource_name, $compile_id, $exp_time, Smarty $smarty)
     {
         $_compile_dir = $smarty->getCompileDir();
         $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
@@ -243,11 +243,12 @@ class Smarty_Internal_Utility {
      * diagnose Smarty setup
      *
      * If $errors is secified, the diagnostic report will be appended to the array, rather than being output.
-     * @param Smarty $smarty Smarty instance to test
-     * @param array $results array to push results into rather than outputting them
+     *
+     * @param Smarty $smarty  Smarty instance to test
+     * @param array  $results array to push results into rather than outputting them
      * @return bool status, true if everything is fine, false else
      */
-    public static function testInstall($smarty, &$errors=null)
+    public static function testInstall(Smarty $smarty, &$errors=null)
     {
         $status = true;
         

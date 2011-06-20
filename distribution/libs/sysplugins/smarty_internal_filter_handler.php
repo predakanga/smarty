@@ -25,13 +25,12 @@ class Smarty_Internal_Filter_Handler {
      * plugin filename format: filtertype.filtername.php
      * Smarty2 filter plugins could be used
      *
-     * @param string $type     the type of filter ('pre','post','output') which shall run
-     * @param string $content  the content which shall be processed by the filters
-     * @param object $template template object
+     * @param string                   $type     the type of filter ('pre','post','output') which shall run
+     * @param string                   $content  the content which shall be processed by the filters
+     * @param Smarty_Internal_Template $template template object
      * @return string the filtered content
-     * @todo  The $template parameter should be given a type-hint
      */
-    public static function runFilter($type, $content, $template)
+    public static function runFilter($type, $content, Smarty_Internal_Template $template)
     {
         $output = $content;
         // loop over autoload filters of specified type

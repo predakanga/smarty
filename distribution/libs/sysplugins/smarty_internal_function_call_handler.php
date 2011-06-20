@@ -23,7 +23,7 @@ class Smarty_Internal_Function_Call_Handler {
      * @param bool                     $_nocache
      * @todo  Missing documentation
      */
-    public static function call($_name, $_template, $_params, $_hash, $_nocache)
+    public static function call($_name, Smarty_Internal_Template $_template, $_params, $_hash, $_nocache)
     {
         if ($_nocache) {
             $_function = "smarty_template_function_{$_name}_nocache";

@@ -349,15 +349,14 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      * @param callback $callback   PHP callback to register
      * @param boolean  $cacheable  if true (default) this fuction is cachable
      * @param array    $cache_attr caching attributes if any
-     * @throws Exception when the plugin tag is invalid
-     * @todo   Consider using a more specific exception class here.
+     * @throws SmartyException when the plugin tag is invalid
      */
     public function registerPlugin($type, $tag, $callback, $cacheable = true, $cache_attr = null)
     {
         if (isset($this->smarty->registered_plugins[$type][$tag])) {
-            throw new Exception("Plugin tag \"{$tag}\" already registered");
+            throw new SmartyException("Plugin tag \"{$tag}\" already registered");
         } elseif (!is_callable($callback)) {
-            throw new Exception("Plugin \"{$tag}\" not callable");
+            throw new SmartyException("Plugin \"{$tag}\" not callable");
         } else {
             $this->smarty->registered_plugins[$type][$tag] = array($callback, (bool) $cacheable, (array) $cache_attr);
         }
@@ -436,7 +435,7 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      * @param boolean $smarty_args   smarty argument format, else traditional
      * @param array   $block_methods list of block-methods
      * @param array $block_functs list of methods that are block format
-     * @throws SmartyException if any of the methods in $allowed or $block_methods is invalid
+     * @throws SmartyException if any of the methods in $allowed or $block_methods are invalid
      */
     public function registerObject($object_name, $object_impl, $allowed = array(), $smarty_args = true, $block_methods = array())
     {

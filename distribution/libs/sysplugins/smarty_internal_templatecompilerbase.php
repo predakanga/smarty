@@ -117,7 +117,7 @@ class Smarty_Internal_TemplateCompilerBase {
      * @param  Smarty_Internal_Template $template template object to compile
      * @return bool true if compiling succeeded, false if it failed
      */
-    public function compileTemplate($template)
+    public function compileTemplate(Smarty_Internal_Template $template)
     {
         if (empty($template->properties['nocache_hash'])) {
             $template->properties['nocache_hash'] = $this->nocache_hash;
@@ -485,7 +485,11 @@ class Smarty_Internal_TemplateCompilerBase {
     {
         $callback = null;
         $script = null;
-        if ($result = call_user_func_array($this->smarty->default_plugin_handler_func, array($tag, $plugin_type, $this->template, &$callback, & $script))) {
+        $result = call_user_func_array(
+            $this->smarty->default_plugin_handler_func,
+            array($tag, $plugin_type, $this->template, &$callback, &$script)
+        );
+        if ($result) {
             if ($script !== null) {
                 if (is_file($script)) {
                     if ($this->template->caching && ($this->nocache || $this->tag_nocache)) {

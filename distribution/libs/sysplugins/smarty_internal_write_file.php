@@ -23,7 +23,7 @@ class Smarty_Internal_Write_File {
      * @param Smarty $smarty    smarty instance
      * @return boolean true
      */
-    public static function writeFile($_filepath, $_contents, $smarty)
+    public static function writeFile($_filepath, $_contents, Smarty $smarty)
     {
         $old_umask = umask(0);
         $_dirpath = dirname($_filepath);

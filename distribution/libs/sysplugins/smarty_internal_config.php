@@ -96,8 +96,8 @@ class Smarty_Internal_Config {
     public function buildCompiledFilepath()
     {
         $_compile_id = isset($this->smarty->compile_id) ? preg_replace('![^\w\|]+!', '_', $this->smarty->compile_id) : null;
-        $_flag = (int) $this->smarty->config_read_hidden + (int) $this->smarty->config_booleanize * 2 +
-                (int) $this->smarty->config_overwrite * 4;
+        $_flag = (int) $this->smarty->config_read_hidden + (int) $this->smarty->config_booleanize * 2
+                + (int) $this->smarty->config_overwrite * 4;
         $_filepath = sha1($this->source->name . $_flag);
         // if use_sub_dirs, break file into directories
         if ($this->smarty->use_sub_dirs) {
@@ -121,9 +121,9 @@ class Smarty_Internal_Config {
      */
     public function getCompiledTimestamp()
     {
-        return $this->compiled_timestamp === null ?
-            ($this->compiled_timestamp = (file_exists($this->getCompiledFilepath())) ? filemtime($this->getCompiledFilepath()) : false) :
-            $this->compiled_timestamp;
+        return $this->compiled_timestamp === null
+            ? ($this->compiled_timestamp = (file_exists($this->getCompiledFilepath())) ? filemtime($this->getCompiledFilepath()) : false)
+            : $this->compiled_timestamp;
     }
 
     /**
