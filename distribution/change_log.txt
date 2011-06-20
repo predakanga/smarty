@@ -3,6 +3,17 @@
 - added $errors argument to testInstall() functions to suppress output.
 - added plugin-file checks to testInstall()
 
+18/06/2011
+- bugfix mixed use of same subtemplate inline and not inline in same script could cause a warning during compilation
+
+17/06/2011
+- bugfix/change use $_smarty->loadPlugin() when loading nested depending plugins via loadPlugin
+- bugfix {include ... inline} within {block}...{/block} did fail
+
+16/06/2011
+- bugfix do not overwrite '$smarty' template variable when {include ... scope=parent} is called
+- bugfix complete empty inline subtemplates did fail
+
 15/06/2011
 - bugfix template variables where not accessable within inline subtemplates
 

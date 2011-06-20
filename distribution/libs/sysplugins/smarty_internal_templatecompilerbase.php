@@ -30,6 +30,12 @@ class Smarty_Internal_TemplateCompilerBase {
      */
     public $suppressNocacheProcessing = false;
     /**
+     * suppress generation of merged template code
+     *
+     * @var bool
+     */
+    public $suppressMergedTemplates = false;
+    /**
      * compile tag objects
      *
      * @var array
@@ -45,7 +51,6 @@ class Smarty_Internal_TemplateCompilerBase {
      * current template
      *
      * @var Smarty_Internal_Template
-     * @todo is this type correct?
      */
     public $template = null;
     /**
@@ -111,7 +116,6 @@ class Smarty_Internal_TemplateCompilerBase {
      *
      * @param  Smarty_Internal_Template $template template object to compile
      * @return bool true if compiling succeeded, false if it failed
-     * @todo   Is given the param-type correct?
      */
     public function compileTemplate($template)
     {
@@ -149,7 +153,7 @@ class Smarty_Internal_TemplateCompilerBase {
                 } else {
                     $code = $template_header . $template->createTemplateCodeFrame();
                 }
-                return '';
+                return $code;
             }
             // call compiler
             $_compiled_code = $this->doCompile($_content);
@@ -160,8 +164,10 @@ class Smarty_Internal_TemplateCompilerBase {
         self::$_tag_objects = array();
         // return compiled code to template object
         $merged_code = '';
-        foreach ($this->merged_templates as $code) {
-            $merged_code .= $code;
+        if (!$this->suppressMergedTemplates) {
+            foreach ($this->merged_templates as $code) {
+                $merged_code .= $code;
+            }
         }
         if ($this->suppressTemplatePropertyHeader) {
             $code = $_compiled_code . $merged_code;

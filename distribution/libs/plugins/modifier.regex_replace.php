@@ -37,12 +37,11 @@ function smarty_modifier_regex_replace($string, $search, $replace)
  * @param  string $search string(s) that should be replaced
  * @return string
  * @ignore
- * @todo   Security issue: The NULL-byte detection does only detect the 1st occurence of a NULL-literal.
- *         Fix this with high priority!
  */
 function _smarty_regex_replace_check($search)
 {
     // null-byte injection detection
+    // anything behind the first null-byte is ignored
     if (($pos = strpos($search,"\0")) !== false) {
         $search = substr($search,0,$pos);
     }

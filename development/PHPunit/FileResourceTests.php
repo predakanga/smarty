@@ -165,14 +165,12 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->smarty->clearCompiledTemplate();
     }
     /**
-    * test getCompiledTemplate
+    * test compile template file
     */
-    public function testGetCompiledTemplate()
+    public function testCompileTemplateFile()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $result = $tpl->getCompiledTemplate();
-        $this->assertContains('hello world', $result);
-        $this->assertContains('<?php /* Smarty version ', $result);
+        $tpl->compileTemplateSource();
     }
     /**
     * test that compiled template file exists

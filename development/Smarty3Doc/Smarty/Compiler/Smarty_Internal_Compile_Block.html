@@ -24,7 +24,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Smarty Internal Plugin Compile Block Class</p>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compile_block.php.html">/libs/sysplugins/smarty_internal_compile_block.php</a> (line <span class="field">15</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compile_block.php.html">/libs/sysplugins/smarty_internal_compile_block.php</a> (line <span class="field">18</span>)
 		</p>
 		
 				
@@ -50,15 +50,15 @@
 		<div class="info-box-body">
 			<div class="var-summary">
 																																								<div class="var-title">
-					<span class="var-type">mixed</span>
+					<span class="var-type">array</span>
 					<a href="#$optional_attributes" title="details" class="var-name">$optional_attributes</a>
 				</div>
 																<div class="var-title">
-					<span class="var-type">mixed</span>
+					<span class="var-type">array</span>
 					<a href="#$required_attributes" title="details" class="var-name">$required_attributes</a>
 				</div>
 																<div class="var-title">
-					<span class="var-type">mixed</span>
+					<span class="var-type">array</span>
 					<a href="#$shorttag_order" title="details" class="var-name">$shorttag_order</a>
 				</div>
 											</div>
@@ -78,14 +78,14 @@
 		<div class="info-box-body">			
 			<div class="method-summary">
 																				<div class="method-definition">
-					static 						<span class="method-result">void</span>
+					static 						<span class="method-result">string</span>
 										<a href="#compileChildBlock" title="details" class="method-name">compileChildBlock</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$compiler</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$_name</span> = <span class="var-default">null</span>])
+											(<span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$_name</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 					static 						<span class="method-result">void</span>
 										<a href="#saveBlockData" title="details" class="method-name">saveBlockData</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$block_content</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$block_tag</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$template</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$filepath</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$block_content</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$block_tag</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$filepath</span>)
 									</div>
 								
 												<div class="method-definition">
@@ -115,14 +115,16 @@
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$optional_attributes</span>
-			 = <span class="var-default">array('hide')</span>			(line <span class="line-number">19</span>)
+			 = <span class="var-default">array('hide')</span>			(line <span class="line-number">40</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -131,6 +133,7 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$optional_attributes">Smarty_Internal_CompileBase::$optional_attributes</a></dt>
+						<dd>Array of names of optional attribute required by tag  use array('_any') if there is no restriction of attributes names</dd>
 					</dl>
 		
 		
@@ -141,14 +144,16 @@
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$required_attributes</span>
-			 = <span class="var-default">array('name')</span>			(line <span class="line-number">17</span>)
+			 = <span class="var-default">array('name')</span>			(line <span class="line-number">26</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -157,6 +162,7 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$required_attributes">Smarty_Internal_CompileBase::$required_attributes</a></dt>
+						<dd>Array of names of required attribute required by tag</dd>
 					</dl>
 		
 		
@@ -167,14 +173,16 @@
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$shorttag_order</span>
-			 = <span class="var-default">array('name', 'hide')</span>			(line <span class="line-number">18</span>)
+			 = <span class="var-default">array('name', 'hide')</span>			(line <span class="line-number">33</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -183,6 +191,7 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$shorttag_order">Smarty_Internal_CompileBase::$shorttag_order</a></dt>
+						<dd>Shorttag attribute order defined by its names</dd>
 					</dl>
 		
 		
@@ -215,27 +224,32 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method compileChildBlock</span> (line <span class="line-number">92</span>)
+		<span class="method-title">static method compileChildBlock</span> (line <span class="line-number">128</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Compile saved child block source</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> compiled code of schild block</li>
+				<li><span class="field">access:</span> public</li>
+			</ul>
 	
 	<div class="method-signature">
 	    static
-		<span class="method-result">void</span>
+		<span class="method-result">string</span>
 		<span class="method-name">
 			compileChildBlock
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$compiler</span>, [<span class="var-type"></span>&nbsp;<span class="var-name">$_name</span> = <span class="var-default">null</span>])
+					(<span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$_name</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$compiler</span>			</li>
+				<span class="var-type">object</span>
+				<span class="var-name">$compiler</span><span class="var-description">: compiler object</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$_name</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$_name</span><span class="var-description">: optional name of child block</span>			</li>
 				</ul>
 		
 			
@@ -244,10 +258,14 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method saveBlockData</span> (line <span class="line-number">47</span>)
+		<span class="method-title">static method saveBlockData</span> (line <span class="line-number">76</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Save or replace child block source by block name during parsing</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
 	
 	<div class="method-signature">
 	    static
@@ -255,22 +273,22 @@
 		<span class="method-name">
 			saveBlockData
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$block_content</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$block_tag</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$template</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$filepath</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$block_content</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$block_tag</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$filepath</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$block_content</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$block_content</span><span class="var-description">: block source content</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$block_tag</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$block_tag</span><span class="var-description">: opening block tag</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$template</span>			</li>
+				<span class="var-type">object</span>
+				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$filepath</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$filepath</span><span class="var-description">: filepath of template source</span>			</li>
 				</ul>
 		
 			
@@ -280,7 +298,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">compile</span> (line <span class="line-number">27</span>)
+		<span class="method-title">compile</span> (line <span class="line-number">49</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -324,7 +342,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:33:52 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 20 Jun 2011 17:07:06 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

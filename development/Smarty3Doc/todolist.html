@@ -10,12 +10,117 @@
 		<body>
 						<div align="center"><h1>Todo List</h1></div>
 <h2>Smarty</h2>
+<h3><a href="Smarty/Template/Smarty.html#var$cache_id">Smarty::$cache_id</a></h3>
+<ul>
+    <li>missing documentation</li>
+    <li>type correct?</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#var$compile_error">Smarty::$compile_error</a></h3>
+<ul>
+    <li>FIXME! This documentation is misleading</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#var$compile_id">Smarty::$compile_id</a></h3>
+<ul>
+    <li>missing documentation</li>
+    <li>type correct?</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#var$debugging_ctrl">Smarty::$debugging_ctrl</a></h3>
+<ul>
+    <li>consider introducing constants or change the type to boolean</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#methodaddConfigDir">Smarty::addConfigDir()</a></h3>
+<ul>
+    <li>consider to split this function in addConfigDir(string, string) and addConfigDirs(array)</li>
+    <li>same thing as with {@see Smarty::addTemplateDir} - it contains duplicate code.</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#methodaddTemplateDir">Smarty::addTemplateDir()</a></h3>
+<ul>
+    <li>review this section: there is no need to distinguish between $template_dir as string or array.          The code is identical. Cast $template_dir to array instead!</li>
+    <li>You might want to split this in two functions:          addTemplateDir(string, string) + addTemplateDirs(array)</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#constCACHING_OFF">Smarty::CACHING_OFF</a></h3>
+<ul>
+    <li>consider exporting this to a proper enumeration class</li>
+</ul>
+<h3><a href="Smarty/PluginsInternal/Smarty_Internal_Function_Call_Handler.html#methodcall">Smarty_Internal_Function_Call_Handler::call()</a></h3>
+<ul>
+    <li>Missing documentation</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#constCOMPILECHECK_OFF">Smarty::COMPILECHECK_OFF</a></h3>
+<ul>
+    <li>consider exporting this to a proper enumeration class</li>
+</ul>
+<h3><a href="Smarty/Config/Smarty_Internal_Config_File_Compiler.html#methodcompileSource">Smarty_Internal_Config_File_Compiler::compileSource()</a></h3>
+<ul>
+    <li>Params are missing documentation</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#constFILTER_POST">Smarty::FILTER_POST</a></h3>
+<ul>
+    <li>consider exporting this to a proper enumeration class</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#methodgetConfigDir">Smarty::getConfigDir()</a></h3>
+<ul>
+    <li>consider to split this into 'string getConfigDir(string)' + 'array getConfigDirs()'</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#constPHP_PASSTHRU">Smarty::PHP_PASSTHRU</a></h3>
+<ul>
+    <li>consider exporting this to a proper enumeration</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#constPLUGIN_FUNCTION">Smarty::PLUGIN_FUNCTION</a></h3>
+<ul>
+    <li>consider exporting this to a proper enumeration class</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty_Internal_TemplateBase.html#methodregisterCacheResource">Smarty_Internal_TemplateBase::registerCacheResource()</a></h3>
+<ul>
+    <li>Consider Introducing a type-hint instead of throwing an exception</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty_Internal_TemplateBase.html#methodregisterPlugin">Smarty_Internal_TemplateBase::registerPlugin()</a></h3>
+<ul>
+    <li>Consider using a more specific exception class here.</li>
+</ul>
+<h3><a href="Smarty/PluginsInternal/Smarty_Internal_Filter_Handler.html#methodrunFilter">Smarty_Internal_Filter_Handler::runFilter()</a></h3>
+<ul>
+    <li>The $template parameter should be given a type-hint</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#constSCOPE_LOCAL">Smarty::SCOPE_LOCAL</a></h3>
+<ul>
+    <li>consider exporting this to a proper enumeration class</li>
+</ul>
+<h3><a href="Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></h3>
+<ul>
+    <li>This class is not abstract but there is an (unmentioned) abstract function compile(),         that each sub-class implements. If you do not want to make this class abstract,         consider introducing an interface class, to ensure all sub-classes implement the function         correctly.</li>
+</ul>
+<h3><a href="Smarty/Config/Smarty_Internal_Config_File_Compiler.html">Smarty_Internal_Config_File_Compiler</a></h3>
+<ul>
+    <li>The file looks like a work-in-progress. Please verify before the next release.</li>
+    <li>This class is missing all member definitions.        Please review and add definitions for $smarty, $config, $lex, $config_data,        $parser</li>
+</ul>
+<h3><a href="Smarty/Template/Smarty.html#methodtestInstall">Smarty::testInstall()</a></h3>
+<ul>
+    <li>I already got a reporting engine based for this task. You may want to copy it to save time.        It is based on SimpleXML, uses XML/XSLT and is easy to use.</li>
+</ul>
 <h3><a href="Smarty/Config/Smarty_Internal_Config_File_Compiler.html#methodtrigger_config_file_error">Smarty_Internal_Config_File_Compiler::trigger_config_file_error()</a></h3>
 <ul>
     <li>output exact position of parse error in source line</li>
 </ul>
+<h3><a href="Smarty/Compiler/Smarty_Internal_CompileBase.html#method_close_tag">Smarty_Internal_CompileBase::_close_tag()</a></h3>
+<ul>
+    <li>Consider using CamelCase here.</li>
+</ul>
+<h3><a href="Smarty/Compiler/Smarty_Internal_CompileBase.html#method_get_attributes">Smarty_Internal_CompileBase::_get_attributes()</a></h3>
+<ul>
+    <li>Consider using CamelCase here.</li>
+</ul>
+<h3><a href="Smarty/Compiler/Smarty_Internal_CompileBase.html#method_open_tag">Smarty_Internal_CompileBase::_open_tag()</a></h3>
+<ul>
+    <li>Consider using CamelCase here.</li>
+</ul>
+<h3><a href="Smarty/Config/Smarty_Internal_Config_File_Compiler.html#method__construct">Smarty_Internal_Config_File_Compiler::__construct()</a></h3>
+<ul>
+    <li>Check if the given input type is correct.</li>
+</ul>
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:34:27 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 20 Jun 2011 17:07:39 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</body>
 </html>

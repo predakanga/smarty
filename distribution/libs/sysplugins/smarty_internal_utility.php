@@ -51,14 +51,12 @@ class Smarty_Internal_Utility {
     /**
      * Compile all template files
      *
-     * @param string $extension     file extension
+     * @param string $extension     template file name extension
      * @param bool   $force_compile force all to recompile
-     * @param int    $time_limit
-     * @param int    $max_errors
-     * @param Smarty $smarty
-     * @return integer number of template files recompiled
-     * @todo  Missing parameter documentation
-     * @todo  The parameter list was invalid. Check if this change is correct.
+     * @param int    $time_limit    set maximum execution time
+     * @param int    $max_errors    set maximum allowed errors
+     * @param Smarty $smarty        Smarty instance
+     * @return integer number of template files compiled
      */
     public static function compileAllTemplates($extention, $force_compile, $time_limit, $max_errors, $smarty)
     {
@@ -116,14 +114,12 @@ class Smarty_Internal_Utility {
     /**
      * Compile all config files
      *
-     * @param string $extension     file extension
+     * @param string $extension     config file name extension
      * @param bool   $force_compile force all to recompile
-     * @param int    $time_limit
-     * @param int    $max_errors
-     * @param Smarty $smarty
-     * @return integer number of template files recompiled
-     * @todo  Missing parameter documentation
-     * @todo  The parameter list was invalid. Check if this change is correct.
+     * @param int    $time_limit    set maximum execution time
+     * @param int    $max_errors    set maximum allowed errors
+     * @param Smarty $smarty        Smarty instance
+     * @return integer number of config files compiled
      */
     public static function compileAllConfig($extention, $force_compile, $time_limit, $max_errors, $smarty)
     {
@@ -182,7 +178,6 @@ class Smarty_Internal_Utility {
      * @param integer $exp_time      expiration time
      * @param Smarty  $smarty        Smarty instance
      * @return integer number of template files deleted
-     * @todo  The parameter list was invalid. Check if this change is correct.
      */
     public static function clearCompiledTemplate($resource_name, $compile_id, $exp_time, $smarty)
     {

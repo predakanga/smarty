@@ -173,15 +173,12 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
     }
 
     /**
-     * get_key
+     * Return key into $template_data for template
      *
-     * @param object $template
-     * @return mixed
-     *
-     * @todo Missing documentation
-     * @todo This function used nowhere else. Consider making it private
+     * @param object $template  template object
+     * @return string   key into $template_data
      */
-    public static function get_key($template)
+    private static function get_key($template)
     {
         // calculate Uid if not already done
         if ($template->source->uid == '') {

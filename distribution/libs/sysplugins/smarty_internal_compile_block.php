@@ -50,7 +50,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
     {
         // check and get attributes
         $_attr = $this->_get_attributes($compiler, $args);
-        $save = array($_attr, $compiler->parser->current_buffer, $compiler->nocache, $compiler->smarty->merge_compiled_includes);
+        $save = array($_attr, $compiler->parser->current_buffer, $compiler->nocache, $compiler->smarty->merge_compiled_includes, $compiler->merged_templates);
         $this->_open_tag($compiler, 'block', $save);
         if ($_attr['nocache'] == true) {
             $compiler->nocache = true;
@@ -66,12 +66,12 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
     }
 
     /**
-     * @param string $block_content
-     * @param string $block_tag
-     * @param object $template
-     * @param string $filepath
+     * Save or replace child block source by block name during parsing
      *
-     * @todo  Missing documentation!
+     * @param string $block_content     block source content
+     * @param string $block_tag         opening block tag
+     * @param object $template          template object
+     * @param string $filepath          filepath of template source
      */
     public static function saveBlockData($block_content, $block_tag, $template, $filepath)
     {
@@ -119,11 +119,11 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
     }
 
     /**
-     * @param object $compiler
-     * @param string $_name
-     * @return string
+     * Compile saved child block source
      *
-     * @todo  Missing documentation!
+     * @param object $compiler  compiler object
+     * @param string $_name     optional name of child block
+     * @return string   compiled code of schild block
      */
     public static function compileChildBlock($compiler, $_name = null)
     {
@@ -147,7 +147,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
         if (!isset($compiler->template->block_data[$_name])) {
             return '';
         }
-        $_tpl = new Smarty_Internal_template ('eval:' . $compiler->template->block_data[$_name]['source'], $compiler->smarty, $compiler->template, $compiler->template->cache_id,
+        $_tpl = new Smarty_Internal_template ('string:' . $compiler->template->block_data[$_name]['source'], $compiler->smarty, $compiler->template, $compiler->template->cache_id,
         $compiler->template->compile_id = null, $compiler->template->caching, $compiler->template->cache_lifetime);
         $_tpl->variable_filters = $compiler->template->variable_filters;
         $_tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
@@ -159,6 +159,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
         }
         $_tpl->compiler->suppressHeader = true;
         $_tpl->compiler->suppressTemplatePropertyHeader = true;
+        $_tpl->compiler->suppressMergedTemplates = true;
         if (strpos($compiler->template->block_data[$_name]['source'], '%%%%SMARTY_PARENT%%%%') !== false) {
             $_output = str_replace('%%%%SMARTY_PARENT%%%%', $compiler->parser->current_buffer->to_smarty_php(), $_tpl->compiler->compileTemplate($_tpl));
         } elseif ($compiler->template->block_data[$_name]['mode'] == 'prepend') {
@@ -170,6 +171,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
         }
         $compiler->template->properties['file_dependency'] = array_merge($compiler->template->properties['file_dependency'], $_tpl->properties['file_dependency']);
         $compiler->template->properties['function'] = array_merge($compiler->template->properties['function'], $_tpl->properties['function']);
+        $compiler->merged_templates = array_merge($compiler->merged_templates, $_tpl->compiler->merged_templates);
         $compiler->template->variable_filters = $_tpl->variable_filters;
         if ($_tpl->has_nocache_code) {
             $compiler->template->has_nocache_code = true;
@@ -210,10 +212,15 @@ class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
         $saved_data = $this->_close_tag($compiler, array('block'));
         $_name = trim($saved_data[0]['name'], "\"'");
         if (isset($compiler->template->block_data[$_name]) && !isset($compiler->template->block_data[$_name]['compiled'])) {
+            $compiler->merged_templates = $saved_data[4];
             $_output = Smarty_Internal_Compile_Block::compileChildBlock($compiler, $_name);
         } else {
-            $_output = isset($saved_data[0]['hide']) && !isset($compiler->template->block_data[$_name]['source'])
-                ? '' : $compiler->parser->current_buffer->to_smarty_php();
+            if (isset($saved_data[0]['hide']) && !isset($compiler->template->block_data[$_name]['source'])) {
+                $compiler->merged_templates = $saved_data[4];
+                $_output = '';
+            } else {
+                $_output = $compiler->parser->current_buffer->to_smarty_php();
+            }
             unset ($compiler->template->block_data[$_name]['compiled']);
         }
         // reset flags

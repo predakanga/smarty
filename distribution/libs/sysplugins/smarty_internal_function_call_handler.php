@@ -13,7 +13,7 @@
  * @package Smarty
  * @subpackage PluginsInternal
  */
-class Smarty_Internal_Function_Call_Handler extends Smarty_Internal_Template {
+class Smarty_Internal_Function_Call_Handler {
 
     /**
      * @param string                   $_name

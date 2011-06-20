@@ -18,7 +18,20 @@
 abstract class _smarty_parsetree {
 
     /**
-     * @todo Missing documentation
+     * Parser object
+     * @var object
+     */
+    public $parser;
+    /**
+     * Buffer content
+     * @var mixed
+     */
+    public $data;
+
+    /**
+     * Return buffer
+     *
+     * @return string  buffer content
      */
     abstract public function to_smarty_php();
 
@@ -34,22 +47,16 @@ abstract class _smarty_parsetree {
 class _smarty_tag extends _smarty_parsetree {
 
     /**
-     * @todo  Missing documentation
-     */
-    public $parser;
-    /**
-     * @todo  Missing documentation
-     */
-    public $data;
-    /**
-     * @todo  Missing documentation
+     * Saved block nesting level
+     * @var int
      */
     public $saved_block_nesting;
 
     /**
-     * @param object $parser
-     * @param mixed $data
-     * @todo  Missing documentation
+     * Create parse tree buffer for Smarty tag
+     *
+     * @param object $parser    parser object
+     * @param string $data      content
      */
     public function __construct($parser, $data)
     {
@@ -59,7 +66,9 @@ class _smarty_tag extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Return buffer content
+     *
+     * @return string  content
      */
     public function to_smarty_php()
     {
@@ -67,7 +76,9 @@ class _smarty_tag extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Return complied code that loads the evaluated outout of buffer content into a temporary variable
+     *
+     * @return string template code
      */
     public function assign_to_var()
     {
@@ -87,17 +98,12 @@ class _smarty_tag extends _smarty_parsetree {
  */
 class _smarty_code extends _smarty_parsetree {
 
-    /**
-     * @todo  Missing documentation
-     */
-    public $parser;
-    /**
-     * @todo  Missing documentation
-     */
-    public $data;
 
     /**
-     * @todo  Missing documentation
+     * Create parse tree buffer for code fragment
+     *
+     * @param object $parser    parser object
+     * @param string $data      content
      */
     public function __construct($parser, $data)
     {
@@ -106,7 +112,9 @@ class _smarty_code extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Return buffer content in parentheses
+     *
+     * @return string  content
      */
     public function to_smarty_php()
     {
@@ -125,18 +133,10 @@ class _smarty_code extends _smarty_parsetree {
 class _smarty_doublequoted extends _smarty_parsetree {
 
     /**
-     * @todo  Missing documentation
-     */
-    public $parser;
-    /**
-     * @todo  Missing documentation
-     */
-    public $subtrees = Array();
-
-    /**
-     * @param mixed             $parser
-     * @param _smarty_parsetree $subtree
-     * @todo  Missing documentation
+     * Create parse tree buffer for double quoted string subtrees
+     *
+     * @param object $parser    parser object
+     * @param _smarty_parsetree $subtree    parsetree buffer
      */
     public function __construct($parser, _smarty_parsetree $subtree)
     {
@@ -148,8 +148,9 @@ class _smarty_doublequoted extends _smarty_parsetree {
     }
 
     /**
-     * @param _smarty_parsetree $subtree
-     * @todo  Missing documentation
+     * Append buffer to subtree
+     *
+     * @param _smarty_parsetree $subtree  parsetree buffer
      */
     public function append_subtree(_smarty_parsetree $subtree)
     {
@@ -171,7 +172,9 @@ class _smarty_doublequoted extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Merge subtree buffer content together
+     *
+     * @return string  compiled template code
      */
     public function to_smarty_php()
     {
@@ -206,15 +209,12 @@ class _smarty_doublequoted extends _smarty_parsetree {
  */
 class _smarty_dq_content extends _smarty_parsetree {
 
-    /**
-     * @todo  Missing documentation
-     */
-    public $data;
 
     /**
-     * @param type $parser
-     * @param type $data
-     * @todo  Missing documentation
+     * Create parse tree buffer with string content
+     *
+     * @param object $parser  parser object
+     * @param string $data    string section
      */
     public function __construct($parser, $data)
     {
@@ -223,7 +223,9 @@ class _smarty_dq_content extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Return content as double quoted string
+     *
+     * @return string doubled quoted string
      */
     public function to_smarty_php()
     {
@@ -242,13 +244,16 @@ class _smarty_dq_content extends _smarty_parsetree {
 class _smarty_template_buffer extends _smarty_parsetree {
 
     /**
-     * @todo  Missing documentation
+     * Array of template elements
+     *
+     * @var array
      */
     public $subtrees = Array();
 
     /**
-     * @param mixed $parser
-     * @todo  Missing documentation
+     * Create root of parse tree for template elements
+     *
+     * @param object $parser    parse object
      */
     public function __construct($parser)
     {
@@ -256,8 +261,9 @@ class _smarty_template_buffer extends _smarty_parsetree {
     }
 
     /**
+     * Append buffer to subtree
+     *
      * @param _smarty_parsetree $subtree
-     * @todo  Missing documentation
      */
     public function append_subtree(_smarty_parsetree $subtree)
     {
@@ -265,7 +271,9 @@ class _smarty_template_buffer extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Sanitize and merge subtree buffers together
+     *
+     * @return string template code content
      */
     public function to_smarty_php()
     {
@@ -326,15 +334,12 @@ class _smarty_template_buffer extends _smarty_parsetree {
  */
 class _smarty_text extends _smarty_parsetree {
 
-    /**
-     * @todo  Missing documentation
-     */
-    public $data;
 
     /**
-     * @param object $parser
-     * @param mixed  $data
-     * @todo  Missing documentation
+     * Create template text buffer
+     *
+     * @param object $parser    parser object
+     * @param string $data      text
      */
     public function __construct($parser, $data)
     {
@@ -343,7 +348,9 @@ class _smarty_text extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Return buffer content
+     *
+     * @return strint text
      */
     public function to_smarty_php()
     {
@@ -362,14 +369,10 @@ class _smarty_text extends _smarty_parsetree {
 class _smarty_linebreak extends _smarty_parsetree {
 
     /**
-     * @todo  Missing documentation
-     */
-    public $data;
-
-    /**
-     * @param object $parser
-     * @param mixed  $data
-     * @todo  Missing documentation
+     * Create buffer with linebreak content
+     *
+     * @param object $parser    parser object
+     * @param string  $data     linebreak string
      */
     public function __construct($parser, $data)
     {
@@ -378,7 +381,9 @@ class _smarty_linebreak extends _smarty_parsetree {
     }
 
     /**
-     * @todo  Missing documentation
+     * Return linebrak
+     *
+     * @return string linebreak
      */
     public function to_smarty_php()
     {

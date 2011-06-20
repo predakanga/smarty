@@ -155,22 +155,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     }
 
     /**
-     * Returns the compiled template
-     *
-     * It checks if the template must be compiled or just read from the template resource
-     *
-     * @return string the compiled template
-     */
-    public function getCompiledTemplate()
-    {
-        // see if template needs compiling.
-        if ($this->mustCompile()) {
-            $this->compileTemplateSource();
-        }
-        return !$this->source->recompiled && !$this->source->uncompiled ? $this->compiled->content : false;
-    }
-
-    /**
      * Compiles the template
      *
      * If the template is not evaluated the compiled template is saved on disk
@@ -339,7 +323,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         // include code for plugins
         if (!$cache) {
             if (!empty($this->required_plugins['compiled'])) {
-                $plugins_string = '<?php ';
+                $plugins_string = '<?php $_smarty = $_smarty_tpl->smarty; ';
                 foreach ($this->required_plugins['compiled'] as $tmp) {
                     foreach ($tmp as $data) {
                         $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$data['file']}';\n";
@@ -349,7 +333,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             }
             if (!empty($this->required_plugins['nocache'])) {
                 $this->has_nocache_code = true;
-                $plugins_string .= "<?php echo '/*%%SmartyNocache:{$this->properties['nocache_hash']}%%*/<?php ";
+                $plugins_string .= "<?php echo '/*%%SmartyNocache:{$this->properties['nocache_hash']}%%*/<?php \$_smarty = \$_smarty_tpl->smarty; ";
                 foreach ($this->required_plugins['nocache'] as $tmp) {
                     foreach ($tmp as $data) {
                         $plugins_string .= "if (!is_callable(\'{$data['function']}\')) include \'{$data['file']}\';\n";

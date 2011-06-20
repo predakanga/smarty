@@ -24,7 +24,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Smarty Internal Plugin Compile Object Function Class</p>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compile_private_object_function.php.html">/libs/sysplugins/smarty_internal_compile_private_object_function.php</a> (line <span class="field">15</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compile_private_object_function.php.html">/libs/sysplugins/smarty_internal_compile_private_object_function.php</a> (line <span class="field">18</span>)
 		</p>
 		
 				
@@ -49,13 +49,9 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																<div class="var-title">
-					<span class="var-type">mixed</span>
+																								<div class="var-title">
+					<span class="var-type">array</span>
 					<a href="#$optional_attributes" title="details" class="var-name">$optional_attributes</a>
-				</div>
-																<div class="var-title">
-					<span class="var-type">mixed</span>
-					<a href="#$required_attributes" title="details" class="var-name">$required_attributes</a>
 				</div>
 											</div>
 		</div>
@@ -77,7 +73,7 @@
 												<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#compile" title="details" class="method-name">compile</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$parameter</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$methode</span>)
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$parameter</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
 									</div>
 								</div>
 		</div>
@@ -101,14 +97,16 @@
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$optional_attributes</span>
-			 = <span class="var-default">array('_any')</span>			(line <span class="line-number">18</span>)
+			 = <span class="var-default">array('_any')</span>			(line <span class="line-number">26</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -117,32 +115,7 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$optional_attributes">Smarty_Internal_CompileBase::$optional_attributes</a></dt>
-					</dl>
-		
-		
-
-</div>
-<a name="var$required_attributes" id="$required_attributes"><!-- --></A>
-<div class="oddrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
-			<span class="var-name">$required_attributes</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">17</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	
-			<hr class="separator" />
-		<div class="notes">Redefinition of:</div>
-		<dl>
-			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$required_attributes">Smarty_Internal_CompileBase::$required_attributes</a></dt>
+						<dd>Array of names of optional attribute required by tag  use array('_any') if there is no restriction of attributes names</dd>
 					</dl>
 		
 		
@@ -154,6 +127,9 @@
 					<blockquote>
 													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$option_flags">Smarty_Internal_CompileBase::$option_flags</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$required_attributes">Smarty_Internal_CompileBase::$required_attributes</a></span><br>
 							</span>
 													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$shorttag_order">Smarty_Internal_CompileBase::$shorttag_order</a></span><br>
@@ -176,10 +152,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="methodcompile" id="compile"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">compile</span> (line <span class="line-number">30</span>)
+		<span class="method-title">compile</span> (line <span class="line-number">38</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -194,7 +170,7 @@
 		<span class="method-name">
 			compile
 		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$parameter</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$methode</span>)
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$parameter</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$tag</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$method</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -212,7 +188,7 @@
 				<span class="var-name">$tag</span><span class="var-description">: name of function</span>			</li>
 					<li>
 				<span class="var-type">string</span>
-				<span class="var-name">$methode</span><span class="var-description">: name of methode to call</span>			</li>
+				<span class="var-name">$method</span><span class="var-description">: name of method to call</span>			</li>
 				</ul>
 		
 			
@@ -232,7 +208,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:34:00 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 20 Jun 2011 17:07:14 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

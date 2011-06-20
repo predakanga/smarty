@@ -19,9 +19,43 @@ include ("smarty_internal_parsetree.php");
  *
  * @package Smarty
  * @subpackage Compiler
- * @todo The members $lex, $lexer_class, $parser, $parser_class and $smarty are use but not defined and undocumented.
  */
 class Smarty_Internal_SmartyTemplateCompiler extends Smarty_Internal_TemplateCompilerBase {
+
+    /**
+     * Lexer class name
+     *
+     * @var string
+     */
+    public $lexer_class;
+
+    /**
+     * Parser class name
+     *
+     * @var string
+     */
+    public $parser_class;
+
+    /**
+     * Lexer object
+     *
+     * @var object
+     */
+    public $lex;
+
+    /**
+     * Parser object
+     *
+     * @var object
+     */
+    public $parser;
+
+    /**
+     * Smarty object
+     *
+     * @var object
+     */
+    public $smarty;
 
     /**
      * array of vars which can be compiled in local scope

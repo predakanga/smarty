@@ -26,10 +26,14 @@
 <p class="short-description">Smarty Resource Data Object</p>
 <p class="description"><p>Meta Data Container for Template Files</p></p>
 	<ul class="tags">
+				<li><span class="field">property:</span> integer $timestamp: Source Timestamp</li>
+				<li><span class="field">property:</span> boolean $exists: Source Existance</li>
+				<li><span class="field">property:</span> boolean $template: Extended Template reference</li>
+				<li><span class="field">property:</span> string $content: Source Content</li>
 				<li><span class="field">author:</span> Rodney Rehm</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_resource.php.html">/libs/sysplugins/smarty_resource.php</a> (line <span class="field">439</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_resource.php.html">/libs/sysplugins/smarty_resource.php</a> (line <span class="field">440</span>)
 		</p>
 		
 				
@@ -164,14 +168,14 @@
 											(<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>)
 									</div>
 																<div class="method-definition">
-											<span class="method-result">void</span>
+											<span class="method-result">mixed</span>
 										<a href="#__get" title="details" class="method-name">__get</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$property_name</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$property_name</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#__set" title="details" class="method-name">__set</a>
-											(<span class="var-type"></span>&nbsp;<span class="var-name">$property_name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$property_name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
 									</div>
 								</div>
 		</div>
@@ -192,13 +196,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$compiler_class" id="$compiler_class"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$compiler_class</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">444</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">446</span>)
 		</span>
 	</div>
 
@@ -214,13 +218,13 @@
 
 </div>
 <a name="var$components" id="$components"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$components</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">518</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">506</span>)
 		</span>
 	</div>
 
@@ -236,13 +240,13 @@
 
 </div>
 <a name="var$filepath" id="$filepath"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$filepath</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">486</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">488</span>)
 		</span>
 	</div>
 
@@ -258,13 +262,13 @@
 
 </div>
 <a name="var$handler" id="$handler"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Resource.html">Smarty_Resource</a></span>
 			<span class="var-name">$handler</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">531</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">512</span>)
 		</span>
 	</div>
 
@@ -280,13 +284,13 @@
 
 </div>
 <a name="var$name" id="$name"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$name</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">480</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">482</span>)
 		</span>
 	</div>
 
@@ -302,13 +306,13 @@
 
 </div>
 <a name="var$recompiled" id="$recompiled"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$recompiled</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">512</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">500</span>)
 		</span>
 	</div>
 
@@ -324,13 +328,13 @@
 
 </div>
 <a name="var$resource" id="$resource"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$resource</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">468</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">470</span>)
 		</span>
 	</div>
 
@@ -346,13 +350,13 @@
 
 </div>
 <a name="var$smarty" id="$smarty"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type"><a href="../../Smarty/Template/Smarty.html">Smarty</a></span>
 			<span class="var-name">$smarty</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">537</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">518</span>)
 		</span>
 	</div>
 
@@ -368,13 +372,13 @@
 
 </div>
 <a name="var$template_lexer_class" id="$template_lexer_class"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$template_lexer_class</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">450</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">452</span>)
 		</span>
 	</div>
 
@@ -390,13 +394,13 @@
 
 </div>
 <a name="var$template_parser_class" id="$template_parser_class"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$template_parser_class</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">456</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">458</span>)
 		</span>
 	</div>
 
@@ -412,13 +416,13 @@
 
 </div>
 <a name="var$type" id="$type"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$type</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">474</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">476</span>)
 		</span>
 	</div>
 
@@ -434,13 +438,13 @@
 
 </div>
 <a name="var$uid" id="$uid"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$uid</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">462</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">464</span>)
 		</span>
 	</div>
 
@@ -456,13 +460,13 @@
 
 </div>
 <a name="var$uncompiled" id="$uncompiled"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$uncompiled</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">506</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">494</span>)
 		</span>
 	</div>
 
@@ -495,10 +499,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">555</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">529</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -544,10 +548,10 @@
 				</ul>
 	</div>
 <a name="methodgetCompiled" id="getCompiled"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getCompiled</span> (line <span class="line-number">577</span>)
+		<span class="method-title">getCompiled</span> (line <span class="line-number">551</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -574,10 +578,10 @@
 			
 	</div>
 <a name="methodrenderUncompiled" id="renderUncompiled"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">renderUncompiled</span> (line <span class="line-number">592</span>)
+		<span class="method-title">renderUncompiled</span> (line <span class="line-number">565</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -603,29 +607,31 @@
 			
 	</div>
 <a name="method__get" id="__get"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">__get</span> (line <span class="line-number">615</span>)
+		<span class="method-title">__get</span> (line <span class="line-number">601</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">magic&gt;&gt; Generic getter.</p>
 	<ul class="tags">
+				<li><span class="field">throws:</span> SmartyException if $property_name is not valid</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
 	<div class="method-signature">
-		<span class="method-result">void</span>
+		<span class="method-result">mixed</span>
 		<span class="method-name">
 			__get
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$property_name</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$property_name</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$property_name</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$property_name</span><span class="var-description">: valid: timestamp, exists, content</span>			</li>
 				</ul>
 		
 			
@@ -634,18 +640,21 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../../Smarty/TemplateResources/Smarty_Config_Source.html#method__get">Smarty_Config_Source::__get()</a>
+								: magic&gt;&gt; Generic getter.
 							</li>
 				</ul>
 	</div>
 <a name="method__set" id="__set"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">__set</span> (line <span class="line-number">598</span>)
+		<span class="method-title">__set</span> (line <span class="line-number">577</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">magic&gt;&gt; Generic Setter.</p>
 	<ul class="tags">
+				<li><span class="field">throws:</span> SmartyException if $property_name is not valid</li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -654,16 +663,16 @@
 		<span class="method-name">
 			__set
 		</span>
-					(<span class="var-type"></span>&nbsp;<span class="var-name">$property_name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">$value</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$property_name</span>, <span class="var-type">mixed</span>&nbsp;<span class="var-name">$value</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$property_name</span>			</li>
+				<span class="var-type">string</span>
+				<span class="var-name">$property_name</span><span class="var-description">: valid: timestamp, exists, content, template</span>			</li>
 					<li>
-				<span class="var-type"></span>
-				<span class="var-name">$value</span>			</li>
+				<span class="var-type">mixed</span>
+				<span class="var-name">$value</span><span class="var-description">: new value (is not checked)</span>			</li>
 				</ul>
 		
 			
@@ -672,7 +681,7 @@
 		<ul class="redefinitions">
 					<li>
 				<a href="../../Smarty/TemplateResources/Smarty_Config_Source.html#method__set">Smarty_Config_Source::__set()</a>
-								: get a Compiled Object of this source
+								: magic&gt;&gt; Generic setter.
 							</li>
 				</ul>
 	</div>
@@ -682,7 +691,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:34:25 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 20 Jun 2011 17:07:36 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

@@ -26,11 +26,10 @@
 <p class="short-description">Smarty Resource Plugin</p>
 <p class="description"><p>Wrapper Implementation for custom resource plugins</p></p>
 	<ul class="tags">
-				<li><span class="field">author:</span> Rodney Rehm</li>
 				<li><span class="field">abstract:</span> </li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_resource_custom.php.html">/libs/sysplugins/smarty_resource_custom.php</a> (line <span class="field">12</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_resource_custom.php.html">/libs/sysplugins/smarty_resource_custom.php</a> (line <span class="field">18</span>)
 		</p>
 		
 				
@@ -92,7 +91,7 @@
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#fetch" title="details" class="method-name">fetch</a>
-											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$source</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$mtime</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$source</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$mtime</span>)
+											(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">&$source</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">&$mtime</span>)
 									</div>
 																<div class="method-definition">
 											<span class="method-result">integer|boolean</span>
@@ -170,10 +169,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="methodfetch" id="fetch"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">fetch</span> (line <span class="line-number">22</span>)
+		<span class="method-title">fetch</span> (line <span class="line-number">27</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -188,7 +187,7 @@
 		<span class="method-name">
 			fetch
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$source</span>, <span class="var-type"></span>&nbsp;<span class="var-name">&$mtime</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$source</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">$mtime</span>)
+					(<span class="var-type">string</span>&nbsp;<span class="var-name">$name</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">&$source</span>, <span class="var-type">integer</span>&nbsp;<span class="var-name">&$mtime</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -197,16 +196,10 @@
 				<span class="var-name">$name</span><span class="var-description">: template name</span>			</li>
 					<li>
 				<span class="var-type">string</span>
-				<span class="var-name">$source</span><span class="var-description">: template source</span>			</li>
+				<span class="var-name">&$source</span><span class="var-description">: template source</span>			</li>
 					<li>
 				<span class="var-type">integer</span>
-				<span class="var-name">$mtime</span><span class="var-description">: template modification timestamp (epoch)</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$source</span>			</li>
-					<li>
-				<span class="var-type"></span>
-				<span class="var-name">&$mtime</span>			</li>
+				<span class="var-name">&$mtime</span><span class="var-description">: template modification timestamp (epoch)</span>			</li>
 				</ul>
 		
 			
@@ -224,14 +217,15 @@
 				</ul>
 	</div>
 <a name="methodfetchTimestamp" id="fetchTimestamp"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">fetchTimestamp</span> (line <span class="line-number">31</span>)
+		<span class="method-title">fetchTimestamp</span> (line <span class="line-number">38</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Fetch template's modification timestamp from data source</p>
+<p class="description"><p></p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> timestamp (epoch) the template was modified, or false if not found</li>
 				<li><span class="field">access:</span> protected</li>
@@ -262,10 +256,10 @@
 				</ul>
 	</div>
 <a name="methodgetBasename" id="getBasename"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getBasename</span> (line <span class="line-number">83</span>)
+		<span class="method-title">getBasename</span> (line <span class="line-number">89</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -298,10 +292,10 @@
 			
 	</div>
 <a name="methodgetContent" id="getContent"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getContent</span> (line <span class="line-number">67</span>)
+		<span class="method-title">getContent</span> (line <span class="line-number">73</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -335,10 +329,10 @@
 			
 	</div>
 <a name="methodpopulate" id="populate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">populate</span> (line <span class="line-number">43</span>)
+		<span class="method-title">populate</span> (line <span class="line-number">49</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -377,7 +371,6 @@
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../../Smarty/TemplateResources/Smarty_Resource.html">Smarty_Resource</a></span></p>
 					<blockquote>
-													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#method__construct">Smarty_Resource::__construct()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodbuildFilepath">Smarty_Resource::buildFilepath()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodconfig">Smarty_Resource::config()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodgetBasename">Smarty_Resource::getBasename()</a></span><br>
@@ -394,7 +387,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:34:25 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 20 Jun 2011 17:07:37 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

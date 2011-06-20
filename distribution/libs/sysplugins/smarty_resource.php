@@ -626,8 +626,6 @@ class Smarty_Template_Source {
  * @author Rodney Rehm
  *
  * @property string $content compiled content
- *
- * @todo Something is odd with the magic functions here. Please review and clean-up.
  */
 class Smarty_Template_Compiled {
 
@@ -640,23 +638,21 @@ class Smarty_Template_Compiled {
     /**
      * Compiled Timestamp
      * @var integer
-     * @todo Check if this should be "magic" or not.
      */
-    public $timestamp = null; // magic loaded
+    public $timestamp = null;
 
     /**
      * Compiled Existance
      * @var boolean
-     * @todo Check if this should be "magic" or not.
      */
-    public $exists = false; // magic loaded
+    public $exists = false;
 
     /**
      * Compiled Content Loaded
      * @var boolean
      */
-
     public $loaded = false;
+
     /**
      * Template was compiled
      * @var boolean
@@ -677,54 +673,6 @@ class Smarty_Template_Compiled {
     public function __construct(Smarty_Template_Source $source)
     {
         $this->source = $source;
-    }
-
-    /**
-     * <<magic>> Generic Setter.
-     *
-     * @param string $property_name valid: timestamp, exists, content, template
-     * @param mixed  $value        new value (is not checked)
-     * @throws SmartyException if $property_name is not valid
-     * @todo   Review this function. It seems pointless.
-     */
-    public function __set($property_name, $value)
-    {
-        switch ($property_name) {
-            case 'timestamp':
-            case 'exists':
-            case 'content':
-                $this->$property_name = $value;
-                break;
-
-            default:
-                throw new SmartyException("invalid compiled property '$property_name'.");
-        }
-    }
-
-    /**
-     * <<magic>> Generic getter.
-     *
-     * @param string $property_name valid: timestamp, exists, content
-     * @return mixed
-     * @throws SmartyException if $property_name is not valid
-     * @todo   Check if the dead code is really needed
-     */
-    public function __get($property_name)
-    {
-        switch ($property_name) {
-            // @todo This section is dead code!
-            case 'timestamp':
-            case 'exists':
-                $this->timestamp = @filemtime($this->filepath);
-                $this->exists = !!$this->timestamp;
-                return $this->$property_name;
-
-            case 'content':
-                return $this->content = file_get_contents($this->filepath);
-
-            default:
-                throw new SmartyException("compiled property '$property_name' does not exist.");
-        }
     }
 
 }

@@ -20,13 +20,12 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     /**
      * fetches a rendered Smarty template
      *
-     * @param string $template   the resource handle of the template file or template object
-     * @param mixed  $cache_id   cache id to be used with this template
-     * @param mixed  $compile_id compile id to be used with this template
-     * @param object $parent     next higher level of Smarty variables
-     * @param bool   $display    true: display, false: fetch
-    * @param boolean $display if true template content is display otherwise return
-    * @param boolean $merge_tpl_vars if true parten template variables merged in to local scope
+     * @param string $template          the resource handle of the template file or template object
+     * @param mixed  $cache_id          cache id to be used with this template
+     * @param mixed  $compile_id        compile id to be used with this template
+     * @param object $parent            next higher level of Smarty variables
+     * @param bool   $display           true: display, false: fetch
+     * @param bool   $merge_tpl_vars    if true parent template variables merged in to local scope
      * @return string rendered template output
      */
     public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true)
@@ -70,7 +69,9 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             $_template->config_vars = $config_vars;
         }
         // dummy local smarty variable
+        if (!isset($_template->tpl_vars['smarty'])) {
         $_template->tpl_vars['smarty'] = new Smarty_Variable;
+        }
         if (isset($this->smarty->error_reporting)) {
             $_smarty_old_error_level = error_reporting($this->smarty->error_reporting);
         }
@@ -313,8 +314,6 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      * @param mixed         $compile_id compile id to be used with this template
      * @param object        $parent     next higher level of Smarty variables
      * @return boolean cache status
-     * @todo This function calls a method createTemplate() that does not exist in this class or it's parent.
-     *       Please reconsider!
      */
     public function isCached($template = null, $cache_id = null, $compile_id = null, $parent = null)
     {
@@ -325,8 +324,7 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             if ($parent === null) {
                 $parent = $this;
             }
-            // @todo This is an unchecked call to $this->__call() that may result in an error.
-            $template = $this->createTemplate($template, $cache_id, $compile_id, $parent, false);
+            $template = $this->smarty->createTemplate($template, $cache_id, $compile_id, $parent, false);
         }
         // return cache status of template
         return $template->cached->valid;

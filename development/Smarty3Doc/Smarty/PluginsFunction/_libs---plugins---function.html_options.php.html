@@ -41,16 +41,22 @@
 <div class="evenrow">
 	
 	<div>
-		<span class="method-title">smarty_function_html_options</span> (line <span class="line-number">34</span>)
+		<span class="method-title">smarty_function_html_options</span> (line <span class="line-number">36</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Smarty {html_options} function plugin</p>
-<p class="description"><p>Type:     function<br />  Name:     html_options<br />  Purpose:  Prints the list of &lt;option&gt; tags generated from            the passed parameters</p></p>
+<p class="description"><p>Type:     function<br />  Name:     html_options<br />  Purpose:  Prints the list of &lt;option&gt; tags generated from            the passed parameters<br />  Params:  <pre> - name       (optional) - string default "select"
+ - values     (required) - if no options supplied) - array
+ - options    (required) - if no values supplied) - associative array
+ - selected   (optional) - string default not set
+ - output     (required) - if not options supplied) - array
+ - id         (optional) - string default not set
+ - class      (optional) - string default not set</pre></p></p>
 	<ul class="tags">
 				<li><span class="field">author:</span> Monte Ohrt &lt;<a href="mailto:monte">at ohrt dot com monte at ohrt dot com</a>&gt;</li>
 				<li><span class="field">author:</span> Ralf Strehle (minor optimization) &lt;<a href="mailto:ralf">dot strehle at yahoo dot de ralf dot strehle at yahoo dot de</a>&gt;</li>
-				<li><span class="field">link:</span> <a href="http://smarty.php.net/manual/en/language.function.html.options.php">http://smarty.php.net/manual/en/language.function.html.options.php {html_image}
+				<li><span class="field">link:</span> <a href="http://www.smarty.net/manual/en/language.function.html.options.php">http://www.smarty.net/manual/en/language.function.html.options.php {html_image}
       (Smarty online manual)</a></li>
 				<li><span class="field">uses:</span> <a href="../../Smarty/PluginsShared/_libs---plugins---shared.escape_special_chars.php.html#functionsmarty_function_escape_special_chars">smarty_function_escape_special_chars()</a></li>
 			</ul>
@@ -60,15 +66,15 @@
 		<span class="method-name">
 			smarty_function_html_options
 		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$params</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$template</span>)
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$params</span>, <span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$template</span>)
 			</div>
 
 			<ul class="parameters">
 					<li>
 				<span class="var-type">array</span>
-				<span class="var-name">$params</span><span class="var-description">: parameters  Input:<br /> <ul><li>name       (optional) - string default &quot;select&quot;</li><li>values     (required if no options supplied) - array</li><li>options    (required if no values supplied) - associative array</li><li>selected   (optional) - string default not set</li><li>output     (required if not options supplied) - array</li><li>id         (optional) - string default not set</li><li>class      (optional) - string default not set</li></ul></span>			</li>
+				<span class="var-name">$params</span><span class="var-description">: parameters</span>			</li>
 					<li>
-				<span class="var-type">object</span>
+				<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>
 				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 				</ul>
 		
@@ -78,7 +84,7 @@
 <div class="oddrow">
 	
 	<div>
-		<span class="method-title">smarty_function_html_options_optgroup</span> (line <span class="line-number">133</span>)
+		<span class="method-title">smarty_function_html_options_optgroup</span> (line <span class="line-number">135</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
@@ -118,7 +124,7 @@
 <div class="evenrow">
 	
 	<div>
-		<span class="method-title">smarty_function_html_options_optoutput</span> (line <span class="line-number">110</span>)
+		<span class="method-title">smarty_function_html_options_optoutput</span> (line <span class="line-number">112</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
@@ -158,7 +164,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:33:25 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Mon, 20 Jun 2011 17:06:38 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

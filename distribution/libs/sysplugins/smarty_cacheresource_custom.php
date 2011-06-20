@@ -107,11 +107,9 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 
     /**
      * Read the cached template and process the header
-     * 
+     *
      * @param Smarty_Internal_Template $_template template object
      * @return booelan true or false if the cached content does not exist
-     * @todo   reconsider the use of eval() here - the Suhosin plugin may silently deactivate the function
-     *         breaking the application
      */
     public function process(Smarty_Internal_Template $_template)
     {
@@ -135,7 +133,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 
     /**
      * Write the rendered template output to cache
-     * 
+     *
      * @param Smarty_Internal_Template $_template template object
      * @param string                   $content   content to cache
      * @return boolean success
@@ -154,7 +152,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 
     /**
      * Empty cache
-     * 
+     *
      * @param Smarty  $smarty   Smarty object
      * @param integer $exp_time expiration time (number of seconds, not timestamp)
      * @return integer number of cache files deleted
@@ -167,7 +165,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
 
     /**
      * Empty cache for a specific template
-     * 
+     *
      * @param Smarty  $smarty        Smarty object
      * @param string  $resource_name template name
      * @param string  $cache_id      cache id
