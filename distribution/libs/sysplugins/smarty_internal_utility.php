@@ -440,7 +440,7 @@ class Smarty_Internal_Utility {
             echo "Testing sysplugin files...\n";
         }
         // test if sysplugins are available
-        $source = dirname(__FILE__);
+        $source = SMARTY_SYSPLUGINS_DIR;
         if (is_dir($source)) {
             $expected = array(
                 "smarty_cacheresource.php" => true,
@@ -533,13 +533,21 @@ class Smarty_Internal_Utility {
             } elseif ($errors === null) {
                 echo "... OK\n";
             }
+        } else {
+            $status = false;
+            $message = "FAILED: ". SMARTY_SYSPLUGINS_DIR .' is not a directory';
+            if ($errors === null) {
+                echo $message . ".\n";
+            } else {
+                $errors['sysplugins_dir_constant'] = $message;
+            }
         }
 
         if ($errors === null) {
             echo "Testing plugin files...\n";
         }
         // test if core plugins are available
-        $source = dirname(__FILE__) .'/../plugins';
+        $source = SMARTY_PLUGINS_DIR;
         if (is_dir($source)) {
             $expected = array(
                 "block.textformat.php" => true,
@@ -609,6 +617,14 @@ class Smarty_Internal_Utility {
                 }
             } elseif ($errors === null) {
                 echo "... OK\n";
+            }
+        } else {
+            $status = false;
+            $message = "FAILED: ". SMARTY_PLUGINS_DIR .' is not a directory';
+            if ($errors === null) {
+                echo $message . ".\n";
+            } else {
+                $errors['plugins_dir_constant'] = $message;
             }
         }
         
