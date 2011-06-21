@@ -60,6 +60,42 @@ The new unescape modifier is there to reverse the effects of the
 escape modifier. This applies to the escape formats html, htmlall and
 entity.
 
+  default_template_handler_func
+
+The invocation of $smarty->$default_template_handler_func had to be 
+altered. Instead of a Smarty_Internal_Template, the fifth argument is
+now provided with the Smarty instance. New footprint:
+
+
+/**
+ * Default Template Handler
+ *
+ * called when Smarty's file: resource is unable to load a requested file
+ * 
+ * @param string   $type     resource type (e.g. "file", "string", "eval", "resource")
+ * @param string   $name     resource name (e.g. "foo/bar.tpl")
+ * @param string  &$content  template's content
+ * @param integer &$modified template's modification time
+ * @param Smarty   $smarty   Smarty instance
+ * @return string|boolean   path to file or boolean true if $content and $modified 
+ *                          have been filled, boolean false if no default template 
+ *                          could be loaded
+ */
+function default_template_handler_func($type, $name, &$content, &$modified, Smarty $smarty) {
+    if (false) {
+        // return corrected filepath
+        return "/tmp/some/foobar.tpl";
+    } elseif (false) {
+        // return a template directly
+        $content = "the template source";
+        $modified = time();
+        return true;
+    } else {
+        // tell smarty that we failed
+        return false;
+    }
+}
+
   Stuff done to the compiler
 
 @todo uwe.tews
