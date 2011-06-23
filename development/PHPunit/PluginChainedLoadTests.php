@@ -23,6 +23,7 @@ class PluginChainedLoadTests extends PHPUnit_Framework_TestCase {
 
     public function testPluginChainedLoad()
     {
+        $this->smarty->addPluginsDir(dirname(__FILE__)."/PHPunitplugins/");
         $this->assertContains('from chain3', $this->smarty->fetch('test_plugin_chained_load.tpl'));
     }
 

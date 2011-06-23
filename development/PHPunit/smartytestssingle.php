@@ -26,6 +26,11 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
 
     protected static function _init($smarty)
     {
+        $smarty->template_dir = array('.' . DS . 'templates' . DS);
+        $smarty->compile_dir = '.' . DS . 'templates_c' . DS;
+        $smarty->plugins_dir = array(SMARTY_PLUGINS_DIR);
+        $smarty->cache_dir = '.' . DS . 'cache' . DS;
+        $smarty->config_dir = array('.' . DS . 'configs' . DS);
         $smarty->template_objects = null;
         $smarty->config_vars = array();
         Smarty::$global_tpl_vars = array();
@@ -70,8 +75,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public static function suite()
     {
         $testorder = array(
-            'EvalResourceTests',
-            'StringResourceTests',
+            'ClearCompiledTests'
         );
         $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
         if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {
