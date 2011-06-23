@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+23/06/2011
+- bugfix {html_select_date} would not respect current time zone
+
 18/06/2011
 - bugfix mixed use of same subtemplate inline and not inline in same script could cause a warning during compilation
 

@@ -45,20 +45,14 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  */
 function smarty_function_html_select_date($params, $template)
 {
-    $_month_timestamps = array(
-        1 => 946681200,
-        2 => 949359600,
-        3 => 951865200,
-        4 => 954540000,
-        5 => 957132000,
-        6 => 959810400,
-        7 => 962402400,
-        8 => 965080800,
-        9 => 967759200,
-        10 => 970351200,
-        11 => 973033200,
-        12 => 975625200,
-    );
+    // generate timestamps used for month names only
+    static $_month_timestamps = null;
+    if ($_month_timestamps === null) {
+        $_month_timestamps = array();
+        for ($i = 1; $i <= 12; $i++) {
+            $_month_timestamps[$i] = mktime(0, 0, 0, $i, 1, 2000);
+        }
+    }
 
     /* Default values. */
     $prefix = "Date_";
