@@ -55,7 +55,7 @@ class Smarty_Internal_Compile_Setfilterclose extends Smarty_Internal_CompileBase
      */
     public function compile($args, $compiler)
     {
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // reset variable filter to previous state
         if (count($compiler->variable_filter_stack)) {
             $compiler->template->variable_filters = array_pop($compiler->variable_filter_stack);

@@ -34,7 +34,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         $_nocache = 'null';
         $_scope = Smarty::SCOPE_LOCAL;
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // nocache ?
         if ($compiler->tag_nocache || $compiler->nocache) {
             $_nocache = 'true';

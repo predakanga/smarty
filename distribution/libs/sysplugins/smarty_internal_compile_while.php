@@ -28,8 +28,8 @@ class Smarty_Internal_Compile_While extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
-        $this->_open_tag($compiler, 'while', $compiler->nocache);
+        $_attr = $this->getAttributes($compiler, $args);
+        $this->openTag($compiler, 'while', $compiler->nocache);
 
         // maybe nocache because of nocache variables
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
@@ -81,7 +81,7 @@ class Smarty_Internal_Compile_Whileclose extends Smarty_Internal_CompileBase {
         if ($compiler->nocache) {
             $compiler->tag_nocache = true;
         }
-        $compiler->nocache = $this->_close_tag($compiler, array('while'));
+        $compiler->nocache = $this->closeTag($compiler, array('while'));
         return "<?php }?>";
     }
 

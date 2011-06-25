@@ -50,7 +50,7 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // save possible attributes
         if (isset($_attr['assign'])) {
             // output will be stored in a smarty variable instead of beind displayed

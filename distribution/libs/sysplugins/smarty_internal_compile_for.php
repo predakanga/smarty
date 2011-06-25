@@ -46,7 +46,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
             $this->optional_attributes = array();
         }
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
         $output = "<?php ";
         if ($parameter == 1) {
@@ -75,7 +75,7 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
         }
         $output .= "?>";
 
-        $this->_open_tag($compiler, 'for', array('for', $compiler->nocache));
+        $this->openTag($compiler, 'for', array('for', $compiler->nocache));
         // maybe nocache because of nocache variables
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
         // return compiled code
@@ -103,10 +103,10 @@ class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr  = $this->_get_attributes($compiler, $args);
+        $_attr  = $this->getAttributes($compiler, $args);
 
-        list($_open_tag, $nocache) = $this->_close_tag($compiler, array('for'));
-        $this->_open_tag($compiler, 'forelse', array('forelse', $nocache));
+        list($openTag, $nocache) = $this->closeTag($compiler, array('for'));
+        $this->openTag($compiler, 'forelse', array('forelse', $nocache));
         return "<?php }} else { ?>";
     }
 
@@ -131,15 +131,15 @@ class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // must endblock be nocache?
         if ($compiler->nocache) {
             $compiler->tag_nocache = true;
         }
 
-        list($_open_tag, $compiler->nocache) = $this->_close_tag($compiler, array('for', 'forelse'));
+        list($openTag, $compiler->nocache) = $this->closeTag($compiler, array('for', 'forelse'));
 
-        if ($_open_tag == 'forelse') {
+        if ($openTag == 'forelse') {
             return "<?php }  ?>";
         } else {
             return "<?php }} ?>";

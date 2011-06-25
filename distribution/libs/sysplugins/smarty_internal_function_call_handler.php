@@ -16,18 +16,19 @@
 class Smarty_Internal_Function_Call_Handler {
 
     /**
-     * @param string                   $_name
-     * @param Smarty_Internal_Template $_template
-     * @param array                    $_params
-     * @param string                   $_hash
-     * @param bool                     $_nocache
-     * @todo  Missing documentation
+     * This function handles calls to template functions defined by {function}
+     * It does create a PHP function at the first call
+     *
+     * @param string                   $_name       template function name
+     * @param Smarty_Internal_Template $_template   template object
+     * @param array                    $_params     Smarty variables passed as call paramter
+     * @param string                   $_hash       nocache hash value
+     * @param bool                     $_nocache    nocache flag
      */
     public static function call($_name, Smarty_Internal_Template $_template, $_params, $_hash, $_nocache)
     {
         if ($_nocache) {
             $_function = "smarty_template_function_{$_name}_nocache";
-            $_template->smarty->template_functions[$_name]['called_nocache'] = true;
         } else {
             $_function = "smarty_template_function_{$_hash}_{$_name}";
         }
@@ -39,6 +40,7 @@ class Smarty_Internal_Function_Call_Handler {
             if ($_nocache) {
                 $_code .= preg_replace(array("!<\?php echo \\'/\*%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/|/\*/%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/\\';\?>!",
                         "!\\\'!"), array('', "'"), $_template->smarty->template_functions[$_name]['compiled']);
+                $_template->smarty->template_functions[$_name]['called_nocache'] = true;
             } else {
                 $_code .= preg_replace("/{$_template->smarty->template_functions[$_name]['nocache_hash']}/", $_template->properties['nocache_hash'], $_template->smarty->template_functions[$_name]['compiled']);
             }

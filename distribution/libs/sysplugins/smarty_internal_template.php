@@ -56,7 +56,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public $caching_type = null;
     /**
      * Template resource
-     * @var type
+     * @var string
      */
     public $template_resource = null;
     /**
@@ -323,7 +323,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         // include code for plugins
         if (!$cache) {
             if (!empty($this->required_plugins['compiled'])) {
-                $plugins_string = '<?php $_smarty = $_smarty_tpl->smarty; ';
+                $plugins_string = '<?php ';
                 foreach ($this->required_plugins['compiled'] as $tmp) {
                     foreach ($tmp as $data) {
                         $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$data['file']}';\n";

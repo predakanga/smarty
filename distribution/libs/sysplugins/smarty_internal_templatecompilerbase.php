@@ -10,12 +10,12 @@
  */
 
 /**
- * Main compiler class
+ * Main abstract compiler class
  *
  * @package Smarty
  * @subpackage Compiler
  */
-class Smarty_Internal_TemplateCompilerBase {
+abstract class Smarty_Internal_TemplateCompilerBase {
 
     /**
      * hash for nocache sections

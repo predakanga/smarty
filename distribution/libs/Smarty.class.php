@@ -108,7 +108,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
     /**
     * define variable scopes
-    * @todo consider exporting this to a proper enumeration class
     */
     const SCOPE_LOCAL = 0;
     const SCOPE_PARENT = 1;
@@ -116,21 +115,18 @@ class Smarty extends Smarty_Internal_TemplateBase {
     const SCOPE_GLOBAL = 3;
     /**
     * define caching modes
-    * @todo consider exporting this to a proper enumeration class
     */
     const CACHING_OFF = 0;
     const CACHING_LIFETIME_CURRENT = 1;
     const CACHING_LIFETIME_SAVED = 2;
     /**
     * define compile check modes
-    * @todo consider exporting this to a proper enumeration class
     */
     const COMPILECHECK_OFF = 0;
     const COMPILECHECK_ON = 1;
     const COMPILECHECK_CACHEMISS = 2;
     /**
     * modes for handling of "<?php ... ?>" tags in templates.
-    * @todo consider exporting this to a proper enumeration
     */
     const PHP_PASSTHRU = 0; //-> print tags as plain text
     const PHP_QUOTE = 1; //-> escape tags as entities
@@ -138,7 +134,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     const PHP_ALLOW = 3; //-> escape tags as entities
     /**
     * filter types
-    * @todo consider exporting this to a proper enumeration class
     */
     const FILTER_POST = 'post';
     const FILTER_PRE = 'pre';
@@ -146,7 +141,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     const FILTER_VARIABLE = 'variable';
     /**
     * plugin types
-    * @todo consider exporting this to a proper enumeration class
     */
     const PLUGIN_FUNCTION = 'function';
     const PLUGIN_BLOCK = 'block';
@@ -241,12 +235,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $use_sub_dirs = false;
     /**
-    * compile_error?
-    * @var boolean
-    * @todo FIXME! This documentation is misleading
-    */
-    public $compile_error = false;
-    /**
     * caching enabled
     * @var boolean
     */
@@ -267,18 +255,18 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $force_cache = false;
     /**
-    * cache_id
-    * @var string
-    * @todo type correct?
-    * @todo missing documentation
-    */
+     * Set this if you want different sets of cache files for the same
+     * templates.
+     *
+     * @var string
+     */
     public $cache_id = null;
     /**
-    * compile_id
-    * @var string
-    * @todo type correct?
-    * @todo missing documentation
-    */
+     * Set this if you want different sets of compiled files for the same
+     * templates.
+     *
+     * @var string
+     */
     public $compile_id = null;
     /**
     * template left-delimiter
@@ -334,10 +322,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $debugging = false;
     /**
-    * If set to 'URL' it allows triggering debugging from the browser.
-    *
+     * This determines if debugging is enable-able from the browser.
+     * <ul>
+     *  <li>NONE => no debugging control allowed</li>
+     *  <li>URL => enable debugging when SMARTY_DEBUG is found in the URL.</li>
+     * </ul>
     * @var string
-    * @todo consider introducing constants or change the type to boolean
     */
     public $debugging_ctrl = 'NONE';
     /**
@@ -725,12 +715,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         $this->template_dir = array();
         foreach ((array) $template_dir as $k => $v) {
-            if (!is_dir($v)) {
-                throw new SmartyException("{$v} is not a directory");
-            } elseif (!is_dir($v)) {
-                throw new SmartyException("{$v} is not readable");
-            }
-
+            $this->checkDir($v);
             $this->template_dir[$k] = rtrim($v, '/\\') . DS;
         }
 
@@ -744,10 +729,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @param string       $key          of the array element to assign the template dir to
     * @return Smarty current Smarty instance for chaining
     * @throws SmartyException when the given template directory is not valid
-    * @todo   review this section: there is no need to distinguish between $template_dir as string or array.
-    *         The code is identical. Cast $template_dir to array instead!
-    * @todo   You might want to split this in two functions:
-    *         addTemplateDir(string, string) + addTemplateDirs(array)
     */
     public function addTemplateDir($template_dir, $key=null)
     {
@@ -756,12 +737,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
         if (is_array($template_dir)) {
             foreach ($template_dir as $k => $v) {
-                if (!is_dir($v)) {
-                    throw new SmartyException("{$v} is not a directory");
-                } elseif (!is_dir($v)) {
-                    throw new SmartyException("{$v} is not readable");
-                }
-
+                $this->checkDir($v);
                 if (is_int($k)) {
                     // indexes are not merged but appended
                     $this->template_dir[] = rtrim($v, '/\\') . DS;
@@ -771,26 +747,17 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
             }
         } elseif ($key !== null) {
-            if (!is_dir($template_dir)) {
-                throw new SmartyException("{$template_dir} is not a directory");
-            } elseif (!is_dir($template_dir)) {
-                throw new SmartyException("{$template_dir} is not readable");
-            }
+            $this->checkDir($template_dir);
 
             // override directory at specified index
             $this->template_dir[$key] = rtrim($template_dir, '/\\') . DS;
         } else {
-            if (!is_dir($template_dir)) {
-                throw new SmartyException("{$template_dir} is not a directory");
-            } elseif (!is_dir($template_dir)) {
-                throw new SmartyException("{$template_dir} is not readable");
-            }
+            $this->checkDir($template_dir);
 
             // append new directory
             $this->template_dir[] = rtrim($template_dir, '/\\') . DS;
         }
 
-        $this->template_dir = array_unique($this->template_dir);
         return $this;
     }
 
@@ -819,11 +786,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         $this->config_dir = array();
         foreach ((array) $config_dir as $k => $v) {
-            if (!is_dir($v)) {
-                throw new SmartyException("{$v} is not a directory");
-            } elseif (!is_dir($v)) {
-                throw new SmartyException("{$v} is not readable");
-            }
+            $this->checkDir($v);
 
             $this->config_dir[$k] = rtrim($v, '/\\') . DS;
         }
@@ -837,8 +800,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @param string|array $config_dir directory(s) of config sources
     * @param string key of the array element to assign the config dir to
     * @return Smarty current Smarty instance for chaining
-    * @todo   same thing as with {@see Smarty::addTemplateDir} - it contains duplicate code.
-    * @todo   consider to split this function in addConfigDir(string, string) and addConfigDirs(array)
     */
     public function addConfigDir($config_dir, $key=null)
     {
@@ -847,11 +808,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
         if (is_array($config_dir)) {
             foreach ($config_dir as $k => $v) {
-                if (!is_dir($v)) {
-                    throw new SmartyException("{$v} is not a directory");
-                } elseif (!is_dir($v)) {
-                    throw new SmartyException("{$v} is not readable");
-                }
+                $this->checkDir($v);
 
                 if (is_int($k)) {
                     // indexes are not merged but appended
@@ -862,26 +819,17 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
             }
         } elseif( $key !== null ) {
-            if (!is_dir($config_dir)) {
-                throw new SmartyException("{$config_dir} is not a directory");
-            } elseif (!is_dir($config_dir)) {
-                throw new SmartyException("{$config_dir} is not readable");
-            }
+            $this->checkDir($config_dir);
 
             // override directory at specified index
             $this->config_dir[$key] = rtrim($config_dir, '/\\') . DS;
         } else {
-            if (!is_dir($config_dir)) {
-                throw new SmartyException("{$config_dir} is not a directory");
-            } elseif (!is_dir($config_dir)) {
-                throw new SmartyException("{$config_dir} is not readable");
-            }
+            $this->checkDir($config_dir);
 
             // append new directory
             $this->config_dir[] = rtrim($config_dir, '/\\') . DS;
         }
 
-        $this->config_dir = array_unique($this->config_dir);
         return $this;
     }
 
@@ -890,7 +838,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     *
     * @param mixed index of directory to get, null to get all
     * @return array|string configuration directory
-    * @todo   consider to split this into 'string getConfigDir(string)' + 'array getConfigDirs()'
     */
     public function getConfigDir($index=null)
     {
@@ -911,11 +858,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         $this->plugins_dir = array();
         foreach ((array)$plugins_dir as $k => $v) {
-            if (!is_dir($v)) {
-                throw new SmartyException("{$v} is not a directory");
-            } elseif (!is_dir($v)) {
-                throw new SmartyException("{$v} is not readable");
-            }
+            $this->checkDir($v);
 
             $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
         }
@@ -937,6 +880,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
         if (is_array($plugins_dir)) {
             foreach ($plugins_dir as $k => $v) {
+                $this->checkDir($v);
                 if (is_int($k)) {
                     // indexes are not merged but appended
                     $this->plugins_dir[] = rtrim($v, '/\\') . DS;
@@ -947,6 +891,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             }
         } else {
             // append new directory
+            $this->checkDir($plugins_dir);
             $this->plugins_dir[] = rtrim($plugins_dir, '/\\') . DS;
         }
 
@@ -972,11 +917,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function setCompileDir($compile_dir)
     {
-        if (!is_dir($compile_dir)) {
-            throw new SmartyException("{$compile_dir} is not a directory");
-        } elseif (!is_dir($compile_dir)) {
-            throw new SmartyException("{$compile_dir} is not readable");
-        }
+        $this->checkDir($compile_dir);
 
         $this->compile_dir = rtrim($compile_dir, '/\\') . DS;
         return $this;
@@ -1000,11 +941,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function setCacheDir($cache_dir)
     {
-        if (!is_dir($cache_dir)) {
-            throw new SmartyException("{$cache_dir} is not a directory");
-        } elseif (!is_dir($cache_dir)) {
-            throw new SmartyException("{$cache_dir} is not readable");
-        }
+        $this->checkDir($cache_dir);
 
         $this->cache_dir = rtrim($cache_dir, '/\\') . DS;
         return $this;
@@ -1020,6 +957,19 @@ class Smarty extends Smarty_Internal_TemplateBase {
         return $this->cache_dir;
     }
 
+    /**
+    * Check that directory is valid and readable
+    *
+    * @param string $dir directory
+    */
+    public function checkDir($dir)
+    {
+        if (!is_dir($dir)) {
+            throw new SmartyException("{$dir} is not a directory");
+        } elseif (!is_readable($dir)) {
+            throw new SmartyException("{$dir} is not readable");
+        }
+    }
 
     /**
     * Set default modifiers
@@ -1239,7 +1189,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
         foreach($this->getPluginsDir() as $_plugin_dir) {
             $file = $_plugin_dir . $_plugin_filename;
             if (file_exists($file)) {
-                $_smarty = $this;
                 require_once($file);
                 return $file;
             }
@@ -1305,36 +1254,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
      *
      * @param array $errors Array to write errors into, rather than outputting them
      * @return boolean true if setup is fine, false if something is wrong
-     * @todo I already got a reporting engine based for this task. You may want to copy it to save time.
-     *       It is based on SimpleXML, uses XML/XSLT and is easy to use.
-     *       @link https://yana.svn.codeplex.com/svn/trunk/libs/yana/isreportable.class.php
-     *       @link https://yana.svn.codeplex.com/svn/trunk/libs/yana/reportxml.class.php
-     *       @link https://yana.svn.codeplex.com/svn/trunk/config/dtd/report.dtd
-     *       @link https://yana.svn.codeplex.com/svn/trunk/plugins/diagnostics/report.xsl
-     *
-     * Example:
-     * <code>
-     * class Foo implements IsReportable {
-     * ...
-     * public function getReport(ReportXML $report = null) {
-     * if (is_null($report)) {
-     *      $report = ReportXML::createReport(__CLASS__);
-     * }
-     * $subreport = $report->addReport("Smarty Installation test...");
-     * if (...) {
-     *     $subreport->addError("FAILED: $template_dir is not a directory.");
-     * } elseif (...) {
-     *     $subreport->addWarning("FAILED: $template_dir is not readable.");
-     * } else {
-     *     $subreport->addText("$template_dir is OK.");
-     * }
-     * }
-     * ...
-     * }
-     * </code>
-     *
-     * This might be more convenient, already allows sub-reporting and command-line use
-     * by exchanging the XSL templates.
      */
     public function testInstall(&$errors=null)
     {

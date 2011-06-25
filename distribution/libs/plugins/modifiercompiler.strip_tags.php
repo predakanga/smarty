@@ -24,7 +24,6 @@ function smarty_modifiercompiler_strip_tags($params, $compiler)
         $params[1] = true;
     }
     if ($params[1] === true) {
-        // TODO: (rodneyrehm) check if this sort of tag stripping isn't punishable by death
         return "preg_replace('!<[^>]*?>!', ' ', {$params[0]})";
     } else {
         return 'strip_tags(' . $params[0] . ')';

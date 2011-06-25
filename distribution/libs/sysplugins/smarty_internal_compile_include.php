@@ -59,14 +59,15 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {include} tag
     *
-    * @param array  $args     array with attributes from parser
-    * @param object $compiler compiler object
-    * @return string compiled code
-    */
-    public function compile($args, $compiler)
+     * @param array $args array with attributes from parser
+     * @param object $compiler compiler object
+     * @param array $parameter array with compilation parameter
+     * @return string compiled code
+     */
+    public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // save posible attributes
         $include_file = $_attr['file'];
         $has_compiled_template = false;

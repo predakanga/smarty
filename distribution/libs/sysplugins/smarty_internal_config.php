@@ -22,52 +22,58 @@
 class Smarty_Internal_Config {
 
     /**
-     * @var array
-     * @todo Missing documentation
-     */
-    public static $config_objects = array();
-    /**
-     * @todo Missing documentation
+     * Samrty instance
+     *
+     * @var Smarty object
      */
     public $smarty = null;
     /**
-     * @todo Missing documentation
+     * Object of config var storage
+     *
+     * @var object
      */
     public $data = null;
     /**
-     * @todo Missing documentation
+     * Config resource
+     * @var string
      */
     public $config_resource = null;
     /**
-     * @todo Missing documentation
-     */
-    public $config_source = null;
-    /**
-     * @todo Missing documentation
+     * Compiled config file
+     *
+     * @var string
      */
     public $compiled_config = null;
     /**
-     * @todo Missing documentation
+     * filepath of compiled config file
+     *
+     * @var string
      */
     public $compiled_filepath = null;
     /**
-     * @todo Missing documentation
+     * Filemtime of compiled config Filemtime
+     *
+     * @var int
      */
     public $compiled_timestamp = null;
     /**
-     * @todo Missing documentation
+     * flag if compiled config file is invalid and must be (re)compiled
+     * @var bool
      */
     public $mustCompile = null;
     /**
-     * @todo Missing documentation
+     * Config file compiler object
+     *
+     * @var Smarty_Internal_Config_File_Compiler object
      */
     public $compiler_object = null;
 
     /**
-     * @param mixed $config_resource
-     * @param mixed $smarty
-     * @param mixed $data
-     * @todo Missing documentation
+     * Constructor of config file object
+     *
+     * @param string $config_resource config file resource name
+     * @param Smarty $smarty Smarty instance
+     * @param object $data object for config vars storage
      */
     public function __construct($config_resource, $smarty, $data = null)
     {

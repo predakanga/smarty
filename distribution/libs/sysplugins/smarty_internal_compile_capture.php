@@ -42,7 +42,7 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
         $buffer = isset($_attr['name']) ? $_attr['name'] : "'default'";
         $assign = isset($_attr['assign']) ? $_attr['assign'] : null;
@@ -76,7 +76,7 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // must endblock be nocache?
         if ($compiler->nocache) {
             $compiler->tag_nocache = true;

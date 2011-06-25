@@ -15,7 +15,7 @@
  * @package Smarty
  * @subpackage Template
  */
-class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
+abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
 
     /**
      * fetches a rendered Smarty template
@@ -403,14 +403,9 @@ class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      *
      * @param string               $type     name of cache resource type
      * @param Smarty_CacheResource $callback instance of Smarty_CacheResource to handle output caching
-     * @throws SmartyException if $callback is not an instance of Smarty_CacheResource
-     * @todo  Consider Introducing a type-hint instead of throwing an exception
      */
-    public function registerCacheResource($type, $callback)
+    public function registerCacheResource($type, Smarty_CacheResource $callback)
     {
-        if (!($callback instanceof Smarty_CacheResource)) {
-            throw new SmartyException("CacheResource handlers must implement Smarty_CacheResource");
-        }
         $this->smarty->registered_cache_resources[$type] = $callback;
     }
 

@@ -52,7 +52,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
             throw new SmartyException("{include_php} is deprecated, use SmartyBC class to enable");
         }
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
         $_output = '<?php ';
 

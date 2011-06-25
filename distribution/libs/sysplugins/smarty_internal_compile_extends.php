@@ -46,7 +46,7 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
         $this->_ldl = preg_quote($compiler->smarty->left_delimiter);
         $filepath = $compiler->template->source->filepath;
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         if ($_attr['nocache'] === true) {
             $compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }

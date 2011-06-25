@@ -29,7 +29,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         $output = $parameter['value'];
         // loop over list of modifiers
         foreach ($parameter['modifierlist'] as $single_modifier) {

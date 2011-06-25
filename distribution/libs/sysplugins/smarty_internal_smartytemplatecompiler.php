@@ -114,8 +114,8 @@ class Smarty_Internal_SmartyTemplateCompiler extends Smarty_Internal_TemplateCom
         // check for unclosed tags
         if (count($this->_tag_stack) > 0) {
             // get stacked info
-            list($_open_tag, $_data) = array_pop($this->_tag_stack);
-            $this->trigger_template_error("unclosed {" . $_open_tag . "} tag");
+            list($openTag, $_data) = array_pop($this->_tag_stack);
+            $this->trigger_template_error("unclosed {" . $openTag . "} tag");
         }
         // return compiled code
         // return str_replace(array("? >\n<?php","? ><?php"), array('',''), $this->parser->retvalue);

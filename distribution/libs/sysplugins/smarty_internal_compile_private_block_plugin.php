@@ -40,7 +40,7 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
         if (strlen($tag) < 6 || substr($tag, -5) != 'close') {
             // opening tag of block plugin
             // check and get attributes
-            $_attr = $this->_get_attributes($compiler, $args);
+            $_attr = $this->getAttributes($compiler, $args);
             if ($_attr['nocache'] === true) {
                 $compiler->tag_nocache = true;
             }
@@ -56,7 +56,7 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
             }
             $_params = 'array(' . implode(",", $_paramsArray) . ')';
 
-            $this->_open_tag($compiler, $tag, array($_params, $compiler->nocache));
+            $this->openTag($compiler, $tag, array($_params, $compiler->nocache));
             // maybe nocache because of nocache variables or nocache plugin
             $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
             // compile code
@@ -67,7 +67,7 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
                 $compiler->tag_nocache = true;
             }
             // closing tag of block plugin, restore nocache
-            list($_params, $compiler->nocache) = $this->_close_tag($compiler, substr($tag, 0, -5));
+            list($_params, $compiler->nocache) = $this->closeTag($compiler, substr($tag, 0, -5));
             // This tag does create output
             $compiler->has_output = true;
             // compile code

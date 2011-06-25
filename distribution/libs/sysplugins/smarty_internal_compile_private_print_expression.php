@@ -43,7 +43,7 @@ class Smarty_Internal_Compile_Private_Print_Expression extends Smarty_Internal_C
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // nocache option
         if ($_attr['nocache'] === true) {
             $compiler->tag_nocache = true;

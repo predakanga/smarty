@@ -49,9 +49,9 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
-        $this->_open_tag($compiler, 'section', array('section', $compiler->nocache));
+        $this->openTag($compiler, 'section', array('section', $compiler->nocache));
         // maybe nocache because of nocache variables
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
 
@@ -154,10 +154,10 @@ class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
-        list($_open_tag, $nocache) = $this->_close_tag($compiler, array('section'));
-        $this->_open_tag($compiler, 'sectionelse', array('sectionelse', $nocache));
+        list($openTag, $nocache) = $this->closeTag($compiler, array('section'));
+        $this->openTag($compiler, 'sectionelse', array('sectionelse', $nocache));
 
         return "<?php endfor; else: ?>";
     }
@@ -182,16 +182,16 @@ class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase {
     public function compile($args, $compiler)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
         // must endblock be nocache?
         if ($compiler->nocache) {
             $compiler->tag_nocache = true;
         }
 
-        list($_open_tag, $compiler->nocache) = $this->_close_tag($compiler, array('section', 'sectionelse'));
+        list($openTag, $compiler->nocache) = $this->closeTag($compiler, array('section', 'sectionelse'));
 
-        if ($_open_tag == 'sectionelse') {
+        if ($openTag == 'sectionelse') {
             return "<?php endif; ?>";
         } else {
             return "<?php endfor; endif; ?>";

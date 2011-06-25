@@ -12,13 +12,8 @@
  *
  * @package Smarty
  * @subpackage Compiler
- * @todo  This class is not abstract but there is an (unmentioned) abstract function compile(),
- *        that each sub-class implements. If you do not want to make this class abstract,
- *        consider introducing an interface class, to ensure all sub-classes implement the function
- *        correctly.
  */
-// abstract class Smarty_Internal_CompileBase implements TagCompilerInterface
-class Smarty_Internal_CompileBase {
+abstract class Smarty_Internal_CompileBase {
 
     /**
      * Array of names of required attribute required by tag
@@ -57,9 +52,8 @@ class Smarty_Internal_CompileBase {
      * @param object $compiler   compiler object
      * @param array  $attributes attributes applied to the tag
      * @return array of mapped attributes for further processing
-     * @todo Consider using CamelCase here.
      */
-    public function _get_attributes($compiler, $attributes)
+    public function getAttributes($compiler, $attributes)
     {
         $_indexed_attr = array();
         // loop over attributes
@@ -138,9 +132,8 @@ class Smarty_Internal_CompileBase {
      * @param object    $compiler   compiler object
      * @param string    $openTag    the opening tag's name
      * @param mixed     $data       optional data saved
-     * @todo Consider using CamelCase here.
      */
-    public function _open_tag($compiler, $openTag, $data = null)
+    public function openTag($compiler, $openTag, $data = null)
     {
         array_push($compiler->_tag_stack, array($openTag, $data));
     }
@@ -153,9 +146,8 @@ class Smarty_Internal_CompileBase {
      * @param object       $compiler    compiler object
      * @param array|string $expectedTag the expected opening tag names
      * @return mixed any type the opening tag's name or saved data
-     * @todo Consider using CamelCase here.
      */
-    public function _close_tag($compiler, $expectedTag)
+    public function closeTag($compiler, $expectedTag)
     {
         if (count($compiler->_tag_stack) > 0) {
             // get stacked info

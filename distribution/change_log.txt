@@ -1,4 +1,12 @@
 ﻿===== Smarty 3.1-DEV  =====
+25/06/2011
+- revert change of 17/06/2011. $_smarty varibale removed. call loadPlugin() from inside plugin code if required
+- code cleanup, remove no longer used properties and methods
+- update of PHPdoc comments
+
+23/06/2011
+- bugfix {html_select_date} would not respect current time zone
+
 19/06/2011
 - added $errors argument to testInstall() functions to suppress output.
 - added plugin-file checks to testInstall()
