@@ -1,7 +1,7 @@
 <?php
 /**
 * Smarty PHPunit tests for File resources
-* 
+*
 * @package PHPunit
 * @author Rodney Rehm
 */
@@ -11,18 +11,18 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
         $this->smarty = SmartyTests::$smarty;
+        SmartyTests::init();
         $this->smarty->addTemplateDir(dirname(__FILE__) .'/templates_2');
         // note that 10 is a string!
         $this->smarty->addTemplateDir(dirname(__FILE__) .'/templates_3', '10');
         $this->smarty->addTemplateDir(dirname(__FILE__) .'/templates_4', 'foo');
-        SmartyTests::init();
-    } 
+    }
 
     public static function isRunnable()
     {
         return true;
-    } 
-    
+    }
+
     protected function relative($path)
     {
         $path = str_replace( dirname(__FILE__), '.', $path );
@@ -36,7 +36,7 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('dirname.tpl');
         $this->assertEquals('./templates/dirname.tpl', $this->relative($tpl->source->filepath));
-    } 
+    }
     public function testGetTemplateFilepathNumber()
     {
         $tpl = $this->smarty->createTemplate('[1]dirname.tpl');
@@ -52,13 +52,13 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
         $tpl = $this->smarty->createTemplate('[foo]dirname.tpl');
         $this->assertEquals('./templates_4/dirname.tpl', $this->relative($tpl->source->filepath));
     }
-    
-    
+
+
     public function testFetch()
     {
         $tpl = $this->smarty->createTemplate('dirname.tpl');
         $this->assertEquals('templates', $this->smarty->fetch($tpl));
-    } 
+    }
     public function testFetchNumber()
     {
         $tpl = $this->smarty->createTemplate('[1]dirname.tpl');
@@ -88,7 +88,7 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('[foo]dirname.tpl');
         $this->assertFalse($tpl->cached->filepath);
-    } 
+    }
 
 
     public function testGetCachedFilepath()
@@ -104,11 +104,11 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     {
         try {
             $this->smarty->fetch('[foo]./dirname.tpl');
-        } 
+        }
         catch (Exception $e) {
             $this->assertContains("may not start with ../ or ./", $e->getMessage());
             return;
-        } 
+        }
         $this->fail('Exception for relative filepath has not been raised.');
     }
 
@@ -116,7 +116,7 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->clearCompiledTemplate();
 	  $this->smarty->clearAllCache();
-    } 
-} 
+    }
+}
 
 ?>
