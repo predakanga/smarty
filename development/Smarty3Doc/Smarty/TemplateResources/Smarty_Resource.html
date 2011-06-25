@@ -26,11 +26,10 @@
 <p class="short-description">Smarty Resource Plugin</p>
 <p class="description"><p>Base implementation for resource plugins</p></p>
 	<ul class="tags">
-				<li><span class="field">author:</span> Rodney Rehm</li>
 				<li><span class="field">abstract:</span> </li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_resource.php.html">/libs/sysplugins/smarty_resource.php</a> (line <span class="field">12</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_resource.php.html">/libs/sysplugins/smarty_resource.php</a> (line <span class="field">18</span>)
 		</p>
 		
 				
@@ -152,7 +151,7 @@
 		</div>
 		<div class="info-box-body">			
 			<div class="method-summary">
-																												<div class="method-definition">
+																				<div class="method-definition">
 					static 						<span class="method-result"><a href="../../Smarty/TemplateResources/Smarty_Config_Source.html">Smarty_Config_Source</a></span>
 										<a href="#config" title="details" class="method-name">config</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$_config</span>)
@@ -169,11 +168,6 @@
 									</div>
 								
 												<div class="method-definition">
-											<span class="method-result">Smarty_Resource</span>
-										<a href="#__construct" title="details" class="method-name">__construct</a>
-										()
-									</div>
-																<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#buildFilepath" title="details" class="method-name">buildFilepath</a>
 											(<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Source.html">Smarty_Template_Source</a></span>&nbsp;<span class="var-name">$source</span>, [<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span> = <span class="var-default">null</span>])
@@ -222,13 +216,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$resources" id="$resources"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">array</span>
 			<span class="var-name">$resources</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">17</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">24</span>)
 		</span>
 	</div>
 
@@ -244,13 +238,13 @@
 
 </div>
 <a name="var$sysplugins" id="$sysplugins"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">array</span>
 			<span class="var-name">$sysplugins</span>
-			 = <span class="var-default">array(<br />        'file' =&gt; true,<br />        'string' =&gt; true,<br />        'extends' =&gt; true,<br />        'stream' =&gt; true,<br />        'eval' =&gt; true<br />    )</span>			(line <span class="line-number">23</span>)
+			 = <span class="var-default">array(<br />        'file' =&gt; true,<br />        'string' =&gt; true,<br />        'extends' =&gt; true,<br />        'stream' =&gt; true,<br />        'eval' =&gt; true<br />    )</span>			(line <span class="line-number">29</span>)
 		</span>
 	</div>
 
@@ -266,13 +260,13 @@
 
 </div>
 <a name="var$compiler_class" id="$compiler_class"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$compiler_class</span>
-			 = <span class="var-default"> 'Smarty_Internal_SmartyTemplateCompiler'</span>			(line <span class="line-number">35</span>)
+			 = <span class="var-default"> 'Smarty_Internal_SmartyTemplateCompiler'</span>			(line <span class="line-number">41</span>)
 		</span>
 	</div>
 
@@ -288,13 +282,13 @@
 
 </div>
 <a name="var$template_lexer_class" id="$template_lexer_class"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$template_lexer_class</span>
-			 = <span class="var-default"> 'Smarty_Internal_Templatelexer'</span>			(line <span class="line-number">41</span>)
+			 = <span class="var-default"> 'Smarty_Internal_Templatelexer'</span>			(line <span class="line-number">47</span>)
 		</span>
 	</div>
 
@@ -310,13 +304,13 @@
 
 </div>
 <a name="var$template_parser_class" id="$template_parser_class"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$template_parser_class</span>
-			 = <span class="var-default"> 'Smarty_Internal_Templateparser'</span>			(line <span class="line-number">47</span>)
+			 = <span class="var-default"> 'Smarty_Internal_Templateparser'</span>			(line <span class="line-number">53</span>)
 		</span>
 	</div>
 
@@ -348,10 +342,10 @@
 		<div class="info-box-body">
 			<A NAME='method_detail'></A>
 <a name="methodconfig" id="config"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method config</span> (line <span class="line-number">398</span>)
+		<span class="method-title">static method config</span> (line <span class="line-number">394</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -379,10 +373,10 @@
 			
 	</div>
 <a name="methodload" id="load"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method load</span> (line <span class="line-number">298</span>)
+		<span class="method-title">static method load</span> (line <span class="line-number">293</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -413,10 +407,10 @@
 			
 	</div>
 <a name="methodsource" id="source"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method source</span> (line <span class="line-number">364</span>)
+		<span class="method-title">static method source</span> (line <span class="line-number">360</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -451,45 +445,11 @@
 			
 	</div>
 
-<a name="method__construct" id="__construct"><!-- --></a>
-<div class="evenrow">
-	
-	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">53</span>)
-	</div> 
-	
-	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Create new Resource Plugin</p>
-	<ul class="tags">
-				<li><span class="field">access:</span> public</li>
-			</ul>
-	
-	<div class="method-signature">
-		<span class="method-result">Smarty_Resource</span>
-		<span class="method-name">
-			__construct
-		</span>
-				()
-			</div>
-	
-		
-			
-			<hr class="separator" />
-		<div class="notes">Redefined in descendants as:</div>
-		<ul class="redefinitions">
-					<li>
-				<a href="../../Resource-examples/Smarty_Resource_Mysql.html#method__construct">Smarty_Resource_Mysql::__construct()</a>
-							</li>
-					<li>
-				<a href="../../Resource-examples/Smarty_Resource_Mysqls.html#method__construct">Smarty_Resource_Mysqls::__construct()</a>
-							</li>
-				</ul>
-	</div>
 <a name="methodbuildFilepath" id="buildFilepath"><!-- --></a>
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">buildFilepath</span> (line <span class="line-number">138</span>)
+		<span class="method-title">buildFilepath</span> (line <span class="line-number">133</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -523,7 +483,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getBasename</span> (line <span class="line-number">286</span>)
+		<span class="method-title">getBasename</span> (line <span class="line-number">281</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -581,11 +541,12 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getContent</span> (line <span class="line-number">66</span>)
+		<span class="method-title">getContent</span> (line <span class="line-number">64</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Load template's source into current template object</p>
+<p class="description"><p></p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> template source</li>
 				<li><span class="field">abstract:</span> </li>
@@ -645,7 +606,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">populate</span> (line <span class="line-number">75</span>)
+		<span class="method-title">populate</span> (line <span class="line-number">72</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -714,7 +675,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">populateCompiledFilepath</span> (line <span class="line-number">95</span>)
+		<span class="method-title">populateCompiledFilepath</span> (line <span class="line-number">90</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -750,7 +711,7 @@
 							</li>
 					<li>
 				<a href="../../Smarty/TemplateResources/Smarty_Resource_Uncompiled.html#methodpopulateCompiledFilepath">Smarty_Resource_Uncompiled::populateCompiledFilepath()</a>
-								: populate Compiled Object with compiled filepath
+								: populate compiled object with compiled filepath
 							</li>
 				</ul>
 	</div>
@@ -758,7 +719,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">populateTimestamp</span> (line <span class="line-number">83</span>)
+		<span class="method-title">populateTimestamp</span> (line <span class="line-number">79</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -805,7 +766,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:34:24 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sat, 25 Jun 2011 16:08:39 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

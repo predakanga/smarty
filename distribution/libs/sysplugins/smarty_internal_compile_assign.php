@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Smarty Internal Plugin Compile Assign
  *
@@ -12,14 +11,18 @@
 
 /**
  * Smarty Internal Plugin Compile Assign Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
+
     /**
      * Compiles code for the {assign} tag
      *
-     * @param array $args array with attributes from parser
-     * @param object $compiler compiler object
-     * @param array $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
     public function compile($args, $compiler, $parameter)
@@ -31,8 +34,8 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         $_nocache = 'null';
         $_scope = Smarty::SCOPE_LOCAL;
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
-		// nocache ?
+        $_attr = $this->getAttributes($compiler, $args);
+        // nocache ?
         if ($compiler->tag_nocache || $compiler->nocache) {
             $_nocache = 'true';
             // create nocache var to make it know for further compiling
@@ -64,5 +67,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         }
         return $output;
     }
+
 }
+
 ?>

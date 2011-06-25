@@ -1,15 +1,22 @@
 <?php
-
 /**
  * Smarty Resource Plugin
- * 
- * Base implementation for resource plugins that don't compile cache
- * 
+ *
  * @package Smarty
  * @subpackage TemplateResources
  * @author Rodney Rehm
  */
+
+/**
+ * Smarty Resource Plugin
+ *
+ * Base implementation for resource plugins that don't compile cache
+ *
+ * @package Smarty
+ * @subpackage TemplateResources
+ */
 abstract class Smarty_Resource_Recompiled extends Smarty_Resource {
+
     /**
      * populate Compiled Object with compiled filepath
      *
@@ -23,6 +30,7 @@ abstract class Smarty_Resource_Recompiled extends Smarty_Resource {
         $compiled->timestamp = false;
         $compiled->exists = false;
     }
+
 }
 
 ?>

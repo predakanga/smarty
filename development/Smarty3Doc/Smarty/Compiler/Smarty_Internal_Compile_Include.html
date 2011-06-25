@@ -26,7 +26,7 @@
         		<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Smarty Internal Plugin Compile Include Class</p>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compile_include.php.html">/libs/sysplugins/smarty_internal_compile_include.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compile_include.php.html">/libs/sysplugins/smarty_internal_compile_include.php</a> (line <span class="field">18</span>)
 		</p>
 		
 				
@@ -76,24 +76,20 @@
 					</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-												<div class="var-title">
-					static <span class="var-type">mixed</span>
-					<a href="#$merged_templates_func" title="details" class="var-name">$merged_templates_func</a>
-				</div>
-																																																												<div class="var-title">
-					<span class="var-type">mixed</span>
+																																																<div class="var-title">
+					<span class="var-type">array</span>
 					<a href="#$optional_attributes" title="details" class="var-name">$optional_attributes</a>
 				</div>
 																<div class="var-title">
-					<span class="var-type">mixed</span>
+					<span class="var-type">array</span>
 					<a href="#$option_flags" title="details" class="var-name">$option_flags</a>
 				</div>
 																<div class="var-title">
-					<span class="var-type">mixed</span>
+					<span class="var-type">array</span>
 					<a href="#$required_attributes" title="details" class="var-name">$required_attributes</a>
 				</div>
 																<div class="var-title">
-					<span class="var-type">mixed</span>
+					<span class="var-type">array</span>
 					<a href="#$shorttag_order" title="details" class="var-name">$shorttag_order</a>
 				</div>
 											</div>
@@ -118,7 +114,7 @@
 												<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#compile" title="details" class="method-name">compile</a>
-											(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>)
+											(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$parameter</span>)
 									</div>
 								</div>
 		</div>
@@ -139,37 +135,21 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$merged_templates_func" id="$merged_templates_func"><!-- --></A>
+			<a name="var$optional_attributes" id="$optional_attributes"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			static <span class="var-type">mixed</span>
-			<span class="var-name">$merged_templates_func</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">24</span>)
-		</span>
-	</div>
-
-	<!-- ========== Info from phpDoc block ========= -->
-	
-	
-		
-		
-
-</div>
-<a name="var$optional_attributes" id="$optional_attributes"><!-- --></A>
-<div class="evenrow">
-
-	<div class="var-header">
-		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$optional_attributes</span>
-			 = <span class="var-default">array('_any')</span>			(line <span class="line-number">23</span>)
+			 = <span class="var-default">array('_any')</span>			(line <span class="line-number">51</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -178,24 +158,27 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$optional_attributes">Smarty_Internal_CompileBase::$optional_attributes</a></dt>
+						<dd>Array of names of optional attribute required by tag  use array('_any') if there is no restriction of attributes names</dd>
 					</dl>
 		
 		
 
 </div>
 <a name="var$option_flags" id="$option_flags"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$option_flags</span>
-			 = <span class="var-default">array('nocache','inline','caching')</span>			(line <span class="line-number">22</span>)
+			 = <span class="var-default">array('nocache', 'inline', 'caching')</span>			(line <span class="line-number">44</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -204,24 +187,27 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$option_flags">Smarty_Internal_CompileBase::$option_flags</a></dt>
+						<dd>Array of names of valid option flags</dd>
 					</dl>
 		
 		
 
 </div>
 <a name="var$required_attributes" id="$required_attributes"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$required_attributes</span>
-			 = <span class="var-default">array('file')</span>			(line <span class="line-number">20</span>)
+			 = <span class="var-default">array('file')</span>			(line <span class="line-number">30</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -230,24 +216,27 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$required_attributes">Smarty_Internal_CompileBase::$required_attributes</a></dt>
+						<dd>Array of names of required attribute required by tag</dd>
 					</dl>
 		
 		
 
 </div>
 <a name="var$shorttag_order" id="$shorttag_order"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
-			<span class="var-type">mixed</span>
+			<span class="var-type">array</span>
 			<span class="var-name">$shorttag_order</span>
-			 = <span class="var-default">array('file')</span>			(line <span class="line-number">21</span>)
+			 = <span class="var-default">array('file')</span>			(line <span class="line-number">37</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Attribute definition: Overwrites base class.</p>
 	<ul class="tags">
+				<li><span class="field">see:</span> <a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></li>
 				<li><span class="field">access:</span> public</li>
 			</ul>
 	
@@ -256,6 +245,7 @@
 		<div class="notes">Redefinition of:</div>
 		<dl>
 			<dt><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#var$shorttag_order">Smarty_Internal_CompileBase::$shorttag_order</a></dt>
+						<dd>Shorttag attribute order defined by its names</dd>
 					</dl>
 		
 		
@@ -280,10 +270,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="methodcompile" id="compile"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">compile</span> (line <span class="line-number">33</span>)
+		<span class="method-title">compile</span> (line <span class="line-number">67</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -298,7 +288,7 @@
 		<span class="method-name">
 			compile
 		</span>
-					(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>)
+					(<span class="var-type">array</span>&nbsp;<span class="var-name">$args</span>, <span class="var-type">object</span>&nbsp;<span class="var-name">$compiler</span>, <span class="var-type">array</span>&nbsp;<span class="var-name">$parameter</span>)
 			</div>
 	
 			<ul class="parameters">
@@ -308,6 +298,9 @@
 					<li>
 				<span class="var-type">object</span>
 				<span class="var-name">$compiler</span><span class="var-description">: compiler object</span>			</li>
+					<li>
+				<span class="var-type">array</span>
+				<span class="var-name">$parameter</span><span class="var-description">: array with compilation parameter</span>			</li>
 				</ul>
 		
 			
@@ -317,9 +310,9 @@
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html">Smarty_Internal_CompileBase</a></span></p>
 					<blockquote>
-													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#method_close_tag">Smarty_Internal_CompileBase::_close_tag()</a></span><br>
-													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#method_get_attributes">Smarty_Internal_CompileBase::_get_attributes()</a></span><br>
-													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#method_open_tag">Smarty_Internal_CompileBase::_open_tag()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#methodcloseTag">Smarty_Internal_CompileBase::closeTag()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#methodgetAttributes">Smarty_Internal_CompileBase::getAttributes()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_CompileBase.html#methodopenTag">Smarty_Internal_CompileBase::openTag()</a></span><br>
 											</blockquote>
 										
 		</div>
@@ -340,18 +333,19 @@
 					</div>
 		<div class="info-box-body">
 			<a name="constCACHING_NOCACHE_CODE" id="CACHING_NOCACHE_CODE"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="const-header">
 		<img src="../../media/images/Variable.png" />
 		<span class="const-title">
 			<span class="const-name">CACHING_NOCACHE_CODE</span>
 			 = <span class="const-default"> 9999</span>
-			(line <span class="line-number">18</span>)
+			(line <span class="line-number">23</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">caching mode to create nocache code but no cache file</p>
 	
 	
 </div>
@@ -360,7 +354,7 @@
 	</div>
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 04 Jun 2011 01:33:58 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sat, 25 Jun 2011 16:08:16 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

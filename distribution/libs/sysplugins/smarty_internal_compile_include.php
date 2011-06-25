@@ -1,5 +1,4 @@
 <?php
-
 /**
 * Smarty Internal Plugin Compile Include
 *
@@ -12,28 +11,63 @@
 
 /**
 * Smarty Internal Plugin Compile Include Class
+*
+* @package Smarty
+* @subpackage Compiler
 */
 class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
-    // caching mode to create nocache code but no cache file
+
+    /**
+    * caching mode to create nocache code but no cache file
+    */
     const CACHING_NOCACHE_CODE = 9999;
-    // attribute definitions
+    /**
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $required_attributes = array('file');
+    /**
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $shorttag_order = array('file');
-    public $option_flags = array('nocache','inline','caching');
+    /**
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
+    public $option_flags = array('nocache', 'inline', 'caching');
+    /**
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $optional_attributes = array('_any');
-    static $merged_templates_func = array();
+    /**
+    * Saved parameter of merged templates
+    *
+    * @var array
+    */
+    private static $merged_templates_func = array();
 
     /**
     * Compiles code for the {include} tag
     *
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @return string compiled code
-    */
-    public function compile($args, $compiler)
+     * @param array $args array with attributes from parser
+     * @param object $compiler compiler object
+     * @param array $parameter array with compilation parameter
+     * @return string compiled code
+     */
+    public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // save posible attributes
         $include_file = $_attr['file'];
         $has_compiled_template = false;
@@ -47,7 +81,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
                     // save unique function name
                     self::$merged_templates_func[$tpl_name]['func'] = $tpl->properties['unifunc'] = 'content_'.uniqid();
                     // use current nocache hash for inlined code
-			        self::$merged_templates_func[$tpl_name]['nocache_hash'] = $tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
+                    self::$merged_templates_func[$tpl_name]['nocache_hash'] = $tpl->properties['nocache_hash'] = $compiler->template->properties['nocache_hash'];
                     if ($compiler->template->caching) {
                         // needs code for cached page but no cache file
                         $tpl->caching = self::CACHING_NOCACHE_CODE;
@@ -179,5 +213,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         }
         return $_output;
     }
+
 }
+
 ?>

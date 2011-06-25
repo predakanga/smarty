@@ -9,14 +9,14 @@
 /**
  * Smarty trimwhitespace outputfilter plugin
  *
- * Trim unnecessary whitespace from HTML markup. 
- *           
+ * Trim unnecessary whitespace from HTML markup.
+ *
  * @author   Rodney Rehm
- * @param string $source input string
- * @param Smarty &$smarty Smarty object
+ * @param string                   $source input string
+ * @param Smarty_Internal_Template $smarty Smarty object
  * @return string filtered output
  */
-function smarty_outputfilter_trimwhitespace($source, $smarty)
+function smarty_outputfilter_trimwhitespace($source, Smarty_Internal_Template $smarty)
 {
     $store = array();
     $_store = 0;
@@ -61,14 +61,14 @@ function smarty_outputfilter_trimwhitespace($source, $smarty)
         '#(:SMARTY@!@|>)\s+(?=@!@SMARTY:|<)#s' => '\1 \2',
         // remove spaces between attributes (but not in attribute values!)
         '#(([a-z0-9]\s*=\s*(["\'])[^\3]*?\3)|<[a-z0-9_]+)\s+([a-z/>])#is' => '\1 \4',
-        // note: for some very weird reason trim() seems to remove spaces inside attributes. 
+        // note: for some very weird reason trim() seems to remove spaces inside attributes.
         // maybe a \0 byte or something is interfering?
         '#^\s+<#Ss' => '<',
         '#>\s+$#Ss' => '>',
     );
 
     $source = preg_replace( array_keys($expressions), array_values($expressions), $source );
-    // note: for some very weird reason trim() seems to remove spaces inside attributes. 
+    // note: for some very weird reason trim() seems to remove spaces inside attributes.
     // maybe a \0 byte or something is interfering?
     // $source = trim( $source );
 
@@ -85,7 +85,7 @@ function smarty_outputfilter_trimwhitespace($source, $smarty)
             $_store++;
         }
     }
-    
+
     return $source;
 }
 

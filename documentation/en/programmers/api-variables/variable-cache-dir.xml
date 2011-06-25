@@ -13,11 +13,8 @@
      <link linkend="installing.smarty.basic">see install</link> for more info.
      </para>
      <para>
-     You can also use your own
-       <!-- FIXME: this link breaks compilation <link linkend="caching.custom">
-       custom cache implementation</link> -->
-       to control cache files, which will ignore this
-       setting.
+     You can also use your own <link linkend="caching.custom">custom cache implementation</link>
+       to control cache files, which will ignore this setting.
        See also
        <link linkend="variable.use.sub.dirs"><parameter>$use_sub_dirs</parameter></link>.
       </para>

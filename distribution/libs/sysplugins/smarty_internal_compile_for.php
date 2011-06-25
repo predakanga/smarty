@@ -11,8 +11,12 @@
 
 /**
  * Smarty Internal Plugin Compile For Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
+
     /**
      * Compiles code for the {for} tag
      *
@@ -27,22 +31,22 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
      * The parser is gereration different sets of attribute by which this compiler can
      * determin which syntax is used.
      *
-     * @param array $args array with attributes from parser
-     * @param object $compiler compiler object
-     * @param array $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
     public function compile($args, $compiler, $parameter)
     {
         if ($parameter == 0) {
-        	$this->required_attributes = array('start','to');
-        	$this->optional_attributes = array('max','step');
+            $this->required_attributes = array('start', 'to');
+            $this->optional_attributes = array('max', 'step');
         } else {
-        	$this->required_attributes = array('start','ifexp','var','step');
-        	$this->optional_attributes = array();
+            $this->required_attributes = array('start', 'ifexp', 'var', 'step');
+            $this->optional_attributes = array();
         }
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
         $output = "<?php ";
         if ($parameter == 1) {
@@ -71,65 +75,77 @@ class Smarty_Internal_Compile_For extends Smarty_Internal_CompileBase {
         }
         $output .= "?>";
 
-        $this->_open_tag($compiler, 'for', array('for', $compiler->nocache));
+        $this->openTag($compiler, 'for', array('for', $compiler->nocache));
         // maybe nocache because of nocache variables
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
         // return compiled code
         return $output;
     }
+
 }
 
 /**
  * Smarty Internal Plugin Compile Forelse Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Forelse extends Smarty_Internal_CompileBase {
+
     /**
      * Compiles code for the {forelse} tag
      *
-     * @param array $args array with attributes from parser
-     * @param object $compiler compiler object
-     * @param array $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr  = $this->_get_attributes($compiler, $args);
+        $_attr  = $this->getAttributes($compiler, $args);
 
-        list($_open_tag, $nocache) = $this->_close_tag($compiler, array('for'));
-        $this->_open_tag($compiler, 'forelse', array('forelse', $nocache));
+        list($openTag, $nocache) = $this->closeTag($compiler, array('for'));
+        $this->openTag($compiler, 'forelse', array('forelse', $nocache));
         return "<?php }} else { ?>";
     }
+
 }
 
 /**
  * Smarty Internal Plugin Compile Forclose Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Forclose extends Smarty_Internal_CompileBase {
+
     /**
      * Compiles code for the {/for} tag
      *
-     * @param array $args array with attributes from parser
-     * @param object $compiler compiler object
-     * @param array $parameter array with compilation parameter
+     * @param array  $args      array with attributes from parser
+     * @param object $compiler  compiler object
+     * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
     public function compile($args, $compiler, $parameter)
     {
         // check and get attributes
-        $_attr  = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         // must endblock be nocache?
         if ($compiler->nocache) {
             $compiler->tag_nocache = true;
         }
 
-        list($_open_tag, $compiler->nocache) = $this->_close_tag($compiler, array('for', 'forelse'));
+        list($openTag, $compiler->nocache) = $this->closeTag($compiler, array('for', 'forelse'));
 
-        if ($_open_tag == 'forelse')
+        if ($openTag == 'forelse') {
             return "<?php }  ?>";
-        else
+        } else {
             return "<?php }} ?>";
+        }
     }
+
 }
 
 ?>

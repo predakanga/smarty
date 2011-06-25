@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Smarty Internal Plugin Compile Include PHP
  *
@@ -12,27 +11,48 @@
 
 /**
  * Smarty Internal Plugin Compile Insert Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
-	// attribute definitions
+
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $required_attributes = array('file');
-   	public $shorttag_order = array('file');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
+    public $shorttag_order = array('file');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $optional_attributes = array('once', 'assign');
 
     /**
      * Compiles code for the {include_php} tag
      *
-     * @param array $args array with attributes from parser
+     * @param array  $args     array with attributes from parser
      * @param object $compiler compiler object
      * @return string compiled code
      */
     public function compile($args, $compiler)
     {
-    	if (!($compiler->smarty instanceof SmartyBC)) {
-        	throw new SmartyException("{include_php} is deprecated, use SmartyBC class to enable");
-    	}
+        if (!($compiler->smarty instanceof SmartyBC)) {
+            throw new SmartyException("{include_php} is deprecated, use SmartyBC class to enable");
+        }
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
 
         $_output = '<?php ';
 
@@ -40,7 +60,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
         $_filepath = false;
         eval('$_file = ' . $_attr['file'] . ';');
         if (!isset($compiler->smarty->security_policy) && file_exists($_file)) {
-        	$_filepath = $_file;
+            $_filepath = $_file;
         } else {
             if (isset($compiler->smarty->security_policy)) {
                 $_dir = $compiler->smarty->security_policy->trusted_dir;
@@ -82,6 +102,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase {
             return "<?php include{$_once} ('{$_filepath}');?>\n";
         }
     }
+
 }
 
 ?>

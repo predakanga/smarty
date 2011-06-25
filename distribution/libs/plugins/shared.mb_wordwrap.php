@@ -7,41 +7,43 @@
  */
 
 if(!function_exists('smarty_mb_wordwrap')) {
+
     /**
      * Wrap a string to a given number of characters
      *
-     * @see http://php.net/manual/en/function.wordwrap.php for similarity
-     * @param string $str the string to wrap
-     * @param int $width the width of the output
-     * @param string $break the character used to break the line
-     * @param boolean $cut ignored parameter, just for the sake of
+     * @link http://php.net/manual/en/function.wordwrap.php for similarity
+     * @param string  $str   the string to wrap
+     * @param int     $width the width of the output
+     * @param string  $break the character used to break the line
+     * @param boolean $cut   ignored parameter, just for the sake of
      * @return string wrapped string
      * @author Rodney Rehm
      */
-    function smarty_mb_wordwrap($str, $width=75, $break="\n", $cut=false) {
+    function smarty_mb_wordwrap($str, $width=75, $break="\n", $cut=false)
+    {
         // break words into tokens using white space as a delimiter
         $tokens = preg_split('!(\s)!uS', $str, -1, PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);
         $length = 0;
         $t = '';
         $_previous = false;
 
-        foreach($tokens as $_token) {
-            $token_length = mb_strlen( $_token, SMARTY_RESOURCE_CHAR_SET);
+        foreach ($tokens as $_token) {
+            $token_length = mb_strlen($_token, SMARTY_RESOURCE_CHAR_SET);
             $_tokens = array($_token);
             if ($token_length > $width) {
                 // remove last space
-                $t = mb_substr($t, 0, -1,  SMARTY_RESOURCE_CHAR_SET);
+                $t = mb_substr($t, 0, -1, SMARTY_RESOURCE_CHAR_SET);
                 $_previous = false;
                 $length = 0;
 
                 if ($cut) {
-                    $_tokens = preg_split('!(.{'. $width .'})!uS', $_token, -1, PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);
+                    $_tokens = preg_split('!(.{' . $width . '})!uS', $_token, -1, PREG_SPLIT_NO_EMPTY + PREG_SPLIT_DELIM_CAPTURE);
                     // broken words go on a new line
                     $t .= $break;
                 }
             }
 
-            foreach($_tokens as $token) {
+            foreach ($_tokens as $token) {
                 $_space = !!preg_match('!^\s$!uS', $token);
                 $token_length = mb_strlen($token, SMARTY_RESOURCE_CHAR_SET);
                 $length += $token_length;
@@ -49,7 +51,7 @@ if(!function_exists('smarty_mb_wordwrap')) {
                 if ($length > $width) {
                     // remove space before inserted break
                     if ($_previous && $token_length < $width) {
-                        $t = mb_substr($t, 0, -1,  SMARTY_RESOURCE_CHAR_SET);
+                        $t = mb_substr($t, 0, -1, SMARTY_RESOURCE_CHAR_SET);
                     }
 
                     // add the break before the token
@@ -76,6 +78,6 @@ if(!function_exists('smarty_mb_wordwrap')) {
 
         return $t;
     }
-}
 
+}
 ?>

@@ -5,7 +5,7 @@ class smarty_compiler_testclose extends Smarty_Internal_CompileBase
     public function execute($args, $compiler)
     {
 
-        $this->_close_tag($compiler, 'test');
+        $this->closeTag($compiler, 'test');
 
         return '';
     }

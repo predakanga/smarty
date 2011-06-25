@@ -12,17 +12,32 @@
 
 /**
  * Smarty Internal Plugin Compile extend Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
-	// attribute definitions
+
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $required_attributes = array('file');
+    /**
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $shorttag_order = array('file');
 
     /**
      * Compiles code for the {extends} tag
      *
-     * @param array $args array with attributes from parser
-     * @param object $compiler $compiler object
+     * @param array  $args     array with attributes from parser
+     * @param object $compiler compiler object
      * @return string compiled code
      */
     public function compile($args, $compiler)
@@ -31,30 +46,30 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
         $this->_ldl = preg_quote($compiler->smarty->left_delimiter);
         $filepath = $compiler->template->source->filepath;
         // check and get attributes
-        $_attr = $this->_get_attributes($compiler, $args);
+        $_attr = $this->getAttributes($compiler, $args);
         if ($_attr['nocache'] === true) {
-        	$compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
+            $compiler->trigger_template_error('nocache option not allowed', $compiler->lex->taglineno);
         }
 
         $_smarty_tpl = $compiler->template;
         $include_file = null;
-        if (strpos($_attr['file'],'$_tmp') !== false) {
-        	$compiler->trigger_template_error('illegal value for file attribute', $compiler->lex->taglineno);
+        if (strpos($_attr['file'], '$_tmp') !== false) {
+            $compiler->trigger_template_error('illegal value for file attribute', $compiler->lex->taglineno);
         }
         eval('$include_file = ' . $_attr['file'] . ';');
         // create template object
         $_template = new $compiler->smarty->template_class($include_file, $compiler->smarty, $compiler->template);
         // save file dependency
-        if (in_array($_template->source->type,array('eval','string'))) {
-        	$template_sha1 = sha1($include_file);
-    	} else {
-        	$template_sha1 = sha1($_template->source->filepath);
-    	}
-        if (isset($compiler->template->properties['file_dependency'][$template_sha1])) {
-            $compiler->trigger_template_error("illegal recursive call of \"{$include_file}\"",$compiler->lex->line-1);
+        if (in_array($_template->source->type, array('eval', 'string'))) {
+            $template_sha1 = sha1($include_file);
+        } else {
+            $template_sha1 = sha1($_template->source->filepath);
         }
-        $compiler->template->properties['file_dependency'][$template_sha1] = array($_template->source->filepath, $_template->source->timestamp,$_template->source->type);
-        $_content = substr($compiler->template->source->content,$compiler->lex->counter-1);
+        if (isset($compiler->template->properties['file_dependency'][$template_sha1])) {
+            $compiler->trigger_template_error("illegal recursive call of \"{$include_file}\"", $compiler->lex->line - 1);
+        }
+        $compiler->template->properties['file_dependency'][$template_sha1] = array($_template->source->filepath, $_template->source->timestamp, $_template->source->type);
+        $_content = substr($compiler->template->source->content, $compiler->lex->counter - 1);
         if (preg_match_all("!({$this->_ldl}block\s(.+?){$this->_rdl})!", $_content, $s) !=
                 preg_match_all("!({$this->_ldl}/block{$this->_rdl})!", $_content, $c)) {
             $compiler->trigger_template_error('unmatched {block} {/block} pairs');
@@ -85,7 +100,7 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
         if ($_template->source->type == 'extends') {
             $compiler->template->block_data = $_template->block_data;
             foreach ($_template->source->components as $key => $component) {
-                $compiler->template->properties['file_dependency'][$key] = array($component->filepath, $component->timestamp,$component->type);
+                $compiler->template->properties['file_dependency'][$key] = array($component->filepath, $component->timestamp, $component->type);
             }
         }
         $compiler->template->source->filepath = $_template->source->filepath;
@@ -94,4 +109,5 @@ class Smarty_Internal_Compile_Extends extends Smarty_Internal_CompileBase {
     }
 
 }
+
 ?>
