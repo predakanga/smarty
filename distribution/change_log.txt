@@ -2,6 +2,8 @@
 28/06/2011
 - added back support of php template resource as undocumented feature
 - bugfix automatic recompilation on version change could drop undefined index notice on old 3.0 cache and compiled files
+- update of README_3_1_DEV.txt and moved into the distribution folder
+- improvement show first characters of eval and string templates instead sha1 Uid in debug window
 
 ===== Smarty 3.1-RC1 =====
 25/06/2011

@@ -247,7 +247,8 @@ or it has expired
 Templates will now be automatically recompiled on Smarty version
 changes to avoide incompatibillities in the compiled code. Compiled
 template checked against the current setting of the SMARTY_VERSION
-constant.
+constant. NOTE: This will not work when upgrading from versions <3.1.
+In this case you have still to delete old compiled and cache files manually.
 
   default_config_handler_func()
 
