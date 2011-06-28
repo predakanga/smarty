@@ -31,7 +31,8 @@ abstract class Smarty_Resource {
         'string' => true,
         'extends' => true,
         'stream' => true,
-        'eval' => true
+        'eval' => true,
+        'php' => true
     );
 
     /**
@@ -411,7 +412,7 @@ abstract class Smarty_Resource {
             }
         }
 
-        if (in_array($resource_type, array('eval', 'string', 'extends'))) {
+        if (in_array($resource_type, array('eval', 'string', 'extends', 'php'))) {
             throw new SmartyException ("Unable to use resource '{$resource_type}' for config");
         }
 

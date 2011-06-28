@@ -1,4 +1,9 @@
 ﻿===== Smarty 3.1-DEV  =====
+28/06/2011
+- added back support of php template resource as undocumented feature
+- bugfix automatic recompilation on version change could drop undefined index notice on old 3.0 cache and compiled files
+
+===== Smarty 3.1-RC1 =====
 25/06/2011
 - revert change of 17/06/2011. $_smarty varibale removed. call loadPlugin() from inside plugin code if required
 - code cleanup, remove no longer used properties and methods

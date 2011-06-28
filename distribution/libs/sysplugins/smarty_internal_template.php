@@ -406,7 +406,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->properties['function'] = array_merge($this->properties['function'], $properties['function']);
             $this->smarty->template_functions = array_merge($this->smarty->template_functions, $properties['function']);
         }
-        $this->properties['version'] = $properties['version'];
+        $this->properties['version'] = (isset($properties['version'])) ? $properties['version'] : '';
         $this->properties['unifunc'] = $properties['unifunc'];
         // check file dependencies at compiled code
         $is_valid = true;
@@ -414,7 +414,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $is_valid = false;
         } else if (((!$cache && $this->smarty->compile_check) || $this->smarty->compile_check === true || $this->smarty->compile_check === Smarty::COMPILECHECK_ON) && !empty($this->properties['file_dependency'])) {
             foreach ($this->properties['file_dependency'] as $_file_to_check) {
-                if ($_file_to_check[2] == 'file') {
+                if ($_file_to_check[2] == 'file' || $_file_to_check[2] == 'php') {
                     // file and php types can be checked without loading the respective resource handlers
                     $mtime = filemtime($_file_to_check[0]);
                 } elseif ($_file_to_check[2] == 'string') {

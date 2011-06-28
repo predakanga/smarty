@@ -69,14 +69,14 @@ class AppendByRefTests extends PHPUnit_Framework_TestCase {
     */
     public function testAppendByRefMerge()
     {
-        /*
+        $foo =  array('a' => 'a', 'b' => 'b', 'c' => 'c');
         $bar = array('b' => 'd');
-        $this->smarty->assign('foo', array('a' => 'a', 'b' => 'b', 'c' => 'c'));
+        $this->smarty->assignByRef('foo', $foo);
         $this->smarty->appendByRef('foo', $bar, true);
         $this->assertEquals('a d c', $this->smarty->fetch('eval:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
         $bar = array('b' => 'newd');
+        $this->smarty->appendByRef('foo', $bar, true);
         $this->assertEquals('a newd c', $this->smarty->fetch('eval:{$foo["a"]} {$foo["b"]} {$foo["c"]}'));
-*/
     }
 }
 
