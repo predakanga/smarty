@@ -1,4 +1,8 @@
 ﻿===== Smarty 3.1-DEV  =====
+30/06/2011
+- bugfix generic getter/setter of Smarty properties used on template objects did throw exception
+- removed is_dir and is_readable checks from directory setters for better performance
+
 28/06/2011
 - added back support of php template resource as undocumented feature
 - bugfix automatic recompilation on version change could drop undefined index notice on old 3.0 cache and compiled files

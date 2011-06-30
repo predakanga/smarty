@@ -721,7 +721,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         $this->template_dir = array();
         foreach ((array) $template_dir as $k => $v) {
-            $this->checkDir($v);
             $this->template_dir[$k] = rtrim($v, '/\\') . DS;
         }
 
@@ -743,7 +742,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
         if (is_array($template_dir)) {
             foreach ($template_dir as $k => $v) {
-                $this->checkDir($v);
                 if (is_int($k)) {
                     // indexes are not merged but appended
                     $this->template_dir[] = rtrim($v, '/\\') . DS;
@@ -753,13 +751,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
             }
         } elseif ($key !== null) {
-            $this->checkDir($template_dir);
-
             // override directory at specified index
             $this->template_dir[$key] = rtrim($template_dir, '/\\') . DS;
         } else {
-            $this->checkDir($template_dir);
-
             // append new directory
             $this->template_dir[] = rtrim($template_dir, '/\\') . DS;
         }
@@ -792,8 +786,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         $this->config_dir = array();
         foreach ((array) $config_dir as $k => $v) {
-            $this->checkDir($v);
-
             $this->config_dir[$k] = rtrim($v, '/\\') . DS;
         }
 
@@ -814,8 +806,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
         if (is_array($config_dir)) {
             foreach ($config_dir as $k => $v) {
-                $this->checkDir($v);
-
                 if (is_int($k)) {
                     // indexes are not merged but appended
                     $this->config_dir[] = rtrim($v, '/\\') . DS;
@@ -825,13 +815,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
             }
         } elseif( $key !== null ) {
-            $this->checkDir($config_dir);
-
             // override directory at specified index
             $this->config_dir[$key] = rtrim($config_dir, '/\\') . DS;
         } else {
-            $this->checkDir($config_dir);
-
             // append new directory
             $this->config_dir[] = rtrim($config_dir, '/\\') . DS;
         }
@@ -864,8 +850,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         $this->plugins_dir = array();
         foreach ((array)$plugins_dir as $k => $v) {
-            $this->checkDir($v);
-
             $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
         }
 
@@ -886,7 +870,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
 
         if (is_array($plugins_dir)) {
             foreach ($plugins_dir as $k => $v) {
-                $this->checkDir($v);
                 if (is_int($k)) {
                     // indexes are not merged but appended
                     $this->plugins_dir[] = rtrim($v, '/\\') . DS;
@@ -897,7 +880,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
             }
         } else {
             // append new directory
-            $this->checkDir($plugins_dir);
             $this->plugins_dir[] = rtrim($plugins_dir, '/\\') . DS;
         }
 
@@ -923,8 +905,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function setCompileDir($compile_dir)
     {
-        $this->checkDir($compile_dir);
-
         $this->compile_dir = rtrim($compile_dir, '/\\') . DS;
         return $this;
     }
@@ -947,8 +927,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function setCacheDir($cache_dir)
     {
-        $this->checkDir($cache_dir);
-
         $this->cache_dir = rtrim($cache_dir, '/\\') . DS;
         return $this;
     }
@@ -961,20 +939,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public function getCacheDir()
     {
         return $this->cache_dir;
-    }
-
-    /**
-    * Check that directory is valid and readable
-    *
-    * @param string $dir directory
-    */
-    public function checkDir($dir)
-    {
-        if (!is_dir($dir)) {
-            throw new SmartyException("{$dir} is not a directory");
-        } elseif (!is_readable($dir)) {
-            throw new SmartyException("{$dir} is not readable");
-        }
     }
 
     /**

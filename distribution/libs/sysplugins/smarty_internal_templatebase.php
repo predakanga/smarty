@@ -618,7 +618,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             $property_name = strtolower(substr($name, 3, 1)) . substr($name, 4);
             // convert camel case to underscored name
             $property_name = preg_replace_callback('/([A-Z])/', $camel_func, $property_name);
-            if (!property_exists($this, $property_name)) {
+            if (!(property_exists($this, $property_name) || property_exists($this->smarty, $property_name))) {
                 throw new SmartyException("property '$property_name' does not exist.");
                 return false;
             }
