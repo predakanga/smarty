@@ -198,7 +198,7 @@ abstract class Smarty_Resource {
         }
 
         // template_dir index?
-        if (preg_match('#^\[(?<key>[^\]]+)\](?<file>.+)$#', $file, $match)) {
+        if (preg_match('#^\[(?P<key>[^\]]+)\](?P<file>.+)$#', $file, $match)) {
             if ($match['file'][0] == '.' && ($match['file'][1] == '.' || $match['file'][1] == '/' || $match['file'][1] == "\\")) {
                 throw new SmartyException("Template '{$match['file']}' may not start with ../ or ./'");
             }

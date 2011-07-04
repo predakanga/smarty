@@ -608,6 +608,10 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     public function __call($name, $args)
     {
         static $camel_func;
+        // methode of Smarty object?
+        if (method_exists($this->smarty, $name)) {
+            return call_user_func_array(array($this->smarty, $name), $args);
+        }
         if (!isset($camel_func))
             $camel_func = create_function('$c', 'return "_" . strtolower($c[1]);');
         // see if this is a set/get for a property
@@ -618,21 +622,23 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             $property_name = strtolower(substr($name, 3, 1)) . substr($name, 4);
             // convert camel case to underscored name
             $property_name = preg_replace_callback('/([A-Z])/', $camel_func, $property_name);
-            if (!(property_exists($this, $property_name) || property_exists($this->smarty, $property_name))) {
+            if (property_exists($this, $property_name)) {
+                if ($first3 == 'get')
+                    return $this->$property_name;
+                else
+                    return $this->$property_name = $args[0];
+            } else if (property_exists($this->smarty, $property_name)) {
+                if ($first3 == 'get')
+                    return $this->smarty->$property_name;
+                else
+                    return $this->smarty->$property_name = $args[0];
+            } else {
                 throw new SmartyException("property '$property_name' does not exist.");
                 return false;
             }
-            if ($first3 == 'get')
-                return $this->$property_name;
-            else
-                return $this->$property_name = $args[0];
         }
-        // pass call to Smarty object
-        if (method_exists($this->smarty, $name)) {
-            return call_user_func_array(array($this->smarty, $name), $args);
-        } else {
-            throw new SmartyException("Call of unknown function '$name'.");
-        }
+        // must be unknown
+        throw new SmartyException("Call of unknown function '$name'.");
     }
 
 }

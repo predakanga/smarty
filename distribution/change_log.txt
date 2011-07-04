@@ -1,4 +1,8 @@
 ﻿===== Smarty 3.1-DEV  =====
+04/07/2011
+- bugfix use (?P<name>) syntax at preg_match as some pcre libraries failed on (?<name>)
+- some performance improvement when using generic getter/setter on template objects
+
 30/06/2011
 - bugfix generic getter/setter of Smarty properties used on template objects did throw exception
 - removed is_dir and is_readable checks from directory setters for better performance
