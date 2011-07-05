@@ -95,6 +95,7 @@
 <!ENTITY programmers.api-variables.variable-compile-check SYSTEM '../current_lang/programmers/api-variables/variable-compile-check.xml'>
 <!ENTITY programmers.api-variables.variable-config-overwrite SYSTEM '../current_lang/programmers/api-variables/variable-config-overwrite.xml'>
 <!ENTITY programmers.api-variables.variable-config-read-hidden SYSTEM '../current_lang/programmers/api-variables/variable-config-read-hidden.xml'>
+<!ENTITY programmers.api-variables.variable-default-config-handler-func SYSTEM '../current_lang/programmers/api-variables/variable-default-config-handler-func.xml'>
 <!ENTITY programmers.api-variables.variable-default-template-handler-func SYSTEM '../current_lang/programmers/api-variables/variable-default-template-handler-func.xml'>
 <!ENTITY programmers.api-variables.variable-use-sub-dirs SYSTEM '../current_lang/programmers/api-variables/variable-use-sub-dirs.xml'>
 <!ENTITY programmers.api-variables.variable-config-booleanize SYSTEM '../current_lang/programmers/api-variables/variable-config-booleanize.xml'>

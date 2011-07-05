@@ -40,6 +40,7 @@
 &programmers.api-variables.variable-debugging-ctrl;
 &programmers.api-variables.variable-default-modifiers;
 &programmers.api-variables.variable-default-resource-type;
+&programmers.api-variables.variable-default-config-handler-func;
 &programmers.api-variables.variable-default-template-handler-func;
 &programmers.api-variables.variable-error-reporting;
 &programmers.api-variables.variable-force-compile;

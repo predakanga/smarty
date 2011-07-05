@@ -343,6 +343,8 @@ abstract class Smarty_Resource {
             }
             return self::$resources['stream'];
         }
+        
+        // TODO: try default_(template|config)_handler
 
         // give up
         throw new SmartyException('Unkown resource type \'' . $resource_type . '\'');
