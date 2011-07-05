@@ -72,7 +72,7 @@
      </row>    
      <row>
        <entry>hide</entry>
-       <entry>Ignore the block content if no child block of same name is existing.
+       <entry>Ignore the block content if no child block of same name is existing.</entry>
      </row>    
      <row>
        <entry>nocache</entry>
