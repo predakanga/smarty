@@ -20,12 +20,17 @@
     <programlisting role="php">
 <![CDATA[
 <?php
-$_smarty_tpl->loadPlugin('smarty_shared_make_timestamp'); 
+function smarty_function_yourPlugin(array $params, Smarty_Internal_Template $template)
+{
+  // load plugin depended upon
+  $template->smarty->loadPlugin('smarty_shared_make_timestamp');
+  // plugin code
+}
 ?>
 ]]>
     </programlisting>
     <para>
-     As a general rule, Smarty object is always passed to the plugins
+     As a general rule, the currently evaluated template's Smarty_Internal_Template object is always passed to the plugins
      as the last parameter with two exceptions:
      </para>
      <itemizedlist>
