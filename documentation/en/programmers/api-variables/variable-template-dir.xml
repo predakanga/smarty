@@ -43,7 +43,7 @@
     </note>
     <para>
      See also 
-     <link linkend="template.resources"><varname>Template Resources</varname></link>, 
+     <link linkend="resources"><varname>Template Resources</varname></link>, 
      <link linkend="variable.use.include.path"><parameter>$use_include_path</parameter></link>, 
      <link linkend="api.get.template.dir"><varname>getTemplateDir()</varname></link>, 
      <link linkend="api.set.template.dir"><varname>setTemplateDir()</varname></link> and

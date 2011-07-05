@@ -56,6 +56,7 @@
   &programmers.api-variables;
   &programmers.api-functions;
   &programmers.caching;
+  &programmers.resources;
   &programmers.advanced-features;
   &programmers.plugins;
  </part>

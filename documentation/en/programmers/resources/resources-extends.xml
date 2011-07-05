@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 3827 $ -->
-<sect1 id="template.resources.extends">
+<sect1 id="resources.extends">
  <title>Extends Template Resources</title>
  <para>
   The <literal>extends:</literal> resource is used to define child/parent relationships for template inheritance from the PHP script.
@@ -8,9 +8,9 @@
  </para>
  <para>
    As of Smarty 3.1 the <literal>extends:</literal> resource may use any available 
-   <link linkend="template.resources">template resource</link>, 
+   <link linkend="resources">template resource</link>, 
    including <literal>string:</literal> and <literal>eval:</literal>.
-   When <link linkend="template.resources.string">templates from strings</link> are used,
+   When <link linkend="resources.string">templates from strings</link> are used,
    make sure they are properly (url or base64) encoded. Is an <literal>eval:</literal> resource
    found within an inheritance chain, its "don't save a compile file" property is superseeded by
    the <literal>extends:</literal> resource. The templates within an inheritance chain are not

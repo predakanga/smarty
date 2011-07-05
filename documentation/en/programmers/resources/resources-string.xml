@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 3827 $ -->
-<sect1 id="template.resources.string">
+<sect1 id="resources.string">
  <title>String Template Resources</title>
  <para>
   Smarty can render templates from a string by using the <literal>string:</literal> or <literal>eval:</literal> resource. 
@@ -61,7 +61,7 @@ $smarty->display('eval:'.$template_string); // compiles every time
      <ulink url="&url.php-manual;urlencode"><varname>base64_encode()</varname></ulink>. This is
      not necessary for the usual use of <literal>string:</literal> and <literal>eval:</literal>,
      but is required when using either of them in conjunction with 
-     <link linkend="template.resources.extends"><varname>Extends Template Resource</varname></link>
+     <link linkend="resources.extends"><varname>Extends Template Resource</varname></link>
  </para>
  
  <example>

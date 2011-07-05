@@ -14,10 +14,10 @@
   </methodsynopsis>
   <para>
    Use this to dynamically register a
-   <link linkend="template.resources">Resource plugin</link>
+   <link linkend="resources">Resource plugin</link>
    with Smarty.
    Pass in the <parameter>name</parameter> of the Resource  and the object extending Smarty_Resource. See
-   <link linkend="template.resources">template resources</link>
+   <link linkend="resources">template resources</link>
    for more information on how to setup a function for fetching templates.
      <note>
    <title>Technical Note</title>
@@ -52,7 +52,7 @@ $smarty->registerResource('mysql', new Smarty_Resource_Mysql());
   See also
   <link linkend="api.unregister.resource"><varname>unregisterResource()</varname></link>
   and the
-  <link linkend="template.resources">template resources</link> section.
+  <link linkend="resources">template resources</link> section.
 </para>
 
  </refsect1>

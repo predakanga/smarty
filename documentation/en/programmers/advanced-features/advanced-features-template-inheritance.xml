@@ -109,7 +109,7 @@ My HTML Page Body goes here
     <para>
       Instead of using <link linkend="language.function.extends"><varname>{extends}</varname></link> tags in the template
       files you can define the inheritance tree in your PHP script by using the 
-      <link linkend="template.resources.extends"><literal>extends:</literal> resource</link> type.
+      <link linkend="resources.extends"><literal>extends:</literal> resource</link> type.
     </para>
     <para>
       The code below will return same result as the example above.
@@ -126,7 +126,7 @@ $smarty->display('extends:layout.tpl|myproject.tpl|mypage.tpl');
   See also
   <link linkend="language.function.block"><varname>{block}</varname></link>,
    <link linkend="language.function.extends"><varname>{extends}</varname></link>
-   and  <link linkend="template.resources.extends"><literal>extends:</literal> resource</link>
+   and  <link linkend="resources.extends"><literal>extends:</literal> resource</link>
  </para> 
 </sect1>
 

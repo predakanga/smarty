@@ -4,7 +4,7 @@
  <title>$use_include_path</title>
  <para>
   This tells smarty to respect the <ulink url="&url.php-manual;ini.core.php#ini.include-path">include_path</ulink> 
-  FIXME: within the <link linkend="template.resources.file"><varname>File Template Resource</varname></link> handler
+  FIXME: within the <link linkend="resources.file"><varname>File Template Resource</varname></link> handler
   within the <varname>File Template Resource</varname> handler
   to resolve the directories known to <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>.
  </para>
@@ -17,7 +17,7 @@
  </note>
  <para>
    See also
-   <link linkend="template.resources"><varname>Template Resources</varname></link> and 
+   <link linkend="resources"><varname>Template Resources</varname></link> and 
    <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>
   </para>
 </sect1>

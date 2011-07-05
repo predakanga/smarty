@@ -19,7 +19,7 @@
    
   <listitem><para>
   Use the syntax for <link
-  linkend="template.resources">template resources</link> to extend files outside of the
+  linkend="resources">template resources</link> to extend files outside of the
   <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>  directory.
   </para></listitem>
  </itemizedlist>

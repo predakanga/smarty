@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 3827 $ -->
-<sect1 id="template.resources.file">
+<sect1 id="resources.file">
  <title>File Template Resources</title>
  <para>
   Smarty ships with a built-in template resource for the filesystem. The <literal>file:</literal> is the default resource. 

@@ -11,10 +11,6 @@
 &programmers.advanced-features.advanced-features-prefilters;
 &programmers.advanced-features.advanced-features-postfilters;
 &programmers.advanced-features.advanced-features-outputfilters;
-&programmers.advanced-features.template-resources;
-&programmers.advanced-features.template-resources-file;
-&programmers.advanced-features.template-resources-string;
-&programmers.advanced-features.template-resources-extends;
 </chapter>
 <!-- Keep this comment at the end of the file
 Local variables:
