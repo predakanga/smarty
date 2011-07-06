@@ -10,12 +10,6 @@
  * @package SmartyTestScripts
  */
 header( 'Content-Type: text/html; charset=UTF-8' );
-function _get_time()
-{
-    $_mtime = microtime();
-    $_mtime = explode(" ", $_mtime);
-    return (double)($_mtime[1]) + (double)($_mtime[0]);
-} 
 error_reporting((E_ALL | E_STRICT));
 require('../distribution/libs/Smarty.class.php');
 ini_set('pcre.backtrack_limit', -1); 
@@ -56,11 +50,11 @@ $smarty2->debugging = !empty($_POST['debug']);
 //$smarty2->enableSecurity();
 //$smarty2->deprecation_notices = false;
 $tpl = $smarty2->createTemplate ('eval:' . str_replace("\r", '', $template), null, null, $smarty2);
-$start = _get_time();
+$start = microtime(true);
 $i=1;
 //echo '<pre><br><br>' . htmlentities($tpl->getCompiledTemplate()) . '</pre>';
 $smarty2->display($tpl);
-echo '<br><br>' . (_get_time() - $start);
+echo '<br><br>' . (microtime(true) - $start);
 echo '<br>' . memory_get_peak_usage(true);
 
 
