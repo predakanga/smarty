@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+06/07/2011
+- bugfix variable modifier must run befor gereral filtering/escaping
+
 04/07/2011
 - bugfix use (?P<name>) syntax at preg_match as some pcre libraries failed on (?<name>)
 - some performance improvement when using generic getter/setter on template objects
