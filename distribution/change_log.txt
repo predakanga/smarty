@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+13/07/2011
+- optimized internal file write functionality
+
 06/07/2011
 - bugfix variable modifier must run befor gereral filtering/escaping
 
