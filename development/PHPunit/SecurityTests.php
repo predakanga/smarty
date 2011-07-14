@@ -150,12 +150,12 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testAllowedModifier1()
     {
-        $this->smarty->security_policy->allowed_modifier = array('capitalize');
+        $this->smarty->security_policy->allowed_modifiers = array('capitalize');
         $this->assertEquals("Hello World", $this->smarty->fetch('eval:{"hello world"|capitalize}'));
     }
     public function testAllowedModifier2()
     {
-        $this->smarty->security_policy->allowed_modifier = array('upper');
+        $this->smarty->security_policy->allowed_modifiers = array('upper');
         $this->assertEquals("HELLO WORLD", $this->smarty->fetch('eval:{"hello world"|upper}'));
     }
 
@@ -164,7 +164,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testNotAllowedModifier()
     {
-        $this->smarty->security_policy->allowed_modifier = array('upper');
+        $this->smarty->security_policy->allowed_modifiers = array('upper');
         try {
             $this->smarty->fetch('eval:{"hello"|upper}{"world"|lower}');
         }
@@ -180,7 +180,7 @@ class SecurityTests extends PHPUnit_Framework_TestCase {
     */
     public function testDisabledModifier()
     {
-        $this->smarty->security_policy->disabled_modifier = array('lower');
+        $this->smarty->security_policy->disabled_modifiers = array('lower');
         try {
             $this->smarty->fetch('eval:{"hello"|upper}{"world"|lower}');
         }

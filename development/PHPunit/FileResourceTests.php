@@ -245,6 +245,17 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertTrue($tpl->isCached());
     }
     /**
+    * test force_cache
+    */
+    public function testForceCache()
+    {
+        $this->smarty->caching = true;
+        $this->smarty->force_cache = true;
+        $this->smarty->cache_lifetime = 1000;
+        $tpl = $this->smarty->createTemplate('helloworld.tpl');
+        $this->assertFalse($tpl->isCached());
+    }
+    /**
     * test isCached on touched source
     */
     public function testIsCachedTouchedSource()
