@@ -4,14 +4,13 @@
  <title>$use_include_path</title>
  <para>
   This tells smarty to respect the <ulink url="&url.php-manual;ini.core.php#ini.include-path">include_path</ulink> 
-  FIXME: within the <link linkend="resources.file"><varname>File Template Resource</varname></link> handler
-  within the <varname>File Template Resource</varname> handler
+  within the <link linkend="resources.file"><varname>File Template Resource</varname></link> handler and the plugin loader
   to resolve the directories known to <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>.
  </para>
  <note>
   <title>Note</title>
   <para>
-   This is a backward compatibility option. You should not design your applications to rely on the include_path, as this
+   You should not design your applications to rely on the include_path, as this
    may - depending on your implementation - slow down your system (and Smarty) considerably.
   </para>
  </note>

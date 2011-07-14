@@ -1162,6 +1162,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 require_once($file);
                 return $file;
             }
+            if ($this->use_include_path) {
+                // try PHP include_path
+                if (($file = Smarty_Internal_Get_Include_Path::getIncludePath($file)) !== false) {
+                    require_once($file);
+                    return $file;
+                }
+            }
         }
         // no plugin loaded
         return false;

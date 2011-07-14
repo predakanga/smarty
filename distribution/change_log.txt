@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+14/07/2011
+- made Smarty::loadPlugin() respect the include_path if required
+
 13/07/2011
 - optimized internal file write functionality
 - bugfix PHP did eat line break on nocache sections
