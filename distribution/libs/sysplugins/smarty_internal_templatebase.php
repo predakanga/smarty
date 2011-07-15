@@ -145,7 +145,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                         }
                         $_template->compiled->loaded = true;
                     } else {
-                        $_template->decodeProperties($_template->compiled->_properties, $_template->compiled->_cache);
+                        $_template->decodeProperties($_template->compiled->_properties, false);
                     }
                     ob_start();
                     if (empty($_template->properties['unifunc']) || !is_callable($_template->properties['unifunc'])) {

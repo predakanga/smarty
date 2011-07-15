@@ -395,11 +395,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function decodeProperties($properties, $cache = false)
     {
         // store data in reusable Smarty_Template_Compiled
-        if ($this->compiled->_properties === null) {
+        if (!$cache && $this->compiled->_properties === null) {
             $this->compiled->_properties = $properties;
-            $this->compiled->_cache = $cache;
         }
-        
+
         $this->has_nocache_code = $properties['has_nocache_code'];
         $this->properties['nocache_hash'] = $properties['nocache_hash'];
         if (isset($properties['cache_lifetime'])) {
