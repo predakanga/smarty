@@ -1,6 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
 15/07/2011
 - bugfix individual cache_lifetime of {include} did not work correctly inside {block} tags
+- added caches for Smarty_Template_Source and Smarty_Template_Compiled to reduce I/O for multiple cache_id rendering
 
 14/07/2011
 - made Smarty::loadPlugin() respect the include_path if required

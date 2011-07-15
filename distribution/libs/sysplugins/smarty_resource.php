@@ -16,7 +16,16 @@
  * @subpackage TemplateResources
  */
 abstract class Smarty_Resource {
-
+    /**
+     * cache for Smarty_Template_Source instances
+     * @var array
+     */    
+    public static $sources = array();
+    /**
+     * cache for Smarty_Template_Compiled instances
+     * @var array
+     */    
+    public static $compileds = array();
     /**
      * cache for Smarty_Resource instances
      * @var array
@@ -366,6 +375,12 @@ abstract class Smarty_Resource {
             $smarty = $_template->smarty;
             $template_resource = $_template->template_resource;
         }
+        
+        // check runtime cache
+        $_cache_key = 'template|' . $template_resource;
+        if (isset(self::$sources[$_cache_key])) {
+            return self::$sources[$_cache_key];
+        }
 
         if (($pos = strpos($template_resource, ':')) === false) {
             // no resource given, use default
@@ -385,6 +400,9 @@ abstract class Smarty_Resource {
         $resource = Smarty_Resource::load($smarty, $resource_type);
         $source = new Smarty_Template_Source($resource, $smarty, $template_resource, $resource_type, $resource_name);
         $resource->populate($source, $_template);
+        
+        // runtime cache
+        self::$sources[$_cache_key] = $source;
         return $source;
     }
 
@@ -553,10 +571,20 @@ class Smarty_Template_Source {
      */
     public function getCompiled(Smarty_Internal_Template $_template)
     {
+        // check runtime cache
+        $_cache_key = $_template->template_resource . '#' . $_template->compile_id;
+        if (isset(Smarty_Resource::$compileds[$_cache_key])) {
+            return Smarty_Resource::$compileds[$_cache_key];
+        }
+        
         $compiled = new Smarty_Template_Compiled($this);
         $this->handler->populateCompiledFilepath($compiled, $_template);
         $compiled->timestamp = @filemtime($compiled->filepath);
         $compiled->exists = !!$compiled->timestamp;
+        
+        // runtime cache
+        Smarty_Resource::$compileds[$_cache_key] = $compiled;
+
         return $compiled;
     }
 
@@ -667,6 +695,22 @@ class Smarty_Template_Compiled {
      * @var Smarty_Template_Source
      */
     public $source = null;
+
+    /**
+     * Metadata properties
+     *
+     * populated by Smarty_Internal_Template::decodeProperties()
+     * @var array
+     */
+    public $_properties = null;
+    
+    /**
+     * Metadata cache
+     *
+     * populated by Smarty_Internal_Template::decodeProperties()
+     * @var array
+     */
+    public $_cache = null;
 
     /**
      * create Compiled Object container

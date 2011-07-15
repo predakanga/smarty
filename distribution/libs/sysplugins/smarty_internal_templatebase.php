@@ -144,8 +144,13 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                             include($_template->compiled->filepath);
                         }
                         $_template->compiled->loaded = true;
+                    } else {
+                        $_template->decodeProperties($_template->compiled->_properties, $_template->compiled->_cache);
                     }
                     ob_start();
+                    if (empty($_template->properties['unifunc']) || !is_callable($_template->properties['unifunc'])) {
+                        throw new SmartyException("Invalid compiled template for '{$_template->template_resource}'");
+                    }
                     $_template->properties['unifunc']($_template);
                 }
             } else {
@@ -156,7 +161,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                     ob_start();
                     $_template->source->renderUncompiled($_template);
                 } else {
-                    throw new SmartyException("Resource '$_template->source->type' must have 'renderUncompiled' methode");
+                    throw new SmartyException("Resource '$_template->source->type' must have 'renderUncompiled' method");
                 }
             }
             $_output = ob_get_clean();
