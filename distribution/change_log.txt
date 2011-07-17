@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+17/07/2011
+- bugfix {$smarty.block.child} did drop a notice at undefined child
+
 15/07/2011
 - bugfix individual cache_lifetime of {include} did not work correctly inside {block} tags
 - added caches for Smarty_Template_Source and Smarty_Template_Compiled to reduce I/O for multiple cache_id rendering
