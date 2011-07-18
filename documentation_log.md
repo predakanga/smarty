@@ -56,6 +56,8 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * add example for php template resource, since it's been removed from source
 * $smarty->compile_check = Smarty:.COMPILECHECK_CACHEMISS
 * Smarty::$escape_html 
+* Smarty_Internal_Templatebase::registerClass()
+* Smarty::loadPlugin()
 
 
 ## Smarty_CacheResource ##
