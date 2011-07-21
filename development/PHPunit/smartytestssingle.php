@@ -68,6 +68,9 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         self::_init(SmartyTests::$smarty);
         self::_init(SmartyTests::$smartyBC);
         SmartyTests::$smartyBC->registerPlugin('block','php','smarty_php_tag');
+        Smarty_Resource::$sources = array();
+        Smarty_Resource::$compileds = array();
+//        Smarty_Resource::$resources = array();
     }
     /**
      * look for test units and run them
@@ -75,7 +78,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public static function suite()
     {
         $testorder = array(
-            'CompileIncludeTests'
+            'FileResourceTests'
         );
         $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
         if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {
