@@ -44,6 +44,10 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         // create template object if necessary
         $_template = ($template instanceof $this->template_class) ? $template :
             $this->createTemplate($template, $cache_id, $compile_id, $parent, false);
+        // save local variables
+        $save_tpl_vars = $_template->tpl_vars;
+        $save_config_vars = $_template->config_vars;
+        // merge all variable scopes into template
         if ($merge_tpl_vars) {
             $ptr_array = array($_template);
             $ptr = $_template;
@@ -290,8 +294,14 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             if ($this->smarty->debugging) {
                 Smarty_Internal_Debug::display_debug($this);
             }
+            // restore local variables
+            $_template->tpl_vars = $save_tpl_vars;
+            $_template->config_vars =  $save_config_vars;
             return;
         } else {
+            // restore local variables
+            $_template->tpl_vars = $save_tpl_vars;
+            $_template->config_vars =  $save_config_vars;
             // return fetched content
             return $_output;
         }

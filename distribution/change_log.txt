@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+21/07/2011
+- bugfix value changes of variable values assigned to Smarty object could not be seen on repeated $smarty->fetch() calls
+
 17/07/2011
 - bugfix {$smarty.block.child} did drop a notice at undefined child
 
