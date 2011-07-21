@@ -58,6 +58,8 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * Smarty::$escape_html 
 * Smarty_Internal_Templatebase::registerClass()
 * Smarty::loadPlugin()
+* Smarty::clearRuntimeCaches()
+* nature of include_path handling
 
 
 ## Smarty_CacheResource ##

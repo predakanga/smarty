@@ -1212,7 +1212,23 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
     {
+        $this->clearRuntimeCaches();
         return Smarty_Internal_Utility::clearCompiledTemplate($resource_name, $compile_id, $exp_time, $this);
+    }
+    
+    /**
+     * Clear internal runtime caches
+     *
+     * @return Smarty current Smarty instance for chaining
+     */
+    public function clearRuntimeCaches()
+    {
+        // clear template cache
+        $this->template_objects = array();
+        // clear Smarty_Resource caches
+        Smarty_Resource::$sources = array();
+        Smarty_Resource::$compileds = array();
+        return $this;
     }
 
     /**
