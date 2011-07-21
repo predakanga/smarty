@@ -222,6 +222,9 @@ class Smarty_Internal_Utility {
                 }
             }
         }
+        // clear compiled cache
+        Smarty_Resource::$sources = array();
+        Smarty_Resource::$compileds = array();
         return $_count;
     }
 
@@ -238,7 +241,7 @@ class Smarty_Internal_Utility {
         return $template->used_tags;
     }
 
-    
+
     /**
      * diagnose Smarty setup
      *
@@ -251,13 +254,13 @@ class Smarty_Internal_Utility {
     public static function testInstall(Smarty $smarty, &$errors=null)
     {
         $status = true;
-        
+
         if ($errors === null) {
             echo "<PRE>\n";
             echo "Smarty Installation test...\n";
             echo "Testing template directory...\n";
         }
-        
+
         // test if all registered template_dir are accessible
         foreach($smarty->getTemplateDir() as $template_dir) {
             if (!is_dir($template_dir)) {
@@ -282,12 +285,12 @@ class Smarty_Internal_Utility {
                 }
             }
         }
-        
-        
+
+
         if ($errors === null) {
             echo "Testing compile directory...\n";
         }
-        
+
         // test if registered compile_dir is accessible
         $_compile_dir = $smarty->getCompileDir();
         if (!is_dir($_compile_dir)) {
@@ -319,12 +322,12 @@ class Smarty_Internal_Utility {
                 echo "{$_compile_dir} is OK.\n";
             }
         }
-        
-        
+
+
         if ($errors === null) {
             echo "Testing plugins directory...\n";
         }
-        
+
         // test if all registered plugins_dir are accessible
         // and if core plugins directory is still registered
         $_core_plugins_dir = realpath(dirname(__FILE__) .'/../plugins');
@@ -363,7 +366,7 @@ class Smarty_Internal_Utility {
                 $errors['plugins_dir'] = $message;
             }
         }
-        
+
         if ($errors === null) {
             echo "Testing cache directory...\n";
         }
@@ -400,8 +403,8 @@ class Smarty_Internal_Utility {
                 echo "{$_cache_dir} is OK.\n";
             }
         }
-        
-        
+
+
         if ($errors === null) {
             echo "Testing configs directory...\n";
         }
@@ -430,8 +433,8 @@ class Smarty_Internal_Utility {
                 }
             }
         }
-        
-        
+
+
         if ($errors === null) {
             echo "Testing sysplugin files...\n";
         }
@@ -623,12 +626,12 @@ class Smarty_Internal_Utility {
                 $errors['plugins_dir_constant'] = $message;
             }
         }
-        
+
         if ($errors === null) {
             echo "Tests complete.\n";
             echo "</PRE>\n";
         }
-    
+
         return $status;
     }
 

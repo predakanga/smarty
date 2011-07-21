@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+22/07/2011
+- clear internal caches on clearAllCache(), clearCache(), clearCompiledTemplate()
+
 21/07/2011
 - bugfix value changes of variable values assigned to Smarty object could not be seen on repeated $smarty->fetch() calls
 

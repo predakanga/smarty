@@ -412,7 +412,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * cached template objects
     * @var array
     */
-    public $template_objects = null;
+    public $template_objects = array();
     /**
     * check If-Modified-Since headers
     * @var boolean
@@ -651,6 +651,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         // load cache resource and call clearAll
         $_cache_resource = Smarty_CacheResource::load($this, $type);
+        Smarty_CacheResource::invalidLoadedCache($this);
         return $_cache_resource->clearAll($this, $exp_time);
     }
 
@@ -668,6 +669,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         // load cache resource and call clear
         $_cache_resource = Smarty_CacheResource::load($this, $type);
+        Smarty_CacheResource::invalidLoadedCache($this);
         return $_cache_resource->clear($this, $template_name, $cache_id, $compile_id, $exp_time);
     }
 
@@ -1212,24 +1214,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
     {
-        $this->clearRuntimeCaches();
         return Smarty_Internal_Utility::clearCompiledTemplate($resource_name, $compile_id, $exp_time, $this);
     }
-    
-    /**
-     * Clear internal runtime caches
-     *
-     * @return Smarty current Smarty instance for chaining
-     */
-    public function clearRuntimeCaches()
-    {
-        // clear template cache
-        $this->template_objects = array();
-        // clear Smarty_Resource caches
-        Smarty_Resource::$sources = array();
-        Smarty_Resource::$compileds = array();
-        return $this;
-    }
+
 
     /**
     * Return array of tag/attributes of all tags used by an template

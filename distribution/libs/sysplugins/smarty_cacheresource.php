@@ -19,13 +19,13 @@ abstract class Smarty_CacheResource {
      * @var array
      */
     protected static $resources = array();
-    
+
     /**
      * resource types provided by the core
      * @var array
      */
     protected static $sysplugins = array(
-        'file' => true, 
+        'file' => true,
     );
 
     /**
@@ -132,6 +132,21 @@ abstract class Smarty_CacheResource {
         }
         // give up
         throw new SmartyException("Unable to load cache resource '{$type}'");
+    }
+
+    /**
+     * Invalid Loaded Cache Files
+     *
+     * @param Smarty $smarty Smarty object
+     */
+    public static function invalidLoadedCache(Smarty $smarty)
+    {
+        foreach ($smarty->template_objects as $tpl) {
+            if (isset($tpl->cached)) {
+                $tpl->cached->valid = false;
+                $tpl->cached->processed = false;
+            }
+        }
     }
 }
 
