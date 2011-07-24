@@ -517,6 +517,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     {
         if (is_array($value) === true || $value instanceof Countable) {
             return count($value);
+        } elseif ($value instanceof IteratorAggregate) {
+            // Note: getIterator() returns a Traversable, not an Iterator
+            // thus rewind() and valid() methods may not be present
+            return iterator_count($value->getIterator());
         } elseif ($value instanceof Iterator) {
             $value->rewind();
             if ($value->valid()) {
