@@ -42,8 +42,9 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             $parent = $this;
         }
         // create template object if necessary
-        $_template = ($template instanceof $this->template_class) ? $template :
-            $this->createTemplate($template, $cache_id, $compile_id, $parent, false);
+        $_template = ($template instanceof $this->template_class) 
+            ? $template 
+            : $this->createTemplate($template, $cache_id, $compile_id, $parent, false);
         // save local variables
         $save_tpl_vars = $_template->tpl_vars;
         $save_config_vars = $_template->config_vars;
@@ -74,7 +75,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         }
         // dummy local smarty variable
         if (!isset($_template->tpl_vars['smarty'])) {
-        $_template->tpl_vars['smarty'] = new Smarty_Variable;
+            $_template->tpl_vars['smarty'] = new Smarty_Variable;
         }
         if (isset($this->smarty->error_reporting)) {
             $_smarty_old_error_level = error_reporting($this->smarty->error_reporting);
@@ -130,9 +131,14 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                     if ($this->smarty->debugging) {
                         Smarty_Internal_Debug::start_render($_template);
                     }
-                    ob_start();
-                    eval("?>" . $code);
-                    unset($code);
+                    try {
+                        ob_start();
+                        eval("?>" . $code);
+                        unset($code);
+                    } catch (Exception $e) {
+                        ob_get_clean();
+                        throw $e;
+                    }
                 } else {
                     if (!$_template->compiled->exists || ($_template->smarty->force_compile && !$_template->compiled->isCompiled)) {
                         $_template->compileTemplateSource();
@@ -151,19 +157,29 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                     } else {
                         $_template->decodeProperties($_template->compiled->_properties, false);
                     }
-                    ob_start();
-                    if (empty($_template->properties['unifunc']) || !is_callable($_template->properties['unifunc'])) {
-                        throw new SmartyException("Invalid compiled template for '{$_template->template_resource}'");
+                    try {
+                        ob_start();
+                        if (empty($_template->properties['unifunc']) || !is_callable($_template->properties['unifunc'])) {
+                            throw new SmartyException("Invalid compiled template for '{$_template->template_resource}'");
+                        }
+                        $_template->properties['unifunc']($_template);
+                    } catch (Exception $e) {
+                        ob_get_clean();
+                        throw $e;
                     }
-                    $_template->properties['unifunc']($_template);
                 }
             } else {
                 if ($_template->source->uncompiled) {
                     if ($this->smarty->debugging) {
                         Smarty_Internal_Debug::start_render($_template);
                     }
-                    ob_start();
-                    $_template->source->renderUncompiled($_template);
+                    try {
+                        ob_start();
+                        $_template->source->renderUncompiled($_template);
+                    } catch (Exception $e) {
+                        ob_get_clean();
+                        throw $e;
+                    }
                 } else {
                     throw new SmartyException("Resource '$_template->source->type' must have 'renderUncompiled' method");
                 }
@@ -211,9 +227,14 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                 }
                 // rendering (must be done before writing cache file because of {function} nocache handling)
                 $_smarty_tpl = $_template;
-                ob_start();
-                eval("?>" . $output);
-                $_output = ob_get_clean();
+                try {
+                    ob_start();
+                    eval("?>" . $output);
+                    $_output = ob_get_clean();
+                } catch (Exception $e) {
+                    ob_get_clean();
+                    throw $e;
+                }
                 // write cache file content
                 $_template->writeCachedContent($output);
                 $_template->cached->valid = true;
@@ -237,9 +258,14 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                 $_template->cached->handler->process($_template);
                 $_template->cached->processed = true;
             }
-            ob_start();
-            $_template->properties['unifunc']($_template);
-            $_output = ob_get_clean();
+            try {
+                ob_start();
+                $_template->properties['unifunc']($_template);
+                $_output = ob_get_clean();
+            } catch (Exception $e) {
+                ob_get_clean();
+                throw $e;
+            }
             if ($this->smarty->debugging) {
                 Smarty_Internal_Debug::end_cache($_template);
             }
