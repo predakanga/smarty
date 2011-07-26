@@ -355,6 +355,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @var int
     */
     public $error_reporting = null;
+    /**
+    * Internal flag for getTags()
+    * @var boolean
+    */
+    public $get_used_tags = false;
 
     /**#@+
     * config var settings
