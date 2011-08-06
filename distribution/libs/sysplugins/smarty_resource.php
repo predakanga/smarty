@@ -203,7 +203,7 @@ abstract class Smarty_Resource {
 
         // files relative to a template only get one shot
         if (isset($_file_exact_match)) {
-            return file_exists($file) ? $file : false;
+            return $this->fileExists($source, $file) ? $file : false;
         }
 
         // template_dir index?
@@ -231,7 +231,7 @@ abstract class Smarty_Resource {
             if ($_directory) {
                 $_file = substr($file, strpos($file, ']') + 1);
                 $_filepath = $_directory . $_file;
-                if (file_exists($_filepath)) {
+                if ($this->fileExists($source, $_filepath)) {
                     return $_filepath;
                 }
             }
@@ -241,7 +241,7 @@ abstract class Smarty_Resource {
         if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $file)) {
             foreach ($_directories as $_directory) {
                 $_filepath = $_directory . $file;
-                if (file_exists($_filepath)) {
+                if ($this->fileExists($source, $_filepath)) {
                     return $_filepath;
                 }
                 if ($source->smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_directory)) {
@@ -254,7 +254,7 @@ abstract class Smarty_Resource {
         }
 
         // try absolute filepath
-        if (file_exists($file)) {
+        if ($this->fileExists($source, $file)) {
             return $file;
         }
 
@@ -270,16 +270,33 @@ abstract class Smarty_Resource {
             $_return = call_user_func_array($_default_handler,
                 array($source->type, $source->name, &$_content, &$_timestamp, $source->smarty));
             if (is_string($_return)) {
+                $source->timestamp = @filemtime($_return);
+                $source->exists = !!$source->timestamp;
                 return $_return;
             } elseif ($_return === true) {
                 $source->content = $_content;
                 $source->timestamp = $_timestamp;
+                $source->exists = true;
                 return $_filepath;
             }
         }
 
         // give up
         return false;
+    }
+
+    /**
+     * test is file exists and save timestamp
+     *
+     * @param Smarty_Template_Source   $source    source object
+     * @param string $file file name
+     * @return bool  true if file exists
+     */
+    protected function fileExists(Smarty_Template_Source $source, $file)
+    {
+        $source->timestamp = @filemtime($file);
+        return $source->exists = !!$source->timestamp;
+
     }
 
     /**

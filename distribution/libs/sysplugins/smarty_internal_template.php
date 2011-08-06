@@ -394,11 +394,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public function decodeProperties($properties, $cache = false)
     {
-        // store data in reusable Smarty_Template_Compiled
-        if (!$cache) {
-            $this->compiled->_properties = $properties;
-        }
-
         $this->has_nocache_code = $properties['has_nocache_code'];
         $this->properties['nocache_hash'] = $properties['nocache_hash'];
         if (isset($properties['cache_lifetime'])) {
@@ -417,11 +412,16 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $is_valid = true;
         if ($this->properties['version'] != Smarty::SMARTY_VERSION) {
             $is_valid = false;
-        } else if (((!$cache && $this->smarty->compile_check) || $this->smarty->compile_check === true || $this->smarty->compile_check === Smarty::COMPILECHECK_ON) && !empty($this->properties['file_dependency'])) {
+        } else if (((!$cache && $this->smarty->compile_check && empty($this->compiled->_properties)) || $cache && ($this->smarty->compile_check === true || $this->smarty->compile_check === Smarty::COMPILECHECK_ON)) && !empty($this->properties['file_dependency'])) {
             foreach ($this->properties['file_dependency'] as $_file_to_check) {
                 if ($_file_to_check[2] == 'file' || $_file_to_check[2] == 'php') {
-                    // file and php types can be checked without loading the respective resource handlers
-                    $mtime = filemtime($_file_to_check[0]);
+                    if ($this->source->filepath == $_file_to_check[0] && isset($this->source->timestamp)) {
+                        // do not recheck current template
+                        $mtime = $this->source->timestamp;
+                    } else {
+                        // file and php types can be checked without loading the respective resource handlers
+                        $mtime = filemtime($_file_to_check[0]);
+                    }
                 } elseif ($_file_to_check[2] == 'string') {
                     continue;
                 } else {
@@ -438,6 +438,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->cached->valid = $is_valid;
         } else {
             $this->mustCompile = !$is_valid;
+        }
+        // store data in reusable Smarty_Template_Compiled
+        if (!$cache) {
+            $this->compiled->_properties = $properties;
         }
         return $is_valid;
     }
@@ -477,7 +481,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } elseif ($scope == Smarty::SCOPE_ROOT && !empty($this->parent)) {
             $ptr = $this->parent;
             while (!empty($ptr->parent)) {
-                $ptr = $this->parent;
+                $ptr = $ptr->parent;
             }
             return $ptr->tpl_vars;
         } elseif ($scope == Smarty::SCOPE_GLOBAL) {
@@ -500,7 +504,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } elseif ($scope == Smarty::SCOPE_ROOT && !empty($this->parent)) {
             $ptr = $this->parent;
             while (!empty($ptr->parent)) {
-                $ptr = $this->parent;
+                $ptr = $ptr->parent;
             }
             return $ptr;
         }
