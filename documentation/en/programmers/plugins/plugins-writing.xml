@@ -35,11 +35,11 @@ function smarty_function_yourPlugin(array $params, Smarty_Internal_Template $tem
      </para>
      <itemizedlist>
      <listitem><para>
-     modifiers do not get passed the Smarty object at all
+      modifiers do not get passed the Smarty_Internal_Template object at all
      </para></listitem>
      <listitem><para>
      blocks get passed
-     <parameter>$repeat</parameter> after the Smarty object to keep
+      <parameter>$repeat</parameter> after the Smarty_Internal_Template object to keep
      backwards compatibility to older versions of Smarty.
      </para></listitem>
      </itemizedlist>

@@ -6,7 +6,7 @@
 	   Upon each invocation of the PHP application, Smarty tests to see if the
 	   current template has changed (different time stamp) since the last time
 	   it was compiled. If it has changed, it recompiles that template. If the
-	   template has not been compiled, it will compile regardless of this
+	   template has yet not been compiled at all, it will compile regardless of this
 	   setting. By default this variable is set to &true;.
       </para>
       <para>Once an application is

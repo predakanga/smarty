@@ -60,6 +60,7 @@
 <!ENTITY programmers.api-functions.api-clear-cache SYSTEM '../current_lang/programmers/api-functions/api-clear-cache.xml'>
 <!ENTITY programmers.api-functions.api-is-cached  SYSTEM '../current_lang/programmers/api-functions/api-is-cached.xml'>
 <!ENTITY programmers.api-functions.api-register-resource SYSTEM '../current_lang/programmers/api-functions/api-register-resource.xml'>
+<!ENTITY programmers.api-functions.api-register-default-plugin-handler SYSTEM '../current_lang/programmers/api-functions/api-register-default-plugin-handler.xml'>
 <!ENTITY programmers.api-functions.api-register-cacheresource SYSTEM '../current_lang/programmers/api-functions/api-register-cacheresource.xml'>
 <!ENTITY programmers.api-functions.api-clear-config SYSTEM '../current_lang/programmers/api-functions/api-clear-config.xml'>
 <!ENTITY programmers.api-functions.api-config-load SYSTEM '../current_lang/programmers/api-functions/api-config-load.xml'>

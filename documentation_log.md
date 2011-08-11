@@ -4,10 +4,12 @@ these changes must reflect on the documentation at some point…
 
 ## General ##
 
+## Proterties ##
+* documentation of force_cache
 
 ## Syntax ##
 
-* {block ... hide} option to supress block if no child is defined
+* - {block ... hide} option to supress block if no child is defined
 * {setfilter} tag 
 * {break} {continue} are present but currently not documented
 
@@ -15,6 +17,8 @@ these changes must reflect on the documentation at some point…
 ## Plugins ##
 
 * - update documentation to load nested plugins by $_smarty->loadPlugin()
+* - correct compiler plugin doc to return php tags.
+* - fix documentation of filters. Second parameter is template object
 
 ## Functions ##
 
@@ -58,7 +62,6 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * Smarty::$escape_html 
 * Smarty_Internal_Templatebase::registerClass()
 * Smarty::loadPlugin()
-* Smarty::clearRuntimeCaches()
 * nature of include_path handling
 
 
