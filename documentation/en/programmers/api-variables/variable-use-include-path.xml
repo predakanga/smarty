@@ -5,13 +5,58 @@
  <para>
   This tells smarty to respect the <ulink url="&url.php-manual;ini.core.php#ini.include-path">include_path</ulink> 
   within the <link linkend="resources.file"><varname>File Template Resource</varname></link> handler and the plugin loader
-  to resolve the directories known to <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>.
+  to resolve the directories known to <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link>. 
+  The flag also makes the plugin loader check the include_path for 
+  <link linkend="variable.plugins.dir"><parameter>$plugins_dir</parameter></link>.
  </para>
  <note>
   <title>Note</title>
   <para>
    You should not design your applications to rely on the include_path, as this
    may - depending on your implementation - slow down your system (and Smarty) considerably.
+  </para>
+ </note>
+ <para>
+  If use_include_path is enabled, file discovery for
+  <link linkend="variable.template.dir"><parameter>$template_dir</parameter></link> and 
+  <link linkend="variable.plugins.dir"><parameter>$plugins_dir</parameter></link>
+  work as follows.
+ </para>
+ <itemizedlist>
+  <listitem>
+   <para>
+    For each element <literal>$directory</literal> in array ($template_dir or $plugins_dir) do
+   </para>
+  </listitem>
+  <listitem>
+   <para>
+    Test if requested file is in <literal>$directory</literal> relative to the <ulink url="&url.php-manual;function.getcwd.php">current working directory</ulink>. If file found, return it.
+   </para>
+  </listitem>
+  <listitem>
+   <para>
+    For each <literal>$path</literal> in include_path do
+   </para>
+  </listitem>
+  <listitem>
+   <para>
+    Test if requested file is in <literal>$directory</literal> relative to the <literal>$path</literal> (possibly relative to the <ulink url="&url.php-manual;function.getcwd.php">current working directory</ulink>). If file found, return it.
+   </para>
+  </listitem>
+  <listitem>
+   <para>
+    Try default_handler or fail.
+   </para>
+  </listitem>
+ </itemizedlist>
+ <para>
+  This means that whenever a directory/file relative to the current working directory is encountered, it is preferred over anything potentially accessible through the include_path.
+ </para>
+ <note>
+  <title>Note</title>
+  <para>
+   Smarty does not filter elements of the include_path. 
+   That means a ".:" within your include path will trigger the current working directory lookup twice.
   </para>
  </note>
  <para>
