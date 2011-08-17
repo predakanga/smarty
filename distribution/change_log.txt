@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+17/08/2011
+- bugfix CacheResource_Custom bad internal fetch() call
+
 15/08/2011
 - bugfix CacheResource would load content twice for KeyValueStore and Custom handlers
 

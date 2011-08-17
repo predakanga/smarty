@@ -100,7 +100,7 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
             return;
         }
         $timestamp = null;
-        $this->fetch($cached->filepath, $cached->cache_id, $cached->compile_id, $cached->content, $timestamp);
+        $this->fetch($cached->filepath, $cached->source->name, $cached->cache_id, $cached->compile_id, $cached->content, $timestamp);
         $cached->timestamp = isset($timestamp) ? $timestamp : false;
         $cached->exists = !!$cached->timestamp;
     }
