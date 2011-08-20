@@ -3,8 +3,29 @@
 <sect1 id="variable.escape.html">
  <title>$escape_html</title>
  <para>
-  TODO: $escape_html
+  Setting <varname>$escape_html</varname> to &true; will escape all template 
+  variable output by wrapping it in 
+  <literal>htmlspecialchars({$output}, ENT_QUOTES, SMARTY_RESOURCE_CHAR_SET);</literal>,
+  which is the same as <literal>{$variable|escape:"html"}</literal>.
  </para>
+ <para>
+  Template designers can choose to selectively disable this feature by adding the <literal>nofilter</literal> flag: <literal>{$variable nofilter}</literal>.
+ </para>
+ <para>
+  Modifiers and Filters are run in the following order:
+  modifier,
+  default_modifier,
+  $escape_html,
+  registered variable filters,
+  autoloaded variable filters,
+  template instance's variable filters. Everything after default_modifier can be disabled with the <literal>nofilter</literal> flag.
+ </para>
+ <note>
+  <para>
+   This is a compile time option. If you change the setting you must make
+   sure that the templates get recompiled.
+  </para>
+ </note>
 </sect1>
 <!-- Keep this comment at the end of the file
 Local variables:

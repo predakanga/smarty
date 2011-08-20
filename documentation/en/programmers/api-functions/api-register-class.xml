@@ -14,7 +14,63 @@
   </methodsynopsis>
 
   <para>
-   TODO: registerClass()
+   Smarty allows you to access static classes from templates as long as the 
+   <link linkend="advanced.features.security">Security Policy</link> does not
+   tell it otherwise. If security is enabled, classes registered with 
+   <varname>registerClass()</varname> are accessible to templates.
+  </para>
+  
+  <example>
+   <title>Register class for use within a template</title>
+   <programlisting>
+<![CDATA[
+<?php
+
+class Bar {
+  $property = "hello world";
+}
+
+$smarty = new Smarty();
+$smarty->registerClass("Foo", "Bar");
+]]>
+   </programlisting>
+   <programlisting>
+<![CDATA[
+{* Smarty will access this class as long as it's not prohibited by security *}
+{Bar::$property}
+{* Foo translates to the real class Bar *}
+{Foo::$property}
+]]>
+   </programlisting>
+  </example>
+   
+  <example>
+   <title>Register namespaced class for use within a template</title>
+   <programlisting>
+<![CDATA[
+<?php
+namespace my\php\application {
+  class Bar {
+    $property = "hello world";
+  }
+}
+
+$smarty = new Smarty();
+$smarty->registerClass("Foo", "\my\php\application\Bar");
+]]>
+   </programlisting>
+   <programlisting>
+<![CDATA[
+{* Foo translates to the real class \my\php\application\Bar *}
+{Foo::$property}
+]]>
+   </programlisting>
+  </example>
+  <para>
+   See also
+   <link linkend="api.register.object"><varname>registerObject()</varname></link>,
+   and
+   <link linkend="advanced.features.security">Security</link>.
   </para>
  </refsect1>
 </refentry>

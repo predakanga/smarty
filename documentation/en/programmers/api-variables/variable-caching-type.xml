@@ -3,7 +3,12 @@
 <sect1 id="variable.caching.type">
  <title>$caching_type</title>
  <para>
-  TODO $caching_type
+  This property specifies the name of the caching handler to use. 
+  It defaults to <literal>file</literal>, enabling the internal filesystem based cache handler.
+ </para>
+ <para>
+  See <link linkend="caching.custom">Custom Cache Implementation</link> 
+  for pointers on setting up your own cache handler.
  </para>
 </sect1>
 

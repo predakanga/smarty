@@ -6,6 +6,10 @@ these changes must reflect on the documentation at some point…
 
 * unregisterObject() documented, but not implemented?!
 
+## demo ##
+
+* constructor pattern for template inheritance
+
 ## Proterties ##
 * - documentation of force_cache
 
@@ -60,8 +64,8 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * SmartyBC for BackwardCompatibility
 * {php} and {include_php} with SmartyBC only
 * - $smarty->compile_check = Smarty:.COMPILECHECK_CACHEMISS
-* Smarty::$escape_html 
-* Smarty_Internal_Templatebase::registerClass()
+* - Smarty::$escape_html 
+* - Smarty_Internal_Templatebase::registerClass()
 * Smarty::loadPlugin()
 * - nature of include_path handling
 
