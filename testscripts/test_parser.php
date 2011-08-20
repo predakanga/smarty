@@ -53,6 +53,7 @@ $tpl = $smarty2->createTemplate ('eval:' . str_replace("\r", '', $template), nul
 $start = microtime(true);
 $i=1;
 //echo '<pre><br><br>' . htmlentities($tpl->getCompiledTemplate()) . '</pre>';
+echo '<pre><br><br>' . htmlentities($tpl->compiler->compileTemplate($tpl)) . '</pre>';
 $smarty2->display($tpl);
 echo '<br><br>' . (microtime(true) - $start);
 echo '<br>' . memory_get_peak_usage(true);
