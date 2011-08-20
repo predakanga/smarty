@@ -59,14 +59,14 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * - Smarty::fetch("extends:db:foo.tpl|file:bar.tpl") Smarty_Resources with {extend}
 * - eval: and string: resources in conjunction with extend:
 * - need for proper compile_id when using dynamic inheritance {extends file="{$parent}"}
-* SmartySecurity::$allowed_modifiers, SmartySecurity::$disabled_modifiers, SmartySecurity::$allowed_tags, SmartySecurity::$disabled_tags
+* - SmartySecurity::$allowed_modifiers, SmartySecurity::$disabled_modifiers, SmartySecurity::$allowed_tags, SmartySecurity::$disabled_tags
 * Block Plugins output on opening tag
 * SmartyBC for BackwardCompatibility
-* {php} and {include_php} with SmartyBC only
+* - {php} and {include_php} with SmartyBC only
 * - $smarty->compile_check = Smarty:.COMPILECHECK_CACHEMISS
 * - Smarty::$escape_html 
 * - Smarty_Internal_Templatebase::registerClass()
-* Smarty::loadPlugin()
+* Smarty::loadPlugin() - really public?
 * - nature of include_path handling
 
 
