@@ -41,6 +41,7 @@
 <!ENTITY programmers.api-functions.api-create-template SYSTEM '../current_lang/programmers/api-functions/api-create-template.xml'>
 <!ENTITY programmers.api-functions.api-get-config-vars SYSTEM '../current_lang/programmers/api-functions/api-get-config-vars.xml'>
 <!ENTITY programmers.api-functions.api-register-plugin SYSTEM '../current_lang/programmers/api-functions/api-register-plugin.xml'>
+<!ENTITY programmers.api-functions.api-register-class SYSTEM '../current_lang/programmers/api-functions/api-register-class.xml'>
 <!ENTITY programmers.api-functions.api-register-filter SYSTEM '../current_lang/programmers/api-functions/api-register-filter.xml'>
 <!ENTITY programmers.api-functions.api-assign-by-ref SYSTEM '../current_lang/programmers/api-functions/api-assign-by-ref.xml'>
 <!ENTITY programmers.api-functions.api-template-exists SYSTEM '../current_lang/programmers/api-functions/api-template-exists.xml'>

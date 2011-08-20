@@ -4,6 +4,8 @@ these changes must reflect on the documentation at some point…
 
 ## General ##
 
+* unregisterObject() documented, but not implemented?!
+
 ## Proterties ##
 * - documentation of force_cache
 
