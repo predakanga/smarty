@@ -2,9 +2,20 @@
 
 these changes must reflect on the documentation at some point…
 
-## General ##
+## Undocumented ##
 
 * unregisterObject() documented, but not implemented?!
+* $merge_compiled_includes
+* $error_unassigned
+* $compile_locking
+* $security_policy
+* $allow_php_templates
+* $direct_access_security
+* $smarty_debug_id
+* $default_config_type
+* $_file_perms
+* $_dir_perms
+* 
 
 ## demo ##
 
