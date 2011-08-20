@@ -109,6 +109,7 @@
 <!ENTITY programmers.api-variables.variable-default-resource-type SYSTEM '../current_lang/programmers/api-variables/variable-default-resource-type.xml'>
 <!ENTITY programmers.api-variables.variable-autoload-filters SYSTEM '../current_lang/programmers/api-variables/variable-autoload-filters.xml'>
 <!ENTITY programmers.api-variables.variable-debugging-ctrl SYSTEM '../current_lang/programmers/api-variables/variable-debugging-ctrl.xml'>
+<!ENTITY programmers.api-variables.variable-force-cache SYSTEM '../current_lang/programmers/api-variables/variable-force-cache.xml'>
 <!ENTITY programmers.api-variables.variable-force-compile SYSTEM '../current_lang/programmers/api-variables/variable-force-compile.xml'>
 <!ENTITY programmers.api-variables.variable-cache-dir SYSTEM '../current_lang/programmers/api-variables/variable-cache-dir.xml'>
 <!ENTITY programmers.api-variables.variable-caching-type SYSTEM '../current_lang/programmers/api-variables/variable-caching-type.xml'>

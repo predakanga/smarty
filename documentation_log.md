@@ -5,7 +5,7 @@ these changes must reflect on the documentation at some point…
 ## General ##
 
 ## Proterties ##
-* documentation of force_cache
+* - documentation of force_cache
 
 ## Syntax ##
 
