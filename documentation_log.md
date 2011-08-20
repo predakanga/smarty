@@ -45,20 +45,19 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * - Smarty:: set/get/addTemplateDir()
 * - Smarty::$default_template_handler_func()
 * - Smarty::$default_config_handler_func()
-* Smarty::registerDefaultPluginHandler()
+* Smarty::registerDefaultPluginHandler() [not implemented yet]
 * - Smarty::$use_include_path
 * - template_dir identification: {include file="[foo]bar.tpl"} see http://code.google.com/p/smarty-php/source/detail?r=3947
 * - config uses same Smarty_Resource instances as template
 * - ./ and ../ behaviour in {include} and {extend} as well as $smarty->fetch()
 * - Smarty::fetch("extends:db:foo.tpl|file:bar.tpl") Smarty_Resources with {extend}
 * - eval: and string: resources in conjunction with extend:
-* need for proper compile_id when using dynamic inheritance {extends file="{$parent}"}
+* - need for proper compile_id when using dynamic inheritance {extends file="{$parent}"}
 * SmartySecurity::$allowed_modifiers, SmartySecurity::$disabled_modifiers, SmartySecurity::$allowed_tags, SmartySecurity::$disabled_tags
 * Block Plugins output on opening tag
 * SmartyBC for BackwardCompatibility
 * {php} and {include_php} with SmartyBC only
-* add example for php template resource, since it's been removed from source
-* $smarty->compile_check = Smarty:.COMPILECHECK_CACHEMISS
+* - $smarty->compile_check = Smarty:.COMPILECHECK_CACHEMISS
 * Smarty::$escape_html 
 * Smarty_Internal_Templatebase::registerClass()
 * Smarty::loadPlugin()
