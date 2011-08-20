@@ -43,6 +43,7 @@
 &programmers.api-variables.variable-default-config-handler-func;
 &programmers.api-variables.variable-default-template-handler-func;
 &programmers.api-variables.variable-error-reporting;
+&programmers.api-variables.variable-escape-html;
 &programmers.api-variables.variable-force-cache;
 &programmers.api-variables.variable-force-compile;
 &programmers.api-variables.variable-left-delimiter;

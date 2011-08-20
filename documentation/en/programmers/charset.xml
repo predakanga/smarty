@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- $Revision: 3827 $ -->
-<sect1 id="charset">
+<chapter id="charset">
+<title>Charset Encoding</title>
+
+<sect1 id="charset.encoding">
  <title>Charset Encoding</title>
  <para>
   There are a variety of encodings for textual data, ISO-8859-1 (Latin1) and UTF-8 being the most popular.
@@ -38,6 +41,7 @@ $smarty = new Smarty();
  </example>
 
 </sect1>
+</chapter>
 <!-- Keep this comment at the end of the file
 Local variables:
 mode: sgml

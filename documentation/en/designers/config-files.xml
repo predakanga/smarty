@@ -80,12 +80,10 @@ pass=foobar
   That means that a config file can also be loaded from a db <literal>$smarty->configLoad("db:my.conf")</literal>.
  </para>
  <para>
-  TODO: default_config_handler_func
- </para>
- <para>
   See also
   <link linkend="language.function.config.load"><varname>{config_load}</varname></link>,
   <link linkend="variable.config.overwrite"><parameter>$config_overwrite</parameter></link>,
+  <link linkend="variable.default.config.handler.func"><parameter>$default_config_handler_func</parameter></link>,
   <link linkend="api.get.config.vars"><varname>getConfigVars()</varname></link>,
   <link linkend="api.clear.config"><varname>clearConfig()</varname></link>
   and

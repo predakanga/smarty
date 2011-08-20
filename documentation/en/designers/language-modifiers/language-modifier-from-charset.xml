@@ -51,7 +51,7 @@
 
   <para>
    See also
-   <!-- FIXME: this link breaks compilation <link linkend="charset">Charset Enconding</link>, -->
+   <link linkend="charset">Charset Enconding</link>,
    <link linkend="language.modifier.from_charset">from_charset modifier</link>.
   </para>
  </sect1>
