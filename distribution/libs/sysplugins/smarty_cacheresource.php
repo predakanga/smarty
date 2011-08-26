@@ -167,13 +167,13 @@ class Smarty_Template_Cached {
      * @var string
      */
     public $filepath = false;
-    
+
     /**
      * Source Content
      * @var string
      */
     public $content = null;
-    
+
     /**
      * Source Timestamp
      * @var integer
@@ -261,8 +261,11 @@ class Smarty_Template_Cached {
             if ($smarty->debugging) {
                 Smarty_Internal_Debug::start_cache($_template);
             }
-            $handler->process($_template, $this);
-            $this->processed = true;
+            if($handler->process($_template, $this) === false) {
+                $this->valid = false;
+            } else {
+                $this->processed = true;
+            }
             if ($smarty->debugging) {
                 Smarty_Internal_Debug::end_cache($_template);
             }

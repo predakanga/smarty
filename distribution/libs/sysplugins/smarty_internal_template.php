@@ -220,7 +220,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         }
         $this->properties['cache_lifetime'] = $this->cache_lifetime;
         $this->properties['unifunc'] = 'content_' . uniqid();
-        return $this->cached->write($this, $this->createTemplateCodeFrame($content, true));
+        $content = $this->createTemplateCodeFrame($content, true);
+        $_smarty_tpl = $this;
+        eval("?>" . $content);
+        $this->cached->valid = true;
+        $this->cached->processed = true;
+        return $this->cached->write($this, $content);
     }
 
     /**

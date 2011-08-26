@@ -77,8 +77,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
     public function process(Smarty_Internal_Template $_template, Smarty_Template_Cached $cached=null)
     {
         $_smarty_tpl = $_template;
-        include $_template->cached->filepath;
-        return true;
+        return @include $_template->cached->filepath;
     }
 
     /**

@@ -237,7 +237,6 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                 }
                 // write cache file content
                 $_template->writeCachedContent($output);
-                $_template->cached->valid = true;
                 if ($this->smarty->debugging) {
                     Smarty_Internal_Debug::end_cache($_template);
                 }
@@ -252,11 +251,6 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         } else {
             if ($this->smarty->debugging) {
                 Smarty_Internal_Debug::start_cache($_template);
-            }
-            // cache could have been update on a previous call but not yet processed
-            if (!$_template->cached->processed) {
-                $_template->cached->handler->process($_template);
-                $_template->cached->processed = true;
             }
             try {
                 ob_start();
