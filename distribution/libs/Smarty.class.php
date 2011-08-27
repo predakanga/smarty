@@ -86,10 +86,13 @@ if (SMARTY_SPL_AUTOLOAD && set_include_path(get_include_path() . PATH_SEPARATOR 
 /**
 * Load always needed external class files
 */
-include SMARTY_SYSPLUGINS_DIR.'smarty_internal_data.php';
-include SMARTY_SYSPLUGINS_DIR.'smarty_internal_templatebase.php';
-include SMARTY_SYSPLUGINS_DIR.'smarty_internal_template.php';
-include SMARTY_SYSPLUGINS_DIR.'smarty_resource.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_data.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_templatebase.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_template.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_resource.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_resource_file.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_cacheresource.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_cacheresource_file.php';
 
 /**
 * This is the main Smarty class
@@ -508,7 +511,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @var string
     */
     public $_current_file = null;
-
+    /**
+    * internal flag to enable parser debugging
+    * @var bool
+    */
+    public $_parserdebug = false;
     /**#@-*/
 
     /**

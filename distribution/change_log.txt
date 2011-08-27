@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+27/08/2011
+- bugfix {$foo|bar+1} did create syntax error
+
 26/08/2011
 - bugfix when generating nocache code which contains double \
 - bugfix handle race condition if cache file was deleted between filemtime and include
