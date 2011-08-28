@@ -19,6 +19,7 @@
     for how to change Smarty class variables for individual templates.
  </para></note>
 
+&programmers.api-variables.variable-allow-php-templates;
 &programmers.api-variables.variable-auto-literal;
 &programmers.api-variables.variable-autoload-filters;
 &programmers.api-variables.variable-cache-dir;
@@ -38,6 +39,7 @@
 &programmers.api-variables.variable-debug-template;
 &programmers.api-variables.variable-debugging;
 &programmers.api-variables.variable-debugging-ctrl;
+&programmers.api-variables.variable-default-config-type;
 &programmers.api-variables.variable-default-modifiers;
 &programmers.api-variables.variable-default-resource-type;
 &programmers.api-variables.variable-default-config-handler-func;
@@ -47,6 +49,7 @@
 &programmers.api-variables.variable-force-cache;
 &programmers.api-variables.variable-force-compile;
 &programmers.api-variables.variable-left-delimiter;
+&programmers.api-variables.variable-merge-compiled-includes;
 &programmers.api-variables.variable-php-handling;
 &programmers.api-variables.variable-plugins-dir;
 &programmers.api-variables.variable-right-delimiter;
