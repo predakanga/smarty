@@ -51,19 +51,23 @@ class ClearCompiledTests extends PHPUnit_Framework_TestCase {
     public function testClearCompiledResource()
     {
         $this->smarty->clearCompiledTemplate();
-        file_put_contents($this->smarty->getCompileDir() . 'dummy.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.php', 'test');
+        file_put_contents($this->smarty->getCompileDir() . sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.cache.php', 'test');
         file_put_contents($this->smarty->getCompileDir() . 'dummy2.php', 'test');
-        $this->assertEquals(1, $this->smarty->clearCompiledTemplate('dummy'));
-        $this->assertFalse(file_exists($this->smarty->getCompileDir() . 'dummy.php'));
+        $this->assertEquals(2, $this->smarty->clearCompiledTemplate('helloworld.tpl'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.php'));
+        $this->assertFalse(file_exists($this->smarty->getCompileDir() . sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.cache.php'));
         $this->assertTrue(file_exists($this->smarty->getCompileDir() . 'dummy2.php'));
     }
     public function testSmarty2ClearCompiledResource()
     {
         $this->smartyBC->clearCompiledTemplate();
-        file_put_contents($this->smartyBC->getCompileDir() . 'dummy.php', 'test');
+        file_put_contents($this->smartyBC->getCompileDir() . sha1($this->smartyBC->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.php', 'test');
+        file_put_contents($this->smartyBC->getCompileDir() . sha1($this->smartyBC->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.cache.php', 'test');
         file_put_contents($this->smartyBC->getCompileDir() . 'dummy2.php', 'test');
-        $this->smartyBC->clear_compiled_tpl('dummy');
-        $this->assertFalse(file_exists($this->smartyBC->getCompileDir() . 'dummy.php'));
+        $this->smartyBC->clear_compiled_tpl('helloworld.tpl');
+        $this->assertFalse(file_exists($this->smartyBC->getCompileDir() . sha1($this->smartyBC->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.php'));
+        $this->assertFalse(file_exists($this->smartyBC->getCompileDir() . sha1($this->smartyBC->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.cache.php'));
         $this->assertTrue(file_exists($this->smartyBC->getCompileDir() . 'dummy2.php'));
     }
     /**
