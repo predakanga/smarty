@@ -185,8 +185,20 @@ class Smarty_Internal_Utility {
         $_compile_id = isset($compile_id) ? preg_replace('![^\w\|]+!', '_', $compile_id) : null;
         $_dir_sep = $smarty->use_sub_dirs ? DS : '^';
         if (isset($resource_name)) {
-            $_resource_part_1 = $resource_name . '.php';
-            $_resource_part_2 = $resource_name . '.cache' . '.php';
+            $_save_stat = $smarty->caching;
+            $smarty->caching = false;
+            $tpl = new $smarty->template_class($resource_name, $smarty);
+            $smarty->caching = $_save_stat;
+            if ($tpl->source->exists) {
+                 $_resource_part_1 = basename(str_replace('^', '/', $tpl->compiled->filepath));
+                // remove from template cache
+                unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
+            } else {
+                // remove from template cache
+                unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
+                return 0;
+            }
+            $_resource_part_2 = str_replace('.php','.cache.php',$_resource_part_1);
         } else {
             $_resource_part = '';
         }

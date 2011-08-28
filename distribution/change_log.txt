@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+28/08/2011
+- bugfix clearCompileTemplate() did not work for specific template subfolder or resource
+
 27/08/2011
 - bugfix {$foo|bar+1} did create syntax error
 
