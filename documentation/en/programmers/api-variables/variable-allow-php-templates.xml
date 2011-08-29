@@ -20,7 +20,7 @@ $smarty->allow_php_templates = true;
       </para>
       <note>
        <para>
-        The PHP template file resource is an undocumented decripated feature.
+        The PHP template file resource is an undocumented deprecated feature.
        </para>
       </note>
      </sect1>

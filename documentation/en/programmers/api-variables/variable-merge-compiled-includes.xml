@@ -4,12 +4,13 @@
       <title>$merge_compiled_includes</title>
       <para>
        By setting <varname>$merge_compiled_includes</varname> to &true; Smarty will merge the compiled template 
-       code of subtemplates into the compiled code of the main template. This does increase rendering speed if you
-       use a larger number of different subtemplates.
+       code of subtemplates into the compiled code of the main template. This increases rendering speed of templates 
+       using a many different sub-templates.
       </para>
       <para>
-       You can merge also just individual subtemplates by setting the <varname>inline</varname> option flag at
-       the <varname>{include}</varname> tag.
+       Individual sub-templates can be merged by setting the <literal>inline</literal> option flag within
+       the <varname>{include}</varname> tag. <varname>$merge_compiled_includes</varname> does not have to
+       be enabled for the <literal>inline</literal> merge.
       </para>      
       <para>
        
