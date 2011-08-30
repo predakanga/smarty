@@ -198,7 +198,26 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         }
         return $_count;
     }
-
+    
+    public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        $lock_file = $cached->filepath . '.lock';
+        clearstatcache(false, $lock_file);
+        $t = @filemtime($lock_file);
+        return $t && time() - $t > $smarty->locking_timeout;
+    }
+    
+    public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        $lock_file = $cached->filepath . '.lock';
+        touch($lock_file);
+    }
+    
+    public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        $lock_file = $cached->filepath . '.lock';
+        @unlink($lock_file);
+    }
 }
 
 ?>

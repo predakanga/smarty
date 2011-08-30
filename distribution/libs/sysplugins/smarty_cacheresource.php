@@ -99,6 +99,40 @@ abstract class Smarty_CacheResource {
      * @return integer number of cache files deleted
      */
     public abstract function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);
+    
+    
+    public function requireLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        // theoretically locking_timeout should be checked against time_limit (max_execution_time)…
+        $start = microtime(true);
+        while ($this->hasLock($smarty, $cached)) {
+            if (microtime(true) - $start > $smarty->locking_timeout) {
+                // abort waiting for lock release
+                return;
+            }
+            usleep(500);
+        }
+        // acquire lock
+        $this->acquireLock($smarty, $cached);
+    }
+    
+    public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        // check if lock exists
+        return false;
+    }
+    
+    public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        // create lock
+        return true;
+    }
+    
+    public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    {
+        // release lock
+        return true;
+    }
 
 
     /**
@@ -256,6 +290,9 @@ class Smarty_Template_Cached {
             // lifetime expired
             $this->valid = false;
         }
+        if (!$this->valid && $_template->smarty->locking) {
+            $this->handler->requireLock($_template->smarty, $this);
+        }
         if ($this->valid) {
             // load cache file for the following checks
             if ($smarty->debugging) {
@@ -285,6 +322,7 @@ class Smarty_Template_Cached {
     public function write(Smarty_Internal_Template $_template, $content)
     {
         if (!$_template->source->recompiled) {
+            $this->handler->releaseLock($_template->smarty, $this);
             if ($this->handler->writeCachedContent($_template, $content)) {
                 $this->timestamp = time();
                 $this->exists = true;
