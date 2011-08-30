@@ -101,19 +101,20 @@ abstract class Smarty_CacheResource {
     public abstract function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time);
     
     
-    public function requireLock(Smarty $smarty, Smarty_Template_Cached $cached)
+    public function locked(Smarty $smarty, Smarty_Template_Cached $cached)
     {
         // theoretically locking_timeout should be checked against time_limit (max_execution_time)…
         $start = microtime(true);
+        $hadLock = null;
         while ($this->hasLock($smarty, $cached)) {
+            $hadLock = true;
             if (microtime(true) - $start > $smarty->locking_timeout) {
                 // abort waiting for lock release
-                return;
+                return false;
             }
-            usleep(500);
+            sleep(1);
         }
-        // acquire lock
-        $this->acquireLock($smarty, $cached);
+        return $hadLock;
     }
     
     public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
@@ -280,8 +281,7 @@ class Smarty_Template_Cached {
         if (!($_template->caching == Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == Smarty::CACHING_LIFETIME_SAVED) || $_template->source->recompiled) {
             return;
         }
-        $_iteration = 0;
-        while ($_iteration < 2) {
+        while (true) {
             $handler->populate($this, $_template);
             if ($this->timestamp === false || $smarty->force_compile || $smarty->force_cache) {
                 $this->valid = false;
@@ -292,13 +292,11 @@ class Smarty_Template_Cached {
                 // lifetime expired
                 $this->valid = false;
             }
-            if (!$_iteration && !$this->valid && $_template->smarty->locking) {
-                $this->handler->requireLock($_template->smarty, $this);
-                $_iteration++;
-            } elseif ($_iteration && $this->valid) {
-                $this->handler->releaseLock($_template->smarty, $this);
+            if ($this->valid || !$_template->smarty->locking) {
                 break;
-            } else {
+            }
+            if (!$this->handler->locked($_template->smarty, $this)) {
+                $this->handler->acquireLock($_template->smarty, $this);
                 break;
             }
         }
