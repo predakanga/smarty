@@ -358,23 +358,25 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
         }
         return $t;
     }
-    
+
     public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
         // TODO: sha1() would be executed quite often here, some sort of cache?
         $key = 'LOCK#' . $cached->filepath;
         $data = $this->read(array($key));
-        return $data && time() - $data[$key] > $smarty->locking_timeout;
+        return $data && time() - $data[$key] < $smarty->locking_timeout;
     }
-    
+
     public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
+        $cached->is_locked = true;
         $key = 'LOCK#' . $cached->filepath;
         $this->write(array($key => time()), $smarty->locking_timeout);
     }
-    
+
     public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
+        $cached->is_locked = false;
         $key = 'LOCK#' . $cached->filepath;
         $this->delete(array($key));
     }

@@ -50,6 +50,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
             $_compile_id = '';
         }
         $_cache_dir = $_template->smarty->getCacheDir();
+        $cached->lock_id = $_cache_dir.sha1($_cache_id.$_compile_id.$_template->source->uid).'.lock';
         $cached->filepath = $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
         $cached->timestamp = @filemtime($cached->filepath);
         $cached->exists = !!$cached->timestamp;
@@ -198,25 +199,28 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         }
         return $_count;
     }
-    
+
     public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
-        $lock_file = $cached->filepath . '.lock';
-        clearstatcache(false, $lock_file);
-        $t = @filemtime($lock_file);
-        return $t && time() - $t > $smarty->locking_timeout;
+        if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
+            clearstatcache(true, $cached->lock_id);
+        } else {
+            clearstatcache();
+        }
+        $t = @filemtime($cached->lock_id);
+        return $t && (time() - $t < $smarty->locking_timeout);
     }
-    
+
     public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
-        $lock_file = $cached->filepath . '.lock';
-        touch($lock_file);
+        $cached->is_locked = true;
+        touch($cached->lock_id);
     }
-    
+
     public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
-        $lock_file = $cached->filepath . '.lock';
-        @unlink($lock_file);
+        $cached->is_locked = false;
+        @unlink($cached->lock_id);
     }
 }
 

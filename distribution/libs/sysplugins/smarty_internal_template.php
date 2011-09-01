@@ -622,6 +622,17 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         throw new SmartyException("template property '$property_name' does not exist.");
     }
 
+    /**
+     * Template data object destrutor
+     *
+     */
+    public function __destruct()
+    {
+        if ($this->smarty->cache_locking && isset($this->cached) && $this->cached->is_locked) {
+            $this->cached->handler->releaseLock($this->smarty, $this->cached);
+        }
+    }
+
 }
 
 ?>

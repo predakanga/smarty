@@ -6,7 +6,7 @@
    <title>IMPORTANT NOTICE</title>
    <para>
     <varname>{include_php}</varname> is deprecated from Smarty, use registered plugins to properly insulate presentation from the application code.
-    As of Smarty 3.1 the <varname>{php}</varname> tags are only available from <link linkend="bc">SmartyBC</link>.
+    As of Smarty 3.1 the <varname>{include_php}</varname> tags are only available from <link linkend="bc">SmartyBC</link>.
    </para>
  </note>
 

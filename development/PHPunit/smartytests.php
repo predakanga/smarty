@@ -60,6 +60,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->error_reporting = null;
         $smarty->error_unassigned = true;
         $smarty->caching_type = 'file';
+        $smarty->cache_locking = true;
     }
 
     public static function init()

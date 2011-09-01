@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+01/09/2011
+- update of cache locking
+
 30/08/2011
 - added locking mechanism to CacheResource API (implemented with File and KeyValueStores)
 

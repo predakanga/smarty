@@ -385,22 +385,22 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $config_read_hidden = false;
 
     /**#@-*/
-    
+
     /**#@+
     * resource locking
     */
-    
+
     /**
      * Controls whether cache resources should emply locking mechanism
      * @var boolean
      */
-    public $locking = false;
+    public $cache_locking = false;
     /**
      * seconds to wait for acquiring a lock before ignoring the write lock
      * @var float
      */
     public $locking_timeout = 10;
-    
+
     /**#@-*/
 
     /**
