@@ -50,7 +50,16 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
             $_compile_id = '';
         }
         $_cache_dir = $_template->smarty->getCacheDir();
-        $cached->lock_id = $_cache_dir.sha1($_cache_id.$_compile_id.$_template->source->uid).'.lock';
+        if ($_template->smarty->cache_locking) {
+            // create locking file name
+            // relative file name?
+            if (!preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_cache_dir)) {
+                $_lock_dir = getcwd().$_cache_dir;
+            } else {
+                $_lock_dir = $_cache_dir;
+            }
+            $cached->lock_id = $_lock_dir.sha1($_cache_id.$_compile_id.$_template->source->uid).'.lock';
+        }
         $cached->filepath = $_cache_dir . $_cache_id . $_compile_id . $_filepath . '.' . basename($_source_file_path) . '.php';
         $cached->timestamp = @filemtime($cached->filepath);
         $cached->exists = !!$cached->timestamp;

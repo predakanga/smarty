@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+02/09/2011
+- bugfix cache lock file must use absolute filepath
+
 01/09/2011
 - update of cache locking
 
