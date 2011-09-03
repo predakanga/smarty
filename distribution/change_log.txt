@@ -1,4 +1,10 @@
 ﻿===== Smarty 3.1-DEV  =====
+03/09/2011
+- bugfix createTemplate() must default to cache_id and compile_id of Smarty object
+- bugfix Smarty_CacheResource_KeyValueStore must include $source->uid in cache filepath to keep templates with same
+  name but different folders seperated
+- added cacheresource.apc.php example in demo folder
+
 02/09/2011
 - bugfix cache lock file must use absolute filepath
 

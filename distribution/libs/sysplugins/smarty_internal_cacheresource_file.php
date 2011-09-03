@@ -209,6 +209,13 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         return $_count;
     }
 
+    /**
+     * Check is cache is locked for this template
+     *
+     * @param Smarty $smarty Smarty object
+     * @param Smarty_Template_Cached $cached cached object
+     * @return booelan true or false if cache is locked
+     */
     public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
         if (version_compare(PHP_VERSION, '5.3.0', '>=')) {
@@ -220,12 +227,24 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         return $t && (time() - $t < $smarty->locking_timeout);
     }
 
+    /**
+     * Lock cache for this template
+     *
+     * @param Smarty $smarty Smarty object
+     * @param Smarty_Template_Cached $cached cached object
+     */
     public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
         $cached->is_locked = true;
         touch($cached->lock_id);
     }
 
+    /**
+     * Unlock cache for this template
+     *
+     * @param Smarty $smarty Smarty object
+     * @param Smarty_Template_Cached $cached cached object
+     */
     public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
         $cached->is_locked = false;

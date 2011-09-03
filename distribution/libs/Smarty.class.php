@@ -228,11 +228,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $compile_check = true;
     /**
-    * locking concurrent compiles
-    * @var boolean
-    */
-    public $compile_locking = true;
-    /**
     * use sub dirs for compiled/cached files?
     * @var boolean
     */
@@ -390,6 +385,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * resource locking
     */
 
+    /**
+    * locking concurrent compiles
+    * @var boolean
+    */
+    public $compile_locking = true;
     /**
      * Controls whether cache resources should emply locking mechanism
      * @var boolean
@@ -1122,6 +1122,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
         } else {
             $data = null;
         }
+        // default to cache_id and compile_id of Smarty object
+        $cache_id = $cache_id === null ? $this->cache_id : $cache_id;
+        $compile_id = $compile_id === null ? $this->compile_id : $compile_id;
         // already in template cache?
         $_templateId =  sha1($template . $cache_id . $compile_id);
         if ($do_clone) {

@@ -53,7 +53,8 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      */
     public function populate(Smarty_Template_Cached $cached, Smarty_Internal_Template $_template)
     {
-        $cached->filepath = $this->sanitize($cached->source->name)
+        $cached->filepath = $_template->source->uid
+                . '#' . $this->sanitize($cached->source->name)
                 . '#' . $this->sanitize($cached->cache_id)
                 . '#' . $this->sanitize($cached->compile_id);
 
@@ -152,7 +153,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
      */
     public function clear(Smarty $smarty, $resource_name, $cache_id, $compile_id, $exp_time)
     {
-        $cid = $this->buildCachedFilepath($resource_name, $cache_id, $compile_id);
+        $cid = $this->buildCachedFilepath($smarty,$resource_name, $cache_id, $compile_id);
         $this->delete(array($cid));
         $this->invalidate($cid, $resource_name, $cache_id, $compile_id);
         return -1;
@@ -161,15 +162,25 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     /**
      * Get system filepath to cached file.
      *
+     * @param Smarty $smarty        Smarty object
      * @param string $resource_name template name
      * @param string $cache_id      cache id
      * @param string $compile_id    compile id
      * @return string filepath of cache file
      * @uses sanitize() on $resource_name and $compile_id to avoid bad segments
      */
-    protected function buildCachedFilepath($resource_name, $cache_id, $compile_id)
+    protected function buildCachedFilepath(Smarty $smarty, $resource_name, $cache_id, $compile_id)
     {
-        return $this->sanitize($resource_name) . '#' . $this->sanitize($cache_id) . '#' . $this->sanitize($compile_id);
+        $uid = '';
+        if (isset($resource_name)) {
+            $tpl = new $smarty->template_class($resource_name, $smarty);
+            if ($tpl->source->exists) {
+                $uid = $tpl->source->uid;
+             }
+            // remove from template cache
+            unset($smarty->template_objects[sha1($tpl->template_resource . $tpl->cache_id . $tpl->compile_id)]);
+        }
+        return $uid . '#' . $this->sanitize($resource_name) . '#' . $this->sanitize($cache_id) . '#' . $this->sanitize($compile_id);
     }
 
     /**
@@ -359,14 +370,26 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
         return $t;
     }
 
+    /**
+     * Check is cache is locked for this template
+     *
+     * @param Smarty $smarty Smarty object
+     * @param Smarty_Template_Cached $cached cached object
+     * @return booelan true or false if cache is locked
+     */
     public function hasLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
-        // TODO: sha1() would be executed quite often here, some sort of cache?
         $key = 'LOCK#' . $cached->filepath;
         $data = $this->read(array($key));
         return $data && time() - $data[$key] < $smarty->locking_timeout;
     }
 
+    /**
+     * Lock cache for this template
+     *
+     * @param Smarty $smarty Smarty object
+     * @param Smarty_Template_Cached $cached cached object
+     */
     public function acquireLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
         $cached->is_locked = true;
@@ -374,6 +397,12 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
         $this->write(array($key => time()), $smarty->locking_timeout);
     }
 
+    /**
+     * Unlock cache for this template
+     *
+     * @param Smarty $smarty Smarty object
+     * @param Smarty_Template_Cached $cached cached object
+     */
     public function releaseLock(Smarty $smarty, Smarty_Template_Cached $cached)
     {
         $cached->is_locked = false;
