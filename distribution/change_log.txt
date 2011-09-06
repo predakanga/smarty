@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+06/09/2011
+- bugfix  isset() did not work in templates on config variables
+
 03/09/2011
 - bugfix createTemplate() must default to cache_id and compile_id of Smarty object
 - bugfix Smarty_CacheResource_KeyValueStore must include $source->uid in cache filepath to keep templates with same
