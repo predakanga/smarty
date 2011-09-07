@@ -9,6 +9,13 @@
        <para>
         Cache locking is disabled by default. To enable it set <varname>$cache_locking</varname> to &true;. 
        </para>
+       <note>
+        <title>Note</title>
+        <para>
+         Locking itself consumes resources. Use this option wisely. Identify the pages with a long generation time
+         and only enable cache locking for those resources.
+        </para>
+       </note>
       <para>
        See also
        <link linkend="variable.locking.timeout"><varname>$locking_timeout</varname></link>
