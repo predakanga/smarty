@@ -959,7 +959,14 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP. {
                 if (count(p) == 0) {
                     $this->compiler->trigger_template_error ('Illegal number of paramer in "isset()"');
                 }
-                $isset_par=str_replace("')->value","',null,true,false)->value",implode(',',p));
+                $par = implode(',',p);
+                if (strncasecmp($par,'$_smarty_tpl->getConfigVariable',strlen('$_smarty_tpl->getConfigVariable')) === 0) {
+                    $this->prefix_number++;
+                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.str_replace(')',', false)',$par).';?>';
+                    $isset_par = '$_tmp'.$this->prefix_number;
+                } else {
+                    $isset_par=str_replace("')->value","',null,true,false)->value",$par);
+                }
                 res = f . "(". $isset_par .")";
             } elseif (in_array($func_name,array('empty','reset','current','end','prev','next'))){
                 if (count(p) != 1) {
