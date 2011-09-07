@@ -3,9 +3,8 @@
      <sect1 id="variable.cache.locking">
       <title>$cache_locking</title>
        <para>
-        Cache locking is a feature available in Smarty >= 3.1. It creates cache locks when updating templates in the cache
-        to avoid parallel updates of same template on heavily loaded systems or where a cache updated needs longer time
-        for example because of database access.
+        Cache locking avoids concurrent cache generation. This means resource intensive pages can be generated only once, 
+        even if they've been requested multiple times in the same moment.
        </para>
        <para>
         Cache locking is disabled by default. To enable it set <varname>$cache_locking</varname> to &true;. 
