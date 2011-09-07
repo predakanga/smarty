@@ -189,9 +189,8 @@ anymore. As the functionality had not been ported to Smarty 3.0.x
 properly, it has been dropped from 3.1 completely.
 
 Locking facilities have been implemented to avoid concurrent cache 
-generation. Locking comes with a bit of an overhead. Use this option
-only when necessary, i.e. for scripts with a high execution time.
-Enable cache locking by setting $smarty->cache_locking = true;
+generation. Enable cache locking by setting 
+$smarty->cache_locking = true;
 
   Relative Paths in Templates (File-Resource)
 
