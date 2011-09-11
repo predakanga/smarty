@@ -4,14 +4,14 @@ these changes must reflect on the documentation at some point…
 
 ## Undocumented ##
 
-* unregisterObject() documented, but not implemented?!
+* - unregisterObject() documented, but not implemented?!  now implemented
 * - $merge_compiled_includes
 * $error_unassigned
-* $compile_locking
-* $security_policy
+* - $compile_locking
+* - $security_policy  is an internal property whivh needs no documentation
 * - $allow_php_templates
-* $direct_access_security
-* $smarty_debug_id
+* - $direct_access_security
+* - $smarty_debug_id
 * - $default_config_type
 * $_file_perms
 * $_dir_perms
@@ -27,7 +27,7 @@ these changes must reflect on the documentation at some point…
 ## Syntax ##
 
 * - {block ... hide} option to supress block if no child is defined
-* {setfilter} tag 
+* - {setfilter} tag 
 * - {break} {continue} are present but currently not documented
 
 
@@ -62,7 +62,7 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * - Smarty:: set/get/addTemplateDir()
 * - Smarty::$default_template_handler_func()
 * - Smarty::$default_config_handler_func()
-* Smarty::registerDefaultPluginHandler() [not implemented yet]
+* - Smarty::registerDefaultPluginHandler()
 * - Smarty::$use_include_path
 * - template_dir identification: {include file="[foo]bar.tpl"} see http://code.google.com/p/smarty-php/source/detail?r=3947
 * - config uses same Smarty_Resource instances as template
@@ -71,13 +71,13 @@ http://www.smarty.net/docs/en/template.resources.tpl
 * - eval: and string: resources in conjunction with extend:
 * - need for proper compile_id when using dynamic inheritance {extends file="{$parent}"}
 * - SmartySecurity::$allowed_modifiers, SmartySecurity::$disabled_modifiers, SmartySecurity::$allowed_tags, SmartySecurity::$disabled_tags
-* Block Plugins output on opening tag
-* SmartyBC for BackwardCompatibility
+* - Block Plugins output on opening tag
+* - SmartyBC for BackwardCompatibility
 * - {php} and {include_php} with SmartyBC only
 * - $smarty->compile_check = Smarty:.COMPILECHECK_CACHEMISS
 * - Smarty::$escape_html 
 * - Smarty_Internal_Templatebase::registerClass()
-* Smarty::loadPlugin() - really public?
+* - Smarty::loadPlugin() - really public?  no
 * - nature of include_path handling
 
 
