@@ -162,6 +162,7 @@
 <!ENTITY designers.language-builtin-functions.language-function-for SYSTEM '../current_lang/designers/language-builtin-functions/language-function-for.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-insert SYSTEM '../current_lang/designers/language-builtin-functions/language-function-insert.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-section SYSTEM '../current_lang/designers/language-builtin-functions/language-function-section.xml'>
+<!ENTITY designers.language-builtin-functions.language-function-setfilter SYSTEM '../current_lang/designers/language-builtin-functions/language-function-setfilter.xml'>
 <!ENTITY designers.language-builtin-functions.language-function-config-load SYSTEM '../current_lang/designers/language-builtin-functions/language-function-config-load.xml'>
 <!ENTITY designers.language-modifiers.language-modifier-strip SYSTEM '../current_lang/designers/language-modifiers/language-modifier-strip.xml'>
 <!ENTITY designers.language-modifiers.language-modifier-lower SYSTEM '../current_lang/designers/language-modifiers/language-modifier-lower.xml'>
