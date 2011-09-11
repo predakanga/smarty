@@ -120,7 +120,7 @@
 																<div class="method-definition">
 											<span class="method-result">booelan</span>
 										<a href="#process" title="details" class="method-name">process</a>
-											(<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>, [<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Cached.html">Smarty_Template_Cached</a></span>&nbsp;<span class="var-name">$cached</span> = <span class="var-default">null</span>])
 									</div>
 																<div class="method-definition">
 											<span class="method-result">boolean</span>
@@ -182,7 +182,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">clear</span> (line <span class="line-number">176</span>)
+		<span class="method-title">clear</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -230,7 +230,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">clearAll</span> (line <span class="line-number">160</span>)
+		<span class="method-title">clearAll</span> (line <span class="line-number">166</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -500,7 +500,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">process</span> (line <span class="line-number">114</span>)
+		<span class="method-title">process</span> (line <span class="line-number">115</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -515,13 +515,16 @@
 		<span class="method-name">
 			process
 		</span>
-					(<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>, [<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Cached.html">Smarty_Template_Cached</a></span>&nbsp;<span class="var-name">$cached</span> = <span class="var-default">null</span>])
 			</div>
 	
 			<ul class="parameters">
 					<li>
 				<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>
 				<span class="var-name">$_template</span><span class="var-description">: template object</span>			</li>
+					<li>
+				<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Cached.html">Smarty_Template_Cached</a></span>
+				<span class="var-name">$cached</span><span class="var-description">: cached object</span>			</li>
 				</ul>
 		
 			<hr class="separator" />
@@ -590,7 +593,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">writeCachedContent</span> (line <span class="line-number">141</span>)
+		<span class="method-title">writeCachedContent</span> (line <span class="line-number">147</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -630,13 +633,18 @@
 									<!-- =========== Summary =========== -->
 					<p>Inherited From <span class="classname"><a href="../../Smarty/Cacher/Smarty_CacheResource.html">Smarty_CacheResource</a></span></p>
 					<blockquote>
+													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodacquireLock">Smarty_CacheResource::acquireLock()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodclear">Smarty_CacheResource::clear()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodclearAll">Smarty_CacheResource::clearAll()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodgetCachedContent">Smarty_CacheResource::getCachedContent()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodhasLock">Smarty_CacheResource::hasLock()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodinvalidLoadedCache">Smarty_CacheResource::invalidLoadedCache()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodload">Smarty_CacheResource::load()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodlocked">Smarty_CacheResource::locked()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodpopulate">Smarty_CacheResource::populate()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodpopulateTimestamp">Smarty_CacheResource::populateTimestamp()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodprocess">Smarty_CacheResource::process()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodreleaseLock">Smarty_CacheResource::releaseLock()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Cacher/Smarty_CacheResource.html#methodwriteCachedContent">Smarty_CacheResource::writeCachedContent()</a></span><br>
 											</blockquote>
 										
@@ -645,7 +653,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 25 Jun 2011 16:08:05 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 11 Sep 2011 11:03:03 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

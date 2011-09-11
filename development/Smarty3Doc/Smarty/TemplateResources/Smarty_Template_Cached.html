@@ -28,7 +28,7 @@
 				<li><span class="field">author:</span> Rodney Rehm</li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_cacheresource.php.html">/libs/sysplugins/smarty_cacheresource.php</a> (line <span class="field">147</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_cacheresource.php.html">/libs/sysplugins/smarty_cacheresource.php</a> (line <span class="field">199</span>)
 		</p>
 		
 				
@@ -51,13 +51,17 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																																								<div class="var-title">
+																																																																																																																<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$cache_id" title="details" class="var-name">$cache_id</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$compile_id" title="details" class="var-name">$compile_id</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$content" title="details" class="var-name">$content</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">boolean</span>
@@ -70,6 +74,14 @@
 																<div class="var-title">
 					<span class="var-type"><a href="../../Smarty/Cacher/Smarty_CacheResource.html">Smarty_CacheResource</a></span>
 					<a href="#$handler" title="details" class="var-name">$handler</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">bool</span>
+					<a href="#$is_locked" title="details" class="var-name">$is_locked</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">string</span>
+					<a href="#$lock_id" title="details" class="var-name">$lock_id</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">boolean</span>
@@ -132,13 +144,13 @@
 					</div>
 		<div class="info-box-body">
 			<a name="var$cache_id" id="$cache_id"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$cache_id</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">194</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">252</span>)
 		</span>
 	</div>
 
@@ -154,18 +166,40 @@
 
 </div>
 <a name="var$compile_id" id="$compile_id"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$compile_id</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">188</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">246</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">Template Compile Id (Smarty_Internal_Template::$compile_id)</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$content" id="$content"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$content</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">210</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Source Content</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -182,7 +216,7 @@
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$exists</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">164</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">222</span>)
 		</span>
 	</div>
 
@@ -204,7 +238,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$filepath</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">152</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">204</span>)
 		</span>
 	</div>
 
@@ -226,12 +260,56 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Smarty/Cacher/Smarty_CacheResource.html">Smarty_CacheResource</a></span>
 			<span class="var-name">$handler</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">182</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">240</span>)
 		</span>
 	</div>
 
 	<!-- ========== Info from phpDoc block ========= -->
 <p class="short-description">CacheResource Handler</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$is_locked" id="$is_locked"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">bool</span>
+			<span class="var-name">$is_locked</span>
+			 = <span class="var-default"> false</span>			(line <span class="line-number">264</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">flag that cache is locked by this instance</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$lock_id" id="$lock_id"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">string</span>
+			<span class="var-name">$lock_id</span>
+			 = <span class="var-default"> null</span>			(line <span class="line-number">258</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">Id for cache locking</p>
 	<ul class="tags">
 				<li><span class="field">access:</span> public</li>
 			</ul>
@@ -248,7 +326,7 @@
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$processed</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">176</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">234</span>)
 		</span>
 	</div>
 
@@ -270,7 +348,7 @@
 		<span class="var-title">
 			<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Source.html">Smarty_Template_Source</a></span>
 			<span class="var-name">$source</span>
-			 = <span class="var-default"> null</span>			(line <span class="line-number">200</span>)
+			 = <span class="var-default"> null</span>			(line <span class="line-number">270</span>)
 		</span>
 	</div>
 
@@ -292,7 +370,7 @@
 		<span class="var-title">
 			<span class="var-type">integer</span>
 			<span class="var-name">$timestamp</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">158</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">216</span>)
 		</span>
 	</div>
 
@@ -314,7 +392,7 @@
 		<span class="var-title">
 			<span class="var-type">boolean</span>
 			<span class="var-name">$valid</span>
-			 = <span class="var-default"> false</span>			(line <span class="line-number">170</span>)
+			 = <span class="var-default"> false</span>			(line <span class="line-number">228</span>)
 		</span>
 	</div>
 
@@ -349,7 +427,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">207</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">277</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -378,7 +456,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">write</span> (line <span class="line-number">259</span>)
+		<span class="method-title">write</span> (line <span class="line-number">355</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -413,7 +491,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 25 Jun 2011 16:08:04 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 11 Sep 2011 11:03:01 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

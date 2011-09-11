@@ -114,19 +114,27 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																				<div class="var-title">
+												<div class="var-title">
+					static <span class="var-type">array</span>
+					<a href="#$compileds" title="details" class="var-name">$compileds</a>
+				</div>
+																								<div class="var-title">
 					static <span class="var-type">array</span>
 					<a href="#$resources" title="details" class="var-name">$resources</a>
 				</div>
 																<div class="var-title">
 					static <span class="var-type">array</span>
+					<a href="#$sources" title="details" class="var-name">$sources</a>
+				</div>
+																<div class="var-title">
+					static <span class="var-type">array</span>
 					<a href="#$sysplugins" title="details" class="var-name">$sysplugins</a>
 				</div>
-																																				<div class="var-title">
+																																												<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$compiler_class" title="details" class="var-name">$compiler_class</a>
 				</div>
-																																<div class="var-title">
+																																								<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$template_lexer_class" title="details" class="var-name">$template_lexer_class</a>
 				</div>
@@ -156,7 +164,7 @@
 										<a href="#config" title="details" class="method-name">config</a>
 											(<span class="var-type"></span>&nbsp;<span class="var-name">$_config</span>)
 									</div>
-																																<div class="method-definition">
+																																								<div class="method-definition">
 					static 						<span class="method-result"><a href="../../Smarty/TemplateResources/Smarty_Resource.html">Smarty_Resource</a></span>
 										<a href="#load" title="details" class="method-name">load</a>
 											(<span class="var-type"><a href="../../Smarty/Template/Smarty.html">Smarty</a></span>&nbsp;<span class="var-name">$smarty</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$resource_type</span>)
@@ -173,6 +181,11 @@
 											(<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Source.html">Smarty_Template_Source</a></span>&nbsp;<span class="var-name">$source</span>, [<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span> = <span class="var-default">null</span>])
 									</div>
 																								<div class="method-definition">
+											<span class="method-result">bool</span>
+										<a href="#fileExists" title="details" class="method-name">fileExists</a>
+											(<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Source.html">Smarty_Template_Source</a></span>&nbsp;<span class="var-name">$source</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>)
+									</div>
+																<div class="method-definition">
 											<span class="method-result">string</span>
 										<a href="#getBasename" title="details" class="method-name">getBasename</a>
 											(<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Source.html">Smarty_Template_Source</a></span>&nbsp;<span class="var-name">$source</span>)
@@ -215,14 +228,36 @@
 							
 					</div>
 		<div class="info-box-body">
-			<a name="var$resources" id="$resources"><!-- --></A>
+			<a name="var$compileds" id="$compileds"><!-- --></A>
 <div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
 			static <span class="var-type">array</span>
+			<span class="var-name">$compileds</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">28</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">cache for Smarty_Template_Compiled instances</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$resources" id="$resources"><!-- --></A>
+<div class="evenrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">array</span>
 			<span class="var-name">$resources</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">24</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">33</span>)
 		</span>
 	</div>
 
@@ -237,6 +272,28 @@
 		
 
 </div>
+<a name="var$sources" id="$sources"><!-- --></A>
+<div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			static <span class="var-type">array</span>
+			<span class="var-name">$sources</span>
+			 = <span class="var-default">array()</span>			(line <span class="line-number">23</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">cache for Smarty_Template_Source instances</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
 <a name="var$sysplugins" id="$sysplugins"><!-- --></A>
 <div class="evenrow">
 
@@ -244,7 +301,7 @@
 		<span class="var-title">
 			static <span class="var-type">array</span>
 			<span class="var-name">$sysplugins</span>
-			 = <span class="var-default">array(<br />        'file' =&gt; true,<br />        'string' =&gt; true,<br />        'extends' =&gt; true,<br />        'stream' =&gt; true,<br />        'eval' =&gt; true<br />    )</span>			(line <span class="line-number">29</span>)
+			 = <span class="var-default">array(<br />        'file' =&gt; true,<br />        'string' =&gt; true,<br />        'extends' =&gt; true,<br />        'stream' =&gt; true,<br />        'eval' =&gt; true,<br />        'php' =&gt; true<br />    )</span>			(line <span class="line-number">38</span>)
 		</span>
 	</div>
 
@@ -266,7 +323,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$compiler_class</span>
-			 = <span class="var-default"> 'Smarty_Internal_SmartyTemplateCompiler'</span>			(line <span class="line-number">41</span>)
+			 = <span class="var-default"> 'Smarty_Internal_SmartyTemplateCompiler'</span>			(line <span class="line-number">51</span>)
 		</span>
 	</div>
 
@@ -288,7 +345,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$template_lexer_class</span>
-			 = <span class="var-default"> 'Smarty_Internal_Templatelexer'</span>			(line <span class="line-number">47</span>)
+			 = <span class="var-default"> 'Smarty_Internal_Templatelexer'</span>			(line <span class="line-number">57</span>)
 		</span>
 	</div>
 
@@ -310,7 +367,7 @@
 		<span class="var-title">
 			<span class="var-type">string</span>
 			<span class="var-name">$template_parser_class</span>
-			 = <span class="var-default"> 'Smarty_Internal_Templateparser'</span>			(line <span class="line-number">53</span>)
+			 = <span class="var-default"> 'Smarty_Internal_Templateparser'</span>			(line <span class="line-number">63</span>)
 		</span>
 	</div>
 
@@ -345,7 +402,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method config</span> (line <span class="line-number">394</span>)
+		<span class="method-title">static method config</span> (line <span class="line-number">432</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -376,7 +433,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method load</span> (line <span class="line-number">293</span>)
+		<span class="method-title">static method load</span> (line <span class="line-number">320</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -410,7 +467,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">static method source</span> (line <span class="line-number">360</span>)
+		<span class="method-title">static method source</span> (line <span class="line-number">389</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -449,7 +506,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">buildFilepath</span> (line <span class="line-number">133</span>)
+		<span class="method-title">buildFilepath</span> (line <span class="line-number">143</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -479,11 +536,44 @@
 		
 			
 	</div>
-<a name="methodgetBasename" id="getBasename"><!-- --></a>
+<a name="methodfileExists" id="fileExists"><!-- --></a>
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getBasename</span> (line <span class="line-number">281</span>)
+		<span class="method-title">fileExists</span> (line <span class="line-number">295</span>)
+	</div> 
+	
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">test is file exists and save timestamp</p>
+	<ul class="tags">
+				<li><span class="field">return:</span> true if file exists</li>
+				<li><span class="field">access:</span> protected</li>
+			</ul>
+	
+	<div class="method-signature">
+		<span class="method-result">bool</span>
+		<span class="method-name">
+			fileExists
+		</span>
+					(<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Source.html">Smarty_Template_Source</a></span>&nbsp;<span class="var-name">$source</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$file</span>)
+			</div>
+	
+			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Source.html">Smarty_Template_Source</a></span>
+				<span class="var-name">$source</span><span class="var-description">: source object</span>			</li>
+					<li>
+				<span class="var-type">string</span>
+				<span class="var-name">$file</span><span class="var-description">: file name</span>			</li>
+				</ul>
+		
+			
+	</div>
+<a name="methodgetBasename" id="getBasename"><!-- --></a>
+<div class="oddrow">
+	
+	<div class="method-header">
+		<span class="method-title">getBasename</span> (line <span class="line-number">308</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -538,10 +628,10 @@
 				</ul>
 	</div>
 <a name="methodgetContent" id="getContent"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getContent</span> (line <span class="line-number">64</span>)
+		<span class="method-title">getContent</span> (line <span class="line-number">74</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -600,13 +690,17 @@
 				<a href="../../Smarty/TemplateResources/Smarty_Internal_Resource_Stream.html#methodgetContent">Smarty_Internal_Resource_Stream::getContent()</a>
 								: Load template's source from stream into current template object
 							</li>
+					<li>
+				<a href="../../Smarty/TemplateResources/Smarty_Internal_Resource_PHP.html#methodgetContent">Smarty_Internal_Resource_PHP::getContent()</a>
+								: Load template's source from file into current template object
+							</li>
 				</ul>
 	</div>
 <a name="methodpopulate" id="populate"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">populate</span> (line <span class="line-number">72</span>)
+		<span class="method-title">populate</span> (line <span class="line-number">82</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -669,13 +763,17 @@
 				<a href="../../Smarty/TemplateResources/Smarty_Internal_Resource_Stream.html#methodpopulate">Smarty_Internal_Resource_Stream::populate()</a>
 								: populate Source Object with meta data from Resource
 							</li>
+					<li>
+				<a href="../../Smarty/TemplateResources/Smarty_Internal_Resource_PHP.html#methodpopulate">Smarty_Internal_Resource_PHP::populate()</a>
+								: populate Source Object with meta data from Resource
+							</li>
 				</ul>
 	</div>
 <a name="methodpopulateCompiledFilepath" id="populateCompiledFilepath"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">populateCompiledFilepath</span> (line <span class="line-number">90</span>)
+		<span class="method-title">populateCompiledFilepath</span> (line <span class="line-number">100</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -716,10 +814,10 @@
 				</ul>
 	</div>
 <a name="methodpopulateTimestamp" id="populateTimestamp"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">populateTimestamp</span> (line <span class="line-number">79</span>)
+		<span class="method-title">populateTimestamp</span> (line <span class="line-number">89</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -758,6 +856,10 @@
 				<a href="../../Smarty/TemplateResources/Smarty_Internal_Resource_Registered.html#methodpopulateTimestamp">Smarty_Internal_Resource_Registered::populateTimestamp()</a>
 								: populate Source Object with timestamp and exists from Resource
 							</li>
+					<li>
+				<a href="../../Smarty/TemplateResources/Smarty_Internal_Resource_PHP.html#methodpopulateTimestamp">Smarty_Internal_Resource_PHP::populateTimestamp()</a>
+								: populate Source Object with timestamp and exists from Resource
+							</li>
 				</ul>
 	</div>
 						
@@ -766,7 +868,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 25 Jun 2011 16:08:39 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 11 Sep 2011 11:03:41 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
