@@ -513,6 +513,18 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     }
 
     /**
+     * unregister an object
+     *
+     * @param string $name object name
+     * @throws SmartyException if no such object is found
+     */
+    public function unregisterObject($name)
+    {
+        unset($this->smarty->registered_objects[$name]);
+        return;
+    }
+
+    /**
      * Registers static classes to be used in templates
      *
      * @param string $class name of template class

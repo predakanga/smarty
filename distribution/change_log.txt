@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.1-DEV  =====
+11/09/2011
+- added  unregisterObject() methode
+
 06/09/2011
 - bugfix  isset() did not work in templates on config variables
 
