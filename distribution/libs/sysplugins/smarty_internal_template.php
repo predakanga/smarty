@@ -531,10 +531,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             // thus rewind() and valid() methods may not be present
             return iterator_count($value->getIterator());
         } elseif ($value instanceof Iterator) {
-            $value->rewind();
-            if ($value->valid()) {
-                return iterator_count($value);
-            }
+            return iterator_count($value);
         } elseif ($value instanceof PDOStatement) {
             return $value->rowCount();
         } elseif ($value instanceof Traversable) {
