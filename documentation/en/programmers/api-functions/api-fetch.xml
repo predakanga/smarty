@@ -24,7 +24,6 @@
    section</link> for more information.
   </para>
   &parameter.compileid;
-
   <para>
    <example>
     <title>fetch()</title>

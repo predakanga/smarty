@@ -42,19 +42,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public $cache_lifetime = null;
     /**
-     * Class name
-     * @var string
-     */
-    public $cacher_class = null;
-    /**
-     * caching type
-     *
-     * Must be an element of $cache_resource_types.
-     *
-     * @var string
-     */
-    public $caching_type = null;
-    /**
      * Template resource
      * @var string
      */
@@ -101,6 +88,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @var array
      */
     public $used_tags = array();
+    /**
+     * internal flag to allow relative path in child template blocks
+     * @var bool
+     */
+    public $allow_relative_path = false;
 
     /**
      * Create template data object
@@ -145,7 +137,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function mustCompile()
     {
         if (!$this->source->exists) {
-            throw new SmartyException("Unable to load template {$this->source->type} '{$this->source->name}'");
+            if ($this->parent instanceof Smarty_Internal_Template) {
+                $parent_resource = " in '$this->parent->template_resource}'";
+            } else {
+                $parent_resource = '';
+            }
+            throw new SmartyException("Unable to load template {$this->source->type} '{$this->source->name}'{$parent_resource}");
         }
         if ($this->mustCompile === null) {
             $this->mustCompile = (!$this->source->uncompiled && ($this->smarty->force_compile || $this->source->recompiled || $this->compiled->timestamp === false ||
@@ -272,7 +269,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 $tpl->tpl_vars[$_key] = new Smarty_variable($_val);
             }
         }
-        return $tpl->fetch(null, null, null, null, false, false);
+        return $tpl->fetch(null, null, null, null, false, false, true);
     }
 
     /**
@@ -589,7 +586,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 // cache template object under a unique ID
                 // do not cache eval resources
                 if ($this->source->type != 'eval') {
-                    $this->smarty->template_objects[sha1($this->template_resource . $this->cache_id . $this->compile_id)] = $this;
+                    $this->smarty->template_objects[sha1(join(DIRECTORY_SEPARATOR, $this->smarty->getTemplateDir()).$this->template_resource . $this->cache_id . $this->compile_id)] = $this;
                 }
                 return $this->source;
 

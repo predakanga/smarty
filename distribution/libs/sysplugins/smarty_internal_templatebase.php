@@ -26,9 +26,10 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      * @param object $parent            next higher level of Smarty variables
      * @param bool   $display           true: display, false: fetch
      * @param bool   $merge_tpl_vars    if true parent template variables merged in to local scope
+     * @param bool   $no_output_filter  if true do not run output filter
      * @return string rendered template output
      */
-    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true)
+    public function fetch($template = null, $cache_id = null, $compile_id = null, $parent = null, $display = false, $merge_tpl_vars = true, $no_output_filter = false)
     {
         if ($template === null && $this instanceof $this->template_class) {
             $template = $this;
@@ -106,6 +107,8 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                 }
             }
         }
+        // must reset merge template date
+        $_template->smarty->merged_templates_func = array();
         // get rendered template
         // disable caching for evaluated code
         if ($_template->source->recompiled) {
@@ -113,7 +116,12 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         }
         // checks if template exists
         if (!$_template->source->exists) {
-            throw new SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'");
+            if ($_template->parent instanceof Smarty_Internal_Template) {
+                $parent_resource = " in '{$_template->parent->template_resource}'";
+            } else {
+                $parent_resource = '';
+            }
+            throw new SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'{$parent_resource}");
         }
         // read from cache or render
         if (!($_template->caching == Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == Smarty::CACHING_LIFETIME_SAVED) || !$_template->cached->valid) {
@@ -264,7 +272,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                 Smarty_Internal_Debug::end_cache($_template);
             }
         }
-        if ((!$this->caching || $_template->source->recompiled) && (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))) {
+        if ((!$this->caching || $_template->source->recompiled) && !$no_output_filter && (isset($this->smarty->autoload_filters['output']) || isset($this->smarty->registered_filters['output']))) {
             $_output = Smarty_Internal_Filter_Handler::runFilter('output', $_output, $_template);
         }
         if (isset($this->error_reporting)) {
@@ -651,6 +659,16 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     }
 
     /**
+     * preg_replace callback to convert camelcase getter/setter to underscore property names
+     *
+     * @param string $match match string
+     * @return string  replacemant
+     */
+    private function replaceCamelcase($match) {
+        return "_" . strtolower($match[1]);
+    }
+
+    /**
      * Handle unknown class methods
      *
      * @param string $name unknown method-name
@@ -658,13 +676,10 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      */
     public function __call($name, $args)
     {
-        static $camel_func;
         // methode of Smarty object?
         if (method_exists($this->smarty, $name)) {
             return call_user_func_array(array($this->smarty, $name), $args);
         }
-        if (!isset($camel_func))
-            $camel_func = create_function('$c', 'return "_" . strtolower($c[1]);');
         // see if this is a set/get for a property
         $first3 = strtolower(substr($name, 0, 3));
         if (in_array($first3, array('set', 'get')) && substr($name, 3, 1) !== '_') {
@@ -672,7 +687,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             // lcfirst() not available < PHP 5.3.0, so improvise
             $property_name = strtolower(substr($name, 3, 1)) . substr($name, 4);
             // convert camel case to underscored name
-            $property_name = preg_replace_callback('/([A-Z])/', $camel_func, $property_name);
+            $property_name = preg_replace_callback('/([A-Z])/', array($this,'replaceCamelcase'), $property_name);
             if (property_exists($this, $property_name)) {
                 if ($first3 == 'get')
                     return $this->$property_name;
@@ -689,7 +704,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             }
         }
         // must be unknown
-        throw new SmartyException("Call of unknown function '$name'.");
+        throw new SmartyException("Call of unknown method '$name'.");
     }
 
 }
