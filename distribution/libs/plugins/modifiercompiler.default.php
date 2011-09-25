@@ -25,6 +25,7 @@ function smarty_modifiercompiler_default ($params, $compiler)
         $params[1] = "''";
     }
     for ($i = 1, $cnt = count($params); $i < $cnt; $i++) {
+        $output = preg_replace('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getVariable(\'\1\', null, true, false)',$output);
         $output = '(($tmp = @' . $output . ')===null||$tmp===\'\' ? ' . $params[$i] . ' : $tmp)';
     }
     return $output;

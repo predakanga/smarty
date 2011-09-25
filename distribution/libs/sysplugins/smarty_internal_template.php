@@ -110,6 +110,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public function __construct($template_resource, $smarty, $_parent = null, $_cache_id = null, $_compile_id = null, $_caching = null, $_cache_lifetime = null)
     {
+        // create variable container
+        parent::__construct();
         $this->smarty = &$smarty;
         // Smarty parameter
         $this->cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
@@ -250,10 +252,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } else {
             $tpl = new $this->smarty->template_class($template, $this->smarty, $this, $cache_id, $compile_id, $caching, $cache_lifetime);
         }
-        // get variables from calling scope
-        if ($parent_scope == Smarty::SCOPE_LOCAL) {
-            $tpl->tpl_vars = $this->tpl_vars;
-        } elseif ($parent_scope == Smarty::SCOPE_PARENT) {
+        if ($parent_scope == Smarty::SCOPE_PARENT) {
             $tpl->tpl_vars = &$this->tpl_vars;
         } elseif ($parent_scope == Smarty::SCOPE_GLOBAL) {
             $tpl->tpl_vars = &Smarty::$global_tpl_vars;
@@ -266,7 +265,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (!empty($data)) {
             // set up variable values
             foreach ($data as $_key => $_val) {
-                $tpl->tpl_vars[$_key] = new Smarty_variable($_val);
+                $tpl->tpl_vars->$_key = new Smarty_variable($_val);
             }
         }
         return $tpl->fetch(null, null, null, null, false, false, true);
@@ -290,9 +289,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         $tpl = new $this->smarty->template_class($template, $this->smarty, $this, $cache_id, $compile_id, $caching, $cache_lifetime);
         $tpl->properties['nocache_hash']  = $hash;
         // get variables from calling scope
-        if ($parent_scope == Smarty::SCOPE_LOCAL ) {
-            $tpl->tpl_vars = $this->tpl_vars;
-        } elseif ($parent_scope == Smarty::SCOPE_PARENT) {
+        if ($parent_scope == Smarty::SCOPE_PARENT) {
             $tpl->tpl_vars = &$this->tpl_vars;
         } elseif ($parent_scope == Smarty::SCOPE_GLOBAL) {
             $tpl->tpl_vars = &Smarty::$global_tpl_vars;
@@ -305,7 +302,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (!empty($data)) {
             // set up variable values
             foreach ($data as $_key => $_val) {
-                $tpl->tpl_vars[$_key] = new Smarty_variable($_val);
+                $tpl->tpl_vars->$_key = new Smarty_variable($_val);
             }
         }
         return $tpl;
@@ -457,16 +454,17 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public function createLocalArrayVariable($tpl_var, $nocache = false, $scope = Smarty::SCOPE_LOCAL)
     {
-        if (!isset($this->tpl_vars[$tpl_var])) {
-            $this->tpl_vars[$tpl_var] = new Smarty_variable(array(), $nocache, $scope);
+        $this->tpl_vars->$tpl_var = $this->getVariable($tpl_var, null, true, false);
+        if ($this->tpl_vars->$tpl_var instanceof Undefined_Smarty_Variable) {
+            $this->tpl_vars->$tpl_var = new Smarty_variable(array(), $nocache, $scope);
         } else {
-            $this->tpl_vars[$tpl_var] = clone $this->tpl_vars[$tpl_var];
-            if ($scope != Smarty::SCOPE_LOCAL) {
-                $this->tpl_vars[$tpl_var]->scope = $scope;
-            }
-            if (!(is_array($this->tpl_vars[$tpl_var]->value) || $this->tpl_vars[$tpl_var]->value instanceof ArrayAccess)) {
-                settype($this->tpl_vars[$tpl_var]->value, 'array');
-            }
+            $this->tpl_vars->$tpl_var = clone $this->tpl_vars->$tpl_var;
+        }
+        if ($scope != Smarty::SCOPE_LOCAL) {
+            $this->tpl_vars->$tpl_var->scope = $scope;
+        }
+        if (!(is_array($this->tpl_vars->$tpl_var->value) || $this->tpl_vars->$tpl_var->value instanceof ArrayAccess)) {
+            settype($this->tpl_vars->$tpl_var->value, 'array');
         }
     }
 

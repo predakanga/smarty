@@ -26,16 +26,16 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
 
     protected static function _init($smarty)
     {
-        $smarty->template_dir = array('.' . DS . 'templates' . DS);
-        $smarty->compile_dir = '.' . DS . 'templates_c' . DS;
-        $smarty->plugins_dir = array(SMARTY_PLUGINS_DIR);
-        $smarty->cache_dir = '.' . DS . 'cache' . DS;
-        $smarty->config_dir = array('.' . DS . 'configs' . DS);
+        $smarty->setTemplateDir('.' . DS . 'templates' . DS);
+        $smarty->setCompileDir('.' . DS . 'templates_c' . DS);
+        $smarty->setPluginsDir(SMARTY_PLUGINS_DIR);
+        $smarty->setCacheDir('.' . DS . 'cache' . DS);
+        $smarty->setConfigDir('.' . DS . 'configs' . DS);
         $smarty->template_objects = array();
-        $smarty->config_vars = array();
-        Smarty::$global_tpl_vars = array();
+        $smarty->config_vars = new Smarty_Variable_Container();
+        Smarty::$global_tpl_vars = new Smarty_Variable_Container();
+        $smarty->tpl_vars = new Smarty_Variable_Container();
         $smarty->template_functions = array();
-        $smarty->tpl_vars = array();
         $smarty->force_compile = false;
         $smarty->force_cache = false;
         $smarty->auto_literal = true;
@@ -78,7 +78,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public static function suite()
     {
         $testorder = array(
-            'MuteExpectedErrorsTests'
+            'CompileForTests'
         );
         $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
         if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {

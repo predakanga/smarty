@@ -50,14 +50,15 @@
     }
 
     public function compileVariable($variable) {
-        if (strpos($variable,'(') == 0) {
-            // not a variable variable
-            $var = trim($variable,'\'');
-            $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable($var, null, true, false)->nocache;
-            $this->template->properties['variables'][$var] = $this->compiler->tag_nocache|$this->compiler->nocache;
-        }
-//       return '(isset($_smarty_tpl->tpl_vars['. $variable .'])?$_smarty_tpl->tpl_vars['. $variable .']->value:$_smarty_tpl->getVariable('. $variable .')->value)';
-        return '$_smarty_tpl->tpl_vars['. $variable .']->value';
+    	 if (strpos($variable,'(') == 0) {
+    	 		// not a variable variable
+    	 		$var = trim($variable,'\'"');
+			 		$this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable($var, null, true, false)->nocache;
+			 		$this->template->properties['variables'][$var] = $this->compiler->tag_nocache|$this->compiler->nocache;
+			 } else {
+			    $var = '{'.$variable.'}';
+			 }
+			 return '$_smarty_tpl->tpl_vars->'. $var .'->value';
     }
 } 
 
@@ -794,7 +795,7 @@ variable(res)    ::= varindexed(vi). {
 
                   // variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). {
-    res = '$_smarty_tpl->tpl_vars['. v .']->'.p;
+    res = '$_smarty_tpl->tpl_vars->'. trim(v,"'") .'->'.p;
 }
 
                   // object
@@ -965,7 +966,7 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP. {
                     $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.str_replace(')',', false)',$par).';?>';
                     $isset_par = '$_tmp'.$this->prefix_number;
                 } else {
-                    $isset_par=str_replace("')->value","',null,true,false)->value",$par);
+                    $isset_par = preg_replace('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getVariable(\'\1\', null, true, false)',$par);
                 }
                 res = f . "(". $isset_par .")";
             } elseif (in_array($func_name,array('empty','reset','current','end','prev','next'))){
@@ -1199,7 +1200,7 @@ doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {
 }
 
 doublequotedcontent(res)           ::=  DOLLARID(i). {
-    res = new _smarty_code($this, '$_smarty_tpl->tpl_vars[\''. substr(i,1) .'\']->value');
+    res = new _smarty_code($this, '$_smarty_tpl->tpl_vars->'. substr(i,1) .'->value');
 }
 
 doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {

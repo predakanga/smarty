@@ -67,7 +67,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 
         if (isset($_attr['assign'])) {
             // output will be stored in a smarty variable instead of beind displayed
-            $_assign = $_attr['assign'];
+            $_assign = trim($_attr['assign'], "'\"");
         }
 
         $_parent_scope = Smarty::SCOPE_LOCAL;
@@ -195,7 +195,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_output .= $compiler->smarty->merged_templates_func[$tpl_name]['func']. "(\$_smarty_tpl);\n";
             $_output .= "\$_smarty_tpl = array_pop(\$_tpl_stack); ";
             if (isset($_assign)) {
-                $_output .= " \$_smarty_tpl->tpl_vars[$_assign] = new Smarty_variable(ob_get_clean());";
+                $_output .= " \$_smarty_tpl->tpl_vars->{$_assign} = new Smarty_variable(ob_get_clean());";
             }
             $_output .= "/*  End of included template \"" . $tpl_name . "\" */?>";
             return $_output;
@@ -203,7 +203,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 
         // was there an assign attribute
         if (isset($_assign)) {
-            $_output = "<?php \$_smarty_tpl->tpl_vars[$_assign] = new Smarty_variable(\$_smarty_tpl->getSubTemplate ($include_file, $_cache_id, $_compile_id, $_caching, $_cache_lifetime, $_vars, $_parent_scope));?>\n";;
+            $_output = "<?php \$_smarty_tpl->tpl_vars->{$_assign} = new Smarty_variable(\$_smarty_tpl->getSubTemplate ($include_file, $_cache_id, $_compile_id, $_caching, $_cache_lifetime, $_vars, $_parent_scope));?>\n";;
         } else {
             $_output = "<?php echo \$_smarty_tpl->getSubTemplate ($include_file, $_cache_id, $_compile_id, $_caching, $_cache_lifetime, $_vars, $_parent_scope);?>\n";
         }

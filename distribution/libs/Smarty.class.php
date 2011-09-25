@@ -107,7 +107,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
     * smarty version
     */
-    const SMARTY_VERSION = 'Smarty 3.1-DEV';
+    const SMARTY_VERSION = 'Smarty 3.2-DEV';
 
     /**
     * define variable scopes
@@ -150,14 +150,20 @@ class Smarty extends Smarty_Internal_TemplateBase {
     const PLUGIN_COMPILER = 'compiler';
     const PLUGIN_MODIFIER = 'modifier';
     const PLUGIN_MODIFIERCOMPILER = 'modifiercompiler';
+    /**
+    * unassigend template variable handling
+    */
+    const UNASSIGNED_IGNORE = 0;
+    const UNASSIGNED_NOTICE = 1;
+    const UNASSIGNED_EXCEPTION = 2;
 
     /**#@-*/
 
     /**
     * assigned global tpl vars
     */
-    public static $global_tpl_vars = array();
-    
+    public static $global_tpl_vars = null;
+
     /**
      * error handler returned by set_error_hanlder() in Smarty::muteExpectedErrors()
      */
@@ -178,9 +184,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public $auto_literal = true;
     /**
     * display error on not assigned variables
-    * @var boolean
+    * @var int
     */
-    public $error_unassigned = false;
+    public $error_unassigned = self::UNASSIGNED_IGNORE;
     /**
     * look up relative filepaths in include_path
     * @var boolean
@@ -206,6 +212,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @var callable
     */
     public $default_plugin_handler_func = null;
+    /**
+    * default variable handler
+    * @var callable
+    */
+    public $default_variable_handler_func = null;
     /**
     * compile directory
     * @var string
@@ -556,6 +567,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function __construct()
     {
+        // create variabale container
+	    parent::__construct();
+	    self::$global_tpl_vars = new Smarty_Variable_Container();
         // selfpointer needed by some other class methods
         $this->smarty = $this;
         if (is_callable('mb_internal_encoding')) {
@@ -568,7 +582,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             ->setPluginsDir(SMARTY_PLUGINS_DIR)
             ->setCacheDir('.' . DS . 'cache' . DS)
             ->setConfigDir('.' . DS . 'configs' . DS);
-            
+
         $this->debug_tpl = 'file:' . dirname(__FILE__) . '/debug.tpl';
         if (isset($_SERVER['SCRIPT_NAME'])) {
             $this->assignGlobal('SCRIPT_NAME', $_SERVER['SCRIPT_NAME']);
@@ -670,19 +684,21 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function getGlobal($varname = null)
     {
-        if (isset($varname)) {
-            if (isset(self::$global_tpl_vars[$varname])) {
-                return self::$global_tpl_vars[$varname]->value;
-            } else {
-                return '';
-            }
-        } else {
-            $_result = array();
-            foreach (self::$global_tpl_vars AS $key => $var) {
-                $_result[$key] = $var->value;
-            }
-            return $_result;
-        }
+		if (isset($varname)) {
+			if (isset(self::$global_tpl_vars->$varname)) {
+				return self::$global_tpl_vars->$varname->value;
+			} else {
+				return '';
+			}
+		} else {
+			$_result = array();
+			foreach (self::$global_tpl_vars AS $key => $var) {
+			    if ($key != '__smarty__data') {
+				    $_result[$key] = $var->value;
+			    }
+			}
+			return $_result;
+		}
     }
 
     /**
@@ -1170,7 +1186,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if (!empty($data) && is_array($data)) {
             // set up variable values
             foreach ($data as $_key => $_val) {
-                $tpl->tpl_vars[$_key] = new Smarty_variable($_val);
+                $tpl->tpl_vars->$_key = new Smarty_variable($_val);
             }
         }
         return $tpl;
@@ -1309,7 +1325,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public static function mutingErrorHandler($errno, $errstr, $errfile, $errline, $errcontext)
     {
         $_is_muted_directory = false;
-        
+
         // add the SMARTY_DIR to the list of muted directories
         if (!isset(Smarty::$_muted_directories[SMARTY_DIR])) {
             $smarty_dir = realpath(SMARTY_DIR);
@@ -1318,7 +1334,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 'length' => strlen($smarty_dir),
             );
         }
-        
+
         // walk the muted directories and test against $errfile
         foreach (Smarty::$_muted_directories as $key => &$dir) {
             if (!$dir) {

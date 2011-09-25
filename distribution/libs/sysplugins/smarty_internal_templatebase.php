@@ -51,32 +51,10 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             // save local variables
             $save_tpl_vars = $_template->tpl_vars;
             $save_config_vars = $_template->config_vars;
-            $ptr_array = array($_template);
-            $ptr = $_template;
-            while (isset($ptr->parent)) {
-                $ptr_array[] = $ptr = $ptr->parent;
-            }
-            $ptr_array = array_reverse($ptr_array);
-            $parent_ptr = reset($ptr_array);
-            $tpl_vars = $parent_ptr->tpl_vars;
-            $config_vars = $parent_ptr->config_vars;
-            while ($parent_ptr = next($ptr_array)) {
-                if (!empty($parent_ptr->tpl_vars)) {
-                    $tpl_vars = array_merge($tpl_vars, $parent_ptr->tpl_vars);
-                }
-                if (!empty($parent_ptr->config_vars)) {
-                    $config_vars = array_merge($config_vars, $parent_ptr->config_vars);
-                }
-            }
-            if (!empty(Smarty::$global_tpl_vars)) {
-                $tpl_vars = array_merge(Smarty::$global_tpl_vars, $tpl_vars);
-            }
-            $_template->tpl_vars = $tpl_vars;
-            $_template->config_vars = $config_vars;
         }
         // dummy local smarty variable
-        if (!isset($_template->tpl_vars['smarty'])) {
-            $_template->tpl_vars['smarty'] = new Smarty_Variable;
+        if (!isset($_template->tpl_vars->smarty)) {
+            $_template->tpl_vars->smarty = new Smarty_Variable;
         }
         if (isset($this->smarty->error_reporting)) {
             $_smarty_old_error_level = error_reporting($this->smarty->error_reporting);
@@ -576,6 +554,21 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             $this->smarty->default_template_handler_func = $callback;
         } else {
             throw new SmartyException("Default template handler '$callback' not callable");
+        }
+    }
+
+    /**
+     * Registers a default variable handler
+     *
+     * @param callable $callback class/method name
+     * @throws SmartyException if $callback is not callable
+     */
+    public function registerDefaultVariableHandler($callback)
+    {
+        if (is_callable($callback)) {
+            $this->smarty->default_variable_handler_func = $callback;
+        } else {
+            throw new SmartyException("Default variable handler '$callback' not callable");
         }
     }
 
