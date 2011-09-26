@@ -49,7 +49,7 @@ class Smarty_Internal_Data {
     {
         $this->tpl_vars = new Smarty_Variable_Container();
         $this->tpl_vars->__smarty__data = $this;
-        $this->config_vars = new Smarty_Variable_Container();
+        $this->config_vars = new Smarty_Config_Variable_Container();
         $this->config_vars->__smarty__data = $this;
     }
 
@@ -282,18 +282,20 @@ class Smarty_Internal_Data {
     }
 
     /**
-     * gets the object of a Smarty variable
+     * gets the object of a template variable
      *
      * @param string  $variable the name of the Smarty variable
      * @param object  $_ptr     optional pointer to data object
      * @param boolean $search_parents search also in parent data
+     * @param boolean $error_enable enable error handling
      * @return object the object of the variable
      */
     public function getVariable($_variable, $_ptr = null, $search_parents = true, $error_enable = true)
     {
         if ($_ptr === null) {
             $_ptr = $this;
-        } while ($_ptr !== null) {
+        }
+        while ($_ptr !== null) {
             if (isset($_ptr->tpl_vars->$_variable)) {
                 // found it, return it
                 return $_ptr->tpl_vars->$_variable;
@@ -316,10 +318,10 @@ class Smarty_Internal_Data {
             }
         }
         if ($error_enable) {
-            if ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
+            if ($this->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
 			    // force a notice
 		     $x = $$_variable;
-            } elseif ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
+            } elseif ($this->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
                 throw new SmartyException("Unassigned template variable '{$_variable}'");
             }
         }
@@ -327,28 +329,48 @@ class Smarty_Internal_Data {
     }
 
     /**
-     * gets  a config variable
+     * gets value of config variable
      *
-     * @param string $variable the name of the config variable
-     * @return mixed the value of the config variable
+     * @param string  $variable the name of the Smarty variable
+     * @param object  $_ptr     optional pointer to data object
+     * @param boolean $search_parents search also in parent data
+     * @param boolean $error_enable enable error handling
+     * @return object the object of the variable
      */
-    public function getConfigVariable($variable)
+    public function getConfigVariable($_variable, $_ptr = null, $search_parents = true, $error_enable = true)
     {
-        $_ptr = $this;
+        if ($_ptr === null) {
+            $_ptr = $this;
+        }
         while ($_ptr !== null) {
-            if (isset($_ptr->config_vars->$variable)) {
+            if (isset($_ptr->config_vars->$_variable)) {
                 // found it, return it
-                return $_ptr->config_vars->$variable;
+                return $_ptr->config_vars->$_variable;
             }
             // not found, try at parent
-            $_ptr = $_ptr->parent;
+            if ($search_parents) {
+                $_ptr = $_ptr->parent;
+            } else {
+                $_ptr = null;
+            }
         }
-        if ($this->smarty->error_unassigned) {
-            // force a notice
-            $x = $$variable;
+        if (isset($this->smarty->default_config_variable_handler_func)) {
+            $value = null;
+            if (call_user_func_array($this->smarty->default_config_variable_handler_func,array($_variable, &$value))) {
+                return new Smarty_Variable($value);
+            }
+        }
+        if ($error_enable) {
+            if ($this->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
+			    // force a notice
+		     $x = $$_variable;
+            } elseif ($this->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
+                throw new SmartyException("Unassigned config variable '{$_variable}'");
+            }
         }
         return null;
     }
+
 
     /**
      * gets  a stream variable
@@ -476,7 +498,7 @@ class Smarty_Data extends Smarty_Internal_Data {
 /**
  * class for the Smarty variable container
  *
- * This class holds all assigned varibales
+ * This class holds all assigned variables
  */
 class Smarty_Variable_Container {
     // pointer to parent object
@@ -516,6 +538,47 @@ class Smarty_Variable_Container {
 		return $this->$_variable = new Undefined_Smarty_Variable;
     }
 }
+
+/**
+ * class for the Smarty config variable container
+ *
+ * This class holds all loaded config variables
+ */
+class Smarty_Config_Variable_Container {
+    // pointer to parent object
+    public $__smarty__data = null;
+
+    /**
+    *
+    * magic __get function to get variable not know in current scope
+    */
+    public function __get($_variable)
+    {
+        $_ptr = $this->__smarty__data->parent;
+        while ($_ptr !== null) {
+            if (isset($_ptr->config_vars->$_variable)) {
+                // found it, return it
+                return $this->$_variable = $_ptr->config_vars->$_variable;
+            }
+            // not found, try at parent
+            $_ptr = $_ptr->parent;
+        }
+        if (isset($this->__smarty__data->smarty->default_config_variable_handler_func)) {
+            $value = null;
+            if (call_user_func_array($this->__smarty__data->smarty->default_config_variable_handler_func,array($_variable, &$value))) {
+                return $this->$_variable = $value;
+            }
+        }
+        if ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
+			// force a notice
+		    $x = $$_variable;
+        } elseif ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
+            throw new SmartyException("Unassigned config variable '{$_variable}'");
+        }
+		return $this->$_variable = null;
+    }
+}
+
 /**
  * class for the Smarty variable object
  *

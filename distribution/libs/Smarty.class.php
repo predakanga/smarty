@@ -218,6 +218,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $default_variable_handler_func = null;
     /**
+    * default config variable handler
+    * @var callable
+    */
+    public $default_config_variable_handler_func = null;
+    /**
     * compile directory
     * @var string
     */
@@ -569,7 +574,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         // create variabale container
 	    parent::__construct();
-	    self::$global_tpl_vars = new Smarty_Variable_Container();
+	    if (!isset(self::$global_tpl_vars)) {
+	        self::$global_tpl_vars = new Smarty_Variable_Container();
+	    }
         // selfpointer needed by some other class methods
         $this->smarty = $this;
         if (is_callable('mb_internal_encoding')) {

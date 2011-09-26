@@ -2691,7 +2691,7 @@ static public $yy_action = array(
 #line 2697 "smarty_internal_templateparser.php"
 #line 807 "smarty_internal_templateparser.y"
     function yy_r124(){
-    $this->_retvalue = '$_smarty_tpl->getConfigVariable(\''. $this->yystack[$this->yyidx + -1]->minor .'\')';
+    $this->_retvalue = '$_smarty_tpl->config_vars->'. $this->yystack[$this->yyidx + -1]->minor;
     }
 #line 2702 "smarty_internal_templateparser.php"
 #line 811 "smarty_internal_templateparser.y"
@@ -2830,9 +2830,9 @@ static public $yy_action = array(
                     $this->compiler->trigger_template_error ('Illegal number of paramer in "isset()"');
                 }
                 $par = implode(',',$this->yystack[$this->yyidx + -1]->minor);
-                if (strncasecmp($par,'$_smarty_tpl->getConfigVariable',strlen('$_smarty_tpl->getConfigVariable')) === 0) {
+                if (strncasecmp($par,'$_smarty_tpl->config_vars',strlen('$_smarty_tpl->config_vars')) === 0) {
                     $this->prefix_number++;
-                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.str_replace(')',', false)',$par).';?>';
+                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.preg_replace('/\$_smarty_tpl->config_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getConfigVariable(\'\1\', null, true, false)',$par).';?>';
                     $isset_par = '$_tmp'.$this->prefix_number;
                 } else {
                     $isset_par = preg_replace('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getVariable(\'\1\', null, true, false)',$par);

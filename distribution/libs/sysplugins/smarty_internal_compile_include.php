@@ -193,7 +193,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
                 $_output .= 'ob_start(); ';
             }
             $_output .= $compiler->smarty->merged_templates_func[$tpl_name]['func']. "(\$_smarty_tpl);\n";
-            $_output .= "\$_smarty_tpl = array_pop(\$_tpl_stack); ";
+            $_output .= "unset(\$_smarty_tpl->tpl_vars, \$_smarty_tpl->config_vars, \$_smarty_tpl);\$_smarty_tpl = array_pop(\$_tpl_stack); ";
             if (isset($_assign)) {
                 $_output .= " \$_smarty_tpl->tpl_vars->{$_assign} = new Smarty_variable(ob_get_clean());";
             }

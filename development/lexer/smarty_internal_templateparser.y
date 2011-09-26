@@ -805,7 +805,7 @@ variable(res)    ::= object(o). {
 
                   // config variable
 variable(res)    ::= HATCH ID(i) HATCH. {
-    res = '$_smarty_tpl->getConfigVariable(\''. i .'\')';
+    res = '$_smarty_tpl->config_vars->'. i;
 }
 
 variable(res)    ::= HATCH variable(v) HATCH. {
@@ -961,9 +961,9 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP. {
                     $this->compiler->trigger_template_error ('Illegal number of paramer in "isset()"');
                 }
                 $par = implode(',',p);
-                if (strncasecmp($par,'$_smarty_tpl->getConfigVariable',strlen('$_smarty_tpl->getConfigVariable')) === 0) {
+                if (strncasecmp($par,'$_smarty_tpl->config_vars',strlen('$_smarty_tpl->config_vars')) === 0) {
                     $this->prefix_number++;
-                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.str_replace(')',', false)',$par).';?>';
+                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.preg_replace('/\$_smarty_tpl->config_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getConfigVariable(\'\1\', null, true, false)',$par).';?>';
                     $isset_par = '$_tmp'.$this->prefix_number;
                 } else {
                     $isset_par = preg_replace('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getVariable(\'\1\', null, true, false)',$par);

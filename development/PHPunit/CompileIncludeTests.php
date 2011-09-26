@@ -87,21 +87,6 @@ class CompileIncludeTests extends PHPUnit_Framework_TestCase {
     */
     public function testIncludeRootScope()
     {
- 		$this->smarty->error_reporting  = error_reporting() & ~(E_NOTICE|E_USER_NOTICE);
-        $this->smarty->assign('foo',1);
-        $tpl = $this->smarty->createTemplate('eval: befor include {$foo} {include file=\'eval:{$foo=2} in include {$foo}\' scope = root} after include {$foo}');
-        $content = $this->smarty->fetch($tpl);
-        $content2 = $this->smarty->fetch('eval: smarty value {$foo}' );
-        $this->assertNotContains('befor include 1', $content);
-        $this->assertContains('in include 2', $content);
-        $this->assertContains('after include 2', $content);
-        $this->assertContains('smarty value 1', $content2);
-    }
-    /**
-    * Test  root scope
-    */
-    public function testIncludeRootScope2()
-    {
         $this->smarty->assign('foo',1);
         $tpl = $this->smarty->createTemplate('eval: befor include {$foo} {include file=\'eval:{$foo=2} in include {$foo}\' scope = root} after include {$foo}', null, null, $this->smarty);
         $content = $this->smarty->fetch($tpl);
@@ -127,6 +112,17 @@ class CompileIncludeTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('bar','bar');
         $content = $this->smarty->fetch('test_recursive_includes2.tpl');
         $this->assertContains("before 1 bar<br>\nbefore 3 bar<br>\nbefore 5 bar<br>\nafter 5 bar<br>\nafter 3 bar<br>\nafter 1 bar<br>", $content);
+    }
+    public function testRecursiveIncludes3()
+    {
+        $this->smarty->merge_compiled_includes = true;
+        $this->smarty->clearCompiledTemplate();
+        $this->smarty->assign('foo',1);
+        $this->smarty->assign('bar','bar');
+        $content = $this->smarty->fetch('test_recursive_includes2.tpl');
+        $this->assertContains("before 1 bar<br>\nbefore 3 bar<br>\nbefore 5 bar<br>\nafter 5 bar<br>\nafter 3 bar<br>\nafter 1 bar<br>", $content);
+        $tpl = $this->smarty->createTemplate('test_recursive_includes_pass.tpl');
+        $this->assertFalse($tpl->compiled->exists);
     }
 }
 
