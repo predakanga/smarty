@@ -32,7 +32,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->setCacheDir('.' . DS . 'cache' . DS);
         $smarty->setConfigDir('.' . DS . 'configs' . DS);
         $smarty->template_objects = array();
-        $smarty->config_vars = new Smarty_Variable_Container();
+        $smarty->config_vars = new Smarty_Config_Variable_Container();
         Smarty::$global_tpl_vars = new Smarty_Variable_Container();
         $smarty->tpl_vars = new Smarty_Variable_Container();
         $smarty->template_functions = array();
@@ -58,7 +58,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->php_handling = Smarty::PHP_PASSTHRU;
         $smarty->enableSecurity();
         $smarty->error_reporting = null;
-        $smarty->error_unassigned = true;
+        $smarty->error_unassigned = Smarty::UNASSIGNED_NOTICE;
         $smarty->caching_type = 'file';
         $smarty->cache_locking = false;
     }

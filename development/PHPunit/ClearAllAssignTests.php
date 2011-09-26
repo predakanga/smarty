@@ -65,7 +65,8 @@ class ClearAllAssignTests extends PHPUnit_Framework_TestCase {
     {
  		$this->smarty->error_reporting  = error_reporting() & ~(E_NOTICE|E_USER_NOTICE);
         $this->_data->clearAllAssign();
-		$this->assertEquals('fooblar', $this->smarty->fetch($this->_tpl));
+        $this->tpl = $this->smarty->createTemplate('eval:{$foo}{$bar}{$blar}', null, null, $this->_data);
+		$this->assertEquals('fooblar', $this->smarty->fetch($this->tpl));
     }
     /**
     * test clear all assign in Smarty object

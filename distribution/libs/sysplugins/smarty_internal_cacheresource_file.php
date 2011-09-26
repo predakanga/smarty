@@ -149,7 +149,7 @@ class Smarty_Internal_CacheResource_File extends Smarty_CacheResource {
         if (isset($resource_name)) {
             $_save_stat = $smarty->caching;
             $smarty->caching = true;
-            $tpl = new $smarty->template_class($resource_name, $smarty);
+            $tpl = new $smarty->template_class($resource_name, $smarty, null, null, null, null, null, true);
             $smarty->caching = $_save_stat;
             if ($tpl->source->exists) {
                 $_resourcename_parts = basename(str_replace('^', '/', $tpl->cached->filepath));

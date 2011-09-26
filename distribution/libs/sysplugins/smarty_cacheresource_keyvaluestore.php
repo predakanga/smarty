@@ -172,7 +172,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
     {
         $uid = '';
         if (isset($resource_name)) {
-            $tpl = new $smarty->template_class($resource_name, $smarty);
+            $tpl = new $smarty->template_class($resource_name, $smarty, null, null, null, null, null, true);
             if ($tpl->source->exists) {
                 $uid = $tpl->source->uid;
              }
@@ -312,7 +312,7 @@ abstract class Smarty_CacheResource_KeyValueStore extends Smarty_CacheResource {
         if (!($_cid = $this->listInvalidationKeys($cid, $resource_name, $cache_id, $compile_id, $resource_uid))) {
             return 0;
         }
-        
+
         // there are no InValidationKeys
         if (!($values = $this->read($_cid))) {
             return 0;

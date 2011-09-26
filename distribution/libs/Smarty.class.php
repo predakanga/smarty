@@ -675,7 +675,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         // create template object
         $save = $this->template_objects;
-        $tpl = new $this->template_class($resource_name, $this);
+        $tpl = new $this->template_class($resource_name, $this, null, null, null, null, null, true);
         // check if it does exists
         $result = $tpl->source->exists;
         $this->template_objects = $save;
@@ -1170,6 +1170,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // default to cache_id and compile_id of Smarty object
         $cache_id = $cache_id === null ? $this->cache_id : $cache_id;
         $compile_id = $compile_id === null ? $this->compile_id : $compile_id;
+        $update_var_container = false;
         // already in template cache?
         $_templateId =  sha1(join(DIRECTORY_SEPARATOR, $this->getTemplateDir()).$template . $cache_id . $compile_id);
         if ($do_clone) {
@@ -1179,14 +1180,29 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 $tpl->smarty = clone $tpl->smarty;
                 $tpl->parent = $parent;
             } else {
-                $tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id);
+                $tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id, null, null, true);
             }
+            $update_var_container = true;
         } else {
             if (isset($this->template_objects[$_templateId])) {
                 // return cached template object
                 $tpl = $this->template_objects[$_templateId];
             } else {
-                $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id);
+                $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id, null ,null, true);
+                $update_var_container = true;
+            }
+        }
+        if ($update_var_container) {
+             if ($parent != null) {
+                $tpl->tpl_vars = clone $parent->tpl_vars;
+                $tpl->tpl_vars->__smarty__data = $tpl;
+                $tpl->config_vars =  clone $parent->config_vars;
+                $tpl->config_vars->__smarty__data = $tpl;
+            } else {
+                $tpl->tpl_vars = new Smarty_Variable_Container();
+                $tpl->tpl_vars->__smarty__data = $tpl;
+                $tpl->config_vars = new Smarty_Config_Variable_Container();
+                $tpl->config_vars->__smarty__data = $tpl;
             }
         }
         // fill data if present

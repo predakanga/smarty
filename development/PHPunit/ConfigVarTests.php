@@ -51,7 +51,6 @@ class ConfigVarTests extends PHPUnit_Framework_TestCase {
     */
     public function testConfigVariableSection2()
     {
- 		$this->smarty->error_reporting  = error_reporting() & ~(E_NOTICE|E_USER_NOTICE);
         $this->smarty->configLoad('test.conf', 'section2');
         $this->assertEquals("Welcome to Smarty! Global Section1 Hello Section2", $this->smarty->fetch('eval:{#title#} {#sec1#} {#sec2#}'));
     }

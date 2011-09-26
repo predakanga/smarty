@@ -2,6 +2,7 @@
 29.09.2011
 - add default variable handler
 - add default config variable handler
+- optimization of variable container handling
 
 ===== trunk  =====
 26.09.2011

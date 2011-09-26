@@ -187,7 +187,7 @@ class Smarty_Internal_Utility {
         if (isset($resource_name)) {
             $_save_stat = $smarty->caching;
             $smarty->caching = false;
-            $tpl = new $smarty->template_class($resource_name, $smarty);
+            $tpl = new $smarty->template_class($resource_name, $smarty, null, null, null, null, null, true);
             $smarty->caching = $_save_stat;
             if ($tpl->source->exists) {
                  $_resource_part_1 = basename(str_replace('^', '/', $tpl->compiled->filepath));
