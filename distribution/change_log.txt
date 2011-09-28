@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+29.09.2011
+- added namespace support for static classes in templates
+
 28.09.2011
 - remove scope property from Smarty_variable class
 - code optimizations

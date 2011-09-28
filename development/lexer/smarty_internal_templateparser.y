@@ -757,6 +757,11 @@ value(res)       ::= ID(c) DOUBLECOLON static_class_access(r). {
     }
 }
 
+                  // static namepace class access
+value(res)       ::= NAMESPACECLASS(c) static_class_access(r). {
+            res = c.r;
+}
+
 value(res)    ::= varindexed(vi) DOUBLECOLON static_class_access(r). {
     if (vi['var'] == '\'smarty\'') {
         res =  $this->compiler->compileTag('private_special_variable',array(),vi['smarty_internal_index']).'::'.r;

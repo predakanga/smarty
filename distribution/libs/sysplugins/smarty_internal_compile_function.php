@@ -62,6 +62,7 @@ class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase {
         $_name = trim($_attr['name'], "'\"");
         unset($_attr['name']);
         // set flag that we are compiling a template function
+        $compiler->compiles_template_function = true;
         $compiler->template->properties['function'][$_name]['parameter'] = array();
         $_smarty_tpl = $compiler->template;
         foreach ($_attr as $_key => $_data) {
