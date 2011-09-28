@@ -151,17 +151,12 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
             if ($key != '__smarty__data' && is_object($var)) {
                 $tpl_vars[$key] = clone $var;
                 if ($obj instanceof Smarty_Internal_Template) {
-                    $tpl_vars[$key]->scope = $obj->source->type . ':' . $obj->source->name;
+                    $tpl_vars[$key]->source = $obj->source->type . ':' . $obj->source->name;
                 } elseif ($obj instanceof Smarty_Data) {
-                    $tpl_vars[$key]->scope = 'Data object';
+                    $tpl_vars[$key]->source = 'Data object';
                 } else {
-                    $tpl_vars[$key]->scope = 'Smarty root';
+                    $tpl_vars[$key]->source = 'Smarty object';
                 }
-            }
-        }
-        foreach ($obj->tpl_vars as $key => $var) {
-            if ($key != '__smarty__data') {
-                $tpl_vars[$key] = $var;
             }
         }
 
@@ -174,7 +169,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
                 if ($key != '__smarty__data' && is_object($var)) {
                     if (!array_key_exists($name, $tpl_vars)) {
                         $clone = clone $var;
-                        $clone->scope = 'Global';
+                        $clone->source = 'Global';
                         $tpl_vars[$name] = $clone;
                     }
                 }

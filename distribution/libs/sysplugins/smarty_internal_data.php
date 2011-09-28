@@ -317,12 +317,13 @@ class Smarty_Internal_Data {
                 return new Smarty_Variable($value);
             }
         }
-        if ($error_enable) {
+        if ($this->smarty->error_unassigned != Smarty::UNASSIGNED_IGNORE && $error_enable) {
+            $err_msg = "Unassigned template variable '{$_variable}'";
             if ($this->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
-			    // force a notice
-		     $x = $$_variable;
+			     // force a notice
+		        trigger_error($err_msg);
             } elseif ($this->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
-                throw new SmartyException("Unassigned template variable '{$_variable}'");
+                throw new SmartyException($err_msg);
             }
         }
         return new Undefined_Smarty_Variable;
@@ -360,12 +361,13 @@ class Smarty_Internal_Data {
                 return new Smarty_Variable($value);
             }
         }
-        if ($error_enable) {
+        if ($this->smarty->error_unassigned != Smarty::UNASSIGNED_IGNORE && $error_enable) {
+            $err_msg = "Unassigned config variable '{$_variable}'";
             if ($this->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
-			    // force a notice
-		     $x = $$_variable;
+			     // force a notice
+		        trigger_error($err_msg);
             } elseif ($this->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
-                throw new SmartyException("Unassigned config variable '{$_variable}'");
+                throw new SmartyException($err_msg);
             }
         }
         return null;
@@ -510,32 +512,7 @@ class Smarty_Variable_Container {
     */
     public function __get($_variable)
     {
-        $_ptr = $this->__smarty__data->parent;
-        while ($_ptr !== null) {
-            if (isset($_ptr->tpl_vars->$_variable)) {
-                // found it, return it
-                return $this->$_variable = $_ptr->tpl_vars->$_variable;
-            }
-            // not found, try at parent
-            $_ptr = $_ptr->parent;
-        }
-        if (isset(Smarty::$global_tpl_vars->$_variable)) {
-            // found it, return it
-            return $this->$_variable = Smarty::$global_tpl_vars->$_variable;
-        }
-        if (isset($this->__smarty__data->smarty->default_variable_handler_func)) {
-            $value = null;
-            if (call_user_func_array($this->__smarty__data->smarty->default_variable_handler_func,array($_variable, &$value))) {
-                return $this->$_variable = new Smarty_Variable($value);
-            }
-        }
-        if ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
-			// force a notice
-		    $x = $$_variable;
-        } elseif ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
-            throw new SmartyException("Unassigned template variable '{$_variable}'");
-        }
-		return $this->$_variable = new Undefined_Smarty_Variable;
+        return $this->$_variable = $this->__smarty__data->getVariable($_variable, $this->__smarty__data->parent);
     }
 }
 
@@ -554,28 +531,7 @@ class Smarty_Config_Variable_Container {
     */
     public function __get($_variable)
     {
-        $_ptr = $this->__smarty__data->parent;
-        while ($_ptr !== null) {
-            if (isset($_ptr->config_vars->$_variable)) {
-                // found it, return it
-                return $this->$_variable = $_ptr->config_vars->$_variable;
-            }
-            // not found, try at parent
-            $_ptr = $_ptr->parent;
-        }
-        if (isset($this->__smarty__data->smarty->default_config_variable_handler_func)) {
-            $value = null;
-            if (call_user_func_array($this->__smarty__data->smarty->default_config_variable_handler_func,array($_variable, &$value))) {
-                return $this->$_variable = $value;
-            }
-        }
-        if ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_NOTICE) {
-			// force a notice
-		    $x = $$_variable;
-        } elseif ($this->__smarty__data->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
-            throw new SmartyException("Unassigned config variable '{$_variable}'");
-        }
-		return $this->$_variable = null;
+        return $this->$_variable = $this->__smarty__data->getConfigVariable($_variable, $this->__smarty__data->parent);
     }
 }
 
@@ -601,25 +557,17 @@ class Smarty_Variable {
      * @var boolean
      */
     public $nocache = false;
-    /**
-     * the scope the variable will have  (local,parent or root)
-     *
-     * @var int
-     */
-    public $scope = Smarty::SCOPE_LOCAL;
 
     /**
      * create Smarty variable object
      *
      * @param mixed   $value   the value to assign
      * @param boolean $nocache if true any output of this variable will be not cached
-     * @param int     $scope   the scope the variable will have  (local,parent or root)
      */
-    public function __construct($value = null, $nocache = false, $scope = Smarty::SCOPE_LOCAL)
+    public function __construct($value = null, $nocache = false)
     {
         $this->value = $value;
         $this->nocache = $nocache;
-        $this->scope = $scope;
     }
 
     /**
@@ -643,32 +591,8 @@ class Smarty_Variable {
  * @subpackage Template
  */
 class Undefined_Smarty_Variable {
-
-    /**
-     * Returns FALSE for 'nocache' and NULL otherwise.
-     *
-     * @param string $name
-     * @return bool
-     */
-    public function __get($name)
-    {
-        if ($name == 'nocache') {
-            return false;
-        } else {
-            return null;
-        }
-    }
-
-    /**
-     * Always returns an empty string.
-     *
-     * @return string
-     */
-    public function __toString()
-    {
-        return "";
-    }
-
+    public $value = null;
+    public $nocache = false;
 }
 
 ?>

@@ -1,10 +1,26 @@
 ﻿===== Smarty 3.2-DEV  =====
-29.09.2011
+28.09.2011
+- remove scope property from Smarty_variable class
+- code optimizations
+
+26.09.2011
 - add default variable handler
 - add default config variable handler
 - optimization of variable container handling
 
 ===== trunk  =====
+28.09.2011
+- bugfix on template functions called nocache calling other template functions
+
+27.09.2011
+- bugfix possible warning "attempt to modify property of non-object" in {section} (issue #34)
+- added chaining to Smarty_Internal_Data so $smarty->assign('a',1)->assign('b',2); is possible now
+- bugfix remove race condition when a custom resource did change timestamp during compilation
+- bugfix variable property did not work on objects variable in template
+- bugfix smarty_make_timestamp() failed to process DateTime objects properly
+- bugfix wrong resource could be used on compile check of custom resource
+
+
 26.09.2011
 - bugfix repeated calls to same subtemplate did not make use of cached template object
 

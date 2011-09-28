@@ -31,7 +31,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         $this->required_attributes = array('var', 'value');
         $this->shorttag_order = array('var', 'value');
         $this->optional_attributes = array('scope');
-        $_nocache = 'null';
+        $_nocache = 'false';
         $_scope = Smarty::SCOPE_LOCAL;
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
@@ -49,6 +49,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
                 $_scope = Smarty::SCOPE_PARENT;
             } elseif ($_attr['scope'] == 'root') {
                 $_scope = Smarty::SCOPE_ROOT;
+                $_scope = Smarty::SCOPE_ROOT;
             } elseif ($_attr['scope'] == 'global') {
                 $_scope = Smarty::SCOPE_GLOBAL;
             } else {
@@ -57,9 +58,9 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         }
         // compiled output
         if (isset($parameter['smarty_internal_index'])) {
-            $output = "<?php \$_smarty_tpl->createLocalArrayVariable($_attr[var], $_nocache, $_scope);\n\$_smarty_tpl->tpl_vars->{$var}->value$parameter[smarty_internal_index] = $_attr[value];";
+            $output = "<?php \$_smarty_tpl->createLocalArrayVariable($_attr[var], $_nocache);\n\$_smarty_tpl->tpl_vars->{$var}->value$parameter[smarty_internal_index] = $_attr[value];";
         } else {
-            $output = "<?php \$_smarty_tpl->tpl_vars->{$var} = new Smarty_variable($_attr[value], $_nocache, $_scope);";
+            $output = "<?php \$_smarty_tpl->tpl_vars->{$var} = new Smarty_variable($_attr[value], $_nocache);";
         }
         if ($_scope == Smarty::SCOPE_PARENT) {
             $output .= "\nif (\$_smarty_tpl->parent != null) \$_smarty_tpl->parent->tpl_vars->{$var} = clone \$_smarty_tpl->tpl_vars->{$var};";
