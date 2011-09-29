@@ -469,6 +469,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $cache_modified_check = false;
     /**
+    * use reflection on plugins
+    * @var boolean
+    */
+    public $use_reflection = true;
+    /**
     * registered plugins
     * @var array
     */
