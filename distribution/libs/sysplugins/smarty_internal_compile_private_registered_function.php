@@ -1,39 +1,39 @@
 <?php
 /**
- * Smarty Internal Plugin Compile Registered Function
- *
- * Compiles code for the execution of a registered function
- *
- * @package Smarty
- * @subpackage Compiler
- * @author Uwe Tews
- */
+* Smarty Internal Plugin Compile Registered Function
+*
+* Compiles code for the execution of a registered function
+*
+* @package Smarty
+* @subpackage Compiler
+* @author Uwe Tews
+*/
 
 /**
- * Smarty Internal Plugin Compile Registered Function Class
- *
- * @package Smarty
- * @subpackage Compiler
- */
+* Smarty Internal Plugin Compile Registered Function Class
+*
+* @package Smarty
+* @subpackage Compiler
+*/
 class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Internal_CompileBase {
 
     /**
-     * Attribute definition: Overwrites base class.
-     *
-     * @var array
-     * @see Smarty_Internal_CompileBase
-     */
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $optional_attributes = array('_any');
 
     /**
-     * Compiles code for the execution of a registered function
-     *
-     * @param array  $args      array with attributes from parser
-     * @param object $compiler  compiler object
-     * @param array  $parameter array with compilation parameter
-     * @param string $tag       name of function
-     * @return string compiled code
-     */
+    * Compiles code for the execution of a registered function
+    *
+    * @param array  $args      array with attributes from parser
+    * @param object $compiler  compiler object
+    * @param array  $parameter array with compilation parameter
+    * @param string $tag       name of function
+    * @return string compiled code
+    */
     public function compile($args, $compiler, $parameter, $tag)
     {
         // This tag does create output
@@ -44,11 +44,11 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
             $compiler->tag_nocache = true;
         }
         unset($_attr['nocache']);
-               if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag])) {
-                   $tag_info = $compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag];
-               } else {
-                   $tag_info = $compiler->default_handler_plugins[Smarty::PLUGIN_FUNCTION][$tag];
-               }
+        if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag])) {
+            $tag_info = $compiler->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION][$tag];
+        } else {
+            $tag_info = $compiler->default_handler_plugins[Smarty::PLUGIN_FUNCTION][$tag];
+        }
         // not cachable?
         $compiler->tag_nocache =  $compiler->tag_nocache || !$tag_info[1];
         // convert attributes into parameter array string
@@ -65,13 +65,21 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
         }
         $_params = 'array(' . implode(",", $_paramsArray) . ')';
         $function = $tag_info[0];
+        $object = '$_smarty_tpl';
+        if ($compiler->smarty->use_reflection) {
+            if ($result = Smarty_Internal_Reflection::injectObject($function, array('Smarty', 'Smarty_Internal_Template'),0)) {
+                if ($result[0] == 'Smarty') {
+                    $object = '$_smarty_tpl->smarty';
+                }
+            }
+        }
         // compile code
         if (!is_array($function)) {
-            $output = "<?php echo {$function}({$_params},\$_smarty_tpl);?>\n";
+            $output = "<?php echo {$function}({$_params},{$object});?>\n";
         } else if (is_object($function[0])) {
-            $output = "<?php echo \$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['{$tag}'][0][0]->{$function[1]}({$_params},\$_smarty_tpl);?>\n";
+            $output = "<?php echo \$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['{$tag}'][0][0]->{$function[1]}({$_params},{$object});?>\n";
         } else {
-            $output = "<?php echo {$function[0]}::{$function[1]}({$_params},\$_smarty_tpl);?>\n";
+            $output = "<?php echo {$function[0]}::{$function[1]}({$_params},{$object});?>\n";
         }
         return $output;
     }

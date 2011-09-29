@@ -5,6 +5,7 @@
 * @package Smarty
 * @subpackage Reflection
 * @author Uwe Tews
+* @author Rodney Rehm
 */
 
 /**
@@ -16,13 +17,13 @@
 class Smarty_Internal_Reflection {
 
     /**
-    * Get Smarty Meta Parameter From PHPdoc comments
+    * Get Annotation From PHPdoc comments
     *
     * @param mixed callback function or class method to be parsed
     * @param string parameter name
     * @return mixed data
     */
-    static function getMetaParameter($callback, $parameter) {
+    static function getAnnotation($callback, $parameter) {
         if (is_string($callback)) {
             $reflection = new ReflectionFunction($callback);
         } elseif (is_array($callback)) {
@@ -34,15 +35,28 @@ class Smarty_Internal_Reflection {
         }
         // get PHPdoc data
         $doc = $reflection->getDocComment();
-        if ($doc && preg_match('#@' . $parameter . '((.+)$(,|\s+))+?#m', $doc, $matches)) {
+        if ($doc && preg_match('#@' . $parameter . '(.+)$#m', $doc, $matches)) {
             if (isset($matches)) {
-                if (count($matches) == 1) {
+                $m = explode(',', $matches[1]);
+                $m = array_map('trim', $m);
+                if (count($m) == 1 && $m[0] == '') {
                     return true;
+                } else {
+                    return $m;
                 }
             }
         }
         return false;
     }
+
+    /**
+    * Find object position bay type-hint
+    *
+    * @param mixed callback function or class method to be parsed
+    * @param array objects array of class name to look for
+    * @param mixed position  int => check specified position; null => scan all parameter
+    * @return mixed  false if failed, array of call found and position
+    */
     static function injectObject($callback, $objects, $position = null) {
         // get function reflection
         if (is_string($callback) || $callback instanceof Closure) {
@@ -60,17 +74,24 @@ class Smarty_Internal_Reflection {
         if (!$args) {
             return false;
         }
+        if ($position != null) {
+            $arg = $args[$position];
+            $class = $arg->getClass();
+            if ($class) {
+                if (in_array($class->name, $objects)) {
+                    return array($class->name, $position);
+                } else {
+                    return false;
+                }
+            }
+        }
         // search for objects
         for ($pos = 0, $count = count($args); $pos < $count; $pos++){
             $arg = $args[$pos];
             $class = $arg->getClass();
             if ($class) {
                 if (in_array($class->name, $objects)) {
-                    if ($position == null || $position == $pos) {
-                        return array($class->name, $pos);
-                    } elseif ($position != null || $position != $pos) {
-                        throw new Exception("object not in exspected position");
-                    }
+                    return array($class->name, $pos);
                 }
             }
         }

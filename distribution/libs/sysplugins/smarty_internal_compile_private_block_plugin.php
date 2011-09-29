@@ -1,40 +1,40 @@
 <?php
 /**
- * Smarty Internal Plugin Compile Block Plugin
- *
- * Compiles code for the execution of block plugin
- *
- * @package Smarty
- * @subpackage Compiler
- * @author Uwe Tews
- */
+* Smarty Internal Plugin Compile Block Plugin
+*
+* Compiles code for the execution of block plugin
+*
+* @package Smarty
+* @subpackage Compiler
+* @author Uwe Tews
+*/
 
 /**
- * Smarty Internal Plugin Compile Block Plugin Class
- *
- * @package Smarty
- * @subpackage Compiler
- */
+* Smarty Internal Plugin Compile Block Plugin Class
+*
+* @package Smarty
+* @subpackage Compiler
+*/
 class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_CompileBase {
 
     /**
-     * Attribute definition: Overwrites base class.
-     *
-     * @var array
-     * @see Smarty_Internal_CompileBase
-     */
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $optional_attributes = array('_any');
 
     /**
-     * Compiles code for the execution of block plugin
-     *
-     * @param array  $args      array with attributes from parser
-     * @param object $compiler  compiler object
-     * @param array  $parameter array with compilation parameter
-     * @param string $tag       name of block plugin
-     * @param string $function  PHP function name
-     * @return string compiled code
-     */
+    * Compiles code for the execution of block plugin
+    *
+    * @param array  $args      array with attributes from parser
+    * @param object $compiler  compiler object
+    * @param array  $parameter array with compilation parameter
+    * @param string $tag       name of block plugin
+    * @param string $function  PHP function name
+    * @return string compiled code
+    */
     public function compile($args, $compiler, $parameter, $tag, $function)
     {
         if (strlen($tag) < 6 || substr($tag, -5) != 'close') {
@@ -44,12 +44,34 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
             if ($_attr['nocache'] === true) {
                 $compiler->tag_nocache = true;
             }
-               unset($_attr['nocache']);
+            unset($_attr['nocache']);
+            $object = '$_smarty_tpl';
+            $cache_attr = null;
+            if ($compiler->smarty->use_reflection) {
+                if ($result = Smarty_Internal_Reflection::injectObject($function, array('Smarty', 'Smarty_Internal_Template'),2)) {
+                    if ($result[0] == 'Smarty') {
+                        $object = '$_smarty_tpl->smarty';
+                    }
+                }
+                if ($compiler->template->caching) {
+                    $result = Smarty_Internal_Reflection::getAnnotation($function, 'smarty_nocache');
+                    if ($result) {
+                        $compiler->tag_nocache = $compiler->tag_nocache || $result;
+                        $compiler->getPlugin(substr($function,16), Smarty::PLUGIN_FUNCTION);
+                    }
+                    if ($compiler->tag_nocache || $compiler->nocache) {
+                        $cache_attr = Smarty_Internal_Reflection::getAnnotation($function, 'smarty_cache_attr');
+                    }
+                }
+            }
             // convert attributes into parameter array string
             $_paramsArray = array();
             foreach ($_attr as $_key => $_value) {
                 if (is_int($_key)) {
                     $_paramsArray[] = "$_key=>$_value";
+                } elseif ($compiler->template->caching && is_array($cache_attr) && in_array($_key, $cache_attr)) {
+                    $_value = str_replace("'","^#^",$_value);
+                    $_paramsArray[] = "'$_key'=>^#^.var_export($_value,true).^#^";
                 } else {
                     $_paramsArray[] = "'$_key'=>$_value";
                 }
@@ -60,7 +82,7 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
             // maybe nocache because of nocache variables or nocache plugin
             $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
             // compile code
-            $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$_params}); \$_block_repeat=true; echo {$function}({$_params}, null, \$_smarty_tpl, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
+            $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$_params}); \$_block_repeat=true; echo {$function}({$_params}, null, {$object}, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
         } else {
             // must endblock be nocache?
             if ($compiler->nocache) {
@@ -70,14 +92,22 @@ class Smarty_Internal_Compile_Private_Block_Plugin extends Smarty_Internal_Compi
             list($_params, $compiler->nocache) = $this->closeTag($compiler, substr($tag, 0, -5));
             // This tag does create output
             $compiler->has_output = true;
-            // compile code
+            $object = '$_smarty_tpl';
+            if ($compiler->smarty->use_reflection) {
+                if ($result = Smarty_Internal_Reflection::injectObject($function, array('Smarty', 'Smarty_Internal_Template'),2)) {
+                    if ($result[0] == 'Smarty') {
+                        $object = '$_smarty_tpl->smarty';
+                    }
+                }
+            }
+              // compile code
             if (!isset($parameter['modifier_list'])) {
                 $mod_pre = $mod_post ='';
             } else {
                 $mod_pre = ' ob_start(); ';
                 $mod_post = 'echo '.$compiler->compileTag('private_modifier',array(),array('modifierlist'=>$parameter['modifier_list'],'value'=>'ob_get_clean()')).';';
             }
-            $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo {$function}({$_params}, \$_block_content, \$_smarty_tpl, \$_block_repeat); ".$mod_post." } array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
+            $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo {$function}({$_params}, \$_block_content, {$object}, \$_block_repeat); ".$mod_post." } array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
         }
         return $output . "\n";
     }

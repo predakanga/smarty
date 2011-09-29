@@ -1,6 +1,10 @@
 ﻿===== Smarty 3.2-DEV  =====
 29.09.2011
 - added namespace support for static classes in templates
+- added PHP reflection to:
+  * pass optional Smarty or template objects to modifier by type-hint
+  * use type-hint to pass Smarty or template objects to plugins
+  * use PHPdoc annotation to use smarty_nocache and smarty_cache_attr on plugins
 
 28.09.2011
 - remove scope property from Smarty_variable class
