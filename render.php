@@ -1,7 +1,7 @@
 <?php
 
 define('BASE_DIR', dirname(__FILE__) . '/');
-require_once BASE_DIR . '../distribution/libs/Smarty.class.php';
+require_once BASE_DIR . '../trunk/distribution/libs/Smarty.class.php';
 
 $smarty = new Smarty();
 $smarty

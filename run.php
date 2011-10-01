@@ -1,6 +1,6 @@
 <?php
 
-define('HTTP_BASE_PATH', 'smarty.dev/3.1/performance/');
+define('HTTP_BASE_PATH', 'smarty.dev/performance/');
 define('ITERATIONS', 100);
 
 define('QUANTILE', (int) ITERATIONS / 4);
@@ -16,6 +16,7 @@ function invoke($test, $case, $factor, $method) {
         . '&case=' . $case 
         . '&factor=' . $factor 
         . '&method=' . $method;
+
     $t = file_get_contents($url);
     
     if (!$t || !strncmp($t, 'error:', 6)) {

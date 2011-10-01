@@ -21,7 +21,7 @@ if (empty($_GET['method']) || empty($methods[$_GET['method']])) {
     return;
 }
 
-require_once BASE_DIR . '../distribution/libs/Smarty.class.php';
+require_once BASE_DIR . '../trunk/distribution/libs/Smarty.class.php';
 require_once BASE_DIR . 'Benchmarker.php';
 require_once BASE_DIR . 'BenchmarkBase.php';
 

@@ -12,6 +12,7 @@
 $tests = array(
     'Eval' => array(1, 5, 10),
     'Snippets' => array(10, 100, 1000),
+    'Math' => array(10, 100, 1000),
 );
 
 /*
@@ -29,4 +30,8 @@ $cases = array(
         'IncludeInline' => 'using regular {include inline}s',
         'Function' => 'using template-{function}',
     ),
+    'Math' => array(
+        'Syntax' => 'using {$x * $y}',
+        'Function' => 'using {math equation="x*y"}',
+    )
 );
