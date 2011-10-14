@@ -22,7 +22,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
      *
      * @var mixed
      */
-    private $nocache_hash = null;
+    public $nocache_hash = null;
     /**
      * suppress generation of nocache code
      *
@@ -122,6 +122,58 @@ abstract class Smarty_Internal_TemplateCompilerBase {
     }
 
     /**
+     * Compiles the template source
+     *
+     * If the template is not evaluated the compiled template is saved on disk
+     * @param  Smarty_Internal_Template $template template object to compile
+    */
+    public function compileTemplateSource(Smarty_Internal_Template $template)
+    {
+        if (!$template->source->recompiled) {
+            $template->properties['file_dependency'] = array();
+            if ($template->source->components) {
+                // uses real resource for file dependency
+                $source = end($template->source->components);
+                $template->properties['file_dependency'][$template->source->uid] = array($template->source->filepath, $template->source->timestamp, $source->type);
+            } else {
+                $template->properties['file_dependency'][$template->source->uid] = array($template->source->filepath, $template->source->timestamp, $template->source->type);
+            }
+        }
+        if ($template->smarty->debugging) {
+            Smarty_Internal_Debug::start_compile($template);
+        }
+        // compile locking
+        if ($template->smarty->compile_locking && !$template->source->recompiled) {
+            if ($saved_timestamp = $template->compiled->timestamp) {
+                touch($template->compiled->filepath);
+            }
+        }
+        // call compiler
+        try {
+            $code = $this->compileTemplate($template);
+        } catch (Exception $e) {
+            // restore old timestamp in case of error
+            if ($template->smarty->compile_locking && !$template->source->recompiled && $saved_timestamp) {
+                touch($template->compiled->filepath, $saved_timestamp);
+            }
+            throw $e;
+        }
+        // compiling succeded
+        if (!$template->source->recompiled && $template->compiler->write_compiled_code) {
+            // write compiled template
+            $_filepath = $template->compiled->filepath;
+            if ($_filepath === false)
+                throw new SmartyException('getCompiledFilepath() did not return a destination to save the compiled template to');
+            Smarty_Internal_Write_File::writeFile($_filepath, $code, $template->smarty);
+            $template->compiled->exists = true;
+            $template->compiled->isCompiled = true;
+        }
+        if ($template->smarty->debugging) {
+            Smarty_Internal_Debug::end_compile($template);
+        }
+    }
+
+ /**
      * Method to compile a Smarty template
      *
      * @param  Smarty_Internal_Template $template template object to compile
@@ -139,6 +191,8 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         $this->tag_nocache = false;
         // save template object in compiler class
         $this->template = $template;
+        // reset has noche code flag
+        $this->template->has_nocache_code = false;
         $this->smarty->_current_file = $saved_filepath = $this->template->source->filepath;
         // template header code
         $template_header = '';

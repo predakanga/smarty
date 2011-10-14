@@ -5,7 +5,6 @@
  * @package PHPunit
  * @author Uwe Tews
  */
-require_once 'PHPUnit/Framework.php';
 
 define ('SMARTY_DIR', '../../distribution/libs/');
 
@@ -45,6 +44,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->registered_plugins = array();
         $smarty->default_plugin_handler_func = null;
         $smarty->registered_objects = array();
+        $smarty->default_modifiers = array();
         $smarty->registered_filters = array();
         $smarty->autoload_filters = array();
         $smarty->escape_html = false;
@@ -61,6 +61,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->error_unassigned = Smarty::UNASSIGNED_NOTICE;
         $smarty->caching_type = 'file';
         $smarty->cache_locking = false;
+        $smarty->default_resource_type = 'file';
     }
 
     public static function init()
@@ -95,6 +96,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
             $suite->addTestSuite($class);
         }
 
+        $_classes = array();
         foreach (new DirectoryIterator(dirname(__FILE__)) as $file) {
             if (!$file->isDot() && !$file->isDir() && (string) $file !== 'smartytests.php' && (string) $file !== 'smartytestssingle.php' && (string) $file !== 'smartytestsfile.php' && substr((string) $file, -4) === '.php') {
                 $class = basename($file, '.php');
@@ -104,11 +106,16 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
                     // that returns true only if all the conditions are met to run it successfully, for example
                     // it can check that an external library is present
                     if (!method_exists($class, 'isRunnable') || call_user_func(array($class, 'isRunnable'))) {
-                        $suite->addTestSuite($class);
+                        $_classes[] = $class;
                     }
                 }
             }
         }
+        sort($_classes);
+        foreach ($_classes as $class) {
+            $suite->addTestSuite($class);
+        }
+
         return $suite;
     }
 }

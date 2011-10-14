@@ -41,7 +41,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
                 $function = $compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier][0];
                 $object = '';
                 if ($compiler->smarty->use_reflection) {
-                    if ($result = Smarty_Internal_Reflection::injectObject($function, array('Smarty', 'Smarty_Internal_Template'),0)) {
+                    if ($result = $this->injectObject($function, array('Smarty', 'Smarty_Internal_Template'),0)) {
                         if ($result[0] == 'Smarty') {
                             $object = '$_smarty_tpl->smarty, ';
                         } else {
@@ -67,7 +67,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
                     $plugin = 'smarty_modifiercompiler_' . $modifier;
                     $object = null;
                     if ($compiler->smarty->use_reflection) {
-                        if ($result = Smarty_Internal_Reflection::injectObject('smarty_modifiercompiler_'.$modifier, array('Smarty', 'Smarty_Internal_Template'),0)) {
+                        if ($result = $this->injectObject('smarty_modifiercompiler_'.$modifier, array('Smarty', 'Smarty_Internal_Template'),0)) {
                             if ($result[0] == 'Smarty') {
                                 $object = $compiler->template->smarty;
                             } else {
@@ -85,7 +85,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
             } else if ($function = $compiler->getPlugin($modifier, Smarty::PLUGIN_MODIFIER)) {
                 $object = '';
                 if ($compiler->smarty->use_reflection) {
-                    if ($result = Smarty_Internal_Reflection::injectObject('smarty_modifier_'.$modifier, array('Smarty', 'Smarty_Internal_Template'),0)) {
+                    if ($result = $this->injectObject('smarty_modifier_'.$modifier, array('Smarty', 'Smarty_Internal_Template'),0)) {
                         if ($result[0] == 'Smarty') {
                             $object = '$_smarty_tpl->smarty, ';
                         } else {
@@ -103,7 +103,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
                 if (!is_object($compiler->smarty->security_policy) || $compiler->smarty->security_policy->isTrustedPhpModifier($modifier, $compiler)) {
                     $object = '';
                     if ($compiler->smarty->use_reflection) {
-                        if ($result = Smarty_Internal_Reflection::injectObject($modifier, array('Smarty', 'Smarty_Internal_Template'),0)) {
+                        if ($result = $this->injectObject($modifier, array('Smarty', 'Smarty_Internal_Template'),0)) {
                             if ($result[0] == 'Smarty') {
                                 $object = '$_smarty_tpl->smarty, ';
                             } else {

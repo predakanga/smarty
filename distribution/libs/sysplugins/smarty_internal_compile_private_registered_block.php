@@ -36,7 +36,7 @@ class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_C
     */
     public function compile($args, $compiler, $parameter, $tag)
     {
-        if (strlen($tag) < 6 || substr($tag,-5) != 'close') {
+        if (!isset($tag[5]) || substr($tag,-5) != 'close') {
             // opening tag of block plugin
             // check and get attributes
             $_attr = $this->getAttributes($compiler, $args);
@@ -49,39 +49,20 @@ class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_C
             } else {
                 $tag_info = $compiler->default_handler_plugins[Smarty::PLUGIN_BLOCK][$tag];
             }
-            // convert attributes into parameter array string
-            $_paramsArray = array();
-            foreach ($_attr as $_key => $_value) {
-                if (is_int($_key)) {
-                    $_paramsArray[] = "$_key=>$_value";
-                } elseif ($compiler->template->caching && in_array($_key,$tag_info[2])) {
-                    $_value = str_replace("'","^#^",$_value);
-                    $_paramsArray[] = "'$_key'=>^#^.var_export($_value,true).^#^";
-                } else {
-                    $_paramsArray[] = "'$_key'=>$_value";
-                }
-            }
-            $_params = 'array(' . implode(",", $_paramsArray) . ')';
+            $function = $tag_info[0];
+            // convert attributes into parameter string
+            $result = $this->getPluginParameterString($function,$_attr, $compiler, true);
 
-            $this->openTag($compiler, $tag, array($_params, $compiler->nocache));
+            $this->openTag($compiler, $tag, array($result, $compiler->nocache));
             // maybe nocache because of nocache variables or nocache plugin
             $compiler->nocache = !$tag_info[1] | $compiler->nocache | $compiler->tag_nocache;
-            $function = $tag_info[0];
-            $object = '$_smarty_tpl';
-            if ($compiler->smarty->use_reflection) {
-                if ($result = Smarty_Internal_Reflection::injectObject($function, array('Smarty', 'Smarty_Internal_Template'),2)) {
-                    if ($result[0] == 'Smarty') {
-                        $object = '$_smarty_tpl->smarty';
-                    }
-                }
-            }
             // compile code
             if (!is_array($function)) {
-                $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$_params}); \$_block_repeat=true; echo {$function}({$_params}, null, {$object}, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
+                $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$result['par']}); \$_block_repeat=true; echo {$function}({$result['par']}, null, {$result['obj']}, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
             } else if (is_object($function[0])) {
-                $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$_params}); \$_block_repeat=true; echo \$_smarty_tpl->smarty->registered_plugins['block']['{$tag}'][0][0]->{$function[1]}({$_params}, null, {$object}, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
+                $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$result['par']}); \$_block_repeat=true; echo \$_smarty_tpl->smarty->registered_plugins['block']['{$tag}'][0][0]->{$function[1]}({$result['par']}, null, {$result['obj']}, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
             } else {
-                $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$_params}); \$_block_repeat=true; echo {$function[0]}::{$function[1]}({$_params}, null, {$object}, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
+                $output = "<?php \$_smarty_tpl->smarty->_tag_stack[] = array('{$tag}', {$result['par']}); \$_block_repeat=true; echo {$function[0]}::{$function[1]}({$result['par']}, null, {$result['obj']}, \$_block_repeat);while (\$_block_repeat) { ob_start();?>";
             }
         } else {
             // must endblock be nocache?
@@ -90,21 +71,13 @@ class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_C
             }
             $base_tag = substr($tag, 0, -5);
             // closing tag of block plugin, restore nocache
-            list($_params, $compiler->nocache) = $this->closeTag($compiler, $base_tag);
+            list($result, $compiler->nocache) = $this->closeTag($compiler, $base_tag);
             // This tag does create output
             $compiler->has_output = true;
             if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_BLOCK][$base_tag])) {
                 $function = $compiler->smarty->registered_plugins[Smarty::PLUGIN_BLOCK][$base_tag][0];
             } else {
                 $function = $compiler->default_handler_plugins[Smarty::PLUGIN_BLOCK][$base_tag][0];
-            }
-            $object = '$_smarty_tpl';
-            if ($compiler->smarty->use_reflection) {
-                if ($result = Smarty_Internal_Reflection::injectObject($function, array('Smarty', 'Smarty_Internal_Template'),2)) {
-                    if ($result[0] == 'Smarty') {
-                        $object = '$_smarty_tpl->smarty';
-                    }
-                }
             }
             // compile code
             if (!isset($parameter['modifier_list'])) {
@@ -114,11 +87,11 @@ class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_C
                 $mod_post = 'echo '.$compiler->compileTag('private_modifier',array(),array('modifierlist'=>$parameter['modifier_list'],'value'=>'ob_get_clean()')).';';
             }
             if (!is_array($function)) {
-                $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo {$function}({$_params}, \$_block_content, {$object}, \$_block_repeat);".$mod_post." } array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
+                $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo {$function}({$result['par']}, \$_block_content, {$result['obj']}, \$_block_repeat);".$mod_post." } array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
             } else if (is_object($function[0])) {
-                $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo \$_smarty_tpl->smarty->registered_plugins['block']['{$base_tag}'][0][0]->{$function[1]}({$_params}, \$_block_content, {$object}, \$_block_repeat); ".$mod_post."} array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
+                $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo \$_smarty_tpl->smarty->registered_plugins['block']['{$base_tag}'][0][0]->{$function[1]}({$result['par']}, \$_block_content, {$result['obj']}, \$_block_repeat); ".$mod_post."} array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
             } else {
-                $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo {$function[0]}::{$function[1]}({$_params}, \$_block_content, {$object}, \$_block_repeat); ".$mod_post."} array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
+                $output = "<?php \$_block_content = ob_get_clean(); \$_block_repeat=false;".$mod_pre." echo {$function[0]}::{$function[1]}({$result['par']}, \$_block_content, {$result['obj']}, \$_block_repeat); ".$mod_post."} array_pop(\$_smarty_tpl->smarty->_tag_stack);?>";
             }
         }
         return $output . "\n";

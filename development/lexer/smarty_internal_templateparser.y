@@ -650,6 +650,10 @@ expr(res)        ::= value(v1) INSTANCEOF(i) ID(id). {
     res = v1.i.id;
 }
 
+expr(res)        ::= value(v1) INSTANCEOF(i) NAMESPACECLASS(c). {
+    res = v1.i.c;
+}
+
 expr(res)        ::= value(v1) INSTANCEOF(i) value(v2). {
     $this->prefix_number++;
     $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.v2.';?>';
@@ -758,8 +762,8 @@ value(res)       ::= ID(c) DOUBLECOLON static_class_access(r). {
 }
 
                   // static namepace class access
-value(res)       ::= NAMESPACECLASS(c) static_class_access(r). {
-            res = c.r;
+value(res)       ::= NAMESPACECLASS(c) DOUBLECOLON static_class_access(r). {
+            res = c.'::'.r;
 }
 
 value(res)    ::= varindexed(vi) DOUBLECOLON static_class_access(r). {

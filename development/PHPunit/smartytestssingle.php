@@ -5,7 +5,6 @@
  * @package PHPunit
  * @author Uwe Tews
  */
-require_once 'PHPUnit/Framework.php';
 
 define ('SMARTY_DIR', '../../distribution/libs/');
 
@@ -45,6 +44,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->registered_plugins = array();
         $smarty->default_plugin_handler_func = null;
         $smarty->registered_objects = array();
+        $smarty->default_modifiers = array();
         $smarty->registered_filters = array();
         $smarty->autoload_filters = array();
         $smarty->escape_html = false;
@@ -60,6 +60,8 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->error_reporting = null;
         $smarty->error_unassigned = Smarty::UNASSIGNED_NOTICE;
         $smarty->caching_type = 'file';
+        $smarty->cache_locking = false;
+        $smarty->default_resource_type = 'file';
     }
 
     public static function init()
@@ -78,7 +80,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     public static function suite()
     {
         $testorder = array(
-            'CompileIncludeTests'
+            'CompileAssignTests'
         );
         $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
         if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {

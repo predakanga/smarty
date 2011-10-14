@@ -170,7 +170,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testCompileTemplateFile()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $tpl->compileTemplateSource();
+        $tpl->compiler->compileTemplateSource($tpl);
     }
     /**
     * test that compiled template file exists

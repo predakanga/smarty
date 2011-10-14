@@ -24,11 +24,12 @@ function smarty_modifiercompiler_default ($params, $compiler)
     if (!isset($params[1])) {
         $params[1] = "''";
     }
-    for ($i = 1, $cnt = count($params); $i < $cnt; $i++) {
-        $output = preg_replace(array('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','/\$_smarty_tpl->config_vars->([0-9]*[a-zA-Z_]\w*)/'),array('$_smarty_tpl->getVariable(\'\1\', null, true, false)','$_smarty_tpl->getConfigVariable(\'\1\', null, true, false)'),$output);
-        $output = '(($tmp = @' . $output . ')===null||$tmp===\'\' ? ' . $params[$i] . ' : $tmp)';
+
+    array_shift($params);
+    foreach ($params as $param) {
+        $output = '(($tmp = @' . $output . ')===null||$tmp===\'\' ? ' . $param . ' : $tmp)';
     }
+    $output = preg_replace(array('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','/\$_smarty_tpl->config_vars->([0-9]*[a-zA-Z_]\w*)/'),array('$_smarty_tpl->getVariable(\'\1\', null, true, false)','$_smarty_tpl->getConfigVariable(\'\1\', null, true, false)'),$output);
     return $output;
 }
-
 ?>

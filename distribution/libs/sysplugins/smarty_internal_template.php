@@ -93,6 +93,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @var bool
      */
     public $allow_relative_path = false;
+    /**
+     * internal capture runtime stack
+     * @var array
+     */
+    public $_capture_stack = array();
 
     /**
      * Create template data object
@@ -155,58 +160,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return $this->mustCompile;
     }
 
-    /**
-     * Compiles the template
-     *
-     * If the template is not evaluated the compiled template is saved on disk
-     */
-    public function compileTemplateSource()
-    {
-        if (!$this->source->recompiled) {
-            $this->properties['file_dependency'] = array();
-            if ($this->source->components) {
-                // uses real resource for file dependency
-                $source = end($this->source->components);
-                $this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp, $source->type);
-            } else {
-                $this->properties['file_dependency'][$this->source->uid] = array($this->source->filepath, $this->source->timestamp, $this->source->type);
-            }
-        }
-        if ($this->smarty->debugging) {
-            Smarty_Internal_Debug::start_compile($this);
-        }
-        // compile locking
-        if ($this->smarty->compile_locking && !$this->source->recompiled) {
-            if ($saved_timestamp = $this->compiled->timestamp) {
-                touch($this->compiled->filepath);
-            }
-        }
-        // call compiler
-        try {
-            $code = $this->compiler->compileTemplate($this);
-        } catch (Exception $e) {
-            // restore old timestamp in case of error
-            if ($this->smarty->compile_locking && !$this->source->recompiled && $saved_timestamp) {
-                touch($this->compiled->filepath, $saved_timestamp);
-            }
-            throw $e;
-        }
-        // compiling succeded
-        if (!$this->source->recompiled && $this->compiler->write_compiled_code) {
-            // write compiled template
-            $_filepath = $this->compiled->filepath;
-            if ($_filepath === false)
-                throw new SmartyException('getCompiledFilepath() did not return a destination to save the compiled template to');
-            Smarty_Internal_Write_File::writeFile($_filepath, $code, $this->smarty);
-            $this->compiled->exists = true;
-            $this->compiled->isCompiled = true;
-        }
-        if ($this->smarty->debugging) {
-            Smarty_Internal_Debug::end_compile($this);
-        }
-        // release compiler object to free memory
-        unset($this->compiler);
-    }
 
     /**
      * Writes the cached template output
@@ -245,7 +198,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     {
         $cloned = false;
         // already in template cache?
-        $_templateId = sha1(join(DIRECTORY_SEPARATOR, $this->smarty->getTemplateDir()).$template . $cache_id . $compile_id);
+        $unique_template_name = Smarty_Resource::getUniqueTemplateName($this->smarty, $template);
+        $_templateId =  sha1($unique_template_name . $cache_id . $compile_id);
         if (isset($this->smarty->template_objects[$_templateId])) {
             // clone cached template object because of possible recursive call
             $tpl = clone $this->smarty->template_objects[$_templateId];
@@ -552,6 +506,41 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     }
 
     /**
+     * runtime error for not matching capture tags
+     *
+     */
+    public function capture_error()
+    {
+        throw new SmartyRuntimeException("Not matching {capture} open/close in \"{$this->template_resource}\"");
+    }
+
+    /**
+     * [util function] to use either var_export or unserialize/serialize to generate code for the
+     * cachevalue optionflag of {assign} tag
+     *
+     * @param mixed $var Smarty variable value
+     * @return string PHP inline code
+     */
+    public function _export_cache_value($var) {
+        if (is_int($var) || is_float($var) || is_bool($var) || is_string($var) || (is_array($var) && !is_object($var) && !array_reduce($var, array($this,'_check_array_callback')))) { return var_export($var,true); } 
+        if (is_resource($var)) { throw new SmartyException('Cannot serialize resource'); } 
+        return 'unserialize(\'' . serialize($var) . '\')';
+    }
+
+     /**
+     * callback used by _export_cache_value to check arrays recursively
+     *
+     * @param bool $flag status of previous elements
+     * @param mixed $element array element to check
+     * @return bool status
+     */
+   private function _check_array_callback($flag, $element) {
+        if (is_resource($element)) { throw new SmartyException('Cannot serialize resource'); } 
+        $flag = $flag || is_object($element) || (!is_int($element) && !is_float($element) && !is_bool($element) && !is_string($element) && (is_array($element) && array_reduce($element, array($this,'_check_array_callback'))));
+        return $flag;
+    }
+
+     /**
      * set Smarty property in template context
      *
      * @param string $property_name property name
@@ -594,7 +583,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 // cache template object under a unique ID
                 // do not cache eval resources
                 if ($this->source->type != 'eval') {
-                    $this->smarty->template_objects[sha1(join(DIRECTORY_SEPARATOR, $this->smarty->getTemplateDir()).$this->template_resource . $this->cache_id . $this->compile_id)] = $this;
+                    $_templateId = sha1($this->source->unique_resource . $this->cache_id . $this->compile_id);
+                    $this->smarty->template_objects[$_templateId] = $this;
                 }
                 return $this->source;
 

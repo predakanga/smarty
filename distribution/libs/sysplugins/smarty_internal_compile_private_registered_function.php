@@ -51,35 +51,16 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
         }
         // not cachable?
         $compiler->tag_nocache =  $compiler->tag_nocache || !$tag_info[1];
-        // convert attributes into parameter array string
-        $_paramsArray = array();
-        foreach ($_attr as $_key => $_value) {
-            if (is_int($_key)) {
-                $_paramsArray[] = "$_key=>$_value";
-            } elseif ($compiler->template->caching && in_array($_key,$tag_info[2])) {
-                $_value = str_replace("'","^#^",$_value);
-                $_paramsArray[] = "'$_key'=>^#^.var_export($_value,true).^#^";
-            } else {
-                $_paramsArray[] = "'$_key'=>$_value";
-            }
-        }
-        $_params = 'array(' . implode(",", $_paramsArray) . ')';
         $function = $tag_info[0];
-        $object = '$_smarty_tpl';
-        if ($compiler->smarty->use_reflection) {
-            if ($result = Smarty_Internal_Reflection::injectObject($function, array('Smarty', 'Smarty_Internal_Template'),0)) {
-                if ($result[0] == 'Smarty') {
-                    $object = '$_smarty_tpl->smarty';
-                }
-            }
-        }
-        // compile code
+        // convert attributes into parameter string
+        $result = $this->getPluginParameterString($function,$_attr, $compiler, false);
+         // compile code
         if (!is_array($function)) {
-            $output = "<?php echo {$function}({$_params},{$object});?>\n";
+            $output = "<?php echo {$function}({$result});?>\n";
         } else if (is_object($function[0])) {
-            $output = "<?php echo \$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['{$tag}'][0][0]->{$function[1]}({$_params},{$object});?>\n";
+            $output = "<?php echo \$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_FUNCTION]['{$tag}'][0][0]->{$function[1]}({$result});?>\n";
         } else {
-            $output = "<?php echo {$function[0]}::{$function[1]}({$_params},{$object});?>\n";
+            $output = "<?php echo {$function[0]}::{$function[1]}({$result});?>\n";
         }
         return $output;
     }
