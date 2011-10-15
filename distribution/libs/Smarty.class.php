@@ -1291,6 +1291,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
             }
         }
+        
+        // FIXME: uwe.tews default_plugin_handler should be called here, no?
+        
         // no plugin loaded
         return false;
     }

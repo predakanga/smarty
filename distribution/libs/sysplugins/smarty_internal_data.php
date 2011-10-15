@@ -325,6 +325,7 @@ class Smarty_Internal_Data {
         }
         if (isset($this->smarty->default_variable_handler_func)) {
             $value = null;
+            // FIXME: uwe.tews default handlers need the $template for context!
             if (call_user_func_array($this->smarty->default_variable_handler_func,array($_variable, &$value))) {
                 return new Smarty_Variable($value);
             }
@@ -369,6 +370,7 @@ class Smarty_Internal_Data {
         }
         if (isset($this->smarty->default_config_variable_handler_func)) {
             $value = null;
+            // FIXME: uwe.tews default handlers need the $template for context!
             if (call_user_func_array($this->smarty->default_config_variable_handler_func,array($_variable, &$value))) {
                 return new Smarty_Variable($value);
             }

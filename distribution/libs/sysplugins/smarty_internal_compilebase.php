@@ -221,7 +221,7 @@ abstract class Smarty_Internal_CompileBase {
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
         } else {
-            throw new Exception("callback must be function name (string) or object/class method array");
+            throw new SmartyException("callback must be function name (string) or object/class method array");
         }
 
         // get list of parameters
@@ -258,6 +258,7 @@ abstract class Smarty_Internal_CompileBase {
     * @param mixed callback function or class method to be parsed
     * @param array $params parameter from template
     * @return mixed data
+    * @throws SmartyCompilerException
     */
     public function getPluginParameterString($callback, $params, $compiler, $block, $cache_attr = null) {
         if (is_string($callback)) {
@@ -267,7 +268,7 @@ abstract class Smarty_Internal_CompileBase {
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
         } else {
-            throw new Excption("callback must be function name (string) or object/class method array");
+            throw new CompilerExcption("callback must be function name (string) or object/class method array");
         }
         $object = '$_smarty_tpl';
         if ($compiler->smarty->use_reflection && $result = $this->injectObject($callback, array('Smarty', 'Smarty_Internal_Template'))) {
@@ -278,8 +279,9 @@ abstract class Smarty_Internal_CompileBase {
                 $par_array = array();
                 $par_names = array();
                 $parameters = $reflection->getParameters();
-                for ($i = 1, $to = count($parameters); $i < $to; $i++) {
-                    $par = $parameters[$i];
+                // lose first argument, since it must've been Smarty or Smarty_Internal_Template
+                array_shift($parameters);
+                foreach ($parameters as $par) {
                     $name = $par->getName();
                     $par_names[$name] = true;
                     $optional = $par->isOptional();
@@ -293,17 +295,19 @@ abstract class Smarty_Internal_CompileBase {
                     } elseif ($optional) {
                         $value = $par->getDefaultValue();
                         $par_array[] = var_export($value,true);
-                     } else {
-                        throw new Exception("missing parameter {$name}");
-                    }
-                    foreach ($params as $key => $value) {
-                        if (is_int($key)) {
-                            $par_array[] = "$key=>$value";
-                        } elseif (!isset($par_names[$key])) {
-                            throw new Exception("undefined parameter {$name}");
-                        }
+                    } else {
+                        throw new SmartyCompilerException("missing parameter {$name}");
                     }
                 }
+                
+                foreach ($params as $key => $value) {
+                    if (is_int($key)) {
+                        $par_array[] = "$key=>$value";
+                    } elseif (!isset($par_names[$key])) {
+                        throw new SmartyCompilerException("undefined parameter {$name}");
+                    }
+                }
+
                 return $object . ', ' . implode(",", $par_array);
             }
         }
