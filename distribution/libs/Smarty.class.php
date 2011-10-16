@@ -93,6 +93,7 @@ include_once SMARTY_SYSPLUGINS_DIR.'smarty_resource.php';
 include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_resource_file.php';
 include_once SMARTY_SYSPLUGINS_DIR.'smarty_cacheresource.php';
 include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_cacheresource_file.php';
+include_once SMARTY_SYSPLUGINS_DIR.'smarty_compiled.php';
 
 /**
 * This is the main Smarty class
@@ -514,10 +515,20 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $registered_resources = array();
     /**
+    * resource handler cache
+    * @var array
+    */
+    public $_resource_handlers = array();
+    /**
     * registered cache resources
     * @var array
     */
     public $registered_cache_resources = array();
+    /**
+    * cache resource handler cache
+    * @var array
+    */
+    public $_cacheresource_handlers = array();
     /**
     * autoload filter
     * @var array
@@ -612,6 +623,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             $this->assignGlobal('SCRIPT_NAME', $_SERVER['SCRIPT_NAME']);
         }
     }
+
 
     /**
     * Class destructor
@@ -1190,7 +1202,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // default to cache_id and compile_id of Smarty object
         $cache_id = $cache_id === null ? $this->cache_id : $cache_id;
         $compile_id = $compile_id === null ? $this->compile_id : $compile_id;
-        $update_var_container = false;
         // already in template cache?
         $unique_template_name = Smarty_Resource::getUniqueTemplateName($this, $template);
         $_templateId =  sha1($unique_template_name . $cache_id . $compile_id);
@@ -1201,29 +1212,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 $tpl->smarty = clone $tpl->smarty;
                 $tpl->parent = $parent;
             } else {
-                $tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id, null, null, true);
+                $tpl = new $this->template_class($template, clone $this, $parent, $cache_id, $compile_id, null, null);
             }
-            $update_var_container = true;
         } else {
             if (isset($this->template_objects[$_templateId])) {
                 // return cached template object
                 $tpl = $this->template_objects[$_templateId];
             } else {
-                $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id, null ,null, true);
-                $update_var_container = true;
-            }
-        }
-        if ($update_var_container) {
-            if ($parent != null) {
-                $tpl->tpl_vars = clone $parent->tpl_vars;
-                $tpl->tpl_vars->__smarty__data = $tpl;
-                $tpl->config_vars =  clone $parent->config_vars;
-                $tpl->config_vars->__smarty__data = $tpl;
-            } else {
-                $tpl->tpl_vars = new Smarty_Variable_Container();
-                $tpl->tpl_vars->__smarty__data = $tpl;
-                $tpl->config_vars = new Smarty_Config_Variable_Container();
-                $tpl->config_vars->__smarty__data = $tpl;
+                $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id, null ,null);
             }
         }
         // fill data if present
@@ -1249,8 +1245,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
     public function loadPlugin($plugin_name, $check = true)
     {
         // if function or class exists, exit silently (already loaded)
-        if ($check && (is_callable($plugin_name) || class_exists($plugin_name, false)))
+        if ($check && (is_callable($plugin_name) || class_exists($plugin_name, false))) {
         return true;
+        }
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $_name_parts = explode('_', $plugin_name, 3);
         // class name must have three parts to be valid plugin
@@ -1271,6 +1268,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         }
         // plugin filename is expected to be: [type].[name].php
         $_plugin_filename = "{$_name_parts[1]}.{$_name_parts[2]}.php";
+
         // loop through plugin dirs and find the plugin
         foreach($this->getPluginsDir() as $_plugin_dir) {
             $names = array(
@@ -1291,9 +1289,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 }
             }
         }
-        
-        // FIXME: uwe.tews default_plugin_handler should be called here, no?
-        
+
         // no plugin loaded
         return false;
     }
@@ -1501,6 +1497,7 @@ function smartyAutoload($class)
     'smarty_resource_custom' => true,
     'smarty_resource_uncompiled' => true,
     'smarty_resource_recompiled' => true,
+    'smarty_compiled' => true,
     );
 
     if (!strncmp($_class, 'smarty_internal_', 16) || isset($_classes[$_class])) {

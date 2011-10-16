@@ -186,7 +186,7 @@ abstract class Smarty_Internal_CompileBase {
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
         } else {
-            throw new Excption("callback must be function name (string) or object/class method array");
+            throw new SmartyException("callback must be function name (string) or object/class method array");
         }
         // get PHPdoc data
         $doc = $reflection->getDocComment();
@@ -268,19 +268,30 @@ abstract class Smarty_Internal_CompileBase {
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
         } else {
-            throw new CompilerExcption("callback must be function name (string) or object/class method array");
+            throw new CompilerException("callback must be function name (string) or object/class method array");
         }
         $object = '$_smarty_tpl';
         if ($compiler->smarty->use_reflection && $result = $this->injectObject($callback, array('Smarty', 'Smarty_Internal_Template'))) {
             if ($result[0] == 'Smarty') {
                 $object = '$_smarty_tpl->smarty';
             }
-            if ($result[0] == 0 && !$block) {
+            if ($result[0] == 0) {
                 $par_array = array();
                 $par_names = array();
                 $parameters = $reflection->getParameters();
                 // lose first argument, since it must've been Smarty or Smarty_Internal_Template
                 array_shift($parameters);
+                if ($block) {
+                    if ($parameters[0]->getName() != 'content') {
+                         $compiler->trigger_template_error("block plugin does not define parameter '{content}'", $compiler->lex->taglineno);
+                    }
+                    if ($parameters[1]->getName() != 'repeat') {
+                         $compiler->trigger_template_error("block plugin does not define parameter '{repeat}'", $compiler->lex->taglineno);
+                    }
+                    // skip $content and $repeat position
+                    array_shift($parameters);
+                    array_shift($parameters);
+                }
                 foreach ($parameters as $par) {
                     $name = $par->getName();
                     $par_names[$name] = true;
@@ -296,18 +307,20 @@ abstract class Smarty_Internal_CompileBase {
                         $value = $par->getDefaultValue();
                         $par_array[] = var_export($value,true);
                     } else {
-                        throw new SmartyCompilerException("missing parameter {$name}");
+                        $compiler->trigger_template_error("missing required plugin parameter '{$name}'", $compiler->lex->taglineno);
                     }
                 }
-                
+
                 foreach ($params as $key => $value) {
                     if (is_int($key)) {
                         $par_array[] = "$key=>$value";
                     } elseif (!isset($par_names[$key])) {
-                        throw new SmartyCompilerException("undefined parameter {$name}");
+                         $compiler->trigger_template_error("plugin does not define parameter '{$name}'", $compiler->lex->taglineno);
                     }
                 }
-
+                if ($block) {
+                    return $object . ', __content__, $_block_repeat, ' . implode(",", $par_array);
+                }
                 return $object . ', ' . implode(",", $par_array);
             }
         }
@@ -326,8 +339,27 @@ abstract class Smarty_Internal_CompileBase {
         if ($block) {
             return array('par' => $arr, 'obj' => $object);
         } else {
-        return 'array(' . implode(",", $par_array) . '),'.$object;
+            return 'array(' . implode(",", $par_array) . '),'.$object;
         }
+    }
+    /**
+    * Get number of required parameters
+    *
+    * @param mixed callback function or class method to be parsed
+    * @return int number of required parameter
+    * @throws SmartyCompilerException
+    */
+    public function getNoOfRequiredParameter($callback) {
+        if (is_string($callback)) {
+            $reflection = new ReflectionFunction($callback);
+        } elseif (is_array($callback)) {
+            $cn = is_object($callback[0]) ? 'ReflectionObject' : 'ReflectionClass';
+            $reflection = new $cn($callback[0]);
+            $reflection = $reflection->getMethod($callback[1]);
+        } else {
+            throw new CompilerException("callback must be function name (string) or object/class method array");
+        }
+        return $reflection->getNumberOfRequiredParameters();
     }
 }
 ?>

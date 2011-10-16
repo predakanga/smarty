@@ -35,7 +35,6 @@ class CompileNocacheTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('foo', 2);
         $this->smarty->assign('bar', 'B');
         $content = $this->smarty->fetch('test_nocache_tag.tpl');
-        var_dump($content);
         $this->assertContains("root 4B", $content);
         $this->assertContains("include 6B", $content);
     }

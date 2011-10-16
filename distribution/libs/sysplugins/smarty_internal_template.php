@@ -16,7 +16,7 @@
  * @subpackage Template
  *
  * @property Smarty_Template_Source   $source
- * @property Smarty_Template_Compiled $compiled
+ * @property Smarty_Compiled $compiled
  * @property Smarty_Template_Cached   $cached
  */
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
@@ -115,10 +115,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public function __construct($template_resource, $smarty, $_parent = null, $_cache_id = null, $_compile_id = null, $_caching = null, $_cache_lifetime = null, $no_var_container = false)
     {
-        // create variable container
-        if (!$no_var_container) {
-            parent::__construct();
-        }
+        // set up local variable scope
+        parent::__construct();
+
         $this->smarty = &$smarty;
         // Smarty parameter
         $this->cache_id = $_cache_id === null ? $this->smarty->cache_id : $_cache_id;
@@ -237,7 +236,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 $tpl->tpl_vars->$_key = new Smarty_variable($_val);
             }
         }
-        $result = $tpl->fetch(null, null, null, null, false, true);
+        $result = $tpl->fetch(null, null, null, null, false, true, false);
         if ($cloned) {
             unset($tpl->tpl_vars, $tpl->config_vars, $tpl);
         }
@@ -429,7 +428,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         } else {
             $this->mustCompile = !$is_valid;
         }
-        // store data in reusable Smarty_Template_Compiled
+        // store data in reusable Smarty_Compiled
         if (!$cache) {
             $this->compiled->_properties = $properties;
         }
@@ -515,6 +514,19 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     }
 
     /**
+    * Empty cache for this template
+    *
+    * @param integer $exp_time      expiration time
+    * @return integer number of cache files deleted
+    */
+    public function clearCache($exp_time=null)
+    {
+        Smarty_CacheResource::invalidLoadedCache($this->smarty);
+        return $this->cached->handler->clear($this->smarty, $this->template_name, $this->cache_id, $this->compile_id, $exp_time);
+    }
+
+
+    /**
      * [util function] to use either var_export or unserialize/serialize to generate code for the
      * cachevalue optionflag of {assign} tag
      *
@@ -522,8 +534,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @return string PHP inline code
      */
     public function _export_cache_value($var) {
-        if (is_int($var) || is_float($var) || is_bool($var) || is_string($var) || (is_array($var) && !is_object($var) && !array_reduce($var, array($this,'_check_array_callback')))) { return var_export($var,true); } 
-        if (is_resource($var)) { throw new SmartyException('Cannot serialize resource'); } 
+        if (is_int($var) || is_float($var) || is_bool($var) || is_string($var) || (is_array($var) && !is_object($var) && !array_reduce($var, array($this,'_check_array_callback')))) { return var_export($var,true); }
+        if (is_resource($var)) { throw new SmartyException('Cannot serialize resource'); }
         return 'unserialize(\'' . serialize($var) . '\')';
     }
 
@@ -535,7 +547,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @return bool status
      */
    private function _check_array_callback($flag, $element) {
-        if (is_resource($element)) { throw new SmartyException('Cannot serialize resource'); } 
+        if (is_resource($element)) { throw new SmartyException('Cannot serialize resource'); }
         $flag = $flag || is_object($element) || (!is_int($element) && !is_float($element) && !is_bool($element) && !is_string($element) && (is_array($element) && array_reduce($element, array($this,'_check_array_callback'))));
         return $flag;
     }
@@ -589,7 +601,13 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 return $this->source;
 
             case 'compiled':
-                $this->compiled = $this->source->getCompiled($this);
+                // check runtime cache
+                $_cache_key = $this->source->unique_resource . '#' . $this->compile_id;
+                if (isset(Smarty_Compiled::$compileds[$_cache_key])) {
+                    $this->compiled =  Smarty_Compiled::$compileds[$_cache_key];
+                } else {
+                    $this->compiled = Smarty_Compiled::$compileds[$_cache_key] = new Smarty_Compiled($this);
+                }
                 return $this->compiled;
 
             case 'cached':

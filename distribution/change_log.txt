@@ -1,4 +1,13 @@
 ﻿===== Smarty 3.2-DEV  =====
+16.10.2011
+- pass context object to default variable handlers
+- add support of function and block plugins which use real parameter instead $params array
+- moved compiled object into its own file smarty_compiled.php
+- moved parts of fetch() code into classes it belongs to
+- bugfix cached template objects must save/restore local variables in fetch()
+- add modifier checks for required parameter
+- merging 3.1 patches
+
 14.10.2011
 - add {$x = $k cachevalue} to make the value of $k available as nocache variable $x (Forum Topic 20123)
 - removed traceback information from Smarty exceptions
@@ -21,8 +30,16 @@
 - optimization of variable container handling
 
 ===== trunk  =====
+16.10.2011
+- bugfix testInstall() did not propery check cache_dir and compile_dir
+
+15.10.2011
+- bugfix Smarty_Resource and Smarty_CacheResource runtime caching (Forum Post 75264)
+
 14.10.2011
 - bugfix unique_resource did not properly apply to compiled resources (Forum Topic 20128)
+- add locking to custom resources (Forum Post 75252)
+- add Smarty_Internal_Template::clearCache() to accompany isCached() fetch() etc.
 
 13.10.2011
 - add caching for config files in Smarty_Resource
