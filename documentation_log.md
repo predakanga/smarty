@@ -5,6 +5,9 @@ these changes must reflect on the documentation at some point…
 ## Undocumented ##
 
 * $error_unassigned
+* $security_class
+* $security_policy
+* $plugin_search_order
 * $_file_perms
 * $_dir_perms
 * $default_plugin_handler_func

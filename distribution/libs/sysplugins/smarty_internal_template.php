@@ -15,50 +15,59 @@
  * @package Smarty
  * @subpackage Template
  *
- * @property Smarty_Template_Source   $source
- * @property Smarty_Compiled $compiled
- * @property Smarty_Template_Cached   $cached
+ * @property Smarty_Template_Source                 $source
+ * @property Smarty_Compiled                        $compiled
+ * @property Smarty_Template_Cached                 $cached
+ * @property Smarty_Internal_SmartyTemplateCompiler $compiler
  */
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
 
     /**
      * cache_id
      * @var string
+     * @link http://www.smarty.net/docs/en/variable.cache.id.tpl
      */
     public $cache_id = null;
     /**
      * $compile_id
      * @var string
+     * @link http://www.smarty.net/docs/en/variable.compile.id.tpl
      */
     public $compile_id = null;
     /**
      * caching enabled
      * @var boolean
+     * @link http://www.smarty.net/docs/en/variable.caching.tpl
      */
     public $caching = null;
     /**
      * cache lifetime in seconds
      * @var integer
+     * @link http://www.smarty.net/docs/en/variable.cache.lifetime.tpl
      */
     public $cache_lifetime = null;
     /**
      * Template resource
      * @var string
+     * @internal
      */
     public $template_resource = null;
     /**
      * flag if compiled template is invalid and must be (re)compiled
-     * @var bool
+     * @var boolean
+     * @internal
      */
     public $mustCompile = null;
     /**
      * flag if template does contain nocache code sections
-     * @var bool
+     * @var boolean
+     * @internal
      */
     public $has_nocache_code = false;
     /**
      * special compiled and cached template properties
      * @var array
+     * @internal
      */
     public $properties = array('file_dependency' => array(),
         'nocache_hash' => '',
@@ -66,36 +75,43 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     /**
      * required plugins
      * @var array
+     * @internal
      */
     public $required_plugins = array('compiled' => array(), 'nocache' => array());
     /**
      * Global smarty instance
      * @var Smarty
+     * @internal
      */
     public $smarty = null;
     /**
      * blocks for template inheritance
      * @var array
+     * @internal
      */
     public $block_data = array();
     /**
      * variable filters
      * @var array
+     * @internal
      */
     public $variable_filters = array();
     /**
      * optional log of tag/attributes
      * @var array
+     * @internal
      */
     public $used_tags = array();
     /**
      * internal flag to allow relative path in child template blocks
-     * @var bool
+     * @var boolean
+     * @internal
      */
     public $allow_relative_path = false;
     /**
      * internal capture runtime stack
      * @var array
+     * @internal
      */
     public $_capture_stack = array();
 
@@ -511,6 +527,18 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     public function capture_error()
     {
         throw new SmartyRuntimeException("Not matching {capture} open/close in \"{$this->template_resource}\"");
+    }
+    
+    /**
+     * Get Template Configuration Information
+     *
+     * @param boolean $html return formatted HTML, array else
+     * @return string|array configuration information
+     */
+    public function info($html=true)
+    {
+        $info = new Smarty_Internal_Info($this->smarty, $this);
+        return $html ? $info->getHtml() : $info->getArray();
     }
 
     /**
