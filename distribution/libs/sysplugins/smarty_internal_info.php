@@ -94,11 +94,8 @@ class Smarty_Internal_Info
         $this->analyzeProperties();
         // TODO: analyze directories (see testInstall())
         // TODO: analyze security
-        // TODO: analyze resource handlers
-        // TODO: analyze cache resource handlers
+        // TODO: analyze cache resource handler availabilty
         // TODO: analyze plugins
-        // TODO: analyze variables
-        // TODO: analyze config
 
         $this->data = array(
             'na' => '#!$#notappliccable#$!#',
@@ -241,6 +238,10 @@ class Smarty_Internal_Info
             
             case 'string':
                 $value = (string) $value;
+                break;
+            
+            case 'callable':
+                $value = $value ? '(function)' : null;
                 break;
         }
 

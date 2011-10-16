@@ -40,11 +40,13 @@
         .not-appliccable {}
         
         .integer {}
+        .callable {}
         .float {}
         .array {}
         .object {}
         .resource {}
         .string {}
+        .directory {}
         .empty,
         .null,
         .boolean,
@@ -133,6 +135,140 @@
         {/foreach}
         </tbody>
     </table>
+</section>
+
+<section>
+    <header>
+        <h1 id="filesystem">Filesystem</h1>
+    </header>
+    
+    {*
+        template_dir
+        compile_dir
+        config_dir 
+        cache_dir
+        plugins_dir
+    *}
+    
+    <dl>
+        <dt id="filesystem-template-dir">$template_dir</dt>
+        <dd>
+            <table>
+                <thead>
+                    <tr>
+                        <th>index</th>
+                        <th>Configured</th>
+                        <th>Realpath</th>
+                        <th>Readable</th>
+                        <th>Writable</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="type">(int)</span> <span class="integer">0</span></td>
+                        <td><span class="directory">./templates</span></td>
+                        <td><span class="directory">/var/www/templates</span></td>
+                        <td><span class="boolean">TRUE</span></td>
+                        <td><span class="boolean">FALSE</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+    
+</section>
+
+<section>
+    <header>
+        <h1 id="plugins">Plugins</h1>
+    </header>
+    
+    {*
+        function
+        modifier (compilermodifier)
+        block
+        compiler
+        prefilter
+        postfilter
+        outputfilter
+        insert (deprecated)
+    *}
+
+    <dl>
+        <dt id="plugins-prefilter">Prefilter Plugins</dt>
+        <dd>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Function</th>
+                        <th>$autoload_filters</th>
+                        <th>Origin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>foobar</td>
+                        <td>smarty_prefilter_foobar()</td>
+                        <td><span class="boolean">FALSE</span></td>
+                        <td><span class="directory">/var/foo/plugins</span></td>
+                    </tr>
+                    <tr>
+                        <td>foobar</td>
+                        <td>smarty_prefilter_foobar()</td>
+                        <td><span class="boolean">TRUE</span></td>
+                        <td><em>registered</em></td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+        <dt id="plugins-function">Function Plugins</dt>
+        <dd>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Function</th>
+                        <th>No-Cache</th>
+                        <th>Cached Attributes</th>
+                        <th>Origin</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>foobar</td>
+                        <td>smarty_function_foobar()</td>
+                        <td><span class="boolean">FALSE</span></td>
+                        <td>$param1, $param2, $param3</td>
+                        <td><span class="directory">/var/foo/plugins</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+</section>
+
+<section>
+    <header>
+        <h1 id="security">Smarty Security</h1>
+    </header>
+    
+    {*
+        php_handling (wtf?)
+        secure_dir (template_dir config_dir) -> also in {fetch}
+        trusted_dir
+        static_classes (registered_classes?)
+        php_functions
+        php_modifiers
+        allowed_tags, disabled_tags
+        allowed_modifiers, disabled_modifiers
+        streams
+        allow_constants
+        allow_super_globals
+        
+    *}
+
 </section>
 
 </body>
