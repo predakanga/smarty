@@ -60,9 +60,9 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
                     if ($compiler->smarty->use_reflection) {
                         if ($result = $this->injectObject($plugin, array('Smarty', 'Smarty_Internal_Template'),0)) {
                             if ($result[0] == 'Smarty') {
-                                $object = '$_smarty_tpl->smarty, ';
+                                $object = $compiler->template->smarty;
                             } else {
-                                $object = '$_smarty_tpl, ';
+                                $object = $compiler->template;
                             }
                         }
                     }
