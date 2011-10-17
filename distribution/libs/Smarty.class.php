@@ -1022,14 +1022,21 @@ class Smarty extends Smarty_Internal_TemplateBase {
     /**
      * Set plugins directory
      *
+     * Adds {@link SMARTY_PLUGINS_DIR} if not specified
      * @param string|array $plugins_dir directory(s) of plugins
      * @return Smarty current Smarty instance for chaining
      */
     public function setPluginsDir($plugins_dir)
     {
         $this->plugins_dir = array();
-        foreach ((array)$plugins_dir as $k => $v) {
-            $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
+        foreach ((array)$plugins_dir as $v) {
+            $this->plugins_dir[] = rtrim($v, '/\\') . DS;
+        }
+        
+        // add SMARTY_PLUGINS_DIR if not present
+        $lookup = array_flip($this->plugins_dir);
+        if (!isset($lookup[SMARTY_PLUGINS_DIR])) {
+            array_unshift($this->plugins_dir, SMARTY_PLUGINS_DIR);
         }
 
         return $this;
