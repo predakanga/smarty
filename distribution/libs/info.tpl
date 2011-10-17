@@ -39,6 +39,9 @@
         }
         .not-appliccable {}
         
+        .error {
+            background: #FF9999;
+        }
         .integer {}
         .callable {}
         .float {}
@@ -47,6 +50,9 @@
         .resource {}
         .string {}
         .directory {}
+        .filename {}
+        .classname {}
+        .line {}
         .empty,
         .null,
         .boolean,
@@ -92,6 +98,32 @@
     </hgroup>
 </header>
 
+{if $data.errors}
+    <section>
+        <header>
+            <h1 id="errors">{$data.errors|@count} Errors</h1>
+        </header>
+        <ul>
+        {foreach $data.errors as $error}
+            <li><a href="#{$error@key|escape}">{$error|escape}</a></li>
+        {/foreach}
+        </ul>
+    </section>
+{/if}
+{if $data.warnings}
+    <section>
+        <header>
+            <h1 id="errors">{$data.warnings|@count} Warnings</h1>
+        </header>
+        <ul>
+        {foreach $data.warnings as $warning}
+            <li><a href="#{$warning@key|escape}">{$warning|escape}</a></li>
+        {/foreach}
+        </ul>
+    </section>
+{/if}
+
+{if $data.php}
 <section>
     <header>
         <h1 id="php-environment">PHP Environment</h1>
@@ -100,7 +132,9 @@
     {$data.php|var_dump}
     
 </section>
+{/if}
 
+{if $data.properties}
 <section>
     <header>
         <h1 id="properties">Properties</h1>
@@ -119,7 +153,7 @@
         <tbody>
         {foreach $data.properties as $prop}
             <tr>
-                <th><a href="{$prop.link|escape}" title="{$prop.name|escape}">{$prop@key|escape}</a></th>
+                <th id="properties-{$prop@key|escape}"><a href="{$prop.link|escape}" title="{$prop.name|escape}">{$prop@key|escape}</a></th>
                 {if $_template}
                     {if $prop.template !== "#!$#notappliccable#$!#"}
                         <td class="{if $prop.template_diff}diff{else}equal{/if}">
@@ -136,111 +170,149 @@
         </tbody>
     </table>
 </section>
+{/if}
 
+{if $data.filesystem}
 <section>
     <header>
         <h1 id="filesystem">Filesystem</h1>
     </header>
-    
-    {*
-        template_dir
-        compile_dir
-        config_dir 
-        cache_dir
-        plugins_dir
-    *}
-    
+
     <dl>
-        <dt id="filesystem-template-dir">$template_dir</dt>
+        {foreach $data.filesystem as $d => $directories}
+        <dt id="filesystem-{$d|escape}">
+            {if $d == "template_dir"}Template Directories
+            {elseif $d == "config_dir"}Config Directories
+            {elseif $d == "plugins_dir"}Plugins Directories
+            {elseif $d == "cache_dir"}Cache Directory
+            {elseif $d == "compile_dir"}Compile Directory
+            {else}{$d|escape}
+            {/if}
+        </dt>
         <dd>
             <table>
                 <thead>
                     <tr>
-                        <th>index</th>
+                        <th>Key</th>
                         <th>Configured</th>
+                        <th>Include_Path</th>
                         <th>Realpath</th>
                         <th>Readable</th>
                         <th>Writable</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {foreach $directories as $dir}
                     <tr>
-                        <td><span class="type">(int)</span> <span class="integer">0</span></td>
-                        <td><span class="directory">./templates</span></td>
-                        <td><span class="directory">/var/www/templates</span></td>
-                        <td><span class="boolean">TRUE</span></td>
-                        <td><span class="boolean">FALSE</span></td>
+                        {if $dir.key !== null}
+                            <td>{prettyprint value=$dir.key}</td>
+                        {else}
+                            <td class="not-appliccable"></td>
+                        {/if}
+                        <td><span class="directory">{$dir.path|escape}</span></td>
+                        <td><span class="directory">{$dir.includepath|escape}</span></td>
+                        <td><span class="directory">{$dir.realpath|escape}</span></td>
+                        {if $dir.error}
+                            <td colspan="2" class="error">{$dir.error|escape}</td>
+                        {else}
+                            <td>{prettyprint value=$dir.readable}</td>
+                            <td>{prettyprint value=$dir.writable}</td>
+                        {/if}
                     </tr>
+                    {/foreach}
                 </tbody>
             </table>
         </dd>
+        {/foreach}
     </dl>
     
 </section>
+{/if}
 
+{if $data.plugins}
 <section>
     <header>
         <h1 id="plugins">Plugins</h1>
     </header>
     
-    {*
-        function
-        modifier (compilermodifier)
-        block
-        compiler
-        prefilter
-        postfilter
-        outputfilter
-        insert (deprecated)
-    *}
-
+    <p>
+        TODO: show function signature (default or reflected), nocache-attributes, file+line of registered plugins
+    </p>
+ 
     <dl>
-        <dt id="plugins-prefilter">Prefilter Plugins</dt>
+        {foreach $data.plugins as $p => $plugins}
+        <dt id="plugins-{$p|escape}">
+            {if $p == "function"}Function Plugins
+            {elseif $p == "modifier"}Modifier Plugins
+            {elseif $p == "modifiercompiler"}Compiled Modifier Plugins
+            {elseif $p == "block"}Block Plugins
+            {elseif $p == "compiler"}Compiler Plugins
+            {elseif $p == "prefilter"}Prefilter Plugins
+            {elseif $p == "postfilter"}Postfilter Plugins
+            {elseif $p == "outputfilter"}Outputfilter Plugins
+            {elseif $p == "variablefilter"}Variablefilter Plugins
+            {elseif $p == "insert"}Insert Plugins
+            {elseif $p == "resource"}Resource Plugins
+            {elseif $p == "cacheresource"}CacheResource Plugins
+            {else}{$p|escape}
+            {/if}
+        </dt>
         <dd>
             <table>
                 <thead>
                     <tr>
                         <th>Name</th>
                         <th>Function</th>
-                        <th>$autoload_filters</th>
+                        <th>attrs…</th>
                         <th>Origin</th>
                     </tr>
                 </thead>
                 <tbody>
+                    {foreach $plugins as $plugin}
                     <tr>
-                        <td>foobar</td>
-                        <td>smarty_prefilter_foobar()</td>
-                        <td><span class="boolean">FALSE</span></td>
-                        <td><span class="directory">/var/foo/plugins</span></td>
+                        <td id="plugins-{$p|escape}-{$plugin.name|escape}">{$plugin.name|escape}</td>
+                        <td>---</td>
+                        <td>---</td>
+                        <td><span class="directory">{$plugin.realpath}</span></td>
                     </tr>
-                    <tr>
-                        <td>foobar</td>
-                        <td>smarty_prefilter_foobar()</td>
-                        <td><span class="boolean">TRUE</span></td>
-                        <td><em>registered</em></td>
-                    </tr>
+                    {/foreach}
                 </tbody>
             </table>
         </dd>
-        <dt id="plugins-function">Function Plugins</dt>
+        {/foreach}
+    </dl>
+
+</section>
+{/if}
+
+{if $data.registered}
+<section>
+    <header>
+        <h1 id="registered">Registered Elements</h1>
+    </header>
+    
+    {*
+        registered_objects
+        registered_classes
+        registered_filters
+        registered_resources
+        registered_cache_resources
+    *}
+    
+    <dl>
+        <dt id="registered-objects">Registered Objects</dt>
         <dd>
             <table>
                 <thead>
                     <tr>
                         <th>Name</th>
-                        <th>Function</th>
-                        <th>No-Cache</th>
-                        <th>Cached Attributes</th>
-                        <th>Origin</th>
+                        <th>Class</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>foobar</td>
-                        <td>smarty_function_foobar()</td>
-                        <td><span class="boolean">FALSE</span></td>
-                        <td>$param1, $param2, $param3</td>
-                        <td><span class="directory">/var/foo/plugins</span></td>
+                        <td><span class="string">foo</span></td>
+                        <td><span class="classname">Foo_Bar</span></td>
                     </tr>
                 </tbody>
             </table>
@@ -248,7 +320,44 @@
     </dl>
 
 </section>
+{/if}
 
+{if $data.defaults}
+<section>
+    <header>
+        <h1 id="default-variable-handling">Default Variable Handling</h1>
+    </header>
+    
+    {*
+        default_modifiers
+        registered_filters [variable]
+        autoload_filters [variable]
+    *}
+    
+    <dl>
+        <dt id="default-variable-handling-modifiers">Default Modifiers</dt>
+        <dd>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Function</th>
+                        <th>Defined in</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><span class="callable">smarty_foo</span></td>
+                        <td><span class="filename">/foo/bar/foo.php</span> <span class="line">99</span></td>
+                    </tr>
+                </tbody>
+            </table>
+        </dd>
+    </dl>
+
+</section>
+{/if}
+
+{if $data.security}
 <section>
     <header>
         <h1 id="security">Smarty Security</h1>
@@ -270,6 +379,7 @@
     *}
 
 </section>
+{/if}
 
 </body>
 </html>
