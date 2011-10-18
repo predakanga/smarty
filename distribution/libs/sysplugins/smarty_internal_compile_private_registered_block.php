@@ -51,7 +51,7 @@ class Smarty_Internal_Compile_Private_Registered_Block extends Smarty_Internal_C
             }
             $function = $tag_info[0];
             // convert attributes into parameter string
-            $par_string = $this->getPluginParameterString($function,$_attr, $compiler, true);
+            $par_string = $this->getPluginParameterString($function,$_attr, $compiler, true, $tag_info[2]);
 
             $this->openTag($compiler, $tag, array($par_string, $compiler->nocache));
             // maybe nocache because of nocache variables or nocache plugin

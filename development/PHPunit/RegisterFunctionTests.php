@@ -75,7 +75,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->registerPlugin(Smarty::PLUGIN_FUNCTION,'testfunction', 'myfunction');
         $this->assertEquals('hello world 0 10', $this->smarty->fetch('test_register_function.tpl'));
     }
-    public function testRegisterFunctionCaching3()
+    public function testRegisterFunctionNoCaching1()
     {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 10;
@@ -85,7 +85,7 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->registerPlugin(Smarty::PLUGIN_FUNCTION,'testfunction', 'myfunction', false);
         $this->assertEquals('hello world 2 30', $this->smarty->fetch('test_register_function.tpl'));
     }
-    public function testRegisterFunctionCaching4()
+    public function testRegisterFunctionNoCaching2()
     {
         $this->smarty->caching = 1;
         $this->smarty->cache_lifetime = 10;
@@ -93,6 +93,25 @@ class RegisterFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->assign('y', 40);
         $this->smarty->registerPlugin(Smarty::PLUGIN_FUNCTION,'testfunction', 'myfunction', false);
         $this->assertEquals('hello world 3 30', $this->smarty->fetch('test_register_function.tpl'));
+    }
+    public function testRegisterFunctionNoCachingAttr1()
+    {
+        $this->smarty->caching = 1;
+        $this->smarty->cache_lifetime = 10;
+        $this->smarty->force_compile = true;
+        $this->smarty->assign('x', 2);
+        $this->smarty->assign('y', 30);
+        $this->smarty->registerPlugin(Smarty::PLUGIN_FUNCTION,'testfunction', 'myfunction', false, array('value'));
+        $this->assertEquals('hello world 2 30', $this->smarty->fetch('test_register_function.tpl'));
+    }
+    public function testRegisterFunctionNoCachingAttr2()
+    {
+        $this->smarty->caching = 1;
+        $this->smarty->cache_lifetime = 10;
+        $this->smarty->assign('x', 3);
+        $this->smarty->assign('y', 40);
+        $this->smarty->registerPlugin(Smarty::PLUGIN_FUNCTION,'testfunction', 'myfunction', false, array('value'));
+        $this->assertEquals('hello world 2 30', $this->smarty->fetch('test_register_function.tpl'));
     }
     /**
      * test unregister->templateFunction method

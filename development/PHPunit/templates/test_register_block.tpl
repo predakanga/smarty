@@ -1,1 +1,1 @@
-{$x} {testblock}{$y}{/testblock} {$z}
+{$x} {testblock value=$z}{$y}{/testblock} {$z}

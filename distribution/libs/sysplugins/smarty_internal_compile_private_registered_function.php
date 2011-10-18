@@ -53,7 +53,7 @@ class Smarty_Internal_Compile_Private_Registered_Function extends Smarty_Interna
         $compiler->tag_nocache =  $compiler->tag_nocache || !$tag_info[1];
         $function = $tag_info[0];
         // convert attributes into parameter string
-        $result = $this->getPluginParameterString($function,$_attr, $compiler, false);
+        $result = $this->getPluginParameterString($function,$_attr, $compiler, false, $tag_info[2]);
          // compile code
         if (!is_array($function)) {
             $output = "<?php echo {$function}({$result});?>\n";
