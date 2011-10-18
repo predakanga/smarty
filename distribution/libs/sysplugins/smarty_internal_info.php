@@ -2,13 +2,14 @@
 
 class Smarty_Internal_Info
 {
+    const ALL = 127;
     const PHP = 1;
     const PROPERTIES = 2;
     const FILESYSTEM = 4;
     const PLUGINS = 8;
     const REGISTERED = 16;
     const DEFAULTS = 32;
-    const SECURITY = 34;
+    const SECURITY = 64;
     
     const NOT_AVAILABLE = '#!$#notappliccable#$!#';
     
@@ -146,6 +147,11 @@ class Smarty_Internal_Info
             $this->analyzeSecurity();
             $this->data['security'] = $this->security;
         }
+        
+        // purge plugins_dir if loaded by other test
+        if ($flags && !($flags & self::FILESYSTEM)) {
+            $this->filesystem = array();
+        }
     }
     
     protected function analyzeTemplates()
@@ -277,11 +283,19 @@ class Smarty_Internal_Info
     
     protected function analyzePropertiesPlausibility()
     {
+        // maybe these checks should be performed by the compiler?
+        
         if ($this->properties['left_delimiter']['smarty'] === $this->properties['right_delimiter']['smarty']) {
             $message = "Left and Right Delimiters are equal";
             $this->errors['properties-left_delimiter'] = $message;
             $this->properties['left_delimiter']['error'] = $message;
             $this->properties['right_delimiter']['error'] = $message;
+        }
+        
+        if ($this->smarty->security_policy && $this->smarty->security_policy->php_handling != $this->smarty->php_handling) {
+            $message = 'Smarty_Security::$php_handling superseeds Smarty::$php_handling';
+            $this->warnings['properties-php_handling'] = $message;
+            $this->properties['php_handling']['warning'] = $message;
         }
     }
     
@@ -313,26 +327,19 @@ class Smarty_Internal_Info
             }
         }
         
-        foreach ($this->smarty->getPluginsDir() as $key => $path) {
+        $_plugins_dir = $this->smarty->getPluginsDir();
+        if (!$this->smarty->disable_core_plugins) {
+            $_plugins_dir[] = SMARTY_PLUGINS_DIR;
+        }
+        
+        foreach ($_plugins_dir as $key => $path) {
             $t = $this->analyzeDirectory($path, false, $this->smarty->use_include_path);
             $this->filesystem['plugins_dir'][] = $t;
             if ($t['error']) {
                 $this->errors['filesystem-plugins_dir'] = "Plugin Directories";
             }
         }
-        
-        // check if core plugins are available
-        $_plugins = realpath(SMARTY_PLUGINS_DIR);
-        foreach ($this->filesystem['plugins_dir'] as $_dir) {
-            if ($_dir['realpath'] === $_plugins) {
-                $_plugins = null;
-                break;
-            }
-        }
-        if ($_plugins) {
-            $this->errors['filesystem-plugins_dir'] = "SMARTY_PLUGINS_DIR is missing";
-        }
-        
+
         $path = $this->smarty->getCompileDir();
         $t = $this->analyzeDirectory($path, true);
         $this->filesystem['compile_dir'][] = $t;
@@ -410,11 +417,12 @@ class Smarty_Internal_Info
         // import plugins_dir
         if (!$this->filesystem) {
             $this->analyzeFilesystem();
-            $directories = $this->filesystem['plugins_dir'];
-            $this->filesystem = array();
-        } else {
-            $directories = $this->filesystem['plugins_dir'];
         }
+        
+        $directories = $this->filesystem['plugins_dir'];
+        
+        // reverse so first element is actually shown in output
+        $directories = array_reverse($directories);
         
         // scan plugins_dir
         foreach ($directories as $dir) {
@@ -435,25 +443,121 @@ class Smarty_Internal_Info
                 }
                 
                 $name = $parts[1];
+                $_name = "smarty_{$type}_{$name}";
+                $realpath = $dir['realpath'] . DS . $file->getFilename();
+                $function = $this->reflectedFunctionFromFile($_name, $realpath);
+                
+                $autoload = false;
+                // autoload_filters
+                if (isset($type[6]) && substr($type, -6) == 'filter' && $this->smarty->autoload_filters) {
+                    $filter = substr($type, 0, -6);
+                    if (isset($this->smarty->autoload_filters[$filter]) && in_array($name, $this->smarty->autoload_filters[$filter])) {
+                        $autoload = true;
+                    }
+                }
+                
+                // default_modifiers
+                if ($type == 'modifier' && $this->smarty->default_modifiers &&  in_array($name, $this->smarty->default_modifiers)) {
+                    $autoload = true;
+                }
+                
+                if (isset($this->plugins[$type][$name])) {
+                    $this->warnings['plugins-' . $type . '-' . $name] = "Plugin '{$name}' found in at least 2 directories";
+                }
+                
+                // TODO: Reflection for $nocache and $cache_attr
+                // TODO: Reflection for signature ($smarty|$template) order
+                
                 $this->plugins[$type][$name] = array(
                     'name' => $name,
                     'type' => $type,
                     'file' => $file->getFilename(),
-                    'realpath' => $dir['realpath'] . DS . $file->getFilename(),
-                    'function' => null,
-                    'registered' => null,
-                    'autoloaded' => true,
+                    'realpath' => $realpath,
+                    
+                    'function' => $_name,
+                    'line' => $function instanceof ReflectionFunction ? $function->getStartLine() : null,
                     'signature' => null,
                     'nocache' => null,
                     'cache_attr' => null,
+                    
+                    'registered' => null,
+                    'lazyloaded' => true,
+                    'autoload' => $autoload,
+                    'error' => is_string($function) ? $function : null,
+                    'warning' => null,
+                );
+            }
+        }
+        
+        // scan registered_plugins
+        foreach ($this->smarty->registered_plugins as $type => $plugins) {
+            if (!isset($this->plugins[$type])) {
+                continue;
+            }
+            foreach ($plugins as $name => $_plugin) {
+                list($callback, $nocache, $attributes) = $_plugin;
+                $function = $this->reflectedFunctionOfCallable($callback);
+            
+                if (isset($this->plugins[$type][$name])) {
+                    $this->warnings['plugins-' . $type . '-' . $name] = "Plugin '{$name}' found in at least 2 directories";
+                }
+                
+                // TODO: Reflection for signature ($smarty|$template) order
+                
+                $this->plugins[$type][$name] = array(
+                    'name' => $name,
+                    'type' => $type,
+                    'file' => $function ? basename($function->getFileName()) : null,
+                    'realpath' => $function ? $function->getFileName() : null,
+                    
+                    'function' => $function ? $function->getName() : null,
+                    'line' => $function ? $function->getStartLine() : null,
+                    'signature' => null,
+                    'nocache' => $nocache,
+                    'cache_attr' => $attributes,
+                    
+                    'registered' => true,
+                    'lazyloaded' => false,
+                    'autoload' => false,
                     'error' => null,
                     'warning' => null,
                 );
             }
         }
         
-        // TODO: scan registered_plugins
-        // TODO: scan registered_filters
+        // scan registered_filters
+        foreach ($this->smarty->registered_filters as $type => $filters) {
+            $type .= 'filter';
+            if (!isset($this->plugins[$type])) {
+                continue;
+            }
+            foreach ($filters as $callback) {
+                $function = $this->reflectedFunctionOfCallable($callback);
+        
+                if (isset($this->plugins[$type][$name])) {
+                    $this->warnings['plugins-' . $type . '-' . $name] = "Plugin '{$name}' found in at least 2 directories";
+                }
+            
+                $this->plugins[$type][$name] = array(
+                    'name' => $name,
+                    'type' => $type,
+                    'file' => $function ? basename($function->getFileName()) : null,
+                    'realpath' => $function ? $function->getFileName() : null,
+                
+                    'function' => $function ? $function->getName() : null,
+                    'line' => $function ? $function->getStartLine() : null,
+                    'signature' => null,
+                    'nocache' => null,
+                    'cache_attr' => null,
+                
+                    'registered' => true,
+                    'lazyloaded' => false,
+                    'autoload' => false,
+                    'error' => null,
+                    'warning' => null,
+                );
+            }
+        }
 
         ksort($this->plugins);
         foreach ($this->plugins as &$plugins) {
@@ -463,17 +567,80 @@ class Smarty_Internal_Info
     
     protected function analyzeRegistered()
     {
-        
+        /*
+            registered_objects
+            registered_classes
+            registered_filters
+            registered_resources
+            registered_cache_resources
+        */
     }
     
     protected function analyzeDefaults()
     {
-        
+        /*
+            default_modifiers
+            autoload_filters
+        */
     }
     
     protected function analyzeSecurity()
     {
+        /*
+            php_handling (wtf?)
+            secure_dir (template_dir config_dir) -> also in {fetch}
+            trusted_dir
+            static_classes (registered_classes?)
+            php_functions
+            php_modifiers
+            allowed_tags, disabled_tags
+            allowed_modifiers, disabled_modifiers
+            streams
+            allow_constants
+            allow_super_globals
+        */
+    }
+    
+    
+    protected function reflectedFunctionFromFile($function_name, $filepath)
+    {
+        // Not sure if this is really such a great idea…
         
+        // make sure we're not running into syntax errors
+        $last = exec('php -l ' . escapeshellarg($filepath));
+        if (!$last) {
+            return null;
+        }
+        if (strpos($last, 'Errors parsing') !== false) {
+            return 'syntax';
+        }
+        
+        ob_start();
+        include_once $filepath;
+        ob_end_clean();
+        if (function_exists($function_name)) {
+            return new ReflectionFunction($function_name);
+        } elseif (class_exists($function_name)) {
+            return new ReflectionClass($function_name);
+        }
+    }
+    
+    protected function reflectedFunctionOfCallable($callback)
+    {
+        try {
+            if (is_string($callback) || $callback instanceof Closure) {
+                return new ReflectionFunction($callback);
+            } elseif (is_array($callback)) {
+                $cn = is_object($callback[0]) ? 'ReflectionObject' : 'ReflectionClass';
+                $reflection = new $cn($callback[0]);
+                return $reflection->getMethod($callback[1]);
+            } elseif (is_object($callback) && method_exists($callback, '__invoke')) {
+                $reflection = new ReflectionObject($callback);
+                return $reflection->getMethod('__invoke');
+            }
+        } catch(ReflectionException $e) {}
+        
+        return null;
     }
     
     protected function sanitizeValue($name, $value, $type)

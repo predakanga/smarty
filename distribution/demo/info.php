@@ -10,6 +10,26 @@ $smarty->setTemplateDir(array(
     'default' => './templates',
 ));
 $smarty->addPluginsDir('./plugins');
+$smarty->registerPlugin('modifier', 'strlen', 'strlen');
+$smarty->registerPlugin('modifier', 'strlen2', array('InfoFoo', 'strlen'));
+$smarty->registerPlugin('modifier', 'strlen3', function($string){ return strlen($string); });
+
+$smarty->autoload_filters['output'] = array('trimwhitespace');
+
+$smarty->registerFilter('pre', array('InfoFoo', 'prefilterThingie'));
+//$smarty->registerFilter('pre', function(){ });
+//$smarty->registerFilter('pre', function(){ });
+
+class InfoFoo {
+    public static function strlen($string)
+    {
+        return strlen($string);
+    }
+    public static function prefilterThingie()
+    {
+        
+    }
+}
 
 $smarty->right_delimiter = $smarty->left_delimiter;
 $smarty->caching = 1;

@@ -273,7 +273,7 @@
                         <td id="plugins-{$p|escape}-{$plugin.name|escape}">{$plugin.name|escape}</td>
                         <td>---</td>
                         <td>---</td>
-                        <td><span class="directory">{$plugin.realpath}</span></td>
+                        <td><span class="directory">{$plugin.realpath}</span> <span class="line">{$plugin.line}</span></td>
                     </tr>
                     {/foreach}
                 </tbody>
