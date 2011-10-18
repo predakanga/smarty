@@ -15,14 +15,15 @@ these changes must reflect on the documentation at some point…
 * Smarty_Internal_Templatebase::registerDefaultConfigHandler()
 * Smarty_Internal_Template::fetch() display() isCached() clear() into Smarty::createTemplate() docs?
 * $use_reflection
+* $disable_core_plugins
 
 
 ## Properties ##
 
 * Smarty::$default_variable_handler_func_ - Smarty::registerDefaultVariableHandler()
-    * (boolean) function($name, &$value)
+    * (boolean) function($name, &$value, Smarty|Smarty_Internal_Template $context)
 * Smarty::$default_config_variable_handler_func - Smarty::registerDefaultConfigVariableHandler()
-    * (boolean) function($name, &$value)
+    * (boolean) function($name, &$value, Smarty|Smarty_Internal_Template $context)
 
 
 ## Syntax ##

@@ -275,6 +275,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
      */
     protected $config_dir = array();
     /**
+     * disable core plugins in {@link loadPlugin()}
+     * @var boolean
+     * @link <missing>
+     */
+    public $disable_core_plugins = false;
+    /**
      * force template compiling?
      * @var boolean
      * @link http://www.smarty.net/docs/en/variable.force.compile.tpl
@@ -691,7 +697,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
         // set default dirs
         $this->setTemplateDir('.' . DS . 'templates' . DS)
         ->setCompileDir('.' . DS . 'templates_c' . DS)
-        ->setPluginsDir(SMARTY_PLUGINS_DIR)
         ->setCacheDir('.' . DS . 'cache' . DS)
         ->setConfigDir('.' . DS . 'configs' . DS);
 
@@ -1033,13 +1038,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
             $this->plugins_dir[] = rtrim($v, '/\\') . DS;
         }
         
-        /*
-        // add SMARTY_PLUGINS_DIR if not present
-        $lookup = array_flip($this->plugins_dir);
-        if (!isset($lookup[SMARTY_PLUGINS_DIR])) {
-            array_unshift($this->plugins_dir, SMARTY_PLUGINS_DIR);
-        }
-        */
         return $this;
     }
 
@@ -1331,7 +1329,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         // if function or class exists, exit silently (already loaded)
         if ($check && (is_callable($plugin_name) || class_exists($plugin_name, false))) {
-        return true;
+            return true;
         }
         // Plugin name is expected to be: Smarty_[Type]_[Name]
         $_name_parts = explode('_', $plugin_name, 3);
@@ -1353,9 +1351,16 @@ class Smarty extends Smarty_Internal_TemplateBase {
         }
         // plugin filename is expected to be: [type].[name].php
         $_plugin_filename = "{$_name_parts[1]}.{$_name_parts[2]}.php";
-
+        
+        
+        // add SMARTY_PLUGINS_DIR if not present
+        $_plugins_dir = $this->getPluginsDir();
+        if (!$this->disable_core_plugins) {
+            $_plugins_dir[] = SMARTY_PLUGINS_DIR;
+        }
+        
         // loop through plugin dirs and find the plugin
-        foreach($this->getPluginsDir() as $_plugin_dir) {
+        foreach($_plugins_dir as $_plugin_dir) {
             $names = array(
             $_plugin_dir . $_plugin_filename,
             $_plugin_dir . strtolower($_plugin_filename),

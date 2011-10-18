@@ -3,6 +3,7 @@
 - bugfix {${$foo}} did not work (Smarty 3.2 parser)
 - improvement remove BOM of template and config files in lexer
 - bugfix cache_attr of registered plugins did not work after adding PHP reflection
+- add $disable_core_plugins to disable looking for plugins in Smarty's plugins/
 
 16.10.2011
 - pass context object to default variable handlers
