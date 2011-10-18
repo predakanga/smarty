@@ -189,6 +189,19 @@ typecast = /\((int(eger)?|bool(ean)?|float|double|real|string|binary|array|objec
 other = /./
 double_quote = /"/
 single_quote = /'/
+bom = /\xEF\xBB\xBF|\xFE\xFF|\xFF\xFE/
+any = /[\s\S]?/
+*/
+/*!lex2php
+%statename BOM
+bom {
+     $this->yypushstate(self::TEXT);
+     return false;
+}
+any {
+     $this->yypushstate(self::TEXT);
+     return true;
+}
 */
 /*!lex2php
 %statename TEXT

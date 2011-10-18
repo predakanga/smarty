@@ -65,8 +65,20 @@ float = /\d+\.\d+(?=[ \t\r]*[\n#;])/
 int = /\d+(?=[ \t\r]*[\n#;])/
 maybe_bool = /[a-zA-Z]+(?=[ \t\r]*[\n#;])/
 naked_string = /[^\n]+?(?=[ \t\r]*\n)/
+bom = /\xEF\xBB\xBF|\xFE\xFF|\xFF\xFE/
+any = /[\s\S]?/
 */
-
+/*!lex2php
+%statename BOM
+bom {
+     $this->yypushstate(self::START);
+     return false;
+}
+any {
+     $this->yypushstate(self::START);
+     return true;
+}
+*/
 /*!lex2php
 %statename START
 

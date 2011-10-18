@@ -50,7 +50,7 @@
     }
 
     public function compileVariable($variable) {
-    	 if (strpos($variable,'(') == 0) {
+    	 if (strpos($variable,'(') === false) {
     	 		// not a variable variable
     	 		$var = trim($variable,'\'"');
 			 		$this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable($var, null, true, false)->nocache;

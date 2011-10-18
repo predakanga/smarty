@@ -1,4 +1,9 @@
 ﻿===== Smarty 3.2-DEV  =====
+18.10.2011
+- bugfix {${$foo}} did not work (Smarty 3.2 parser)
+- improvement remove BOM of template and config files in lexer
+- bugfix cache_attr of registered plugins did not work after adding PHP reflection
+
 16.10.2011
 - pass context object to default variable handlers
 - add support of function and block plugins which use real parameter instead $params array

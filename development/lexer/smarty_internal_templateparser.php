@@ -126,7 +126,7 @@ class Smarty_Internal_Templateparser#line 79 "smarty_internal_templateparser.php
     }
 
     public function compileVariable($variable) {
-    	 if (strpos($variable,'(') == 0) {
+    	 if (strpos($variable,'(') === false) {
     	 		// not a variable variable
     	 		$var = trim($variable,'\'"');
 			 		$this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable($var, null, true, false)->nocache;
