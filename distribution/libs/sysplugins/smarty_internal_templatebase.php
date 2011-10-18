@@ -479,6 +479,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      */
     public function registerFilter($type, $callback)
     {
+        // TODO: uwe.tews check if $type is legal and is_callable($callback)
         $this->smarty->registered_filters[$type][$this->_get_filter_name($callback)] = $callback;
     }
 
@@ -490,6 +491,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
      */
     public function unregisterFilter($type, $callback)
     {
+        // TODO: uwe.tews $callback could be a closure ($callback instanceof Closure) - use reflection?
         $name = $this->_get_filter_name($callback);
         if (isset($this->smarty->registered_filters[$type][$name])) {
             unset($this->smarty->registered_filters[$type][$name]);
