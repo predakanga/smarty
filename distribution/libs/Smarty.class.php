@@ -1033,12 +1033,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
             $this->plugins_dir[] = rtrim($v, '/\\') . DS;
         }
         
+        /*
         // add SMARTY_PLUGINS_DIR if not present
         $lookup = array_flip($this->plugins_dir);
         if (!isset($lookup[SMARTY_PLUGINS_DIR])) {
             array_unshift($this->plugins_dir, SMARTY_PLUGINS_DIR);
         }
-
+        */
         return $this;
     }
 
