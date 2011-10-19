@@ -107,12 +107,12 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         }
         // checks if template exists
         if (!$_template->source->exists) {
+            $msg = "Unable to load template {$_template->source->type} '{$_template->source->name}'";
             if ($_template->parent instanceof Smarty_Internal_Template) {
-                $parent_resource = " in '{$_template->parent->template_resource}'";
+                throw new SmartyRunTimeException($msg, $_template->parent);
             } else {
-                $parent_resource = '';
+                throw new SmartyException($msg);
             }
-            throw new SmartyException("Unable to load template {$_template->source->type} '{$_template->source->name}'{$parent_resource}");
         }
         if ($_template->caching == Smarty::CACHING_LIFETIME_CURRENT || $_template->caching == Smarty::CACHING_LIFETIME_SAVED) {
             $_output = $_template->cached->getRenderedTemplate($this, $_template, $no_output_filter);

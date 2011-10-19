@@ -114,6 +114,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @internal
      */
     public $_capture_stack = array();
+    /**
+     * template source line number of last executed tag
+     * @var int
+     * @internal
+     */
+    public $trace_line = 0;
 
     /**
      * Create template data object
@@ -526,9 +532,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public function capture_error()
     {
-        throw new SmartyRuntimeException("Not matching {capture} open/close in \"{$this->template_resource}\"");
+        throw new SmartyRuntimeException("Not matching {capture} open/close", $this);
     }
-    
+
     /**
      * Get Template Configuration Information
      *

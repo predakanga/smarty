@@ -29,7 +29,7 @@
  * @author Rodney Rehm
  * @package Smarty
  * @version 3.2-DEV
- */ 
+ */
 
 /**
  * define shorthand directory separator constant
@@ -1037,7 +1037,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         foreach ((array)$plugins_dir as $v) {
             $this->plugins_dir[] = rtrim($v, '/\\') . DS;
         }
-        
+
         return $this;
     }
 
@@ -1351,14 +1351,14 @@ class Smarty extends Smarty_Internal_TemplateBase {
         }
         // plugin filename is expected to be: [type].[name].php
         $_plugin_filename = "{$_name_parts[1]}.{$_name_parts[2]}.php";
-        
-        
+
+
         // add SMARTY_PLUGINS_DIR if not present
         $_plugins_dir = $this->getPluginsDir();
         if (!$this->disable_core_plugins) {
             $_plugins_dir[] = SMARTY_PLUGINS_DIR;
         }
-        
+
         // loop through plugin dirs and find the plugin
         foreach($_plugins_dir as $_plugin_dir) {
             $names = array(
@@ -1447,7 +1447,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         return Smarty_Internal_Utility::testInstall($this, $errors);
     }
-    
+
     /**
      * Get Smarty Configuration Information
      *
@@ -1573,11 +1573,31 @@ class SmartyCompilerException extends SmartyException  {
 
 /**
  * Smarty runtime exception class
+ * loads template source and displays line where error did occur
+ *
  * @package Smarty
  */
 class SmartyRuntimeException extends SmartyException  {
+    protected $object = null;
+    protected $line = null;
+
+    public function __construct($message, $object = null) {
+        $this->message = $message;
+        $this->object = $object;
+        $this->line = $object->trace_line;
+        $this->file = $this->object->template_resource;
+    }
+
     public function __toString() {
-        return "Smarty runtime error: {$this->message}\n";
+        $match = preg_split("/\n/", $this->object->source->content);
+        $start_line = max(0,$this->line - 2);
+        $end_line = min ($this->line + 2, count($match));
+        $source = "<br>";
+        for ($i = $start_line; $i <= $end_line; $i++) {
+            $source .= sprintf('%4d : ',$i) . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$match[$i-1]))) . "<br>";
+        }
+        echo "Smarty runtime error: <b>{$this->message}</b> in line {$this->line}{$source}";
+        return '';
     }
 
 }

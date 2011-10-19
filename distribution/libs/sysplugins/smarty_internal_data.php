@@ -335,7 +335,7 @@ class Smarty_Internal_Data {
                 // force a notice
                 trigger_error($err_msg);
             } elseif ($this->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
-                throw new SmartyException($err_msg);
+                throw new SmartyRunTimeException($err_msg, $this);
             }
         }
         return new Undefined_Smarty_Variable;
@@ -379,7 +379,7 @@ class Smarty_Internal_Data {
                 // force a notice
                 trigger_error($err_msg);
             } elseif ($this->smarty->error_unassigned == Smarty::UNASSIGNED_EXCEPTION) {
-                throw new SmartyException($err_msg);
+                throw new SmartyRunTimeException($err_msg, $this);
             }
         }
         return null;

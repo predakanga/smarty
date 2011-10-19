@@ -20,6 +20,7 @@
     public $retvalue = 0;
     private $lex;
     private $internalError = false;
+    private $last_taglineno = 0;
 
     function __construct($lex, $compiler) {
         $this->lex = $lex;
@@ -118,7 +119,12 @@ template       ::= .
                       // Smarty tag
 template_element(res)::= smartytag(st). {
     if ($this->compiler->has_code) {
-        $tmp =''; foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
+        $tmp ='';
+        if ($this->last_taglineno != $this->lex->taglineno) {
+            $tmp = "<?php \$_smarty_tpl->trace_line = {$this->lex->taglineno}?>";
+            $this->last_taglineno = $this->lex->taglineno;
+        }
+        foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
         res = new _smarty_tag($this, $this->compiler->processNocacheCode($tmp.st,true));
     } else { 
         res = new _smarty_tag($this, st);
