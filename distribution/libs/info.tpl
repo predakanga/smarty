@@ -134,6 +134,33 @@
 </section>
 {/if}
 
+{if $data.constants}
+<section>
+    <header>
+        <h1 id="constants">Constants</h1>
+    </header>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Constant</th>
+                <th>Value</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach $data.constants as $name => $const}
+            <tr>
+                <th id="constants-{$name|escape}">{$name|escape}</th>
+                <td>{prettyprint value=$const.value}</td>
+                <td>{prettyprint value=$const.default}</td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+</section>
+{/if}
+
 {if $data.properties}
 <section>
     <header>

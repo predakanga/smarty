@@ -777,11 +777,19 @@ class Smarty extends Smarty_Internal_TemplateBase {
     }
 
     /**
-     * Check if a template resource exists
-     *
-     * @param string $resource_name template name
-     * @return boolean status
+     * Throw error when using PHP 4 style constructor
      */
+    public function Smarty()
+    {
+         throw new SmartyException("PHP5 requires you to call __construct() instead of Smarty()");
+    }
+
+    /**
+    * Check if a template resource exists
+    *
+    * @param string $resource_name template name
+    * @return boolean status
+    */
     public function templateExists($resource_name)
     {
         // create template object
@@ -1452,12 +1460,13 @@ class Smarty extends Smarty_Internal_TemplateBase {
      * Get Smarty Configuration Information
      *
      * @param boolean $html return formatted HTML, array else
+     * @param integer $flags see Smarty_Internal_Info constants
      * @return string|array configuration information
      */
-    public function info($html=true)
+    public function info($html=true, $flags=0)
     {
         $info = new Smarty_Internal_Info($this);
-        return $html ? $info->getHtml() : $info->getArray();
+        return $html ? $info->getHtml($flags) : $info->getArray($flags);
     }
 
     /**

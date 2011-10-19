@@ -3,6 +3,7 @@
 - improvement SmartyRunTimeException now shows template source lines of error
 - fix SmartyRunTimeException on eval and string resources
 - bugfix getConfigVars() should also run into the default_config_variable_handler
+- merged 3.1.4
 
 18.10.2011
 - bugfix {${$foo}} did not work (Smarty 3.2 parser)
@@ -40,7 +41,10 @@
 - add default config variable handler
 - optimization of variable container handling
 
-===== trunk  =====
+===== Smarty-3.1.4 =====
+19.10.2011
+- added exception when using PHP4 style constructor
+
 16.10.2011
 - bugfix testInstall() did not propery check cache_dir and compile_dir
 

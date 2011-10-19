@@ -2,7 +2,7 @@
 
 class Smarty_Internal_Info
 {
-    const ALL = 127;
+    const ALL = 255;
     const PHP = 1;
     const PROPERTIES = 2;
     const FILESYSTEM = 4;
@@ -10,6 +10,7 @@ class Smarty_Internal_Info
     const REGISTERED = 16;
     const DEFAULTS = 32;
     const SECURITY = 64;
+    const CONSTANTS = 128;
     
     const NOT_AVAILABLE = '#!$#notappliccable#$!#';
     
@@ -81,6 +82,7 @@ class Smarty_Internal_Info
     protected $defaults = array();
     protected $security = array();
     protected $filesystem = array();
+    protected $constants = array();
     
     public function __construct(Smarty $smarty, Smarty_Internal_Template $template = null)
     {
@@ -147,6 +149,10 @@ class Smarty_Internal_Info
             $this->analyzeSecurity();
             $this->data['security'] = $this->security;
         }
+        if (!$flags || $flags & self::CONSTANTS) {
+            $this->analyzeConstants();
+            $this->data['constants'] = $this->constants;
+        }
         
         // purge plugins_dir if loaded by other test
         if ($flags && !($flags & self::FILESYSTEM)) {
@@ -198,6 +204,31 @@ class Smarty_Internal_Info
                 )
             )
         );
+    }
+    
+    protected function analyzeConstants()
+    {
+        $constants = array(
+            'SMARTY_DIR' => realpath(dirname(__FILE__) .'/..') . DS,
+            'SMARTY_SYSPLUGINS_DIR' => dirname(__FILE__) . DS,
+            'SMARTY_PLUGINS_DIR' => realpath(dirname(__FILE__) .'/../plugins') . DS,
+            'SMARTY_MBSTRING' => function_exists('mb_strlen'),
+            'SMARTY_RESOURCE_CHAR_SET' => function_exists('mb_strlen') ? 'UTF-8' : 'ISO-8859-1',
+            'SMARTY_RESOURCE_DATE_FORMAT' => '%b %e, %Y',
+            'SMARTY_SPL_AUTOLOAD' => 0,
+        );
+        
+        foreach ($constants as $key => $default) {
+            $constants[$key] = array(
+                'name' => $key,
+                'value' => constant($key),
+                'default' => $default,
+                'error' => null,
+                'warning' => null,
+            );
+        }
+        
+        $this->constants = $constants;
     }
     
     protected function analyzeProperties()

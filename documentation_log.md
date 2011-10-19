@@ -29,7 +29,7 @@ these changes must reflect on the documentation at some point…
 ## Syntax ##
 
 * {$x = $k cachevalue} 
-* {\some\namespaced\ClassName::CONST}
+* {\some\namespaced\ClassName::CONST} (Needs UnitTests?!)
 
 
 ## Plugins ##

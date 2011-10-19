@@ -538,13 +538,14 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     /**
      * Get Template Configuration Information
      *
-     * @param boolean $html return formatted HTML, array else
+     * @param boolean $html  return formatted HTML, array else
+     * @param integer $flags see Smarty_Internal_Info constants
      * @return string|array configuration information
      */
-    public function info($html=true)
+    public function info($html=true, $flags=0)
     {
         $info = new Smarty_Internal_Info($this->smarty, $this);
-        return $html ? $info->getHtml() : $info->getArray();
+        return $html ? $info->getHtml($flags) : $info->getArray($flags);
     }
 
     /**
