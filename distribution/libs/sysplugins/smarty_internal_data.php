@@ -419,6 +419,7 @@ class Smarty_Internal_Data {
     */
     public function getConfigVars($varname = null, $search_parents = true)
     {
+        // TODO: uwe.tews this should probably behave like getTemplateVars() [calling getConfigVariable()]
         $_ptr = $this;
         $_result = array();
         while ($_ptr !== null) {
