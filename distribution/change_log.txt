@@ -2,6 +2,7 @@
 19.10.2011
 - improvement SmartyRunTimeException now shows template source lines of error
 - fix SmartyRunTimeException on eval and string resources
+- bugfix getConfigVars() should also run into the default_config_variable_handler
 
 18.10.2011
 - bugfix {${$foo}} did not work (Smarty 3.2 parser)

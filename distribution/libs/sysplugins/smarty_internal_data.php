@@ -204,6 +204,36 @@ class Smarty_Internal_Data {
     }
 
     /**
+    * clear the given assigned template variable.
+    *
+    * @param string|array $tpl_var the template variable(s) to clear
+    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
+    */
+    public function clearAssign($tpl_var)
+    {
+        if (is_array($tpl_var)) {
+            foreach ($tpl_var as $curr_var) {
+                unset($this->tpl_vars->$curr_var);
+            }
+        } else {
+            unset($this->tpl_vars->$tpl_var);
+        }
+
+        return $this;
+    }
+
+    /**
+    * clear all the assigned template variables.
+    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
+    */
+    public function clearAllAssign()
+    {
+        $this->tpl_vars = new Smarty_Variable_Container();
+        $this->tpl_vars->__smarty__data = $this;
+        return $this;
+    }
+
+    /**
     * Returns a single or all template variables
     *
     * @param string  $varname        variable name or null
@@ -247,52 +277,6 @@ class Smarty_Internal_Data {
             return $_result;
         }
     }
-
-    /**
-    * clear the given assigned template variable.
-    *
-    * @param string|array $tpl_var the template variable(s) to clear
-    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
-    */
-    public function clearAssign($tpl_var)
-    {
-        if (is_array($tpl_var)) {
-            foreach ($tpl_var as $curr_var) {
-                unset($this->tpl_vars->$curr_var);
-            }
-        } else {
-            unset($this->tpl_vars->$tpl_var);
-        }
-
-        return $this;
-    }
-
-    /**
-    * clear all the assigned template variables.
-    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
-    */
-    public function clearAllAssign()
-    {
-        $this->tpl_vars = new Smarty_Variable_Container();
-        $this->tpl_vars->__smarty__data = $this;
-        return $this;
-    }
-
-    /**
-    * load a config file, optionally load just selected sections
-    *
-    * @param string $config_file filename
-    * @param mixed  $sections    array of section names, single section or null
-    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
-    */
-    public function configLoad($config_file, $sections = null)
-    {
-        // load Config class
-        $config = new Smarty_Internal_Config($config_file, $this->smarty, $this);
-        $config->loadConfigVars($sections);
-        return $this;
-    }
-
     /**
     * gets the object of a template variable
     *
@@ -340,6 +324,35 @@ class Smarty_Internal_Data {
         }
         return new Undefined_Smarty_Variable;
     }
+    /**
+    * Returns a single or all config variables
+    *
+    * @param string $varname variable name or null
+    * @return string variable value or or array of variables
+    */
+    public function getConfigVars($varname = null, $search_parents = true)
+    {
+        if (isset($varname)) {
+            return $this->getConfigVariable($varname, $this, $search_parents, false);
+        } else {
+            $_result = array();
+            $_ptr = $this;
+            while ($_ptr !== null) {
+                foreach ($_ptr->config_vars AS $key => $value) {
+                    if ($key != '__smarty__data' && !array_key_exists($key, $_result)) {
+                        $_result[$key] = $value;
+                    }
+                }
+                // not found, try at parent
+                if ($search_parents) {
+                    $_ptr = $_ptr->parent;
+                } else {
+                    $_ptr = null;
+                }
+            }
+            return $_result;
+        }
+    }
 
     /**
     * gets value of config variable
@@ -370,7 +383,7 @@ class Smarty_Internal_Data {
         if (isset($this->smarty->default_config_variable_handler_func)) {
             $value = null;
             if (call_user_func_array($this->smarty->default_config_variable_handler_func,array($_variable, &$value, $this))) {
-                return new Smarty_Variable($value);
+                return $value;
             }
         }
         if ($this->smarty->error_unassigned != Smarty::UNASSIGNED_IGNORE && $error_enable) {
@@ -385,6 +398,40 @@ class Smarty_Internal_Data {
         return null;
     }
 
+    /**
+    * Deassigns a single or all config variables
+    *
+    * @param string $varname variable name or null
+    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
+    */
+    public function clearConfig($varname = null)
+    {
+        if (isset($varname)) {
+            unset($this->config_vars->$varname);
+        } else {
+            foreach($this->config_vars as $key => $var) {
+                if ($key != '__smarty__data') {
+                    unset($this->config_vars->$key);
+                }
+            }
+        }
+        return $this;
+    }
+
+    /**
+    * load a config file, optionally load just selected sections
+    *
+    * @param string $config_file filename
+    * @param mixed  $sections    array of section names, single section or null
+    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
+    */
+    public function configLoad($config_file, $sections = null)
+    {
+        // load Config class
+        $config = new Smarty_Internal_Config($config_file, $this->smarty, $this);
+        $config->loadConfigVars($sections);
+        return $this;
+    }
 
     /**
     * gets  a stream variable
@@ -410,64 +457,6 @@ class Smarty_Internal_Data {
             return null;
         }
     }
-
-    /**
-    * Returns a single or all config variables
-    *
-    * @param string $varname variable name or null
-    * @return string variable value or or array of variables
-    */
-    public function getConfigVars($varname = null, $search_parents = true)
-    {
-        // TODO: uwe.tews this should probably behave like getTemplateVars() [calling getConfigVariable()]
-        $_ptr = $this;
-        $_result = array();
-        while ($_ptr !== null) {
-            if (isset($varname)) {
-                if (isset($_ptr->config_vars->$varname)) {
-                    return $_ptr->config_vars->$varname;
-                }
-            } else {
-                foreach ($_ptr->config_vars AS $key => $value) {
-                    if ($key != '__smarty__data' && !array_key_exists($key, $_result)) {
-                        $_result[$key] = $value;
-                    }
-                }
-            }
-            // not found, try at parent
-            if ($search_parents) {
-                $_ptr = $_ptr->parent;
-            } else {
-                $_ptr = null;
-            }
-        }
-        if (isset($varname)) {
-            return '';
-        } else {
-            return $_result;
-        }
-    }
-
-    /**
-    * Deassigns a single or all config variables
-    *
-    * @param string $varname variable name or null
-    * @return Smarty_Internal_Data current Smarty_Internal_Data (or Smarty or Smarty_Internal_Template) instance for chaining
-    */
-    public function clearConfig($varname = null)
-    {
-        if (isset($varname)) {
-            unset($this->config_vars->$varname);
-        } else {
-            foreach($this->config_vars as $key => $var) {
-                if ($key != '__smarty__data') {
-                    unset($this->config_vars->$key);
-                }
-            }
-        }
-        return $this;
-    }
-
 }
 
 /**
