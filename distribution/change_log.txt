@@ -1,6 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
 19.10.2011
 - improvement SmartyRunTimeException now shows template source lines of error
+- fix SmartyRunTimeException on eval and string resources
 
 18.10.2011
 - bugfix {${$foo}} did not work (Smarty 3.2 parser)

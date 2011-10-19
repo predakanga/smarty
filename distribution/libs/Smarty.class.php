@@ -1585,12 +1585,16 @@ class SmartyRuntimeException extends SmartyException  {
         $this->message = $message;
         $this->object = $object;
         $this->line = $object->trace_line;
-        $this->file = $this->object->template_resource;
+        if ($this->object->source->type == 'eval' || $this->object->source->type == 'string' || $this->object->source instanceof Smarty_Resource_Recompiled) {
+            $this->file = "in {$this->object->source->type}: resource";
+        } else {
+            $this->file = $this->object->template_resource;
+        }
     }
 
     public function __toString() {
         $match = preg_split("/\n/", $this->object->source->content);
-        $start_line = max(0,$this->line - 2);
+        $start_line = max(1,$this->line - 2);
         $end_line = min ($this->line + 2, count($match));
         $source = "<br>";
         for ($i = $start_line; $i <= $end_line; $i++) {
