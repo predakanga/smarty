@@ -207,31 +207,22 @@ class ReflectionTests extends PHPUnit_Framework_TestCase {
 
     public function testBlockNocache()
     {
-        //$this->smarty->fetch('eval:{smarty_block_annotated_nocache param1="hello world" param2=2}con-tent{/smarty_block_annotated_nocache}');
         // TODO: uwe.tews add test for auto-loaded annotated nocache blocks
+        $this->fail("annotated nocache block missing");
+        return;
+        
+        $this->smarty->addPluginsDir(dirname(__FILE__) . '/PHPunitplugins/');
+        $this->smarty->fetch('eval:{annotated_nocache param1="hello world" param2=2}con-tent{/annotated_nocache}');
     }
 
     public function testFunctionNocache()
     {
-        //$this->smarty->fetch('eval:{smarty_function_annotated_nocache param1="hello world" param2=2}');
-        // TODO: uwe.tews add test for auto-loaded annotated nocache blocks
+        // TODO: uwe.tews add test for auto-loaded annotated nocache functions
+        $this->fail("annotated nocache function missing");
+        return;
+        
+        $this->smarty->addPluginsDir(dirname(__FILE__) . '/PHPunitplugins/');
+        $this->smarty->fetch('eval:{annotated_nocache param1="hello world" param2=2}');
     }
 }
 
-/**
- * @smarty_nocache
- * @smarty_cache_attr param1, param2
- */
-function smarty_block_annotated_nocache($params, $content, $template, &$repeat) {
-
-}
-
-/**
- * @smarty_nocache
- * @smarty_cache_attr param1, param2
- */
-function smarty_function_annotated_nocache($params, $template) {
-
-}
-
-?>

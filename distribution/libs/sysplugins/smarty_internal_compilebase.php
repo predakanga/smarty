@@ -179,26 +179,28 @@ abstract class Smarty_Internal_CompileBase {
     * @return mixed data
     */
     public function getAnnotation($callback, $parameter) {
-        if (is_string($callback)) {
+        if (is_string($callback) || $callback instanceof Closure) {
             $reflection = new ReflectionFunction($callback);
         } elseif (is_array($callback)) {
             $cn = is_object($callback[0]) ? 'ReflectionObject' : 'ReflectionClass';
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
+        } elseif (is_object($callback) && method_exists($callback, '__invoke')) {
+            $reflection = new ReflectionObject($callback);
+            $reflection = $reflection->getMethod('__invoke');
         } else {
-            throw new SmartyException("callback must be function name (string) or object/class method array");
+            throw new SmartyException("callback must be closure, function name (string), object/class method array or invokable object");
         }
+        
         // get PHPdoc data
         $doc = $reflection->getDocComment();
-        if ($doc && preg_match('#@' . $parameter . '(.+)$#m', $doc, $matches)) {
-            if (isset($matches)) {
-                $m = explode(',', $matches[1]);
-                $m = array_map('trim', $m);
-                if (count($m) == 1 && $m[0] == '') {
-                    return true;
-                } else {
-                    return $m;
-                }
+        if ($doc && preg_match('#@' . $parameter . '(.*)$#m', $doc, $matches)) {
+            $m = explode(',', $matches[1]);
+            $m = array_map('trim', $m);
+            if (count($m) == 1 && $m[0] === '') {
+                return true;
+            } else {
+                return $m;
             }
         }
         return false;
@@ -220,8 +222,11 @@ abstract class Smarty_Internal_CompileBase {
             $cn = is_object($callback[0]) ? 'ReflectionObject' : 'ReflectionClass';
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
+        } elseif (is_object($callback) && method_exists($callback, '__invoke')) {
+            $reflection = new ReflectionObject($callback);
+            $reflection = $reflection->getMethod('__invoke');
         } else {
-            throw new SmartyException("callback must be function name (string) or object/class method array");
+            throw new SmartyException("callback must be closure, function name (string), object/class method array or invokable object");
         }
 
         // get list of parameters
@@ -261,15 +266,19 @@ abstract class Smarty_Internal_CompileBase {
     * @throws SmartyCompilerException
     */
     public function getPluginParameterString($callback, $params, $compiler, $block, $cache_attr = null) {
-        if (is_string($callback)) {
+        if (is_string($callback) || $callback instanceof Closure) {
             $reflection = new ReflectionFunction($callback);
         } elseif (is_array($callback)) {
             $cn = is_object($callback[0]) ? 'ReflectionObject' : 'ReflectionClass';
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
+        } elseif (is_object($callback) && method_exists($callback, '__invoke')) {
+            $reflection = new ReflectionObject($callback);
+            $reflection = $reflection->getMethod('__invoke');
         } else {
-            throw new CompilerException("callback must be function name (string) or object/class method array");
+            throw new SmartyException("callback must be closure, function name (string), object/class method array or invokable object");
         }
+        
         $object = '$_smarty_tpl';
         if ($compiler->smarty->use_reflection && $result = $this->injectObject($callback, array('Smarty', 'Smarty_Internal_Template'))) {
             if ($result[0] == 'Smarty') {
@@ -350,15 +359,19 @@ abstract class Smarty_Internal_CompileBase {
     * @throws SmartyCompilerException
     */
     public function getNoOfRequiredParameter($callback) {
-        if (is_string($callback)) {
+        if (is_string($callback) || $callback instanceof Closure) {
             $reflection = new ReflectionFunction($callback);
         } elseif (is_array($callback)) {
             $cn = is_object($callback[0]) ? 'ReflectionObject' : 'ReflectionClass';
             $reflection = new $cn($callback[0]);
             $reflection = $reflection->getMethod($callback[1]);
+        } elseif (is_object($callback) && method_exists($callback, '__invoke')) {
+            $reflection = new ReflectionObject($callback);
+            $reflection = $reflection->getMethod('__invoke');
         } else {
-            throw new CompilerException("callback must be function name (string) or object/class method array");
+            throw new SmartyException("callback must be closure, function name (string), object/class method array or invokable object");
         }
+        
         return $reflection->getNumberOfRequiredParameters();
     }
 }

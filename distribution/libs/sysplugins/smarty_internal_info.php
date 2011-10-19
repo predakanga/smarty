@@ -116,9 +116,6 @@ class Smarty_Internal_Info
             'na' => self::NOT_AVAILABLE,
             'version' => Smarty::SMARTY_VERSION,
             'bc' => $this->smarty instanceof SmartyBC,
-
-            'errors' => &$this->errors,
-            'warnings' => &$this->warnings,
         );
         
         if (!$flags || $flags & self::PHP) {
@@ -156,8 +153,11 @@ class Smarty_Internal_Info
         
         // purge plugins_dir if loaded by other test
         if ($flags && !($flags & self::FILESYSTEM)) {
-            $this->filesystem = array();
+            $this->data['filesystem'] = array();
         }
+        
+        $this->data['errors'] = $this->errors;
+        $this->data['warnings'] = $this->warnings;
     }
     
     protected function analyzeTemplates()
@@ -171,6 +171,10 @@ class Smarty_Internal_Info
     
     protected function analyzeEnvironment()
     {
+        if ($this->php) {
+            return;
+        }
+        
         $this->php = array(
             'version' => phpversion(),
             'modules' => array(
@@ -208,6 +212,10 @@ class Smarty_Internal_Info
     
     protected function analyzeConstants()
     {
+        if ($this->constants) {
+            return;
+        }
+        
         $constants = array(
             'SMARTY_DIR' => realpath(dirname(__FILE__) .'/..') . DS,
             'SMARTY_SYSPLUGINS_DIR' => dirname(__FILE__) . DS,
@@ -219,10 +227,12 @@ class Smarty_Internal_Info
         );
         
         foreach ($constants as $key => $default) {
+            $value = constant($key);
             $constants[$key] = array(
                 'name' => $key,
-                'value' => constant($key),
+                'value' => $value,
                 'default' => $default,
+                'diff' => $default === $value,
                 'error' => null,
                 'warning' => null,
             );
@@ -233,6 +243,10 @@ class Smarty_Internal_Info
     
     protected function analyzeProperties()
     {
+        if ($this->properties) {
+            return;
+        }
+        
         $_clean_smarty = new Smarty();
         $template = null;
         $smarty = new ReflectionClass($this->smarty);
@@ -332,6 +346,10 @@ class Smarty_Internal_Info
     
     protected function analyzeFilesystem()
     {
+        if ($this->filesystem) {
+            return;
+        }
+        
         $this->filesystem = array(
             'template_dir' => array(),
             'config_dir' => array(),
@@ -430,6 +448,10 @@ class Smarty_Internal_Info
     
     protected function analyzePlugins()
     {
+        if ($this->plugins) {
+            return;
+        }
+        
         $this->plugins = array(
             'function' => array(),
             'modifier' => array(),
@@ -496,8 +518,13 @@ class Smarty_Internal_Info
                     $this->warnings['plugins-' . $type . '-' . $name] = "Plugin '{$name}' found in at least 2 directories";
                 }
                 
-                // TODO: Reflection for $nocache and $cache_attr
-                // TODO: Reflection for signature ($smarty|$template) order
+                $signature = null;
+                $nocache = null;
+                $cache_attr = null;
+                if ($function instanceof ReflectionFunction) {
+                    $signature = $this->reflectedSignature($function);
+                    list($nocache, $cache_attr) = $this->reflectedAnnotations($function);
+                }
                 
                 $this->plugins[$type][$name] = array(
                     'name' => $name,
@@ -506,10 +533,10 @@ class Smarty_Internal_Info
                     'realpath' => $realpath,
                     
                     'function' => $_name,
-                    'line' => $function instanceof ReflectionFunction ? $function->getStartLine() : null,
-                    'signature' => null,
-                    'nocache' => null,
-                    'cache_attr' => null,
+                    'line' => $function instanceof Reflector ? $function->getStartLine() : null,
+                    'signature' => $signature,
+                    'nocache' => $nocache,
+                    'cache_attr' => $cache_attr,
                     
                     'registered' => null,
                     'lazyloaded' => true,
@@ -533,8 +560,6 @@ class Smarty_Internal_Info
                     $this->warnings['plugins-' . $type . '-' . $name] = "Plugin '{$name}' found in at least 2 directories";
                 }
                 
-                // TODO: Reflection for signature ($smarty|$template) order
-                
                 $this->plugins[$type][$name] = array(
                     'name' => $name,
                     'type' => $type,
@@ -543,7 +568,7 @@ class Smarty_Internal_Info
                     
                     'function' => $function ? $function->getName() : null,
                     'line' => $function ? $function->getStartLine() : null,
-                    'signature' => null,
+                    'signature' => $function ? $this->reflectedSignature($function) : null,
                     'nocache' => $nocache,
                     'cache_attr' => $attributes,
                     
@@ -577,7 +602,7 @@ class Smarty_Internal_Info
                 
                     'function' => $function ? $function->getName() : null,
                     'line' => $function ? $function->getStartLine() : null,
-                    'signature' => null,
+                    'signature' => $function ? $this->reflectedSignature($function) : null,
                     'nocache' => null,
                     'cache_attr' => null,
                 
@@ -598,25 +623,54 @@ class Smarty_Internal_Info
     
     protected function analyzeRegistered()
     {
-        /*
-            registered_objects
-            registered_classes
-            registered_filters
-            registered_resources
-            registered_cache_resources
-        */
+        if ($this->registered) {
+            return;
+        }
+        
+        // analyze registered_objects
+        foreach ($this->smarty->registered_objects as $name => $_object) {
+            list($object, $allowed, $args, $blocked) = $object;
+            
+        }
+        
+        // analyze registered_classes
+        foreach ($this->smarty->registered_classes as $name => $class) {
+            
+        }
+
+        // Smarty::$registered_filters might be getting an overhaul
+        
+        // analyze registered_resources
+        foreach ($this->smarty->registered_resources as $name => $handler) {
+            
+        }
+        
+        // analyze registered_cacheresources
+        foreach ($this->smarty->registered_cache_resources as $name => $handler) {
+            
+        }
     }
     
     protected function analyzeDefaults()
     {
-        /*
-            default_modifiers
-            autoload_filters
-        */
+        if ($this->defaults) {
+            return;
+        }
+        
+        foreach ($this->smarty->default_modifiers as $callback) {
+            $function = $this->reflectedFunctionOfCallable($callback);
+            
+        }
+        
+        // Smarty::$autoload_filters might be getting an overhaul
     }
     
     protected function analyzeSecurity()
     {
+        if ($this->security) {
+            return;
+        }
+        
         /*
             php_handling (wtf?)
             secure_dir (template_dir config_dir) -> also in {fetch}
@@ -632,6 +686,52 @@ class Smarty_Internal_Info
         */
     }
     
+    protected function reflectedAnnotations($function) {
+        $attributes = array(null, null);
+        
+        /*
+        * @smarty_nocache
+        * @smarty_cache_attr param1, param2
+        */
+        
+        // get PHPdoc data
+        $doc = $function->getDocComment();
+
+        if ($doc && preg_match_all('#@(?<name>smarty_nocache|smarty_cache_attr)(?<value>.*)$#m', $doc, $matches, PREG_SET_ORDER)) {
+            foreach ($matches as $match) {
+                $m = explode(',', $match['value']);
+                $m = array_map('trim', $m);
+                if (count($m) === 1 && $m[0] === '') {
+                    $attributes[0] = true;
+                } else {
+                    $attributes[1] = $m;
+                }
+            }
+        }
+
+        return $attributes;
+    }
+    
+    protected function reflectedSignature(ReflectionFunctionAbstract $function)
+    {
+        $params = array();
+        foreach ($function->getParameters() as $p) {
+            $param = '';
+            if ($c = $p->getClass()) {
+                $param .= $c->getName() .' ';
+            }
+            
+            $param .= '$' . $p->getName();
+            try {
+                $param .= '='. var_export($p->getDefaultValue(), true);
+            } catch (ReflectionException $e) {}
+            
+            $params[] = $param;
+        }
+        
+        $signature = $function->getName() .'(' . join(', ', $params) . ')';
+        return $signature;
+    }
     
     protected function reflectedFunctionFromFile($function_name, $filepath)
     {
@@ -654,6 +754,8 @@ class Smarty_Internal_Info
         } elseif (class_exists($function_name)) {
             return new ReflectionClass($function_name);
         }
+        
+        return null;
     }
     
     protected function reflectedFunctionOfCallable($callback)

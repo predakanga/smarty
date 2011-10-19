@@ -78,7 +78,7 @@
     {elseif is_float($value)}
         <span class="float {$_flag}">{$value|string_format:"%0.4f"}</span>
     {elseif is_array($value)}
-        <span class="array {$_flag}">{$value|join:", "|escape}</span>
+        <span class="array {$_flag}">[{$value|join:", "|escape}]</span>
     {elseif is_object($value)}
         <span class="object {$_flag}">{$value|get_class}</span>
     {elseif is_resource($value)}
@@ -222,7 +222,9 @@
                     <tr>
                         <th>Key</th>
                         <th>Configured</th>
-                        <th>Include_Path</th>
+                        {if $_smarty->use_include_path}
+                            <th>Include_Path</th>
+                        {/if}
                         <th>Realpath</th>
                         <th>Readable</th>
                         <th>Writable</th>
@@ -237,7 +239,9 @@
                             <td class="not-appliccable"></td>
                         {/if}
                         <td><span class="directory">{$dir.path|escape}</span></td>
-                        <td><span class="directory">{$dir.includepath|escape}</span></td>
+                        {if $_smarty->use_include_path}
+                            <td><span class="directory">{$dir.includepath|escape}</span></td>
+                        {/if}
                         <td><span class="directory">{$dir.realpath|escape}</span></td>
                         {if $dir.error}
                             <td colspan="2" class="error">{$dir.error|escape}</td>
@@ -290,7 +294,7 @@
                     <tr>
                         <th>Name</th>
                         <th>Function</th>
-                        <th>attrs…</th>
+                        <th>Caching</th>
                         <th>Origin</th>
                     </tr>
                 </thead>
@@ -298,8 +302,13 @@
                     {foreach $plugins as $plugin}
                     <tr>
                         <td id="plugins-{$p|escape}-{$plugin.name|escape}">{$plugin.name|escape}</td>
-                        <td>---</td>
-                        <td>---</td>
+                        <td>{$plugin.signature|escape}</td>
+                        <td>{if $plugin.nocache}
+                            <span class="string flag">NOCACHE</span>
+                            {if $plugin.cache_attr}
+                                {prettyprint value=$plugin.cache_attr}
+                            {/if}
+                        {/if}</td>
                         <td><span class="directory">{$plugin.realpath}</span> <span class="line">{$plugin.line}</span></td>
                     </tr>
                     {/foreach}
