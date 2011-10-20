@@ -777,19 +777,11 @@ class Smarty extends Smarty_Internal_TemplateBase {
     }
 
     /**
-     * Throw error when using PHP 4 style constructor
+     * Check if a template resource exists
+     *
+     * @param string $resource_name template name
+     * @return boolean status
      */
-    public function Smarty()
-    {
-         throw new SmartyException("PHP5 requires you to call __construct() instead of Smarty()");
-    }
-
-    /**
-    * Check if a template resource exists
-    *
-    * @param string $resource_name template name
-    * @return boolean status
-    */
     public function templateExists($resource_name)
     {
         // create template object
@@ -1295,7 +1287,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $compile_id = $compile_id === null ? $this->compile_id : $compile_id;
         // already in template cache?
         $unique_template_name = Smarty_Resource::getUniqueTemplateName($this, $template);
-        $_templateId =  sha1($unique_template_name . $cache_id . $compile_id);
+        $_templateId = $unique_template_name . $cache_id . $compile_id;
         if ($do_clone) {
             if (isset($this->template_objects[$_templateId])) {
                 // return cached template object

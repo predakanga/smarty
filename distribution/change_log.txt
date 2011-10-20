@@ -41,6 +41,16 @@
 - add default config variable handler
 - optimization of variable container handling
 
+20.10.2011
+- @silenced unlink() in Smarty_Internal_Write_File since debuggers go haywire without it.
+- bugfix Smarty::clearCompiledTemplate() threw an Exception if $cache_id was not present in $compile_dir when $use_sub_dirs = true.
+- bugfix {html_select_date} and {html_select_time} did not properly handle empty time arguments (Forum Topic 20190)
+- improvement removed unnecessary sha1()
+
+19.10.2011
+- revert PHP4 constructor message
+- fixed PHP4 constructor message
+
 ===== Smarty-3.1.4 =====
 19.10.2011
 - added exception when using PHP4 style constructor
