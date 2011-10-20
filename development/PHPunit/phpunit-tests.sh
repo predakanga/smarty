@@ -9,4 +9,4 @@ if [ -e /usr/bin/phpunit ]; then
   PHPUNIT=/usr/bin/phpunit
 fi
 
-php -d asp_tags=On $PHPUNIT --verbose SmartyTests.php > test_results.txt
+php -d asp_tags=On $PHPUNIT --verbose SmartyTests.php
