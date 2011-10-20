@@ -1,2 +1,12 @@
 #!/bin/sh
-php -d asp_tags=On /usr/local/bin/phpunit --verbose SmartyTestssingle.php
+
+# rodneyrehm
+if [ -e /usr/local/bin/phpunit ]; then 
+  PHPUNIT=/usr/local/bin/phpunit
+fi
+# monte.ohrt
+if [ -e /usr/bin/phpunit ]; then 
+  PHPUNIT=/usr/bin/phpunit
+fi
+
+php -d asp_tags=On $PHPUNIT --verbose SmartyTestssingle.php
