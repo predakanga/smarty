@@ -221,6 +221,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         // already in template cache?
         $unique_template_name = Smarty_Resource::getUniqueTemplateName($this->smarty, $template);
         $_templateId =  $unique_template_name . $cache_id . $compile_id;
+        if (isset($_templateId[150])) {
+            $_templateId = sha1($_templateId);
+        }
         if (isset($this->smarty->template_objects[$_templateId])) {
             // clone cached template object because of possible recursive call
             $tpl = clone $this->smarty->template_objects[$_templateId];
@@ -330,7 +333,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 $plugins_string = '<?php ';
                 foreach ($this->required_plugins['compiled'] as $tmp) {
                     foreach ($tmp as $data) {
-                        $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$data['file']}';\n";
+                        $file = addslashes($data['file']);
+                        $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$file}';\n";
                     }
                 }
                 $plugins_string .= '?>';
@@ -340,7 +344,8 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 $plugins_string .= "<?php echo '/*%%SmartyNocache:{$this->properties['nocache_hash']}%%*/<?php \$_smarty = \$_smarty_tpl->smarty; ";
                 foreach ($this->required_plugins['nocache'] as $tmp) {
                     foreach ($tmp as $data) {
-                        $plugins_string .= "if (!is_callable(\'{$data['function']}\')) include \'{$data['file']}\';\n";
+                        $file = addslashes($data['file']);
+                        $plugins_string .= addslashes("if (!is_callable('{$data['function']}')) include '{$file}';\n");
                     }
                 }
                 $plugins_string .= "?>/*/%%SmartyNocache:{$this->properties['nocache_hash']}%%*/';?>\n";
@@ -560,7 +565,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return $this->cached->handler->clear($this->smarty, $this->template_name, $this->cache_id, $this->compile_id, $exp_time);
     }
 
-
     /**
      * [util function] to use either var_export or unserialize/serialize to generate code for the
      * cachevalue optionflag of {assign} tag
@@ -574,20 +578,20 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         return 'unserialize(\'' . serialize($var) . '\')';
     }
 
-     /**
+    /**
      * callback used by _export_cache_value to check arrays recursively
      *
      * @param bool $flag status of previous elements
      * @param mixed $element array element to check
      * @return bool status
      */
-   private function _check_array_callback($flag, $element) {
+    private function _check_array_callback($flag, $element) {
         if (is_resource($element)) { throw new SmartyException('Cannot serialize resource'); }
         $flag = $flag || is_object($element) || (!is_int($element) && !is_float($element) && !is_bool($element) && !is_string($element) && (is_array($element) && array_reduce($element, array($this,'_check_array_callback'))));
         return $flag;
     }
 
-     /**
+    /**
      * set Smarty property in template context
      *
      * @param string $property_name property name
@@ -631,6 +635,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 // do not cache eval resources
                 if ($this->source->type != 'eval') {
                     $_templateId = $this->source->unique_resource . $this->cache_id . $this->compile_id;
+                    if (isset($_templateId[150])) {
+                        $_templateId = sha1($_templateId);
+                    }
                     $this->smarty->template_objects[$_templateId] = $this;
                 }
                 return $this->source;
