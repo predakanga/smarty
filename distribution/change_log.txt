@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+21.10.2011
+- bugfix nocache_hash processing
+
 19.10.2011
 - improvement SmartyRunTimeException now shows template source lines of error
 - fix SmartyRunTimeException on eval and string resources

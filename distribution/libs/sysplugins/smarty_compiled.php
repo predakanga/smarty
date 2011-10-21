@@ -169,6 +169,14 @@ class Smarty_Compiled {
                 }
             }
         }
+        if ($_template->caching != Smarty::CACHING_LIFETIME_SAVED && $_template->caching != Smarty::CACHING_LIFETIME_CURRENT) {
+            // var_dump('renderTemplate', $_template->has_nocache_code, $_template->template_resource, $_template->properties['nocache_hash'], $_template->parent->properties['nocache_hash'], $_output);
+            if (!empty($_template->properties['nocache_hash']) && !empty($_template->parent->properties['nocache_hash'])) {
+                // replace nocache_hash
+                $output = preg_replace("/{$_template->properties['nocache_hash']}/", $_template->parent->properties['nocache_hash'], $output);
+                $_template->parent->has_nocache_code = $_template->parent->has_nocache_code || $_template->has_nocache_code;
+            }
+        }
         if ($obj->smarty->debugging) {
             Smarty_Internal_Debug::end_render($_template);
         }
