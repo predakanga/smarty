@@ -1,4 +1,11 @@
 ﻿===== Smarty 3.2-DEV  =====
+
+22.10.2011
+- bugfix use catch Exception instead UnexpectedValueException in 
+  clearCompiledTemplate to be PHP 5.2 compatible
+- bugfix use catch Exception instead UnexpectedValueException in 
+  clearCompiledTemplate to be PHP 5.2 compatible
+
 21.10.2011
 - bugfix nocache_hash processing
 
