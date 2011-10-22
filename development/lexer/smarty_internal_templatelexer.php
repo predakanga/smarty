@@ -181,14 +181,15 @@ class Smarty_Internal_Templatelexer
     function yy_r1_1($yy_subpatterns)
     {
 
+     $this->token = Smarty_Internal_Templateparser::TP_TEMPLATEINIT;
      $this->yypushstate(self::TEXT);
-     return false;
     }
     function yy_r1_2($yy_subpatterns)
     {
 
+     $this->value = '';
+     $this->token = Smarty_Internal_Templateparser::TP_TEMPLATEINIT;
      $this->yypushstate(self::TEXT);
-     return true;
     }
 
 

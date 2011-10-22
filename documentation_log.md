@@ -37,7 +37,7 @@ these changes must reflect on the documentation at some point…
 * smarty_modifier_foobar(Smarty $smarty, $string, …) vs. smarty_modifier_foobar($string, …)
 * smarty_function_foobar(Smarty $smarty, $param1, $param2) vs, smarty_modifier_foobar($params, Smarty_Internal_Template $template)
 * smarty_block_foobar(Smarty $smarty, $content, $$repeat, $param1, $param2) vs, smarty_modifier_foobar($params, $content, Smarty_Internal_Template $template, &$repeat)
-
+* {exception} tag
 
 ## Functions ##
 

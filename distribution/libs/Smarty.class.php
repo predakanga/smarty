@@ -1578,7 +1578,8 @@ class SmartyException extends Exception {
  */
 class SmartyCompilerException extends SmartyException  {
     public function __toString() {
-        return "Template error: {$this->message}\n";
+        echo "Compiler: {$this->message}";
+        return '';
     }
 
 }
@@ -1597,22 +1598,34 @@ class SmartyRuntimeException extends SmartyException  {
         $this->message = $message;
         $this->object = $object;
         $this->line = $object->trace_line;
-        if ($this->object->source->type == 'eval' || $this->object->source->type == 'string' || $this->object->source instanceof Smarty_Resource_Recompiled) {
-            $this->file = "in {$this->object->source->type}: resource";
-        } else {
-            $this->file = $this->object->template_resource;
-        }
+        $this->file = end($this->object->trace_call_stack);
     }
 
     public function __toString() {
-        $match = preg_split("/\n/", $this->object->source->content);
+        preg_match_all("/\n/", $this->object->source->content, $match, PREG_OFFSET_CAPTURE);
         $start_line = max(1,$this->line - 2);
-        $end_line = min ($this->line + 2, count($match));
+        $end_line = min ($this->line + 2, count($match[0])+1);
         $source = "<br>";
         for ($i = $start_line; $i <= $end_line; $i++) {
-            $source .= sprintf('%4d : ',$i) . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$match[$i-1]))) . "<br>";
+            $from = 0;
+            $to = 99999999;
+            if (isset($match[0][$i-2])) {
+                $from = $match[0][$i-2][1];
+            }
+            if (isset($match[0][$i-1])) {
+                $to = $match[0][$i-1][1] - $from;
+            }
+            $substr =  substr($this->object->source->content, $from, $to);
+            $source .= sprintf('%4d : ',$i) . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$substr))) . "<br>";
         }
-        echo "Smarty runtime error: <b>{$this->message}</b> in line {$this->line}{$source}";
+        $msg = "Smarty runtime exception: <b>{$this->message}</b> in <b>{$this->file}</b> line <b>{$this->line}</b>{$source}<br><br>";
+        $ptr = $this->object;
+        while ($ptr->parent instanceof Smarty_Internal_Template) {
+            $ptr = $ptr->parent;
+            $file = end($ptr->trace_call_stack);
+            $msg .= "<b>called by {$file}</b><br>";
+        }
+        echo $msg;
         return '';
     }
 

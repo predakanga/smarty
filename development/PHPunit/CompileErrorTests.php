@@ -1,9 +1,9 @@
 <?php
 /**
 * Smarty PHPunit tests compiler errors
-* 
+*
 * @package PHPunit
-* @author Uwe Tews 
+* @author Uwe Tews
 */
 
 /**
@@ -14,12 +14,12 @@ class CompileErrorTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
-    } 
+    }
 
     public static function isRunnable()
     {
         return true;
-    } 
+    }
 
     /**
     * test none existing template file error
@@ -28,13 +28,13 @@ class CompileErrorTests extends PHPUnit_Framework_TestCase {
     {
         try {
             $this->smarty->fetch('eval:{include file=\'no.tpl\'}');
-        } 
+        }
         catch (Exception $e) {
             $this->assertContains('Unable to load template', $e->getMessage());
             return;
-        } 
+        }
         $this->fail('Exception for none existing template has not been raised.');
-    } 
+    }
     /**
     * test unkown tag error
     */
@@ -42,13 +42,13 @@ class CompileErrorTests extends PHPUnit_Framework_TestCase {
     {
         try {
             $this->smarty->fetch('eval:{unknown}');
-        } 
+        }
         catch (Exception $e) {
-            $this->assertContains('unknown tag "unknown"', $e->getMessage());
+            $this->assertContains('unknown tag \'{unknown...}\'', $e->getMessage());
             return;
-        } 
+        }
         $this->fail('Exception for unknown Smarty tag has not been raised.');
-    } 
+    }
     /**
     * test unclosed tag error
     */
@@ -56,13 +56,13 @@ class CompileErrorTests extends PHPUnit_Framework_TestCase {
     {
         try {
             $this->smarty->fetch('eval:{if true}');
-        } 
+        }
         catch (Exception $e) {
             $this->assertContains('unclosed {if} tag', $e->getMessage());
             return;
-        } 
+        }
         $this->fail('Exception for unclosed Smarty tags has not been raised.');
-    } 
+    }
     /**
     * test syntax error
     */
@@ -70,14 +70,14 @@ class CompileErrorTests extends PHPUnit_Framework_TestCase {
     {
         try {
             $this->smarty->fetch('eval:{assign var=}');
-        } 
+        }
         catch (Exception $e) {
-            $this->assertContains('Syntax Error in template "599a9cf0e3623a3206bd02a0f5c151d5f5f3f69e"', $e->getMessage());
-            $this->assertContains('Unexpected "}"', $e->getMessage());
+            $this->assertContains('<b>Syntax Error</b> in template <b>\'599a9cf0e3623a3206bd02a0f5c151d5f5f3f69e\'', $e->getMessage());
+            $this->assertContains('Unexpected \'<b>}</b>\'', $e->getMessage());
             return;
-        } 
+        }
         $this->fail('Exception for syntax error has not been raised.');
-    } 
+    }
     /**
     * test empty templates
     */
@@ -85,8 +85,8 @@ class CompileErrorTests extends PHPUnit_Framework_TestCase {
     {
         $tpl = $this->smarty->createTemplate('eval:');
         $this->assertEquals('', $this->smarty->fetch($tpl));
-    } 
+    }
 
-} 
+}
 
 ?>

@@ -21,6 +21,7 @@
     private $lex;
     private $internalError = false;
     private $last_taglineno = 0;
+    private $last_taglineno_nocache = 0;
 
     function __construct($lex, $compiler) {
         $this->lex = $lex;
@@ -94,7 +95,17 @@
 // complete template
 //
 start(res)       ::= template. {
-    res = $this->root_buffer->to_smarty_php();
+   // execute end of template
+   $this->current_buffer->append_subtree(new _smarty_text($this, "<?php array_pop(\$_smarty_tpl->trace_call_stack)?>"));
+   if ($this->compiler->template->caching) {
+       $this->compiler->has_code = true;
+       $this->compiler->tag_nocache = true;
+       $save = $this->template->has_nocache_code; 
+       $this->current_buffer->append_subtree(new _smarty_text($this, $this->compiler->processNocacheCode("<?php array_pop(\$_smarty_tpl->trace_call_stack)?>", true)));
+       $this->template->has_nocache_code = $save;
+   }
+   // merge all buffer to output
+   res = $this->root_buffer->to_smarty_php();
 }
 
 //
@@ -116,13 +127,32 @@ template       ::= .
 //
 // template elements
 //
+                      // Template init
+template_element(res)::= TEMPLATEINIT(i). {
+    $code = "<?php \$_smarty_tpl->trace_call_stack[] = '{$this->compiler->template->source->filepath}';?>";
+    res = new _smarty_text($this, $code);
+    if ($this->compiler->template->caching) {
+        $this->compiler->has_code = true;
+        $this->compiler->tag_nocache = true;
+        $save = $this->template->has_nocache_code; 
+        res = new _smarty_text($this, $this->compiler->processNocacheCode($code, true) . $code);
+        $this->template->has_nocache_code = $save;
+    }
+}
+
+
                       // Smarty tag
 template_element(res)::= smartytag(st). {
     if ($this->compiler->has_code) {
         $tmp ='';
-        if ($this->last_taglineno != $this->lex->taglineno) {
-            $tmp = "<?php \$_smarty_tpl->trace_line = {$this->lex->taglineno}?>";
-            $this->last_taglineno = $this->lex->taglineno;
+        if ((!$this->compiler->nocache && !$this->compiler->tag_nocache) && $this->last_taglineno != $this->lex->taglineno ||
+            (($this->compiler->nocache || $this->compiler->tag_nocache) && $this->last_taglineno_nocache != $this->lex->taglineno)) {
+            $tmp = "<?php \$_smarty_tpl->trace_line = {$this->lex->taglineno};?>";
+            if (!$this->compiler->nocache && !$this->compiler->tag_nocache) { 
+                $this->last_taglineno = $this->lex->taglineno;
+            } else {
+                $this->last_taglineno_nocache = $this->lex->taglineno;
+            }
         }
         foreach ($this->compiler->prefix_code as $code) {$tmp.=$code;} $this->compiler->prefix_code=array();
         res = new _smarty_tag($this, $this->compiler->processNocacheCode($tmp.st,true));
@@ -165,7 +195,7 @@ template_element(res)::= PHPENDTAG. {
         $this->compiler->tag_nocache = true; 
         $this->is_xml = false;
         $save = $this->template->has_nocache_code; 
-        res = new _smarty_text($this, $this->compiler->processNocacheCode("<?php echo '?>';?>", $this->compiler, true));
+        res = new _smarty_text($this, $this->compiler->processNocacheCode("<?php echo '?>';?>", true));
         $this->template->has_nocache_code = $save; 
     } elseif ($this->php_handling == Smarty::PHP_PASSTHRU) {
         res = new _smarty_text($this, '?<?php ?>>');
@@ -236,7 +266,7 @@ template_element(res)::= XMLTAG. {
     $this->compiler->tag_nocache = true;
     $this->is_xml = true; 
     $save = $this->template->has_nocache_code; 
-    res = new _smarty_text($this, $this->compiler->processNocacheCode("<?php echo '<?xml';?>", $this->compiler, true));
+    res = new _smarty_text($this, $this->compiler->processNocacheCode("<?php echo '<?xml';?>", true));
     $this->template->has_nocache_code = $save;
 }
 

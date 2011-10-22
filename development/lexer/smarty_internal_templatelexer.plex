@@ -195,12 +195,13 @@ any = /[\s\S]?/
 /*!lex2php
 %statename BOM
 bom {
+     $this->token = Smarty_Internal_Templateparser::TP_TEMPLATEINIT;
      $this->yypushstate(self::TEXT);
-     return false;
 }
 any {
+     $this->value = '';
+     $this->token = Smarty_Internal_Templateparser::TP_TEMPLATEINIT;
      $this->yypushstate(self::TEXT);
-     return true;
 }
 */
 /*!lex2php

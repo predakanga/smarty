@@ -120,6 +120,12 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @internal
      */
     public $trace_line = 0;
+    /**
+     * template template call stack for traceback
+     * @var array
+     * @internal
+     */
+    public $trace_call_stack = array();
 
     /**
      * Create template data object
