@@ -2,6 +2,9 @@
 22.10.2011
 - add {exception} tag
 - improved Exception messages (work still in progress)
+- bugfix call of plugin with Smarty | Smarty_Internal_Template object as only 
+  parameter was incorrectly compiled
+- add buildRefection() internal method for code optimization
 
 21.10.2011
 - bugfix nocache_hash processing
