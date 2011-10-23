@@ -184,6 +184,9 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_vars = 'array()';
             $_has_vars = false;
         }
+        // update nocache line number trace back
+        $compiler->parser->updateNocacheLineTrace();
+        // output compiled code
         if ($has_compiled_template) {
             $_hash = $compiler->smarty->merged_templates_func[$tpl_name]['nocache_hash'];
             $_output = "<?php /*  Call merged included template \"" . $tpl_name . "\" */\n";

@@ -1597,12 +1597,22 @@ class SmartyRuntimeException extends SmartyException  {
     public function __construct($message, $object = null) {
         $this->message = $message;
         $this->object = $object;
-        $this->line = $object->trace_line;
-        $this->file = end($this->object->trace_call_stack);
+        $this->line = $object->trace_call_stack[0][1];
     }
 
     public function __toString() {
-        preg_match_all("/\n/", $this->object->source->content, $match, PREG_OFFSET_CAPTURE);
+        if (!isset($this->object->trace_call_stack[1])) {
+            if ($this->object->trace_call_stack[0][2] == 'eval' || $this->object->trace_call_stack[0][2] == 'string') {
+                $this->file = $this->object->source->type . ':';
+            } else {
+                $this->file = $this->object->source->filepath;
+            }
+            $ptr = $this->object;
+        } else {
+            $ptr = new Smarty_Internal_Template ($this->object->trace_call_stack[0][0], $this->object->smarty);
+            $this->file = $ptr->source->filepath;
+        }
+        preg_match_all("/\n/", $ptr->source->content, $match, PREG_OFFSET_CAPTURE);
         $start_line = max(1,$this->line - 2);
         $end_line = min ($this->line + 2, count($match[0])+1);
         $source = "<br>";
@@ -1615,15 +1625,21 @@ class SmartyRuntimeException extends SmartyException  {
             if (isset($match[0][$i-1])) {
                 $to = $match[0][$i-1][1] - $from;
             }
-            $substr =  substr($this->object->source->content, $from, $to);
+            $substr =  substr($ptr->source->content, $from, $to);
             $source .= sprintf('%4d : ',$i) . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$substr))) . "<br>";
         }
-        $msg = "Smarty runtime exception: <b>{$this->message}</b> in <b>{$this->file}</b> line <b>{$this->line}</b>{$source}<br><br>";
+        $msg = "<br>Smarty runtime exception: <b>{$this->message}</b> in <b>{$this->file}</b> line <b>{$this->line}</b>{$source}<br><br>";
+        $stack = $this->object->trace_call_stack;
+        array_shift($stack);
+        foreach ($stack as $info) {
+            $msg .= "<b>called by {$info[0]} in line {$info[1]}</b><br>";
+        }
         $ptr = $this->object;
         while ($ptr->parent instanceof Smarty_Internal_Template) {
             $ptr = $ptr->parent;
-            $file = end($ptr->trace_call_stack);
-            $msg .= "<b>called by {$file}</b><br>";
+            foreach ($ptr->trace_call_stack as $info) {
+                $msg .= "<b>called by {$info[0]} in line {$info[1]}</b><br>";
+            }
         }
         echo $msg;
         return '';

@@ -1,4 +1,8 @@
 ﻿===== Smarty 3.2-DEV  =====
+23.10.2011
+- make template source traceback on SmartyRunTimeException working also in nocache
+  sections in cache files
+
 22.10.2011
 - add {exception} tag
 - improved Exception messages (work still in progress)
