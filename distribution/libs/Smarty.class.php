@@ -1502,7 +1502,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
                 'length' => strlen($file),
                 );
             }
-            if (strpos($errfile, $dir['file'])===0) {
+            if (strpos($errfile, $dir['file']) === 0) {
                 $_is_muted_directory = true;
                 break;
             }
@@ -1653,9 +1653,7 @@ class SmartyRuntimeException extends SmartyException  {
 function smartyAutoload($class)
 {
     $_class = strtolower($class);
-    static $_classes = null;
-    if(!isset($_classes)) {
-        $_classes = array(
+    static $_classes = array(
         'smarty_config_source' => true,
         'smarty_config_compiled' => true,
         'smarty_security' => true,
@@ -1668,9 +1666,8 @@ function smartyAutoload($class)
         'smarty_resource_recompiled' => true,
         'smarty_compiled' => true,
         );
-    }
 
-    if (strpos($_class, 'smarty_internal_')===0 || isset($_classes[$_class])) {
+    if (strpos($_class, 'smarty_internal_') === 0 || isset($_classes[$_class])) {
         include SMARTY_SYSPLUGINS_DIR . $_class . '.php';
     }
 }

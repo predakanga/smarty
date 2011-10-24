@@ -243,7 +243,7 @@ class Smarty_Internal_Utility {
                 }
             } else {
                 $unlink = false;
-                if ((!isset($_compile_id) || strpos($_filepath, $_compile_id_part)===0)
+                if ((!isset($_compile_id) || strpos($_filepath, $_compile_id_part) === 0)
                     && (!isset($resource_name)
                         || (isset($_filepath[$_resource_part_1_length])
                             && substr_compare($_filepath, $_resource_part_1, -$_resource_part_1_length, $_resource_part_1_length) == 0)
