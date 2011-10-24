@@ -54,7 +54,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
         $from = $_attr['from'];
         $item = trim($_attr['item'],'\'"');
-        if (!strncmp("\$_smarty_tpl->tpl_vars->$item-", $from, strlen($item) + 25)) {
+        if (strpos("\$_smarty_tpl->tpl_vars->$item-", $from )===0) {
             $compiler->trigger_template_error("item variable {$item} may not be the same variable as at 'from'", $compiler->lex->taglineno);
         }
 

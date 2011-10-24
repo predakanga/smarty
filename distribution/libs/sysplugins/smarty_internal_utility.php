@@ -221,7 +221,6 @@ class Smarty_Internal_Utility {
         }
         if (isset($_compile_id)) {
             $_compile_id_part = $_compile_dir . $_compile_id . $_dir_sep;
-            $_compile_id_part_length = strlen($_compile_id_part);
         }
         $_count = 0;
         try {
@@ -244,7 +243,7 @@ class Smarty_Internal_Utility {
                 }
             } else {
                 $unlink = false;
-                if ((!isset($_compile_id) || (isset($_filepath[$_compile_id_part_length]) && !strncmp($_filepath, $_compile_id_part, $_compile_id_part_length)))
+                if ((!isset($_compile_id) || strpos($_filepath, $_compile_id_part)===0)
                     && (!isset($resource_name)
                         || (isset($_filepath[$_resource_part_1_length])
                             && substr_compare($_filepath, $_resource_part_1, -$_resource_part_1_length, $_resource_part_1_length) == 0)
