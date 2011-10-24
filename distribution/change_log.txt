@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+24.10.2011
+- tweak performance replace strncmp with strpos (15% faster)
+- tweak make internal variable static to (often called) smartyAutoload
 23.10.2011
 - make template source traceback on SmartyRunTimeException working also in nocache
   sections in cache files
