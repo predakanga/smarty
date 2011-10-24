@@ -115,12 +115,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public $_capture_stack = array();
     /**
-     * template source line number of last executed tag
-     * @var int
-     * @internal
-     */
-    public $trace_line = 0;
-    /**
      * template template call stack for traceback
      * @var array
      * @internal

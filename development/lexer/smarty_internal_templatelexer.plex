@@ -19,6 +19,7 @@ class Smarty_Internal_Templatelexer
     public $node;
     public $line;
     public $taglineno;
+    public $line_offset;
     public $state = 1;
     public $strip = false;
     private $heredoc_id_stack = Array();
@@ -83,6 +84,7 @@ class Smarty_Internal_Templatelexer
         $this->counter = 0;
         $this->line = 1;
         $this->smarty = $compiler->smarty;
+        $this->line_offset = $compiler->line_offset;
         $this->compiler = $compiler;
         $this->ldel = preg_quote($this->smarty->left_delimiter,'/'); 
         $this->ldel_length = strlen($this->smarty->left_delimiter); 
@@ -256,7 +258,8 @@ ldelspaceslash {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+        $this->taglineno = $compiler->line_offset;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelif {
@@ -265,7 +268,7 @@ ldelif {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELIF;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelfor {
@@ -274,7 +277,7 @@ ldelfor {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOR;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelforeach {
@@ -283,7 +286,7 @@ ldelforeach {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOREACH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelsetfilter {
@@ -292,7 +295,7 @@ ldelsetfilter {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSETFILTER;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldels {
@@ -301,18 +304,18 @@ ldels {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
 }
 phpstarttag {
   if (in_array($this->value, Array('<?', '<?=', '<?php'))) {
@@ -356,7 +359,7 @@ ldelspaceslash {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelif {
@@ -365,7 +368,7 @@ ldelif {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELIF;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelfor {
@@ -374,7 +377,7 @@ ldelfor {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOR;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelforeach {
@@ -383,7 +386,7 @@ ldelforeach {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOREACH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldels {
@@ -392,7 +395,7 @@ ldels {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 rdels {
@@ -402,12 +405,12 @@ rdels {
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
 }
 rdel {
   $this->token = Smarty_Internal_Templateparser::TP_RDEL;
@@ -639,7 +642,7 @@ ldelspaceslash {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelif {
@@ -648,7 +651,7 @@ ldelif {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELIF;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelfor {
@@ -657,7 +660,7 @@ ldelfor {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOR;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelforeach {
@@ -666,7 +669,7 @@ ldelforeach {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELFOREACH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldels {
@@ -675,18 +678,18 @@ ldels {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
   }
 }
 ldelslash {
   $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
 }
 ldel {
   $this->token = Smarty_Internal_Templateparser::TP_LDEL;
      $this->yypushstate(self::SMARTY);
-     $this->taglineno = $this->line;
+     $this->taglineno = $this->line + $this->line_offset;
 }
 double_quote {
   $this->token = Smarty_Internal_Templateparser::TP_QUOTE;
@@ -696,7 +699,7 @@ backtickdollar {
   $this->token = Smarty_Internal_Templateparser::TP_BACKTICK;
   $this->value = substr($this->value,0,-1);
   $this->yypushstate(self::SMARTY);
-  $this->taglineno = $this->line;
+  $this->taglineno = $this->line + $this->line_offset;
 }
 dollarid {
   $this->token = Smarty_Internal_Templateparser::TP_DOLLARID;
