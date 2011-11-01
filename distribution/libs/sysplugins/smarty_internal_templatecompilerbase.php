@@ -643,6 +643,8 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         // get template source line which has error
         if (!isset($line)) {
             $line = $this->lex->line;
+        } else {
+            $line = $line - $this->line_offset;
         }
         preg_match_all("/\n/", $this->lex->data, $match, PREG_OFFSET_CAPTURE);
         $start_line = max(1,$line - 2);
@@ -658,9 +660,9 @@ abstract class Smarty_Internal_TemplateCompilerBase {
                 $to = $match[0][$i-1][1] - $from;
             }
             $substr =  substr($this->lex->data, $from, $to);
-            $source .= sprintf('%4d : ',$i) . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$substr))) . "<br>";
+            $source .= sprintf('%4d : ',$i + $this->line_offset) . htmlspecialchars(trim(preg_replace('![\t\r\n]+!',' ',$substr))) . "<br>";
         }
-        $error_text = "<b>Syntax Error</b> in template <b>'{$this->template->source->filepath}'</b>  on line {$line}<br>{$source}";
+        $error_text = "<b>Syntax Error</b> in template <b>'{$this->template->source->filepath}'</b>  on line ". ($line + $this->line_offset) . "<br>{$source}";
         if (isset($msg)) {
             // individual error message
             $error_text .= "<br><b>{$msg}</b><br>";

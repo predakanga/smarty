@@ -1,4 +1,8 @@
 ﻿===== Smarty 3.2-DEV  =====
+01.11.2011
+- bugfix adjust displayed line numbers for SmartyCompilerException in {block} tags to be 
+  absolute to start of source file
+
 24.10.2011
 - tweak performance replace strncmp with strpos (15% faster)
 - tweak make internal variable static to (often called) smartyAutoload
