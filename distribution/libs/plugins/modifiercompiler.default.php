@@ -15,11 +15,14 @@
  *
  * @link http://www.smarty.net/manual/en/language.modifier.default.php default (Smarty online manual)
  * @author Uwe Tews
- * @param array $params parameters
+ *
+ * @param n x mixed $params any number of parameter                    }
  * @return string with compiled code
  */
-function smarty_modifiercompiler_default ($params, $compiler)
+// NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
+function smarty_modifiercompiler_default ()
 {
+    $params = func_get_args();
     $output = $params[0];
     if (!isset($params[1])) {
         $params[1] = "''";

@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+12.11.2011
+- use Reflection to check parameter when compiling modifier code
+
 01.11.2011
 - bugfix adjust displayed line numbers for SmartyCompilerException in {block} tags to be 
   absolute to start of source file

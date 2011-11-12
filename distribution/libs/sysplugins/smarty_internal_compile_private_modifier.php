@@ -39,7 +39,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
             // check for registered modifier
             if (isset($compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier])) {
                 $function = $compiler->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][$modifier][0];
-                $object = $this->testParameter($function, $single_modifier, $compiler);
+                $object = $this->testParameter($modifier, $function, $single_modifier, $compiler);
                 if (!is_array($function)) {
                     $output = "{$function}({$object}{$params})";
                 } else {
@@ -56,25 +56,22 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
                 // check if modifier allowed
                 if (!is_object($compiler->smarty->security_policy) || $compiler->smarty->security_policy->isTrustedModifier($modifier, $compiler)) {
                     $plugin = 'smarty_modifiercompiler_' . $modifier;
-                    $object = null;
-                    if ($compiler->smarty->use_reflection) {
-                        if ($result = $this->injectObject($plugin, array('Smarty', 'Smarty_Internal_Template'),0)) {
-                            if ($result[0] == 'Smarty') {
-                                $object = $compiler->template->smarty;
-                            } else {
-                                $object = $compiler->template;
-                            }
-                        }
-                    }
-                    if ($object == null) {
-                        $output = $plugin($single_modifier, $compiler);
+                    if ($this->getNoOfRequiredParameter($plugin) == 0) {
+                        // NOTE: This covers the modifier like 'default' and 'cat' which can take any number of parameter
+                        $output = call_user_func_array($plugin, $single_modifier);
                     } else {
-                        $output = $plugin($object, $single_modifier, $compiler);
+                        $object = $this->testParameter($modifier, $plugin, $single_modifier, $compiler);
+                        if ($object == '') {
+                            $output = call_user_func_array($plugin, $single_modifier);
+                        } else {
+                            array_unshift($single_modifier, $object);
+                            $output = call_user_func_array($plugin, $single_modifier);
+                        }
                     }
                 }
                 // check for plugin modifier
             } else if ($function = $compiler->getPlugin($modifier, Smarty::PLUGIN_MODIFIER)) {
-                $object = $this->testParameter($function, $single_modifier, $compiler);
+                $object = $this->testParameter($modifier, $function, $single_modifier, $compiler);
                 // check if modifier allowed
                 if (!is_object($compiler->smarty->security_policy) || $compiler->smarty->security_policy->isTrustedModifier($modifier, $compiler)) {
                     $output = "{$function}({$object}{$params})";
@@ -83,7 +80,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
             } else if (is_callable($modifier)) {
                 // check if modifier allowed
                 if (!is_object($compiler->smarty->security_policy) || $compiler->smarty->security_policy->isTrustedPhpModifier($modifier, $compiler)) {
-                    $object = $this->testParameter($modifier, $single_modifier, $compiler);
+                    $object = $this->testParameter($modifier, $modifier, $single_modifier, $compiler);
                     $output = "{$modifier}({$object}{$params})";
                 }
             } else {
@@ -96,32 +93,44 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
     /**
     * Check number of required modifer parameter oand optionally return context object
     *
-    * @param callback $function modifier callabck
+    * @param string $modifier modifier name
+    * @param callback $function modifier callback
     * @param array  $params parameter array
     * @param object $compiler  compiler object
     * @return string variable with context object or empty
     */
-    private function testParameter($function, $params, $compiler) {
+    private function testParameter($modifier, $callback, $params, $compiler) {
         $object = '';
-        if ($compiler->smarty->use_reflection) {
-            if ($result = $this->injectObject($function, array('Smarty', 'Smarty_Internal_Template'),0)) {
+        //NOTE: For some PHP functions in PHP < 5.3 getParameters() did not return a result
+        if ($parameters = $this->buildReflection($callback)->getParameters()) {
+            if ($result = $this->injectObject($callback, array('Smarty', 'Smarty_Internal_Template','Smarty_Internal_TemplateCompilerBase'),0)) {
                 if ($result[0] == 'Smarty') {
                     $object = '$_smarty_tpl->smarty, ';
-                } else {
+                } elseif  ($result[0] == 'Smarty_Internal_Template') {
                     $object = '$_smarty_tpl, ';
+                } else {
+                    $object = $compiler;
+                }
+                array_shift($parameters);
+            }
+            $no_supplied = count($params);
+            if ($no_supplied > count($parameters)) {
+                $compiler->trigger_template_error("Modifier '{$modifier}': Too many parameter", $compiler->lex->taglineno);
+            }
+            $i = 0;
+            $names = array();
+            foreach ($parameters as $parameter) {
+                $i++;
+                if ($i > $no_supplied && !$parameter->isOptional()) {
+                    $names[] = $parameter->getName();
                 }
             }
-            $no_required = $this->getNoOfRequiredParameter($function);
-            $no_supplied = count($params);
-            if ($result) {
-                $no_supplied++;
-            }
-            if ($no_supplied < $no_required) {
-                $compiler->trigger_template_error('missing required modifier parameter', $compiler->lex->taglineno);
+            if (!empty($names)) {
+                $names = join(', ',$names);
+                $compiler->trigger_template_error("Modifier '{$modifier}': Missing required parameter '{$names}'", $compiler->lex->taglineno);
             }
         }
         return $object;
     }
 }
-
 ?>
