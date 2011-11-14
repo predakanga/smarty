@@ -240,7 +240,7 @@ abstract class Smarty_Internal_CompileBase {
     */
     public function getPluginParameterString($callback, $params, $compiler, $block, $cache_attr = null) {
         $object = '$_smarty_tpl';
-        if ($compiler->smarty->use_reflection && $result = $this->injectObject($callback, array('Smarty', 'Smarty_Internal_Template'))) {
+        if ($result = $this->injectObject($callback, array('Smarty', 'Smarty_Internal_Template'))) {
             if ($result[0] == 'Smarty') {
                 $object = '$_smarty_tpl->smarty';
             }

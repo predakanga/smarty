@@ -547,12 +547,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public $cache_modified_check = false;
     /**
-    * use reflection on plugins
-    * @var boolean
-    * @link <missing>
-    */
-    public $use_reflection = true;
-    /**
     * registered plugins
     * @var array
     * @internal
@@ -697,7 +691,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if (is_callable('mb_internal_encoding')) {
             mb_internal_encoding(SMARTY_RESOURCE_CHAR_SET);
         }
-        $this->use_reflection = class_exists('ReflectionClass');
         $this->start_time = microtime(true);
         // set default dirs
         $this->setTemplateDir('.' . DS . 'templates' . DS)

@@ -14,7 +14,6 @@ these changes must reflect on the documentation at some point…
 * Smarty_Internal_Templatebase::registerDefaultTemplateHandler()
 * Smarty_Internal_Templatebase::registerDefaultConfigHandler()
 * Smarty_Internal_Template::fetch() display() isCached() clear() into Smarty::createTemplate() docs?
-* $use_reflection
 * $disable_core_plugins
 
 
