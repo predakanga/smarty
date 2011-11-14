@@ -8,7 +8,7 @@ require_once './LexerGenerator.php';
 $lex = new PHP_LexerGenerator('smarty_internal_templatelexer.plex');
 $contents = file_get_contents('smarty_internal_templatelexer.php');
 $contents = str_replace(array('SMARTYldel','SMARTYrdel'),array('".$this->ldel."','".$this->rdel."'),$contents);
-file_put_contents('smarty_internal_templatelexer.php', $contents);
+file_put_contents('smarty_internal_templatelexer.php', substr($contents, 0 , strlen($contents)-2));
 copy('smarty_internal_templatelexer.php','../../distribution/libs/sysplugins/smarty_internal_templatelexer.php');
 
 // Create Parser
@@ -26,7 +26,7 @@ $contents = '<?php
 * @author Uwe Tews
 */
 '.substr($contents,6);
-file_put_contents('smarty_internal_templateparser.php', $contents."?>");
+file_put_contents('smarty_internal_templateparser.php', $contents);
 copy('smarty_internal_templateparser.php','../../distribution/libs/sysplugins/smarty_internal_templateparser.php');
 
 ?>

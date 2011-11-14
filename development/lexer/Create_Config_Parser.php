@@ -4,7 +4,7 @@ require_once(dirname(__FILE__)."/../dev_settings.php");
 require_once './LexerGenerator.php';
 $lex = new PHP_LexerGenerator('smarty_internal_configfilelexer.plex');
 $contents = file_get_contents('smarty_internal_configfilelexer.php');
-file_put_contents('smarty_internal_configfilelexer.php', $contents."\n");
+file_put_contents('smarty_internal_configfilelexer.php', substr($contents, 0 , strlen($contents)-2));
 copy('smarty_internal_configfilelexer.php','../../distribution/libs/sysplugins/smarty_internal_configfilelexer.php');
 
 
@@ -23,6 +23,6 @@ $contents = '<?php
 * @author Uwe Tews
 */
 '.substr($contents,6);
-file_put_contents('smarty_internal_configfileparser.php', $contents."?>");
+file_put_contents('smarty_internal_configfileparser.php', $contents);
 copy('smarty_internal_configfileparser.php','../../distribution/libs/sysplugins/smarty_internal_configfileparser.php');
 ?>

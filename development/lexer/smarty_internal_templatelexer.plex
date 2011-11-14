@@ -124,7 +124,7 @@ math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
 incdec = /\+\+|\-\-/
 unimath = /\s*(\+|\-)\s*/
-openP = /\(\s*/
+openP = /\s*\(\s*/
 closeP = /\s*\)/
 openB = /\[\s*/
 closeB = /\s*\]/
@@ -258,7 +258,6 @@ ldelspaceslash {
   } else {
      $this->token = Smarty_Internal_Templateparser::TP_LDELSLASH;
      $this->yypushstate(self::SMARTY);
-        $this->taglineno = $compiler->line_offset;
      $this->taglineno = $this->line + $this->line_offset;
   }
 }

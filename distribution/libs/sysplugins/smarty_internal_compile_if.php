@@ -1,20 +1,20 @@
 <?php
 /**
- * Smarty Internal Plugin Compile If
- *
- * Compiles the {if} {else} {elseif} {/if} tags
- *
- * @package Smarty
- * @subpackage Compiler
- * @author Uwe Tews
- */
+* Smarty Internal Plugin Compile If
+*
+* Compiles the {if} {else} {elseif} {/if} tags
+*
+* @package Smarty
+* @subpackage Compiler
+* @author Uwe Tews
+*/
 
 /**
- * Smarty Internal Plugin Compile If Class
- *
- * @package Smarty
- * @subpackage Compiler
- */
+* Smarty Internal Plugin Compile If Class
+*
+* @package Smarty
+* @subpackage Compiler
+*/
 class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
 
     /**
@@ -32,6 +32,11 @@ class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
         $this->openTag($compiler, 'if',array(1,$compiler->nocache));
         // must whole block be nocache ?
         $compiler->nocache = $compiler->nocache | $compiler->tag_nocache;
+
+        if (!array_key_exists("if condition",$parameter)) {
+            $compiler->trigger_template_error("missing if condition", $compiler->lex->taglineno);
+        }
+
         if (is_array($parameter['if condition'])) {
             if (is_array($parameter['if condition']['var'])) {
                 $var = trim($parameter['if condition']['var']['var'], "'");
@@ -64,11 +69,11 @@ class Smarty_Internal_Compile_If extends Smarty_Internal_CompileBase {
 }
 
 /**
- * Smarty Internal Plugin Compile Else Class
- *
- * @package Smarty
- * @subpackage Compiler
- */
+* Smarty Internal Plugin Compile Else Class
+*
+* @package Smarty
+* @subpackage Compiler
+*/
 class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {else} tag
@@ -88,11 +93,11 @@ class Smarty_Internal_Compile_Else extends Smarty_Internal_CompileBase {
 }
 
 /**
- * Smarty Internal Plugin Compile ElseIf Class
- *
- * @package Smarty
- * @subpackage Compiler
- */
+* Smarty Internal Plugin Compile ElseIf Class
+*
+* @package Smarty
+* @subpackage Compiler
+*/
 class Smarty_Internal_Compile_Elseif extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {elseif} tag
@@ -108,6 +113,10 @@ class Smarty_Internal_Compile_Elseif extends Smarty_Internal_CompileBase {
         $_attr = $this->getAttributes($compiler, $args);
 
         list($nesting, $compiler->tag_nocache) = $this->closeTag($compiler, array('if', 'elseif'));
+
+        if (!array_key_exists("if condition",$parameter)) {
+            $compiler->trigger_template_error("missing elseif condition", $compiler->lex->taglineno);
+        }
 
         if (is_array($parameter['if condition'])) {
             $condition_by_assign = true;
@@ -168,11 +177,11 @@ class Smarty_Internal_Compile_Elseif extends Smarty_Internal_CompileBase {
 }
 
 /**
- * Smarty Internal Plugin Compile Ifclose Class
- *
- * @package Smarty
- * @subpackage Compiler
- */
+* Smarty Internal Plugin Compile Ifclose Class
+*
+* @package Smarty
+* @subpackage Compiler
+*/
 class Smarty_Internal_Compile_Ifclose extends Smarty_Internal_CompileBase {
     /**
     * Compiles code for the {/if} tag

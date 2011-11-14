@@ -56,7 +56,7 @@ class ReflectionTests extends PHPUnit_Framework_TestCase {
         try {
             $this->smarty->fetch('eval:{"hello world"|modifier_with_smarty_fail}');
         } catch(SmartyCompilerException $e) {
-            $this->assertContains('missing required', $e->getMessage());
+            $this->assertContains('Missing required', $e->getMessage());
             return;
         }
 
@@ -210,7 +210,7 @@ class ReflectionTests extends PHPUnit_Framework_TestCase {
         // TODO: uwe.tews add test for auto-loaded annotated nocache blocks
         $this->fail("annotated nocache block missing");
         return;
-        
+
         $this->smarty->addPluginsDir(dirname(__FILE__) . '/PHPunitplugins/');
         $this->smarty->fetch('eval:{annotated_nocache param1="hello world" param2=2}con-tent{/annotated_nocache}');
     }
@@ -220,7 +220,7 @@ class ReflectionTests extends PHPUnit_Framework_TestCase {
         // TODO: uwe.tews add test for auto-loaded annotated nocache functions
         $this->fail("annotated nocache function missing");
         return;
-        
+
         $this->smarty->addPluginsDir(dirname(__FILE__) . '/PHPunitplugins/');
         $this->smarty->fetch('eval:{annotated_nocache param1="hello world" param2=2}');
     }

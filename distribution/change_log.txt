@@ -68,6 +68,18 @@
 - optimization of variable container handling
 
 ===== trunk  =====
+===== Smarty-3.1.5  =====
+14.11.2011
+- bugfix allow space between function name and open bracket (forum topic 20375)
+
+09.11.2011
+- bugfix different behaviour of uniqid() on cygwin. See https://bugs.php.net/bug.php?id=34908
+  (forum topic 20343)
+
+01.11.2011
+- bugfix {if} and {while} tags without condition did not throw a SmartyCompilerException (Issue #57)
+- bugfix multiline strings in config files could fail on longer strings (reopened Issue #55)
+
 22.10.2011
 - bugfix smarty_mb_from_unicode() would not decode unicode-points properly
 - bugfix use catch Exception instead UnexpectedValueException in 
@@ -1769,7 +1781,7 @@ NOTICE: existing compiled template and cache files must be deleted
 - autoappend a directory separator if the xxxxx_dir definition have no trailing one
 
 03/19/2009
-- allow array definition as modifer paramter
+- allow array definition as modifer parameter
 - changed modifier to use multi byte string funktions. 
 
 03/17/2009
