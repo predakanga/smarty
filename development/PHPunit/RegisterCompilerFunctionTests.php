@@ -1,9 +1,9 @@
 <?php
 /**
  * Smarty PHPunit tests register->compilerFunction / unregister->compilerFunction methods
- * 
+ *
  * @package PHPunit
- * @author Uwe Tews 
+ * @author Uwe Tews
  */
 
 /**
@@ -14,12 +14,12 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty = SmartyTests::$smarty;
         SmartyTests::init();
-    } 
+    }
 
     public static function isRunnable()
     {
         return true;
-    } 
+    }
 
     /**
      * test register->compilerFunction method for function
@@ -29,7 +29,7 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->registerPlugin(Smarty::PLUGIN_COMPILER,'testcompilerfunction', 'mycompilerfunction');
         $this->assertEquals('mycompilerfunction', $this->smarty->registered_plugins['compiler']['testcompilerfunction'][0]);
         $this->assertEquals('hello world 1', $this->smarty->fetch('eval:{testcompilerfunction var=1}'));
-    } 
+    }
     /**
      * test register->compilerFunction method for static class
      */
@@ -37,7 +37,7 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->registerPlugin(Smarty::PLUGIN_COMPILER,'testcompilerfunction', array('mycompilerfunctionclass', 'execute'));
         $this->assertEquals('hello world 2', $this->smarty->fetch('eval:{testcompilerfunction var1=2}'));
-    } 
+    }
     /**
      * test register->compilerFunction method for objects
      */
@@ -46,7 +46,7 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
         $obj = new mycompilerfunctionclass;
         $this->smarty->registerPlugin(Smarty::PLUGIN_COMPILER,'testcompilerfunction', array($obj, 'compile'));
         $this->assertEquals('hello world 3', $this->smarty->fetch('eval:{testcompilerfunction var2=3}'));
-    } 
+    }
     /**
      * test unregister->compilerFunction method
      */
@@ -55,7 +55,7 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->registerPlugin(Smarty::PLUGIN_COMPILER,'testcompilerfunction', 'mycompilerfunction');
         $this->smarty->unregisterPlugin(Smarty::PLUGIN_COMPILER,'testcompilerfunction');
         $this->assertFalse(isset($this->smarty->registered_plugins[Smarty::PLUGIN_COMPILER]['testcompilerfunction']));
-    } 
+    }
     /**
      * test unregister->compilerFunction method not registered
      */
@@ -63,7 +63,7 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->unregisterPlugin(Smarty::PLUGIN_COMPILER,'testcompilerfunction');
         $this->assertFalse(isset($this->smarty->registered_plugins[Smarty::PLUGIN_COMPILER]['testcompilerfunction']));
-    } 
+    }
     /**
      * test unregister->compilerFunction method other registered
      */
@@ -72,21 +72,21 @@ class RegisterCompilerFunctionTests extends PHPUnit_Framework_TestCase {
         $this->smarty->registerPlugin(Smarty::PLUGIN_BLOCK,'testcompilerfunction', 'mycompilerfunction');
         $this->smarty->unregisterPlugin(Smarty::PLUGIN_COMPILER,'testcompilerfunction');
         $this->assertTrue(isset($this->smarty->registered_plugins[Smarty::PLUGIN_BLOCK]['testcompilerfunction']));
-    } 
-} 
+    }
+}
 function mycompilerfunction($params, $smarty)
 {
-    return "<?php echo 'hello world {$params['var']}'?>";
-} 
+    return "<?php echo 'hello world {$params['var']}';?>";
+}
 class mycompilerfunctionclass {
     static function execute($params, $smarty)
     {
-        return "<?php echo 'hello world {$params['var1']}'?>";
-    } 
+        return "<?php echo 'hello world {$params['var1']}';?>";
+    }
     function compile($params, $smarty)
     {
-        return "<?php echo 'hello world {$params['var2']}'?>";
-    } 
-} 
+        return "<?php echo 'hello world {$params['var2']}';?>";
+    }
+}
 
 ?>

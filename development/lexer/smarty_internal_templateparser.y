@@ -156,13 +156,14 @@ template_element(res)::= TEMPLATEINIT(i). {
         }
     }
     $code = "<?php array_unshift(\$_smarty_tpl->trace_call_stack, array('{$resource}', 0, '{$this->compiler->template->source->type}'));?>";
-    res = new _smarty_tag($this, $code);
     if ($this->compiler->template->caching) {
         $this->compiler->has_code = true;
         $this->compiler->tag_nocache = true;
         $save = $this->template->has_nocache_code; 
         res = new _smarty_tag($this, $this->compiler->processNocacheCode($code, true) . $code);
         $this->template->has_nocache_code = $save;
+    } else {
+        res = new _smarty_tag($this, $code);
     }
 }
 
@@ -191,7 +192,7 @@ template_element(res)::= smartytag(st). {
 
                       // comments
 template_element(res)::= COMMENT. {
-    res = new _smarty_tag($this, '');
+    res = new _smarty_text($this, '');
 }
 
                       // Literal
@@ -418,13 +419,13 @@ smartytag(res)   ::= LDEL ID(i) PTR ID(m) attributes(a) RDEL. {
                   // tag with modifier and optional Smarty2 style attributes
 smartytag(res)   ::= LDEL ID(i) modifierlist(l)attributes(a) RDEL. {
     res = '<?php ob_start();?>'.$this->compiler->compileTag(i,a).'<?php echo ';
-    res .= $this->compiler->compileTag('private_modifier',array(),array('modifierlist'=>l,'value'=>'ob_get_clean()')).'?>';
+    res .= $this->compiler->compileTag('private_modifier',array(),array('modifierlist'=>l,'value'=>'ob_get_clean()')).';?>';
 }
 
                   // registered object tag with modifiers
 smartytag(res)   ::= LDEL ID(i) PTR ID(me) modifierlist(l) attributes(a) RDEL. {
     res = '<?php ob_start();?>'.$this->compiler->compileTag(i,a,array('object_methode'=>me)).'<?php echo ';
-    res .= $this->compiler->compileTag('private_modifier',array(),array('modifierlist'=>l,'value'=>'ob_get_clean()')).'?>';
+    res .= $this->compiler->compileTag('private_modifier',array(),array('modifierlist'=>l,'value'=>'ob_get_clean()')).';?>';
 }
 
                   // {if}, {elseif} and {while} tag

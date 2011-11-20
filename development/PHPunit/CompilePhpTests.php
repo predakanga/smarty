@@ -72,7 +72,7 @@ echo '{\$a["?>"]}';
 echo "{\$a['?>']}";
 echo '{\$a["{\$b["?>"]}"]}';
 echo "{\$c['a']['b']}";
-echo "a{\$e['f']->d_attr}a"
+echo "a{\$e['f']->d_attr}a";
 ?>
 STR;
 

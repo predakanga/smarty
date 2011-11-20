@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+20.11.2011
+- tweak remove unneeded ?><?php context switching from compiled templates
+
 15.11.2011
 - removed $use_reflection property as  reflection is now mandatory
 
