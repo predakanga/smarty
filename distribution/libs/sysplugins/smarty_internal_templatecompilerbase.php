@@ -620,6 +620,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         } else {
             $_output = $content;
         }
+        $this->modifier_plugins = array();
         $this->suppressNocacheProcessing = false;
         $this->tag_nocache = false;
         return $_output;
