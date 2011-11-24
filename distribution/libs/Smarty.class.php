@@ -1305,6 +1305,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
             if (isset($this->template_objects[$_templateId])) {
                 // return cached template object
                 $tpl = $this->template_objects[$_templateId];
+                $tpl->parent = $parent;
             } else {
                 $tpl = new $this->template_class($template, $this, $parent, $cache_id, $compile_id, null ,null);
             }
