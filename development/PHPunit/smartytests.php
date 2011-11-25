@@ -81,7 +81,7 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
     {
         $testorder = array('CoreTests', 'ClearCompiledTests', 'ClearCacheTests', 'StringResourceTests', 'FileResourceTests' ,'DoubleQuotedStringTests',  'CompileAssignTests', 'AttributeTests');
         $smarty_libs_dir = dirname(__FILE__) . '/../../distribution/libs';
-        if (method_exists('PHPUnit_Util_Filter', $smarty_libs_dir)) {
+        if (method_exists('PHPUnit_Util_Filter', 'addDirectoryToWhitelist')) {
             // Older versions of PHPUnit did not have this function,
             // which is used when determining which PHP files are
             // included in the PHPUnit code coverage result.

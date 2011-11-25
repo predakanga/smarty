@@ -47,6 +47,11 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      */
     public $cache_lifetime = null;
     /**
+     * individually cached subtemplates
+     * @var array
+     */
+    public $cached_subtemplates = array();
+    /**
      * Template resource
      * @var string
      * @internal
@@ -228,6 +233,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (isset($_templateId[150])) {
             $_templateId = sha1($_templateId);
         }
+        if ($this->caching) {
+            $this->cached_subtemplates[$_templateId] = array($template, $cache_id, $compile_id, $caching, $cache_lifetime);
+        }
         if (isset($this->smarty->template_objects[$_templateId])) {
             // clone cached template object because of possible recursive call
             $tpl = clone $this->smarty->template_objects[$_templateId];
@@ -386,6 +394,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (!isset($this->properties['unifunc'])) {
             $this->properties['unifunc'] = 'content_' . uniqid('', false);
         }
+        $this->properties['cachedsubtemplates'] = $this->cached_subtemplates;
         if (!$this->source->recompiled) {
             $output .= "\$_valid = \$_smarty_tpl->decodeProperties(" . var_export($this->properties, true) . ',' . ($cache ? 'true' : 'false') . "); /*/%%SmartyHeaderCode%%*/?>\n";
         }
@@ -441,7 +450,10 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             $this->properties['function'] = array_merge($this->properties['function'], $properties['function']);
             $this->smarty->template_functions = array_merge($this->smarty->template_functions, $properties['function']);
         }
-        $this->properties['version'] = (isset($properties['version'])) ? $properties['version'] : '';
+        if (isset($properties['cachedsubtemplates'])) {
+            $this->cached_subtemplates = $properties['cachedsubtemplates'];
+        }
+         $this->properties['version'] = (isset($properties['version'])) ? $properties['version'] : '';
         $this->properties['unifunc'] = $properties['unifunc'];
         // check file dependencies at compiled code
         $is_valid = true;

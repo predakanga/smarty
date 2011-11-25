@@ -96,14 +96,14 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
         */
         if (isset($_attr['cache_lifetime'])) {
             $_cache_lifetime = $_attr['cache_lifetime'];
-            $compiler->tag_nocache = true;
+            $compiler->nocache_nolog = true;
             $_caching = Smarty::CACHING_LIFETIME_CURRENT;
         } else {
             $_cache_lifetime = 'null';
         }
         if (isset($_attr['cache_id'])) {
             $_cache_id = $_attr['cache_id'];
-            $compiler->tag_nocache = true;
+            $compiler->nocache_nolog = true;
             $_caching = Smarty::CACHING_LIFETIME_CURRENT;
         } else {
             $_cache_id = '$_smarty_tpl->cache_id';
@@ -114,6 +114,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_compile_id = '$_smarty_tpl->compile_id';
         }
         if ($_attr['caching'] === true) {
+            $compiler->nocache_nolog = true;
             $_caching = Smarty::CACHING_LIFETIME_CURRENT;
         }
         if ($_attr['nocache'] === true) {
@@ -123,7 +124,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
 
         $has_compiled_template = false;
         if (($compiler->smarty->merge_compiled_includes || $_attr['inline'] === true) && !$compiler->template->source->recompiled
-            && !($compiler->template->caching && ($compiler->tag_nocache || $compiler->nocache)) && $_caching != Smarty::CACHING_LIFETIME_CURRENT) {
+            && !($compiler->template->caching && ($compiler->tag_nocache || $compiler->nocache || $compiler->nocache_nolog)) && $_caching != Smarty::CACHING_LIFETIME_CURRENT) {
             // check if compiled code can be merged (contains no variable part)
             if (!$compiler->has_variable_string && (substr_count($include_file, '"') == 2 or substr_count($include_file, "'") == 2)
                and substr_count($include_file, '(') == 0 and substr_count($include_file, '$_smarty_tpl->') == 0) {
@@ -184,8 +185,10 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase {
             $_vars = 'array()';
             $_has_vars = false;
         }
+        $save = $compiler->nocache_nolog;
         // update nocache line number trace back
         $compiler->parser->updateNocacheLineTrace();
+        $compiler->nocache_nolog = $save;
         // output compiled code
         if ($has_compiled_template) {
             $_hash = $compiler->smarty->merged_templates_func[$tpl_name]['nocache_hash'];

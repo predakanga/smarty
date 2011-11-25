@@ -24,11 +24,38 @@ abstract class Smarty_Internal_TemplateCompilerBase {
      */
     public $nocache_hash = null;
     /**
+     * flag for nocache section
+     *
+     * @var bool
+     */
+    public $nocache = false;
+    /**
+     * flag for nocache tag
+     *
+     * @var bool
+     */
+    public $tag_nocache = false;
+    /**
+     * flag for nocache code not setting $has_nocache_flag
+     *
+     * @var bool
+     */
+    public $nocache_nolog = false;
+    /**
      * suppress generation of nocache code
      *
      * @var bool
      */
     public $suppressNocacheProcessing = false;
+    /**
+     * force compilation of complete template as nocache
+     * 0 = off
+     * 1 = observe nocache flags on template type recompiled
+     * 2 = force all code to be nocache
+     * 
+     * @var integer
+     */
+    public $forceNocache = 0;
     /**
      * suppress generation of merged template code
      *
@@ -77,11 +104,6 @@ abstract class Smarty_Internal_TemplateCompilerBase {
      * @var mixed
      */
     public $default_modifier_list = null;
-    /**
-     * force compilation of complete template as nocache
-     * @var boolean
-     */
-    public $forceNocache = false;
     /**
      * suppress Smarty header code in compiled template
      * @var bool
@@ -602,9 +624,12 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         // If the template is not evaluated and we have a nocache section and or a nocache tag
         if ($is_code && !empty($content)) {
             // generate replacement code
+            $make_nocache_code = $this->nocache || $this->tag_nocache || $this->forceNocache == 2;
             if ((!($this->template->source->recompiled) || $this->forceNocache) && $this->template->caching && !$this->suppressNocacheProcessing &&
-            ($this->nocache || $this->tag_nocache || $this->forceNocache == 2)) {
-                $this->template->has_nocache_code = true;
+                ($make_nocache_code || $this->nocache_nolog)) {
+                if ($make_nocache_code) {
+                    $this->template->has_nocache_code = true;
+                }
                 $_output = str_replace(array("'",'\\\\',"^#^"), array("\'",'\\\\\\\\',"'"), $content);
                 $_output = preg_replace('/(\?><\?php)|(\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'|"[^"\\\\]*(?:\\\\.[^"\\\\]*)*")/','$2', $_output);
                 $_output = "<?php echo '/*%%SmartyNocache:{$this->nocache_hash}%%*/" . $_output . "/*/%%SmartyNocache:{$this->nocache_hash}%%*/';?>\n";
@@ -623,6 +648,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         $this->modifier_plugins = array();
         $this->suppressNocacheProcessing = false;
         $this->tag_nocache = false;
+        $this->nocache_nolog = false;
         return $_output;
     }
 

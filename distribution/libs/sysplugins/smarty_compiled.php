@@ -84,6 +84,7 @@ class Smarty_Compiled {
     * @param Smarty__Internal_Template or Smarty $obj object of caller
     */
     public function getRenderedTemplate($obj, $_template) {
+        $_template->cached_subtemplates = array();
         if (!$this->source->uncompiled) {
             $_smarty_tpl = $_template;
             if ($this->source->recompiled) {

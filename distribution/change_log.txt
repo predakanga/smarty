@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+25.11.2011
+- enhancement make cache_modied_check work also with individually cached subtemplates (issue 46)
+
 20.11.2011
 - tweak remove unneeded ?><?php context switching from compiled templates
 
