@@ -118,9 +118,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             $browser_cache_valid = false;
             if ($display && $this->cache_modified_check && $_template->cached->valid && !$_template->has_nocache_code) {
                 $_last_modified_date = @substr($_SERVER['HTTP_IF_MODIFIED_SINCE'], 0, strpos($_SERVER['HTTP_IF_MODIFIED_SINCE'], 'GMT') + 3);
-//                if ($_last_modified_date !== false && $_template->cached->timestamp <= ($_last_modified_timestamp = strtotime($_last_modified_date)) &&
-                $_last_modified_timestamp = 9999999999; 
-                if ($_template->cached->timestamp <= $_last_modified_timestamp  && 
+                if ($_last_modified_date !== false && $_template->cached->timestamp <= ($_last_modified_timestamp = strtotime($_last_modified_date)) &&
                   $this->checkSubtemplateCache($_template, $_last_modified_timestamp)) {
                     $browser_cache_valid = true;
                     switch (PHP_SAPI) {
@@ -166,7 +164,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                         break;
 
                         default:
-                        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', $_template->cached->timestamp) . ' GMT');
+                        header('Last-Modified: ' . gmdate('D, d M Y H:i:s', time()) . ' GMT');
                         break;
                     }
                     echo $_output;
