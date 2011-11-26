@@ -233,7 +233,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (isset($_templateId[150])) {
             $_templateId = sha1($_templateId);
         }
-        if ($this->caching) {
+        if ($this->caching && $caching && $caching != 9999) {
             $this->cached_subtemplates[$_templateId] = array($template, $cache_id, $compile_id, $caching, $cache_lifetime);
         }
         if (isset($this->smarty->template_objects[$_templateId])) {

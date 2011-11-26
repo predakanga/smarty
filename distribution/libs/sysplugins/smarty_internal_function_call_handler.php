@@ -38,11 +38,15 @@ class Smarty_Internal_Function_Call_Handler {
     foreach (\$_smarty_tpl->smarty->template_functions['{$_name}']['parameter'] as \$key => \$value) {\$_smarty_tpl->tpl_vars->\$key = new Smarty_variable(\$value);};
     foreach (\$params as \$key => \$value) {\$_smarty_tpl->tpl_vars->\$key = new Smarty_variable(\$value);}?>";
             if ($_nocache) {
-                $_code .= preg_replace(array("!<\?php echo \\'/\*%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/|/\*/%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/\\';\?>!",
+                $echo = "echo \\'/\*%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/";
+                $end = "/\*/%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/\\';";
+                $_code .= preg_replace(array("!<\?php {$echo}|{$echo}<\?php|{$end}\?>|\?>\s*{$end}!",
                         "!\\\'!"), array('', "'"), $_template->smarty->template_functions[$_name]['compiled']);
                 $_template->smarty->template_functions[$_name]['called_nocache'] = true;
             } else {
+                $_code .= "<?php echo '/*%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/" . $_template->smarty->template_functions[$_name]['traceback'] . "/*/%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/';?>\n";
                 $_code .= preg_replace("/{$_template->smarty->template_functions[$_name]['nocache_hash']}/", $_template->properties['nocache_hash'], $_template->smarty->template_functions[$_name]['compiled']);
+                $_code .= "<?php echo '/*%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/<?php array_shift(\$_smarty_tpl->trace_call_stack);?>/*/%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/';?>\n";
             }
             $_code .= "<?php \$_smarty_tpl->tpl_vars = \$saved_tpl_vars;}";
             eval($_code);

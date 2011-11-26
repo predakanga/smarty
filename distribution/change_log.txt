@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+26.11.2011
+- add runtime traceback to template {function}
+
 25.11.2011
 - enhancement make cache_modied_check work also with individually cached subtemplates (issue 46)
 
