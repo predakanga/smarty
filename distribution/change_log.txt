@@ -2,6 +2,9 @@
 27.11.2011
 - update of exception messages
 - make class Smarty_Template_Cached in file smarty_cacheresource.php loadable by autoloader
+- optimization of templateExist()
+- optimization of clearCompiledTemplate()
+- optimization of clearCache() in file cache resource
 
 26.11.2011
 - add runtime traceback to template {function}

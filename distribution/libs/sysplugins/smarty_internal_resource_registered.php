@@ -85,7 +85,7 @@ class Smarty_Internal_Resource_Registered extends Smarty_Resource {
      * @param Smarty_Template_Source $source source object
      * @return string resource's basename
      */
-    protected function getBasename(Smarty_Template_Source $source)
+    public function getBasename(Smarty_Template_Source $source)
     {
         return basename($source->name);
     }

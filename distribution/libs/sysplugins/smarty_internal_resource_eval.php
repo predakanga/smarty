@@ -45,7 +45,7 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
     {
         return $this->decode($source->name);
     }
-    
+
     /**
      * decode base64 and urlencode
      *
@@ -62,10 +62,10 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
                 return urldecode(substr($string, 10));
             }
         }
-        
+
         return $string;
     }
-    
+
     /**
      * modify resource_name according to resource handlers specifications
      *
@@ -84,7 +84,7 @@ class Smarty_Internal_Resource_Eval extends Smarty_Resource_Recompiled {
      * @param Smarty_Template_Source $source source object
      * @return string resource's basename
      */
-    protected function getBasename(Smarty_Template_Source $source)
+    public function getBasename(Smarty_Template_Source $source)
     {
         return '';
     }

@@ -102,7 +102,7 @@ abstract class Smarty_Resource {
     /**
      * populate Compiled Object with compiled filepath
      *
-     * @param Smarty_Compiled $compiled  compiled object
+     * @param Smarty_Compiled $compiled     compiled object
      * @param Smarty_Internal_Template $_template template object
      */
     public function populateCompiledFilepath(Smarty_Compiled $compiled, Smarty_Internal_Template $_template)
@@ -318,7 +318,7 @@ abstract class Smarty_Resource {
      * @param Smarty_Template_Source $source source object
      * @return string resource's basename
      */
-    protected function getBasename(Smarty_Template_Source $source)
+    public function getBasename(Smarty_Template_Source $source)
     {
         return null;
     }
@@ -344,14 +344,14 @@ abstract class Smarty_Resource {
                 // note registered to smarty is not kept unique!
                 return $smarty->_resource_handlers[$type];
             }
-            
+
             if (!isset(self::$resources['registered'])) {
                 self::$resources['registered'] = new Smarty_Internal_Resource_Registered();
             }
             if (!isset($smarty->_resource_handlers[$type])) {
                 $smarty->_resource_handlers[$type] = self::$resources['registered'];
             }
-            
+
             return $smarty->_resource_handlers[$type];
         }
 
@@ -370,7 +370,7 @@ abstract class Smarty_Resource {
             if (isset(self::$resources[$type])) {
                 return $smarty->_resource_handlers[$type] = self::$resources[$type];
             }
-            
+
             if (class_exists($_resource_class, false)) {
                 self::$resources[$type] = new $_resource_class();
                 return $smarty->_resource_handlers[$type] = self::$resources[$type];

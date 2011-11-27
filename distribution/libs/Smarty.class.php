@@ -782,13 +782,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
     */
     public function templateExists($resource_name)
     {
-        // create template object
-        $save = $this->template_objects;
-        $tpl = new $this->template_class($resource_name, $this, null, null, null, null, null, true);
-        // check if it does exists
-        $result = $tpl->source->exists;
-        $this->template_objects = $save;
-        return $result;
+        $source = Smarty_Resource::source(null, $this, $resource_name);
+        return $source->exists;
     }
 
     /**
@@ -848,6 +843,19 @@ class Smarty extends Smarty_Internal_TemplateBase {
         $_cache_resource = Smarty_CacheResource::load($this, $type);
         Smarty_CacheResource::invalidLoadedCache($this);
         return $_cache_resource->clear($this, $template_name, $cache_id, $compile_id, $exp_time);
+    }
+
+    /**
+    * Delete compiled template file
+    *
+    * @param string $resource_name template name
+    * @param string $compile_id compile id
+    * @param integer $exp_time expiration time
+    * @return integer number of template files deleted
+    */
+    public function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
+    {
+        return Smarty_Compiled::clearCompiledTemplate($resource_name, $compile_id, $exp_time, $this);
     }
 
     /**
@@ -1415,20 +1423,6 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         return Smarty_Internal_Utility::compileAllConfig($extention, $force_compile, $time_limit, $max_errors, $this);
     }
-
-    /**
-    * Delete compiled template file
-    *
-    * @param string $resource_name template name
-    * @param string $compile_id compile id
-    * @param integer $exp_time expiration time
-    * @return integer number of template files deleted
-    */
-    public function clearCompiledTemplate($resource_name = null, $compile_id = null, $exp_time = null)
-    {
-        return Smarty_Internal_Utility::clearCompiledTemplate($resource_name, $compile_id, $exp_time, $this);
-    }
-
 
     /**
     * Return array of tag/attributes of all tags used by an template
