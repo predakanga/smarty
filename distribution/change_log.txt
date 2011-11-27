@@ -5,6 +5,8 @@
 - optimization of templateExist()
 - optimization of clearCompiledTemplate()
 - optimization of clearCache() in file cache resource
+- moved debug_print_var modifier into smarty_internal_debug.php that debugging can work with 
+  $disable_core_plugins = true 
 
 26.11.2011
 - add runtime traceback to template {function}
