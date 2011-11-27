@@ -240,10 +240,10 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         $subtpl = reset($_template->cached_subtemplates);
         while ($subtpl) {
             $tpl = new $this->smarty->template_class($subtpl[0], $this->smarty, $_template, $subtpl[1], $subtpl[2], $subtpl[3] ,$subtpl[4], true);
-            if (!$tpl->cached->valid || $tpl->has_nocache_code || $tpl->cached->timestamp > $_last_modified_timestamp || 
+            if (!$tpl->cached->valid || $tpl->has_nocache_code || $tpl->cached->timestamp > $_last_modified_timestamp ||
               !$this->checkSubtemplateCache($tpl, $_last_modified_timestamp)) {
                 // browser cache invalid
-                return false;      
+                return false;
             }
             $subtpl = next($_template->cached_subtemplates);
         }
@@ -275,9 +275,9 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     public function registerPlugin($type, $tag, $callback, $cacheable = true, $cache_attr = null)
     {
         if (isset($this->smarty->registered_plugins[$type][$tag])) {
-            throw new SmartyException("Plugin tag \"{$tag}\" already registered");
+            throw new SmartyException("registerPlugin(): Plugin tag \"{$tag}\" already registered");
         } elseif (!is_callable($callback)) {
-            throw new SmartyException("Plugin \"{$tag}\" not callable");
+            throw new SmartyException("registerPlugin(): Plugin \"{$tag}\" not callable");
         } else {
             $this->smarty->registered_plugins[$type][$tag] = array($callback, (bool) $cacheable, (array) $cache_attr);
         }
@@ -346,34 +346,37 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     * Registers object to be used in templates
     *
     * @param string  $object        name of template object
-    * @param object  $object_impl   the referenced PHP object to register
+    * @param object  $object        the referenced PHP object to register
     * @param array   $allowed       list of allowed methods (empty = all)
     * @param boolean $smarty_args   smarty argument format, else traditional
     * @param array   $block_methods list of block-methods
     * @param array $block_functs list of methods that are block format
     * @throws SmartyException if any of the methods in $allowed or $block_methods are invalid
     */
-    public function registerObject($object_name, $object_impl, $allowed = array(), $smarty_args = true, $block_methods = array())
+    public function registerObject($object_name, $object, $allowed = array(), $smarty_args = true, $block_methods = array())
     {
+        if (!is_object($object)) {
+            throw new SmartyException("registerObject(): Invalid parameter for object");
+        }
         // test if allowed methodes callable
         if (!empty($allowed)) {
             foreach ((array) $allowed as $method) {
-                if (!is_callable(array($object_impl, $method))) {
-                    throw new SmartyException("Undefined method '$method' in registered object");
+                if (!is_callable(array($object, $method))) {
+                    throw new SmartyException("registerObject(): Undefined method \"{$method}\"");
                 }
             }
         }
         // test if block methodes callable
         if (!empty($block_methods)) {
             foreach ((array) $block_methods as $method) {
-                if (!is_callable(array($object_impl, $method))) {
-                    throw new SmartyException("Undefined method '$method' in registered object");
+                if (!is_callable(array($object, $method))) {
+                    throw new SmartyException("registerObject(): Undefined method \"{$method}\"");
                 }
             }
         }
         // register the object
         $this->smarty->registered_objects[$object_name] =
-        array($object_impl, (array) $allowed, (boolean) $smarty_args, (array) $block_methods);
+        array($object, (array) $allowed, (boolean) $smarty_args, (array) $block_methods);
     }
 
     /**
@@ -386,10 +389,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     public function getRegisteredObject($name)
     {
         if (!isset($this->smarty->registered_objects[$name])) {
-            throw new SmartyException("'$name' is not a registered object");
-        }
-        if (!is_object($this->smarty->registered_objects[$name][0])) {
-            throw new SmartyException("registered '$name' is not an object");
+            throw new SmartyException("getRegisteredObject(): No object resgistered for \"{$name}\"");
         }
         return $this->smarty->registered_objects[$name][0];
     }
@@ -417,7 +417,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     {
         // test if exists
         if (!class_exists($class_impl)) {
-            throw new SmartyException("Undefined class '$class_impl' in register template class");
+            throw new SmartyException("registerClass(): Undefined class \"{$class_impl}\"");
         }
         // register the class
         $this->smarty->registered_classes[$class_name] = $class_impl;
@@ -434,7 +434,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         if (is_callable($callback)) {
             $this->smarty->default_plugin_handler_func = $callback;
         } else {
-            throw new SmartyException("Default plugin handler '$callback' not callable");
+            throw new SmartyException("registerDefaultPluginHandler(): Invalid callback");
         }
     }
 
@@ -449,7 +449,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         if (is_callable($callback)) {
             $this->smarty->default_template_handler_func = $callback;
         } else {
-            throw new SmartyException("Default template handler '$callback' not callable");
+            throw new SmartyException("registerDefaultTemplateHandler(): Invalid callback");
         }
     }
 
@@ -464,7 +464,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         if (is_callable($callback)) {
             $this->smarty->default_variable_handler_func = $callback;
         } else {
-            throw new SmartyException("Default variable handler '$callback' not callable");
+            throw new SmartyException("registerDefaultVariableHandler(): Invalid callback");
         }
     }
 
@@ -479,12 +479,12 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         if (is_callable($callback)) {
             $this->smarty->default_config_variable_handler_func = $callback;
         } else {
-            throw new SmartyException("Default config variable handler '$callback' not callable");
+            throw new SmartyException("registerDefaultConfigVariableHandler(): Invalid callback");
         }
     }
 
     /**
-    * Registers a default template handler
+    * Registers a default config handler
     *
     * @param callable $callback class/method name
     * @throws SmartyException if $callback is not callable
@@ -494,7 +494,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         if (is_callable($callback)) {
             $this->smarty->default_config_handler_func = $callback;
         } else {
-            throw new SmartyException("Default config handler '$callback' not callable");
+            throw new SmartyException("registerDefaultConfigHandler(): Invalid callback");
         }
     }
 
@@ -506,8 +506,14 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     */
     public function registerFilter($type, $callback)
     {
-        // TODO: uwe.tews check if $type is legal and is_callable($callback)
-        $this->smarty->registered_filters[$type][$this->_get_filter_name($callback)] = $callback;
+        if (!in_array($type, array('pre','post','output','variable'))) {
+            throw new SmartyException("registerFilter(): Invalid filter type \"{$type}\"");
+        }
+        if (is_callable($callback)) {
+            $this->smarty->registered_filters[$type][$this->_get_filter_name($callback)] = $callback;
+        } else {
+            throw new SmartyException("registerFilter(): Invalid callback");
+        }
     }
 
     /**
@@ -550,6 +556,9 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     */
     public function loadFilter($type, $name)
     {
+        if (!in_array($type, array('pre','post','output','variable'))) {
+            throw new SmartyException("loadFilter(): Invalid filter type \"{$type}\"");
+        }
         $_plugin = "smarty_{$type}filter_{$name}";
         $_filter_name = $_plugin;
         if ($this->smarty->loadPlugin($_plugin)) {
@@ -561,7 +570,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                 return true;
             }
         }
-        throw new SmartyException("{$type}filter \"{$name}\" not callable");
+        throw new SmartyException("loadFilter(): {$type}filter \"{$name}\" not callable");
         return false;
     }
 
@@ -644,7 +653,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
                 else
                 return $this->smarty->$property_name = $args[0];
             } else {
-                throw new SmartyException("property '$property_name' does not exist.");
+                throw new SmartyException("Template/Smarty property \"{$property_name}\" does not exist");
                 return false;
             }
         }
@@ -652,7 +661,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             throw new SmartyException("PHP5 requires you to call __construct() instead of Smarty()");
         }
         // must be unknown
-        throw new SmartyException("Call of unknown method '$name'.");
+        throw new SmartyException("Smarty method \"{$name}\" does not exist");
     }
 
 }
