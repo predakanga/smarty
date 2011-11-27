@@ -49,13 +49,17 @@
 								</div>
 		<div class="info-box-body">
 			<div class="var-summary">
-																																																																<div class="var-title">
+																																																																								<div class="var-title">
 					<span class="var-type">object</span>
 					<a href="#$lex" title="details" class="var-name">$lex</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">string</span>
 					<a href="#$lexer_class" title="details" class="var-name">$lexer_class</a>
+				</div>
+																<div class="var-title">
+					<span class="var-type">int</span>
+					<a href="#$line_offset" title="details" class="var-name">$line_offset</a>
 				</div>
 																<div class="var-title">
 					<span class="var-type">array</span>
@@ -161,8 +165,30 @@
 		
 
 </div>
-<a name="var$local_var" id="$local_var"><!-- --></A>
+<a name="var$line_offset" id="$line_offset"><!-- --></A>
 <div class="oddrow">
+
+	<div class="var-header">
+		<span class="var-title">
+			<span class="var-type">int</span>
+			<span class="var-name">$line_offset</span>
+			 = <span class="var-default"> 0</span>			(line <span class="line-number">72</span>)
+		</span>
+	</div>
+
+	<!-- ========== Info from phpDoc block ========= -->
+<p class="short-description">line offset to start of template source</p>
+	<ul class="tags">
+				<li><span class="field">access:</span> public</li>
+			</ul>
+	
+	
+		
+		
+
+</div>
+<a name="var$local_var" id="$local_var"><!-- --></A>
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -184,7 +210,7 @@
 
 </div>
 <a name="var$parser" id="$parser"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -206,7 +232,7 @@
 
 </div>
 <a name="var$parser_class" id="$parser_class"><!-- --></A>
-<div class="oddrow">
+<div class="evenrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -228,7 +254,7 @@
 
 </div>
 <a name="var$smarty" id="$smarty"><!-- --></A>
-<div class="evenrow">
+<div class="oddrow">
 
 	<div class="var-header">
 		<span class="var-title">
@@ -254,6 +280,12 @@
 									<p>Inherited from <span class="classname"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html">Smarty_Internal_TemplateCompilerBase</a></span></p>
 					<blockquote>
 													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$called_functions">Smarty_Internal_TemplateCompilerBase::$called_functions</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$compiles_template_function">Smarty_Internal_TemplateCompilerBase::$compiles_template_function</a></span><br>
+							</span>
+													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$default_handler_plugins">Smarty_Internal_TemplateCompilerBase::$default_handler_plugins</a></span><br>
 							</span>
 													<span class="var-title">
@@ -272,6 +304,15 @@
 								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$modifier_plugins">Smarty_Internal_TemplateCompilerBase::$modifier_plugins</a></span><br>
 							</span>
 													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$nocache">Smarty_Internal_TemplateCompilerBase::$nocache</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$nocache_hash">Smarty_Internal_TemplateCompilerBase::$nocache_hash</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$nocache_nolog">Smarty_Internal_TemplateCompilerBase::$nocache_nolog</a></span><br>
+							</span>
+													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$suppressHeader">Smarty_Internal_TemplateCompilerBase::$suppressHeader</a></span><br>
 							</span>
 													<span class="var-title">
@@ -282,6 +323,9 @@
 							</span>
 													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$suppressTemplatePropertyHeader">Smarty_Internal_TemplateCompilerBase::$suppressTemplatePropertyHeader</a></span><br>
+							</span>
+													<span class="var-title">
+								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$tag_nocache">Smarty_Internal_TemplateCompilerBase::$tag_nocache</a></span><br>
 							</span>
 													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#var$template">Smarty_Internal_TemplateCompilerBase::$template</a></span><br>
@@ -313,10 +357,10 @@
 			<A NAME='method_detail'></A>
 
 <a name="method__construct" id="__construct"><!-- --></a>
-<div class="oddrow">
+<div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">Constructor __construct</span> (line <span class="line-number">74</span>)
+		<span class="method-title">Constructor __construct</span> (line <span class="line-number">81</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -354,10 +398,10 @@
 			
 	</div>
 <a name="methoddoCompile" id="doCompile"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">doCompile</span> (line <span class="line-number">89</span>)
+		<span class="method-title">doCompile</span> (line <span class="line-number">96</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -392,6 +436,7 @@
 													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#methodcallTagCompiler">Smarty_Internal_TemplateCompilerBase::callTagCompiler()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#methodcompileTag">Smarty_Internal_TemplateCompilerBase::compileTag()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#methodcompileTemplate">Smarty_Internal_TemplateCompilerBase::compileTemplate()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#methodcompileTemplateSource">Smarty_Internal_TemplateCompilerBase::compileTemplateSource()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#methodgetPlugin">Smarty_Internal_TemplateCompilerBase::getPlugin()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#methodgetPluginFromDefaultHandler">Smarty_Internal_TemplateCompilerBase::getPluginFromDefaultHandler()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/Compiler/Smarty_Internal_TemplateCompilerBase.html#methodprocessNocacheCode">Smarty_Internal_TemplateCompilerBase::processNocacheCode()</a></span><br>
@@ -403,7 +448,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 24 Sep 2011 20:23:59 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 27 Nov 2011 11:04:36 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

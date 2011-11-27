@@ -38,14 +38,14 @@
 		</div>
 		<div class="info-box-body">	
 			<a name="functionsmarty_modifier_escape" id="functionsmarty_modifier_escape"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div>
-		<span class="method-title">smarty_modifier_escape</span> (line <span class="line-number">24</span>)
+		<span class="method-title">smarty_modifier_escape</span> (line <span class="line-number">27</span>)
 	</div> 
 
 	<!-- ========== Info from phpDoc block ========= -->
-<p class="short-description">Smarty escape modifier plugin</p>
+<p class="short-description">Smarty escape modifier plugin  NOTE: This plugin is called only when smarty_modifercompiler_escape() is not able to produce inline code</p>
 <p class="description"><p>Type:     modifier<br />  Name:     escape<br />  Purpose:  escape string for output</p></p>
 	<ul class="tags">
 				<li><span class="field">return:</span> escaped input string</li>
@@ -58,10 +58,13 @@
 		<span class="method-name">
 			smarty_modifier_escape
 		</span>
-					(<span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$esc_type</span> = <span class="var-default">&#039;html&#039;</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$char_set</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$double_encode</span> = <span class="var-default">true</span>])
+					(<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$template</span>, <span class="var-type">string</span>&nbsp;<span class="var-name">$string</span>, [<span class="var-type">string</span>&nbsp;<span class="var-name">$esc_type</span> = <span class="var-default">&#039;html&#039;</span>], [<span class="var-type">string</span>&nbsp;<span class="var-name">$char_set</span> = <span class="var-default">null</span>], [<span class="var-type">boolean</span>&nbsp;<span class="var-name">$double_encode</span> = <span class="var-default">true</span>])
 			</div>
 
 			<ul class="parameters">
+					<li>
+				<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>
+				<span class="var-name">$template</span><span class="var-description">: template object</span>			</li>
 					<li>
 				<span class="var-type">string</span>
 				<span class="var-name">$string</span><span class="var-description">: input string</span>			</li>
@@ -82,7 +85,7 @@
 	</div>
 	
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 24 Sep 2011 20:23:13 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 27 Nov 2011 11:03:17 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>

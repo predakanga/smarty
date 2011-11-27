@@ -91,7 +91,7 @@
 												<div class="method-definition">
 											<span class="method-result">void</span>
 										<a href="#populateCompiledFilepath" title="details" class="method-name">populateCompiledFilepath</a>
-											(<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Compiled.html">Smarty_Template_Compiled</a></span>&nbsp;<span class="var-name">$compiled</span>, <span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>)
+											(<span class="var-type"><a href="../../Smarty/CompiledResources/Smarty_Compiled.html">Smarty_Compiled</a></span>&nbsp;<span class="var-name">$compiled</span>, <span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>)
 									</div>
 								</div>
 		</div>
@@ -115,9 +115,6 @@
 				<A NAME='inherited_vars'><!-- --></A>
 									<p>Inherited from <span class="classname"><a href="../../Smarty/TemplateResources/Smarty_Resource.html">Smarty_Resource</a></span></p>
 					<blockquote>
-													<span class="var-title">
-								<span class="var-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#var$compileds">Smarty_Resource::$compileds</a></span><br>
-							</span>
 													<span class="var-title">
 								<span class="var-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#var$compiler_class">Smarty_Resource::$compiler_class</a></span><br>
 							</span>
@@ -155,7 +152,7 @@
 			<A NAME='method_detail'></A>
 
 <a name="methodpopulateCompiledFilepath" id="populateCompiledFilepath"><!-- --></a>
-<div class="evenrow">
+<div class="oddrow">
 	
 	<div class="method-header">
 		<span class="method-title">populateCompiledFilepath</span> (line <span class="line-number">27</span>)
@@ -172,12 +169,12 @@
 		<span class="method-name">
 			populateCompiledFilepath
 		</span>
-					(<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Compiled.html">Smarty_Template_Compiled</a></span>&nbsp;<span class="var-name">$compiled</span>, <span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>)
+					(<span class="var-type"><a href="../../Smarty/CompiledResources/Smarty_Compiled.html">Smarty_Compiled</a></span>&nbsp;<span class="var-name">$compiled</span>, <span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>&nbsp;<span class="var-name">$_template</span>)
 			</div>
 	
 			<ul class="parameters">
 					<li>
-				<span class="var-type"><a href="../../Smarty/TemplateResources/Smarty_Template_Compiled.html">Smarty_Template_Compiled</a></span>
+				<span class="var-type"><a href="../../Smarty/CompiledResources/Smarty_Compiled.html">Smarty_Compiled</a></span>
 				<span class="var-name">$compiled</span><span class="var-description">: compiled object</span>			</li>
 					<li>
 				<span class="var-type"><a href="../../Smarty/Template/Smarty_Internal_Template.html">Smarty_Internal_Template</a></span>
@@ -198,11 +195,14 @@
 					<p>Inherited From <span class="classname"><a href="../../Smarty/TemplateResources/Smarty_Resource.html">Smarty_Resource</a></span></p>
 					<blockquote>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodbuildFilepath">Smarty_Resource::buildFilepath()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodbuildUniqueResourceName">Smarty_Resource::buildUniqueResourceName()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodconfig">Smarty_Resource::config()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodfileExists">Smarty_Resource::fileExists()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodgetBasename">Smarty_Resource::getBasename()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodgetContent">Smarty_Resource::getContent()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodgetUniqueTemplateName">Smarty_Resource::getUniqueTemplateName()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodload">Smarty_Resource::load()</a></span><br>
+													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodparseResourceName">Smarty_Resource::parseResourceName()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodpopulate">Smarty_Resource::populate()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodpopulateCompiledFilepath">Smarty_Resource::populateCompiledFilepath()</a></span><br>
 													<span class="method-name"><a href="../../Smarty/TemplateResources/Smarty_Resource.html#methodpopulateTimestamp">Smarty_Resource::populateTimestamp()</a></span><br>
@@ -214,7 +214,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sat, 24 Sep 2011 20:24:09 +0200 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 27 Nov 2011 11:04:52 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
