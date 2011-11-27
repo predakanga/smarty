@@ -1677,10 +1677,13 @@ function smartyAutoload($class)
         'smarty_resource_uncompiled' => true,
         'smarty_resource_recompiled' => true,
         'smarty_compiled' => true,
+        'smarty_template_cached' => 'smarty_cacheresource'
         );
 
-    if (strpos($_class, 'smarty_internal_') === 0 || isset($_classes[$_class])) {
+    if (strpos($_class, 'smarty_internal_') === 0 || (isset($_classes[$_class]) && $_classes[$_class] === true)) {
         include SMARTY_SYSPLUGINS_DIR . $_class . '.php';
+    } elseif (isset($_classes[$_class])) {
+        include SMARTY_SYSPLUGINS_DIR . $_classes[$_class] . '.php';
     }
 }
 

@@ -689,9 +689,6 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
                 return $this->compiled;
 
             case 'cached':
-                if (!class_exists('Smarty_Template_Cached')) {
-                    include SMARTY_SYSPLUGINS_DIR . 'smarty_cacheresource.php';
-                }
                 $this->cached = new Smarty_Template_Cached($this);
                 return $this->cached;
 
