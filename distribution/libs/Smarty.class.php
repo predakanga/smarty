@@ -871,15 +871,15 @@ class Smarty extends Smarty_Internal_TemplateBase {
             $this->security_policy = $security_class;
             return $this;
         } elseif (is_object($security_class)) {
-            throw new SmartyException("enableSecurit(): Class '" . get_class($security_class) . "' must extend Smarty_Security.");
+            throw new SmartyException("enableSecurity(): Class '" . get_class($security_class) . "' must extend Smarty_Security.");
         }
         if ($security_class == null) {
             $security_class = $this->security_class;
         }
         if (!class_exists($security_class)) {
-            throw new SmartyException("enableSecurit(): Security class '$security_class' is not defined");
+            throw new SmartyException("enableSecurity(): Security class '$security_class' is not defined");
         } elseif ($security_class !== 'Smarty_Security' && !is_subclass_of($security_class, 'Smarty_Security')) {
-            throw new SmartyException("enableSecurit(): Class '$security_class' must extend Smarty_Security.");
+            throw new SmartyException("enableSecurity(): Class '$security_class' must extend Smarty_Security.");
         } else {
             $this->security_policy = new $security_class($this);
         }
