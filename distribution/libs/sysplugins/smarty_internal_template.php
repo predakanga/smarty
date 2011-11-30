@@ -137,8 +137,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @param Smarty_Internal_Template $_parent           back pointer to parent object with variables or null
      * @param mixed                    $_cache_id cache   id or null
      * @param mixed                    $_compile_id       compile id or null
-     * @param bool                     $_caching          use caching?
+     * @param int                      $_caching          use caching?
      * @param int                      $_cache_lifetime   cache life-time in seconds
+     * @param boolean                  $no_var_container  flag to suppress generation of variable container
      */
     public function __construct($template_resource, $smarty, $_parent = null, $_cache_id = null, $_compile_id = null, $_caching = null, $_cache_lifetime = null, $no_var_container = false)
     {
