@@ -11,9 +11,15 @@
        Individual sub-templates can be merged by setting the <literal>inline</literal> option flag within
        the <varname>{include}</varname> tag. <varname>$merge_compiled_includes</varname> does not have to
        be enabled for the <literal>inline</literal> merge.
-      </para>      
+      </para>
+
+      <note>
+       <para>
+        As of Smarty 3.2 <varname>$merge_compiled_includes</varname> is set to &true; by default for maximum redering speed.
+       </para>
+      </note>
+      
       <para>
-       
         <informalexample>
         <programlisting role="php">
 <![CDATA[

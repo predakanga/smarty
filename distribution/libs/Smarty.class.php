@@ -320,7 +320,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
     * @var boolean
     * @link http://www.smarty.net/docs/en/variable.merge.compiled.includes.tpl
     */
-    public $merge_compiled_includes = false;
+    public $merge_compiled_includes = true;
     /**
     * cache lifetime in seconds
     * @var integer
