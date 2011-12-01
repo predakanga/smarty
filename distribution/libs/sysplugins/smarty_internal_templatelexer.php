@@ -958,7 +958,7 @@ class Smarty_Internal_Templatelexer
     function yy_r3_76($yy_subpatterns)
     {
 
-  $this->token = Smarty_Internal_Templateparser::TP_NAMESPACECLASS;
+  $this->token = Smarty_Internal_Templateparser::TP_NAMESPACE;
     }
     function yy_r3_78($yy_subpatterns)
     {

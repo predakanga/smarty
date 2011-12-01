@@ -1,4 +1,7 @@
 ﻿===== Smarty 3.2-DEV  =====
+1.12.2011
+- add template namespace support for constant and function
+
 30.11.2011
 - add new {import file=...} tag
 

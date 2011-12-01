@@ -104,7 +104,7 @@ linebreak = /[\t ]*[\r\n]+[\t ]*/
 textsmarty = /([\S\s]*?)(?=([\t ]*[\r\n]+[\t ]*|SMARTYldel|<\?|\?>|<%|%>))/
 textdoublequoted = /([^"\\]*?)((?:\\.[^"\\]*?)*?)(?=(SMARTYldel|\$|`\$|"))/
 dollarid = /\$[0-9]*[a-zA-Z_]\w*/
-namespaceclass = /(\\[0-9]*[a-zA-Z_]\w*)+/
+namespace = /(\\[0-9]*[a-zA-Z_]\w*)+/
 all = /[\S\s]+/
 emptyjava = /\{\}/
 phpstarttag = /<\?(?:php\w+|=|[a-zA-Z]+)?/
@@ -587,8 +587,8 @@ integer {
 space {
   $this->token = Smarty_Internal_Templateparser::TP_SPACE;
 }
-namespaceclass {
-  $this->token = Smarty_Internal_Templateparser::TP_NAMESPACECLASS;     
+namespace {
+  $this->token = Smarty_Internal_Templateparser::TP_NAMESPACE;     
 }
 other {
   $this->token = Smarty_Internal_Templateparser::TP_OTHER;

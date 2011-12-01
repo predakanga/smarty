@@ -702,10 +702,10 @@ expr(res)        ::= expr(e1) ISNOTODDBY expr(e2).  {
 expr(res)        ::= value(v1) INSTANCEOF(i) ID(id). {
     res = v1.i.id;
 }
-
-expr(res)        ::= value(v1) INSTANCEOF(i) NAMESPACECLASS(c). {
-    res = v1.i.c;
+expr(res)        ::= value(v1) INSTANCEOF(i) NAMESPACE(id). {
+    res = v1.i.id;
 }
+
 
 expr(res)        ::= value(v1) INSTANCEOF(i) value(v2). {
     $this->prefix_number++;
@@ -723,6 +723,7 @@ ternary(res)        ::= OPENP expr(v) CLOSEP  QMARK DOLLAR ID(e1) COLON  expr(e2
 ternary(res)        ::= OPENP expr(v) CLOSEP  QMARK  expr(e1) COLON  expr(e2). {
     res = v.' ? '.e1.' : '.e2;
 }
+
 
                  // value
 value(res)       ::= variable(v). {
@@ -814,9 +815,14 @@ value(res)       ::= ID(c) DOUBLECOLON static_class_access(r). {
     }
 }
 
-                  // static namepace class access
-value(res)       ::= NAMESPACECLASS(c) DOUBLECOLON static_class_access(r). {
-            res = c.'::'.r;
+                  // namespace class access
+value(res)       ::= NAMESPACE(c) DOUBLECOLON static_class_access(r). {
+        res = c.'::'.r;
+}
+
+                  // name space constant
+value(res)       ::= NAMESPACE(c). {
+    res = c;
 }
 
 value(res)    ::= varindexed(vi) DOUBLECOLON static_class_access(r). {
@@ -1043,6 +1049,19 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP. {
             } else {
                 res = f . "(". implode(',',p) .")";
             }
+        } else {
+            $this->compiler->trigger_template_error ("unknown function \"" . f . "\"");
+        }
+    }
+}
+
+//
+// namespace function
+//
+function(res)     ::= NAMESPACE(f) OPENP params(p) CLOSEP. {
+    if (!$this->security || $this->smarty->security_policy->isTrustedPhpFunction(f, $this->compiler)) {
+        if (is_callable(f)) {
+            res = f . "(". implode(',',p) .")";
         } else {
             $this->compiler->trigger_template_error ("unknown function \"" . f . "\"");
         }
