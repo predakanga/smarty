@@ -98,6 +98,8 @@ class Smarty_Internal_SmartyTemplateCompiler extends Smarty_Internal_TemplateCom
         /* here is where the compiling takes place. Smarty
           tags in the templates are replaces with PHP code,
           then written to compiled files. */
+        // make sure that we don't run into backtrack limit errors
+        ini_set('pcre.backtrack_limit', -1);
         // init the lexer/parser to compile the template
         $this->lex = new $this->lexer_class($_content, $this);
         $this->parser = new $this->parser_class($this->lex, $this);

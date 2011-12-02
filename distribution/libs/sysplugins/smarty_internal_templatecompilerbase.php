@@ -226,14 +226,12 @@ abstract class Smarty_Internal_TemplateCompilerBase {
         do {
             // flag for aborting current and start recompile
             $this->abort_and_recompile = false;
-            // get template source
-            $_content = $template->source->content;
             // run prefilter if required
             if (isset($this->smarty->autoload_filters['pre']) || isset($this->smarty->registered_filters['pre'])) {
-                $template->source->content = $_content = Smarty_Internal_Filter_Handler::runFilter('pre', $_content, $template);
+                $template->source->content = Smarty_Internal_Filter_Handler::runFilter('pre', $template->source->content, $template);
             }
             // on empty template just return header
-            if ($_content == '') {
+            if ($template->source->content == '') {
                 if ($this->suppressTemplatePropertyHeader) {
                     $code = '';
                 } else {
@@ -242,7 +240,7 @@ abstract class Smarty_Internal_TemplateCompilerBase {
                 return $code;
             }
             // call compiler
-            $_compiled_code = $this->doCompile($_content);
+            $_compiled_code = $this->doCompile($template->source->content);
         } while ($this->abort_and_recompile);
         $this->template->source->filepath = $saved_filepath;
         // free memory
@@ -634,7 +632,6 @@ abstract class Smarty_Internal_TemplateCompilerBase {
                     $this->template->has_nocache_code = true;
                 }
                 $_output = str_replace(array("'",'\\\\',"^#^"), array("\'",'\\\\\\\\',"'"), $content);
-                $_output = preg_replace('/(\?><\?php)|(\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\'|"[^"\\\\]*(?:\\\\.[^"\\\\]*)*")/','$2', $_output);
                 $_output = "<?php echo '/*%%SmartyNocache:{$this->nocache_hash}%%*/" . $_output . "/*/%%SmartyNocache:{$this->nocache_hash}%%*/';?>\n";
                 // make sure we include modifer plugins for nocache code
                 foreach ($this->modifier_plugins as $plugin_name => $dummy) {

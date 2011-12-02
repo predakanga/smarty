@@ -407,7 +407,9 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         if (!$this->source->recompiled) {
             $output .= '<?php }} ?>';
         }
-        $output = preg_replace_callback('/(\?>)([\n]{0,1})(<\?php )|(\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\';|"[^"\\\\]*(?:\\\\.[^"\\\\]*)*";)/',array($this,'removePhpTags'), $output);
+        // make sure that we don't run into backtrack limit errors
+        ini_set('pcre.backtrack_limit', -1);
+        $output = preg_replace_callback('/(\?>)([\n]?)(<\?php )|(\'[^\'\\\\]*(?:\\\\.[^\'\\\\]*)*\';|"[^"\\\\]*(?:\\\\.[^"\\\\]*)*";)/',array($this,'removePhpTags'), $output);
         return $output;
     }
 

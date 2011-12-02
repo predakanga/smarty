@@ -118,7 +118,7 @@ class _smarty_code extends _smarty_parsetree {
      */
     public function to_smarty_php()
     {
-        return sprintf("(%s)", $this->data);
+        return '('. $this->data . ')';
     }
 
 }
@@ -179,7 +179,7 @@ class _smarty_doublequoted extends _smarty_parsetree {
     public function to_smarty_php()
     {
         $code = '';
-        foreach ($this->subtrees as $subtree) {
+        foreach ($this->subtrees as $key => $subtree) {
             if ($code !== "") {
                 $code .= ".";
             }
@@ -194,6 +194,7 @@ class _smarty_doublequoted extends _smarty_parsetree {
             if (!$subtree instanceof _smarty_dq_content) {
                 $this->parser->compiler->has_variable_string = true;
             }
+            unset ($this->subtrees[$key]);
         }
         return $code;
     }
@@ -319,7 +320,9 @@ class _smarty_template_buffer extends _smarty_parsetree {
                 continue;
             }
             $code .= $this->subtrees[$key]->to_smarty_php();
+            unset($this->subtrees[$key]);
         }
+        $this->subtrees = null;
         return $code;
     }
 
