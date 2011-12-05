@@ -55,12 +55,12 @@
     	 if (strpos($variable,'(') === false) {
     	 		// not a variable variable
     	 		$var = trim($variable,'\'"');
-			 		$this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable($var, null, true, false)->nocache;
+			 		$this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('___nocache_'.$var, null, true, false);
 			 		$this->template->properties['variables'][$var] = $this->compiler->tag_nocache|$this->compiler->nocache;
 			 } else {
 			    $var = '{'.$variable.'}';
 			 }
-			 return '$_smarty_tpl->tpl_vars->'. $var .'->value';
+			 return '$_smarty_tpl->tpl_vars->'. $var;
     }
     
     public function updateNocacheLineTrace($allways = false) {
@@ -863,7 +863,7 @@ variable(res)    ::= varindexed(vi). {
 
                   // variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). {
-    res = '$_smarty_tpl->tpl_vars->'. trim(v,"'") .'->'.p;
+    res = '$_smarty_tpl->tpl_vars->___' . p . '_' . trim(v,"'");
 }
 
                   // object
@@ -1034,7 +1034,9 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP. {
                     $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.preg_replace('/\$_smarty_tpl->config_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getConfigVariable(\'\1\', null, true, false)',$par).';?>';
                     $isset_par = '$_tmp'.$this->prefix_number;
                 } else {
-                    $isset_par = preg_replace('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getVariable(\'\1\', null, true, false)',$par);
+                    $this->prefix_number++;
+                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.preg_replace('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getVariable(\'\1\', null, true, false)',$par).';?>';
+                    $isset_par = '$_tmp'.$this->prefix_number;
                 }
                 res = f . "(". $isset_par .")";
             } elseif (in_array($func_name,array('empty','reset','current','end','prev','next'))){
@@ -1042,7 +1044,7 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP. {
                     $this->compiler->trigger_template_error ('Illegal number of paramer in "empty()"');
                 }
                 if ($func_name == 'empty') {
-                    res = $func_name.'('.str_replace("')->value","',null,true,false)->value",p[0]).')';
+                    res = $func_name.'('.str_replace("')","',null,true,false)",p[0]).')';
                 } else {
                     res = $func_name.'('.p[0].')';
                 }
@@ -1281,7 +1283,7 @@ doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {
 }
 
 doublequotedcontent(res)           ::=  DOLLARID(i). {
-    res = new _smarty_code($this, '$_smarty_tpl->tpl_vars->'. substr(i,1) .'->value');
+    res = new _smarty_code($this, '$_smarty_tpl->tpl_vars->'. substr(i,1));
 }
 
 doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {

@@ -797,15 +797,15 @@ class Smarty extends Smarty_Internal_TemplateBase {
     {
         if (isset($varname)) {
             if (isset(self::$global_tpl_vars->$varname)) {
-                return self::$global_tpl_vars->$varname->value;
+                return self::$global_tpl_vars->$varname;
             } else {
                 return '';
             }
         } else {
             $_result = array();
             foreach (self::$global_tpl_vars AS $key => $var) {
-                if ($key != '__smarty__data') {
-                    $_result[$key] = $var->value;
+                if (strpos($key, '___') !== 0) {
+                    $_result[$key] = $var;
                 }
             }
             return $_result;
@@ -1321,7 +1321,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
         if (!empty($data) && is_array($data)) {
             // set up variable values
             foreach ($data as $_key => $_val) {
-                $tpl->tpl_vars->$_key = new Smarty_variable($_val);
+                $tpl->tpl_vars->$_key = $_val;
             }
         }
         return $tpl;
