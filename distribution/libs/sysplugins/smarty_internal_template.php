@@ -118,7 +118,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
      * @var array
      * @internal
      */
-    public $_capture_stack = array();
+    public $_capture_stack = array(0 => array());
     /**
      * template template call stack for traceback
      * @var array

@@ -131,10 +131,16 @@ class Smarty_Compiled {
                     if (empty($_template->properties['unifunc']) || !is_callable($_template->properties['unifunc'])) {
                         throw new SmartyException("Invalid compiled template for '{$_template->template_resource}'");
                     }
+                    array_unshift($_template->_capture_stack,array());
+                    //
+                    // render compiled template
+                    //
                     $_template->properties['unifunc']($_template);
-                    if (isset($_template->_capture_stack[0])) {
+                    // any unclosed {capture} tags ?
+                    if (isset($_template->_capture_stack[0][0])) {
                         $_template->capture_error();
                     }
+                    array_shift($_template->_capture_stack);
                 } catch (Exception $e) {
                     ob_get_clean();
                     throw $e;

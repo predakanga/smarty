@@ -412,10 +412,16 @@ class Smarty_Template_Cached {
             }
             try {
                 ob_start();
+                array_unshift($_template->_capture_stack,array());
+                //
+                // render cached template
+                //
                 $_template->properties['unifunc']($_template);
-                if (isset($_template->_capture_stack[0])) {
+                // any unclosed {capture} tags ?
+                if (isset($_template->_capture_stack[0][0])) {
                     $_template->capture_error();
                 }
+                array_shift($_template->_capture_stack);
                 $_output = ob_get_clean();
             } catch (Exception $e) {
                 ob_get_clean();
