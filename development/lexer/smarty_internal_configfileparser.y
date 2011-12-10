@@ -174,7 +174,7 @@ var_list(res) ::= . {
 
 // Var
 var(res) ::= ID(id) EQUAL value(v). {
-    res = Array("key" => id, "value" => v);
+    res = Array("key" => '___config_var_' . id, "value" => v);
 }
 
 

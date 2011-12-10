@@ -149,8 +149,8 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
         $tpl_vars = array();
         foreach ($obj->tpl_vars as $key => $value) {
             if ($key != '___smarty__data') {
-                if (strpos($key,'___') !== 0) {
-                    $tpl_vars[$key]['value'] =  $value;
+                if (strpos($key,'___config_var_') !== 0) {
+                    $tpl_vars[$key] =  $value;
                     if ($obj instanceof Smarty_Internal_Template) {
                         $tpl_vars[$key]['source'] = $obj->source->type . ':' . $obj->source->name;
                     } elseif ($obj instanceof Smarty_Data) {
@@ -159,13 +159,15 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
                         $tpl_vars[$key]['source'] = 'Smarty object';
                     }
                 } else {
-                    $_var_pos = strpos($key,'_',3);
-                    $_property = substr($key,3,$_var_pos-3);
-                    $_var = substr($key,$_var_pos);
-                    if (!isset($tpl_vars[$_var])) {
-                        $tpl_vars[$_var] = null;
+                    $key = substr($key,14);
+                    $config_vars[$key] =  $value;
+                    if ($obj instanceof Smarty_Internal_Template) {
+                        $config_vars[$key]['source'] = $obj->source->type . ':' . $obj->source->name;
+                    } elseif ($obj instanceof Smarty_Data) {
+                        $config_vars[$key]['source'] = 'Data object';
+                    } else {
+                        $config_vars[$key]['source'] = 'Smarty object';
                     }
-                    $tpl_vars[$_var][$_property] = $value;
                 }
             }
         }
@@ -176,19 +178,12 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
             $config_vars = array_merge($parent->config_vars, $config_vars);
         } else {
             foreach (Smarty::$global_tpl_vars as $key => $var) {
-                if ($key != '__smarty__data' && is_object($var)) {
+                if (strpos($key,'___smarty__data') !== 0) {
                     if (!isset($tpl_vars[$key])) {
-                        if (strpos($key,'___') !== 0) {
-                            $tpl_vars[$key]['value'] =  $value;
+                        if (strpos($key,'___smarty_conf_') !== 0) {
+                            $tpl_vars[$key] =  $var;
                             $tpl_vars[$key]['source'] = 'Global';
                         } else {
-                            $_var_pos = strpos($key,'_',3);
-                            $_property = substr($key,3,$_var_pos-3);
-                            $_var = substr($key,$_var_pos);
-                            if (!isset($tpl_vars[$_var])) {
-                                $tpl_vars[$_var] = null;
-                            }
-                            $tpl_vars[$_var][$_property] = value;
                         }
                     }
                 }
@@ -237,9 +232,10 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
 * @param array|object $var     variable to be formatted
 * @param integer      $depth   maximum recursion depth if $var is an array
 * @param integer      $length  maximum string length if $var is a string
+* @param bool         $root    flag true if called in debug.tpl
 * @return string
 */
-function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
+function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40, $root = true)
 {
     $_replace = array("\n" => '<i>\n</i>',
     "\r" => '<i>\r</i>',
@@ -248,11 +244,15 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
 
     switch (gettype($var)) {
         case 'array' :
-        $results = '<b>Array (' . count($var) . ')</b>';
+        if ($root) {
+            $results = '';   
+        } else {
+            $results = '<b>Array (' . count($var) . ')</b>';
+        }
         foreach ($var as $curr_key => $curr_val) {
             $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
             . '<b>' . strtr($curr_key, $_replace) . '</b> =&gt; '
-            . smarty_modifier_debug_print_var($curr_val, ++$depth, $length);
+            . smarty_modifier_debug_print_var($curr_val, ++$depth, $length, false);
             $depth--;
         }
         break;
@@ -263,7 +263,7 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40)
         foreach ($object_vars as $curr_key => $curr_val) {
             $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
             . '<b> -&gt;' . strtr($curr_key, $_replace) . '</b> = '
-            . smarty_modifier_debug_print_var($curr_val, ++$depth, $length);
+            . smarty_modifier_debug_print_var($curr_val, ++$depth, $length, false);
             $depth--;
         }
         break;

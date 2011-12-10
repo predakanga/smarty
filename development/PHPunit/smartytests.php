@@ -31,7 +31,6 @@ class SmartyTests extends PHPUnit_Framework_TestSuite {
         $smarty->setCacheDir('.' . DS . 'cache' . DS);
         $smarty->setConfigDir('.' . DS . 'configs' . DS);
         $smarty->template_objects = array();
-        $smarty->config_vars = new Smarty_Config_Variable_Container($smarty);
         Smarty::$global_tpl_vars = new Smarty_Variable_Container();
         $smarty->tpl_vars = new Smarty_Variable_Container($smarty);
         $smarty->template_functions = array();

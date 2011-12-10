@@ -55,25 +55,27 @@
     	 if (strpos($variable,'(') === false) {
     	 		// not a variable variable
     	 		$var = trim($variable,'\'"');
-			 		$this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable('___nocache_'.$var, null, true, false);
-			 		$this->template->properties['variables'][$var] = $this->compiler->tag_nocache|$this->compiler->nocache;
+			    $this->compiler->tag_nocache=$this->compiler->tag_nocache|$this->template->getVariable($var, null, true, false, 'nocache');
+//			    $this->template->properties['variables'][$var] = $this->compiler->tag_nocache|$this->compiler->nocache;
 			 } else {
 			    $var = '{'.$variable.'}';
 			 }
-			 return '$_smarty_tpl->tpl_vars->'. $var;
+			 return '$_smarty_tpl->tpl_vars->'. $var . "['value']";
     }
     
     public function updateNocacheLineTrace($allways = false) {
-       if ($this->compiler->template->caching && $this->last_taglineno_nocache != $this->lex->taglineno) {
-           $this->compiler->has_code = true;
-           $this->compiler->nocache_nolog = true;
-           $this->current_buffer->append_subtree(new _smarty_text($this, $this->compiler->processNocacheCode("<?php \$_smarty_tpl->trace_call_stack[0][1] = {$this->lex->taglineno};?>", true)));
-           $this->last_taglineno_nocache = $this->lex->taglineno;
-       } elseif ($allways && $this->last_taglineno != $this->lex->taglineno) {
-           $this->compiler->has_code = true;
-           $this->current_buffer->append_subtree(new _smarty_text($this, $this->compiler->processNocacheCode("<?php \$_smarty_tpl->trace_call_stack[0][1] = {$this->lex->taglineno};?>", true)));
-           $this->last_taglineno = $this->lex->taglineno;
-     }
+       if ($this->smarty->enable_traceback) {
+           if ($this->compiler->template->caching && $this->last_taglineno_nocache != $this->lex->taglineno) {
+               $this->compiler->has_code = true;
+               $this->compiler->nocache_nolog = true;
+               $this->current_buffer->append_subtree(new _smarty_text($this, $this->compiler->processNocacheCode("<?php \$_smarty_tpl->trace_call_stack[0][1] = {$this->lex->taglineno};?>", true)));
+               $this->last_taglineno_nocache = $this->lex->taglineno;
+           } elseif ($allways && $this->last_taglineno != $this->lex->taglineno) {
+               $this->compiler->has_code = true;
+               $this->current_buffer->append_subtree(new _smarty_text($this, $this->compiler->processNocacheCode("<?php \$_smarty_tpl->trace_call_stack[0][1] = {$this->lex->taglineno};?>", true)));
+               $this->last_taglineno = $this->lex->taglineno;
+           }
+       }
     }
 } 
 
@@ -166,7 +168,7 @@ template_element(res)::= TEMPLATEINIT(i). {
 template_element(res)::= smartytag(st). {
     if ($this->compiler->has_code) {
         $tmp ='';
-        if ((!$this->compiler->nocache && !$this->compiler->tag_nocache) && $this->last_taglineno != $this->lex->taglineno ||
+        if ($this->smarty->enable_traceback && (!$this->compiler->nocache && !$this->compiler->tag_nocache) && $this->last_taglineno != $this->lex->taglineno ||
             (($this->compiler->nocache || $this->compiler->tag_nocache) && $this->last_taglineno_nocache != $this->lex->taglineno)) {
             $tmp = "<?php \$_smarty_tpl->trace_call_stack[0][1] = {$this->lex->taglineno};?>";
             if (!$this->compiler->nocache && !$this->compiler->tag_nocache) { 
@@ -863,7 +865,7 @@ variable(res)    ::= varindexed(vi). {
 
                   // variable with property
 variable(res)    ::= DOLLAR varvar(v) AT ID(p). {
-    res = '$_smarty_tpl->tpl_vars->___' . p . '_' . trim(v,"'");
+    res = '$_smarty_tpl->tpl_vars->' . trim(v,"'") . "['". p . "']";
 }
 
                   // object
@@ -873,11 +875,12 @@ variable(res)    ::= object(o). {
 
                   // config variable
 variable(res)    ::= HATCH ID(i) HATCH. {
-    res = '$_smarty_tpl->config_vars->'. i;
+    $var = trim(i,'\'');
+    res = "\$_smarty_tpl->tpl_vars->___config_var_{$var}['value']";
 }
 
 variable(res)    ::= HATCH variable(v) HATCH. {
-    res = '$_smarty_tpl->getConfigVariable('. v .')';
+    res = "\$_smarty_tpl->tpl_vars->___config_var_{{v}}['value']";
 }
 
 varindexed(res)  ::= DOLLAR varvar(v) arrayindex(a). {
@@ -1029,25 +1032,24 @@ function(res)     ::= ID(f) OPENP params(p) CLOSEP. {
                     $this->compiler->trigger_template_error ('Illegal number of paramer in "isset()"');
                 }
                 $par = implode(',',p);
-                if (strncasecmp($par,'$_smarty_tpl->config_vars',strlen('$_smarty_tpl->config_vars')) === 0) {
+                preg_match('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)(.*)/',$par,$match);
+                if (isset($match[1])) {
+                    $search = array('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','/\[\'[0-9]*[a-zA-Z_]\w*\'\].*/');
+                    $replace = array('$_smarty_tpl->getVariable(\'\1\', null, true, false)','');
                     $this->prefix_number++;
-                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.preg_replace('/\$_smarty_tpl->config_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getConfigVariable(\'\1\', null, true, false)',$par).';?>';
-                    $isset_par = '$_tmp'.$this->prefix_number;
+                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.preg_replace($search, $replace, $par).';?>';
+                    $isset_par = '$_tmp'.$this->prefix_number.$match[2];
                 } else {
                     $this->prefix_number++;
-                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='.preg_replace('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','$_smarty_tpl->getVariable(\'\1\', null, true, false)',$par).';?>';
+                    $this->compiler->prefix_code[] = '<?php $_tmp'.$this->prefix_number.'='. $par .';?>';
                     $isset_par = '$_tmp'.$this->prefix_number;
                 }
                 res = f . "(". $isset_par .")";
             } elseif (in_array($func_name,array('empty','reset','current','end','prev','next'))){
                 if (count(p) != 1) {
-                    $this->compiler->trigger_template_error ('Illegal number of paramer in "empty()"');
+                    $this->compiler->trigger_template_error ("Illegal number of paramer in \"{$func_name}\"");
                 }
-                if ($func_name == 'empty') {
-                    res = $func_name.'('.str_replace("')","',null,true,false)",p[0]).')';
-                } else {
-                    res = $func_name.'('.p[0].')';
-                }
+                res = $func_name.'('.p[0].')';
             } else {
                 res = f . "(". implode(',',p) .")";
             }
@@ -1283,7 +1285,7 @@ doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {
 }
 
 doublequotedcontent(res)           ::=  DOLLARID(i). {
-    res = new _smarty_code($this, '$_smarty_tpl->tpl_vars->'. substr(i,1));
+    res = new _smarty_code($this, '$_smarty_tpl->tpl_vars->'. substr(i,1) . "['value']");
 }
 
 doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {

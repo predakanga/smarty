@@ -706,7 +706,7 @@ static public $yy_action = array(
 #line 702 "smarty_internal_configfileparser.php"
 #line 176 "smarty_internal_configfileparser.y"
     function yy_r9(){
-    $this->_retvalue = Array("key" => $this->yystack[$this->yyidx + -2]->minor, "value" => $this->yystack[$this->yyidx + 0]->minor);
+    $this->_retvalue = Array("key" => '___config_var_' . $this->yystack[$this->yyidx + -2]->minor, "value" => $this->yystack[$this->yyidx + 0]->minor);
     }
 #line 707 "smarty_internal_configfileparser.php"
 #line 181 "smarty_internal_configfileparser.y"

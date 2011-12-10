@@ -212,7 +212,6 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
             }
         }
         unset($_tpl->tpl_vars);
-        unset($_tpl->config_vars);
         unset($_tpl);
         return $_output;
     }

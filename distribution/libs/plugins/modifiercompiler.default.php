@@ -1,24 +1,24 @@
 <?php
 /**
- * Smarty plugin
- *
- * @package Smarty
- * @subpackage PluginsModifierCompiler
- */
+* Smarty plugin
+*
+* @package Smarty
+* @subpackage PluginsModifierCompiler
+*/
 
 /**
- * Smarty default modifier plugin
- *
- * Type:     modifier<br>
- * Name:     default<br>
- * Purpose:  designate default value for empty variables
- *
- * @link http://www.smarty.net/manual/en/language.modifier.default.php default (Smarty online manual)
- * @author Uwe Tews
- *
- * @param n x mixed $params any number of parameter                    }
- * @return string with compiled code
- */
+* Smarty default modifier plugin
+*
+* Type:     modifier<br>
+* Name:     default<br>
+* Purpose:  designate default value for empty variables
+*
+* @link http://www.smarty.net/manual/en/language.modifier.default.php default (Smarty online manual)
+* @author Uwe Tews
+*
+* @param n x mixed $params any number of parameter                    }
+* @return string with compiled code
+*/
 // NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
 function smarty_modifiercompiler_default ()
 {
@@ -27,12 +27,23 @@ function smarty_modifiercompiler_default ()
     if (!isset($params[1])) {
         $params[1] = "''";
     }
-
+    $first = true;
     array_shift($params);
     foreach ($params as $param) {
-        $output = '(($tmp = @' . $output . ')===null||$tmp===\'\' ? ' . $param . ' : $tmp)';
+        $postfix = '';
+        $at = '';
+        if ($first) {
+            preg_match('/(\$_smarty_tpl->tpl_vars->)([0-9]*[a-zA-Z_]\w*)(.*)/', $output, $match);
+            if (isset($match[1])) {
+                $output = "isset({$match[1]}{$match[2]}) ? {$match[1]}{$match[2]} : \$_smarty_tpl->getVariable('{$match[2]}', null, true, false)";
+                $postfix = $match[3];
+            }
+            $first = false;
+        } else {
+            $at = '@';
+        }
+        $output = "((\$tmp = {$at}{$output})===null||\$tmp{$postfix}==='' ? {$param} : \$tmp{$postfix})";
     }
-    $output = preg_replace(array('/\$_smarty_tpl->tpl_vars->([0-9]*[a-zA-Z_]\w*)/','/\$_smarty_tpl->config_vars->([0-9]*[a-zA-Z_]\w*)/'),array('$_smarty_tpl->getVariable(\'\1\', null, true, false)','$_smarty_tpl->getConfigVariable(\'\1\', null, true, false)'),$output);
     return $output;
 }
 ?>

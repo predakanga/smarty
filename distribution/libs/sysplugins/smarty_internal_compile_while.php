@@ -46,17 +46,16 @@ class Smarty_Internal_Compile_While extends Smarty_Internal_CompileBase {
         	if ($compiler->nocache) {
         		$_nocache = 'true';
             	// create nocache var to make it know for further compiling
-            	$compiler->template->tpl_vars->$var = null;
-                $compiler->template->tpl_vars->{'___nocache_'.$var} = true;
+            	$compiler->template->tpl_vars->$var = array('value' => null, 'nocache' => true);
         	} else {
         		$_nocache = 'false';
         	}
             if (is_array($parameter['if condition']['var'])) {
-            	$_output = "<?php if (!isset(\$_smarty_tpl->tpl_vars->{$var}) || !is_array(\$_smarty_tpl->tpl_vars->{$var})) \$_smarty_tpl->createLocalArrayVariable(".$parameter['if condition']['var']['var'].",{$_nocache});\n";
-	            $_output .= "while (\$_smarty_tpl->tpl_vars->{$var}".$parameter['if condition']['var']['smarty_internal_index']." = ".$parameter['if condition']['value']."){?>";
+            	$_output = "<?php if (!isset(\$_smarty_tpl->tpl_vars->{$var}) || !is_array(\$_smarty_tpl->tpl_vars->{$var}['value'])) \$_smarty_tpl->createLocalArrayVariable(".$parameter['if condition']['var']['var'].",{$_nocache});\n";
+	            $_output .= "while (\$_smarty_tpl->tpl_vars->{$var}['value']".$parameter['if condition']['var']['smarty_internal_index']." = ".$parameter['if condition']['value']."){?>";
             } else {
-	            $_output = "<?php if (!isset(\$_smarty_tpl->tpl_vars->{$var})) {\$_smarty_tpl->tpl_vars->{$var} = null; \$_smarty_tpl->tpl_vars->___nocache_{$var} = {$_nocache};}\n";
-	            $_output .= "while (\$_smarty_tpl->tpl_vars->{$var} = ".$parameter['if condition']['value']."){?>";
+	            $_output = "<?php if (!isset(\$_smarty_tpl->tpl_vars->{$var})) \$_smarty_tpl->tpl_vars->{$var} = array('value' => null, 'nocache' => {$_nocache});\n";
+	            $_output .= "while (\$_smarty_tpl->tpl_vars->{$var}['value'] = ".$parameter['if condition']['value']."){?>";
 	        }
             return $_output;
         } else {

@@ -52,16 +52,11 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
         // merge all variable from scopes into template
         if ($merge_tpl_vars && $_template->parent != null) {
             // save local variables
-            $saved_tpl_vars = clone $_template->tpl_vars;
-            $saved_config_vars = clone $_template->config_vars;
+            $saved_tpl_vars =  clone $_template->tpl_vars;
             $_template->tpl_vars = clone $_template->parent->tpl_vars;
-            $_template->config_vars = clone $_template->parent->config_vars;
             // merge local vars
             foreach ($saved_tpl_vars as $key => $var) {
                 $_template->tpl_vars->$key = $var;
-            }
-            foreach ($saved_config_vars as $key => $var) {
-                $_template->config_vars->$key = $var;
             }
         }
 
@@ -176,12 +171,15 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
             if ($this->smarty->debugging) {
                 Smarty_Internal_Debug::display_debug($this);
             }
+            if ($merge_tpl_vars && $_template->parent != null) {
+                // restore local variables
+                $_template->tpl_vars = $saved_tpl_vars;
+            }
             return;
         }
         if ($merge_tpl_vars && $_template->parent != null) {
             // restore local variables
             $_template->tpl_vars = $saved_tpl_vars;
-            $_template->config_vars =  $saved_config_vars;
         }
         if ($display) {
             return;

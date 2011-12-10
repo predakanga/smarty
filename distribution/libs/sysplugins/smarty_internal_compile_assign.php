@@ -41,8 +41,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         if ($compiler->tag_nocache || $compiler->nocache) {
             $_nocache = 'true';
             // create nocache var to make it know for further compiling
-            $compiler->template->tpl_vars->$var = null;
-            $compiler->template->tpl_vars->{'____nocache_'.$var} = true;
+            $compiler->template->tpl_vars->$var = array('value' => null, 'nocache' => true);
         }
         // scope setup
         if (isset($_attr['scope'])) {
@@ -60,9 +59,9 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         }
         // compiled output
         if (isset($parameter['smarty_internal_index'])) {
-            $output = "<?php \$_smarty_tpl->createLocalArrayVariable({$_attr['var']}, {$_nocache});\n\$_smarty_tpl->tpl_vars->{$var}{$parameter['smarty_internal_index']} = {$_attr['value']};";
+            $output = "<?php \$_smarty_tpl->createLocalArrayVariable({$_attr['var']}, {$_nocache});\n\$_smarty_tpl->tpl_vars->{$var}['value']{$parameter['smarty_internal_index']} = {$_attr['value']};";
         } else {
-            $output = "<?php \$_smarty_tpl->tpl_vars->{$var} = {$_attr['value']}; \$_smarty_tpl->tpl_vars->___nocache_{$var} = {$_nocache};";
+            $output = "<?php \$_smarty_tpl->tpl_vars->{$var} = array('value' => {$_attr['value']}, 'nocache' => {$_nocache});";
         }
         if ($_scope == Smarty::SCOPE_PARENT) {
             $output .= "\nif (\$_smarty_tpl->parent != null) \$_smarty_tpl->parent->tpl_vars->{$var} = \$_smarty_tpl->tpl_vars->{$var};";
@@ -77,7 +76,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
                 $compiler->trigger_template_error('cannot assign to array with "cachevalue" option', $compiler->lex->taglineno);
             } else {
                 if (!$compiler->tag_nocache && !$compiler->nocache) {
-                    $output .= "echo '/*%%SmartyNocache:{$compiler->nocache_hash}%%*/<?php \$_smarty_tpl->tpl_vars->{$var} = ' . \$_smarty_tpl->_export_cache_value({$_attr['value']}) . ';?>/*/%%SmartyNocache:{$compiler->nocache_hash}%%*/';";
+                    $output .= "echo '/*%%SmartyNocache:{$compiler->nocache_hash}%%*/<?php \$_smarty_tpl->tpl_vars->{$var} = array(\'value\' => ' . \$_smarty_tpl->_export_cache_value({$_attr['value']}) . ');?>/*/%%SmartyNocache:{$compiler->nocache_hash}%%*/';";
                 } else {
                     $compiler->trigger_template_error('cannot assign with "cachevalue" option inside nocache section', $compiler->lex->taglineno);
                 }

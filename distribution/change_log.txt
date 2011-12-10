@@ -1,4 +1,9 @@
 ﻿===== Smarty 3.2-DEV  =====
+10.12.2011
+- major change:
+  * template variable values and its properties are stored as array in the template variable container
+  * config variables are stored with prefix in template variable container
+  
 5.12.2011
 - major change: template variable and its properties are no longer stored in Smarty_Variable objects but as
   as property of the variable container
