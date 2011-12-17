@@ -97,6 +97,7 @@ function my_plugin_handler ($name, $type, $template, &$callback, &$script)
          </para>
      </note> 
   
+     
  </refsect1>
 </refentry>
 <!-- Keep this comment at the end of the file

@@ -22,6 +22,7 @@
     private $internalError = false;
     private $last_taglineno = 0;
     private $last_taglineno_nocache = 0;
+    private $strip = false;
 
     function __construct($lex, $compiler) {
         $this->lex = $lex;
@@ -274,11 +275,11 @@ template_element(res)::= ASPENDTAG(et). {
     }
 }
 
-template_element(res)::= FAKEPHPSTARTTAG(t). {
-    if ($this->lex->strip) {
-        res = new _smarty_text($this, preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(t))); 
+template_element(res)::= FAKEPHPSTARTTAG(o). {
+    if ($this->strip) {
+        res = new _smarty_text($this, preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(o))); 
     } else {
-        res = new _smarty_text($this, self::escape_start_tag(t));  
+        res = new _smarty_text($this, self::escape_start_tag(ö));  
     }
 }
 
@@ -289,18 +290,25 @@ template_element(res)::= XMLTAG. {
     res = new _smarty_text($this, $this->compiler->processNocacheCode("<?php echo '<?xml';?>", true));
 }
 
-                      // Other template text
-template_element(res)::= OTHER(o). {
-    if ($this->lex->strip) {
+                      // template text
+template_element(res)::= TEXT(o). {
+    if ($this->strip) {
         res = new _smarty_text($this, preg_replace('![\t ]*[\r\n]+[\t ]*!', '', o)); 
     } else {
         res = new _smarty_text($this, o);  
     }
 }
 
-template_element(res)::= LINEBREAK(o). {
-    res = new _smarty_linebreak($this, o);
-}  
+                      // strip on
+template_element(res)::= STRIPON(d). {
+    $this->strip = true;
+    res = new _smarty_text($this, '');  
+}
+                      // strip off
+template_element(res)::= STRIPOFF(d). {
+    $this->strip = false;
+    res = new _smarty_text($this, '');  
+}
 
                     // Litteral
 literal(res) ::= LITERALSTART LITERALEND. {
@@ -346,7 +354,6 @@ literal_element(res) ::= ASPSTARTTAG(st). {
 literal_element(res) ::= ASPENDTAG(et). {
     res = '%<?php ?>>';
 }
-
 
 //
 // output tags start here
@@ -1300,7 +1307,7 @@ doublequotedcontent(res)     ::=  smartytag(st). {
     res = new _smarty_tag($this, st);
 }
 
-doublequotedcontent(res)           ::=  OTHER(o). {
+doublequotedcontent(res)           ::=  TEXT(o). {
     res = new _smarty_dq_content($this, o);
 }
 

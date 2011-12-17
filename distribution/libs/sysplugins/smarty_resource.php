@@ -260,10 +260,12 @@ abstract class Smarty_Resource {
                 if ($source->smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_directory)) {
                     // try PHP include_path
                     if (($_filepath = Smarty_Internal_Get_Include_Path::getIncludePath($_filepath)) !== false) {
+                        if ($this->fileExists($source, $_filepath)) {
                         return $_filepath;
                     }
                 }
             }
+        }
         }
 
         // try absolute filepath
