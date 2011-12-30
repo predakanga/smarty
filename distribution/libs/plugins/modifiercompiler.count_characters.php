@@ -28,10 +28,10 @@ function smarty_modifiercompiler_count_characters(Smarty_Internal_TemplateCompil
     if (preg_match('/^([\'"]?)[a-zA-Z0-9_]+(\\1)$/', $whitespace)) {
         $wspace = trim($whitespace, "'\"");
         if ($wspace == 'false') {
-            return "preg_match_all('/[^\s]/u', {$input}, \$tmp)";
+            return "preg_match_all('/[^\s]/". Smarty::$_UTF8_MODIFIER. "', {$input}, \$tmp)";
         }
         if ($wspace == 'true') {
-            if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
+            if (Smarty::$_MBSTRING) {
                 return "mb_strlen({$input}, SMARTY_RESOURCE_CHAR_SET)";
             }
             // no MBString fallback

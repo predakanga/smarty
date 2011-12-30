@@ -66,8 +66,8 @@ class Smarty_Internal_Templatelexer
      				'FAKEPHPSTARTTAG'	=> 'Fake PHP start tag',
      				'PHPSTARTTAG'	=> 'PHP start tag',
      				'PHPENDTAG'	=> 'PHP end tag',
- 						'LITERALSTART'  => 'Literal start',
- 						'LITERALEND'    => 'Literal end',
+ 					'LITERALSTART'  => 'Literal start',
+ 					'LITERALEND'    => 'Literal end',
     				'LDELSLASH' => 'closing tag',
     				'COMMENT' => 'comment',
     				'AS' => 'as',
@@ -125,13 +125,13 @@ class Smarty_Internal_Templatelexer
               1 => 0,
               2 => 0,
             );
-        if ($this->counter >= strlen($this->data)) {
+        if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
             return false; // end of input
         }
         $yy_global_pattern = "/\G(\xEF\xBB\xBF|\xFE\xFF|\xFF\xFE)|\G([\s\S]?)/iS";
 
         do {
-            if ($this->mbstring_overload ? preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
+            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter,2000000000,'latin1'), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
@@ -151,7 +151,7 @@ class Smarty_Internal_Templatelexer
                 $this->value = current($yymatches); // token value
                 $r = $this->{'yy_r1_' . $this->token}($yysubmatches);
                 if ($r === null) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
                     // accept this token
                     return true;
@@ -160,9 +160,9 @@ class Smarty_Internal_Templatelexer
                     // process this token in the new state
                     return $this->yylex();
                 } elseif ($r === false) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= strlen($this->data)) {
+                    if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
                         return false; // end of input
                     }
                     // skip this token
@@ -218,13 +218,13 @@ class Smarty_Internal_Templatelexer
               22 => 0,
               23 => 0,
             );
-        if ($this->counter >= strlen($this->data)) {
+        if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
             return false; // end of input
         }
         $yy_global_pattern = "/\G(".$this->ldel."[$]smarty\\.block\\.child".$this->rdel.")|\G(\\{\\})|\G(".$this->ldel."\\*([\S\s]*?)\\*".$this->rdel.")|\G(".$this->ldel."strip".$this->rdel.")|\G(".$this->ldel."\\s{1,}strip\\s{1,}".$this->rdel.")|\G(".$this->ldel."\/strip".$this->rdel.")|\G(".$this->ldel."\\s{1,}\/strip\\s{1,}".$this->rdel.")|\G(".$this->ldel."\\s*literal\\s*".$this->rdel.")|\G(".$this->ldel."\\s{1,}\/)|\G(".$this->ldel."\\s*(if|elseif|else if|while)\\s+)|\G(".$this->ldel."\\s*for\\s+)|\G(".$this->ldel."\\s*foreach(?![^\s]))|\G(".$this->ldel."\\s*setfilter\\s+)|\G(".$this->ldel."\\s{1,})|\G(".$this->ldel."\/)|\G(".$this->ldel.")|\G(<\\?(?:php\\w+|=|[a-zA-Z]+)?)|\G(\\?>)|\G(<%)|\G(%>)|\G([\S\s])/iS";
 
         do {
-            if ($this->mbstring_overload ? preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
+            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter,2000000000,'latin1'), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
@@ -244,7 +244,7 @@ class Smarty_Internal_Templatelexer
                 $this->value = current($yymatches); // token value
                 $r = $this->{'yy_r2_' . $this->token}($yysubmatches);
                 if ($r === null) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
                     // accept this token
                     return true;
@@ -253,9 +253,9 @@ class Smarty_Internal_Templatelexer
                     // process this token in the new state
                     return $this->yylex();
                 } elseif ($r === false) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= strlen($this->data)) {
+                    if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
                         return false; // end of input
                     }
                     // skip this token
@@ -430,12 +430,20 @@ class Smarty_Internal_Templatelexer
     function yy_r2_23($yy_subpatterns)
     {
 
+  if ($this->mbstring_overload) {
+    $to = mb_strlen($this->data,'latin1');
+  } else {
   $to = strlen($this->data);
+  }
   preg_match("/{$this->ldel}|<\?|\?>|<%|%>/",$this->data,$match,PREG_OFFSET_CAPTURE,$this->counter);
   if (isset($match[0][1])) {
     $to = $match[0][1];
   }
+  if ($this->mbstring_overload) {
+    $this->value = mb_substr($this->data,$this->counter,$to-$this->counter,'latin1');
+  } else {
   $this->value = substr($this->data,$this->counter,$to-$this->counter);
+  }
   $this->token = Smarty_Internal_Templateparser::TP_TEXT;
     }
 
@@ -512,13 +520,13 @@ class Smarty_Internal_Templatelexer
               76 => 0,
               77 => 1,
             );
-        if ($this->counter >= strlen($this->data)) {
+        if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
             return false; // end of input
         }
         $yy_global_pattern = "/\G('[^'\\\\]*(?:\\\\.[^'\\\\]*)*')|\G(".$this->ldel."\\s{1,}\/)|\G(".$this->ldel."\\s*(if|elseif|else if|while)\\s+)|\G(".$this->ldel."\\s*for\\s+)|\G(".$this->ldel."\\s*foreach(?![^\s]))|\G(".$this->ldel."\\s{1,})|\G(\\s{1,}".$this->rdel.")|\G(".$this->ldel."\/)|\G(".$this->ldel.")|\G(".$this->rdel.")|\G(\\s+is\\s+in\\s+)|\G(\\s+as\\s+)|\G(\\s+to\\s+)|\G(\\s+step\\s+)|\G(\\s+instanceof\\s+)|\G(\\s*===\\s*)|\G(\\s*!==\\s*)|\G(\\s*==\\s*|\\s+eq\\s+)|\G(\\s*!=\\s*|\\s*<>\\s*|\\s+(ne|neq)\\s+)|\G(\\s*>=\\s*|\\s+(ge|gte)\\s+)|\G(\\s*<=\\s*|\\s+(le|lte)\\s+)|\G(\\s*>\\s*|\\s+gt\\s+)|\G(\\s*<\\s*|\\s+lt\\s+)|\G(\\s+mod\\s+)|\G(!\\s*|not\\s+)|\G(\\s*&&\\s*|\\s*and\\s+)|\G(\\s*\\|\\|\\s*|\\s*or\\s+)|\G(\\s*xor\\s+)|\G(\\s+is\\s+odd\\s+by\\s+)|\G(\\s+is\\s+not\\s+odd\\s+by\\s+)|\G(\\s+is\\s+odd)|\G(\\s+is\\s+not\\s+odd)|\G(\\s+is\\s+even\\s+by\\s+)|\G(\\s+is\\s+not\\s+even\\s+by\\s+)|\G(\\s+is\\s+even)|\G(\\s+is\\s+not\\s+even)|\G(\\s+is\\s+div\\s+by\\s+)|\G(\\s+is\\s+not\\s+div\\s+by\\s+)|\G(\\((int(eger)?|bool(ean)?|float|double|real|string|binary|array|object)\\)\\s*)|\G(\\s*\\(\\s*)|\G(\\s*\\))|\G(\\[\\s*)|\G(\\s*\\])|\G(\\s*->\\s*)|\G(\\s*=>\\s*)|\G(\\s*=\\s*)|\G(\\+\\+|--)|\G(\\s*(\\+|-)\\s*)|\G(\\s*(\\*|\/|%)\\s*)|\G(\\$)|\G(\\s*;)|\G(::)|\G(\\s*:\\s*)|\G(@)|\G(#)|\G(\")|\G(`)|\G(\\|)|\G(\\.)|\G(\\s*,\\s*)|\G(\\s*&\\s*)|\G(\\s*\\?\\s*)|\G(0[xX][0-9a-fA-F]+)|\G([0-9]*[a-zA-Z_]\\w*)|\G(\\d+)|\G(\\s+)|\G([\S\s])|\G((\\\\[0-9]*[a-zA-Z_]\\w*)+)/iS";
 
         do {
-            if ($this->mbstring_overload ? preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
+            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter,2000000000,'latin1'), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
@@ -538,7 +546,7 @@ class Smarty_Internal_Templatelexer
                 $this->value = current($yymatches); // token value
                 $r = $this->{'yy_r3_' . $this->token}($yysubmatches);
                 if ($r === null) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
                     // accept this token
                     return true;
@@ -547,9 +555,9 @@ class Smarty_Internal_Templatelexer
                     // process this token in the new state
                     return $this->yylex();
                 } elseif ($r === false) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= strlen($this->data)) {
+                    if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
                         return false; // end of input
                     }
                     // skip this token
@@ -957,13 +965,13 @@ class Smarty_Internal_Templatelexer
               6 => 0,
               7 => 0,
             );
-        if ($this->counter >= strlen($this->data)) {
+        if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
             return false; // end of input
         }
         $yy_global_pattern = "/\G(".$this->ldel."\\s*literal\\s*".$this->rdel.")|\G(".$this->ldel."\\s*\/literal\\s*".$this->rdel.")|\G(<\\?(?:php\\w+|=|[a-zA-Z]+)?)|\G(\\?>)|\G(<%)|\G(%>)|\G([\S\s])/iS";
 
         do {
-            if ($this->mbstring_overload ? preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
+            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter,2000000000,'latin1'), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
@@ -983,7 +991,7 @@ class Smarty_Internal_Templatelexer
                 $this->value = current($yymatches); // token value
                 $r = $this->{'yy_r4_' . $this->token}($yysubmatches);
                 if ($r === null) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
                     // accept this token
                     return true;
@@ -992,9 +1000,9 @@ class Smarty_Internal_Templatelexer
                     // process this token in the new state
                     return $this->yylex();
                 } elseif ($r === false) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= strlen($this->data)) {
+                    if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
                         return false; // end of input
                     }
                     // skip this token
@@ -1050,15 +1058,22 @@ class Smarty_Internal_Templatelexer
     function yy_r4_7($yy_subpatterns)
     {
 
+  if ($this->mbstring_overload) {
+    $to = mb_strlen($this->data,'latin1');
+  } else {
   $to = strlen($this->data);
+  }
   preg_match("/{$this->ldel}\/?literal{$this->rdel}|<\?|<%|\?>|%>/",$this->data,$match,PREG_OFFSET_CAPTURE,$this->counter);
   if (isset($match[0][1])) {
     $to = $match[0][1];
   } else {
     $this->compiler->trigger_template_error ("missing or misspelled literal closing tag");
   }
-
-  $this->value = substr($this->data,$this->counter,$to-$this->counter);
+  if ($this->mbstring_overload) {
+    $this->value = mb_substr($this->data,$this->counter,$to-$this->counter,'latin1');
+  } else {
+    $this->value = substr($this->data,$this->counter,$to-$this->counter);
+  }
   $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
     }
 
@@ -1080,13 +1095,13 @@ class Smarty_Internal_Templatelexer
               13 => 3,
               17 => 0,
             );
-        if ($this->counter >= strlen($this->data)) {
+        if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
             return false; // end of input
         }
         $yy_global_pattern = "/\G(".$this->ldel."\\s{1,}\/)|\G(".$this->ldel."\\s*(if|elseif|else if|while)\\s+)|\G(".$this->ldel."\\s*for\\s+)|\G(".$this->ldel."\\s*foreach(?![^\s]))|\G(".$this->ldel."\\s{1,})|\G(".$this->ldel."\/)|\G(".$this->ldel.")|\G(\")|\G(`\\$)|\G(\\$[0-9]*[a-zA-Z_]\\w*)|\G(\\$)|\G(([^\"\\\\]*?)((?:\\\\.[^\"\\\\]*?)*?)(?=(".$this->ldel."|\\$|`\\$|\")))|\G([\S\s])/iS";
 
         do {
-            if ($this->mbstring_overload ? preg_match($yy_global_pattern, substr($this->data, $this->counter), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
+            if ($this->mbstring_overload ? preg_match($yy_global_pattern, mb_substr($this->data, $this->counter,2000000000,'latin1'), $yymatches) : preg_match($yy_global_pattern,$this->data, $yymatches, null, $this->counter)) {
                 $yysubmatches = $yymatches;
                 $yymatches = array_filter($yymatches, 'strlen'); // remove empty sub-patterns
                 if (!count($yymatches)) {
@@ -1106,7 +1121,7 @@ class Smarty_Internal_Templatelexer
                 $this->value = current($yymatches); // token value
                 $r = $this->{'yy_r5_' . $this->token}($yysubmatches);
                 if ($r === null) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
                     // accept this token
                     return true;
@@ -1115,9 +1130,9 @@ class Smarty_Internal_Templatelexer
                     // process this token in the new state
                     return $this->yylex();
                 } elseif ($r === false) {
-                    $this->counter += strlen($this->value);
+                    $this->counter += ($this->mbstring_overload ? mb_strlen($this->value,'latin1'): strlen($this->value));
                     $this->line += substr_count($this->value, "\n");
-                    if ($this->counter >= strlen($this->data)) {
+                    if ($this->counter >= ($this->mbstring_overload ? mb_strlen($this->data,'latin1'): strlen($this->data))) {
                         return false; // end of input
                     }
                     // skip this token
@@ -1234,8 +1249,16 @@ class Smarty_Internal_Templatelexer
     function yy_r5_17($yy_subpatterns)
     {
 
+  if ($this->mbstring_overload) {
+    $to = mb_strlen($this->data,'latin1');
+  } else {
   $to = strlen($this->data);
+  }
+  if ($this->mbstring_overload) {
+    $this->value = mb_substr($this->data,$this->counter,$to-$this->counter,'latin1');
+  } else {
   $this->value = substr($this->data,$this->counter,$to-$this->counter);
+  }
   $this->token = Smarty_Internal_Templateparser::TP_TEXT;
     }
 

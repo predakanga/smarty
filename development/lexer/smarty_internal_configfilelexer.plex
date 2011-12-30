@@ -62,8 +62,7 @@ single_quoted_string = /'[^'\\]*(?:\\.[^'\\]*)*'(?=[ \t\r]*[\n#;])/
 double_quoted_string = /"[^"\\]*(?:\\.[^"\\]*)*"(?=[ \t\r]*[\n#;])/
 tripple_quotes = /"""/
 tripple_quotes_end = /"""(?=[ \t\r]*[\n#;])/
-tripple_line = /([\S\s]*?)(?=([ \t\r]*\n|"""))/
-tripple_newline = /[ \t\r]*\n/
+text = /[\S\s]/
 float = /\d+\.\d+(?=[ \t\r]*[\n#;])/
 int = /\d+(?=[ \t\r]*[\n#;])/
 maybe_bool = /[a-zA-Z]+(?=[ \t\r]*[\n#;])/
@@ -108,6 +107,9 @@ newline {
 }
 id {
     $this->token = Smarty_Internal_Configfileparser::TPC_ID;
+}
+text {
+    $this->token = Smarty_Internal_Configfileparser::TPC_OTHER;
 }
 
 */
@@ -206,11 +208,24 @@ tripple_quotes_end {
     $this->yypopstate();
     $this->yypushstate(self::START);
 }
-tripple_newline {
-    $this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_CONTENT;
-}
-tripple_line {
-    $this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_CONTENT;
+text {
+  if ($this->mbstring_overload) {
+    $to = mb_strlen($this->data,'latin1');
+  } else {
+  $to = strlen($this->data);
+  }
+  preg_match("/\"\"\"[ \t\r]*[\n#;]/",$this->data,$match,PREG_OFFSET_CAPTURE,$this->counter);
+  if (isset($match[0][1])) {
+    $to = $match[0][1];
+  } else {
+    $this->compiler->trigger_template_error ("missing or misspelled literal closing tag");
+  }  
+  if ($this->mbstring_overload) {
+    $this->value = mb_substr($this->data,$this->counter,$to-$this->counter,'latin1');
+  } else {
+    $this->value = substr($this->data,$this->counter,$to-$this->counter);
+  }
+  $this->token = Smarty_Internal_Configfileparser::TPC_TRIPPLE_TEXT;
 }
 */
 

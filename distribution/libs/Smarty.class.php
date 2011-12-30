@@ -32,24 +32,24 @@
 */
 
 /**
-* define shorthand directory separator constant
-*/
+ * define shorthand directory separator constant
+ */
 if (!defined('DS')) {
 	define('DS', DIRECTORY_SEPARATOR);
 }
 
 /**
-* set SMARTY_DIR to absolute path to Smarty library files.
-* Sets SMARTY_DIR only if user application has not already defined it.
-*/
+ * set SMARTY_DIR to absolute path to Smarty library files.
+ * Sets SMARTY_DIR only if user application has not already defined it.
+ */
 if (!defined('SMARTY_DIR')) {
 	define('SMARTY_DIR', dirname(__FILE__) . DS);
 }
 
 /**
-* set SMARTY_SYSPLUGINS_DIR to absolute path to Smarty internal plugins.
-* Sets SMARTY_SYSPLUGINS_DIR only if user application has not already defined it.
-*/
+ * set SMARTY_SYSPLUGINS_DIR to absolute path to Smarty internal plugins.
+ * Sets SMARTY_SYSPLUGINS_DIR only if user application has not already defined it.
+ */
 if (!defined('SMARTY_SYSPLUGINS_DIR')) {
 	define('SMARTY_SYSPLUGINS_DIR', SMARTY_DIR . 'sysplugins' . DS);
 }
@@ -60,16 +60,22 @@ if (!defined('SMARTY_MBSTRING')) {
 	define('SMARTY_MBSTRING', function_exists('mb_strlen'));
 }
 if (!defined('SMARTY_RESOURCE_CHAR_SET')) {
-	// UTF-8 can only be done properly when mbstring is available!
-	define('SMARTY_RESOURCE_CHAR_SET', SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1');
+    // UTF-8 can only be done properly when mbstring is available!
+    /**
+     * @deprecated in favor of Smarty::$_CHARSET
+     */
+    define('SMARTY_RESOURCE_CHAR_SET', SMARTY_MBSTRING ? 'UTF-8' : 'ISO-8859-1');
 }
 if (!defined('SMARTY_RESOURCE_DATE_FORMAT')) {
-	define('SMARTY_RESOURCE_DATE_FORMAT', '%b %e, %Y');
+    /**
+     * @deprecated in favor of Smarty::$_DATE_FORMAT
+     */
+    define('SMARTY_RESOURCE_DATE_FORMAT', '%b %e, %Y');
 }
 
 /**
-* register the class autoloader
-*/
+ * register the class autoloader
+ */
 if (!defined('SMARTY_SPL_AUTOLOAD')) {
 	define('SMARTY_SPL_AUTOLOAD', 0);
 }
@@ -84,8 +90,8 @@ if (SMARTY_SPL_AUTOLOAD && set_include_path(get_include_path() . PATH_SEPARATOR 
 }
 
 /**
-* Load always needed external class files
-*/
+ * Load always needed external class files
+ */
 include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_data.php';
 include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_templatebase.php';
 include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_template.php';
@@ -96,9 +102,9 @@ include_once SMARTY_SYSPLUGINS_DIR.'smarty_internal_resource_file.php';
 //include_once SMARTY_SYSPLUGINS_DIR.'smarty_compiled.php';
 
 /**
-* This is the main Smarty class
-* @package Smarty
-*/
+ * This is the main Smarty class
+ * @package Smarty
+ */
 class Smarty extends Smarty_Internal_TemplateBase {
 
 	/**#@+
@@ -176,6 +182,23 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	* @internal
 	*/
 	public static $_muted_directories = array();
+    /**
+     * Flag denoting if Multibyte String functions are available
+     */
+    public static $_MBSTRING = SMARTY_MBSTRING;
+    /**
+     * The character set to adhere to (e.g. "UTF-8")
+     */
+    public static $_CHARSET = SMARTY_RESOURCE_CHAR_SET;
+    /**
+     * The date format to be used internally
+     * (accepts date() and strftime())
+     */
+    public static $_DATE_FORMAT = SMARTY_RESOURCE_DATE_FORMAT;
+    /**
+     * Flag denoting if PCRE should run in UTF-8 mode
+     */
+    public static $_UTF8_MODIFIER = 'u';
 
 	/**#@+
 	* variables
@@ -693,9 +716,9 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		// selfpointer needed by some other class methods
 		$this->smarty = $this;
 		// PHP options
-		if (is_callable('mb_internal_encoding')) {
-			mb_internal_encoding(SMARTY_RESOURCE_CHAR_SET);
-		}
+        if (is_callable('mb_internal_encoding')) {
+            mb_internal_encoding(Smarty::$_CHARSET);
+        }
 		$this->start_time = microtime(true);
 		// set default dirs
 		$this->setTemplateDir('.' . DS . 'templates' . DS)
@@ -1554,10 +1577,15 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	}
 }
 
+// let PCRE (preg_*) treat strings as ISO-8859-1 if we're not dealing with UTF-8
+if (Smarty::$_CHARSET !== 'UTF-8') {
+    Smarty::$_UTF8_MODIFIER = '';
+}
+
 /**
-* Smarty exception class
-* @package Smarty
-*/
+ * Smarty exception class
+ * @package Smarty
+ */
 class SmartyException extends Exception {
 	public function __toString() {
 		return "Smarty error: {$this->message}\n";
@@ -1565,9 +1593,9 @@ class SmartyException extends Exception {
 }
 
 /**
-* Smarty compiler exception class
-* @package Smarty
-*/
+ * Smarty compiler exception class
+ * @package Smarty
+ */
 class SmartyCompilerException extends SmartyException  {
 	public function __toString() {
 		// TODO

@@ -90,13 +90,13 @@ function my_plugin_handler ($name, $type, $template, &$callback, &$script)
   </example>
      <note>
          <para>
-             The returned callback must be static; a function name or an array of class and method name.
+             The return callback must be static; a function name or an array of class and method name.
          </para>
          <para>
              Dynamic callbacks like objects methods are not supported.
          </para>
      </note> 
-  
+     
      
  </refsect1>
 </refentry>

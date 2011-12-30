@@ -22,9 +22,9 @@
 // NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
 function smarty_modifiercompiler_count_words($input)
 {
-    if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
+    if (Smarty::$_MBSTRING) {
         // expression taken from http://de.php.net/manual/en/function.str-word-count.php#85592
-        return 'preg_match_all(\'/\p{L}[\p{L}\p{Mn}\p{Pd}\\\'\x{2019}]*/u\', ' . $input . ', $tmp)';
+        return 'preg_match_all(\'/\p{L}[\p{L}\p{Mn}\p{Pd}\\\'\x{2019}]*/' . Smarty::$_UTF8_MODIFIER . '\', ' . $input . ', $tmp)';
     }
     // no MBString fallback
     return "str_word_count({$input})";

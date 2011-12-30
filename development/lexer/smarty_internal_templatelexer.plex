@@ -66,8 +66,8 @@ class Smarty_Internal_Templatelexer
      				'FAKEPHPSTARTTAG'	=> 'Fake PHP start tag',
      				'PHPSTARTTAG'	=> 'PHP start tag',
      				'PHPENDTAG'	=> 'PHP end tag',
- 						'LITERALSTART'  => 'Literal start',
- 						'LITERALEND'    => 'Literal end',
+ 					'LITERALSTART'  => 'Literal start',
+ 					'LITERALEND'    => 'Literal end',
     				'LDELSLASH' => 'closing tag',
     				'COMMENT' => 'comment',
     				'AS' => 'as',
@@ -321,12 +321,20 @@ aspendtag {
   $this->token = Smarty_Internal_Templateparser::TP_ASPENDTAG;
 }
 text {
+  if ($this->mbstring_overload) {
+    $to = mb_strlen($this->data,'latin1');
+  } else {
   $to = strlen($this->data);
+  }
   preg_match("/{$this->ldel}|<\?|\?>|<%|%>/",$this->data,$match,PREG_OFFSET_CAPTURE,$this->counter);
   if (isset($match[0][1])) {
     $to = $match[0][1];
   }
+  if ($this->mbstring_overload) {
+    $this->value = mb_substr($this->data,$this->counter,$to-$this->counter,'latin1');
+  } else {
   $this->value = substr($this->data,$this->counter,$to-$this->counter);
+  }
   $this->token = Smarty_Internal_Templateparser::TP_TEXT;
 }
 
@@ -609,15 +617,22 @@ aspendtag {
   $this->token = Smarty_Internal_Templateparser::TP_ASPENDTAG;
 }
 text {
+  if ($this->mbstring_overload) {
+    $to = mb_strlen($this->data,'latin1');
+  } else {
   $to = strlen($this->data);
+  }
   preg_match("/{$this->ldel}\/?literal{$this->rdel}|<\?|<%|\?>|%>/",$this->data,$match,PREG_OFFSET_CAPTURE,$this->counter);
   if (isset($match[0][1])) {
     $to = $match[0][1];
   } else {
     $this->compiler->trigger_template_error ("missing or misspelled literal closing tag");
+  }  
+  if ($this->mbstring_overload) {
+    $this->value = mb_substr($this->data,$this->counter,$to-$this->counter,'latin1');
+  } else {
+    $this->value = substr($this->data,$this->counter,$to-$this->counter);
   }
-  
-  $this->value = substr($this->data,$this->counter,$to-$this->counter);
   $this->token = Smarty_Internal_Templateparser::TP_LITERAL;
 }
 */
@@ -699,8 +714,16 @@ textdoublequoted {
   $this->token = Smarty_Internal_Templateparser::TP_TEXT;
 }
 text {
+  if ($this->mbstring_overload) {
+    $to = mb_strlen($this->data,'latin1');
+  } else {
   $to = strlen($this->data);
+  }
+  if ($this->mbstring_overload) {
+    $this->value = mb_substr($this->data,$this->counter,$to-$this->counter,'latin1');
+  } else {
   $this->value = substr($this->data,$this->counter,$to-$this->counter);
+  }
   $this->token = Smarty_Internal_Templateparser::TP_TEXT;
 }
 */

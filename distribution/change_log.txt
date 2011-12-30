@@ -51,8 +51,39 @@
 23.10.2011
 - make template source traceback on SmartyRunTimeException working also in nocache
   sections in cache files
-
 ===== trunk  =====
+29.12.2011
+- bugfix enable more entropy in Smarty_Internal_Write_File for "more uniqueness" and Cygwin compatibility (Forum Topic 20724)
+- bugfix embedded quotes in single quoted strings did not compile correctly in {nocache} sections (Forum Topic 20730)
+
+28.12.2011
+- bugfix Smarty's internal header code must be excluded from postfilters (issue 71)
+
+22.12.2011
+- bugfix the new lexer of 17.12.2011 did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+- bugfix template inheritace did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+
+20.12.2011
+- bugfix template inheritance: {$smarty.block.child} in nested child {block} tags did not return 
+  content after {$smarty.block.child} (Forum Topic 20564)
+
+===== Smarty-3.1.7 =====
+18.12.2011
+- bugfix strings ending with " in multiline strings of config files failed to compile (isse #67)
+- added chaining to Smarty_Internal_Templatebase
+- changed unloadFilter() to not return a boolean in favor of chaining and API conformity
+- bugfix unregisterObject() raised notice when object to unregister did not exist
+- changed internals to use Smarty::$_MBSTRING ($_CHARSET, $_DATE_FORMAT) for better unit testing
+- added Smarty::$_UTF8_MODIFIER for proper PCRE charset handling (Forum Topic 20452)
+- added Smarty_Security::isTrustedUri() and Smarty_Security::$trusted_uri to validate 
+  remote resource calls through {fetch} and {html_image} (Forum Topic 20627)
+
+17.12.2011
+- improvement of compiling speed by new handling of plain text blocks in the lexer/parser (issue #68)
+
+16.12.2011
+- bugfix the source exits flag and timestamp was not setup when template was in php include path (issue #69)
+
 9.12.2011
 - bugfix {capture} tags around recursive {include} calls did throw exception (Forum Topic 20549)
 - bugfix $auto_literal = false did not work with { block} tags in child templates (Forum Topic 20581)
@@ -111,6 +142,80 @@
    parent template (Issue 66}
 - bugfix template inheritance: {$smarty.block.child} in nested child {block} tags did not return expected
    result (Forum Topic 20564)
+    
+===== Smarty-3.1.6  =====
+30.11.2011
+- bugfix is_cache() for individual cached subtemplates with $smarty->caching = CACHING_OFF did produce
+  an exception (Forum Topic 20531)
+
+29.11.2011
+- bugfix added exception if the default plugin handler did return a not static callback (Forum Topic 20512)
+
+25.11.2011
+- bugfix {html_select_date} and {html_slecet_time} did not default to current time if "time" was not specified 
+  since r4432 (issue 60)
+
+24.11.2011
+- bugfix a subtemplate later used as main template did use old variable values
+
+21.11.2011
+- bugfix cache file could include unneeded modifier plugins under certain condition
+
+18.11.2011
+- bugfix declare all directory properties private to map direct access to getter/setter also on extended Smarty class
+
+16.11.2011
+- bugfix Smarty_Resource::load() did not always return a proper resource handler (Forum Topic 20414)
+- added escape argument to html_checkboxes and html_radios (Forum Topic 20425)
+
+===== Smarty-3.1.5  =====
+14.11.2011
+- bugfix allow space between function name and open bracket (forum topic 20375)
+
+09.11.2011
+- bugfix different behaviour of uniqid() on cygwin. See https://bugs.php.net/bug.php?id=34908
+  (forum topic 20343)
+
+01.11.2011
+- bugfix {if} and {while} tags without condition did not throw a SmartyCompilerException (Issue #57)
+- bugfix multiline strings in config files could fail on longer strings (reopened Issue #55)
+
+22.12.2011
+- bugfix the new lexer of 17.12.2011 did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+- bugfix template inheritace did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+
+22.12.2011
+- bugfix the new lexer of 17.12.2011 did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+- bugfix template inheritace did fail if mbstring.func_overload != 0 (issue 70) (Forum Topic 20680)
+
+20.12.2011
+- bugfix template inheritance: {$smarty.block.child} in nested child {block} tags did not return 
+  content after {$smarty.block.child} (Forum Topic 20564)
+
+===== Smarty-3.1.7 =====
+18.12.2011
+- bugfix strings ending with " in multiline strings of config files failed to compile (isse #67)
+- added chaining to Smarty_Internal_Templatebase
+- changed unloadFilter() to not return a boolean in favor of chaining and API conformity
+- bugfix unregisterObject() raised notice when object to unregister did not exist
+- changed internals to use Smarty::$_MBSTRING ($_CHARSET, $_DATE_FORMAT) for better unit testing
+- added Smarty::$_UTF8_MODIFIER for proper PCRE charset handling (Forum Topic 20452)
+- added Smarty_Security::isTrustedUri() and Smarty_Security::$trusted_uri to validate 
+  remote resource calls through {fetch} and {html_image} (Forum Topic 20627)
+
+17.12.2011
+- improvement of compiling speed by new handling of plain text blocks in the lexer/parser (issue #68)
+
+16.12.2011
+- bugfix the source exits flag and timestamp was not setup when template was in php include path (issue #69)
+
+9.12.2011
+- bugfix {capture} tags around recursive {include} calls did throw exception (Forum Topic 20549)
+- bugfix $auto_literal = false did not work with { block} tags in child templates (Forum Topic 20581)
+- bugfix template inheritance: do not include code of {include} in overloaded {block} into compiled 
+  parent template (Issue #66}
+- bugfix template inheritance: {$smarty.block.child} in nested child {block} tags did not return expected
+  result (Forum Topic 20564)
     
 ===== Smarty-3.1.6  =====
 30.11.2011

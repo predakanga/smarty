@@ -28,20 +28,20 @@
  * @return string with compiled code
  */
 // NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
-function smarty_modifiercompiler_escape(Smarty_Internal_TemplateCompilerBase $compiler, $input, $esc_type = "'html'", $char_set = 'SMARTY_RESOURCE_CHAR_SET', $double_encode = 'true')
+function smarty_modifiercompiler_escape(Smarty_Internal_TemplateCompilerBase $compiler, $input, $esc_type = 'html', $char_set = 'null', $double_encode = 'true')
 {
+    if (trim($char_set, "'\"") == 'null') {
+            $char_set = '\'' .Smarty::$_CHARSET . '\'';
+    }
     if (preg_match('/^([\'"]?)[a-zA-Z0-9_]+(\\1)$/', $esc_type)) {
         // $esc_type is litteral so we can produce compiled code
-        if (trim($char_set, "'\"") == 'null') {
-            $char_set = 'SMARTY_RESOURCE_CHAR_SET';
-        }
         $esc = trim($esc_type, "'\"");
         switch ($esc) {
             case 'html':
                 return "htmlspecialchars({$input}, ENT_QUOTES, {$char_set}, {$double_encode})";
 
             case 'htmlall':
-                if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
+                if (Smarty::$_MBSTRING) {
                     return "mb_convert_encoding(htmlspecialchars({$input}, ENT_QUOTES, {$char_set}, {$double_encode}), 'HTML-ENTITIES', {$char_set})";
                 }
 

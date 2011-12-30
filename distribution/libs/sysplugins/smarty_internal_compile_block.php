@@ -18,34 +18,34 @@
 class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 
     /**
-     * Attribute definition: Overwrites base class.
-     *
-     * @var array
-     * @see Smarty_Internal_CompileBase
-     */
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $required_attributes = array('name');
     /**
-     * Attribute definition: Overwrites base class.
-     *
-     * @var array
-     * @see Smarty_Internal_CompileBase
-     */
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $shorttag_order = array('name', 'hide');
     /**
-     * Attribute definition: Overwrites base class.
-     *
-     * @var array
-     * @see Smarty_Internal_CompileBase
-     */
+    * Attribute definition: Overwrites base class.
+    *
+    * @var array
+    * @see Smarty_Internal_CompileBase
+    */
     public $optional_attributes = array('hide');
 
     /**
-     * Compiles code for the {block} tag
-     *
-     * @param array  $args     array with attributes from parser
-     * @param object $compiler compiler object
-     * @return boolean true
-     */
+    * Compiles code for the {block} tag
+    *
+    * @param array  $args     array with attributes from parser
+    * @param object $compiler compiler object
+    * @return boolean true
+    */
     public function compile($args, $compiler)
     {
         // check and get attributes
@@ -101,8 +101,8 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
                             $replacement = '';
                         }
                         // replace {$smarty.block.child} tag
-                        $search = array("%({$_ldl}{$al}block[\s\S]*?{$name}[\s\S]*?{$_rdl})([\s\S]*?)({$_ldl}{$al}\\\$smarty\.block\.child{$_rdl})([\s\S]*?{$_ldl}{$al}/block{$_rdl})%","/§§§child§§§/");
-                        $replace = array('\2§§§child§§§', $replacement);
+                        $search = array("%({$_ldl}{$al}block[\s\S]*?{$name}[\s\S]*?{$_rdl})([\s\S]*?)({$_ldl}{$al}\\\$smarty\.block\.child{$_rdl})([\s\S]*?)({$_ldl}{$al}/block{$_rdl})%","/§§§child§§§/");
+                        $replace = array('\2§§§child§§§\4', $replacement);
                         $block_content = preg_replace($search, $replace , $block_content);
                     }
                 }
@@ -144,12 +144,12 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
     }
 
     /**
-     * Compile saved child block source
-     *
-     * @param object $compiler  compiler object
-     * @param string $_name     optional name of child block
-     * @return string   compiled code of schild block
-     */
+    * Compile saved child block source
+    *
+    * @param object $compiler  compiler object
+    * @param string $_name     optional name of child block
+    * @return string   compiled code of schild block
+    */
     public static function compileChildBlock($compiler, $_name = null)
     {
         $_output = '';
@@ -227,12 +227,12 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase {
 class Smarty_Internal_Compile_Blockclose extends Smarty_Internal_CompileBase {
 
     /**
-     * Compiles code for the {/block} tag
-     *
-     * @param array  $args     array with attributes from parser
-     * @param object $compiler compiler object
-     * @return string compiled code
-     */
+    * Compiles code for the {/block} tag
+    *
+    * @param array  $args     array with attributes from parser
+    * @param object $compiler compiler object
+    * @return string compiled code
+    */
     public function compile($args, $compiler)
     {
         $compiler->has_code = true;

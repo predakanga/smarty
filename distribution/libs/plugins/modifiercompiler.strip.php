@@ -26,6 +26,6 @@
 // NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
 function smarty_modifiercompiler_strip($input, $replacement = "' '")
 {
-    return "preg_replace('!\s+!u', {$replacement},{$input})";
+    return "preg_replace('!\s+!" . Smarty::$_UTF8_MODIFIER . "', {$replacement},{$input})";
 }
 ?>

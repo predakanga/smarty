@@ -245,7 +245,7 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40, $root 
     switch (gettype($var)) {
         case 'array' :
         if ($root) {
-            $results = '';   
+            $results = '';
         } else {
             $results = '<b>Array (' . count($var) . ')</b>';
         }
@@ -290,9 +290,9 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40, $root 
 
         case 'string' :
         $results = strtr($var, $_replace);
-        if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
-            if (mb_strlen($var, SMARTY_RESOURCE_CHAR_SET) > $length) {
-                $results = mb_substr($var, 0, $length - 3, SMARTY_RESOURCE_CHAR_SET) . '...';
+            if (Smarty::$_MBSTRING) {
+                if (mb_strlen($var, Smarty::$_CHARSET) > $length) {
+                    $results = mb_substr($var, 0, $length - 3, Smarty::$_CHARSET) . '...';
             }
         } else {
             if (isset($var[$length])) {
@@ -305,10 +305,9 @@ function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40, $root 
 
         case 'unknown type' :
         default :
-        $results = strtr((string) $var, $_replace);
-        if (SMARTY_MBSTRING /* ^phpunit */&&empty($_SERVER['SMARTY_PHPUNIT_DISABLE_MBSTRING'])/* phpunit$ */) {
-            if (mb_strlen($results, SMARTY_RESOURCE_CHAR_SET) > $length) {
-                $results = mb_substr($results, 0, $length - 3, SMARTY_RESOURCE_CHAR_SET) . '...';
+            if (Smarty::$_MBSTRING) {
+                if (mb_strlen($results, Smarty::$_CHARSET) > $length) {
+                    $results = mb_substr($results, 0, $length - 3, Smarty::$_CHARSET) . '...';
             }
         } else {
             if (strlen($results) > $length) {
