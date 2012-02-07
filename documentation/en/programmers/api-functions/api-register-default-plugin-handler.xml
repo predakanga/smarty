@@ -44,9 +44,10 @@ $smarty->registerDefaultPluginHandler('my_plugin_handler');
  * @param Smarty_Internal_Template   $template     template object
  * @param string                     &$callback    returned function name 
  * @param string                     &$script      optional returned script filepath if function is external
- * @return bool          true if successfull
+ * @param bool                       &$cacheable    true by default, set to false if plugin is not cachable (Smarty >= 3.1.8)
+ * @return bool                      true if successfull
  */
-function my_plugin_handler ($name, $type, $template, &$callback, &$script)
+function my_plugin_handler ($name, $type, $template, &$callback, &$script, &$cacheable)
 {
     switch ($type) {
         case Smarty::PLUGIN_FUNCTION:
