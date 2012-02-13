@@ -235,7 +235,6 @@
 </section>
 {/if}
 
-
 {if $data.properties}
 <section>
     <header>
@@ -401,15 +400,31 @@
     <header>
         <h1 id="registered">Registered Elements</h1>
     </header>
+
     
-    {*
-        registered_objects
-        registered_classes
-        registered_filters
-        registered_resources
-        registered_cache_resources
-    *}
-    
+    <dl>
+        <dt id="registered-classes">Registered Classes</dt>
+        <dd>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Class</th>
+                        <th>Exists</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {foreach $data.registered.classes as $class}
+                        <tr>
+                            <td>{$class.name|escape}</td>
+                            <td>{$class.class|escape}</td>
+                            <td>{prettyprint value=$class.exists}</td>
+                        </tr>
+                    {/foreach}
+                </tbody>
+            </table>
+        </dd>
+    </dl>
     <dl>
         <dt id="registered-objects">Registered Objects</dt>
         <dd>
@@ -418,13 +433,21 @@
                     <tr>
                         <th>Name</th>
                         <th>Class</th>
+                        <th>Functions</th>
+                        <th title="Smarty style Argument Format">Smarty Args</th>
+                        <th>Blocks</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><span class="string">foo</span></td>
-                        <td><span class="classname">Foo_Bar</span></td>
-                    </tr>
+                    {foreach $data.registered.objects as $object}
+                        <tr>
+                            <td>{$object.name|escape}</td>
+                            <td>{$object.class|escape}</td>
+                            <td>{prettyprint value=$object.allowed}</td>
+                            <td>{prettyprint value=$object.smarty_format}</td>
+                            <td>{prettyprint value=$object.blocks}</td>
+                        </tr>
+                    {/foreach}
                 </tbody>
             </table>
         </dd>

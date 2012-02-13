@@ -20,12 +20,24 @@ $smarty->registerFilter('pre', array('InfoFoo', 'prefilterThingie'));
 //$smarty->registerFilter('pre', function(){ });
 //$smarty->registerFilter('pre', function(){ });
 
+$smarty->registerClass('Foo', 'InfoFoo');
+$smarty->registerObject('foobar', new InfoFoo(), array('isFunction'), true, array('isBlock'));
+
 class InfoFoo {
     public static function strlen($string)
     {
         return strlen($string);
     }
     public static function prefilterThingie()
+    {
+        
+    }
+    public $isAttribute = true;
+    public function isFunction()
+    {
+        
+    }
+    public function isBlock()
     {
         
     }

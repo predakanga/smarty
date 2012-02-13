@@ -678,29 +678,38 @@ class Smarty_Internal_Info
             return;
         }
         
-        // TODO: analyzeRegistered()
+        $registered = array(
+            'classes' => array(),
+            'objects' => array(),
+        );
 
         // analyze registered_objects
         foreach ($this->smarty->registered_objects as $name => $_object) {
-            list($object, $allowed, $args, $blocked) = $object;
+            list($object, $allowed, $smarty_format, $blocks) = $_object;
+            
+            $registered['objects'][$name] = array(
+                'name' => $name,
+                'class' => get_class($object),
+                
+                'allowed' => $allowed,
+                'smarty_format' => (bool) $smarty_format,
+                'blocks' => $blocks,
+            );
         }
 
         // analyze registered_classes
         foreach ($this->smarty->registered_classes as $name => $class) {
-
+            $registered['classes'][$name] = array(
+                'name' => $name,
+                'class' => $class,
+                
+                'exists' => class_exists($class),
+            );
         }
 
-        // Smarty::$registered_filters might be getting an overhaul
-
-        // analyze registered_resources
-        foreach ($this->smarty->registered_resources as $name => $handler) {
-
-        }
-
-        // analyze registered_cacheresources
-        foreach ($this->smarty->registered_cache_resources as $name => $handler) {
-
-        }
+        // TODO: [info] Smarty::$registered_filters might be getting an overhaul
+        
+        $this->registered = $registered;
     }
 
     protected function analyzeDefaults()
@@ -740,7 +749,9 @@ class Smarty_Internal_Info
         */
     }
 
-    protected function reflectedAnnotations($function) {
+
+    protected function reflectedAnnotations($function)
+    {
         $attributes = array(null, null);
 
         /*

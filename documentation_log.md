@@ -17,7 +17,7 @@ these changes must reflect on the documentation at some point…
 * $disable_core_plugins
 * outputfilter.trimwhitespace.php (don't forget @link in file!)
 * modifiercompiler.noprint.php (don't forget @link in file!)
-
+* How does registerObject() handle __call()ed functions and __get()ed attributes?
 
 ## Properties ##
 
