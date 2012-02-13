@@ -13,10 +13,16 @@
         *}
         
         body {
+            position: relative;
             width: 800px;
             margin: 0 auto;
         }
-        
+        nav {
+            position: absolute;
+            top: 50px; 
+            left: -200px;
+            width: 200px;
+        }
         table {
             border-collapse: collapse;
             border-spacing: 0; 
@@ -96,7 +102,22 @@
         <h1>Smarty Version {$data.version}</h1>
         <h2>PHP Version {$data.php.version}</h2>
     </hgroup>
+    <p>Smarty Internal Info, generated in {"%0.4f"|sprintf:$data.duration} seconds</p>
 </header>
+
+<nav>
+    <ul>
+        <li><a href="#php-environment">PHP Environment</a></li>
+        <li><a href="#constants">Constants</a></li>
+        <li><a href="#statics">Class Flags</a></li>
+        <li><a href="#properties">Properties</a></li>
+        <li><a href="#filesystem">Filesystem</a></li>
+        <li><a href="#plugins">Plugins</a></li>
+        <li><a href="#registered">Registered</a></li>
+        <li><a href="#defaults">Defaults</a></li>
+        <li><a href="#security">Security</a></li>
+    </ul>
+</nav>
 
 {if $data.errors}
     <section>
@@ -128,8 +149,34 @@
     <header>
         <h1 id="php-environment">PHP Environment</h1>
     </header>
-    
-    {$data.php|var_dump}
+
+    {foreach $data.php.modules as $module}
+        <section>
+            <header>
+                <h1><a href="{$module.href|escape}">{$module.name|escape}</a></h1>
+            </header>
+            
+            <dl>
+                <dt>Available</dt><dd>{prettyprint value=$module.available}</dd>
+                <dt>Enabled</dt><dd>{prettyprint value=$module.enabled}</dd>
+                <dt>Version</dt><dd>{prettyprint value=$module.version}</dd>
+            </dl>
+            
+            {foreach $module.options as $option}
+                <h2><a href="{$option.href|escape}">{$option.name|escape}</a></h2>
+                <dl>
+                    <dt>Value</dt><dd>{prettyprint value=$option.is_value}</dd>
+                    {if $option.best_value !== null}
+                        <dt>Preferred</dt><dd>{prettyprint value=$option.best_value}</dd>
+                    {/if}
+                    {if $option.need_value !== null}
+                        <dt>Expected</dt><dd>{prettyprint value=$option.need_value}</dd>
+                    </dl>
+                    {/if}
+                </dl>
+            {/foreach}
+        </section>
+    {/foreach}
     
 </section>
 {/if}
@@ -160,6 +207,34 @@
     </table>
 </section>
 {/if}
+
+{if $data.statics}
+<section>
+    <header>
+        <h1 id="statics">Class Flags</h1>
+    </header>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>Flag</th>
+                <th>Value</th>
+                <th>Default</th>
+            </tr>
+        </thead>
+        <tbody>
+            {foreach $data.statics as $name => $flag}
+            <tr>
+                <th id="constants-{$name|escape}">{$name|escape}</th>
+                <td>{prettyprint value=$flag.value}</td>
+                <td>{prettyprint value=$flag.default}</td>
+            </tr>
+            {/foreach}
+        </tbody>
+    </table>
+</section>
+{/if}
+
 
 {if $data.properties}
 <section>
@@ -265,10 +340,6 @@
     <header>
         <h1 id="plugins">Plugins</h1>
     </header>
-    
-    <p>
-        TODO: show function signature (default or reflected), nocache-attributes, file+line of registered plugins
-    </p>
  
     <dl>
         {foreach $data.plugins as $p => $plugins}

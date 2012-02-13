@@ -2,7 +2,7 @@
 
 class Smarty_Internal_Info
 {
-    const ALL = 255;
+    const ALL = 511;
     const PHP = 1;
     const PROPERTIES = 2;
     const FILESYSTEM = 4;
@@ -11,6 +11,7 @@ class Smarty_Internal_Info
     const DEFAULTS = 32;
     const SECURITY = 64;
     const CONSTANTS = 128;
+    const STATICS = 256;
 
     const NOT_AVAILABLE = '#!$#notappliccable#$!#';
 
@@ -82,6 +83,7 @@ class Smarty_Internal_Info
     protected $security = array();
     protected $filesystem = array();
     protected $constants = array();
+    protected $statics = array();
 
     public function __construct(Smarty $smarty, Smarty_Internal_Template $template = null)
     {
@@ -111,6 +113,7 @@ class Smarty_Internal_Info
 
     protected function analyze($flags=0)
     {
+        $started = microtime(true);
         $this->data = array(
             'na' => self::NOT_AVAILABLE,
             'version' => Smarty::SMARTY_VERSION,
@@ -149,7 +152,11 @@ class Smarty_Internal_Info
             $this->analyzeConstants();
             $this->data['constants'] = $this->constants;
         }
-
+        if (!$flags || $flags & self::STATICS) {
+            $this->analyzeStatics();
+            $this->data['statics'] = $this->statics;
+        }
+        
         // purge plugins_dir if loaded by other test
         if ($flags && !($flags & self::FILESYSTEM)) {
             $this->data['filesystem'] = array();
@@ -157,6 +164,7 @@ class Smarty_Internal_Info
 
         $this->data['errors'] = $this->errors;
         $this->data['warnings'] = $this->warnings;
+        $this->data['duration'] = microtime(true) - $started;
     }
 
     protected function analyzeTemplates()
@@ -186,8 +194,10 @@ class Smarty_Internal_Info
                     'options' => array(
                         'func_overload' => array(
                             'name' => 'Function overload',
-                            'is_value' => ini_get('mbstring.func_overload') & 2,
-                            'need_value' => false,
+                            'href' => 'http://php.net/manual/en/mbstring.configuration.php#ini.mbstring.func-overload',
+                            'is_value' => (bool) (ini_get('mbstring.func_overload') & 2),
+                            'best_value' => false,
+                            'need_value' => null,
                         ),
                     ),
                 ),
@@ -200,8 +210,10 @@ class Smarty_Internal_Info
                     'options' => array(
                         'backtrack_limit' => array(
                             'name' => 'Backtrack Limit',
+                            'href' => 'http://php.net/manual/en/pcre.configuration.php#ini.pcre.backtrack-limit',
                             'is_value' => ini_get('pcre.backtrack_limit'),
-                            'need_value' => -1,
+                            'best_value' => -1,
+                            'need_value' => null,
                         ),
                     ),
                 )
@@ -239,7 +251,35 @@ class Smarty_Internal_Info
 
         $this->constants = $constants;
     }
+    
+    protected function analyzeStatics()
+    {
+        if ($this->statics) {
+            return;
+        }
 
+        $statics = array(
+            '_MBSTRING' => function_exists('mb_strlen'),
+            '_CHARSET' => function_exists('mb_strlen') ? 'UTF-8' : 'ISO-8859-1',
+            '_DATE_FORMAT' => '%b %e, %Y',
+            '_UTF8_MODIFIER' => Smarty::$_CHARSET == 'UTF-8' ? 'u' : '',
+        );
+        $_statics = get_class_vars('Smarty');
+        foreach ($statics as $key => $default) {
+            $value = $_statics[$key];
+            $statics[$key] = array(
+                'name' => $key,
+                'value' => $value,
+                'default' => $default,
+                'diff' => $default === $value,
+                'error' => null,
+                'warning' => null,
+            );
+        }
+
+        $this->statics = $statics;
+    }
+        
     protected function analyzeProperties()
     {
         if ($this->properties) {
@@ -586,6 +626,7 @@ class Smarty_Internal_Info
             if (!isset($this->plugins[$type])) {
                 continue;
             }
+            
             foreach ($filters as $callback) {
                 $function = $this->reflectedFunctionOfCallable($callback);
 
@@ -625,11 +666,12 @@ class Smarty_Internal_Info
         if ($this->registered) {
             return;
         }
+        
+        // TODO: analyzeRegistered()
 
         // analyze registered_objects
         foreach ($this->smarty->registered_objects as $name => $_object) {
             list($object, $allowed, $args, $blocked) = $object;
-
         }
 
         // analyze registered_classes
@@ -655,10 +697,11 @@ class Smarty_Internal_Info
         if ($this->defaults) {
             return;
         }
+        
+        // TODO: analyzeDefaults()
 
         foreach ($this->smarty->default_modifiers as $callback) {
             $function = $this->reflectedFunctionOfCallable($callback);
-
         }
 
         // Smarty::$autoload_filters might be getting an overhaul
@@ -671,6 +714,7 @@ class Smarty_Internal_Info
         }
 
         /*
+            TODO: analyzeSecurity()
             php_handling (wtf?)
             secure_dir (template_dir config_dir) -> also in {fetch}
             trusted_dir
