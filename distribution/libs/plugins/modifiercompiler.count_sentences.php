@@ -13,7 +13,7 @@
  * Name:     count_sentences
  * Purpose:  count the number of sentences in a text
  *
- * @link http://www.smarty.net/docs/en/language.modifier.count.paragraphs.tpl
+ * @link http://www.smarty.net/docs/en/language.modifier.count.sentences.tpl
  *          count_sentences (Smarty online manual)
  * @author Uwe Tews
  *

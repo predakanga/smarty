@@ -13,8 +13,6 @@
  * Name:     noprint<br>
  * Purpose:  return an empty string
  *
- * @link http://www.smarty.net/docs/en/language.modifier.noprint.tpl
- *          regex_replace (Smarty online manual)
  * @author   Uwe Tews
  *
  * @param string $input input string to be ignored
