@@ -494,7 +494,7 @@ class Smarty_Internal_Info
         $this->plugins = array(
             'function' => array(),
             'modifier' => array(),
-            'modifercompiler' => array(),
+            'modifiercompiler' => array(),
             'block' => array(),
             'compiler' => array(),
             'prefilter' => array(),
@@ -562,7 +562,7 @@ class Smarty_Internal_Info
                 $cache_attr = null;
                 if ($function instanceof ReflectionFunction) {
                     $signature = $this->reflectedSignature($function);
-                    list($nocache, $cache_attr) = $this->reflectedAnnotations($function);
+                    list($nocache, $cache_attr, $link) = $this->reflectedAnnotations($function);
                 }
 
                 $this->plugins[$type][$name] = array(
@@ -570,6 +570,7 @@ class Smarty_Internal_Info
                     'type' => $type,
                     'file' => $file->getFilename(),
                     'realpath' => $realpath,
+                    'link' => $link,
 
                     'function' => $_name,
                     'line' => $function instanceof Reflector ? $function->getStartLine() : null,
@@ -598,12 +599,17 @@ class Smarty_Internal_Info
                 if (isset($this->plugins[$type][$name])) {
                     $this->warnings['plugins-' . $type . '-' . $name] = "Plugin '{$name}' found in at least 2 directories";
                 }
+                
+                if ($function instanceof ReflectionFunction) {
+                    list(,, $link) = $this->reflectedAnnotations($function);
+                }
 
                 $this->plugins[$type][$name] = array(
                     'name' => $name,
                     'type' => $type,
                     'file' => $function ? basename($function->getFileName()) : null,
                     'realpath' => $function ? $function->getFileName() : null,
+                    'link' => $function ? $link : null,
 
                     'function' => $function ? $function->getName() : null,
                     'line' => $function ? $function->getStartLine() : null,
@@ -633,12 +639,17 @@ class Smarty_Internal_Info
                 if (isset($this->plugins[$type][$name])) {
                     $this->warnings['plugins-' . $type . '-' . $name] = "Plugin '{$name}' found in at least 2 directories";
                 }
+                
+                if ($function instanceof ReflectionFunction) {
+                    list(,, $link) = $this->reflectedAnnotations($function);
+                }
 
                 $this->plugins[$type][$name] = array(
                     'name' => $name,
                     'type' => $type,
                     'file' => $function ? basename($function->getFileName()) : null,
                     'realpath' => $function ? $function->getFileName() : null,
+                    'link' => $function ? $link : null,
 
                     'function' => $function ? $function->getName() : null,
                     'line' => $function ? $function->getStartLine() : null,
@@ -750,6 +761,12 @@ class Smarty_Internal_Info
                     $attributes[1] = $m;
                 }
             }
+        }
+        
+        if ($doc && preg_match('#\* @link (?<link>[^\s]+)\s#i', $doc, $matches)) {
+            $attributes[2] = trim($matches['link']);
+        } else {
+            $attributes[2] = null;
         }
 
         return $attributes;

@@ -15,6 +15,8 @@ these changes must reflect on the documentation at some point…
 * Smarty_Internal_Templatebase::registerDefaultConfigHandler()
 * Smarty_Internal_Template::fetch() display() isCached() clear() into Smarty::createTemplate() docs?
 * $disable_core_plugins
+* outputfilter.trimwhitespace.php (don't forget @link in file!)
+* modifiercompiler.noprint.php (don't forget @link in file!)
 
 
 ## Properties ##

@@ -372,7 +372,11 @@
                 <tbody>
                     {foreach $plugins as $plugin}
                     <tr>
-                        <td id="plugins-{$p|escape}-{$plugin.name|escape}">{$plugin.name|escape}</td>
+                        <td id="plugins-{$p|escape}-{$plugin.name|escape}">
+                            {if $plugin.link}<a href="{$plugin.link|escape}">{/if}
+                                {$plugin.name|escape}
+                            {if $plugin.link}</a>{/if}
+                        </td>
                         <td>{$plugin.signature|escape}</td>
                         <td>{if $plugin.nocache}
                             <span class="string flag">NOCACHE</span>
