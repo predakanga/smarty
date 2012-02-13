@@ -13,6 +13,8 @@
  * Name:     unescape<br>
  * Purpose:  unescape html entities
  *
+ * @link http://www.smarty.net/docs/en/language.modifier.unescape.tpl
+ *          regex_replace (Smarty online manual)
  * @author Rodney Rehm
  *
  * @param string $input     output string

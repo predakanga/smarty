@@ -14,7 +14,7 @@
  * Name:     math<br>
  * Purpose:  handle math computations in template
  *
- * @link http://www.smarty.net/manual/en/language.function.math.php {math}
+ * @link http://www.smarty.net/docs/en/language.function.math.tpl {math}
  *          (Smarty online manual)
  * @author   Monte Ohrt <monte at ohrt dot com>
  * @param array                    $params   parameters

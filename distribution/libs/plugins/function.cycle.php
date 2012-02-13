@@ -31,7 +31,7 @@
  * {cycle name=row}
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.cycle.php {cycle}
+ * @link http://www.smarty.net/docs/en/language.function.cycle.tpl {cycle}
  *       (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  * @author credit to Mark Priatel <mpriatel@rogers.com>

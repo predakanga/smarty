@@ -13,7 +13,7 @@
  * Name:     lower<br>
  * Purpose:  convert string to uppercase
  *
- * @link http://smarty.php.net/manual/en/language.modifier.upper.php lower (Smarty online manual)
+ * @link http://www.smarty.net/docs/en/language.modifier.upper.tpl lower (Smarty online manual)
  * @author Uwe Tews
  *
  * @param string $input input string

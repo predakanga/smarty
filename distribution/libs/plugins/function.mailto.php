@@ -39,7 +39,7 @@
  * {mailto address="me@domain.com" extra='class="mailto"'}
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.mailto.php {mailto}
+ * @link http://www.smarty.net/docs/en/language.function.mailto.tpl {mailto}
  *          (Smarty online manual)
  * @version 1.2
  * @author Monte Ohrt <monte at ohrt dot com>

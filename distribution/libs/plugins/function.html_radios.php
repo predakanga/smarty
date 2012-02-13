@@ -32,7 +32,7 @@
  * {html_radios values=$ids checked=$checked separator='<br>' output=$names}
  * </pre>
  * 
- * @link http://smarty.php.net/manual/en/language.function.html.radios.php {html_radios}
+ * @link http://www.smarty.net/docs/en/language.function.html.radios.tpl {html_radios}
  *      (Smarty online manual)
  * @author Christopher Kvarme <christopher.kvarme@flashjab.com> 
  * @author credits to Monte Ohrt <monte at ohrt dot com> 

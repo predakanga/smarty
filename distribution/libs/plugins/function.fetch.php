@@ -13,7 +13,7 @@
  * Name:     fetch<br>
  * Purpose:  fetch file, web or ftp data and display results
  *
- * @link http://www.smarty.net/manual/en/language.function.fetch.php {fetch}
+ * @link http://www.smarty.net/docs/en/language.function.fetch.tpl {fetch}
  *       (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  * @param array                    $params   parameters

@@ -13,7 +13,7 @@
  * Name:     exception<br>
  * Purpose:  throw a SnartyRunTimeException
  *
- * @link http://www.smarty.net/manual/en/language.function.exception.php {exception}
+ * @link http://www.smarty.net/docs/en/language.function.exception.tpl {exception}
  *       (Smarty online manual)
  * @author Uwe Tews
  * @param Smarty_Internal_Template $template template object

@@ -32,7 +32,7 @@
  * - escape     (optional) - escape the content (not value), defaults to true
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.html.checkboxes.php {html_checkboxes}
+ * @link http://www.smarty.net/docs/en/language.function.html.checkboxes.tpl {html_checkboxes}
  *      (Smarty online manual)
  * @author     Christopher Kvarme <christopher.kvarme@flashjab.com>
  * @author credits to Monte Ohrt <monte at ohrt dot com>

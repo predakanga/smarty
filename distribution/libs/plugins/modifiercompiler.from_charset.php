@@ -13,6 +13,8 @@
  * Name:     from_charset<br>
  * Purpose:  convert character encoding from $charset to internal encoding
  *
+ * @link http://www.smarty.net/docs/en/language.modifier.from_charset.tpl
+ *          regex_replace (Smarty online manual)
  * @author Rodney Rehm
  *
  * @param string $input input string

@@ -13,8 +13,10 @@
 * Type:     modifier<br>
 * Name:     unescape<br>
 * Purpose:  unescape html entities
-*
+* @link http://www.smarty.net/docs/en/language.modifier.unescape.tpl
+*          regex_replace (Smarty online manual)
 * @author Uwe Tews
+* @author Rodney Rehm
 *
 * @param Smarty_Internal_Template $template template object
 * @param string $input     output string

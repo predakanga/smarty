@@ -13,7 +13,7 @@
  * Name:     regex_replace<br>
  * Purpose:  regular expression search/replace
  *
- * @link http://smarty.php.net/manual/en/language.modifier.regex.replace.php
+ * @link http://www.smarty.net/docs/en/language.modifier.regex.replace.tpl
  *          regex_replace (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  * @param string       $string   input string

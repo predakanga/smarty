@@ -41,7 +41,7 @@
  * @author credit to Messju Mohr <messju at lammfellpuschen dot de>
  * @author credit to boots <boots dot smarty at yahoo dot com>
  * @version 1.1
- * @link http://www.smarty.net/manual/en/language.function.html.table.php {html_table}
+ * @link http://www.smarty.net/docs/en/language.function.html.table.tpl {html_table}
  *          (Smarty online manual)
  * @param array                    $params   parameters
  * @param Smarty_Internal_Template $template template object

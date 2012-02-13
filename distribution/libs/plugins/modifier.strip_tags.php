@@ -14,14 +14,14 @@
  * Name:     strip_tags<br>
  * Purpose:  strip html tags from text
  *
- * @link http://www.smarty.net/manual/en/language.modifier.strip.tags.php strip_tags (Smarty online manual)
+ * @link http://www.smarty.net/docs/en/language.modifier.strip.tags.tpl strip_tags (Smarty online manual)
  * @author Uwe Tews
  *
  * @param string $input  input string
  * @param bool $replace  if true replace tag by ' '
  * @return string with compiled code
  */
-function smarty_modifiercompiler_strip_tags($input, $replace = true)
+function smarty_modifier_strip_tags($input, $replace = true)
 {
     if ($replace === true) {
         return preg_replace('!<[^>]*?>!', ' ', $input);

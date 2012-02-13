@@ -23,7 +23,7 @@
  * - wrap_boundary - boolean (true)
  * </pre>
  *
- * @link http://www.smarty.net/manual/en/language.function.textformat.php {textformat}
+ * @link http://www.smarty.net/docs/en/language.function.textformat.tpl {textformat}
  *       (Smarty online manual)
  * @param array                    $params   parameters
  * @param string                   $content  contents of the block

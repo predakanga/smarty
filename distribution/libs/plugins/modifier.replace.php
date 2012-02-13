@@ -12,7 +12,7 @@
  * Name:     replace<br>
  * Purpose:  simple search/replace
  * 
- * @link http://smarty.php.net/manual/en/language.modifier.replace.php replace (Smarty online manual)
+ * @link http://www.smarty.net/docs/en/language.modifier.replace.tpl replace (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com> 
  * @author Uwe Tews 
  * @param string $string  input string

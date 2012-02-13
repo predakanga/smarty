@@ -13,7 +13,7 @@
 * Name:     default<br>
 * Purpose:  designate default value for empty variables
 *
-* @link http://www.smarty.net/manual/en/language.modifier.default.php default (Smarty online manual)
+* @link http://www.smarty.net/docs/en/language.modifier.default.tpl default (Smarty online manual)
 * @author Uwe Tews
 *
 * @param n x mixed $params any number of parameter                    }

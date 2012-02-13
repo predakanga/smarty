@@ -14,7 +14,7 @@
 * Name:     count_characteres<br>
 * Purpose:  count the number of characters in a text
 *
-* @link http://www.smarty.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
+* @link http://www.smarty.net/docs/en/language.modifier.count.characters.tpl count_characters (Smarty online manual)
 * @author Uwe Tews
 *
 * @param string $input  input string

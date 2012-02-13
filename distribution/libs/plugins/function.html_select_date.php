@@ -41,7 +41,7 @@ require_once(SMARTY_PLUGINS_DIR . 'shared.make_timestamp.php');
  *              added attributes month_names, *_id
  * </pre>
  * 
- * @link http://www.smarty.net/manual/en/language.function.html.select.date.php {html_select_date}
+ * @link http://www.smarty.net/docs/en/language.function.html.select.date.tpl {html_select_date}
  *      (Smarty online manual)
  * @version 2.0
  * @author Andrei Zmievski 

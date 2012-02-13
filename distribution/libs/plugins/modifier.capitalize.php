@@ -19,6 +19,8 @@
  * @param boolean $uc_digits also capitalize "x123" to "X123"
  * @param boolean $lc_rest   capitalize first letters, lowercase all following letters "aAa" to "Aaa"
  * @return string capitalized string
+ * @link http://www.smarty.net/docs/en/language.modifiers.tpl#language.modifier.capitalize {cycle}
+ *       (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com> 
  * @author Rodney Rehm
  */

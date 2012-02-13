@@ -14,7 +14,7 @@
  * Name:     escape<br>
  * Purpose:  escape string for output
  *
- * @link http://www.smarty.net/manual/en/language.modifier.count.characters.php count_characters (Smarty online manual)
+ * @link http://www.smarty.net/docs/en/language.modifier.escape.tpl (Smarty online manual)
  * @author Monte Ohrt <monte at ohrt dot com>
  *
 * @param Smarty_Internal_Template $template template object
