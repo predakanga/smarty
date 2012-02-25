@@ -90,6 +90,8 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
     */
     public function testCompileBlockGrandChildMustCompile1()
     {
+        // FIXME: this tests fails when run with smartytestssingle.php
+        // $this->smarty->clearCache('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
         $this->smarty->caching = true;
         $this->smarty->cache_lifetime = 1000;
         $tpl = $this->smarty->createTemplate('extends:test_block_parent.tpl|test_block_child_resource.tpl|test_block_grandchild_resource.tpl');
@@ -190,6 +192,16 @@ class ExtendsResourceTests extends PHPUnit_Framework_TestCase {
         $this->assertContains('--parent from --section-- block--', $result);
         $this->assertContains('--parent from --base-- block--', $result);
         $this->assertContains('--block include ok--', $result);
+    }
+    
+    public function testExtendExists()
+    {
+        $this->smarty->caching = false;
+        $tpl = $this->smarty->createTemplate('extends:test_block_base.tpl');
+        $this->assertTrue($tpl->source->exists);
+
+        $tpl = $this->smarty->createTemplate('extends:does-not-exists.tpl|this-neither.tpl');
+        $this->assertFalse($tpl->source->exists);
     }
 }
 

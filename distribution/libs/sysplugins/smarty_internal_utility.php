@@ -205,6 +205,7 @@ class Smarty_Internal_Utility {
             echo "Testing template directory...\n";
         }
 
+        $_stream_resolve_include_path = function_exists('stream_resolve_include_path');
         // test if all registered template_dir are accessible
         foreach($smarty->getTemplateDir() as $template_dir) {
             $_template_dir = $template_dir;
@@ -213,7 +214,12 @@ class Smarty_Internal_Utility {
             if (!$template_dir) {
                 if ($smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_template_dir)) {
                     // try PHP include_path
-                    if (($template_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_template_dir)) !== false) {
+                    if ($_stream_resolve_include_path) {
+                        $template_dir = stream_resolve_include_path($_template_dir);
+                    } else {
+                        $template_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_template_dir);
+                    }
+                    if ($template_dir !== false) {
                         if ($errors === null) {
                             echo "$template_dir is OK.\n";
                         }
@@ -328,7 +334,12 @@ class Smarty_Internal_Utility {
             if (!$plugin_dir) {
                 if ($smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_plugin_dir)) {
                     // try PHP include_path
-                    if (($plugin_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_plugin_dir)) !== false) {
+                    if ($_stream_resolve_include_path) {
+                        $plugin_dir = stream_resolve_include_path($_plugin_dir);
+                    } else {
+                        $plugin_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_plugin_dir);
+                    }
+                    if ($plugin_dir !== false) {
                         if ($errors === null) {
                             echo "$plugin_dir is OK.\n";
                         }
@@ -454,7 +465,12 @@ class Smarty_Internal_Utility {
             if (!$config_dir) {
                 if ($smarty->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_config_dir)) {
                     // try PHP include_path
-                    if (($config_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_config_dir)) !== false) {
+                    if ($_stream_resolve_include_path) {
+                        $config_dir = stream_resolve_include_path($_config_dir);
+                    } else {
+                        $config_dir = Smarty_Internal_Get_Include_Path::getIncludePath($_config_dir);
+                    }
+                    if ($config_dir !== false) {
                         if ($errors === null) {
                             echo "$config_dir is OK.\n";
                         }

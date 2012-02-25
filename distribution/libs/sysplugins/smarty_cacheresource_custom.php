@@ -230,7 +230,6 @@ abstract class Smarty_CacheResource_Custom extends Smarty_CacheResource {
     {
         $cached->is_locked = false;
         
-        $id = $cached->filepath;
         $name = $cached->source->name . '.lock';
         $this->delete($name, null, null, null);
     }

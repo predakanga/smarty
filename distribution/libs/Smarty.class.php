@@ -1067,8 +1067,8 @@ class Smarty extends Smarty_Internal_TemplateBase {
 	public function setPluginsDir($plugins_dir)
 	{
 		$this->plugins_dir = array();
-		foreach ((array)$plugins_dir as $v) {
-			$this->plugins_dir[] = rtrim($v, '/\\') . DS;
+        foreach ((array)$plugins_dir as $k => $v) {
+            $this->plugins_dir[$k] = rtrim($v, '/\\') . DS;
 		}
 
 		return $this;
@@ -1393,6 +1393,7 @@ class Smarty extends Smarty_Internal_TemplateBase {
 		$_plugin_filename = "{$_name_parts[1]}.{$_name_parts[2]}.php";
 
 
+    $_stream_resolve_include_path = function_exists('stream_resolve_include_path');
 		// add SMARTY_PLUGINS_DIR if not present
 		$_plugins_dir = $this->getPluginsDir();
 		if (!$this->disable_core_plugins) {
@@ -1412,7 +1413,12 @@ class Smarty extends Smarty_Internal_TemplateBase {
 				}
 				if ($this->use_include_path && !preg_match('/^([\/\\\\]|[a-zA-Z]:[\/\\\\])/', $_plugin_dir)) {
 					// try PHP include_path
-					if (($file = Smarty_Internal_Get_Include_Path::getIncludePath($file)) !== false) {
+          if ($_stream_resolve_include_path) {
+               $file = stream_resolve_include_path($file);
+          } else {
+              $file = Smarty_Internal_Get_Include_Path::getIncludePath($file);
+          }
+          if ($file !== false) {
 						require_once($file);
 						return $file;
 					}

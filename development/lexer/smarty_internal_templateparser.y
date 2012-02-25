@@ -279,7 +279,7 @@ template_element(res)::= FAKEPHPSTARTTAG(o). {
     if ($this->strip) {
         res = new _smarty_text($this, preg_replace('![\t ]*[\r\n]+[\t ]*!', '', self::escape_start_tag(o))); 
     } else {
-        res = new _smarty_text($this, self::escape_start_tag(ö));  
+        res = new _smarty_text($this, self::escape_start_tag(o));  
     }
 }
 

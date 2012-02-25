@@ -29,6 +29,18 @@ class DefaultPluginHandlerTests extends PHPUnit_Framework_TestCase {
     {
         $this->assertEquals("scriptfunction foo bar", $this->smarty->fetch('test_default_function_script.tpl'));
     }
+    public function testDefaultFunctionScriptNotCachable1()
+    {
+        $this->smarty->assign('foo','foo');
+        $this->smarty->caching = 1;
+        $this->assertEquals("scriptfunction foo", $this->smarty->fetch('test_default_function_script_notcachable.tpl'));
+    }
+    public function testDefaultFunctionScriptNotCachable2()
+    {
+        $this->smarty->assign('foo','bar');
+        $this->smarty->caching = 1;
+        $this->assertEquals("scriptfunction bar", $this->smarty->fetch('test_default_function_script_notcachable.tpl'));
+    }
 
     public function testDefaultFunctionLocal()
     {
@@ -45,7 +57,7 @@ class DefaultPluginHandlerTests extends PHPUnit_Framework_TestCase {
 
 }
 
-function my_plugin_handler ($tag, $type, $template, &$callback, &$script)
+function my_plugin_handler ($tag, $type, $template, &$callback, &$script, &$cachable)
 {
     switch ($type) {
         case Smarty::PLUGIN_FUNCTION:
@@ -53,6 +65,11 @@ function my_plugin_handler ($tag, $type, $template, &$callback, &$script)
                 case 'scriptfunction':
                     $script = './scripts/script_function_tag.php';
                     $callback = 'default_script_function_tag';
+                    return true;
+                case 'scriptfunctionnotcachable':
+                    $script = './scripts/script_function_tag.php';
+                    $callback = 'default_script_function_tag';
+                    $cachable = false;
                     return true;
                 case 'localfunction':
                     $callback = 'default_local_function_tag';

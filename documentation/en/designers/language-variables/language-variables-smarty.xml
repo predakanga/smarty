@@ -162,11 +162,18 @@ define('MY_CONST_VAL','CHERRIES');
  <sect2 id="language.variables.smarty.template">
   <title>{$smarty.template}</title>
   <para>
-   Returns the name of the current template being  processed (without the directory.)
+   Returns the name of the current template being  processed (without the directory).
   </para>
  </sect2>
 
-  <sect2 id="language.variables.smarty.current_dir">
+ <sect2 id="language.variables.smarty.template_object">
+  <title>{$smarty.template_object}</title>
+  <para>
+   Returns the template object of the current template being  processed.
+  </para>
+ </sect2>
+
+ <sect2 id="language.variables.smarty.current_dir">
    <title>{$smarty.current_dir}</title>
    <para>
     Returns the name of the directory for the current template being processed.
