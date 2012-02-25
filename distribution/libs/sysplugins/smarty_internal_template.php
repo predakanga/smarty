@@ -200,7 +200,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
             return false;
         }
         $this->properties['cache_lifetime'] = $this->cache_lifetime;
-        $this->properties['unifunc'] = 'content_' . uniqid('', false);
+        $this->properties['unifunc'] = 'content_' . str_replace('.', '_', uniqid('', true));
         $content = $this->createTemplateCodeFrame($content, true);
         $_smarty_tpl = $this;
         eval("?>" . $content);
@@ -379,7 +379,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
         }
         $this->properties['version'] = Smarty::SMARTY_VERSION;
         if (!isset($this->properties['unifunc'])) {
-            $this->properties['unifunc'] = 'content_' . uniqid('', false);
+            $this->properties['unifunc'] = 'content_' . str_replace('.', '_', uniqid('', true));
         }
         $this->properties['cachedsubtemplates'] = $this->cached_subtemplates;
         if (!$this->source->recompiled) {
