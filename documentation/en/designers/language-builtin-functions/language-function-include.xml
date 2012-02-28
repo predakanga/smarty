@@ -239,7 +239,7 @@
   <para>In this example included template will be cached with an individual cache lifetime of 500 seconds.</para>
   <programlisting>
 <![CDATA[
-{include 'sub_template.tpl' cache_lifteime=500}
+{include 'sub_template.tpl' cache_lifetime=500}
 ...
 ]]>
   </programlisting>
