@@ -91,7 +91,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testMustCompile()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertTrue($tpl->mustCompile());
+        $this->assertTrue($tpl->mustCompile);
     }
     /**
     * test getCompiledFilepath
@@ -99,7 +99,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertEquals('./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed.string.php', $this->relative($tpl->compiled->filepath));
+        $this->assertEquals('./templates_c/2aae6c35c94fcfb415dbe95f408b9ce91ee846ed_0.string.php', $this->relative($tpl->compiled->filepath));
     }
     /**
     * test getCompiledTimestamp
@@ -123,7 +123,7 @@ class StringResourceTests extends PHPUnit_Framework_TestCase {
     public function testWriteCachedContent()
     {
         $tpl = $this->smarty->createTemplate('string:hello world');
-        $this->assertFalse($tpl->writeCachedContent('dummy'));
+        $this->assertTrue($tpl->cached->write($tpl, 'dummy'));
     }
     /**
     * test isCached

@@ -1,4 +1,9 @@
 ﻿===== Smarty 3.2-DEV  =====
+04.03.2011
+- moved code into classes it better belongs to
+- prefix core functions called from compiled templates with '_'
+- update PHPunit tests
+
 10.12.2011
 - major change:
   * template variable values and its properties are stored as array in the template variable container

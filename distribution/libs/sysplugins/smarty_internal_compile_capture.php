@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Capture
  *
@@ -24,6 +25,7 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('name');
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -39,8 +41,7 @@ class Smarty_Internal_Compile_Capture extends Smarty_Internal_CompileBase {
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -73,8 +74,7 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
         // must endblock be nocache?
@@ -89,7 +89,7 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
         $_output .= " if (isset(\$_capture_assign)) \$_smarty_tpl->assign(\$_capture_assign, ob_get_contents());\n";
         $_output .= " if (isset( \$_capture_append)) \$_smarty_tpl->append( \$_capture_append, ob_get_contents());\n";
         $_output .= " Smarty::\$_smarty_vars['capture'][\$_capture_buffer]=ob_get_clean();\n";
-        $_output .= "} else \$_smarty_tpl->capture_error();?>";
+        $_output .= "} else \$_smarty_tpl->_capture_error();?>";
         return $_output;
     }
 

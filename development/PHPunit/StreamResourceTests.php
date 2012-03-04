@@ -79,7 +79,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testMustCompile()
     {
         $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertTrue($tpl->mustCompile());
+        $this->assertTrue($tpl->mustCompile);
     }
     /**
     * test getCompiledFilepath
@@ -138,7 +138,7 @@ class StreamResourceTests extends PHPUnit_Framework_TestCase {
     public function testWriteCachedContent()
     {
         $tpl = $this->smarty->createTemplate('global:mytest');
-        $this->assertFalse($tpl->writeCachedContent('dummy'));
+        $this->assertFalse($tpl->cached->write($tpl, 'dummy'));
     }
     /**
     * test isCached

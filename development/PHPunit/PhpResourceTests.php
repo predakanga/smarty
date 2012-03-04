@@ -93,7 +93,7 @@ class PhpResourceTests extends PHPUnit_Framework_TestCase {
     public function testMustCompile()
     {
         $tpl = $this->smarty->createTemplate('php:phphelloworld.php');
-        $this->assertFalse($tpl->mustCompile());
+        $this->assertFalse($tpl->mustCompile);
     }
     /**
     * test getCachedFilepath

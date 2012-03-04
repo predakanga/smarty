@@ -79,7 +79,7 @@ class IndexedFileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('[foo]dirname.tpl');
-        $expected = './templates_c/'.sha1($this->smarty->getTemplateDir('foo').'dirname.tpl').'.file.dirname.tpl.php';
+        $expected = './templates_c/'.sha1($this->smarty->getTemplateDir('foo').'dirname.tpl').'_0.file.dirname.tpl.php';
         $this->assertEquals($expected, $this->relative($tpl->compiled->filepath));
     }
 

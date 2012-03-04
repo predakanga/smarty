@@ -80,7 +80,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testMustCompile()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertTrue($tpl->mustCompile());
+        $this->assertTrue($tpl->mustCompile);
     }
     /**
     * test getCompiledFilepath
@@ -104,7 +104,7 @@ class EvalResourceTests extends PHPUnit_Framework_TestCase {
     public function testWriteCachedContent()
     {
         $tpl = $this->smarty->createTemplate('eval:hello world');
-        $this->assertFalse($tpl->writeCachedContent('dummy'));
+        $this->assertFalse($tpl->cached->write($tpl, 'dummy'));
     }
     /**
     * test isCached

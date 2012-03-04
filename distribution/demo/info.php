@@ -1,5 +1,9 @@
 <?php
+ /**
+ * Example Info
 
+ * @package Example-application
+ */
 require_once dirname(__FILE__) . '/../libs/Smarty.class.php';
 
 ini_set('pcre.backtrack_limit', -1);
@@ -12,7 +16,7 @@ $smarty->setTemplateDir(array(
 $smarty->addPluginsDir('./plugins');
 $smarty->registerPlugin('modifier', 'strlen', 'strlen');
 $smarty->registerPlugin('modifier', 'strlen2', array('InfoFoo', 'strlen'));
-$smarty->registerPlugin('modifier', 'strlen3', function($string){ return strlen($string); });
+//$smarty->registerPlugin('modifier', 'strlen3', function($string){ return strlen($string); });
 
 $smarty->autoload_filters['output'] = array('trimwhitespace');
 
@@ -30,16 +34,16 @@ class InfoFoo {
     }
     public static function prefilterThingie()
     {
-        
+
     }
     public $isAttribute = true;
     public function isFunction()
     {
-        
+
     }
     public function isBlock()
     {
-        
+
     }
 }
 

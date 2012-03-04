@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Assign
  *
@@ -25,13 +26,12 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
      * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
-    public function compile($args, $compiler, $parameter)
-    {
+    public function compile($args, $compiler, $parameter) {
         // the following must be assigned at runtime because it will be overwritten in Smarty_Internal_Compile_Append
         $this->required_attributes = array('var', 'value');
         $this->shorttag_order = array('var', 'value');
         $this->optional_attributes = array('scope');
-        $this->option_flags = array('nocache','cachevalue');
+        $this->option_flags = array('nocache', 'cachevalue');
         $_nocache = 'false';
         $_scope = Smarty::SCOPE_LOCAL;
         // check and get attributes
@@ -59,7 +59,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         }
         // compiled output
         if (isset($parameter['smarty_internal_index'])) {
-            $output = "<?php \$_smarty_tpl->createLocalArrayVariable({$_attr['var']}, {$_nocache});\n\$_smarty_tpl->tpl_vars->{$var}['value']{$parameter['smarty_internal_index']} = {$_attr['value']};";
+            $output = "<?php \$_smarty_tpl->_createLocalArrayVariable({$_attr['var']}, {$_nocache});\n\$_smarty_tpl->tpl_vars->{$var}['value']{$parameter['smarty_internal_index']} = {$_attr['value']};";
         } else {
             $output = "<?php \$_smarty_tpl->tpl_vars->{$var} = array('value' => {$_attr['value']}, 'nocache' => {$_nocache});";
         }
@@ -68,7 +68,7 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
         } elseif ($_scope == Smarty::SCOPE_ROOT || $_scope == Smarty::SCOPE_GLOBAL) {
             $output .= "\n\$_ptr = \$_smarty_tpl->parent; while (\$_ptr != null) {\$_ptr->tpl_vars->{$var} = \$_smarty_tpl->tpl_vars->{$var}; \$_ptr = \$_ptr->parent; }";
         }
-        if ( $_scope == Smarty::SCOPE_GLOBAL) {
+        if ($_scope == Smarty::SCOPE_GLOBAL) {
             $output .= "\nSmarty::\$global_tpl_vars->{$var} =  \$_smarty_tpl->tpl_vars->{$var};";
         }
         if ($_attr['cachevalue'] === true && $compiler->template->caching) {
@@ -87,4 +87,5 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
     }
 
 }
+
 ?>

@@ -32,7 +32,7 @@ class DefaultConfigHandlerTests extends PHPUnit_Framework_TestCase {
             $this->assertEquals("123.4", $this->smarty->fetch('eval:{#Number#}'));
         }
         catch (Exception $e) {
-            $this->assertContains('Unable to read config file', $e->getMessage());
+            $this->assertContains('Unable to load config file', $e->getMessage());
             return;
         }
         $this->fail('Exception for none existing config has not been raised.');
@@ -73,7 +73,7 @@ class DefaultConfigHandlerTests extends PHPUnit_Framework_TestCase {
             $this->assertEquals("123.4", $this->smarty->fetch('eval:{#Number#}'));
         }
         catch (Exception $e) {
-            $this->assertContains('Unable to read config file', $e->getMessage());
+            $this->assertContains('Unable to load config file', $e->getMessage());
             return;
         }
         $this->fail('Exception for none existing template has not been raised.');

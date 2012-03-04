@@ -113,7 +113,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testGetCompiledFilepath()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $expected = './templates_c/'.sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'.file.helloworld.tpl.php';
+        $expected = './templates_c/'.sha1($this->smarty->getTemplateDir(0) . 'helloworld.tpl').'_0.file.helloworld.tpl.php';
         $this->assertEquals($expected, $this->relative($tpl->compiled->filepath));
     }
     /**
@@ -139,7 +139,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     public function testMustCompileExisting()
     {
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertFalse($tpl->mustCompile());
+        $this->assertFalse($tpl->mustCompile);
     }
     /**
     * test mustCompile if force compile = true
@@ -148,7 +148,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
     {
         $this->smarty->force_compile = true;
         $tpl = $this->smarty->createTemplate('helloworld.tpl');
-        $this->assertTrue($tpl->mustCompile());
+        $this->assertTrue($tpl->mustCompile);
     }
     /**
     * test mustCompile on touched source file
@@ -160,7 +160,7 @@ class FileResourceTests extends PHPUnit_Framework_TestCase {
         touch($tpl->source->filepath);
         // reset cache for this test to work
         unset($tpl->source->timestamp);
-        $this->assertTrue($tpl->mustCompile());
+        $this->assertTrue($tpl->mustCompile);
         // clean up for next tests
         $this->smarty->clearCompiledTemplate();
     }
