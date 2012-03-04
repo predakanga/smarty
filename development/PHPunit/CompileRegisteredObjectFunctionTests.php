@@ -12,12 +12,12 @@
 class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     public function setUp()
     {
-        $this->smarty = SmartyTests::$smarty;
+        $this->smartyBC = SmartyTests::$smartyBC;
         SmartyTests::init();
-        $this->smarty->force_compile = true;
-        $this->smarty->disableSecurity();
+        $this->smartyBC->force_compile = true;
+        $this->smartyBC->disableSecurity();
         $this->object = new RegObject;
-        $this->smarty->registerObject('objecttest', $this->object, 'myhello', true, 'myblock');
+        $this->smartyBC->registerObject('objecttest', $this->object, 'myhello', true, 'myblock');
     }
 
     public static function isRunnable()
@@ -30,16 +30,16 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredObjectFunction()
     {
-        $tpl = $this->smarty->createTemplate('eval:{objecttest->myhello}');
-        $this->assertEquals('hello world', $this->smarty->fetch($tpl));
+        $tpl = $this->smartyBC->createTemplate('eval:{objecttest->myhello}');
+        $this->assertEquals('hello world', $this->smartyBC->fetch($tpl));
     }
     /**
     * test resgistered object as function with modifier
     */
     public function testRegisteredObjectFunctionModifier()
     {
-        $tpl = $this->smarty->createTemplate('eval:{objecttest->myhello|truncate:6}');
-        $this->assertEquals('hel...', $this->smarty->fetch($tpl));
+        $tpl = $this->smartyBC->createTemplate('eval:{objecttest->myhello|truncate:6}');
+        $this->assertEquals('hel...', $this->smartyBC->fetch($tpl));
     }
 
     /**
@@ -47,18 +47,18 @@ class CompileRegisteredObjectFunctionTests extends PHPUnit_Framework_TestCase {
     */
     public function testRegisteredObjectBlockFunction()
     {
-        $tpl = $this->smarty->createTemplate('eval:{objecttest->myblock}hello world{/objecttest->myblock}');
-        $this->assertEquals('block test', $this->smarty->fetch($tpl));
+        $tpl = $this->smartyBC->createTemplate('eval:{objecttest->myblock}hello world{/objecttest->myblock}');
+        $this->assertEquals('block test', $this->smartyBC->fetch($tpl));
     }
     public function testRegisteredObjectBlockFunctionModifier1()
     {
-        $tpl = $this->smarty->createTemplate('eval:{objecttest->myblock}hello world{/objecttest->myblock|strtoupper}');
-        $this->assertEquals(strtoupper('block test'), $this->smarty->fetch($tpl));
+        $tpl = $this->smartyBC->createTemplate('eval:{objecttest->myblock}hello world{/objecttest->myblock|strtoupper}');
+        $this->assertEquals(strtoupper('block test'), $this->smartyBC->fetch($tpl));
     }
     public function testRegisteredObjectBlockFunctionModifier2()
     {
-        $tpl = $this->smarty->createTemplate('eval:{objecttest->myblock}hello world{/objecttest->myblock|default:""|strtoupper}');
-        $this->assertEquals(strtoupper('block test'), $this->smarty->fetch($tpl));
+        $tpl = $this->smartyBC->createTemplate('eval:{objecttest->myblock}hello world{/objecttest->myblock|default:""|strtoupper}');
+        $this->assertEquals(strtoupper('block test'), $this->smartyBC->fetch($tpl));
     }
 }
 

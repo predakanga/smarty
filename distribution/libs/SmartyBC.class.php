@@ -135,6 +135,71 @@ class SmartyBC extends Smarty {
     }
 
     /**
+     * Registers object to be used in templates
+     *
+     * @param string  $object        name of template object
+     * @param object  $object        the referenced PHP object to register
+     * @param array   $allowed       list of allowed methods (empty = all)
+     * @param boolean $smarty_args   smarty argument format, else traditional
+     * @param array   $block_methods list of block-methods
+     * @param array $block_functs list of methods that are block format
+     * @return Smarty_Internal_Templatebase current Smarty_Internal_Templatebase (or Smarty or Smarty_Internal_Template) instance for chaining
+     * @throws SmartyException if any of the methods in $allowed or $block_methods are invalid
+     */
+    public function registerObject($object_name, $object, $allowed = array(), $smarty_args = true, $block_methods = array()) {
+        if (!is_object($object)) {
+            throw new SmartyException("registerObject(): Invalid parameter for object");
+        }
+        // test if allowed methodes callable
+        if (!empty($allowed)) {
+            foreach ((array) $allowed as $method) {
+                if (!is_callable(array($object, $method))) {
+                    throw new SmartyException("registerObject(): Undefined method \"{$method}\"");
+                }
+            }
+        }
+        // test if block methodes callable
+        if (!empty($block_methods)) {
+            foreach ((array) $block_methods as $method) {
+                if (!is_callable(array($object, $method))) {
+                    throw new SmartyException("registerObject(): Undefined method \"{$method}\"");
+                }
+            }
+        }
+        // register the object
+        $this->registered_objects[$object_name] =
+                array($object, (array) $allowed, (boolean) $smarty_args, (array) $block_methods);
+        return $this;
+    }
+
+    /**
+     * return a reference to a registered object
+     *
+     * @param string $name object name
+     * @return object
+     * @throws SmartyException if no such object is found
+     */
+    public function getRegisteredObject($name) {
+        if (!isset($this->registered_objects[$name])) {
+            throw new SmartyException("getRegisteredObject(): No object resgistered for \"{$name}\"");
+        }
+        return $this->registered_objects[$name][0];
+    }
+
+    /**
+     * unregister an object
+     *
+     * @param string $name object name
+     * @return Smarty_Internal_Templatebase current Smarty_Internal_Templatebase (or Smarty or Smarty_Internal_Template) instance for chaining
+     */
+    public function unregisterObject($name) {
+        if (isset($this->registered_objects[$name])) {
+            unset($this->registered_objects[$name]);
+        }
+        return $this;
+    }
+
+    /**
      * Registers block function to be used in templates
      *
      * @param string $block      name of template block
