@@ -28,7 +28,7 @@
 				<li><span class="field">abstract:</span> </li>
 			</ul>
 		<p class="notes">
-			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compilebase.php.html">/libs/sysplugins/smarty_internal_compilebase.php</a> (line <span class="field">16</span>)
+			Located in <a class="field" href="_libs---sysplugins---smarty_internal_compilebase.php.html">/libs/sysplugins/smarty_internal_compilebase.php</a> (line <span class="field">17</span>)
 		</p>
 		
 				
@@ -195,6 +195,12 @@
 					<td style="padding-right: 2em"><a href="../../Smarty/Compiler/Smarty_Internal_Compile_Ifclose.html">Smarty_Internal_Compile_Ifclose</a></td>
 					<td>
 											Smarty Internal Plugin Compile Ifclose Class
+										</td>
+				</tr>
+								<tr>
+					<td style="padding-right: 2em"><a href="../../Smarty/Compiler/Smarty_Internal_Compile_Import.html">Smarty_Internal_Compile_Import</a></td>
+					<td>
+											Smarty Internal Plugin Compile Import Class
 										</td>
 				</tr>
 								<tr>
@@ -452,7 +458,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$optional_attributes</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">30</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">32</span>)
 		</span>
 	</div>
 
@@ -501,6 +507,10 @@
 							</li>
 					<li>
 				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Function.html#var$optional_attributes">Smarty_Internal_Compile_Function::$optional_attributes</a>
+								: Attribute definition: Overwrites base class.
+							</li>
+					<li>
+				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Import.html#var$optional_attributes">Smarty_Internal_Compile_Import::$optional_attributes</a>
 								: Attribute definition: Overwrites base class.
 							</li>
 					<li>
@@ -558,7 +568,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$option_flags</span>
-			 = <span class="var-default">array('nocache')</span>			(line <span class="line-number">42</span>)
+			 = <span class="var-default">array('nocache')</span>			(line <span class="line-number">46</span>)
 		</span>
 	</div>
 
@@ -573,6 +583,10 @@
 			<hr class="separator" />
 		<div class="notes">Redefined in descendants as:</div>
 		<ul class="redefinitions">
+					<li>
+				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Import.html#var$option_flags">Smarty_Internal_Compile_Import::$option_flags</a>
+								: Attribute definition: Overwrites base class.
+							</li>
 					<li>
 				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Include.html#var$option_flags">Smarty_Internal_Compile_Include::$option_flags</a>
 								: Attribute definition: Overwrites base class.
@@ -592,7 +606,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$required_attributes</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">23</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">24</span>)
 		</span>
 	</div>
 
@@ -636,6 +650,10 @@
 								: Attribute definition: Overwrites base class.
 							</li>
 					<li>
+				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Import.html#var$required_attributes">Smarty_Internal_Compile_Import::$required_attributes</a>
+								: Attribute definition: Overwrites base class.
+							</li>
+					<li>
 				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Include.html#var$required_attributes">Smarty_Internal_Compile_Include::$required_attributes</a>
 								: Attribute definition: Overwrites base class.
 							</li>
@@ -666,7 +684,7 @@
 		<span class="var-title">
 			<span class="var-type">array</span>
 			<span class="var-name">$shorttag_order</span>
-			 = <span class="var-default">array()</span>			(line <span class="line-number">36</span>)
+			 = <span class="var-default">array()</span>			(line <span class="line-number">39</span>)
 		</span>
 	</div>
 
@@ -722,6 +740,10 @@
 								: Attribute definition: Overwrites base class.
 							</li>
 					<li>
+				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Import.html#var$shorttag_order">Smarty_Internal_Compile_Import::$shorttag_order</a>
+								: Attribute definition: Overwrites base class.
+							</li>
+					<li>
 				<a href="../../Smarty/Compiler/Smarty_Internal_Compile_Include.html#var$shorttag_order">Smarty_Internal_Compile_Include::$shorttag_order</a>
 								: Attribute definition: Overwrites base class.
 							</li>
@@ -762,7 +784,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">buildReflection</span> (line <span class="line-number">332</span>)
+		<span class="method-title">buildReflection</span> (line <span class="line-number">335</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -793,7 +815,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">closeTag</span> (line <span class="line-number">150</span>)
+		<span class="method-title">closeTag</span> (line <span class="line-number">152</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -827,7 +849,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getAnnotation</span> (line <span class="line-number">181</span>)
+		<span class="method-title">getAnnotation</span> (line <span class="line-number">182</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -860,7 +882,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getAttributes</span> (line <span class="line-number">56</span>)
+		<span class="method-title">getAttributes</span> (line <span class="line-number">60</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -894,7 +916,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">getNoOfRequiredParameter</span> (line <span class="line-number">321</span>)
+		<span class="method-title">getNoOfRequiredParameter</span> (line <span class="line-number">324</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -925,7 +947,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">getPluginParameterString</span> (line <span class="line-number">241</span>)
+		<span class="method-title">getPluginParameterString</span> (line <span class="line-number">243</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -968,7 +990,7 @@
 <div class="evenrow">
 	
 	<div class="method-header">
-		<span class="method-title">injectObject</span> (line <span class="line-number">204</span>)
+		<span class="method-title">injectObject</span> (line <span class="line-number">205</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1004,7 +1026,7 @@
 <div class="oddrow">
 	
 	<div class="method-header">
-		<span class="method-title">openTag</span> (line <span class="line-number">136</span>)
+		<span class="method-title">openTag</span> (line <span class="line-number">139</span>)
 	</div> 
 	
 	<!-- ========== Info from phpDoc block ========= -->
@@ -1042,7 +1064,7 @@
 
 
 	<p class="notes" id="credit">
-		Documentation generated on Sun, 27 Nov 2011 11:03:53 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
+		Documentation generated on Sun, 04 Mar 2012 17:38:56 +0100 by <a href="http://www.phpdoc.org" target="_blank">phpDocumentor 1.4.1</a>
 	</p>
 	</div></body>
 </html>
