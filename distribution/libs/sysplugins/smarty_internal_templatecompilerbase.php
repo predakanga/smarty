@@ -156,6 +156,12 @@ abstract class Smarty_Internal_TemplateCompilerBase {
     public $modifier_plugins = array();
 
     /**
+     * type of already compiled modifier
+     * @var array
+     */
+    public $known_modifier_type = array();
+
+    /**
      * Initialize compiler
      */
     public function __construct() {
