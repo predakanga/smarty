@@ -580,11 +580,11 @@ integer {
 space {
   $this->token = Smarty_Internal_Templateparser::TP_SPACE;
 }
-text {
-  $this->token = Smarty_Internal_Templateparser::TP_TEXT;
-}
 namespace {
   $this->token = Smarty_Internal_Templateparser::TP_NAMESPACE;     
+}
+text {
+  $this->token = Smarty_Internal_Templateparser::TP_TEXT;
 }
 */
 

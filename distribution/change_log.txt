@@ -5,6 +5,7 @@
 - update PHPunit tests
 - remove trailing ?> from Smarty source and format code
 - moved deprecated register object functions into SmartyBC
+- fixed Namespace support
 
 10.12.2011
 - major change:
