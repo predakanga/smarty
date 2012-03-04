@@ -11,7 +11,12 @@
    <type>void</type><methodname>unregisterObject</methodname>
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
   </methodsynopsis>
-
+  <note>
+   <para>
+    As of Smarty 3.2 registered objects are deprecated and only available from <link linkend="bc">SmartyBC</link>.
+   </para>
+  </note>
+  
  <para>
  See also
  <link linkend="api.register.object"><varname>registerObject()</varname></link>

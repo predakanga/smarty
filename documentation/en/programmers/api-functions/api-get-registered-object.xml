@@ -11,6 +11,12 @@
    <type>array</type><methodname>getRegisteredObject</methodname>
    <methodparam><type>string</type><parameter>object_name</parameter></methodparam>
   </methodsynopsis>
+  <note>
+   <para>
+    As of Smarty 3.2 registered objects are deprecated and only available from <link linkend="bc">SmartyBC</link>.
+   </para>
+  </note>
+  
   <para>
    This is useful
    from within a custom function when you need direct access to a
