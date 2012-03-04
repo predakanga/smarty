@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Eval
  *
@@ -24,6 +25,7 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('var');
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -31,13 +33,14 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $optional_attributes = array('assign');
+
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
      * @see Smarty_Internal_CompileBase
      */
-    public $shorttag_order = array('var','assign');
+    public $shorttag_order = array('var', 'assign');
 
     /**
      * Compiles code for the {eval} tag
@@ -46,19 +49,18 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase {
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         $this->required_attributes = array('var');
         $this->optional_attributes = array('assign');
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
         if (isset($_attr['assign'])) {
-              // output will be stored in a smarty variable instead of beind displayed
+            // output will be stored in a smarty variable instead of beind displayed
             $_assign = $_attr['assign'];
         }
 
         // create template object
-        $_output = "\$_template = new {$compiler->smarty->template_class}('eval:'.".$_attr['var'].", \$_smarty_tpl->smarty, \$_smarty_tpl);";
+        $_output = "\$_template = new {$compiler->smarty->template_class}('eval:'." . $_attr['var'] . ", \$_smarty_tpl->smarty, \$_smarty_tpl);";
         //was there an assign attribute?
         if (isset($_assign)) {
             $_output .= "\$_smarty_tpl->assign($_assign,\$_template->fetch());";
@@ -69,5 +71,3 @@ class Smarty_Internal_Compile_Eval extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

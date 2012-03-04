@@ -32,5 +32,3 @@ abstract class Smarty_Resource_Recompiled extends Smarty_Resource {
     }
 
 }
-
-?>

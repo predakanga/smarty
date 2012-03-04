@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Foreach
  *
@@ -16,6 +17,7 @@
  * @subpackage Compiler
  */
 class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -23,6 +25,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('from', 'item');
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -30,13 +33,14 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $optional_attributes = array('name', 'key');
+
     /**
      * Attribute definition: Overwrites base class.
      *
      * @var array
      * @see Smarty_Internal_CompileBase
      */
-    public $shorttag_order = array('from','item','key','name');
+    public $shorttag_order = array('from', 'item', 'key', 'name');
 
     /**
      * Compiles code for the {foreach} tag
@@ -46,20 +50,19 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
      * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
-    public function compile($args, $compiler, $parameter)
-    {
+    public function compile($args, $compiler, $parameter) {
         $tpl = $compiler->template;
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
         $from = $_attr['from'];
-        $item = trim($_attr['item'],'\'"');
+        $item = trim($_attr['item'], '\'"');
         if ("\$_smarty_tpl->tpl_vars->{$item}" == $from) {
             $compiler->trigger_template_error("item variable {$item} may not be the same variable as at 'from'", $compiler->lex->taglineno);
         }
 
         if (isset($_attr['key'])) {
-            $key =trim($_attr['key'],'\'"');
+            $key = trim($_attr['key'], '\'"');
         } else {
             $key = null;
         }
@@ -165,6 +168,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase {
 
         return $output;
     }
+
 }
 
 /**
@@ -183,8 +187,7 @@ class Smarty_Internal_Compile_Foreachelse extends Smarty_Internal_CompileBase {
      * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
-    public function compile($args, $compiler, $parameter)
-    {
+    public function compile($args, $compiler, $parameter) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -212,8 +215,7 @@ class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase {
      * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
-    public function compile($args, $compiler, $parameter)
-    {
+    public function compile($args, $compiler, $parameter) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
         // must endblock be nocache?
@@ -227,5 +229,3 @@ class Smarty_Internal_Compile_Foreachclose extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Nocache Insert
  *
@@ -27,8 +28,7 @@ class Smarty_Internal_Nocache_Insert {
      * @param string                   $_assign   optional variable name
      * @return string compiled code
      */
-    public static function compile($_function, $_attr, $_template, $_script, $_assign = null)
-    {
+    public static function compile($_function, $_attr, $_template, $_script, $_assign = null) {
         $_output = '<?php ';
         if ($_script != 'null') {
             // script which must be included
@@ -49,5 +49,3 @@ class Smarty_Internal_Nocache_Insert {
     }
 
 }
-
-?>

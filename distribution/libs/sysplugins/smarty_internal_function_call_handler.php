@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Function Call Handler
  *
@@ -25,8 +26,7 @@ class Smarty_Internal_Function_Call_Handler {
      * @param string                   $_hash       nocache hash value
      * @param bool                     $_nocache    nocache flag
      */
-    public static function call($_name, Smarty_Internal_Template $_template, $_params, $_hash, $_nocache)
-    {
+    public static function call($_name, Smarty_Internal_Template $_template, $_params, $_hash, $_nocache) {
         if ($_nocache) {
             $_function = "smarty_template_function_{$_name}_nocache";
         } else {
@@ -41,7 +41,7 @@ class Smarty_Internal_Function_Call_Handler {
                 $echo = "echo \\'/\*%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/";
                 $end = "/\*/%%SmartyNocache:{$_template->smarty->template_functions[$_name]['nocache_hash']}%%\*/\\';";
                 $_code .= preg_replace(array("!<\?php {$echo}|{$echo}<\?php|{$end}\?>|\?>\s*{$end}!",
-                        "!\\\'!"), array('', "'"), $_template->smarty->template_functions[$_name]['compiled']);
+                    "!\\\'!"), array('', "'"), $_template->smarty->template_functions[$_name]['compiled']);
                 $_template->smarty->template_functions[$_name]['called_nocache'] = true;
             } else {
                 $_code .= "<?php echo '/*%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/" . $_template->smarty->template_functions[$_name]['traceback'] . "/*/%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/';?>\n";
@@ -55,5 +55,3 @@ class Smarty_Internal_Function_Call_Handler {
     }
 
 }
-
-?>

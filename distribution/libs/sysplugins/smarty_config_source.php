@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin
  *
@@ -31,10 +32,8 @@ class Smarty_Config_Source extends Smarty_Template_Source {
      * @param string          $name             resource name
      * @param string          $unique_resource  unqiue resource name
      */
-    public function __construct(Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name, $unique_resource)
-    {
+    public function __construct(Smarty_Resource $handler, Smarty $smarty, $resource, $type, $name, $unique_resource) {
         $this->handler = $handler; // Note: prone to circular references
-
         // Note: these may be ->config_compiler_class etc in the future
         //$this->config_compiler_class = $handler->config_compiler_class;
         //$this->config_lexer_class = $handler->config_lexer_class;
@@ -54,8 +53,7 @@ class Smarty_Config_Source extends Smarty_Template_Source {
      * @param mixed  $value         newly assigned value (not check for correct type)
      * @throws SmartyException when the given property name is not valid
      */
-    public function __set($property_name, $value)
-    {
+    public function __set($property_name, $value) {
         switch ($property_name) {
             case 'content':
             case 'timestamp':
@@ -74,8 +72,7 @@ class Smarty_Config_Source extends Smarty_Template_Source {
      * @param string $property_name valid: content, timestamp, exists
      * @throws SmartyException when the given property name is not valid
      */
-    public function __get($property_name)
-    {
+    public function __get($property_name) {
         switch ($property_name) {
             case 'timestamp':
             case 'exists':
@@ -91,5 +88,3 @@ class Smarty_Config_Source extends Smarty_Template_Source {
     }
 
 }
-
-?>

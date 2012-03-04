@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Function_Call
  *
@@ -24,6 +25,7 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('name');
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -31,6 +33,7 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('name');
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -47,8 +50,7 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
      * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
         // save possible attributes
@@ -126,5 +128,3 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

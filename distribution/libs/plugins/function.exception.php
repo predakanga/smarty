@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  *
@@ -19,8 +20,7 @@
  * @param Smarty_Internal_Template $template template object
  * @param string  $message   exception messsage
  */
-function smarty_function_exception(Smarty_Internal_Template $template, $message = 'User Exception'){
+function smarty_function_exception(Smarty_Internal_Template $template, $message = 'User Exception') {
     throw new SmartyRunTimeException($message, $template);
     return;
 }
-?>

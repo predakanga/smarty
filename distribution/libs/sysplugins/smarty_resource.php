@@ -707,5 +707,3 @@ class Smarty_Template_Source {
     }
 
 }
-
-?>

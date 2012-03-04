@@ -667,5 +667,3 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data {
     }
 
 }
-
-?>

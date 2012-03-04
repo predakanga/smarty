@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  *
@@ -24,8 +25,6 @@
  * @return string with compiled code
  */
 // NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
-function smarty_modifiercompiler_cat()
-{
-    return '('.implode(').(', func_get_args()).')';
+function smarty_modifiercompiler_cat() {
+    return '(' . implode(').(', func_get_args()) . ')';
 }
-?>

@@ -90,5 +90,3 @@ class Smarty_Internal_Compile_Whileclose extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

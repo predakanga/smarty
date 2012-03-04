@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Setfilter
  *
@@ -25,8 +26,7 @@ class Smarty_Internal_Compile_Setfilter extends Smarty_Internal_CompileBase {
      * @param array  $parameter array with compilation parameter
      * @return string compiled code
      */
-    public function compile($args, $compiler, $parameter)
-    {
+    public function compile($args, $compiler, $parameter) {
         $compiler->variable_filter_stack[] = $compiler->template->variable_filters;
         $compiler->template->variable_filters = $parameter['modifier_list'];
         // this tag does not return compiled code
@@ -53,8 +53,7 @@ class Smarty_Internal_Compile_Setfilterclose extends Smarty_Internal_CompileBase
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         $_attr = $this->getAttributes($compiler, $args);
         // reset variable filter to previous state
         if (count($compiler->variable_filter_stack)) {
@@ -68,5 +67,3 @@ class Smarty_Internal_Compile_Setfilterclose extends Smarty_Internal_CompileBase
     }
 
 }
-
-?>

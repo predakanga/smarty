@@ -589,5 +589,3 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase {
     }
 
 }
-
-?>

@@ -1,11 +1,11 @@
 <?php
+
 /**
  * Smarty plugin
  *
  * @package Smarty
  * @subpackage PluginsModifierCompiler
  */
-
 /**
  * @ignore
  */
@@ -28,10 +28,9 @@
  * @return string with compiled code
  */
 // NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
-function smarty_modifiercompiler_escape(Smarty_Internal_TemplateCompilerBase $compiler, $input, $esc_type = 'html', $char_set = 'null', $double_encode = 'true')
-{
+function smarty_modifiercompiler_escape(Smarty_Internal_TemplateCompilerBase $compiler, $input, $esc_type = 'html', $char_set = 'null', $double_encode = 'true') {
     if (trim($char_set, "'\"") == 'null') {
-            $char_set = '\'' .Smarty::$_CHARSET . '\'';
+        $char_set = '\'' . Smarty::$_CHARSET . '\'';
     }
     if (preg_match('/^([\'"]?)[a-zA-Z0-9_]+(\\1)$/', $esc_type)) {
         // $esc_type is litteral so we can produce compiled code
@@ -61,18 +60,16 @@ function smarty_modifiercompiler_escape(Smarty_Internal_TemplateCompilerBase $co
             case 'javascript':
                 // escape quotes and backslashes, newlines, etc.
                 return 'strtr(' . $input . ', array("\\\\" => "\\\\\\\\", "\'" => "\\\\\'", "\"" => "\\\\\"", "\\r" => "\\\\r", "\\n" => "\\\n", "</" => "<\/" ))';
-
         }
     }
 
     // could not optimize |escape call, so fallback to regular plugin
     if ($compiler->tag_nocache | $compiler->nocache) {
-        $compiler->template->required_plugins['nocache']['escape']['modifier']['file'] = SMARTY_PLUGINS_DIR .'modifier.escape.php';
+        $compiler->template->required_plugins['nocache']['escape']['modifier']['file'] = SMARTY_PLUGINS_DIR . 'modifier.escape.php';
         $compiler->template->required_plugins['nocache']['escape']['modifier']['function'] = 'smarty_modifier_escape';
     } else {
-        $compiler->template->required_plugins['compiled']['escape']['modifier']['file'] = SMARTY_PLUGINS_DIR .'modifier.escape.php';
+        $compiler->template->required_plugins['compiled']['escape']['modifier']['file'] = SMARTY_PLUGINS_DIR . 'modifier.escape.php';
         $compiler->template->required_plugins['compiled']['escape']['modifier']['function'] = 'smarty_modifier_escape';
     }
     return "smarty_modifier_escape(\$_smarty_tpl, {$input}, {$esc_type}, {$char_set}, {$double_encode})";
 }
-?>

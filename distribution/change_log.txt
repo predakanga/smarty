@@ -3,6 +3,7 @@
 - moved code into classes it better belongs to
 - prefix core functions called from compiled templates with '_'
 - update PHPunit tests
+- remove trailing ?> from Smarty source and format code
 
 10.12.2011
 - major change:

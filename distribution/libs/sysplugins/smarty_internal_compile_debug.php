@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Debug
  *
@@ -25,8 +26,7 @@ class Smarty_Internal_Compile_Debug extends Smarty_Internal_CompileBase {
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -39,5 +39,3 @@ class Smarty_Internal_Compile_Debug extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

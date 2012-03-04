@@ -1,102 +1,96 @@
 <?php
-/**
-* Smarty Internal Plugin Debug
-*
-* Class to collect data for the Smarty Debugging Consol
-*
-* @package Smarty
-* @subpackage Debug
-* @author Uwe Tews
-*/
 
 /**
-* Smarty Internal Plugin Debug Class
-*
-* @package Smarty
-* @subpackage Debug
-*/
+ * Smarty Internal Plugin Debug
+ *
+ * Class to collect data for the Smarty Debugging Consol
+ *
+ * @package Smarty
+ * @subpackage Debug
+ * @author Uwe Tews
+ */
+
+/**
+ * Smarty Internal Plugin Debug Class
+ *
+ * @package Smarty
+ * @subpackage Debug
+ */
 class Smarty_Internal_Debug extends Smarty_Internal_Data {
 
     /**
-    * template data
-    *
-    * @var array
-    */
+     * template data
+     *
+     * @var array
+     */
     public static $template_data = array();
 
     /**
-    * Start logging of compile time
-    *
-    * @param object $template
-    */
-    public static function start_compile($template)
-    {
+     * Start logging of compile time
+     *
+     * @param object $template
+     */
+    public static function start_compile($template) {
         $key = self::get_key($template);
         self::$template_data[$key]['start_time'] = microtime(true);
     }
 
     /**
-    * End logging of compile time
-    *
-    * @param object $template
-    */
-    public static function end_compile($template)
-    {
+     * End logging of compile time
+     *
+     * @param object $template
+     */
+    public static function end_compile($template) {
         $key = self::get_key($template);
         self::$template_data[$key]['compile_time'] += microtime(true) - self::$template_data[$key]['start_time'];
     }
 
     /**
-    * Start logging of render time
-    *
-    * @param object $template
-    */
-    public static function start_render($template)
-    {
+     * Start logging of render time
+     *
+     * @param object $template
+     */
+    public static function start_render($template) {
         $key = self::get_key($template);
         self::$template_data[$key]['start_time'] = microtime(true);
     }
 
     /**
-    * End logging of compile time
-    *
-    * @param object $template
-    */
-    public static function end_render($template)
-    {
+     * End logging of compile time
+     *
+     * @param object $template
+     */
+    public static function end_render($template) {
         $key = self::get_key($template);
         self::$template_data[$key]['render_time'] += microtime(true) - self::$template_data[$key]['start_time'];
     }
 
     /**
-    * Start logging of cache time
-    *
-    * @param object $template cached template
-    */
-    public static function start_cache($template)
-    {
+     * Start logging of cache time
+     *
+     * @param object $template cached template
+     */
+    public static function start_cache($template) {
         $key = self::get_key($template);
         self::$template_data[$key]['start_time'] = microtime(true);
     }
 
     /**
-    * End logging of cache time
-    *
-    * @param object $template cached template
-    */
-    public static function end_cache($template)
-    {
+     * End logging of cache time
+     *
+     * @param object $template cached template
+     */
+    public static function end_cache($template) {
         $key = self::get_key($template);
         self::$template_data[$key]['cache_time'] += microtime(true) - self::$template_data[$key]['start_time'];
     }
 
     /**
-    * Opens a window for the Smarty Debugging Consol and display the data
-    *
-    * @param Smarty_Internal_Template|Smarty $obj object to debug
-    */
-    public static function display_debug($obj)
-    {
+     * Opens a window for the Smarty Debugging Consol and display the data
+     *
+     * @param Smarty_Internal_Template|Smarty $obj object to debug
+     */
+    public static function display_debug($obj) {
         // prepare information of assigned variables
         $ptr = self::get_debug_vars($obj);
         if ($obj instanceof Smarty) {
@@ -138,19 +132,18 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
     }
 
     /**
-    * Recursively gets variables from all template/data scopes
-    *
-    * @param Smarty_Internal_Template|Smarty_Data $obj object to debug
-    * @return StdClass
-    */
-    public static function get_debug_vars($obj)
-    {
+     * Recursively gets variables from all template/data scopes
+     *
+     * @param Smarty_Internal_Template|Smarty_Data $obj object to debug
+     * @return StdClass
+     */
+    public static function get_debug_vars($obj) {
         $config_vars = array();
         $tpl_vars = array();
         foreach ($obj->tpl_vars as $key => $value) {
             if ($key != '___smarty__data') {
-                if (strpos($key,'___config_var_') !== 0) {
-                    $tpl_vars[$key] =  $value;
+                if (strpos($key, '___config_var_') !== 0) {
+                    $tpl_vars[$key] = $value;
                     if ($obj instanceof Smarty_Internal_Template) {
                         $tpl_vars[$key]['source'] = $obj->source->type . ':' . $obj->source->name;
                     } elseif ($obj instanceof Smarty_Data) {
@@ -159,8 +152,8 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
                         $tpl_vars[$key]['source'] = 'Smarty object';
                     }
                 } else {
-                    $key = substr($key,14);
-                    $config_vars[$key] =  $value;
+                    $key = substr($key, 14);
+                    $config_vars[$key] = $value;
                     if ($obj instanceof Smarty_Internal_Template) {
                         $config_vars[$key]['source'] = $obj->source->type . ':' . $obj->source->name;
                     } elseif ($obj instanceof Smarty_Data) {
@@ -178,12 +171,13 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
             $config_vars = array_merge($parent->config_vars, $config_vars);
         } else {
             foreach (Smarty::$global_tpl_vars as $key => $var) {
-                if (strpos($key,'___smarty__data') !== 0) {
+                if (strpos($key, '___smarty__data') !== 0) {
                     if (!isset($tpl_vars[$key])) {
-                        if (strpos($key,'___smarty_conf_') !== 0) {
-                            $tpl_vars[$key] =  $var;
+                        if (strpos($key, '___smarty_conf_') !== 0) {
+                            $tpl_vars[$key] = $var;
                             $tpl_vars[$key]['source'] = 'Global';
                         } else {
+                            
                         }
                     }
                 }
@@ -193,13 +187,12 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
     }
 
     /**
-    * Return key into $template_data for template
-    *
-    * @param object $template  template object
-    * @return string   key into $template_data
-    */
-    private static function get_key($template)
-    {
+     * Return key into $template_data for template
+     *
+     * @param object $template  template object
+     * @return string   key into $template_data
+     */
+    private static function get_key($template) {
         static $_is_stringy = array('string' => true, 'eval' => true);
         // calculate Uid if not already done
         if ($template->source->uid == '') {
@@ -210,7 +203,7 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
             return $key;
         } else {
             if (isset($_is_stringy[$template->source->type])) {
-                self::$template_data[$key]['name'] = '\''.substr($template->source->name,0,25).'...\'';
+                self::$template_data[$key]['name'] = '\'' . substr($template->source->name, 0, 25) . '...\'';
             } else {
                 self::$template_data[$key]['name'] = $template->source->filepath;
             }
@@ -220,104 +213,103 @@ class Smarty_Internal_Debug extends Smarty_Internal_Data {
             return $key;
         }
     }
+
 }
 
 /**
-* Smarty debug_print_var modifier
-*
-* Type:     modifier<br>
-* Name:     debug_print_var<br>
-* Purpose:  formats variable contents for display in the console
-*
-* @param array|object $var     variable to be formatted
-* @param integer      $depth   maximum recursion depth if $var is an array
-* @param integer      $length  maximum string length if $var is a string
-* @param bool         $root    flag true if called in debug.tpl
-* @return string
-*/
-function smarty_modifier_debug_print_var ($var, $depth = 0, $length = 40, $root = true)
-{
+ * Smarty debug_print_var modifier
+ *
+ * Type:     modifier<br>
+ * Name:     debug_print_var<br>
+ * Purpose:  formats variable contents for display in the console
+ *
+ * @param array|object $var     variable to be formatted
+ * @param integer      $depth   maximum recursion depth if $var is an array
+ * @param integer      $length  maximum string length if $var is a string
+ * @param bool         $root    flag true if called in debug.tpl
+ * @return string
+ */
+function smarty_modifier_debug_print_var($var, $depth = 0, $length = 40, $root = true) {
     $_replace = array("\n" => '<i>\n</i>',
-    "\r" => '<i>\r</i>',
-    "\t" => '<i>\t</i>'
+        "\r" => '<i>\r</i>',
+        "\t" => '<i>\t</i>'
     );
 
     switch (gettype($var)) {
         case 'array' :
-        if ($root) {
-            $results = '';
-        } else {
-            $results = '<b>Array (' . count($var) . ')</b>';
-        }
-        foreach ($var as $curr_key => $curr_val) {
-            $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
-            . '<b>' . strtr($curr_key, $_replace) . '</b> =&gt; '
-            . smarty_modifier_debug_print_var($curr_val, ++$depth, $length, false);
-            $depth--;
-        }
-        break;
+            if ($root) {
+                $results = '';
+            } else {
+                $results = '<b>Array (' . count($var) . ')</b>';
+            }
+            foreach ($var as $curr_key => $curr_val) {
+                $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
+                        . '<b>' . strtr($curr_key, $_replace) . '</b> =&gt; '
+                        . smarty_modifier_debug_print_var($curr_val, ++$depth, $length, false);
+                $depth--;
+            }
+            break;
 
         case 'object' :
-        $object_vars = get_object_vars($var);
-        $results = '<b>' . get_class($var) . ' Object (' . count($object_vars) . ')</b>';
-        foreach ($object_vars as $curr_key => $curr_val) {
-            $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
-            . '<b> -&gt;' . strtr($curr_key, $_replace) . '</b> = '
-            . smarty_modifier_debug_print_var($curr_val, ++$depth, $length, false);
-            $depth--;
-        }
-        break;
+            $object_vars = get_object_vars($var);
+            $results = '<b>' . get_class($var) . ' Object (' . count($object_vars) . ')</b>';
+            foreach ($object_vars as $curr_key => $curr_val) {
+                $results .= '<br>' . str_repeat('&nbsp;', $depth * 2)
+                        . '<b> -&gt;' . strtr($curr_key, $_replace) . '</b> = '
+                        . smarty_modifier_debug_print_var($curr_val, ++$depth, $length, false);
+                $depth--;
+            }
+            break;
 
         case 'boolean' :
         case 'NULL' :
         case 'resource' :
-        if (true === $var) {
-            $results = 'true';
-        } elseif (false === $var) {
-            $results = 'false';
-        } elseif (null === $var) {
-            $results = 'null';
-        } else {
-            $results = htmlspecialchars((string) $var);
-        }
-        $results = '<i>' . $results . '</i>';
-        break;
+            if (true === $var) {
+                $results = 'true';
+            } elseif (false === $var) {
+                $results = 'false';
+            } elseif (null === $var) {
+                $results = 'null';
+            } else {
+                $results = htmlspecialchars((string) $var);
+            }
+            $results = '<i>' . $results . '</i>';
+            break;
 
         case 'integer' :
         case 'float' :
-        $results = htmlspecialchars((string) $var);
-        break;
+            $results = htmlspecialchars((string) $var);
+            break;
 
         case 'string' :
-        $results = strtr($var, $_replace);
+            $results = strtr($var, $_replace);
             if (Smarty::$_MBSTRING) {
                 if (mb_strlen($var, Smarty::$_CHARSET) > $length) {
                     $results = mb_substr($var, 0, $length - 3, Smarty::$_CHARSET) . '...';
+                }
+            } else {
+                if (isset($var[$length])) {
+                    $results = substr($var, 0, $length - 3) . '...';
+                }
             }
-        } else {
-            if (isset($var[$length])) {
-                $results = substr($var, 0, $length - 3) . '...';
-            }
-        }
 
-        $results = htmlspecialchars('"' . $results . '"');
-        break;
+            $results = htmlspecialchars('"' . $results . '"');
+            break;
 
         case 'unknown type' :
         default :
             if (Smarty::$_MBSTRING) {
                 if (mb_strlen($results, Smarty::$_CHARSET) > $length) {
                     $results = mb_substr($results, 0, $length - 3, Smarty::$_CHARSET) . '...';
+                }
+            } else {
+                if (strlen($results) > $length) {
+                    $results = substr($results, 0, $length - 3) . '...';
+                }
             }
-        } else {
-            if (strlen($results) > $length) {
-                $results = substr($results, 0, $length - 3) . '...';
-            }
-        }
 
-        $results = htmlspecialchars($results);
+            $results = htmlspecialchars($results);
     }
 
     return $results;
 }
-?>

@@ -283,5 +283,3 @@ class Smarty_Compiled {
     }
 
 }
-
-?>

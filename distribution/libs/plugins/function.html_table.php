@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  *
@@ -47,8 +48,7 @@
  * @param Smarty_Internal_Template $template template object
  * @return string
  */
-function smarty_function_html_table($params, $template)
-{
+function smarty_function_html_table($params, $template) {
     $table_attr = 'border="1"';
     $tr_attr = '';
     $th_attr = '';
@@ -63,14 +63,14 @@ function smarty_function_html_table($params, $template)
     $loop = null;
 
     if (!isset($params['loop'])) {
-        trigger_error("html_table: missing 'loop' parameter",E_USER_WARNING);
+        trigger_error("html_table: missing 'loop' parameter", E_USER_WARNING);
         return;
     }
 
     foreach ($params as $_key => $_value) {
         switch ($_key) {
             case 'loop':
-                $$_key = (array)$_value;
+                $$_key = (array) $_value;
                 break;
 
             case 'cols':
@@ -81,14 +81,14 @@ function smarty_function_html_table($params, $template)
                     $cols = explode(',', $_value);
                     $cols_count = count($cols);
                 } elseif (!empty($_value)) {
-                    $cols_count = (int)$_value;
+                    $cols_count = (int) $_value;
                 } else {
                     $cols_count = $cols;
                 }
                 break;
 
             case 'rows':
-                $$_key = (int)$_value;
+                $$_key = (int) $_value;
                 break;
 
             case 'table_attr':
@@ -97,7 +97,7 @@ function smarty_function_html_table($params, $template)
             case 'vdir':
             case 'inner':
             case 'caption':
-                $$_key = (string)$_value;
+                $$_key = (string) $_value;
                 break;
 
             case 'tr_attr':
@@ -140,12 +140,12 @@ function smarty_function_html_table($params, $template)
     $output .= "<tbody>\n";
     for ($r = 0; $r < $rows; $r++) {
         $output .= "<tr" . smarty_function_html_table_cycle('tr', $tr_attr, $r) . ">\n";
-        $rx = ($vdir == 'down') ? $r * $cols_count : ($rows-1 - $r) * $cols_count;
+        $rx = ($vdir == 'down') ? $r * $cols_count : ($rows - 1 - $r) * $cols_count;
 
         for ($c = 0; $c < $cols_count; $c++) {
-            $x = ($hdir == 'right') ? $rx + $c : $rx + $cols_count-1 - $c;
+            $x = ($hdir == 'right') ? $rx + $c : $rx + $cols_count - 1 - $c;
             if ($inner != 'cols') {
-                /* shuffle x to loop over rows*/
+                /* shuffle x to loop over rows */
                 $x = floor($x / $cols_count) + ($x % $cols_count) * $rows;
             }
 
@@ -163,8 +163,7 @@ function smarty_function_html_table($params, $template)
     return $output;
 }
 
-function smarty_function_html_table_cycle($name, $var, $no)
-{
+function smarty_function_html_table_cycle($name, $var, $no) {
     if (!is_array($var)) {
         $ret = $var;
     } else {
@@ -173,5 +172,3 @@ function smarty_function_html_table_cycle($name, $var, $no)
 
     return ($ret) ? ' ' . $ret : '';
 }
-
-?>

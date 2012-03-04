@@ -1,54 +1,56 @@
 <?php
-/**
-* Smarty Internal Plugin Compile Function
-*
-* Compiles the {function} {/function} tags
-*
-* @package Smarty
-* @subpackage Compiler
-* @author Uwe Tews
-*/
 
 /**
-* Smarty Internal Plugin Compile Function Class
-*
-* @package Smarty
-* @subpackage Compiler
-*/
+ * Smarty Internal Plugin Compile Function
+ *
+ * Compiles the {function} {/function} tags
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ * @author Uwe Tews
+ */
+
+/**
+ * Smarty Internal Plugin Compile Function Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ */
 class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase {
 
     /**
-    * Attribute definition: Overwrites base class.
-    *
-    * @var array
-    * @see Smarty_Internal_CompileBase
-    */
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $required_attributes = array('name');
+
     /**
-    * Attribute definition: Overwrites base class.
-    *
-    * @var array
-    * @see Smarty_Internal_CompileBase
-    */
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $shorttag_order = array('name');
+
     /**
-    * Attribute definition: Overwrites base class.
-    *
-    * @var array
-    * @see Smarty_Internal_CompileBase
-    */
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $optional_attributes = array('_any');
 
     /**
-    * Compiles code for the {function} tag
-    *
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @param array $parameter array with compilation parameter
-    * @return boolean true
-    */
-    public function compile($args, $compiler, $parameter)
-    {
+     * Compiles code for the {function} tag
+     *
+     * @param array $args array with attributes from parser
+     * @param object $compiler compiler object
+     * @param array $parameter array with compilation parameter
+     * @return boolean true
+     */
+    public function compile($args, $compiler, $parameter) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -61,14 +63,14 @@ class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase {
         } else {
             $resource = $compiler->template->template_resource;
             // santitize extends resource
-            if (strpos($resource,'extends:') !==false) {
-                $start = strpos($resource,':');
-                $end = strpos($resource,'|');
-                $resource = substr($resource,$start+1,$end-$start-1);
+            if (strpos($resource, 'extends:') !== false) {
+                $start = strpos($resource, ':');
+                $end = strpos($resource, '|');
+                $resource = substr($resource, $start + 1, $end - $start - 1);
             }
         }
         $save = array($_attr, $compiler->parser->current_buffer,
-        $compiler->template->has_nocache_code, $compiler->template->required_plugins, $resource);
+            $compiler->template->has_nocache_code, $compiler->template->required_plugins, $resource);
         $this->openTag($compiler, 'function', $save);
         $_name = trim($_attr['name'], "'\"");
         unset($_attr['name']);
@@ -77,7 +79,7 @@ class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase {
         $compiler->template->properties['function'][$_name]['parameter'] = array();
         $_smarty_tpl = $compiler->template;
         foreach ($_attr as $_key => $_data) {
-            eval ('$tmp='.$_data.';');
+            eval('$tmp=' . $_data . ';');
             $compiler->template->properties['function'][$_name]['parameter'][$_key] = $tmp;
         }
         $compiler->smarty->template_functions[$_name]['parameter'] = $compiler->template->properties['function'][$_name]['parameter'];
@@ -104,23 +106,22 @@ class Smarty_Internal_Compile_Function extends Smarty_Internal_CompileBase {
 }
 
 /**
-* Smarty Internal Plugin Compile Functionclose Class
-*
-* @package Smarty
-* @subpackage Compiler
-*/
+ * Smarty Internal Plugin Compile Functionclose Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ */
 class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase {
 
     /**
-    * Compiles code for the {/function} tag
-    *
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @param array $parameter array with compilation parameter
-    * @return boolean true
-    */
-    public function compile($args, $compiler, $parameter)
-    {
+     * Compiles code for the {/function} tag
+     *
+     * @param array $args array with attributes from parser
+     * @param object $compiler compiler object
+     * @param array $parameter array with compilation parameter
+     * @return boolean true
+     */
+    public function compile($args, $compiler, $parameter) {
         $_attr = $this->getAttributes($compiler, $args);
         $saved_data = $this->closeTag($compiler, array('function'));
         $_name = trim($saved_data[0]['name'], "'\"");
@@ -130,8 +131,8 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
         $plugins_string = '';
         if (!empty($compiler->template->required_plugins['compiled'])) {
             $plugins_string = '<?php ';
-            foreach($compiler->template->required_plugins['compiled'] as $tmp) {
-                foreach($tmp as $data) {
+            foreach ($compiler->template->required_plugins['compiled'] as $tmp) {
+                foreach ($tmp as $data) {
                     $plugins_string .= "if (!is_callable('{$data['function']}')) include '{$data['file']}';\n";
                 }
             }
@@ -139,8 +140,8 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
         }
         if (!empty($compiler->template->required_plugins['nocache'])) {
             $plugins_string .= $nocache_start_string;
-            foreach($compiler->template->required_plugins['nocache'] as $tmp) {
-                foreach($tmp as $data) {
+            foreach ($compiler->template->required_plugins['nocache'] as $tmp) {
+                foreach ($tmp as $data) {
                     $plugins_string .= "if (!is_callable(\'{$data['function']}\')) include \'{$data['file']}\';\n";
                 }
             }
@@ -155,10 +156,10 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
         if ($compiler->template->caching) {
             $compiler->template->properties['function'][$_name]['compiled'] .= $plugins_string
 //            . $nocache_start_string . "array_unshift(\$_smarty_tpl->trace_call_stack, array(\'{$saved_data[4]}\', 0, \'{$compiler->template->source->type}\'));\n" . $nocache_end_string
-            . "<?php array_unshift(\$_smarty_tpl->trace_call_stack, array('{$saved_data[4]}', 0, '{$compiler->template->source->type}'));?>\n"
-            . $compiler->parser->current_buffer->to_smarty_php()
+                    . "<?php array_unshift(\$_smarty_tpl->trace_call_stack, array('{$saved_data[4]}', 0, '{$compiler->template->source->type}'));?>\n"
+                    . $compiler->parser->current_buffer->to_smarty_php()
 //            . $nocache_start_string . "array_shift(\$_smarty_tpl->trace_call_stack);\n" . $nocache_end_string
-            . "<?php\narray_shift(\$_smarty_tpl->trace_call_stack);?>";
+                    . "<?php\narray_shift(\$_smarty_tpl->trace_call_stack);?>";
             $compiler->template->properties['function'][$_name]['nocache_hash'] = $compiler->template->properties['nocache_hash'];
             $compiler->template->properties['function'][$_name]['has_nocache_code'] = $compiler->template->has_nocache_code;
             $compiler->template->properties['function'][$_name]['called_functions'] = $compiler->called_functions;
@@ -181,5 +182,3 @@ class Smarty_Internal_Compile_Functionclose extends Smarty_Internal_CompileBase 
     }
 
 }
-
-?>

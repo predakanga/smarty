@@ -11,6 +11,7 @@
  * @author Rodney Rehm
  */
 class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
+
     /**
      * container for short_open_tag directive's value before executing PHP templates
      * @var string
@@ -21,9 +22,8 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
      * Create a new PHP Resource
      *
      */
-    public function __construct()
-    {
-        $this->short_open_tag = ini_get( 'short_open_tag' );
+    public function __construct() {
+        $this->short_open_tag = ini_get('short_open_tag');
     }
 
     /**
@@ -33,8 +33,7 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
      * @param Smarty_Internal_Template $_template template object
      * @return void
      */
-    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
-    {
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null) {
         $source->filepath = $this->buildFilepath($source, $_template);
 
         if ($source->filepath !== false) {
@@ -56,8 +55,7 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
      * @param Smarty_Template_Source $source source object
      * @return void
      */
-    public function populateTimestamp(Smarty_Template_Source $source)
-    {
+    public function populateTimestamp(Smarty_Template_Source $source) {
         $source->timestamp = @filemtime($source->filepath);
         $source->exists = !!$source->timestamp;
     }
@@ -69,8 +67,7 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
      * @return string template source
      * @throws SmartyException if source cannot be loaded
      */
-    public function getContent(Smarty_Template_Source $source)
-    {
+    public function getContent(Smarty_Template_Source $source) {
         if ($source->timestamp) {
             return '';
         }
@@ -85,8 +82,7 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
      * @return void
      * @throws SmartyException if template cannot be loaded or allow_php_templates is disabled
      */
-    public function renderUncompiled(Smarty_Template_Source $source, Smarty_Internal_Template $_template)
-    {
+    public function renderUncompiled(Smarty_Template_Source $source, Smarty_Internal_Template $_template) {
         $_smarty_template = $_template;
 
         if (!$source->smarty->allow_php_templates) {
@@ -105,10 +101,9 @@ class Smarty_Internal_Resource_PHP extends Smarty_Resource_Uncompiled {
         extract($_template->getTemplateVars());
 
         // include PHP template with short open tags enabled
-        ini_set( 'short_open_tag', '1' );
+        ini_set('short_open_tag', '1');
         include($source->filepath);
-        ini_set( 'short_open_tag', $this->short_open_tag );
+        ini_set('short_open_tag', $this->short_open_tag);
     }
-}
 
-?>
+}

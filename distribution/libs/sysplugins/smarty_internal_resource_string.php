@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Resource String
  *
@@ -27,8 +28,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
      * @param Smarty_Internal_Template $_template template object
      * @return void
      */
-    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null)
-    {
+    public function populate(Smarty_Template_Source $source, Smarty_Internal_Template $_template=null) {
         $source->uid = $source->filepath = sha1($source->name);
         $source->timestamp = 0;
         $source->exists = true;
@@ -41,8 +41,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
      * @param Smarty_Template_Source $source source object
      * @return string template source
      */
-    public function getContent(Smarty_Template_Source $source)
-    {
+    public function getContent(Smarty_Template_Source $source) {
         return $this->decode($source->name);
     }
 
@@ -52,8 +51,7 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
      * @param string $string template_resource to decode
      * @return string decoded template_resource
      */
-    protected function decode($string)
-    {
+    protected function decode($string) {
         // decode if specified
         if (($pos = strpos($string, ':')) !== false) {
             if (strpos($string, 'base64') === 0) {
@@ -73,9 +71,8 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
      * @param string $resource_name resource_name to make unique
      * @return string unique resource name
      */
-    protected function buildUniqueResourceName(Smarty $smarty, $resource_name)
-    {
-        return get_class($this) . '#' .$this->decode($resource_name);
+    protected function buildUniqueResourceName(Smarty $smarty, $resource_name) {
+        return get_class($this) . '#' . $this->decode($resource_name);
     }
 
     /**
@@ -86,11 +83,8 @@ class Smarty_Internal_Resource_String extends Smarty_Resource {
      * @param Smarty_Template_Source $source source object
      * @return string resource's basename
      */
-    public function getBasename(Smarty_Template_Source $source)
-    {
+    public function getBasename(Smarty_Template_Source $source) {
         return '';
     }
 
 }
-
-?>

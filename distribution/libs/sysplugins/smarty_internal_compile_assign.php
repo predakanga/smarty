@@ -87,5 +87,3 @@ class Smarty_Internal_Compile_Assign extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

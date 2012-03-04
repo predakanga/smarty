@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Config File Compiler
  *
@@ -58,8 +59,7 @@ class Smarty_Internal_Config_File_Compiler {
      *
      * @param Smarty $smarty base instance
      */
-    public function __construct($smarty)
-    {
+    public function __construct($smarty) {
         $this->smarty = $smarty;
         $this->config_data['sections'] = array();
         $this->config_data['vars'] = array();
@@ -71,8 +71,7 @@ class Smarty_Internal_Config_File_Compiler {
      * @param  Smarty_Internal_Config $config config object
      * @return bool true if compiling succeeded, false if it failed
      */
-    public function compileSource(Smarty_Internal_Config $config)
-    {
+    public function compileSource(Smarty_Internal_Config $config) {
         /* here is where the compiling takes place. Smarty
           tags in the templates are replaces with PHP code,
           then written to compiled files. */
@@ -86,10 +85,12 @@ class Smarty_Internal_Config_File_Compiler {
         // init the lexer/parser to compile the config file
         $lex = new Smarty_Internal_Configfilelexer($_content, $this->smarty);
         $parser = new Smarty_Internal_Configfileparser($lex, $this);
-        if ($this->smarty->_parserdebug) $parser->PrintTrace();
+        if ($this->smarty->_parserdebug)
+            $parser->PrintTrace();
         // get tokens from lexer and parse them
         while ($lex->yylex()) {
-            if ($this->smarty->_parserdebug) echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} Line {$lex->line} \n";
+            if ($this->smarty->_parserdebug)
+                echo "<br>Parsing  {$parser->yyTokenName[$lex->token]} Token {$lex->value} Line {$lex->line} \n";
             $parser->doParse($lex->token, $lex->value);
         }
         // finish parsing process
@@ -107,8 +108,7 @@ class Smarty_Internal_Config_File_Compiler {
      *
      * @param string $args individual error message or null
      */
-    public function trigger_config_file_error($args = null)
-    {
+    public function trigger_config_file_error($args = null) {
         $this->lex = Smarty_Internal_Configfilelexer::instance();
         $this->parser = Smarty_Internal_Configfileparser::instance();
         // get template source line which has error
@@ -117,7 +117,7 @@ class Smarty_Internal_Config_File_Compiler {
             // $line--;
         }
         $match = preg_split("/\n/", $this->lex->data);
-        $error_text = "Syntax error in config file '{$this->config->source->filepath}' on line {$line} '{$match[$line-1]}' ";
+        $error_text = "Syntax error in config file '{$this->config->source->filepath}' on line {$line} '{$match[$line - 1]}' ";
         if (isset($args)) {
             // individual error message
             $error_text .= $args;
@@ -140,5 +140,3 @@ class Smarty_Internal_Config_File_Compiler {
     }
 
 }
-
-?>

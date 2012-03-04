@@ -514,5 +514,3 @@ class Smarty_Variable_Container {
     }
 
 }
-
-?>

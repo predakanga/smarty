@@ -1742,5 +1742,3 @@ function smartyAutoload($class) {
         include SMARTY_SYSPLUGINS_DIR . $_classes[$_class] . '.php';
     }
 }
-
-?>

@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Object Funtion
  *
@@ -35,8 +36,7 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
      * @param string $method    name of method to call
      * @return string compiled code
      */
-    public function compile($args, $compiler, $parameter, $tag, $method)
-    {
+    public function compile($args, $compiler, $parameter, $tag, $method) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
         if ($_attr['nocache'] === true) {
@@ -75,5 +75,3 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
     }
 
 }
-
-?>

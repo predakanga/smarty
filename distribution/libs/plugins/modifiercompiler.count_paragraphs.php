@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty plugin
  *
@@ -21,9 +22,7 @@
  * @return string with compiled code
  */
 // NOTE: The parser does pass all parameter as strings which could be directly inserted into the compiled code string
-function smarty_modifiercompiler_count_paragraphs($input)
-{
+function smarty_modifiercompiler_count_paragraphs($input) {
     // count \r or \n characters
     return '(preg_match_all(\'#[\r\n]+#\', ' . $input . ', $tmp)+1)';
 }
-?>

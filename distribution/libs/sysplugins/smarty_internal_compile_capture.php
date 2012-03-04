@@ -94,5 +94,3 @@ class Smarty_Internal_Compile_CaptureClose extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

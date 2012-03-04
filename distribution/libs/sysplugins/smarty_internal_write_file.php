@@ -165,5 +165,3 @@ function _smartyRemovePhpTags($match) {
     }
     return '';
 }
-
-?>

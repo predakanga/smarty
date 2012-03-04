@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Smarty Internal Plugin Compile Section
  *
@@ -24,6 +25,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $required_attributes = array('name', 'loop');
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -31,6 +33,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase {
      * @see Smarty_Internal_CompileBase
      */
     public $shorttag_order = array('name', 'loop');
+
     /**
      * Attribute definition: Overwrites base class.
      *
@@ -46,8 +49,7 @@ class Smarty_Internal_Compile_Section extends Smarty_Internal_CompileBase {
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -151,8 +153,7 @@ class Smarty_Internal_Compile_Sectionelse extends Smarty_Internal_CompileBase {
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -179,8 +180,7 @@ class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase {
      * @param object $compiler compiler object
      * @return string compiled code
      */
-    public function compile($args, $compiler)
-    {
+    public function compile($args, $compiler) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -199,5 +199,3 @@ class Smarty_Internal_Compile_Sectionclose extends Smarty_Internal_CompileBase {
     }
 
 }
-
-?>

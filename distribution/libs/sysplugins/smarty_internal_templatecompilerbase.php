@@ -729,5 +729,3 @@ abstract class Smarty_Internal_TemplateCompilerBase {
     }
 
 }
-
-?>

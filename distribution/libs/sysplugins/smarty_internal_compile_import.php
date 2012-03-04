@@ -1,61 +1,64 @@
 <?php
-/**
-* Smarty Internal Plugin Compile Import
-*
-* Compiles the {import} tag
-*
-* @package Smarty
-* @subpackage Compiler
-* @author Uwe Tews
-*/
 
 /**
-* Smarty Internal Plugin Compile Import Class
-*
-* @package Smarty
-* @subpackage Compiler
-*/
+ * Smarty Internal Plugin Compile Import
+ *
+ * Compiles the {import} tag
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ * @author Uwe Tews
+ */
+
+/**
+ * Smarty Internal Plugin Compile Import Class
+ *
+ * @package Smarty
+ * @subpackage Compiler
+ */
 class Smarty_Internal_Compile_Import extends Smarty_Internal_CompileBase {
 
     /**
-    * Attribute definition: Overwrites base class.
-    *
-    * @var array
-    * @see Smarty_Internal_CompileBase
-    */
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $required_attributes = array('file');
+
     /**
-    * Attribute definition: Overwrites base class.
-    *
-    * @var array
-    * @see Smarty_Internal_CompileBase
-    */
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $shorttag_order = array('file');
+
     /**
-    * Attribute definition: Overwrites base class.
-    *
-    * @var array
-    * @see Smarty_Internal_CompileBase
-    */
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $option_flags = array();
+
     /**
-    * Attribute definition: Overwrites base class.
-    *
-    * @var array
-    * @see Smarty_Internal_CompileBase
-    */
+     * Attribute definition: Overwrites base class.
+     *
+     * @var array
+     * @see Smarty_Internal_CompileBase
+     */
     public $optional_attributes = array();
 
     /**
-    * Compiles code for the {import} tag
-    *
-    * @param array $args array with attributes from parser
-    * @param object $compiler compiler object
-    * @param array $parameter array with compilation parameter
-    * @return string compiled code
-    */
-    public function compile($args, $compiler, $parameter)
-    {
+     * Compiles code for the {import} tag
+     *
+     * @param array $args array with attributes from parser
+     * @param object $compiler compiler object
+     * @param array $parameter array with compilation parameter
+     * @return string compiled code
+     */
+    public function compile($args, $compiler, $parameter) {
         // check and get attributes
         $_attr = $this->getAttributes($compiler, $args);
 
@@ -70,7 +73,7 @@ class Smarty_Internal_Compile_Import extends Smarty_Internal_CompileBase {
         } else {
             $caching = 1;
         }
-        $tpl = new $compiler->smarty->template_class ($tpl_name, $compiler->smarty, $compiler->template, null, null, $caching, null, true);
+        $tpl = new $compiler->smarty->template_class($tpl_name, $compiler->smarty, $compiler->template, null, null, $caching, null, true);
         // get compiled code
         $tpl->compiler->suppressHeader = true;
         $tpl->compiler->suppressTemplatePropertyHeader = true;
@@ -80,7 +83,7 @@ class Smarty_Internal_Compile_Import extends Smarty_Internal_CompileBase {
         // merge compiled code for {function} tags
         $compiler->template->properties['function'] = array_merge($compiler->template->properties['function'], $tpl->properties['function']);
         // merge filedependency
-        $tpl->properties['file_dependency'][$tpl->source->uid] = array($tpl->source->filepath, $tpl->source->timestamp,$tpl->source->type);
+        $tpl->properties['file_dependency'][$tpl->source->uid] = array($tpl->source->filepath, $tpl->source->timestamp, $tpl->source->type);
         $compiler->template->properties['file_dependency'] = array_merge($compiler->template->properties['file_dependency'], $tpl->properties['file_dependency']);
         // remove header code
         $compiled_code = preg_replace("/(\/\*%%SmartyHeaderCode:{$tpl->properties['nocache_hash']}%%\*\/(.+?)\/\*\/%%SmartyHeaderCode%%\*\/)/s", '', $compiled_code);
@@ -98,5 +101,5 @@ class Smarty_Internal_Compile_Import extends Smarty_Internal_CompileBase {
         $_output .= "\n<?php /*  End of imported template \"" . $tpl_name . "\" */\n?>";
         return $_output;
     }
+
 }
-?>
