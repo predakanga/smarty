@@ -22,6 +22,8 @@
 class Smarty_Security {
 
     /**
+     * Handling of {php}
+     * 
      * This determines how Smarty handles "<?php ... ?>" tags in templates.
      * possible values:
      * <ul>
@@ -36,6 +38,8 @@ class Smarty_Security {
     public $php_handling = Smarty::PHP_PASSTHRU;
 
     /**
+     * Allowed Directories of templates
+     * 
      * This is the list of template directories that are considered secure.
      * $template_dir is in this list implicitly.
      *
@@ -44,6 +48,8 @@ class Smarty_Security {
     public $secure_dir = array();
 
     /**
+     * Allowed Directories of PHP scripts
+     * 
      * This is an array of directories where trusted php scripts reside.
      * {@link $security} is disabled during their inclusion/execution.
      *
@@ -52,6 +58,8 @@ class Smarty_Security {
     public $trusted_dir = array();
 
     /**
+     * Allowed URLs
+     * 
      * List of regular expressions (PCRE) that include trusted URIs
      *
      * @var array
@@ -59,6 +67,8 @@ class Smarty_Security {
     public $trusted_uri = array();
 
     /**
+     * Allowed static classes
+     * 
      * This is an array of trusted static classes.
      *
      * If empty access to all static classes is allowed.
@@ -68,6 +78,8 @@ class Smarty_Security {
     public $static_classes = array();
 
     /**
+     * Allowed PHP functions (as function plugins)
+     * 
      * This is an array of trusted PHP functions.
      *
      * If empty all functions are allowed.
@@ -83,6 +95,8 @@ class Smarty_Security {
     );
 
     /**
+    * Allowed PHP functions (as modifier plugins)
+    *
      * This is an array of trusted PHP modifers.
      *
      * If empty all modifiers are allowed.
@@ -95,6 +109,8 @@ class Smarty_Security {
     );
 
     /**
+     * Allowed function/block plugins
+     * 
      * This is an array of allowed tags.
      *
      * If empty no restriction by allowed_tags.
@@ -103,6 +119,8 @@ class Smarty_Security {
     public $allowed_tags = array();
 
     /**
+     * Restricted function/block plugins
+     *
      * This is an array of disabled tags.
      *
      * If empty no restriction by disabled_tags.
@@ -111,6 +129,8 @@ class Smarty_Security {
     public $disabled_tags = array();
 
     /**
+     * Allowed modifier plugins
+     *
      * This is an array of allowed modifier plugins.
      *
      * If empty no restriction by allowed_modifiers.
@@ -119,6 +139,8 @@ class Smarty_Security {
     public $allowed_modifiers = array();
 
     /**
+     * Restricted modifier plugins
+     * 
      * This is an array of disabled modifier plugins.
      *
      * If empty no restriction by disabled_modifiers.
@@ -127,6 +149,8 @@ class Smarty_Security {
     public $disabled_modifiers = array();
 
     /**
+     * Allowed PHP Streams
+     * 
      * This is an array of trusted streams.
      *
      * If empty all streams are allowed.
@@ -136,12 +160,16 @@ class Smarty_Security {
     public $streams = array('file');
 
     /**
+     * Allow {$smarty.const.*}
+     * 
      * + flag if constants can be accessed from template
      * @var boolean
      */
     public $allow_constants = true;
 
     /**
+     * Allow {$smarty.get.*}
+     *
      * + flag if super globals can be accessed from template
      * @var boolean
      */

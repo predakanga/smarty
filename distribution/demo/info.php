@@ -25,7 +25,12 @@ $smarty->registerFilter('pre', array('InfoFoo', 'prefilterThingie'));
 //$smarty->registerFilter('pre', function(){ });
 
 $smarty->registerClass('Foo', 'InfoFoo');
-$smarty->registerObject('foobar', new InfoFoo(), array('isFunction'), true, array('isBlock'));
+
+class MySecurity extends Smarty_Security {}
+$security = new MySecurity($smarty);
+$security->streams[] = 'file2';
+$smarty->enableSecurity($security);
+
 
 class InfoFoo {
     public static function strlen($string)
@@ -53,4 +58,5 @@ $smarty->cache_lifetime = 336699;
 
 $tpl = $smarty->createTemplate('eval:foobar');
 $tpl->caching = 2;
+
 echo $tpl->info();

@@ -680,22 +680,7 @@ class Smarty_Internal_Info
         
         $registered = array(
             'classes' => array(),
-            'objects' => array(),
         );
-
-        // analyze registered_objects
-        foreach ($this->smarty->registered_objects as $name => $_object) {
-            list($object, $allowed, $smarty_format, $blocks) = $_object;
-            
-            $registered['objects'][$name] = array(
-                'name' => $name,
-                'class' => get_class($object),
-                
-                'allowed' => $allowed,
-                'smarty_format' => (bool) $smarty_format,
-                'blocks' => $blocks,
-            );
-        }
 
         // analyze registered_classes
         foreach ($this->smarty->registered_classes as $name => $class) {
@@ -732,21 +717,73 @@ class Smarty_Internal_Info
         if ($this->security) {
             return;
         }
+        
+        $this->security = array(
+            'class' => null,
+            'properties' => array(),
+        );
 
-        /*
-            TODO: analyzeSecurity()
-            php_handling (wtf?)
-            secure_dir (template_dir config_dir) -> also in {fetch}
-            trusted_dir
-            static_classes (registered_classes?)
-            php_functions
-            php_modifiers
-            allowed_tags, disabled_tags
-            allowed_modifiers, disabled_modifiers
-            streams
-            allow_constants
-            allow_super_globals
-        */
+        if ($this->smarty->security_policy) {
+            $smarty = $this->smarty->security_policy;
+            $_smarty = new ReflectionClass($smarty);
+            $this->security['class'] = get_class($smarty);
+        } else {
+            return;
+        }
+        
+        foreach ($_smarty->getDefaultProperties() as $name => $value) {
+            if ($name[0] == '_') {
+                continue;
+            }
+
+            $property = $_smarty->getProperty($name);
+            if ($property->isStatic()) {
+                continue;
+            }
+
+            $doc = $property->getDocComment();
+
+            if (preg_match('#\* @internal\s#i', $doc, $matches)) {
+                continue;
+            }
+
+            $type = null;
+            if (preg_match('#\* @var (?<type>[a-zA-Z0-9_]+)\s#i', $doc, $matches)) {
+                $type = $matches['type'];
+            }
+
+            $link = null;
+            if (preg_match('#\* @link (?<link>[^\s]+)\s#i', $doc, $matches)) {
+                $link = $matches['link'];
+            }
+
+            $_name = null;
+            if (preg_match('#/\*{2}\s+\* (?<name>)\s\*#i', $doc, $matches)) {
+                $_name = trim($matches['name']);
+            }
+
+            try {
+                $_smarty_value = $this->sanitizeValue($name, $property->getValue($smarty), $type);
+            } catch (ReflectionException $e) {
+                $_smarty_value = self::NOT_AVAILABLE;
+            }
+
+            $_default_value = $this->sanitizeValue($name, $value, $type);
+            $this->security['properties'][$name] = array(
+                'name' => $_name ? $_name : $name,
+                'type' => $type,
+                'link' => $link,
+                'default' => $_default_value,
+                'flag' => isset(self::$flags[$name]),
+                'smarty' => $_smarty_value,
+                'error' => null,
+                'warning' => null,
+            );
+
+            $this->security['properties'][$name]['smarty_diff'] = $_smarty_value !== $_default_value;
+        }
+
+        ksort($this->security);
     }
 
 

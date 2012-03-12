@@ -425,33 +425,6 @@
             </table>
         </dd>
     </dl>
-    <dl>
-        <dt id="registered-objects">Registered Objects</dt>
-        <dd>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Class</th>
-                        <th>Functions</th>
-                        <th title="Smarty style Argument Format">Smarty Args</th>
-                        <th>Blocks</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {foreach $data.registered.objects as $object}
-                        <tr>
-                            <td>{$object.name|escape}</td>
-                            <td>{$object.class|escape}</td>
-                            <td>{prettyprint value=$object.allowed}</td>
-                            <td>{prettyprint value=$object.smarty_format}</td>
-                            <td>{prettyprint value=$object.blocks}</td>
-                        </tr>
-                    {/foreach}
-                </tbody>
-            </table>
-        </dd>
-    </dl>
 
 </section>
 {/if}
@@ -497,21 +470,48 @@
         <h1 id="security">Smarty Security</h1>
     </header>
     
-    {*
-        php_handling (wtf?)
-        secure_dir (template_dir config_dir) -> also in {fetch}
-        trusted_dir
-        static_classes (registered_classes?)
-        php_functions
-        php_modifiers
-        allowed_tags, disabled_tags
-        allowed_modifiers, disabled_modifiers
-        streams
-        allow_constants
-        allow_super_globals
-        
-    *}
-
+    {if !$data.security.properties}
+        <p>Security is not enabled</p>
+    {else}
+        {if $data.security.class != 'Smarty_Security'}
+            <p>The built-in Security class was extended. It may very well be possible that the following table has no meaning what so ever.</p>
+        {/if}
+        <table>
+            <thead>
+                <tr>
+                    <th>Option</th>
+                    <th>Smarty</th>
+                    <th>Default</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th id="security-classname">Class name</th>
+                    {if $data.security.class.smarty}
+                        <td class="{if $data.security.class !== 'Smarty_Security'}diff{else}equal{/if}">
+                            {$data.security.class|escape}
+                        </td>
+                    {else}
+                        <td class="not-appliccable"></td>
+                    {/if}
+                    <td class="not-appliccable"></td>
+                </tr>
+            {foreach $data.security.properties as $prop}
+                <tr>
+                    <th id="security-{$prop@key|escape}">
+                        {if $prop.link}
+                            <a href="{$prop.link|escape}" title="{$prop.name|escape}">{$prop@key|escape}</a>
+                        {else}
+                            {$prop@key|escape}
+                        {/if}
+                    </th>
+                    <td class="{if $prop.smarty_diff}diff{else}equal{/if}">{prettyprint value=$prop.smarty flag=$prop.flag}</td>
+                    <td>{prettyprint value=$prop.default flag=$prop.flag}</td>
+                </tr>
+            {/foreach}
+            </tbody>
+        </table>
+    {/if}
 </section>
 {/if}
 
