@@ -32,6 +32,7 @@ these changes must reflect on the documentation at some point…
 * {$x = $k cachevalue} 
 * {\some\namespaced\ClassName::CONST} (Needs UnitTests?!)
 * {import file= ....} tag
+* {-tag} whitespace control
 
 
 ## Plugins ##

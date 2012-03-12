@@ -46,7 +46,6 @@ class Smarty_Internal_Templatelexer
     				'NUMBER'	=> 'number',
     				'UNIMATH'	=> '+" , "-',
     				'MATH'		=> '*" , "/" , "%',
-    				'INCDEC'	=> '++" , "--',
     				'SPACE'		=> ' ',
     				'DOLLAR'	=> '$',
     				'SEMICOLON' => ';',
@@ -109,18 +108,18 @@ phpstarttag = /<\?(?:php\w+|=|[a-zA-Z]+)?/
 phpendtag = /\?>/
 aspstarttag = /<%/
 aspendtag = /%>/
-ldels = /SMARTYldel\s{1,}/
-rdels = /\s{1,}SMARTYrdel/
-ldelslash = /SMARTYldel\//
-ldelspaceslash = /SMARTYldel\s{1,}\//
-ldel = /SMARTYldel/
-rdel = /SMARTYrdel/
+ldels = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)\s{1,}/
+rdels = /\s{1,}(SMARTYrdel|--SMARTYrdel\s*|-SMARTYrdel[^\S\r\n]*)/
+ldelslash = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)\//
+ldelspaceslash = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)\s{1,}\//
+ldel = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)/
+rdel = /(SMARTYrdel|--SMARTYrdel\s*|-SMARTYrdel[^\S\r\n]*)/
 smartyblockchild = /SMARTYldel[\$]smarty\.block\.childSMARTYrdel/
 integer = /\d+/
 hex =  /0[xX][0-9a-fA-F]+/
 math = /\s*(\*|\/|\%)\s*/
 comment = /SMARTYldel\*([\S\s]*?)\*SMARTYrdel/
-incdec = /\+\+|\-\-/
+idincdec = /\$[0-9]*[a-zA-Z_]\w*(\+\+|\-\-)/
 unimath = /\s*(\+|\-)\s*/
 openP = /\s*\(\s*/
 closeP = /\s*\)/
@@ -175,10 +174,10 @@ isin = /\s+is\s+in\s+/
 as = /\s+as\s+/
 to = /\s+to\s+/
 step = /\s+step\s+/
-ldelif = /SMARTYldel\s*(if|elseif|else if|while)\s+/
-ldelfor = /SMARTYldel\s*for\s+/
-ldelforeach = /SMARTYldel\s*foreach(?![^\s])/
-ldelsetfilter = /SMARTYldel\s*setfilter\s+/
+ldelif = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)\s*(if|elseif|else if|while)\s+/
+ldelfor = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)\s*for\s+/
+ldelforeach = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)\s*foreach(?![^\s])/
+ldelsetfilter = /(SMARTYldel|\s*SMARTYldel--|[^\S\r\n]*SMARTYldel-)\s*setfilter\s+/
 instanceof = /\s+instanceof\s+/
 not = /!\s*|not\s+/
 land = /\s*\&\&\s*|\s*and\s+/
@@ -518,14 +517,14 @@ aptr {
 equal {
   $this->token = Smarty_Internal_Templateparser::TP_EQUAL;
 }
-incdec {
-  $this->token = Smarty_Internal_Templateparser::TP_INCDEC;
-}
 unimath {
   $this->token = Smarty_Internal_Templateparser::TP_UNIMATH;
 }
 math {
   $this->token = Smarty_Internal_Templateparser::TP_MATH;
+}
+idincdec {
+  $this->token = Smarty_Internal_Templateparser::TP_IDINCDEC;
 }
 dollar {
   $this->token = Smarty_Internal_Templateparser::TP_DOLLAR;

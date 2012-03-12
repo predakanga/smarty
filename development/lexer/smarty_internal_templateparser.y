@@ -449,16 +449,12 @@ smartytag(res)   ::= LDELIF(i) statement(ie)  attributes(a) RDEL. {
 }
 
                   // {for} tag
-smartytag(res)   ::= LDELFOR statements(st) SEMICOLON optspace expr(ie) SEMICOLON optspace DOLLAR varvar(v2) foraction(e2) attributes(a) RDEL. {
-    res = $this->compiler->compileTag('for',array_merge(a,array(array('start'=>st),array('ifexp'=>ie),array('var'=>v2),array('step'=>e2))),1);
+smartytag(res)   ::= LDELFOR statements(st) SEMICOLON optspace expr(ie) SEMICOLON optspace DOLLAR varvar(v2) EQUAL expr(e) attributes(a) RDEL. {
+    res = $this->compiler->compileTag('for',array_merge(a,array(array('start'=>st),array('ifexp'=>ie),array('var'=>v2),array('step'=>'='.e))),1);
 }
-
-  foraction(res)   ::= EQUAL expr(e). {
-    res = '='.e;
-}
-
-  foraction(res)   ::= INCDEC(e). {
-    res = e;
+smartytag(res)   ::= LDELFOR statements(st) SEMICOLON optspace expr(ie) SEMICOLON optspace IDINCDEC(v2) attributes(a) RDEL. {
+    $len =strlen(v2);
+    res = $this->compiler->compileTag('for',array_merge(a,array(array('start'=>st),array('ifexp'=>ie),array('var'=>substr(v2,1,$len-3)),array('step'=>substr(v2,$len-2)))),1);
 }
 
 smartytag(res)   ::= LDELFOR statement(st) TO expr(v) attributes(a) RDEL. {
@@ -753,10 +749,6 @@ value(res)       ::= TYPECAST(t) value(v). {
     res = t.v;
 }
 
-value(res)       ::= variable(v) INCDEC(o). {
-    res = v.o;
-}
-
                  // numeric
 value(res)       ::= HEX(n). {
     res = n;
@@ -809,6 +801,11 @@ value(res)       ::= SINGLEQUOTESTRING(t). {
                   // double quoted string
 value(res)       ::= doublequoted_with_quotes(s). {
     res = s;
+}
+
+value(res)    ::= IDINCDEC(v). {
+    $len = strlen(v);
+    res = '$_smarty_tpl->tpl_vars->' . substr(v,1,$len-3) . "['value']". substr(v,$len-2);
 }
 
                   // static class access
