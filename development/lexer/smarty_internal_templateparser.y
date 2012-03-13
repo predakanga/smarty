@@ -1281,23 +1281,23 @@ doublequoted(res)          ::= doublequotedcontent(o). {
 }
 
 doublequotedcontent(res)           ::=  BACKTICK variable(v) BACKTICK. {
-    res = new _smarty_code($this, v);
+    res = new _smarty_code($this, '(string)'.v);
 }
 
 doublequotedcontent(res)           ::=  BACKTICK expr(e) BACKTICK. {
-    res = new _smarty_code($this, e);
+    res = new _smarty_code($this, '(string)'.e);
 }
 
 doublequotedcontent(res)           ::=  DOLLARID(i). {
-    res = new _smarty_code($this, '$_smarty_tpl->tpl_vars->'. substr(i,1) . "['value']");
+    res = new _smarty_code($this, '(string)$_smarty_tpl->tpl_vars->'. substr(i,1) . "['value']");
 }
 
 doublequotedcontent(res)           ::=  LDEL variable(v) RDEL. {
-    res = new _smarty_code($this, v);
+    res = new _smarty_code($this, '(string)'.v);
 }
 
 doublequotedcontent(res)           ::=  LDEL expr(e) RDEL. {
-    res = new _smarty_code($this, '('.e.')');
+    res = new _smarty_code($this, '(string)('.e.')');
 }
 
 doublequotedcontent(res)     ::=  smartytag(st). {
